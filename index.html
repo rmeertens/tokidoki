@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Genki Conjugation Cards</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- Header -->
+    <header id="header">
+      <div class="header-left">
+        <button id="btn-back" class="icon-btn hidden" aria-label="Back">←</button>
+        <h1 id="header-title">Genki Conjugation Cards</h1>
+      </div>
+      <div class="header-right">
+        <span id="streak-badge" class="streak-badge" title="Daily streak">🔥 <span id="streak-count">0</span></span>
+        <button id="btn-theme" class="icon-btn" aria-label="Toggle theme">◐</button>
+        <button id="btn-ref" class="icon-btn" aria-label="Conjugation reference">?</button>
+        <button id="btn-settings" class="icon-btn" aria-label="Settings">⚙</button>
+      </div>
+    </header>
+
+    <!-- Screen: Chapter Select -->
+    <main id="screen-chapters" class="screen active">
+      <div class="stats-bar">
+        <div class="stat"><span class="stat-num" id="today-reviewed">0</span><span class="stat-label">Today</span></div>
+        <div class="stat"><span class="stat-num" id="today-accuracy">0%</span><span class="stat-label">Accuracy</span></div>
+        <div class="stat"><span class="stat-num" id="cards-due">0</span><span class="stat-label">Due</span></div>
+      </div>
+      <div class="mode-tabs">
+        <button class="mode-tab active" data-mode="verbs">Verbs</button>
+        <button class="mode-tab" data-mode="adjectives">Adjectives</button>
+      </div>
+      <div id="verb-chapters">
+        <h2 class="section-title">Genki I</h2>
+        <div class="chapter-grid" id="chapters-genki1"></div>
+        <h2 class="section-title">Genki II</h2>
+        <div class="chapter-grid" id="chapters-genki2"></div>
+      </div>
+      <div id="adj-chapters" class="hidden">
+        <h2 class="section-title">Genki I</h2>
+        <div class="chapter-grid" id="adj-chapters-genki1"></div>
+        <h2 class="section-title">Genki II</h2>
+        <div class="chapter-grid" id="adj-chapters-genki2"></div>
+      </div>
+      <div class="reset-section">
+        <button id="btn-reset" class="btn-danger">Reset All Progress</button>
+      </div>
+    </main>
+
+    <!-- Screen: Study Session -->
+    <main id="screen-study" class="screen">
+      <div class="study-toolbar">
+        <div class="study-progress">
+          <div class="study-progress-bar"><div id="study-bar-fill" class="study-bar-fill"></div></div>
+          <span id="study-progress-text" class="study-progress-text">0 / 0</span>
+        </div>
+        <button id="btn-undo" class="btn-undo hidden" aria-label="Undo last card" title="Undo (Z)">↩ Undo</button>
+      </div>
+      <div id="save-indicator" class="save-indicator hidden">Saved</div>
+
+      <input id="key-capture" class="key-capture" readonly aria-hidden="true" tabindex="-1">
+      <div id="card-container" class="card-container">
+        <div id="card" class="card">
+          <!-- Front -->
+          <div class="card-front" id="card-front">
+            <div class="form-badge" id="card-form-badge"></div>
+            <div class="card-kanji" id="card-kanji"></div>
+            <div class="card-reading" id="card-reading"></div>
+            <div class="card-meaning" id="card-meaning"></div>
+            <div class="card-prompt" id="card-prompt"></div>
+            <div class="card-context hidden" id="card-context"></div>
+            <div class="hint-area hidden" id="hint-area"></div>
+            <div class="reveal-area" id="reveal-area">
+              <div class="reveal-buttons">
+                <button id="btn-hint" class="btn-hint">Hint <span class="grade-key">H</span></button>
+                <button id="btn-reveal" class="btn-reveal">Show Answer</button>
+              </div>
+              <span class="reveal-hint">Space = show answer</span>
+            </div>
+            <div class="typing-area hidden" id="typing-area">
+              <div class="answer-area">
+                <input type="text" id="answer-input" class="answer-input" placeholder="Type in hiragana..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" lang="ja">
+                <button id="btn-check" class="btn-primary">Check</button>
+              </div>
+              <button id="btn-show" class="btn-secondary">Show Answer</button>
+            </div>
+          </div>
+          <!-- Back -->
+          <div class="card-back hidden" id="card-back">
+            <div class="form-badge" id="card-form-badge-back"></div>
+            <div class="card-kanji" id="card-kanji-back"></div>
+            <div class="card-conjugated" id="card-conjugated"></div>
+            <div class="result-area">
+              <div id="result-icon" class="result-icon hidden"></div>
+              <div id="result-row-user" class="result-row hidden">
+                <span class="result-label">Your answer:</span>
+                <span id="user-answer" class="user-answer"></span>
+              </div>
+              <div class="result-row">
+                <span class="result-label">Correct:</span>
+                <span id="correct-answer" class="correct-answer"></span>
+              </div>
+            </div>
+            <div class="card-explanation" id="card-explanation"></div>
+            <div class="grade-buttons">
+              <button class="btn-grade btn-again" data-grade="1"><span class="grade-key">1</span> Again</button>
+              <button class="btn-grade btn-good" data-grade="3"><span class="grade-key">2</span> Good</button>
+              <button class="btn-grade btn-easy" data-grade="4"><span class="grade-key">3</span> Easy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="session-complete" class="session-complete hidden">
+        <div class="complete-icon">🎉</div>
+        <h2>Session Complete!</h2>
+        <div class="session-stats">
+          <div class="stat"><span class="stat-num" id="session-total">0</span><span class="stat-label">Cards</span></div>
+          <div class="stat"><span class="stat-num" id="session-correct">0</span><span class="stat-label">Correct</span></div>
+          <div class="stat"><span class="stat-num" id="session-accuracy">0%</span><span class="stat-label">Accuracy</span></div>
+        </div>
+        <button id="btn-back-to-chapters" class="btn-primary">Back to Chapters</button>
+      </div>
+    </main>
+
+    <!-- Screen: Settings -->
+    <main id="screen-settings" class="screen">
+      <h2 class="section-title">Settings</h2>
+      <div class="settings-panel">
+        <label class="setting-row">
+          <div class="setting-info">
+            <span class="setting-label">Type answers in hiragana</span>
+            <span class="setting-desc">When enabled, you type the conjugation before revealing the answer</span>
+          </div>
+          <input type="checkbox" id="setting-typing-mode" class="setting-toggle">
+        </label>
+        <label class="setting-row">
+          <div class="setting-info">
+            <span class="setting-label">Hide form name (harder mode)</span>
+            <span class="setting-desc">Only shows the English hint (e.g. "Polite past") — you must recall the form yourself</span>
+          </div>
+          <input type="checkbox" id="setting-hide-form" class="setting-toggle">
+        </label>
+        <label class="setting-row">
+          <div class="setting-info">
+            <span class="setting-label">Show context example</span>
+            <span class="setting-desc">Shows an English example below the hint, e.g. "I did eat (polite, past)"</span>
+          </div>
+          <input type="checkbox" id="setting-show-context" class="setting-toggle">
+        </label>
+      </div>
+    </main>
+
+    <!-- Screen: Conjugation Reference -->
+    <main id="screen-reference" class="screen">
+      <h2 class="section-title">Conjugation Reference</h2>
+      <div class="ref-tabs">
+        <button class="ref-tab active" data-tab="u">U-verbs</button>
+        <button class="ref-tab" data-tab="ru">Ru-verbs</button>
+        <button class="ref-tab" data-tab="irr">Irregular</button>
+      </div>
+      <div id="ref-content" class="ref-content"></div>
+    </main>
+
+  </div>
+
+  <script src="conjugator.js"></script>
+  <script src="verbs.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
