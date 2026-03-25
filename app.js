@@ -471,7 +471,7 @@
       badge.style.color = fi.color;
       badge.style.borderColor = fi.color;
     } else {
-      badge.innerHTML = `<span class="form-symbol">${fi.symbol}</span> ${fi.name}`;
+      badge.innerHTML = `${fi.name} <span class="form-symbol">(${fi.symbol})</span>`;
       badge.style.background = fi.color + '22';
       badge.style.color = fi.color;
       badge.style.borderColor = fi.color;
@@ -556,10 +556,15 @@
     revealAnswer('', correct);
   }
 
-  function showHint() {
+  function toggleHint() {
     if (answered || !currentCard) return;
     const hintEl = $('#hint-area');
-    if (!hintEl.classList.contains('hidden')) return;
+    if (!hintEl.classList.contains('hidden')) {
+      hintEl.classList.add('hidden');
+      $('#btn-hint').disabled = false;
+      $('#key-capture').focus();
+      return;
+    }
 
     const { verb, form } = currentCard;
     const fi = Conjugator.getFormInfo(form);
@@ -621,7 +626,7 @@
       }
     }
 
-    steps.push(`Target form: <strong>${fi.name}</strong> — ${fi.hint}`);
+    steps.push(`Target form: <strong>${fi.name}</strong> (${fi.symbol}) — ${fi.hint}`);
 
     hintEl.innerHTML = `<div class="hint-label">Hint</div>` + steps.map(s => `<div class="hint-step">→ ${s}</div>`).join('');
     hintEl.classList.remove('hidden');
@@ -941,12 +946,14 @@
 
     const fi = Conjugator.getFormInfo(currentCard.form);
     const badgeBack = $('#card-form-badge-back');
-    badgeBack.innerHTML = `<span class="form-symbol">${fi.symbol}</span> ${fi.name}`;
+    badgeBack.innerHTML = `${fi.name} <span class="form-symbol">(${fi.symbol})</span>`;
     badgeBack.style.background = fi.color + '22';
     badgeBack.style.color = fi.color;
     badgeBack.style.borderColor = fi.color;
 
     $('#card-kanji-back').textContent = currentCard.verb.kanji;
+    $('#card-reading-back').textContent = currentCard.verb.reading;
+    $('#card-meaning-back').textContent = currentCard.verb.meaning;
     const conjugated = $('#card-conjugated');
     conjugated.textContent = correct;
     conjugated.style.color = fi.color;
@@ -1419,7 +1426,7 @@
 
     // Reveal button (default mode)
     $('#btn-reveal').addEventListener('click', showAnswer);
-    $('#btn-hint').addEventListener('click', showHint);
+    $('#btn-hint').addEventListener('click', toggleHint);
 
     // Check answer (typing mode)
     $('#btn-check').addEventListener('click', checkAnswer);
@@ -1484,7 +1491,7 @@
       }
 
       // Card front is showing
-      if (e.key === 'h' || e.key === 'H') { e.preventDefault(); showHint(); return; }
+      if (e.key === 'h' || e.key === 'H') { e.preventDefault(); toggleHint(); return; }
       if (settings.typingMode) {
         if (e.key === 'Enter') { e.preventDefault(); checkAnswer(); }
       } else {

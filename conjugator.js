@@ -159,21 +159,21 @@ const Conjugator = (() => {
   }
 
   const FORM_INFO = {
-    'masu':        { name: 'ます form', nameJp: 'ます形', hint: 'Polite present/future', symbol: 'ます', color: '#2196F3', chapter: 3 },
-    'masu-neg':    { name: 'ません form', nameJp: 'ません形', hint: 'Polite negative', symbol: 'ません', color: '#64B5F6', chapter: 3 },
-    'masu-past':   { name: 'ました form', nameJp: 'ました形', hint: 'Polite past', symbol: 'ました', color: '#FF9800', chapter: 4 },
-    'masu-past-neg': { name: 'ませんでした', nameJp: 'ませんでした形', hint: 'Polite past negative', symbol: 'ませんでした', color: '#FFB74D', chapter: 4 },
-    'te':          { name: 'て form', nameJp: 'て形', hint: 'Connecting / request', symbol: 'て', color: '#4CAF50', chapter: 6 },
-    'nai':         { name: 'ない form', nameJp: 'ない形', hint: 'Plain negative', symbol: 'ない', color: '#F44336', chapter: 8 },
-    'dict':        { name: 'Dictionary form', nameJp: '辞書形', hint: 'Plain present/future', symbol: '辞書', color: '#9C27B0', chapter: 8 },
-    'ta':          { name: 'た form', nameJp: 'た形', hint: 'Plain past', symbol: 'た', color: '#E65100', chapter: 9 },
-    'nakatta':     { name: 'なかった form', nameJp: 'なかった形', hint: 'Plain past negative', symbol: 'なかった', color: '#D32F2F', chapter: 9 },
-    'tai':         { name: 'たい form', nameJp: 'たい形', hint: 'Want to ~', symbol: 'たい', color: '#E91E63', chapter: 11 },
+    'masu':        { name: 'Polite', nameJp: 'ます形', hint: 'Polite present/future', symbol: 'ます', color: '#2196F3', chapter: 3 },
+    'masu-neg':    { name: 'Polite negative', nameJp: 'ません形', hint: 'Polite negative', symbol: 'ません', color: '#64B5F6', chapter: 3 },
+    'masu-past':   { name: 'Polite past', nameJp: 'ました形', hint: 'Polite past', symbol: 'ました', color: '#FF9800', chapter: 4 },
+    'masu-past-neg': { name: 'Polite past neg.', nameJp: 'ませんでした形', hint: 'Polite past negative', symbol: 'ませんでした', color: '#FFB74D', chapter: 4 },
+    'te':          { name: 'Te-form', nameJp: 'て形', hint: 'Connecting / request', symbol: 'て', color: '#4CAF50', chapter: 6 },
+    'nai':         { name: 'Plain negative', nameJp: 'ない形', hint: 'Plain negative', symbol: 'ない', color: '#F44336', chapter: 8 },
+    'dict':        { name: 'Dictionary', nameJp: '辞書形', hint: 'Plain present/future', symbol: '辞書', color: '#9C27B0', chapter: 8 },
+    'ta':          { name: 'Plain past', nameJp: 'た形', hint: 'Plain past', symbol: 'た', color: '#E65100', chapter: 9 },
+    'nakatta':     { name: 'Plain past neg.', nameJp: 'なかった形', hint: 'Plain past negative', symbol: 'なかった', color: '#D32F2F', chapter: 9 },
+    'tai':         { name: 'Want to', nameJp: 'たい形', hint: 'Want to ~', symbol: 'たい', color: '#E91E63', chapter: 11 },
     'potential':   { name: 'Potential', nameJp: '可能形', hint: 'Can do ~', symbol: '可能', color: '#7B1FA2', chapter: 13 },
     'volitional':  { name: 'Volitional', nameJp: '意向形', hint: "Let's ~ / intend to", symbol: '意向', color: '#00BCD4', chapter: 15 },
     'passive':     { name: 'Passive', nameJp: '受身形', hint: 'Is done to ~', symbol: '受身', color: '#1565C0', chapter: 21 },
     'causative':   { name: 'Causative', nameJp: '使役形', hint: 'Make/let do ~', symbol: '使役', color: '#EF6C00', chapter: 22 },
-    'ba':          { name: 'ば form', nameJp: 'ば形', hint: 'If ~', symbol: 'ば', color: '#009688', chapter: 22 },
+    'ba':          { name: 'Conditional', nameJp: 'ば形', hint: 'If ~', symbol: 'ば', color: '#009688', chapter: 22 },
     'causative-passive': { name: 'Causative-Passive', nameJp: '使役受身形', hint: 'Is made to do ~', symbol: '使役受身', color: '#BF360C', chapter: 23 },
   };
 
@@ -194,7 +194,7 @@ const Conjugator = (() => {
     'adj-neg':       { name: 'Negative', nameJp: '否定形', hint: 'Plain negative', symbol: 'くない', color: '#F44336', chapter: 5 },
     'adj-past':      { name: 'Past', nameJp: '過去形', hint: 'Plain past', symbol: 'かった', color: '#FF9800', chapter: 9 },
     'adj-past-neg':  { name: 'Past negative', nameJp: '過去否定形', hint: 'Plain past negative', symbol: 'なかった', color: '#D32F2F', chapter: 9 },
-    'adj-te':        { name: 'て form', nameJp: 'て形', hint: 'Connecting / and...', symbol: 'くて', color: '#4CAF50', chapter: 9 },
+    'adj-te':        { name: 'Te-form', nameJp: 'て形', hint: 'Connecting / and...', symbol: 'くて', color: '#4CAF50', chapter: 9 },
     'adj-adverb':    { name: 'Adverb', nameJp: '副詞形', hint: 'Adverb form', symbol: 'く/に', color: '#00BCD4', chapter: 10 },
   };
 
