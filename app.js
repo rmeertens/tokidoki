@@ -677,27 +677,21 @@
   function getRuExplanation(verb, form, result) {
     const stem = verb.reading.slice(0, -1);
     const label = `<strong>Ru-verb:</strong> drop <span class="ex-hl">る</span> from ${verb.reading}`;
-    const stepBase = `${stem}`;
+    const suffixes = {
+      'masu':'ます', 'masu-neg':'ません', 'masu-past':'ました', 'masu-past-neg':'ませんでした',
+      'te':'て', 'ta':'た', 'nai':'ない', 'nakatta':'なかった', 'tai':'たい',
+      'potential':'られる', 'volitional':'よう', 'passive':'られる',
+      'causative':'させる', 'causative-passive':'させられる', 'ba':'れば',
+    };
 
-    switch (form) {
-      case 'masu': return buildExplanation(label, `${stepBase} + <span class="ex-hl">ます</span> → ${result}`);
-      case 'masu-neg': return buildExplanation(label, `${stepBase} + <span class="ex-hl">ません</span> → ${result}`);
-      case 'masu-past': return buildExplanation(label, `${stepBase} + <span class="ex-hl">ました</span> → ${result}`);
-      case 'masu-past-neg': return buildExplanation(label, `${stepBase} + <span class="ex-hl">ませんでした</span> → ${result}`);
-      case 'te': return buildExplanation(label, `${stepBase} + <span class="ex-hl">て</span> → ${result}`);
-      case 'ta': return buildExplanation(label, `${stepBase} + <span class="ex-hl">た</span> → ${result}`);
-      case 'nai': return buildExplanation(label, `${stepBase} + <span class="ex-hl">ない</span> → ${result}`);
-      case 'nakatta': return buildExplanation(label, `${stepBase} + <span class="ex-hl">なかった</span> → ${result}`);
-      case 'dict': return buildExplanation('<strong>Ru-verb:</strong> dictionary form is the plain form', `${verb.reading} (no change)`);
-      case 'tai': return buildExplanation(label, `${stepBase} + <span class="ex-hl">たい</span> → ${result}`);
-      case 'potential': return buildExplanation(label, `${stepBase} + <span class="ex-hl">られる</span> → ${result}`);
-      case 'volitional': return buildExplanation(label, `${stepBase} + <span class="ex-hl">よう</span> → ${result}`);
-      case 'passive': return buildExplanation(label, `${stepBase} + <span class="ex-hl">られる</span> → ${result}`);
-      case 'causative': return buildExplanation(label, `${stepBase} + <span class="ex-hl">させる</span> → ${result}`);
-      case 'causative-passive': return buildExplanation(label, `${stepBase} + <span class="ex-hl">させられる</span> → ${result}`);
-      case 'ba': return buildExplanation(label, `${stepBase} + <span class="ex-hl">れば</span> → ${result}`);
-      default: return '';
-    }
+    if (form === 'dict') return buildExplanation('<strong>Ru-verb:</strong> dictionary form is the plain form', `→ ${verb.reading} (no change)`);
+    const suffix = suffixes[form];
+    if (!suffix) return '';
+    return buildExplanation(label, `→ ${hlResult(stem, suffix)}`);
+  }
+
+  function hlResult(base, hl) {
+    return `${base}<span class="ex-hl">${hl}</span>`;
   }
 
   function getUExplanation(verb, form, result, isIku) {
@@ -714,58 +708,60 @@
         const iForm = I_ROW[ending];
         const suffix = { 'masu':'ます', 'masu-neg':'ません', 'masu-past':'ました', 'masu-past-neg':'ませんでした', 'tai':'たい' }[form];
         const label = `<strong>U-verb:</strong> change <span class="ex-hl">${ending}</span> to <span class="ex-hl">${iForm}</span> (い-row)`;
-        return buildExplanation(label, `${base}<span class="ex-hl">${iForm}</span> + ${suffix} → ${result}`);
+        return buildExplanation(label, `→ ${hlResult(base, iForm + suffix)}`);
       }
       case 'te':
       case 'ta': {
         if (isIku) {
           const prefix = reading.slice(0, -2);
           const label = `<strong>U-verb (いく):</strong> special rule — いく uses <span class="ex-hl">いって/いった</span>`;
-          return buildExplanation(label, `${prefix}<span class="ex-hl">${form === 'te' ? 'いって' : 'いった'}</span> → ${result}`);
+          const teForm = form === 'te' ? 'いって' : 'いった';
+          return buildExplanation(label, `→ ${hlResult(prefix, teForm)}`);
         }
         const rule = U_TE_RULES[ending];
         const label = `<strong>U-verb:</strong> ${form === 'te' ? 'て' : 'た'}-form rule for <span class="ex-hl">${ending}</span>: ${rule.desc.replace(ending, `<span class="ex-hl">${ending}</span>`)}`;
-        return buildExplanation(label, `${base}<span class="ex-hl">${form === 'te' ? rule.te : rule.ta}</span> → ${result}`);
+        const teForm = form === 'te' ? rule.te : rule.ta;
+        return buildExplanation(label, `→ ${hlResult(base, teForm)}`);
       }
       case 'nai':
       case 'nakatta': {
         const aForm = A_ROW[ending];
         const suffix = form === 'nai' ? 'ない' : 'なかった';
         const label = `<strong>U-verb:</strong> change <span class="ex-hl">${ending}</span> to <span class="ex-hl">${aForm}</span> (あ-row)`;
-        return buildExplanation(label, `${base}<span class="ex-hl">${aForm}</span> + ${suffix} → ${result}`);
+        return buildExplanation(label, `→ ${hlResult(base, aForm + suffix)}`);
       }
       case 'dict': {
-        return buildExplanation('<strong>U-verb:</strong> dictionary form is the plain form', `${reading} (no change)`);
+        return buildExplanation('<strong>U-verb:</strong> dictionary form is the plain form', `→ ${reading} (no change)`);
       }
       case 'potential': {
         const eForm = E_ROW[ending];
         const label = `<strong>U-verb:</strong> change <span class="ex-hl">${ending}</span> to <span class="ex-hl">${eForm}</span> (え-row)`;
-        return buildExplanation(label, `${base}<span class="ex-hl">${eForm}</span> + る → ${result}`);
+        return buildExplanation(label, `→ ${hlResult(base, eForm + 'る')}`);
       }
       case 'volitional': {
         const oForm = O_ROW[ending];
         const label = `<strong>U-verb:</strong> change <span class="ex-hl">${ending}</span> to <span class="ex-hl">${oForm}</span> (お-row)`;
-        return buildExplanation(label, `${base}<span class="ex-hl">${oForm}</span> + う → ${result}`);
+        return buildExplanation(label, `→ ${hlResult(base, oForm + 'う')}`);
       }
       case 'passive': {
         const aForm = A_ROW[ending];
         const label = `<strong>U-verb:</strong> change <span class="ex-hl">${ending}</span> to <span class="ex-hl">${aForm}</span> (あ-row)`;
-        return buildExplanation(label, `${base}<span class="ex-hl">${aForm}</span> + れる → ${result}`);
+        return buildExplanation(label, `→ ${hlResult(base, aForm + 'れる')}`);
       }
       case 'causative': {
         const aForm = A_ROW[ending];
         const label = `<strong>U-verb:</strong> change <span class="ex-hl">${ending}</span> to <span class="ex-hl">${aForm}</span> (あ-row)`;
-        return buildExplanation(label, `${base}<span class="ex-hl">${aForm}</span> + せる → ${result}`);
+        return buildExplanation(label, `→ ${hlResult(base, aForm + 'せる')}`);
       }
       case 'causative-passive': {
         const aForm = A_ROW[ending];
         const label = `<strong>U-verb:</strong> change <span class="ex-hl">${ending}</span> to <span class="ex-hl">${aForm}</span> (あ-row)`;
-        return buildExplanation(label, `${base}<span class="ex-hl">${aForm}</span> + せられる → ${result}`);
+        return buildExplanation(label, `→ ${hlResult(base, aForm + 'せられる')}`);
       }
       case 'ba': {
         const eForm = E_ROW[ending];
         const label = `<strong>U-verb:</strong> change <span class="ex-hl">${ending}</span> to <span class="ex-hl">${eForm}</span> (え-row)`;
-        return buildExplanation(label, `${base}<span class="ex-hl">${eForm}</span> + ば → ${result}`);
+        return buildExplanation(label, `→ ${hlResult(base, eForm + 'ば')}`);
       }
       default: return '';
     }
@@ -778,7 +774,6 @@
 
     if (isSuru) {
       const prefix = reading.slice(0, -2);
-      const prefixLabel = prefix ? `${prefix} + ` : '';
       const label = `<strong>Irregular (する):</strong> する has unique conjugation stems`;
 
       const stems = {
@@ -794,17 +789,15 @@
         'passive': 'れる', 'causative': 'せる', 'causative-passive': 'せられる', 'ba': 'れば',
       };
 
-      if (form === 'dict') return buildExplanation(label, `Dictionary form: ${reading} (no change)`);
-      if (form === 'potential') return buildExplanation(label, `${prefixLabel}<span class="ex-hl">でき</span> + る → ${result}`);
+      if (form === 'dict') return buildExplanation(label, `→ ${reading} (no change)`);
 
       const stem = stems[form] || 'し';
       const suffix = suffixes[form] || '';
-      return buildExplanation(label, `${prefixLabel}<span class="ex-hl">${stem}</span> + ${suffix} → ${result}`);
+      return buildExplanation(label, `→ ${hlResult(prefix, stem + suffix)}`);
     }
 
     if (isKuru) {
       const prefix = reading.slice(0, -2);
-      const prefixLabel = prefix ? `${prefix} + ` : '';
       const label = `<strong>Irregular (くる):</strong> くる changes its vowel`;
 
       const stemMap = {
@@ -820,11 +813,11 @@
         'passive': 'る', 'causative': 'る', 'causative-passive': 'る', 'ba': 'れば',
       };
 
-      if (form === 'dict') return buildExplanation(label, `Dictionary form: ${reading} (no change)`);
+      if (form === 'dict') return buildExplanation(label, `→ ${reading} (no change)`);
 
       const stem = stemMap[form] || 'き';
       const suffix = suffixes[form] || '';
-      return buildExplanation(label, `${prefixLabel}<span class="ex-hl">${stem}</span> + ${suffix} → ${result}`);
+      return buildExplanation(label, `→ ${hlResult(prefix, stem + suffix)}`);
     }
 
     return '';
@@ -840,41 +833,22 @@
       if (isIi || isKakkoii) {
         const baseStem = isIi ? 'よ' : 'かっこよ';
         const label = `<strong>い-adjective (irregular):</strong> ${reading} uses ${baseStem}- stem for conjugations`;
-        switch (form) {
-          case 'adj-present': return buildExplanation(label, `${reading} (no change)`);
-          case 'adj-neg': return buildExplanation(label, `${baseStem} + <span class="ex-hl">くない</span> → ${result}`);
-          case 'adj-past': return buildExplanation(label, `${baseStem} + <span class="ex-hl">かった</span> → ${result}`);
-          case 'adj-past-neg': return buildExplanation(label, `${baseStem} + <span class="ex-hl">くなかった</span> → ${result}`);
-          case 'adj-te': return buildExplanation(label, `${baseStem} + <span class="ex-hl">くて</span> → ${result}`);
-          case 'adj-adverb': return buildExplanation(label, `${baseStem} + <span class="ex-hl">く</span> → ${result}`);
-          default: return '';
-        }
+        const irrSuffixes = { 'adj-neg':'くない', 'adj-past':'かった', 'adj-past-neg':'くなかった', 'adj-te':'くて', 'adj-adverb':'く' };
+        if (form === 'adj-present') return buildExplanation(label, `→ ${reading} (no change)`);
+        return buildExplanation(label, `→ ${hlResult(baseStem, irrSuffixes[form])}`);
       }
 
       const stem = reading.slice(0, -1);
       const label = `<strong>い-adjective:</strong> drop <span class="ex-hl">い</span> from ${reading}`;
-      switch (form) {
-        case 'adj-present': return buildExplanation(`<strong>い-adjective:</strong> dictionary form`, `${reading} (no change)`);
-        case 'adj-neg': return buildExplanation(label, `${stem} + <span class="ex-hl">くない</span> → ${result}`);
-        case 'adj-past': return buildExplanation(label, `${stem} + <span class="ex-hl">かった</span> → ${result}`);
-        case 'adj-past-neg': return buildExplanation(label, `${stem} + <span class="ex-hl">くなかった</span> → ${result}`);
-        case 'adj-te': return buildExplanation(label, `${stem} + <span class="ex-hl">くて</span> → ${result}`);
-        case 'adj-adverb': return buildExplanation(label, `${stem} + <span class="ex-hl">く</span> → ${result}`);
-        default: return '';
-      }
+      const iSuffixes = { 'adj-neg':'くない', 'adj-past':'かった', 'adj-past-neg':'くなかった', 'adj-te':'くて', 'adj-adverb':'く' };
+      if (form === 'adj-present') return buildExplanation(`<strong>い-adjective:</strong> dictionary form`, `→ ${reading} (no change)`);
+      return buildExplanation(label, `→ ${hlResult(stem, iSuffixes[form])}`);
     }
 
     if (type === 'na-adj') {
       const label = `<strong>な-adjective:</strong> add suffix to ${reading}`;
-      switch (form) {
-        case 'adj-present': return buildExplanation(label, `${reading} + <span class="ex-hl">だ</span> → ${result}`);
-        case 'adj-neg': return buildExplanation(label, `${reading} + <span class="ex-hl">じゃない</span> → ${result}`);
-        case 'adj-past': return buildExplanation(label, `${reading} + <span class="ex-hl">だった</span> → ${result}`);
-        case 'adj-past-neg': return buildExplanation(label, `${reading} + <span class="ex-hl">じゃなかった</span> → ${result}`);
-        case 'adj-te': return buildExplanation(label, `${reading} + <span class="ex-hl">で</span> → ${result}`);
-        case 'adj-adverb': return buildExplanation(label, `${reading} + <span class="ex-hl">に</span> → ${result}`);
-        default: return '';
-      }
+      const naSuffixes = { 'adj-present':'だ', 'adj-neg':'じゃない', 'adj-past':'だった', 'adj-past-neg':'じゃなかった', 'adj-te':'で', 'adj-adverb':'に' };
+      return buildExplanation(label, `→ ${hlResult(reading, naSuffixes[form])}`);
     }
 
     return '';

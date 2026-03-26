@@ -680,6 +680,9 @@ body {
 .card-explanation .ex-hl {
   color: var(--accent);
   font-weight: 700;
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  padding: 1px 3px;
+  border-radius: 3px;
 }
 
 /* Example sentence */
