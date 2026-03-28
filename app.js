@@ -89,7 +89,7 @@
   const SETTINGS_KEY = 'genki_settings';
 
   function loadSettings() {
-    const defaults = { typingMode: false, hideForm: true, showContext: true, englishToJapanese: true };
+    const defaults = { typingMode: false, hideForm: true, showContext: true, englishToJapanese: true, showExampleFront: false };
     try { return { ...defaults, ...JSON.parse(localStorage.getItem(SETTINGS_KEY)) }; }
     catch { return defaults; }
   }
@@ -516,6 +516,23 @@
     $('#hint-area').classList.add('hidden');
     $('#hint-area').innerHTML = '';
 
+    const exFrontEl = $('#card-example-sentence-front');
+    if (settings.showExampleFront) {
+      const exFront = getExampleSentenceForFront(verb, form);
+      if (exFront) {
+        exFrontEl.innerHTML = `<div class="example-label">Example</div>`
+          + `<div class="example-jp">${exFront.ja}</div>`
+          + `<div class="example-en">${highlightKeywords(exFront.en)}</div>`;
+        exFrontEl.classList.remove('hidden');
+      } else {
+        exFrontEl.classList.add('hidden');
+        exFrontEl.innerHTML = '';
+      }
+    } else {
+      exFrontEl.classList.add('hidden');
+      exFrontEl.innerHTML = '';
+    }
+
     if (settings.typingMode) {
       $('#reveal-area').classList.add('hidden');
       $('#typing-area').classList.remove('hidden');
@@ -858,34 +875,160 @@
     const v = verb.meaning.replace(/^to /, '');
 
     const verbTemplates = {
-      'masu':             { ja: `私は毎日${conjugated}。`, en: `I ${v} every day.` },
-      'masu-neg':         { ja: `私はあまり${conjugated}。`, en: `I don't ${v} much.` },
-      'masu-past':        { ja: `昨日${conjugated}。`, en: `Yesterday, I did ${v}.` },
-      'masu-past-neg':    { ja: `昨日は${conjugated}。`, en: `I didn't ${v} yesterday.` },
-      'te':               { ja: `${conjugated}ください。`, en: `Please ${v}.` },
-      'nai':              { ja: `今日は${conjugated}。`, en: `I don't ${v} today.` },
-      'dict':             { ja: `${conjugated}のが好きです。`, en: `I like to ${v}.` },
-      'ta':               { ja: `もう${conjugated}。`, en: `Already did ${v}.` },
-      'nakatta':          { ja: `まだ${conjugated}。`, en: `Still didn't ${v}.` },
-      'tai':              { ja: `${conjugated}です。`, en: `I want to ${v}.` },
-      'potential':        { ja: `私は${conjugated}。`, en: `I can ${v}.` },
-      'volitional':       { ja: `一緒に${conjugated}。`, en: `Let's ${v} together.` },
-      'passive':          { ja: `友達に${conjugated}。`, en: `Was ${v} by a friend.` },
-      'causative':        { ja: `先生が${conjugated}。`, en: `The teacher made someone ${v}.` },
-      'ba':               { ja: `もっと${conjugated}よかったのに。`, en: `If only I did ${v} more.` },
-      'causative-passive': { ja: `先生に${conjugated}。`, en: `Was made to ${v} by the teacher.` },
+      'masu': [
+        { ja: `私は毎日${conjugated}。`, en: `I ${v} every day.` },
+        { ja: `友達と一緒に${conjugated}。`, en: `I ${v} together with a friend.` },
+        { ja: `週末にいつも${conjugated}。`, en: `I always ${v} on weekends.` },
+      ],
+      'masu-neg': [
+        { ja: `私はあまり${conjugated}。`, en: `I don't ${v} much.` },
+        { ja: `今日は全然${conjugated}。`, en: `I don't ${v} at all today.` },
+        { ja: `最近は${conjugated}。`, en: `I don't ${v} recently.` },
+      ],
+      'masu-past': [
+        { ja: `昨日${conjugated}。`, en: `Yesterday, I did ${v}.` },
+        { ja: `先週の日曜日に${conjugated}。`, en: `I did ${v} last Sunday.` },
+        { ja: `友達と${conjugated}。`, en: `I did ${v} with a friend.` },
+      ],
+      'masu-past-neg': [
+        { ja: `昨日は${conjugated}。`, en: `I didn't ${v} yesterday.` },
+        { ja: `先月は一度も${conjugated}。`, en: `I didn't ${v} even once last month.` },
+        { ja: `結局${conjugated}。`, en: `In the end, I didn't ${v}.` },
+      ],
+      'te': [
+        { ja: `${conjugated}ください。`, en: `Please ${v}.` },
+        { ja: `${conjugated}から、出かけましょう。`, en: `After you ${v}, let's go out.` },
+        { ja: `${conjugated}もいいですか。`, en: `May I ${v}?` },
+      ],
+      'nai': [
+        { ja: `今日は${conjugated}。`, en: `I don't ${v} today.` },
+        { ja: `あの人は全然${conjugated}。`, en: `That person doesn't ${v} at all.` },
+        { ja: `まだ${conjugated}。`, en: `I still don't ${v}.` },
+      ],
+      'dict': [
+        { ja: `${conjugated}のが好きです。`, en: `I like to ${v}.` },
+        { ja: `${conjugated}ことができます。`, en: `I am able to ${v}.` },
+        { ja: `${conjugated}前に準備します。`, en: `I prepare before I ${v}.` },
+      ],
+      'ta': [
+        { ja: `もう${conjugated}。`, en: `I already did ${v}.` },
+        { ja: `さっき${conjugated}。`, en: `I just did ${v} a moment ago.` },
+        { ja: `${conjugated}ことがあります。`, en: `I have done ${v} before.` },
+      ],
+      'nakatta': [
+        { ja: `まだ${conjugated}。`, en: `I still didn't ${v}.` },
+        { ja: `あの時は${conjugated}。`, en: `I didn't ${v} at that time.` },
+        { ja: `一度も${conjugated}。`, en: `I never did ${v}.` },
+      ],
+      'tai': [
+        { ja: `${conjugated}です。`, en: `I want to ${v}.` },
+        { ja: `いつか${conjugated}と思います。`, en: `I think I want to ${v} someday.` },
+        { ja: `今すぐ${conjugated}。`, en: `I want to ${v} right now.` },
+      ],
+      'potential': [
+        { ja: `私は${conjugated}。`, en: `I can ${v}.` },
+        { ja: `日本語で${conjugated}。`, en: `I can ${v} in Japanese.` },
+        { ja: `一人で${conjugated}。`, en: `I can ${v} by myself.` },
+      ],
+      'volitional': [
+        { ja: `一緒に${conjugated}。`, en: `Let's ${v} together.` },
+        { ja: `今日は早く${conjugated}。`, en: `Let's ${v} early today.` },
+        { ja: `みんなで${conjugated}。`, en: `Let's all ${v}.` },
+      ],
+      'passive': [
+        { ja: `友達に${conjugated}。`, en: `Was ${v} by a friend.` },
+        { ja: `先生に${conjugated}。`, en: `Was ${v} by the teacher.` },
+        { ja: `みんなに${conjugated}。`, en: `Was ${v} by everyone.` },
+      ],
+      'causative': [
+        { ja: `先生が${conjugated}。`, en: `The teacher made someone ${v}.` },
+        { ja: `母が弟を${conjugated}。`, en: `Mom made my brother ${v}.` },
+        { ja: `子供に${conjugated}。`, en: `I let the child ${v}.` },
+      ],
+      'ba': [
+        { ja: `もっと${conjugated}よかったのに。`, en: `If only I did ${v} more.` },
+        { ja: `早く${conjugated}間に合います。`, en: `If I ${v} early, I'll make it in time.` },
+        { ja: `${conjugated}いいのに。`, en: `It would be nice if you ${v}.` },
+      ],
+      'causative-passive': [
+        { ja: `先生に${conjugated}。`, en: `Was made to ${v} by the teacher.` },
+        { ja: `親に${conjugated}。`, en: `Was made to ${v} by my parents.` },
+        { ja: `毎日${conjugated}。`, en: `I'm made to ${v} every day.` },
+      ],
     };
 
     const adjTemplates = {
-      'adj-present':      { ja: `この部屋は${conjugated}。`, en: `This room is ${v}.` },
-      'adj-neg':          { ja: `この部屋は${conjugated}。`, en: `This room is not ${v}.` },
-      'adj-past':         { ja: `昨日は${conjugated}。`, en: `Yesterday was ${v}.` },
-      'adj-past-neg':     { ja: `あまり${conjugated}。`, en: `It wasn't very ${v}.` },
-      'adj-te':           { ja: `${conjugated}、楽しかった。`, en: `It was ${v}, and it was fun.` },
-      'adj-adverb':       { ja: `${conjugated}なりました。`, en: `It became ${v}.` },
+      'adj-present': [
+        { ja: `この部屋は${conjugated}。`, en: `This room is ${v}.` },
+        { ja: `今日の天気は${conjugated}。`, en: `Today's weather is ${v}.` },
+        { ja: `あの映画は${conjugated}。`, en: `That movie is ${v}.` },
+      ],
+      'adj-neg': [
+        { ja: `この部屋は${conjugated}。`, en: `This room is not ${v}.` },
+        { ja: `あの店はあまり${conjugated}。`, en: `That shop is not very ${v}.` },
+        { ja: `今日は全然${conjugated}。`, en: `Today is not ${v} at all.` },
+      ],
+      'adj-past': [
+        { ja: `昨日は${conjugated}。`, en: `Yesterday was ${v}.` },
+        { ja: `去年の夏は${conjugated}。`, en: `Last summer was ${v}.` },
+        { ja: `子供の時は${conjugated}。`, en: `When I was a child it was ${v}.` },
+      ],
+      'adj-past-neg': [
+        { ja: `あまり${conjugated}。`, en: `It wasn't very ${v}.` },
+        { ja: `思ったほど${conjugated}。`, en: `It wasn't as ${v} as I thought.` },
+        { ja: `去年は${conjugated}。`, en: `Last year it wasn't ${v}.` },
+      ],
+      'adj-te': [
+        { ja: `${conjugated}、楽しかった。`, en: `It was ${v}, and it was fun.` },
+        { ja: `${conjugated}、びっくりしました。`, en: `It was ${v}, and I was surprised.` },
+        { ja: `${conjugated}、よかったです。`, en: `It was ${v}, and that was good.` },
+      ],
+      'adj-adverb': [
+        { ja: `${conjugated}なりました。`, en: `It became ${v}.` },
+        { ja: `${conjugated}作ってください。`, en: `Please make it ${v}.` },
+        { ja: `${conjugated}話してください。`, en: `Please speak ${v}.` },
+      ],
     };
 
-    return verbTemplates[form] || adjTemplates[form] || null;
+    const templates = verbTemplates[form] || adjTemplates[form];
+    if (!templates) return null;
+    return templates[Math.floor(Math.random() * templates.length)];
+  }
+
+  function getExampleSentenceForFront(verb, form) {
+    const v = verb.meaning.replace(/^to /, '');
+
+    const verbTemplates = {
+      'masu':             [{ ja: `私は毎日＿＿。`, en: `I ${v} every day.` }, { ja: `友達と一緒に＿＿。`, en: `I ${v} with a friend.` }, { ja: `週末にいつも＿＿。`, en: `I always ${v} on weekends.` }],
+      'masu-neg':         [{ ja: `私はあまり＿＿。`, en: `I don't ${v} much.` }, { ja: `今日は全然＿＿。`, en: `I don't ${v} at all today.` }],
+      'masu-past':        [{ ja: `昨日＿＿。`, en: `Yesterday, I did ${v}.` }, { ja: `先週の日曜日に＿＿。`, en: `I did ${v} last Sunday.` }],
+      'masu-past-neg':    [{ ja: `昨日は＿＿。`, en: `I didn't ${v} yesterday.` }, { ja: `結局＿＿。`, en: `In the end, I didn't ${v}.` }],
+      'te':               [{ ja: `＿＿ください。`, en: `Please ${v}.` }, { ja: `＿＿ もいいですか。`, en: `May I ${v}?` }],
+      'nai':              [{ ja: `今日は＿＿。`, en: `I don't ${v} today.` }, { ja: `まだ＿＿。`, en: `I still don't ${v}.` }],
+      'dict':             [{ ja: `＿＿のが好きです。`, en: `I like to ${v}.` }, { ja: `＿＿前に準備します。`, en: `I prepare before I ${v}.` }],
+      'ta':               [{ ja: `もう＿＿。`, en: `I already did ${v}.` }, { ja: `＿＿ことがあります。`, en: `I have done ${v} before.` }],
+      'nakatta':          [{ ja: `まだ＿＿。`, en: `I still didn't ${v}.` }, { ja: `一度も＿＿。`, en: `I never did ${v}.` }],
+      'tai':              [{ ja: `＿＿です。`, en: `I want to ${v}.` }, { ja: `今すぐ＿＿。`, en: `I want to ${v} right now.` }],
+      'potential':        [{ ja: `私は＿＿。`, en: `I can ${v}.` }, { ja: `一人で＿＿。`, en: `I can ${v} by myself.` }],
+      'volitional':       [{ ja: `一緒に＿＿。`, en: `Let's ${v} together.` }, { ja: `みんなで＿＿。`, en: `Let's all ${v}.` }],
+      'passive':          [{ ja: `友達に＿＿。`, en: `Was ${v} by a friend.` }, { ja: `先生に＿＿。`, en: `Was ${v} by the teacher.` }],
+      'causative':        [{ ja: `先生が＿＿。`, en: `The teacher made someone ${v}.` }, { ja: `子供に＿＿。`, en: `I let the child ${v}.` }],
+      'ba':               [{ ja: `もっと＿＿よかったのに。`, en: `If only I did ${v} more.` }, { ja: `＿＿いいのに。`, en: `It would be nice if you ${v}.` }],
+      'causative-passive': [{ ja: `先生に＿＿。`, en: `Was made to ${v} by the teacher.` }, { ja: `毎日＿＿。`, en: `I'm made to ${v} every day.` }],
+    };
+
+    const adjTemplates = {
+      'adj-present':      [{ ja: `この部屋は＿＿。`, en: `This room is ${v}.` }, { ja: `あの映画は＿＿。`, en: `That movie is ${v}.` }],
+      'adj-neg':          [{ ja: `この部屋は＿＿。`, en: `This room is not ${v}.` }, { ja: `あの店はあまり＿＿。`, en: `That shop is not very ${v}.` }],
+      'adj-past':         [{ ja: `昨日は＿＿。`, en: `Yesterday was ${v}.` }, { ja: `去年の夏は＿＿。`, en: `Last summer was ${v}.` }],
+      'adj-past-neg':     [{ ja: `あまり＿＿。`, en: `It wasn't very ${v}.` }, { ja: `思ったほど＿＿。`, en: `It wasn't as ${v} as I thought.` }],
+      'adj-te':           [{ ja: `＿＿、楽しかった。`, en: `It was ${v}, and it was fun.` }, { ja: `＿＿、びっくりしました。`, en: `It was ${v}, and I was surprised.` }],
+      'adj-adverb':       [{ ja: `＿＿なりました。`, en: `It became ${v}.` }, { ja: `＿＿作ってください。`, en: `Please make it ${v}.` }],
+    };
+
+    const templates = verbTemplates[form] || adjTemplates[form];
+    if (!templates) return null;
+    return templates[Math.floor(Math.random() * templates.length)];
   }
 
   function buildExplanation(rule, steps) {
@@ -1022,6 +1165,17 @@
       ? getAdjExplanation(currentCard.verb, currentCard.form, correct)
       : getExplanation(currentCard.verb, currentCard.form, correct);
     $('#card-explanation').innerHTML = explanation;
+
+    // Copy hint content to answer page if it was shown
+    const hintAreaBack = $('#hint-area-back');
+    const hintAreaFront = $('#hint-area');
+    if (hintAreaFront.innerHTML && !hintAreaFront.classList.contains('hidden')) {
+      hintAreaBack.innerHTML = hintAreaFront.innerHTML;
+      hintAreaBack.classList.remove('hidden');
+    } else {
+      hintAreaBack.innerHTML = '';
+      hintAreaBack.classList.add('hidden');
+    }
 
     const exSentence = getExampleSentence(currentCard.verb, currentCard.form, correct);
     const exEl = $('#card-example-sentence');
@@ -1458,6 +1612,7 @@
         $('#setting-hide-form').checked = settings.hideForm;
         $('#setting-show-context').checked = settings.showContext;
         $('#setting-english-to-japanese').checked = settings.englishToJapanese;
+        $('#setting-show-example-front').checked = settings.showExampleFront;
       }
     });
 
@@ -1479,6 +1634,11 @@
 
     $('#setting-english-to-japanese').addEventListener('change', (e) => {
       settings.englishToJapanese = e.target.checked;
+      saveSettings(settings);
+    });
+
+    $('#setting-show-example-front').addEventListener('change', (e) => {
+      settings.showExampleFront = e.target.checked;
       saveSettings(settings);
     });
 

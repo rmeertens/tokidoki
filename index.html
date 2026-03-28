@@ -90,6 +90,7 @@
             <div class="card-meaning" id="card-meaning"></div>
             <div class="card-prompt" id="card-prompt"></div>
             <div class="card-context hidden" id="card-context"></div>
+            <div class="card-example-sentence-front hidden" id="card-example-sentence-front"></div>
             <div class="hint-area hidden" id="hint-area"></div>
             <div class="reveal-area" id="reveal-area">
               <div class="reveal-buttons">
@@ -125,6 +126,7 @@
               </div>
             </div>
             <div class="card-explanation" id="card-explanation"></div>
+            <div class="hint-area-back" id="hint-area-back"></div>
             <div class="card-example-sentence" id="card-example-sentence"></div>
             <div class="grade-buttons">
               <button class="btn-grade btn-again" data-grade="1"><span class="grade-key">1</span> Again</button>
@@ -178,6 +180,13 @@
             <span class="setting-desc">See an English sentence (e.g. "I did take (a thing) (polite, past)") and produce the Japanese conjugation</span>
           </div>
           <input type="checkbox" id="setting-english-to-japanese" class="setting-toggle">
+        </label>
+        <label class="setting-row">
+          <div class="setting-info">
+            <span class="setting-label">Show example sentence on question</span>
+            <span class="setting-desc">Shows a Japanese example sentence (with the answer blanked out) before you reveal the answer</span>
+          </div>
+          <input type="checkbox" id="setting-show-example-front" class="setting-toggle">
         </label>
       </div>
     </main>
