@@ -172,7 +172,7 @@
 
     if (name === 'chapters') {
       backBtn.classList.add('hidden');
-      title.textContent = 'Genki Conjugation Cards';
+      title.textContent = 'Tokidoki';
     } else if (name === 'study') {
       backBtn.classList.remove('hidden');
       title.textContent = studyMode === 'translate' ? 'Translate Sentences' : studyMode === 'custom' ? 'Custom Session' : (CHAPTER_INFO[currentChapter]?.title || 'Study');
