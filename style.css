@@ -943,8 +943,36 @@ body {
   font-family: var(--font-jp);
 }
 
-.ref-table tr:hover td {
+.ref-row {
+  cursor: pointer;
+}
+
+.ref-row:hover td {
   background: var(--bg-card-hover);
+}
+
+.ref-row-active td {
+  background: var(--accent-dim);
+}
+
+.ref-explanation-row td {
+  padding: 0 !important;
+  border-top: none !important;
+}
+
+.ref-explanation-row.hidden {
+  display: none;
+}
+
+.ref-explanation {
+  padding: 12px 16px;
+  font-family: var(--font);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--text-dim);
+  background: var(--bg-input);
+  border-top: 1px solid var(--border);
+  animation: fadeIn 0.2s ease;
 }
 
 /* Build Your Own */

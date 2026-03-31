@@ -1416,11 +1416,16 @@
         example = Conjugator.conjugate(exampleVerb, form);
       }
 
-      rows += `<tr>
+      rows += `<tr class="ref-row" data-form="${form}">
         <td><span class="form-pill" style="background:${fi.color}22;color:${fi.color}">${fi.symbol}</span></td>
         <td style="font-family:var(--font);font-size:0.8rem">${fi.name}</td>
         <td>${example}</td>
         <td style="font-family:var(--font);font-size:0.75rem;color:var(--text-dim)">Ch ${fi.chapter}</td>
+      </tr>
+      <tr class="ref-explanation-row hidden" data-form-detail="${form}">
+        <td colspan="4">
+          <div class="ref-explanation">${fi.explanation || ''}</div>
+        </td>
       </tr>`;
     });
 
@@ -1430,6 +1435,20 @@
         <tbody>${rows}</tbody>
       </table>
     `;
+
+    content.querySelectorAll('.ref-row').forEach(row => {
+      row.addEventListener('click', () => {
+        const form = row.dataset.form;
+        const detail = content.querySelector(`[data-form-detail="${form}"]`);
+        const wasOpen = !detail.classList.contains('hidden');
+        content.querySelectorAll('.ref-explanation-row').forEach(r => r.classList.add('hidden'));
+        content.querySelectorAll('.ref-row').forEach(r => r.classList.remove('ref-row-active'));
+        if (!wasOpen) {
+          detail.classList.remove('hidden');
+          row.classList.add('ref-row-active');
+        }
+      });
+    });
   }
 
   // ─── Build Your Own ──────────────────────────────────────────────────────────
