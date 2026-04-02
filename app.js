@@ -1204,6 +1204,16 @@
     return null;
   }
 
+  function getUnchangedBaseForDisplay(card) {
+    const { verb, form } = card;
+    const isAdj = studyMode === 'adjectives' || (studyMode === 'custom' && isAdjCard(card));
+    if (isAdj) return null;
+    if (verb.type === 'u' && form !== 'dict') {
+      return verb.reading.slice(0, -1);
+    }
+    return null;
+  }
+
   function formatConjugatedWithStem(card, correct) {
     const stem = getStemForDisplay(card);
     if (!stem || !correct.startsWith(stem) || stem.length >= correct.length) {
@@ -1211,6 +1221,11 @@
     }
 
     const ending = correct.slice(stem.length);
+    const unchangedBase = getUnchangedBaseForDisplay(card);
+    if (unchangedBase !== null && stem.startsWith(unchangedBase) && unchangedBase.length < stem.length) {
+      const changedChar = stem.slice(unchangedBase.length);
+      return `<span class="conjugation-stem">${unchangedBase}</span><span class="conjugation-changed">${changedChar}</span><span class="conjugation-ending">${ending}</span>`;
+    }
     return `<span class="conjugation-stem">${stem}</span><span class="conjugation-ending">${ending}</span>`;
   }
 
