@@ -439,15 +439,15 @@ body {
 }
 
 .conjugation-stem {
-  opacity: 0.62;
+  color: var(--text-muted);
 }
 
 .conjugation-changed {
-  opacity: 0.85;
+  color: var(--text);
 }
 
 .conjugation-ending {
-  opacity: 1;
+  color: var(--form-color, var(--accent));
 }
 
 .card-prompt {
