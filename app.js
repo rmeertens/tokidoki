@@ -2234,6 +2234,7 @@
     // Reveal button (default mode)
     $('#btn-reveal').addEventListener('click', showAnswer);
     $('#btn-hint').addEventListener('click', toggleHint);
+    $('#btn-hint-typing').addEventListener('click', toggleHint);
 
     // Check answer (typing mode)
     $('#btn-check').addEventListener('click', checkAnswer);

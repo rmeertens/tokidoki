@@ -515,10 +515,11 @@ body {
   margin-top: 16px;
 }
 
-.reveal-buttons {
+.reveal-buttons, .typing-buttons {
   display: flex;
   gap: 10px;
   align-items: center;
+  margin-top: 8px;
 }
 
 .btn-hint {
