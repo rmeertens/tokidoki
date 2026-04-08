@@ -948,6 +948,14 @@ body {
   margin-bottom: 12px;
 }
 
+.ref-verb-rule-box p {
+  margin: 0 0 6px;
+}
+
+.ref-verb-rule-box p:last-of-type {
+  margin-bottom: 0;
+}
+
 .ref-verb-examples {
   display: block;
   font-family: var(--font-jp);

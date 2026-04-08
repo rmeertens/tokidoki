@@ -1396,24 +1396,35 @@
   // ─── Reference Screen ─────────────────────────────────────────────────────────
 
   function buildVerbTypeHTML() {
-    const uRuVerbs = GENKI_VERBS.filter(v => v.type === 'u' && v.reading.endsWith('る'));
-    const exceptionItems = uRuVerbs.map(v =>
+    const eSounds = 'えけせてねへめれげぜでべぺ';
+    const iSounds = 'いきしちにひみりぎじびぴ';
+    const exceptions = GENKI_VERBS.filter(v => {
+      if (v.type !== 'u' || !v.reading.endsWith('る')) return false;
+      const before = v.reading[v.reading.length - 2];
+      return eSounds.includes(before) || iSounds.includes(before);
+    });
+    const exceptionItems = exceptions.map(v =>
       `<li><span class="ref-exc-kanji">${v.kanji}</span><span class="ref-exc-reading"> ${v.reading}</span> — ${v.meaning}</li>`
     ).join('');
 
     return `<div class="ref-verb-types">
       <button class="ref-exc-header" id="ref-exc-toggle" aria-expanded="false">
-        <span>Verb types &amp; exceptions</span>
+        <span>RU-verbs vs U-verbs (ichidan / godan)</span>
         <span class="ref-exc-arrow">▶</span>
       </button>
       <div class="ref-exc-body hidden" id="ref-exc-body">
         <div class="ref-verb-rule-box">
-          <strong>How to recognize a RU-verb:</strong> the kana directly before る is an
-          <strong>e-sound</strong> (え段: べ、け、せ…) or <strong>i-sound</strong> (い段: み、き、し…).
+          <p><strong>RU-verbs</strong> (一段 ichidan — "one row"): the kana before る is always an
+          <strong>e-sound</strong> (え段) or <strong>i-sound</strong> (い段).
+          Conjugations only ever use that one row of the hiragana chart.</p>
           <span class="ref-verb-examples">食べ<strong>る</strong> · 見<strong>る</strong> · 起き<strong>る</strong> · 教え<strong>る</strong></span>
-          Everything else — including る after an a/u/o-sound — is a U-verb.
+          <p><strong>U-verbs</strong> (五段 godan — "five rows"): conjugations change the final kana
+          across all five vowel rows (a / i / u / e / o), hence the name.
+          Any verb <em>not</em> ending in る is a U-verb; verbs ending in る where the preceding
+          sound is <strong>a / u / o</strong> are also U-verbs.</p>
+          <span class="ref-verb-examples">書<strong>く</strong> → か・き・く・け・こ · 帰<strong>る</strong> · 分か<strong>る</strong></span>
         </div>
-        <div class="ref-exc-label">Exceptions — end in る but are U-verbs (${uRuVerbs.length})</div>
+        <div class="ref-exc-label">Exceptions — end in える or いる but are U-verbs (${exceptions.length})</div>
         <ul class="ref-exc-list">${exceptionItems}</ul>
       </div>
     </div>`;
