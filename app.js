@@ -1273,9 +1273,7 @@
     const conjugated = $('#card-conjugated');
     conjugated.innerHTML = formatConjugatedWithStem(currentCard, correct);
     conjugated.style.color = fi.color;
-    $('#correct-answer').textContent = Array.isArray(correctAnswers) && correctAnswers.length > 1
-      ? correctAnswers.join(' / ')
-      : correct;
+    $('#correct-answer').textContent = correct;
     $('#card-hint-explanation').textContent = fi.hint;
 
     const isAdj = studyMode === 'adjectives' || (studyMode === 'custom' && isAdjCard(currentCard));
