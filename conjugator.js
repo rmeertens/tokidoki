@@ -450,9 +450,43 @@ const Conjugator = (() => {
     }
   }
 
+  function isHiragana(ch) {
+    const code = ch.charCodeAt(0);
+    return code >= 0x3041 && code <= 0x309F;
+  }
+
+  function getOkurigana(str) {
+    let i = str.length - 1;
+    while (i >= 0 && isHiragana(str[i])) {
+      i--;
+    }
+    return str.slice(i + 1);
+  }
+
+  function conjugateKanji(verb, form) {
+    const { kanji, reading } = verb;
+    if (!kanji || kanji === reading) return null;
+
+    const okurigana = getOkurigana(kanji);
+    if (!okurigana || okurigana.length >= reading.length) return null;
+
+    const kanjiBase = kanji.slice(0, kanji.length - okurigana.length);
+    const readingBaseLen = reading.length - okurigana.length;
+
+    const isAdj = verb.type === 'i-adj' || verb.type === 'na-adj';
+    const hiraganaConj = isAdj ? conjugateAdjective(verb, form) : conjugate(verb, form);
+    return kanjiBase + hiraganaConj.slice(readingBaseLen);
+  }
+
+  function conjugateAdjKanji(adj, form) {
+    return conjugateKanji(adj, form);
+  }
+
   return {
     conjugate,
     conjugateAdjective,
+    conjugateKanji,
+    conjugateAdjKanji,
     getFormsForChapter,
     getAdjFormsForChapter,
     getFormInfo,

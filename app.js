@@ -560,10 +560,14 @@
 
   function getCorrectAnswer(card) {
     const { verb, form } = card;
-    if (studyMode === 'adjectives' || (studyMode === 'custom' && isAdjCard(card))) {
-      return Conjugator.conjugateAdjective(verb, form);
-    }
-    return Conjugator.conjugate(verb, form);
+    const isAdj = studyMode === 'adjectives' || (studyMode === 'custom' && isAdjCard(card));
+    const hiragana = isAdj
+      ? Conjugator.conjugateAdjective(verb, form)
+      : Conjugator.conjugate(verb, form);
+    const kanji = Conjugator.conjugateKanji(verb, form);
+    const answers = [hiragana];
+    if (kanji && kanji !== hiragana) answers.push(kanji);
+    return answers;
   }
 
   function checkAnswer() {
@@ -1215,12 +1219,16 @@
     return `<span class="conjugation-stem">${stem}</span><span class="conjugation-ending">${ending}</span>`;
   }
 
-  function revealAnswer(userAnswer, correct) {
+  function revealAnswer(userAnswer, correctAnswers) {
     answered = true;
+
+    const correct = Array.isArray(correctAnswers) ? correctAnswers[0] : correctAnswers;
 
     if (settings.typingMode) {
       const input = $('#answer-input');
-      const isCorrect = normalize(userAnswer) === normalize(correct);
+      const isCorrect = Array.isArray(correctAnswers)
+        ? correctAnswers.some(a => normalize(userAnswer) === normalize(a))
+        : normalize(userAnswer) === normalize(correct);
       input.className = 'answer-input ' + (userAnswer ? (isCorrect ? 'correct' : 'incorrect') : '');
       input.blur();
 
@@ -1265,7 +1273,9 @@
     const conjugated = $('#card-conjugated');
     conjugated.innerHTML = formatConjugatedWithStem(currentCard, correct);
     conjugated.style.color = fi.color;
-    $('#correct-answer').textContent = correct;
+    $('#correct-answer').textContent = Array.isArray(correctAnswers) && correctAnswers.length > 1
+      ? correctAnswers.join(' / ')
+      : correct;
     $('#card-hint-explanation').textContent = fi.hint;
 
     const isAdj = studyMode === 'adjectives' || (studyMode === 'custom' && isAdjCard(currentCard));
