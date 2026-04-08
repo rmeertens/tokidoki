@@ -121,7 +121,6 @@
   const screens = {
     chapters: $('#screen-chapters'),
     study: $('#screen-study'),
-    reference: $('#screen-reference'),
   };
 
   // ─── Theme ─────────────────────────────────────────────────────────────────────
@@ -176,9 +175,6 @@
     } else if (name === 'study') {
       backBtn.classList.remove('hidden');
       title.textContent = studyMode === 'translate' ? 'Translate Sentences' : studyMode === 'custom' ? 'Custom Session' : (CHAPTER_INFO[currentChapter]?.title || 'Study');
-    } else if (name === 'reference') {
-      backBtn.classList.remove('hidden');
-      title.textContent = 'Conjugation Reference';
     }
   }
 
@@ -2176,14 +2172,50 @@
       renderAdjChapters();
     });
 
-    // Reference button
-    $('#btn-ref').addEventListener('click', () => {
-      if (screens.reference.classList.contains('active')) {
-        showScreen('chapters');
-        renderChapters();
-        renderAdjChapters();
-      } else {
-        showScreen('reference');
+    // Reference overlay
+    function openReference() {
+      const overlay = $('#ref-overlay');
+      const isAdj = currentCard && (currentCard.verb.type === 'i-adj' || currentCard.verb.type === 'na-adj');
+      const verbType = isAdj ? 'adj' : 'verb';
+      const targetForm = currentCard ? currentCard.form : null;
+
+      $$('.ref-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === verbType));
+      renderReference(verbType);
+
+      if (targetForm) {
+        const content = $('#ref-content');
+        // Expand the matching row
+        const row = content.querySelector(`[data-form="${targetForm}"]`);
+        const detail = content.querySelector(`[data-form-detail="${targetForm}"]`);
+        if (row && detail) {
+          content.querySelectorAll('.ref-explanation-row').forEach(r => r.classList.add('hidden'));
+          content.querySelectorAll('.ref-row').forEach(r => r.classList.remove('ref-row-active', 'ref-row-current'));
+          detail.classList.remove('hidden');
+          row.classList.add('ref-row-active', 'ref-row-current');
+        }
+      }
+
+      overlay.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+
+      if (targetForm) {
+        const row = $('#ref-content').querySelector(`[data-form="${targetForm}"]`);
+        if (row) setTimeout(() => row.scrollIntoView({ block: 'center', behavior: 'smooth' }), 50);
+      }
+    }
+
+    function closeReference() {
+      $('#ref-overlay').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    $('#btn-ref').addEventListener('click', openReference);
+    $('#btn-ref-close').addEventListener('click', closeReference);
+    $('#ref-backdrop').addEventListener('click', closeReference);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !$('#ref-overlay').classList.contains('hidden')) {
+        closeReference();
       }
     });
 
@@ -2292,6 +2324,7 @@
         closeSettings();
         return;
       }
+      if (!$('#ref-overlay').classList.contains('hidden')) return;
       if (!screens.study.classList.contains('active')) return;
       if (!$('#settings-overlay').classList.contains('hidden')) return;
 

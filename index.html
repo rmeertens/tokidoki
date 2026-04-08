@@ -233,15 +233,21 @@
       </div>
     </div>
 
-    <!-- Screen: Conjugation Reference -->
-    <main id="screen-reference" class="screen">
-      <h2 class="section-title">Conjugation Reference</h2>
-      <div class="ref-tabs">
-        <button class="ref-tab active" data-tab="verb">Verbs</button>
-        <button class="ref-tab" data-tab="adj">Adjectives</button>
+    <!-- Reference Overlay -->
+    <div id="ref-overlay" class="ref-overlay hidden" role="dialog" aria-modal="true" aria-label="Conjugation Reference">
+      <div id="ref-backdrop" class="ref-backdrop"></div>
+      <div class="ref-overlay-panel">
+        <div class="ref-overlay-header">
+          <h2 class="section-title" style="margin:0">Conjugation Reference</h2>
+          <button id="btn-ref-close" class="icon-btn" aria-label="Close">✕</button>
+        </div>
+        <div class="ref-tabs">
+          <button class="ref-tab active" data-tab="verb">Verbs</button>
+          <button class="ref-tab" data-tab="adj">Adjectives</button>
+        </div>
+        <div id="ref-content" class="ref-content"></div>
       </div>
-      <div id="ref-content" class="ref-content"></div>
-    </main>
+    </div>
 
   </div>
 
