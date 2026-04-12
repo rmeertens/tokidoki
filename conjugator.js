@@ -350,7 +350,13 @@ const Conjugator = (() => {
 
   const ADJ_FORM_INFO = {
     'adj-present':   { name: 'Present', nameJp: '現在形', hint: 'Plain present', symbol: 'だ/い', color: '#9C27B0', chapter: 5,
-      explanation: '<p>The <strong>plain present</strong> of adjectives. い-adjectives are used as-is (they already end in い). な-adjectives add <b>だ</b> in plain form or <b>です</b> in polite form.</p>'
+      explanation: '<p class="conj-note" style="background:#fff3e0;border-left:3px solid #FF9800"><strong>⚠ Careful:</strong> Some な-adjectives end in い and look like い-adjectives — but they conjugate as な-adjectives!</p>'
+        + '<table class="conj-table"><thead><tr><th>な-adjective ending in い</th><th>Reading</th><th>Meaning</th></tr></thead><tbody>'
+        + '<tr><td>きれい</td><td>kirei</td><td>beautiful / clean</td></tr>'
+        + '<tr><td>嫌い</td><td>きらい</td><td>disliked</td></tr>'
+        + '<tr><td>有名</td><td>ゆうめい</td><td>famous</td></tr>'
+        + '</tbody></table>'
+        + '<p>The <strong>plain present</strong> of adjectives. い-adjectives are used as-is (they already end in い). な-adjectives add <b>だ</b> in plain form or <b>です</b> in polite form.</p>'
         + '<table class="conj-table"><thead><tr><th>Type</th><th>Plain</th><th>Polite</th></tr></thead><tbody>'
         + '<tr><td>い-adjective</td><td>高<b>い</b></td><td>高<b>いです</b></td></tr>'
         + '<tr><td>な-adjective</td><td>静か<b>だ</b></td><td>静か<b>です</b></td></tr>'
