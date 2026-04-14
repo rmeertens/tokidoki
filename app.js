@@ -2197,20 +2197,62 @@
     renderAdjChapters();
     renderReference('verb');
 
+    // ─── Mode routing helpers ───────────────────────────────────────────────────
+
+    const MODE_TO_HASH = { verbs: 'verbs', adjectives: 'adjectives', custom: 'custom', translate: 'sentences' };
+    const HASH_TO_MODE = { verbs: 'verbs', adjectives: 'adjectives', custom: 'custom', sentences: 'translate' };
+    const MODE_TITLES  = { verbs: 'Verbs', adjectives: 'Adjectives', custom: 'Build Your Own', translate: 'Sentences' };
+
+    function switchMode(mode) {
+      if (!MODE_TO_HASH[mode]) mode = 'verbs';
+
+      document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+      const tab = document.querySelector(`.mode-tab[data-mode="${mode}"]`);
+      if (tab) tab.classList.add('active');
+
+      $('#verb-chapters').classList.toggle('hidden', mode !== 'verbs');
+      $('#adj-chapters').classList.toggle('hidden', mode !== 'adjectives');
+      $('#custom-builder').classList.toggle('hidden', mode !== 'custom');
+      $('#translate-panel').classList.toggle('hidden', mode !== 'translate');
+
+      if (mode === 'custom') renderCustomPanel();
+      if (mode === 'translate') renderTranslateChapters();
+
+      // Update URL hash without adding extra history entries when called from hashchange
+      const hash = '#' + MODE_TO_HASH[mode];
+      if (location.hash !== hash) history.pushState(null, '', hash);
+
+      // Update page title
+      document.title = 'Tokidoki – ' + (MODE_TITLES[mode] || 'Practice');
+
+      // Send GA virtual page view so each section is tracked separately
+      if (typeof gtag === 'function') {
+        gtag('event', 'page_view', {
+          page_title: document.title,
+          page_location: location.href,
+          page_path: '/' + hash,
+        });
+      }
+    }
+
     // Mode tabs (Verbs / Adjectives / Build Your Own)
     document.querySelectorAll('.mode-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        const mode = tab.dataset.mode;
-        $('#verb-chapters').classList.toggle('hidden', mode !== 'verbs');
-        $('#adj-chapters').classList.toggle('hidden', mode !== 'adjectives');
-        $('#custom-builder').classList.toggle('hidden', mode !== 'custom');
-        $('#translate-panel').classList.toggle('hidden', mode !== 'translate');
-        if (mode === 'custom') renderCustomPanel();
-        if (mode === 'translate') renderTranslateChapters();
-      });
+      tab.addEventListener('click', () => switchMode(tab.dataset.mode));
     });
+
+    // Respond to browser back/forward within the chapter screen
+    window.addEventListener('hashchange', () => {
+      if (screens.chapters.classList.contains('active')) {
+        const mode = HASH_TO_MODE[location.hash.replace('#', '')] || 'verbs';
+        switchMode(mode);
+      }
+    });
+
+    // Activate the mode indicated by the URL hash on first load
+    {
+      const initialMode = HASH_TO_MODE[location.hash.replace('#', '')] || 'verbs';
+      switchMode(initialMode);
+    }
 
     // Theme toggle
     $('#btn-theme').addEventListener('click', toggleTheme);
