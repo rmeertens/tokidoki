@@ -1173,9 +1173,17 @@ body {
   font-size: 1.9rem;
 }
 
-.kanji-hover-card:hover .kanji-hover-answer,
 .kanji-hover-card.revealed .kanji-hover-answer {
   opacity: 1;
+}
+
+/* Hover-to-peek only for devices with a real hover (mouse/trackpad). On touch,
+   tapping a card can leave it "stuck" in :hover until another element is
+   tapped, which would make the click-to-toggle-reveal below look broken. */
+@media (hover: hover) and (pointer: fine) {
+  .kanji-hover-card:hover .kanji-hover-answer {
+    opacity: 1;
+  }
 }
 
 /* Session complete */
