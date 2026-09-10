@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" id="viewport-meta" content="width=device-width, initial-scale=1.0">
+  <title>Kanji Hover Reference | Tokidoki</title>
+  <meta name="description" content="Browse JLPT kanji (N5–N1) the way they appear on the printable answer-key sheets — kanji and meaning stacked, one side hidden until you hover or click. Toggle kanji→meaning or meaning→kanji and filter by level.">
+  <meta property="og:title" content="Kanji Hover Reference | Tokidoki">
+  <meta property="og:description" content="JLPT kanji (N5–N1), kanji and meaning stacked — hover to peek, click to reveal for good. Toggle direction and filter by level.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tokidoki.meertens.dev/kanji-hover.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Kanji Hover Reference | Tokidoki">
+  <meta name="twitter:description" content="JLPT kanji (N5–N1), hover to peek the meaning (or kanji), click to reveal for good.">
+  <link rel="canonical" href="https://tokidoki.meertens.dev/kanji-hover.html">
+  <link rel="stylesheet" href="style.css">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXWYNZC7YH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXWYNZC7YH');
+  </script>
+</head>
+<body data-mode="kanji-hover">
+  <div id="app">
+
+    <!-- Header -->
+    <!-- Header (rendered by renderSharedChrome() in app.js) -->
+    <div id="header-mount"></div>
+
+    <!-- Screen: Kanji Hover -->
+    <main id="screen-chapters" class="screen active">
+      <nav class="mode-tabs">
+        <a class="mode-tab" href="verbs.html">Verbs</a>
+        <a class="mode-tab" href="adjectives.html">Adjectives</a>
+        <a class="mode-tab" href="custom.html">Build Your Own</a>
+        <a class="mode-tab" href="sentences.html">Sentences</a>
+        <a class="mode-tab" href="particles-quiz.html">Particles</a>
+        <a class="mode-tab" href="kana.html">Kana</a>
+        <a class="mode-tab" href="kanji.html">Practice Sheets</a>
+        <a class="mode-tab" href="kanji-quiz.html">Kanji Quiz</a>
+        <a class="mode-tab active" href="kanji-hover.html">Kanji Hover</a>
+      </nav>
+      <p class="tab-intro">
+        The same kanji &amp; meaning pairs as the printable answer-key sheets, stacked the
+        same way &mdash; but on screen, with one side hidden per card. Hover a card to peek
+        at it, click to reveal it for good. Pick a direction and which JLPT levels to include.
+      </p>
+      <div class="kana-settings-row" id="kanji-hover-direction-row">
+        <label class="kana-script-toggle">
+          <input type="radio" name="kanji-hover-direction" id="kanji-hover-dir-km" value="kanji-to-meaning" checked>
+          Kanji &rarr; Meaning
+        </label>
+        <label class="kana-script-toggle">
+          <input type="radio" name="kanji-hover-direction" id="kanji-hover-dir-mk" value="meaning-to-kanji">
+          Meaning &rarr; Kanji
+        </label>
+      </div>
+      <div class="kana-settings-row">
+        <label class="kana-script-toggle"><input type="checkbox" id="kanji-hover-toggle-n5" checked> N5</label>
+        <label class="kana-script-toggle"><input type="checkbox" id="kanji-hover-toggle-n4"> N4</label>
+        <label class="kana-script-toggle"><input type="checkbox" id="kanji-hover-toggle-n3"> N3</label>
+        <label class="kana-script-toggle"><input type="checkbox" id="kanji-hover-toggle-n2"> N2</label>
+        <label class="kana-script-toggle"><input type="checkbox" id="kanji-hover-toggle-n1"> N1</label>
+      </div>
+      <p class="tab-intro" id="kanji-hover-count" style="margin-top:0"></p>
+
+      <div class="kanji-hover-grid" id="kanji-hover-grid"></div>
+      <p class="tab-intro hidden" id="kanji-hover-empty">No kanji match the selected levels.</p>
+    </main>
+
+  </div>
+
+  <script src="conjugator.js"></script>
+  <script src="verbs.js"></script>
+  <script src="kana.js"></script>
+  <script src="kanji-quiz-data.js"></script>
+  <script src="sentences-data.js"></script>
+  <script src="app.js"></script>
+
+  <!-- Static content for search engines -->
+  <section id="seo-content" aria-hidden="true">
+    <h2>Kanji Hover Reference</h2>
+    <p>
+      A browsable version of the printable kanji answer-key sheets, covering JLPT N5 through
+      N1. Each card shows the kanji and its English meaning stacked, one on top of the other,
+      but only one side is visible at first &mdash; hover over a card to peek at the hidden
+      side, or click it to reveal that side permanently. Switch the direction to show the
+      kanji first and hide the meaning, or show the meaning first and hide the kanji, and
+      filter which JLPT levels appear. Uses the same kanji lists as the
+      <a href="kanji-quiz.html">Kanji Quiz</a> and the printable
+      <a href="kanji.html">practice sheets</a>.
+    </p>
+  </section>
+</body>
+</html>

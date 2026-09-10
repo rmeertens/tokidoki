@@ -1106,6 +1106,78 @@ body {
   margin-top: 2px;
 }
 
+/* Kanji hover reference page */
+.kanji-hover-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.kanji-hover-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 8px 10px;
+  cursor: pointer;
+  text-align: center;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.kanji-hover-card.revealed {
+  border-color: var(--accent);
+}
+
+.kanji-hover-level {
+  font-size: 0.6rem;
+  color: var(--accent);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.kanji-hover-glyph {
+  font-family: var(--font-jp);
+  font-size: 2.3rem;
+  line-height: 1;
+}
+
+.kanji-hover-text {
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.kanji-hover-prompt.kanji-hover-text {
+  min-height: 2.3rem;
+  display: flex;
+  align-items: center;
+}
+
+.kanji-hover-answer {
+  width: 100%;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border);
+  color: var(--text-dim);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.kanji-hover-answer.kanji-hover-glyph {
+  color: var(--text);
+  font-size: 1.9rem;
+}
+
+.kanji-hover-card:hover .kanji-hover-answer,
+.kanji-hover-card.revealed .kanji-hover-answer {
+  opacity: 1;
+}
+
 /* Session complete */
 .session-complete {
   text-align: center;
@@ -1959,6 +2031,18 @@ body {
 
   .mode-tab {
     font-size: 0.82rem;
+  }
+
+  .kanji-hover-grid {
+    grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+  }
+
+  .kanji-hover-glyph {
+    font-size: 1.9rem;
+  }
+
+  .kanji-hover-answer.kanji-hover-glyph {
+    font-size: 1.6rem;
   }
 }
 

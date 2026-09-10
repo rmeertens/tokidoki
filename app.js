@@ -2899,6 +2899,58 @@
     if (empty) empty.classList.toggle('hidden', filtered.length !== 0);
   }
 
+  // ─── Kanji hover reference page (kanji-hover.html) ──────────────────────────────
+  //
+  // Same kanji + meaning pairs as the printable answer-key sheets, but browsable
+  // on screen: one side is hidden per card until you hover (peek) or click (reveal
+  // for good). No SRS state — this is a reference, not a quiz.
+
+  function getKanjiHoverLevels() {
+    return KANJI_QUIZ_LEVELS.filter(level => {
+      const el = $(`#kanji-hover-toggle-${level}`);
+      return el && el.checked;
+    });
+  }
+
+  function getKanjiHoverDirection() {
+    const checked = document.querySelector('input[name="kanji-hover-direction"]:checked');
+    return checked ? checked.value : 'kanji-to-meaning';
+  }
+
+  function renderKanjiHoverPage() {
+    const grid = $('#kanji-hover-grid');
+    if (!grid) return;
+
+    const showKanjiFirst = getKanjiHoverDirection() === 'kanji-to-meaning';
+    const levels = getKanjiHoverLevels();
+
+    const items = [];
+    levels.forEach(level => {
+      (KANJI_QUIZ_DATA[level] || []).forEach(k => items.push({ level, kanji: k.kanji, meaning: k.meaning }));
+    });
+
+    grid.innerHTML = items.map(({ level, kanji, meaning }) => {
+      const promptText = showKanjiFirst ? kanji : meaning;
+      const answerText = showKanjiFirst ? meaning : kanji;
+      const promptClass = showKanjiFirst ? 'kanji-hover-glyph' : 'kanji-hover-text';
+      const answerClass = showKanjiFirst ? 'kanji-hover-text' : 'kanji-hover-glyph';
+      return `
+        <div class="kanji-hover-card">
+          <div class="kanji-hover-level">${level}</div>
+          <div class="kanji-hover-prompt ${promptClass}">${promptText}</div>
+          <div class="kanji-hover-answer ${answerClass}">${answerText}</div>
+        </div>
+      `;
+    }).join('');
+
+    const count = $('#kanji-hover-count');
+    if (count) count.textContent = `${items.length} kanji`;
+
+    grid.classList.toggle('hidden', items.length === 0);
+    const empty = $('#kanji-hover-empty');
+    if (empty) empty.classList.toggle('hidden', items.length !== 0);
+  }
+
   // ─── Utilities ─────────────────────────────────────────────────────────────────
 
   function shuffle(arr) {
@@ -3111,6 +3163,8 @@
       renderKanjiQuizPanel();
     } else if (mode === 'confusable-browse') {
       renderConfusableBrowsePage();
+    } else if (mode === 'kanji-hover') {
+      renderKanjiHoverPage();
     } else if (mode === 'particles') {
       renderParticlesPanel();
     } else {
@@ -3511,6 +3565,29 @@
     on('#confusable-browse-search', 'input', renderConfusableBrowsePage);
     KANJI_QUIZ_LEVELS.forEach(level => {
       on(`#confusable-browse-toggle-${level}`, 'change', renderConfusableBrowsePage);
+    });
+
+    // ─── Kanji hover reference page ─────────────────────────────────────────────
+
+    on('#kanji-hover-dir-km', 'change', renderKanjiHoverPage);
+    on('#kanji-hover-dir-mk', 'change', renderKanjiHoverPage);
+
+    function toggleKanjiHoverLevel(e) {
+      const anyChecked = KANJI_QUIZ_LEVELS.some(level => $(`#kanji-hover-toggle-${level}`).checked);
+      if (!anyChecked) {
+        e.target.checked = true;
+        return;
+      }
+      renderKanjiHoverPage();
+    }
+
+    KANJI_QUIZ_LEVELS.forEach(level => {
+      on(`#kanji-hover-toggle-${level}`, 'change', toggleKanjiHoverLevel);
+    });
+
+    on('#kanji-hover-grid', 'click', (e) => {
+      const card = e.target.closest('.kanji-hover-card');
+      if (card) card.classList.add('revealed');
     });
 
     // Reference tabs
