@@ -3587,7 +3587,7 @@
 
     on('#kanji-hover-grid', 'click', (e) => {
       const card = e.target.closest('.kanji-hover-card');
-      if (card) card.classList.add('revealed');
+      if (card) card.classList.toggle('revealed');
     });
 
     // Reference tabs
