@@ -1107,6 +1107,22 @@ body {
 }
 
 /* Kanji hover reference page */
+.kanji-hover-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.kanji-hover-toolbar .tab-intro {
+  margin: 0;
+}
+
+.kanji-hover-toolbar .btn-secondary {
+  flex-shrink: 0;
+}
+
 .kanji-hover-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));

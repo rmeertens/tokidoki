@@ -2917,17 +2917,35 @@
     return checked ? checked.value : 'kanji-to-meaning';
   }
 
+  function buildKanjiHoverPool() {
+    const items = [];
+    getKanjiHoverLevels().forEach(level => {
+      (KANJI_QUIZ_DATA[level] || []).forEach(k => items.push({ level, kanji: k.kanji, meaning: k.meaning }));
+    });
+    return items;
+  }
+
+  // Shuffled order survives a direction toggle (same pool, just which side is
+  // shown), but is dropped whenever the level filters change the pool itself.
+  let kanjiHoverOrder = null;
+
+  function resetKanjiHoverOrder() {
+    kanjiHoverOrder = null;
+    renderKanjiHoverPage();
+  }
+
+  function shuffleKanjiHoverOrder() {
+    kanjiHoverOrder = buildKanjiHoverPool();
+    shuffle(kanjiHoverOrder);
+    renderKanjiHoverPage();
+  }
+
   function renderKanjiHoverPage() {
     const grid = $('#kanji-hover-grid');
     if (!grid) return;
 
     const showKanjiFirst = getKanjiHoverDirection() === 'kanji-to-meaning';
-    const levels = getKanjiHoverLevels();
-
-    const items = [];
-    levels.forEach(level => {
-      (KANJI_QUIZ_DATA[level] || []).forEach(k => items.push({ level, kanji: k.kanji, meaning: k.meaning }));
-    });
+    const items = kanjiHoverOrder || buildKanjiHoverPool();
 
     grid.innerHTML = items.map(({ level, kanji, meaning }) => {
       const promptText = showKanjiFirst ? kanji : meaning;
@@ -3578,7 +3596,7 @@
         e.target.checked = true;
         return;
       }
-      renderKanjiHoverPage();
+      resetKanjiHoverOrder();
     }
 
     KANJI_QUIZ_LEVELS.forEach(level => {
@@ -3589,6 +3607,8 @@
       const card = e.target.closest('.kanji-hover-card');
       if (card) card.classList.toggle('revealed');
     });
+
+    on('#btn-kanji-hover-shuffle', 'click', shuffleKanjiHoverOrder);
 
     // Reference tabs
     $$('.ref-tab').forEach(tab => {
