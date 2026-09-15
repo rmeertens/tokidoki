@@ -1214,6 +1214,7 @@ body {
 }
 
 .vocab-hover-word {
+  position: relative;
   font-family: var(--font-jp);
   font-size: 1.4rem;
   line-height: 1.6;
@@ -1245,6 +1246,75 @@ body {
   .kanji-hover-card:hover .vocab-word-peek rt {
     opacity: 1;
   }
+}
+
+/* Per-kanji breakdown tooltip (meaning + on'yomi/kun'yomi for each kanji in
+   the word) — shown under the same hover/reveal trigger as the rest of the
+   card. Absolutely positioned so it overlays neighboring cards instead of
+   pushing the grid around, and pointer-events:none so it never steals a
+   click meant for the card underneath it. */
+.vocab-kanji-breakdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 6px;
+  width: max-content;
+  max-width: 220px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  padding: 6px 10px;
+  z-index: 5;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  text-align: left;
+  white-space: normal;
+}
+
+.kanji-hover-card.revealed .vocab-kanji-breakdown {
+  opacity: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .kanji-hover-card:hover .vocab-kanji-breakdown {
+    opacity: 1;
+  }
+}
+
+.vocab-kanji-breakdown-row {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  padding: 4px 0;
+}
+
+.vocab-kanji-breakdown-row + .vocab-kanji-breakdown-row {
+  border-top: 1px dashed var(--border);
+}
+
+.vocab-kanji-breakdown-char {
+  flex-shrink: 0;
+  font-size: 1.1rem;
+}
+
+.vocab-kanji-breakdown-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  font-size: 0.68rem;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.vocab-kanji-breakdown-meaning {
+  color: var(--text);
+}
+
+.vocab-kanji-breakdown-reading {
+  color: var(--text-dim);
 }
 
 /* Session complete */

@@ -3027,6 +3027,43 @@
     return item.html;
   }
 
+  const VOCAB_KANJI_CHAR_RE = /[一-鿿㐀-䶿々]/g;
+
+  // A small tooltip, shown alongside the word on hover/reveal, breaking the
+  // word down into its individual kanji with each one's own meaning and
+  // on'yomi/kun'yomi reading (from kanji-info-data.js) — separate from the
+  // whole-word reading already shown by the furigana/peek above.
+  function vocabKanjiBreakdownHtml(kanjiText) {
+    if (typeof KANJI_INFO === 'undefined') return '';
+    const chars = kanjiText.match(VOCAB_KANJI_CHAR_RE);
+    if (!chars) return '';
+
+    const seen = new Set();
+    const rows = [];
+    chars.forEach(ch => {
+      if (seen.has(ch)) return;
+      seen.add(ch);
+      const info = KANJI_INFO[ch];
+      if (!info) return;
+      const readings = [
+        info.on ? `on: ${info.on}` : '',
+        info.kun ? `kun: ${info.kun}` : '',
+      ].filter(Boolean).join('  ');
+      rows.push(`
+        <div class="vocab-kanji-breakdown-row">
+          <span class="vocab-kanji-breakdown-char">${ch}</span>
+          <span class="vocab-kanji-breakdown-info">
+            ${info.meaning ? `<span class="vocab-kanji-breakdown-meaning">${info.meaning}</span>` : ''}
+            ${readings ? `<span class="vocab-kanji-breakdown-reading">${readings}</span>` : ''}
+          </span>
+        </div>
+      `);
+    });
+
+    if (!rows.length) return '';
+    return `<div class="vocab-kanji-breakdown">${rows.join('')}</div>`;
+  }
+
   function renderVocabPage() {
     const grid = $('#vocab-grid');
     if (!grid) return;
@@ -3036,7 +3073,7 @@
     const items = vocabOrder || buildVocabPool();
 
     grid.innerHTML = items.map(item => {
-      const wordHtml = vocabWordHtml(item, script);
+      const wordHtml = vocabWordHtml(item, script) + vocabKanjiBreakdownHtml(item.kanji);
       const wordClass = 'vocab-hover-word' + (script === 'kanji' ? ' vocab-word-peek' : '');
       const promptHtml = showWordFirst ? wordHtml : item.meaning;
       const answerHtml = showWordFirst ? item.meaning : wordHtml;
