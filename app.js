@@ -3442,10 +3442,36 @@
       renderHub();
     }
 
-    // Mode picker — a single <select> replacing the old tab row
-    on('#mode-select', 'change', (e) => {
-      if (e.target.value) location.href = e.target.value;
+    // Mode picker — category buttons that drop down their pages on hover
+    // (real pointers) or on tap (touch, where :hover doesn't apply — the
+    // trigger toggles an .open class instead).
+    const modeMenus = $$('.mode-menu');
+    function closeModeMenus() {
+      modeMenus.forEach(menu => {
+        menu.classList.remove('open');
+        const trigger = menu.querySelector('.mode-menu-trigger');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      });
+    }
+    modeMenus.forEach(menu => {
+      const trigger = menu.querySelector('.mode-menu-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const willOpen = !menu.classList.contains('open');
+        closeModeMenus();
+        if (willOpen) {
+          menu.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
     });
+    if (modeMenus.length) {
+      document.addEventListener('click', closeModeMenus);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModeMenus();
+      });
+    }
 
     // Theme toggle
     on('#btn-theme', 'click', toggleTheme);
