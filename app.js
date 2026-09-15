@@ -3073,7 +3073,11 @@
     const items = vocabOrder || buildVocabPool();
 
     grid.innerHTML = items.map(item => {
-      const wordHtml = vocabWordHtml(item, script) + vocabKanjiBreakdownHtml(item.kanji);
+      const wordHtml = vocabWordHtml(item, script);
+      // Attached to the card itself (not the word cell) so it drops in below
+      // the whole card — including the meaning — instead of overlapping
+      // whichever side the word happens to be on.
+      const breakdownHtml = vocabKanjiBreakdownHtml(item.kanji);
       const wordClass = 'vocab-hover-word' + (script === 'kanji' ? ' vocab-word-peek' : '');
       const promptHtml = showWordFirst ? wordHtml : item.meaning;
       const answerHtml = showWordFirst ? item.meaning : wordHtml;
@@ -3084,6 +3088,7 @@
           <div class="kanji-hover-level">${item.level}</div>
           <div class="kanji-hover-prompt ${promptClass}">${promptHtml}</div>
           <div class="kanji-hover-answer ${answerClass}">${answerHtml}</div>
+          ${breakdownHtml}
         </div>
       `;
     }).join('');
