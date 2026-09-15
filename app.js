@@ -3029,10 +3029,10 @@
 
   const VOCAB_KANJI_CHAR_RE = /[一-鿿㐀-䶿々]/g;
 
-  // A small tooltip, shown alongside the word on hover/reveal, breaking the
-  // word down into its individual kanji with each one's own meaning and
-  // on'yomi/kun'yomi reading (from kanji-info-data.js) — separate from the
-  // whole-word reading already shown by the furigana/peek above.
+  // Shown under the word on hover/reveal, breaking it down into its
+  // individual kanji with each one's own meaning and on'yomi/kun'yomi
+  // reading (from kanji-info-data.js) — separate from the whole-word
+  // reading already shown by the furigana/peek above.
   function vocabKanjiBreakdownHtml(kanjiText) {
     if (typeof KANJI_INFO === 'undefined') return '';
     const chars = kanjiText.match(VOCAB_KANJI_CHAR_RE);
@@ -3061,7 +3061,7 @@
     });
 
     if (!rows.length) return '';
-    return `<div class="vocab-kanji-breakdown">${rows.join('')}</div>`;
+    return `<div class="vocab-kanji-breakdown"><div class="vocab-kanji-breakdown-inner">${rows.join('')}</div></div>`;
   }
 
   function renderVocabPage() {

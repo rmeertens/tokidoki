@@ -1248,47 +1248,42 @@ body {
   }
 }
 
-/* Per-kanji breakdown tooltip (meaning + on'yomi/kun'yomi for each kanji in
-   the word) — shown under the same hover/reveal trigger as the rest of the
-   card. Absolutely positioned so it overlays neighboring cards instead of
-   pushing the grid around, and pointer-events:none so it never steals a
-   click meant for the card underneath it. */
+/* Per-kanji breakdown (meaning + on'yomi/kun'yomi for each kanji in the
+   word) — shown under the same hover/reveal trigger as the rest of the
+   card. Kept in normal document flow (an animated 0fr/1fr grid row, rather
+   than an absolutely-positioned overlay) so it can never overlap the
+   meaning or a neighboring card — it just grows the card in place. */
 .vocab-kanji-breakdown {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-top: 6px;
-  width: max-content;
-  max-width: 220px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
-  padding: 6px 10px;
-  z-index: 5;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.15s ease;
-  text-align: left;
-  white-space: normal;
+  display: grid;
+  grid-template-rows: 0fr;
+  width: 100%;
+  transition: grid-template-rows 0.2s ease;
 }
 
 .kanji-hover-card.revealed .vocab-kanji-breakdown {
-  opacity: 1;
+  grid-template-rows: 1fr;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .kanji-hover-card:hover .vocab-kanji-breakdown {
-    opacity: 1;
+    grid-template-rows: 1fr;
   }
+}
+
+.vocab-kanji-breakdown-inner {
+  overflow: hidden;
+  min-height: 0;
+  background: var(--bg-card-hover);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-align: left;
 }
 
 .vocab-kanji-breakdown-row {
   display: flex;
   gap: 8px;
   align-items: baseline;
-  padding: 4px 0;
+  padding: 4px 10px;
 }
 
 .vocab-kanji-breakdown-row + .vocab-kanji-breakdown-row {
