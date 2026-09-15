@@ -184,48 +184,31 @@ body {
   margin: 20px 0 12px;
 }
 
-/* Mode tabs (Verbs / Adjectives) */
+/* Mode picker — a single dropdown replaces the old horizontally-scrolling
+   row of tabs, which had grown to 11+ destinations and no longer fit any
+   viewport without scrolling. */
 .mode-tabs {
-  display: flex;
-  gap: 4px;
   margin-bottom: 16px;
-  background: var(--bg-card);
-  border-radius: var(--radius-sm);
-  padding: 4px;
-  border: 1px solid var(--border);
-  /* More tabs than fit a narrow viewport scroll horizontally instead of
-     silently overflowing the container — flex-shrink alone can't get a
-     tab below its own text's min-content width. */
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
 }
 
-.mode-tabs::-webkit-scrollbar { display: none; }
-
-.mode-tab, .mode-tab:visited {
-  flex: 0 0 auto;
+.mode-select {
+  width: 100%;
   padding: 10px 14px;
-  border: none;
-  border-radius: 6px;
-  background: transparent;
-  color: var(--text-dim);
-  font-size: 0.9rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 0.95rem;
   font-weight: 700;
+  font-family: inherit;
   cursor: pointer;
-  transition: all var(--transition);
-  text-decoration: none;
-  text-align: center;
-  white-space: nowrap;
+  transition: border-color var(--transition);
 }
 
-.mode-tab.active, .mode-tab.active:visited {
-  background: var(--accent);
-  color: #fff;
-}
-
-.mode-tab:hover:not(.active) {
-  background: var(--bg-card-hover);
+.mode-select:hover,
+.mode-select:focus {
+  border-color: var(--accent);
+  outline: none;
 }
 
 /* Chapter grid */
@@ -2268,10 +2251,6 @@ body {
   .ref-explanation .conj-table td { padding: 5px 6px; font-size: 0.78rem; }
   .ref-explanation .conj-table th { padding: 6px; font-size: 0.65rem; }
   .ref-exc-list { grid-template-columns: 1fr 1fr; }
-
-  .mode-tab {
-    font-size: 0.82rem;
-  }
 
   .kanji-hover-grid {
     grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));

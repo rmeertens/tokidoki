@@ -38,17 +38,23 @@
         <div class="stat"><span class="stat-num" id="cards-due">0</span><span class="stat-label">Due</span></div>
       </div>
       <nav class="mode-tabs">
-        <a class="mode-tab" href="verbs.html">Verbs</a>
-        <a class="mode-tab active" href="adjectives.html">Adjectives</a>
-        <a class="mode-tab" href="custom.html">Build Your Own</a>
-        <a class="mode-tab" href="sentences.html">Sentences</a>
-        <a class="mode-tab" href="particles-quiz.html">Particles</a>
-        <a class="mode-tab" href="kana.html">Kana</a>
-        <a class="mode-tab" href="kanji.html">Practice Sheets</a>
-        <a class="mode-tab" href="kanji-quiz.html">Kanji Quiz</a>
-        <a class="mode-tab" href="kanji-hover.html">Kanji Hover</a>
-        <a class="mode-tab" href="vocabulary.html">Vocabulary</a>
-        <a class="mode-tab" href="words-by-kanji.html">Words by Kanji</a>
+        <select id="mode-select" class="mode-select" aria-label="Choose a page">
+          <optgroup label="Practice">
+            <option value="verbs.html">Verbs</option>
+            <option value="adjectives.html" selected>Adjectives</option>
+            <option value="custom.html">Build Your Own</option>
+            <option value="sentences.html">Sentences</option>
+            <option value="particles-quiz.html">Particles</option>
+            <option value="kana.html">Kana</option>
+            <option value="kanji-quiz.html">Kanji Quiz</option>
+          </optgroup>
+          <optgroup label="Reference">
+            <option value="kanji.html">Practice Sheets</option>
+            <option value="kanji-hover.html">Kanji Hover</option>
+            <option value="vocabulary.html">Vocabulary</option>
+            <option value="words-by-kanji.html">Words by Kanji</option>
+          </optgroup>
+        </select>
       </nav>
       <div id="adj-chapters">
         <p class="tab-intro">Drill i-adjective and na-adjective conjugations — negative, past, and more — chapter by chapter.</p>

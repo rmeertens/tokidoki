@@ -3404,12 +3404,6 @@
     renderSharedChrome();
     initTheme();
 
-    // The mode-tabs row scrolls horizontally once there are more tabs than
-    // fit — make sure the active one (which can be the last tab) actually
-    // starts in view instead of requiring a manual scroll to find it.
-    const activeTab = $('.mode-tab.active');
-    if (activeTab) activeTab.scrollIntoView({ block: 'nearest', inline: 'nearest' });
-
     srsData = loadSRS();
     statsData = loadStats();
     renderGlobalStats();
@@ -3447,6 +3441,11 @@
     } else {
       renderHub();
     }
+
+    // Mode picker — a single <select> replacing the old tab row
+    on('#mode-select', 'change', (e) => {
+      if (e.target.value) location.href = e.target.value;
+    });
 
     // Theme toggle
     on('#btn-theme', 'click', toggleTheme);
