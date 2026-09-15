@@ -1312,6 +1312,112 @@ body {
   color: var(--text-dim);
 }
 
+/* Words by kanji page — the grid reuses .kanji-hover-grid/-level; the card
+   and the "words using this kanji" overlay (built on the shared
+   .ref-overlay/-backdrop/-panel/-header dialog styles) are page-specific. */
+.wbk-kanji-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 6px 8px;
+  cursor: pointer;
+  text-align: center;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.wbk-kanji-card:hover {
+  border-color: var(--accent);
+}
+
+.wbk-kanji-glyph {
+  font-family: var(--font-jp);
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.wbk-kanji-meaning {
+  font-size: 0.68rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.wbk-kanji-count {
+  font-size: 0.6rem;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.wbk-kanji-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.wbk-kanji-info-glyph {
+  font-family: var(--font-jp);
+  font-size: 2.8rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.wbk-kanji-info-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wbk-kanji-info-meaning {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.wbk-kanji-info-reading {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.wbk-word-list {
+  display: flex;
+  flex-direction: column;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.wbk-word-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 8px 2px;
+}
+
+.wbk-word-row + .wbk-word-row {
+  border-top: 1px dashed var(--border);
+}
+
+.wbk-word-jp {
+  font-family: var(--font-jp);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.wbk-word-jp rt {
+  font-size: 0.5em;
+  color: var(--text-dim);
+}
+
+.wbk-word-meaning {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
 /* Session complete */
 .session-complete {
   text-align: center;

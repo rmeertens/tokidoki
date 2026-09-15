@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" id="viewport-meta" content="width=device-width, initial-scale=1.0">
+  <title>Words by Kanji | Tokidoki</title>
+  <meta name="description" content="Browse JLPT kanji (N5-N1) and click one to see every vocabulary word that uses it, with its reading and English meaning.">
+  <meta property="og:title" content="Words by Kanji | Tokidoki">
+  <meta property="og:description" content="Click a JLPT kanji to see every vocabulary word that uses it, with reading and meaning.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tokidoki.meertens.dev/words-by-kanji.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Words by Kanji | Tokidoki">
+  <meta name="twitter:description" content="Click a JLPT kanji to see every vocabulary word that uses it, with reading and meaning.">
+  <link rel="canonical" href="https://tokidoki.meertens.dev/words-by-kanji.html">
+  <link rel="stylesheet" href="style.css">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXWYNZC7YH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXWYNZC7YH');
+  </script>
+</head>
+<body data-mode="words-by-kanji">
+  <div id="app">
+
+    <!-- Header -->
+    <!-- Header (rendered by renderSharedChrome() in app.js) -->
+    <div id="header-mount"></div>
+
+    <!-- Screen: Words by Kanji -->
+    <main id="screen-chapters" class="screen active">
+      <nav class="mode-tabs">
+        <a class="mode-tab" href="verbs.html">Verbs</a>
+        <a class="mode-tab" href="adjectives.html">Adjectives</a>
+        <a class="mode-tab" href="custom.html">Build Your Own</a>
+        <a class="mode-tab" href="sentences.html">Sentences</a>
+        <a class="mode-tab" href="particles-quiz.html">Particles</a>
+        <a class="mode-tab" href="kana.html">Kana</a>
+        <a class="mode-tab" href="kanji.html">Practice Sheets</a>
+        <a class="mode-tab" href="kanji-quiz.html">Kanji Quiz</a>
+        <a class="mode-tab" href="kanji-hover.html">Kanji Hover</a>
+        <a class="mode-tab" href="vocabulary.html">Vocabulary</a>
+        <a class="mode-tab active" href="words-by-kanji.html">Words by Kanji</a>
+      </nav>
+      <p class="tab-intro">
+        Browse JLPT kanji (N5&ndash;N1) and click one to see every vocabulary word from the
+        <a href="vocabulary.html">Vocabulary</a> list (N5&ndash;N3) that uses it, with its
+        reading and English meaning.
+      </p>
+      <div class="kana-settings-row">
+        <input type="search" id="wbk-search" class="answer-input" placeholder="Search by kanji or meaning…" autocomplete="off">
+      </div>
+      <div class="kana-settings-row">
+        <label class="kana-script-toggle"><input type="checkbox" id="wbk-toggle-n5" checked> N5</label>
+        <label class="kana-script-toggle"><input type="checkbox" id="wbk-toggle-n4"> N4</label>
+        <label class="kana-script-toggle"><input type="checkbox" id="wbk-toggle-n3"> N3</label>
+        <label class="kana-script-toggle"><input type="checkbox" id="wbk-toggle-n2"> N2</label>
+        <label class="kana-script-toggle"><input type="checkbox" id="wbk-toggle-n1"> N1</label>
+      </div>
+      <p class="tab-intro" id="wbk-count"></p>
+
+      <div class="kanji-hover-grid" id="wbk-grid"></div>
+      <p class="tab-intro hidden" id="wbk-empty">No kanji match your search.</p>
+    </main>
+
+    <!-- Word list overlay -->
+    <div id="wbk-overlay" class="ref-overlay hidden" role="dialog" aria-modal="true" aria-label="Words using this kanji">
+      <div id="wbk-backdrop" class="ref-backdrop"></div>
+      <div class="ref-overlay-panel">
+        <div class="ref-overlay-header">
+          <h2 class="section-title" style="margin:0" id="wbk-overlay-title">Words using this kanji</h2>
+          <button id="btn-wbk-close" class="icon-btn" aria-label="Close">✕</button>
+        </div>
+        <div id="wbk-overlay-kanji-info" class="wbk-kanji-info"></div>
+        <div id="wbk-overlay-words" class="wbk-word-list"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="conjugator.js"></script>
+  <script src="verbs.js"></script>
+  <script src="kana.js"></script>
+  <script src="kanji-quiz-data.js"></script>
+  <script src="sentences-data.js"></script>
+  <script src="vocabulary-data.js"></script>
+  <script src="kanji-info-data.js"></script>
+  <script src="app.js"></script>
+
+  <!-- Static content for search engines -->
+  <section id="seo-content" aria-hidden="true">
+    <h2>Words by Kanji</h2>
+    <p>
+      A reverse-lookup reference: browse the same JLPT kanji lists (N5&ndash;N1) as
+      <a href="kanji-hover.html">Kanji Hover</a> and the printable
+      <a href="kanji.html">practice sheets</a>, and click any kanji to open a list of every
+      word in the <a href="vocabulary.html">Vocabulary</a> list that contains it, each shown
+      with furigana and its English meaning. Useful for seeing a kanji in context, or for
+      finding real vocabulary that reinforces a kanji you just learned. Vocabulary coverage
+      currently runs N5 through N3, so N2 and N1 kanji may not have example words yet.
+    </p>
+  </section>
+</body>
+</html>

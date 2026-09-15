@@ -3101,6 +3101,129 @@
     if (empty) empty.classList.toggle('hidden', items.length !== 0);
   }
 
+  // ─── Words by kanji page (words-by-kanji.html) ───────────────────────────────
+  //
+  // Browse kanji (same JLPT N5-N1 lists as Kanji Hover); clicking one opens an
+  // overlay listing every vocabulary word from vocabulary-data.js (N5-N3 only,
+  // so N2/N1 kanji will often come up empty) that contains it, with its
+  // reading and meaning.
+
+  // Built lazily from VOCAB_DATA and cached: { [kanji]: [{ level, html, meaning }] }.
+  let wbkKanjiToWords = null;
+
+  function buildWbkIndex() {
+    const index = {};
+    ['n5', 'n4', 'n3'].forEach(level => {
+      (VOCAB_DATA[level] || []).forEach(w => {
+        const chars = w.kanji.match(VOCAB_KANJI_CHAR_RE);
+        if (!chars) return;
+        const seen = new Set();
+        chars.forEach(ch => {
+          if (seen.has(ch)) return;
+          seen.add(ch);
+          (index[ch] || (index[ch] = [])).push({ level, html: w.html, meaning: w.meaning });
+        });
+      });
+    });
+    return index;
+  }
+
+  function getWbkIndex() {
+    if (!wbkKanjiToWords) wbkKanjiToWords = buildWbkIndex();
+    return wbkKanjiToWords;
+  }
+
+  function getWbkLevels() {
+    return KANJI_QUIZ_LEVELS.filter(level => {
+      const el = $(`#wbk-toggle-${level}`);
+      return el && el.checked;
+    });
+  }
+
+  function renderWbkPage() {
+    const grid = $('#wbk-grid');
+    if (!grid) return;
+
+    const levels = getWbkLevels();
+    const query = ($('#wbk-search')?.value || '').trim().toLowerCase();
+    const wordIndex = getWbkIndex();
+
+    const items = [];
+    levels.forEach(level => {
+      (KANJI_QUIZ_DATA[level] || []).forEach(k => {
+        if (query && k.kanji !== query && !k.meaning.toLowerCase().includes(query)) return;
+        items.push({ level, kanji: k.kanji, meaning: k.meaning, count: (wordIndex[k.kanji] || []).length });
+      });
+    });
+
+    grid.innerHTML = items.map(item => `
+      <div class="wbk-kanji-card" data-kanji="${item.kanji}">
+        <div class="kanji-hover-level">${item.level}</div>
+        <div class="wbk-kanji-glyph">${item.kanji}</div>
+        <div class="wbk-kanji-meaning">${item.meaning}</div>
+        <div class="wbk-kanji-count">${item.count ? `${item.count} word${item.count === 1 ? '' : 's'}` : 'no words yet'}</div>
+      </div>
+    `).join('');
+
+    const count = $('#wbk-count');
+    if (count) count.textContent = `${items.length} kanji`;
+
+    grid.classList.toggle('hidden', items.length === 0);
+    const empty = $('#wbk-empty');
+    if (empty) empty.classList.toggle('hidden', items.length !== 0);
+  }
+
+  function openWbkOverlay(kanji) {
+    const overlay = $('#wbk-overlay');
+    if (!overlay) return;
+
+    const kanjiEntry = KANJI_QUIZ_LEVELS
+      .map(level => (KANJI_QUIZ_DATA[level] || []).find(k => k.kanji === kanji))
+      .find(Boolean);
+    const info = (typeof KANJI_INFO !== 'undefined') ? KANJI_INFO[kanji] : null;
+    const words = (getWbkIndex()[kanji] || [])
+      .slice()
+      .sort((a, b) => KANJI_QUIZ_LEVELS.indexOf(a.level) - KANJI_QUIZ_LEVELS.indexOf(b.level));
+
+    const title = $('#wbk-overlay-title');
+    if (title) title.textContent = `Words using ${kanji}`;
+
+    const infoBox = $('#wbk-overlay-kanji-info');
+    if (infoBox) {
+      const meaning = (info && info.meaning) || (kanjiEntry && kanjiEntry.meaning) || '';
+      const readings = info
+        ? [info.on ? `on: ${info.on}` : '', info.kun ? `kun: ${info.kun}` : ''].filter(Boolean).join('  ')
+        : '';
+      infoBox.innerHTML = `
+        <span class="wbk-kanji-info-glyph">${kanji}</span>
+        <div class="wbk-kanji-info-text">
+          ${meaning ? `<div class="wbk-kanji-info-meaning">${meaning}</div>` : ''}
+          ${readings ? `<div class="wbk-kanji-info-reading">${readings}</div>` : ''}
+        </div>
+      `;
+    }
+
+    const list = $('#wbk-overlay-words');
+    if (list) {
+      list.innerHTML = words.length
+        ? words.map(w => `
+            <div class="wbk-word-row">
+              <span class="wbk-word-jp">${w.html}</span>
+              <span class="kanji-hover-level">${w.level}</span>
+              <span class="wbk-word-meaning">${w.meaning}</span>
+            </div>
+          `).join('')
+        : `<p class="tab-intro">No word in this list (N5–N3 vocabulary) uses this kanji yet.</p>`;
+    }
+
+    overlay.classList.remove('hidden');
+  }
+
+  function closeWbkOverlay() {
+    const overlay = $('#wbk-overlay');
+    if (overlay) overlay.classList.add('hidden');
+  }
+
   // ─── Utilities ─────────────────────────────────────────────────────────────────
 
   function shuffle(arr) {
@@ -3317,6 +3440,8 @@
       renderKanjiHoverPage();
     } else if (mode === 'vocabulary') {
       renderVocabPage();
+    } else if (mode === 'words-by-kanji') {
+      renderWbkPage();
     } else if (mode === 'particles') {
       renderParticlesPanel();
     } else {
@@ -3771,6 +3896,28 @@
     });
 
     on('#btn-vocab-shuffle', 'click', shuffleVocabOrder);
+
+    // ─── Words by kanji page ────────────────────────────────────────────────────
+
+    on('#wbk-search', 'input', renderWbkPage);
+    KANJI_QUIZ_LEVELS.forEach(level => {
+      on(`#wbk-toggle-${level}`, 'change', renderWbkPage);
+    });
+
+    on('#wbk-grid', 'click', (e) => {
+      const card = e.target.closest('.wbk-kanji-card');
+      if (card) openWbkOverlay(card.dataset.kanji);
+    });
+
+    on('#btn-wbk-close', 'click', closeWbkOverlay);
+    on('#wbk-backdrop', 'click', closeWbkOverlay);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlayOpen('wbk-overlay')) {
+        consumeKey(e);
+        closeWbkOverlay();
+      }
+    }, true);
 
     // Reference tabs
     $$('.ref-tab').forEach(tab => {
