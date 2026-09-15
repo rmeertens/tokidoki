@@ -3019,9 +3019,12 @@
   }
 
   function vocabWordHtml(item, script) {
-    if (script === 'furigana') return item.html;
     if (script === 'kana') return item.kana;
-    return item.kanji;
+    // 'furigana' shows the reading above the kanji at all times; 'kanji' uses
+    // the same ruby markup but CSS keeps the reading invisible until the card
+    // is hovered or revealed, so a kanji-only card still lets you peek the
+    // hiragana without permanently showing it.
+    return item.html;
   }
 
   function renderVocabPage() {
@@ -3034,10 +3037,11 @@
 
     grid.innerHTML = items.map(item => {
       const wordHtml = vocabWordHtml(item, script);
+      const wordClass = 'vocab-hover-word' + (script === 'kanji' ? ' vocab-word-peek' : '');
       const promptHtml = showWordFirst ? wordHtml : item.meaning;
       const answerHtml = showWordFirst ? item.meaning : wordHtml;
-      const promptClass = showWordFirst ? 'vocab-hover-word' : 'kanji-hover-text';
-      const answerClass = showWordFirst ? 'kanji-hover-text' : 'vocab-hover-word';
+      const promptClass = showWordFirst ? wordClass : 'kanji-hover-text';
+      const answerClass = showWordFirst ? 'kanji-hover-text' : wordClass;
       return `
         <div class="kanji-hover-card">
           <div class="kanji-hover-level">${item.level}</div>

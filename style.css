@@ -1229,6 +1229,24 @@ body {
   font-size: 1.3rem;
 }
 
+/* In "Kanji" script mode the reading is rendered as ruby markup like furigana
+   mode, but stays invisible until the card is hovered or revealed — a kanji
+   card still lets you peek the hiragana without permanently showing it. */
+.vocab-word-peek rt {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.kanji-hover-card.revealed .vocab-word-peek rt {
+  opacity: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .kanji-hover-card:hover .vocab-word-peek rt {
+    opacity: 1;
+  }
+}
+
 /* Session complete */
 .session-complete {
   text-align: center;
