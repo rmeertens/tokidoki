@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" id="viewport-meta" content="width=device-width, initial-scale=1.0">
+  <title>Vocabulary Hover Reference | Tokidoki</title>
+  <meta name="description" content="Browse JLPT vocabulary (N5-N3) word and meaning pairs, stacked and hidden until you hover or click. Show words as kanji, furigana, or hiragana/katakana only, toggle direction, and filter by level.">
+  <meta property="og:title" content="Vocabulary Hover Reference | Tokidoki">
+  <meta property="og:description" content="JLPT vocabulary (N5-N3), word and meaning stacked — hover to peek, click to reveal for good. Show kanji, furigana, or kana only.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tokidoki.meertens.dev/vocabulary.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Vocabulary Hover Reference | Tokidoki">
+  <meta name="twitter:description" content="JLPT vocabulary (N5-N3), hover to peek the meaning (or word), click to reveal for good.">
+  <link rel="canonical" href="https://tokidoki.meertens.dev/vocabulary.html">
+  <link rel="stylesheet" href="style.css">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXWYNZC7YH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXWYNZC7YH');
+  </script>
+</head>
+<body data-mode="vocabulary">
+  <div id="app">
+
+    <!-- Header -->
+    <!-- Header (rendered by renderSharedChrome() in app.js) -->
+    <div id="header-mount"></div>
+
+    <!-- Screen: Vocabulary -->
+    <main id="screen-chapters" class="screen active">
+      <nav class="mode-tabs">
+        <a class="mode-tab" href="verbs.html">Verbs</a>
+        <a class="mode-tab" href="adjectives.html">Adjectives</a>
+        <a class="mode-tab" href="custom.html">Build Your Own</a>
+        <a class="mode-tab" href="sentences.html">Sentences</a>
+        <a class="mode-tab" href="particles-quiz.html">Particles</a>
+        <a class="mode-tab" href="kana.html">Kana</a>
+        <a class="mode-tab" href="kanji.html">Practice Sheets</a>
+        <a class="mode-tab" href="kanji-quiz.html">Kanji Quiz</a>
+        <a class="mode-tab" href="kanji-hover.html">Kanji Hover</a>
+        <a class="mode-tab active" href="vocabulary.html">Vocabulary</a>
+      </nav>
+      <p class="tab-intro">
+        JLPT vocabulary (N5&ndash;N3), word and meaning stacked with one side hidden per
+        card. Hover a card to peek at it, click to reveal it for good. Pick a direction,
+        how the Japanese side is written, and which JLPT levels to include.
+      </p>
+      <div class="kana-settings-row" id="vocab-direction-row">
+        <label class="kana-script-toggle">
+          <input type="radio" name="vocab-direction" id="vocab-dir-wm" value="word-to-meaning" checked>
+          Word &rarr; Meaning
+        </label>
+        <label class="kana-script-toggle">
+          <input type="radio" name="vocab-direction" id="vocab-dir-mw" value="meaning-to-word">
+          Meaning &rarr; Word
+        </label>
+      </div>
+      <div class="kana-settings-row" id="vocab-script-row">
+        <label class="kana-script-toggle">
+          <input type="radio" name="vocab-script" id="vocab-script-kanji" value="kanji" checked>
+          Kanji
+        </label>
+        <label class="kana-script-toggle">
+          <input type="radio" name="vocab-script" id="vocab-script-furigana" value="furigana">
+          Furigana
+        </label>
+        <label class="kana-script-toggle">
+          <input type="radio" name="vocab-script" id="vocab-script-kana" value="kana">
+          Hiragana/Katakana only
+        </label>
+      </div>
+      <div class="kana-settings-row">
+        <label class="kana-script-toggle"><input type="checkbox" id="vocab-toggle-n5" checked> N5</label>
+        <label class="kana-script-toggle"><input type="checkbox" id="vocab-toggle-n4"> N4</label>
+        <label class="kana-script-toggle"><input type="checkbox" id="vocab-toggle-n3"> N3</label>
+      </div>
+      <div class="kanji-hover-toolbar">
+        <p class="tab-intro" id="vocab-count"></p>
+        <button id="btn-vocab-shuffle" class="btn-secondary">&#128256; Shuffle</button>
+      </div>
+
+      <div class="vocab-hover-grid" id="vocab-grid"></div>
+      <p class="tab-intro hidden" id="vocab-empty">No words match the selected levels.</p>
+    </main>
+
+  </div>
+
+  <script src="conjugator.js"></script>
+  <script src="verbs.js"></script>
+  <script src="kana.js"></script>
+  <script src="kanji-quiz-data.js"></script>
+  <script src="sentences-data.js"></script>
+  <script src="vocabulary-data.js"></script>
+  <script src="app.js"></script>
+
+  <!-- Static content for search engines -->
+  <section id="seo-content" aria-hidden="true">
+    <h2>Vocabulary Hover Reference</h2>
+    <p>
+      A browsable JLPT vocabulary list, covering N5 through N3. Each card shows a
+      Japanese word and its English meaning stacked, one on top of the other, but only
+      one side is visible at first &mdash; hover over a card to peek at the hidden side,
+      or click it to reveal that side permanently. Switch the direction to show the word
+      first and hide the meaning, or show the meaning first and hide the word, and choose
+      how the Japanese word is written: with kanji, with furigana readings above the
+      kanji, or spelled out entirely in hiragana/katakana. Filter which JLPT levels
+      appear. Pairs well with the <a href="kanji-hover.html">Kanji Hover</a> reference
+      and the <a href="kanji.html">printable practice sheets</a>.
+    </p>
+  </section>
+</body>
+</html>

@@ -1202,6 +1202,33 @@ body {
   }
 }
 
+/* Vocabulary hover reference page — reuses .kanji-hover-card/-toolbar/-level
+   and the .kanji-hover-prompt/-answer reveal mechanics above; only the grid
+   (words need more width than a single kanji glyph) and the Japanese-word
+   text size/ruby styling are page-specific. */
+.vocab-hover-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.vocab-hover-word {
+  font-family: var(--font-jp);
+  font-size: 1.4rem;
+  line-height: 1.6;
+}
+
+.vocab-hover-word rt {
+  font-size: 0.5em;
+  color: var(--text-dim);
+}
+
+.kanji-hover-answer.vocab-hover-word {
+  color: var(--text);
+  font-size: 1.3rem;
+}
+
 /* Session complete */
 .session-complete {
   text-align: center;
@@ -2067,6 +2094,18 @@ body {
 
   .kanji-hover-answer.kanji-hover-glyph {
     font-size: 1.6rem;
+  }
+
+  .vocab-hover-grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  }
+
+  .vocab-hover-word {
+    font-size: 1.2rem;
+  }
+
+  .kanji-hover-answer.vocab-hover-word {
+    font-size: 1.1rem;
   }
 }
 

@@ -2969,6 +2969,92 @@
     if (empty) empty.classList.toggle('hidden', items.length !== 0);
   }
 
+  // ─── Vocabulary hover reference page (vocabulary.html) ──────────────────────────
+  //
+  // Same hover-to-peek / click-to-reveal mechanic as the Kanji Hover page above,
+  // but for JLPT N5-N3 vocabulary, with an extra setting for how the Japanese
+  // side of each card is written: kanji, furigana (kanji + reading), or the
+  // reading spelled out entirely in hiragana/katakana.
+
+  const VOCAB_LEVELS = ['n5', 'n4', 'n3'];
+
+  function getVocabLevels() {
+    return VOCAB_LEVELS.filter(level => {
+      const el = $(`#vocab-toggle-${level}`);
+      return el && el.checked;
+    });
+  }
+
+  function getVocabDirection() {
+    const checked = document.querySelector('input[name="vocab-direction"]:checked');
+    return checked ? checked.value : 'word-to-meaning';
+  }
+
+  function getVocabScript() {
+    const checked = document.querySelector('input[name="vocab-script"]:checked');
+    return checked ? checked.value : 'kanji';
+  }
+
+  function buildVocabPool() {
+    const items = [];
+    getVocabLevels().forEach(level => {
+      (VOCAB_DATA[level] || []).forEach(w => items.push({ level, kanji: w.kanji, kana: w.kana, html: w.html, meaning: w.meaning }));
+    });
+    return items;
+  }
+
+  // Shuffled order survives a direction/script toggle (same pool, just how it's
+  // displayed), but is dropped whenever the level filters change the pool itself.
+  let vocabOrder = null;
+
+  function resetVocabOrder() {
+    vocabOrder = null;
+    renderVocabPage();
+  }
+
+  function shuffleVocabOrder() {
+    vocabOrder = buildVocabPool();
+    shuffle(vocabOrder);
+    renderVocabPage();
+  }
+
+  function vocabWordHtml(item, script) {
+    if (script === 'furigana') return item.html;
+    if (script === 'kana') return item.kana;
+    return item.kanji;
+  }
+
+  function renderVocabPage() {
+    const grid = $('#vocab-grid');
+    if (!grid) return;
+
+    const showWordFirst = getVocabDirection() === 'word-to-meaning';
+    const script = getVocabScript();
+    const items = vocabOrder || buildVocabPool();
+
+    grid.innerHTML = items.map(item => {
+      const wordHtml = vocabWordHtml(item, script);
+      const promptHtml = showWordFirst ? wordHtml : item.meaning;
+      const answerHtml = showWordFirst ? item.meaning : wordHtml;
+      const promptClass = showWordFirst ? 'vocab-hover-word' : 'kanji-hover-text';
+      const answerClass = showWordFirst ? 'kanji-hover-text' : 'vocab-hover-word';
+      return `
+        <div class="kanji-hover-card">
+          <div class="kanji-hover-level">${item.level}</div>
+          <div class="kanji-hover-prompt ${promptClass}">${promptHtml}</div>
+          <div class="kanji-hover-answer ${answerClass}">${answerHtml}</div>
+        </div>
+      `;
+    }).join('');
+
+    const count = $('#vocab-count');
+    if (count) count.textContent = `${items.length} words`;
+
+    grid.classList.toggle('hidden', items.length === 0);
+    const empty = $('#vocab-empty');
+    if (empty) empty.classList.toggle('hidden', items.length !== 0);
+  }
+
   // ─── Utilities ─────────────────────────────────────────────────────────────────
 
   function shuffle(arr) {
@@ -3183,6 +3269,8 @@
       renderConfusableBrowsePage();
     } else if (mode === 'kanji-hover') {
       renderKanjiHoverPage();
+    } else if (mode === 'vocabulary') {
+      renderVocabPage();
     } else if (mode === 'particles') {
       renderParticlesPanel();
     } else {
@@ -3609,6 +3697,34 @@
     });
 
     on('#btn-kanji-hover-shuffle', 'click', shuffleKanjiHoverOrder);
+
+    // ─── Vocabulary hover reference page ────────────────────────────────────────
+
+    on('#vocab-dir-wm', 'change', renderVocabPage);
+    on('#vocab-dir-mw', 'change', renderVocabPage);
+    on('#vocab-script-kanji', 'change', renderVocabPage);
+    on('#vocab-script-furigana', 'change', renderVocabPage);
+    on('#vocab-script-kana', 'change', renderVocabPage);
+
+    function toggleVocabLevel(e) {
+      const anyChecked = VOCAB_LEVELS.some(level => $(`#vocab-toggle-${level}`).checked);
+      if (!anyChecked) {
+        e.target.checked = true;
+        return;
+      }
+      resetVocabOrder();
+    }
+
+    VOCAB_LEVELS.forEach(level => {
+      on(`#vocab-toggle-${level}`, 'change', toggleVocabLevel);
+    });
+
+    on('#vocab-grid', 'click', (e) => {
+      const card = e.target.closest('.kanji-hover-card');
+      if (card) card.classList.toggle('revealed');
+    });
+
+    on('#btn-vocab-shuffle', 'click', shuffleVocabOrder);
 
     // Reference tabs
     $$('.ref-tab').forEach(tab => {
