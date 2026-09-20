@@ -2299,6 +2299,7 @@ body {
   height: 0;
   padding: 0;
   border: 0;
+  font-size: 16px; /* prevent iOS Safari from zooming in when this input is focused */
   pointer-events: none;
   overflow: hidden;
 }
