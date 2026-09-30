@@ -639,7 +639,7 @@
       const exFront = getExampleSentenceForFront(verb, form);
       if (exFront) {
         exFrontEl.innerHTML = `<div class="example-label">Example</div>`
-          + `<div class="example-jp">${exFront.ja}</div>`
+          + `<div class="example-jp">${exampleJaHtml(exFront.ja)}</div>`
           + `<div class="example-en">${highlightKeywords(exFront.en)}</div>`;
         exFrontEl.classList.remove('hidden');
       } else {
@@ -1004,172 +1004,226 @@
   }
 
   const VERB_CONTEXTS = {
-    '行く': { pre: '学校に', en: 'to school' }, '帰る': { pre: '家に', en: 'home' },
-    '聞く': { pre: '音楽を', en: 'to music' }, '聞く_ask': { pre: '先生に', en: 'the teacher' },
+    '行く': { pre: '学校[がっこう]に', en: 'to school' }, '帰る': { pre: '家[いえ]に', en: 'home' },
+    '聞く': { pre: '音楽[おんがく]を', en: 'to music' }, '聞く_ask': { pre: '先生[せんせい]に', en: 'the teacher' },
     '飲む': { pre: 'コーヒーを', en: 'coffee' },
-    '話す': { pre: '日本語を', en: 'Japanese' }, '読む': { pre: '本を', en: 'a book' },
-    '起きる': { pre: '朝早く', en: 'early in the morning' }, '食べる': { pre: '寿司を', en: 'sushi' },
-    '寝る': { pre: '早く', en: 'early' }, '見る': { pre: '映画を', en: 'a movie' },
-    '来る': { pre: '日本に', en: 'to Japan' }, 'する': { pre: '運動を', en: 'exercise' },
-    '勉強する': { pre: '日本語を', en: 'Japanese' }, '会う': { pre: '友達に', en: 'a friend' },
-    'ある': { pre: '机の上に', en: 'on the desk' }, '買う': { pre: '新しい靴を', en: 'new shoes' },
-    '書く': { pre: '手紙を', en: 'a letter' }, '撮る': { pre: '写真を', en: 'a photo' },
-    '待つ': { pre: 'バスを', en: 'for the bus' }, '分かる': { pre: '日本語が', en: 'Japanese' },
-    'いる': { pre: '教室に', en: 'in the classroom' }, '泳ぐ': { pre: 'プールで', en: 'in the pool' },
-    '乗る': { pre: '電車に', en: 'the train' }, 'やる': { pre: 'スポーツを', en: 'sports' },
-    '出かける': { pre: '週末に', en: 'on weekends' }, '遊ぶ': { pre: '公園で', en: 'in the park' },
-    '急ぐ': { pre: '駅まで', en: 'to the station' }, '返す': { pre: '本を', en: 'a book' },
-    '消す': { pre: '電気を', en: 'the light' }, '死ぬ': { pre: '戦争で', en: 'in the war' },
-    '座る': { pre: '椅子に', en: 'on a chair' }, '立つ': { pre: '教室で', en: 'in the classroom' },
+    '話す': { pre: '日本語[にほんご]を', en: 'Japanese' }, '読む': { pre: '本[ほん]を', en: 'a book' },
+    '起きる': { pre: '朝[あさ]早[はや]く', en: 'early in the morning' }, '食べる': { pre: '寿司[すし]を', en: 'sushi' },
+    '寝る': { pre: '早[はや]く', en: 'early' }, '見る': { pre: '映画[えいが]を', en: 'a movie' },
+    '来る': { pre: '日本[にほん]に', en: 'to Japan' }, 'する': { pre: '運動[うんどう]を', en: 'exercise' },
+    '勉強する': { pre: '日本語[にほんご]を', en: 'Japanese' }, '会う': { pre: '友達[ともだち]に', en: 'a friend' },
+    'ある': { pre: '机[つくえ]の上[うえ]に', en: 'on the desk' }, '買う': { pre: '新[あたら]しい靴[くつ]を', en: 'new shoes' },
+    '書く': { pre: '手紙[てがみ]を', en: 'a letter' }, '撮る': { pre: '写真[しゃしん]を', en: 'a photo' },
+    '待つ': { pre: 'バスを', en: 'for the bus' }, '分かる': { pre: '日本語[にほんご]が', en: 'Japanese' },
+    'いる': { pre: '教室[きょうしつ]に', en: 'in the classroom' }, '泳ぐ': { pre: 'プールで', en: 'in the pool' },
+    '乗る': { pre: '電車[でんしゃ]に', en: 'the train' }, 'やる': { pre: 'スポーツを', en: 'sports' },
+    '出かける': { pre: '週末[しゅうまつ]に', en: 'on weekends' }, '遊ぶ': { pre: '公園[こうえん]で', en: 'in the park' },
+    '急ぐ': { pre: '駅[えき]まで', en: 'to the station' }, '返す': { pre: '本[ほん]を', en: 'a book' },
+    '消す': { pre: '電気[でんき]を', en: 'the light' }, '死ぬ': { pre: '戦争[せんそう]で', en: 'in the war' },
+    '座る': { pre: '椅子[いす]に', en: 'on a chair' }, '立つ': { pre: '教室[きょうしつ]で', en: 'in the classroom' },
     '吸う': { pre: 'タバコを', en: 'a cigarette' }, '使う': { pre: 'パソコンを', en: 'a computer' },
-    '手伝う': { pre: '友達を', en: 'a friend' }, '入る': { pre: '部屋に', en: 'the room' },
-    '持つ': { pre: 'かばんを', en: 'a bag' }, '休む': { pre: '今日', en: 'today' },
-    '開ける': { pre: '窓を', en: 'the window' }, '教える': { pre: '英語を', en: 'English' },
-    '降りる': { pre: 'バスを', en: 'the bus' }, '借りる': { pre: '本を', en: 'a book' },
-    'つける': { pre: 'テレビを', en: 'the TV' }, '忘れる': { pre: '傘を', en: 'my umbrella' },
-    '電話をかける': { pre: '母に', en: 'mom' }, '連れてくる': { pre: '友達を', en: 'a friend' },
-    '持ってくる': { pre: 'お弁当を', en: 'a lunch box' }, '歌う': { pre: '歌を', en: 'a song' },
-    'かぶる': { pre: '帽子を', en: 'a hat' }, '知る': { pre: '答えを', en: 'the answer' },
-    '住む': { pre: '東京に', en: 'in Tokyo' }, 'はく': { pre: 'ジーンズを', en: 'jeans' },
-    '太る': { pre: '最近', en: 'recently' }, 'かける': { pre: 'メガネを', en: 'glasses' },
-    '着る': { pre: 'シャツを', en: 'a shirt' }, '勤める': { pre: '会社に', en: 'at a company' },
-    '痩せる': { pre: '夏までに', en: 'by summer' }, '結婚する': { pre: '来年', en: 'next year' },
-    '降る': { pre: '雨が', en: 'rain' }, '洗う': { pre: '皿を', en: 'the dishes' },
-    '言う': { pre: '「ありがとう」と', en: '"thank you"' }, '要る': { pre: 'お金が', en: 'money' },
-    '遅くなる': { pre: '今日は', en: 'today' }, '思う': { pre: 'そうだと', en: 'so' },
-    '切る': { pre: '紙を', en: 'paper' }, '作る': { pre: '料理を', en: 'food' },
-    '持っていく': { pre: 'お弁当を', en: 'a lunch box' }, '始める': { pre: '宿題を', en: 'homework' },
-    '運転する': { pre: '車を', en: 'a car' }, '洗濯する': { pre: '服を', en: 'clothes' },
-    '掃除する': { pre: '部屋を', en: 'the room' }, '料理する': { pre: '晩ご飯を', en: 'dinner' },
-    '踊る': { pre: 'ダンスを', en: 'a dance' }, '終わる': { pre: '授業が', en: 'class' },
-    '始まる': { pre: '映画が', en: 'the movie' }, '弾く': { pre: 'ピアノを', en: 'piano' },
-    'もらう': { pre: 'プレゼントを', en: 'a present' }, '覚える': { pre: '漢字を', en: 'kanji' },
-    '出る': { pre: '授業に', en: 'class' }, '運動する': { pre: '毎朝', en: 'every morning' },
-    '散歩する': { pre: '公園で', en: 'in the park' }, 'かかる': { pre: '一時間', en: 'one hour' },
-    '泊まる': { pre: 'ホテルに', en: 'at a hotel' }, 'なる': { pre: '先生に', en: 'a teacher' },
-    '払う': { pre: 'お金を', en: 'money' }, '決める': { pre: '予定を', en: 'plans' },
-    '練習する': { pre: 'テニスを', en: 'tennis' }, '取る': { pre: '授業を', en: 'a class' },
-    '習う': { pre: '日本語を', en: 'Japanese' }, '登る': { pre: '山に', en: 'a mountain' },
-    '働く': { pre: 'レストランで', en: 'at a restaurant' }, '飼う': { pre: '猫を', en: 'a cat' },
-    'サボる': { pre: '授業を', en: 'class' }, '疲れる': { pre: '仕事で', en: 'from work' },
-    'やめる': { pre: '仕事を', en: 'the job' }, '紹介する': { pre: '友達を', en: 'a friend' },
-    'ダイエットする': { pre: '来月から', en: 'from next month' },
-    '遅刻する': { pre: '学校に', en: 'for school' }, '留学する': { pre: 'アメリカに', en: 'in America' },
-    '喉が渇く': { pre: '夏に', en: 'in summer' }, 'なくす': { pre: '鍵を', en: 'my keys' },
-    '別れる': { pre: '彼女と', en: 'my girlfriend' }, '緊張する': { pre: 'テストの前に', en: 'before a test' },
-    '心配する': { pre: '将来を', en: 'about the future' }, '編む': { pre: 'セーターを', en: 'a sweater' },
-    '貸す': { pre: 'お金を', en: 'money' }, '頑張る': { pre: '試験のために', en: 'for the exam' },
-    '泣く': { pre: '映画を見て', en: 'watching a movie' }, '磨く': { pre: '歯を', en: 'my teeth' },
-    '約束を守る': { pre: 'いつも', en: 'always' }, '感動する': { pre: '映画に', en: 'by the movie' },
-    '送る': { pre: '荷物を', en: 'a package' }, '似合う': { pre: 'この服が', en: 'this outfit' },
-    '諦める': { pre: '夢を', en: 'a dream' }, 'あげる': { pre: 'プレゼントを', en: 'a present' },
-    'くれる': { pre: '友達が本を', en: 'a book' }, 'できる': { pre: '日本語が', en: 'Japanese' },
-    '相談する': { pre: '先生に', en: 'the teacher' }, '売る': { pre: '車を', en: 'a car' },
-    '下ろす': { pre: 'お金を', en: 'money' }, '描く': { pre: '絵を', en: 'a picture' },
-    '探す': { pre: '仕事を', en: 'a job' }, '誘う': { pre: '友達を', en: 'a friend' },
-    'しゃべる': { pre: '電話で', en: 'on the phone' }, '付き合う': { pre: '彼女と', en: 'my girlfriend' },
-    '着く': { pre: '駅に', en: 'at the station' }, '気をつける': { pre: '車に', en: 'cars' },
+    '手伝う': { pre: '友達[ともだち]を', en: 'a friend' }, '入る': { pre: '部屋[へや]に', en: 'the room' },
+    '持つ': { pre: 'かばんを', en: 'a bag' }, '休む': { pre: '今日[きょう]', en: 'today' },
+    '開ける': { pre: '窓[まど]を', en: 'the window' }, '教える': { pre: '英語[えいご]を', en: 'English' },
+    '降りる': { pre: 'バスを', en: 'the bus' }, '借りる': { pre: '本[ほん]を', en: 'a book' },
+    'つける': { pre: 'テレビを', en: 'the TV' }, '忘れる': { pre: '傘[かさ]を', en: 'my umbrella' },
+    '電話をかける': { pre: '母[はは]に', en: 'mom' }, '連れてくる': { pre: '友達[ともだち]を', en: 'a friend' },
+    '持ってくる': { pre: 'お弁当[べんとう]を', en: 'a lunch box' }, '歌う': { pre: '歌[うた]を', en: 'a song' },
+    'かぶる': { pre: '帽子[ぼうし]を', en: 'a hat' }, '知る': { pre: '答[こた]えを', en: 'the answer' },
+    '住む': { pre: '東京[とうきょう]に', en: 'in Tokyo' }, 'はく': { pre: 'ジーンズを', en: 'jeans' },
+    '太る': { pre: '最近[さいきん]', en: 'recently' }, 'かける': { pre: 'メガネを', en: 'glasses' },
+    '着る': { pre: 'シャツを', en: 'a shirt' }, '勤める': { pre: '会社[かいしゃ]に', en: 'at a company' },
+    '痩せる': { pre: '夏[なつ]までに', en: 'by summer' }, '結婚する': { pre: '来年[らいねん]', en: 'next year' },
+    '降る': { pre: '雨[あめ]が', en: 'rain' }, '洗う': { pre: '皿[さら]を', en: 'the dishes' },
+    '言う': { pre: '「ありがとう」と', en: '"thank you"' }, '要る': { pre: 'お金[かね]が', en: 'money' },
+    '遅くなる': { pre: '今日[きょう]は', en: 'today' }, '思う': { pre: 'そうだと', en: 'so' },
+    '切る': { pre: '紙[かみ]を', en: 'paper' }, '作る': { pre: '料理[りょうり]を', en: 'food' },
+    '持っていく': { pre: 'お弁当[べんとう]を', en: 'a lunch box' }, '始める': { pre: '宿題[しゅくだい]を', en: 'homework' },
+    '運転する': { pre: '車[くるま]を', en: 'a car' }, '洗濯する': { pre: '服[ふく]を', en: 'clothes' },
+    '掃除する': { pre: '部屋[へや]を', en: 'the room' }, '料理する': { pre: '晩[ばん]ご飯[はん]を', en: 'dinner' },
+    '踊る': { pre: 'ダンスを', en: 'a dance' }, '終わる': { pre: '授業[じゅぎょう]が', en: 'class' },
+    '始まる': { pre: '映画[えいが]が', en: 'the movie' }, '弾く': { pre: 'ピアノを', en: 'piano' },
+    'もらう': { pre: 'プレゼントを', en: 'a present' }, '覚える': { pre: '漢字[かんじ]を', en: 'kanji' },
+    '出る': { pre: '授業[じゅぎょう]に', en: 'class' }, '運動する': { pre: '毎朝[まいあさ]', en: 'every morning' },
+    '散歩する': { pre: '公園[こうえん]で', en: 'in the park' }, 'かかる': { pre: '一時間[いちじかん]', en: 'one hour' },
+    '泊まる': { pre: 'ホテルに', en: 'at a hotel' }, 'なる': { pre: '先生[せんせい]に', en: 'a teacher' },
+    '払う': { pre: 'お金[かね]を', en: 'money' }, '決める': { pre: '予定[よてい]を', en: 'plans' },
+    '練習する': { pre: 'テニスを', en: 'tennis' }, '取る': { pre: '授業[じゅぎょう]を', en: 'a class' },
+    '習う': { pre: '日本語[にほんご]を', en: 'Japanese' }, '登る': { pre: '山[やま]に', en: 'a mountain' },
+    '働く': { pre: 'レストランで', en: 'at a restaurant' }, '飼う': { pre: '猫[ねこ]を', en: 'a cat' },
+    'サボる': { pre: '授業[じゅぎょう]を', en: 'class' }, '疲れる': { pre: '仕事[しごと]で', en: 'from work' },
+    'やめる': { pre: '仕事[しごと]を', en: 'the job' }, '紹介する': { pre: '友達[ともだち]を', en: 'a friend' },
+    'ダイエットする': { pre: '来月[らいげつ]から', en: 'from next month' },
+    '遅刻する': { pre: '学校[がっこう]に', en: 'for school' }, '留学する': { pre: 'アメリカに', en: 'in America' },
+    '喉が渇く': { pre: '夏[なつ]に', en: 'in summer' }, 'なくす': { pre: '鍵[かぎ]を', en: 'my keys' },
+    '別れる': { pre: '彼女[かのじょ]と', en: 'my girlfriend' }, '緊張する': { pre: 'テストの前[まえ]に', en: 'before a test' },
+    '心配する': { pre: '将来[しょうらい]を', en: 'about the future' }, '編む': { pre: 'セーターを', en: 'a sweater' },
+    '貸す': { pre: 'お金[かね]を', en: 'money' }, '頑張る': { pre: '試験[しけん]のために', en: 'for the exam' },
+    '泣く': { pre: '映画[えいが]を見[み]て', en: 'watching a movie' }, '磨く': { pre: '歯[は]を', en: 'my teeth' },
+    '約束を守る': { pre: 'いつも', en: 'always' }, '感動する': { pre: '映画[えいが]に', en: 'by the movie' },
+    '送る': { pre: '荷物[にもつ]を', en: 'a package' }, '似合う': { pre: 'この服[ふく]が', en: 'this outfit' },
+    '諦める': { pre: '夢[ゆめ]を', en: 'a dream' }, 'あげる': { pre: 'プレゼントを', en: 'a present' },
+    'くれる': { pre: '友達[ともだち]が本[ほん]を', en: 'a book' }, 'できる': { pre: '日本語[にほんご]が', en: 'Japanese' },
+    '相談する': { pre: '先生[せんせい]に', en: 'the teacher' }, '売る': { pre: '車[くるま]を', en: 'a car' },
+    '下ろす': { pre: 'お金[かね]を', en: 'money' }, '描く': { pre: '絵[え]を', en: 'a picture' },
+    '探す': { pre: '仕事[しごと]を', en: 'a job' }, '誘う': { pre: '友達[ともだち]を', en: 'a friend' },
+    'しゃべる': { pre: '電話[でんわ]で', en: 'on the phone' }, '付き合う': { pre: '彼女[かのじょ]と', en: 'my girlfriend' },
+    '着く': { pre: '駅[えき]に', en: 'at the station' }, '気をつける': { pre: '車[くるま]に', en: 'cars' },
     '調べる': { pre: 'インターネットで', en: 'on the internet' },
-    '見える': { pre: '山が', en: 'the mountain' }, '観光する': { pre: '京都を', en: 'Kyoto' },
-    '卒業する': { pre: '大学を', en: 'university' }, '予約する': { pre: 'レストランを', en: 'a restaurant' },
-    '起こす': { pre: '弟を', en: 'my brother' }, 'おごる': { pre: '友達に', en: 'a friend' },
-    '落ち込む': { pre: '最近', en: 'recently' }, '困る': { pre: 'お金に', en: 'about money' },
-    '出す': { pre: '宿題を', en: 'homework' }, '直す': { pre: 'パソコンを', en: 'the computer' },
-    '見つかる': { pre: '鍵が', en: 'the keys' }, '訳す': { pre: '英語に', en: 'into English' },
-    '笑う': { pre: '冗談で', en: 'at a joke' }, '集める': { pre: '切手を', en: 'stamps' },
-    '入れる': { pre: '砂糖を', en: 'sugar' }, '乗り遅れる': { pre: '電車に', en: 'the train' },
-    '見せる': { pre: '写真を', en: 'a photo' }, '朝寝坊する': { pre: '日曜日に', en: 'on Sundays' },
-    '案内する': { pre: '町を', en: 'the town' }, '説明する': { pre: '問題を', en: 'the problem' },
-    '選ぶ': { pre: 'プレゼントを', en: 'a present' }, '込む': { pre: '電車が', en: 'the train' },
-    '脱ぐ': { pre: '靴を', en: 'shoes' }, '生まれる': { pre: '東京で', en: 'in Tokyo' },
-    '足りる': { pre: 'お金が', en: 'money' }, '慣れる': { pre: '日本の生活に', en: 'life in Japan' },
-    '化粧する': { pre: '毎朝', en: 'every morning' }, '就職する': { pre: '来年', en: 'next year' },
-    '離婚する': { pre: '最近', en: 'recently' }, '開く': { pre: 'ドアが', en: 'the door' },
-    '謝る': { pre: '先生に', en: 'to the teacher' }, '押す': { pre: 'ボタンを', en: 'the button' },
-    '落とす': { pre: '財布を', en: 'my wallet' }, '転ぶ': { pre: '道で', en: 'on the road' },
-    '壊す': { pre: 'おもちゃを', en: 'a toy' }, '咲く': { pre: '桜が', en: 'cherry blossoms' },
-    '閉まる': { pre: '店が', en: 'the shop' }, '汚す': { pre: '服を', en: 'clothes' },
-    '落ちる': { pre: '木から', en: 'from the tree' }, '片付ける': { pre: '部屋を', en: 'the room' },
-    '考える': { pre: '将来を', en: 'the future' }, '消える': { pre: '電気が', en: 'the light' },
-    '壊れる': { pre: 'パソコンが', en: 'the computer' }, '汚れる': { pre: '服が', en: 'clothes' },
-    '注文する': { pre: 'ピザを', en: 'pizza' }, 'いらっしゃる': { pre: '先生が', en: 'the teacher' },
-    '怒る': { pre: '母が', en: 'mom' }, 'おっしゃる': { pre: '先生が', en: 'the teacher' },
-    '決まる': { pre: '予定が', en: 'plans' }, '下さる': { pre: '先生がお菓子を', en: 'sweets' },
-    'ご覧になる': { pre: '映画を', en: 'a movie' }, '引っ越す': { pre: '大阪に', en: 'to Osaka' },
-    '召し上がる': { pre: 'お寿司を', en: 'sushi' }, '呼ぶ': { pre: 'タクシーを', en: 'a taxi' },
+    '見える': { pre: '山[やま]が', en: 'the mountain' }, '観光する': { pre: '京都[きょうと]を', en: 'Kyoto' },
+    '卒業する': { pre: '大学[だいがく]を', en: 'university' }, '予約する': { pre: 'レストランを', en: 'a restaurant' },
+    '起こす': { pre: '弟[おとうと]を', en: 'my brother' }, 'おごる': { pre: '友達[ともだち]に', en: 'a friend' },
+    '落ち込む': { pre: '最近[さいきん]', en: 'recently' }, '困る': { pre: 'お金[かね]に', en: 'about money' },
+    '出す': { pre: '宿題[しゅくだい]を', en: 'homework' }, '直す': { pre: 'パソコンを', en: 'the computer' },
+    '見つかる': { pre: '鍵[かぎ]が', en: 'the keys' }, '訳す': { pre: '英語[えいご]に', en: 'into English' },
+    '笑う': { pre: '冗談[じょうだん]で', en: 'at a joke' }, '集める': { pre: '切手[きって]を', en: 'stamps' },
+    '入れる': { pre: '砂糖[さとう]を', en: 'sugar' }, '乗り遅れる': { pre: '電車[でんしゃ]に', en: 'the train' },
+    '見せる': { pre: '写真[しゃしん]を', en: 'a photo' }, '朝寝坊する': { pre: '日曜日[にちようび]に', en: 'on Sundays' },
+    '案内する': { pre: '町[まち]を', en: 'the town' }, '説明する': { pre: '問題[もんだい]を', en: 'the problem' },
+    '選ぶ': { pre: 'プレゼントを', en: 'a present' }, '込む': { pre: '電車[でんしゃ]が', en: 'the train' },
+    '脱ぐ': { pre: '靴[くつ]を', en: 'shoes' }, '生まれる': { pre: '東京[とうきょう]で', en: 'in Tokyo' },
+    '足りる': { pre: 'お金[かね]が', en: 'money' }, '慣れる': { pre: '日本[にほん]の生活[せいかつ]に', en: 'life in Japan' },
+    '化粧する': { pre: '毎朝[まいあさ]', en: 'every morning' }, '就職する': { pre: '来年[らいねん]', en: 'next year' },
+    '離婚する': { pre: '最近[さいきん]', en: 'recently' }, '開く': { pre: 'ドアが', en: 'the door' },
+    '謝る': { pre: '先生[せんせい]に', en: 'to the teacher' }, '押す': { pre: 'ボタンを', en: 'the button' },
+    '落とす': { pre: '財布[さいふ]を', en: 'my wallet' }, '転ぶ': { pre: '道[みち]で', en: 'on the road' },
+    '壊す': { pre: 'おもちゃを', en: 'a toy' }, '咲く': { pre: '桜[さくら]が', en: 'cherry blossoms' },
+    '閉まる': { pre: '店[みせ]が', en: 'the shop' }, '汚す': { pre: '服[ふく]を', en: 'clothes' },
+    '落ちる': { pre: '木[き]から', en: 'from the tree' }, '片付ける': { pre: '部屋[へや]を', en: 'the room' },
+    '考える': { pre: '将来[しょうらい]を', en: 'the future' }, '消える': { pre: '電気[でんき]が', en: 'the light' },
+    '壊れる': { pre: 'パソコンが', en: 'the computer' }, '汚れる': { pre: '服[ふく]が', en: 'clothes' },
+    '注文する': { pre: 'ピザを', en: 'pizza' }, 'いらっしゃる': { pre: '先生[せんせい]が', en: 'the teacher' },
+    '怒る': { pre: '母[はは]が', en: 'mom' }, 'おっしゃる': { pre: '先生[せんせい]が', en: 'the teacher' },
+    '決まる': { pre: '予定[よてい]が', en: 'plans' }, '下さる': { pre: '先生[せんせい]がお菓子[かし]を', en: 'sweets' },
+    'ご覧になる': { pre: '映画[えいが]を', en: 'a movie' }, '引っ越す': { pre: '大阪[おおさか]に', en: 'to Osaka' },
+    '召し上がる': { pre: 'お寿司[すし]を', en: 'sushi' }, '呼ぶ': { pre: 'タクシーを', en: 'a taxi' },
     '寄る': { pre: 'コンビニに', en: 'the convenience store' },
-    '遅れる': { pre: '電車が', en: 'the train' }, '晴れる': { pre: '明日', en: 'tomorrow' },
-    'もてる': { pre: '学校で', en: 'at school' }, '招待する': { pre: 'パーティーに', en: 'to a party' },
-    '注意する': { pre: '車に', en: 'cars' }, '致す': { pre: 'お手伝いを', en: 'a favor' },
-    '頂く': { pre: 'お土産を', en: 'a souvenir' }, '伺う': { pre: '先生のお宅に', en: 'the teacher\'s home' },
+    '遅れる': { pre: '電車[でんしゃ]が', en: 'the train' }, '晴れる': { pre: '明日[あした]', en: 'tomorrow' },
+    'もてる': { pre: '学校[がっこう]で', en: 'at school' }, '招待する': { pre: 'パーティーに', en: 'to a party' },
+    '注意する': { pre: '車[くるま]に', en: 'cars' }, '致す': { pre: 'お手伝[てつだ]いを', en: 'a favor' },
+    '頂く': { pre: 'お土産[みやげ]を', en: 'a souvenir' }, '伺う': { pre: '先生[せんせい]のお宅[たく]に', en: 'the teacher\'s home' },
     'おる': { pre: 'こちらに', en: 'here' }, '参る': { pre: 'すぐに', en: 'right away' },
-    '曲がる': { pre: '右に', en: 'to the right' }, '申す': { pre: '田中と', en: 'Tanaka' },
-    '戻る': { pre: '家に', en: 'home' }, '聞こえる': { pre: '音楽が', en: 'music' },
+    '曲がる': { pre: '右[みぎ]に', en: 'to the right' }, '申す': { pre: '田中[たなか]と', en: 'Tanaka' },
+    '戻る': { pre: '家[いえ]に', en: 'home' }, '聞こえる': { pre: '音楽[おんがく]が', en: 'music' },
     '差し上げる': { pre: 'プレゼントを', en: 'a present' }, '伝える': { pre: 'メッセージを', en: 'a message' },
-    '交換する': { pre: '電話番号を', en: 'phone numbers' }, '生活する': { pre: '東京で', en: 'in Tokyo' },
-    '置く': { pre: '机の上に', en: 'on the desk' }, '触る': { pre: '展示物に', en: 'the exhibit' },
-    '捕まる': { pre: '泥棒が', en: 'the thief' }, '包む': { pre: 'プレゼントを', en: 'a present' },
-    '殴る': { pre: '壁を', en: 'the wall' }, '盗む': { pre: '財布を', en: 'a wallet' },
-    '貼る': { pre: 'ポスターを', en: 'a poster' }, '踏む': { pre: '足を', en: 'a foot' },
-    '焼く': { pre: 'ケーキを', en: 'a cake' }, 'いじめる': { pre: '弱い子を', en: 'weaker kids' },
-    '着替える': { pre: '服を', en: 'clothes' }, 'ためる': { pre: 'お金を', en: 'money' },
-    '続ける': { pre: '勉強を', en: 'studying' }, '褒める': { pre: '子供を', en: 'the child' },
-    '間違える': { pre: '答えを', en: 'the answer' }, '見つける': { pre: '財布を', en: 'a wallet' },
-    '連絡する': { pre: '友達に', en: 'a friend' }, '勝つ': { pre: '試合に', en: 'the game' },
-    '運ぶ': { pre: '荷物を', en: 'luggage' }, '走る': { pre: '公園で', en: 'in the park' },
-    '拾う': { pre: 'ゴミを', en: 'trash' }, '間に合う': { pre: '電車に', en: 'the train' },
-    '育てる': { pre: '子供を', en: 'a child' }, '助ける': { pre: '友達を', en: 'a friend' },
-    '負ける': { pre: '試合に', en: 'the game' }, '賛成する': { pre: 'この意見に', en: 'this opinion' },
-    '反対する': { pre: 'その計画に', en: 'that plan' }, '翻訳する': { pre: '本を', en: 'a book' },
-    '受ける': { pre: '試験を', en: 'an exam' }, '答える': { pre: '質問に', en: 'a question' },
-    '離れる': { pre: '家から', en: 'from home' }, '我慢する': { pre: '痛みを', en: 'the pain' },
-    '優勝する': { pre: '大会で', en: 'the tournament' },
+    '交換する': { pre: '電話[でんわ]番号[ばんごう]を', en: 'phone numbers' }, '生活する': { pre: '東京[とうきょう]で', en: 'in Tokyo' },
+    '置く': { pre: '机[つくえ]の上[うえ]に', en: 'on the desk' }, '触る': { pre: '展示物[てんじぶつ]に', en: 'the exhibit' },
+    '捕まる': { pre: '泥棒[どろぼう]が', en: 'the thief' }, '包む': { pre: 'プレゼントを', en: 'a present' },
+    '殴る': { pre: '壁[かべ]を', en: 'the wall' }, '盗む': { pre: '財布[さいふ]を', en: 'a wallet' },
+    '貼る': { pre: 'ポスターを', en: 'a poster' }, '踏む': { pre: '足[あし]を', en: 'a foot' },
+    '焼く': { pre: 'ケーキを', en: 'a cake' }, 'いじめる': { pre: '弱[よわ]い子[こ]を', en: 'weaker kids' },
+    '着替える': { pre: '服[ふく]を', en: 'clothes' }, 'ためる': { pre: 'お金[かね]を', en: 'money' },
+    '続ける': { pre: '勉強[べんきょう]を', en: 'studying' }, '褒める': { pre: '子供[こども]を', en: 'the child' },
+    '間違える': { pre: '答[こた]えを', en: 'the answer' }, '見つける': { pre: '財布[さいふ]を', en: 'a wallet' },
+    '連絡する': { pre: '友達[ともだち]に', en: 'a friend' }, '勝つ': { pre: '試合[しあい]に', en: 'the game' },
+    '運ぶ': { pre: '荷物[にもつ]を', en: 'luggage' }, '走る': { pre: '公園[こうえん]で', en: 'in the park' },
+    '拾う': { pre: 'ゴミを', en: 'trash' }, '間に合う': { pre: '電車[でんしゃ]に', en: 'the train' },
+    '育てる': { pre: '子供[こども]を', en: 'a child' }, '助ける': { pre: '友達[ともだち]を', en: 'a friend' },
+    '負ける': { pre: '試合[しあい]に', en: 'the game' }, '賛成する': { pre: 'この意見[いけん]に', en: 'this opinion' },
+    '反対する': { pre: 'その計画[けいかく]に', en: 'that plan' }, '翻訳する': { pre: '本[ほん]を', en: 'a book' },
+    '受ける': { pre: '試験[しけん]を', en: 'an exam' }, '答える': { pre: '質問[しつもん]に', en: 'a question' },
+    '離れる': { pre: '家[いえ]から', en: 'from home' }, '我慢する': { pre: '痛[いた]みを', en: 'the pain' },
+    '優勝する': { pre: '大会[たいかい]で', en: 'the tournament' },
   };
 
   const ADJ_CONTEXTS = {
-    'おもしろい': { pre: 'この映画は', en: 'This movie' }, 'おいしい': { pre: 'このケーキは', en: 'This cake' },
-    '楽しい': { pre: 'この旅行は', en: 'This trip' }, '安い': { pre: 'この店は', en: 'This shop' },
-    '怖い': { pre: 'あの映画は', en: 'That movie' }, '寒い': { pre: '今日は', en: 'Today' },
-    '暑い': { pre: '夏は', en: 'Summer' }, '忙しい': { pre: '今週は', en: 'This week' },
-    '高い': { pre: 'この車は', en: 'This car' }, '大きい': { pre: 'この部屋は', en: 'This room' },
-    '小さい': { pre: 'この箱は', en: 'This box' }, '新しい': { pre: 'この本は', en: 'This book' },
-    '古い': { pre: 'この建物は', en: 'This building' }, 'いい': { pre: 'この天気は', en: 'This weather' },
-    '難しい': { pre: 'この問題は', en: 'This problem' }, 'かっこいい': { pre: '彼は', en: 'He' },
-    'つまらない': { pre: 'この授業は', en: 'This class' }, 'きれい': { pre: 'この公園は', en: 'This park' },
-    '元気': { pre: '彼は', en: 'He' }, '静か': { pre: 'この図書館は', en: 'This library' },
-    'にぎやか': { pre: 'この町は', en: 'This town' }, '好き': { pre: '猫が', en: 'Cats' },
-    '嫌い': { pre: '虫が', en: 'Bugs' }, '暇': { pre: '今日は', en: 'Today' },
-    'ハンサム': { pre: '彼は', en: 'He' }, '長い': { pre: 'この映画は', en: 'This movie' },
-    '短い': { pre: 'この道は', en: 'This road' }, '速い': { pre: 'この電車は', en: 'This train' },
-    '近い': { pre: '駅は', en: 'The station' }, '遠い': { pre: '学校は', en: 'The school' },
-    '多い': { pre: '宿題が', en: 'Homework' }, '少ない': { pre: '時間が', en: 'Time' },
-    '広い': { pre: 'この部屋は', en: 'This room' }, '狭い': { pre: 'このアパートは', en: 'This apartment' },
-    '悪い': { pre: '天気は', en: 'The weather' }, '優しい': { pre: '先生は', en: 'The teacher' },
-    '有名': { pre: 'この店は', en: 'This shop' }, '便利': { pre: 'この駅は', en: 'This station' },
-    '暖かい': { pre: '今日は', en: 'Today' }, '涼しい': { pre: '秋は', en: 'Autumn' },
+    'おもしろい': { pre: 'この映画[えいが]は', en: 'This movie' }, 'おいしい': { pre: 'このケーキは', en: 'This cake' },
+    '楽しい': { pre: 'この旅行[りょこう]は', en: 'This trip' }, '安い': { pre: 'この店[みせ]は', en: 'This shop' },
+    '怖い': { pre: 'あの映画[えいが]は', en: 'That movie' }, '寒い': { pre: '今日[きょう]は', en: 'Today' },
+    '暑い': { pre: '夏[なつ]は', en: 'Summer' }, '忙しい': { pre: '今週[こんしゅう]は', en: 'This week' },
+    '高い': { pre: 'この車[くるま]は', en: 'This car' }, '大きい': { pre: 'この部屋[へや]は', en: 'This room' },
+    '小さい': { pre: 'この箱[はこ]は', en: 'This box' }, '新しい': { pre: 'この本[ほん]は', en: 'This book' },
+    '古い': { pre: 'この建物[たてもの]は', en: 'This building' }, 'いい': { pre: 'この天気[てんき]は', en: 'This weather' },
+    '難しい': { pre: 'この問題[もんだい]は', en: 'This problem' }, 'かっこいい': { pre: '彼[かれ]は', en: 'He' },
+    'つまらない': { pre: 'この授業[じゅぎょう]は', en: 'This class' }, 'きれい': { pre: 'この公園[こうえん]は', en: 'This park' },
+    '元気': { pre: '彼[かれ]は', en: 'He' }, '静か': { pre: 'この図書館[としょかん]は', en: 'This library' },
+    'にぎやか': { pre: 'この町[まち]は', en: 'This town' }, '好き': { pre: '猫[ねこ]が', en: 'Cats' },
+    '嫌い': { pre: '虫[むし]が', en: 'Bugs' }, '暇': { pre: '今日[きょう]は', en: 'Today' },
+    'ハンサム': { pre: '彼[かれ]は', en: 'He' }, '長い': { pre: 'この映画[えいが]は', en: 'This movie' },
+    '短い': { pre: 'この道[みち]は', en: 'This road' }, '速い': { pre: 'この電車[でんしゃ]は', en: 'This train' },
+    '近い': { pre: '駅[えき]は', en: 'The station' }, '遠い': { pre: '学校[がっこう]は', en: 'The school' },
+    '多い': { pre: '宿題[しゅくだい]が', en: 'Homework' }, '少ない': { pre: '時間[じかん]が', en: 'Time' },
+    '広い': { pre: 'この部屋[へや]は', en: 'This room' }, '狭い': { pre: 'このアパートは', en: 'This apartment' },
+    '悪い': { pre: '天気[てんき]は', en: 'The weather' }, '優しい': { pre: '先生[せんせい]は', en: 'The teacher' },
+    '有名': { pre: 'この店[みせ]は', en: 'This shop' }, '便利': { pre: 'この駅[えき]は', en: 'This station' },
+    '暖かい': { pre: '今日[きょう]は', en: 'Today' }, '涼しい': { pre: '秋[あき]は', en: 'Autumn' },
     '甘い': { pre: 'このケーキは', en: 'This cake' }, '辛い': { pre: 'このカレーは', en: 'This curry' },
-    '簡単': { pre: 'この問題は', en: 'This problem' }, '嬉しい': { pre: '彼は', en: 'He' },
-    '悲しい': { pre: 'あの映画は', en: 'That movie' }, '痛い': { pre: '頭が', en: 'My head' },
-    '厳しい': { pre: 'この先生は', en: 'This teacher' }, '素敵': { pre: 'この服は', en: 'This outfit' },
-    '汚い': { pre: 'この部屋は', en: 'This room' }, '危ない': { pre: 'この道は', en: 'This road' },
-    '丈夫': { pre: 'この鞄は', en: 'This bag' }, '珍しい': { pre: 'この料理は', en: 'This dish' },
-    '正直': { pre: '彼は', en: 'He' }, '明るい': { pre: 'この部屋は', en: 'This room' },
-    '暗い': { pre: 'この道は', en: 'This road' }, '強い': { pre: '彼は', en: 'He' },
-    '弱い': { pre: 'このチームは', en: 'This team' }, '正しい': { pre: 'この答えは', en: 'This answer' },
-    '幸せ': { pre: '彼女は', en: 'She' },
+    '簡単': { pre: 'この問題[もんだい]は', en: 'This problem' }, '嬉しい': { pre: '彼[かれ]は', en: 'He' },
+    '悲しい': { pre: 'あの映画[えいが]は', en: 'That movie' }, '痛い': { pre: '頭[あたま]が', en: 'My head' },
+    '厳しい': { pre: 'この先生[せんせい]は', en: 'This teacher' }, '素敵': { pre: 'この服[ふく]は', en: 'This outfit' },
+    '汚い': { pre: 'この部屋[へや]は', en: 'This room' }, '危ない': { pre: 'この道[みち]は', en: 'This road' },
+    '丈夫': { pre: 'この鞄[かばん]は', en: 'This bag' }, '珍しい': { pre: 'この料理[りょうり]は', en: 'This dish' },
+    '正直': { pre: '彼[かれ]は', en: 'He' }, '明るい': { pre: 'この部屋[へや]は', en: 'This room' },
+    '暗い': { pre: 'この道[みち]は', en: 'This road' }, '強い': { pre: '彼[かれ]は', en: 'He' },
+    '弱い': { pre: 'このチームは', en: 'This team' }, '正しい': { pre: 'この答[こた]えは', en: 'This answer' },
+    '幸せ': { pre: '彼女[かのじょ]は', en: 'She' },
   };
+
+  // Example sentences mark readings inline as 漢字[かんじ]; these turn that
+  // into <ruby> furigana or strip it, depending on the furigana setting.
+  const KANJI_RE = /[\u4e00-\u9fff々〆ヵヶ]/;
+  const KANJI_OR_KANA_RUNS = /[\u4e00-\u9fff々〆ヵヶ]+|[^\u4e00-\u9fff々〆ヵヶ]+/g;
+
+  function furiganaHtml(str) {
+    return str.replace(/([\u4e00-\u9fff々〆ヵヶ]+)\[([^\]]+)\]/g, '<ruby>$1<rt>$2</rt></ruby>');
+  }
+
+  function stripFurigana(str) {
+    return str.replace(/\[[^\]]+\]/g, '');
+  }
+
+  function exampleJaHtml(ja) {
+    return settings.showFurigana ? furiganaHtml(ja) : stripFurigana(ja);
+  }
+
+  // Split a kanji spelling into kanji and kana runs and match it against the
+  // reading, e.g. 持って来 + もってこ -> 持[も]って来[こ]. Null if they don't line up.
+  function alignFurigana(kanji, reading) {
+    const parts = kanji.match(KANJI_OR_KANA_RUNS) || [];
+    const pattern = parts
+      .map(p => KANJI_RE.test(p) ? '(.+?)' : `(${p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`)
+      .join('');
+    const m = reading.match(new RegExp(`^${pattern}$`));
+    if (!m) return null;
+    return parts.map((p, i) => KANJI_RE.test(p) ? `${p}[${m[i + 1]}]` : p).join('');
+  }
+
+  // Conjugations are computed on the reading (ゆうしょうさせる); show them with
+  // the dictionary form's kanji instead (優勝[ゆうしょう]させる) where the
+  // kanji stem's reading survives conjugation. 来る changes its reading
+  // (こ/き/く), so its last kana is taken from the conjugated form.
+  function conjugatedWithKanji(word, conjugated) {
+    const { kanji, reading } = word;
+    if (!kanji || kanji === reading || !KANJI_RE.test(kanji)) return conjugated;
+    let i = 0;
+    while (i < kanji.length && i < reading.length && kanji[kanji.length - 1 - i] === reading[reading.length - 1 - i]) i++;
+    const kStem = kanji.slice(0, kanji.length - i);
+    const rStem = reading.slice(0, reading.length - i);
+    if (kStem && conjugated.startsWith(rStem)) {
+      const a = alignFurigana(kStem, rStem);
+      if (a) return a + conjugated.slice(rStem.length);
+    }
+    if (kStem.endsWith('来') && rStem.endsWith('く')) {
+      const base = rStem.slice(0, -1);
+      if (conjugated.startsWith(base) && conjugated.length > base.length) {
+        const a = alignFurigana(kStem, base + conjugated[base.length]);
+        if (a) return a + conjugated.slice(base.length + 1);
+      }
+    }
+    return conjugated;
+  }
 
   function buildVerbJa(pre, conjugated, form) {
     switch (form) {
       case 'te':        return `${pre}${conjugated}ください。`;
-      case 'dict':      return `${pre}${conjugated}のが好きです。`;
+      case 'dict':      return `${pre}${conjugated}のが好[す]きです。`;
       case 'ta':        return `もう${pre}${conjugated}。`;
       case 'nakatta':   return `まだ${pre}${conjugated}。`;
       case 'tai':       return `${pre}${conjugated}です。`;
-      case 'volitional': return `一緒に${pre}${conjugated}。`;
-      case 'causative': return `子供に${pre}${conjugated}。`;
+      case 'volitional': return `一緒[いっしょ]に${pre}${conjugated}。`;
+      case 'causative': return `子供[こども]に${pre}${conjugated}。`;
       case 'ba':        return `${pre}${conjugated}いいのに。`;
-      case 'causative-passive': return `先生に${pre}${conjugated}。`;
+      case 'causative-passive': return `先生[せんせい]に${pre}${conjugated}。`;
       default:          return `${pre}${conjugated}。`;
     }
   }
@@ -1222,12 +1276,12 @@
 
     if (isAdj) {
       const ctx = ADJ_CONTEXTS[verb.kanji] || ADJ_CONTEXTS[verb.reading] || { pre: 'これは', en: 'This' };
-      return { ja: buildAdjJa(ctx.pre, conjugated, form), en: buildAdjEn(v, ctx.en, form) };
+      return { ja: buildAdjJa(ctx.pre, conjugatedWithKanji(verb, conjugated), form), en: buildAdjEn(v, ctx.en, form) };
     }
 
     const key = verb.disambig ? `${verb.kanji}_${verb.disambig}` : verb.kanji;
     const ctx = VERB_CONTEXTS[key] || VERB_CONTEXTS[verb.kanji] || { pre: '', en: '' };
-    return { ja: buildVerbJa(ctx.pre, conjugated, form), en: buildVerbEn(v, ctx.en, form) };
+    return { ja: buildVerbJa(ctx.pre, conjugatedWithKanji(verb, conjugated), form), en: buildVerbEn(v, ctx.en, form) };
   }
 
   function getExampleSentenceForFront(verb, form) {
@@ -1411,7 +1465,7 @@
     const exEl = $('#card-example-sentence');
     if (exSentence) {
       exEl.innerHTML = `<div class="example-label">Example</div>`
-        + `<div class="example-jp">${exSentence.ja}</div>`
+        + `<div class="example-jp">${exampleJaHtml(exSentence.ja)}</div>`
         + `<div class="example-en">${highlightKeywords(exSentence.en)}</div>`;
     } else {
       exEl.innerHTML = '';
