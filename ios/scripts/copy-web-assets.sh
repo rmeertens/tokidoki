@@ -1,9 +1,11 @@
 #!/bin/sh
-# Copies the Tokidoki website (repo root) into the app bundle's Web/ folder.
+# Copies the website's exercise data (JS) and printable sheets (PDF) from the
+# repo root into the app bundle's Content/ folder. The app reads the data by
+# evaluating these scripts in JavaScriptCore, so the site stays the source of truth.
 set -eu
 
 REPO_ROOT="${SRCROOT}/.."
-DEST="${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Web"
+DEST="${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Content"
 
 mkdir -p "$DEST"
 rsync -a --delete \
@@ -13,9 +15,7 @@ rsync -a --delete \
   --exclude='.*' \
   --exclude='test_*.js' \
   --include='*/' \
-  --include='*.html' \
   --include='*.js' \
-  --include='*.css' \
   --include='*.pdf' \
   --exclude='*' \
   --prune-empty-dirs \

@@ -5,9 +5,9 @@
   "level": "N5",
   "sentences": [
     {
-      "ja": "夏に喉が渇きます。",
-      "jaHtml": "<ruby>夏<rp>(</rp><rt>なつ</rt><rp>)</rp></ruby>に<ruby>喉<rp>(</rp><rt>のど</rt><rp>)</rp></ruby>が<ruby>渇<rp>(</rp><rt>かわ</rt><rp>)</rp></ruby>きます。",
-      "en": "I get thirsty in summer."
+      "ja": "夏はよく喉が渇きます。",
+      "jaHtml": "<ruby>夏<rp>(</rp><rt>なつ</rt><rp>)</rp></ruby>はよく<ruby>喉<rp>(</rp><rt>のど</rt><rp>)</rp></ruby>が<ruby>渇<rp>(</rp><rt>かわ</rt><rp>)</rp></ruby>きます。",
+      "en": "I often get thirsty in summer."
     },
     {
       "ja": "鍵をなくしてしまいました。",
@@ -101,7 +101,7 @@
     },
     {
       "ja": "辛い食べ物が好きです。",
-      "jaHtml": "<ruby>辛<rp>(</rp><rt>つら</rt><rp>)</rp></ruby>い<ruby>食べ物<rp>(</rp><rt>たべもの</rt><rp>)</rp></ruby>が<ruby>好<rp>(</rp><rt>す</rt><rp>)</rp></ruby>きです。",
+      "jaHtml": "<ruby>辛<rp>(</rp><rt>から</rt><rp>)</rp></ruby>い<ruby>食<rp>(</rp><rt>た</rt><rp>)</rp></ruby>べ<ruby>物<rp>(</rp><rt>もの</rt><rp>)</rp></ruby>が<ruby>好<rp>(</rp><rt>す</rt><rp>)</rp></ruby>きです。",
       "en": "I like spicy food."
     }
   ]

@@ -15,9 +15,9 @@
       "en": "Mom got angry."
     },
     {
-      "ja": "先生がおっしゃいました。",
-      "jaHtml": "<ruby>先生<rp>(</rp><rt>せんせい</rt><rp>)</rp></ruby>がおっしゃいました。",
-      "en": "The teacher said. (honorific)"
+      "ja": "先生がそうおっしゃいました。",
+      "jaHtml": "<ruby>先生<rp>(</rp><rt>せんせい</rt><rp>)</rp></ruby>がそうおっしゃいました。",
+      "en": "The teacher said so. (honorific)"
     },
     {
       "ja": "予定が決まりました。",

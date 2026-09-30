@@ -12,6 +12,11 @@ const Conjugator = (() => {
     'す': { a: 'さ', i: 'し', e: 'せ', o: 'そ', te: 'して', ta: 'した' },
   };
 
+  // Honorific verbs whose polite stem is い, not り: いらっしゃいます, not いらっしゃります.
+  const HONORIFIC_I_STEM = ['いらっしゃる', 'おっしゃる', 'くださる', 'なさる', 'ござる'];
+  const MASU_ENDINGS = { 'masu': 'ます', 'masu-neg': 'ません', 'masu-past': 'ました', 'masu-past-neg': 'ませんでした' };
+  const MASU_FORMS = new Set(Object.keys(MASU_ENDINGS));
+
   function getUVerbBase(reading) {
     return reading.slice(0, -1);
   }
@@ -44,6 +49,12 @@ const Conjugator = (() => {
     if (!stems) return reading;
 
     const endsWithIku = reading.endsWith('いく') || reading.endsWith('ゆく');
+
+    if (reading === 'ある' && form === 'nai') return 'ない';
+    if (reading === 'ある' && form === 'nakatta') return 'なかった';
+    if (MASU_FORMS.has(form) && HONORIFIC_I_STEM.some(v => reading.endsWith(v))) {
+      return base + 'い' + MASU_ENDINGS[form];
+    }
 
     switch (form) {
       case 'masu':        return base + stems.i + 'ます';
@@ -373,7 +384,7 @@ const Conjugator = (() => {
         + '<tr><td>い-adjective</td><td>Drop <b>い</b>, add <b>くない</b></td><td>高い → 高<b>くない</b></td><td>高<b>くないです</b></td></tr>'
         + '<tr><td>な-adjective</td><td>Add <b>じゃない</b></td><td>静か → 静か<b>じゃない</b></td><td>静か<b>じゃないです</b></td></tr>'
         + '</tbody></table>'
-        + '<p class="conj-note"><strong>Exception:</strong> いい (good) → <b>よくない</b> (not よくない). The irregular stem よ- is used for all conjugations of いい.<br>Similarly: かっこいい → <b>かっこよくない</b></p>' },
+        + '<p class="conj-note"><strong>Exception:</strong> いい (good) → <b>よくない</b> (not いくない). The irregular stem よ- is used for all conjugations of いい.<br>Similarly: かっこいい → <b>かっこよくない</b></p>' },
 
     'adj-past':      { name: 'Past', nameJp: '過去形', hint: 'Plain past', symbol: 'かった', color: '#FF9800', chapter: 9,
       explanation: '<p>The <strong>plain past</strong> of adjectives ("was ~"). い-adjectives change their ending; な-adjectives add だった.</p>'
@@ -477,14 +488,20 @@ const Conjugator = (() => {
     const { kanji, reading } = verb;
     if (!kanji || kanji === reading) return null;
 
+    const isAdj = verb.type === 'i-adj' || verb.type === 'na-adj';
+    const hiraganaConj = isAdj ? conjugateAdjective(verb, form) : conjugate(verb, form);
+
+    // な-adjectives written entirely in kanji (元気, 有名) keep the whole word and add the ending.
+    if (verb.type === 'na-adj' && hiraganaConj.startsWith(reading)) {
+      return kanji + hiraganaConj.slice(reading.length);
+    }
+
     const okurigana = getOkurigana(kanji);
     if (!okurigana || okurigana.length >= reading.length) return null;
 
     const kanjiBase = kanji.slice(0, kanji.length - okurigana.length);
     const readingBaseLen = reading.length - okurigana.length;
 
-    const isAdj = verb.type === 'i-adj' || verb.type === 'na-adj';
-    const hiraganaConj = isAdj ? conjugateAdjective(verb, form) : conjugate(verb, form);
     return kanjiBase + hiraganaConj.slice(readingBaseLen);
   }
 

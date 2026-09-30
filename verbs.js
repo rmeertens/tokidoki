@@ -149,7 +149,7 @@ const GENKI_VERBS = [
   // Chapter 15
   { kanji: '売る', reading: 'うる', meaning: 'to sell', type: 'u', chapter: 15 },
   { kanji: '下ろす', reading: 'おろす', meaning: 'to withdraw (money)', type: 'u', chapter: 15 },
-  { kanji: '描く', reading: 'えがく', meaning: 'to draw / to paint', type: 'u', chapter: 15 },
+  { kanji: '描く', reading: 'かく', meaning: 'to draw / to paint', type: 'u', chapter: 15, disambig: 'draw' },
   { kanji: '探す', reading: 'さがす', meaning: 'to look for', type: 'u', chapter: 15 },
   { kanji: '誘う', reading: 'さそう', meaning: 'to invite', type: 'u', chapter: 15 },
   { kanji: 'しゃべる', reading: 'しゃべる', meaning: 'to chat', type: 'u', chapter: 15 },
@@ -335,9 +335,9 @@ const GENKI_ADJECTIVES = [
   { kanji: '好き', reading: 'すき', meaning: 'liked / favorite', type: 'na-adj', chapter: 5 },
   { kanji: '嫌い', reading: 'きらい', meaning: 'disliked', type: 'na-adj', chapter: 5 },
   { kanji: '暇', reading: 'ひま', meaning: 'free (not busy)', type: 'na-adj', chapter: 5 },
-  { kanji: 'かっこいい', reading: 'かっこいい', meaning: 'handsome / cool', type: 'i-adj', chapter: 5 },
 
   // Chapter 7
+  { kanji: 'ハンサム', reading: 'はんさむ', meaning: 'handsome', type: 'na-adj', chapter: 7 },
   { kanji: '長い', reading: 'ながい', meaning: 'long', type: 'i-adj', chapter: 7 },
   { kanji: '短い', reading: 'みじかい', meaning: 'short (length)', type: 'i-adj', chapter: 7 },
   { kanji: '速い', reading: 'はやい', meaning: 'fast / early', type: 'i-adj', chapter: 7 },

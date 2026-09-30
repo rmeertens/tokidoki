@@ -260,6 +260,48 @@ testVerb(
   }
 );
 
+// --- ある: plain negative is ない, not あらない ---
+testVerb(
+  { kanji: 'ある', reading: 'ある', type: 'u', chapter: 4 },
+  {
+    'masu': 'あります',
+    'masu-neg': 'ありません',
+    'nai': 'ない',
+    'nakatta': 'なかった',
+    'ta': 'あった',
+  }
+);
+
+// --- Honorific verbs with an い polite stem ---
+testVerb(
+  { kanji: 'いらっしゃる', reading: 'いらっしゃる', type: 'u', chapter: 19 },
+  {
+    'masu': 'いらっしゃいます',
+    'masu-past': 'いらっしゃいました',
+    'te': 'いらっしゃって',
+    'nai': 'いらっしゃらない',
+  }
+);
+testVerb(
+  { kanji: 'おっしゃる', reading: 'おっしゃる', type: 'u', chapter: 19 },
+  { 'masu': 'おっしゃいます', 'masu-neg': 'おっしゃいません' }
+);
+testVerb(
+  { kanji: '下さる', reading: 'くださる', type: 'u', chapter: 19 },
+  { 'masu': 'くださいます', 'masu-past-neg': 'くださいませんでした', 'ta': 'くださった' }
+);
+testVerb(
+  { kanji: '召し上がる', reading: 'めしあがる', type: 'u', chapter: 19 },
+  { 'masu': 'めしあがります' }
+);
+
+// --- Kanji spellings of adjectives ---
+console.log('Testing adjective kanji spellings');
+assert(Conjugator.conjugateKanji({ kanji: '元気', reading: 'げんき', type: 'na-adj' }, 'adj-past'), '元気だった', '元気 → adj-past (kanji)');
+assert(Conjugator.conjugateKanji({ kanji: '好き', reading: 'すき', type: 'na-adj' }, 'adj-neg'), '好きじゃない', '好き → adj-neg (kanji)');
+assert(Conjugator.conjugateKanji({ kanji: '高い', reading: 'たかい', type: 'i-adj' }, 'adj-past'), '高かった', '高い → adj-past (kanji)');
+assert(Conjugator.conjugateKanji({ kanji: 'きれい', reading: 'きれい', type: 'na-adj' }, 'adj-te'), null, 'きれい has no kanji spelling');
+
 // --- Test getFormsForChapter ---
 console.log('\nTesting getFormsForChapter...');
 const ch3Forms = Conjugator.getFormsForChapter(3);

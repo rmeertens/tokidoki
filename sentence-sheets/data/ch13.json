@@ -86,7 +86,7 @@
     },
     {
       "ja": "辛い物が食べられません。",
-      "jaHtml": "<ruby>辛<rp>(</rp><rt>つら</rt><rp>)</rp></ruby>い<ruby>物<rp>(</rp><rt>もの</rt><rp>)</rp></ruby>が<ruby>食<rp>(</rp><rt>た</rt><rp>)</rp></ruby>べられません。",
+      "jaHtml": "<ruby>辛<rp>(</rp><rt>から</rt><rp>)</rp></ruby>い<ruby>物<rp>(</rp><rt>もの</rt><rp>)</rp></ruby>が<ruby>食<rp>(</rp><rt>た</rt><rp>)</rp></ruby>べられません。",
       "en": "I can't eat spicy food."
     },
     {

@@ -50,9 +50,9 @@
       "en": "I didn't attend class."
     },
     {
-      "ja": "まだ漢字を覚えなかった。",
-      "jaHtml": "まだ<ruby>漢字<rp>(</rp><rt>かんじ</rt><rp>)</rp></ruby>を<ruby>覚<rp>(</rp><rt>おぼ</rt><rp>)</rp></ruby>えなかった。",
-      "en": "I still didn't memorize the kanji."
+      "ja": "昨日は漢字を覚えなかった。",
+      "jaHtml": "<ruby>昨日<rp>(</rp><rt>きのう</rt><rp>)</rp></ruby>は<ruby>漢字<rp>(</rp><rt>かんじ</rt><rp>)</rp></ruby>を<ruby>覚<rp>(</rp><rt>おぼ</rt><rp>)</rp></ruby>えなかった。",
+      "en": "I didn't memorize the kanji yesterday."
     },
     {
       "ja": "北海道に行ったことがあります。",
@@ -65,9 +65,9 @@
       "en": "I have never eaten sushi."
     },
     {
-      "ja": "宿題はまだ終わらなかった。",
-      "jaHtml": "<ruby>宿題<rp>(</rp><rt>しゅくだい</rt><rp>)</rp></ruby>はまだ<ruby>終<rp>(</rp><rt>お</rt><rp>)</rp></ruby>わらなかった。",
-      "en": "The homework still hasn't finished."
+      "ja": "昨日は宿題が終わらなかった。",
+      "jaHtml": "<ruby>昨日<rp>(</rp><rt>きのう</rt><rp>)</rp></ruby>は<ruby>宿題<rp>(</rp><rt>しゅくだい</rt><rp>)</rp></ruby>が<ruby>終<rp>(</rp><rt>お</rt><rp>)</rp></ruby>わらなかった。",
+      "en": "My homework didn't get finished yesterday."
     },
     {
       "ja": "去年京都で祭りを見た。",
@@ -80,9 +80,9 @@
       "en": "I have had a fight with him before."
     },
     {
-      "ja": "その本はまだ読まなかった。",
-      "jaHtml": "その<ruby>本<rp>(</rp><rt>ほん</rt><rp>)</rp></ruby>はまだ<ruby>読<rp>(</rp><rt>よ</rt><rp>)</rp></ruby>まなかった。",
-      "en": "I still hadn't read that book."
+      "ja": "その本は読まなかった。",
+      "jaHtml": "その<ruby>本<rp>(</rp><rt>ほん</rt><rp>)</rp></ruby>は<ruby>読<rp>(</rp><rt>よ</rt><rp>)</rp></ruby>まなかった。",
+      "en": "I didn't read that book."
     },
     {
       "ja": "富士山に登ったことがあります。",
@@ -100,9 +100,9 @@
       "en": "I have gone skiing with her."
     },
     {
-      "ja": "会議はまだ始まらなかった。",
-      "jaHtml": "<ruby>会議<rp>(</rp><rt>かいぎ</rt><rp>)</rp></ruby>はまだ<ruby>始<rp>(</rp><rt>はじ</rt><rp>)</rp></ruby>まらなかった。",
-      "en": "The meeting still hadn't started."
+      "ja": "会議はなかなか始まらなかった。",
+      "jaHtml": "<ruby>会議<rp>(</rp><rt>かいぎ</rt><rp>)</rp></ruby>はなかなか<ruby>始<rp>(</rp><rt>はじ</rt><rp>)</rp></ruby>まらなかった。",
+      "en": "The meeting just wouldn't start."
     }
   ]
 }

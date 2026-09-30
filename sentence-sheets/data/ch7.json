@@ -81,7 +81,7 @@
     },
     {
       "ja": "最近忙しくなりました。",
-      "jaHtml": "<ruby>最近忙<rp>(</rp><rt>さいきんいそが</rt><rp>)</rp></ruby>しくなりました。",
+      "jaHtml": "<ruby>最近<rp>(</rp><rt>さいきん</rt><rp>)</rp></ruby><ruby>忙<rp>(</rp><rt>いそが</rt><rp>)</rp></ruby>しくなりました。",
       "en": "I've gotten busy recently."
     },
     {

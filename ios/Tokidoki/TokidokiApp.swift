@@ -4,14 +4,27 @@ import SwiftUI
 struct TokidokiApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
+                .preferredColorScheme(AppSettings.shared.appearance.colorScheme)
         }
     }
 }
 
-struct ContentView: View {
+struct RootView: View {
     var body: some View {
-        ExerciseWebView()
-            .ignoresSafeArea()
+        TabView {
+            Tab("Practice", systemImage: "graduationcap") {
+                NavigationStack { HomeView() }
+            }
+            Tab("Reference", systemImage: "books.vertical") {
+                NavigationStack { ReferenceHomeView() }
+            }
+            Tab("Sheets", systemImage: "printer") {
+                NavigationStack { PracticeSheetsView() }
+            }
+            Tab("Settings", systemImage: "gearshape") {
+                NavigationStack { SettingsView() }
+            }
+        }
     }
 }

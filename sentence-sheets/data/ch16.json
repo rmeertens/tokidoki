@@ -22,7 +22,7 @@
     {
       "ja": "お金に困っています。",
       "jaHtml": "お<ruby>金<rp>(</rp><rt>かね</rt><rp>)</rp></ruby>に<ruby>困<rp>(</rp><rt>こま</rt><rp>)</rp></ruby>っています。",
-      "en": "I am in trouble about money."
+      "en": "I'm having money problems."
     },
     {
       "ja": "宿題を出してください。",
@@ -80,8 +80,8 @@
       "en": "I haven't been feeling energetic lately."
     },
     {
-      "ja": "仕事に困っています。",
-      "jaHtml": "<ruby>仕事<rp>(</rp><rt>しごと</rt><rp>)</rp></ruby>に<ruby>困<rp>(</rp><rt>こま</rt><rp>)</rp></ruby>っています。",
+      "ja": "仕事で困っています。",
+      "jaHtml": "<ruby>仕事<rp>(</rp><rt>しごと</rt><rp>)</rp></ruby>で<ruby>困<rp>(</rp><rt>こま</rt><rp>)</rp></ruby>っています。",
       "en": "I'm having trouble with work."
     },
     {
