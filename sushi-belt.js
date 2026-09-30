@@ -20,137 +20,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const ctx = canvas.getContext('2d');
 
   const H = 48;
-  // The mini strip drops the empty rows above the tallest sushi.
-  const TOP = mini ? 18 : 0;
+  // The mini strip drops the empty rows above the tallest rider.
+  const TOP = mini ? 13 : 0;
   const PLATE_Y = 25;
   const BELT_Y = 29;
   const COUNTER_Y = 37;
   const SPACING = 34;
   const SPEED = 12;
+  const RARE_CHANCE = 0.04;
 
-  const COLORS = {
-    W: '#fbf7ee', w: '#e2d9c6',
-    S: '#f58a5b', s: '#ffd4bb',
-    T: '#d23a3a', t: '#9f2430',
-    Y: '#f6c945', y: '#d9a52b',
-    N: '#1f3326', n: '#3d5a45',
-    O: '#ff7a1a', o: '#ffc27d',
-    E: '#ff8a4c', e: '#fff0e2',
-    C: '#6fbf5a', I: '#c98a3c', i: '#a0661f',
-    K: '#6f9d5c', k: '#4b7240',
-    R: '#d23a3a', D: '#3a2418',
-    G: '#f7a8b8', g: '#e27f98',
-    B: '#c49a6c', P: '#f7f7f4', p: '#cfd0cc',
-  };
-
-  const SUSHI = {
-    salmon: [
-      '...SSSSSSS..',
-      '.SSsSSSsSSS.',
-      'SSSSsSSSsSSS',
-      'WSSSSSSSSSSW',
-      'WWWWWWWWWWWW',
-      'WWWWWWWWWWWW',
-      '.wwwwwwwwww.',
-    ],
-    tuna: [
-      '...TTTTTTT..',
-      '.TTtTTTtTTT.',
-      'TTTTtTTTtTTT',
-      'WTTTTTTTTTTW',
-      'WWWWWWWWWWWW',
-      'WWWWWWWWWWWW',
-      '.wwwwwwwwww.',
-    ],
-    tamago: [
-      'YYYYYYYYYYYY',
-      'YYYYYNNYYYYY',
-      'yyyyyNNyyyyy',
-      'WWWWWNNWWWWW',
-      'WWWWWNNWWWWW',
-      '.wwwwNNwwww.',
-    ],
-    maki: [
-      '.NNNN..NNNN.',
-      'NWWWWNNWWWWN',
-      'NWCCWNNWTTWN',
-      'NWCCWNNWTTWN',
-      'NWWWWNNWWWWN',
-      '.NNNN..NNNN.',
-    ],
-    ikura: [
-      '..oO.Oo.oO..',
-      '.OOOOoOOOOo.',
-      'NNNNNNNNNNNN',
-      'NnNNNNNNNNnN',
-      'NNNNNNNNNNNN',
-      'NNNNNNNNNNNN',
-      '.NNNNNNNNNN.',
-    ],
-    ebi: [
-      '..........EE',
-      'EEeEEeEEeEEE',
-      'eEEeEEeEEeE.',
-      'WWWWWWWWWWW.',
-      'WWWWWWWWWWW.',
-      '.wwwwwwwww..',
-    ],
-    inari: [
-      '..IIIIIIII..',
-      '.IIiIIIIiII.',
-      'IIIIIIIIIIII',
-      'IiIIIIIIIIiI',
-      'IIIIIIIIIIII',
-      '.iiiiiiiiii.',
-    ],
-  };
+  const { COLORS, SUSHI, PLATE, PLATE_COLORS, PROPS, RARE, RARE_PLATE, HEART } = window.TokidokiSushi;
   const SUSHI_KINDS = Object.keys(SUSHI);
-
-  const PLATE = [
-    '.PPPPPPPPPPPPPPPP.',
-    'AAAAAAAAAAAAAAAAAA',
-    '.aaaaaaaaaaaaaaaa.',
-    '....aaaaaaaaaa....',
-  ];
-  const PLATE_COLORS = [
-    ['#4f86d9', '#335d9f'],
-    ['#e04b3c', '#a3302a'],
-    ['#f2c230', '#b88c14'],
-    ['#5bb56a', '#3b8448'],
-    ['#f29bb8', '#c46e8d'],
-    ['#3a3a46', '#22222b'],
-  ];
-
-  const PROPS = {
-    tea: [
-      'kKKKKk',
-      'KKKKKK',
-      'KKPKKK',
-      'KKKKKK',
-      'kKKKKk',
-      '.kkkk.',
-    ],
-    soy: [
-      '.RR.',
-      '.RR.',
-      'DDDD',
-      'DDDD',
-      'DDDD',
-      'DDDD',
-      'DDDD',
-    ],
-    gari: [
-      '..GgG...',
-      '.GGgGGG.',
-      'PPPPPPPP',
-      '.pppppp.',
-    ],
-    chopsticks: [
-      'BBBBBBBBBBBB',
-      '.BBBBBBBBBBBB',
-    ],
-  };
   const PROP_KINDS = Object.keys(PROPS);
+  const RARE_KINDS = Object.keys(RARE);
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -158,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let scale = 4;
   let plates = [];
   let props = [];
+  let hearts = [];
   let theme = {};
   let offset = 0;
   let lastT = 0;
@@ -183,7 +66,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
   function newPlate(x) {
+    if (Math.random() < RARE_CHANCE) {
+      return { x, rare: pick(RARE_KINDS), plate: RARE_PLATE, grabbedAt: 0 };
+    }
     return { x, kind: pick(SUSHI_KINDS), plate: pick(PLATE_COLORS), grabbedAt: 0 };
+  }
+
+  function riderSprite(p, now) {
+    if (!p.rare) return SUSHI[p.kind];
+    const frames = RARE[p.rare];
+    return frames[Math.floor(now / 450) % frames.length];
   }
 
   function layout() {
@@ -267,8 +159,17 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       const palette = { A: p.plate[0], a: p.plate[1] };
       sprite(PLATE, x, PLATE_Y - lift, palette, alpha);
-      const food = SUSHI[p.kind];
-      sprite(food, x + 3, PLATE_Y - food.length + 1 - lift, palette, alpha);
+      const rider = riderSprite(p, now);
+      const rx = x + Math.floor((PLATE[0].length - rider[0].length) / 2);
+      sprite(rider, rx, PLATE_Y - rider.length + 1 - lift, palette, alpha);
+    }
+  }
+
+  function drawHearts(now) {
+    hearts = hearts.filter((h) => now - h.t0 < 1200);
+    for (const h of hearts) {
+      const t = (now - h.t0) / 1200;
+      sprite(HEART, h.x, h.y - Math.round(t * 12), {}, 1 - t);
     }
   }
 
@@ -286,6 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
     drawPlates(now);
     drawCounter();
     drawProps();
+    drawHearts(now);
   }
 
   // Plates live at fixed slots; `offset % SPACING` slides every slot along
@@ -333,10 +235,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const x = p.x + (offset % SPACING);
       if (!p.grabbedAt && lx >= x && lx <= x + 18) {
         p.grabbedAt = now;
+        if (p.rare) hearts.push({ x: Math.round(x) + 6, y: Math.max(PLATE_Y - 16, TOP + 12), t0: now });
         if (!running) {
           const tick = (t) => {
             draw(t);
-            if (t - now < 650) requestAnimationFrame(tick);
+            if (t - now < 1250) requestAnimationFrame(tick);
           };
           requestAnimationFrame(tick);
         }

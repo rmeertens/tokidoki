@@ -9,6 +9,7 @@
 //   python3 scripts/render_kanji_html.py <build-dir>
 //   python3 scripts/render_kana_html.py <build-dir>
 //   node scripts/render_sheets_pdfs.mjs <build-dir> <out-dir>
+//   node scripts/stamp_sheet_belts.mjs <out-dir>   (sushi belt in the bottom margin)
 //
 // Requires the `playwright` npm package to be resolvable (locally installed,
 // or run with NODE_PATH pointing at a global install) and a Chromium build

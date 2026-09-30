@@ -1,0 +1,286 @@
+// Pixel-art sprites shared by the website belt (sushi-belt.js) and the PDF
+// sheet stamper (scripts/stamp_sheet_belts.mjs). One character per pixel;
+// '.' is transparent, 'A'/'a' are filled in with the plate's colours.
+(function (root) {
+  const COLORS = {
+    W: '#fbf7ee', w: '#e2d9c6',
+    S: '#f58a5b', s: '#ffd4bb',
+    T: '#d23a3a', t: '#9f2430',
+    Y: '#f6c945', y: '#d9a52b',
+    N: '#1f3326', n: '#3d5a45',
+    O: '#ff7a1a', o: '#ffc27d',
+    E: '#ff8a4c', e: '#fff0e2',
+    C: '#6fbf5a', I: '#c98a3c', i: '#a0661f',
+    K: '#6f9d5c', k: '#4b7240',
+    R: '#d23a3a', D: '#3a2418',
+    G: '#f7a8b8', g: '#e27f98',
+    B: '#c49a6c', P: '#f7f7f4', p: '#cfd0cc',
+    F: '#4f9a4a', f: '#2f6e34', L: '#86c96f',
+    H: '#6b4a2b', h: '#4a321c', Q: '#3f5f8a', q: '#2c4466',
+    M: '#f0a04b', m: '#c77a2a', X: '#2b2320', Z: '#f28aa0',
+    J: '#e0913f', j: '#b86d24',
+    U: '#ef6f7a', u: '#c94c5a', V: '#e2533f', v: '#b03626',
+  };
+
+  const SUSHI = {
+    salmon: [
+      '...SSSSSSS..',
+      '.SSsSSSsSSS.',
+      'SSSSsSSSsSSS',
+      'WSSSSSSSSSSW',
+      'WWWWWWWWWWWW',
+      'WWWWWWWWWWWW',
+      '.wwwwwwwwww.',
+    ],
+    tuna: [
+      '...TTTTTTT..',
+      '.TTtTTTtTTT.',
+      'TTTTtTTTtTTT',
+      'WTTTTTTTTTTW',
+      'WWWWWWWWWWWW',
+      'WWWWWWWWWWWW',
+      '.wwwwwwwwww.',
+    ],
+    tamago: [
+      'YYYYYYYYYYYY',
+      'YYYYYNNYYYYY',
+      'yyyyyNNyyyyy',
+      'WWWWWNNWWWWW',
+      'WWWWWNNWWWWW',
+      '.wwwwNNwwww.',
+    ],
+    maki: [
+      '.NNNN..NNNN.',
+      'NWWWWNNWWWWN',
+      'NWCCWNNWTTWN',
+      'NWCCWNNWTTWN',
+      'NWWWWNNWWWWN',
+      '.NNNN..NNNN.',
+    ],
+    ikura: [
+      '..oO.Oo.oO..',
+      '.OOOOoOOOOo.',
+      'NNNNNNNNNNNN',
+      'NnNNNNNNNNnN',
+      'NNNNNNNNNNNN',
+      'NNNNNNNNNNNN',
+      '.NNNNNNNNNN.',
+    ],
+    ebi: [
+      '..........EE',
+      'EEeEEeEEeEEE',
+      'eEEeEEeEEeE.',
+      'WWWWWWWWWWW.',
+      'WWWWWWWWWWW.',
+      '.wwwwwwwww..',
+    ],
+    inari: [
+      '..IIIIIIII..',
+      '.IIiIIIIiII.',
+      'IIIIIIIIIIII',
+      'IiIIIIIIIIiI',
+      'IIIIIIIIIIII',
+      '.iiiiiiiiii.',
+    ],
+  };
+
+  const PLATE = [
+    '.PPPPPPPPPPPPPPPP.',
+    'AAAAAAAAAAAAAAAAAA',
+    '.aaaaaaaaaaaaaaaa.',
+    '....aaaaaaaaaa....',
+  ];
+  const PLATE_COLORS = [
+    ['#4f86d9', '#335d9f'],
+    ['#e04b3c', '#a3302a'],
+    ['#f2c230', '#b88c14'],
+    ['#5bb56a', '#3b8448'],
+    ['#f29bb8', '#c46e8d'],
+    ['#3a3a46', '#22222b'],
+  ];
+
+  const PROPS = {
+    tea: [
+      'kKKKKk',
+      'KKKKKK',
+      'KKPKKK',
+      'KKKKKK',
+      'kKKKKk',
+      '.kkkk.',
+    ],
+    soy: [
+      '.RR.',
+      '.RR.',
+      'DDDD',
+      'DDDD',
+      'DDDD',
+      'DDDD',
+      'DDDD',
+    ],
+    gari: [
+      '..GgG...',
+      '.GGgGGG.',
+      'PPPPPPPP',
+      '.pppppp.',
+    ],
+    chopsticks: [
+      'BBBBBBBBBBBB',
+      '.BBBBBBBBBBBB',
+    ],
+  };
+
+  // Rare riders: the occasional surprise on a gold plate. Each is a list of
+  // animation frames (at most 16 wide and 12 tall so they fit on a plate and
+  // inside the cropped footer strip).
+  const RARE = {
+    bonsai: [[
+      '....LFF.......',
+      '..LFFFFf..LF..',
+      '.LFFFFFFfLFFf.',
+      '..fFFffH.fFf..',
+      '...ff.H...H...',
+      '......HH.H....',
+      '.......HHH....',
+      '........H.....',
+      '.......hH.....',
+      '..QQQQQQQQQQ..',
+      '...QqqqqqqQ...',
+      '....QQQQQQ....',
+    ]],
+    cat: [[
+      '.M......M...',
+      '.MM....MM...',
+      '.MMMMMMMM...',
+      '.MXMMMMXM...',
+      '.MMMZZMMM...',
+      '..MMMMMM....',
+      '..MPPPPM....',
+      '.MMPPPPMM..m',
+      '.MMPPPPMM.m.',
+      '.MMMMMMMMm..',
+      '..mm..mm....',
+    ], [
+      '.M......M...',
+      '.MM....MM...',
+      '.MMMMMMMM...',
+      '.MXMMMMXM...',
+      '.MMMZZMMM...',
+      '..MMMMMM....',
+      '..MPPPPM....',
+      '.MMPPPPMM.m.',
+      '.MMPPPPMM..m',
+      '.MMMMMMMMmm.',
+      '..mm..mm....',
+    ]],
+    shiba: [[
+      '...........J.J.',
+      '..........JJJJ.',
+      '.JJ.......JXJJ.',
+      'J.PJ......JJJPX',
+      '.JJJJJJJJJJJPP.',
+      '..JJJJJJJJJJP..',
+      '..JPPPPPPPJJ...',
+      '..J.J....J.J...',
+      '..j.j....j.j...',
+    ], [
+      '...........J.J.',
+      '..........JJJJ.',
+      'JJ........JXJJ.',
+      '.JPJ......JJJPX',
+      '.JJJJJJJJJJJPP.',
+      '..JJJJJJJJJJP..',
+      '..JPPPPPPPJJ...',
+      '...J.J..J.J....',
+      '...j.j..j.j....',
+    ]],
+    maneki: [[
+      '.p.......p..',
+      '.pP.....PpPP',
+      '.pPPPPPPPpPP',
+      '.PXPPPPXPPPp',
+      '.PPPPZPPPPP.',
+      '.pPPPPPPPp..',
+      '.RRRRYRRRR..',
+      '.PPPPPPPPP..',
+      '.PPPPPPPPP..',
+      '.PPPPPPPPP..',
+      '.pPPPPPPPp..',
+      '..pppppppp..',
+    ], [
+      '.p.......p..',
+      '.pP.....Pp..',
+      '.pPPPPPPPp..',
+      '.PXPPPPXPPPP',
+      '.PPPPZPPPPPP',
+      '.pPPPPPPPpp.',
+      '.RRRRYRRRR..',
+      '.PPPPPPPPP..',
+      '.PPPPPPPPP..',
+      '.PPPPPPPPP..',
+      '.pPPPPPPPp..',
+      '..pppppppp..',
+    ]],
+    daruma: [[
+      '...RRRR...',
+      '.RRRRRRRR.',
+      'RRPPPPPPRR',
+      'RPXPPPPXPR',
+      'RPPPPPPPPR',
+      'RRPPXXPPRR',
+      'RRRRRRRRRR',
+      'RRYRRRRYRR',
+      '.RRRRRRRR.',
+      '...RRRR...',
+    ]],
+    octopus: [[
+      '...UUUUU....',
+      '..UUUUUUU...',
+      '.UUPXUUPXU..',
+      '.UUUUUUUUU..',
+      '..UUUuuUU...',
+      '.U.U.UU.U.U.',
+      'U..U.U..U..U',
+      '.U.U..U.U.U.',
+    ], [
+      '...UUUUU....',
+      '..UUUUUUU...',
+      '.UUPXUUPXU..',
+      '.UUUUUUUUU..',
+      '..UUUuuUU...',
+      'U.U.UU.U.U..',
+      '.U..U.U..U..',
+      'U..U.U..U...',
+    ]],
+    crab: [[
+      '.VV........VV.',
+      'VvV........VvV',
+      '.VV.P....P.VV.',
+      '..V.X....X.V..',
+      '...VVVVVVVV...',
+      '..VVVVVVVVVV..',
+      '.V.V.V..V.V.V.',
+    ], [
+      'VV..........VV',
+      '.VV........VV.',
+      '.VV.P....P.VV.',
+      '..V.X....X.V..',
+      '...VVVVVVVV...',
+      '..VVVVVVVVVV..',
+      'V.V.V....V.V.V',
+    ]],
+  };
+
+  const RARE_PLATE = ['#f2c230', '#b88c14'];
+
+  const HEART = [
+    '.ZZ.ZZ.',
+    'ZZZZZZZ',
+    '.ZZZZZ.',
+    '..ZZZ..',
+    '...Z...',
+  ];
+
+  const api = { COLORS, SUSHI, PLATE, PLATE_COLORS, PROPS, RARE, RARE_PLATE, HEART };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  else root.TokidokiSushi = api;
+})(typeof window !== 'undefined' ? window : globalThis);
