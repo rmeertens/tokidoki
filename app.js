@@ -130,7 +130,7 @@
   // ─── Theme ─────────────────────────────────────────────────────────────────────
 
   function initTheme() {
-    const saved = localStorage.getItem('tokidoki_theme') || 'dark';
+    const saved = localStorage.getItem('tokidoki_theme') || 'light';
     document.documentElement.setAttribute('data-theme', saved);
   }
 
@@ -169,9 +169,56 @@
   const VIEWPORT_DEFAULT = 'width=device-width, initial-scale=1.0';
   const VIEWPORT_NO_ZOOM = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
 
+  // ─── Coach marks (hand-drawn "look here" notes pointing at header buttons) ────
+
+  let coachMarkEl = null;
+  let coachMarkTimer = null;
+  let consecutiveMisses = 0;
+  let refHintShown = false;
+
+  function hideCoachMark() {
+    clearTimeout(coachMarkTimer);
+    if (!coachMarkEl) return;
+    const el = coachMarkEl;
+    coachMarkEl = null;
+    el.classList.remove('visible');
+    setTimeout(() => el.remove(), 600);
+  }
+
+  function showCoachMark(targetSel, text) {
+    const target = $(targetSel);
+    if (!target) return;
+    hideCoachMark();
+    const rect = target.getBoundingClientRect();
+    const el = document.createElement('div');
+    el.className = 'coach-mark';
+    el.setAttribute('aria-hidden', 'true');
+    el.style.left = `${rect.left + rect.width / 2 - 44}px`;
+    el.style.top = `${rect.bottom - 2}px`;
+    el.innerHTML = `
+      <svg viewBox="0 0 56 44" width="56" height="44" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path class="coach-mark-line" d="M6 38 C 13 35, 22 33, 29 26 S 41 14, 44 7" />
+        <path class="coach-mark-head" d="M37 11 L44.5 6.5 L45.5 15" />
+      </svg>
+      <span class="coach-mark-text">${text}</span>`;
+    document.body.appendChild(el);
+    coachMarkEl = el;
+    requestAnimationFrame(() => el.classList.add('visible'));
+    coachMarkTimer = setTimeout(hideCoachMark, 4500);
+    target.addEventListener('click', hideCoachMark, { once: true });
+    window.addEventListener('resize', hideCoachMark, { once: true });
+  }
+
   function showScreen(name) {
     Object.values(screens).filter(Boolean).forEach(s => s.classList.remove('active'));
     screens[name].classList.add('active');
+
+    hideCoachMark();
+    if (name === 'study') {
+      consecutiveMisses = 0;
+      refHintShown = false;
+      showCoachMark('#btn-settings', 'settings here');
+    }
 
     // Disable pinch/double-tap zoom only while the kana canvas is on screen —
     // it interferes with drawing but shouldn't limit zoom accessibility elsewhere.
@@ -211,7 +258,6 @@
     g2.innerHTML = '';
 
     const chapters = getAllChapters();
-    let totalDue = 0;
 
     chapters.forEach(ch => {
       const info = CHAPTER_INFO[ch];
@@ -232,7 +278,6 @@
         });
       });
 
-      totalDue += chapterDue;
       const pct = chapterCards > 0 ? Math.round((chapterReviewed / chapterCards) * 100) : 0;
 
       const formPills = (info.newForms || []).map(f => {
@@ -254,11 +299,6 @@
       if (info.book === 'Genki I') g1.appendChild(card);
       else g2.appendChild(card);
     });
-
-    $('#today-reviewed').textContent = statsData.todayReviews || 0;
-    const todayAcc = statsData.todayReviews > 0 ? Math.round((statsData.todayCorrect / statsData.todayReviews) * 100) : 0;
-    $('#today-accuracy').textContent = todayAcc + '%';
-    $('#cards-due').textContent = totalDue;
   }
 
   function adjCardId(adj, form) {
@@ -272,7 +312,6 @@
     g2.innerHTML = '';
 
     const chapters = getAllAdjChapters();
-    let totalDue = 0;
 
     chapters.forEach(ch => {
       const info = ADJ_CHAPTER_INFO[ch];
@@ -293,7 +332,6 @@
         });
       });
 
-      totalDue += chapterDue;
       const pct = chapterCards > 0 ? Math.round((chapterReviewed / chapterCards) * 100) : 0;
 
       const formPills = (info.newForms || []).map(f => {
@@ -319,21 +357,6 @@
       if (info.book === 'Genki I') g1.appendChild(card);
       else g2.appendChild(card);
     });
-
-    const todayEl = $('#today-reviewed');
-    if (todayEl) {
-      todayEl.textContent = statsData.todayReviews || 0;
-      const todayAcc = statsData.todayReviews > 0 ? Math.round((statsData.todayCorrect / statsData.todayReviews) * 100) : 0;
-      $('#today-accuracy').textContent = todayAcc + '%';
-      $('#cards-due').textContent = totalDue;
-    }
-  }
-
-  // ─── Global stats (streak badge lives in the header on every page) ─────────────
-
-  function renderGlobalStats() {
-    const streakEl = $('#streak-count');
-    if (streakEl) streakEl.textContent = statsData.streak;
   }
 
   // ─── Hub (landing page linking out to each exercise page) ──────────────────────
@@ -378,14 +401,6 @@
     const verbDue = countDueVerbs();
     const adjDue = countDueAdjectives();
     const kanaDue = countDueKana();
-
-    const todayEl = $('#today-reviewed');
-    if (todayEl) {
-      todayEl.textContent = statsData.todayReviews || 0;
-      const todayAcc = statsData.todayReviews > 0 ? Math.round((statsData.todayCorrect / statsData.todayReviews) * 100) : 0;
-      $('#today-accuracy').textContent = todayAcc + '%';
-      $('#cards-due').textContent = verbDue + adjDue + kanaDue;
-    }
 
     const setDue = (id, n) => { const el = $(id); if (el) el.textContent = n > 0 ? `${n} due` : ''; };
     setDue('#hub-due-verbs', verbDue);
@@ -1449,6 +1464,12 @@
       sessionTotal++;
     }
 
+    consecutiveMisses = grade === 1 ? consecutiveMisses + 1 : 0;
+    if (consecutiveMisses >= 2 && !refHintShown) {
+      refHintShown = true;
+      showCoachMark('#btn-ref', 'explanation here');
+    }
+
     sessionIndex++;
     showCard();
   }
@@ -1516,12 +1537,16 @@
       `<li><span class="ref-exc-kanji">${v.kanji}</span><span class="ref-exc-reading"> ${v.reading}</span> — ${v.meaning}</li>`
     ).join('');
 
-    return `<div class="ref-verb-types">
-      <button class="ref-exc-header" id="ref-exc-toggle" aria-expanded="false">
-        <span>RU-verbs vs U-verbs (ichidan / godan)</span>
-        <span class="ref-exc-arrow">▶</span>
-      </button>
-      <div class="ref-exc-body hidden" id="ref-exc-body">
+    return `<details class="ref-verb-types">
+      <summary class="ref-disclosure">
+        <span class="ref-disclosure-icon" aria-hidden="true">る</span>
+        <span class="ref-disclosure-text">
+          <span class="ref-disclosure-title">RU-verbs vs U-verbs</span>
+          <span class="ref-disclosure-sub">How to tell ichidan and godan apart · ${exceptions.length} exceptions</span>
+        </span>
+        <span class="ref-disclosure-chevron" aria-hidden="true"></span>
+      </summary>
+      <div class="ref-exc-body">
         <div class="ref-verb-rule-box">
           <p><strong>RU-verbs</strong> (一段 ichidan — "one row"): the kana before る is always an
           <strong>e-sound</strong> (え段) or <strong>i-sound</strong> (い段).
@@ -1536,7 +1561,7 @@
         <div class="ref-exc-label">Exceptions — end in える or いる but are U-verbs (${exceptions.length})</div>
         <ul class="ref-exc-list">${exceptionItems}</ul>
       </div>
-    </div>`;
+    </details>`;
   }
 
   function renderReference(verbType) {
@@ -1606,20 +1631,6 @@
         <tbody>${rows}</tbody>
       </table>
     `;
-
-    // Exception list toggle
-    const excToggle = content.querySelector('#ref-exc-toggle');
-    if (excToggle) {
-      excToggle.addEventListener('click', () => {
-        const body = content.querySelector('#ref-exc-body');
-        const arrow = excToggle.querySelector('.ref-exc-arrow');
-        const open = !body.classList.contains('hidden');
-        body.classList.toggle('hidden', open);
-        arrow.textContent = open ? '▶' : '▼';
-        excToggle.setAttribute('aria-expanded', String(!open));
-      });
-    }
-
     content.querySelectorAll('.ref-row').forEach(row => {
       row.addEventListener('click', () => {
         const form = row.dataset.form;
@@ -3272,10 +3283,19 @@
         <header id="header">
           <div class="header-left">
             <button id="btn-back" class="icon-btn hidden" aria-label="Back">←</button>
-            <a href="index.html" class="header-title-link"><h1 id="header-title">Tokidoki</h1></a>
+            <a href="index.html" class="header-title-link">
+              <svg class="header-logo" viewBox="0 0 12 9" width="24" height="18" shape-rendering="crispEdges" aria-hidden="true">
+                <path fill="#f58a5b" d="M3 0h7v1H3zM1 1h10v1H1zM0 2h12v1H0z"/>
+                <path fill="#ffd4bb" d="M3 1h1v1H3zM7 1h1v1H7zM4 2h1v1H4zM8 2h1v1H8z"/>
+                <path fill="#fbf7ee" d="M0 3h12v3H0z"/>
+                <path fill="#e2d9c6" d="M1 6h10v1H1z"/>
+                <path fill="#e04b3c" d="M0 7h12v1H0z"/>
+                <path fill="#a3302a" d="M1 8h10v1H1z"/>
+              </svg>
+              <h1 id="header-title">Tokidoki</h1>
+            </a>
           </div>
           <div class="header-right">
-            <span id="streak-badge" class="streak-badge" title="Daily streak">🔥 <span id="streak-count">0</span></span>
             <button id="btn-theme" class="icon-btn" aria-label="Toggle theme">◐</button>
             ${showRef ? '<button id="btn-ref" class="icon-btn" aria-label="Conjugation reference">?</button>' : ''}
             ${showSettings ? '<button id="btn-settings" class="icon-btn" aria-label="Settings">⚙</button>' : ''}
@@ -3406,7 +3426,6 @@
 
     srsData = loadSRS();
     statsData = loadStats();
-    renderGlobalStats();
 
     const mode = document.body.dataset.mode || 'hub';
 
@@ -3442,36 +3461,11 @@
       renderHub();
     }
 
-    // Mode picker — category buttons that drop down their pages on hover
-    // (real pointers) or on tap (touch, where :hover doesn't apply — the
-    // trigger toggles an .open class instead).
-    const modeMenus = $$('.mode-menu');
-    function closeModeMenus() {
-      modeMenus.forEach(menu => {
-        menu.classList.remove('open');
-        const trigger = menu.querySelector('.mode-menu-trigger');
-        if (trigger) trigger.setAttribute('aria-expanded', 'false');
-      });
-    }
-    modeMenus.forEach(menu => {
-      const trigger = menu.querySelector('.mode-menu-trigger');
-      if (!trigger) return;
-      trigger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const willOpen = !menu.classList.contains('open');
-        closeModeMenus();
-        if (willOpen) {
-          menu.classList.add('open');
-          trigger.setAttribute('aria-expanded', 'true');
-        }
-      });
+    // Keep the current page's chip in view when its nav row scrolls sideways.
+    $$('.page-nav-item.active').forEach(el => {
+      const row = el.parentElement;
+      row.scrollLeft = el.offsetLeft - row.clientWidth / 2 + el.offsetWidth / 2;
     });
-    if (modeMenus.length) {
-      document.addEventListener('click', closeModeMenus);
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeModeMenus();
-      });
-    }
 
     // Theme toggle
     on('#btn-theme', 'click', toggleTheme);
@@ -3960,7 +3954,6 @@
         localStorage.removeItem(STATS_KEY);
         srsData = {};
         statsData = loadStats();
-        renderGlobalStats();
         if (mode === 'verbs') renderChapters();
         else if (mode === 'adjectives') renderAdjChapters();
         else if (mode === 'kana') renderKanaPanel();

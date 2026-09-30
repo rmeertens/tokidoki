@@ -1,40 +1,70 @@
+/* Palette: a kaiten-zushi counter. Washi paper page, soy-brown ink, ai-iro
+   (indigo) accent, hinoki counter, and a salmon highlight used sparingly. */
 :root {
-  --bg: #0f1117;
-  --bg-card: #1a1d27;
-  --bg-card-hover: #22263a;
-  --bg-input: #252836;
-  --text: #e8e8ee;
-  --text-dim: #8b8fa3;
-  --text-muted: #555a6e;
-  --border: #2a2e3f;
-  --accent: #6c5ce7;
-  --accent-dim: rgba(108, 92, 231, 0.15);
-  --green: #00b894;
-  --green-dim: rgba(0, 184, 148, 0.15);
+  --bg: #f6f0e4;
+  --bg-card: #fffaf1;
+  --bg-card-hover: #fdf1de;
+  --bg-input: #efe5d3;
+  --text: #2b2320;
+  --text-dim: #6c5d53;
+  --text-muted: #a3928a;
+  --border: #e5d6bf;
+  --accent: #3a57a6;
+  --accent-dim: rgba(58, 87, 166, 0.12);
+  --salmon: #e8643f;
+  --hero-bg: #e1eee4;
+  --hero-kana: rgba(58, 110, 80, 0.10);
+  --belt-slat: #e6e9ee;
+  --belt-seam: #c3c9d2;
+  --belt-steel: #aab2be;
+  --belt-steel-dark: #7d8694;
+  --belt-shadow: rgba(60, 40, 20, 0.25);
+  --counter-top: #ecc38a;
+  --counter-edge: #f6d9ad;
+  --counter: #d6a466;
+  --counter-grain: #c48f52;
+  --green: #00a383;
+  --green-dim: rgba(0, 163, 131, 0.14);
   --red: #e74c3c;
-  --red-dim: rgba(231, 76, 60, 0.15);
-  --orange: #e8913a;
-  --orange-dim: rgba(232, 145, 58, 0.15);
+  --red-dim: rgba(231, 76, 60, 0.14);
+  --orange: #e0822a;
+  --orange-dim: rgba(224, 130, 42, 0.15);
   --blue: #4a90d9;
   --blue-dim: rgba(74, 144, 217, 0.15);
-  --radius: 12px;
-  --radius-sm: 8px;
-  --shadow: 0 2px 16px rgba(0,0,0,0.3);
-  --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --radius: 14px;
+  --radius-sm: 9px;
+  --shadow: 0 2px 0 rgba(90, 60, 30, 0.08), 0 8px 24px rgba(90, 60, 30, 0.08);
+  --font: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: ui-rounded, 'SF Pro Rounded', 'Hiragino Maru Gothic ProN', 'M PLUS Rounded 1c', system-ui, sans-serif;
   --font-jp: 'Hiragino Kaku Gothic Pro', 'Yu Gothic', 'Meiryo', sans-serif;
   --transition: 0.2s ease;
 }
 
-[data-theme="light"] {
-  --bg: #f5f6fa;
-  --bg-card: #ffffff;
-  --bg-card-hover: #f0f1f6;
-  --bg-input: #eef0f5;
-  --text: #1a1d27;
-  --text-dim: #555a6e;
-  --text-muted: #8b8fa3;
-  --border: #dfe1e8;
-  --shadow: 0 2px 16px rgba(0,0,0,0.08);
+/* Late-night izakaya: indigo wall, dark lacquered counter. */
+[data-theme="dark"] {
+  --bg: #16141b;
+  --bg-card: #211e28;
+  --bg-card-hover: #2a2633;
+  --bg-input: #2d2937;
+  --text: #efe8de;
+  --text-dim: #a59c93;
+  --text-muted: #6d655f;
+  --border: #35303f;
+  --accent: #8ea7ff;
+  --accent-dim: rgba(142, 167, 255, 0.14);
+  --salmon: #ff8a65;
+  --hero-bg: #1c2236;
+  --hero-kana: rgba(255, 200, 120, 0.07);
+  --belt-slat: #8a929e;
+  --belt-seam: #666e7a;
+  --belt-steel: #555c68;
+  --belt-steel-dark: #3b414b;
+  --belt-shadow: rgba(0, 0, 0, 0.45);
+  --counter-top: #8a5a36;
+  --counter-edge: #a26d44;
+  --counter: #6b4428;
+  --counter-grain: #5a3820;
+  --shadow: 0 2px 0 rgba(0, 0, 0, 0.25), 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -48,6 +78,7 @@ body {
   background: var(--bg);
   color: var(--text);
   min-height: 100dvh;
+  overflow-x: clip;
   transition: background var(--transition), color var(--transition);
 }
 
@@ -65,10 +96,34 @@ body {
   padding: 16px 0;
   position: sticky;
   top: 0;
-  background: var(--bg);
+  --header-bg: var(--bg);
+  background: var(--header-bg);
+  /* Paint the header colour edge to edge even though #app is centred. */
+  box-shadow: 0 0 0 100vmax var(--header-bg), 0 1px 0 100vmax var(--border);
+  clip-path: inset(0 -100vmax -1px);
   z-index: 100;
-  border-bottom: 1px solid var(--border);
   margin-bottom: 16px;
+  transition: background 0.35s ease, box-shadow 0.35s ease;
+}
+
+body.header-over-hero #header {
+  --header-bg: var(--hero-bg);
+  box-shadow: 0 0 0 100vmax var(--header-bg);
+}
+
+body[data-mode="hub"] #header {
+  margin-bottom: 0;
+}
+
+.header-title-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-logo {
+  flex-shrink: 0;
+  image-rendering: pixelated;
 }
 
 .header-left {
@@ -86,8 +141,10 @@ body {
 }
 
 #header-title {
-  font-size: 1.15rem;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -115,21 +172,118 @@ body {
 
 .icon-btn:hover { background: var(--bg-card-hover); }
 
-.streak-badge {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  padding: 4px 10px;
-  background: var(--orange-dim);
-  border-radius: 20px;
-  color: var(--orange);
-}
-
 /* Screens */
 .screen { display: none; }
 .screen.active { display: block; }
+
+/* Hub hero: a sushi-bar wall with the conveyor belt running along its bottom
+   edge. The counter at the bottom of the belt is the transition into the
+   page colour below, so the hero and the grid read as one room. */
+.hero {
+  position: relative;
+  margin: 0 calc(50% - 50vw) 28px;
+  padding: 56px max(16px, calc(50vw - 424px)) 0;
+  background: var(--hero-bg);
+  overflow: hidden;
+  transition: background var(--transition);
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
+  padding-bottom: 12px;
+}
+
+.hero-kicker {
+  font-family: var(--font-jp);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--salmon);
+  margin-bottom: 12px;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5.5vw, 3.1rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  margin-bottom: 16px;
+}
+
+.hero-sub {
+  font-size: 1.02rem;
+  line-height: 1.55;
+  color: var(--text-dim);
+  max-width: 440px;
+}
+
+.hero-kana {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  font-family: var(--font-jp);
+  font-weight: 800;
+  color: var(--hero-kana);
+}
+
+.hero-kana span {
+  position: absolute;
+  line-height: 1;
+  animation: kana-drift 14s ease-in-out infinite alternate;
+}
+
+.hero-kana span:nth-child(1) { font-size: 7rem; top: 8%;  right: 8%; }
+.hero-kana span:nth-child(2) { font-size: 4rem; top: 42%; right: 30%; animation-delay: -3s; }
+.hero-kana span:nth-child(3) { font-size: 5.5rem; top: 12%; right: 38%; animation-delay: -6s; }
+.hero-kana span:nth-child(4) { font-size: 3rem; top: 50%; right: 4%; animation-delay: -9s; }
+.hero-kana span:nth-child(5) { font-size: 3.5rem; top: 4%; right: 24%; animation-delay: -2s; }
+.hero-kana span:nth-child(6) { font-size: 4.5rem; top: 38%; right: 16%; animation-delay: -11s; }
+
+@keyframes kana-drift {
+  from { transform: translate(0, 0) rotate(-4deg); }
+  to   { transform: translate(-18px, 10px) rotate(4deg); }
+}
+
+.sushi-belt-wrap {
+  margin: 0 calc(-1 * max(16px, calc(50vw - 424px)));
+  line-height: 0;
+}
+
+#sushi-belt {
+  display: block;
+  image-rendering: pixelated;
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-kana span { animation: none; }
+}
+
+/* Small belt footer on the exercise pages, pinned to the bottom of short pages. */
+body.has-belt-footer {
+  display: flex;
+  flex-direction: column;
+}
+
+body.has-belt-footer #app {
+  width: 100%;
+}
+
+.belt-footer {
+  margin-top: auto;
+  padding-top: 24px;
+  line-height: 0;
+}
+
+@media (max-width: 600px) {
+  .hero-kana span:nth-child(n+4) { display: none; }
+  .hero { padding-top: 36px; }
+  .hero-copy { padding-bottom: 4px; }
+}
 
 /* Tab intro */
 .tab-intro {
@@ -138,16 +292,9 @@ body {
   line-height: 1.55;
   margin: 0 0 16px;
   padding: 12px 16px;
-  background: var(--accent-dim);
+  background: color-mix(in srgb, var(--accent) 7%, var(--bg-card));
   border-left: 3px solid var(--accent);
   border-radius: var(--radius-sm);
-}
-
-/* Stats bar */
-.stats-bar {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 20px;
 }
 
 .stat {
@@ -161,6 +308,7 @@ body {
 
 .stat-num {
   display: block;
+  font-family: var(--font-display);
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--accent);
@@ -184,110 +332,113 @@ body {
   margin: 20px 0 12px;
 }
 
-/* Mode picker — two category buttons (Practice / Reference) instead of a
-   flat row of 11+ tabs; hovering (or, on touch, tapping) a category drops
-   down its pages as a small menu. */
-.mode-tabs {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-.mode-menu {
-  position: relative;
-}
-
-.mode-menu-trigger {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 14px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  color: var(--text-dim);
-  font-size: 0.9rem;
-  font-family: inherit;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all var(--transition);
-}
-
-.mode-menu-trigger:hover {
-  background: var(--bg-card-hover);
-  color: var(--text);
-}
-
-.mode-menu.has-active .mode-menu-trigger {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-.mode-menu-caret {
-  font-size: 0.6rem;
-  transition: transform var(--transition);
-}
-
-.mode-menu.open .mode-menu-caret {
-  transform: rotate(180deg);
-}
-
-.mode-menu-dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 50;
-  margin-top: 6px;
-  min-width: 180px;
+/* Page nav: every exercise and reference page laid out as a menu board,
+   so the options are visible at a glance rather than hidden in dropdowns.
+   Each row scrolls sideways on narrow screens. */
+.page-nav {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 10px;
+  margin-bottom: 18px;
+  padding: 12px 14px;
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow);
-  padding: 6px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-4px);
-  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+  border-radius: var(--radius);
 }
 
-.mode-menu.open .mode-menu-dropdown {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
+.page-nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
 }
 
-/* Hover-to-open only where a real hover exists — on touch, tapping the
-   trigger toggles the .open class above instead (see app.js). */
-@media (hover: hover) and (pointer: fine) {
-  .mode-menu:hover .mode-menu-dropdown {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
+.page-nav-group + .page-nav-group {
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
 }
 
-.mode-menu-item, .mode-menu-item:visited {
-  padding: 8px 10px;
-  border-radius: 6px;
-  color: var(--text-dim);
-  font-size: 0.88rem;
+.page-nav-label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.page-nav-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-width: 0;
+}
+
+.page-nav-item, .page-nav-item:visited {
+  --plate: #4f86d9;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 11px 5px 5px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.85rem;
   font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
-  transition: background var(--transition);
+  transition: transform var(--transition), border-color var(--transition), background var(--transition);
 }
 
-.mode-menu-item:hover {
-  background: var(--bg-card-hover);
-  color: var(--text);
+.page-nav-items .page-nav-item:nth-child(6n+2) { --plate: #e04b3c; }
+.page-nav-items .page-nav-item:nth-child(6n+3) { --plate: #d9a514; }
+.page-nav-items .page-nav-item:nth-child(6n+4) { --plate: #3f9d52; }
+.page-nav-items .page-nav-item:nth-child(6n+5) { --plate: #d9678f; }
+.page-nav-items .page-nav-item:nth-child(6n+6) { --plate: #6a6878; }
+
+.page-nav-glyph {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--plate) 16%, transparent);
+  color: var(--plate);
+  font-family: var(--font-jp);
+  font-size: 0.8rem;
+  font-weight: 800;
 }
 
-.mode-menu-item.active, .mode-menu-item.active:visited {
-  background: var(--accent);
+.page-nav-item:hover {
+  border-color: var(--plate);
+  background: color-mix(in srgb, var(--plate) 7%, var(--bg-card));
+  transform: translateY(-1px);
+}
+
+.page-nav-item.active, .page-nav-item.active:visited {
+  background: var(--plate);
+  border-color: var(--plate);
   color: #fff;
+}
+
+.page-nav-item.active .page-nav-glyph {
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .page-nav {
+    padding: 10px 0 10px 12px;
+  }
+  .page-nav-items {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-right: 24px;
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+  }
+  .page-nav-items::-webkit-scrollbar { display: none; }
 }
 
 /* Chapter grid */
@@ -317,9 +468,27 @@ body {
   box-shadow: var(--shadow);
 }
 
+/* Hub cards get a kaiten plate-coloured rim, cycling like plates on the belt. */
+a.chapter-card {
+  border-top: 4px solid var(--plate, var(--accent));
+  padding-top: 12px;
+}
+.chapter-grid a.chapter-card:nth-child(6n+1) { --plate: #4f86d9; }
+.chapter-grid a.chapter-card:nth-child(6n+2) { --plate: #e04b3c; }
+.chapter-grid a.chapter-card:nth-child(6n+3) { --plate: #f2c230; }
+.chapter-grid a.chapter-card:nth-child(6n+4) { --plate: #5bb56a; }
+.chapter-grid a.chapter-card:nth-child(6n+5) { --plate: #f29bb8; }
+.chapter-grid a.chapter-card:nth-child(6n+6) { --plate: #3a3a46; }
+[data-theme="dark"] .chapter-grid a.chapter-card:nth-child(6n+6) { --plate: #8b8a99; }
+
+.chapter-grid a.chapter-card:hover {
+  box-shadow: 0 6px 0 -2px color-mix(in srgb, var(--plate, var(--accent)) 35%, transparent), var(--shadow);
+}
+
 .chapter-card-title {
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
   margin-bottom: 4px;
 }
 
@@ -482,7 +651,7 @@ body {
   flex-direction: column;
   transition: background 0.3s ease, border-color 0.3s ease;
   /* #app is wider than a flashcard should be (it needs the room for the
-     mode-tabs nav to fit without scrolling) — cap and center the card
+     page nav to lay out comfortably) — cap and center the card
      itself so it stays a comfortable reading width instead of stretching. */
   max-width: 600px;
   margin-left: auto;
@@ -657,10 +826,12 @@ body {
   border: none;
   background: var(--accent);
   color: #fff;
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--accent) 60%, #000);
   transition: all var(--transition);
 }
 
 .btn-reveal:hover { filter: brightness(1.1); transform: translateY(-1px); }
+.btn-reveal:active { transform: translateY(2px); box-shadow: 0 1px 0 color-mix(in srgb, var(--accent) 60%, #000); }
 
 .reveal-hint {
   font-size: 0.75rem;
@@ -717,7 +888,10 @@ body {
 .btn-primary {
   background: var(--accent);
   color: #fff;
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--accent) 60%, #000);
 }
+
+.btn-primary:active { transform: translateY(2px); box-shadow: 0 1px 0 color-mix(in srgb, var(--accent) 60%, #000); }
 
 .btn-primary:hover { filter: brightness(1.1); }
 
@@ -1700,9 +1874,114 @@ body {
   background: color-mix(in srgb, var(--accent) 12%, transparent) !important;
 }
 
-/* Verb type explanation */
+/* Verb type explanation: a <details> card that clearly reads as expandable. */
 .ref-verb-types {
   margin-bottom: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.ref-verb-types:hover,
+.ref-verb-types[open] {
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+}
+
+.ref-verb-types[open] {
+  box-shadow: var(--shadow);
+}
+
+.ref-disclosure {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  transition: background var(--transition);
+}
+
+.ref-disclosure::-webkit-details-marker { display: none; }
+
+.ref-disclosure:hover { background: var(--bg-card-hover); }
+
+.ref-disclosure:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  border-radius: var(--radius);
+}
+
+.ref-disclosure-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--accent-dim);
+  color: var(--accent);
+  font-family: var(--font-jp);
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.ref-disclosure-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.ref-disclosure-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.ref-disclosure-sub {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+.ref-disclosure-chevron {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  position: relative;
+  transition: transform 0.25s ease, background var(--transition), border-color var(--transition);
+}
+
+.ref-disclosure-chevron::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid var(--text-dim);
+  border-bottom: 2px solid var(--text-dim);
+  transform: translate(-50%, -70%) rotate(45deg);
+}
+
+.ref-disclosure:hover .ref-disclosure-chevron {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.ref-verb-types[open] .ref-disclosure-chevron {
+  transform: rotate(180deg);
+}
+
+.ref-verb-types[open] .ref-exc-body {
+  animation: slideUp 0.25s ease;
 }
 
 .ref-verb-rule-box {
@@ -1740,45 +2019,8 @@ body {
   margin-bottom: 8px;
 }
 
-.ref-exc-section {
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-}
-
-.ref-exc-header {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 14px;
-  background: var(--bg-input);
-  border: none;
-  cursor: pointer;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--text-dim);
-  text-align: left;
-  transition: background var(--transition);
-}
-
-.ref-exc-header:hover { background: var(--bg-card-hover); color: var(--text); }
-
-.ref-exc-meta {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  flex-shrink: 0;
-}
-
-.ref-exc-arrow { font-size: 0.65rem; }
-
 .ref-exc-body {
-  padding: 12px 14px;
-  border-top: 1px solid var(--border);
-  background: var(--bg-card);
+  padding: 4px 14px 14px;
 }
 
 .ref-exc-list {
@@ -2304,6 +2546,56 @@ body {
   overflow: hidden;
 }
 
+/* Coach marks: faint hand-drawn note + arrow pointing up at a header button. */
+.coach-mark {
+  position: fixed;
+  z-index: 150;
+  width: 56px;
+  height: 44px;
+  color: var(--text-muted);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.coach-mark.visible { opacity: 0.85; }
+
+.coach-mark svg { display: block; }
+
+.coach-mark-line {
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+}
+
+.coach-mark-head {
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+}
+
+.coach-mark.visible .coach-mark-line {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.7s ease-out 0.15s;
+}
+
+.coach-mark.visible .coach-mark-head {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.25s ease-out 0.8s;
+}
+
+.coach-mark-text {
+  position: absolute;
+  top: 30px;
+  right: 50px;
+  white-space: nowrap;
+  font-family: 'Bradley Hand', 'Noteworthy', 'Segoe Print', 'Comic Sans MS', cursive;
+  font-size: 1rem;
+  transform: rotate(-4deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coach-mark-line, .coach-mark-head { stroke-dasharray: none; }
+}
+
 /* Utility */
 .hidden { display: none !important; }
 
@@ -2318,7 +2610,6 @@ body {
   .card { padding: 20px 16px; min-height: 300px; }
   .card-kanji { font-size: 2.2rem; }
 
-  .stats-bar { flex-wrap: wrap; }
   .stat { min-width: calc(50% - 4px); }
 
   .grade-buttons { gap: 6px; }

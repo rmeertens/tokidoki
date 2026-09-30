@@ -32,12 +32,19 @@
 
     <!-- Screen: Hub -->
     <main id="screen-chapters" class="screen active">
-      <div class="stats-bar">
-        <div class="stat"><span class="stat-num" id="today-reviewed">0</span><span class="stat-label">Today</span></div>
-        <div class="stat"><span class="stat-num" id="today-accuracy">0%</span><span class="stat-label">Accuracy</span></div>
-        <div class="stat"><span class="stat-num" id="cards-due">0</span><span class="stat-label">Due</span></div>
-      </div>
-      <p class="tab-intro">Free, no-login Japanese practice with spaced repetition. Pick an exercise to get started.</p>
+      <section class="hero">
+        <div class="hero-kana" aria-hidden="true">
+          <span>あ</span><span>カ</span><span>寿</span><span>さ</span><span>ネ</span><span>司</span>
+        </div>
+        <div class="hero-copy">
+          <p class="hero-kicker">回転寿司 · Japanese practice</p>
+          <h2 class="hero-title">Japanese, served<br>one plate at a time.</h2>
+          <p class="hero-sub">Free, no-login drills with spaced repetition. Grab whatever comes past — verbs, kana, kanji, particles.</p>
+        </div>
+        <div class="sushi-belt-wrap" aria-hidden="true">
+          <canvas id="sushi-belt" title="Click a plate to grab it"></canvas>
+        </div>
+      </section>
       <div class="chapter-grid">
         <a class="chapter-card" href="verbs.html">
           <div class="chapter-card-title">Verbs</div>
@@ -103,6 +110,7 @@
   <script src="kanji-info-data.js"></script>
   <script src="particles-data.js"></script>
   <script src="app.js"></script>
+  <script src="sushi-belt.js"></script>
 
   <!-- Static content for search engines -->
   <section id="seo-content" aria-hidden="true">

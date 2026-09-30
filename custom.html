@@ -32,26 +32,26 @@
 
     <!-- Screen: Chapter Select -->
     <main id="screen-chapters" class="screen active">
-      <nav class="mode-tabs">
-        <div class="mode-menu has-active">
-          <button type="button" class="mode-menu-trigger" aria-haspopup="true" aria-expanded="false">Practice <span class="mode-menu-caret">&#9662;</span></button>
-          <div class="mode-menu-dropdown">
-            <a class="mode-menu-item" href="verbs.html">Verbs</a>
-            <a class="mode-menu-item" href="adjectives.html">Adjectives</a>
-            <a class="mode-menu-item active" href="custom.html">Build Your Own</a>
-            <a class="mode-menu-item" href="sentences.html">Sentences</a>
-            <a class="mode-menu-item" href="particles-quiz.html">Particles</a>
-            <a class="mode-menu-item" href="kana.html">Kana</a>
-            <a class="mode-menu-item" href="kanji-quiz.html">Kanji Quiz</a>
+      <nav class="page-nav" aria-label="Exercises">
+        <div class="page-nav-group">
+          <span class="page-nav-label">Practice</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="verbs.html"><span class="page-nav-glyph" aria-hidden="true">食</span>Verbs</a>
+            <a class="page-nav-item" href="adjectives.html"><span class="page-nav-glyph" aria-hidden="true">高</span>Adjectives</a>
+            <a class="page-nav-item active" href="custom.html" aria-current="page"><span class="page-nav-glyph" aria-hidden="true">作</span>Build Your Own</a>
+            <a class="page-nav-item" href="sentences.html"><span class="page-nav-glyph" aria-hidden="true">文</span>Sentences</a>
+            <a class="page-nav-item" href="particles-quiz.html"><span class="page-nav-glyph" aria-hidden="true">は</span>Particles</a>
+            <a class="page-nav-item" href="kana.html"><span class="page-nav-glyph" aria-hidden="true">あ</span>Kana</a>
+            <a class="page-nav-item" href="kanji-quiz.html"><span class="page-nav-glyph" aria-hidden="true">字</span>Kanji Quiz</a>
           </div>
         </div>
-        <div class="mode-menu">
-          <button type="button" class="mode-menu-trigger" aria-haspopup="true" aria-expanded="false">Reference <span class="mode-menu-caret">&#9662;</span></button>
-          <div class="mode-menu-dropdown">
-            <a class="mode-menu-item" href="kanji.html">Practice Sheets</a>
-            <a class="mode-menu-item" href="kanji-hover.html">Kanji Hover</a>
-            <a class="mode-menu-item" href="vocabulary.html">Vocabulary</a>
-            <a class="mode-menu-item" href="words-by-kanji.html">Words by Kanji</a>
+        <div class="page-nav-group">
+          <span class="page-nav-label">Reference</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="kanji.html"><span class="page-nav-glyph" aria-hidden="true">紙</span>Practice Sheets</a>
+            <a class="page-nav-item" href="kanji-hover.html"><span class="page-nav-glyph" aria-hidden="true">漢</span>Kanji Hover</a>
+            <a class="page-nav-item" href="vocabulary.html"><span class="page-nav-glyph" aria-hidden="true">語</span>Vocabulary</a>
+            <a class="page-nav-item" href="words-by-kanji.html"><span class="page-nav-glyph" aria-hidden="true">詞</span>Words by Kanji</a>
           </div>
         </div>
       </nav>
@@ -184,6 +184,7 @@
   <script src="vocabulary-data.js"></script>
   <script src="kanji-info-data.js"></script>
   <script src="app.js"></script>
+  <script src="sushi-belt.js"></script>
 
   <!-- Static content for search engines -->
   <section id="seo-content" aria-hidden="true">
