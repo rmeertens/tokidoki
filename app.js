@@ -645,6 +645,7 @@
       const input = $('#answer-input');
       input.value = '';
       input.className = 'answer-input';
+      input.lang = 'ja';
       input.focus();
     } else {
       $('#reveal-area').classList.remove('hidden');
@@ -680,7 +681,7 @@
       return;
     }
 
-    const userAnswer = $('#answer-input').value.trim();
+    const userAnswer = Romaji.flush($('#answer-input')).trim();
     const correct = getCorrectAnswer(currentCard);
 
     revealAnswer(userAnswer, correct);
@@ -1725,6 +1726,8 @@
       const input = $('#answer-input');
       input.value = '';
       input.placeholder = isEnToJa ? 'Type in Japanese...' : 'Type in English...';
+      // Romaji → hiragana only when the answer is Japanese.
+      input.lang = isEnToJa ? 'ja' : 'en';
       setTimeout(() => input.focus(), 50);
     }
 
@@ -3698,7 +3701,7 @@
     const built = card.built;
 
     const input = $('#bunkei-input');
-    const typed = input.value.trim();
+    const typed = Romaji.flush(input).trim();
     const result = $('#bunkei-result');
     if (bunkeiSettings.typing && typed) {
       const ok = Bunkei.matches(typed, built);
@@ -3930,6 +3933,10 @@
     statsData = loadStats();
 
     const mode = document.body.dataset.mode || 'hub';
+    if (window.Romaji) {
+      Romaji.attach($('#answer-input'));
+      Romaji.attach($('#bunkei-input'));
+    }
 
     if (mode === 'verbs') {
       renderChapters();
