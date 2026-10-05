@@ -3160,6 +3160,9 @@
       btn.textContent = deck.length === 0 ? 'No words yet' : due > 0 ? 'Review' : 'Practice all';
     }
 
+    const exportRow = $('#story-export');
+    if (exportRow) exportRow.classList.toggle('hidden', deck.length === 0);
+
     const listEl = $('#story-deck-list');
     if (listEl) {
       listEl.innerHTML = deck.length
@@ -3172,6 +3175,47 @@
             </li>
           `).join('')
         : '<li class="story-deck-empty">Open a story and tap any word you don\'t know, then “Add to flashcards”.</li>';
+    }
+  }
+
+  // Saved words as plain objects for flashcard-export.js, oldest first so the
+  // exported order matches the order they were collected in.
+  function getStoryExportCards() {
+    return getStoryDeck().reverse().map(c => {
+      const story = getStory(c.meta.story);
+      const sentence = story && story.sentences[c.meta.s];
+      const [reading, meaning, pos] = c.gloss;
+      return {
+        key: c.key,
+        word: storyDisplayWord(c.key),
+        reading, meaning, pos,
+        sentence: sentence ? sentence.jp.split(' ').map(t => t.split('>')[0]).join('') : '',
+        sentenceEn: sentence ? sentence.en : '',
+        story: story ? story.titleEn : '',
+        level: story ? story.level.toUpperCase() : '',
+      };
+    });
+  }
+
+  async function exportStoryDeck(format) {
+    const cards = getStoryExportCards();
+    const status = $('#story-export-status');
+    if (cards.length === 0 || !window.FlashcardExport) return;
+    const setStatus = (text) => { if (status) status.textContent = text; };
+    try {
+      if (format === 'anki') {
+        setStatus('Building Anki deck…');
+        await FlashcardExport.exportAnki(cards);
+        setStatus(`Downloaded ${cards.length} cards — open the file with Anki to import.`);
+      } else if (format === 'csv') {
+        FlashcardExport.exportCsv(cards);
+        setStatus(`Downloaded ${cards.length} cards as CSV.`);
+      } else {
+        FlashcardExport.exportPrint(cards);
+        setStatus('Opened printable cards — choose “Save as PDF” in the print dialog for a PDF.');
+      }
+    } catch (err) {
+      setStatus(`Export failed: ${err.message}`);
     }
   }
 
@@ -4225,6 +4269,10 @@
       toggleStoryWord(btn.dataset.word);
       renderStoryDeck();
     });
+
+    on('#btn-export-anki', 'click', () => exportStoryDeck('anki'));
+    on('#btn-export-csv', 'click', () => exportStoryDeck('csv'));
+    on('#btn-export-print', 'click', () => exportStoryDeck('print'));
 
     on('#btn-story-review', 'click', startStoryReview);
     on('#btn-story-review-reveal', 'click', revealStoryReviewAnswer);
