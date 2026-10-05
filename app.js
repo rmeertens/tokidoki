@@ -127,6 +127,7 @@
     particles: $('#screen-particles'),
     story: $('#screen-story'),
     'story-review': $('#screen-story-review'),
+    bunkei: $('#screen-bunkei'),
   };
 
   // ─── Theme ─────────────────────────────────────────────────────────────────────
@@ -254,6 +255,9 @@
     } else if (name === 'story-review') {
       backBtn.classList.remove('hidden');
       title.textContent = 'Story Flashcards';
+    } else if (name === 'bunkei') {
+      backBtn.classList.remove('hidden');
+      title.textContent = 'Bunkei';
     }
   }
 
@@ -3476,6 +3480,263 @@
     $('#story-review-accuracy').textContent = total ? `${Math.round((storyReviewCorrect / total) * 100)}%` : '0%';
   }
 
+  // ─── Bunkei drill (bunkei.html) ───────────────────────────────────────────────
+  //
+  // Pick a few verbs and some sentence patterns (bunkei-data.js), then
+  // translate English sentences into Japanese — one verb at a time, through
+  // every chosen pattern. Cards are scheduled in the shared SRS store under
+  // `bunkei:<verb>:<pattern>`; the verb and pattern choices are remembered.
+
+  const BUNKEI_KEY = 'tokidoki_bunkei';
+  const BUNKEI_DEFAULT_VERBS = ['食べる', '行く', '書く'];
+
+  let bunkeiVerbs = null;           // usable verbs, cached
+  let bunkeiSessionCards = [];
+  let bunkeiIndex = 0;
+  let bunkeiCorrect = 0;
+  let bunkeiAnswered = false;
+
+  function bunkeiVerbKey(verb) {
+    return verb.disambig ? `${verb.kanji}_${verb.disambig}` : verb.kanji;
+  }
+
+  function getBunkeiVerbs() {
+    if (!bunkeiVerbs) bunkeiVerbs = window.Bunkei ? Bunkei.usableVerbs(GENKI_VERBS) : [];
+    return bunkeiVerbs;
+  }
+
+  function loadBunkeiSettings() {
+    const defaults = {
+      verbs: BUNKEI_DEFAULT_VERBS,
+      patterns: window.Bunkei ? Bunkei.PATTERNS.filter(p => p.level === 'N5' || p.level === 'N4').map(p => p.id) : [],
+      typing: false,
+      hint: true,
+    };
+    try { return { ...defaults, ...JSON.parse(localStorage.getItem(BUNKEI_KEY)) }; }
+    catch { return defaults; }
+  }
+
+  function saveBunkeiSettings(data) {
+    localStorage.setItem(BUNKEI_KEY, JSON.stringify(data));
+  }
+
+  let bunkeiSettings = null;
+
+  function bunkeiSelectedVerbs() {
+    const byKey = Object.fromEntries(getBunkeiVerbs().map(v => [bunkeiVerbKey(v), v]));
+    return bunkeiSettings.verbs.map(k => byKey[k]).filter(Boolean);
+  }
+
+  // All cards for the current selection, verb by verb (patterns shuffled per verb).
+  function bunkeiPool() {
+    const selected = new Set(bunkeiSettings.patterns);
+    const cards = [];
+    bunkeiSelectedVerbs().forEach(verb => {
+      const patterns = Bunkei.patternsFor(verb).filter(p => selected.has(p.id));
+      shuffle(patterns);
+      patterns.forEach(pattern => {
+        cards.push({ verb, pattern, id: `bunkei:${bunkeiVerbKey(verb)}:${pattern.id}` });
+      });
+    });
+    return cards;
+  }
+
+  function renderBunkeiPage() {
+    if (!window.Bunkei || !$('#bunkei-verb-list')) return;
+    if (!bunkeiSettings) bunkeiSettings = loadBunkeiSettings();
+
+    $('#bunkei-toggle-typing').checked = !!bunkeiSettings.typing;
+    $('#bunkei-toggle-hint').checked = !!bunkeiSettings.hint;
+
+    renderBunkeiSelectedVerbs();
+    renderBunkeiVerbList();
+    renderBunkeiPatterns();
+    renderBunkeiCount();
+  }
+
+  function renderBunkeiSelectedVerbs() {
+    const el = $('#bunkei-selected');
+    const verbs = bunkeiSelectedVerbs();
+    el.innerHTML = verbs.length
+      ? verbs.map(v => `
+          <button class="bunkei-chip selected" data-verb="${bunkeiVerbKey(v)}" title="Remove">
+            <span class="bunkei-chip-jp" lang="ja">${v.kanji}</span>
+            <span class="bunkei-chip-meaning">${v.meaning.replace(/^to /, '')}</span>
+            <span class="bunkei-chip-x" aria-hidden="true">✕</span>
+          </button>`).join('')
+      : '<p class="bunkei-empty">No verbs yet — pick some below, or roll three at random.</p>';
+  }
+
+  function renderBunkeiVerbList() {
+    const query = ($('#bunkei-verb-search').value || '').trim().toLowerCase();
+    const chosen = new Set(bunkeiSettings.verbs);
+    const matches = v => !query || v.kanji.includes(query) || v.reading.includes(query) || v.meaning.toLowerCase().includes(query);
+    const byChapter = {};
+    getBunkeiVerbs().filter(matches).forEach(v => { (byChapter[v.chapter] = byChapter[v.chapter] || []).push(v); });
+    const chapters = Object.keys(byChapter).map(Number).sort((a, b) => a - b);
+    $('#bunkei-verb-list').innerHTML = chapters.length
+      ? chapters.map(ch => `
+          <div class="bunkei-verb-group">
+            <div class="bunkei-verb-group-title">Genki ch. ${ch}</div>
+            <div class="bunkei-verb-chips">
+              ${byChapter[ch].map(v => `
+                <button class="bunkei-chip${chosen.has(bunkeiVerbKey(v)) ? ' selected' : ''}" data-verb="${bunkeiVerbKey(v)}" aria-pressed="${chosen.has(bunkeiVerbKey(v))}">
+                  <span class="bunkei-chip-jp" lang="ja">${v.kanji}</span>
+                  <span class="bunkei-chip-meaning">${v.meaning.replace(/^to /, '')}</span>
+                </button>`).join('')}
+            </div>
+          </div>`).join('')
+      : '<p class="bunkei-empty">No verbs match that search.</p>';
+  }
+
+  function renderBunkeiPatterns() {
+    const chosen = new Set(bunkeiSettings.patterns);
+    $('#bunkei-patterns').innerHTML = Bunkei.LEVELS.map(level => {
+      const patterns = Bunkei.PATTERNS.filter(p => p.level === level);
+      const allOn = patterns.every(p => chosen.has(p.id));
+      return `
+        <div class="bunkei-pattern-group">
+          <div class="bunkei-pattern-group-head">
+            <span class="story-level-badge">${level}</span>
+            <button class="bunkei-link" data-level-toggle="${level}">${allOn ? 'None' : 'All'}</button>
+          </div>
+          <div class="bunkei-pattern-chips">
+            ${patterns.map(p => `
+              <label class="bunkei-pattern${chosen.has(p.id) ? ' selected' : ''}">
+                <input type="checkbox" data-pattern="${p.id}" ${chosen.has(p.id) ? 'checked' : ''}>
+                <span class="bunkei-pattern-name" lang="ja">${p.name}</span>
+                <span class="bunkei-pattern-meaning">${p.meaning}</span>
+              </label>`).join('')}
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  function renderBunkeiCount() {
+    const pool = bunkeiPool();
+    const due = pool.filter(c => isDue(getCardState(srsData, c.id))).length;
+    $('#bunkei-count').textContent = pool.length;
+    $('#bunkei-count-label').textContent = pool.length === 0
+      ? 'sentences — pick at least one verb and pattern'
+      : `sentences · ${due} due`;
+    $('#btn-start-bunkei').disabled = pool.length === 0;
+  }
+
+  function toggleBunkeiVerb(key) {
+    const list = bunkeiSettings.verbs;
+    const i = list.indexOf(key);
+    if (i === -1) list.push(key); else list.splice(i, 1);
+    saveBunkeiSettings(bunkeiSettings);
+    renderBunkeiSelectedVerbs();
+    renderBunkeiVerbList();
+    renderBunkeiCount();
+  }
+
+  function pickRandomBunkeiVerbs() {
+    const verbs = getBunkeiVerbs().slice();
+    shuffle(verbs);
+    bunkeiSettings.verbs = verbs.slice(0, 3).map(bunkeiVerbKey);
+    saveBunkeiSettings(bunkeiSettings);
+    renderBunkeiPage();
+  }
+
+  function startBunkeiStudy() {
+    const pool = bunkeiPool();
+    if (pool.length === 0) return;
+    const due = pool.filter(c => isDue(getCardState(srsData, c.id)));
+    bunkeiSessionCards = due.length > 0 ? due : pool;
+    bunkeiIndex = 0;
+    bunkeiCorrect = 0;
+    showScreen('bunkei');
+    $('#bunkei-session-complete').classList.add('hidden');
+    $('#bunkei-card').classList.remove('hidden');
+    showBunkeiCard();
+  }
+
+  function showBunkeiCard() {
+    if (bunkeiIndex >= bunkeiSessionCards.length) {
+      finishBunkeiSession();
+      return;
+    }
+    const card = bunkeiSessionCards[bunkeiIndex];
+    card.built = card.built || Bunkei.build(card.verb, card.pattern.id);
+    bunkeiAnswered = false;
+
+    const total = bunkeiSessionCards.length;
+    $('#bunkei-bar-fill').style.width = `${(bunkeiIndex / total) * 100}%`;
+    $('#bunkei-progress-text').textContent = `${bunkeiIndex + 1} / ${total}`;
+
+    const verbs = [...new Set(bunkeiSessionCards.map(c => c.verb))];
+    const verbNo = verbs.indexOf(card.verb) + 1;
+    $('#bunkei-verb-badge').innerHTML = `
+      <span class="bunkei-verb-jp" lang="ja">${card.verb.kanji}</span>
+      ${card.verb.kanji !== card.verb.reading ? `<span class="bunkei-verb-reading" lang="ja">${card.verb.reading}</span>` : ''}
+      <span class="bunkei-verb-meaning">${card.verb.meaning}</span>
+      ${verbs.length > 1 ? `<span class="bunkei-verb-count">verb ${verbNo} of ${verbs.length}</span>` : ''}`;
+
+    $('#bunkei-en').textContent = card.built.en;
+    const hint = $('#bunkei-pattern-hint');
+    hint.innerHTML = `<span lang="ja">${card.pattern.name}</span> · ${card.pattern.meaning}`;
+    hint.classList.toggle('hidden', !bunkeiSettings.hint);
+
+    const typing = !!bunkeiSettings.typing;
+    const input = $('#bunkei-input');
+    input.value = '';
+    input.classList.remove('correct', 'incorrect');
+    input.disabled = false;
+    $('#bunkei-typing').classList.toggle('hidden', !typing);
+    $('#bunkei-reveal-hint').textContent = typing ? 'Enter = check' : 'Space = show answer';
+    $('#bunkei-reveal-area').classList.remove('hidden');
+    $('#bunkei-answer-area').classList.add('hidden');
+    if (typing) setTimeout(() => input.focus(), 0);
+  }
+
+  function revealBunkeiAnswer() {
+    if (bunkeiAnswered) return;
+    bunkeiAnswered = true;
+    const card = bunkeiSessionCards[bunkeiIndex];
+    const built = card.built;
+
+    const input = $('#bunkei-input');
+    const typed = input.value.trim();
+    const result = $('#bunkei-result');
+    if (bunkeiSettings.typing && typed) {
+      const ok = Bunkei.matches(typed, built);
+      input.classList.add(ok ? 'correct' : 'incorrect');
+      result.innerHTML = ok ? '<span class="bunkei-ok">✓ Correct</span>' : '<span class="bunkei-ng">✗ Not quite — compare with the answer</span>';
+    } else {
+      result.innerHTML = '';
+    }
+    input.disabled = true;
+
+    $('#bunkei-ja').innerHTML = `${Examples.furiganaHtml(built.before)}<mark class="bunkei-focus">${Examples.furiganaHtml(built.focus)}</mark>。`;
+    $('#bunkei-note').innerHTML = `<strong lang="ja">${card.pattern.name}</strong> — ${card.pattern.note}`;
+    $('#bunkei-reveal-area').classList.add('hidden');
+    $('#bunkei-answer-area').classList.remove('hidden');
+    document.activeElement && document.activeElement.blur && document.activeElement.blur();
+  }
+
+  function gradeBunkeiAndAdvance(grade) {
+    if (!bunkeiAnswered) return;
+    const card = bunkeiSessionCards[bunkeiIndex];
+    srsData[card.id] = gradeCard(getCardState(srsData, card.id), grade);
+    saveSRS(srsData);
+    flashSaveIndicator();
+    if (grade > 1) bunkeiCorrect++;
+    bunkeiIndex++;
+    showBunkeiCard();
+  }
+
+  function finishBunkeiSession() {
+    $('#bunkei-card').classList.add('hidden');
+    $('#bunkei-session-complete').classList.remove('hidden');
+    $('#bunkei-bar-fill').style.width = '100%';
+    const total = bunkeiSessionCards.length;
+    $('#bunkei-session-total').textContent = total;
+    $('#bunkei-session-correct').textContent = bunkeiCorrect;
+    $('#bunkei-session-accuracy').textContent = total ? `${Math.round((bunkeiCorrect / total) * 100)}%` : '0%';
+  }
+
   // ─── Utilities ─────────────────────────────────────────────────────────────────
 
   function shuffle(arr) {
@@ -3698,6 +3959,8 @@
       renderWbkPage();
     } else if (mode === 'particles') {
       renderParticlesPanel();
+    } else if (mode === 'bunkei') {
+      renderBunkeiPage();
     } else if (mode === 'stories') {
       renderStoriesPage();
       if (getStory(location.hash.slice(1))) openStory(location.hash.slice(1));
@@ -3723,6 +3986,7 @@
       else if (mode === 'kanji-quiz') renderKanjiQuizPanel();
       else if (mode === 'particles') renderParticlesPanel();
       else if (mode === 'stories') closeStory();
+      else if (mode === 'bunkei') renderBunkeiPage();
     });
 
     // Reference overlay
@@ -4183,6 +4447,88 @@
       }
     }, true);
 
+    // ─── Bunkei drill ────────────────────────────────────────────────────────────
+
+    function backToBunkeiSetup() {
+      showScreen('chapters');
+      renderBunkeiPage();
+    }
+
+    on('#bunkei-verb-search', 'input', renderBunkeiVerbList);
+    on('#bunkei-verb-list', 'click', (e) => {
+      const chip = e.target.closest('.bunkei-chip');
+      if (chip) toggleBunkeiVerb(chip.dataset.verb);
+    });
+    on('#bunkei-selected', 'click', (e) => {
+      const chip = e.target.closest('.bunkei-chip');
+      if (chip) toggleBunkeiVerb(chip.dataset.verb);
+    });
+    on('#btn-bunkei-random', 'click', pickRandomBunkeiVerbs);
+    on('#btn-bunkei-clear-verbs', 'click', () => {
+      bunkeiSettings.verbs = [];
+      saveBunkeiSettings(bunkeiSettings);
+      renderBunkeiPage();
+    });
+    on('#bunkei-patterns', 'change', (e) => {
+      const id = e.target.dataset.pattern;
+      if (!id) return;
+      const set = new Set(bunkeiSettings.patterns);
+      if (e.target.checked) set.add(id); else set.delete(id);
+      bunkeiSettings.patterns = Bunkei.PATTERNS.map(p => p.id).filter(pid => set.has(pid));
+      saveBunkeiSettings(bunkeiSettings);
+      renderBunkeiPatterns();
+      renderBunkeiCount();
+    });
+    on('#bunkei-patterns', 'click', (e) => {
+      const level = e.target.dataset && e.target.dataset.levelToggle;
+      if (!level) return;
+      const ids = Bunkei.PATTERNS.filter(p => p.level === level).map(p => p.id);
+      const set = new Set(bunkeiSettings.patterns);
+      const allOn = ids.every(id => set.has(id));
+      ids.forEach(id => (allOn ? set.delete(id) : set.add(id)));
+      bunkeiSettings.patterns = Bunkei.PATTERNS.map(p => p.id).filter(pid => set.has(pid));
+      saveBunkeiSettings(bunkeiSettings);
+      renderBunkeiPatterns();
+      renderBunkeiCount();
+    });
+    on('#bunkei-toggle-typing', 'change', (e) => {
+      bunkeiSettings.typing = e.target.checked;
+      saveBunkeiSettings(bunkeiSettings);
+    });
+    on('#bunkei-toggle-hint', 'change', (e) => {
+      bunkeiSettings.hint = e.target.checked;
+      saveBunkeiSettings(bunkeiSettings);
+    });
+    on('#btn-start-bunkei', 'click', startBunkeiStudy);
+    on('#btn-bunkei-reveal', 'click', revealBunkeiAnswer);
+    on('#btn-bunkei-check', 'click', revealBunkeiAnswer);
+    $$('.btn-grade[data-bunkei-grade]').forEach(btn => {
+      btn.addEventListener('click', () => gradeBunkeiAndAdvance(parseInt(btn.dataset.bunkeiGrade, 10)));
+    });
+    on('#btn-bunkei-back', 'click', backToBunkeiSetup);
+
+    document.addEventListener('keydown', (e) => {
+      if (mode !== 'bunkei') return;
+      if (!(screens.bunkei && screens.bunkei.classList.contains('active'))) return;
+
+      if (!$('#bunkei-session-complete').classList.contains('hidden')) {
+        if (e.key === ' ' && !focusHasOwnSpaceAction()) { consumeKey(e); backToBunkeiSetup(); }
+        return;
+      }
+      const inInput = document.activeElement === $('#bunkei-input');
+      if (!bunkeiAnswered) {
+        // Let the input (and the IME) have every key except a plain Enter.
+        if (inInput) {
+          if (e.key === 'Enter' && !e.isComposing) { consumeKey(e); revealBunkeiAnswer(); }
+          return;
+        }
+        if ((e.key === ' ' || e.key === 'Enter') && !focusHasOwnSpaceAction()) { consumeKey(e); revealBunkeiAnswer(); }
+        return;
+      }
+      if (e.key === '1') { consumeKey(e); gradeBunkeiAndAdvance(1); return; }
+      if (e.key === '2' || e.key === ' ' || e.key === 'Enter') { consumeKey(e); gradeBunkeiAndAdvance(4); }
+    }, true);
+
     // ─── Stories page ────────────────────────────────────────────────────────────
 
     // Story cards are plain #id links, so the browser's own Back button
@@ -4325,6 +4671,7 @@
         else if (mode === 'kanji-quiz') renderKanjiQuizPanel();
         else if (mode === 'particles') renderParticlesPanel();
         else if (mode === 'stories') renderStoryDeck();
+        else if (mode === 'bunkei') renderBunkeiPage();
         else if (mode === 'hub') renderHub();
       }
     });

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" id="viewport-meta" content="width=device-width, initial-scale=1.0">
+  <title>Bunkei: Japanese Sentence Pattern Drill | Tokidoki</title>
+  <meta name="description" content="Pick a few Japanese verbs and drill them through sentence patterns (文型) like 〜させてください, 〜なければなりません and 〜かもしれません. Translate English sentences into Japanese, with spaced repetition. JLPT N5–N3.">
+  <meta property="og:title" content="Bunkei: Japanese Sentence Pattern Drill | Tokidoki">
+  <meta property="og:description" content="Drill a verb through dozens of sentence patterns: please let me, must, can't, might, should… Translate into Japanese, JLPT N5–N3.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tokidoki.meertens.dev/bunkei.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Bunkei: Japanese Sentence Pattern Drill | Tokidoki">
+  <meta name="twitter:description" content="Drill a verb through dozens of sentence patterns (文型) — translate English into Japanese, JLPT N5–N3.">
+  <link rel="canonical" href="https://tokidoki.meertens.dev/bunkei.html">
+  <link rel="stylesheet" href="style.css?v=7">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXWYNZC7YH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXWYNZC7YH');
+  </script>
+</head>
+<body data-mode="bunkei">
+  <div id="app">
+
+    <!-- Header -->
+    <!-- Header (rendered by renderSharedChrome() in app.js) -->
+    <div id="header-mount"></div>
+
+    <!-- Screen: Setup -->
+    <main id="screen-chapters" class="screen active">
+      <nav class="page-nav" aria-label="Exercises">
+        <div class="page-nav-group">
+          <span class="page-nav-label">Practice</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="verbs.html"><span class="page-nav-glyph" aria-hidden="true">食</span>Verbs</a>
+            <a class="page-nav-item" href="adjectives.html"><span class="page-nav-glyph" aria-hidden="true">高</span>Adjectives</a>
+            <a class="page-nav-item" href="custom.html"><span class="page-nav-glyph" aria-hidden="true">作</span>Build Your Own</a>
+            <a class="page-nav-item active" href="bunkei.html" aria-current="page"><span class="page-nav-glyph" aria-hidden="true">型</span>Bunkei</a>
+            <a class="page-nav-item" href="sentences.html"><span class="page-nav-glyph" aria-hidden="true">文</span>Sentences</a>
+            <a class="page-nav-item" href="stories.html"><span class="page-nav-glyph" aria-hidden="true">話</span>Stories</a>
+            <a class="page-nav-item" href="particles-quiz.html"><span class="page-nav-glyph" aria-hidden="true">は</span>Particles</a>
+            <a class="page-nav-item" href="kana.html"><span class="page-nav-glyph" aria-hidden="true">あ</span>Kana</a>
+            <a class="page-nav-item" href="kanji-quiz.html"><span class="page-nav-glyph" aria-hidden="true">字</span>Kanji Quiz</a>
+          </div>
+        </div>
+        <div class="page-nav-group">
+          <span class="page-nav-label">Reference</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="kanji.html"><span class="page-nav-glyph" aria-hidden="true">紙</span>Practice Sheets</a>
+            <a class="page-nav-item" href="kanji-hover.html"><span class="page-nav-glyph" aria-hidden="true">漢</span>Kanji Hover</a>
+            <a class="page-nav-item" href="vocabulary.html"><span class="page-nav-glyph" aria-hidden="true">語</span>Vocabulary</a>
+            <a class="page-nav-item" href="words-by-kanji.html"><span class="page-nav-glyph" aria-hidden="true">詞</span>Words by Kanji</a>
+          </div>
+        </div>
+      </nav>
+      <p class="tab-intro">
+        文型 (<i>bunkei</i>, sentence patterns) are the reusable endings that turn a verb into
+        &ldquo;please let me&hellip;&rdquo;, &ldquo;I have to&hellip;&rdquo;, &ldquo;I might&hellip;&rdquo; and so on.
+        Pick a few verbs and some patterns, then translate each English sentence into Japanese &mdash;
+        one verb at a time, through every pattern.
+      </p>
+
+      <section class="bunkei-section">
+        <div class="bunkei-section-head">
+          <h2 class="bunkei-step"><span class="bunkei-step-num">1</span>Pick a few verbs</h2>
+          <div class="bunkei-section-actions">
+            <button class="btn-secondary bunkei-small-btn" id="btn-bunkei-random">🎲 Random 3</button>
+            <button class="btn-secondary bunkei-small-btn" id="btn-bunkei-clear-verbs">Clear</button>
+          </div>
+        </div>
+        <div class="bunkei-selected" id="bunkei-selected"></div>
+        <input type="search" class="bunkei-search" id="bunkei-verb-search" placeholder="Search verbs — 食べる, たべる, eat…" autocomplete="off" lang="ja">
+        <div class="bunkei-verb-list" id="bunkei-verb-list"></div>
+      </section>
+
+      <section class="bunkei-section">
+        <div class="bunkei-section-head">
+          <h2 class="bunkei-step"><span class="bunkei-step-num">2</span>Pick sentence patterns</h2>
+        </div>
+        <div id="bunkei-patterns"></div>
+      </section>
+
+      <section class="bunkei-section">
+        <div class="bunkei-section-head">
+          <h2 class="bunkei-step"><span class="bunkei-step-num">3</span>Translate</h2>
+        </div>
+        <div class="kana-settings-row">
+          <label class="kana-script-toggle"><input type="checkbox" id="bunkei-toggle-typing"> Type my answers</label>
+          <label class="kana-script-toggle"><input type="checkbox" id="bunkei-toggle-hint" checked> Show the pattern</label>
+        </div>
+        <div class="kana-start-card">
+          <div class="kana-start-info">
+            <span class="stat-num" id="bunkei-count">0</span>
+            <span class="stat-label" id="bunkei-count-label">sentences</span>
+          </div>
+          <button id="btn-start-bunkei" class="btn-primary btn-start-custom">Start</button>
+        </div>
+      </section>
+
+      <div class="reset-section">
+        <button id="btn-reset" class="btn-danger">Reset All Progress</button>
+      </div>
+    </main>
+
+    <!-- Screen: Drill -->
+    <main id="screen-bunkei" class="screen">
+      <div class="study-toolbar">
+        <div class="study-progress">
+          <div class="study-progress-bar"><div id="bunkei-bar-fill" class="study-bar-fill"></div></div>
+          <span id="bunkei-progress-text" class="study-progress-text">0 / 0</span>
+        </div>
+      </div>
+      <div id="save-indicator" class="save-indicator">Saved</div>
+
+      <div id="bunkei-card" class="card bunkei-card">
+        <div class="bunkei-verb-badge" id="bunkei-verb-badge"></div>
+        <div class="kana-prompt-label">Translate into Japanese</div>
+        <div class="bunkei-en" id="bunkei-en"></div>
+        <div class="bunkei-pattern-hint" id="bunkei-pattern-hint"></div>
+
+        <div class="answer-area bunkei-typing hidden" id="bunkei-typing">
+          <input type="text" id="bunkei-input" class="answer-input" placeholder="Type in Japanese…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" lang="ja">
+          <button id="btn-bunkei-check" class="btn-primary">Check</button>
+        </div>
+
+        <div class="reveal-area" id="bunkei-reveal-area">
+          <button id="btn-bunkei-reveal" class="btn-reveal">Show Answer</button>
+          <span class="reveal-hint" id="bunkei-reveal-hint">Space = show answer</span>
+        </div>
+
+        <div class="bunkei-answer hidden" id="bunkei-answer-area">
+          <div class="bunkei-result" id="bunkei-result"></div>
+          <div class="bunkei-ja" id="bunkei-ja" lang="ja"></div>
+          <div class="bunkei-note" id="bunkei-note"></div>
+          <div class="grade-buttons">
+            <button class="btn-grade btn-again" data-bunkei-grade="1"><span class="grade-key">1</span> Didn't know</button>
+            <button class="btn-grade btn-easy" data-bunkei-grade="4"><span class="grade-key">2</span> Got it</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="bunkei-session-complete" class="session-complete hidden">
+        <div class="complete-icon">🎉</div>
+        <h2>Session Complete!</h2>
+        <div class="session-stats">
+          <div class="stat"><span class="stat-num" id="bunkei-session-total">0</span><span class="stat-label">Sentences</span></div>
+          <div class="stat"><span class="stat-num" id="bunkei-session-correct">0</span><span class="stat-label">Got It</span></div>
+          <div class="stat"><span class="stat-num" id="bunkei-session-accuracy">0%</span><span class="stat-label">Accuracy</span></div>
+        </div>
+        <button id="btn-bunkei-back" class="btn-primary">Back to Setup</button>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="conjugator.js?v=7"></script>
+  <script src="verbs.js?v=7"></script>
+  <script src="kana.js?v=7"></script>
+  <script src="kanji-quiz-data.js?v=7"></script>
+  <script src="sentences-data.js?v=7"></script>
+  <script src="vocabulary-data.js?v=7"></script>
+  <script src="kanji-info-data.js?v=7"></script>
+  <script src="examples.js?v=7"></script>
+  <script src="bunkei-data.js?v=7"></script>
+  <script src="app.js?v=7"></script>
+  <script src="sushi-sprites.js"></script>
+  <script src="sushi-belt.js"></script>
+
+  <!-- Static content for search engines -->
+  <section id="seo-content" aria-hidden="true">
+    <h2>Bunkei — Japanese Sentence Pattern Drill</h2>
+    <p>
+      Free, no-login practice for Japanese sentence patterns (文型, bunkei). Choose a few
+      verbs from Genki I and II — 食べる, 行く, 書く, 勉強する and many more — and a set of
+      patterns from JLPT N5 to N3: 〜てください, 〜ないでください, 〜てもいいですか,
+      〜てはいけません, 〜たいです, 〜ませんか, the potential form (can / can't),
+      〜なければなりません, 〜なくてもいいです, 〜させてください, 〜たことがあります,
+      〜てしまいました, 〜ておきます, 〜てみます, 〜つもりです, 〜た方がいいです,
+      〜かもしれません, 〜てほしいです, the causative-passive, 〜べきです, 〜ことにしました,
+      〜ようにしています, 〜わけにはいきません and more. Each English sentence uses one
+      verb in one pattern; translate it into Japanese, optionally type your answer to have
+      it checked, and see the answer with furigana and a note on how the pattern is built.
+      Progress is scheduled with spaced repetition.
+    </p>
+  </section>
+</body>
+</html>

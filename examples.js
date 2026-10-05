@@ -687,6 +687,9 @@
     withKanji,
     furiganaHtml,
     stripFurigana,
+    contextFor,
+    // English helpers, shared with the bunkei (sentence pattern) drill.
+    english: { clause, inflect, pastTense, gerund, sentence },
   };
 
   if (typeof module !== 'undefined' && module.exports) {
