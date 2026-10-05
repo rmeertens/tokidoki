@@ -3636,3 +3636,26 @@ a.chapter-card {
   .bunkei-en { font-size: 1.2rem; }
   .bunkei-ja { font-size: 1.3rem; }
 }
+
+/* Flashcard furigana switch (stories.html export row and review screen) */
+.flashcard-furigana-label {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+}
+
+.story-export .flashcard-furigana-label {
+  margin-right: 8px;
+}
+
+.story-review-options {
+  display: flex;
+  justify-content: flex-end;
+  max-width: 600px;
+  margin: 0 auto 10px;
+}
+
+.story-review-prompt rt {
+  font-size: 0.35em;
+  font-weight: 500;
+  color: var(--text-dim);
+}

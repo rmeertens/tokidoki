@@ -12,8 +12,10 @@
   //     browser's print dialog can save as a PDF
   //
   // Each card passed in is a plain object:
-  //   { key, word, reading, meaning, pos, sentence, sentenceEn, story, level }
-  // where `sentence` uses the site's inline `kanji[reading]` furigana markup.
+  //   { key, word, wordFurigana, reading, meaning, pos, sentence, sentenceEn, story, level }
+  // where `wordFurigana` and `sentence` use the site's inline
+  // `kanji[reading]` furigana markup. Every export takes `{ furigana }`:
+  // with it off, the word and sentence are exported as plain text.
 
   const FURIGANA_RE = /([一-鿿々]+)\[([^\]]+)\]/g;
 
@@ -59,12 +61,15 @@
 
   // ─── CSV ─────────────────────────────────────────────────────────────────────
 
-  function toCsv(cards) {
-    const header = ['Word', 'Reading', 'Meaning', 'Part of speech', 'Sentence', 'Sentence (furigana)', 'Translation', 'Story', 'Level'];
-    const rows = cards.map(c => [
-      c.word, c.reading, c.meaning, c.pos,
-      plainText(c.sentence), c.sentence, c.sentenceEn, c.story, c.level,
-    ]);
+  // With furigana on, adds "Word (furigana)" and "Sentence (furigana)"
+  // columns in the 漢字[かんじ] markup that Anki and many other apps understand.
+  function toCsv(cards, { furigana = true } = {}) {
+    const header = furigana
+      ? ['Word', 'Word (furigana)', 'Reading', 'Meaning', 'Part of speech', 'Sentence', 'Sentence (furigana)', 'Translation', 'Story', 'Level']
+      : ['Word', 'Reading', 'Meaning', 'Part of speech', 'Sentence', 'Translation', 'Story', 'Level'];
+    const rows = cards.map(c => furigana
+      ? [c.word, c.wordFurigana || c.word, c.reading, c.meaning, c.pos, plainText(c.sentence), c.sentence, c.sentenceEn, c.story, c.level]
+      : [c.word, c.reading, c.meaning, c.pos, plainText(c.sentence), c.sentenceEn, c.story, c.level]);
     const quote = v => {
       const s = String(v == null ? '' : v);
       return /[",\r\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
@@ -72,9 +77,9 @@
     return [header, ...rows].map(r => r.map(quote).join(',')).join('\r\n') + '\r\n';
   }
 
-  function exportCsv(cards) {
+  function exportCsv(cards, opts) {
     download(`tokidoki-flashcards-${dateStamp()}.csv`,
-      new Blob(['\uFEFF' + toCsv(cards)], { type: 'text/csv;charset=utf-8' }));
+      new Blob(['\uFEFF' + toCsv(cards, opts)], { type: 'text/csv;charset=utf-8' }));
   }
 
   // ─── Zip (store-only) ────────────────────────────────────────────────────────
@@ -154,6 +159,7 @@
 
   const ANKI_CSS = `.card { font-family: "Hiragino Kaku Gothic Pro", "Yu Gothic", "Noto Sans JP", sans-serif; font-size: 20px; text-align: center; color: #2b2320; background: #fffaf1; }
 .word { font-size: 48px; font-weight: bold; margin: 20px 0; }
+.word rt, .sentence rt { font-size: 0.5em; color: #6c5d53; }
 .reading { font-size: 26px; color: #6c5d53; }
 .meaning { font-size: 22px; font-weight: bold; margin: 10px 0; }
 .pos { font-size: 14px; color: #a3928a; }
@@ -162,7 +168,9 @@
 .story { font-size: 12px; color: #a3928a; margin-top: 12px; }
 .nightMode.card, .night_mode .card { color: #efe8de; background: #211e28; }`;
 
-  const ANKI_FRONT = '<div class="word">{{Word}}</div>';
+  // {{furigana:}} renders 漢字[かんじ] as ruby and leaves plain text alone, so
+  // one note type serves exports both with and without furigana.
+  const ANKI_FRONT = '<div class="word">{{furigana:Word}}</div>';
   const ANKI_BACK = `{{FrontSide}}
 <hr id="answer">
 <div class="reading">{{Reading}}</div>
@@ -208,7 +216,7 @@ CREATE INDEX ix_notes_csum on notes (csum);`;
     return parseInt(hex, 16);
   }
 
-  async function buildApkg(cards) {
+  async function buildApkg(cards, { furigana = true } = {}) {
     const SQL = await loadSqlJs();
     const db = new SQL.Database();
     db.run(ANKI_SCHEMA);
@@ -249,15 +257,16 @@ CREATE INDEX ix_notes_csum on notes (csum);`;
 
     for (let i = 0; i < cards.length; i++) {
       const c = cards[i];
+      const withReadings = text => (furigana ? ankiFurigana(text) : escapeField(plainText(text)));
       const fields = [
-        escapeField(c.word), escapeField(c.reading), escapeField(c.meaning), escapeField(c.pos),
-        c.sentence ? ankiFurigana(c.sentence) : '', escapeField(c.sentenceEn || ''), escapeField(c.story || ''),
+        withReadings(c.wordFurigana || c.word), escapeField(c.reading), escapeField(c.meaning), escapeField(c.pos),
+        c.sentence ? withReadings(c.sentence) : '', escapeField(c.sentenceEn || ''), escapeField(c.story || ''),
       ];
       const noteId = nowMs + i;
       const tags = ` tokidoki ${String(c.level || '').toLowerCase()} `.replace(/\s+/g, ' ');
       db.run('INSERT INTO notes VALUES (?, ?, ?, ?, -1, ?, ?, ?, ?, 0, \'\')', [
         noteId, `tokidoki-story:${c.key}`, ANKI_MODEL_ID, now, tags,
-        fields.join('\x1f'), fields[0], await ankiChecksum(fields[0]),
+        fields.join('\x1f'), escapeField(c.word), await ankiChecksum(escapeField(c.word)),
       ]);
       db.run('INSERT INTO cards VALUES (?, ?, ?, 0, ?, -1, 0, 0, ?, 0, 0, 0, 0, 0, 0, 0, 0, \'\')', [
         noteId, noteId, ANKI_DECK_ID, now, i + 1,
@@ -272,8 +281,8 @@ CREATE INDEX ix_notes_csum on notes (csum);`;
     ]);
   }
 
-  async function exportAnki(cards) {
-    const zip = await buildApkg(cards);
+  async function exportAnki(cards, opts) {
+    const zip = await buildApkg(cards, opts);
     download(`tokidoki-flashcards-${dateStamp()}.apkg`, new Blob([zip], { type: 'application/octet-stream' }));
   }
 
@@ -282,14 +291,15 @@ CREATE INDEX ix_notes_csum on notes (csum);`;
   const PRINT_COLS = 2;
   const PRINT_ROWS = 5;
 
-  function printHtml(cards) {
+  function printHtml(cards, { furigana = true } = {}) {
+    const withReadings = text => (furigana ? rubyHtml(text) : escapeHtml(plainText(text)));
     const perPage = PRINT_COLS * PRINT_ROWS;
     const pages = [];
     for (let start = 0; start < cards.length; start += perPage) {
       const slice = cards.slice(start, start + perPage);
       while (slice.length < perPage) slice.push(null);
       const fronts = slice.map(c => c
-        ? `<div class="cell front"><div class="word">${escapeHtml(c.word)}</div></div>`
+        ? `<div class="cell front"><div class="word">${withReadings(c.wordFurigana || c.word)}</div></div>`
         : '<div class="cell empty"></div>');
       // Backs are mirrored left-to-right within each row, so after flipping
       // the sheet on its long edge each back lands behind its own front.
@@ -301,7 +311,7 @@ CREATE INDEX ix_notes_csum on notes (csum);`;
               ${c.reading !== c.word ? `<div class="reading">${escapeHtml(c.reading)}</div>` : ''}
               <div class="meaning">${escapeHtml(c.meaning)}</div>
               <div class="pos">${escapeHtml(c.pos)}</div>
-              ${c.sentence ? `<div class="sentence">${rubyHtml(c.sentence)}</div>` : ''}
+              ${c.sentence ? `<div class="sentence">${withReadings(c.sentence)}</div>` : ''}
               ${c.sentenceEn ? `<div class="sentence-en">${escapeHtml(c.sentenceEn)}</div>` : ''}
             </div>`
           : '<div class="cell empty"></div>'));
@@ -326,7 +336,8 @@ CREATE INDEX ix_notes_csum on notes (csum);`;
   .cell { border: 0.3mm dashed #b9ad9c; display: flex; flex-direction: column; align-items: center; justify-content: center;
           text-align: center; padding: 4mm 5mm; overflow: hidden; }
   .cell.empty { border-color: transparent; }
-  .word { font-size: 30pt; font-weight: 700; }
+  .word { font-size: 30pt; font-weight: 700; line-height: 1.6; }
+  .word rt { font-size: 0.4em; font-weight: 400; color: #6c5d53; }
   .reading { font-size: 14pt; color: #6c5d53; }
   .meaning { font-size: 12pt; font-weight: 700; margin-top: 1mm; }
   .pos { font-size: 8pt; color: #8c7d72; margin-top: 0.5mm; }
@@ -352,11 +363,11 @@ CREATE INDEX ix_notes_csum on notes (csum);`;
 </html>`;
   }
 
-  function exportPrint(cards) {
+  function exportPrint(cards, opts) {
     const win = window.open('', '_blank');
     if (!win) throw new Error('Pop-up blocked — allow pop-ups for this site to print flashcards.');
     win.document.open();
-    win.document.write(printHtml(cards));
+    win.document.write(printHtml(cards, opts));
     win.document.close();
     // Give fonts a moment to settle before opening the print dialog.
     setTimeout(() => { win.focus(); win.print(); }, 400);

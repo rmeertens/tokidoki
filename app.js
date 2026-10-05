@@ -89,7 +89,7 @@
   const SETTINGS_KEY = 'tokidoki_settings';
 
   function loadSettings() {
-    const defaults = { typingMode: false, hideForm: true, showContext: true, englishToJapanese: true, showExampleFront: false, showFurigana: true };
+    const defaults = { typingMode: false, hideForm: true, showContext: true, englishToJapanese: true, showExampleFront: false, showFurigana: true, flashcardFurigana: true };
     try { return { ...defaults, ...JSON.parse(localStorage.getItem(SETTINGS_KEY)) }; }
     catch { return defaults; }
   }
@@ -3043,6 +3043,25 @@
     return key.replace(/\(.*\)$/, '');
   }
 
+  // A glossary word with its whole-word reading lined up against its kanji,
+  // in 漢字[かんじ] markup: 食べる + たべる → 食[た]べる. Kana-only words come
+  // back unchanged; if the kana around the kanji don't line up, the whole
+  // word gets the reading.
+  function storyWordFurigana(word, reading) {
+    const KANJI = /[一-鿿々]/;
+    if (!KANJI.test(word)) return word;
+    const parts = word.match(/[一-鿿々]+|[^一-鿿々]+/g);
+    const pattern = parts.map(p => KANJI.test(p) ? '(.+?)' : `(${p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`).join('');
+    const m = reading.match(new RegExp(`^${pattern}$`));
+    if (!m) return `${word}[${reading}]`;
+    return parts.map((p, i) => KANJI.test(p) ? `${p}[${m[i + 1]}]` : p).join('');
+  }
+
+  // Flashcard text with or without furigana, per the flashcard setting.
+  function storyCardHtml(text) {
+    return settings.flashcardFurigana ? storyRubyHtml(text) : storyPlainText(text);
+  }
+
   // Splits a sentence into tokens: { surface, plain, key } — key is null for
   // punctuation, which isn't clickable.
   function parseStorySentence(sentence) {
@@ -3171,6 +3190,7 @@
 
     const exportRow = $('#story-export');
     if (exportRow) exportRow.classList.toggle('hidden', deck.length === 0);
+    $$('.flashcard-furigana-toggle').forEach(el => { el.checked = !!settings.flashcardFurigana; });
 
     const listEl = $('#story-deck-list');
     if (listEl) {
@@ -3197,6 +3217,7 @@
       return {
         key: c.key,
         word: storyDisplayWord(c.key),
+        wordFurigana: storyWordFurigana(storyDisplayWord(c.key), c.gloss[0]),
         reading, meaning, pos,
         sentence: sentence ? sentence.jp.split(' ').map(t => t.split('>')[0]).join('') : '',
         sentenceEn: sentence ? sentence.en : '',
@@ -3211,16 +3232,17 @@
     const status = $('#story-export-status');
     if (cards.length === 0 || !window.FlashcardExport) return;
     const setStatus = (text) => { if (status) status.textContent = text; };
+    const opts = { furigana: !!settings.flashcardFurigana };
     try {
       if (format === 'anki') {
         setStatus('Building Anki deck…');
-        await FlashcardExport.exportAnki(cards);
+        await FlashcardExport.exportAnki(cards, opts);
         setStatus(`Downloaded ${cards.length} cards — open the file with Anki to import.`);
       } else if (format === 'csv') {
-        FlashcardExport.exportCsv(cards);
+        FlashcardExport.exportCsv(cards, opts);
         setStatus(`Downloaded ${cards.length} cards as CSV.`);
       } else {
-        FlashcardExport.exportPrint(cards);
+        FlashcardExport.exportPrint(cards, opts);
         setStatus('Opened printable cards — choose “Save as PDF” in the print dialog for a PDF.');
       }
     } catch (err) {
@@ -3426,7 +3448,7 @@
     $('#story-review-bar-fill').style.width = `${(storyReviewIndex / total) * 100}%`;
     $('#story-review-progress-text').textContent = `${storyReviewIndex + 1} / ${total}`;
 
-    $('#story-review-prompt').textContent = storyDisplayWord(card.key);
+    renderStoryReviewText();
     $('#story-review-reveal-area').classList.remove('hidden');
     $('#story-review-answer-area').classList.add('hidden');
 
@@ -3438,13 +3460,23 @@
       <div class="story-panel-pos">${pos}</div>
     `;
 
-    // Show the sentence the word was saved from, with the word highlighted.
+  }
+
+  // The card's Japanese — the word on the front and the sentence it was saved
+  // from (word highlighted) on the back — with or without furigana. Re-run
+  // when the furigana setting changes mid-card.
+  function renderStoryReviewText() {
+    const card = storyReviewCards[storyReviewIndex];
+    if (!card) return;
+    const [reading] = card.gloss;
+    $('#story-review-prompt').innerHTML = storyCardHtml(storyWordFurigana(storyDisplayWord(card.key), reading));
+
     const story = getStory(card.meta.story);
     const sentence = story && story.sentences[card.meta.s];
     const ctx = $('#story-review-context');
     if (sentence) {
       const html = parseStorySentence(sentence).map(t => {
-        const piece = storyRubyHtml(t.surface);
+        const piece = storyCardHtml(t.surface);
         return t.key === card.key ? `<mark>${piece}</mark>` : piece;
       }).join('');
       ctx.innerHTML = `
@@ -3455,6 +3487,13 @@
     } else {
       ctx.innerHTML = '';
     }
+  }
+
+  function setFlashcardFurigana(on) {
+    settings.flashcardFurigana = on;
+    saveSettings(settings);
+    $$('.flashcard-furigana-toggle').forEach(el => { el.checked = on; });
+    renderStoryReviewText();
   }
 
   function revealStoryReviewAnswer() {
@@ -4641,6 +4680,10 @@
       if (!btn) return;
       toggleStoryWord(btn.dataset.word);
       renderStoryDeck();
+    });
+
+    $$('.flashcard-furigana-toggle').forEach(el => {
+      el.addEventListener('change', () => setFlashcardFurigana(el.checked));
     });
 
     on('#btn-export-anki', 'click', () => exportStoryDeck('anki'));
