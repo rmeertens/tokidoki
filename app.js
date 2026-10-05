@@ -646,6 +646,7 @@
       input.value = '';
       input.className = 'answer-input';
       input.lang = 'ja';
+      if (window.Speech) Speech.stopAll();
       input.focus();
     } else {
       $('#reveal-area').classList.remove('hidden');
@@ -681,6 +682,7 @@
       return;
     }
 
+    if (window.Speech) Speech.stopAll();
     const userAnswer = Romaji.flush($('#answer-input')).trim();
     const correct = getCorrectAnswer(currentCard);
 
@@ -3684,6 +3686,7 @@
 
     const typing = !!bunkeiSettings.typing;
     const input = $('#bunkei-input');
+    if (window.Speech) Speech.stopAll();
     input.value = '';
     input.classList.remove('correct', 'incorrect');
     input.disabled = false;
@@ -3701,6 +3704,7 @@
     const built = card.built;
 
     const input = $('#bunkei-input');
+    if (window.Speech) Speech.stopAll();
     const typed = Romaji.flush(input).trim();
     const result = $('#bunkei-result');
     if (bunkeiSettings.typing && typed) {
@@ -3936,6 +3940,10 @@
     if (window.Romaji) {
       Romaji.attach($('#answer-input'));
       Romaji.attach($('#bunkei-input'));
+    }
+    if (window.Speech) {
+      Speech.attach($('#answer-input'));
+      Speech.attach($('#bunkei-input'));
     }
 
     if (mode === 'verbs') {

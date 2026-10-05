@@ -849,6 +849,7 @@ a.chapter-card {
 
 .answer-input {
   flex: 1;
+  min-width: 0;
   padding: 10px 14px;
   font-size: 1.15rem;
   font-family: var(--font-jp);
@@ -872,6 +873,40 @@ a.chapter-card {
 .answer-input.incorrect {
   border-color: var(--red);
   background: var(--red-dim);
+}
+
+/* Speak-your-answer microphone button */
+.btn-mic {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  padding: 0;
+  background: var(--bg-input);
+  color: var(--text-dim);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.btn-mic:hover { color: var(--accent); border-color: var(--accent); }
+
+.btn-mic.listening {
+  color: #fff;
+  background: var(--red);
+  border-color: var(--red);
+  animation: mic-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes mic-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 var(--red-dim); }
+  50% { box-shadow: 0 0 0 6px var(--red-dim); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-mic.listening { animation: none; }
 }
 
 /* Buttons */
