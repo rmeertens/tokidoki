@@ -125,6 +125,8 @@
     'kanji-quiz': $('#screen-kanji-quiz'),
     confusable: $('#screen-confusable'),
     particles: $('#screen-particles'),
+    story: $('#screen-story'),
+    'story-review': $('#screen-story-review'),
   };
 
   // ─── Theme ─────────────────────────────────────────────────────────────────────
@@ -246,6 +248,12 @@
     } else if (name === 'particles') {
       backBtn.classList.remove('hidden');
       title.textContent = 'Particle Quiz';
+    } else if (name === 'story') {
+      backBtn.classList.remove('hidden');
+      title.textContent = 'Stories';
+    } else if (name === 'story-review') {
+      backBtn.classList.remove('hidden');
+      title.textContent = 'Story Flashcards';
     }
   }
 
@@ -406,6 +414,7 @@
     setDue('#hub-due-verbs', verbDue);
     setDue('#hub-due-adjectives', adjDue);
     setDue('#hub-due-kana', kanaDue);
+    setDue('#hub-due-stories', countDueStoryWords());
   }
 
   // ─── Study Session ─────────────────────────────────────────────────────────────
@@ -2980,6 +2989,449 @@
     if (overlay) overlay.classList.add('hidden');
   }
 
+  // ─── Stories page (stories.html) ──────────────────────────────────────────────
+  //
+  // Graded readers from stories-data.js, grouped by JLPT level. In the reader,
+  // tapping a word looks it up (and can add it to a personal flashcard deck),
+  // and tapping a sentence lists the grammar it uses, highlighting where each
+  // point appears. Saved words are reviewed on their own flashcard screen;
+  // their schedules live in the shared SRS store under `story_word:<key>`
+  // (so Reset All Progress resets them), while the deck itself — which words,
+  // and the sentence each was saved from — lives under its own key.
+
+  const STORY_LEVELS = ['n5', 'n4', 'n3'];
+  const STORY_LEVEL_BLURB = {
+    n5: 'Short sentences in です / ます form: particles, adjectives, 〜ている.',
+    n4: 'Linked clauses: 〜たら, 〜ので, 〜てしまう, giving and receiving.',
+    n3: 'Plain-form narration: passive, causative, hearsay and nuance.',
+  };
+  const STORY_WORDS_KEY = 'tokidoki_story_words';
+  const STORY_PUNCT = new Set(['。', '、', '「', '」', '？', '！']);
+  const STORY_FURIGANA_RE = /([一-鿿々]+)\[([^\]]+)\]/g;
+
+  let currentStory = null;
+  let storySelection = null;       // { type: 'word' | 'sentence', s, t }
+  let storyActiveGrammar = null;   // index into the selected sentence's grammar list
+  let storyReviewCards = [];
+  let storyReviewIndex = 0;
+  let storyReviewCorrect = 0;
+  let storyReviewAnswered = false;
+
+  function storyRubyHtml(text) {
+    return text.replace(STORY_FURIGANA_RE, '<ruby>$1<rp>(</rp><rt>$2</rt><rp>)</rp></ruby>');
+  }
+
+  function storyPlainText(text) {
+    return text.replace(STORY_FURIGANA_RE, '$1');
+  }
+
+  function storyTextHtml(text) {
+    return settings.showFurigana ? storyRubyHtml(text) : storyPlainText(text);
+  }
+
+  // Glossary keys can carry a "(disambiguation)" suffix — never shown.
+  function storyDisplayWord(key) {
+    return key.replace(/\(.*\)$/, '');
+  }
+
+  // Splits a sentence into tokens: { surface, plain, key } — key is null for
+  // punctuation, which isn't clickable.
+  function parseStorySentence(sentence) {
+    if (sentence._tokens) return sentence._tokens;
+    sentence._tokens = sentence.jp.split(' ').map(tok => {
+      if (STORY_PUNCT.has(tok)) return { surface: tok, plain: tok, key: null };
+      const [surface, override] = tok.split('>');
+      const plain = storyPlainText(surface);
+      return { surface, plain, key: override || plain };
+    });
+    return sentence._tokens;
+  }
+
+  function parseStoryGrammarRef(ref) {
+    const i = ref.indexOf(':');
+    return i === -1 ? { id: ref, snippet: '' } : { id: ref.slice(0, i), snippet: ref.slice(i + 1) };
+  }
+
+  // Token indices covering the first occurrence of `snippet` in the sentence.
+  function storySnippetTokens(sentence, snippet) {
+    const tokens = parseStorySentence(sentence);
+    const plain = tokens.map(t => t.plain).join('');
+    const start = snippet ? plain.indexOf(snippet) : -1;
+    if (start === -1) return [];
+    const end = start + snippet.length;
+    const hits = [];
+    let pos = 0;
+    tokens.forEach((t, i) => {
+      const tStart = pos;
+      pos += t.plain.length;
+      if (t.key && tStart < end && pos > start) hits.push(i);
+    });
+    return hits;
+  }
+
+  function getStory(id) {
+    return (window.STORIES_DATA || []).find(s => s.id === id) || null;
+  }
+
+  // ── Flashcard deck ──
+
+  function loadStoryWords() {
+    try { return JSON.parse(localStorage.getItem(STORY_WORDS_KEY)) || {}; }
+    catch { return {}; }
+  }
+
+  function saveStoryWords(words) {
+    localStorage.setItem(STORY_WORDS_KEY, JSON.stringify(words));
+  }
+
+  function storyWordCardId(key) {
+    return `story_word:${key}`;
+  }
+
+  function isStoryWordSaved(key) {
+    return Object.prototype.hasOwnProperty.call(loadStoryWords(), key);
+  }
+
+  function toggleStoryWord(key, storyId, sentenceIndex) {
+    const words = loadStoryWords();
+    if (words[key]) {
+      delete words[key];
+      delete srsData[storyWordCardId(key)];
+      saveSRS(srsData);
+    } else {
+      words[key] = { story: storyId, s: sentenceIndex, added: Date.now() };
+    }
+    saveStoryWords(words);
+  }
+
+  function getStoryDeck() {
+    const glossary = window.STORY_GLOSSARY || {};
+    return Object.entries(loadStoryWords())
+      .filter(([key]) => glossary[key])
+      .sort((a, b) => b[1].added - a[1].added)
+      .map(([key, meta]) => ({ key, meta, id: storyWordCardId(key), gloss: glossary[key] }));
+  }
+
+  function countDueStoryWords() {
+    return getStoryDeck().filter(c => isDue(getCardState(srsData, c.id))).length;
+  }
+
+  // ── List screen ──
+
+  function renderStoriesPage() {
+    const list = $('#story-list');
+    if (!list) return;
+
+    const stories = window.STORIES_DATA || [];
+    list.innerHTML = STORY_LEVELS.map(level => {
+      const items = stories.filter(s => s.level === level);
+      if (items.length === 0) return '';
+      return `
+        <section class="story-level">
+          <h2 class="story-level-title"><span class="story-level-badge">${level.toUpperCase()}</span>${STORY_LEVEL_BLURB[level]}</h2>
+          <div class="chapter-grid">
+            ${items.map(s => `
+              <a class="chapter-card story-card" href="#${s.id}" data-story="${s.id}">
+                <div class="chapter-card-title story-card-title">${storyRubyHtml(s.title)}</div>
+                <div class="chapter-card-sub">${s.titleEn}</div>
+                <div class="chapter-card-sub">${s.sentences.length} sentences</div>
+              </a>
+            `).join('')}
+          </div>
+        </section>
+      `;
+    }).join('');
+
+    renderStoryDeck();
+  }
+
+  function renderStoryDeck() {
+    const deck = getStoryDeck();
+    const due = deck.filter(c => isDue(getCardState(srsData, c.id))).length;
+
+    const dueEl = $('#story-deck-due');
+    if (dueEl) dueEl.textContent = due;
+    const totalEl = $('#story-deck-total');
+    if (totalEl) totalEl.textContent = `${deck.length} saved word${deck.length === 1 ? '' : 's'}`;
+
+    const btn = $('#btn-story-review');
+    if (btn) {
+      btn.disabled = deck.length === 0;
+      btn.textContent = deck.length === 0 ? 'No words yet' : due > 0 ? 'Review' : 'Practice all';
+    }
+
+    const listEl = $('#story-deck-list');
+    if (listEl) {
+      listEl.innerHTML = deck.length
+        ? deck.map(c => `
+            <li class="story-deck-row">
+              <span class="story-deck-word">${storyDisplayWord(c.key)}</span>
+              <span class="story-deck-reading">${c.gloss[0] !== storyDisplayWord(c.key) ? c.gloss[0] : ''}</span>
+              <span class="story-deck-meaning">${c.gloss[1]}</span>
+              <button class="story-deck-remove" data-word="${c.key}" aria-label="Remove ${storyDisplayWord(c.key)} from flashcards" title="Remove">✕</button>
+            </li>
+          `).join('')
+        : '<li class="story-deck-empty">Open a story and tap any word you don\'t know, then “Add to flashcards”.</li>';
+    }
+  }
+
+  // ── Reader screen ──
+
+  function openStory(id) {
+    const story = getStory(id);
+    if (!story) return;
+    currentStory = story;
+    storySelection = null;
+    storyActiveGrammar = null;
+    if (location.hash !== `#${id}`) history.replaceState(null, '', `#${id}`);
+    showScreen('story');
+    renderStoryReader();
+    window.scrollTo(0, 0);
+  }
+
+  function closeStory() {
+    currentStory = null;
+    if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+    showScreen('chapters');
+    renderStoriesPage();
+  }
+
+  function renderStoryReader() {
+    const story = currentStory;
+    if (!story) return;
+
+    $('#story-level').textContent = story.level.toUpperCase();
+    $('#story-title').innerHTML = storyTextHtml(story.title);
+    $('#story-title-en').textContent = story.titleEn;
+    $('#story-toggle-furigana').checked = settings.showFurigana;
+    $('#story-toggle-english').checked = !!settings.storyShowEnglish;
+
+    const saved = loadStoryWords();
+    $('#story-text').innerHTML = story.sentences.map((sentence, si) => {
+      const tokensHtml = parseStorySentence(sentence).map((t, ti) => {
+        if (!t.key) return `<span class="story-punct">${t.surface}</span>`;
+        const cls = 'story-word' + (saved[t.key] ? ' saved' : '');
+        return `<span class="${cls}" data-s="${si}" data-t="${ti}" role="button" tabindex="0">${storyTextHtml(t.surface)}</span>`;
+      }).join('');
+      return `
+        <div class="story-sentence" data-s="${si}">
+          <button class="story-sentence-num" data-s="${si}" aria-label="Grammar in sentence ${si + 1}" title="Show grammar">${si + 1}</button>
+          <div class="story-sentence-body">
+            <div class="story-jp" lang="ja">${tokensHtml}</div>
+            <div class="story-en">${sentence.en}</div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    $('#story-text').classList.toggle('show-english', !!settings.storyShowEnglish);
+
+    const stories = window.STORIES_DATA || [];
+    const idx = stories.indexOf(story);
+    const prev = stories[idx - 1];
+    const next = stories[idx + 1];
+    const prevBtn = $('#btn-story-prev');
+    const nextBtn = $('#btn-story-next');
+    prevBtn.classList.toggle('hidden', !prev);
+    nextBtn.classList.toggle('hidden', !next);
+    if (prev) { prevBtn.dataset.story = prev.id; prevBtn.textContent = `← ${prev.titleEn}`; }
+    if (next) { nextBtn.dataset.story = next.id; nextBtn.textContent = `${next.titleEn} →`; }
+
+    renderStorySelection();
+  }
+
+  function selectStoryWord(si, ti) {
+    storySelection = { type: 'word', s: si, t: ti };
+    storyActiveGrammar = null;
+    renderStorySelection();
+  }
+
+  function selectStorySentence(si) {
+    storySelection = { type: 'sentence', s: si };
+    storyActiveGrammar = null;
+    renderStorySelection();
+  }
+
+  function clearStorySelection() {
+    storySelection = null;
+    storyActiveGrammar = null;
+    renderStorySelection();
+  }
+
+  function renderStorySelection() {
+    const text = $('#story-text');
+    const panel = $('#story-panel');
+    if (!text || !panel || !currentStory) return;
+
+    const sel = storySelection;
+    text.querySelectorAll('.story-sentence').forEach(el => {
+      el.classList.toggle('selected', !!sel && Number(el.dataset.s) === sel.s);
+    });
+    text.querySelectorAll('.story-word').forEach(el => {
+      el.classList.toggle('selected', !!sel && sel.type === 'word' &&
+        Number(el.dataset.s) === sel.s && Number(el.dataset.t) === sel.t);
+    });
+    highlightStoryGrammar(storyActiveGrammar);
+
+    panel.classList.toggle('open', !!sel);
+    const body = $('#story-panel-body');
+    if (!sel) {
+      body.innerHTML = `
+        <p class="story-panel-empty">
+          Tap a <strong>word</strong> to look it up and add it to your flashcards.<br>
+          Tap a <strong>sentence number</strong> (or the space beside a sentence) to see its grammar.
+        </p>`;
+      return;
+    }
+
+    const sentence = currentStory.sentences[sel.s];
+    if (sel.type === 'word') {
+      const token = parseStorySentence(sentence)[sel.t];
+      const [reading, meaning, pos] = window.STORY_GLOSSARY[token.key];
+      const word = storyDisplayWord(token.key);
+      const savedNow = isStoryWordSaved(token.key);
+      body.innerHTML = `
+        <div class="story-panel-kicker">Word</div>
+        <div class="story-panel-word" lang="ja">${word}</div>
+        ${reading !== word ? `<div class="story-panel-reading" lang="ja">${reading}</div>` : ''}
+        <div class="story-panel-pos">${pos}</div>
+        <div class="story-panel-meaning">${meaning}</div>
+        ${token.plain !== word ? `<div class="story-panel-form">In the text: <span lang="ja">${token.plain}</span></div>` : ''}
+        <button class="${savedNow ? 'btn-secondary' : 'btn-primary'} story-panel-add" id="btn-story-add-word">
+          ${savedNow ? '✓ In flashcards — remove' : '＋ Add to flashcards'}
+        </button>
+        <button class="story-panel-link" id="btn-story-word-sentence">Grammar in this sentence →</button>
+      `;
+      return;
+    }
+
+    const items = sentence.grammar.map((ref, gi) => {
+      const { id, snippet } = parseStoryGrammarRef(ref);
+      const g = window.STORY_GRAMMAR[id];
+      if (!g) return '';
+      return `
+        <li class="story-grammar-item${storyActiveGrammar === gi ? ' active' : ''}" data-g="${gi}" tabindex="0">
+          <div class="story-grammar-head">
+            <span class="story-grammar-title">${g.title}</span>
+            <span class="story-grammar-level">${g.level}</span>
+          </div>
+          <div class="story-grammar-pattern" lang="ja">${g.pattern}</div>
+          <div class="story-grammar-note">${g.note}</div>
+          ${snippet ? `<div class="story-grammar-here">Here: <span lang="ja">${snippet}</span></div>` : ''}
+        </li>
+      `;
+    }).join('');
+    body.innerHTML = `
+      <div class="story-panel-kicker">Sentence ${sel.s + 1}</div>
+      <div class="story-panel-sentence" lang="ja">${storyRubyHtml(sentence.jp.split(' ').map(t => t.split('>')[0]).join(''))}</div>
+      <div class="story-panel-en">${sentence.en}</div>
+      <div class="story-panel-kicker">Grammar</div>
+      <ul class="story-grammar-list">${items}</ul>
+    `;
+  }
+
+  // Highlights the words a grammar point covers, or clears highlights for null.
+  function highlightStoryGrammar(gi) {
+    const text = $('#story-text');
+    if (!text) return;
+    text.querySelectorAll('.story-word.grammar-hit').forEach(el => el.classList.remove('grammar-hit'));
+    if (gi === null || !storySelection || storySelection.type !== 'sentence') return;
+    const sentence = currentStory.sentences[storySelection.s];
+    const ref = sentence.grammar[gi];
+    if (!ref) return;
+    storySnippetTokens(sentence, parseStoryGrammarRef(ref).snippet).forEach(ti => {
+      const el = text.querySelector(`.story-word[data-s="${storySelection.s}"][data-t="${ti}"]`);
+      if (el) el.classList.add('grammar-hit');
+    });
+  }
+
+  // ── Flashcard review ──
+
+  function startStoryReview() {
+    const deck = getStoryDeck();
+    if (deck.length === 0) return;
+    const due = deck.filter(c => isDue(getCardState(srsData, c.id)));
+    storyReviewCards = prioritizeDifficult(due.length > 0 ? due : deck.slice()).slice(0, 20);
+    storyReviewIndex = 0;
+    storyReviewCorrect = 0;
+
+    showScreen('story-review');
+    $('#story-review-complete').classList.add('hidden');
+    $('#story-review-card').classList.remove('hidden');
+    showStoryReviewCard();
+  }
+
+  function showStoryReviewCard() {
+    if (storyReviewIndex >= storyReviewCards.length) {
+      finishStoryReview();
+      return;
+    }
+    const card = storyReviewCards[storyReviewIndex];
+    storyReviewAnswered = false;
+
+    const total = storyReviewCards.length;
+    $('#story-review-bar-fill').style.width = `${(storyReviewIndex / total) * 100}%`;
+    $('#story-review-progress-text').textContent = `${storyReviewIndex + 1} / ${total}`;
+
+    $('#story-review-prompt').textContent = storyDisplayWord(card.key);
+    $('#story-review-reveal-area').classList.remove('hidden');
+    $('#story-review-answer-area').classList.add('hidden');
+
+    const [reading, meaning, pos] = card.gloss;
+    const word = storyDisplayWord(card.key);
+    $('#story-review-answer').innerHTML = `
+      ${reading !== word ? `<div class="story-panel-reading" lang="ja">${reading}</div>` : ''}
+      <div class="story-panel-meaning">${meaning}</div>
+      <div class="story-panel-pos">${pos}</div>
+    `;
+
+    // Show the sentence the word was saved from, with the word highlighted.
+    const story = getStory(card.meta.story);
+    const sentence = story && story.sentences[card.meta.s];
+    const ctx = $('#story-review-context');
+    if (sentence) {
+      const html = parseStorySentence(sentence).map(t => {
+        const piece = storyRubyHtml(t.surface);
+        return t.key === card.key ? `<mark>${piece}</mark>` : piece;
+      }).join('');
+      ctx.innerHTML = `
+        <div class="story-review-context-jp" lang="ja">${html}</div>
+        <div class="story-review-context-en">${sentence.en}</div>
+        <div class="story-review-context-src">from “${story.titleEn}”</div>
+      `;
+    } else {
+      ctx.innerHTML = '';
+    }
+  }
+
+  function revealStoryReviewAnswer() {
+    if (storyReviewAnswered) return;
+    storyReviewAnswered = true;
+    $('#story-review-reveal-area').classList.add('hidden');
+    $('#story-review-answer-area').classList.remove('hidden');
+  }
+
+  function gradeStoryReviewAndAdvance(grade) {
+    if (!storyReviewAnswered) return;
+    const card = storyReviewCards[storyReviewIndex];
+    srsData[card.id] = gradeCard(getCardState(srsData, card.id), grade);
+    saveSRS(srsData);
+    flashSaveIndicator();
+    if (grade > 1) storyReviewCorrect++;
+    storyReviewIndex++;
+    showStoryReviewCard();
+  }
+
+  function finishStoryReview() {
+    $('#story-review-card').classList.add('hidden');
+    $('#story-review-complete').classList.remove('hidden');
+    $('#story-review-bar-fill').style.width = '100%';
+    const total = storyReviewCards.length;
+    $('#story-review-total').textContent = total;
+    $('#story-review-correct').textContent = storyReviewCorrect;
+    $('#story-review-accuracy').textContent = total ? `${Math.round((storyReviewCorrect / total) * 100)}%` : '0%';
+  }
+
   // ─── Utilities ─────────────────────────────────────────────────────────────────
 
   function shuffle(arr) {
@@ -3202,6 +3654,9 @@
       renderWbkPage();
     } else if (mode === 'particles') {
       renderParticlesPanel();
+    } else if (mode === 'stories') {
+      renderStoriesPage();
+      if (getStory(location.hash.slice(1))) openStory(location.hash.slice(1));
     } else {
       renderHub();
     }
@@ -3223,6 +3678,7 @@
       else if (mode === 'kana') renderKanaPanel();
       else if (mode === 'kanji-quiz') renderKanjiQuizPanel();
       else if (mode === 'particles') renderParticlesPanel();
+      else if (mode === 'stories') closeStory();
     });
 
     // Reference overlay
@@ -3683,6 +4139,122 @@
       }
     }, true);
 
+    // ─── Stories page ────────────────────────────────────────────────────────────
+
+    // Story cards are plain #id links, so the browser's own Back button
+    // returns from a story to the list.
+    if (mode === 'stories') {
+      window.addEventListener('hashchange', () => {
+        const id = location.hash.slice(1);
+        if (getStory(id)) openStory(id);
+        else if (screens.story && screens.story.classList.contains('active')) closeStory();
+      });
+    }
+
+    on('#story-text', 'click', (e) => {
+      const word = e.target.closest('.story-word');
+      if (word) {
+        selectStoryWord(Number(word.dataset.s), Number(word.dataset.t));
+        return;
+      }
+      const sentence = e.target.closest('.story-sentence');
+      if (sentence) selectStorySentence(Number(sentence.dataset.s));
+    });
+
+    on('#story-text', 'keydown', (e) => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      const word = e.target.closest('.story-word');
+      if (!word) return;
+      consumeKey(e);
+      selectStoryWord(Number(word.dataset.s), Number(word.dataset.t));
+    });
+
+    on('#story-panel', 'click', (e) => {
+      if (e.target.closest('#btn-story-panel-close')) { clearStorySelection(); return; }
+      if (e.target.closest('#btn-story-add-word')) {
+        const sel = storySelection;
+        const token = parseStorySentence(currentStory.sentences[sel.s])[sel.t];
+        toggleStoryWord(token.key, currentStory.id, sel.s);
+        const saved = isStoryWordSaved(token.key);
+        $$('#story-text .story-word').forEach(el => {
+          const t = parseStorySentence(currentStory.sentences[el.dataset.s])[el.dataset.t];
+          if (t.key === token.key) el.classList.toggle('saved', saved);
+        });
+        renderStorySelection();
+        return;
+      }
+      if (e.target.closest('#btn-story-word-sentence')) { selectStorySentence(storySelection.s); return; }
+      const item = e.target.closest('.story-grammar-item');
+      if (item) {
+        const gi = Number(item.dataset.g);
+        storyActiveGrammar = storyActiveGrammar === gi ? null : gi;
+        $$('#story-panel .story-grammar-item').forEach(el => el.classList.toggle('active', Number(el.dataset.g) === storyActiveGrammar));
+        highlightStoryGrammar(storyActiveGrammar);
+      }
+    });
+
+    // Hovering a grammar point previews its highlight; leaving restores the
+    // clicked (pinned) one, if any.
+    on('#story-panel', 'mouseover', (e) => {
+      const item = e.target.closest('.story-grammar-item');
+      if (item) highlightStoryGrammar(Number(item.dataset.g));
+    });
+    on('#story-panel', 'mouseout', (e) => {
+      const item = e.target.closest('.story-grammar-item');
+      if (item && !item.contains(e.relatedTarget)) highlightStoryGrammar(storyActiveGrammar);
+    });
+
+    on('#story-toggle-furigana', 'change', (e) => {
+      settings.showFurigana = e.target.checked;
+      saveSettings(settings);
+      renderStoryReader();
+    });
+
+    on('#story-toggle-english', 'change', (e) => {
+      settings.storyShowEnglish = e.target.checked;
+      saveSettings(settings);
+      $('#story-text').classList.toggle('show-english', settings.storyShowEnglish);
+    });
+
+    on('#btn-story-prev', 'click', (e) => { location.hash = e.currentTarget.dataset.story; });
+    on('#btn-story-next', 'click', (e) => { location.hash = e.currentTarget.dataset.story; });
+
+    on('#story-deck-list', 'click', (e) => {
+      const btn = e.target.closest('.story-deck-remove');
+      if (!btn) return;
+      toggleStoryWord(btn.dataset.word);
+      renderStoryDeck();
+    });
+
+    on('#btn-story-review', 'click', startStoryReview);
+    on('#btn-story-review-reveal', 'click', revealStoryReviewAnswer);
+    $$('.btn-grade[data-story-grade]').forEach(btn => {
+      btn.addEventListener('click', () => gradeStoryReviewAndAdvance(parseInt(btn.dataset.storyGrade, 10)));
+    });
+    on('#btn-story-review-done', 'click', closeStory);
+
+    document.addEventListener('keydown', (e) => {
+      if (mode !== 'stories') return;
+
+      if (screens.story && screens.story.classList.contains('active')) {
+        if (e.key === 'Escape' && storySelection) { consumeKey(e); clearStorySelection(); }
+        return;
+      }
+
+      if (!(screens['story-review'] && screens['story-review'].classList.contains('active'))) return;
+
+      if (!$('#story-review-complete').classList.contains('hidden')) {
+        if (e.key === ' ' && !focusHasOwnSpaceAction()) { consumeKey(e); closeStory(); }
+        return;
+      }
+      if (!storyReviewAnswered) {
+        if (e.key === ' ' || e.key === 'Enter') { consumeKey(e); revealStoryReviewAnswer(); }
+        return;
+      }
+      if (e.key === '1') { consumeKey(e); gradeStoryReviewAndAdvance(1); return; }
+      if (e.key === '2' || e.key === ' ') { consumeKey(e); gradeStoryReviewAndAdvance(4); }
+    }, true);
+
     // Reference tabs
     $$('.ref-tab').forEach(tab => {
       tab.addEventListener('click', () => {
@@ -3704,6 +4276,7 @@
         else if (mode === 'kana') renderKanaPanel();
         else if (mode === 'kanji-quiz') renderKanjiQuizPanel();
         else if (mode === 'particles') renderParticlesPanel();
+        else if (mode === 'stories') renderStoryDeck();
         else if (mode === 'hub') renderHub();
       }
     });
