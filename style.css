@@ -2796,6 +2796,24 @@ a.chapter-card {
   margin-bottom: 12px;
 }
 
+/* The Furigana / English toggles stay pinned just under the sticky header
+   (68px tall) while you scroll through a story. */
+.story-toggles {
+  position: sticky;
+  top: 68px;
+  z-index: 90;
+  margin-bottom: 12px;
+  padding: 8px 0;
+  background: var(--bg);
+  /* Paint the bar's background edge to edge, like the header. */
+  box-shadow: 0 0 0 100vmax var(--bg);
+  clip-path: inset(0 -100vmax);
+}
+
+.story-toggles .kana-script-toggle {
+  padding: 7px 14px;
+}
+
 .story-title {
   font-family: var(--font-jp);
   font-size: 1.7rem;
@@ -2944,8 +2962,13 @@ a.chapter-card {
 /* Detail panel: a sticky sidebar on wide screens, a bottom sheet on phones. */
 .story-panel {
   position: sticky;
-  top: 84px;
-  max-height: calc(100dvh - 100px);
+  /* Below the header (68px) and the pinned toggle bar (~54px). */
+  top: 132px;
+  max-height: calc(100dvh - 148px);
+  /* Near the end of a story the panel gets pushed up by the text column; keep
+     it above the toggle bar's background (the toggles sit on the left, the
+     panel on the right) but below the header. */
+  z-index: 95;
   overflow-y: auto;
   background: var(--bg-card);
   border: 1px solid var(--border);
