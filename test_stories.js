@@ -5,7 +5,7 @@ global.window = global;
 require('./stories-data.js');
 
 const { STORIES_DATA, STORY_GLOSSARY, STORY_GRAMMAR } = global;
-const PUNCT = new Set(['。', '、', '「', '」', '？', '！', '…']);
+const PUNCT = new Set(['。', '、', '「', '」', '『', '』', '？', '！', '…']);
 const stripFurigana = (s) => s.replace(/\[[^\]]*\]/g, '');
 
 let passed = 0;
