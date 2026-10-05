@@ -3006,7 +3006,7 @@
     n3: 'Plain-form narration: passive, causative, hearsay and nuance.',
   };
   const STORY_WORDS_KEY = 'tokidoki_story_words';
-  const STORY_PUNCT = new Set(['。', '、', '「', '」', '？', '！']);
+  const STORY_PUNCT = new Set(['。', '、', '「', '」', '？', '！', '…']);
   const STORY_FURIGANA_RE = /([一-鿿々]+)\[([^\]]+)\]/g;
 
   let currentStory = null;
