@@ -4541,6 +4541,18 @@
       });
     }
 
+    // Clicking anywhere outside the panel deselects. Sentences and words
+    // select (their own handler below), and the Furigana / English toggles
+    // keep the selection. Capture phase, so this runs before panel buttons
+    // re-render the panel and detach the clicked element.
+    if (mode === 'stories') {
+      document.addEventListener('click', (e) => {
+        if (!storySelection || !(screens.story && screens.story.classList.contains('active'))) return;
+        if (e.target.closest('#story-panel, .story-sentence, .story-toggles')) return;
+        clearStorySelection();
+      }, true);
+    }
+
     on('#story-text', 'click', (e) => {
       const word = e.target.closest('.story-word');
       if (word) {
