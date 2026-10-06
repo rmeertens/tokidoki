@@ -410,7 +410,7 @@
         ? `<span class="notepad-composing">${pending ? piecesHtml(pending.pieces) : esc(input.value)}</span>`
         : '') + '<span class="notepad-caret" aria-hidden="true"></span>';
       if (!doc.length && !input.value) {
-        paper.innerHTML = '<span class="notepad-placeholder">Start typing below…</span>' + caret;
+        paper.innerHTML = '<span class="notepad-placeholder">Type in the text box below</span>';
         return;
       }
       const wordHtml = i => (i === pos ? caret : '') + (isBreak(doc[i]) ? '<br>'
