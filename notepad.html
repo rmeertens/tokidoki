@@ -60,19 +60,25 @@
       <p class="tab-intro">
         Type romaji (<em>watashi wa gakusei desu</em>) or an English word (<em>cat</em>) and pick
         how to write it &mdash; kanji, hiragana or katakana. Whole phrases are split into words
-        for you, and the finished text shows furigana above every kanji.
+        for you, and the finished text shows furigana above every kanji. Click a sentence to
+        see each word&rsquo;s reading and meaning, listen to it, or change it.
       </p>
 
       <div class="notepad-paper" id="notepad-paper" lang="ja" aria-live="polite"></div>
+      <div class="notepad-panel hidden" id="notepad-panel" aria-live="polite"></div>
 
       <div class="notepad-compose">
-        <input type="text" id="notepad-input" class="answer-input notepad-input" placeholder="Type here… e.g. nihongo, taberu, house"
-               autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Type romaji or English" aria-controls="notepad-candidates">
+        <div class="notepad-input-row">
+          <input type="text" id="notepad-input" class="answer-input notepad-input" placeholder="Type here… e.g. nihongo, taberu, house"
+                 autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Type romaji or English" aria-controls="notepad-candidates">
+          <button type="button" class="icon-btn notepad-cancel hidden" id="btn-notepad-cancel" aria-label="Cancel" title="Cancel (Esc)">✕</button>
+        </div>
         <div class="notepad-candidates hidden" id="notepad-candidates" role="listbox" aria-label="Candidates"></div>
       </div>
       <p class="notepad-keys">
         <kbd>Space</kbd> / <kbd>Enter</kbd> pick the highlighted choice &middot; <kbd>&uarr;</kbd><kbd>&darr;</kbd> or <kbd>Tab</kbd> move &middot;
-        <kbd>1</kbd>&ndash;<kbd>9</kbd> choose &middot; <kbd>Esc</kbd> cancel &middot; <kbd>Backspace</kbd> deletes from the notepad &middot;
+        <kbd>1</kbd>&ndash;<kbd>9</kbd> choose &middot; <kbd>Esc</kbd> or ✕ cancel &middot; <kbd>Backspace</kbd> deletes from the notepad &middot;
+        <kbd>&larr;</kbd><kbd>&rarr;</kbd> move the cursor &middot; click a sentence to see its words, hear it, or edit it &middot;
         <kbd>.</kbd> <kbd>,</kbd> <kbd>?</kbd> <kbd>!</kbd> type 。、？！ &middot; <kbd>-</kbd> is ー
       </p>
 

@@ -16,6 +16,7 @@
   const HAS_KANJI = new RegExp('[' + KANJI + ']');
   const KANJI_SPLIT = new RegExp('[' + KANJI + ']+|[^' + KANJI + ']+', 'g');
   const KANA_ONLY = /^[ぁ-ゖァ-ヺー]+$/;
+  const KANA_OR_PUNCT = /^[\u3041-\u3096\u30a1-\u30faー。、？！「」（）：〜　]+$/;
   const HIRAGANA_CHAR = /[ぁ-ゖー]/;
 
   const toHira = s => s.replace(/[ァ-ヶ]/g, c => String.fromCharCode(c.charCodeAt(0) - 0x60));
@@ -189,23 +190,23 @@
 
   // Splits a kana string into words, picking the cheapest path: dictionary
   // words cost ~1, particles less, a stem plus its conjugated ending a bit
-  // more, and an unknown kana 3. Returns furigana pieces.
+  // more, and an unknown kana 3. Returns words: { p: furigana pieces, m: meaning }.
   function segment(kana, dict) {
     const n = kana.length;
     const best = new Array(n + 1).fill(Infinity);
     const back = new Array(n + 1);
     best[0] = 0;
-    const relax = (i, j, cost, pieces) => {
-      if (best[i] + cost < best[j]) { best[j] = best[i] + cost; back[j] = { i, pieces }; }
+    const relax = (i, j, cost, p, m) => {
+      if (best[i] + cost < best[j]) { best[j] = best[i] + cost; back[j] = { i, word: { p, m: m || '' } }; }
     };
     for (let i = 0; i < n; i++) {
       if (best[i] === Infinity) continue;
       relax(i, i + 1, 3, [{ t: kana[i] }]);
       for (let len = 1; len <= Math.min(12, n - i); len++) {
         const s = kana.substr(i, len);
-        if (PARTICLES.has(s)) relax(i, i + len, 0.6, [{ t: s }]);
+        if (PARTICLES.has(s)) relax(i, i + len, 0.6, [{ t: s }], kanaMeaning(s, dict));
         const words = dict.byReading.get(s);
-        if (words) relax(i, i + len, wordCost(words[0]), words[0].pieces);
+        if (words) relax(i, i + len, wordCost(words[0]), words[0].pieces, words[0].meaning);
         const stems = dict.stems.get(s);
         if (stems) {
           for (let tail = 1; tail <= 10 && i + len + tail <= n; tail++) {
@@ -213,14 +214,26 @@
             if (!HIRAGANA_CHAR.test(t.slice(-1))) break;
                         let st = null;
             stems.forEach(x => { if (validTail(t, x) && (!st || stemCost(x, tail) < stemCost(st, tail))) st = x; });
-            if (st) relax(i, i + len + tail, stemCost(st, tail), st.pieces.concat({ t }));
+            if (st) relax(i, i + len + tail, stemCost(st, tail), st.pieces.concat({ t }), st.meaning);
           }
         }
       }
     }
     const out = [];
-    for (let j = n; j > 0; j = back[j].i) out.unshift(...back[j].pieces);
-    return mergePieces(out);
+    for (let j = n; j > 0; j = back[j].i) out.unshift(back[j].word);
+    // Runs of unknown kana become one word.
+    return out.reduce((acc, w) => {
+      const prev = acc[acc.length - 1];
+      if (prev && !w.m && !prev.m && !w.p.some(x => x.r) && !prev.p.some(x => x.r)) prev.p = mergePieces(prev.p.concat(w.p));
+      else acc.push(w);
+      return acc;
+    }, []);
+  }
+
+  // Meaning of a kana-only word (は, ください) from the glossary, if listed.
+  function kanaMeaning(s, dict) {
+    const e = (dict.byReading.get(s) || []).find(x => x.text === s);
+    return e ? e.meaning : '';
   }
 
   // Joins neighbouring kana-only pieces so the document stays tidy.
@@ -254,14 +267,19 @@
     return hits.slice(0, limit);
   }
 
-  const plain = (t, hint) => ({ pieces: [{ t }], text: t, hint: hint || '' });
-  const fromPieces = (pieces, hint) => ({ pieces, text: pieces.map(p => p.t).join(''), hint: hint || '' });
+  // A candidate is a list of words; `pieces` is the flattened furigana run.
+  function fromWords(words, hint) {
+    const pieces = mergePieces([].concat(...words.map(w => w.p)));
+    return { words, pieces, text: pieces.map(p => p.t).join(''), hint: hint || '' };
+  }
+  const fromPieces = (pieces, hint) => fromWords([{ p: pieces, m: hint || '' }], hint);
 
   // Candidate spellings for what's in the input box, best first.
   //   opts.katakana — prefer katakana over hiragana for plain kana
   //   opts.kanaFirst — prefer kana over kanji suggestions
   function candidates(raw, dict, opts) {
     opts = opts || {};
+    const plain = t => fromPieces([{ t }], kanaMeaning(toHira(t), dict));
     const list = [];
     const seen = new Set();
     const add = c => { if (c && c.text && !seen.has(c.text)) { seen.add(c.text); list.push(c); } };
@@ -271,7 +289,7 @@
     const english = /^[a-z][a-z' -]*$/i.test(raw.trim()) ? englishMatches(raw, dict, 8) : [];
     const englishCands = english.map(h => fromPieces(h.e.pieces, h.e.meaning));
 
-    if (!KANA_ONLY.test(converted)) {
+    if (!KANA_OR_PUNCT.test(converted)) {
       // Not valid romaji ("cat", "eat"): English lookups lead.
       englishCands.forEach(add);
       add(plain(raw));
@@ -289,9 +307,10 @@
     if (!exact.length) english.filter(h => h.score < 2).forEach(h => add(fromPieces(h.e.pieces, h.e.meaning)));
     if (kanaFirst) add(plain(kana));
     const seg = segment(hira, dict);
-    if (!exact.length && seg.some(p => p.r)) add(fromPieces(seg));
+    const segKanji = seg.some(w => w.p.some(p => p.r));
+    if (!exact.length && (segKanji || seg.length > 1)) add(fromWords(seg));
     exact.forEach(e => add(fromPieces(e.pieces, e.meaning)));
-    if (exact.length && seg.length > 1 && seg.some(p => p.r)) add(fromPieces(seg));
+    if (exact.length && seg.length > 1 && segKanji) add(fromWords(seg));
 
     // Conjugated forms, most likely first.
     const conj = [];
@@ -320,16 +339,19 @@
 
   const STORAGE_KEY = 'tokidoki-notepad';
   const PUNCT = { '.': '。', ',': '、', '?': '？', '!': '！', '(': '（', ')': '）', '[': '「', ']': '」', ':': '：', '~': '〜' };
+  const SENTENCE_END = /[。？！]$/;
 
   function initPage() {
     const paper = document.getElementById('notepad-paper');
     const input = document.getElementById('notepad-input');
     if (!paper || !input) return;
     const candBox = document.getElementById('notepad-candidates');
+    const panel = document.getElementById('notepad-panel');
     const furiToggle = document.getElementById('notepad-furigana');
     const kataToggle = document.getElementById('notepad-katakana');
     const kanaToggle = document.getElementById('notepad-kana-first');
     const status = document.getElementById('notepad-status');
+    const cancelBtn = document.getElementById('btn-notepad-cancel');
 
     let dict = null;
     const getDict = () => dict || (dict = buildDictionary());
@@ -337,8 +359,14 @@
     const load = (k, fallback) => { try { const v = localStorage.getItem(k); return v == null ? fallback : JSON.parse(v); } catch { return fallback; } };
     const save = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* storage unavailable */ } };
 
+    // The document is a list of words, { p: furigana pieces, m: meaning };
+    // punctuation, spaces and line breaks are words of their own. Older saves
+    // were a flat list of pieces.
     let doc = load(STORAGE_KEY, []);
     if (!Array.isArray(doc)) doc = [];
+    doc = doc.filter(w => w && (w.p || w.t)).map(w => (w.p ? w : { p: [w], m: '' }));
+    let pos = doc.length; // caret: new words go in before doc[pos]
+    let selected = null;  // { start, end } of the sentence shown in the panel
     let cands = [];
     let candsFor = '';
     let sel = 0;
@@ -353,19 +381,84 @@
       if (p.r && HAS_KANJI.test(p.t)) return `<ruby>${esc(p.t)}<rp>(</rp><rt>${esc(p.r)}</rt><rp>)</rp></ruby>`;
       return esc(p.t);
     }).join('');
+    const wordText = w => w.p.map(x => x.t).join('');
+    const wordReading = w => w.p.map(x => x.r || x.t).join('');
+    const isBreak = w => wordText(w) === '\n';
+
+    // Sentences as [start, end) index ranges: each ends after 。？！ or at a
+    // line break (the break itself belongs to no sentence).
+    function sentences() {
+      const out = [];
+      let start = 0;
+      doc.forEach((w, i) => {
+        if (isBreak(w)) {
+          if (i > start) out.push({ start, end: i });
+          start = i + 1;
+        } else if (SENTENCE_END.test(wordText(w))) {
+          out.push({ start, end: i + 1 });
+          start = i + 1;
+        }
+      });
+      if (doc.length > start) out.push({ start, end: doc.length });
+      return out;
+    }
 
     function renderPaper() {
       paper.classList.toggle('no-furigana', !furiToggle.checked);
       const pending = cands[sel];
-      const composing = input.value
+      const caret = (input.value
         ? `<span class="notepad-composing">${pending ? piecesHtml(pending.pieces) : esc(input.value)}</span>`
-        : '';
-      const empty = !doc.length && !input.value;
-      paper.innerHTML = (empty ? '<span class="notepad-placeholder">Start typing below…</span>' : piecesHtml(doc))
-        + composing + '<span class="notepad-caret" aria-hidden="true"></span>';
+        : '') + '<span class="notepad-caret" aria-hidden="true"></span>';
+      if (!doc.length && !input.value) {
+        paper.innerHTML = '<span class="notepad-placeholder">Start typing below…</span>' + caret;
+        return;
+      }
+      const wordHtml = i => (i === pos ? caret : '') + (isBreak(doc[i]) ? '<br>'
+        : `<span class="notepad-word" data-i="${i}">${piecesHtml(doc[i].p)}</span>`);
+      let html = '';
+      let i = 0;
+      sentences().forEach(sn => {
+        for (; i < sn.start; i++) html += wordHtml(i); // line breaks between sentences
+        const isSel = selected && selected.start === sn.start;
+        html += `<span class="notepad-sentence${isSel ? ' selected' : ''}" data-start="${sn.start}" data-end="${sn.end}">`;
+        for (; i < sn.end; i++) html += wordHtml(i);
+        html += '</span>';
+      });
+      for (; i < doc.length; i++) html += wordHtml(i);
+      if (pos >= doc.length) html += caret;
+      paper.innerHTML = html;
+    }
+
+    function renderPanel() {
+      if (!selected) { panel.classList.add('hidden'); panel.innerHTML = ''; return; }
+      const words = doc.slice(selected.start, selected.end);
+      const rows = words.filter(w => !/^[\s　。、？！「」（）：〜]*$/.test(wordText(w))).map(w => {
+        const reading = wordReading(w);
+        return `<li class="notepad-panel-word">
+          <span class="notepad-panel-jp" lang="ja">${piecesHtml(w.p)}</span>
+          ${reading !== wordText(w) ? `<span class="notepad-panel-reading" lang="ja">${esc(reading)}</span>` : ''}
+          <span class="notepad-panel-meaning">${esc(w.m || '')}</span>
+        </li>`;
+      }).join('');
+      const canSpeak = 'speechSynthesis' in window;
+      panel.innerHTML = `
+        <div class="notepad-panel-head">
+          <div class="notepad-panel-sentence" lang="ja">${piecesHtml([].concat(...words.map(w => w.p)))}</div>
+          <button type="button" class="icon-btn" data-act="close" aria-label="Close">✕</button>
+        </div>
+        <div class="notepad-panel-reading-line" lang="ja">${esc(words.map(wordReading).join(''))}</div>
+        ${rows ? `<ul class="notepad-panel-words">${rows}</ul>` : ''}
+        <div class="notepad-panel-actions">
+          ${canSpeak ? '<button type="button" class="btn-secondary" data-act="speak">🔊 Listen</button>' : ''}
+          <button type="button" class="btn-secondary" data-act="copy">Copy</button>
+          <button type="button" class="btn-secondary" data-act="edit" title="Put this sentence back in the input box to pick different spellings">Edit</button>
+          <button type="button" class="btn-secondary" data-act="delete">Delete</button>
+        </div>`;
+      panel.classList.remove('hidden');
     }
 
     function renderCandidates() {
+      cancelBtn.classList.toggle('hidden', !input.value);
       if (!cands.length) { candBox.innerHTML = ''; candBox.classList.add('hidden'); return; }
       candBox.classList.remove('hidden');
       candBox.innerHTML = cands.map((c, i) => `
@@ -379,24 +472,39 @@
     }
 
     function refresh() {
-      if (input.value === candsFor && cands.length) { renderCandidates(); renderPaper(); return; }
-      candsFor = input.value;
-      cands = candidates(input.value, getDict(), { katakana: kataToggle.checked, kanaFirst: kanaToggle.checked });
-      sel = 0;
+      if (input.value !== candsFor || !cands.length) {
+        candsFor = input.value;
+        cands = candidates(input.value, getDict(), { katakana: kataToggle.checked, kanaFirst: kanaToggle.checked });
+        sel = 0;
+      }
       renderCandidates();
       renderPaper();
     }
 
-    function persist() { save(STORAGE_KEY, doc); }
+    function changed() {
+      save(STORAGE_KEY, doc);
+      if (selected) {
+        // Keep the panel on the sentence the caret is in, if it still exists.
+        const sn = sentences().find(x => x.start <= Math.max(0, pos - 1) && Math.max(0, pos - 1) < x.end);
+        selected = sn || null;
+        renderPanel();
+      }
+    }
 
-    function append(pieces) {
-      doc = mergePieces(doc.concat(pieces));
-      persist();
+    function insert(words) {
+      doc.splice(pos, 0, ...words.map(w => ({ p: w.p.map(x => ({ ...x })), m: w.m || '' })));
+      pos += words.length;
+      changed();
     }
 
     function commit(i) {
       const c = cands[i == null ? sel : i];
-      if (c) append(c.pieces);
+      if (c) insert(c.words);
+      input.value = '';
+      refresh();
+    }
+
+    function cancel() {
       input.value = '';
       refresh();
     }
@@ -409,12 +517,19 @@
     }
 
     function deleteBack() {
-      const last = doc[doc.length - 1];
-      if (!last) return;
-      if (last.r || last.t.length <= 1) doc.pop();
-      else last.t = last.t.slice(0, -1);
-      persist();
+      const w = doc[pos - 1];
+      if (!w) return;
+      const last = w.p[w.p.length - 1];
+      if (w.p.some(x => x.r) || wordText(w).length <= 1) { doc.splice(pos - 1, 1); pos--; } else {
+        last.t = last.t.slice(0, -1);
+        if (!last.t) w.p.pop();
+      }
+      changed();
       renderPaper();
+    }
+
+    function focusInput() {
+      try { input.focus({ preventScroll: true }); } catch { input.focus(); }
     }
 
     input.addEventListener('input', (e) => {
@@ -424,53 +539,133 @@
       if (lastCh === ' ' || lastCh === '　') {
         // Space commits the highlighted candidate; on its own it's a space.
         input.value = v.slice(0, -1);
-        if (input.value.trim()) { refresh(); commit(); } else { input.value = ''; append([{ t: '　' }]); refresh(); }
+        if (input.value.trim()) { refresh(); commit(); } else { input.value = ''; insert([{ p: [{ t: '　' }] }]); refresh(); }
         return;
       }
       if (PUNCT[lastCh]) {
         input.value = v.slice(0, -1);
         if (input.value) { refresh(); commit(); }
-        append([{ t: PUNCT[lastCh] }]);
+        insert([{ p: [{ t: PUNCT[lastCh] }] }]);
         refresh();
         return;
       }
       refresh();
     });
 
-    input.addEventListener('keydown', (e) => {
-      if (e.isComposing || e.keyCode === 229) return;
-      const hasText = input.value.length > 0;
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        if (hasText) commit(); else { append([{ t: '\n' }]); renderPaper(); }
-      } else if (hasText && (e.key === 'ArrowDown' || (e.key === 'Tab' && !e.shiftKey))) {
-        e.preventDefault(); setSel(sel + 1);
-      } else if (hasText && (e.key === 'ArrowUp' || (e.key === 'Tab' && e.shiftKey))) {
-        e.preventDefault(); setSel(sel - 1);
-      } else if (hasText && /^[1-9]$/.test(e.key) && cands.length >= Number(e.key) && !/^\d+$/.test(input.value)) {
-        e.preventDefault(); commit(Number(e.key) - 1);
-      } else if (e.key === 'Escape') {
-        if (hasText) { e.preventDefault(); input.value = ''; refresh(); }
-      } else if (e.key === 'Backspace' && !hasText) {
-        e.preventDefault(); deleteBack();
+    // Capture phase, and the keys we use stop there, so page-wide shortcuts
+    // and browser extensions (Vimium and friends) don't also act on them.
+    document.addEventListener('keydown', (e) => {
+      if (e.target !== input) {
+        if (e.key === 'Escape' && selected && !input.value) { selected = null; renderPanel(); renderPaper(); }
+        return;
       }
-    });
+      if (e.isComposing || e.keyCode === 229 || e.ctrlKey || e.metaKey || e.altKey) return;
+      const hasText = input.value.length > 0;
+      const consume = () => { e.preventDefault(); e.stopPropagation(); };
+      if (e.key === 'Enter') {
+        consume();
+        if (hasText) commit(); else { insert([{ p: [{ t: '\n' }] }]); renderPaper(); }
+      } else if (hasText && (e.key === 'ArrowDown' || (e.key === 'Tab' && !e.shiftKey))) {
+        consume(); setSel(sel + 1);
+      } else if (hasText && (e.key === 'ArrowUp' || (e.key === 'Tab' && e.shiftKey))) {
+        consume(); setSel(sel - 1);
+      } else if (hasText && /^[1-9]$/.test(e.key) && cands.length >= Number(e.key) && !/^\d+$/.test(input.value)) {
+        consume(); commit(Number(e.key) - 1);
+      } else if (e.key === 'Escape') {
+        if (hasText) { consume(); cancel(); } else if (selected) { consume(); selected = null; renderPanel(); renderPaper(); }
+      } else if (e.key === 'Backspace' && !hasText) {
+        consume(); deleteBack();
+      } else if (!hasText && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+        consume();
+        pos = Math.max(0, Math.min(doc.length, pos + (e.key === 'ArrowLeft' ? -1 : 1)));
+        renderPaper();
+      } else if (!hasText && (e.key === 'Home' || e.key === 'End')) {
+        consume(); pos = e.key === 'Home' ? 0 : doc.length; renderPaper();
+      }
+    }, true);
 
     input.addEventListener('compositionend', refresh);
 
     candBox.addEventListener('mousedown', e => e.preventDefault()); // keep focus in the input
     candBox.addEventListener('click', (e) => {
       const btn = e.target.closest('.notepad-cand');
-      if (btn) { commit(Number(btn.dataset.i)); input.focus(); }
+      if (btn) { commit(Number(btn.dataset.i)); focusInput(); }
     });
-    paper.addEventListener('click', () => input.focus());
+    cancelBtn.addEventListener('mousedown', e => e.preventDefault());
+    cancelBtn.addEventListener('click', () => { cancel(); focusInput(); });
+
+    // Clicking a sentence opens its breakdown and puts the caret after the
+    // word clicked; clicking blank paper moves the caret to the end.
+    paper.addEventListener('click', (e) => {
+      const word = e.target.closest('.notepad-word');
+      const sn = e.target.closest('.notepad-sentence');
+      if (sn) {
+        selected = { start: Number(sn.dataset.start), end: Number(sn.dataset.end) };
+        pos = word ? Number(word.dataset.i) + 1 : selected.end;
+      } else {
+        selected = null;
+        pos = doc.length;
+      }
+      renderPanel();
+      renderPaper();
+      focusInput();
+    });
+
+    function speak(text) {
+      try {
+        speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'ja-JP';
+        const voice = speechSynthesis.getVoices().find(v => /^ja/i.test(v.lang));
+        if (voice) u.voice = voice;
+        u.rate = 0.9;
+        speechSynthesis.speak(u);
+      } catch { /* speech unavailable */ }
+    }
+
+    panel.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-act]');
+      if (!btn || !selected) return;
+      const words = doc.slice(selected.start, selected.end);
+      const text = words.map(wordText).join('');
+      const act = btn.dataset.act;
+      if (act === 'close') {
+        selected = null;
+      } else if (act === 'speak') {
+        speak(text);
+        return;
+      } else if (act === 'copy') {
+        copy(text, 'sentence');
+        return;
+      } else if (act === 'delete') {
+        doc.splice(selected.start, selected.end - selected.start);
+        pos = selected.start;
+        selected = null;
+        save(STORAGE_KEY, doc);
+      } else if (act === 'edit') {
+        // Back into the input as kana; the end punctuation stays put.
+        let end = selected.end;
+        if (end > selected.start && SENTENCE_END.test(wordText(doc[end - 1]))) end--;
+        const kana = doc.slice(selected.start, end).map(wordReading).join('');
+        doc.splice(selected.start, end - selected.start);
+        pos = selected.start;
+        selected = null;
+        save(STORAGE_KEY, doc);
+        input.value = kana;
+        candsFor = null;
+        refresh();
+      }
+      renderPanel();
+      renderPaper();
+      focusInput();
+    });
 
     [[furiToggle, '-furigana'], [kataToggle, '-katakana'], [kanaToggle, '-kana-first']].forEach(([el, suffix]) => {
-      el.addEventListener('change', () => { save(STORAGE_KEY + suffix, el.checked); candsFor = null; refresh(); });
+      el.addEventListener('change', () => { save(STORAGE_KEY + suffix, el.checked); candsFor = null; refresh(); renderPanel(); });
     });
 
-    const plainText = () => doc.map(p => p.t).join('');
-    const bracketText = () => doc.map(p => (p.r && HAS_KANJI.test(p.t) ? `${p.t}(${p.r})` : p.t)).join('');
+    const plainText = () => doc.map(wordText).join('');
+    const bracketText = () => doc.map(w => w.p.map(p => (p.r && HAS_KANJI.test(p.t) ? `${p.t}(${p.r})` : p.t)).join('')).join('');
     function copy(text, label) {
       const done = () => { status.textContent = `Copied ${label}`; setTimeout(() => { status.textContent = ''; }, 2000); };
       if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -486,7 +681,8 @@
     document.getElementById('btn-notepad-copy-furigana').addEventListener('click', () => copy(bracketText(), 'with readings'));
     document.getElementById('btn-notepad-clear').addEventListener('click', () => {
       if (doc.length && !confirm('Clear the notepad?')) return;
-      doc = []; persist(); input.value = ''; refresh(); input.focus();
+      doc = []; pos = 0; selected = null; save(STORAGE_KEY, doc);
+      input.value = ''; refresh(); renderPanel(); focusInput();
     });
 
     refresh();

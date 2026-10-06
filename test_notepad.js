@@ -55,6 +55,11 @@ check('house', '家[いえ]');
 check('neko', 'ねこ', { kanaFirst: true });
 check('neko', 'ネコ', { katakana: true });
 
+// Sentence candidates keep word boundaries and meanings for the breakdown panel.
+const words = Notepad.candidates('watashihagakuseidesu', dict)[0].words;
+checkEq('words', words.map(w => w.p.map(p => p.t).join('')), ['私', 'は', '学生', 'です']);
+checkEq('meanings', words.map(w => !!w.m), [true, true, true, true]);
+
 checkEq('align 食べる', Notepad.align('食べる', 'たべる'), [{ t: '食', r: 'た' }, { t: 'べる' }]);
 checkEq('align 取り消す', Notepad.align('取り消す', 'とりけす'), [{ t: '取', r: 'と' }, { t: 'り' }, { t: '消', r: 'け' }, { t: 'す' }]);
 checkEq('merge', Notepad.mergePieces([{ t: 'あ' }, { t: 'い' }, { t: '猫', r: 'ねこ' }]), [{ t: 'あい' }, { t: '猫', r: 'ねこ' }]);
