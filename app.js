@@ -1149,6 +1149,7 @@
     conjugated.innerHTML = formatConjugatedWithStem(currentCard, correct);
     conjugated.style.color = fi.color;
     $('#correct-answer').textContent = correct;
+    showAnswerDiff(userAnswer, correctAnswers);
     $('#card-hint-explanation').textContent = fi.hint;
 
     const isAdj = studyMode === 'adjectives' || (studyMode === 'custom' && isAdjCard(currentCard));
@@ -1181,6 +1182,20 @@
 
   function normalize(str) {
     return str.replace(/\s/g, '').normalize('NFKC');
+  }
+
+  // A wrong typed answer gets a character diff: the typed characters that
+  // were off are marked on "Your answer", the ones it should have had on
+  // "Correct" (diffed against whichever accepted answer is closest).
+  function showAnswerDiff(userAnswer, correctAnswers) {
+    if (!settings.typingMode || !userAnswer || !window.AnswerDiff) return;
+    const answers = Array.isArray(correctAnswers) ? correctAnswers : [correctAnswers];
+    if (answers.some(a => normalize(userAnswer) === normalize(a))) return;
+    const target = AnswerDiff.closest(userAnswer, answers);
+    const d = AnswerDiff.diff(userAnswer, target);
+    $('#user-answer').innerHTML = AnswerDiff.toHtml(d.typed, 'diff-wrong');
+    $('#user-answer').style.color = '';
+    $('#correct-answer').innerHTML = AnswerDiff.toHtml(d.expected, 'diff-missing');
   }
 
   function gradeAndAdvance(grade) {
@@ -3750,6 +3765,14 @@
       const ok = Bunkei.matches(typed, built);
       input.classList.add(ok ? 'correct' : 'incorrect');
       result.innerHTML = ok ? '<span class="bunkei-ok">✓ Correct</span>' : '<span class="bunkei-ng">✗ Not quite — compare with the answer</span>';
+      if (!ok && window.AnswerDiff) {
+        const target = AnswerDiff.closest(typed, [built.kana, built.plain]);
+        const d = AnswerDiff.diff(typed, target);
+        result.innerHTML += `<div class="answer-diff" lang="ja">`
+          + `<div><span class="answer-diff-label">You typed</span>${AnswerDiff.toHtml(d.typed, 'diff-wrong')}</div>`
+          + `<div><span class="answer-diff-label">Expected</span>${AnswerDiff.toHtml(d.expected, 'diff-missing')}</div>`
+          + `</div>`;
+      }
     } else {
       result.innerHTML = '';
     }

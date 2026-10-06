@@ -987,6 +987,39 @@ a.chapter-card {
   color: var(--green);
 }
 
+/* Character diff of a wrong typed answer */
+.diff-wrong {
+  color: var(--red);
+  background: var(--red-dim);
+  text-decoration: line-through;
+  border-radius: 3px;
+}
+
+.diff-missing {
+  color: var(--orange);
+  background: var(--orange-dim);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  border-radius: 3px;
+}
+
+.answer-diff {
+  margin-top: 8px;
+  font-family: var(--font-jp);
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.8;
+}
+
+.answer-diff-label {
+  display: inline-block;
+  min-width: 6.5em;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-dim);
+}
+
 /* Explanation */
 .card-explanation {
   width: 100%;
