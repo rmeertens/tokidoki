@@ -117,6 +117,106 @@
   const BEDTIME = only(['磨く', '勉強する', '洗う', '片付ける', '消す', '電話をかける', '連絡する',
     '書く', '読む', '洗濯する', '掃除する', '着替える', '脱ぐ', '食べる', '謝る', '練習する', '調べる']);
 
+  // 〜てから: the drill verb happens first, then this second action
+  // (寿司を食べてから → 歯を磨きます). Keyed like NAGARA.
+  const TE_KARA = {
+    '食べる': ['歯[は]を磨[みが]きます', 'brush my teeth'],
+    '飲む': ['仕事[しごと]を始[はじ]めます', 'start work'],
+    '帰る': ['晩[ばん]ご飯[はん]を食[た]べます', 'eat dinner'],
+    '起きる': ['シャワーを浴[あ]びます', 'take a shower'],
+    '勉強する': ['テレビを見[み]ます', 'watch TV'],
+    '見る': ['寝[ね]ます', 'go to bed'],
+    'する': ['シャワーを浴[あ]びます', 'take a shower'],
+    '運動する': ['シャワーを浴[あ]びます', 'take a shower'],
+    '走る': ['シャワーを浴[あ]びます', 'take a shower'],
+    '書く': ['郵便局[ゆうびんきょく]に行[い]きます', 'go to the post office'],
+    '読む': ['寝[ね]ます', 'go to bed'],
+    '買う_buy': ['家[いえ]に帰[かえ]ります', 'go home'],
+    '洗う': ['お風呂[ふろ]に入[はい]ります', 'take a bath'],
+    '掃除する': ['友達[ともだち]を呼[よ]びます', 'invite my friends over'],
+    '片付ける': ['出[で]かけます', 'go out'],
+    '着替える': ['出[で]かけます', 'go out'],
+    '調べる': ['レポートを書[か]きます', 'write the report'],
+    '磨く': ['寝[ね]ます', 'go to bed'],
+    '電話をかける': ['寝[ね]ます', 'go to bed'],
+    '料理する': ['家族[かぞく]と食[た]べます', 'eat with my family'],
+    '作る': ['家族[かぞく]と食[た]べます', 'eat with my family'],
+    '予約する': ['友達[ともだち]を誘[さそ]います', 'invite a friend'],
+    '練習する': ['ジュースを飲[の]みます', 'drink some juice'],
+    '散歩する': ['朝[あさ]ご飯[はん]を食[た]べます', 'eat breakfast'],
+    '脱ぐ': ['部屋[へや]に入[はい]ります', 'go into the room'],
+    '相談する': ['決[き]めます', 'decide'],
+    '返す': ['新[あたら]しい本[ほん]を借[か]ります', 'borrow a new book'],
+    '降りる': ['少[すこ]し歩[ある]きます', 'walk a little'],
+  };
+
+  // 〜前に: this action comes first, before the drill verb
+  // (寿司を食べる前に ← 手を洗います).
+  const MAE_NI = {
+    '食べる': ['手[て]を洗[あら]います', 'wash my hands'],
+    '料理する': ['手[て]を洗[あら]います', 'wash my hands'],
+    '行く': ['朝[あさ]ご飯[はん]を食[た]べます', 'eat breakfast'],
+    '帰る': ['スーパーに寄[よ]ります', 'stop by the supermarket'],
+    '来る': ['日本語[にほんご]を勉強[べんきょう]しました', 'studied Japanese'],
+    '留学する': ['英語[えいご]を勉強[べんきょう]しました', 'studied English'],
+    '入る': ['靴[くつ]を脱[ぬ]ぎます', 'take off my shoes'],
+    '泳ぐ': ['準備[じゅんび]運動[うんどう]をします', 'warm up'],
+    '運転する': ['お酒[さけ]を飲[の]みません', "don't drink alcohol"],
+    '買う_buy': ['値段[ねだん]を調[しら]べます', 'check the price'],
+    '書く': ['よく考[かんが]えます', 'think carefully'],
+    '答える': ['よく考[かんが]えます', 'think carefully'],
+    '見る': ['ポップコーンを買[か]います', 'buy popcorn'],
+    '乗る': ['切符[きっぷ]を買[か]います', 'buy a ticket'],
+    '引っ越す': ['部屋[へや]を片付[かたづ]けます', 'tidy up my room'],
+    '登る': ['天気[てんき]を調[しら]べます', 'check the weather'],
+    '出る': ['教科書[きょうかしょ]を読[よ]みます', 'read the textbook'],
+    '受ける': ['たくさん勉強[べんきょう]します', 'study a lot'],
+    '注文する': ['メニューを見[み]ます', 'look at the menu'],
+    '観光する': ['ガイドブックを読[よ]みます', 'read a guidebook'],
+    '化粧する': ['顔[かお]を洗[あら]います', 'wash my face'],
+  };
+
+  // Things you can do for someone else, for 〜てあげる / 〜てくれる / 〜てもらう.
+  const FAVORS = only(['買う_buy', '書く', '撮る_photo', '作る', '洗う', '掃除する', '料理する', '直す', '運ぶ',
+    '持つ', '開ける', '消す', '返す', '呼ぶ', '予約する', '調べる', '訳す', '翻訳する', '弾く', '歌う',
+    '片付ける', '焼く', '包む', '送る', '選ぶ', '編む', '描く_draw', '洗濯する']);
+
+  // 迷惑の受身, "had my … eaten on me": who did it.
+  const SUFFERING_PASSIVE = {
+    '食べる': ['弟[おとうと]', 'my little brother'],
+    '飲む': ['姉[あね]', 'my big sister'],
+    '使う': ['弟[おとうと]', 'my little brother'],
+    '着る_wear': ['妹[いもうと]', 'my little sister'],
+    '壊す': ['弟[おとうと]', 'my little brother'],
+    '盗む': ['誰[だれ]か', 'someone'],
+  };
+
+  // 〜すぎました, with the English for each (it rarely maps to "too much" word for word).
+  const SUGIRU = {
+    '食べる': 'I ate too much sushi.',
+    '飲む': 'I drank too much coffee.',
+    '吸う': 'I smoked too many cigarettes.',
+    '見る': 'I watched too many movies.',
+    '撮る_photo': 'I took too many photos.',
+    '歌う': 'I sang too many songs.',
+    '集める': 'I collected too many stamps.',
+    '入れる': 'I put too much sugar in the coffee.',
+    '払う': 'I paid too much money.',
+    '待つ': 'I waited too long for the bus.',
+    '焼く': 'I baked the cake for too long.',
+    '頑張る': 'I worked too hard for the exam.',
+    '考える': 'I thought too much about the future.',
+    '勉強する': 'I studied Japanese too hard.',
+    '練習する': 'I practiced tennis too much.',
+    '働く': 'I worked too much at the restaurant.',
+    '走る': 'I ran too much in the park.',
+    '使う': 'I used the computer too much.',
+  };
+
+  // Activities that carry on once started, for 〜始めました.
+  const ONGOING = only(['勉強する', '習う', '練習する', '運動する', '散歩する', '走る', '働く', '編む',
+    '描く_draw', '弾く', '集める', '育てる', '料理する', 'ためる', '吸う', '読む', '探す', '使う', '泳ぐ']);
+
   // Drops the final る of a ru-verb-like form (potential, causative…) and adds an ending.
   const ruTo = (form, ending) => form.slice(0, -1) + ending;
   // 食べない → 食べな + ending (〜なければ, 〜なくて)
@@ -160,6 +260,17 @@
       note: 'Prohibition: て-form + はいけません.',
       ja: p => `${p.pre}${p.c('te')}はいけません。`,
       en: p => `You must not ${p.v} ${p.o}.` },
+    { id: 'te-kara', level: 'N5', name: '〜てから', meaning: 'after doing',
+      note: 'One action, then the next: て-form + から, then what comes after.',
+      only: TE_KARA,
+      ja: p => `${p.pre}${p.c('te')}から、${TE_KARA[p.key][0]}。`,
+      en: p => `I ${TE_KARA[p.key][1]} after ${p.ing} ${p.o}.` },
+    { id: 'mae-ni', level: 'N5', name: '〜前に', meaning: 'before doing',
+      note: 'What you do first: dictionary form + 前に, then that action. The verb before 前に stays in the dictionary form even in the past.',
+      only: MAE_NI,
+      needs: 'dict',
+      ja: p => `${p.pre}${p.c('dict')}前[まえ]に、${MAE_NI[p.key][0]}。`,
+      en: p => `I ${MAE_NI[p.key][1]} before ${p.ing} ${p.o}.` },
 
     // ── N4 ──
     { id: 'potential', level: 'N4', name: 'Potential 〜(ら)れます', meaning: 'can',
@@ -250,6 +361,37 @@
       only: SKILLS,
       ja: p => `やっと${p.potPre}${p.c('potential')}ようになりました。`,
       en: p => `I can finally ${p.v} ${p.o}.` },
+    { id: 'te-ageru', level: 'N4', name: '〜てあげましょうか', meaning: 'shall I … for you?',
+      note: 'Offering to do something for someone: て-form + あげましょうか. Use it with care — to a superior it can sound condescending.',
+      only: FAVORS,
+      ja: p => `${p.pre}${p.c('te')}あげましょうか。`,
+      en: p => `Shall I ${p.v} ${p.o} for you?` },
+    { id: 'te-kureru', level: 'N4', name: '〜てくれました', meaning: 'did … for me',
+      note: 'Someone did something for you (or your group): person が + て-form + くれました.',
+      only: FAVORS,
+      ja: p => `友達[ともだち]が${p.pre}${p.c('te')}くれました。`,
+      en: p => `My friend ${p.past} ${p.o} for me.` },
+    { id: 'te-morau', level: 'N4', name: '〜てもらいました', meaning: 'had someone do … for me',
+      note: 'You received a favour: person に + て-form + もらいました. Same event as 〜てくれる, seen from your side.',
+      only: FAVORS,
+      ja: p => `兄[あに]に${p.pre}${p.c('te')}もらいました。`,
+      en: p => `I had my big brother ${p.v} ${p.o} for me.` },
+    { id: 'passive', level: 'N4', name: 'Passive 〜(ら)れました', meaning: 'had … done to me',
+      note: 'The "suffering" passive (迷惑の受身): person に + passive form, for something done that affected you badly. う-verbs 〜あれる, る-verbs 〜られる, する → される.',
+      only: SUFFERING_PASSIVE,
+      needs: 'passive',
+      ja: p => `${SUFFERING_PASSIVE[p.key][0]}に${p.pre}${ruTo(p.c('passive'), 'ました')}。`,
+      en: p => `${SUFFERING_PASSIVE[p.key][1]} ${p.past} my ${p.o.replace(/^(a|an|the|my) /, '')}.` },
+    { id: 'sugiru', level: 'N4', name: '〜すぎました', meaning: 'did too much',
+      note: 'Overdoing it: ます-stem + すぎる (conjugates like a る-verb).',
+      only: SUGIRU,
+      ja: p => `${p.pre}${p.stem}すぎました。`,
+      en: p => SUGIRU[p.key] },
+    { id: 'hajimeru', level: 'N4', name: '〜始めました', meaning: 'started doing',
+      note: 'The start of an ongoing action: ます-stem + 始めました. Its partners: 〜続ける (keep on) and 〜終わる (finish).',
+      only: ONGOING,
+      ja: p => `先月[せんげつ]から${p.pre}${p.stem}始[はじ]めました。`,
+      en: p => `I started ${p.ing} ${p.o} last month.` },
 
     // ── N3 ──
     { id: 'causative-passive', level: 'N3', name: '〜させられました', meaning: 'was made to',
@@ -299,7 +441,8 @@
 
   const PATTERN_BY_ID = Object.fromEntries(PATTERNS.map(p => [p.id, p]));
 
-  // Tells apart verbs spelled alike (聞く "listen" vs 聞く_ask, 書く vs 描く_draw).
+  // Tells apart verbs spelled alike (聞く "listen" vs 聞く_ask, 書く vs 描く_draw,
+  // 買う_buy vs 飼う). Lists of verbs below use these keys.
   const verbKey = verb => (verb.disambig ? `${verb.kanji}_${verb.disambig}` : verb.kanji);
 
   // 食べない → 食べずに; しない → せずに (する and 〜する verbs).
@@ -327,6 +470,7 @@
       v: ctx.v,
       o: ctx.o || '',
       ing: inflect(ctx.v, gerund),
+      past: inflect(ctx.v, pastTense),
       // "have been to Japan", not "have gone to Japan"
       pp: ctx.v === 'go' && /^to /.test(ctx.o || '') ? 'been' : inflect(ctx.v, w => PARTICIPLE[w] || pastTense(w)),
       head,

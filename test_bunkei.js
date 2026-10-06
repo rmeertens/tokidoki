@@ -60,6 +60,15 @@ expect('泳ぐ', 'you-ni-naru', 'やっとプールで泳げるようになり�
 expect('する', 'you-to-suru', '運動をしようとしましたが、できませんでした。');
 expect('磨く', 'zuni', '昨日は歯を磨かずに寝ました。', 'Yesterday I went to bed without brushing my teeth.');
 expect('勉強する', 'zuni', '昨日は日本語を勉強せずに寝ました。');
+expect('食べる', 'te-kara', '寿司を食べてから、歯を磨きます。', 'I brush my teeth after eating sushi.');
+expect('入る', 'mae-ni', '部屋に入る前に、靴を脱ぎます。', 'I take off my shoes before entering the room.');
+expect('作る', 'te-ageru', 'カレーを作ってあげましょうか。', 'Shall I make curry for you?');
+expect('直す', 'te-kureru', '友達がパソコンを直してくれました。', 'My friend fixed the computer for me.');
+expect('書く', 'te-morau', '兄に手紙を書いてもらいました。', 'I had my big brother write a letter for me.');
+expect('食べる', 'passive', '弟に寿司を食べられました。', 'My little brother ate my sushi.');
+expect('盗む', 'passive', '誰かに財布を盗まれました。', 'Someone stole my wallet.');
+expect('飲む', 'sugiru', 'コーヒーを飲みすぎました。', 'I drank too much coffee.');
+expect('勉強する', 'hajimeru', '先月から日本語を勉強し始めました。', 'I started studying Japanese last month.');
 check(Bunkei.build(find('開ける'), 'nagara') === null, '開ける has no 〜ながら pairing');
 // Patterns limited to a list of verbs: every listed verb exists and gets the pattern (catches typos).
 const keyOf = v => (v.disambig ? `${v.kanji}_${v.disambig}` : v.kanji);
