@@ -3692,3 +3692,107 @@ a.chapter-card {
   font-weight: 500;
   color: var(--text-dim);
 }
+
+/* Notepad (notepad.html): romaji / English → Japanese with furigana. */
+.notepad-paper {
+  min-height: 9rem;
+  padding: 14px 18px;
+  margin-bottom: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  font-family: var(--font-jp);
+  font-size: 1.5rem;
+  line-height: 2.4;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  cursor: text;
+}
+.notepad-paper rt {
+  font-size: 0.5em;
+  color: var(--text-dim);
+}
+.notepad-paper.no-furigana rt { visibility: hidden; }
+.notepad-placeholder { color: var(--text-muted); font-family: var(--font); font-size: 1rem; }
+.notepad-composing {
+  background: var(--accent-dim);
+  border-bottom: 2px solid var(--accent);
+  border-radius: 3px;
+}
+.notepad-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  margin-left: 1px;
+  vertical-align: -0.15em;
+  background: var(--accent);
+  animation: notepad-blink 1s steps(1) infinite;
+}
+@keyframes notepad-blink { 50% { opacity: 0; } }
+.notepad-compose { position: relative; display: flex; flex-direction: column; gap: 8px; }
+.notepad-input { width: 100%; font-family: var(--font); }
+.notepad-candidates {
+  display: flex;
+  flex-direction: column;
+  max-height: 22rem;
+  overflow-y: auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+}
+.notepad-cand {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 6px 12px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.notepad-cand:last-child { border-bottom: none; }
+.notepad-cand:hover { background: var(--bg-card-hover); }
+.notepad-cand.selected { background: var(--accent-dim); }
+.notepad-cand-num {
+  flex: none;
+  width: 1em;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+}
+.notepad-cand-text {
+  flex: none;
+  font-family: var(--font-jp);
+  font-size: 1.25rem;
+  line-height: 2;
+}
+.notepad-cand-text rt { font-size: 0.5em; color: var(--text-dim); }
+.notepad-cand-hint {
+  min-width: 0;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.notepad-keys {
+  margin: 10px 0 16px;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  line-height: 1.9;
+}
+.notepad-keys kbd {
+  padding: 1px 5px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-family: var(--font);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+.notepad-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }

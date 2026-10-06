@@ -4034,6 +4034,8 @@
       renderVocabPage();
     } else if (mode === 'words-by-kanji') {
       renderWbkPage();
+    } else if (mode === 'notepad') {
+      // notepad.js wires up its own page.
     } else if (mode === 'particles') {
       renderParticlesPanel();
     } else if (mode === 'bunkei') {

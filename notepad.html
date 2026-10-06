@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" id="viewport-meta" content="width=device-width, initial-scale=1.0">
+  <title>Japanese Notepad – Romaji to Kanji with Furigana | Tokidoki</title>
+  <meta name="description" content="Type Japanese in romaji or English and pick hiragana, katakana or kanji — your text is shown with furigana above every kanji. Free, no install.">
+  <meta property="og:title" content="Japanese Notepad – Romaji to Kanji with Furigana | Tokidoki">
+  <meta property="og:description" content="Type Japanese in romaji or English and pick hiragana, katakana or kanji — your text is shown with furigana above every kanji. Free, no install.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tokidoki.meertens.dev/notepad.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Japanese Notepad – Romaji to Kanji with Furigana | Tokidoki">
+  <meta name="twitter:description" content="Type Japanese in romaji or English and pick hiragana, katakana or kanji — your text is shown with furigana above every kanji. Free, no install.">
+  <link rel="canonical" href="https://tokidoki.meertens.dev/notepad.html">
+  <link rel="stylesheet" href="style.css">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXWYNZC7YH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXWYNZC7YH');
+  </script>
+</head>
+<body data-mode="notepad">
+  <div id="app">
+
+    <!-- Header (rendered by renderSharedChrome() in app.js) -->
+    <div id="header-mount"></div>
+
+    <!-- Screen: Notepad -->
+    <main id="screen-chapters" class="screen active">
+      <nav class="page-nav" aria-label="Exercises">
+        <div class="page-nav-group">
+          <span class="page-nav-label">Practice</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="verbs.html"><span class="page-nav-glyph" aria-hidden="true">食</span>Verbs</a>
+            <a class="page-nav-item" href="adjectives.html"><span class="page-nav-glyph" aria-hidden="true">高</span>Adjectives</a>
+            <a class="page-nav-item" href="custom.html"><span class="page-nav-glyph" aria-hidden="true">作</span>Build Your Own</a>
+            <a class="page-nav-item" href="bunkei.html"><span class="page-nav-glyph" aria-hidden="true">型</span>Bunkei</a>
+            <a class="page-nav-item" href="sentences.html"><span class="page-nav-glyph" aria-hidden="true">文</span>Sentences</a>
+            <a class="page-nav-item" href="stories.html"><span class="page-nav-glyph" aria-hidden="true">話</span>Stories</a>
+            <a class="page-nav-item" href="particles-quiz.html"><span class="page-nav-glyph" aria-hidden="true">は</span>Particles</a>
+            <a class="page-nav-item" href="kana.html"><span class="page-nav-glyph" aria-hidden="true">あ</span>Kana</a>
+            <a class="page-nav-item" href="kanji-quiz.html"><span class="page-nav-glyph" aria-hidden="true">字</span>Kanji Quiz</a>
+          </div>
+        </div>
+        <div class="page-nav-group">
+          <span class="page-nav-label">Reference</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="kanji.html"><span class="page-nav-glyph" aria-hidden="true">紙</span>Practice Sheets</a>
+            <a class="page-nav-item" href="kanji-hover.html"><span class="page-nav-glyph" aria-hidden="true">漢</span>Kanji Hover</a>
+            <a class="page-nav-item" href="vocabulary.html"><span class="page-nav-glyph" aria-hidden="true">語</span>Vocabulary</a>
+            <a class="page-nav-item" href="words-by-kanji.html"><span class="page-nav-glyph" aria-hidden="true">詞</span>Words by Kanji</a>
+            <a class="page-nav-item active" href="notepad.html" aria-current="page"><span class="page-nav-glyph" aria-hidden="true">書</span>Notepad</a>
+          </div>
+        </div>
+      </nav>
+      <p class="tab-intro">
+        Type romaji (<em>watashi wa gakusei desu</em>) or an English word (<em>cat</em>) and pick
+        how to write it &mdash; kanji, hiragana or katakana. Whole phrases are split into words
+        for you, and the finished text shows furigana above every kanji.
+      </p>
+
+      <div class="notepad-paper" id="notepad-paper" lang="ja" aria-live="polite"></div>
+
+      <div class="notepad-compose">
+        <input type="text" id="notepad-input" class="answer-input notepad-input" placeholder="Type here… e.g. nihongo, taberu, house"
+               autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Type romaji or English" aria-controls="notepad-candidates">
+        <div class="notepad-candidates hidden" id="notepad-candidates" role="listbox" aria-label="Candidates"></div>
+      </div>
+      <p class="notepad-keys">
+        <kbd>Space</kbd> / <kbd>Enter</kbd> pick the highlighted choice &middot; <kbd>&uarr;</kbd><kbd>&darr;</kbd> or <kbd>Tab</kbd> move &middot;
+        <kbd>1</kbd>&ndash;<kbd>9</kbd> choose &middot; <kbd>Esc</kbd> cancel &middot; <kbd>Backspace</kbd> deletes from the notepad &middot;
+        <kbd>.</kbd> <kbd>,</kbd> <kbd>?</kbd> <kbd>!</kbd> type 。、？！ &middot; <kbd>-</kbd> is ー
+      </p>
+
+      <div class="kana-settings-row notepad-options">
+        <label class="kana-script-toggle"><input type="checkbox" id="notepad-furigana" checked> Furigana</label>
+        <label class="kana-script-toggle"><input type="checkbox" id="notepad-kana-first"> Kana first</label>
+        <label class="kana-script-toggle"><input type="checkbox" id="notepad-katakana"> Katakana</label>
+      </div>
+      <div class="notepad-actions">
+        <button class="btn-secondary" id="btn-notepad-copy">Copy text</button>
+        <button class="btn-secondary" id="btn-notepad-copy-furigana" title="Copies 漢字(かんじ) style text">Copy with readings</button>
+        <button class="btn-secondary" id="btn-notepad-clear">Clear</button>
+        <span class="story-export-status" id="notepad-status" role="status"></span>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="conjugator.js"></script>
+  <script src="verbs.js"></script>
+  <script src="kana.js"></script>
+  <script src="kanji-quiz-data.js"></script>
+  <script src="sentences-data.js"></script>
+  <script src="vocabulary-data.js"></script>
+  <script src="kanji-info-data.js"></script>
+  <script src="stories-data.js?v=13"></script>
+  <script src="examples.js"></script>
+  <script src="romaji.js"></script>
+  <script src="app.js"></script>
+  <script src="notepad.js"></script>
+  <script src="sushi-sprites.js"></script>
+  <script src="sushi-belt.js"></script>
+
+  <!-- Static content for search engines -->
+  <section id="seo-content" aria-hidden="true">
+    <h2>Japanese Notepad: type romaji, get kanji with furigana</h2>
+    <p>
+      A free online Japanese input method for learners. Type in romaji and pick the kanji,
+      hiragana or katakana spelling from a list of suggestions, or type an English word to find
+      its Japanese equivalent. Full sentences like &ldquo;kyou wa ame ga futte imasu&rdquo; are
+      split into words automatically, conjugated verbs and adjectives are recognised, and the
+      result is displayed with furigana (reading aids) above every kanji. Suggestions come from
+      the JLPT N5&ndash;N3 <a href="vocabulary.html">vocabulary list</a> and the words in the
+      <a href="stories.html">graded stories</a>. Copy the text as plain Japanese or with readings.
+    </p>
+  </section>
+</body>
+</html>
