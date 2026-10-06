@@ -43,9 +43,79 @@
   // doing it together ("every day", "let's … together", "try … once").
   const ONE_OFF = ['卒業する', '結婚する', '就職する', '留学する', '離婚する', '優勝する', '引っ越す', 'なる', '別れる', '付き合う', '入学する'];
 
+  // Wrongdoing and mishaps: fine as "must not" or "was made to", but not as
+  // something to plan, wish for or report on (〜たら, 〜ばよかった…).
+  const NOT_ORDINARY = ['殴る', '盗む', '踏む', 'いじめる', '壊す', 'サボる', '離婚する', '別れる', '諦める', 'もてる', '心配する'];
+
   // Existence verbs read oddly in almost every pattern ("please let me be in
   // the classroom"), so they're left out of the drill.
   const EXCLUDED_VERBS = ['いる', 'ある'];
+
+  // 〜ながら joins two actions, so each verb it's drilled with is paired with a
+  // second verb: the main action, done while the drill verb's action goes on
+  // (寿司を食べながら → 映画を見ます). Keyed like usableVerbs (kanji, or
+  // kanji_disambig); only verbs listed here get the pattern, since it needs an
+  // action that lasts a while (not 開ける or 着く).
+  const NAGARA = {
+    '聞く': ['日本語[にほんご]を勉強[べんきょう]します', 'study Japanese'],
+    '飲む': ['新聞[しんぶん]を読[よ]みます', 'read the newspaper'],
+    '話す': ['駅[えき]まで歩[ある]きます', 'walk to the station'],
+    '読む': ['コーヒーを飲[の]みます', 'drink coffee'],
+    '食べる': ['テレビを見[み]ます', 'watch TV'],
+    '見る': ['ポップコーンを食[た]べます', 'eat popcorn'],
+    'する': ['音楽[おんがく]を聞[き]きます', 'listen to music'],
+    '勉強する': ['音楽[おんがく]を聞[き]きます', 'listen to music'],
+    '待つ': ['本[ほん]を読[よ]みます', 'read a book'],
+    '泳ぐ': ['いろいろなことを考[かんが]えます', 'think about all sorts of things'],
+    '急ぐ': ['パンを食[た]べます', 'eat some bread'],
+    '吸う': ['コーヒーを飲[の]みます', 'drink coffee'],
+    '使う': ['お茶[ちゃ]を飲[の]みます', 'drink tea'],
+    '持つ': ['階段[かいだん]を上[のぼ]ります', 'climb the stairs'],
+    '教える': ['日本語[にほんご]を習[なら]っています', 'am learning Japanese'],
+    '歌う': ['ギターを弾[ひ]きます', 'play the guitar'],
+    '働く': ['大学[だいがく]に通[かよ]っています', 'am going to university'],
+    '洗う': ['歌[うた]を歌[うた]います', 'sing a song'],
+    '作る': ['音楽[おんがく]を聞[き]きます', 'listen to music'],
+    '運転する': ['ラジオを聞[き]きます', 'listen to the radio'],
+    '洗濯する': ['電話[でんわ]で話[はな]します', 'talk on the phone'],
+    '掃除する': ['ラジオを聞[き]きます', 'listen to the radio'],
+    '料理する': ['歌[うた]を歌[うた]います', 'sing a song'],
+    '弾く': ['歌[うた]を歌[うた]います', 'sing a song'],
+    '覚える': ['ノートに何度[なんど]も書[か]きます', 'write in my notebook again and again'],
+    '運動する': ['音楽[おんがく]を聞[き]きます', 'listen to music'],
+    '散歩する': ['いろいろなことを考[かんが]えます', 'think about all sorts of things'],
+    '習う': ['働[はたら]いています', 'am working'],
+    '登る': ['写真[しゃしん]を撮[と]ります', 'take photos'],
+    '編む': ['テレビを見[み]ます', 'watch TV'],
+    '描く_draw': ['音楽[おんがく]を聞[き]きます', 'listen to music'],
+    '探す': ['アルバイトをしています', 'am working a part-time job'],
+    'しゃべる': ['料理[りょうり]をします', 'cook'],
+    '調べる': ['レポートを書[か]きます', 'write a report'],
+    '観光する': ['写真[しゃしん]を撮[と]ります', 'take photos'],
+    '化粧する': ['音楽[おんがく]を聞[き]きます', 'listen to music'],
+    '考える': ['海[うみ]を見[み]ています', 'am looking at the sea'],
+    '走る': ['音楽[おんがく]を聞[き]きます', 'listen to music'],
+    '運ぶ': ['階段[かいだん]を上[のぼ]ります', 'climb the stairs'],
+    '着替える': ['テレビを見[み]ます', 'watch TV'],
+    '翻訳する': ['辞書[じしょ]を引[ひ]きます', 'look words up in the dictionary'],
+    '説明する': ['図[ず]を描[か]きます', 'draw a diagram'],
+    '案内する': ['町[まち]の歴史[れきし]を話[はな]します', 'talk about its history'],
+    '片付ける': ['音楽[おんがく]を聞[き]きます', 'listen to music'],
+    '焼く': ['歌[うた]を歌[うた]います', 'sing a song'],
+    '拾う': ['公園[こうえん]を歩[ある]きます', 'walk around the park'],
+    '我慢する': ['仕事[しごと]を続[つづ]けました', 'kept working'],
+  };
+
+  const only = keys => Object.fromEntries(keys.map(k => [k, true]));
+
+  // Skills, for 〜ようになりました ("I can finally…").
+  const SKILLS = only(['話す', '読む', '書く', '泳ぐ', '運転する', '弾く', '料理する', '作る', '歌う',
+    '踊る', '編む', '描く_draw', '起きる', '食べる', '飲む', '覚える', '翻訳する', '訳す', '走る', '登る',
+    '使う', '直す', '焼く', '説明する', '教える', '乗る']);
+
+  // Things you'd normally do before bed, for 〜ずに寝ました ("went to bed without…").
+  const BEDTIME = only(['磨く', '勉強する', '洗う', '片付ける', '消す', '電話をかける', '連絡する',
+    '書く', '読む', '洗濯する', '掃除する', '着替える', '脱ぐ', '食べる', '謝る', '練習する', '調べる']);
 
   // Drops the final る of a ru-verb-like form (potential, causative…) and adds an ending.
   const ruTo = (form, ending) => form.slice(0, -1) + ending;
@@ -157,6 +227,29 @@
       skip: ['会う', '手伝う'],
       ja: p => `弟[おとうと]に${p.pre}${p.c('te')}ほしいです。`,
       en: p => `I want my little brother to ${p.v} ${p.o}.` },
+    { id: 'nagara', level: 'N4', name: '〜ながら', meaning: 'while doing',
+      note: 'Two actions at once by the same person: ます-stem + ながら, then the main action.',
+      only: NAGARA,
+      ja: p => `${p.pre}${p.stem}ながら、${NAGARA[p.key][0]}。`,
+      en: p => `I ${NAGARA[p.key][1]} while ${p.ing} ${p.o}.` },
+    { id: 'tara', level: 'N4', name: '〜たら', meaning: 'once, when (I\'ve done)',
+      note: 'Once one thing has happened, the next follows: た-form + ら.',
+      skip: ['寝る', '電話をかける', '連絡する', '待つ', '住む', '勤める', '飼う', '思う', '立つ', '持つ', '座る',
+        '気をつける', '注意する', '頑張る', '生活する', '我慢する', '続ける', '笑う', '着く', ...NOT_ORDINARY],
+      ja: p => `${p.pre}${p.c('ta')}ら、連絡[れんらく]します。`,
+      en: p => `I'll get in touch once I've ${p.pp} ${p.o}.` },
+    { id: 'ba-yokatta', level: 'N4', name: '〜ばよかったです', meaning: 'I wish I had',
+      note: 'Regret about something you didn\'t do: ば-form + よかったです.',
+      needs: 'ba',
+      skip: ['立つ', '座る', '持つ', '笑う', '住む', ...NOT_ORDINARY],
+      ja: p => `${p.pre}${p.c('ba')}よかったです。`,
+      en: p => `I wish I had ${p.pp} ${p.o}.` },
+    { id: 'you-ni-naru', level: 'N4', name: '〜ようになりました', meaning: 'can now, have come to',
+      note: 'A change in ability: potential form + ようになりました.',
+      needs: 'potential',
+      only: SKILLS,
+      ja: p => `やっと${p.potPre}${p.c('potential')}ようになりました。`,
+      en: p => `I can finally ${p.v} ${p.o}.` },
 
     // ── N3 ──
     { id: 'causative-passive', level: 'N3', name: '〜させられました', meaning: 'was made to',
@@ -191,9 +284,23 @@
       repeated: true,
       ja: p => `最近[さいきん]、${p.pre}${p.c('te')}ばかりいます。`,
       en: p => `Lately I do nothing but ${p.v} ${p.o}.` },
+    { id: 'you-to-suru', level: 'N3', name: '〜(よ)うとしました', meaning: 'tried to (but couldn\'t)',
+      note: 'An attempt, usually one that failed: volitional form + としました.',
+      needs: 'volitional',
+      skip: ['笑う', '思う', '考える', '住む', '生活する', ...NOT_ORDINARY],
+      ja: p => `${p.pre}${p.c('volitional')}としましたが、できませんでした。`,
+      en: p => `I tried to ${p.v} ${p.o}, but I couldn't.` },
+    { id: 'zuni', level: 'N3', name: '〜ずに', meaning: 'without doing',
+      note: 'Doing something without doing another: ない-form, drop ない, add ずに (しない → せずに). Like 〜ないで, but more written.',
+      only: BEDTIME,
+      ja: p => `昨日[きのう]は${p.pre}${p.zuni}寝[ね]ました。`,
+      en: p => `Yesterday I went to bed without ${p.ing} ${p.o}.` },
   ];
 
   const PATTERN_BY_ID = Object.fromEntries(PATTERNS.map(p => [p.id, p]));
+
+  // Tells apart verbs spelled alike (聞く "listen" vs 聞く_ask, 書く vs 描く_draw).
+  const verbKey = verb => (verb.disambig ? `${verb.kanji}_${verb.disambig}` : verb.kanji);
 
   // 食べない → 食べずに; しない → せずに (する and 〜する verbs).
   function zuniForm(verb, nai) {
@@ -211,6 +318,7 @@
     const head = ctx.v.split(' ')[0];
     return {
       ctx,
+      key: verbKey(verb),
       pre: ctx.pre || '',
       potPre: ctx.potPre || ctx.pre || '',
       c,
@@ -227,6 +335,7 @@
 
   function appliesTo(pattern, verb, p) {
     if (!p) return false;
+    if (pattern.only && !pattern.only[p.key]) return false;
     if ((pattern.skip || []).includes(verb.kanji)) return false;
     if (pattern.repeated && ONE_OFF.includes(verb.kanji)) return false;
     if (pattern.needs && (p.ctx.skip || []).includes(pattern.needs)) return false;
@@ -243,7 +352,7 @@
   function usableVerbs(verbs) {
     const seen = new Set();
     return verbs.filter(v => {
-      const key = v.disambig ? `${v.kanji}_${v.disambig}` : v.kanji;
+      const key = verbKey(v);
       if (seen.has(key) || !pieces(v)) return false;
       seen.add(key);
       return true;

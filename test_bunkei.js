@@ -52,6 +52,23 @@ expect('来る', 'causative-passive', '父に日本に来させられました�
 expect('する', 'potential', '運動ができます。', 'I can get exercise.');
 expect('勉強する', 'nakute-mo-ii', '日本語を勉強しなくてもいいです。');
 expect('飲む', 'volitional-to-omou', 'コーヒーを飲もうと思っています。');
+expect('食べる', 'nagara', '寿司を食べながら、テレビを見ます。', 'I watch TV while eating sushi.');
+expect('勉強する', 'nagara', '日本語を勉強しながら、音楽を聞きます。');
+expect('食べる', 'tara', '寿司を食べたら、連絡します。', "I'll get in touch once I've eaten sushi.");
+expect('行く', 'ba-yokatta', '学校に行けばよかったです。');
+expect('泳ぐ', 'you-ni-naru', 'やっとプールで泳げるようになりました。', 'I can finally swim in the pool.');
+expect('する', 'you-to-suru', '運動をしようとしましたが、できませんでした。');
+expect('磨く', 'zuni', '昨日は歯を磨かずに寝ました。', 'Yesterday I went to bed without brushing my teeth.');
+expect('勉強する', 'zuni', '昨日は日本語を勉強せずに寝ました。');
+check(Bunkei.build(find('開ける'), 'nagara') === null, '開ける has no 〜ながら pairing');
+// Patterns limited to a list of verbs: every listed verb exists and gets the pattern (catches typos).
+const keyOf = v => (v.disambig ? `${v.kanji}_${v.disambig}` : v.kanji);
+Bunkei.PATTERNS.filter(p => p.only).forEach(p => Object.keys(p.only).forEach(key => {
+  const verb = verbs.find(v => keyOf(v) === key);
+  check(verb && Bunkei.build(verb, p.id), `${p.id}: listed verb ${key} gets no sentence`);
+}));
+const nagaraVerbs = verbs.filter(v => Bunkei.build(v, 'nagara'));
+check(nagaraVerbs.length >= 40, `expected 40+ verbs with 〜ながら, got ${nagaraVerbs.length}`);
 check(Bunkei.build(find('結婚する'), 'mashou') === null, '結婚する should skip "let\'s … together"');
 check(Bunkei.build(find('行く'), 'te-iru') === null, '行く should skip 〜ています (it means "has gone")');
 check(!find('いる'), 'いる should be excluded');
