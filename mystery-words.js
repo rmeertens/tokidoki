@@ -1,0 +1,187 @@
+(function (global) {
+  'use strict';
+
+  // Words used in the ことば探偵クロ mystery (mystery-data.js) that the Stories
+  // glossary doesn't already have. They're added to STORY_GLOSSARY so a word
+  // saved from the mystery joins the same flashcard deck as story words, and
+  // shows up on the Stories page for review. Load after stories-data.js.
+  // Entries are [reading, meaning, part of speech], like STORY_GLOSSARY.
+
+  const WORDS = {
+    // Names
+    'クロ': ['クロ', 'Kuro (the cat detective; くろ = black)', 'name'],
+    '田貫': ['たぬき', 'Tanuki (family name; sounds like 狸, raccoon dog)', 'name'],
+    'ゴンタ': ['ゴンタ', 'Gonta (given name)', 'name'],
+    '狐塚': ['きつねづか', 'Kitsunezuka (family name: “fox mound”)', 'name'],
+    'マメ': ['マメ', 'Mame (nickname; まめ = bean)', 'name'],
+    '魚住': ['うおずみ', 'Uozumi (family name: “fish dwelling”)', 'name'],
+    'ウメ': ['ウメ', 'Ume (given name; うめ = plum)', 'name'],
+
+    // People & roles
+    '助手': ['じょしゅ', 'assistant', 'noun'],
+    '刑事': ['けいじ', 'police detective', 'noun'],
+    '会長': ['かいちょう', 'chairperson, president (of an association)', 'noun'],
+    'みなさん': ['みなさん', 'everyone (polite)', 'pronoun'],
+    'おれ': ['おれ', 'I, me (rough, masculine)', 'pronoun'],
+    'わし': ['わし', 'I, me (old man’s speech)', 'pronoun'],
+    'わたくし': ['わたくし', 'I, me (very formal)', 'pronoun'],
+    'だれか': ['だれか', 'someone', 'pronoun'],
+    '母さん': ['かあさん', 'Mum (calling one’s own mother)', 'noun'],
+    'ちゃん': ['ちゃん', 'affectionate suffix for children, pets, close friends', 'suffix'],
+
+    // Places & things
+    '商店街': ['しょうてんがい', 'shopping street', 'noun'],
+    '本屋': ['ほんや', 'bookshop', 'noun'],
+    '骨董屋': ['こっとうや', 'antique shop', 'noun'],
+    '時計台': ['とけいだい', 'clock tower', 'noun'],
+    '台': ['だい', 'stand, counter, table', 'noun'],
+    'ゴミ箱': ['ゴミばこ', 'rubbish bin', 'noun'],
+    '金庫': ['きんこ', 'safe, strongbox', 'noun'],
+    'ガラス': ['ガラス', 'glass', 'noun'],
+    'はしご': ['はしご', 'ladder', 'noun'],
+    'ねじ': ['ねじ', 'screw; (clock) spring, winder', 'noun'],
+    '歯車': ['はぐるま', 'gear, cogwheel', 'noun'],
+    '茶碗': ['ちゃわん', 'rice / tea bowl', 'noun'],
+    'レプリカ': ['レプリカ', 'replica', 'noun'],
+    'お面': ['おめん', 'mask', 'noun'],
+    '招待状': ['しょうたいじょう', 'invitation (card)', 'noun'],
+    '手錠': ['てじょう', 'handcuffs', 'noun'],
+    '羽': ['はね', 'feather; wing', 'noun'],
+    '毛': ['け', 'hair, fur', 'noun'],
+    '巣': ['す', 'nest', 'noun'],
+    '前足': ['まえあし', 'front paw / leg', 'noun'],
+    'カラス': ['カラス', 'crow', 'noun'],
+    'トラ': ['トラ', 'tiger', 'noun'],
+    '鯛': ['たい', 'sea bream (a festive fish)', 'noun'],
+    'いわし': ['いわし', 'sardine', 'noun'],
+    'どろ': ['どろ', 'mud', 'noun'],
+    '足あと': ['あしあと', 'footprint', 'noun'],
+    'ローマ字': ['ローマじ', 'romaji, the Latin alphabet', 'noun'],
+    'ひらがな': ['ひらがな', 'hiragana', 'noun'],
+    '漢字': ['かんじ', 'kanji, Chinese characters', 'noun'],
+    'ことば': ['ことば', 'word; language', 'noun'],
+    'なぞなぞ': ['なぞなぞ', 'riddle', 'noun'],
+    '月': ['つき', 'moon; month', 'noun'],
+    '林': ['はやし', 'grove, small wood', 'noun'],
+    '北': ['きた', 'north', 'noun'],
+
+    // Events & ideas
+    '事件': ['じけん', 'incident, case', 'noun'],
+    '大事件': ['だいじけん', 'major incident, big case', 'noun'],
+    '犯行予告': ['はんこうよこく', 'advance notice of a crime', 'noun'],
+    '証拠': ['しょうこ', 'evidence, proof', 'noun'],
+    '結論': ['けつろん', 'conclusion', 'noun'],
+    '考え': ['かんがえ', 'idea, opinion', 'noun'],
+    '判決': ['はんけつ', 'verdict, judgement', 'noun'],
+    '無罪': ['むざい', 'not guilty, innocent', 'noun'],
+    '逮捕': ['たいほ', 'arrest', 'noun / する-verb'],
+    '配達': ['はいたつ', 'delivery', 'noun / する-verb'],
+    '招待': ['しょうたい', 'invitation', 'noun / する-verb'],
+    '騒ぎ': ['さわぎ', 'fuss, commotion', 'noun'],
+    '祭り': ['まつり', 'festival', 'noun'],
+    '主役': ['しゅやく', 'leading role, star (of the show)', 'noun'],
+    'ご覧': ['ごらん', 'look (honorific; ご覧ください = please look)', 'noun'],
+    'おわび': ['おわび', 'apology; something given to make amends', 'noun'],
+    '申し訳': ['もうしわけ', 'excuse (申し訳ありません = I’m truly sorry)', 'noun'],
+
+    // Time & amounts
+    '今朝': ['けさ', 'this morning', 'noun'],
+    '今夜': ['こんや', 'tonight', 'noun'],
+    '十五分': ['じゅうごふん', 'fifteen minutes (past)', 'noun'],
+    '十秒後': ['じゅうびょうご', 'ten seconds later', 'noun'],
+    '三百年': ['さんびゃくねん', 'three hundred years', 'noun'],
+    '三つ': ['みっつ', 'three (things)', 'counter'],
+    'すぎ': ['すぎ', 'past, after (a time): 八時すぎ = just after eight', 'suffix'],
+
+    // Verbs
+    'お願いする': ['おねがいする', 'to ask a favour (humble); お願いします = please', 'する-verb'],
+    'くださる': ['くださる', 'to give (me) (respectful くれる); 〜てくださる = kindly do', 'う-verb (irregular)'],
+    'ござる': ['ござる', 'to be, to exist (very polite ある); でございます = です', 'う-verb (irregular)'],
+    'おる': ['おる', 'to be (humble いる); 〜ております = 〜ています', 'う-verb'],
+    'なさい': ['なさい', 'do ~ (gentle command, from なさる): お待ちなさい', 'auxiliary'],
+    '冷ます': ['さます', 'to let cool', 'う-verb'],
+    '落ちる': ['おちる', 'to fall, to drop; to be lying (on the ground)', 'る-verb'],
+    '巻く': ['まく', 'to wind, to roll up', 'う-verb'],
+    '落ち着く': ['おちつく', 'to calm down', 'う-verb'],
+    '解く': ['とく', 'to solve (a riddle, a problem)', 'う-verb'],
+    '試す': ['ためす', 'to test, to try out', 'う-verb'],
+    '動き出す': ['うごきだす', 'to start moving', 'う-verb'],
+    '逃げる': ['にげる', 'to run away, to escape', 'る-verb'],
+    '拭く': ['ふく', 'to wipe, to polish', 'う-verb'],
+    '割る': ['わる', 'to break (glass, china), to split', 'う-verb'],
+    '助ける': ['たすける', 'to help, to save', 'る-verb'],
+    '盗む': ['ぬすむ', 'to steal', 'う-verb'],
+    'くわえる': ['くわえる', 'to hold in one’s mouth', 'る-verb'],
+    'ぬれる': ['ぬれる', 'to get wet', 'る-verb'],
+    '言い渡す': ['いいわたす', 'to pronounce (a verdict), to announce', 'う-verb'],
+    '外す': ['はずす', 'to remove, to take off', 'う-verb'],
+    '足りる': ['たりる', 'to be enough', 'る-verb'],
+    '渡す': ['わたす', 'to hand over', 'う-verb'],
+
+    // Adjectives
+    '有名': ['ゆうめい', 'famous', 'な-adjective'],
+    '重い': ['おもい', 'heavy', 'い-adjective'],
+    '暑い': ['あつい', 'hot (weather)', 'い-adjective'],
+    'おかしい': ['おかしい', 'strange, odd; funny', 'い-adjective'],
+    'たいへん': ['たいへん', 'terrible, serious; very', 'な-adjective'],
+    'ふつう': ['ふつう', 'normal, ordinary', 'な-adjective / noun'],
+    'からっぽ': ['からっぽ', 'empty', 'な-adjective / noun'],
+    'どろどろ': ['どろどろ', 'muddy, sludgy', 'な-adjective'],
+
+    // Adverbs & connectives
+    'さっそく': ['さっそく', 'right away', 'adverb'],
+    'もうすぐ': ['もうすぐ', 'soon, any moment now', 'adverb'],
+    'やはり': ['やはり', 'as expected, after all', 'adverb'],
+    'うっかり': ['うっかり', 'carelessly, by accident', 'adverb'],
+    'きちんと': ['きちんと', 'properly, neatly', 'adverb'],
+    'ぴかぴか': ['ぴかぴか', 'gleaming, sparkling', 'adverb'],
+    'さかさま': ['さかさま', 'upside down, backwards', 'な-adjective / noun'],
+    'それに': ['それに', 'besides, what’s more', 'conjunction'],
+    'そうしたら': ['そうしたら', 'and then, when I did that', 'conjunction'],
+
+    // Sentence-end particles
+    'ぜ': ['ぜ', 'sentence-end particle: rough, masculine emphasis', 'particle'],
+    'ぞ': ['ぞ', 'sentence-end particle: strong, masculine emphasis', 'particle'],
+    'ねえ': ['ねえ', 'drawn-out ね: “isn’t it?”, softly', 'particle'],
+
+    // Greetings & interjections
+    'よろしく': ['よろしく', 'please treat me well; nice to meet you', 'expression'],
+    'はじめまして': ['はじめまして', 'nice to meet you (first meeting)', 'expression'],
+    'ようこそ': ['ようこそ', 'welcome', 'expression'],
+    'すまん': ['すまん', 'sorry (rough, casual すみません)', 'expression'],
+    'せいかい': ['せいかい', 'correct! (正解)', 'expression'],
+    'なーんだ': ['なーんだ', 'what is it? (riddle ending, drawn-out なんだ)', 'expression'],
+    'にゃるほど': ['にゃるほど', 'I see! — cat-style なるほど', 'expression'],
+    'にゃあ': ['にゃあ', 'meow', 'interjection'],
+    'にゃ': ['にゃ', 'nya! (a cat’s yelp)', 'interjection'],
+    'カー': ['カー', 'caw (a crow’s cry)', 'interjection'],
+    'ふむ': ['ふむ', 'hmm (thinking)', 'interjection'],
+    'むむ': ['むむ', 'hmm… (grumbling)', 'interjection'],
+    'ふん': ['ふん', 'hmph', 'interjection'],
+    'ふふ': ['ふふ', 'hehe (a quiet laugh)', 'interjection'],
+    'ふぁあ': ['ふぁあ', '*yawn*', 'interjection'],
+    'ぐぬぬ': ['ぐぬぬ', 'grrr (frustrated)', 'interjection'],
+    'おや': ['おや', 'oh? (mild surprise)', 'interjection'],
+    'おう': ['おう', 'hey (rough greeting)', 'interjection'],
+    'ええ': ['ええ', 'yes (soft)', 'interjection'],
+    'うん': ['うん', 'yeah (casual yes)', 'interjection'],
+    'う': ['う', 'ugh', 'interjection'],
+    'よし': ['よし', 'right! okay! (deciding)', 'interjection'],
+    'えーっ': ['えーっ', 'whaaat?!', 'interjection'],
+    'きゃー': ['きゃー', 'eek!', 'interjection'],
+    'あら': ['あら', 'oh! (surprise, feminine)', 'interjection'],
+    'あらあら': ['あらあら', 'oh my, oh my', 'interjection'],
+    'ほら': ['ほら', 'look, there you go', 'interjection'],
+    'ねえねえ': ['ねえねえ', 'hey, hey (getting attention)', 'interjection'],
+    'はいはい': ['はいはい', 'yes, yes (humouring someone)', 'interjection'],
+    'バタン': ['バタン', 'bang! (a door slamming)', 'sound word'],
+    'パッ': ['パッ', 'flash! click! (sudden change)', 'sound word'],
+    'カチ': ['カチ', 'tick (a clock)', 'sound word'],
+    'カチャッ': ['カチャッ', 'click (metal snapping shut)', 'sound word'],
+  };
+
+  const glossary = global.STORY_GLOSSARY || (global.STORY_GLOSSARY = {});
+  Object.keys(WORDS).forEach(k => { if (!glossary[k]) glossary[k] = WORDS[k]; });
+
+  if (typeof module !== 'undefined' && module.exports) module.exports = WORDS;
+})(typeof window !== 'undefined' ? window : globalThis);

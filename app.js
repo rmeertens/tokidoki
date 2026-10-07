@@ -3116,6 +3116,17 @@
     return (window.STORIES_DATA || []).find(s => s.id === id) || null;
   }
 
+  // The sentence a saved word came from: a story's, or — for words saved in
+  // the mystery game (mystery.html) — the line stored with the word itself.
+  function storyWordSource(meta) {
+    const story = getStory(meta.story);
+    if (story && story.sentences[meta.s]) {
+      return { sentence: story.sentences[meta.s], title: story.titleEn, level: story.level.toUpperCase() };
+    }
+    if (meta.jp) return { sentence: { jp: meta.jp, en: meta.en || '' }, title: meta.title || '', level: meta.level || '' };
+    return null;
+  }
+
   // ── Flashcard deck ──
 
   function loadStoryWords() {
@@ -3226,8 +3237,8 @@
   // exported order matches the order they were collected in.
   function getStoryExportCards() {
     return getStoryDeck().reverse().map(c => {
-      const story = getStory(c.meta.story);
-      const sentence = story && story.sentences[c.meta.s];
+      const src = storyWordSource(c.meta);
+      const sentence = src && src.sentence;
       const [reading, meaning, pos] = c.gloss;
       return {
         key: c.key,
@@ -3236,8 +3247,8 @@
         reading, meaning, pos,
         sentence: sentence ? sentence.jp.split(' ').map(t => t.split('>')[0]).join('') : '',
         sentenceEn: sentence ? sentence.en : '',
-        story: story ? story.titleEn : '',
-        level: story ? story.level.toUpperCase() : '',
+        story: src ? src.title : '',
+        level: src ? src.level : '',
       };
     });
   }
@@ -3486,8 +3497,8 @@
     const [reading] = card.gloss;
     $('#story-review-prompt').innerHTML = storyCardHtml(storyWordFurigana(storyDisplayWord(card.key), reading));
 
-    const story = getStory(card.meta.story);
-    const sentence = story && story.sentences[card.meta.s];
+    const src = storyWordSource(card.meta);
+    const sentence = src && src.sentence;
     const ctx = $('#story-review-context');
     if (sentence) {
       const html = parseStorySentence(sentence).map(t => {
@@ -3497,7 +3508,7 @@
       ctx.innerHTML = `
         <div class="story-review-context-jp" lang="ja">${html}</div>
         <div class="story-review-context-en">${sentence.en}</div>
-        <div class="story-review-context-src">from “${story.titleEn}”</div>
+        <div class="story-review-context-src">from “${src.title}”</div>
       `;
     } else {
       ctx.innerHTML = '';

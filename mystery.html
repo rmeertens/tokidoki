@@ -13,7 +13,7 @@
   <meta name="twitter:title" content="Kuro the Word Detective: a Japanese Mystery Game | Tokidoki">
   <meta name="twitter:description" content="Solve mysteries by answering in Japanese — riddles, testimony and fill-in-the-blank. JLPT N5–N3.">
   <link rel="canonical" href="https://tokidoki.meertens.dev/mystery.html">
-  <link rel="stylesheet" href="style.css?v=8">
+  <link rel="stylesheet" href="style.css?v=9">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXWYNZC7YH"></script>
   <script>
@@ -67,7 +67,8 @@
             Kuro is a black cat and the only detective on Hidamari shopping street. He speaks nothing
             but Japanese, so as his new assistant you answer in Japanese too: fill in missing words,
             question suspects, crack なぞなぞ riddles and shout <span lang="ja"><ruby>異議<rt>いぎ</rt></ruby>あり！</span>
-            when a witness gets it wrong. Type in romaji and it turns into kana as you go.
+            when a witness gets it wrong. Type in romaji and it turns into kana as you go. Just like
+            in Stories, tap any word to look it up and save it as a flashcard, or tap a line to see its grammar.
           </p>
         </div>
       </section>
@@ -79,6 +80,7 @@
         <div><span>⚖️</span><b>Testimony</b>: find the lie, then object</div>
         <div><span>🐾</span>3 paws a challenge; misses and hints cost one</div>
       </div>
+      <p class="mys-deck" id="mys-deck"></p>
 
       <h2 class="mys-section-title">Case files</h2>
       <div class="mys-cases" id="mys-cases"></div>
@@ -109,9 +111,13 @@
       <div class="study-progress-bar mys-bar"><div id="mys-bar-fill" class="study-bar-fill"></div></div>
       <div class="mys-stage">
         <div class="mys-log" id="mys-log" aria-live="polite"></div>
+        <aside class="mys-panel hidden" id="mys-panel" aria-live="polite">
+          <button class="icon-btn story-panel-close" id="mys-panel-close" aria-label="Close">✕</button>
+          <div id="mys-panel-body"></div>
+        </aside>
         <div class="mys-dock" id="mys-dock"></div>
       </div>
-      <p class="mys-tip">Tap a line to see its English · Enter / Space = next</p>
+      <p class="mys-tip">Tap a word to look it up · tap a line for its grammar · Enter / Space = next</p>
 
       <div id="mys-file" class="mys-file hidden" role="dialog" aria-modal="true" aria-label="Case file">
         <div class="mys-file-panel">
@@ -131,8 +137,10 @@
   <script src="answer-diff.js?v=8"></script>
   <script src="romaji.js?v=8"></script>
   <script src="speech.js?v=8"></script>
-  <script src="mystery-data.js?v=8"></script>
-  <script src="mystery.js?v=8"></script>
+  <script src="stories-data.js?v=15"></script>
+  <script src="mystery-words.js?v=1"></script>
+  <script src="mystery-data.js?v=9"></script>
+  <script src="mystery.js?v=9"></script>
   <script src="app.js?v=8"></script>
 
   <!-- Static content for search engines -->
@@ -153,6 +161,8 @@
       い-adjective past), The Moon Tea Bowl (keigo, 〜ている vs 〜てある, 〜てしまう) and
       Kuro Arrested?! (hearsay そうだ, passive vs causative, 〜ておく, 申し訳ありません).
       Type in romaji and it is converted to hiragana; kanji and kana spellings are both accepted.
+      As on the Stories page, tap any word for its reading and meaning and save it to your
+      flashcard deck, or tap a line to see the grammar it uses.
     </p>
   </section>
 </body>

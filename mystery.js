@@ -100,6 +100,68 @@
     : esc(p.t))).join('');
   const person = who => (who === 'you' ? YOU : CAST[who]);
 
+  // ─── Words & grammar, as on the Stories page ───────────────────────────────
+  //
+  // Dialogue is written in the Stories token format (space-separated tokens,
+  // `>key` for a word's dictionary form), so every word can be looked up in
+  // STORY_GLOSSARY and every line's grammar in STORY_GRAMMAR. Saved words go
+  // into the Stories flashcard deck (tokidoki_story_words) and are reviewed
+  // there; each remembers the line it came from.
+
+  const GLOSSARY = global.STORY_GLOSSARY || {};
+  const GRAMMAR = global.STORY_GRAMMAR || {};
+  const PUNCT = new Set(['。', '、', '「', '」', '『', '』', '？', '！', '…']);
+  const WORDS_KEY = 'tokidoki_story_words';
+  const SRS_KEY = 'tokidoki_srs';
+
+  const surfaceText = ja => ja.split(' ').map(t => t.split('>')[0]).join('');
+  const displayWord = key => key.replace(/\(.*\)$/, '');
+
+  // A line's tokens, with a fill step's answer put in place of {_}: a lone
+  // {_} token becomes the answer's own tokens, a {_} inside a token
+  // (食[た]べ{_}た) gets the answer spliced in. `filled` marks those tokens.
+  function tokens(ja, fill) {
+    const out = [];
+    ja.split(' ').forEach(tok => {
+      if (fill != null && tok === '{_}') {
+        fill.split(' ').forEach(f => out.push(Object.assign(token(f), { filled: true })));
+      } else if (fill != null && tok.includes('{_}')) {
+        out.push(Object.assign(token(tok.replace('{_}', fill)), { filled: true }));
+      } else {
+        out.push(token(tok));
+      }
+    });
+    return out;
+  }
+
+  function token(tok) {
+    if (PUNCT.has(tok)) return { surface: tok, plain: tok, key: null };
+    const [surface, override] = tok.split('>');
+    const p = plain(surface);
+    return { surface, plain: p, key: surface.includes('{_}') ? null : override || p };
+  }
+
+  // Token indices covering a grammar snippet (first occurrence).
+  function snippetTokens(toks, snippet) {
+    const text = toks.map(t => t.plain).join('');
+    const start = snippet ? text.indexOf(snippet) : -1;
+    if (start === -1) return [];
+    const end = start + snippet.length;
+    const hits = [];
+    let pos = 0;
+    toks.forEach((t, i) => {
+      const from = pos;
+      pos += t.plain.length;
+      if (t.key && from < end && pos > start) hits.push(i);
+    });
+    return hits;
+  }
+
+  const parseRef = ref => {
+    const i = ref.indexOf(':');
+    return i === -1 ? { id: ref, snippet: '' } : { id: ref.slice(0, i), snippet: ref.slice(i + 1) };
+  };
+
   function load(key, fallback) {
     try { return JSON.parse(localStorage.getItem(key)) || fallback; } catch { return fallback; }
   }
@@ -177,6 +239,27 @@
   let ch = null;       // current chapter
   let state = null;    // { step, paws }
   let busy = null;     // the active challenge's bookkeeping
+  let sents = [];      // every line shown so far: { ja, en, g, toks, step }
+  let stepIdx = 0;     // the step whose lines are being drawn
+  let selection = null; // { type: 'word' | 'sentence', sid, t, g }
+
+  // Registers a line and returns its tokens as clickable words.
+  function sentence(ja, en, g, fill) {
+    const toks = tokens(ja, fill);
+    const sid = sents.length;
+    sents.push({ ja: toks.map(t => (t.key && t.key !== t.plain ? `${t.surface}>${t.key}` : t.surface)).join(' '), en: en || '', g: g === null ? null : g || [], toks, step: stepIdx });
+    const saved = loadWords();
+    const html = toks.map((t, ti) => {
+      if (t.surface.includes('{_}')) {
+        const [a, b] = t.surface.split('{_}');
+        return ruby(a) + '<span class="mys-blank">？</span>' + ruby(b);
+      }
+      if (!t.key) return `<span class="story-punct">${esc(t.surface)}</span>`;
+      const cls = 'story-word mys-word' + (saved[t.key] ? ' saved' : '') + (t.filled ? ' mys-filled' : '');
+      return `<span class="${cls}" data-sid="${sid}" data-t="${ti}" role="button" tabindex="0">${ruby(t.surface)}</span>`;
+    }).join('');
+    return { html, sid };
+  }
 
   const log = () => $('#mys-log');
   const dock = () => $('#mys-dock');
@@ -200,11 +283,13 @@
     $('#mys-chapter-title').innerHTML = `第${ch.num}話 <span lang="ja">${ruby(ch.title)}</span>`;
     log().innerHTML = '';
     dock().innerHTML = '';
+    sents = [];
+    closePanel();
     renderClueCount();
     showPlay(true);
 
     // Replay what came before, without waiting on each line.
-    for (let s = 0; s < state.step; s++) replayStep(ch.steps[s]);
+    for (let s = 0; s < state.step; s++) { stepIdx = s; replayStep(ch.steps[s]); }
     if (state.step === 0) addBanner(`第${ch.num}話`, ch.title, ch.en);
     updateProgress();
     run();
@@ -233,9 +318,10 @@
     busy = null;
     if (window.Speech) Speech.stopAll();
     const step = ch.steps[state.step];
+    stepIdx = state.step;
     if (!step) { finish(); return; }
 
-    if (step.type === 'say') { addLine(step.who, step.ja, step.en); waitForNext(); return; }
+    if (step.type === 'say') { addLine(step.who, step.ja, step.en, step.g); waitForNext(); return; }
     if (step.type === 'place') { addPlace(step); next(); return; }
     if (step.type === 'clue') { addClue(step); waitForNext('Add to case file'); return; }
     if (step.type === 'testimony') { startTestimony(step); return; }
@@ -244,7 +330,7 @@
 
   // Past steps as they'd look once played.
   function replayStep(step) {
-    if (step.type === 'say') addLine(step.who, step.ja, step.en);
+    if (step.type === 'say') addLine(step.who, step.ja, step.en, step.g);
     else if (step.type === 'place') addPlace(step);
     else if (step.type === 'clue') addClue(step);
     else if (step.type === 'testimony') addSolvedTestimony(step);
@@ -262,20 +348,22 @@
     return log().lastElementChild;
   }
 
-  function lineHtml(who, ja, en, extra) {
+  function lineHtml(who, ja, en, extra, sid) {
+    const at = sid == null ? '' : ` data-sid="${sid}"`;
     if (who === 'narr') {
-      return `<div class="mys-line narr${extra || ''}">
+      return `<div class="mys-line narr${extra || ''}"${at}>
         <div class="mys-text"><div class="mys-ja" lang="ja">${ja}</div>${en ? `<div class="mys-en">${esc(en)}</div>` : ''}</div></div>`;
     }
     const p = person(who);
-    return `<div class="mys-line${who === 'you' ? ' you' : ''}${extra || ''}" style="--who:${p.color}">
+    return `<div class="mys-line${who === 'you' ? ' you' : ''}${extra || ''}"${at} style="--who:${p.color}">
       <span class="mys-face" aria-hidden="true">${p.face}</span>
       <div class="mys-text"><div class="mys-name"><span lang="ja">${esc(p.name)}</span></div>
       <div class="mys-ja" lang="ja">${ja}</div>${en ? `<div class="mys-en">${esc(en)}</div>` : ''}</div></div>`;
   }
 
-  function addLine(who, ja, en) {
-    return append(lineHtml(who, ruby(ja), en));
+  function addLine(who, ja, en, g, fill, extra) {
+    const { html, sid } = sentence(ja, en, g, fill);
+    return append(lineHtml(who, html, en, extra, sid));
   }
 
   function addBanner(kicker, title, en) {
@@ -288,26 +376,24 @@
   }
 
   function addClue(step) {
+    const quote = step.ja ? sentence(step.ja, step.desc, step.g) : null;
     append(`<div class="mys-clue-get"><span class="mys-clue-icon">📁</span><div>
       <div class="mys-clue-kicker">${ruby('証拠[しょうこ]')} Evidence added</div>
       <div class="mys-clue-name"><span lang="ja">${ruby(step.name)}</span> · ${esc(step.en)}</div>
-      <div class="mys-clue-desc" lang="ja">${ruby(step.desc)}</div></div></div>`);
+      ${quote ? `<div class="mys-clue-quote mys-ja" lang="ja" data-sid="${quote.sid}">${quote.html}</div>` : ''}
+      <div class="mys-clue-desc">${esc(step.desc)}</div></div></div>`);
     renderClueCount();
   }
 
-  // Lines with a blank show the answer once it's solved.
-  function blankHtml(ja, filled) {
-    const [a, b] = ja.split('{_}');
-    const mid = filled ? `<span class="mys-filled">${ruby(filled)}</span>` : '<span class="mys-blank">？</span>';
-    return ruby(a) + mid + ruby(b || '');
-  }
+  // The English of an "ask" step: the quoted part of its prompt.
+  const askEnglish = step => ((step.prompt || '').match(/“([^”]+)”/) || [])[1] || '';
 
   function addSolved(step) {
     const ans = step.answers[0];
     if (step.type === 'fill') {
-      append(lineHtml(step.who, blankHtml(step.ja, ans), step.en, step.accuse ? ' accuse' : ''));
+      addLine(step.who, step.ja, step.en, step.g, step.fill, step.accuse ? ' accuse' : '');
     } else if (step.type === 'ask') {
-      append(lineHtml('you', ruby(ans)));
+      addLine('you', step.line, askEnglish(step), step.g);
     } else if (step.type === 'riddle') {
       append(riddleHtml(step, ans));
     } else if (step.type === 'meaning') {
@@ -318,9 +404,10 @@
 
   function riddleHtml(step, solved) {
     const p = person(step.who);
+    const q = sentence(step.ja, step.en, step.g);
     return `<div class="mys-riddle${solved ? ' solved' : ''}">
       <div class="mys-riddle-head"><span class="mys-riddle-title" lang="ja">${esc(step.title)}</span><span class="mys-riddle-from">from ${esc(p.en)}</span></div>
-      <div class="mys-riddle-ja" lang="ja">${ruby(step.ja)}</div>
+      <div class="mys-riddle-ja" lang="ja" data-sid="${q.sid}">${q.html}</div>
       <div class="mys-riddle-en">${esc(step.en)}</div>
       ${solved ? `<div class="mys-riddle-answer">${ruby('答[こた]え')}: <span lang="ja">${ruby(solved)}</span></div>` : ''}
     </div>`;
@@ -345,7 +432,7 @@
     busy = { step, wrong: 0, hint: false, done: false, typed: '' };
     const english = step.type === 'meaning';
 
-    if (step.type === 'fill') busy.lineEl = append(lineHtml(step.who, blankHtml(step.ja), step.en, ' asking' + (step.accuse ? ' accuse' : '')));
+    if (step.type === 'fill') busy.lineEl = addLine(step.who, step.ja, step.en, null, null, ' asking' + (step.accuse ? ' accuse' : ''));
     if (step.type === 'riddle') busy.lineEl = append(riddleHtml(step));
 
     dock().innerHTML = `
@@ -476,9 +563,12 @@
     return `<div class="mys-testimony${solved ? ' solved' : ''}" style="--who:${p.color}">
       <div class="mys-testimony-head"><span class="mys-face" aria-hidden="true">${p.face}</span>
         <div><div class="mys-testimony-title" lang="ja">${ruby(step.title)}</div><div class="mys-testimony-en">${esc(step.titleEn)}</div></div></div>
-      <ol class="mys-statements">${step.lines.map((l, i) => `
-        <li><button class="mys-statement${i === picked ? ' picked' : ''}${solved && i === step.wrong ? ' broken' : ''}" data-line="${i}" ${solved ? 'disabled' : ''}>
-          <span class="mys-ja" lang="ja">${ruby(l.ja)}</span><span class="mys-en">${esc(l.en)}</span></button></li>`).join('')}
+      <ol class="mys-statements">${step.lines.map((l, i) => {
+        const q = sentence(l.ja, l.en, l.g);
+        return `
+        <li><div class="mys-statement${i === picked ? ' picked' : ''}${solved ? ' done' : ''}${solved && i === step.wrong ? ' broken' : ''}" data-line="${i}"${solved ? ` data-sid="${q.sid}"` : ' role="button" tabindex="0"'}>
+          <span class="mys-ja" lang="ja">${q.html}</span><span class="mys-en">${esc(l.en)}</span></div></li>`;
+      }).join('')}
       </ol></div>`;
   }
 
@@ -489,12 +579,15 @@
   function startTestimony(step) {
     busy = { step, wrong: 0, hint: false, done: false, picked: -1 };
     busy.lineEl = append(testimonyHtml(step, -1, false));
-    busy.lineEl.addEventListener('click', e => {
-      const btn = e.target.closest('.mys-statement');
+    const pick = btn => {
       if (!btn || busy.done) return;
       busy.picked = Number(btn.dataset.line);
       busy.lineEl.querySelectorAll('.mys-statement').forEach(b => b.classList.toggle('picked', b === btn));
       $('#mys-object').disabled = false;
+    };
+    busy.lineEl.addEventListener('click', e => pick(e.target.closest('.mys-statement')));
+    busy.lineEl.addEventListener('keydown', e => {
+      if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('mys-statement')) { e.preventDefault(); pick(e.target); }
     });
     dock().innerHTML = `
       <div class="mys-challenge">
@@ -531,7 +624,7 @@
       state.paws += earned;
       busy.lineEl.remove();
       addSolvedTestimony(step);
-      addLine('you', 'ちょっと待[ま]った！', 'Hold it right there!');
+      addLine('you', 'ちょっと 待[ま]った>待つ ！', 'Hold it right there!', ['plain-form:待った']);
       dock().innerHTML = `
         <div class="mys-challenge solved">
           <div class="mys-result ok"><span lang="ja">${ruby('見[み]つけた！')}</span> +${earned} 🐾</div>
@@ -547,10 +640,10 @@
     busy.wrong++;
     updateStepPaws();
     const line = step.lines[busy.picked];
-    const [who, ja, en] = line.no || ['kuro', 'うーん…それは、おかしくないですね。', 'Hmm… nothing wrong with that one.'];
+    const [who, ja, en] = line.no || ['kuro', 'うーん … それ は 、 おかしくない です ね 。', 'Hmm… nothing wrong with that one.'];
     const p = person(who);
     $('#mys-feedback').innerHTML = `<div class="mys-rebuttal" style="--who:${p.color}"><span class="mys-face" aria-hidden="true">${p.face}</span>
-      <div><div class="mys-ja" lang="ja">${ruby(ja)}</div><div class="mys-en">${esc(en)}</div></div></div>`;
+      <div><div class="mys-ja" lang="ja">${ruby(surfaceText(ja))}</div><div class="mys-en">${esc(en)}</div></div></div>`;
   }
 
   function flash() {
@@ -558,6 +651,129 @@
     el.classList.remove('show');
     void el.offsetWidth;
     el.classList.add('show');
+  }
+
+  // ─── Word & grammar panel ───────────────────────────────────────────────────
+
+  const loadWords = () => load(WORDS_KEY, {});
+
+  function toggleWord(key, sid) {
+    const words = loadWords();
+    if (words[key]) {
+      delete words[key];
+      const srs = load(SRS_KEY, {});
+      delete srs['story_word:' + key];
+      save(SRS_KEY, srs);
+    } else {
+      const s = sents[sid];
+      words[key] = {
+        story: 'mystery-' + ch.id, s: s.step, added: Date.now(),
+        jp: s.ja, en: s.en, title: `${ch.en} (Kuro the Word Detective)`, level: ch.level,
+      };
+    }
+    save(WORDS_KEY, words);
+    log().querySelectorAll('.mys-word').forEach(el => {
+      const t = sents[el.dataset.sid].toks[el.dataset.t];
+      el.classList.toggle('saved', !!words[t.key]);
+    });
+    renderDeckCount();
+  }
+
+  function openWord(sid, t) {
+    selection = { type: 'word', sid, t };
+    renderPanel();
+  }
+
+  function openSentence(sid) {
+    selection = { type: 'sentence', sid, g: null };
+    renderPanel();
+  }
+
+  function closePanel() {
+    selection = null;
+    renderPanel();
+  }
+
+  function renderPanel() {
+    const panel = $('#mys-panel');
+    if (!panel) return;
+    log().querySelectorAll('.mys-word.selected, .mys-word.grammar-hit, .mys-sel').forEach(el => el.classList.remove('selected', 'grammar-hit', 'mys-sel'));
+    panel.classList.toggle('hidden', !selection);
+    if (!selection) return;
+
+    const s = sents[selection.sid];
+    const body = $('#mys-panel-body');
+    if (selection.type === 'word') {
+      const el = log().querySelector(`.mys-word[data-sid="${selection.sid}"][data-t="${selection.t}"]`);
+      if (el) el.classList.add('selected');
+      if (el) requestAnimationFrame(() => el.scrollIntoView({ block: 'nearest' }));
+      const tok = s.toks[selection.t];
+      const [reading, meaning, pos] = GLOSSARY[tok.key] || [tok.plain, '', ''];
+      const word = displayWord(tok.key);
+      const saved = !!loadWords()[tok.key];
+      body.innerHTML = `
+        <div class="story-panel-kicker">Word</div>
+        <div class="story-panel-word" lang="ja">${esc(word)}</div>
+        ${reading !== word ? `<div class="story-panel-reading" lang="ja">${esc(reading)}</div>` : ''}
+        <div class="story-panel-pos">${esc(pos)}</div>
+        <div class="story-panel-meaning">${esc(meaning)}</div>
+        ${tok.plain !== word ? `<div class="story-panel-form">In the text: <span lang="ja">${esc(tok.plain)}</span></div>` : ''}
+        <div class="mys-panel-actions">
+          <button class="${saved ? 'btn-secondary' : 'btn-primary'} story-panel-add" id="mys-add-word">${saved ? '✓ In flashcards — remove' : '＋ Add to flashcards'}</button>
+          <button class="story-panel-link" id="mys-word-sentence">Grammar in this sentence →</button>
+        </div>
+        ${saved ? '<div class="mys-panel-tip">Review your flashcards on the <a href="stories.html#deck">Stories page</a>.</div>' : ''}`;
+      $('#mys-add-word').addEventListener('click', () => { toggleWord(tok.key, selection.sid); renderPanel(); });
+      $('#mys-word-sentence').addEventListener('click', () => openSentence(selection.sid));
+      return;
+    }
+
+    const host = log().querySelector(`[data-sid="${selection.sid}"]:not(.mys-word)`);
+    if (host) {
+      host.classList.add('mys-sel');
+      requestAnimationFrame(() => host.scrollIntoView({ block: 'nearest' }));
+    }
+    const items = (s.g || []).map((ref, gi) => {
+      const { id, snippet } = parseRef(ref);
+      const g = GRAMMAR[id];
+      if (!g) return '';
+      return `
+        <li class="story-grammar-item${selection.g === gi ? ' active' : ''}" data-g="${gi}" tabindex="0">
+          <div class="story-grammar-head"><span class="story-grammar-title">${esc(g.title)}</span><span class="story-grammar-level">${esc(g.level)}</span></div>
+          <div class="story-grammar-pattern" lang="ja">${esc(g.pattern)}</div>
+          <div class="story-grammar-note">${esc(g.note)}</div>
+          ${snippet ? `<div class="story-grammar-here">Here: <span lang="ja">${esc(snippet)}</span></div>` : ''}
+        </li>`;
+    }).join('');
+    body.innerHTML = `
+      <div class="story-panel-kicker">Sentence</div>
+      <div class="story-panel-sentence" lang="ja">${ruby(surfaceText(s.ja))}</div>
+      ${s.en ? `<div class="story-panel-en">${esc(s.en)}</div>` : ''}
+      <div class="story-panel-kicker">Grammar</div>
+      ${items ? `<ul class="story-grammar-list">${items}</ul>`
+        : `<p class="mys-panel-tip">${s.g === null ? 'The grammar shows up once you’ve filled in the blank.' : 'Nothing to unpack here — tap a word to look it up.'}</p>`}`;
+    if (selection.g != null) {
+      const { snippet } = parseRef(s.g[selection.g]);
+      snippetTokens(s.toks, snippet).forEach(ti => {
+        const el = log().querySelector(`.mys-word[data-sid="${selection.sid}"][data-t="${ti}"]`);
+        if (el) el.classList.add('grammar-hit');
+      });
+    }
+    body.querySelectorAll('.story-grammar-item').forEach(li => {
+      const pick = () => { selection.g = selection.g === Number(li.dataset.g) ? null : Number(li.dataset.g); renderPanel(); };
+      li.addEventListener('click', pick);
+      li.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
+    });
+  }
+
+  function renderDeckCount() {
+    const n = Object.keys(loadWords()).length;
+    const el = $('#mys-deck');
+    if (el) {
+      el.innerHTML = n
+        ? `📚 <b>${n}</b> word${n === 1 ? '' : 's'} in your flashcards — <a href="stories.html#deck">review them on the Stories page</a>.`
+        : '📚 Tap any word in a case to look it up and add it to your flashcards; tap a line to see its grammar.';
+    }
   }
 
   // ─── Case file ──────────────────────────────────────────────────────────────
@@ -575,7 +791,8 @@
     const clues = cluesSoFar();
     $('#mys-file-list').innerHTML = clues.length
       ? clues.map(c => `<div class="mys-file-item"><div class="mys-clue-name"><span lang="ja">${ruby(c.name)}</span> · ${esc(c.en)}</div>
-          <div class="mys-clue-desc" lang="ja">${ruby(c.desc)}</div></div>`).join('')
+          ${c.ja ? `<div class="mys-clue-quote mys-ja" lang="ja">${ruby(surfaceText(c.ja))}</div>` : ''}
+          <div class="mys-clue-desc">${esc(c.desc)}</div></div>`).join('')
       : '<p class="mys-file-empty">No evidence yet. Keep your eyes open.</p>';
     $('#mys-file').classList.remove('hidden');
     $('#mys-file-close').focus();
@@ -617,6 +834,7 @@
     ch = null;
     busy = null;
     closeFile();
+    closePanel();
     renderCaseList();
     showPlay(false);
   }
@@ -654,11 +872,22 @@
       renderCaseList();
     });
 
-    // Tap a line to peek at its English.
+    // Tap a word to look it up, or the rest of a line for its grammar.
     log().addEventListener('click', e => {
-      const line = e.target.closest('.mys-line, .mys-statement');
-      if (line && !e.target.closest('button.mys-statement')) line.classList.toggle('peek');
+      const word = e.target.closest('.mys-word');
+      if (word) { openWord(Number(word.dataset.sid), Number(word.dataset.t)); return; }
+      const host = e.target.closest('[data-sid]');
+      if (host) openSentence(Number(host.dataset.sid));
     });
+    log().addEventListener('keydown', e => {
+      const word = e.target.closest && e.target.closest('.mys-word');
+      if (word && (e.key === 'Enter' || e.key === ' ')) {
+        e.preventDefault(); e.stopPropagation();
+        openWord(Number(word.dataset.sid), Number(word.dataset.t));
+      }
+    });
+    $('#mys-panel-close').addEventListener('click', closePanel);
+    renderDeckCount();
 
     // The header's back button (wired by app.js to the setup screen) ends the chapter.
     const back = $('#btn-back');
@@ -669,10 +898,14 @@
       if (e.key === 'Escape' && !$('#mys-file').classList.contains('hidden')) {
         e.preventDefault(); e.stopPropagation(); closeFile(); return;
       }
-      const tag = document.activeElement && document.activeElement.tagName;
-      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+      if (e.key === 'Escape' && selection) {
+        e.preventDefault(); e.stopPropagation(); closePanel(); return;
+      }
+      // Let buttons, words and inputs handle their own keys.
+      const el = document.activeElement;
+      if (el && el !== document.body && el.closest('input, textarea, button, a, [role="button"], [tabindex]')) return;
       const nextBtn = $('#mys-next');
-      if (nextBtn && (e.key === 'Enter' || e.key === ' ') && document.activeElement !== nextBtn) {
+      if (nextBtn && (e.key === 'Enter' || e.key === ' ')) {
         e.preventDefault(); e.stopPropagation(); nextBtn.click();
       }
     }, true);
