@@ -352,9 +352,16 @@
     else addSolved(step);
   }
 
+  // The transcript sticks to its newest line: when a line is added, and when
+  // it shrinks because the answer box or word panel below it grows. Once the
+  // player scrolls up to reread something, it stays where they put it.
+  let pinned = true;
+  let pinnedTop = 0;
   function scrollLog() {
     const el = log();
     el.scrollTop = el.scrollHeight;
+    pinned = true;
+    pinnedTop = el.scrollTop;
   }
 
   function append(html) {
@@ -937,6 +944,16 @@
       }
     });
     $('#mys-panel-close').addEventListener('click', closePanel);
+    // Scroll events also arrive late from redraws, so only a move up from
+    // where it was pinned counts as the player scrolling away.
+    log().addEventListener('scroll', () => {
+      const el = log();
+      if (el.scrollHeight - el.scrollTop - el.clientHeight < 24) pinned = true;
+      else if (el.scrollTop < pinnedTop - 2) pinned = false;
+    }, { passive: true });
+    if (global.ResizeObserver) {
+      new ResizeObserver(() => { if (pinned) scrollLog(); }).observe(log());
+    }
     renderDeckCount();
 
     // The header's back button (wired by app.js to the setup screen) ends the chapter.
