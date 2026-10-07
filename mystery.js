@@ -477,7 +477,14 @@
       if (e.key === 'Enter' && !e.isComposing) { e.preventDefault(); e.stopPropagation(); check(); }
     });
     updateStepPaws();
-    input.focus({ preventScroll: true });
+    focusInput(input);
+  }
+
+  // Puts the cursor in the answer box — except on touch screens, where that
+  // would pop the keyboard up over the story before the player asked for it.
+  const touch = () => !!(global.matchMedia && global.matchMedia('(hover: none) and (pointer: coarse)').matches);
+  function focusInput(input) {
+    if (input && !touch()) input.focus({ preventScroll: true });
   }
 
   const stepPaws = () => (busy.gaveUp ? 0 : Math.max(0, PAWS_PER - busy.wrong - (busy.hint ? 1 : 0)));
@@ -494,7 +501,7 @@
     const step = busy.step;
     const input = $('#mys-input');
     const typed = step.type === 'meaning' ? input.value : (window.Romaji ? Romaji.flush(input) : input.value);
-    if (!typed.trim()) { input.focus(); return; }
+    if (!typed.trim()) { focusInput(input); return; }
     const ok = step.type === 'meaning' ? matchEnglish(typed, step.answers) : match(typed, step.answers);
     if (ok) { busy.typed = typed; solve(); return; }
 
@@ -520,7 +527,7 @@
     updateStepPaws();
     $('#mys-hint').disabled = true;
     $('#mys-hint').insertAdjacentHTML('afterend', `<div class="mys-hint">💡 ${esc(busy.step.hint)}</div>`);
-    $('#mys-input').focus();
+    focusInput($('#mys-input'));
   }
 
   // What was last typed against the expected answer, mismatches marked —
