@@ -3864,3 +3864,473 @@ a.chapter-card {
   .notepad-panel-word { grid-template-columns: auto 1fr; }
   .notepad-panel-meaning { grid-column: 1 / -1; }
 }
+
+/* ─── Mystery (mystery.html): ことば探偵クロ ─────────────────────────────── */
+
+.mys-hero {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  margin-bottom: 14px;
+  padding: 20px 22px;
+  background: linear-gradient(135deg, color-mix(in srgb, #4b4466 16%, var(--bg-card)), var(--bg-card));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.mys-hero-face {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 84px;
+  font-size: 3rem;
+  background: color-mix(in srgb, #4b4466 22%, var(--bg-card));
+  border: 3px solid #4b4466;
+  border-radius: 50%;
+}
+.mys-hero-kicker { font-family: var(--font-jp); color: var(--salmon); font-weight: 700; font-size: 0.95rem; }
+.mys-hero-title { font-family: var(--font-display); font-size: 1.6rem; margin: 2px 0 6px; }
+.mys-hero-sub { color: var(--text-dim); font-size: 0.9rem; line-height: 1.6; }
+@media (max-width: 600px) {
+  .mys-hero { flex-direction: column; align-items: flex-start; padding: 16px; }
+  .mys-hero-face { width: 64px; height: 64px; font-size: 2.2rem; }
+}
+
+.mys-howto {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+.mys-howto > div {
+  flex: 1 1 150px;
+  padding: 9px 12px;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.mys-howto span { margin-right: 4px; }
+.mys-howto b { color: var(--text); }
+
+.mys-section-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin: 0 0 10px;
+}
+
+.mys-cases {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 12px;
+  margin-bottom: 26px;
+}
+.mys-case {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+  padding: 16px 16px 14px;
+  color: var(--text);
+  font: inherit;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-top: 6px solid #c8a46a;
+  border-radius: var(--radius-sm) var(--radius-sm) var(--radius) var(--radius);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform var(--transition), background var(--transition);
+}
+.mys-case:hover:not(.locked) { transform: translateY(-2px); background: var(--bg-card-hover); }
+.mys-case.locked { opacity: 0.55; cursor: not-allowed; }
+.mys-case-num { font-family: var(--font-jp); font-size: 0.75rem; font-weight: 700; color: var(--text-muted); }
+.mys-case-level {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 2px 8px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border-radius: 999px;
+}
+.mys-case-title { font-family: var(--font-jp); font-size: 1.25rem; font-weight: 700; line-height: 1.9; }
+.mys-case-en { font-weight: 600; font-size: 0.9rem; }
+.mys-case-intro { font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; }
+.mys-case-skills { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+.mys-case-status { margin-top: 8px; font-size: 0.78rem; font-weight: 700; }
+.mys-case-status.new { color: var(--accent); }
+.mys-case-status.going { color: var(--orange); }
+.mys-case-status.solved { color: var(--green); }
+.mys-case-status.locked { color: var(--text-muted); font-weight: 500; }
+
+.mys-cast {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 10px;
+  margin-bottom: 22px;
+}
+.mys-cast-card {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.mys-cast-card.unknown { opacity: 0.6; }
+.mys-cast-name { font-weight: 700; font-size: 0.9rem; }
+.mys-cast-role { font-weight: 500; font-size: 0.72rem; color: var(--text-muted); margin-left: 4px; }
+.mys-cast-bio { font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; margin-top: 2px; }
+
+.mys-face {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  font-size: 1.5rem;
+  line-height: 1;
+  background: color-mix(in srgb, var(--who, var(--accent)) 20%, var(--bg-card));
+  border: 2px solid var(--who, var(--accent));
+  border-radius: 50%;
+}
+
+.mys-settings { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+
+/* Playing a case */
+.mys-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 4px 0 8px;
+}
+.mys-toolbar-title { font-weight: 700; font-family: var(--font-jp); min-width: 0; }
+.mys-toolbar-actions { display: flex; align-items: center; gap: 6px; flex: none; }
+.mys-paws { font-weight: 700; font-size: 0.9rem; margin-right: 4px; white-space: nowrap; }
+.mys-small { padding: 6px 12px; font-size: 0.8rem; }
+.mys-file-count {
+  display: inline-block;
+  min-width: 1.4em;
+  padding: 0 5px;
+  margin-left: 2px;
+  font-size: 0.72rem;
+  color: #fff;
+  background: var(--salmon);
+  border-radius: 999px;
+  text-align: center;
+}
+.mys-bar { flex: none; margin-bottom: 10px; }
+
+.mys-stage {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.mys-log {
+  height: min(56vh, 540px);
+  overflow-y: auto;
+  padding: 16px 16px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scroll-behavior: smooth;
+}
+.mys-dock {
+  padding: 14px 16px 16px;
+  border-top: 1px solid var(--border);
+  background: color-mix(in srgb, var(--accent) 4%, var(--bg-card));
+}
+.mys-tip { text-align: center; font-size: 0.72rem; color: var(--text-muted); margin-top: 8px; }
+
+.mys-line {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  max-width: 92%;
+  animation: mys-in 0.25s ease;
+  cursor: pointer;
+}
+.mys-line.you { align-self: flex-end; flex-direction: row-reverse; }
+.mys-line.you .mys-text { background: color-mix(in srgb, var(--accent) 12%, var(--bg-card)); border-color: color-mix(in srgb, var(--accent) 35%, var(--border)); }
+.mys-line.you .mys-name { text-align: right; }
+.mys-text {
+  min-width: 0;
+  padding: 8px 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--who, var(--border));
+  border-radius: var(--radius-sm);
+}
+.mys-name { font-size: 0.72rem; font-weight: 700; color: var(--who, var(--text-dim)); margin-bottom: 2px; }
+.mys-ja { font-family: var(--font-jp); font-size: 1.1rem; line-height: 2; }
+.mys-ja rt, .mys-case-title rt, .mys-riddle-ja rt { font-size: 0.55em; color: var(--text-dim); }
+.mys-en { display: none; font-size: 0.8rem; color: var(--text-dim); margin-top: 2px; }
+.mys-show-en .mys-en, .mys-line.peek .mys-en, .mys-statement.peek .mys-en, .mys-rebuttal .mys-en,
+.mys-line.asking .mys-en { display: block; }
+.mys-no-furigana .mys-ja rt, .mys-no-furigana .mys-riddle-ja rt, .mys-no-furigana .mys-clue-desc rt,
+.mys-no-furigana .mys-model rt, .mys-no-furigana .mys-statement rt { visibility: hidden; }
+
+.mys-line.narr { align-self: center; max-width: 100%; text-align: center; }
+.mys-line.narr .mys-text { background: transparent; border: none; padding: 2px 8px; }
+.mys-line.narr .mys-ja { font-style: italic; color: var(--text-dim); font-size: 1rem; }
+.mys-line.accuse .mys-text { border-width: 2px 2px 2px 5px; border-color: var(--salmon); }
+
+.mys-blank, .mys-filled {
+  display: inline-block;
+  min-width: 2.6em;
+  margin: 0 3px;
+  padding: 0 6px;
+  text-align: center;
+  border-radius: 6px;
+}
+.mys-blank { color: var(--accent); background: var(--accent-dim); border-bottom: 2px dashed var(--accent); }
+.mys-filled { color: var(--green); background: var(--green-dim); font-weight: 700; }
+
+.mys-place {
+  align-self: center;
+  padding: 4px 14px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: var(--font-jp);
+  color: var(--text-dim);
+  background: var(--bg-input);
+  border-radius: 999px;
+}
+.mys-place rt { font-size: 0.55em; }
+.mys-place-en { font-family: var(--font); font-weight: 500; margin-left: 8px; color: var(--text-muted); }
+
+.mys-banner {
+  align-self: stretch;
+  text-align: center;
+  padding: 18px 12px;
+  margin-bottom: 4px;
+  color: #fff;
+  background: linear-gradient(135deg, #3a3550, #4b4466 60%, #6a4f7a);
+  border-radius: var(--radius-sm);
+}
+.mys-banner.end { background: linear-gradient(135deg, #1f7a62, #00a383); margin-top: 6px; }
+.mys-banner-kicker { font-family: var(--font-jp); font-weight: 700; opacity: 0.8; letter-spacing: 0.1em; }
+.mys-banner-title { font-family: var(--font-jp); font-size: 1.6rem; font-weight: 800; line-height: 2; }
+.mys-banner-title rt, .mys-banner-kicker rt { color: rgba(255, 255, 255, 0.75); font-size: 0.45em; }
+.mys-banner-en { opacity: 0.85; font-size: 0.9rem; }
+
+.mys-clue-get {
+  align-self: center;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  max-width: 460px;
+  padding: 12px 14px;
+  background: color-mix(in srgb, #c8a46a 18%, var(--bg-card));
+  border: 1px dashed #c8a46a;
+  border-radius: var(--radius-sm);
+  animation: mys-in 0.3s ease;
+}
+.mys-clue-icon { font-size: 1.6rem; }
+.mys-clue-kicker { font-size: 0.7rem; font-weight: 700; color: var(--orange); text-transform: uppercase; letter-spacing: 0.05em; }
+.mys-clue-kicker rt { text-transform: none; }
+.mys-clue-name { font-weight: 700; font-family: var(--font-jp); line-height: 2; }
+.mys-clue-desc { font-size: 0.88rem; color: var(--text-dim); line-height: 1.9; font-family: var(--font-jp); }
+.mys-clue-desc rt, .mys-clue-name rt { font-size: 0.55em; }
+
+.mys-riddle {
+  align-self: center;
+  width: min(100%, 480px);
+  padding: 14px 16px;
+  background: color-mix(in srgb, #d9a514 10%, var(--bg-card));
+  border: 2px solid #d9a514;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 3px 0 color-mix(in srgb, #d9a514 50%, transparent);
+  animation: mys-in 0.3s ease;
+}
+.mys-riddle-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+.mys-riddle-title { font-family: var(--font-jp); font-weight: 800; color: #b38708; }
+.mys-riddle-from { font-size: 0.72rem; color: var(--text-muted); }
+.mys-riddle-ja { font-family: var(--font-jp); font-size: 1.2rem; line-height: 2; }
+.mys-riddle-en { font-size: 0.82rem; color: var(--text-dim); }
+.mys-riddle-answer { margin-top: 6px; font-family: var(--font-jp); font-weight: 700; color: var(--green); line-height: 2; }
+.mys-riddle-answer rt { font-size: 0.55em; }
+
+.mys-testimony {
+  align-self: stretch;
+  padding: 12px;
+  background: color-mix(in srgb, var(--who) 8%, var(--bg-card));
+  border: 2px solid var(--who);
+  border-radius: var(--radius-sm);
+  animation: mys-in 0.3s ease;
+}
+.mys-testimony-head { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; }
+.mys-testimony-title { font-family: var(--font-jp); font-weight: 800; line-height: 2; }
+.mys-testimony-title rt { font-size: 0.55em; }
+.mys-testimony-en { font-size: 0.75rem; color: var(--text-muted); }
+.mys-statements { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.mys-statement {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: var(--text);
+  padding: 6px 12px;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+}
+.mys-statement .mys-ja { font-size: 1rem; }
+.mys-statement:hover:not(:disabled) { border-color: var(--who); }
+.mys-statement.picked { border-color: var(--salmon); background: color-mix(in srgb, var(--salmon) 10%, var(--bg-card)); }
+.mys-statement:disabled { cursor: default; opacity: 0.75; }
+.mys-statement.broken { opacity: 1; border-color: var(--red); background: var(--red-dim); }
+.mys-statement.broken .mys-ja { text-decoration: line-through; text-decoration-color: var(--red); }
+
+/* The challenge dock */
+.mys-challenge { display: flex; flex-direction: column; gap: 8px; }
+.mys-challenge-kind {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
+.mys-challenge.accuse .mys-challenge-kind { color: var(--salmon); }
+.mys-challenge-paws { letter-spacing: 0.1em; text-transform: none; color: var(--text-dim); }
+.mys-challenge-prompt { font-size: 0.92rem; line-height: 1.5; }
+.mys-answer { max-width: none; margin-top: 0; }
+.mys-answer .answer-input.incorrect { animation: mys-shake 0.35s ease; }
+.mys-feedback:empty { display: none; }
+.mys-wrong { color: var(--red); font-weight: 600; font-size: 0.88rem; }
+.mys-challenge-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-start; }
+.mys-hint {
+  flex-basis: 100%;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  background: var(--orange-dim);
+  border-radius: var(--radius-sm);
+}
+.mys-result { font-weight: 800; font-size: 1.05rem; }
+.mys-result.ok { color: var(--green); }
+.mys-result.reveal { color: var(--orange); font-family: var(--font-jp); line-height: 2; }
+.mys-result rt { font-size: 0.55em; }
+.mys-models-label { font-size: 0.72rem; color: var(--text-muted); }
+.mys-model { font-family: var(--font-jp); font-size: 1.05rem; line-height: 2; }
+.mys-model rt { font-size: 0.55em; color: var(--text-dim); }
+.mys-note {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 10px 12px;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+}
+.mys-note-face { font-size: 1.3rem; }
+.mys-next { align-self: flex-end; min-width: 140px; }
+.mys-key { opacity: 0.7; margin-left: 4px; }
+
+.mys-object-row { display: flex; }
+.mys-object { background: var(--salmon); box-shadow: 0 3px 0 color-mix(in srgb, var(--salmon) 60%, #000); }
+.mys-object:disabled { opacity: 0.45; cursor: not-allowed; filter: none; }
+.mys-object rt { font-size: 0.55em; }
+.mys-rebuttal {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 10px;
+  background: var(--bg);
+  border-left: 3px solid var(--who);
+  border-radius: var(--radius-sm);
+}
+.mys-rebuttal .mys-face { width: 34px; height: 34px; font-size: 1.1rem; }
+.mys-rebuttal .mys-ja { font-size: 1rem; }
+
+.mys-end { align-items: center; text-align: center; }
+.mys-end-paws { font-size: 2rem; font-weight: 800; }
+.mys-end-paws span { font-size: 1rem; color: var(--text-muted); }
+.mys-end-rank { font-family: var(--font-jp); font-size: 1.05rem; line-height: 2; }
+.mys-end-rank rt { font-size: 0.55em; }
+.mys-end-actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 4px; }
+.mys-end-fin { width: 100%; color: var(--text-dim); }
+
+/* Case file overlay */
+.mys-file {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(20, 15, 10, 0.5);
+}
+.mys-file-panel {
+  width: min(100%, 480px);
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 16px;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.mys-file-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.mys-file-head h2 { font-family: var(--font-jp); font-size: 1.15rem; line-height: 2; }
+.mys-file-head h2 span { font-family: var(--font); font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
+.mys-file-head rt { font-size: 0.5em; }
+.mys-file-item { padding: 10px 0; border-top: 1px solid var(--border); }
+.mys-file-empty { color: var(--text-muted); font-size: 0.9rem; }
+
+/* 異議あり！ */
+.mys-flash {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  opacity: 0;
+}
+.mys-flash span {
+  padding: 10px 28px;
+  font-family: var(--font-jp);
+  font-size: clamp(2.4rem, 10vw, 4.5rem);
+  font-weight: 900;
+  color: #fff;
+  background: var(--salmon);
+  border: 5px solid #fff;
+  border-radius: 18px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+  transform: rotate(-6deg);
+}
+.mys-flash.show { animation: mys-flash 0.9s ease; }
+
+@keyframes mys-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes mys-shake { 0%, 100% { transform: none; } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+@keyframes mys-flash {
+  0% { opacity: 0; transform: scale(1.6); }
+  15% { opacity: 1; transform: scale(1); }
+  70% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mys-line, .mys-clue-get, .mys-riddle, .mys-testimony, .mys-answer .answer-input.incorrect { animation: none; }
+  .mys-flash.show { animation-duration: 0.6s; }
+}
+@media (max-width: 600px) {
+  .mys-log { height: 52vh; padding: 12px 10px 6px; }
+  .mys-dock { padding: 12px; }
+  .mys-line { max-width: 100%; }
+  .mys-face { width: 36px; height: 36px; font-size: 1.2rem; }
+  .mys-toolbar { flex-wrap: wrap; }
+}
