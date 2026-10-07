@@ -1722,7 +1722,9 @@
 
     const kanjiEl = $('#card-kanji');
     if (isEnToJa) {
-      kanjiEl.textContent = sourceText;
+      // Hover (or tap) an English word to see the Japanese word for it.
+      if (window.EnHover) EnHover.render(kanjiEl, sourceText, { ja: sentence.ja, kana: EnHover.kanaOfRuby(sentence.jaHtml || sentence.ja) });
+      else kanjiEl.textContent = sourceText;
     } else {
       kanjiEl.innerHTML = settings.showFurigana ? (sentence.jaHtml || sentence.ja) : sentence.ja;
     }
@@ -1756,6 +1758,7 @@
   function revealTranslateAnswer() {
     if (answered) return;
     answered = true;
+    if (window.EnHover) EnHover.hide();
 
     const { sentence, direction } = currentCard;
     const isEnToJa = direction === 'en-to-ja';
@@ -3753,7 +3756,9 @@
       <span class="bunkei-verb-meaning">${card.verb.meaning}</span>
       ${verbs.length > 1 ? `<span class="bunkei-verb-count">verb ${verbNo} of ${verbs.length}</span>` : ''}`;
 
-    $('#bunkei-en').textContent = card.built.en;
+    // Hover (or tap) an English word to see the Japanese word for it.
+    if (window.EnHover) EnHover.render($('#bunkei-en'), card.built.en, { ja: card.built.plain, kana: card.built.kana, words: card.built.words });
+    else $('#bunkei-en').textContent = card.built.en;
     const hint = $('#bunkei-pattern-hint');
     hint.innerHTML = `<span lang="ja">${card.pattern.name}</span> · ${card.pattern.meaning}`;
     hint.classList.toggle('hidden', !bunkeiSettings.hint);
@@ -3774,6 +3779,7 @@
   function revealBunkeiAnswer() {
     if (bunkeiAnswered) return;
     bunkeiAnswered = true;
+    if (window.EnHover) EnHover.hide();
     const card = bunkeiSessionCards[bunkeiIndex];
     const built = card.built;
 

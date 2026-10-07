@@ -671,7 +671,19 @@
       en: global.Examples.english.sentence(pattern.en(p)),
       plain: global.Examples.stripFurigana(ja),
       kana: toKana(ja),
+      words: glossary(verb, p),
     };
+  }
+
+  // The sentence's own word pairs, for the hover hints on the English
+  // (en-hover.js): the drilled verb, and its object without the particle
+  // (おもちゃを → おもちゃ "toy", 学校[がっこう]に → 学校 "school").
+  function glossary(verb, p) {
+    const words = [{ ja: verb.kanji, kana: verb.reading, en: p.v, meaning: verb.meaning }];
+    const obj = p.pre.replace(/(を|に|へ|で|と|が|から|まで)$/, '');
+    const en = p.o.replace(/^(to|at|in|on|for|with|from|by|the|a|an|my|your|some)\s+/g, '').replace(/^(the|a|an|my|your|some)\s+/, '');
+    if (obj && en) words.push({ ja: global.Examples.stripFurigana(obj), kana: toKana(obj), en });
+    return words;
   }
 
   // Loose comparison for typed answers: ignores punctuation, spaces and
