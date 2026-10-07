@@ -4530,6 +4530,42 @@ a.chapter-card {
 .lis-part-meta { flex: none; font-size: 0.78rem; color: var(--text-muted); text-align: right; line-height: 1.4; }
 .lis-part-go { flex: none; font-size: 1.5rem; color: var(--text-muted); }
 
+.lis-levels, .lis-speed { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.lis-levels { margin-bottom: 10px; }
+.lis-levels-label, .lis-speed > span { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-right: 4px; }
+.lis-levels button, .lis-speed button {
+  padding: 6px 14px;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.lis-levels button[aria-pressed="true"], .lis-speed button[aria-pressed="true"] { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
+.lis-review {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin: -10px 0 20px;
+  padding: 12px 16px;
+  font: inherit;
+  font-weight: 700;
+  color: var(--salmon);
+  background: color-mix(in srgb, var(--salmon) 10%, var(--bg-card));
+  border: 1.5px solid color-mix(in srgb, var(--salmon) 45%, transparent);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.lis-review-count { padding: 1px 9px; color: #fff; background: var(--salmon); border-radius: 999px; font-size: 0.85rem; }
+.lis-part-row:disabled { opacity: 0.45; cursor: default; }
+.lis-level { margin-left: 6px; padding: 1px 7px; font-size: 0.72rem; font-weight: 700; color: var(--text-muted); border: 1px solid var(--border); border-radius: 999px; }
+.lis-credits { margin-top: 14px; font-size: 0.75rem; color: var(--text-muted); text-align: center; }
+.lis-timing .lis-audio-fill { background: var(--orange); transition: width 0.2s linear; }
 .lis-options { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); }
 .lis-options summary { padding: 12px 16px; font-weight: 600; cursor: pointer; }
 .lis-options-body { display: flex; flex-direction: column; gap: 10px; padding: 2px 16px 14px; font-size: 0.9rem; }
@@ -4620,7 +4656,7 @@ a.chapter-card {
   border: 2px solid var(--text-dim);
   border-radius: 50%;
 }
-.lis-choice-pic { flex: 1; display: grid; place-items: center; padding: 4px 12px 16px; min-height: 120px; }
+.lis-choice-pic { flex: 1; display: grid; place-items: center; margin: 6px 10px 10px; padding: 8px; min-height: 124px; background: #fffdf8; border-radius: var(--radius-sm); }
 .lis-choices-spoken .lis-choice { flex-direction: row; align-items: center; gap: 10px; min-height: 60px; padding: 10px 14px; }
 .lis-choices-spoken .lis-choice-num { margin: 0; width: 34px; height: 34px; font-size: 1.05rem; flex: none; }
 .lis-choice-text { font-family: var(--font-jp); font-size: 0.95rem; text-align: left; }
@@ -4630,66 +4666,6 @@ a.chapter-card {
 .lis-choice.lis-wrong { border-color: var(--red); background: var(--red-dim); }
 .lis-choice.lis-wrong .lis-choice-num { background: var(--red); border-color: var(--red); color: #fff; }
 .lis-choice.lis-dim { opacity: 0.5; }
-
-/* Pictures */
-.lis-svg { width: 100%; max-width: 120px; height: auto; display: block; }
-.lis-svg.lis-wide { max-width: 210px; }
-.lis-face { fill: var(--bg-card); stroke: var(--text); stroke-width: 3; }
-.lis-ink { stroke: var(--text); fill: var(--text); }
-.lis-stroke { stroke: var(--text); fill: none; }
-.lis-dot { fill: var(--salmon); }
-.lis-skin { fill: #f3d2b3; }
-.lis-hair { fill: #3d2b22; }
-.lis-shirt { fill: var(--accent); }
-.lis-legs rect { fill: #5a5560; }
-.lis-hat { fill: var(--salmon); }
-.lis-rule { stroke: var(--border); stroke-width: 1.5; }
-.lis-cal-head, .lis-cal-day { font-size: 9px; text-anchor: middle; fill: var(--text); font-family: var(--font-jp); }
-.lis-cal-head { font-weight: 700; }
-.lis-sun { fill: var(--red); }
-.lis-sat { fill: var(--blue); }
-.lis-mark { fill: none; stroke: var(--salmon); stroke-width: 2; }
-.lis-road { fill: var(--bg-input); }
-.lis-road-line { stroke: var(--text-muted); stroke-width: 1.5; stroke-dasharray: 6 5; }
-.lis-block { fill: var(--bg-card); stroke: var(--text-muted); stroke-width: 1.5; }
-.lis-bank { fill: var(--accent-dim); stroke: var(--accent); stroke-width: 1.5; }
-.lis-mark-block { fill: color-mix(in srgb, var(--salmon) 22%, var(--bg-card)); stroke: var(--salmon); stroke-width: 2; }
-.lis-map-label { font-size: 11px; text-anchor: middle; fill: var(--text); font-family: var(--font-jp); font-weight: 700; }
-.lis-map-star { font-size: 18px; text-anchor: middle; fill: var(--salmon); }
-.lis-items { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px 6px; font-size: 2rem; line-height: 1.2; max-width: 150px; }
-.lis-items-one { font-size: 3.4rem; }
-.lis-weather { display: flex; align-items: center; gap: 8px; }
-.lis-weather > div { display: flex; flex-direction: column; align-items: center; gap: 2px; }
-.lis-weather-icon { font-size: 2.4rem; line-height: 1.1; }
-.lis-weather-label { font-family: var(--font-jp); font-size: 0.8rem; color: var(--text-dim); }
-.lis-weather-arrow { color: var(--text-muted); font-size: 1.2rem; }
-.lis-price { font-family: var(--font-jp); font-size: 2rem; font-weight: 700; }
-.lis-price small { font-size: 1.1rem; margin-left: 2px; }
-
-.lis-scene {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 22px;
-  padding: 16px 12px 14px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-}
-.lis-scene-person { display: flex; flex-direction: column; align-items: center; font-size: 3.6rem; line-height: 1.1; }
-.lis-scene-prop { font-size: 2.6rem; padding-bottom: 6px; }
-.lis-bubble {
-  font-size: 1rem;
-  font-weight: 700;
-  padding: 2px 10px;
-  margin-bottom: 2px;
-  color: var(--salmon);
-  background: var(--bg);
-  border: 2px solid var(--salmon);
-  border-radius: 12px;
-}
-.lis-arrow { font-size: 1.5rem; color: var(--salmon); line-height: 1; }
-.lis-arrow-gap { height: calc(1.5rem + 34px); }
 
 .lis-result {
   display: flex;
@@ -4752,9 +4728,51 @@ a.chapter-card {
   .lis-part-ja { display: none; }
   .lis-audio { padding: 10px 14px 10px 10px; }
   .lis-choices-pics { gap: 8px; }
-  .lis-choice-pic { min-height: 100px; padding: 2px 6px 10px; }
+  .lis-choice-pic { min-height: 104px; margin: 4px 6px 6px; padding: 6px 4px; }
   .lis-choices-spoken { grid-template-columns: 1fr; gap: 8px; }
-  .lis-scene-person { font-size: 2.8rem; }
+  .lis-art-scene { gap: 8px; }
+  .lis-art-actor { width: 72px; }
+  .lis-art-prop { width: 52px; }
   .lis-result { flex-wrap: wrap; }
   .lis-next { width: 100%; }
 }
+
+/* Listening illustrations (listening-art.js): a light "paper" panel in both themes. */
+.lis-art { display: block; width: 100%; height: auto; max-width: 110px; }
+.lis-art.lis-art-wide { max-width: 220px; }
+.lis-art.lis-art-clock { max-width: 112px; }
+.lis-art-person { max-width: 88px; }
+.lis-art-text { font: 600 10px var(--font-jp); text-anchor: middle; }
+.lis-art-bold { font-weight: 800; }
+.lis-art-star { font-size: 18px; text-anchor: middle; }
+.lis-art-num { font: 800 15px var(--font); text-anchor: middle; }
+.lis-art-items { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 2px; max-width: 200px; }
+.lis-art-items .lis-art { width: auto; }
+.lis-art-xl .lis-art { width: 96px; }
+.lis-art-lg .lis-art { width: 64px; }
+.lis-art-sm .lis-art { width: 46px; }
+.lis-art-xs .lis-art { width: 34px; }
+.lis-art-weather { display: flex; align-items: center; gap: 6px; }
+.lis-art-weather > div { display: flex; flex-direction: column; align-items: center; gap: 2px; font: 700 0.78rem var(--font-jp); color: #6c5d53; }
+.lis-art-weather .lis-art { width: 60px; }
+.lis-art-then { color: #a3928a; font-weight: 700; }
+.lis-art-label { font: 800 1.35rem var(--font-jp); color: #2b2320; letter-spacing: 0.02em; text-align: center; white-space: nowrap; }
+.lis-art-label.lis-art-small { font-size: 1.05rem; }
+.lis-art-price { font-size: 1.9rem; }
+.lis-art-price small { font-size: 1rem; margin-left: 2px; }
+.lis-art-scene {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 18px;
+  padding: 14px 12px 12px;
+  background: #fffdf8;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.lis-art-actor { display: flex; flex-direction: column; align-items: center; width: 84px; }
+.lis-art-actor .lis-art-person { max-width: 84px; }
+.lis-art-prop { width: 64px; padding-bottom: 8px; }
+.lis-art-bubble { font: 800 1rem var(--font); color: #e8594a; background: #fff; border: 2.5px solid #e8594a; border-radius: 12px; padding: 1px 10px; }
+.lis-art-arrow { color: #e8594a; font-size: 1.3rem; line-height: 1.1; }
+.lis-art-gap { height: calc(1.3rem * 1.1 + 30px); }

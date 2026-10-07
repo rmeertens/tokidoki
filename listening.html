@@ -13,7 +13,7 @@
   <meta name="twitter:title" content="JLPT Listening Practice — 聴解 with Pictures | Tokidoki">
   <meta name="twitter:description" content="Hear a Japanese conversation, then pick the right picture or reply — JLPT N5–N4 listening practice.">
   <link rel="canonical" href="https://tokidoki.meertens.dev/listening.html">
-  <link rel="stylesheet" href="style.css?v=13">
+  <link rel="stylesheet" href="style.css?v=14">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXWYNZC7YH"></script>
   <script>
@@ -75,9 +75,16 @@
       </ol>
 
       <p class="lis-no-voice hidden" id="lis-no-voice">
-        Your browser has no Japanese voice, so you’ll read the script instead of hearing it. To hear
-        the audio, add a Japanese voice in your system’s speech settings or use Chrome, Edge or Safari.
+        The recordings couldn’t be found, and your browser has no Japanese voice, so you’ll read the
+        script instead of hearing it.
       </p>
+
+      <div class="lis-levels" role="group" aria-label="Level">
+        <span class="lis-levels-label">Level</span>
+        <button data-level="all" aria-pressed="true">All</button>
+        <button data-level="N5" aria-pressed="false">N5</button>
+        <button data-level="N4" aria-pressed="false">N4</button>
+      </div>
 
       <button class="lis-start" id="lis-start">
         <span class="lis-start-text">
@@ -87,18 +94,27 @@
         <span class="lis-start-go" aria-hidden="true">▶</span>
       </button>
 
+      <button class="lis-review hidden" id="lis-review">↺ Review the questions you missed <span class="lis-review-count" id="lis-review-count">0</span></button>
+
       <h3 class="lis-heading">Or practise one part</h3>
       <div class="lis-sections" id="lis-sections"></div>
 
       <details class="lis-options">
         <summary>Options</summary>
         <div class="lis-options-body">
-          <label><input type="checkbox" id="lis-opt-slow"> Slower speech</label>
-          <label><input type="checkbox" id="lis-opt-once"> Exam mode — the audio plays only once</label>
+          <div class="lis-speed" role="group" aria-label="Speed">
+            <span>Speed</span>
+            <button data-speed="0.8" aria-pressed="false">Slower</button>
+            <button data-speed="1" aria-pressed="true">Normal</button>
+            <button data-speed="1.2" aria-pressed="false">Faster</button>
+          </div>
+          <label><input type="checkbox" id="lis-opt-exam"> Exam mode — the audio plays once and you have 12 seconds to answer</label>
           <label><input type="checkbox" id="lis-opt-script"> Show the script while listening (easier)</label>
           <label><input type="checkbox" id="lis-opt-furigana"> Furigana in the script</label>
         </div>
       </details>
+
+      <p class="lis-credits">Voices: VOICEVOX:No.7, VOICEVOX:玄野武宏, VOICEVOX:青山龍星, VOICEVOX:冥鳴ひまり, VOICEVOX:九州そら</p>
     </main>
 
     <!-- Screen: A question -->
@@ -156,6 +172,7 @@
         <ul class="lis-done-parts" id="lis-done-parts"></ul>
         <div class="lis-done-actions">
           <button id="btn-lis-again" class="btn-secondary">Try again</button>
+          <button id="btn-lis-review-missed" class="btn-secondary hidden">Review mistakes</button>
           <button id="btn-lis-home" class="btn-primary">Back to the parts</button>
         </div>
       </div>
@@ -163,8 +180,10 @@
 
   </div>
 
-  <script src="listening-data.js?v=1"></script>
-  <script src="listening.js?v=2"></script>
+  <script src="listening-data.js?v=2"></script>
+  <script src="listening-art.js?v=1"></script>
+  <script src="listening-audio.js?v=1"></script>
+  <script src="listening.js?v=3"></script>
   <script src="app.js?v=14"></script>
 
   <!-- Static content for search engines -->
@@ -172,18 +191,18 @@
     <h2>JLPT listening practice (聴解) with picture choices</h2>
     <p>
       Free, no-login listening practice in the format of the JLPT N5 and N4 listening section
-      (聴解). Each question is played with Japanese text-to-speech the way the test plays it:
-      the question number, the situation and question, a short conversation between a man and
-      a woman, and the question again. 問題1 課題理解 (task comprehension) and 問題2 ポイント理解
-      (point comprehension) are answered by picking one of four pictures — clocks, calendars,
-      maps, people, weather and shopping. 問題3 発話表現 (utterance expressions) shows a picture
-      with an arrow and three spoken replies, and 問題4 即時応答 (quick response) has no picture
-      at all.
+      (聴解): 46 questions with natural recorded voices. Each question plays the way the test
+      does — the question number, the situation and question, a short conversation between a man
+      and a woman, and the question again. 問題1 課題理解 (task comprehension) and 問題2
+      ポイント理解 (point comprehension) are answered by picking one of four pictures: clocks,
+      calendars, maps, floors of a department store, a room layout, people's clothes, buses,
+      shopping and weather. 問題3 発話表現 (utterance expressions) shows a scene with an arrow and
+      three spoken replies, and 問題4 即時応答 (quick response) has no picture at all.
     </p>
     <p>
       After answering, read the script with furigana and English translations and tap any line
-      to hear it again. Options: slower speech, exam mode where the audio plays only once, and
-      showing the script while listening.
+      to hear it again. Filter by level (N5 or N4), review the questions you missed, change the
+      speed, or turn on exam mode, where the audio plays once and you have 12 seconds to answer.
     </p>
   </section>
 </body>
