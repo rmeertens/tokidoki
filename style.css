@@ -4059,7 +4059,6 @@ a.chapter-card {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  scroll-behavior: smooth;
 }
 .mys-dock {
   flex: none;
