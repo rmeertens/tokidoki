@@ -47,7 +47,7 @@
   // often read the wrong way (何[なん] as なに, 降[ふ]り as おり, 十分[じゅっぷん]
   // as じゅうぶん), which are spoken from their furigana. The audio generator
   // checks every other reading against the furigana too.
-  const SPEAK_AS_KANA = new Set(['何', '降', '十分', '要', '後']);
+  const SPEAK_AS_KANA = new Set(['何', '降', '十分', '要', '後', '行', '辛', '薬', '角', '開', '何色', '二十歳', '日本']);
   const speech = markup => pieces(markup).map(p => (p.r && SPEAK_AS_KANA.has(p.t) ? p.r : p.t)).join('').replace(/ /g, '');
 
   const esc = s => String(s).replace(/[&<>"']/g, c =>
@@ -67,16 +67,81 @@
     return sentences[sentences.length - 1] + '。';
   }
 
+  // ─── Voices ────────────────────────────────────────────────────────────────
+
+  // The recorded cast (VOICEVOX voices, by style id). Each question gets a
+  // man and a woman from these pools — adult unless the item asks for
+  // `voices: { M: 'young' | 'child' | 'old', F: … }` — picked from a hash of
+  // its id, so the voices vary from question to question but never change
+  // between recordings. Pitch (F0) measured on one test sentence: men
+  // 80–165 Hz, women 200–360 Hz.
+  const NARRATOR = { id: 30, name: 'No.7', speed: 1.0 };
+  const VOICES = {
+    takehiro: { id: 11, name: '玄野武宏', speed: 1.0 },
+    ryusei: { id: 13, name: '青山龍星', speed: 1.0 },
+    mesuo: { id: 21, name: '剣崎雌雄', speed: 1.0 },
+    shuji: { id: 52, name: '雀松朱司', speed: 1.0 },
+    sorin: { id: 53, name: '麒ヶ島宗麟', speed: 1.0 },
+    kotaro: { id: 12, name: '白上虎太郎', speed: 1.0 },
+    jii: { id: 42, name: 'ちび式じい', speed: 1.08 },
+    himari: { id: 14, name: '冥鳴ひまり', speed: 1.0 },
+    sora: { id: 16, name: '九州そら', speed: 1.15 },
+    metan: { id: 2, name: '四国めたん', speed: 1.0 },
+    mochiko: { id: 20, name: 'もち子さん', speed: 1.0 },
+    itako: { id: 109, name: '東北イタコ', speed: 1.0 },
+    tsumugi: { id: 8, name: '春日部つむぎ', speed: 1.0 },
+    hau: { id: 10, name: '雨晴はう', speed: 1.0 },
+  };
+  const POOLS = {
+    M: { adult: ['takehiro', 'ryusei', 'mesuo', 'shuji', 'sorin'], young: ['kotaro', 'takehiro'], child: ['kotaro'], old: ['jii', 'sorin'] },
+    F: { adult: ['himari', 'sora', 'metan', 'mochiko', 'itako'], young: ['tsumugi', 'metan'], child: ['hau'], old: ['itako', 'sora'] },
+  };
+
+  function hashString(s) {
+    let h = 0x811c9dc5;
+    for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+    return h;
+  }
+
+  // Some speakers talk faster or slower, like real people: about one N4
+  // conversation in six is brisk, and one N5 conversation in eight slow.
+  function paceOf(section, item) {
+    const h = hashString(section.id + '/' + item.id + '/pace') % 24;
+    if (item.level === 'N4') return h < 4 ? 'fast' : '';
+    return h < 3 ? 'slow' : '';
+  }
+
+  // { N, M, F } → { id, name, speed } for one question. Speed is VOICEVOX's
+  // speed scale: N5 conversations a touch slower than natural, N4 natural to
+  // brisk, and `pace: 'slow' | 'fast'` on an item for a slow or fast talker.
+  function castFor(section, item) {
+    const key = section.id + '/' + item.id;
+    const want = item.voices || {};
+    const pace = item.pace || paceOf(section, item);
+    const base = (item.level === 'N4' ? 1.04 : 0.94) + ({ slow: -0.08, fast: 0.1 }[pace] || 0);
+    const pick = g => {
+      const h = hashString(key + '/' + g);
+      const pool = POOLS[g][want[g] || 'adult'];
+      const v = VOICES[pool[h % pool.length]];
+      const jitter = ((h >>> 8) % 7 - 3) * 0.015;
+      return { id: v.id, name: v.name, speed: +Math.min(1.3, Math.max(0.8, base * v.speed + jitter)).toFixed(2) };
+    };
+    return { N: Object.assign({}, NARRATOR), M: pick('M'), F: pick('F') };
+  }
+
   // ─── The spoken script ─────────────────────────────────────────────────────
 
   // What is played for one question, as { voice: 'N' | 'M' | 'F', text,
-  // reading, pause, line } steps: N is the narrator, reading the expected
-  // kana (for checking the recording), pause the silence after it in ms,
-  // and line the transcript row it belongs to.
+  // reading, pause, line, style, speed } steps: N is the narrator, reading
+  // the expected kana (for checking the recording), pause the silence after
+  // it in ms, line the transcript row it belongs to, and style / speed the
+  // VOICEVOX voice that records it.
   function buildScript(section, item, number) {
+    const cast = castFor(section, item);
     const steps = [];
     const step = (voice, markup, say, pause, line) => steps.push({
       voice, text: say || speech(markup), reading: say ? '' : reading(markup), pause, line,
+      style: cast[voice].id, speed: cast[voice].speed,
     });
     step('N', '', number + '番。', 700, 'num');
 
@@ -91,7 +156,7 @@
     (item.lines || []).forEach((l, i) => step(l.who, l.ja, l.say, 900, 'line' + i));
     const by = item.replyBy || 'M';
     item.choices.forEach((c, i) => {
-      step('N', NUMBERS[i] + '。', '', 250, 'choice' + i);
+      step('N', '', NUMBERS[i] + '。', 250, 'choice' + i);
       step(by, c.ja, c.say, i < item.choices.length - 1 ? 700 : 0, 'choice' + i);
     });
     return steps;
@@ -99,16 +164,57 @@
 
   // A short fingerprint of what a recording has to say, so a test can tell
   // when listening-data.js changed without the audio being re-recorded.
+  //
+  // The question number isn't part of a recording — 3番 in its part's list
+  // may be 5番 in a mock test — so the number step is left out here and in
+  // the recording, and played from the narrator's numbers file instead.
+  const recorded = steps => steps.filter(st => st.line !== 'num');
   function scriptHash(steps) {
-    const s = JSON.stringify(steps.map(st => [st.voice, st.text, st.pause]));
-    let h = 0x811c9dc5;
-    for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
-    return h.toString(16).padStart(8, '0');
+    return hashString(JSON.stringify(recorded(steps).map(st => [st.voice, st.text, st.pause, st.style, st.speed]))).toString(16).padStart(8, '0');
   }
 
   const audioKey = (section, item) => section.id + '/' + item.id;
+  const NUMBERS_KEY = '_numbers'; // the recording of 1番, 2番, … in listening-audio.js
 
-  const api = { pieces, plain, reading, speech, rubyHtml, questionOf, buildScript, scriptHash, audioKey };
+  // Called once on the loaded questions: rotates each question's choices so
+  // its answer lands on a position picked from its id, which spreads the
+  // right answers evenly over 1–4 (or 1–3). Everything after this — the page,
+  // the spoken script, the recordings — sees the rotated order.
+  function prepare(sections) {
+    sections.forEach(section => section.items.forEach(item => {
+      if (item.prepared) return;
+      const n = item.choices.length;
+      const target = hashString(audioKey(section, item) + '/answer') % n;
+      const shift = (target - item.answer + n) % n;
+      item.choices = item.choices.map((_, i) => item.choices[(i - shift + n) % n]);
+      item.answer = target;
+      item.prepared = true;
+    }));
+    return sections;
+  }
+
+  // Mock tests in the layout of the real listening section: questions per
+  // part for each level, as in the JLPT (N5: 7 / 6 / 5 / 6, N4: 8 / 7 / 5 / 8).
+  // A level's questions are spread over its tests in a fixed shuffled order,
+  // so each test mixes kinds of question; as many full tests are made as the
+  // questions allow.
+  const TEST_LAYOUT = { N5: [7, 6, 5, 6], N4: [8, 7, 5, 8] };
+  function mockTests(sections, level) {
+    const pools = sections.map(section => section.items
+      .filter(item => item.level === level)
+      .map(item => ({ section, item, h: hashString(audioKey(section, item) + '/test') }))
+      .sort((a, b) => a.h - b.h));
+    const sizes = TEST_LAYOUT[level];
+    const count = Math.min(...pools.map((pool, i) => Math.floor(pool.length / sizes[i])));
+    const tests = [];
+    for (let t = 0; t < count; t++) {
+      tests.push({ id: `${level}-${t + 1}`, level, number: t + 1, parts: pools.map((pool, i) => pool.slice(t * sizes[i], (t + 1) * sizes[i])) });
+    }
+    return tests;
+  }
+
+  const api = { pieces, plain, reading, speech, rubyHtml, questionOf, buildScript, scriptHash, recorded, audioKey, NUMBERS_KEY, castFor, prepare, mockTests, TEST_LAYOUT, VOICES, NARRATOR, POOLS };
+  if (global.LISTENING_SECTIONS) prepare(global.LISTENING_SECTIONS);
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   global.Listening = api;
   if (typeof document === 'undefined') return;
@@ -138,7 +244,7 @@
 
   const audio = new Audio();
   audio.preload = 'auto';
-  let player = null;    // what is playing: { kind: 'file' | 'tts', steps, stopAt, onDone }
+  let player = null;    // what is playing: { kind: 'file', segments, index, onDone } or { kind: 'tts', steps, onDone }
   let ttsToken = 0;
 
   const synth = 'speechSynthesis' in global ? global.speechSynthesis : null;
@@ -172,52 +278,72 @@
     updatePlayer();
   }
 
-  // Plays [from, to) seconds of a question's recording (to = null: the end).
-  function playFile(rec, steps, from, to, onDone) {
+  // Plays recordings as a queue of segments — the question number, then the
+  // question; or one line — each { rec, from, to, times, steps }: from / to
+  // in seconds (to = null: the end of the file), and times[i] when steps[i]
+  // is spoken. `gap` is a pause in ms before a segment starts.
+  function playSegments(segments, onDone) {
     stopAudio();
-    const url = new URL(rec.src, location.href).href;
+    player = { kind: 'file', segments, index: 0, onDone, fallback: segments.flatMap(sg => sg.steps) };
+    startSegment(player, 0);
+    updatePlayer();
+  }
+
+  function startSegment(mine, i) {
+    const seg = mine.segments[i];
+    mine.index = i;
+    mine.switching = false;
+    const url = new URL(seg.rec.src, location.href).href;
     if (audio.src !== url) audio.src = url;
     audio.playbackRate = settings.speed;
     audio.defaultPlaybackRate = settings.speed;
-    player = { kind: 'file', rec, steps, stopAt: to, onDone };
-    const mine = player;
-    try { audio.currentTime = from; } catch { /* seeks once it has loaded */ }
-    if (from && audio.readyState < 1) {
-      audio.addEventListener('loadedmetadata', () => { if (player === mine) audio.currentTime = from; }, { once: true });
+    try { audio.currentTime = seg.from; } catch { /* seeks once it has loaded */ }
+    if (seg.from && audio.readyState < 1) {
+      audio.addEventListener('loadedmetadata', () => { if (player === mine && mine.index === i) audio.currentTime = seg.from; }, { once: true });
     }
-    // play() is called right here, inside the tap that asked for it: iOS and
-    // Chrome only allow audio to start from a user gesture.
+    // The first play() happens inside the tap that asked for it: iOS and
+    // Chrome only allow audio to start from a user gesture. Later segments
+    // reuse the same element, which then stays allowed.
     const p = audio.play();
     if (p && p.catch) p.catch(err => {
       if (player !== mine) return;
       player = null;
       if (err && err.name === 'NotAllowedError') {
-        if (onDone) onDone(null);
+        if (mine.onDone) mine.onDone(null);
         updatePlayer();
         setStatus('Tap ▶ to listen');
         return;
       }
-      fallbackToSpeech(steps, onDone);
+      fallbackToSpeech(mine.fallback, mine.onDone);
     });
-    updatePlayer();
+  }
+
+  function nextSegment(mine) {
+    if (mine.switching) return; // timeupdate and ended can both arrive
+    mine.switching = true;
+    if (mine.index + 1 >= mine.segments.length) { setProgress(1); finishPlayback(true); return; }
+    audio.pause();
+    const gap = mine.segments[mine.index + 1].gap || 0;
+    const go = () => { if (player === mine) startSegment(mine, mine.index + 1); };
+    if (gap) setTimeout(go, gap / settings.speed); else go();
   }
 
   audio.addEventListener('timeupdate', () => {
-    if (!player || player.kind !== 'file') return;
+    if (!player || player.kind !== 'file' || player.switching) return;
+    const mine = player;
+    const seg = mine.segments[mine.index];
     const t = audio.currentTime;
-    const i = player.rec.steps.findIndex(([a, b]) => t >= a && t < b + 0.15);
-    markStep(i >= 0 ? player.steps[i] : null);
-    if (player.stopAt != null && t >= player.stopAt) { audio.pause(); finishPlayback(true); return; }
-    if (audio.duration) setProgress(t / audio.duration);
+    const i = seg.times.findIndex(([a, b]) => t >= a && t < b + 0.15);
+    markStep(i >= 0 ? seg.steps[i] : null);
+    if (seg.to != null && t >= seg.to) { nextSegment(mine); return; }
+    if (seg.to == null && audio.duration) setProgress(t / audio.duration);
   });
-  audio.addEventListener('ended', () => {
-    if (player && player.kind === 'file') { setProgress(1); finishPlayback(true); }
-  });
+  audio.addEventListener('ended', () => { if (player && player.kind === 'file') nextSegment(player); });
   audio.addEventListener('error', () => {
     if (!player || player.kind !== 'file') return;
-    const { steps, onDone } = player;
+    const { fallback, onDone } = player;
     player = null;
-    fallbackToSpeech(steps, onDone);
+    fallbackToSpeech(fallback, onDone);
   });
 
   // ─── Playback: the browser's voice, when there is no recording ─────────────
@@ -317,18 +443,26 @@
       updatePlayer();
     };
     const rec = recordingFor(q);
-    if (rec) playFile(rec, steps, 0, null, onDone);
-    else fallbackToSpeech(steps, onDone);
+    if (!rec) { fallbackToSpeech(steps, onDone); return; }
+    const segments = [];
+    const nums = RECORDINGS[NUMBERS_KEY];
+    const at = nums && nums.steps[q.number - 1];
+    if (at) segments.push({ rec: nums, from: Math.max(0, at[0] - 0.05), to: at[1] + 0.05, times: [at], steps: [steps[0]] });
+    segments.push({ rec, from: 0, to: null, times: rec.steps, steps: recorded(steps), gap: at ? 450 : 0 });
+    playSegments(segments, onDone);
   }
 
   function playLine(key) {
     const q = current();
     const steps = stepsFor(q);
     const rec = recordingFor(q);
-    const idx = steps.map((s, i) => (s.line === key ? i : -1)).filter(i => i >= 0);
+    const lines = recorded(steps);
+    const idx = lines.map((s, i) => (s.line === key ? i : -1)).filter(i => i >= 0);
     if (!idx.length) return;
-    if (rec) playFile(rec, steps, rec.steps[idx[0]][0], rec.steps[idx[idx.length - 1]][1] + 0.05, null);
-    else fallbackToSpeech(idx.map(i => Object.assign({}, steps[i], { pause: 0 })), null);
+    if (rec) {
+      const times = idx.map(i => rec.steps[i]);
+      playSegments([{ rec, from: times[0][0], to: times[times.length - 1][1] + 0.05, times, steps: idx.map(i => lines[i]) }], null);
+    } else fallbackToSpeech(idx.map(i => Object.assign({}, lines[i], { pause: 0 })), null);
   }
 
   // Exam mode: like the test, a few seconds to answer once the audio ends.
@@ -397,25 +531,46 @@
 
   const levelOk = item => settings.level === 'all' || item.level === settings.level;
   const keyOf = (section, item) => section.id + '/' + item.id;
+  const TESTS = ['N5', 'N4'].flatMap(level => mockTests(SECTIONS, level));
+  const LEVEL_NAME = { all: 'all levels', N5: 'N5', N4: 'N4' };
 
+  // A session's questions, numbered 1番, 2番… within each part.
   function queueFor(id) {
-    const queue = [];
-    const sections = id === 'all' || id === 'missed' ? SECTIONS : SECTIONS.filter(s => s.id === id);
-    sections.forEach(section => {
-      let number = 0;
-      section.items.forEach(item => {
-        if (id === 'missed' ? !store.missed.includes(keyOf(section, item)) : !levelOk(item)) return;
-        queue.push({ section, item, number: ++number, answered: false, picked: null, played: false });
-      });
-    });
-    return queue;
+    let picked;
+    const test = TESTS.find(t => t.id === id);
+    if (test) picked = test.parts.flat();
+    else if (id === 'missed') picked = SECTIONS.flatMap(section => section.items.filter(item => store.missed.includes(keyOf(section, item))).map(item => ({ section, item })));
+    else if (id === 'quick') {
+      const pool = SECTIONS.flatMap(section => section.items.filter(levelOk).map(item => ({ section, item, r: Math.random() })));
+      picked = pool.sort((x, y) => x.r - y.r).slice(0, 10)
+        .sort((x, y) => SECTIONS.indexOf(x.section) - SECTIONS.indexOf(y.section));
+    } else {
+      const sections = id === 'all' ? SECTIONS : SECTIONS.filter(s => s.id === id);
+      picked = sections.flatMap(section => section.items.filter(levelOk).map(item => ({ section, item })));
+    }
+    const count = {};
+    return picked.map(({ section, item }) => ({
+      section, item, number: (count[section.id] = (count[section.id] || 0) + 1),
+      answered: false, picked: null, played: false,
+    }));
   }
 
+  const bestKey = id => (TESTS.some(t => t.id === id) || id === 'missed' || id === 'quick' ? id : id + '-' + settings.level);
+
   function renderHome() {
-    const total = queueFor('all').length;
-    const bestAll = store.best['all-' + settings.level];
-    $('lis-start-meta').textContent = `All four parts · ${total} questions${bestAll ? ` · best ${bestAll.score}/${bestAll.total}` : ''}`;
     document.querySelectorAll('[data-level]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.level === settings.level)));
+    const tests = TESTS.filter(t => settings.level === 'all' || t.level === settings.level);
+    $('lis-tests').innerHTML = tests.map(t => {
+      const b = store.best[t.id];
+      const n = t.parts.reduce((k, p) => k + p.length, 0);
+      return `<button class="lis-test" data-test="${t.id}">
+        <span class="lis-test-level">${t.level}</span>
+        <span class="lis-test-name" lang="ja">模擬試験 ${t.number}</span>
+        <span class="lis-test-meta">${n} questions${b ? ` · best <b>${b.score}/${b.total}</b>` : ''}</span>
+        <span class="lis-test-go" aria-hidden="true">▶</span>
+      </button>`;
+    }).join('');
+    $('lis-quick-meta').textContent = `10 random questions · ${LEVEL_NAME[settings.level]}`;
     $('lis-sections').innerHTML = SECTIONS.map(s => {
       const n = s.items.filter(levelOk).length;
       const b = store.best[s.id + '-' + settings.level];
@@ -429,6 +584,8 @@
         <span class="lis-part-go" aria-hidden="true">›</span>
       </button>`;
     }).join('');
+    const total = SECTIONS.reduce((k, s) => k + s.items.filter(levelOk).length, 0);
+    $('lis-total').textContent = total;
     const missed = queueFor('missed').length;
     $('lis-review').classList.toggle('hidden', !missed);
     $('lis-review-count').textContent = missed;
@@ -443,7 +600,8 @@
   function start(id) {
     const queue = queueFor(id);
     if (!queue.length) return;
-    session = { id, queue, pos: 0 };
+    const test = TESTS.find(t => t.id === id);
+    session = { id, queue, pos: 0, title: test ? `${test.level} 模擬試験 ${test.number}` : '' };
     show('screen-listening');
     renderQuestion();
   }
@@ -455,7 +613,7 @@
     const q = current();
     const { section, item } = q;
     playsLeft = settings.exam ? 1 : Infinity;
-    $('lis-part').innerHTML = `<span class="lis-part-badge" lang="ja">問題${section.num}</span> ${esc(section.en)} <span class="lis-level">${item.level}</span>`;
+    $('lis-part').innerHTML = `<span class="lis-part-badge" lang="ja">問題${section.num}</span> ${esc(section.en)} <span class="lis-level">${session.title ? esc(session.title) : item.level}</span>`;
     $('lis-number').textContent = `${q.number}番`;
     $('lis-progress-text').textContent = `${session.pos + 1} / ${session.queue.length}`;
     $('lis-bar-fill').style.width = `${(session.pos / session.queue.length) * 100}%`;
@@ -500,9 +658,10 @@
     box.classList.toggle('hidden', !visible);
     if (!visible) { $('lis-script-body').innerHTML = ''; return; }
     const who = { N: '', M: '男', F: '女' };
+    const cast = castFor(section, item);
     const row = (key, voice, ja, en, extra = '') =>
       `<div class="lis-line${extra}" data-line="${key}" data-voice="${voice}" role="button" tabindex="0" title="Play this line">
-        <span class="lis-who" lang="ja">${who[voice]}</span>
+        <span class="lis-who" lang="ja">${who[voice]}${voice !== 'N' && RECORDINGS[audioKey(section, item)] ? `<span class="lis-voice-name">${esc(cast[voice].name)}</span>` : ''}</span>
         <span class="lis-ja" lang="ja">${rubyHtml(ja)}</span>
         ${en ? `<span class="lis-en">${esc(en)}</span>` : ''}
       </div>`;
@@ -572,8 +731,8 @@
     stopTimer();
     const score = session.queue.filter(q => q.picked === q.item.answer).length;
     const total = session.queue.length;
-    if (session.id !== 'missed') {
-      const key = session.id + '-' + settings.level;
+    if (session.id !== 'missed' && session.id !== 'quick') {
+      const key = bestKey(session.id);
       const prev = store.best[key];
       if (!prev || score > prev.score) store.best[key] = { score, total };
       save(STORE_KEY, store);
@@ -605,7 +764,11 @@
 
   // ─── Events ────────────────────────────────────────────────────────────────
 
-  $('lis-start').addEventListener('click', () => start('all'));
+  $('lis-tests').addEventListener('click', e => {
+    const card = e.target.closest('[data-test]');
+    if (card) start(card.dataset.test);
+  });
+  $('lis-quick').addEventListener('click', () => start('quick'));
   $('lis-review').addEventListener('click', () => start('missed'));
   $('lis-sections').addEventListener('click', e => {
     const row = e.target.closest('[data-section]');

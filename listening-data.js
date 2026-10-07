@@ -23,8 +23,11 @@
   //   lines      the conversation: { who: 'M' | 'F', ja, en }
   //   choices    問題1/2: four pictures (see PICTURES in listening-art.js)
   //              問題3/4: three spoken replies { ja, en }
-  //   scene      問題3 only: { left, right, prop, arrow } (ROLES and ICONS in
-  //              listening-art.js), the arrow over the one who speaks
+  //   scene      問題3 only: { setting, left, right, prop, holder, propAt, arrow }
+  //              (SETTINGS, ROLES and ICONS in listening-art.js); the arrow
+  //              and "?" go over the one who speaks
+  //   voices     optional { M, F }: 'young' | 'child' | 'old' voices (see castFor)
+  //   pace       optional 'slow' | 'fast'
   //   replyBy    問題3/4: whose voice reads the spoken choices ('M' | 'F')
   //   answer     index of the right choice
   //   why        a one-line explanation shown afterwards
@@ -504,7 +507,7 @@
         {
           id: 'thanks', level: 'N5',
           intro: '友[とも]だちに プレゼントを もらいました。何[なん]と 言[い]いますか。',
-          scene: { left: 'boy', right: 'girl', prop: 'gift', arrow: 'left' },
+          scene: { setting: 'living', left: 'boy', right: 'girl', prop: 'gift', holder: 'left', arrow: 'left' }, voices: { M: 'child' },
           choices: [
             { ja: 'ありがとう。', en: 'Thank you.' },
             { ja: 'どういたしまして。', en: 'You’re welcome.' },
@@ -516,7 +519,7 @@
         {
           id: 'morning', level: 'N5',
           intro: '朝[あさ]、学校[がっこう]で 先生[せんせい]に 会[あ]いました。何[なん]と 言[い]いますか。',
-          scene: { left: 'student', right: 'teacher', prop: 'sun', arrow: 'left' },
+          scene: { setting: 'classroom', left: 'student', right: 'teacher', prop: 'sun', propAt: 'high', arrow: 'left' }, voices: { M: 'young' },
           choices: [
             { ja: 'こんばんは。', en: 'Good evening.' },
             { ja: 'おやすみなさい。', en: 'Good night.' },
@@ -528,7 +531,7 @@
         {
           id: 'water', level: 'N5',
           intro: 'レストランで 水[みず]が 欲[ほ]しいです。お店[みせ]の 人[ひと]に 何[なん]と 言[い]いますか。',
-          scene: { left: 'man', right: 'waiter', prop: 'drink', arrow: 'left' },
+          scene: { setting: 'restaurant', left: 'man', right: 'waiter', prop: 'plate', arrow: 'left' },
           choices: [
             { ja: '水[みず]は いかがですか。', en: 'Would you like some water?' },
             { ja: 'すみません、水[みず]を ください。', en: 'Excuse me, water please.' },
@@ -540,7 +543,7 @@
         {
           id: 'leaving', level: 'N5',
           intro: '友[とも]だちの 家[いえ]から 帰[かえ]ります。何[なん]と 言[い]いますか。',
-          scene: { left: 'man', right: 'woman', prop: 'house', arrow: 'left' },
+          scene: { setting: 'home', left: 'man', right: 'woman', arrow: 'left' },
           choices: [
             { ja: 'いってきます。', en: 'I’m off (leaving your own home).' },
             { ja: 'ただいま。', en: 'I’m home.' },
@@ -552,7 +555,7 @@
         {
           id: 'help', level: 'N4',
           intro: '荷物[にもつ]が 重[おも]いです。友[とも]だちに 何[なん]と 言[い]いますか。',
-          scene: { left: 'woman', right: 'man', prop: 'box', arrow: 'left' },
+          scene: { setting: 'street', left: 'woman', right: 'man', prop: 'box', holder: 'left', propSize: 40, arrow: 'left' },
           replyBy: 'F',
           choices: [
             { ja: 'ちょっと 手伝[てつだ]って くれませんか。', en: 'Could you give me a hand?' },
@@ -565,7 +568,7 @@
         {
           id: 'borrow-pen', level: 'N4',
           intro: '友[とも]だちの ペンを 借[か]りたいです。何[なん]と 言[い]いますか。',
-          scene: { left: 'student', right: 'boy', prop: 'pen', arrow: 'left' },
+          scene: { setting: 'classroom', left: 'student', right: 'friendMan', prop: 'pen', holder: 'right', arrow: 'left' }, voices: { M: 'young' },
           choices: [
             { ja: 'ペン、借[か]りて くれる？', en: '(wrong verb: “will you borrow a pen for me?”)' },
             { ja: 'ペン、貸[か]して くれる？', en: 'Can you lend me a pen?' },
@@ -577,7 +580,7 @@
         {
           id: 'try-on', level: 'N4',
           intro: '店[みせ]で 服[ふく]を 着[き]て みたいです。店[みせ]の人[ひと]に 何[なん]と 言[い]いますか。',
-          scene: { left: 'woman', right: 'clerk', prop: 'shirt', arrow: 'left' },
+          scene: { setting: 'clothes', left: 'woman', right: 'clerk', prop: 'tshirt', holder: 'left', arrow: 'left' },
           replyBy: 'F',
           choices: [
             { ja: 'これ、着[き]ても いいですか。', en: 'May I try this on?' },
@@ -590,7 +593,7 @@
         {
           id: 'meal', level: 'N5',
           intro: '今[いま]から ご飯[はん]を 食[た]べます。何[なん]と 言[い]いますか。',
-          scene: { left: 'girl', right: 'grandma', prop: 'rice', arrow: 'left' },
+          scene: { setting: 'kitchen', left: 'girl', right: 'grandma', prop: 'rice', holder: 'left', arrow: 'left' }, voices: { F: 'child' },
           replyBy: 'F',
           choices: [
             { ja: 'ごちそうさまでした。', en: 'Thank you for the meal (after eating).' },
@@ -603,7 +606,7 @@
         {
           id: 'photo', level: 'N4',
           intro: '写真[しゃしん]を 撮[と]って ほしいです。何[なん]と 言[い]いますか。',
-          scene: { left: 'tourist', right: 'woman', prop: 'camera', arrow: 'left' },
+          scene: { setting: 'park', left: 'tourist', right: 'woman', prop: 'camera', holder: 'left', arrow: 'left' },
           choices: [
             { ja: '写真[しゃしん]を 撮[と]りましょうか。', en: 'Shall I take a photo?' },
             { ja: 'すみません、写真[しゃしん]を 撮[と]って いただけませんか。', en: 'Excuse me, could you take a photo for me?' },
@@ -615,7 +618,7 @@
         {
           id: 'leave-first', level: 'N4',
           intro: '会社[かいしゃ]で、ほかの 人[ひと]より 先[さき]に 帰[かえ]ります。何[なん]と 言[い]いますか。',
-          scene: { left: 'office', right: 'officeWoman', prop: 'computer', arrow: 'left' },
+          scene: { setting: 'office', left: 'office', right: 'officeWoman', arrow: 'left' },
           choices: [
             { ja: 'お疲[つか]れさまでした。', en: 'Thanks for your hard work (said to someone leaving).' },
             { ja: 'お先[さき]に 失礼[しつれい]します。', en: 'Excuse me for leaving first.' },
@@ -782,7 +785,19 @@
     },
   ];
 
-  const api = { SECTIONS };
+  // More questions live in listening-data-2.js … -4.js, which add theirs
+  // with LISTENING_ADD(sectionId, items).
+  function add(id, items) {
+    const section = SECTIONS.find(s => s.id === id);
+    if (!section) throw new Error('No listening section ' + id);
+    items.forEach(item => {
+      if (section.items.some(other => other.id === item.id)) throw new Error('Duplicate listening item ' + id + '/' + item.id);
+      section.items.push(item);
+    });
+  }
+
+  const api = { SECTIONS, add };
   global.LISTENING_SECTIONS = SECTIONS;
+  global.LISTENING_ADD = add;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -8,6 +8,9 @@ global.window = global;
 const fs = require('fs');
 const path = require('path');
 const { SECTIONS } = require('./listening-data.js');
+require('./listening-data-2.js');
+require('./listening-data-3.js');
+require('./listening-data-4.js');
 const L = require('./listening.js');
 const Art = require('./listening-art.js');
 require('./listening-audio.js');
@@ -39,13 +42,13 @@ ok(L.questionOf({ intro: 'AAA。BBBですか。' }) === 'BBBですか。', 'ques
 ok(SECTIONS.map(s => s.num).join() === '1,2,3,4', 'four parts, numbered 1–4');
 const ids = new Set();
 const VOICES = new Set(['M', 'F']);
-const ICON_TYPES = { items: p => p.items.map(([n]) => n), weather: p => [p.am, p.pm] };
+const ICON_TYPES = { items: p => p.items.map(([n]) => (typeof n === 'string' ? n : n.name)), weather: p => [p.am, p.pm] };
 
 for (const section of SECTIONS) {
   furigana(section.ja, section.id);
   ok(['pictures', 'spoken'].includes(section.kind), `${section.id}: kind`);
-  ok(section.items.length >= 10, `${section.id}: at least ten questions`);
-  const answers = new Set();
+  ok(section.items.length >= 30, `${section.id}: at least thirty questions`);
+  const answers = {};
 
   section.items.forEach((item, index) => {
     const where = `${section.id}/${item.id}`;
@@ -53,7 +56,7 @@ for (const section of SECTIONS) {
     ids.add(item.id);
     ok(['N5', 'N4'].includes(item.level), `${where}: level is N5 or N4`);
     ok(typeof item.why === 'string' && item.why.length > 10, `${where}: explanation`);
-    answers.add(item.answer);
+    answers[item.answer] = (answers[item.answer] || 0) + 1;
     if (item.intro) furigana(item.intro, `${where} intro`);
     if (item.sayIntro) ok(!/[\[\]]/.test(item.sayIntro), `${where}: sayIntro is plain text`);
     (item.lines || []).forEach((l, i) => {
@@ -80,14 +83,25 @@ for (const section of SECTIONS) {
         ok(typeof c.en === 'string' && c.en.length > 0, `${where} choice ${i}: English`);
       });
       if (item.scene) {
-        ok(['left', 'right'].includes(item.scene.arrow), `${where}: arrow side`);
-        ok(item.scene.left in Art.ROLES && item.scene.right in Art.ROLES, `${where}: scene roles`);
-        ok(item.scene.prop in Art.ICONS, `${where}: scene prop`);
-        ok(Art.scene(item.scene).includes('lis-art-arrow'), `${where}: scene draws an arrow`);
+        const sc = item.scene;
+        ok(['left', 'right'].includes(sc.arrow), `${where}: arrow side`);
+        ok(sc.left in Art.ROLES && sc.right in Art.ROLES, `${where}: scene roles`);
+        ok(sc.setting in Art.SETTINGS, `${where}: scene setting ${sc.setting}`);
+        ok(!sc.prop || sc.prop in Art.ICONS, `${where}: scene prop ${sc.prop}`);
+        ok(!sc.holder || ['left', 'right'].includes(sc.holder), `${where}: holder`);
+        ok((Art.scene(sc).match(/class="lis-art-q"/g) || []).length === 1, `${where}: one "?" over the speaker`);
       }
+      ok(section.id !== 'hatsuwa' || !!item.scene, `${where}: 問題3 has a scene`);
       ok(!!item.intro || (item.lines || []).length > 0, `${where}: something to respond to`);
     }
     ok(Number.isInteger(item.answer) && item.answer >= 0 && item.answer < item.choices.length, `${where}: answer in range`);
+
+    // Each question has a man and a woman from the cast, at a sensible speed.
+    const cast = L.castFor(section, item);
+    const voiceIds = new Set(Object.values(L.VOICES).map(v => v.id));
+    ok(voiceIds.has(cast.M.id) && voiceIds.has(cast.F.id), `${where}: cast from VOICES`);
+    ok(cast.M.speed >= 0.75 && cast.M.speed <= 1.3 && cast.F.speed >= 0.75 && cast.F.speed <= 1.35, `${where}: speaking speed in range`);
+    if (item.voices) for (const g of Object.keys(item.voices)) ok(item.voices[g] in L.POOLS[g], `${where}: voice pool ${item.voices[g]}`);
 
     // The script plays in the test's order.
     const script = L.buildScript(section, item, index + 1);
@@ -109,19 +123,55 @@ for (const section of SECTIONS) {
     if (rec) {
       ok(rec.hash === L.scriptHash(script), `${where}: recording is out of date (run scripts/generate_listening_audio.py)`);
       ok(fs.existsSync(path.join(__dirname, rec.src)), `${where}: ${rec.src} exists`);
-      ok(rec.steps.length === script.length, `${where}: a time for every step`);
+      ok(rec.steps.length === L.recorded(script).length && L.recorded(script).length === script.length - 1, `${where}: a time for every recorded step (all but the number)`);
+      ok(L.scriptHash(L.buildScript(section, item, 7)) === rec.hash, `${where}: the recording fits whatever number the question has`);
       ok(rec.steps.every(([a, b], i) => b > a && (i === 0 || a >= rec.steps[i - 1][1])), `${where}: step times run in order`);
     }
   });
-  ok(answers.size > 2, `${section.id}: the answers are spread over the numbers`);
+  const n = section.items[0].choices.length;
+  for (let i = 0; i < n; i++) ok((answers[i] || 0) >= section.items.length / n / 2, `${section.id}: answer ${i + 1} is right often enough (${answers[i] || 0})`);
 }
-ok(Object.keys(RECORDINGS).length === ids.size, 'no recordings for questions that no longer exist');
+ok(Object.keys(RECORDINGS).filter(k => k !== L.NUMBERS_KEY).length === ids.size, 'no recordings for questions that no longer exist');
+const numbers = RECORDINGS[L.NUMBERS_KEY];
+ok(!!numbers && fs.existsSync(path.join(__dirname, numbers.src)), 'the numbers recording exists');
+const longest = Math.max(...SECTIONS.map(s => s.items.length));
+ok(numbers && numbers.steps.length >= longest, `numbers go up to ${longest}番, the longest part practised on its own`);
+
+// Voices vary from question to question.
+const used = { M: new Set(), F: new Set() };
+const speeds = new Set();
+SECTIONS.forEach(s => s.items.forEach(it => { const c = L.castFor(s, it); used.M.add(c.M.name); used.F.add(c.F.name); speeds.add(c.M.speed); }));
+ok(used.M.size >= 5 && used.F.size >= 5, `at least five men's and five women's voices are used (${used.M.size} / ${used.F.size})`);
+ok(speeds.size >= 8, 'speaking speeds vary');
+ok(L.castFor(SECTIONS[0], SECTIONS[0].items[0]).M.id === L.castFor(SECTIONS[0], SECTIONS[0].items[0]).M.id, 'casting is stable');
+
+// Mock tests: the JLPT layout, every question at most once.
+for (const level of ['N5', 'N4']) {
+  const tests = L.mockTests(SECTIONS, level);
+  ok(tests.length >= 3, `${level}: at least three mock tests (${tests.length})`);
+  const seen = new Set();
+  tests.forEach(t => {
+    ok(t.parts.map(p => p.length).join() === L.TEST_LAYOUT[level].join(), `${t.id}: ${L.TEST_LAYOUT[level].join('/')} questions per part`);
+    t.parts.forEach((part, i) => part.forEach(({ section, item }) => {
+      ok(section === SECTIONS[i] && item.level === level, `${t.id}: ${item.id} belongs in part ${i + 1}`);
+      ok(!seen.has(item.id), `${t.id}: ${item.id} is in one test only`);
+      seen.add(item.id);
+    }));
+  });
+}
+
+// prepare() rotated the choices once: running it again changes nothing.
+const before = JSON.stringify(SECTIONS.map(s => s.items.map(i => i.answer)));
+L.prepare(SECTIONS);
+ok(JSON.stringify(SECTIONS.map(s => s.items.map(i => i.answer))) === before, 'prepare is idempotent');
 
 // Pictures that carry the answer
 const cal = Art.picture({ type: 'calendar', mark: 15 });
 ok((cal.match(/<circle/g) || []).length === 1, 'calendar circles one day');
 ok(/<text x="133" y="60" fill="#5b8fd6"[^>]*>15<\/text>/.test(cal), 'calendar: the 15th is a Saturday');
 ok(/<text x="113" y="60" fill="#2b2320"[^>]*>14<\/text>/.test(cal), 'calendar: the 14th is a Friday');
+const cal24 = Art.picture({ type: 'calendar', mark: 24 });
+ok(/>24<\/text>/.test(cal24) && (cal24.match(/<circle/g) || []).length === 1, 'calendar: late dates are shown and circled');
 for (const at of Object.keys(Art.MAP_SPOTS)) ok((Art.picture({ type: 'map', at }).match(/★/g) || []).length === 1, `map: one star at ${at}`);
 for (const at of Object.keys(Art.ROOM_SPOTS)) ok((Art.picture({ type: 'room', at }).match(/★/g) || []).length === 1, `room: one star at ${at}`);
 ok((Art.picture({ type: 'floor', floor: 5 }).match(/★/g) || []).length === 1, 'floor: one floor starred');
@@ -129,6 +179,11 @@ ok((Art.picture({ type: 'week', days: [2, 5] }).match(/<circle/g) || []).length 
 ok(Art.picture({ type: 'clock', h: 10, m: 15 }) !== Art.picture({ type: 'clock', h: 10, m: 30 }), 'clocks differ by time');
 ok((Art.picture({ type: 'items', items: [['apple', 3], ['mandarin', 2]] }).match(/<svg/g) || []).length === 5, 'items repeat by count');
 ok((Art.picture({ type: 'people', n: 5 }).match(/<svg/g) || []).length === 5, 'people draws n people');
+ok(Art.picture({ type: 'items', items: [[{ name: 'umbrella', color: 'red' }, 1]] }).includes('#e8594a'), 'icons can be recoloured');
+ok((Art.picture({ type: 'route', turns: ['up', 'up', 'right'] }).match(/★/g) || []).length === 1, 'route: one goal');
+ok((Art.picture({ type: 'seats', row: 'C', seat: 4 }).match(/★/g) || []).length === 1, 'seats: one seat starred');
+for (const role of Object.keys(Art.ROLES)) ok(Art.person(Art.ROLES[role]).length > 500, `role ${role} draws`);
+for (const setting of Object.keys(Art.SETTINGS)) ok(Art.scene({ setting, left: 'man', right: 'woman', arrow: 'left' }).includes('<svg'), `setting ${setting} draws`);
 
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);
