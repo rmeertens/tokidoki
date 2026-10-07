@@ -914,8 +914,13 @@
     log().addEventListener('click', e => {
       const word = e.target.closest('.mys-word');
       if (word) { openWord(Number(word.dataset.sid), Number(word.dataset.t)); return; }
+      // Only the bubble itself counts, not the empty space beside it; tapping
+      // anywhere else (or the open line again) puts the explanation away.
       const host = e.target.closest('[data-sid]');
-      if (host) openSentence(Number(host.dataset.sid));
+      const inside = host && (!host.classList.contains('mys-line') || e.target.closest('.mys-text'));
+      const sid = inside ? Number(host.dataset.sid) : null;
+      if (sid === null || (selection && selection.type === 'sentence' && selection.sid === sid)) closePanel();
+      else openSentence(sid);
     });
     log().addEventListener('keydown', e => {
       const word = e.target.closest && e.target.closest('.mys-word');
