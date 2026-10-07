@@ -3702,10 +3702,12 @@
     renderBunkeiCount();
   }
 
-  function pickRandomBunkeiVerbs() {
-    const verbs = getBunkeiVerbs().slice();
+  // Adds `count` random verbs to the selection, skipping ones already picked.
+  function addRandomBunkeiVerbs(count) {
+    const picked = new Set(bunkeiSettings.verbs);
+    const verbs = getBunkeiVerbs().map(bunkeiVerbKey).filter(k => !picked.has(k));
     shuffle(verbs);
-    bunkeiSettings.verbs = verbs.slice(0, 3).map(bunkeiVerbKey);
+    bunkeiSettings.verbs = [...bunkeiSettings.verbs, ...verbs.slice(0, count)];
     saveBunkeiSettings(bunkeiSettings);
     renderBunkeiPage();
   }
@@ -4555,7 +4557,9 @@
       const chip = e.target.closest('.bunkei-chip');
       if (chip) toggleBunkeiVerb(chip.dataset.verb);
     });
-    on('#btn-bunkei-random', 'click', pickRandomBunkeiVerbs);
+    document.querySelectorAll('.bunkei-random-btn').forEach(btn => {
+      btn.addEventListener('click', () => addRandomBunkeiVerbs(Number(btn.dataset.count)));
+    });
     on('#btn-bunkei-clear-verbs', 'click', () => {
       bunkeiSettings.verbs = [];
       saveBunkeiSettings(bunkeiSettings);
