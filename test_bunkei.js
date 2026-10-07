@@ -76,6 +76,7 @@ Bunkei.PATTERNS.filter(p => p.only).forEach(p => Object.keys(p.only).forEach(key
   const verb = verbs.find(v => keyOf(v) === key);
   check(verb && Bunkei.build(verb, p.id), `${p.id}: listed verb ${key} gets no sentence`);
 }));
+verbs.forEach(v => check(Bunkei.build(v, 'te-kara'), `${v.kanji}: no 〜てから sentence (add it to TE_KARA)`));
 const nagaraVerbs = verbs.filter(v => Bunkei.build(v, 'nagara'));
 check(nagaraVerbs.length >= 40, `expected 40+ verbs with 〜ながら, got ${nagaraVerbs.length}`);
 check(Bunkei.build(find('結婚する'), 'mashou') === null, '結婚する should skip "let\'s … together"');

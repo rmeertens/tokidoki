@@ -3702,10 +3702,19 @@
     renderBunkeiCount();
   }
 
-  function pickRandomBunkeiVerbs() {
-    const verbs = getBunkeiVerbs().slice();
+  // Adds `count` random verbs to the selection, skipping ones already picked.
+  // Prefers verbs that work with every selected pattern (〜前に, 〜ながら… only
+  // suit some verbs); if too few do, takes the ones that work with the most.
+  function addRandomBunkeiVerbs(count) {
+    const picked = new Set(bunkeiSettings.verbs);
+    const selected = new Set(bunkeiSettings.patterns);
+    const verbs = getBunkeiVerbs()
+      .filter(v => !picked.has(bunkeiVerbKey(v)))
+      .map(v => ({ v, fit: Bunkei.patternsFor(v).filter(p => selected.has(p.id)).length }))
+      .filter(x => x.fit > 0 || selected.size === 0);
     shuffle(verbs);
-    bunkeiSettings.verbs = verbs.slice(0, 3).map(bunkeiVerbKey);
+    verbs.sort((a, b) => b.fit - a.fit);
+    bunkeiSettings.verbs = [...bunkeiSettings.verbs, ...verbs.slice(0, count).map(x => bunkeiVerbKey(x.v))];
     saveBunkeiSettings(bunkeiSettings);
     renderBunkeiPage();
   }
@@ -4555,7 +4564,9 @@
       const chip = e.target.closest('.bunkei-chip');
       if (chip) toggleBunkeiVerb(chip.dataset.verb);
     });
-    on('#btn-bunkei-random', 'click', pickRandomBunkeiVerbs);
+    document.querySelectorAll('.bunkei-random-btn').forEach(btn => {
+      btn.addEventListener('click', () => addRandomBunkeiVerbs(Number(btn.dataset.count)));
+    });
     on('#btn-bunkei-clear-verbs', 'click', () => {
       bunkeiSettings.verbs = [];
       saveBunkeiSettings(bunkeiSettings);
