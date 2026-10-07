@@ -510,8 +510,7 @@
       'Hmm, that isn’t it either.',
       'Still not it — a hint might help.',
     ];
-    $('#mys-feedback').innerHTML = `<span class="mys-wrong">${close ? 'So close! Check the spelling.' : lines[Math.min(busy.wrong - 1, lines.length - 1)]}</span>`
-      + (step.type === 'meaning' ? '' : diffHtml(typed, step.answers));
+    $('#mys-feedback').innerHTML = `<span class="mys-wrong">${close ? 'So close! Check the spelling.' : lines[Math.min(busy.wrong - 1, lines.length - 1)]}</span>`;
     input.select();
   }
 
@@ -524,7 +523,8 @@
     $('#mys-input').focus();
   }
 
-  // What was typed against the expected answer, mismatches marked.
+  // What was last typed against the expected answer, mismatches marked —
+  // shown with the answer once it's revealed, never while still guessing.
   function diffHtml(typed, answers) {
     const AD = global.AnswerDiff;
     if (!AD || !typed) return '';
