@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" id="viewport-meta" content="width=device-width, initial-scale=1.0">
+  <title>JLPT Listening Practice — 聴解 with Pictures | Tokidoki</title>
+  <meta name="description" content="Free JLPT N5–N4 style listening (聴解) practice: hear a conversation, then pick the right picture — clocks, calendars, maps, people — or the right spoken reply. Task, point, utterance and quick-response questions, with scripts, furigana and English.">
+  <meta property="og:title" content="JLPT Listening Practice — 聴解 with Pictures | Tokidoki">
+  <meta property="og:description" content="Hear a Japanese conversation, then pick the right picture or reply — JLPT N5–N4 listening practice with scripts and English.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tokidoki.meertens.dev/listening.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="JLPT Listening Practice — 聴解 with Pictures | Tokidoki">
+  <meta name="twitter:description" content="Hear a Japanese conversation, then pick the right picture or reply — JLPT N5–N4 listening practice.">
+  <link rel="canonical" href="https://tokidoki.meertens.dev/listening.html">
+  <link rel="stylesheet" href="style.css?v=12">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXWYNZC7YH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXWYNZC7YH');
+  </script>
+</head>
+<body data-mode="listening">
+  <div id="app">
+
+    <!-- Header (rendered by renderSharedChrome() in app.js) -->
+    <div id="header-mount"></div>
+
+    <!-- Screen: Choose a part -->
+    <main id="screen-chapters" class="screen active">
+      <nav class="page-nav" aria-label="Exercises">
+        <div class="page-nav-group">
+          <span class="page-nav-label">Practice</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="verbs.html"><span class="page-nav-glyph" aria-hidden="true">食</span>Verbs</a>
+            <a class="page-nav-item" href="adjectives.html"><span class="page-nav-glyph" aria-hidden="true">高</span>Adjectives</a>
+            <a class="page-nav-item" href="custom.html"><span class="page-nav-glyph" aria-hidden="true">作</span>Build Your Own</a>
+            <a class="page-nav-item" href="bunkei.html"><span class="page-nav-glyph" aria-hidden="true">型</span>Bunkei</a>
+            <a class="page-nav-item" href="sentences.html"><span class="page-nav-glyph" aria-hidden="true">文</span>Sentences</a>
+            <a class="page-nav-item" href="stories.html"><span class="page-nav-glyph" aria-hidden="true">話</span>Stories</a>
+            <a class="page-nav-item" href="mystery.html"><span class="page-nav-glyph" aria-hidden="true">謎</span>Mystery</a>
+            <a class="page-nav-item active" href="listening.html" aria-current="page"><span class="page-nav-glyph" aria-hidden="true">聴</span>Listening</a>
+            <a class="page-nav-item" href="particles-quiz.html"><span class="page-nav-glyph" aria-hidden="true">は</span>Particles</a>
+            <a class="page-nav-item" href="kana.html"><span class="page-nav-glyph" aria-hidden="true">あ</span>Kana</a>
+            <a class="page-nav-item" href="kanji-quiz.html"><span class="page-nav-glyph" aria-hidden="true">字</span>Kanji Quiz</a>
+          </div>
+        </div>
+        <div class="page-nav-group">
+          <span class="page-nav-label">Reference</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="kanji.html"><span class="page-nav-glyph" aria-hidden="true">紙</span>Practice Sheets</a>
+            <a class="page-nav-item" href="kanji-hover.html"><span class="page-nav-glyph" aria-hidden="true">漢</span>Kanji Hover</a>
+            <a class="page-nav-item" href="vocabulary.html"><span class="page-nav-glyph" aria-hidden="true">語</span>Vocabulary</a>
+            <a class="page-nav-item" href="words-by-kanji.html"><span class="page-nav-glyph" aria-hidden="true">詞</span>Words by Kanji</a>
+            <a class="page-nav-item" href="notepad.html"><span class="page-nav-glyph" aria-hidden="true">書</span>Notepad</a>
+          </div>
+        </div>
+      </nav>
+      <section class="lis-hero">
+        <div class="lis-hero-face" aria-hidden="true">🎧</div>
+        <div>
+          <p class="lis-hero-kicker" lang="ja"><ruby>聴解<rt>ちょうかい</rt></ruby></p>
+          <h2 class="lis-hero-title">JLPT Listening</h2>
+          <p class="lis-hero-sub">
+            Practice questions in the format of the JLPT N5 and N4 listening section. You hear the
+            situation and the question, then a short conversation, then the question once more —
+            and pick the answer from four pictures, or from replies that are only spoken.
+          </p>
+        </div>
+      </section>
+
+
+      <p class="lis-no-voice hidden" id="lis-no-voice">
+        Your browser has no Japanese voice, so the script is shown instead of played. To hear the
+        audio, add a Japanese voice in your system’s speech settings or try Chrome, Edge or Safari.
+      </p>
+
+      <div class="lis-sections" id="lis-sections"></div>
+
+      <div class="lis-settings">
+        <label class="kana-script-toggle"><input type="checkbox" id="lis-opt-slow"> Slower speech</label>
+        <label class="kana-script-toggle"><input type="checkbox" id="lis-opt-once"> Exam mode: audio plays once</label>
+        <label class="kana-script-toggle"><input type="checkbox" id="lis-opt-script"> Show the script while listening</label>
+        <label class="kana-script-toggle"><input type="checkbox" id="lis-opt-furigana"> Furigana</label>
+      </div>
+    </main>
+
+    <!-- Screen: A question -->
+    <main id="screen-listening" class="screen">
+      <div class="study-toolbar">
+        <div class="study-progress">
+          <div class="study-progress-bar"><div id="lis-bar-fill" class="study-bar-fill"></div></div>
+          <span id="lis-progress-text" class="study-progress-text">0 / 0</span>
+        </div>
+        <button class="btn-secondary lis-small" id="lis-quit" aria-label="Back to the parts">✕</button>
+      </div>
+
+      <div class="card lis-card">
+        <div class="lis-head">
+          <div>
+            <div class="lis-part" id="lis-part"></div>
+            <div class="lis-number" id="lis-number" lang="ja"></div>
+          </div>
+          <div class="lis-player">
+            <button class="btn-primary lis-play" id="lis-play">▶ Play</button>
+            <span class="lis-status" id="lis-status" aria-live="polite"></span>
+          </div>
+        </div>
+        <p class="lis-instructions" id="lis-instructions"></p>
+        <div id="lis-stage"></div>
+        <div class="lis-feedback hidden" id="lis-feedback" aria-live="polite"></div>
+        <div class="lis-script hidden" id="lis-script"></div>
+        <div class="reveal-area hidden" id="lis-next-area">
+          <button id="btn-lis-next" class="btn-reveal">Next</button>
+          <span class="reveal-hint">1–4 = answer · P = play · Space = next</span>
+        </div>
+      </div>
+    </main>
+
+    <!-- Screen: Results -->
+    <main id="screen-listening-done" class="screen">
+      <div class="session-complete">
+        <div class="complete-icon">🎧</div>
+        <h2>Finished!</h2>
+        <div class="session-stats">
+          <div class="stat"><span class="stat-num" id="lis-done-score">0</span><span class="stat-label">Correct</span></div>
+          <div class="stat"><span class="stat-num" id="lis-done-accuracy">0%</span><span class="stat-label">Accuracy</span></div>
+        </div>
+        <ul class="lis-done-parts" id="lis-done-parts"></ul>
+        <div class="lis-done-actions">
+          <button id="btn-lis-again" class="btn-secondary">Try again</button>
+          <button id="btn-lis-home" class="btn-primary">Back to the parts</button>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="listening-data.js?v=1"></script>
+  <script src="listening.js?v=1"></script>
+  <script src="app.js?v=14"></script>
+
+  <!-- Static content for search engines -->
+  <section id="seo-content" aria-hidden="true">
+    <h2>JLPT listening practice (聴解) with picture choices</h2>
+    <p>
+      Free, no-login listening practice in the format of the JLPT N5 and N4 listening section
+      (聴解). Each question is played with Japanese text-to-speech the way the test plays it:
+      the question number, the situation and question, a short conversation between a man and
+      a woman, and the question again. 問題1 課題理解 (task comprehension) and 問題2 ポイント理解
+      (point comprehension) are answered by picking one of four pictures — clocks, calendars,
+      maps, people, weather and shopping. 問題3 発話表現 (utterance expressions) shows a picture
+      with an arrow and three spoken replies, and 問題4 即時応答 (quick response) has no picture
+      at all.
+    </p>
+    <p>
+      After answering, read the script with furigana and English translations and tap any line
+      to hear it again. Options: slower speech, exam mode where the audio plays only once, and
+      showing the script while listening.
+    </p>
+  </section>
+</body>
+</html>
