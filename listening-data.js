@@ -243,7 +243,7 @@
       num: 3,
       ja: '発話[はつわ]表現[ひょうげん]',
       en: 'Utterance expressions',
-      desc: 'Look at the picture. What does the person with the arrow say? The choices are only spoken.',
+      desc: 'What does the person with the arrow say? Replies are only spoken.',
       kind: 'spoken',
       items: [
         {
@@ -314,7 +314,7 @@
       num: 4,
       ja: '即時[そくじ]応答[おうとう]',
       en: 'Quick response',
-      desc: 'No picture. Hear one line, then three replies, and pick the natural one.',
+      desc: 'No picture: hear one line and pick the natural reply.',
       kind: 'spoken',
       items: [
         {

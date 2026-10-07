@@ -189,7 +189,7 @@
 
   // 問題3: the scene, with an arrow over the person who speaks.
   function sceneHtml(s) {
-    const arrow = '<span class="lis-arrow" aria-hidden="true">⬇</span>';
+    const arrow = '<span class="lis-bubble">？</span><span class="lis-arrow" aria-hidden="true">⬇</span>';
     return `<div class="lis-scene" aria-hidden="true">
       <div class="lis-scene-person">${s.arrow === 'left' ? arrow : '<span class="lis-arrow-gap"></span>'}<span>${s.left}</span></div>
       <div class="lis-scene-prop">${s.prop}</div>
@@ -252,24 +252,35 @@
   const best = load(STORE_KEY, {});
 
   const $ = id => document.getElementById(id);
-  let session = null;   // { queue: [{ section, item, number }], pos, results: [] }
+  let session = null;   // { id, queue: [{ section, item, number, answered, picked, played }], pos }
   let playToken = 0;
   let playing = false;
   let playsLeft = Infinity;
+  let autoTimer = 0;
+
+  const PROMPTS = {
+    pictures: 'Listen to the conversation, then pick the picture that answers the question.',
+    hatsuwa: 'Look at the picture. Which reply does the person with the red arrow say?',
+    sokuji: 'There is no picture. Listen to the line, then pick the most natural reply.',
+  };
+  const promptFor = section => section.kind === 'pictures' ? PROMPTS.pictures : PROMPTS[section.id] || PROMPTS.sokuji;
 
   // ─── Playback ──────────────────────────────────────────────────────────────
 
   function stopAudio() {
     playToken++;
     playing = false;
+    clearTimeout(autoTimer);
     if (synth) synth.cancel();
     document.querySelectorAll('.lis-speaking').forEach(el => el.classList.remove('lis-speaking'));
-    updatePlayButton();
+    updatePlayer();
   }
 
+  // Resolves with false when the browser refuses to speak (no user gesture
+  // yet), so the caller can stop and wait for the play button.
   function speakOne(step, token, cast) {
     return new Promise(resolve => {
-      if (token !== playToken) return resolve();
+      if (token !== playToken) return resolve(true);
       const u = new SpeechSynthesisUtterance(step.text);
       const c = cast[step.voice] || cast.N;
       u.lang = 'ja-JP';
@@ -277,63 +288,88 @@
       u.pitch = c.pitch;
       u.rate = settings.slow ? 0.7 : 0.95;
       let done = false;
-      const finish = () => { if (!done) { done = true; clearTimeout(guard); resolve(); } };
+      const finish = ok => { if (!done) { done = true; clearTimeout(guard); resolve(ok); } };
       // Some browsers never fire onend for an utterance; don't hang on it.
-      const guard = setTimeout(finish, 2500 + step.text.length * 400 / u.rate);
-      u.onend = finish;
-      u.onerror = finish;
+      const guard = setTimeout(() => finish(true), 2500 + step.text.length * 400 / u.rate);
+      u.onend = () => finish(true);
+      u.onerror = e => finish(!(e && e.error === 'not-allowed'));
       synth.speak(u);
     });
   }
 
   const wait = ms => new Promise(r => setTimeout(r, ms));
+  const SPEAKER = { N: 'Narrator', M: 'Man · 男の人', F: 'Woman · 女の人' };
 
-  async function playSteps(steps) {
+  // Plays a list of steps. `onDone(finished)` runs when it ends by itself.
+  async function playSteps(steps, onDone) {
     if (!synth) return;
     stopAudio();
     const token = playToken;
     const cast = castVoices();
     playing = true;
-    updatePlayButton();
+    setProgress(0);
+    updatePlayer();
     await wait(80); // Chrome sometimes drops an utterance queued right after cancel().
-    for (const step of steps) {
+    for (let i = 0; i < steps.length; i++) {
+      const step = steps[i];
       if (token !== playToken) return;
       const row = step.line && document.querySelector(`[data-line="${step.line}"]`);
       if (row) row.classList.add('lis-speaking');
-      setStatus(step.voice === 'N' ? 'Narrator' : step.voice === 'M' ? '男の人' : '女の人');
-      await speakOne(step, token, cast);
+      setStatus(SPEAKER[step.voice] || '', true);
+      const spoke = await speakOne(step, token, cast);
       if (row) row.classList.remove('lis-speaking');
+      if (token !== playToken) return;
+      if (!spoke) { playing = false; setProgress(0); if (onDone) onDone(false); updatePlayer(); return; }
+      setProgress((i + 1) / steps.length);
       if (step.pause) await wait(settings.slow ? step.pause * 1.4 : step.pause);
     }
     if (token !== playToken) return;
     playing = false;
-    updatePlayButton();
-    const q = current();
-    if (q && !q.answered) setStatus(q.section.kind === 'pictures' ? 'Choose a picture' : 'Choose 1, 2 or 3');
-    else setStatus('');
+    if (onDone) onDone(true);
+    updatePlayer();
   }
 
   function playCurrent() {
     const q = current();
     if (!q || playing || (!q.answered && playsLeft <= 0)) return;
-    if (!q.answered) playsLeft--;
-    q.played = true;
-    playSteps(buildScript(q.section, q.item, q.number));
+    const counts = !q.answered;
+    if (counts) playsLeft--;
+    playSteps(buildScript(q.section, q.item, q.number), finished => {
+      if (finished) q.played = true;
+      else if (counts) playsLeft++; // blocked before it started: give the play back
+    });
   }
 
-  function setStatus(text) {
+  function setStatus(text, live) {
     const el = $('lis-status');
-    if (el) el.textContent = text;
+    if (!el) return;
+    el.textContent = text;
+    el.classList.toggle('lis-status-live', !!live);
   }
 
-  function updatePlayButton() {
+  function setProgress(f) {
+    const el = $('lis-audio-fill');
+    if (el) el.style.width = `${Math.round(f * 100)}%`;
+  }
+
+  function updatePlayer() {
     const btn = $('lis-play');
-    if (!btn) return;
     const q = current();
-    const locked = q && !q.answered && playsLeft <= 0 && !playing;
-    btn.textContent = playing ? '■ Stop' : (q && (q.played || q.answered) ? '↻ Play again' : '▶ Play');
+    if (!btn || !q) return;
+    const locked = !q.answered && playsLeft <= 0 && !playing;
+    btn.classList.toggle('lis-playing', playing);
+    btn.innerHTML = playing ? '<span aria-hidden="true">■</span>' : (q.played || q.answered ? '<span aria-hidden="true">↻</span>' : '<span aria-hidden="true">▶</span>');
+    btn.setAttribute('aria-label', playing ? 'Stop' : q.played ? 'Play again' : 'Play');
     btn.disabled = !synth || locked;
-    btn.title = locked ? 'Exam mode: the audio plays once' : '';
+    const done = !playing && (q.played || q.answered);
+    $('lis-audio').classList.toggle('lis-audio-done', done);
+    if (playing) return;
+    setProgress(done ? 1 : 0);
+    if (!synth) setStatus('No Japanese voice — read the script below');
+    else if (q.answered) setStatus('Tap ↻ to hear it again, or tap a line in the script');
+    else if (locked) setStatus('Exam mode: the audio plays once. Choose your answer.');
+    else if (q.played) setStatus(q.section.kind === 'pictures' ? 'Now choose a picture ↓' : 'Now choose the reply you heard ↓');
+    else setStatus('Tap ▶ to listen');
   }
 
   // ─── Screens ───────────────────────────────────────────────────────────────
@@ -345,22 +381,24 @@
     window.scrollTo(0, 0);
   }
 
+  function bestText(id) {
+    const b = best[id];
+    return b ? `Best ${b.score}/${b.total}` : '';
+  }
+
   function renderHome() {
     const total = SECTIONS.reduce((n, s) => n + s.items.length, 0);
-    $('lis-sections').innerHTML = SECTIONS.map(s => {
-      const b = best[s.id];
-      return `<button class="lis-section-card" data-section="${s.id}">
-        <span class="lis-section-num" lang="ja">問題${s.num}</span>
-        <span class="lis-section-name"><span lang="ja">${rubyHtml(s.ja)}</span> ${esc(s.en)}</span>
-        <span class="lis-section-desc">${esc(s.desc)}</span>
-        <span class="lis-section-meta">${s.items.length} questions${b ? ` · best ${b.score}/${b.total}` : ''}</span>
-      </button>`;
-    }).join('') + `<button class="lis-section-card lis-section-all" data-section="all">
-        <span class="lis-section-num" lang="ja">模擬試験</span>
-        <span class="lis-section-name">Full mock test</span>
-        <span class="lis-section-desc">All four parts in order, like the real listening section.</span>
-        <span class="lis-section-meta">${total} questions${best.all ? ` · best ${best.all.score}/${best.all.total}` : ''}</span>
-      </button>`;
+    $('lis-start-meta').textContent = `All four parts · ${total} questions${best.all ? ' · ' + bestText('all') : ''}`;
+    $('lis-sections').innerHTML = SECTIONS.map(s => `
+      <button class="lis-part-row" data-section="${s.id}">
+        <span class="lis-part-badge" lang="ja">問題${s.num}</span>
+        <span class="lis-part-body">
+          <span class="lis-part-title">${esc(s.en)} <span class="lis-part-ja" lang="ja">${esc(plain(s.ja))}</span></span>
+          <span class="lis-part-desc">${esc(s.desc)}</span>
+        </span>
+        <span class="lis-part-meta">${s.items.length} Qs${best[s.id] ? `<br>${bestText(s.id)}` : ''}</span>
+        <span class="lis-part-go" aria-hidden="true">›</span>
+      </button>`).join('');
     ['slow', 'once', 'script', 'furigana'].forEach(k => { $('lis-opt-' + k).checked = !!settings[k]; });
     $('lis-no-voice').classList.toggle('hidden', !!synth && castVoices().found);
     document.body.classList.toggle('lis-no-furigana', !settings.furigana);
@@ -382,30 +420,35 @@
     const q = current();
     const { section, item } = q;
     playsLeft = settings.once ? 1 : Infinity;
-    $('lis-part').innerHTML = `<span lang="ja">問題${section.num}</span> ${esc(section.en)}`;
+    $('lis-part').innerHTML = `<span class="lis-part-badge" lang="ja">問題${section.num}</span> ${esc(section.en)}`;
     $('lis-number').textContent = `${q.number}番`;
     $('lis-progress-text').textContent = `${session.pos + 1} / ${session.queue.length}`;
     $('lis-bar-fill').style.width = `${(session.pos / session.queue.length) * 100}%`;
-    $('lis-instructions').textContent = section.desc;
+    $('lis-instructions').textContent = promptFor(section);
+    setProgress(0);
 
     const stage = $('lis-stage');
     if (section.kind === 'pictures') {
       stage.innerHTML = `<div class="lis-choices lis-choices-pics">${item.choices.map((c, i) =>
         `<button class="lis-choice" data-choice="${i}" aria-label="Picture ${i + 1}">
-          <span class="lis-choice-num">${i + 1}</span>${pictureHtml(c)}</button>`).join('')}</div>`;
+          <span class="lis-choice-num">${i + 1}</span>
+          <span class="lis-choice-pic">${pictureHtml(c)}</span></button>`).join('')}</div>`;
     } else {
-      stage.innerHTML = (item.picture ? sceneHtml(item.picture) : '<div class="lis-no-picture" lang="ja">（絵はありません）</div>')
-        + `<div class="lis-choices lis-choices-spoken">${item.choices.map((c, i) =>
-          `<button class="lis-choice" data-choice="${i}"><span class="lis-choice-num">${i + 1}</span><span class="lis-choice-text"></span></button>`).join('')}</div>`;
+      stage.innerHTML = (item.picture ? sceneHtml(item.picture) : '')
+        + `<p class="lis-choices-label">Which reply did you hear?</p>
+          <div class="lis-choices lis-choices-spoken">${item.choices.map((c, i) =>
+          `<button class="lis-choice" data-choice="${i}" aria-label="Reply ${i + 1}">
+            <span class="lis-choice-num">${i + 1}</span><span class="lis-choice-text" lang="ja"></span></button>`).join('')}</div>`;
     }
     renderScript();
-    $('lis-feedback').classList.add('hidden');
-    $('lis-next-area').classList.add('hidden');
-    setStatus(synth ? 'Press Play when you’re ready' : '');
-    updatePlayButton();
+    $('lis-result').classList.add('hidden');
+    updatePlayer();
+    // Play straight away, like the test. If the browser won't speak without
+    // a tap first, the play button waits for one.
+    if (synth) autoTimer = setTimeout(playCurrent, 450);
   }
 
-  // The script: hidden until the answer is picked (or always shown with the
+  // The script: hidden until the answer is picked (or always, with the
   // "show the script" option). Each row can be tapped to hear it again.
   function renderScript() {
     const q = current();
@@ -413,10 +456,10 @@
     const visible = q.answered || settings.script || !synth;
     const box = $('lis-script');
     box.classList.toggle('hidden', !visible);
-    if (!visible) { box.innerHTML = ''; return; }
+    if (!visible) { $('lis-script-body').innerHTML = ''; return; }
     const who = { N: '', M: '男', F: '女' };
     const row = (key, voice, ja, en, extra = '', sayText) =>
-      `<div class="lis-line${extra}" data-line="${key}" data-voice="${voice}" data-say="${esc(sayText || plain(ja))}" role="button" tabindex="0">
+      `<div class="lis-line${extra}" data-line="${key}" data-voice="${voice}" data-say="${esc(sayText || plain(ja))}" role="button" tabindex="0" title="Play this line">
         <span class="lis-who" lang="ja">${who[voice]}</span>
         <span class="lis-ja" lang="ja">${rubyHtml(ja)}</span>
         ${en ? `<span class="lis-en">${esc(en)}</span>` : ''}
@@ -432,7 +475,7 @@
         rows.push(row('choice' + i, item.replyBy || 'M', `${i + 1}. ${c.ja}`, q.answered ? c.en : '', ' lis-line-choice' + mark, c.say));
       });
     }
-    box.innerHTML = `<div class="lis-script-head">Script <span class="lis-script-hint">tap a line to hear it</span></div>${rows.join('')}`;
+    $('lis-script-body').innerHTML = rows.join('');
   }
 
   function pick(i) {
@@ -447,18 +490,22 @@
       btn.disabled = true;
       btn.classList.toggle('lis-right', n === q.item.answer);
       btn.classList.toggle('lis-wrong', n === i && !right);
+      btn.classList.toggle('lis-dim', n !== i && n !== q.item.answer);
     });
     if (q.section.kind === 'spoken') {
-      document.querySelectorAll('.lis-choice-text').forEach((el, n) => { el.innerHTML = rubyHtml(q.item.choices[n].ja); el.lang = 'ja'; });
+      document.querySelectorAll('.lis-choice-text').forEach((el, n) => { el.innerHTML = rubyHtml(q.item.choices[n].ja); });
     }
-    const fb = $('lis-feedback');
-    fb.className = 'lis-feedback ' + (right ? 'lis-feedback-right' : 'lis-feedback-wrong');
-    fb.innerHTML = `<b>${right ? '正解！ Correct' : `Not quite — the answer is ${q.item.answer + 1}`}</b> ${esc(q.item.why)}`;
+    const res = $('lis-result');
+    res.className = 'lis-result ' + (right ? 'lis-result-right' : 'lis-result-wrong');
+    $('lis-result-icon').textContent = right ? '○' : '×';
+    $('lis-result-title').textContent = right ? '正解！ Correct' : `Not quite — the answer is ${q.item.answer + 1}`;
+    $('lis-result-why').textContent = q.item.why;
+    $('btn-lis-next').textContent = session.pos + 1 < session.queue.length ? 'Next question →' : 'See results →';
     renderScript();
-    $('lis-next-area').classList.remove('hidden');
-    $('btn-lis-next').textContent = session.pos + 1 < session.queue.length ? 'Next' : 'See results';
-    setStatus('');
-    updatePlayButton();
+    $('lis-script').open = true;
+    updatePlayer();
+    res.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    $('btn-lis-next').focus({ preventScroll: true });
   }
 
   function next() {
@@ -466,6 +513,7 @@
     if (session.pos + 1 < session.queue.length) {
       session.pos++;
       renderQuestion();
+      window.scrollTo(0, 0);
     } else {
       finish();
     }
@@ -477,7 +525,6 @@
     const total = session.queue.length;
     const prev = best[session.id];
     if (!prev || score > prev.score) { best[session.id] = { score, total }; save(STORE_KEY, best); }
-    $('lis-bar-fill').style.width = '100%';
     $('lis-done-score').textContent = `${score} / ${total}`;
     $('lis-done-accuracy').textContent = `${Math.round(score / total * 100)}%`;
     const bySection = [];
@@ -488,15 +535,23 @@
       if (q.picked === q.item.answer) s.right++; else s.missed.push(q.number);
     });
     $('lis-done-parts').innerHTML = bySection.map(b =>
-      `<li><span lang="ja">問題${b.section.num}</span> ${esc(b.section.en)}: <b>${b.right}/${b.total}</b>${b.missed.length ? ` <span class="lis-missed">(missed ${b.missed.map(n => n + '番').join(', ')})</span>` : ''}</li>`).join('');
+      `<li><span class="lis-part-badge" lang="ja">問題${b.section.num}</span> ${esc(b.section.en)} <b>${b.right}/${b.total}</b>${b.missed.length ? ` <span class="lis-missed">missed ${b.missed.map(n => n + '番').join(', ')}</span>` : ''}</li>`).join('');
     show('screen-listening-done');
+  }
+
+  function goHome() {
+    stopAudio();
+    session = null;
+    renderHome();
+    show('screen-chapters');
   }
 
   // ─── Events ────────────────────────────────────────────────────────────────
 
+  $('lis-start').addEventListener('click', () => start('all'));
   $('lis-sections').addEventListener('click', e => {
-    const card = e.target.closest('[data-section]');
-    if (card) start(card.dataset.section);
+    const row = e.target.closest('[data-section]');
+    if (row) start(row.dataset.section);
   });
   ['slow', 'once', 'script', 'furigana'].forEach(k => $('lis-opt-' + k).addEventListener('change', e => {
     settings[k] = e.target.checked;
@@ -509,24 +564,24 @@
     if (btn) pick(Number(btn.dataset.choice));
   });
   function playRow(el) {
-    playSteps([{ voice: el.dataset.voice, text: el.dataset.say, pause: 0 }]);
+    playSteps([{ voice: el.dataset.voice, text: el.dataset.say, pause: 0, line: el.dataset.line }]);
   }
-  $('lis-script').addEventListener('click', e => {
+  $('lis-script-body').addEventListener('click', e => {
     const row = e.target.closest('.lis-line');
-    if (row && (current().answered || settings.script || !synth)) playRow(row);
+    if (row) playRow(row);
   });
-  $('lis-script').addEventListener('keydown', e => {
+  $('lis-script-body').addEventListener('keydown', e => {
     const row = e.target.closest('.lis-line');
     if (row && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); playRow(row); }
   });
   $('btn-lis-next').addEventListener('click', next);
-  $('lis-quit').addEventListener('click', () => { stopAudio(); session = null; renderHome(); show('screen-chapters'); });
+  $('lis-quit').addEventListener('click', goHome);
   $('btn-lis-again').addEventListener('click', () => start(session.id));
-  $('btn-lis-home').addEventListener('click', () => { session = null; renderHome(); show('screen-chapters'); });
+  $('btn-lis-home').addEventListener('click', goHome);
 
   document.addEventListener('keydown', e => {
     if (!session || !$('screen-listening').classList.contains('active')) return;
-    if (e.target.closest && e.target.closest('input, textarea, select, .lis-line')) return;
+    if (e.target.closest && e.target.closest('input, textarea, select, .lis-line, summary')) return;
     const q = current();
     const n = Number(e.key);
     if (n >= 1 && n <= q.item.choices.length && !q.answered) { e.preventDefault(); pick(n - 1); }
