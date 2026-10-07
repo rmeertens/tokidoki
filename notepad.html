@@ -78,7 +78,7 @@
       <p class="notepad-keys">
         <kbd>Space</kbd> / <kbd>Enter</kbd> pick the highlighted choice &middot; <kbd>&uarr;</kbd><kbd>&darr;</kbd> or <kbd>Tab</kbd> move &middot;
         <kbd>1</kbd>&ndash;<kbd>9</kbd> choose &middot; <kbd>Esc</kbd> or ✕ cancel &middot; <kbd>Backspace</kbd> deletes from the notepad &middot;
-        <kbd>&larr;</kbd><kbd>&rarr;</kbd> move the cursor &middot; click a sentence to see its words, hear it, or edit it &middot;
+        <kbd>&larr;</kbd><kbd>&rarr;</kbd> move the cursor &middot; click a sentence to see its words, hear it, or edit it, or its ✕ to remove it &middot;
         <kbd>.</kbd> <kbd>,</kbd> <kbd>?</kbd> <kbd>!</kbd> type 。、？！ &middot; <kbd>-</kbd> is ー
       </p>
 
@@ -86,6 +86,7 @@
         <label class="kana-script-toggle"><input type="checkbox" id="notepad-furigana" checked> Furigana</label>
         <label class="kana-script-toggle"><input type="checkbox" id="notepad-kana-first"> Kana first</label>
         <label class="kana-script-toggle"><input type="checkbox" id="notepad-katakana"> Katakana</label>
+        <label class="kana-script-toggle notepad-voice hidden">Voice <select id="notepad-voice" aria-label="Voice for listening"></select></label>
       </div>
       <div class="notepad-actions">
         <button class="btn-secondary" id="btn-notepad-copy">Copy text</button>

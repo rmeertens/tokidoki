@@ -422,7 +422,7 @@
         const isSel = selected && selected.start === sn.start;
         html += `<span class="notepad-sentence${isSel ? ' selected' : ''}" data-start="${sn.start}" data-end="${sn.end}">`;
         for (; i < sn.end; i++) html += wordHtml(i);
-        html += '</span>';
+        html += '<button type="button" class="notepad-sentence-close" data-close aria-label="Remove this sentence" title="Remove this sentence">✕</button></span>';
       });
       for (; i < doc.length; i++) html += wordHtml(i);
       if (pos >= doc.length) html += caret;
@@ -440,7 +440,7 @@
           <span class="notepad-panel-meaning">${esc(w.m || '')}</span>
         </li>`;
       }).join('');
-      const canSpeak = 'speechSynthesis' in window;
+      const canSpeak = !!synth;
       panel.innerHTML = `
         <div class="notepad-panel-head">
           <div class="notepad-panel-sentence" lang="ja">${piecesHtml([].concat(...words.map(w => w.p)))}</div>
@@ -449,7 +449,7 @@
         <div class="notepad-panel-reading-line" lang="ja">${esc(words.map(wordReading).join(''))}</div>
         ${rows ? `<ul class="notepad-panel-words">${rows}</ul>` : ''}
         <div class="notepad-panel-actions">
-          ${canSpeak ? '<button type="button" class="btn-secondary" data-act="speak">🔊 Listen</button>' : ''}
+          ${canSpeak ? '<button type="button" class="btn-secondary" data-act="speak">🔊 Listen</button><button type="button" class="btn-secondary" data-act="speak-slow">🐢 Slowly</button>' : ''}
           <button type="button" class="btn-secondary" data-act="copy">Copy</button>
           <button type="button" class="btn-secondary" data-act="edit" title="Put this sentence back in the input box to pick different spellings">Edit</button>
           <button type="button" class="btn-secondary" data-act="delete">Delete</button>
@@ -528,6 +528,19 @@
       renderPaper();
     }
 
+    // Drops doc[start, end), keeping the caret and the open panel on the
+    // same words they were on.
+    function removeSentence(start, end) {
+      const len = end - start;
+      doc.splice(start, len);
+      if (pos >= end) pos -= len; else if (pos > start) pos = start;
+      if (selected) {
+        if (selected.start >= end) selected = { start: selected.start - len, end: selected.end - len };
+        else if (selected.end > start) selected = null;
+      }
+      save(STORAGE_KEY, doc);
+    }
+
     function focusInput() {
       try { input.focus({ preventScroll: true }); } catch { input.focus(); }
     }
@@ -597,6 +610,14 @@
     // Clicking a sentence opens its breakdown and puts the caret after the
     // word clicked; clicking blank paper moves the caret to the end.
     paper.addEventListener('click', (e) => {
+      if (e.target.closest('[data-close]')) {
+        const sn = e.target.closest('.notepad-sentence');
+        removeSentence(Number(sn.dataset.start), Number(sn.dataset.end));
+        renderPanel();
+        renderPaper();
+        focusInput();
+        return;
+      }
       const word = e.target.closest('.notepad-word');
       const sn = e.target.closest('.notepad-sentence');
       if (sn) {
@@ -611,15 +632,64 @@
       focusInput();
     });
 
-    function speak(text) {
+    // Text to speech. Browsers ship several Japanese voices of very different
+    // quality and often default to the worst one (or to an English voice
+    // reading kana), so rank them by name and let the reader pick.
+    const synth = 'speechSynthesis' in window ? window.speechSynthesis : null;
+    const voiceSelect = document.getElementById('notepad-voice');
+    const VOICE_KEY = STORAGE_KEY + '-voice';
+    function voiceScore(v) {
+      const n = v.name;
+      let score = 0;
+      if (/natural|neural/i.test(n)) score += 50;      // Edge: Nanami / Keita Online (Natural)
+      if (/premium/i.test(n)) score += 45;             // macOS / iOS downloadable voices
+      if (/enhanced|siri/i.test(n)) score += 35;
+      if (/google/i.test(n)) score += 25;              // Chrome: Google 日本語
+      if (/online/i.test(n)) score += 10;
+      if (!v.localService) score += 5;
+      if (/^ja[-_]JP$/i.test(v.lang)) score += 2;
+      if (/compact|espeak/i.test(n)) score -= 20;
+      return score;
+    }
+    const jaVoices = () => (synth ? synth.getVoices() : [])
+      .filter(v => /^ja\b|^ja[-_]/i.test(v.lang))
+      .sort((a, b) => voiceScore(b) - voiceScore(a));
+    function chosenVoice() {
+      const voices = jaVoices();
+      const want = load(VOICE_KEY, '');
+      return voices.find(v => v.voiceURI === want) || voices[0] || null;
+    }
+    function fillVoices() {
+      if (!voiceSelect) return;
+      const voices = jaVoices();
+      const label = voiceSelect.closest('label');
+      if (label) label.classList.toggle('hidden', voices.length < 2);
+      const current = chosenVoice();
+      voiceSelect.innerHTML = voices.map(v =>
+        `<option value="${esc(v.voiceURI)}"${v === current ? ' selected' : ''}>${esc(v.name.replace(/\s*[-–(]\s*Japanese.*$|\s*\(Japan\)$/i, ''))}</option>`).join('');
+    }
+    if (synth) {
+      fillVoices();
+      // Chrome loads its voice list asynchronously.
+      if (synth.addEventListener) synth.addEventListener('voiceschanged', fillVoices);
+      else synth.onvoiceschanged = fillVoices;
+    }
+    if (voiceSelect) {
+      voiceSelect.addEventListener('change', () => { save(VOICE_KEY, voiceSelect.value); speak('こんにちは。'); });
+    }
+
+    function speak(text, slow) {
+      if (!synth) return;
       try {
-        speechSynthesis.cancel();
+        synth.cancel();
         const u = new SpeechSynthesisUtterance(text);
         u.lang = 'ja-JP';
-        const voice = speechSynthesis.getVoices().find(v => /^ja/i.test(v.lang));
-        if (voice) u.voice = voice;
-        u.rate = 0.9;
-        speechSynthesis.speak(u);
+        const voice = chosenVoice();
+        if (voice) { u.voice = voice; u.lang = voice.lang; }
+        else showStatus('No Japanese voice found — add one in your system’s speech settings');
+        u.rate = slow ? 0.6 : 0.95;
+        // Chrome sometimes drops an utterance queued right after cancel().
+        setTimeout(() => synth.speak(u), 50);
       } catch { /* speech unavailable */ }
     }
 
@@ -631,17 +701,15 @@
       const act = btn.dataset.act;
       if (act === 'close') {
         selected = null;
-      } else if (act === 'speak') {
-        speak(text);
+      } else if (act === 'speak' || act === 'speak-slow') {
+        speak(text, act === 'speak-slow');
         return;
       } else if (act === 'copy') {
         copy(text, 'sentence');
         return;
       } else if (act === 'delete') {
-        doc.splice(selected.start, selected.end - selected.start);
-        pos = selected.start;
-        selected = null;
-        save(STORAGE_KEY, doc);
+        removeSentence(selected.start, selected.end);
+        pos = Math.min(pos, doc.length);
       } else if (act === 'edit') {
         // Back into the input as kana; the end punctuation stays put.
         let end = selected.end;
@@ -666,8 +734,13 @@
 
     const plainText = () => doc.map(wordText).join('');
     const bracketText = () => doc.map(w => w.p.map(p => (p.r && HAS_KANJI.test(p.t) ? `${p.t}(${p.r})` : p.t)).join('')).join('');
+    function showStatus(msg) {
+      status.textContent = msg;
+      clearTimeout(showStatus.timer);
+      showStatus.timer = setTimeout(() => { status.textContent = ''; }, 4000);
+    }
     function copy(text, label) {
-      const done = () => { status.textContent = `Copied ${label}`; setTimeout(() => { status.textContent = ''; }, 2000); };
+      const done = () => showStatus(`Copied ${label}`);
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(done, () => { status.textContent = 'Copy failed'; });
       } else {
