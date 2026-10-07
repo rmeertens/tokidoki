@@ -81,7 +81,22 @@
     return best;
   }
 
-  const api = { fold, pieces, plain, reading, match, matchEnglish, distance };
+  // The spelling of an answer to compare a wrong try against: of every
+  // accepted answer, written with each kanji word as kanji where the player
+  // typed that kanji and as kana where they didn't, the one closest to what
+  // they typed.
+  function expected(typed, answers) {
+    const AD = global.AnswerDiff;
+    const t = fold(typed);
+    const forms = answers.flatMap(a => [
+      pieces(a).map(p => (p.r && !t.includes(fold(p.t)) ? p.r : p.t)).join(''),
+      reading(a),
+      plain(a),
+    ]);
+    return AD ? AD.closest(typed, forms) : forms[0];
+  }
+
+  const api = { fold, pieces, plain, reading, match, matchEnglish, distance, expected };
   global.Mystery = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   if (typeof document === 'undefined') return;
@@ -447,7 +462,7 @@
         <div class="mys-feedback" id="mys-feedback" aria-live="polite"></div>
         <div class="mys-challenge-actions">
           <button class="btn-secondary mys-small" id="mys-hint">💡 Hint (−1 🐾)</button>
-          <button class="btn-secondary mys-small hidden" id="mys-giveup">Show answer</button>
+          <button class="btn-secondary mys-small" id="mys-giveup">🏳 I don’t know — show answer</button>
         </div>
       </div>`;
     const input = $('#mys-input');
@@ -484,6 +499,7 @@
     if (ok) { busy.typed = typed; solve(); return; }
 
     busy.wrong++;
+    busy.lastTyped = typed;
     updateStepPaws();
     input.classList.remove('incorrect');
     void input.offsetWidth; // restart the shake
@@ -494,8 +510,8 @@
       'Hmm, that isn’t it either.',
       'Still not it — a hint might help.',
     ];
-    $('#mys-feedback').innerHTML = `<span class="mys-wrong">${close ? 'So close! Check the spelling.' : lines[Math.min(busy.wrong - 1, lines.length - 1)]}</span>`;
-    if (busy.wrong >= 3) $('#mys-giveup').classList.remove('hidden');
+    $('#mys-feedback').innerHTML = `<span class="mys-wrong">${close ? 'So close! Check the spelling.' : lines[Math.min(busy.wrong - 1, lines.length - 1)]}</span>`
+      + (step.type === 'meaning' ? '' : diffHtml(typed, step.answers));
     input.select();
   }
 
@@ -508,10 +524,20 @@
     $('#mys-input').focus();
   }
 
+  // What was typed against the expected answer, mismatches marked.
+  function diffHtml(typed, answers) {
+    const AD = global.AnswerDiff;
+    if (!AD || !typed) return '';
+    const d = AD.diff(typed, expected(typed, answers));
+    return `<div class="answer-diff mys-diff" lang="ja">
+      <div><span class="answer-diff-label">You typed</span>${AD.toHtml(d.typed, 'diff-wrong')}</div>
+      <div><span class="answer-diff-label">Expected</span>${AD.toHtml(d.expected, 'diff-missing')}</div></div>`;
+  }
+
   function giveUp() {
     if (!busy || busy.done) return;
     busy.gaveUp = true;
-    busy.typed = '';
+    busy.typed = busy.lastTyped || '';
     solve();
   }
 
@@ -529,7 +555,10 @@
     const typed = busy.typed;
     let head;
     if (busy.gaveUp) {
-      head = `<div class="mys-result reveal">The answer: <span lang="ja">${step.type === 'meaning' ? esc(ans) : ruby(ans)}</span></div>`;
+      head = `<div class="mys-result reveal">The answer: <span lang="ja">${step.type === 'meaning' ? esc(ans) : ruby(ans)}</span></div>`
+        + (step.type === 'meaning'
+          ? (typed ? `<div class="mys-models-label">You typed: ${esc(typed)}</div>` : '')
+          : diffHtml(typed, step.answers));
     } else {
       const cheers = ['正解[せいかい]！', 'お見事[みごと]！', 'その通[とお]り！', 'さすが！'];
       head = `<div class="mys-result ok"><span lang="ja">${ruby(cheers[state.step % cheers.length])}</span> +${earned} 🐾</div>`;
@@ -600,6 +629,7 @@
         <div class="mys-challenge-actions">
           <button class="btn-secondary mys-small" id="mys-hint">💡 Hint (−1 🐾)</button>
           <button class="btn-secondary mys-small" id="mys-file-open">📁 Case file</button>
+          <button class="btn-secondary mys-small" id="mys-giveup">🏳 I don’t know — show me</button>
         </div>
       </div>`;
     $('#mys-object').addEventListener('click', object);
@@ -611,13 +641,19 @@
       $('#mys-hint').insertAdjacentHTML('afterend', `<div class="mys-hint">💡 ${esc(step.hint)}</div>`);
     });
     $('#mys-file-open').addEventListener('click', openFile);
+    $('#mys-giveup').addEventListener('click', () => {
+      if (busy.done) return;
+      busy.gaveUp = true;
+      busy.picked = step.wrong;
+      object();
+    });
     updateStepPaws();
   }
 
   function object() {
     if (!busy || busy.done || busy.picked < 0) return;
     const step = busy.step;
-    flash();
+    if (!busy.gaveUp) flash();
     if (busy.picked === step.wrong) {
       busy.done = true;
       const earned = stepPaws();
@@ -627,8 +663,10 @@
       addLine('you', 'ちょっと 待[ま]った>待つ ！', 'Hold it right there!', ['plain-form:待った']);
       dock().innerHTML = `
         <div class="mys-challenge solved">
-          <div class="mys-result ok"><span lang="ja">${ruby('見[み]つけた！')}</span> +${earned} 🐾</div>
-          <div class="mys-note"><span class="mys-note-face" aria-hidden="true">${CAST.kuro.face}</span><div>That’s the one that doesn’t hold up. Now prove it…</div></div>
+          ${busy.gaveUp
+            ? `<div class="mys-result reveal">The weak spot: <span lang="ja">${ruby(surfaceText(step.lines[step.wrong].ja))}</span></div>`
+            : `<div class="mys-result ok"><span lang="ja">${ruby('見[み]つけた！')}</span> +${earned} 🐾</div>`}
+          <div class="mys-note"><span class="mys-note-face" aria-hidden="true">${CAST.kuro.face}</span><div>${busy.gaveUp ? `Kuro points it out: this statement doesn’t hold up. ${esc(step.hint)}` : 'That’s the one that doesn’t hold up.'} Now prove it…</div></div>
           <button class="btn-primary mys-next" id="mys-next">Continue <span class="mys-key">▸</span></button>
         </div>`;
       $('#mys-next').addEventListener('click', next);

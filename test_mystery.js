@@ -130,5 +130,11 @@ ok(M.matchEnglish('she fed him', step('arrested', 'meaning', 1).answers), 'Engli
 ok(M.distance('ふらいぱm', step('melonpan', 'riddle').answers) <= 2, 'near miss is close');
 ok(M.distance('なべ', step('melonpan', 'riddle').answers) > 2, 'different word is not close');
 
+// The answer a wrong try is compared against follows the player's own spelling.
+const keyAsk = step('clocktower', 'ask').answers;
+ok(M.expected('とけいだいのかぎはだれがもってますか', keyAsk) === 'とけいだいのかぎはだれがもっていますか', 'kana try → kana answer');
+ok(M.expected('時計台のかぎはだれが持ってますか', keyAsk) === '時計台のかぎはだれが持っていますか', 'mixed try → mixed answer');
+ok(M.expected('すいようび', step('melonpan', 'fill').answers) === 'すいようび', 'exact kana form');
+
 console.log(`${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

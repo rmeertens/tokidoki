@@ -4378,3 +4378,4 @@ a.chapter-card {
 .mys-panel .story-panel-close { display: inline-flex; }
 .mys-panel-actions .story-panel-add { width: auto; }
 .mys-panel-actions .story-panel-link { margin-top: 0; }
+.mys-diff { margin-top: 6px; padding: 6px 10px; background: var(--bg); border-radius: var(--radius-sm); }
