@@ -106,6 +106,9 @@
   let sessionCards = [];
   let sessionIndex = 0;
   let sessionCorrect = 0;
+  // Whether the last typed answer was right — Enter on the answer side
+  // grades it Good if so, Again if not.
+  let lastTypedCorrect = false;
   let sessionTotal = 0;
   let currentCard = null;
   let answered = false;
@@ -648,29 +651,7 @@
     const userAnswer = Romaji.flush($('#answer-input')).trim();
     const correct = getCorrectAnswer(currentCard);
 
-    // A right answer is graded straight away and the next card shown —
-    // only a wrong (or empty) one stops on the answer side.
-    if (userAnswer && correct.some(a => normalize(userAnswer) === normalize(a))) {
-      sessionCorrect++;
-      gradeAndAdvance(4);
-      // Undo should take this card's point back off as well.
-      const last = undoStack[undoStack.length - 1];
-      if (last) last.sessionCorrect--;
-      flashCorrect();
-      return;
-    }
-
     revealAnswer(userAnswer, correct);
-  }
-
-  // Brief green pulse on the card, so an auto-advanced right answer still
-  // registers.
-  function flashCorrect() {
-    const card = $('#card');
-    if (!card) return;
-    card.classList.remove('card-flash-correct');
-    void card.offsetWidth; // restart the animation
-    card.classList.add('card-flash-correct');
   }
 
   function showAnswer() {
@@ -1106,6 +1087,7 @@
       $('#user-answer').style.color = isCorrect ? 'var(--green)' : 'var(--red)';
 
       if (isCorrect) sessionCorrect++;
+      lastTypedCorrect = isCorrect;
     } else {
       $('#result-icon').classList.add('hidden');
       $('#result-row-user').classList.add('hidden');
@@ -5167,6 +5149,11 @@
       if (answered) {
         if (e.key === '1') { consumeKey(e); gradeAndAdvance(1); return; }
         if (e.key === '2' || e.key === ' ') { consumeKey(e); gradeAndAdvance(4); return; }
+        if (e.key === 'Enter' && settings.typingMode && studyMode !== 'translate') {
+          consumeKey(e);
+          gradeAndAdvance(lastTypedCorrect ? 4 : 1);
+          return;
+        }
         if (e.key === 'z' || e.key === 'Z') { consumeKey(e); undoLastGrade(); return; }
         return;
       }
