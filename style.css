@@ -1004,22 +1004,34 @@ a.chapter-card {
 }
 
 .answer-diff {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
   margin-top: 8px;
   font-family: var(--font-jp);
   font-size: 1.1rem;
   font-weight: 600;
   line-height: 1.8;
-}
-
-.translate-typed {
-  margin: 0 0 12px;
   text-align: left;
   overflow-wrap: anywhere;
 }
 
+/* You typed | Expected, side by side */
+.answer-diff > div {
+  min-width: 0;
+}
+
+.answer-diff > div + div {
+  padding-left: 12px;
+  border-left: 1px solid var(--border);
+}
+
+.translate-typed {
+  margin: 0 0 12px;
+}
+
 .answer-diff-label {
-  display: inline-block;
-  min-width: 6.5em;
+  display: block;
   font-family: inherit;
   font-size: 0.8rem;
   font-weight: 500;
