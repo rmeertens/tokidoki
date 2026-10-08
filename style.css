@@ -1601,6 +1601,38 @@ a.chapter-card {
   }
 }
 
+/* Picture → Word: the drawing (listening-art.js) on its light "paper" panel,
+   which stays light in both themes like on the listening page. */
+.vocab-pic-grid {
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+.vocab-pic-prompt { width: 100%; }
+
+.vocab-pic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 112px;
+  background: #fffdf8;
+  border-radius: calc(var(--radius) - 2px);
+}
+
+.vocab-pic .lis-art { width: 96px; max-width: 96px; }
+.vocab-pic .lis-art-person { width: 66px; }
+.vocab-pic .lis-art-items .lis-art { width: 44px; }
+
+.vocab-pic-meaning {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--font);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-dim);
+}
+
 /* Per-kanji breakdown (meaning + on'yomi/kun'yomi for each kanji in the
    word) — shown under the same hover/reveal trigger as the rest of the
    card. Kept in normal document flow (an animated 0fr/1fr grid row, rather
@@ -2762,6 +2794,14 @@ a.chapter-card {
   .vocab-hover-grid {
     grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
   }
+
+  .vocab-hover-grid.vocab-pic-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  }
+
+  .vocab-pic { height: 96px; }
+  .vocab-pic .lis-art { width: 80px; }
+  .vocab-pic .lis-art-person { width: 56px; }
 
   .vocab-hover-word {
     font-size: 1.2rem;

@@ -63,7 +63,8 @@
       <p class="tab-intro">
         JLPT vocabulary (N5&ndash;N3), word and meaning stacked with one side hidden per
         card. Hover a card to peek at it, click to reveal it for good. Pick a direction,
-        how the Japanese side is written, and which JLPT levels to include.
+        how the Japanese side is written, and which JLPT levels to include &mdash; or
+        pick Picture &rarr; Word to name the things in over 200 drawings.
       </p>
       <div class="kana-settings-row" id="vocab-direction-row">
         <label class="kana-script-toggle">
@@ -73,6 +74,10 @@
         <label class="kana-script-toggle">
           <input type="radio" name="vocab-direction" id="vocab-dir-mw" value="meaning-to-word">
           Meaning &rarr; Word
+        </label>
+        <label class="kana-script-toggle">
+          <input type="radio" name="vocab-direction" id="vocab-dir-pw" value="picture-to-word">
+          Picture &rarr; Word
         </label>
       </div>
       <div class="kana-settings-row" id="vocab-script-row">
@@ -111,6 +116,8 @@
   <script src="kanji-quiz-data.js"></script>
   <script src="sentences-data.js"></script>
   <script src="vocabulary-data.js"></script>
+  <script src="listening-art.js?v=5"></script>
+  <script src="vocab-pictures.js"></script>
   <script src="kanji-info-data.js"></script>
   <script src="examples.js"></script>
   <script src="app.js?v=1"></script>
@@ -128,7 +135,9 @@
       first and hide the meaning, or show the meaning first and hide the word, and choose
       how the Japanese word is written: with kanji, with furigana readings above the
       kanji, or spelled out entirely in hiragana/katakana. Filter which JLPT levels
-      appear. Pairs well with the <a href="kanji-hover.html">Kanji Hover</a> reference
+      appear. The Picture &rarr; Word direction shows a drawing for each word that can be
+      pictured &mdash; foods, animals, clothes, places, the body, colours &mdash; and hides
+      the Japanese word until you hover or click. Pairs well with the <a href="kanji-hover.html">Kanji Hover</a> reference
       and the <a href="kanji.html">printable practice sheets</a>.
     </p>
   </section>

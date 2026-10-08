@@ -2780,12 +2780,44 @@
     return checked ? checked.value : 'kanji';
   }
 
+  // In Picture → Word mode only words with a drawing (vocab-pictures.js) are
+  // shown, each once: a word listed at several levels (上 is N5 and, with
+  // other meanings, N3 too) belongs to its first entry, N5 before N3.
+  function vocabPictureEntries() {
+    const seen = new Set();
+    const entries = new Set();
+    VOCAB_LEVELS.forEach(level => (VOCAB_DATA[level] || []).forEach(w => {
+      if (seen.has(w.kanji)) return;
+      seen.add(w.kanji);
+      if (VOCAB_PICTURES[w.kanji]) entries.add(w);
+    }));
+    return entries;
+  }
+
   function buildVocabPool() {
+    const pictureMode = getVocabDirection() === 'picture-to-word';
+    const withPicture = pictureMode ? vocabPictureEntries() : null;
     const items = [];
     getVocabLevels().forEach(level => {
-      (VOCAB_DATA[level] || []).forEach(w => items.push({ level, kanji: w.kanji, kana: w.kana, html: w.html, meaning: w.meaning }));
+      (VOCAB_DATA[level] || []).forEach(w => {
+        if (withPicture && !withPicture.has(w)) return;
+        items.push({ level, kanji: w.kanji, kana: w.kana, html: w.html, meaning: w.meaning });
+      });
     });
     return items;
+  }
+
+  function vocabPictureHtml(kanji) {
+    const spec = VOCAB_PICTURES[kanji];
+    const art = ListeningArt;
+    let html;
+    if (typeof spec === 'string') html = art.icon(spec);
+    else if (spec.person) html = art.person(typeof spec.person === 'string' ? art.ROLES[spec.person] : spec.person);
+    else html = art.picture({ type: 'items', items: spec.items });
+    // A few drawings carry a label (the 駅 sign, the 辞書 cover): drop any
+    // that would spell out the answer.
+    html = html.replace(/<text[^>]*>([^<]*)<\/text>/g, (m, t) => ([...t].some(ch => kanji.includes(ch)) ? '' : m));
+    return `<div class="vocab-pic">${html}</div>`;
   }
 
   // Shuffled order survives a direction/script toggle (same pool, just how it's
@@ -2853,10 +2885,13 @@
     const grid = $('#vocab-grid');
     if (!grid) return;
 
-    const showWordFirst = getVocabDirection() === 'word-to-meaning';
+    const direction = getVocabDirection();
+    const showWordFirst = direction === 'word-to-meaning';
+    const pictureMode = direction === 'picture-to-word';
     const script = getVocabScript();
     const items = vocabOrder || buildVocabPool();
 
+    grid.classList.toggle('vocab-pic-grid', pictureMode);
     grid.innerHTML = items.map(item => {
       const wordHtml = vocabWordHtml(item, script);
       // Attached to the card itself (not the word cell) so it drops in below
@@ -2864,10 +2899,15 @@
       // whichever side the word happens to be on.
       const breakdownHtml = vocabKanjiBreakdownHtml(item.kanji);
       const wordClass = 'vocab-hover-word' + (script === 'kanji' ? ' vocab-word-peek' : '');
-      const promptHtml = showWordFirst ? wordHtml : item.meaning;
-      const answerHtml = showWordFirst ? item.meaning : wordHtml;
-      const promptClass = showWordFirst ? wordClass : 'kanji-hover-text';
+      let promptHtml = showWordFirst ? wordHtml : item.meaning;
+      let answerHtml = showWordFirst ? item.meaning : wordHtml;
+      let promptClass = showWordFirst ? wordClass : 'kanji-hover-text';
       const answerClass = showWordFirst ? 'kanji-hover-text' : wordClass;
+      if (pictureMode) {
+        promptHtml = vocabPictureHtml(item.kanji);
+        promptClass = 'vocab-pic-prompt';
+        answerHtml = `${wordHtml}<span class="vocab-pic-meaning">${item.meaning}</span>`;
+      }
       return `
         <div class="kanji-hover-card">
           <div class="kanji-hover-level">${item.level}</div>
@@ -2879,7 +2919,7 @@
     }).join('');
 
     const count = $('#vocab-count');
-    if (count) count.textContent = `${items.length} words`;
+    if (count) count.textContent = `${items.length} words${pictureMode ? ' with pictures' : ''}`;
 
     grid.classList.toggle('hidden', items.length === 0);
     const empty = $('#vocab-empty');
@@ -4552,8 +4592,18 @@
 
     // ─── Vocabulary hover reference page ────────────────────────────────────────
 
-    on('#vocab-dir-wm', 'change', renderVocabPage);
-    on('#vocab-dir-mw', 'change', renderVocabPage);
+    // Switching into or out of Picture → Word changes the pool itself, so the
+    // shuffled order only survives a flip between the other two directions.
+    let vocabPictureMode = getVocabDirection() === 'picture-to-word';
+    function changeVocabDirection() {
+      const pictureMode = getVocabDirection() === 'picture-to-word';
+      if (pictureMode !== vocabPictureMode) vocabOrder = null;
+      vocabPictureMode = pictureMode;
+      renderVocabPage();
+    }
+    on('#vocab-dir-wm', 'change', changeVocabDirection);
+    on('#vocab-dir-mw', 'change', changeVocabDirection);
+    on('#vocab-dir-pw', 'change', changeVocabDirection);
     on('#vocab-script-kanji', 'change', renderVocabPage);
     on('#vocab-script-furigana', 'change', renderVocabPage);
     on('#vocab-script-kana', 'change', renderVocabPage);
