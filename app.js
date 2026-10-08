@@ -2924,7 +2924,7 @@
 
   function vocabDeckButtonHtml(saved) {
     return saved
-      ? '<span aria-hidden="true">✓</span>'
+      ? '<span aria-hidden="true">−</span>'
       : '<span aria-hidden="true">＋</span>';
   }
 
@@ -2943,7 +2943,7 @@
     const words = loadStoryWords();
     const n = Object.keys(words).length;
     el.innerHTML = n
-      ? `📚 <b>${n}</b> word${n === 1 ? '' : 's'} in your flashcards — <a href="stories.html#deck">review them on the Stories page</a>. Words already in them are highlighted; click ＋ on a card to add it.`
+      ? `📚 <b>${n}</b> word${n === 1 ? '' : 's'} in your flashcards — <a href="stories.html#deck">review them on the Stories page</a>. Words already in them have an orange outline; click ＋ on a card to add it, − to remove it.`
       : '📚 Click ＋ on a card to add the word to your flashcards, then review them on the <a href="stories.html#deck">Stories page</a>.';
   }
 

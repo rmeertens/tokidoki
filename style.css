@@ -1612,13 +1612,13 @@ a.chapter-card {
 .vocab-deck-status a { color: var(--accent); }
 
 .kanji-hover-card.in-deck {
-  background: linear-gradient(var(--green-dim), var(--green-dim)), var(--bg-card);
-  border-color: var(--green);
+  border-color: var(--orange);
+  box-shadow: 0 0 0 1px var(--orange);
 }
 
 .kanji-hover-card.in-deck.revealed {
-  border-color: var(--accent);
-  box-shadow: inset 0 0 0 1px var(--green);
+  border-color: var(--orange);
+  box-shadow: 0 0 0 1px var(--orange), inset 0 0 0 1px var(--accent);
 }
 
 .vocab-deck-btn {
@@ -1644,14 +1644,13 @@ a.chapter-card {
 
 .vocab-deck-btn:hover,
 .vocab-deck-btn:focus-visible {
-  border-color: var(--green);
-  color: var(--green);
+  border-color: var(--orange);
+  color: var(--orange);
 }
 
 .kanji-hover-card.in-deck .vocab-deck-btn {
-  background: var(--green);
-  border-color: var(--green);
-  color: #fff;
+  border-color: var(--orange);
+  color: var(--orange);
 }
 
 /* Picture → Word: the drawing (listening-art.js) on its light "paper" panel,
