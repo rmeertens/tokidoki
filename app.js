@@ -2813,6 +2813,7 @@
     let html;
     if (typeof spec === 'string') html = art.icon(spec);
     else if (spec.person) html = art.person(typeof spec.person === 'string' ? art.ROLES[spec.person] : spec.person);
+    else if (spec.people) html = `<div class="lis-art-items vocab-pic-people">${spec.people.map(role => art.person(art.ROLES[role])).join('')}</div>`;
     else html = art.picture({ type: 'items', items: spec.items });
     // A few drawings carry a label (the 駅 sign, the 辞書 cover): drop any
     // that would spell out the answer.

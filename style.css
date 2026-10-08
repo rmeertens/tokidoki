@@ -1674,6 +1674,8 @@ a.chapter-card {
 .vocab-pic .lis-art { width: 96px; max-width: 96px; }
 .vocab-pic .lis-art-person { width: 66px; }
 .vocab-pic .lis-art-items .lis-art { width: 44px; }
+.vocab-pic .vocab-pic-people { flex-wrap: nowrap; gap: 0; }
+.vocab-pic .vocab-pic-people .lis-art-person { width: 34px; }
 
 .vocab-pic-meaning {
   display: block;

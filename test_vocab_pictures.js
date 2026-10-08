@@ -21,6 +21,7 @@ Object.entries(global.VOCAB_PICTURES).forEach(([word, spec]) => {
   ok(words.has(word), `${word}: not in vocabulary-data.js`);
   if (typeof spec === 'string') ok(!!Art.ICONS[spec], `${word}: no icon "${spec}"`);
   else if (spec.person) ok(typeof spec.person === 'object' || !!Art.ROLES[spec.person], `${word}: no role "${spec.person}"`);
+  else if (spec.people) ok(spec.people.every(r => Art.ROLES[r]), `${word}: bad people`);
   else ok(Array.isArray(spec.items) && spec.items.every(n => Art.ICONS[n]), `${word}: bad items`);
   const key = JSON.stringify(spec);
   ok(!seen.has(key), `${word}: same picture as ${seen.get(key)}`);

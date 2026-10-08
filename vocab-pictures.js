@@ -7,6 +7,7 @@
   //   'name'                 an icon (ListeningArt.ICONS)
   //   { person: 'role' }     a person (ListeningArt.ROLES), or a full person spec
   //   { items: [...] }       several icons side by side
+  //   { people: [...] }      several people (roles) side by side
   // Only words a picture can pin down are here; one picture per word, so no
   // two cards share a drawing.
   const POLICE = { hair: 'short', top: 'jacket', topColor: 'navy', bottom: 'trousers', bottomColor: 'navy', cap: true, hatColor: 'navy', tie: true };
@@ -80,5 +81,54 @@
     '赤': 'swatch-red', '青': 'swatch-blue', '黄色': 'swatch-yellow', '白': 'swatch-white', '黒': 'swatch-black',
     '緑': 'swatch-green', '茶色': 'swatch-brown',
     '上': 'above', '下': 'below', '中': 'inside', '右': 'turn-right', '左': 'turn-left',
+    '北': 'north', '南': 'south', '東': 'east', '西': 'west', '円': 'circle', '四角': 'square',
+
+    // more food and drink
+    '食べ物': { items: ['onigiri', 'apple', 'bread'] }, '飲み物': 'drink', '牛肉': { items: ['cow', 'meat'] },
+    '豚肉': { items: ['pig', 'meat'] }, '米': 'ricesack', '小麦': 'wheat', '塩': 'salt', '胡椒': 'pepper', '砂糖': 'sugar',
+    'スープ': 'soup', '蕎麦': 'soba', 'チーズ': 'cheese', 'デザート': 'pudding', 'ウイスキー': 'whiskey',
+    'カップ': 'mug', '皿': 'dishes', '瓶': 'bottle', '缶': 'can', '辛い': 'chili', 'すっぱい': 'lemon',
+
+    // people, feelings, doing things
+    '男': { person: 'man' }, '女': { person: 'woman' }, '子供': { people: ['boy', 'girl'] },
+    '両親': { people: ['father', 'mother'] }, '家族': { people: ['father', 'mother', 'boy', 'girl'] },
+    '友達': { people: ['friend', 'friendMan'] }, '泥棒': 'thief',
+    '笑う': 'laugh', '泣く': 'cry', '怒る': 'angry', '眠い': 'sleepy', '驚く': 'surprised', '嬉しい': 'happy',
+    '舌': 'tongue', 'ひげ': 'beard', '髪': 'hair', '指': 'finger', '筋肉': 'muscle', '脳': 'brain',
+    '食べる': 'eat', '飲む': 'drinking', '聞く': 'listen', '読む': 'reading', '走る': 'run', '書く': 'write',
+    '寝る': 'sleep', 'ハイキング': 'hiking',
+
+    // weather, sky and land
+    '暑い': 'hot', '寒い': 'cold', '空': 'sky', '晴れ': 'sunny', '夕方': 'sunset', '台風': 'typhoon',
+    '地震': 'earthquake', '砂漠': 'desert', '畑': 'field', '丘': 'hill', '泉': 'fountain', '枝': 'branch',
+    '芽': 'sprout', '植物': 'plant', '松': 'pine', '稲': 'riceplant', '羽根': 'feather',
+
+    // at home
+    'トイレ': 'toilet', 'お風呂': 'bath', 'シャワー': 'shower', '台所': 'kitchen', '庭': 'garden',
+    'カーテン': 'curtain', '棚': 'shelves', '引き出し': 'drawer', 'ソファー': 'sofa', '布団': 'futon',
+    '畳': 'tatami', '毛布': 'blanket', 'タオル': 'towel', '水道': 'faucet', 'スイッチ': 'lightswitch',
+    '湯': 'onsen', '壁': 'brickwall', '柵': 'fence', 'ベンチ': 'bench', '家具': { items: ['chair', 'table', 'bed'] },
+    '金庫': 'safe', '機械': 'gears', '道具': 'tools', '鎖': 'chain', '縄': 'rope', '板': 'plank', '籠': 'basket',
+    '体重': 'scale', 'ライター': 'lighter', 'たばこ': 'cigarette', 'マッチ': 'match',
+
+    // clothes and things you carry
+    '服': 'hanger', '背広': 'suit', 'ワイシャツ': 'dressshirt', 'ドレス': 'dress', 'ポケット': 'pocket',
+    'サンダル': 'sandals', 'ハンカチ': 'handkerchief', 'アクセサリー': 'necklace', '宝石': 'gem', '化粧': 'lipstick',
+    '荷物': 'luggage', '小包': 'parcel', '袋': 'paperbag', 'カード': 'card', 'パスポート': 'passport',
+    '硬貨': 'coin', '札': 'banknote', '宝': 'treasure', '刀': 'katana', '盾': 'shield',
+
+    // paper, school and hobbies
+    '紙': 'paper', '雑誌': 'magazine', '漫画': 'manga', 'アルバム': 'album', 'ボールペン': 'ballpoint',
+    '万年筆': 'fountainpen', '筆': 'brush', 'インク': 'inkbottle', 'テープ': 'tape', 'タイプライター': 'typewriter',
+    '黒板': 'blackboard', 'レコード': 'record', '音': 'speaker', '楽器': { items: ['guitar', 'piano'] },
+    'バイオリン': 'violin', '笛': 'recorder', 'ゲーム': 'game', 'スポーツ': { items: ['soccer', 'baseball'] },
+    'スキー': 'ski', 'スケート': 'skate', '柔道': 'judogi', 'キャンプ': 'campfire', 'パーティー': 'balloons',
+    'クリスマス': 'xmastree', 'お祭り': 'lantern', 'ペット': 'fishbowl', '動物園': { items: ['elephant', 'monkey', 'tiger'] },
+
+    // places and getting around
+    '道': 'road', '町': 'town', '村': 'village', 'ホテル': 'hotel', 'レストラン': 'restaurant', '大学': 'gradcap',
+    'ビル': 'skyscraper', '地下鉄': 'subway', '交差点': 'crossroads', 'エスカレーター': 'escalator',
+    '空港': 'airport', '教会': 'church', '寺': 'temple', '工場': 'factory', '駐車場': 'parking', '劇場': 'theater',
+    'スーパー': 'cart', '鐘': 'templebell', '衛星': 'satellite',
   };
 })(typeof window !== 'undefined' ? window : globalThis);
