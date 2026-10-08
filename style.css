@@ -1601,6 +1601,59 @@ a.chapter-card {
   }
 }
 
+/* Vocabulary words already in the flashcard deck, and the ＋ / ✓ button
+   that adds or removes a word. */
+.vocab-deck-status {
+  margin: 4px 0 10px;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.vocab-deck-status a { color: var(--accent); }
+
+.kanji-hover-card.in-deck {
+  background: linear-gradient(var(--green-dim), var(--green-dim)), var(--bg-card);
+  border-color: var(--green);
+}
+
+.kanji-hover-card.in-deck.revealed {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--green);
+}
+
+.vocab-deck-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--bg-card);
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.vocab-deck-btn:hover,
+.vocab-deck-btn:focus-visible {
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.kanji-hover-card.in-deck .vocab-deck-btn {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
+
 /* Picture → Word: the drawing (listening-art.js) on its light "paper" panel,
    which stays light in both themes like on the listening page. */
 .vocab-pic-grid {

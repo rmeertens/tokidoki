@@ -64,7 +64,8 @@
         JLPT vocabulary (N5&ndash;N3), word and meaning stacked with one side hidden per
         card. Hover a card to peek at it, click to reveal it for good. Pick a direction,
         how the Japanese side is written, and which JLPT levels to include &mdash; or
-        pick Picture &rarr; Word to name the things in over 200 drawings.
+        pick Picture &rarr; Word to name the things in over 200 drawings. Click ＋ on a card
+        to add the word to your flashcards; words already in them are highlighted.
       </p>
       <div class="kana-settings-row" id="vocab-direction-row">
         <label class="kana-script-toggle">
@@ -99,13 +100,17 @@
         <label class="kana-script-toggle"><input type="checkbox" id="vocab-toggle-n4"> N4</label>
         <label class="kana-script-toggle"><input type="checkbox" id="vocab-toggle-n3"> N3</label>
       </div>
+      <div class="kana-settings-row">
+        <label class="kana-script-toggle"><input type="checkbox" id="vocab-only-deck"> Only words in my flashcards</label>
+      </div>
+      <p class="vocab-deck-status" id="vocab-deck-status"></p>
       <div class="kanji-hover-toolbar">
         <p class="tab-intro" id="vocab-count"></p>
         <button id="btn-vocab-shuffle" class="btn-secondary">&#128256; Shuffle</button>
       </div>
 
       <div class="vocab-hover-grid" id="vocab-grid"></div>
-      <p class="tab-intro hidden" id="vocab-empty">No words match the selected levels.</p>
+      <p class="tab-intro hidden" id="vocab-empty">No words match &mdash; check the levels, or add words to your flashcards with ＋.</p>
     </main>
 
   </div>
@@ -119,8 +124,10 @@
   <script src="listening-art.js?v=5"></script>
   <script src="vocab-pictures.js"></script>
   <script src="kanji-info-data.js"></script>
+  <script src="stories-data.js?v=15"></script>
+  <script src="mystery-words.js?v=3"></script>
   <script src="examples.js"></script>
-  <script src="app.js?v=1"></script>
+  <script src="app.js?v=2"></script>
   <script src="sushi-sprites.js"></script>
   <script src="sushi-belt.js"></script>
 
@@ -137,7 +144,9 @@
       kanji, or spelled out entirely in hiragana/katakana. Filter which JLPT levels
       appear. The Picture &rarr; Word direction shows a drawing for each word that can be
       pictured &mdash; foods, animals, clothes, places, the body, colours &mdash; and hides
-      the Japanese word until you hover or click. Pairs well with the <a href="kanji-hover.html">Kanji Hover</a> reference
+      the Japanese word until you hover or click. Any word can be added to the same personal
+      flashcard deck as the <a href="stories.html">Stories</a> page, where it is reviewed with
+      spaced repetition, and words already in the deck are highlighted. Pairs well with the <a href="kanji-hover.html">Kanji Hover</a> reference
       and the <a href="kanji.html">printable practice sheets</a>.
     </p>
   </section>

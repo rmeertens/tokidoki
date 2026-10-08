@@ -2881,6 +2881,89 @@
     return `<div class="vocab-kanji-breakdown"><div class="vocab-kanji-breakdown-inner">${rows.join('')}</div></div>`;
   }
 
+  // ── Vocabulary words in the flashcard deck ──
+  //
+  // The page shares the Stories flashcard deck (tokidoki_story_words, also
+  // fed by the mystery game). A word counts as saved when the deck holds it
+  // under its own spelling, or under a glossary key with the same spelling
+  // and reading (後(あと) for 後/あと). Added words use the glossary's key and
+  // definition when it has the word; otherwise they keep this list's reading
+  // and meaning themselves, keyed 漢字(かな) if the glossary's 漢字 reads
+  // differently.
+
+  let vocabRendered = [];
+
+  function vocabDeckKey(item, words) {
+    if (words[item.kanji]) {
+      const gloss = storyWordGloss(item.kanji, words[item.kanji]);
+      if (!gloss || gloss[0] === item.kana || words[item.kanji].vocab) return item.kanji;
+    }
+    return Object.keys(words).find(key => {
+      if (key === item.kanji || storyDisplayWord(key) !== item.kanji) return false;
+      const gloss = storyWordGloss(key, words[key]);
+      return gloss && gloss[0] === item.kana;
+    }) || null;
+  }
+
+  function toggleVocabFlashcard(item) {
+    const words = loadStoryWords();
+    const saved = vocabDeckKey(item, words);
+    if (saved) {
+      delete words[saved];
+      delete srsData[storyWordCardId(saved)];
+      saveSRS(srsData);
+    } else {
+      const glossary = window.STORY_GLOSSARY || {};
+      const glossKey = Object.keys(glossary).find(k => storyDisplayWord(k) === item.kanji && glossary[k][0] === item.kana);
+      const key = glossKey || (words[item.kanji] || glossary[item.kanji] ? `${item.kanji}(${item.kana})` : item.kanji);
+      words[key] = { vocab: item.level, kana: item.kana, meaning: item.meaning, added: Date.now() };
+    }
+    saveStoryWords(words);
+    return !saved;
+  }
+
+  function vocabDeckButtonHtml(saved) {
+    return saved
+      ? '<span aria-hidden="true">✓</span>'
+      : '<span aria-hidden="true">＋</span>';
+  }
+
+  function setVocabCardSaved(card, item, saved) {
+    card.classList.toggle('in-deck', saved);
+    const btn = card.querySelector('.vocab-deck-btn');
+    btn.innerHTML = vocabDeckButtonHtml(saved);
+    btn.setAttribute('aria-pressed', saved);
+    btn.title = saved ? 'In your flashcards — click to remove' : 'Add to flashcards';
+    btn.setAttribute('aria-label', `${saved ? 'Remove' : 'Add'} ${item.kanji} ${saved ? 'from' : 'to'} flashcards`);
+  }
+
+  function renderVocabDeckStatus() {
+    const el = $('#vocab-deck-status');
+    if (!el) return;
+    const words = loadStoryWords();
+    const n = Object.keys(words).length;
+    el.innerHTML = n
+      ? `📚 <b>${n}</b> word${n === 1 ? '' : 's'} in your flashcards — <a href="stories.html#deck">review them on the Stories page</a>. Words already in them are highlighted; click ＋ on a card to add it.`
+      : '📚 Click ＋ on a card to add the word to your flashcards, then review them on the <a href="stories.html#deck">Stories page</a>.';
+  }
+
+  function onVocabDeckClick(btn) {
+    const card = btn.closest('.kanji-hover-card');
+    const item = vocabRendered[+card.dataset.i];
+    if (!item) return;
+    const saved = toggleVocabFlashcard(item);
+    if (!saved && $('#vocab-only-deck') && $('#vocab-only-deck').checked) {
+      renderVocabPage();
+    } else {
+      // Every card for the same word (one per level it's listed at) follows.
+      $$('#vocab-grid .kanji-hover-card').forEach(c => {
+        const other = vocabRendered[+c.dataset.i];
+        if (other && other.kanji === item.kanji && other.kana === item.kana) setVocabCardSaved(c, other, saved);
+      });
+    }
+    renderVocabDeckStatus();
+  }
+
   function renderVocabPage() {
     const grid = $('#vocab-grid');
     if (!grid) return;
@@ -2889,10 +2972,15 @@
     const showWordFirst = direction === 'word-to-meaning';
     const pictureMode = direction === 'picture-to-word';
     const script = getVocabScript();
-    const items = vocabOrder || buildVocabPool();
+    const words = loadStoryWords();
+    const onlyDeck = $('#vocab-only-deck') && $('#vocab-only-deck').checked;
+    let items = vocabOrder || buildVocabPool();
+    if (onlyDeck) items = items.filter(item => vocabDeckKey(item, words));
+    vocabRendered = items;
 
     grid.classList.toggle('vocab-pic-grid', pictureMode);
-    grid.innerHTML = items.map(item => {
+    grid.innerHTML = items.map((item, i) => {
+      const saved = !!vocabDeckKey(item, words);
       const wordHtml = vocabWordHtml(item, script);
       // Attached to the card itself (not the word cell) so it drops in below
       // the whole card — including the meaning — instead of overlapping
@@ -2909,8 +2997,11 @@
         answerHtml = `${wordHtml}<span class="vocab-pic-meaning">${item.meaning}</span>`;
       }
       return `
-        <div class="kanji-hover-card">
+        <div class="kanji-hover-card${saved ? ' in-deck' : ''}" data-i="${i}">
           <div class="kanji-hover-level">${item.level}</div>
+          <button type="button" class="vocab-deck-btn" aria-pressed="${saved}"
+            title="${saved ? 'In your flashcards — click to remove' : 'Add to flashcards'}"
+            aria-label="${saved ? 'Remove' : 'Add'} ${item.kanji} ${saved ? 'from' : 'to'} flashcards">${vocabDeckButtonHtml(saved)}</button>
           <div class="kanji-hover-prompt ${promptClass}">${promptHtml}</div>
           <div class="kanji-hover-answer ${answerClass}">${answerHtml}</div>
           ${breakdownHtml}
@@ -2919,7 +3010,8 @@
     }).join('');
 
     const count = $('#vocab-count');
-    if (count) count.textContent = `${items.length} words${pictureMode ? ' with pictures' : ''}`;
+    if (count) count.textContent = `${items.length} words${pictureMode ? ' with pictures' : ''}${onlyDeck ? ' in your flashcards' : ''}`;
+    renderVocabDeckStatus();
 
     grid.classList.toggle('hidden', items.length === 0);
     const empty = $('#vocab-empty');
@@ -3194,12 +3286,21 @@
     saveStoryWords(words);
   }
 
-  function getStoryDeck() {
+  // A saved word's [reading, meaning, part of speech]: from the stories'
+  // glossary, or — for words added on the Vocabulary page that the glossary
+  // lacks — from the word itself.
+  function storyWordGloss(key, meta) {
     const glossary = window.STORY_GLOSSARY || {};
+    if (glossary[key]) return glossary[key];
+    if (meta && meta.vocab) return [meta.kana, meta.meaning, `JLPT ${meta.vocab.toUpperCase()} vocabulary`];
+    return null;
+  }
+
+  function getStoryDeck() {
     return Object.entries(loadStoryWords())
-      .filter(([key]) => glossary[key])
-      .sort((a, b) => b[1].added - a[1].added)
-      .map(([key, meta]) => ({ key, meta, id: storyWordCardId(key), gloss: glossary[key] }));
+      .map(([key, meta]) => ({ key, meta, id: storyWordCardId(key), gloss: storyWordGloss(key, meta) }))
+      .filter(c => c.gloss)
+      .sort((a, b) => b.meta.added - a.meta.added);
   }
 
   function countDueStoryWords() {
@@ -3284,7 +3385,7 @@
         sentence: sentence ? sentence.jp.split(' ').map(t => t.split('>')[0]).join('') : '',
         sentenceEn: sentence ? sentence.en : '',
         story: src ? src.title : '',
-        level: src ? src.level : '',
+        level: src ? src.level : (c.meta.vocab || '').toUpperCase(),
       };
     });
   }
@@ -4621,7 +4722,14 @@
       on(`#vocab-toggle-${level}`, 'change', toggleVocabLevel);
     });
 
+    on('#vocab-only-deck', 'change', renderVocabPage);
+
     on('#vocab-grid', 'click', (e) => {
+      const deckBtn = e.target.closest('.vocab-deck-btn');
+      if (deckBtn) {
+        onVocabDeckClick(deckBtn);
+        return;
+      }
       const card = e.target.closest('.kanji-hover-card');
       if (card) card.classList.toggle('revealed');
     });
