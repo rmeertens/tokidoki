@@ -3154,6 +3154,57 @@
     renderVocabDeckStatus();
   }
 
+  // Pronunciation: 🔊 / 🐢 on each card read the word aloud with the
+  // browser's speech engine, at a natural pace or slowly — the same way the
+  // Notepad reads sentences, including the voice picked there. The kana
+  // reading is spoken rather than the kanji, so the voice can't misread it.
+  const vocabSynth = typeof window !== 'undefined' && 'speechSynthesis' in window ? window.speechSynthesis : null;
+  function vocabVoiceScore(v) {
+    const n = v.name;
+    let score = 0;
+    if (/natural|neural/i.test(n)) score += 50;
+    if (/premium/i.test(n)) score += 45;
+    if (/enhanced|siri/i.test(n)) score += 35;
+    if (/google/i.test(n)) score += 25;
+    if (/online/i.test(n)) score += 10;
+    if (!v.localService) score += 5;
+    if (/^ja[-_]JP$/i.test(v.lang)) score += 2;
+    if (/compact|espeak/i.test(n)) score -= 20;
+    return score;
+  }
+  function vocabVoice() {
+    const voices = vocabSynth.getVoices()
+      .filter(v => /^ja\b|^ja[-_]/i.test(v.lang))
+      .sort((a, b) => vocabVoiceScore(b) - vocabVoiceScore(a));
+    let want = '';
+    try { want = JSON.parse(localStorage.getItem('tokidoki-notepad-voice')) || ''; } catch { /* none picked */ }
+    return voices.find(v => v.voiceURI === want) || voices[0] || null;
+  }
+  let vocabUtterance = null;
+  function speakVocab(item, slow) {
+    if (!vocabSynth) return;
+    const text = item.kana.replace(/[～~〜]/g, '');
+    try {
+      vocabSynth.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'ja-JP';
+      const voice = vocabVoice();
+      if (voice) { u.voice = voice; u.lang = voice.lang; }
+      u.rate = slow ? 0.6 : 0.95;
+      vocabUtterance = u; // keep a reference, or Chrome may drop it
+      // Chrome sometimes drops an utterance queued right after cancel().
+      setTimeout(() => vocabSynth.speak(u), 50);
+    } catch { /* speech unavailable */ }
+  }
+  function vocabSpeakButtonsHtml(item) {
+    if (!vocabSynth) return '';
+    return `
+          <div class="vocab-speak">
+            <button type="button" class="vocab-speak-btn" data-speak="normal" title="Listen" aria-label="Listen to ${item.kana}"><span aria-hidden="true">🔊</span></button>
+            <button type="button" class="vocab-speak-btn" data-speak="slow" title="Listen slowly" aria-label="Listen to ${item.kana} slowly"><span aria-hidden="true">🐢</span></button>
+          </div>`;
+  }
+
   function renderVocabPage() {
     const grid = $('#vocab-grid');
     if (!grid) return;
@@ -3191,7 +3242,7 @@
           <div class="kanji-hover-level">${item.level}</div>
           <button type="button" class="vocab-deck-btn" aria-pressed="${saved}"
             title="${saved ? 'In your flashcards — click to remove' : 'Add to flashcards'}"
-            aria-label="${saved ? 'Remove' : 'Add'} ${item.kanji} ${saved ? 'from' : 'to'} flashcards">${vocabDeckButtonHtml(saved)}</button>
+            aria-label="${saved ? 'Remove' : 'Add'} ${item.kanji} ${saved ? 'from' : 'to'} flashcards">${vocabDeckButtonHtml(saved)}</button>${vocabSpeakButtonsHtml(item)}
           <div class="kanji-hover-prompt ${promptClass}">${promptHtml}</div>
           <div class="kanji-hover-answer ${answerClass}">${answerHtml}</div>
           ${breakdownHtml}
@@ -4943,6 +4994,12 @@
     on('#vocab-only-deck', 'change', renderVocabPage);
 
     on('#vocab-grid', 'click', (e) => {
+      const speakBtn = e.target.closest('.vocab-speak-btn');
+      if (speakBtn) {
+        const item = vocabRendered[+speakBtn.closest('.kanji-hover-card').dataset.i];
+        if (item) speakVocab(item, speakBtn.dataset.speak === 'slow');
+        return;
+      }
       const deckBtn = e.target.closest('.vocab-deck-btn');
       if (deckBtn) {
         onVocabDeckClick(deckBtn);
