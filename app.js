@@ -3196,6 +3196,26 @@
       setTimeout(() => vocabSynth.speak(u), 50);
     } catch { /* speech unavailable */ }
   }
+  // "Speak words on click" (top of the page): every card click also reads
+  // the word aloud. Remembered between visits.
+  const VOCAB_AUTOSPEAK_KEY = 'tokidoki-vocab-autospeak';
+  let vocabAutoSpeak = false;
+  try { vocabAutoSpeak = localStorage.getItem(VOCAB_AUTOSPEAK_KEY) === '1'; } catch { /* storage unavailable */ }
+  function renderVocabAutoSpeak() {
+    const row = $('#vocab-autospeak-row');
+    const btn = $('#btn-vocab-autospeak');
+    if (!row || !btn) return;
+    row.classList.toggle('hidden', !vocabSynth);
+    btn.setAttribute('aria-pressed', vocabAutoSpeak);
+    btn.classList.toggle('active', vocabAutoSpeak);
+    btn.innerHTML = `&#128266; Speak words on click: ${vocabAutoSpeak ? 'On' : 'Off'}`;
+  }
+  function toggleVocabAutoSpeak() {
+    vocabAutoSpeak = !vocabAutoSpeak;
+    try { localStorage.setItem(VOCAB_AUTOSPEAK_KEY, vocabAutoSpeak ? '1' : '0'); } catch { /* storage unavailable */ }
+    renderVocabAutoSpeak();
+  }
+
   function vocabSpeakButtonsHtml(item) {
     if (!vocabSynth) return '';
     return `
@@ -5006,10 +5026,15 @@
         return;
       }
       const card = e.target.closest('.kanji-hover-card');
-      if (card) card.classList.toggle('revealed');
+      if (!card) return;
+      card.classList.toggle('revealed');
+      const item = vocabRendered[+card.dataset.i];
+      if (vocabAutoSpeak && item) speakVocab(item, false);
     });
 
     on('#btn-vocab-shuffle', 'click', shuffleVocabOrder);
+    on('#btn-vocab-autospeak', 'click', toggleVocabAutoSpeak);
+    renderVocabAutoSpeak();
 
     // ─── Words by kanji page ────────────────────────────────────────────────────
 

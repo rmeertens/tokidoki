@@ -1747,6 +1747,11 @@ a.chapter-card {
   border-color: var(--accent);
 }
 
+#btn-vocab-autospeak[aria-pressed="true"] {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 /* Narrow cards: drop the level label below the buttons. */
 @media (max-width: 480px) {
   .vocab-hover-grid .kanji-hover-card { padding-top: 36px; }
