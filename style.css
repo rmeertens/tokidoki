@@ -4516,21 +4516,39 @@ a.chapter-card {
   border-radius: var(--radius);
   overflow: hidden;
 }
-.lis-part-row {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 14px 16px;
-  font: inherit;
-  text-align: left;
-  color: var(--text);
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: background var(--transition);
-}
+.lis-part-row { padding: 14px 16px; color: var(--text); }
+.lis-part-head { display: flex; align-items: center; gap: 14px; }
 .lis-part-row + .lis-part-row { border-top: 1px solid var(--border); }
-.lis-part-row:hover { background: var(--bg-card-hover); }
+.lis-sets {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+.lis-set {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 8px 6px;
+  font: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition), transform var(--transition);
+}
+.lis-set:hover { border-color: var(--accent); transform: translateY(-1px); }
+.lis-set-name { font-size: 0.82rem; font-weight: 700; }
+.lis-set-range { font-family: var(--font-jp); font-size: 0.74rem; color: var(--text-muted); }
+.lis-set-score { font-size: 0.74rem; font-weight: 700; color: var(--text-muted); }
+.lis-set-next { border-color: var(--accent); background: var(--accent-dim); }
+.lis-set-next .lis-set-score { color: var(--accent); }
+.lis-set-done { background: var(--orange-dim); border-color: color-mix(in srgb, var(--orange) 55%, var(--border)); }
+.lis-set-done .lis-set-score { color: var(--orange); }
+.lis-set-perfect { background: var(--green-dim); border-color: color-mix(in srgb, var(--green) 55%, var(--border)); }
+.lis-set-perfect .lis-set-score { color: var(--green); }
 .lis-part-badge {
   flex: none;
   display: inline-block;
@@ -4797,7 +4815,9 @@ a.chapter-card {
   .lis-hero-title { font-size: 1.2rem; }
   .lis-steps { grid-template-columns: 1fr; gap: 6px; }
   .lis-steps li { padding: 8px 12px; }
-  .lis-part-row { gap: 10px; padding: 12px; }
+  .lis-part-row { padding: 12px; }
+  .lis-part-head { gap: 10px; }
+  .lis-sets { grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); gap: 6px; }
   .lis-part-ja { display: none; }
   .lis-audio { padding: 10px 14px 10px 10px; }
   .lis-choices-pics { gap: 8px; }

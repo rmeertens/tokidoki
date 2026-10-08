@@ -268,9 +268,8 @@
   }
 
   const SECTIONS = global.LISTENING_SECTIONS || [];
-  const settings = Object.assign({ speed: 1, exam: false, script: false, furigana: true, level: 'all', setSize: 5 }, load(SETTINGS_KEY, {}));
-  const store = Object.assign({ best: {}, missed: [], setPos: {} }, load(STORE_KEY, {}));
-  if (!store.setPos) store.setPos = {};
+  const settings = Object.assign({ speed: 1, exam: false, script: false, furigana: true, level: 'all' }, load(SETTINGS_KEY, {}));
+  const store = Object.assign({ best: {}, missed: [] }, load(STORE_KEY, {}));
   if (!Array.isArray(store.missed)) store.missed = [];
 
   const $ = id => document.getElementById(id);
@@ -572,14 +571,20 @@
   const LEVEL_NAME = { all: 'all levels', N5: 'N5', N4: 'N4', N3: 'N3', N2: 'N2' };
   const numOf = section => partNum(section, settings.level === 'all' ? 'N3' : settings.level);
 
-  // Practising one part goes through it in sets (5, 10, or all at once),
-  // remembering where the last set ended.
-  const setKey = id => id + '-' + settings.level;
-  function setInfo(id, n) {
-    const size = settings.setSize && settings.setSize < n ? settings.setSize : n;
-    const pos = (store.setPos[setKey(id)] || 0) % Math.max(1, n);
-    return { size, pos, number: Math.floor(pos / size) + 1, count: Math.ceil(n / size) };
-  }
+  // Each part is split into fixed sets of five — 1–5番, 6–10番… — easier
+  // levels first, so a set is always the same five questions.
+  const SET_SIZE = 5;
+  const partItems = id => SECTIONS.filter(s => s.id === id).flatMap(section => section.items.filter(levelOk).map(item => ({ section, item })))
+    .sort((x, y) => LEVELS.indexOf(x.item.level) - LEVELS.indexOf(y.item.level));
+  const setsOf = id => {
+    const all = partItems(id);
+    const sets = [];
+    for (let i = 0; i < all.length; i += SET_SIZE) sets.push(all.slice(i, i + SET_SIZE));
+    return sets;
+  };
+  const setId = (part, k) => part + ':' + k;
+  const parseSet = id => { const m = /^(\w+):(\d+)$/.exec(id || ''); return m ? { part: m[1], k: Number(m[2]) } : null; };
+  const missedCount = () => SECTIONS.reduce((k, section) => k + section.items.filter(item => store.missed.includes(keyOf(section, item))).length, 0);
 
   // A session's questions, numbered 1番, 2番… within each part.
   function queueFor(id) {
@@ -588,20 +593,18 @@
     if (test) picked = test.parts.flat();
     else if (id === 'missed') {
       picked = SECTIONS.flatMap(section => section.items.filter(item => store.missed.includes(keyOf(section, item))).map(item => ({ section, item })));
-      if (settings.setSize) picked = picked.slice(0, settings.setSize);
+      picked = picked.slice(0, SET_SIZE);
     } else if (id === 'quick') {
       const pool = SECTIONS.flatMap(section => section.items.filter(levelOk).map(item => ({ section, item, r: Math.random() })));
-      picked = pool.sort((x, y) => x.r - y.r).slice(0, settings.setSize || 20)
+      picked = pool.sort((x, y) => x.r - y.r).slice(0, SET_SIZE)
         .sort((x, y) => SECTIONS.indexOf(x.section) - SECTIONS.indexOf(y.section));
     } else {
-      const sections = id === 'all' ? SECTIONS : SECTIONS.filter(s => s.id === id);
-      const all = sections.flatMap(section => section.items.filter(levelOk).map(item => ({ section, item })));
-      const { size, pos } = setInfo(id, all.length);
-      picked = all.concat(all).slice(pos, pos + size);
-      // Each question keeps its number in its part, whichever set it falls in.
-      const numberOf = e => all.filter(o => o.section === e.section).indexOf(e) + 1;
-      return picked.map(e => ({
-        section: e.section, item: e.item, number: numberOf(e),
+      // One set of a part: each question keeps its number in the part.
+      const set = parseSet(id);
+      if (!set) return [];
+      const k0 = set.k * SET_SIZE;
+      return (setsOf(set.part)[set.k] || []).map((e, i) => ({
+        section: e.section, item: e.item, number: k0 + i + 1,
         answered: false, picked: null, played: false,
       }));
     }
@@ -627,26 +630,39 @@
         <span class="lis-test-go" aria-hidden="true">▶</span>
       </button>`;
     }).join('');
-    $('lis-quick-meta').textContent = `${settings.setSize || 20} random questions · ${LEVEL_NAME[settings.level]}`;
-    document.querySelectorAll('[data-set]').forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.set) === settings.setSize)));
+    $('lis-quick-meta').textContent = `${SET_SIZE} random questions · ${LEVEL_NAME[settings.level]}`;
     $('lis-tests-none').classList.toggle('hidden', !!tests.length);
     $('lis-sections').innerHTML = SECTIONS.filter(s => s.items.some(levelOk)).map(s => {
-      const n = s.items.filter(levelOk).length;
-      const b = store.best[s.id + '-' + settings.level];
-      const set = setInfo(s.id, n);
-      return `<button class="lis-part-row" data-section="${s.id}">
-        <span class="lis-part-badge" lang="ja">問題${numOf(s)}</span>
-        <span class="lis-part-body">
-          <span class="lis-part-title">${esc(s.en)} <span class="lis-part-ja" lang="ja">${esc(plain(s.ja))}</span></span>
-          <span class="lis-part-desc">${esc(s.desc)}</span>
-        </span>
-        <span class="lis-part-meta">${set.count > 1 ? `set ${set.number}/${set.count}<br>` : ''}${n} Qs${b ? `<br>best ${b.score}/${b.total}` : ''}</span>
-        <span class="lis-part-go" aria-hidden="true">›</span>
-      </button>`;
+      const sets = setsOf(s.id);
+      const n = sets.reduce((k, set) => k + set.length, 0);
+      const bests = sets.map((_, k) => store.best[bestKey(setId(s.id, k))]);
+      const done = bests.filter(Boolean).length;
+      const next = bests.findIndex(b => !b);
+      const chips = sets.map((set, k) => {
+        const b = bests[k];
+        const from = k * SET_SIZE + 1, to = k * SET_SIZE + set.length;
+        const state = !b ? (k === next ? ' lis-set-next' : '') : b.score === b.total ? ' lis-set-perfect' : ' lis-set-done';
+        return `<button class="lis-set${state}" data-set="${setId(s.id, k)}" aria-label="Set ${k + 1}: questions ${from} to ${to}${b ? `, best ${b.score} of ${b.total}` : ''}">
+          <span class="lis-set-name">Set ${k + 1}</span>
+          <span class="lis-set-range" lang="ja">${from}–${to}番</span>
+          <span class="lis-set-score">${b ? `${b.score}/${b.total}` : k === next ? 'next' : '—'}</span>
+        </button>`;
+      }).join('');
+      return `<div class="lis-part-row">
+        <div class="lis-part-head">
+          <span class="lis-part-badge" lang="ja">問題${numOf(s)}</span>
+          <span class="lis-part-body">
+            <span class="lis-part-title">${esc(s.en)} <span class="lis-part-ja" lang="ja">${esc(plain(s.ja))}</span></span>
+            <span class="lis-part-desc">${esc(s.desc)}</span>
+          </span>
+          <span class="lis-part-meta">${n} Qs<br>${done}/${sets.length} sets</span>
+        </div>
+        <div class="lis-sets">${chips}</div>
+      </div>`;
     }).join('');
     const total = SECTIONS.reduce((k, s) => k + s.items.filter(levelOk).length, 0);
     $('lis-total').textContent = total;
-    const missed = queueFor('missed').length;
+    const missed = missedCount();
     $('lis-review').classList.toggle('hidden', !missed);
     $('lis-review-count').textContent = missed;
     $('lis-opt-exam').checked = settings.exam;
@@ -804,15 +820,11 @@
       if (!prev || score > prev.score) store.best[key] = { score, total };
       save(STORE_KEY, store);
     }
-    const isPart = SECTIONS.some(sec => sec.id === session.id) || session.id === 'all';
-    if (isPart) {
-      const n = SECTIONS.filter(sec => session.id === 'all' || sec.id === session.id).reduce((k, sec) => k + sec.items.filter(levelOk).length, 0);
-      const { size, pos, count } = setInfo(session.id, n);
-      store.setPos[setKey(session.id)] = (pos + size) % n;
-      save(STORE_KEY, store);
-      $('btn-lis-next-set').classList.toggle('hidden', count < 2);
-      $('btn-lis-next-set').textContent = `Next ${size} →`;
-    } else $('btn-lis-next-set').classList.add('hidden');
+    const set = parseSet(session.id);
+    const nextSet = set && setsOf(set.part)[set.k + 1] ? setId(set.part, set.k + 1) : null;
+    $('btn-lis-next-set').classList.toggle('hidden', !nextSet);
+    $('btn-lis-next-set').dataset.next = nextSet || '';
+    if (nextSet) $('btn-lis-next-set').textContent = `Next set: ${(set.k + 1) * SET_SIZE + 1}–${(set.k + 1) * SET_SIZE + setsOf(set.part)[set.k + 1].length}番 →`;
     $('lis-done-score').textContent = `${score} / ${total}`;
     $('lis-done-accuracy').textContent = `${Math.round(score / total * 100)}%`;
     const bySection = [];
@@ -824,7 +836,7 @@
     });
     $('lis-done-parts').innerHTML = bySection.map(b =>
       `<li><span class="lis-part-badge" lang="ja">問題${partNum(b.section, session.queue[0].item.level)}</span> ${esc(b.section.en)} <b>${b.right}/${b.total}</b>${b.missed.length ? ` <span class="lis-missed">missed ${b.missed.map(n => n + '番').join(', ')}</span>` : ''}</li>`).join('');
-    const missed = queueFor('missed').length;
+    const missed = missedCount();
     $('btn-lis-review-missed').classList.toggle('hidden', !missed);
     $('btn-lis-review-missed').textContent = `Review mistakes (${missed})`;
     show('screen-listening-done');
@@ -847,20 +859,15 @@
   $('lis-quick').addEventListener('click', () => start('quick'));
   $('lis-review').addEventListener('click', () => start('missed'));
   $('lis-sections').addEventListener('click', e => {
-    const row = e.target.closest('[data-section]');
-    if (row) start(row.dataset.section);
+    const chip = e.target.closest('[data-set]');
+    if (chip) start(chip.dataset.set);
   });
   document.querySelectorAll('[data-level]').forEach(b => b.addEventListener('click', () => {
     settings.level = b.dataset.level;
     save(SETTINGS_KEY, settings);
     renderHome();
   }));
-  document.querySelectorAll('[data-set]').forEach(b => b.addEventListener('click', () => {
-    settings.setSize = Number(b.dataset.set);
-    save(SETTINGS_KEY, settings);
-    renderHome();
-  }));
-  $('btn-lis-next-set').addEventListener('click', () => start(session.id));
+  $('btn-lis-next-set').addEventListener('click', e => start(e.currentTarget.dataset.next));
   document.querySelectorAll('[data-speed]').forEach(b => b.addEventListener('click', () => {
     settings.speed = Number(b.dataset.speed);
     save(SETTINGS_KEY, settings);

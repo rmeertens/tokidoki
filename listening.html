@@ -13,7 +13,7 @@
   <meta name="twitter:title" content="JLPT Listening Practice — 聴解 with Pictures | Tokidoki">
   <meta name="twitter:description" content="Hear a Japanese conversation, then pick the right picture or reply — JLPT N5–N2 listening practice.">
   <link rel="canonical" href="https://tokidoki.meertens.dev/listening.html">
-  <link rel="stylesheet" href="style.css?v=21">
+  <link rel="stylesheet" href="style.css?v=22">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXWYNZC7YH"></script>
   <script>
@@ -87,14 +87,10 @@
         <button data-level="N2" aria-pressed="false">N2</button>
         <button data-level="all" aria-pressed="false">All</button>
       </div>
-      <div class="lis-levels" role="group" aria-label="Questions per set">
-        <span class="lis-levels-label">Set size</span>
-        <button data-set="5" aria-pressed="true">5</button>
-        <button data-set="10" aria-pressed="false">10</button>
-        <button data-set="0" aria-pressed="false">All</button>
-      </div>
+      <h3 class="lis-heading">Practise in sets of five <span>— <b id="lis-total">0</b> questions</span></h3>
+      <div class="lis-sections" id="lis-sections"></div>
 
-      <h3 class="lis-heading">Mock tests <span>— the real test’s layout, all four parts</span></h3>
+      <h3 class="lis-heading">Mock tests <span>— the real test’s layout, every part</span></h3>
       <div class="lis-tests" id="lis-tests"></div>
       <p class="lis-tests-none hidden" id="lis-tests-none">No full mock test at this level yet.</p>
 
@@ -105,8 +101,6 @@
 
       <button class="lis-review hidden" id="lis-review">↺ Review the questions you missed <span class="lis-review-count" id="lis-review-count">0</span></button>
 
-      <h3 class="lis-heading">Practise one part <span>— <b id="lis-total">0</b> questions</span></h3>
-      <div class="lis-sections" id="lis-sections"></div>
 
       <details class="lis-options">
         <summary>Options</summary>
@@ -180,7 +174,7 @@
         </div>
         <ul class="lis-done-parts" id="lis-done-parts"></ul>
         <div class="lis-done-actions">
-          <button id="btn-lis-next-set" class="btn-primary hidden">Next 5 →</button>
+          <button id="btn-lis-next-set" class="btn-primary hidden">Next set →</button>
           <button id="btn-lis-again" class="btn-secondary">Try again</button>
           <button id="btn-lis-review-missed" class="btn-secondary hidden">Review mistakes</button>
           <button id="btn-lis-home" class="btn-primary">Back to the parts</button>
@@ -199,7 +193,7 @@
   <script src="listening-data-7.js?v=1"></script>
   <script src="listening-art.js?v=4"></script>
   <script src="listening-audio.js?v=4"></script>
-  <script src="listening.js?v=6"></script>
+  <script src="listening.js?v=7"></script>
   <script src="app.js?v=14"></script>
 
   <!-- Static content for search engines -->
@@ -217,7 +211,7 @@
     </p>
     <p>
       After answering, read the script with furigana and English translations and tap any line
-      to hear it again. Practise in sets of 5 or 10 questions, filter by level (N5 to N2), review the questions you missed, change the
+      to hear it again. Practise each part in fixed sets of five questions, filter by level (N5 to N2), review the questions you missed, change the
       speed, or turn on exam mode, where the audio plays once and you have 12 seconds to answer.
     </p>
   </section>
