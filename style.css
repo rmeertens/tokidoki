@@ -1400,6 +1400,70 @@ a.chapter-card {
   text-decoration: line-through;
 }
 
+/* Verb + particle reference (particles-quiz.html) */
+.verb-particles-reference {
+  margin-top: 20px;
+}
+
+.vp-rule {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  padding: 10px 0;
+  border-top: 1px solid var(--border);
+}
+
+.vp-rule:first-child { border-top: none; }
+
+.vp-rule .particle-tag { min-width: 2.4em; }
+
+.vp-rule-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.vp-rule p {
+  margin: 2px 0 6px;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--text-dim);
+}
+
+.vp-rule-examples {
+  font-family: var(--font-jp);
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.vp-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.vp-table td { vertical-align: top; }
+
+.vp-table .vp-verb {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.vp-table .vp-en {
+  font-family: inherit;
+  color: var(--text-dim);
+}
+
+.vp-frame {
+  display: block;
+  white-space: nowrap;
+}
+
+.vp-p {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+
 /* Confusable kanji browse page */
 .confusable-group-grid {
   display: grid;

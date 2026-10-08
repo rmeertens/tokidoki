@@ -2430,7 +2430,18 @@
     });
   }
 
+  // "sentences" (particles-data.js) or "verbs" (verb-particles-data.js:
+  // which particle a verb takes).
+  function getParticlesQuizType() {
+    const checked = $('input[name="particles-quiz-type"]:checked');
+    return checked ? checked.value : 'sentences';
+  }
+
   function getParticlesPool() {
+    if (getParticlesQuizType() === 'verbs') {
+      return (window.VERB_PARTICLE_ITEMS || [])
+        .map(item => ({ ...item, itemId: item.id, id: `vparticle_${item.id}` }));
+    }
     const selected = getSelectedParticles();
     return (window.PARTICLE_QUIZ_ITEMS || [])
       .filter(item => selected.includes(item.particle))
@@ -2452,8 +2463,78 @@
     });
   }
 
+  // Rules + verb overview table for the Verb + Particle quiz, built once
+  // from verb-particles-data.js.
+  function renderVerbParticlesReference() {
+    const el = $('#verb-particles-reference');
+    if (!el || !window.VERB_PARTICLE_RULES) return;
+    const furiKey = settings.showFurigana ? 'on' : 'off';
+    if (el.dataset.furigana === furiKey) return;
+    el.dataset.furigana = furiKey;
+    const furi = t => window.VERB_PARTICLE_FURIGANA(t)[settings.showFurigana ? 'html' : 'plain'];
+    const esc = t => t.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const particleTags = text => esc(text).replace(/([〕／(])(から|[をにでがとへ])/g, '$1<span class="vp-p" lang="ja">$2</span>');
+    const rules = window.VERB_PARTICLE_RULES.map(r => `
+      <div class="vp-rule">
+        <span class="particle-tag particle-tag-ok" lang="ja">${r.particle}</span>
+        <div>
+          <div class="vp-rule-title">${esc(r.title)}</div>
+          <p>${esc(r.rule)}</p>
+          <div class="vp-rule-examples" lang="ja">${r.examples.map(furi).join('　·　')}</div>
+        </div>
+      </div>`).join('');
+    const rows = window.VERB_PARTICLE_VERBS.map(v => `
+      <tr>
+        <td lang="ja" class="vp-verb">${furi(v.verb)}</td>
+        <td class="vp-en">${esc(v.en)}</td>
+        <td class="vp-frames">${v.frames.map(f => `<span class="vp-frame">${particleTags(f)}</span>`).join('')}</td>
+      </tr>`).join('');
+    el.innerHTML = `
+      <details class="ref-verb-types" open>
+        <summary class="ref-disclosure">
+          <span class="ref-disclosure-icon" aria-hidden="true">に</span>
+          <span class="ref-disclosure-text">
+            <span class="ref-disclosure-title">The rules</span>
+            <span class="ref-disclosure-sub">Which particle a verb takes depends on the role the noun plays</span>
+          </span>
+          <span class="ref-disclosure-chevron" aria-hidden="true"></span>
+        </summary>
+        <div class="ref-exc-body">${rules}</div>
+      </details>
+      <details class="ref-verb-types" open>
+        <summary class="ref-disclosure">
+          <span class="ref-disclosure-icon" aria-hidden="true">食</span>
+          <span class="ref-disclosure-text">
+            <span class="ref-disclosure-title">Common verbs and their particles</span>
+            <span class="ref-disclosure-sub">${window.VERB_PARTICLE_VERBS.length} everyday verbs · 〔…〕 is the noun that goes before the particle</span>
+          </span>
+          <span class="ref-disclosure-chevron" aria-hidden="true"></span>
+        </summary>
+        <div class="ref-exc-body">
+          <div class="vp-table-wrap">
+            <table class="ref-table vp-table">
+              <thead><tr><th>Verb</th><th>Meaning</th><th>Particles</th></tr></thead>
+              <tbody>${rows}</tbody>
+            </table>
+          </div>
+        </div>
+      </details>`;
+  }
+
   function renderParticlesPanel() {
     renderParticleToggles();
+    const verbs = getParticlesQuizType() === 'verbs';
+    const toggleRow = $('#particles-toggle-row');
+    if (toggleRow) toggleRow.classList.toggle('hidden', verbs);
+    const introS = $('#particles-intro-sentences');
+    const introV = $('#particles-intro-verbs');
+    if (introS) introS.classList.toggle('hidden', verbs);
+    if (introV) introV.classList.toggle('hidden', !verbs);
+    const ref = $('#verb-particles-reference');
+    if (ref) {
+      if (verbs) renderVerbParticlesReference();
+      ref.classList.toggle('hidden', !verbs);
+    }
     const pool = getParticlesPool();
     const due = pool.filter(item => isDue(getCardState(srsData, item.id))).length;
     const el = $('#particles-due-count');
@@ -2461,7 +2542,7 @@
   }
 
   function pickParticleChoices(item) {
-    const distractors = (window.PARTICLE_DISTRACTOR_GROUPS[item.particle] || []).slice();
+    const distractors = (item.wrong || window.PARTICLE_DISTRACTOR_GROUPS[item.particle] || []).slice();
     shuffle(distractors);
     const result = [item.particle, ...distractors.slice(0, 3)];
     shuffle(result);
@@ -2473,7 +2554,10 @@
     if (pool.length === 0) return;
 
     const due = pool.filter(item => isDue(getCardState(srsData, item.id)));
-    particlesSessionCards = pickBatch('particles', due, pool, cont);
+    const verbs = getParticlesQuizType() === 'verbs';
+    particlesSessionCards = pickBatch(verbs ? 'particles-verbs' : 'particles', due, pool, cont);
+    const label = $('#particles-prompt-label');
+    if (label) label.textContent = verbs ? 'Which particle goes with the verb?' : 'Which particle fits?';
 
     particlesIndex = 0;
     particlesCorrect = 0;
@@ -2574,7 +2658,7 @@
   function particleExplanationHtml(card, choices, correct) {
     const esc = t => t.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
     const fmt = t => esc(t).replace(/\*([^*]+)\*/g, '<em>$1</em>');
-    const note = (window.PARTICLE_NOTES || {})[card.itemId];
+    const note = card.note || (window.PARTICLE_NOTES || {})[card.itemId];
     const why = note ? note.why : ((window.PARTICLE_EXPLANATIONS || {})[card.particle] || '');
     let html = `<div class="particle-why"><span class="particle-tag particle-tag-ok" lang="ja">${card.particle}</span>`
       + `<span>${correct ? '' : `The answer is ${card.particle}. `}${fmt(why)}</span></div>`;
@@ -4195,7 +4279,7 @@
   function focusHasOwnSpaceAction() {
     const el = document.activeElement;
     if (!el || el === document.body) return false;
-    if (['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON', 'A'].includes(el.tagName)) return true;
+    if (['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON', 'A', 'SUMMARY'].includes(el.tagName)) return true;
     return el.isContentEditable;
   }
 
@@ -4606,6 +4690,10 @@
 
     (window.PARTICLE_LIST || []).forEach(p => {
       on(`#particles-toggle-${window.PARTICLE_ROMAJI[p]}`, 'change', toggleParticlesLevel);
+    });
+
+    $$('input[name="particles-quiz-type"]').forEach(el => {
+      el.addEventListener('change', renderParticlesPanel);
     });
 
     on('#btn-start-particles', 'click', startParticlesStudy);
