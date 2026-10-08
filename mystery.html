@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" id="viewport-meta" content="width=device-width, initial-scale=1.0">
   <title>Kuro the Word Detective: a Japanese Mystery Game | Tokidoki</title>
-  <meta name="description" content="ことば探偵クロ: solve mysteries by answering in Japanese. Fill in missing words, ask suspects questions, crack なぞなぞ riddles and catch lies in testimony. Four cases from JLPT N5 to N3.">
+  <meta name="description" content="ことば探偵クロ: solve mysteries by answering in Japanese. Fill in missing words, ask suspects questions, crack なぞなぞ riddles and catch lies in testimony. Ten cases from JLPT N5 to N3.">
   <meta property="og:title" content="Kuro the Word Detective: a Japanese Mystery Game | Tokidoki">
   <meta property="og:description" content="Solve mysteries by answering in Japanese — fill-in-the-blank, full sentences, riddles and cross-examinations. JLPT N5–N3.">
   <meta property="og:type" content="website">
@@ -13,7 +13,7 @@
   <meta name="twitter:title" content="Kuro the Word Detective: a Japanese Mystery Game | Tokidoki">
   <meta name="twitter:description" content="Solve mysteries by answering in Japanese — riddles, testimony and fill-in-the-blank. JLPT N5–N3.">
   <link rel="canonical" href="https://tokidoki.meertens.dev/mystery.html">
-  <link rel="stylesheet" href="style.css?v=12">
+  <link rel="stylesheet" href="style.css?v=13">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXWYNZC7YH"></script>
   <script>
@@ -94,6 +94,11 @@
         <label class="kana-script-toggle"><input type="checkbox" id="mys-toggle-english"> Always show English</label>
       </div>
 
+      <div class="mys-unlock-row">
+        <button id="mys-unlock" class="btn-secondary">🔓 Unlock all cases</button>
+        <span class="mys-unlock-note" id="mys-unlock-note"></span>
+      </div>
+
       <div class="reset-section">
         <button id="mys-reset" class="btn-danger">Reset case files</button>
       </div>
@@ -139,9 +144,9 @@
   <script src="romaji.js?v=8"></script>
   <script src="speech.js?v=8"></script>
   <script src="stories-data.js?v=15"></script>
-  <script src="mystery-words.js?v=2"></script>
-  <script src="mystery-data.js?v=10"></script>
-  <script src="mystery.js?v=12"></script>
+  <script src="mystery-words.js?v=3"></script>
+  <script src="mystery-data.js?v=11"></script>
+  <script src="mystery.js?v=13"></script>
   <script src="app.js?v=8"></script>
 
   <!-- Static content for search engines -->
@@ -157,10 +162,12 @@
       where you find the statement that contradicts the evidence and shout 異議あり.
     </p>
     <p>
-      Four chapters grow harder from JLPT N5 to N3: The Vanishing Melon Pan (particles, days
+      Ten cases grow harder from JLPT N5 to N3. Part one: The Vanishing Melon Pan (particles, days
       of the week, あります and います), The Stopped Clock Tower (telling time, て-form,
       い-adjective past), The Moon Tea Bowl (keigo, 〜ている vs 〜てある, 〜てしまう) and
-      Kuro Arrested?! (hearsay そうだ, passive vs causative, 〜ておく, 申し訳ありません).
+      Kuro Arrested?! (hearsay そうだ, passive vs causative, 〜ておく, 申し訳ありません). Part two follows
+      the phantom thief Mike through the festival weekend: homophones and 〜べからず, keigo mistakes in
+      a forged letter, alibis decided by 〜ところ, Kansai dialect, the causative-passive, 〜わけだ and 〜ものの.
       Type in romaji and it is converted to hiragana; kanji and kana spellings are both accepted.
       As on the Stories page, tap any word for its reading and meaning and save it to your
       flashcard deck, or tap a line to see the grammar it uses.

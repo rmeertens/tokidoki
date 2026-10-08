@@ -4389,3 +4389,5 @@ a.chapter-card {
 .mys-panel-actions .story-panel-add { width: auto; }
 .mys-panel-actions .story-panel-link { margin-top: 0; }
 .mys-diff { margin-top: 6px; padding: 6px 10px; background: var(--bg); border-radius: var(--radius-sm); }
+.mys-unlock-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 8px 0 4px; }
+.mys-unlock-note { font-size: 0.8rem; color: var(--text-muted); }

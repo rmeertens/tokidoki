@@ -185,11 +185,12 @@
   }
 
   let progress = load(STORE_KEY, {});
-  const settings = Object.assign({ furigana: true, english: false }, load(SETTINGS_KEY, {}));
+  const settings = Object.assign({ furigana: true, english: false, unlockAll: false }, load(SETTINGS_KEY, {}));
 
   const maxPaws = ch => ch.steps.filter(s => CHALLENGES.has(s.type)).length * PAWS_PER;
   const chapterState = ch => progress[ch.id] || { step: 0, paws: 0 };
-  const isUnlocked = i => i === 0 || !!(progress[CHAPTERS[i - 1].id] && progress[CHAPTERS[i - 1].id].solved);
+  // Cases open one after another, or all at once with “Unlock all cases”.
+  const isUnlocked = i => settings.unlockAll || i === 0 || !!(progress[CHAPTERS[i - 1].id] && progress[CHAPTERS[i - 1].id].solved);
 
   function rank(paws, max) {
     const pct = max ? paws / max : 0;
@@ -214,6 +215,13 @@
   // ─── Case list ──────────────────────────────────────────────────────────────
 
   function renderCaseList() {
+    const unlock = $('#mys-unlock');
+    if (unlock) {
+      unlock.textContent = settings.unlockAll ? '🔒 Lock cases again (play in order)' : '🔓 Unlock all cases';
+      $('#mys-unlock-note').textContent = settings.unlockAll
+        ? 'Every case is open — jump in anywhere.'
+        : 'Cases normally open one at a time as you solve them. Unlock all to play any case now.';
+    }
     const list = $('#mys-cases');
     list.innerHTML = CHAPTERS.map((ch, i) => {
       const st = progress[ch.id];
@@ -917,6 +925,11 @@
     $('#mys-file-close').addEventListener('click', closeFile);
     $('#mys-file').addEventListener('click', e => { if (e.target.id === 'mys-file') closeFile(); });
     $('#mys-quit').addEventListener('click', closeChapter);
+    $('#mys-unlock').addEventListener('click', () => {
+      settings.unlockAll = !settings.unlockAll;
+      save(SETTINGS_KEY, settings);
+      renderCaseList();
+    });
     $('#mys-reset').addEventListener('click', () => {
       if (!confirm('Reset all case files? Your progress in every chapter will be lost.')) return;
       progress = {};
