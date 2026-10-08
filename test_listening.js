@@ -14,6 +14,8 @@ require('./listening-data-4.js');
 require('./listening-data-5.js');
 require('./listening-data-6.js');
 require('./listening-data-7.js');
+require('./listening-data-8.js');
+require('./listening-data-9.js');
 const L = require('./listening.js');
 const Art = require('./listening-art.js');
 require('./listening-audio.js');

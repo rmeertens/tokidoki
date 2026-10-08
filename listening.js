@@ -47,7 +47,7 @@
   // often read the wrong way (何[なん] as なに, 降[ふ]り as おり, 十分[じゅっぷん]
   // as じゅうぶん), which are spoken from their furigana. The audio generator
   // checks every other reading against the furigana too.
-  const SPEAK_AS_KANA = new Set(['何', '降', '十分', '要', '後', '行', '辛', '薬', '角', '開', '何色', '二十歳', '日本', '時計', '五分', '垂', '方', '眠', '第三', '手数', '切']);
+  const SPEAK_AS_KANA = new Set(['何', '降', '十分', '要', '後', '行', '辛', '薬', '角', '開', '何色', '二十歳', '日本', '時計', '五分', '垂', '方', '眠', '第三', '手数', '切', '国', '何階', '間', '君', '一駅', '人数分', '運動靴', '上']);
   const speech = markup => pieces(markup).map(p => (p.r && SPEAK_AS_KANA.has(p.t) ? p.r : p.t)).join('').replace(/ /g, '');
 
   const esc = s => String(s).replace(/[&<>"']/g, c =>
