@@ -4881,7 +4881,10 @@
       }
 
       // Card front is showing
-      if (e.key === 'h' || e.key === 'H') { consumeKey(e); toggleHint(); return; }
+      // H = hint, except while typing an answer: there "h" is a letter
+      // (English answers, romaji like "ha"), not a shortcut.
+      const inTextField = ['INPUT', 'TEXTAREA'].includes(e.target.tagName) || e.target.isContentEditable;
+      if ((e.key === 'h' || e.key === 'H') && !inTextField) { consumeKey(e); toggleHint(); return; }
       if (settings.typingMode) {
         if (e.key === 'Enter' && !e.isComposing) { consumeKey(e); checkAnswer(); }
       } else {
