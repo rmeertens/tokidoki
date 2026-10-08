@@ -335,15 +335,18 @@
     const cards = [];
     getAdjectivesByChapter(chapter).forEach(a => {
       forms.forEach(f => {
-        const ex = Examples.build(a, f, Conjugator.conjugateAdjective(a, f));
+        const conj = Conjugator.conjugateAdjective(a, f);
+        const ex = Examples.build(a, f, conj);
         if (!ex) return;
         const fi = Conjugator.getFormInfo(f);
         cards.push({
           id: adjSentenceCardId(a, f),
           direction: 'en-to-ja',
           sentence: { ja: Examples.stripFurigana(ex.ja), jaHtml: Examples.furiganaHtml(ex.ja), en: ex.en },
-          hint: `${a.kanji} (${a.meaning}) · ${fi.name}`,
+          hint: `${a.kanji} (${a.meaning}) · ${fi.hint}`,
           refForm: f,
+          // The ending for this adjective's type: 〜くない for い, 〜じゃない for な.
+          formEnding: conj.slice(a.type === 'i-adj' ? a.reading.length - 1 : a.reading.length) || 'だ',
           verb: null,
           form: null,
         });
@@ -1761,8 +1764,18 @@
     const sourceText = isEnToJa ? sentence.en : sentence.ja;
 
     $('#card').classList.remove('negative-form');
-    $('#card-form-badge').innerHTML = `${sourceLang} → ${targetLang}`;
-    $('#card-form-badge').style.cssText = '';
+    const badge = $('#card-form-badge');
+    badge.style.cssText = '';
+    if (card.refForm) {
+      // Adjective sentences: the form the sentence expects, in its colour.
+      const fi = Conjugator.getFormInfo(card.refForm);
+      badge.innerHTML = `${fi.name} <span class="form-symbol">(${card.formEnding || fi.symbol})</span>`;
+      badge.style.background = fi.color + '22';
+      badge.style.color = fi.color;
+      badge.style.borderColor = fi.color;
+    } else {
+      badge.innerHTML = `${sourceLang} → ${targetLang}`;
+    }
     $('#card-kanji').textContent = '';
     $('#card-reading').textContent = '';
     $('#card-meaning').textContent = '';
@@ -1824,6 +1837,7 @@
     $('#card-back').classList.remove('hidden');
 
     $('#card-form-badge-back').innerHTML = $('#card-form-badge').innerHTML;
+    $('#card-form-badge-back').style.cssText = $('#card-form-badge').style.cssText;
     const answerEl = $('#card-kanji-back');
     if (isEnToJa) {
       answerEl.innerHTML = jaDisplay;
