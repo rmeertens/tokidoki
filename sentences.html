@@ -13,7 +13,7 @@
   <meta name="twitter:title" content="Japanese Sentence Translation Practice | Tokidoki">
   <meta name="twitter:description" content="Translate full Japanese sentences taken from Genki chapters 3–12, in either direction, with optional furigana readings.">
   <link rel="canonical" href="https://tokidoki.meertens.dev/sentences.html">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=22">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXWYNZC7YH"></script>
   <script>
@@ -43,6 +43,7 @@
             <a class="page-nav-item active" href="sentences.html" aria-current="page"><span class="page-nav-glyph" aria-hidden="true">文</span>Sentences</a>
             <a class="page-nav-item" href="stories.html"><span class="page-nav-glyph" aria-hidden="true">話</span>Stories</a>
             <a class="page-nav-item" href="mystery.html"><span class="page-nav-glyph" aria-hidden="true">謎</span>Mystery</a>
+            <a class="page-nav-item" href="listening.html"><span class="page-nav-glyph" aria-hidden="true">聴</span>Listening</a>
             <a class="page-nav-item" href="particles-quiz.html"><span class="page-nav-glyph" aria-hidden="true">は</span>Particles</a>
             <a class="page-nav-item" href="kana.html"><span class="page-nav-glyph" aria-hidden="true">あ</span>Kana</a>
             <a class="page-nav-item" href="kanji-quiz.html"><span class="page-nav-glyph" aria-hidden="true">字</span>Kanji Quiz</a>
@@ -154,7 +155,10 @@
           <div class="stat"><span class="stat-num" id="session-correct">0</span><span class="stat-label">Correct</span></div>
           <div class="stat"><span class="stat-num" id="session-accuracy">0%</span><span class="stat-label">Accuracy</span></div>
         </div>
-        <button id="btn-back-to-chapters" class="btn-primary">Back to Chapters</button>
+        <div class="session-actions">
+          <button id="btn-session-continue" class="btn-primary">Next 20 →</button>
+          <button id="btn-back-to-chapters" class="btn-secondary">Back to Chapters</button>
+        </div>
       </div>
     </main>
 
@@ -168,13 +172,14 @@
   <script src="kana.js"></script>
   <script src="kanji-quiz-data.js"></script>
   <script src="sentences-data.js"></script>
+  <script src="en-hover.js?v=1"></script>
   <script src="vocabulary-data.js"></script>
   <script src="kanji-info-data.js"></script>
   <script src="examples.js"></script>
   <script src="answer-diff.js"></script>
   <script src="romaji.js"></script>
   <script src="speech.js"></script>
-  <script src="app.js"></script>
+  <script src="app.js?v=17"></script>
   <script src="sushi-sprites.js"></script>
   <script src="sushi-belt.js"></script>
 
