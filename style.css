@@ -5054,3 +5054,13 @@ a.chapter-card {
 .en-hover-kana { font-family: var(--font-jp); color: var(--text-dim); }
 .en-hover-en { color: var(--text-muted); font-size: 0.8rem; flex-basis: 100%; }
 .en-hover-note { margin-top: 4px; font-size: 0.72rem; color: var(--text-muted); font-style: italic; }
+
+/* Typing mode: a right answer advances straight to the next card */
+@keyframes card-flash-correct {
+  from { box-shadow: 0 0 0 3px var(--green); }
+  to { box-shadow: 0 0 0 3px transparent; }
+}
+
+.card-flash-correct {
+  animation: card-flash-correct 0.7s ease-out;
+}

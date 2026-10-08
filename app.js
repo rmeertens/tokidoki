@@ -648,7 +648,29 @@
     const userAnswer = Romaji.flush($('#answer-input')).trim();
     const correct = getCorrectAnswer(currentCard);
 
+    // A right answer is graded straight away and the next card shown —
+    // only a wrong (or empty) one stops on the answer side.
+    if (userAnswer && correct.some(a => normalize(userAnswer) === normalize(a))) {
+      sessionCorrect++;
+      gradeAndAdvance(4);
+      // Undo should take this card's point back off as well.
+      const last = undoStack[undoStack.length - 1];
+      if (last) last.sessionCorrect--;
+      flashCorrect();
+      return;
+    }
+
     revealAnswer(userAnswer, correct);
+  }
+
+  // Brief green pulse on the card, so an auto-advanced right answer still
+  // registers.
+  function flashCorrect() {
+    const card = $('#card');
+    if (!card) return;
+    card.classList.remove('card-flash-correct');
+    void card.offsetWidth; // restart the animation
+    card.classList.add('card-flash-correct');
   }
 
   function showAnswer() {
