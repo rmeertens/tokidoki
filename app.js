@@ -3857,6 +3857,21 @@
     return cards;
   }
 
+  // On a session-complete screen, Space carries on with the next batch
+  // ("Next 20") whenever there is one, whatever button happens to have
+  // focus. Returns false when there's no next batch, so the screen's own
+  // Space shortcut (usually "back") applies.
+  function continueOnSpace(e, sel) {
+    if (e.key !== ' ') return false;
+    const btn = $(sel);
+    if (!btn || btn.classList.contains('hidden') || !btn.onclick) return false;
+    const el = document.activeElement;
+    if (el && (['INPUT', 'TEXTAREA', 'SELECT'].includes(el.tagName) || el.isContentEditable)) return false;
+    consumeKey(e);
+    btn.click();
+    return true;
+  }
+
   // The "Next 20" button on a session-complete screen.
   function setContinueButton(sel, label, onClick) {
     const btn = $(sel);
@@ -4297,6 +4312,7 @@
 
       // Session-complete screen: Space goes back, same as clicking the button.
       if (!$('#kana-session-complete').classList.contains('hidden')) {
+        if (continueOnSpace(e, '#btn-kana-continue')) return;
         if (e.key === ' ' && !focusHasOwnSpaceAction()) { consumeKey(e); backToKanaChapters(); }
         return;
       }
@@ -4380,6 +4396,7 @@
 
       // Session-complete screen: Space goes back, same as clicking the button.
       if (!$('#kanji-quiz-session-complete').classList.contains('hidden')) {
+        if (continueOnSpace(e, '#btn-kanji-quiz-continue')) return;
         if (e.key === ' ' && !focusHasOwnSpaceAction()) { consumeKey(e); backToKanjiQuizChapters(); }
         return;
       }
@@ -4423,6 +4440,7 @@
 
       // Session-complete screen: Space goes back, same as clicking the button.
       if (!$('#confusable-session-complete').classList.contains('hidden')) {
+        if (continueOnSpace(e, '#btn-confusable-continue')) return;
         if (e.key === ' ' && !focusHasOwnSpaceAction()) { consumeKey(e); backToConfusableChapters(); }
         return;
       }
@@ -4489,6 +4507,7 @@
 
       // Session-complete screen: Space goes back, same as clicking the button.
       if (!$('#particles-session-complete').classList.contains('hidden')) {
+        if (continueOnSpace(e, '#btn-particles-continue')) return;
         if (e.key === ' ' && !focusHasOwnSpaceAction()) { consumeKey(e); backToParticlesChapters(); }
         return;
       }
@@ -4790,6 +4809,7 @@
       if (!(screens['story-review'] && screens['story-review'].classList.contains('active'))) return;
 
       if (!$('#story-review-complete').classList.contains('hidden')) {
+        if (continueOnSpace(e, '#btn-story-review-continue')) return;
         if (e.key === ' ' && !focusHasOwnSpaceAction()) { consumeKey(e); closeStory(); }
         return;
       }
@@ -4841,6 +4861,11 @@
       if (overlayOpen('ref-overlay')) return;
       if (!(screens.study && screens.study.classList.contains('active'))) return;
       if (overlayOpen('settings-overlay')) return;
+
+      if (!$('#session-complete').classList.contains('hidden')) {
+        continueOnSpace(e, '#btn-session-continue');
+        return;
+      }
 
       if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
         consumeKey(e);

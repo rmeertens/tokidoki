@@ -898,6 +898,14 @@
   $('btn-lis-home').addEventListener('click', goHome);
 
   document.addEventListener('keydown', e => {
+    // Finished a set: Space goes on to the next set, whatever has focus.
+    if (e.key === ' ' && $('screen-listening-done').classList.contains('active')
+        && !$('btn-lis-next-set').classList.contains('hidden')
+        && !(e.target.closest && e.target.closest('input, textarea, select'))) {
+      e.preventDefault();
+      $('btn-lis-next-set').click();
+      return;
+    }
     if (!session || !$('screen-listening').classList.contains('active')) return;
     if (e.target.closest && e.target.closest('input, textarea, select, .lis-line, summary')) return;
     const q = current();
