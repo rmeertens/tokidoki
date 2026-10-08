@@ -666,7 +666,7 @@
     const hintEl = $('#hint-area');
     if (!hintEl.classList.contains('hidden')) {
       hintEl.classList.add('hidden');
-      $('#key-capture').focus();
+      focusCardInput();
       return;
     }
 
@@ -734,7 +734,14 @@
 
     hintEl.innerHTML = `<div class="hint-label">Hint</div>` + steps.map(s => `<div class="hint-step">→ ${s}</div>`).join('');
     hintEl.classList.remove('hidden');
-    $('#key-capture').focus();
+    focusCardInput();
+  }
+
+  // Back to the answer box in typing mode (so a hint doesn't pull focus
+  // away mid-answer), or the hidden key catcher otherwise.
+  function focusCardInput() {
+    if (settings.typingMode) $('#answer-input').focus();
+    else $('#key-capture').focus();
   }
 
   // ─── Explanation Generator ───────────────────────────────────────────────────
@@ -5142,8 +5149,10 @@
         return;
       }
 
-      // Card front is showing
-      if (e.key === 'h' || e.key === 'H') { consumeKey(e); toggleHint(); return; }
+      // Card front is showing. H is the hint shortcut, except while typing
+      // an answer — there it's just the h of romaji like "hayai".
+      const typingInInput = e.target && e.target.id === 'answer-input';
+      if ((e.key === 'h' || e.key === 'H') && !typingInInput) { consumeKey(e); toggleHint(); return; }
       if (settings.typingMode) {
         if (e.key === 'Enter' && !e.isComposing) { consumeKey(e); checkAnswer(); }
       } else {
