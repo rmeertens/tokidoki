@@ -1717,19 +1717,18 @@ a.chapter-card {
   color: var(--orange);
 }
 
-/* Pronunciation buttons, top-left (the ＋ sits top-right). */
-.vocab-speak {
-  position: absolute;
-  top: 6px;
-  left: 6px;
-  display: flex;
+/* Pronunciation buttons (pronounce.js): 🔊 natural, 🐢 slow. */
+.speak-pair {
+  display: inline-flex;
   gap: 3px;
+  vertical-align: middle;
+  margin-left: 6px;
 }
 
-.vocab-speak-btn {
+.speak-btn {
   width: 24px;
   height: 24px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0;
@@ -1742,15 +1741,38 @@ a.chapter-card {
   transition: border-color var(--transition);
 }
 
-.vocab-speak-btn:hover,
-.vocab-speak-btn:focus-visible {
+.speak-btn:hover,
+.speak-btn:focus-visible {
   border-color: var(--accent);
 }
 
-#btn-vocab-autospeak[aria-pressed="true"] {
+/* The sticky story toolbar stays on one line on phones. */
+@media (max-width: 480px) {
+  .story-toggles .speak-toggle { padding: 7px 12px; }
+  .story-toggles .speak-toggle-label { display: none; }
+}
+
+.speak-toggle[aria-pressed="true"] {
   border-color: var(--accent);
   color: var(--accent);
 }
+
+/* On a vocabulary card: top-left (the ＋ sits top-right). */
+.vocab-speak {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  margin: 0;
+}
+
+/* In the story panel and review card: on a line of their own. */
+.story-panel-speak {
+  display: flex;
+  justify-content: center;
+  margin: 4px 0;
+}
+
+.story-panel .story-panel-speak { justify-content: flex-start; }
 
 /* Narrow cards: drop the level label below the buttons. */
 @media (max-width: 480px) {
@@ -1949,6 +1971,13 @@ a.chapter-card {
   font-family: var(--font-jp);
   font-size: 1.1rem;
   flex-shrink: 0;
+  min-width: 4.5em;
+}
+
+.wbk-word-row .speak-pair {
+  margin-left: 0;
+  flex-shrink: 0;
+  align-self: center;
 }
 
 .wbk-word-jp rt {

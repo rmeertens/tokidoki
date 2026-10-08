@@ -69,8 +69,8 @@
         Click &#128266; to hear a word, or &#128034; to hear it slowly &mdash; or turn on
         <i>Speak words on click</i> to hear every card you click.
       </p>
-      <div class="kana-settings-row hidden" id="vocab-autospeak-row">
-        <button type="button" id="btn-vocab-autospeak" class="btn-secondary" aria-pressed="false">&#128266; Speak words on click: Off</button>
+      <div class="kana-settings-row">
+        <button type="button" class="btn-secondary speak-toggle hidden" data-speak-toggle aria-pressed="false">&#128266; Speak words on click: Off</button>
       </div>
       <div class="kana-settings-row" id="vocab-direction-row">
         <label class="kana-script-toggle">
@@ -132,7 +132,8 @@
   <script src="stories-data.js?v=15"></script>
   <script src="mystery-words.js?v=3"></script>
   <script src="examples.js"></script>
-  <script src="app.js?v=8"></script>
+  <script src="pronounce.js"></script>
+  <script src="app.js?v=9"></script>
   <script src="sushi-sprites.js"></script>
   <script src="sushi-belt.js"></script>
 

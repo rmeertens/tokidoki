@@ -63,8 +63,11 @@
       <p class="tab-intro">
         Browse JLPT kanji (N5&ndash;N1) and click one to see every vocabulary word from the
         <a href="vocabulary.html">Vocabulary</a> list (N5&ndash;N3) that uses it, with its
-        reading and English meaning.
+        reading and English meaning. Click &#128266; or &#128034; next to a word to hear it.
       </p>
+      <div class="kana-settings-row">
+        <button type="button" class="btn-secondary speak-toggle hidden" data-speak-toggle aria-pressed="false">&#128266; Speak words on click: Off</button>
+      </div>
       <div class="kana-settings-row">
         <input type="search" id="wbk-search" class="answer-input" placeholder="Search by kanji or meaning…" autocomplete="off">
       </div>
@@ -104,7 +107,8 @@
   <script src="vocabulary-data.js"></script>
   <script src="kanji-info-data.js"></script>
   <script src="examples.js"></script>
-  <script src="app.js?v=1"></script>
+  <script src="pronounce.js"></script>
+  <script src="app.js?v=2"></script>
   <script src="sushi-sprites.js"></script>
   <script src="sushi-belt.js"></script>
 

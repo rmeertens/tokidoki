@@ -3154,76 +3154,11 @@
     renderVocabDeckStatus();
   }
 
-  // Pronunciation: 🔊 / 🐢 on each card read the word aloud with the
-  // browser's speech engine, at a natural pace or slowly — the same way the
-  // Notepad reads sentences, including the voice picked there. The kana
-  // reading is spoken rather than the kanji, so the voice can't misread it.
-  const vocabSynth = typeof window !== 'undefined' && 'speechSynthesis' in window ? window.speechSynthesis : null;
-  function vocabVoiceScore(v) {
-    const n = v.name;
-    let score = 0;
-    if (/natural|neural/i.test(n)) score += 50;
-    if (/premium/i.test(n)) score += 45;
-    if (/enhanced|siri/i.test(n)) score += 35;
-    if (/google/i.test(n)) score += 25;
-    if (/online/i.test(n)) score += 10;
-    if (!v.localService) score += 5;
-    if (/^ja[-_]JP$/i.test(v.lang)) score += 2;
-    if (/compact|espeak/i.test(n)) score -= 20;
-    return score;
-  }
-  function vocabVoice() {
-    const voices = vocabSynth.getVoices()
-      .filter(v => /^ja\b|^ja[-_]/i.test(v.lang))
-      .sort((a, b) => vocabVoiceScore(b) - vocabVoiceScore(a));
-    let want = '';
-    try { want = JSON.parse(localStorage.getItem('tokidoki-notepad-voice')) || ''; } catch { /* none picked */ }
-    return voices.find(v => v.voiceURI === want) || voices[0] || null;
-  }
-  let vocabUtterance = null;
-  function speakVocab(item, slow) {
-    if (!vocabSynth) return;
-    const text = item.kana.replace(/[～~〜]/g, '');
-    try {
-      vocabSynth.cancel();
-      const u = new SpeechSynthesisUtterance(text);
-      u.lang = 'ja-JP';
-      const voice = vocabVoice();
-      if (voice) { u.voice = voice; u.lang = voice.lang; }
-      u.rate = slow ? 0.6 : 0.95;
-      vocabUtterance = u; // keep a reference, or Chrome may drop it
-      // Chrome sometimes drops an utterance queued right after cancel().
-      setTimeout(() => vocabSynth.speak(u), 50);
-    } catch { /* speech unavailable */ }
-  }
-  // "Speak words on click" (top of the page): every card click also reads
-  // the word aloud. Remembered between visits.
-  const VOCAB_AUTOSPEAK_KEY = 'tokidoki-vocab-autospeak';
-  let vocabAutoSpeak = false;
-  try { vocabAutoSpeak = localStorage.getItem(VOCAB_AUTOSPEAK_KEY) === '1'; } catch { /* storage unavailable */ }
-  function renderVocabAutoSpeak() {
-    const row = $('#vocab-autospeak-row');
-    const btn = $('#btn-vocab-autospeak');
-    if (!row || !btn) return;
-    row.classList.toggle('hidden', !vocabSynth);
-    btn.setAttribute('aria-pressed', vocabAutoSpeak);
-    btn.classList.toggle('active', vocabAutoSpeak);
-    btn.innerHTML = `&#128266; Speak words on click: ${vocabAutoSpeak ? 'On' : 'Off'}`;
-  }
-  function toggleVocabAutoSpeak() {
-    vocabAutoSpeak = !vocabAutoSpeak;
-    try { localStorage.setItem(VOCAB_AUTOSPEAK_KEY, vocabAutoSpeak ? '1' : '0'); } catch { /* storage unavailable */ }
-    renderVocabAutoSpeak();
-  }
-
-  function vocabSpeakButtonsHtml(item) {
-    if (!vocabSynth) return '';
-    return `
-          <div class="vocab-speak">
-            <button type="button" class="vocab-speak-btn" data-speak="normal" title="Listen" aria-label="Listen to ${item.kana}"><span aria-hidden="true">🔊</span></button>
-            <button type="button" class="vocab-speak-btn" data-speak="slow" title="Listen slowly" aria-label="Listen to ${item.kana} slowly"><span aria-hidden="true">🐢</span></button>
-          </div>`;
-  }
+  // 🔊 / 🐢 on each card, and "Speak words on click", come from pronounce.js.
+  // The kana reading is spoken rather than the kanji, so the voice can't
+  // misread it.
+  const pronounceButtons = (kana, cls) => (window.Pronounce ? Pronounce.buttonsHtml(kana, cls) : '');
+  const pronounceOnClick = (kana) => { if (window.Pronounce) Pronounce.onClick(kana); };
 
   function renderVocabPage() {
     const grid = $('#vocab-grid');
@@ -3262,7 +3197,8 @@
           <div class="kanji-hover-level">${item.level}</div>
           <button type="button" class="vocab-deck-btn" aria-pressed="${saved}"
             title="${saved ? 'In your flashcards — click to remove' : 'Add to flashcards'}"
-            aria-label="${saved ? 'Remove' : 'Add'} ${item.kanji} ${saved ? 'from' : 'to'} flashcards">${vocabDeckButtonHtml(saved)}</button>${vocabSpeakButtonsHtml(item)}
+            aria-label="${saved ? 'Remove' : 'Add'} ${item.kanji} ${saved ? 'from' : 'to'} flashcards">${vocabDeckButtonHtml(saved)}</button>
+          ${pronounceButtons(item.kana, 'vocab-speak')}
           <div class="kanji-hover-prompt ${promptClass}">${promptHtml}</div>
           <div class="kanji-hover-answer ${answerClass}">${answerHtml}</div>
           ${breakdownHtml}
@@ -3299,7 +3235,7 @@
         chars.forEach(ch => {
           if (seen.has(ch)) return;
           seen.add(ch);
-          (index[ch] || (index[ch] = [])).push({ level, html: w.html, meaning: w.meaning });
+          (index[ch] || (index[ch] = [])).push({ level, html: w.html, kana: w.kana, meaning: w.meaning });
         });
       });
     });
@@ -3385,8 +3321,9 @@
     if (list) {
       list.innerHTML = words.length
         ? words.map(w => `
-            <div class="wbk-word-row">
+            <div class="wbk-word-row" data-kana="${w.kana}">
               <span class="wbk-word-jp">${w.html}</span>
+              ${pronounceButtons(w.kana)}
               <span class="kanji-hover-level">${w.level}</span>
               <span class="wbk-word-meaning">${w.meaning}</span>
             </div>
@@ -3462,6 +3399,15 @@
   }
 
   // Flashcard text with or without furigana, per the flashcard setting.
+  // What to say for a piece of story text: the furigana readings in place
+  // of their kanji, so the voice reads them the way the story does.
+  function storyKana(text) {
+    return text.replace(STORY_FURIGANA_RE, '$2');
+  }
+  function storySentenceKana(sentence) {
+    return parseStorySentence(sentence).filter(t => t.key).map(t => storyKana(t.surface)).join('');
+  }
+
   function storyCardHtml(text) {
     return settings.flashcardFurigana ? storyRubyHtml(text) : storyPlainText(text);
   }
@@ -3624,6 +3570,7 @@
               <span class="story-deck-word">${storyDisplayWord(c.key)}</span>
               <span class="story-deck-reading">${c.gloss[0] !== storyDisplayWord(c.key) ? c.gloss[0] : ''}</span>
               <span class="story-deck-meaning">${c.gloss[1]}</span>
+              ${pronounceButtons(c.gloss[0])}
               <button class="story-deck-remove" data-word="${c.key}" aria-label="Remove ${storyDisplayWord(c.key)} from flashcards" title="Remove">✕</button>
             </li>
           `).join('')
@@ -3793,9 +3740,10 @@
         <div class="story-panel-kicker">Word</div>
         <div class="story-panel-word" lang="ja">${word}</div>
         ${reading !== word ? `<div class="story-panel-reading" lang="ja">${reading}</div>` : ''}
+        ${pronounceButtons(reading, 'story-panel-speak')}
         <div class="story-panel-pos">${pos}</div>
         <div class="story-panel-meaning">${meaning}</div>
-        ${token.plain !== word ? `<div class="story-panel-form">In the text: <span lang="ja">${token.plain}</span></div>` : ''}
+        ${token.plain !== word ? `<div class="story-panel-form">In the text: <span lang="ja">${token.plain}</span>${pronounceButtons(storyKana(token.surface))}</div>` : ''}
         <button class="${savedNow ? 'btn-secondary' : 'btn-primary'} story-panel-add" id="btn-story-add-word">
           ${savedNow ? '✓ In flashcards — remove' : '＋ Add to flashcards'}
         </button>
@@ -3823,6 +3771,7 @@
     body.innerHTML = `
       <div class="story-panel-kicker">Sentence ${sel.s + 1}</div>
       <div class="story-panel-sentence" lang="ja">${storyRubyHtml(sentence.jp.split(' ').map(t => t.split('>')[0]).join(''))}</div>
+      ${pronounceButtons(storySentenceKana(sentence), 'story-panel-speak')}
       <div class="story-panel-en">${sentence.en}</div>
       <div class="story-panel-kicker">Grammar</div>
       <ul class="story-grammar-list">${items}</ul>
@@ -3880,6 +3829,7 @@
     const word = storyDisplayWord(card.key);
     $('#story-review-answer').innerHTML = `
       ${reading !== word ? `<div class="story-panel-reading" lang="ja">${reading}</div>` : ''}
+      ${pronounceButtons(reading, 'story-panel-speak')}
       <div class="story-panel-meaning">${meaning}</div>
       <div class="story-panel-pos">${pos}</div>
     `;
@@ -3923,6 +3873,8 @@
   function revealStoryReviewAnswer() {
     if (storyReviewAnswered) return;
     storyReviewAnswered = true;
+    const card = storyReviewCards[storyReviewIndex];
+    if (card) pronounceOnClick(card.gloss[0]);
     $('#story-review-reveal-area').classList.add('hidden');
     $('#story-review-answer-area').classList.remove('hidden');
   }
@@ -5014,12 +4966,6 @@
     on('#vocab-only-deck', 'change', renderVocabPage);
 
     on('#vocab-grid', 'click', (e) => {
-      const speakBtn = e.target.closest('.vocab-speak-btn');
-      if (speakBtn) {
-        const item = vocabRendered[+speakBtn.closest('.kanji-hover-card').dataset.i];
-        if (item) speakVocab(item, speakBtn.dataset.speak === 'slow');
-        return;
-      }
       const deckBtn = e.target.closest('.vocab-deck-btn');
       if (deckBtn) {
         onVocabDeckClick(deckBtn);
@@ -5029,12 +4975,11 @@
       if (!card) return;
       card.classList.toggle('revealed');
       const item = vocabRendered[+card.dataset.i];
-      if (vocabAutoSpeak && item) speakVocab(item, false);
+      if (item) pronounceOnClick(item.kana);
     });
 
     on('#btn-vocab-shuffle', 'click', shuffleVocabOrder);
-    on('#btn-vocab-autospeak', 'click', toggleVocabAutoSpeak);
-    renderVocabAutoSpeak();
+
 
     // ─── Words by kanji page ────────────────────────────────────────────────────
 
@@ -5046,6 +4991,11 @@
     on('#wbk-grid', 'click', (e) => {
       const card = e.target.closest('.wbk-kanji-card');
       if (card) openWbkOverlay(card.dataset.kanji);
+    });
+
+    on('#wbk-overlay-words', 'click', (e) => {
+      const row = e.target.closest('.wbk-word-row');
+      if (row) pronounceOnClick(row.dataset.kana);
     });
 
     on('#btn-wbk-close', 'click', closeWbkOverlay);
@@ -5165,11 +5115,18 @@
     on('#story-text', 'click', (e) => {
       const word = e.target.closest('.story-word');
       if (word) {
-        selectStoryWord(Number(word.dataset.s), Number(word.dataset.t));
+        const si = Number(word.dataset.s);
+        const ti = Number(word.dataset.t);
+        selectStoryWord(si, ti);
+        pronounceOnClick(storyKana(parseStorySentence(currentStory.sentences[si])[ti].surface));
         return;
       }
       const sentence = e.target.closest('.story-sentence');
-      if (sentence) selectStorySentence(Number(sentence.dataset.s));
+      if (sentence) {
+        const si = Number(sentence.dataset.s);
+        selectStorySentence(si);
+        pronounceOnClick(storySentenceKana(currentStory.sentences[si]));
+      }
     });
 
     on('#story-text', 'keydown', (e) => {
@@ -5232,7 +5189,12 @@
 
     on('#story-deck-list', 'click', (e) => {
       const btn = e.target.closest('.story-deck-remove');
-      if (!btn) return;
+      if (!btn) {
+        const row = e.target.closest('.story-deck-row');
+        const reading = row && row.querySelector('.speak-btn');
+        if (reading) pronounceOnClick(reading.dataset.say);
+        return;
+      }
       toggleStoryWord(btn.dataset.word);
       renderStoryDeck();
     });
