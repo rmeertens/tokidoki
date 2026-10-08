@@ -343,6 +343,7 @@
           direction: 'en-to-ja',
           sentence: { ja: Examples.stripFurigana(ex.ja), jaHtml: Examples.furiganaHtml(ex.ja), en: ex.en },
           hint: `${a.kanji} (${a.meaning}) · ${fi.name}`,
+          refForm: f,
           verb: null,
           form: null,
         });
@@ -4469,9 +4470,12 @@
     // Reference overlay
     function openReference() {
       const overlay = $('#ref-overlay');
-      const isAdj = currentCard && (currentCard.verb.type === 'i-adj' || currentCard.verb.type === 'na-adj');
+      // Translate cards have no word; adjective sentence cards carry the
+      // form they drill as refForm. Off a card, the page decides the tab.
+      const word = currentCard && currentCard.verb;
+      const isAdj = word ? isAdjCard(currentCard) : mode === 'adjectives';
       const verbType = isAdj ? 'adj' : 'verb';
-      const targetForm = currentCard ? currentCard.form : null;
+      const targetForm = currentCard ? (currentCard.form || currentCard.refForm || null) : null;
 
       $$('.ref-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === verbType));
       renderReference(verbType);
