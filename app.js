@@ -89,7 +89,7 @@
   const SETTINGS_KEY = 'tokidoki_settings';
 
   function loadSettings() {
-    const defaults = { typingMode: false, hideForm: true, showContext: true, englishToJapanese: true, showExampleFront: false, showFurigana: true, flashcardFurigana: true };
+    const defaults = { typingMode: false, hideForm: true, showContext: true, englishToJapanese: true, showExampleFront: false, showFurigana: true, flashcardFurigana: true, adjSentences: false };
     try { return { ...defaults, ...JSON.parse(localStorage.getItem(SETTINGS_KEY)) }; }
     catch { return defaults; }
   }
@@ -103,6 +103,10 @@
   let statsData = loadStats();
   let currentChapter = null;
   let studyMode = 'verbs';
+  // For studyMode 'translate': which deck the sentences came from —
+  // 'sentences' (sentences.html) or 'adjectives' (whole-sentence mode on
+  // adjectives.html), so "Next 20" carries on with the same deck.
+  let translateSource = 'sentences';
   let sessionCards = [];
   let sessionIndex = 0;
   let sessionCorrect = 0;
@@ -320,7 +324,64 @@
     return `adj:${adj.reading}:${form}`;
   }
 
+  // Whole-sentence cards for an adjective: one per form that has an example
+  // sentence (Examples.build), translated English → Japanese.
+  function adjSentenceCardId(adj, form) {
+    return `adjsent:${adj.reading}:${form}`;
+  }
+
+  function adjSentenceCards(chapter) {
+    const forms = Conjugator.getAdjFormsForChapter(chapter);
+    const cards = [];
+    getAdjectivesByChapter(chapter).forEach(a => {
+      forms.forEach(f => {
+        const ex = Examples.build(a, f, Conjugator.conjugateAdjective(a, f));
+        if (!ex) return;
+        const fi = Conjugator.getFormInfo(f);
+        cards.push({
+          id: adjSentenceCardId(a, f),
+          direction: 'en-to-ja',
+          sentence: { ja: Examples.stripFurigana(ex.ja), jaHtml: Examples.furiganaHtml(ex.ja), en: ex.en },
+          hint: `${a.kanji} (${a.meaning}) · ${fi.name}`,
+          verb: null,
+          form: null,
+        });
+      });
+    });
+    return cards;
+  }
+
+  function startAdjSentenceStudy(chapter, cont) {
+    studyMode = 'translate';
+    translateSource = 'adjectives';
+    currentChapter = chapter;
+    const all = adjSentenceCards(chapter);
+    if (all.length === 0) return;
+    const due = all.filter(c => isDue(getCardState(srsData, c.id)));
+    sessionCards = pickBatch(`adjsent:${chapter}`, due, all, cont);
+
+    sessionIndex = 0;
+    sessionCorrect = 0;
+    sessionTotal = sessionCards.length;
+    undoStack = [];
+
+    showScreen('study');
+    $('#session-complete').classList.add('hidden');
+    $('#card').classList.remove('hidden');
+    showCard();
+  }
+
+  function renderAdjModeToggle() {
+    const sentences = !!settings.adjSentences;
+    const word = $('#adj-mode-word');
+    const sent = $('#adj-mode-sentences');
+    if (word) word.checked = !sentences;
+    if (sent) sent.checked = sentences;
+  }
+
   function renderAdjChapters() {
+    renderAdjModeToggle();
+    const sentenceMode = !!settings.adjSentences;
     const g1 = $('#adj-chapters-genki1');
     const g2 = $('#adj-chapters-genki2');
     g1.innerHTML = '';
@@ -337,14 +398,14 @@
       let chapterReviewed = 0;
       let chapterDue = 0;
 
-      adjs.forEach(a => {
-        forms.forEach(f => {
-          chapterCards++;
-          const id = adjCardId(a, f);
-          const state = getCardState(srsData, id);
-          if (state.repetitions > 0) chapterReviewed++;
-          if (isDue(state)) chapterDue++;
-        });
+      const ids = sentenceMode
+        ? adjSentenceCards(ch).map(c => c.id)
+        : adjs.flatMap(a => forms.map(f => adjCardId(a, f)));
+      ids.forEach(id => {
+        chapterCards++;
+        const state = getCardState(srsData, id);
+        if (state.repetitions > 0) chapterReviewed++;
+        if (isDue(state)) chapterDue++;
       });
 
       const pct = chapterCards > 0 ? Math.round((chapterReviewed / chapterCards) * 100) : 0;
@@ -362,12 +423,12 @@
       card.className = 'chapter-card';
       card.innerHTML = `
         <div class="chapter-card-title">${info.title}</div>
-        <div class="chapter-card-sub">${typeSummary} &middot; ${forms.length} forms</div>
+        <div class="chapter-card-sub">${typeSummary} &middot; ${sentenceMode ? `${chapterCards} sentences` : `${forms.length} forms`}</div>
         ${formPills ? `<div class="chapter-card-forms">${formPills}</div>` : ''}
         <div class="chapter-progress"><div class="chapter-progress-fill" style="width:${pct}%"></div></div>
         ${chapterDue > 0 ? `<div class="chapter-card-due">${chapterDue} due</div>` : ''}
       `;
-      card.addEventListener('click', () => startAdjStudy(ch));
+      card.addEventListener('click', () => (sentenceMode ? startAdjSentenceStudy(ch) : startAdjStudy(ch)));
 
       if (info.book === 'Genki I') g1.appendChild(card);
       else g2.appendChild(card);
@@ -607,6 +668,7 @@
     if (settings.typingMode) {
       $('#reveal-area').classList.add('hidden');
       $('#typing-area').classList.remove('hidden');
+      $('#btn-hint-typing').classList.remove('hidden');
       const input = $('#answer-input');
       input.value = '';
       input.className = 'answer-input';
@@ -1272,7 +1334,9 @@
     $('#session-accuracy').textContent = acc + '%';
 
     const chapter = currentChapter;
-    if (studyMode === 'translate') {
+    if (studyMode === 'translate' && translateSource === 'adjectives') {
+      setContinueButton('#btn-session-continue', 'Next 20 →', () => startAdjSentenceStudy(chapter, true));
+    } else if (studyMode === 'translate') {
       const next = TRANSLATE_SENTENCES[chapter + 1] ? chapter + 1 : null;
       setContinueButton('#btn-session-continue', next ? `Next 20: Chapter ${next} →` : 'Again ↻',
         () => startTranslateStudy(next || chapter));
@@ -1653,6 +1717,7 @@
 
   function startTranslateStudy(chapter) {
     studyMode = 'translate';
+    translateSource = 'sentences';
     currentChapter = chapter;
 
     const sentences = TRANSLATE_SENTENCES[chapter];
@@ -1717,6 +1782,8 @@
     kanjiEl.classList.toggle('translate-source-en', isEnToJa);
 
     $('#card-prompt').textContent = `Translate to ${targetLang}`;
+    // Adjective sentences say which adjective and form the sentence drills.
+    $('#card-meaning').textContent = card.hint || '';
 
     $('#card-front').classList.remove('hidden');
     $('#card-back').classList.add('hidden');
@@ -1725,6 +1792,7 @@
     $('#reveal-area').classList.toggle('hidden', isTyping);
     $('#typing-area').classList.toggle('hidden', !isTyping);
     $('#btn-hint').classList.add('hidden');
+    $('#btn-hint-typing').classList.add('hidden');
 
     if (isTyping) {
       const input = $('#answer-input');
@@ -1743,6 +1811,7 @@
   function revealTranslateAnswer(typed = '') {
     if (answered) return;
     answered = true;
+    lastTypedCorrect = false;
     if (window.EnHover) EnHover.hide();
 
     const { sentence, direction } = currentCard;
@@ -1772,7 +1841,9 @@
 
     const originalContent = isEnToJa ? sentence.en : jaDisplay;
     const exEl = $('#card-example-sentence');
-    exEl.innerHTML = translateTypedHtml(typed, sentence, isEnToJa)
+    const typedHtml = translateTypedHtml(typed, sentence, isEnToJa);
+    if (lastTypedCorrect) sessionCorrect++;
+    exEl.innerHTML = typedHtml
       + `<div class="translate-original-label">Translation</div><div class="translate-original">${originalContent}</div>`;
   }
 
@@ -1790,7 +1861,8 @@
       answers.push(kana(alt), alt.replace(/<rp>.*?<\/rp>|<rt>.*?<\/rt>|<\/?ruby>/g, ''));
     }
     const key = s => s.normalize('NFKC').toLowerCase().replace(/[\s　。、．，,.!?！？「」'"’]/g, '');
-    if (answers.some(a => key(a) === key(typed))) {
+    lastTypedCorrect = answers.some(a => key(a) === key(typed));
+    if (lastTypedCorrect) {
       return `<div class="translate-typed"><span class="bunkei-ok">✓ Correct</span></div>`;
     }
     if (!window.AnswerDiff) return '';
@@ -4511,6 +4583,15 @@
     });
 
     // Back to chapters from session complete
+    // Adjectives page: single word vs whole-sentence translation.
+    $$('input[name="adj-mode"]').forEach(el => {
+      el.addEventListener('change', () => {
+        settings.adjSentences = $('#adj-mode-sentences').checked;
+        saveSettings(settings);
+        renderAdjChapters();
+      });
+    });
+
     on('#btn-back-to-chapters', 'click', () => {
       showScreen('chapters');
       if (mode === 'verbs') renderChapters();
@@ -5149,7 +5230,8 @@
       if (answered) {
         if (e.key === '1') { consumeKey(e); gradeAndAdvance(1); return; }
         if (e.key === '2' || e.key === ' ') { consumeKey(e); gradeAndAdvance(4); return; }
-        if (e.key === 'Enter' && settings.typingMode && studyMode !== 'translate') {
+        if (e.key === 'Enter' && settings.typingMode
+            && (studyMode !== 'translate' || currentCard.direction === 'en-to-ja')) {
           consumeKey(e);
           gradeAndAdvance(lastTypedCorrect ? 4 : 1);
           return;
