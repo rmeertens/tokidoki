@@ -89,5 +89,22 @@ check(Bunkei.matches(' 寿司を食べたいです ', tabe), 'surrounding spaces
 check(!Bunkei.matches('寿司を食べたいでした', tabe), 'wrong answer rejected');
 check(!Bunkei.matches('', tabe), 'empty answer rejected');
 
+// 家 is accepted as いえ or うち.
+let homeChecked = 0;
+verbs.forEach(verb => Bunkei.patternsFor(verb).forEach(p => {
+  const b = Bunkei.build(verb, p.id);
+  if (!b || !b.ja.includes('家[いえ]')) return;
+  homeChecked++;
+  check(Bunkei.matches(b.kana.split('いえ').join('うち'), b), `${verb.kanji} × ${p.id}: うち reading not accepted`);
+  check(Bunkei.matches(Examples.stripFurigana(b.ja.split('家[いえ]').join('うち')), b), `${verb.kanji} × ${p.id}: うち with kanji not accepted`);
+}));
+check(homeChecked > 0, 'expected some sentences with 家[いえ]');
+const goHome = verbs.map(v => Bunkei.build(v, 'tai')).find(b => b && b.kana === 'いえにかえりたいです。');
+check(!!goHome, 'expected a 家に帰りたいです sentence');
+if (goHome) {
+  check(Bunkei.matches('うち に かえりたい です', goHome), 'うち に かえりたい です accepted');
+  check(Bunkei.matches('いえにかえりたいです', goHome), 'いえにかえりたいです accepted');
+}
+
 console.log(`\n${combos} verb × pattern sentences; ${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

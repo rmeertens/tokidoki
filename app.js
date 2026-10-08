@@ -1768,9 +1768,16 @@
   // What was typed, set against the answer: a character diff when it's off.
   function translateTypedHtml(typed, sentence, isEnToJa) {
     if (!settings.typingMode || !typed) return '';
+    const kana = html => (window.EnHover ? EnHover.kanaOfRuby(html) : html);
     const answers = isEnToJa
-      ? [sentence.ja, window.EnHover ? EnHover.kanaOfRuby(sentence.jaHtml || sentence.ja) : sentence.ja]
+      ? [sentence.ja, kana(sentence.jaHtml || sentence.ja)]
       : [sentence.en];
+    // 家 read いえ can just as well be read うち.
+    const ie = '<ruby>家<rp>(</rp><rt>いえ</rt><rp>)</rp></ruby>';
+    if (isEnToJa && sentence.jaHtml && sentence.jaHtml.includes(ie)) {
+      const alt = sentence.jaHtml.split(ie).join('うち');
+      answers.push(kana(alt), alt.replace(/<rp>.*?<\/rp>|<rt>.*?<\/rt>|<\/?ruby>/g, ''));
+    }
     const key = s => s.normalize('NFKC').toLowerCase().replace(/[\s　。、．，,.!?！？「」'"’]/g, '');
     if (answers.some(a => key(a) === key(typed))) {
       return `<div class="translate-typed"><span class="bunkei-ok">✓ Correct</span></div>`;

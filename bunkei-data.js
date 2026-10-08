@@ -694,10 +694,21 @@
       .replace(/[ァ-ヶ]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0x60));
   }
 
+  // Words with a second, equally correct reading: 家 is いえ or うち.
+  const ALT_READINGS = { '家[いえ]': 'うち' };
+
+  // The sentence with each such word swapped for its other reading, as
+  // [plain, kana] pairs — empty when the sentence has none.
+  function altAnswers(ja) {
+    let alt = ja;
+    Object.keys(ALT_READINGS).forEach(w => { alt = alt.split(w).join(ALT_READINGS[w]); });
+    return alt === ja ? [] : [global.Examples.stripFurigana(alt), toKana(alt)];
+  }
+
   function matches(typed, built) {
     const t = normalize(typed);
     if (!t) return false;
-    return t === normalize(built.plain) || t === normalize(built.kana);
+    return [built.plain, built.kana, ...altAnswers(built.ja)].some(a => t === normalize(a));
   }
 
   global.Bunkei = { LEVELS, PATTERNS, PATTERN_BY_ID, patternsFor, usableVerbs, build, matches };
