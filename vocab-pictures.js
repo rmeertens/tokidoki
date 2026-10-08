@@ -130,5 +130,44 @@
     'ビル': 'skyscraper', '地下鉄': 'subway', '交差点': 'crossroads', 'エスカレーター': 'escalator',
     '空港': 'airport', '教会': 'church', '寺': 'temple', '工場': 'factory', '駐車場': 'parking', '劇場': 'theater',
     'スーパー': 'cart', '鐘': 'templebell', '衛星': 'satellite',
+
+    // days of the week: a calendar page with the day's element
+    '月曜日': 'monday', '火曜日': 'tuesday', '水曜日': 'wednesday', '木曜日': 'thursday', '金曜日': 'friday',
+    '土曜日': 'saturday', '日曜日': 'sunday',
+
+    // meals
+    '朝御飯': 'breakfast', '晩御飯': 'dinner', '食事': 'mealset', 'ごちそう': 'feast', '甘い': 'honey',
+    'ステーキ': 'steak', 'バター': 'butter', '味噌': 'misosoup', '茶碗': 'chawan', '冷たい': 'icedrink',
+    '沸かす': 'kettle', '焼く': 'grill',
+
+    // feelings, the body, gestures
+    '悲しい': 'sad', '好き': 'love', 'まずい': 'yuck', '疲れる': 'tired', '痛い': 'ouch', '風邪': 'mask',
+    '熱': 'fever', '考える': 'think', 'うるさい': 'noisy', '静か': 'shh', '美味しい': 'yummy', '歌う': 'sing',
+    '話す': 'talk', '会話': 'chat', '洗う': 'washhands', '祈る': 'pray', '上手': 'thumbsup', '下手': 'thumbsdown',
+    '大丈夫': 'okhand', '質問': 'question', '誰': 'who', '男性': 'male', '女性': 'female', '正しい': 'check',
+    '間違える': 'cross', '数学': 'math', '怖い': 'ghost', '挨拶': { person: { hair: 'short', top: 'jacket', topColor: 'green', bottom: 'trousers', pose: 'wave' } },
+
+    // doing things
+    '遊ぶ': 'swing', '開ける': 'opendoor', '押す': 'pushbutton', '踊る': 'dance', '滑る': 'slip',
+    '捕まえる': 'bugnet', '包む': 'furoshiki', '植える': 'planting', '育てる': 'wateringcan', '乾く': 'clothesline',
+    '塗る': 'roller', '折る': 'origami', '割れる': 'broken', '回る': 'koma', '送る': 'paperplane', '運ぶ': 'dolly',
+    '引っ越す': 'moving', '釣る': 'fishingrod', '探す': 'magnifier', '起きる': 'alarm', '磨く': 'toothbrush',
+    '見る': 'binoculars', '時間': 'hourglass', '勝つ': 'trophy', '競争': 'finishflag', '戻る': 'uturn',
+    '運動': 'dumbbell', '重い': 'weight', '遅い': 'snail', '運転': 'steering', 'コピーする': 'copier',
+
+    // signs and things
+    '危ない': 'warning', '止まる': 'stopsign', '出口': 'exitsign', '入口': 'entrance', '案内': 'info',
+    '名前': 'nametag', '値段': 'pricetag', '真中': 'target', '背': 'heightchart', 'メートル': 'tapemeasure',
+    '色': 'crayons', 'フィルム': 'filmroll', '形': 'shapes', 'ガス': 'gasflame', '日記': 'diary',
+    'ファックス': 'fax', '卒業': 'diploma', 'お祝い': 'popper', '季節': 'seasons', '正月': 'kadomatsu',
+    '夏休み': 'parasol', '天気': 'weather', '天気予報': 'forecast', 'ニュース': 'newstv', '乗り物': { items: ['car', 'bus', 'train'] },
+    '動物': { items: ['dog', 'cat', 'rabbit'] }, '科学': 'flask',
+
+    // places
+    '部屋': 'room', '玄関': 'genkan', '交番': 'koban', '映画館': 'cinema', 'デパート': 'depato',
+    '美術館': 'gallery', '旅館': 'ryokan', '床屋': 'barberpole', '歯医者': 'dentist', '入院': 'hospitalbed',
+    '受付': 'reception', 'レジ': 'register', 'ガソリンスタンド': 'gaspump', '港': 'lighthouse', '田舎': 'countryside',
+    '警察': 'policecar', '事故': 'crash', '故障': 'breakdown', 'コンサート': 'concert', '会議': 'meeting',
+    '花見': 'hanami', '小学校': 'randoseru', '砂': 'sandcastle', '坂': 'slope',
   };
 })(typeof window !== 'undefined' ? window : globalThis);
