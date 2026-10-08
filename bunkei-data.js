@@ -30,22 +30,50 @@
     be: 'been', begin: 'begun', break: 'broken', choose: 'chosen', come: 'come', do: 'done',
     draw: 'drawn', drink: 'drunk', drive: 'driven', eat: 'eaten', fall: 'fallen', forget: 'forgotten',
     get: 'gotten', give: 'given', go: 'gone', grow: 'grown', know: 'known', ride: 'ridden', run: 'run',
-    see: 'seen', sightsee: 'been sightseeing', sing: 'sung', speak: 'spoken', steal: 'stolen',
+    see: 'seen', show: 'shown', sightsee: 'been sightseeing', sing: 'sung', speak: 'spoken', steal: 'stolen',
     swim: 'swum', take: 'taken', wake: 'woken', withdraw: 'withdrawn', write: 'written', become: 'become',
   };
 
-  // Verbs of motion / existence, whose 〜ている means a resulting state
-  // ("has gone", "is here") rather than "is doing now".
-  const STATE_TE_IRU = ['行く', '来る', '帰る', '出かける', '入る', 'いる', 'ある', '起きる', '座る', '立つ', '乗る', '降りる', '結婚する', '卒業する'];
+  // Verbs whose 〜ている means a resulting state ("has gone", "is wearing",
+  // "knows", "has a cat") or a habit, rather than "is doing now".
+  const STATE_TE_IRU = ['行く', '来る', '帰る', '出かける', '入る', 'いる', 'ある', '起きる', '座る', '立つ', '乗る', '降りる', '結婚する', '卒業する',
+    '寝る', '知る', 'かぶる', 'はく', 'かける', '着る', '痩せる', '始める', '飼う', 'やめる', '諦める', '着く', '見つける', '離れる',
+    'もてる', '戻る', '思う', '賛成する', '約束を守る', '持ってくる', '持っていく', '連れてくる', 'ダイエットする', '勝つ'];
 
   // One-off life events: fine with "I've decided to" or "might", but not with
   // patterns marked `repeated` — ones that imply repetition, trying it out or
   // doing it together ("every day", "let's … together", "try … once").
   const ONE_OFF = ['卒業する', '結婚する', '就職する', '留学する', '離婚する', '優勝する', '引っ越す', 'なる', '別れる', '付き合う', '入学する'];
 
-  // Wrongdoing and mishaps: fine as "must not" or "was made to", but not as
-  // something to plan, wish for or report on (〜たら, 〜ばよかった…).
-  const NOT_ORDINARY = ['殴る', '盗む', '踏む', 'いじめる', '壊す', 'サボる', '離婚する', '別れる', '諦める', 'もてる', '心配する'];
+  // Wrongdoing and mishaps (NOT_ORDINARY): fine as "must not" or "ended up",
+  // but not as something to plan, wish for or report on (〜たら,
+  // 〜ばよかった…). WRONGDOING is never something to want, offer or recommend.
+  const WRONGDOING = ['殴る', '盗む', '踏む', 'いじめる', '壊す', 'サボる'];
+  const NOT_ORDINARY = [...WRONGDOING, '離婚する', '別れる', '諦める', 'もてる', '心配する'];
+
+  // Things that happen to you, or in your head, rather than something you set
+  // out to do: odd as a request, plan, permission or advice ("please think
+  // so", "you ought to arrive at the station").
+  const NOT_CHOSEN = ['思う', '心配する', 'もてる', '知る', '着く'];
+
+  // Small momentary actions: fine as a request or "have to", but too slight
+  // to decide on, plan, recommend or wonder about ("I've decided to sit on
+  // the chair", "I might press the button tomorrow").
+  const SMALL_ACTS = ['消す', '座る', '立つ', '入る', '開ける', 'つける', '押す', '降りる', '持つ', '着く', '曲がる', '置く',
+    'かぶる', 'はく', 'かける', '着る', '入れる', '切る', '触る', '包む', '貼る', '見せる', '選ぶ', '起こす', '持ってくる', '持っていく'];
+
+  // Objects whose "my" belongs to whoever does the action, so it follows the
+  // subject ("you'd better brush your teeth"), unlike 妹 or 財布, which stay
+  // the speaker's.
+  const OWN = ['磨く', '約束を守る', '脱ぐ'];
+
+  // Good habits, which nobody would forbid or call unnecessary ("you must
+  // not brush your teeth").
+  const GOOD_HABITS = ['磨く', '約束を守る'];
+
+  // 夫と離婚する is "divorce my husband", so only the speaker can do it: it
+  // doesn't work in patterns addressed to "you" or about someone else.
+  const MINE_ONLY = ['離婚する'];
 
   // Existence verbs read oddly in almost every pattern ("please let me be in
   // the classroom"), so they're left out of the drill.
@@ -117,9 +145,54 @@
   const BEDTIME = only(['磨く', '勉強する', '洗う', '片付ける', '消す', '電話をかける', '連絡する',
     '書く', '読む', '洗濯する', '掃除する', '着替える', '脱ぐ', '食べる', '謝る', '練習する', '調べる']);
 
+  // Things you'd do with someone, for 一緒に〜ませんか / 〜ましょう.
+  const SHARED = only(['行く', '帰る', '聞く', '飲む', '話す', '読む', '食べる', '見る', 'する', '勉強する', '撮る_photo',
+    '待つ', '泳ぐ', '乗る', '聞く_ask', 'やる', '出かける', '遊ぶ', '手伝う', '歌う', '作る', '料理する', '掃除する', '洗う',
+    '踊る', '運動する', '散歩する', '練習する', '習う', '登る', '決める', '取る_class', '調べる', '観光する', '片付ける',
+    '考える', '注文する', '寄る', '焼く', '走る', '拾う', '育てる', '頑張る', '描く_draw', '包む', '選ぶ', '運ぶ', '吸う',
+    '泊まる', '訳す', '謝る', '相談する', '急ぐ', '出る', '続ける', '覚える', '住む']);
+
+  // Preparations, for 〜ておきます ("do it now so it's done in advance").
+  const IN_ADVANCE = only(['買う_buy', '予約する', '調べる', '掃除する', '片付ける', '洗う', '洗濯する', '作る', '料理する',
+    '覚える', '勉強する', '決める', '開ける', '消す', '下ろす', '払う', '借りる', '返す', '出す', '連絡する', '送る', '着替える',
+    '包む', '練習する', '伝える', '呼ぶ', '電話をかける', '相談する', '聞く_ask', '探す', '選ぶ', '注文する', '招待する', '誘う',
+    '直す', '訳す', '翻訳する', 'ためる', '説明する', '交換する', '書く', '切る_cut', '運ぶ', '焼く']);
+
+  // Things worth trying out once, for 一度〜てみます.
+  const TRY = only(['食べる', '飲む', '読む', '見る', '書く', '作る', '料理する', '泳ぐ', '登る', '乗る', '使う', '弾く', '歌う',
+    '踊る', '編む', '描く_draw', '運転する', '住む', '生活する', '働く', '習う', '飼う_pet', '観光する', '泊まる', '話す', '聞く',
+    '吸う', '触る', '焼く', '育てる', '集める', '走る', '散歩する', '運動する', 'やる', '訳す', '翻訳する', '調べる', '聞く_ask',
+    '相談する', '練習する', '覚える', 'ダイエットする', '化粧する', '注文する', '起きる', '寝る', '電話をかける', '謝る', '説明する',
+    '着る_wear', 'はく', 'かぶる', 'かける', '来る', '出かける', '遊ぶ', '誘う', '教える', '売る', '押す', '開ける', '入れる',
+    '撮る_photo', '買う_buy', '借りる', '直す', '言う', '片付ける', '掃除する', '出る', '取る_class', '受ける', '答える', '探す']);
+
+  // Plans big enough to make a year ahead, for 来年〜つもりです.
+  const PLANS = only(['来る', '勉強する', '習う', '住む', '勤める', '痩せる', '結婚する', '取る_class', '登る', '働く', '飼う_pet',
+    'やめる', 'ダイエットする', '留学する', '売る', '探す', '観光する', '卒業する', '就職する', '引っ越す', '生活する', '招待する',
+    '育てる', 'ためる', '受ける', '離れる', '優勝する', '続ける', '教える', 'なる', '練習する', '頑張る', '翻訳する']);
+
+  // Daily habits, for 毎日〜ようにしています.
+  const HABITS = only(['話す', '起きる', '寝る', '勉強する', 'する', '泳ぐ', '電話をかける', '洗う', '言う', '洗濯する', '掃除する',
+    '料理する', '弾く', '覚える', '出る', '運動する', '散歩する', '練習する', '磨く', '約束を守る', '気をつける', '注意する',
+    '片付ける', '走る', 'ためる', '褒める', '拾う', '頑張る', '読む', '聞く']);
+
+  // Things you could complain of doing all the time, for 〜てばかりいます.
+  const ALL_THE_TIME = only(['食べる', '飲む', '吸う', '遊ぶ', '聞く', '勉強する', '働く', '休む', '心配する', '考える', 'しゃべる',
+    '謝る', '練習する', '弾く', '出かける', '寄る', '貸す', '買う_buy', '待つ', '走る', '運動する', 'サボる', '集める',
+    '電話をかける', '話す', '泳ぐ', '料理する', '掃除する', '洗濯する']);
+
+  // Things done on impulse or out of habit, for つい〜てしまいました.
+  const IMPULSE = only(['食べる', '飲む', '買う_buy', '吸う', '見る', '言う', 'しゃべる', '話す', '笑う', '遊ぶ', '押す', '触る',
+    '踏む', '壊す', '殴る', 'サボる', '休む', 'おごる', '貸す', '寄る', '注文する', '入れる', '起こす', '聞く', '読む', '消す',
+    '電話をかける', '諦める', '我慢する', '謝る', '答える']);
+
   // 〜てから: the drill verb happens first, then this second action
   // (寿司を食べてから → 歯を磨きます). Keyed like NAGARA; every usable verb has
   // an entry (test_bunkei.js checks), so add one here for any new verb.
+  // The English puts the "after" clause first, as the Japanese does, so "it"
+  // and "them" come after what they stand for. An optional third item
+  // replaces that clause when the verb's usual English doesn't fit (電車に
+  // 乗ってから is "after getting on the train", not "after riding" it).
   const TE_KARA = {
     '食べる': ['歯[は]を磨[みが]きます', 'brush my teeth'],
     '飲む': ['仕事[しごと]を始[はじ]めます', 'start work'],
@@ -140,8 +213,8 @@
     '調べる': ['レポートを書[か]きます', 'write the report'],
     '磨く': ['寝[ね]ます', 'go to bed'],
     '電話をかける': ['寝[ね]ます', 'go to bed'],
-    '料理する': ['家族[かぞく]と食[た]べます', 'eat with my family'],
-    '作る': ['家族[かぞく]と食[た]べます', 'eat with my family'],
+    '料理する': ['家族[かぞく]と食[た]べます', 'eat it with my family'],
+    '作る': ['家族[かぞく]と食[た]べます', 'eat it with my family'],
     '予約する': ['友達[ともだち]を誘[さそ]います', 'invite a friend'],
     '練習する': ['ジュースを飲[の]みます', 'drink some juice'],
     '散歩する': ['朝[あさ]ご飯[はん]を食[た]べます', 'eat breakfast'],
@@ -151,49 +224,49 @@
     '降りる': ['少[すこ]し歩[ある]きます', 'walk a little'],
     '行く': ['図書館[としょかん]で勉強[べんきょう]します', 'study at the library'],
     '聞く': ['寝[ね]ます', 'go to bed'],
-    '話す': ['英語[えいご]で説明[せつめい]します', 'explain it in English'],
+    '話す': ['英語[えいご]でも説明[せつめい]します', 'explain it in English too'],
     '寝る': ['朝[あさ]五時[ごじ]に起[お]きます', 'get up at five in the morning'],
     '来る': ['日本語[にほんご]を勉強[べんきょう]し始[はじ]めました', 'started studying Japanese'],
-    '会う': ['一緒[いっしょ]に映画[えいが]を見[み]ます', 'watch a movie together'],
+    '会う': ['一緒[いっしょ]に映画[えいが]を見[み]ます', 'watch a movie with them'],
     '撮る_photo': ['友達[ともだち]に送[おく]ります', 'send it to a friend'],
     '待つ': ['タクシーに乗[の]りました', 'took a taxi'],
     '泳ぐ': ['シャワーを浴[あ]びます', 'take a shower'],
     '聞く_ask': ['宿題[しゅくだい]をします', 'do my homework'],
-    '乗る': ['本[ほん]を読[よ]みます', 'read a book'],
+    '乗る': ['本[ほん]を読[よ]みます', 'read a book', 'getting on the train'],
     'やる': ['シャワーを浴[あ]びます', 'take a shower'],
-    '出かける': ['日曜日[にちようび]はゆっくり休[やす]みます', 'take it easy on Sunday'],
+    '出かける': ['月曜日[げつようび]からまた頑張[がんば]ります', 'get back to work on Monday'],
     '遊ぶ': ['家[いえ]に帰[かえ]ります', 'go home'],
     '急ぐ': ['電車[でんしゃ]に乗[の]りました', 'caught the train'],
     '消す': ['寝[ね]ます', 'go to bed'],
-    '座る': ['話[はなし]を始[はじ]めます', 'start talking'],
+    '座る': ['話[はなし]を始[はじ]めます', 'start talking', 'sitting down on the chair'],
     '立つ': ['写真[しゃしん]を撮[と]ります', 'take a photo'],
-    '吸う': ['仕事[しごと]に戻[もど]ります', 'go back to work'],
-    '使う': ['電源[でんげん]を切[き]ります', 'turn it off'],
-    '手伝う': ['一緒[いっしょ]に晩[ばん]ご飯[はん]を食[た]べます', 'have dinner together'],
+    '吸う': ['仕事[しごと]に戻[もど]ります', 'go back to work', 'having a cigarette'],
+    '使う': ['電源[でんげん]を切[き]ります', 'turn it off', 'using the computer'],
+    '手伝う': ['一緒[いっしょ]に晩[ばん]ご飯[はん]を食[た]べます', 'have dinner with them'],
     '入る': ['電気[でんき]をつけます', 'turn on the light'],
-    '持つ': ['家[いえ]を出[で]ます', 'leave the house'],
-    '休む': ['一日中[いちにちじゅう]寝[ね]ていました', 'slept all day'],
+    '持つ': ['家[いえ]を出[で]ます', 'leave the house', 'picking up my bag'],
+    '休む': ['友達[ともだち]にノートを借[か]りました', "borrowed a friend's notes", 'missing school'],
     '開ける': ['掃除[そうじ]をします', 'clean up'],
     '教える': ['日本語[にほんご]を習[なら]います', 'learn Japanese'],
     '借りる': ['家[いえ]で読[よ]みます', 'read it at home'],
     'つける': ['ニュースを見[み]ます', 'watch the news'],
-    '連れてくる': ['一緒[いっしょ]にゲームをします', 'play games together'],
+    '連れてくる': ['一緒[いっしょ]にゲームをします', 'play games with them'],
     '持ってくる': ['公園[こうえん]で食[た]べます', 'eat it in the park'],
     '歌う': ['水[みず]を飲[の]みます', 'drink some water'],
     'かぶる': ['出[で]かけます', 'go out'],
     '知る': ['彼[かれ]に手紙[てがみ]を書[か]きました', 'wrote him a letter'],
-    '住む': ['友達[ともだち]がたくさんできました', 'made lots of friends'],
+    '住む': ['友達[ともだち]がたくさんできました', 'made lots of friends', 'moving to Tokyo'],
     'はく': ['出[で]かけます', 'go out'],
     'かける': ['新聞[しんぶん]を読[よ]みます', 'read the newspaper'],
     '着る_wear': ['ネクタイを締[し]めます', 'put on a tie'],
-    '勤める': ['スーツを買[か]いました', 'bought a suit'],
-    '痩せる': ['新[あたら]しい水着[みずぎ]を買[か]います', 'buy a new swimsuit'],
+    '勤める': ['スーツを買[か]いました', 'bought a suit', 'starting work at a company'],
+    '痩せる': ['新[あたら]しい水着[みずぎ]を買[か]います', 'will buy a new swimsuit'],
     '結婚する': ['大阪[おおさか]に引[ひ]っ越[こ]しました', 'moved to Osaka'],
     '言う': ['部屋[へや]を出[で]ました', 'left the room'],
     '思う': ['友達[ともだち]にも聞[き]いてみました', 'asked a friend too'],
     '切る_cut': ['箱[はこ]に貼[は]ります', 'stick it on the box'],
     '持っていく': ['公園[こうえん]で食[た]べます', 'eat it in the park'],
-    '始める': ['一時間[いちじかん]で終[お]わりました', 'finished in an hour'],
+    '始める': ['一時間[いちじかん]で終[お]わりました', 'finished it in an hour'],
     '運転する': ['少[すこ]し休[やす]みます', 'take a short rest'],
     '洗濯する': ['外[そと]に干[ほ]します', 'hang them up outside'],
     '踊る': ['水[みず]を飲[の]みます', 'drink some water'],
@@ -201,7 +274,7 @@
     'もらう': ['お礼[れい]のメールを送[おく]ります', 'send a thank-you email'],
     '覚える': ['テストを受[う]けます', 'take the test'],
     '出る': ['アルバイトに行[い]きます', 'go to my part-time job'],
-    '泊まる': ['次[つぎ]の日[ひ]に京都[きょうと]へ行[い]きます', 'go to Kyoto the next day'],
+    '泊まる': ['次[つぎ]の日[ひ]に京都[きょうと]へ行[い]きます', 'will go to Kyoto the next day'],
     'なる': ['とても忙[いそが]しくなりました', 'got very busy'],
     '払う': ['店[みせ]を出[で]ます', 'leave the shop'],
     '決める': ['ホテルを予約[よやく]します', 'book a hotel'],
@@ -209,31 +282,31 @@
     '習う': ['日本[にほん]に旅行[りょこう]しました', 'traveled to Japan'],
     '登る': ['お弁当[べんとう]を食[た]べます', 'eat my boxed lunch'],
     '働く': ['料理[りょうり]が上手[じょうず]になりました', 'got good at cooking'],
-    '飼う_pet': ['早[はや]く起[お]きるようになりました', 'started getting up early'],
+    '飼う_pet': ['早[はや]く起[お]きるようになりました', 'started getting up early', 'getting a cat'],
     'サボる': ['先生[せんせい]に怒[おこ]られました', 'got told off by the teacher'],
     'やめる': ['世界[せかい]を旅行[りょこう]しました', 'traveled around the world'],
-    '紹介する': ['一緒[いっしょ]にご飯[はん]を食[た]べます', 'eat together'],
-    'ダイエットする': ['海[うみ]に行[い]きます', 'go to the beach'],
+    '紹介する': ['一緒[いっしょ]にご飯[はん]を食[た]べます', 'have a meal with them'],
+    'ダイエットする': ['海[うみ]に行[い]きます', 'will go to the beach'],
     '留学する': ['英語[えいご]が上手[じょうず]になりました', 'got better at English'],
     '別れる': ['毎日[まいにち]泣[な]いていました', 'cried every day'],
-    '心配する': ['よく眠[ねむ]れなくなりました', "couldn't sleep well"],
+    '心配する': ['先生[せんせい]に相談[そうだん]しました', 'talked it over with my teacher'],
     '編む': ['友達[ともだち]にあげます', 'give it to a friend'],
     '貸す': ['少[すこ]し後悔[こうかい]しました', 'regretted it a little'],
-    '頑張る': ['ゆっくり休[やす]みます', 'have a good rest'],
+    '頑張る': ['ゆっくり休[やす]みます', 'will have a good rest'],
     '約束を守る': ['気持[きも]ちが楽[らく]になりました', 'felt relieved'],
     '送る': ['友達[ともだち]に連絡[れんらく]します', 'let my friend know'],
     '諦める': ['新[あたら]しい仕事[しごと]を探[さが]しました', 'looked for a new job'],
-    'あげる': ['一緒[いっしょ]にケーキを食[た]べます', 'eat cake together'],
+    'あげる': ['一緒[いっしょ]にケーキを食[た]べます', 'eat cake with them'],
     '売る': ['自転車[じてんしゃ]を買[か]いました', 'bought a bicycle'],
     '下ろす': ['買[か]い物[もの]に行[い]きます', 'go shopping'],
     '描く_draw': ['壁[かべ]に飾[かざ]ります', 'hang it on the wall'],
     '探す': ['面接[めんせつ]を受[う]けました', 'had an interview'],
     '誘う': ['料理[りょうり]を準備[じゅんび]します', 'prepare the food'],
     'しゃべる': ['寝[ね]ます', 'go to bed'],
-    '付き合う': ['毎日[まいにち]が楽[たの]しくなりました', 'started enjoying every day more'],
+    '付き合う': ['毎日[まいにち]が楽[たの]しくなりました', 'found every day more fun', 'starting to go out with her'],
     '着く': ['友達[ともだち]に電話[でんわ]します', 'call my friend'],
     '気をつける': ['道[みち]を渡[わた]ります', 'cross the road'],
-    '観光する': ['旅館[りょかん]に泊[と]まります', 'stay at a ryokan'],
+    '観光する': ['旅館[りょかん]に泊[と]まります', 'will stay at a ryokan'],
     '卒業する': ['銀行[ぎんこう]に就職[しゅうしょく]しました', 'got a job at a bank'],
     '起こす': ['朝[あさ]ご飯[はん]を作[つく]ります', 'make breakfast'],
     'おごる': ['お金[かね]がなくなりました', 'had no money left'],
@@ -244,7 +317,7 @@
     '集める': ['友達[ともだち]に見[み]せます', 'show them to my friends'],
     '入れる': ['よく混[ま]ぜます', 'stir it well'],
     '見せる': ['旅行[りょこう]の話[はなし]をします', 'talk about my trip'],
-    '案内する': ['一緒[いっしょ]に晩[ばん]ご飯[はん]を食[た]べます', 'eat dinner together'],
+    '案内する': ['一緒[いっしょ]に晩[ばん]ご飯[はん]を食[た]べます', 'have dinner with them'],
     '説明する': ['質問[しつもん]に答[こた]えます', 'answer questions'],
     '選ぶ': ['レジで払[はら]います', 'pay at the register'],
     '化粧する': ['出[で]かけます', 'go out'],
@@ -258,14 +331,14 @@
     '引っ越す': ['新[あたら]しい友達[ともだち]ができました', 'made new friends'],
     '呼ぶ': ['空港[くうこう]に行[い]きます', 'go to the airport'],
     '寄る': ['家[いえ]に帰[かえ]ります', 'go home'],
-    'もてる': ['自信[じしん]がつきました', 'became more confident'],
-    '招待する': ['席[せき]を決[き]めます', 'decide on the seating'],
+    'もてる': ['自信[じしん]がつきました', 'became more confident', 'becoming popular at school'],
+    '招待する': ['席[せき]を決[き]めます', 'will decide on the seating'],
     '注意する': ['道[みち]を渡[わた]ります', 'cross the road'],
     '曲がる': ['まっすぐ行[い]きます', 'go straight on'],
-    '戻る': ['忘[わす]れ物[もの]を取[と]ります', 'get what I forgot'],
+    '戻る': ['忘[わす]れ物[もの]を取[と]ります', 'pick up what I forgot'],
     '伝える': ['家[いえ]に帰[かえ]ります', 'go home'],
     '交換する': ['別[わか]れました', 'said goodbye'],
-    '生活する': ['一人[ひとり]で何[なん]でもできるようになりました', 'learned to do everything on my own'],
+    '生活する': ['一人[ひとり]で何[なん]でもできるようになりました', 'learned to do everything on my own', 'living in Tokyo for a while'],
     '置く': ['椅子[いす]に座[すわ]ります', 'sit down on the chair'],
     '触る': ['手[て]を洗[あら]います', 'wash my hands'],
     '包む': ['リボンを付[つ]けます', 'tie a ribbon on it'],
@@ -275,19 +348,19 @@
     '踏む': ['猫[ねこ]に引[ひ]っかかれました', 'got scratched by the cat'],
     '焼く': ['友達[ともだち]と食[た]べます', 'eat it with my friends'],
     'いじめる': ['先生[せんせい]に怒[おこ]られました', 'got told off by the teacher'],
-    'ためる': ['車[くるま]を買[か]います', 'buy a car'],
-    '続ける': ['試験[しけん]に合格[ごうかく]しました', 'passed the exam'],
+    'ためる': ['車[くるま]を買[か]います', 'will buy a car'],
+    '続ける': ['試験[しけん]に合格[ごうかく]しました', 'passed the exam', 'keeping up my studies'],
     '褒める': ['宿題[しゅくだい]を返[かえ]します', 'hand back the homework'],
-    '見つける': ['警察[けいさつ]に届[とど]けました', 'took it to the police'],
+    '見つける': ['警察[けいさつ]に届[とど]けました', 'took it to the police', 'finding a wallet'],
     '連絡する': ['会[あ]う場所[ばしょ]を決[き]めます', 'decide where to meet'],
     '勝つ': ['みんなでお祝[いわ]いしました', 'celebrated with everyone'],
     '運ぶ': ['少[すこ]し休[やす]みます', 'take a short rest'],
     '拾う': ['ゴミ箱[ばこ]に捨[す]てます', 'throw it in the bin'],
     '育てる': ['料理[りょうり]に使[つか]います', 'use them in my cooking'],
     '助ける': ['お礼[れい]を言[い]われました', 'was thanked'],
-    '賛成する': ['理由[りゆう]を説明[せつめい]します', 'explain why'],
+    '賛成する': ['理由[りゆう]を説明[せつめい]します', 'will explain why'],
     '反対する': ['新[あたら]しい案[あん]を出[だ]しました', 'suggested a new idea'],
-    '翻訳する': ['出版社[しゅっぱんしゃ]に送[おく]ります', 'send it to the publisher'],
+    '翻訳する': ['出版社[しゅっぱんしゃ]に送[おく]ります', 'will send it to the publisher'],
     '受ける': ['友達[ともだち]と答[こた]えを確[たし]かめます', 'check the answers with my friends'],
     '答える': ['席[せき]に座[すわ]ります', 'sit back down'],
     '離れる': ['家族[かぞく]の大切[たいせつ]さがわかりました', 'realized how important my family is'],
@@ -296,7 +369,7 @@
   };
 
   // 〜前に: this action comes first, before the drill verb
-  // (寿司を食べる前に ← 手を洗います).
+  // (寿司を食べる前に ← 手を洗います). Entries work like TE_KARA's.
   const MAE_NI = {
     '食べる': ['手[て]を洗[あら]います', 'wash my hands'],
     '料理する': ['手[て]を洗[あら]います', 'wash my hands'],
@@ -311,7 +384,7 @@
     '書く': ['よく考[かんが]えます', 'think carefully'],
     '答える': ['よく考[かんが]えます', 'think carefully'],
     '見る': ['ポップコーンを買[か]います', 'buy popcorn'],
-    '乗る': ['切符[きっぷ]を買[か]います', 'buy a ticket'],
+    '乗る': ['切符[きっぷ]を買[か]います', 'buy a ticket', 'getting on the train'],
     '引っ越す': ['部屋[へや]を片付[かたづ]けます', 'tidy up my room'],
     '登る': ['天気[てんき]を調[しら]べます', 'check the weather'],
     '出る': ['教科書[きょうかしょ]を読[よ]みます', 'read the textbook'],
@@ -371,24 +444,29 @@
     // ── N5 ──
     { id: 'te-kudasai', level: 'N5', name: '〜てください', meaning: 'please do',
       note: 'A polite request: て-form + ください.',
+      skip: [...NOT_CHOSEN, ...WRONGDOING, ...MINE_ONLY],
       ja: p => `${p.pre}${p.c('te')}ください。`,
-      en: p => `Please ${p.v} ${p.o}.` },
+      en: p => `Please ${p.v} ${p.oYou}.` },
     { id: 'naide-kudasai', level: 'N5', name: '〜ないでください', meaning: 'please don\'t',
       note: 'A polite request not to do something: ない-form + でください.',
+      skip: ['もてる', '知る', '着く', '見つける', ...GOOD_HABITS, ...MINE_ONLY],
       ja: p => `${p.pre}${p.c('nai')}でください。`,
-      en: p => `Please don't ${p.v} ${p.o}.` },
+      en: p => `Please don't ${p.v} ${p.oYou}.` },
     { id: 'tai', level: 'N5', name: '〜たいです', meaning: 'want to',
       note: 'Your own wish: ます-stem + たい. It conjugates like an い-adjective.',
+      skip: [...WRONGDOING, '思う', '心配する'],
       ja: p => `${p.pre}${p.c('tai')}です。`,
       en: p => `I want to ${p.v} ${p.o}.` },
     { id: 'masen-ka', level: 'N5', name: '〜ませんか', meaning: 'won\'t you…? (invitation)',
       note: 'A polite invitation: ます-stem + ませんか.',
       repeated: true,
+      only: SHARED,
       ja: p => `一緒[いっしょ]に${p.pre}${p.stem}ませんか。`,
       en: p => `Would you like to ${p.v} ${p.o} together?` },
     { id: 'mashou', level: 'N5', name: '〜ましょう', meaning: 'let\'s',
       note: 'A suggestion to do something together: ます-stem + ましょう.',
       repeated: true,
+      only: SHARED,
       ja: p => `一緒[いっしょ]に${p.pre}${p.stem}ましょう。`,
       en: p => `Let's ${p.v} ${p.o} together.` },
     { id: 'te-iru', level: 'N5', name: '〜ています', meaning: 'am doing (now)',
@@ -399,105 +477,121 @@
       en: p => `I'm ${p.ing} ${p.o} right now.` },
     { id: 'te-mo-ii', level: 'N5', name: '〜てもいいですか', meaning: 'may I…?',
       note: 'Asking permission: て-form + もいいですか.',
+      skip: [...NOT_CHOSEN, ...WRONGDOING, '見つける', '勝つ', '優勝する', '約束を守る'],
       ja: p => `${p.pre}${p.c('te')}もいいですか。`,
       en: p => `May I ${p.v} ${p.o}?` },
     { id: 'te-wa-ikenai', level: 'N5', name: '〜てはいけません', meaning: 'must not',
       note: 'Prohibition: て-form + はいけません.',
+      skip: ['もてる', '知る', '着く', '見つける', '勝つ', '優勝する', ...GOOD_HABITS, ...MINE_ONLY],
       ja: p => `${p.pre}${p.c('te')}はいけません。`,
-      en: p => `You must not ${p.v} ${p.o}.` },
+      en: p => `You must not ${p.v} ${p.oYou}.` },
     { id: 'te-kara', level: 'N5', name: '〜てから', meaning: 'after doing',
       note: 'One action, then the next: て-form + から, then what comes after.',
       only: TE_KARA,
       ja: p => `${p.pre}${p.c('te')}から、${TE_KARA[p.key][0]}。`,
-      en: p => `I ${TE_KARA[p.key][1]} after ${p.ing} ${p.o}.` },
+      en: p => `After ${TE_KARA[p.key][2] || `${p.ing} ${p.o}`}, I ${TE_KARA[p.key][1]}.` },
     { id: 'mae-ni', level: 'N5', name: '〜前に', meaning: 'before doing',
       note: 'What you do first: dictionary form + 前に, then that action. The verb before 前に stays in the dictionary form even in the past.',
       only: MAE_NI,
       needs: 'dict',
       ja: p => `${p.pre}${p.c('dict')}前[まえ]に、${MAE_NI[p.key][0]}。`,
-      en: p => `I ${MAE_NI[p.key][1]} before ${p.ing} ${p.o}.` },
+      en: p => `Before ${MAE_NI[p.key][2] || `${p.ing} ${p.o}`}, I ${MAE_NI[p.key][1]}.` },
 
     // ── N4 ──
     { id: 'potential', level: 'N4', name: 'Potential 〜(ら)れます', meaning: 'can',
       note: 'Ability: う-verbs 〜える, る-verbs 〜られる, する → できる, くる → こられる. The object often takes が.',
       needs: 'potential',
+      skip: [...WRONGDOING, '思う', '離婚する'],
       ja: p => `${p.potPre}${ruTo(p.c('potential'), 'ます')}。`,
       en: p => `I can ${p.v} ${p.o}.` },
     { id: 'potential-neg', level: 'N4', name: 'Potential 〜(ら)れません', meaning: 'can\'t',
       note: 'Inability: the potential form, made negative like any る-verb.',
       needs: 'potential',
+      skip: [...WRONGDOING, 'もてる', '着く'],
       ja: p => `${p.potPre}${ruTo(p.c('potential'), 'ません')}。`,
       en: p => `I can't ${p.v} ${p.o}.` },
     { id: 'nakereba-naranai', level: 'N4', name: '〜なければなりません', meaning: 'must, have to',
       note: 'Obligation: ない-form, drop い, add ければなりません. Casual: 〜なきゃ.',
+      skip: [...NOT_CHOSEN, ...WRONGDOING],
       ja: p => `${p.pre}${naiTo(p.c('nai'), 'ければなりません')}。`,
       en: p => `I have to ${p.v} ${p.o}.` },
     { id: 'nakute-mo-ii', level: 'N4', name: '〜なくてもいいです', meaning: 'don\'t have to',
       note: 'No obligation: ない-form, drop い, add くてもいいです.',
+      skip: [...WRONGDOING, 'もてる', '知る', '着く', '見つける', ...GOOD_HABITS, ...MINE_ONLY],
       ja: p => `${p.pre}${naiTo(p.c('nai'), 'くてもいいです')}。`,
-      en: p => `You don't have to ${p.v} ${p.o}.` },
+      en: p => `You don't have to ${p.v} ${p.oYou}.` },
     { id: 'sasete-kudasai', level: 'N4', name: '〜させてください', meaning: 'please let me',
       note: 'Asking permission to do something yourself: causative て-form + ください.',
       needs: 'causative',
+      skip: [...NOT_CHOSEN, ...WRONGDOING, '見つける', '勝つ', '優勝する'],
       ja: p => `${p.pre}${ruTo(p.c('causative'), 'て')}ください。`,
       en: p => `Please let me ${p.v} ${p.o}.` },
     { id: 'ta-koto-ga-aru', level: 'N4', name: '〜たことがあります', meaning: 'have (ever) done',
       note: 'Past experience: た-form + ことがあります.',
       repeated: true,
+      skip: [...SMALL_ACTS, '帰る', '知る', '思う', '会う', '待つ', '電話をかける', '連絡する', '寝る', '起きる', '返す',
+        '払う', '磨く', '約束を守る', '戻る', '出す', '答える', '伝える', '始める', '着替える', '脱ぐ', '急ぐ', '寄る', '言う'],
       ja: p => `${p.pre}${p.c('ta')}ことがあります。`,
       en: p => `I have ${p.pp} ${p.o} before.` },
     { id: 'te-shimau', level: 'N4', name: '〜てしまいました', meaning: 'ended up doing (regret)',
       note: 'Something done that you regret, or did completely: て-form + しまいました. Casual: 〜ちゃった.',
       repeated: true,
+      only: IMPULSE,
       ja: p => `つい${p.pre}${p.c('te')}しまいました。`,
       en: p => `I ended up ${p.ing} ${p.o} without thinking.` },
     { id: 'te-oku', level: 'N4', name: '〜ておきます', meaning: 'do in advance',
       note: 'Doing something now to be ready later: て-form + おきます.',
       repeated: true,
+      only: IN_ADVANCE,
       ja: p => `先[さき]に${p.pre}${p.c('te')}おきます。`,
       en: p => `I'll ${p.v} ${p.o} first, so it's done in advance.` },
     { id: 'te-miru', level: 'N4', name: '〜てみます', meaning: 'try doing',
       note: 'Doing something to see how it goes: て-form + みます.',
       repeated: true,
+      only: TRY,
       ja: p => `一度[いちど]${p.pre}${p.c('te')}みます。`,
       en: p => `I'll try ${p.ing} ${p.o} once.` },
     { id: 'tsumori', level: 'N4', name: '〜つもりです', meaning: 'plan to, intend to',
       note: 'A plan you have already made: dictionary form + つもりです.',
+      only: PLANS,
       ja: p => `来年[らいねん]、${p.pre}${p.c('dict')}つもりです。`,
       en: p => `I plan to ${p.v} ${p.o} next year.` },
     { id: 'volitional-to-omou', level: 'N4', name: '〜(よ)うと思っています', meaning: 'thinking of doing',
       note: 'An intention you are considering: volitional form + と思っています.',
       needs: 'volitional',
+      skip: [...NOT_CHOSEN, ...WRONGDOING, ...SMALL_ACTS, '約束を守る'],
       ja: p => `${p.pre}${p.c('volitional')}と思[おも]っています。`,
       en: p => `I'm thinking of ${p.ing} ${p.o}.` },
     { id: 'hou-ga-ii', level: 'N4', name: '〜た方がいいです', meaning: 'you\'d better',
       note: 'Advice: た-form + 方がいいです.',
+      skip: [...NOT_CHOSEN, ...WRONGDOING, ...MINE_ONLY, '見つける', '吸う'],
       ja: p => `${p.pre}${p.c('ta')}方[ほう]がいいですよ。`,
-      en: p => `You'd better ${p.v} ${p.o}.` },
+      en: p => `You'd better ${p.v} ${p.oYou}.` },
     { id: 'kamoshirenai', level: 'N4', name: '〜かもしれません', meaning: 'might',
       note: 'Possibility: plain form + かもしれません.',
+      skip: [...SMALL_ACTS, ...WRONGDOING, ...GOOD_HABITS, '思う', '心配する', 'もてる', '住む', '勤める', '生活する', '飼う'],
       ja: p => `明日[あした]、${p.pre}${p.c('dict')}かもしれません。`,
       en: p => `I might ${p.v} ${p.o} tomorrow.` },
     { id: 'te-hoshii', level: 'N4', name: '〜てほしいです', meaning: 'want someone to',
       note: 'Wanting someone else to act: person に + て-form + ほしいです.',
-      skip: ['会う', '手伝う'],
+      skip: ['会う', '手伝う', ...WRONGDOING, ...MINE_ONLY, '思う', '心配する', '着く', '知る'],
       ja: p => `弟[おとうと]に${p.pre}${p.c('te')}ほしいです。`,
-      en: p => `I want my little brother to ${p.v} ${p.o}.` },
+      en: p => `I want my little brother to ${p.v} ${p.oHis}.` },
     { id: 'nagara', level: 'N4', name: '〜ながら', meaning: 'while doing',
       note: 'Two actions at once by the same person: ます-stem + ながら, then the main action.',
       only: NAGARA,
       ja: p => `${p.pre}${p.stem}ながら、${NAGARA[p.key][0]}。`,
-      en: p => `I ${NAGARA[p.key][1]} while ${p.ing} ${p.o}.` },
+      en: p => `While ${p.ing} ${p.o}, I ${NAGARA[p.key][1]}.` },
     { id: 'tara', level: 'N4', name: '〜たら', meaning: 'once, when (I\'ve done)',
       note: 'Once one thing has happened, the next follows: た-form + ら.',
       skip: ['寝る', '電話をかける', '連絡する', '待つ', '住む', '勤める', '飼う', '思う', '立つ', '持つ', '座る',
-        '気をつける', '注意する', '頑張る', '生活する', '我慢する', '続ける', '笑う', '着く', ...NOT_ORDINARY],
+        '気をつける', '注意する', '頑張る', '生活する', '我慢する', '続ける', '笑う', '着く', '約束を守る', ...NOT_ORDINARY],
       ja: p => `${p.pre}${p.c('ta')}ら、連絡[れんらく]します。`,
       en: p => `I'll get in touch once I've ${p.pp} ${p.o}.` },
     { id: 'ba-yokatta', level: 'N4', name: '〜ばよかったです', meaning: 'I wish I had',
       note: 'Regret about something you didn\'t do: ば-form + よかったです.',
       needs: 'ba',
-      skip: ['立つ', '座る', '持つ', '笑う', '住む', ...NOT_ORDINARY],
+      skip: ['立つ', '座る', '持つ', '笑う', '住む', '思う', '着く', ...NOT_ORDINARY],
       ja: p => `${p.pre}${p.c('ba')}よかったです。`,
       en: p => `I wish I had ${p.pp} ${p.o}.` },
     { id: 'you-ni-naru', level: 'N4', name: '〜ようになりました', meaning: 'can now, have come to',
@@ -542,39 +636,46 @@
     { id: 'causative-passive', level: 'N3', name: '〜させられました', meaning: 'was made to',
       note: 'Being made to do something against your will: causative-passive form. Casual う-verb form: 〜される (書かされる).',
       needs: 'causative-passive',
+      skip: [...NOT_CHOSEN, ...WRONGDOING, '勝つ', '優勝する'],
       ja: p => `父[ちち]に${p.pre}${ruTo(p.c('causative-passive'), 'ました')}。`,
       en: p => `My father made me ${p.v} ${p.o}.` },
     { id: 'beki', level: 'N3', name: '〜べきです', meaning: 'should, ought to',
       note: 'What is right or proper: dictionary form + べきです (する → するべき or すべき).',
       repeated: true,
+      skip: [...NOT_CHOSEN, ...WRONGDOING, ...SMALL_ACTS, '吸う', '勝つ', '優勝する', '見つける'],
       ja: p => `${p.pre}${p.c('dict')}べきです。`,
-      en: p => `You really ought to ${p.v} ${p.o}.` },
+      en: p => `You really ought to ${p.v} ${p.oYou}.` },
     { id: 'koto-ni-suru', level: 'N3', name: '〜ことにしました', meaning: 'decided to',
       note: 'A decision you made yourself: dictionary form + ことにしました.',
+      skip: [...NOT_CHOSEN, ...WRONGDOING, ...SMALL_ACTS, '勝つ', '優勝する', '見つける'],
       ja: p => `${p.pre}${p.c('dict')}ことにしました。`,
       en: p => `I've decided to ${p.v} ${p.o}.` },
     { id: 'you-ni-suru', level: 'N3', name: '〜ようにしています', meaning: 'make a point of',
       note: 'A habit you keep up deliberately: dictionary form + ようにしています.',
       repeated: true,
+      only: HABITS,
       ja: p => `毎日[まいにち]${p.pre}${p.c('dict')}ようにしています。`,
       en: p => `I make a point of ${p.ing} ${p.o} every day.` },
     { id: 'wake-ni-wa-ikanai', level: 'N3', name: '〜わけにはいきません', meaning: 'can\'t possibly',
       note: 'Something you can\'t do for social or moral reasons: dictionary form + わけにはいきません.',
+      skip: [...NOT_CHOSEN, ...WRONGDOING, ...SMALL_ACTS, ...GOOD_HABITS, '勝つ', '優勝する', '見つける'],
       ja: p => `今日[きょう]は${p.pre}${p.c('dict')}わけにはいきません。`,
       en: p => `I can't possibly ${p.v} ${p.o} today.` },
     { id: 'koto-wa-nai', level: 'N3', name: '〜ことはありません', meaning: 'there\'s no need to',
       note: 'Reassurance that something is unnecessary: dictionary form + ことはありません.',
+      skip: [...NOT_CHOSEN, ...WRONGDOING, ...SMALL_ACTS, ...GOOD_HABITS, ...MINE_ONLY, '勝つ', '優勝する', '見つける'],
       ja: p => `無理[むり]に${p.pre}${p.c('dict')}ことはありません。`,
-      en: p => `There's no need to force yourself to ${p.v} ${p.o}.` },
+      en: p => `There's no need to force yourself to ${p.v} ${p.oYou}.` },
     { id: 'te-bakari', level: 'N3', name: '〜てばかりいます', meaning: 'do nothing but',
       note: 'Doing one thing all the time, usually as a complaint: て-form + ばかりいます.',
       repeated: true,
+      only: ALL_THE_TIME,
       ja: p => `最近[さいきん]、${p.pre}${p.c('te')}ばかりいます。`,
       en: p => `Lately I do nothing but ${p.v} ${p.o}.` },
     { id: 'you-to-suru', level: 'N3', name: '〜(よ)うとしました', meaning: 'tried to (but couldn\'t)',
       note: 'An attempt, usually one that failed: volitional form + としました.',
       needs: 'volitional',
-      skip: ['笑う', '思う', '考える', '住む', '生活する', ...NOT_ORDINARY],
+      skip: ['笑う', '思う', '考える', '住む', '生活する', '着く', ...NOT_ORDINARY],
       ja: p => `${p.pre}${p.c('volitional')}としましたが、できませんでした。`,
       en: p => `I tried to ${p.v} ${p.o}, but I couldn't.` },
     { id: 'zuni', level: 'N3', name: '〜ずに', meaning: 'without doing',
@@ -604,6 +705,7 @@
     const { inflect, gerund, pastTense } = global.Examples.english;
     const c = form => global.Examples.withKanji(verb, Conjugator.conjugate(verb, form));
     const head = ctx.v.split(' ')[0];
+    const own = who => (OWN.includes(verb.kanji) ? (ctx.o || '').replace(/\bmy\b/g, who) : ctx.o || '');
     return {
       ctx,
       key: verbKey(verb),
@@ -614,6 +716,9 @@
       zuni: zuniForm(verb, c('nai')),
       v: ctx.v,
       o: ctx.o || '',
+      // the object when someone else does it: "brush your teeth", "his teeth"
+      oYou: own('your'),
+      oHis: own('his'),
       ing: inflect(ctx.v, gerund),
       past: inflect(ctx.v, pastTense),
       // "have been to Japan", not "have gone to Japan"

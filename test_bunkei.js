@@ -19,7 +19,8 @@ check(verbs.length > 100, `expected 100+ usable verbs, got ${verbs.length}`);
 let combos = 0;
 verbs.forEach(verb => {
   const patterns = Bunkei.patternsFor(verb);
-  check(patterns.length >= 15, `${verb.kanji}: only ${patterns.length} patterns`);
+  // Some verbs only fit a few patterns (盗む, 思う…), but every verb fits some.
+  check(patterns.length >= 3, `${verb.kanji}: only ${patterns.length} patterns`);
   patterns.forEach(p => {
     const b = Bunkei.build(verb, p.id);
     const where = `${verb.kanji} × ${p.id}`;
@@ -52,7 +53,7 @@ expect('来る', 'causative-passive', '父に日本に来させられました�
 expect('する', 'potential', '運動ができます。', 'I can get exercise.');
 expect('勉強する', 'nakute-mo-ii', '日本語を勉強しなくてもいいです。');
 expect('飲む', 'volitional-to-omou', 'コーヒーを飲もうと思っています。');
-expect('食べる', 'nagara', '寿司を食べながら、テレビを見ます。', 'I watch TV while eating sushi.');
+expect('食べる', 'nagara', '寿司を食べながら、テレビを見ます。', 'While eating sushi, I watch TV.');
 expect('勉強する', 'nagara', '日本語を勉強しながら、音楽を聞きます。');
 expect('食べる', 'tara', '寿司を食べたら、連絡します。', "I'll get in touch once I've eaten sushi.");
 expect('行く', 'ba-yokatta', '学校に行けばよかったです。');
@@ -60,8 +61,8 @@ expect('泳ぐ', 'you-ni-naru', 'やっとプールで泳げるようになり�
 expect('する', 'you-to-suru', '運動をしようとしましたが、できませんでした。');
 expect('磨く', 'zuni', '昨日は歯を磨かずに寝ました。', 'Yesterday I went to bed without brushing my teeth.');
 expect('勉強する', 'zuni', '昨日は日本語を勉強せずに寝ました。');
-expect('食べる', 'te-kara', '寿司を食べてから、歯を磨きます。', 'I brush my teeth after eating sushi.');
-expect('入る', 'mae-ni', '部屋に入る前に、靴を脱ぎます。', 'I take off my shoes before entering the room.');
+expect('食べる', 'te-kara', '寿司を食べてから、歯を磨きます。', 'After eating sushi, I brush my teeth.');
+expect('入る', 'mae-ni', '部屋に入る前に、靴を脱ぎます。', 'Before entering the room, I take off my shoes.');
 expect('作る', 'te-ageru', 'カレーを作ってあげましょうか。', 'Shall I make curry for you?');
 expect('直す', 'te-kureru', '友達がパソコンを直してくれました。', 'My friend fixed the computer for me.');
 expect('書く', 'te-morau', '兄に手紙を書いてもらいました。', 'I had my big brother write a letter for me.');
@@ -82,6 +83,19 @@ check(nagaraVerbs.length >= 40, `expected 40+ verbs with 〜ながら, got ${nag
 check(Bunkei.build(find('結婚する'), 'mashou') === null, '結婚する should skip "let\'s … together"');
 check(Bunkei.build(find('行く'), 'te-iru') === null, '行く should skip 〜ています (it means "has gone")');
 check(!find('いる'), 'いる should be excluded');
+expect('就職する', 'te-kara', '銀行に就職してから、一人暮らしを始めました。',
+  'After getting a job at a bank, I started living on my own.');
+expect('撮る', 'te-kara', '写真を撮ってから、友達に送ります。', 'After taking a photo, I send it to a friend.');
+expect('乗る', 'te-kara', '電車に乗ってから、本を読みます。', 'After getting on the train, I read a book.');
+expect('磨く', 'hou-ga-ii', '歯を磨いた方がいいですよ。', "You'd better brush your teeth.");
+expect('磨く', 'te-hoshii', '弟に歯を磨いてほしいです。', 'I want my little brother to brush his teeth.');
+expect('見せる', 'tara', '写真を見せたら、連絡します。', "I'll get in touch once I've shown the photos.");
+// Wrongdoing only as a warning or a regret, never as a wish, plan or invitation.
+['tai', 'te-miru', 'tsumori', 'beki', 'mashou', 'te-oku', 'you-ni-suru'].forEach(id =>
+  check(Bunkei.build(find('盗む'), id) === null, `盗む should skip ${id}`));
+check(Bunkei.build(find('盗む'), 'te-wa-ikenai'), '盗む should keep 〜てはいけません');
+check(Bunkei.build(find('思う'), 'te-kudasai') === null, '思う should skip 〜てください ("please think so")');
+check(Bunkei.build(find('消す'), 'tsumori') === null, '消す should skip 来年〜つもり');
 
 const tabe = Bunkei.build(find('食べる'), 'tai');
 check(Bunkei.matches('すしをたべたいです', tabe), 'all-hiragana answer accepted');
