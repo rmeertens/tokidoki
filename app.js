@@ -3933,10 +3933,24 @@
   }
 
   // Adds `count` random verbs to the selection, skipping ones already picked.
+  // Adds `count` random verbs, best fit for the selected patterns first.
+  // With `reroll`, the current verbs are swapped out for new ones instead
+  // (falling back to them only when there aren't enough others).
+  function addRandomBunkeiVerbs(count, reroll) {
+    if (reroll) {
+      const previous = new Set(bunkeiSettings.verbs);
+      const fresh = pickRandomBunkeiVerbs(count, previous);
+      bunkeiSettings.verbs = fresh.length >= count ? fresh : [...fresh, ...pickRandomBunkeiVerbs(count - fresh.length, new Set(fresh))];
+    } else {
+      bunkeiSettings.verbs = [...bunkeiSettings.verbs, ...pickRandomBunkeiVerbs(count, new Set(bunkeiSettings.verbs))];
+    }
+    saveBunkeiSettings(bunkeiSettings);
+    renderBunkeiPage();
+  }
+
   // Prefers verbs that work with every selected pattern (〜前に, 〜ながら… only
   // suit some verbs); if too few do, takes the ones that work with the most.
-  function addRandomBunkeiVerbs(count) {
-    const picked = new Set(bunkeiSettings.verbs);
+  function pickRandomBunkeiVerbs(count, picked) {
     const selected = new Set(bunkeiSettings.patterns);
     const verbs = getBunkeiVerbs()
       .filter(v => !picked.has(bunkeiVerbKey(v)))
@@ -3944,9 +3958,7 @@
       .filter(x => x.fit > 0 || selected.size === 0);
     shuffle(verbs);
     verbs.sort((a, b) => b.fit - a.fit);
-    bunkeiSettings.verbs = [...bunkeiSettings.verbs, ...verbs.slice(0, count).map(x => bunkeiVerbKey(x.v))];
-    saveBunkeiSettings(bunkeiSettings);
-    renderBunkeiPage();
+    return verbs.slice(0, count).map(x => bunkeiVerbKey(x.v));
   }
 
   function startBunkeiStudy() {
@@ -4873,11 +4885,7 @@
     document.querySelectorAll('.bunkei-random-btn').forEach(btn => {
       btn.addEventListener('click', () => addRandomBunkeiVerbs(Number(btn.dataset.count)));
     });
-    on('#btn-bunkei-clear-verbs', 'click', () => {
-      bunkeiSettings.verbs = [];
-      saveBunkeiSettings(bunkeiSettings);
-      renderBunkeiPage();
-    });
+    on('#btn-bunkei-reroll-verbs', 'click', () => addRandomBunkeiVerbs(3, true));
     on('#bunkei-patterns', 'change', (e) => {
       const id = e.target.dataset.pattern;
       if (!id) return;
