@@ -1011,6 +1011,12 @@ a.chapter-card {
   line-height: 1.8;
 }
 
+.translate-typed {
+  margin: 0 0 12px;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
 .answer-diff-label {
   display: inline-block;
   min-width: 6.5em;

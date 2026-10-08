@@ -678,7 +678,7 @@
     if (answered) return;
 
     if (studyMode === 'translate') {
-      revealTranslateAnswer();
+      revealTranslateAnswer(Romaji.flush($('#answer-input')).trim());
       return;
     }
 
@@ -1755,7 +1755,7 @@
     updateUndoButton();
   }
 
-  function revealTranslateAnswer() {
+  function revealTranslateAnswer(typed = '') {
     if (answered) return;
     answered = true;
     if (window.EnHover) EnHover.hide();
@@ -1787,7 +1787,27 @@
 
     const originalContent = isEnToJa ? sentence.en : jaDisplay;
     const exEl = $('#card-example-sentence');
-    exEl.innerHTML = `<div class="translate-original-label">Translation</div><div class="translate-original">${originalContent}</div>`;
+    exEl.innerHTML = translateTypedHtml(typed, sentence, isEnToJa)
+      + `<div class="translate-original-label">Translation</div><div class="translate-original">${originalContent}</div>`;
+  }
+
+  // What was typed, set against the answer: a character diff when it's off.
+  function translateTypedHtml(typed, sentence, isEnToJa) {
+    if (!settings.typingMode || !typed) return '';
+    const answers = isEnToJa
+      ? [sentence.ja, window.EnHover ? EnHover.kanaOfRuby(sentence.jaHtml || sentence.ja) : sentence.ja]
+      : [sentence.en];
+    const key = s => s.normalize('NFKC').toLowerCase().replace(/[\s　。、．，,.!?！？「」'"’]/g, '');
+    if (answers.some(a => key(a) === key(typed))) {
+      return `<div class="translate-typed"><span class="bunkei-ok">✓ Correct</span></div>`;
+    }
+    if (!window.AnswerDiff) return '';
+    const target = AnswerDiff.closest(typed, answers);
+    const d = AnswerDiff.diff(typed, target);
+    return `<div class="translate-typed answer-diff"${isEnToJa ? ' lang="ja"' : ''}>`
+      + `<div><span class="answer-diff-label">You typed</span>${AnswerDiff.toHtml(d.typed, 'diff-wrong')}</div>`
+      + `<div><span class="answer-diff-label">Expected</span>${AnswerDiff.toHtml(d.expected, 'diff-missing')}</div>`
+      + `</div>`;
   }
 
   // ─── Kana Drawing Practice ─────────────────────────────────────────────────────
