@@ -423,37 +423,18 @@
 
   // ─── Study Session ─────────────────────────────────────────────────────────────
 
-  function startStudy(chapter) {
+  function startStudy(chapter, cont) {
     studyMode = 'verbs';
     currentChapter = chapter;
     const verbs = getVerbsByChapter(chapter);
     const forms = Conjugator.getFormsForChapter(chapter);
 
-    sessionCards = [];
+    const all = [];
     verbs.forEach(v => {
-      forms.forEach(f => {
-        const id = cardId(v, f);
-        const state = getCardState(srsData, id);
-        if (isDue(state)) {
-          sessionCards.push({ verb: v, form: f, id });
-        }
-      });
+      forms.forEach(f => all.push({ verb: v, form: f, id: cardId(v, f) }));
     });
-
-    if (sessionCards.length === 0) {
-      verbs.forEach(v => {
-        forms.forEach(f => {
-          const id = cardId(v, f);
-          sessionCards.push({ verb: v, form: f, id });
-        });
-      });
-    }
-
-    sessionCards = prioritizeDifficult(sessionCards);
-
-    if (sessionCards.length > 20) {
-      sessionCards = sessionCards.slice(0, 20);
-    }
+    const due = all.filter(c => isDue(getCardState(srsData, c.id)));
+    sessionCards = pickBatch(`verbs:${chapter}`, due, all, cont);
 
     sessionIndex = 0;
     sessionCorrect = 0;
@@ -466,37 +447,18 @@
     showCard();
   }
 
-  function startAdjStudy(chapter) {
+  function startAdjStudy(chapter, cont) {
     studyMode = 'adjectives';
     currentChapter = chapter;
     const adjs = getAdjectivesByChapter(chapter);
     const forms = Conjugator.getAdjFormsForChapter(chapter);
 
-    sessionCards = [];
+    const all = [];
     adjs.forEach(a => {
-      forms.forEach(f => {
-        const id = adjCardId(a, f);
-        const state = getCardState(srsData, id);
-        if (isDue(state)) {
-          sessionCards.push({ verb: a, form: f, id });
-        }
-      });
+      forms.forEach(f => all.push({ verb: a, form: f, id: adjCardId(a, f) }));
     });
-
-    if (sessionCards.length === 0) {
-      adjs.forEach(a => {
-        forms.forEach(f => {
-          const id = adjCardId(a, f);
-          sessionCards.push({ verb: a, form: f, id });
-        });
-      });
-    }
-
-    sessionCards = prioritizeDifficult(sessionCards);
-
-    if (sessionCards.length > 20) {
-      sessionCards = sessionCards.slice(0, 20);
-    }
+    const due = all.filter(c => isDue(getCardState(srsData, c.id)));
+    sessionCards = pickBatch(`adjectives:${chapter}`, due, all, cont);
 
     sessionIndex = 0;
     sessionCorrect = 0;
@@ -1297,6 +1259,21 @@
     $('#session-correct').textContent = sessionCorrect;
     const acc = sessionIndex > 0 ? Math.round((sessionCorrect / sessionIndex) * 100) : 0;
     $('#session-accuracy').textContent = acc + '%';
+
+    const chapter = currentChapter;
+    if (studyMode === 'translate') {
+      const next = TRANSLATE_SENTENCES[chapter + 1] ? chapter + 1 : null;
+      setContinueButton('#btn-session-continue', next ? `Next 20: Chapter ${next} →` : 'Again ↻',
+        () => startTranslateStudy(next || chapter));
+    } else if (studyMode === 'verbs') {
+      setContinueButton('#btn-session-continue', 'Next 20 →', () => startStudy(chapter, true));
+    } else if (studyMode === 'adjectives') {
+      setContinueButton('#btn-session-continue', 'Next 20 →', () => startAdjStudy(chapter, true));
+    } else if (studyMode === 'custom') {
+      setContinueButton('#btn-session-continue', 'Next 30 →', () => startCustomStudy(true));
+    } else {
+      setContinueButton('#btn-session-continue', '', null);
+    }
   }
 
   // ─── Reference Screen ─────────────────────────────────────────────────────────
@@ -1583,7 +1560,7 @@
     $('#btn-start-custom-mid').disabled = disabled;
   }
 
-  function startCustomStudy() {
+  function startCustomStudy(cont) {
     if (customFormsSelected.size === 0 || customVerbsSelected.size === 0) return;
 
     studyMode = 'custom';
@@ -1611,10 +1588,7 @@
 
     if (sessionCards.length === 0) return;
 
-    sessionCards = prioritizeDifficult(sessionCards);
-    if (sessionCards.length > 30) {
-      sessionCards = sessionCards.slice(0, 30);
-    }
+    sessionCards = pickBatch('custom', [], sessionCards, cont, 30);
 
     sessionIndex = 0;
     sessionCorrect = 0;
@@ -1846,16 +1820,12 @@
     $('#kana-due-count').textContent = due;
   }
 
-  function startKanaStudy() {
+  function startKanaStudy(cont) {
     const pool = getKanaPool();
     if (pool.length === 0) return;
 
     const due = pool.filter(k => isDue(getCardState(srsData, k.id)));
-    kanaSessionCards = prioritizeDifficult(due.length > 0 ? due : pool.slice());
-
-    if (kanaSessionCards.length > 20) {
-      kanaSessionCards = kanaSessionCards.slice(0, 20);
-    }
+    kanaSessionCards = pickBatch('kana', due, pool, cont);
 
     kanaIndex = 0;
     kanaCorrect = 0;
@@ -1931,6 +1901,7 @@
     $('#kana-session-total').textContent = kanaTotal;
     $('#kana-session-correct').textContent = kanaCorrect;
     $('#kana-session-accuracy').textContent = (kanaTotal > 0 ? Math.round((kanaCorrect / kanaTotal) * 100) : 0) + '%';
+    setContinueButton('#btn-kana-continue', 'Next 20 →', () => startKanaStudy(true));
   }
 
   function initKanaCanvas() {
@@ -2060,16 +2031,12 @@
     if (el) el.textContent = due;
   }
 
-  function startKanjiQuizStudy() {
+  function startKanjiQuizStudy(cont) {
     const pool = getKanjiQuizPool();
     if (pool.length === 0) return;
 
     const due = pool.filter(k => isDue(getCardState(srsData, k.id)));
-    kanjiQuizSessionCards = prioritizeDifficult(due.length > 0 ? due : pool.slice());
-
-    if (kanjiQuizSessionCards.length > 20) {
-      kanjiQuizSessionCards = kanjiQuizSessionCards.slice(0, 20);
-    }
+    kanjiQuizSessionCards = pickBatch('kanji-quiz', due, pool, cont);
 
     kanjiQuizIndex = 0;
     kanjiQuizCorrect = 0;
@@ -2207,6 +2174,7 @@
     $('#kanji-quiz-session-total').textContent = kanjiQuizTotal;
     $('#kanji-quiz-session-correct').textContent = kanjiQuizCorrect;
     $('#kanji-quiz-session-accuracy').textContent = (kanjiQuizTotal > 0 ? Math.round((kanjiQuizCorrect / kanjiQuizTotal) * 100) : 0) + '%';
+    setContinueButton('#btn-kanji-quiz-continue', 'Next 20 →', () => startKanjiQuizStudy(true));
   }
 
   // ─── Confusing Kanji (multiple-choice, using visually-similar kanji groups) ────
@@ -2286,16 +2254,12 @@
     return result;
   }
 
-  function startConfusableStudy() {
+  function startConfusableStudy(cont) {
     const pool = getConfusablePool();
     if (pool.length === 0) return;
 
     const due = pool.filter(k => isDue(getCardState(srsData, k.id)));
-    confusableSessionCards = prioritizeDifficult(due.length > 0 ? due : pool.slice());
-
-    if (confusableSessionCards.length > 20) {
-      confusableSessionCards = confusableSessionCards.slice(0, 20);
-    }
+    confusableSessionCards = pickBatch('confusable', due, pool, cont);
 
     confusableIndex = 0;
     confusableCorrect = 0;
@@ -2435,6 +2399,7 @@
     $('#confusable-session-total').textContent = confusableTotal;
     $('#confusable-session-correct').textContent = confusableCorrect;
     $('#confusable-session-accuracy').textContent = (confusableTotal > 0 ? Math.round((confusableCorrect / confusableTotal) * 100) : 0) + '%';
+    setContinueButton('#btn-confusable-continue', 'Next 20 →', () => startConfusableStudy(true));
   }
 
   // ─── Particle quiz (multiple-choice fill-in-the-blank) ─────────────────────────
@@ -2469,7 +2434,7 @@
     const selected = getSelectedParticles();
     return (window.PARTICLE_QUIZ_ITEMS || [])
       .filter(item => selected.includes(item.particle))
-      .map(item => ({ ...item, id: particleCardId(item) }));
+      .map(item => ({ ...item, itemId: item.id, id: particleCardId(item) }));
   }
 
   // Builds the particle toggle checkboxes once from PARTICLE_LIST — the
@@ -2503,16 +2468,12 @@
     return result;
   }
 
-  function startParticlesStudy() {
+  function startParticlesStudy(cont) {
     const pool = getParticlesPool();
     if (pool.length === 0) return;
 
     const due = pool.filter(item => isDue(getCardState(srsData, item.id)));
-    particlesSessionCards = prioritizeDifficult(due.length > 0 ? due : pool.slice());
-
-    if (particlesSessionCards.length > 20) {
-      particlesSessionCards = particlesSessionCards.slice(0, 20);
-    }
+    particlesSessionCards = pickBatch('particles', due, pool, cont);
 
     particlesIndex = 0;
     particlesCorrect = 0;
@@ -2575,16 +2536,12 @@
       }
     });
 
-    // Only explain wrong answers — a right answer doesn't need justifying.
+    // Explain this sentence: why its particle fits, and why each of the
+    // other choices offered doesn't.
     const explanationEl = $('#particles-explanation');
     if (explanationEl) {
-      if (!correct) {
-        const explanation = (window.PARTICLE_EXPLANATIONS || {})[currentParticleCard.particle] || '';
-        explanationEl.textContent = `The correct answer is ${currentParticleCard.particle}. ${explanation}`;
-        explanationEl.classList.remove('hidden');
-      } else {
-        explanationEl.classList.add('hidden');
-      }
+      explanationEl.innerHTML = particleExplanationHtml(currentParticleCard, currentParticleChoices, correct);
+      explanationEl.classList.remove('hidden');
     }
 
     const id = currentParticleCard.id;
@@ -2612,6 +2569,21 @@
 
     $('#particles-next-area').classList.remove('hidden');
     updateParticlesUndoButton();
+  }
+
+  function particleExplanationHtml(card, choices, correct) {
+    const esc = t => t.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const fmt = t => esc(t).replace(/\*([^*]+)\*/g, '<em>$1</em>');
+    const note = (window.PARTICLE_NOTES || {})[card.itemId];
+    const why = note ? note.why : ((window.PARTICLE_EXPLANATIONS || {})[card.particle] || '');
+    let html = `<div class="particle-why"><span class="particle-tag particle-tag-ok" lang="ja">${card.particle}</span>`
+      + `<span>${correct ? '' : `The answer is ${card.particle}. `}${fmt(why)}</span></div>`;
+    if (note) {
+      choices.filter(p => p !== card.particle && note.not[p]).forEach(p => {
+        html += `<div class="particle-why"><span class="particle-tag particle-tag-ng" lang="ja">${p}</span><span>${fmt(note.not[p])}</span></div>`;
+      });
+    }
+    return html;
   }
 
   function advanceParticles() {
@@ -2654,6 +2626,7 @@
     $('#particles-session-total').textContent = particlesTotal;
     $('#particles-session-correct').textContent = particlesCorrect;
     $('#particles-session-accuracy').textContent = (particlesTotal > 0 ? Math.round((particlesCorrect / particlesTotal) * 100) : 0) + '%';
+    setContinueButton('#btn-particles-continue', 'Next 20 →', () => startParticlesStudy(true));
   }
 
   // ─── Confusable kanji browse page (confusable-kanji.html) ──────────────────────
@@ -3471,11 +3444,11 @@
 
   // ── Flashcard review ──
 
-  function startStoryReview() {
+  function startStoryReview(cont) {
     const deck = getStoryDeck();
     if (deck.length === 0) return;
     const due = deck.filter(c => isDue(getCardState(srsData, c.id)));
-    storyReviewCards = prioritizeDifficult(due.length > 0 ? due : deck.slice()).slice(0, 20);
+    storyReviewCards = pickBatch('story-review', due, deck, cont);
     storyReviewIndex = 0;
     storyReviewCorrect = 0;
 
@@ -3571,6 +3544,7 @@
     $('#story-review-total').textContent = total;
     $('#story-review-correct').textContent = storyReviewCorrect;
     $('#story-review-accuracy').textContent = total ? `${Math.round((storyReviewCorrect / total) * 100)}%` : '0%';
+    setContinueButton('#btn-story-review-continue', 'Next 20 →', () => startStoryReview(true));
   }
 
   // ─── Bunkei drill (bunkei.html) ───────────────────────────────────────────────
@@ -3859,6 +3833,37 @@
       const j = Math.floor(Math.random() * (i + 1));
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
+  }
+
+  // Cards already handed out since a session was started from its setup
+  // screen, per quiz, so "Next 20" carries on with cards not yet seen
+  // instead of serving the same batch again.
+  const sessionSeen = {};
+
+  // The next batch: due cards first, then the rest of the pool, skipping
+  // cards seen this run; once everything has been seen, start over.
+  function pickBatch(key, due, pool, cont, size = 20) {
+    if (cont !== true || !sessionSeen[key]) sessionSeen[key] = new Set();
+    const seen = sessionSeen[key];
+    const fresh = list => list.filter(c => !seen.has(c.id));
+    let cards = fresh(due);
+    if (cards.length === 0) cards = fresh(pool);
+    if (cards.length === 0) {
+      seen.clear();
+      cards = due.length > 0 ? due : pool.slice();
+    }
+    cards = prioritizeDifficult(cards).slice(0, size);
+    cards.forEach(c => seen.add(c.id));
+    return cards;
+  }
+
+  // The "Next 20" button on a session-complete screen.
+  function setContinueButton(sel, label, onClick) {
+    const btn = $(sel);
+    if (!btn) return;
+    btn.textContent = label;
+    btn.classList.toggle('hidden', !onClick);
+    btn.onclick = onClick || null;
   }
 
   function prioritizeDifficult(cards) {

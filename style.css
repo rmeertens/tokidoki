@@ -1369,6 +1369,37 @@ a.chapter-card {
   color: var(--text);
 }
 
+.particle-why {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+}
+
+.particle-why + .particle-why {
+  margin-top: 8px;
+}
+
+.particle-tag {
+  flex: none;
+  min-width: 1.8em;
+  padding: 0 4px;
+  border-radius: 4px;
+  font-family: var(--font-jp);
+  font-weight: 700;
+  text-align: center;
+}
+
+.particle-tag-ok {
+  color: var(--green);
+  background: var(--green-dim);
+}
+
+.particle-tag-ng {
+  color: var(--red);
+  background: var(--red-dim);
+  text-decoration: line-through;
+}
+
 /* Confusable kanji browse page */
 .confusable-group-grid {
   display: grid;
@@ -1744,6 +1775,13 @@ a.chapter-card {
 .session-complete {
   text-align: center;
   padding: 40px 20px;
+}
+
+.session-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
 }
 
 .complete-icon {
