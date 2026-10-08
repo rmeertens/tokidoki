@@ -47,7 +47,7 @@
   // often read the wrong way (何[なん] as なに, 降[ふ]り as おり, 十分[じゅっぷん]
   // as じゅうぶん), which are spoken from their furigana. The audio generator
   // checks every other reading against the furigana too.
-  const SPEAK_AS_KANA = new Set(['何', '降', '十分', '要', '後', '行', '辛', '薬', '角', '開', '何色', '二十歳', '日本']);
+  const SPEAK_AS_KANA = new Set(['何', '降', '十分', '要', '後', '行', '辛', '薬', '角', '開', '何色', '二十歳', '日本', '時計', '五分', '垂', '方', '眠', '第三', '手数', '切']);
   const speech = markup => pieces(markup).map(p => (p.r && SPEAK_AS_KANA.has(p.t) ? p.r : p.t)).join('').replace(/ /g, '');
 
   const esc = s => String(s).replace(/[&<>"']/g, c =>
@@ -58,6 +58,19 @@
       ? `<ruby>${esc(p.t)}<rt>${esc(p.r)}</rt></ruby>`
       : esc(p.t.replace(/ /g, ''))).join('');
   }
+
+  // Choices printed as Japanese text (N3, N2) rather than drawn.
+  const isPhrases = item => item.choices.every(c => c.type === 'phrase');
+
+  // Which 問題 a part is at each level: the JLPT numbers its parts per level,
+  // and N3 and N2 have a 概要理解 part (N2 no 発話表現).
+  const PART_NUMS = {
+    N5: { kadai: 1, point: 2, hatsuwa: 3, sokuji: 4 },
+    N4: { kadai: 1, point: 2, hatsuwa: 3, sokuji: 4 },
+    N3: { kadai: 1, point: 2, gaiyou: 3, hatsuwa: 4, sokuji: 5 },
+    N2: { kadai: 1, point: 2, gaiyou: 3, sokuji: 4 },
+  };
+  const partNum = (section, level) => (PART_NUMS[level] || PART_NUMS.N3)[section.id] || PART_NUMS.N3[section.id];
 
   // The question asked again after the conversation: the intro's last sentence.
   function questionOf(item) {
@@ -103,12 +116,13 @@
     return h;
   }
 
-  // Some speakers talk faster or slower, like real people: about one N4
-  // conversation in six is brisk, and one N5 conversation in eight slow.
+  // Some speakers talk faster or slower, like real people: about one N4–N2
+  // conversation in six is brisk (and one in twelve slower), and one N5
+  // conversation in eight slow. N3 and N2 are faster to begin with.
   function paceOf(section, item) {
     const h = hashString(section.id + '/' + item.id + '/pace') % 24;
-    if (item.level === 'N4') return h < 4 ? 'fast' : '';
-    return h < 3 ? 'slow' : '';
+    if (item.level === 'N5') return h < 3 ? 'slow' : '';
+    return h < 4 ? 'fast' : h < 6 ? 'slow' : '';
   }
 
   // { N, M, F } → { id, name, speed } for one question. Speed is VOICEVOX's
@@ -118,7 +132,7 @@
     const key = section.id + '/' + item.id;
     const want = item.voices || {};
     const pace = item.pace || paceOf(section, item);
-    const base = (item.level === 'N4' ? 1.04 : 0.94) + ({ slow: -0.08, fast: 0.1 }[pace] || 0);
+    const base = ({ N5: 0.94, N4: 1.04, N3: 1.08, N2: 1.12 }[item.level] || 1) + ({ slow: -0.08, fast: 0.1 }[pace] || 0);
     const pick = g => {
       const h = hashString(key + '/' + g);
       const pool = POOLS[g][want[g] || 'adult'];
@@ -146,9 +160,23 @@
     step('N', '', number + '番。', 700, 'num');
 
     if (section.kind === 'pictures') {
-      step('N', item.intro, item.sayIntro, 1200, 'intro');
+      // Printed choices (N3, N2) get time to read them before the talk.
+      step('N', item.intro, item.sayIntro, isPhrases(item) ? 3500 : 1200, 'intro');
       item.lines.forEach((l, i) => step(l.who, l.ja, l.say, 450, 'line' + i));
       step('N', questionOf(item), '', 0, 'question');
+      return steps;
+    }
+
+    if (section.kind === 'summary') {
+      // 概要理解: the situation, the talk, and only then the question and
+      // four spoken choices, read by the narrator.
+      step('N', item.intro, item.sayIntro, 900, 'intro');
+      item.lines.forEach((l, i) => step(l.who, l.ja, l.say, 500, 'line' + i));
+      step('N', item.question, '', 800, 'question');
+      item.choices.forEach((c, i) => {
+        step('N', '', NUMBERS[i] + '。', 250, 'choice' + i);
+        step('N', c.ja, c.say, i < item.choices.length - 1 ? 700 : 0, 'choice' + i);
+      });
       return steps;
     }
 
@@ -194,26 +222,34 @@
   }
 
   // Mock tests in the layout of the real listening section: questions per
-  // part for each level, as in the JLPT (N5: 7 / 6 / 5 / 6, N4: 8 / 7 / 5 / 8).
+  // part for each level, as in the JLPT (N5: 7 / 6 / 5 / 6, N4: 8 / 7 / 5 / 8,
+  // N3: 6 / 6 / 3 / 4 / 9; N2: 5 / 6 / 5 / 12, without its 統合理解 part).
   // A level's questions are spread over its tests in a fixed shuffled order,
   // so each test mixes kinds of question; as many full tests are made as the
   // questions allow.
-  const TEST_LAYOUT = { N5: [7, 6, 5, 6], N4: [8, 7, 5, 8] };
+  const TEST_LAYOUT = {
+    N5: { kadai: 7, point: 6, hatsuwa: 5, sokuji: 6 },
+    N4: { kadai: 8, point: 7, hatsuwa: 5, sokuji: 8 },
+    N3: { kadai: 6, point: 6, gaiyou: 3, hatsuwa: 4, sokuji: 9 },
+    N2: { kadai: 5, point: 6, gaiyou: 5, sokuji: 12 },
+  };
+  const LEVELS = Object.keys(TEST_LAYOUT);
   function mockTests(sections, level) {
-    const pools = sections.map(section => section.items
+    const parts = sections.filter(section => TEST_LAYOUT[level][section.id]);
+    const pools = parts.map(section => section.items
       .filter(item => item.level === level)
       .map(item => ({ section, item, h: hashString(audioKey(section, item) + '/test') }))
       .sort((a, b) => a.h - b.h));
-    const sizes = TEST_LAYOUT[level];
+    const sizes = parts.map(section => TEST_LAYOUT[level][section.id]);
     const count = Math.min(...pools.map((pool, i) => Math.floor(pool.length / sizes[i])));
     const tests = [];
     for (let t = 0; t < count; t++) {
-      tests.push({ id: `${level}-${t + 1}`, level, number: t + 1, parts: pools.map((pool, i) => pool.slice(t * sizes[i], (t + 1) * sizes[i])) });
+      tests.push({ id: `${level}-${t + 1}`, level, number: t + 1, sections: parts, parts: pools.map((pool, i) => pool.slice(t * sizes[i], (t + 1) * sizes[i])) });
     }
     return tests;
   }
 
-  const api = { pieces, plain, reading, speech, rubyHtml, questionOf, buildScript, scriptHash, recorded, audioKey, NUMBERS_KEY, castFor, prepare, mockTests, TEST_LAYOUT, VOICES, NARRATOR, POOLS };
+  const api = { pieces, plain, reading, speech, rubyHtml, questionOf, buildScript, scriptHash, recorded, audioKey, NUMBERS_KEY, castFor, prepare, mockTests, TEST_LAYOUT, LEVELS, partNum, isPhrases, VOICES, NARRATOR, POOLS };
   if (global.LISTENING_SECTIONS) prepare(global.LISTENING_SECTIONS);
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   global.Listening = api;
@@ -232,8 +268,9 @@
   }
 
   const SECTIONS = global.LISTENING_SECTIONS || [];
-  const settings = Object.assign({ speed: 1, exam: false, script: false, furigana: true, level: 'all' }, load(SETTINGS_KEY, {}));
-  const store = Object.assign({ best: {}, missed: [] }, load(STORE_KEY, {}));
+  const settings = Object.assign({ speed: 1, exam: false, script: false, furigana: true, level: 'all', setSize: 5 }, load(SETTINGS_KEY, {}));
+  const store = Object.assign({ best: {}, missed: [], setPos: {} }, load(STORE_KEY, {}));
+  if (!store.setPos) store.setPos = {};
   if (!Array.isArray(store.missed)) store.missed = [];
 
   const $ = id => document.getElementById(id);
@@ -531,22 +568,42 @@
 
   const levelOk = item => settings.level === 'all' || item.level === settings.level;
   const keyOf = (section, item) => section.id + '/' + item.id;
-  const TESTS = ['N5', 'N4'].flatMap(level => mockTests(SECTIONS, level));
-  const LEVEL_NAME = { all: 'all levels', N5: 'N5', N4: 'N4' };
+  const TESTS = LEVELS.flatMap(level => mockTests(SECTIONS, level));
+  const LEVEL_NAME = { all: 'all levels', N5: 'N5', N4: 'N4', N3: 'N3', N2: 'N2' };
+  const numOf = section => partNum(section, settings.level === 'all' ? 'N3' : settings.level);
+
+  // Practising one part goes through it in sets (5, 10, or all at once),
+  // remembering where the last set ended.
+  const setKey = id => id + '-' + settings.level;
+  function setInfo(id, n) {
+    const size = settings.setSize && settings.setSize < n ? settings.setSize : n;
+    const pos = (store.setPos[setKey(id)] || 0) % Math.max(1, n);
+    return { size, pos, number: Math.floor(pos / size) + 1, count: Math.ceil(n / size) };
+  }
 
   // A session's questions, numbered 1番, 2番… within each part.
   function queueFor(id) {
     let picked;
     const test = TESTS.find(t => t.id === id);
     if (test) picked = test.parts.flat();
-    else if (id === 'missed') picked = SECTIONS.flatMap(section => section.items.filter(item => store.missed.includes(keyOf(section, item))).map(item => ({ section, item })));
-    else if (id === 'quick') {
+    else if (id === 'missed') {
+      picked = SECTIONS.flatMap(section => section.items.filter(item => store.missed.includes(keyOf(section, item))).map(item => ({ section, item })));
+      if (settings.setSize) picked = picked.slice(0, settings.setSize);
+    } else if (id === 'quick') {
       const pool = SECTIONS.flatMap(section => section.items.filter(levelOk).map(item => ({ section, item, r: Math.random() })));
-      picked = pool.sort((x, y) => x.r - y.r).slice(0, 10)
+      picked = pool.sort((x, y) => x.r - y.r).slice(0, settings.setSize || 20)
         .sort((x, y) => SECTIONS.indexOf(x.section) - SECTIONS.indexOf(y.section));
     } else {
       const sections = id === 'all' ? SECTIONS : SECTIONS.filter(s => s.id === id);
-      picked = sections.flatMap(section => section.items.filter(levelOk).map(item => ({ section, item })));
+      const all = sections.flatMap(section => section.items.filter(levelOk).map(item => ({ section, item })));
+      const { size, pos } = setInfo(id, all.length);
+      picked = all.concat(all).slice(pos, pos + size);
+      // Each question keeps its number in its part, whichever set it falls in.
+      const numberOf = e => all.filter(o => o.section === e.section).indexOf(e) + 1;
+      return picked.map(e => ({
+        section: e.section, item: e.item, number: numberOf(e),
+        answered: false, picked: null, played: false,
+      }));
     }
     const count = {};
     return picked.map(({ section, item }) => ({
@@ -570,17 +627,20 @@
         <span class="lis-test-go" aria-hidden="true">▶</span>
       </button>`;
     }).join('');
-    $('lis-quick-meta').textContent = `10 random questions · ${LEVEL_NAME[settings.level]}`;
-    $('lis-sections').innerHTML = SECTIONS.map(s => {
+    $('lis-quick-meta').textContent = `${settings.setSize || 20} random questions · ${LEVEL_NAME[settings.level]}`;
+    document.querySelectorAll('[data-set]').forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.set) === settings.setSize)));
+    $('lis-tests-none').classList.toggle('hidden', !!tests.length);
+    $('lis-sections').innerHTML = SECTIONS.filter(s => s.items.some(levelOk)).map(s => {
       const n = s.items.filter(levelOk).length;
       const b = store.best[s.id + '-' + settings.level];
-      return `<button class="lis-part-row" data-section="${s.id}"${n ? '' : ' disabled'}>
-        <span class="lis-part-badge" lang="ja">問題${s.num}</span>
+      const set = setInfo(s.id, n);
+      return `<button class="lis-part-row" data-section="${s.id}">
+        <span class="lis-part-badge" lang="ja">問題${numOf(s)}</span>
         <span class="lis-part-body">
           <span class="lis-part-title">${esc(s.en)} <span class="lis-part-ja" lang="ja">${esc(plain(s.ja))}</span></span>
           <span class="lis-part-desc">${esc(s.desc)}</span>
         </span>
-        <span class="lis-part-meta">${n} Qs${b ? `<br>best ${b.score}/${b.total}` : ''}</span>
+        <span class="lis-part-meta">${set.count > 1 ? `set ${set.number}/${set.count}<br>` : ''}${n} Qs${b ? `<br>best ${b.score}/${b.total}` : ''}</span>
         <span class="lis-part-go" aria-hidden="true">›</span>
       </button>`;
     }).join('');
@@ -597,8 +657,8 @@
     document.body.classList.toggle('lis-no-furigana', !settings.furigana);
   }
 
-  function start(id) {
-    const queue = queueFor(id);
+  function start(id, again) {
+    const queue = again ? again.map(q => Object.assign({}, q, { answered: false, picked: null, played: false })) : queueFor(id);
     if (!queue.length) return;
     const test = TESTS.find(t => t.id === id);
     session = { id, queue, pos: 0, title: test ? `${test.level} 模擬試験 ${test.number}` : '' };
@@ -613,25 +673,30 @@
     const q = current();
     const { section, item } = q;
     playsLeft = settings.exam ? 1 : Infinity;
-    $('lis-part').innerHTML = `<span class="lis-part-badge" lang="ja">問題${section.num}</span> ${esc(section.en)} <span class="lis-level">${session.title ? esc(session.title) : item.level}</span>`;
+    $('lis-part').innerHTML = `<span class="lis-part-badge" lang="ja">問題${partNum(section, item.level)}</span> ${esc(section.en)} <span class="lis-level">${session.title ? esc(session.title) : item.level}</span>`;
     $('lis-number').textContent = `${q.number}番`;
     $('lis-progress-text').textContent = `${session.pos + 1} / ${session.queue.length}`;
     $('lis-bar-fill').style.width = `${(session.pos / session.queue.length) * 100}%`;
     $('lis-instructions').textContent = section.kind === 'pictures'
-      ? 'Listen to the conversation, then pick the picture that answers the question.'
-      : item.scene ? 'Look at the picture. Which reply does the person with the red arrow say?'
-        : 'There is no picture. Listen to the line, then pick the most natural reply.';
+      ? (isPhrases(item) ? 'Read the choices while the question is read out, then listen and pick the answer.' : 'Listen to the conversation, then pick the picture that answers the question.')
+      : section.kind === 'summary' ? 'Listen to the whole talk. The question and the four choices come at the end, and are only spoken.'
+        : item.scene ? 'Look at the picture. Which reply does the person with the red arrow say?'
+          : 'There is no picture. Listen to the line, then pick the most natural reply.';
     setProgress(0);
 
     const stage = $('lis-stage');
-    if (section.kind === 'pictures') {
+    if (section.kind === 'pictures' && isPhrases(item)) {
+      stage.innerHTML = `<div class="lis-choices lis-choices-phrases">${item.choices.map((c, i) =>
+        `<button class="lis-choice" data-choice="${i}" aria-label="Choice ${i + 1}">
+          <span class="lis-choice-num">${i + 1}</span><span class="lis-choice-phrase"><span lang="ja">${rubyHtml(c.ja)}</span><span class="lis-choice-en hidden">${esc(c.en || '')}</span></span></button>`).join('')}</div>`;
+    } else if (section.kind === 'pictures') {
       stage.innerHTML = `<div class="lis-choices lis-choices-pics">${item.choices.map((c, i) =>
         `<button class="lis-choice" data-choice="${i}" aria-label="Picture ${i + 1}">
           <span class="lis-choice-num">${i + 1}</span>
           <span class="lis-choice-pic">${Art.picture(c)}</span></button>`).join('')}</div>`;
     } else {
       stage.innerHTML = (item.scene ? Art.scene(item.scene) : '')
-        + `<p class="lis-choices-label">Which reply did you hear?</p>
+        + `<p class="lis-choices-label">${section.kind === 'summary' ? 'Which answer did you hear?' : 'Which reply did you hear?'}</p>
           <div class="lis-choices lis-choices-spoken">${item.choices.map((c, i) =>
           `<button class="lis-choice" data-choice="${i}" aria-label="Reply ${i + 1}">
             <span class="lis-choice-num">${i + 1}</span><span class="lis-choice-text" lang="ja"></span></button>`).join('')}</div>`;
@@ -671,9 +736,10 @@
     if (section.kind === 'pictures') {
       rows.push(row('question', 'N', questionOf(item), '', ' lis-line-narr'));
     } else {
+      if (section.kind === 'summary') rows.push(row('question', 'N', item.question, '', ' lis-line-narr'));
       item.choices.forEach((c, i) => {
         const mark = q.answered ? (i === item.answer ? ' lis-line-right' : i === q.picked ? ' lis-line-wrong' : '') : '';
-        rows.push(row('choice' + i, item.replyBy || 'M', `${i + 1}. ${c.ja}`, q.answered ? c.en : '', ' lis-line-choice' + mark));
+        rows.push(row('choice' + i, section.kind === 'summary' ? 'N' : item.replyBy || 'M', `${i + 1}. ${c.ja}`, q.answered ? c.en : '', ' lis-line-choice' + mark));
       });
     }
     $('lis-script-body').innerHTML = rows.join('');
@@ -698,9 +764,10 @@
       btn.classList.toggle('lis-wrong', n === i && !right);
       btn.classList.toggle('lis-dim', n !== i && n !== q.item.answer);
     });
-    if (q.section.kind === 'spoken') {
+    if (q.section.kind !== 'pictures') {
       document.querySelectorAll('.lis-choice-text').forEach((el, n) => { el.innerHTML = rubyHtml(q.item.choices[n].ja); });
     }
+    document.querySelectorAll('.lis-choice-en').forEach(el => el.classList.remove('hidden'));
     const res = $('lis-result');
     res.className = 'lis-result ' + (right ? 'lis-result-right' : 'lis-result-wrong');
     $('lis-result-icon').textContent = right ? '○' : '×';
@@ -737,6 +804,15 @@
       if (!prev || score > prev.score) store.best[key] = { score, total };
       save(STORE_KEY, store);
     }
+    const isPart = SECTIONS.some(sec => sec.id === session.id) || session.id === 'all';
+    if (isPart) {
+      const n = SECTIONS.filter(sec => session.id === 'all' || sec.id === session.id).reduce((k, sec) => k + sec.items.filter(levelOk).length, 0);
+      const { size, pos, count } = setInfo(session.id, n);
+      store.setPos[setKey(session.id)] = (pos + size) % n;
+      save(STORE_KEY, store);
+      $('btn-lis-next-set').classList.toggle('hidden', count < 2);
+      $('btn-lis-next-set').textContent = `Next ${size} →`;
+    } else $('btn-lis-next-set').classList.add('hidden');
     $('lis-done-score').textContent = `${score} / ${total}`;
     $('lis-done-accuracy').textContent = `${Math.round(score / total * 100)}%`;
     const bySection = [];
@@ -747,7 +823,7 @@
       if (q.picked === q.item.answer) s.right++; else s.missed.push(q.number);
     });
     $('lis-done-parts').innerHTML = bySection.map(b =>
-      `<li><span class="lis-part-badge" lang="ja">問題${b.section.num}</span> ${esc(b.section.en)} <b>${b.right}/${b.total}</b>${b.missed.length ? ` <span class="lis-missed">missed ${b.missed.map(n => n + '番').join(', ')}</span>` : ''}</li>`).join('');
+      `<li><span class="lis-part-badge" lang="ja">問題${partNum(b.section, session.queue[0].item.level)}</span> ${esc(b.section.en)} <b>${b.right}/${b.total}</b>${b.missed.length ? ` <span class="lis-missed">missed ${b.missed.map(n => n + '番').join(', ')}</span>` : ''}</li>`).join('');
     const missed = queueFor('missed').length;
     $('btn-lis-review-missed').classList.toggle('hidden', !missed);
     $('btn-lis-review-missed').textContent = `Review mistakes (${missed})`;
@@ -779,6 +855,12 @@
     save(SETTINGS_KEY, settings);
     renderHome();
   }));
+  document.querySelectorAll('[data-set]').forEach(b => b.addEventListener('click', () => {
+    settings.setSize = Number(b.dataset.set);
+    save(SETTINGS_KEY, settings);
+    renderHome();
+  }));
+  $('btn-lis-next-set').addEventListener('click', () => start(session.id));
   document.querySelectorAll('[data-speed]').forEach(b => b.addEventListener('click', () => {
     settings.speed = Number(b.dataset.speed);
     save(SETTINGS_KEY, settings);
@@ -804,7 +886,7 @@
   });
   $('btn-lis-next').addEventListener('click', next);
   $('lis-quit').addEventListener('click', goHome);
-  $('btn-lis-again').addEventListener('click', () => start(session.id));
+  $('btn-lis-again').addEventListener('click', () => start(session.id, session.queue));
   $('btn-lis-review-missed').addEventListener('click', () => start('missed'));
   $('btn-lis-home').addEventListener('click', goHome);
 

@@ -497,6 +497,15 @@
       ],
     },
     {
+      id: 'gaiyou',
+      num: 3,
+      ja: '概要[がいよう]理解[りかい]',
+      en: 'Summary comprehension',
+      desc: 'N3–N2: hear a talk, then pick what it was mainly about. Choices are only spoken.',
+      kind: 'summary',
+      items: [],
+    },
+    {
       id: 'hatsuwa',
       num: 3,
       ja: '発話[はつわ]表現[ひょうげん]',

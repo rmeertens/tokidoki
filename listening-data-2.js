@@ -76,6 +76,9 @@
     { id: 'meet-library', level: 'N5', place: ['図書館[としょかん]', 'the library'], first: [10, 0], alt: [11, 0], reason: ['十時[じゅうじ]は ちょっと 早[はや]いです', 'ten is a little early'], answer: 0, others: [[10, 0], [10, 30], [11, 30]] },
     { id: 'meet-park', level: 'N5', place: ['公園[こうえん]の 入[い]り口[ぐち]', 'the park entrance'], first: [9, 30], alt: [9, 45], reason: ['九時半[くじはん]は 少[すこ]し 早[はや]いです', 'half past nine is a bit early'], answer: 3, others: [[9, 30], [9, 15], [10, 45]] },
     { id: 'meet-evening', level: 'N4', place: ['駅[えき]の 改札[かいさつ]', 'the station ticket gates'], first: [6, 0], alt: [6, 40], reason: ['六時[ろくじ]だと 仕事[しごと]が 終[お]わらないかもしれません', 'I might not have finished work by six'], answer: 1, others: [[6, 0], [6, 20], [7, 40]] },
+    { id: 'meet-lunch', level: 'N4', place: ['レストランの 前[まえ]', 'the front of the restaurant'], first: [12, 0], alt: [12, 30], reason: ['十二時[じゅうにじ]までは 会議[かいぎ]が あります', 'I have a meeting until twelve'], answer: 2, others: [[12, 0], [11, 30], [1, 30]] },
+    { id: 'meet-museum', level: 'N5', place: ['美術館[びじゅつかん]の 入[い]り口[ぐち]', 'the art museum entrance'], first: [1, 0], alt: [1, 45], reason: ['一時[いちじ]は 昼[ひる]ご飯[はん]を 食[た]べています', 'I’ll be having lunch at one'], answer: 1, others: [[1, 0], [1, 15], [2, 45]] },
+    { id: 'meet-dept', level: 'N5', place: ['デパートの 前[まえ]', 'the front of the department store'], first: [5, 0], alt: [5, 30], reason: ['五時[ごじ]までは アルバイトが あります', 'I have my part-time job until five'], answer: 3, others: [[5, 0], [4, 30], [6, 30]] },
   ];
   add('kadai', MEET.map(t => ({
     id: t.id, level: t.level,
@@ -97,6 +100,7 @@
     { id: 'concert-before', level: 'N4', what: ['コンサート', 'concert'], start: [7, 0], said: 10, agreed: 30, answer: 3 },
     { id: 'film-before', level: 'N4', what: ['映画[えいが]', 'film'], start: [1, 30], said: 5, agreed: 20, answer: 0 },
     { id: 'game-before', level: 'N4', what: ['サッカーの 試合[しあい]', 'football match'], start: [3, 0], said: 15, agreed: 40, answer: 2 },
+    { id: 'talk-before', level: 'N4', what: ['講演会[こうえんかい]', 'talk'], start: [10, 30], said: 5, agreed: 15, answer: 1 },
   ];
   add('kadai', BEFORE.map(t => {
     const right = addMin(t.start, -t.agreed);
@@ -121,6 +125,8 @@
     { id: 'class-moved', level: 'N5', who: ['先生[せんせい]が 学生[がくせい]に', 'teacher'], what: ['授業[じゅぎょう]', 'class'], usual: [9, 0], now: [10, 30], reason: ['朝[あさ]、会議[かいぎ]が あります', 'I have a meeting in the morning'], answer: 2, others: [[9, 0], [10, 0], [9, 30]] },
     { id: 'meeting-moved', level: 'N4', who: ['会社[かいしゃ]で 女[おんな]の人[ひと]が', 'colleague'], what: ['会議[かいぎ]', 'meeting'], usual: [2, 0], now: [3, 15], reason: ['部長[ぶちょう]が 二時[にじ]まで 出[で]かけています', 'the manager is out until two'], answer: 1, others: [[2, 0], [2, 15], [3, 45]] },
     { id: 'practice-moved', level: 'N5', who: ['先生[せんせい]が 学生[がくせい]に', 'teacher'], what: ['テニスの 練習[れんしゅう]', 'tennis practice'], usual: [4, 0], now: [4, 45], reason: ['コートの 掃除[そうじ]が あります', 'the courts are being cleaned'], answer: 0, others: [[4, 0], [4, 15], [5, 45]] },
+    { id: 'party-moved', level: 'N4', who: ['会社[かいしゃ]で 女[おんな]の人[ひと]が', 'colleague'], what: ['歓迎会[かんげいかい]', 'welcome party'], usual: [6, 0], now: [7, 0], reason: ['部長[ぶちょう]の 会議[かいぎ]が 長[なが]く なりそうです', 'the manager’s meeting looks like running long'], answer: 3, others: [[6, 0], [6, 30], [7, 30]] },
+    { id: 'swim-moved', level: 'N5', who: ['先生[せんせい]が 学生[がくせい]に', 'teacher'], what: ['水泳[すいえい]の 授業[じゅぎょう]', 'swimming class'], usual: [11, 0], now: [1, 30], reason: ['朝[あさ]は プールの 掃除[そうじ]が あります', 'the pool is being cleaned in the morning'], answer: 2, others: [[11, 0], [11, 30], [1, 0]] },
   ];
   add('point', MOVED.map(t => ({
     id: t.id, level: t.level,
@@ -160,6 +166,7 @@
   const WAKE = [
     { id: 'wake-sunday', level: 'N5', who: 'F', weekday: [6, 30], sunday: [9, 0], answer: 2, others: [[6, 30], [7, 0], [10, 0]] },
     { id: 'wake-saturday', level: 'N5', who: 'M', weekday: [7, 0], sunday: [10, 30], day: ['土曜日[どようび]', 'Saturday'], answer: 0, others: [[7, 0], [11, 30], [10, 0]] },
+    { id: 'wake-holiday', level: 'N5', who: 'F', weekday: [7, 30], sunday: [8, 45], day: ['土曜日[どようび]', 'Saturday'], answer: 3, others: [[7, 30], [9, 45], [8, 15]] },
   ];
   add('point', WAKE.map(t => {
     const day = t.day || ['日曜日[にちようび]', 'Sunday'];
@@ -188,6 +195,8 @@
     { id: 'price-bread', level: 'N5', a: ['パン', 'bread rolls', 'つ'], ap: 120, an: 2, b: ['牛乳[ぎゅうにゅう]', 'milk', '本'], bp: 180, bn: 1, answer: 1 },
     { id: 'price-pens', level: 'N5', a: ['ボールペン', 'ballpoint pens', '本'], ap: 150, an: 3, b: ['ノート', 'notebook', '冊'], bp: 200, bn: 1, answer: 3 },
     { id: 'price-fruit', level: 'N5', a: ['りんご', 'apples', 'つ'], ap: 100, an: 4, b: ['バナナ', 'bananas', '本'], bp: 150, bn: 2, answer: 0 },
+    { id: 'price-onigiri', level: 'N5', a: ['おにぎり', 'rice balls', 'つ'], ap: 130, an: 3, b: ['お茶[ちゃ]', 'tea', '本'], bp: 150, bn: 1, answer: 2 },
+    { id: 'price-coffee', level: 'N5', a: ['コーヒー', 'coffees', 'つ'], ap: 300, an: 2, b: ['ケーキ', 'cake', 'つ'], bp: 450, bn: 1, answer: 0 },
   ];
   const COUNT = {
     つ: n => TSU[n],
@@ -216,6 +225,7 @@
   const TICKETS = [
     { id: 'price-zoo', level: 'N5', where: ['動物園[どうぶつえん]', 'zoo'], adult: 600, child: 300, adults: 2, kids: 1, answer: 2 },
     { id: 'price-museum', level: 'N4', where: ['美術館[びじゅつかん]', 'art museum'], adult: 800, child: 400, adults: 1, kids: 2, answer: 1 },
+    { id: 'price-cinema', level: 'N5', where: ['映画館[えいがかん]', 'cinema'], adult: 1800, child: 1000, adults: 2, kids: 2, answer: 3 },
   ];
   add('point', TICKETS.map(t => {
     const right = t.adult * t.adults + t.child * t.kids;
@@ -237,6 +247,7 @@
   const SALE = [
     { id: 'price-tshirt', level: 'N4', item: ['Tシャツ', 'T-shirt', 'ティーシャツ'], price: 1500, off: 500, answer: 0 },
     { id: 'price-cups', level: 'N4', item: ['コップ', 'glass', 'コップ'], price: 800, off: 300, answer: 2 },
+    { id: 'price-umbrella', level: 'N4', item: ['傘[かさ]', 'umbrella', 'かさ'], price: 1200, off: 400, answer: 1 },
   ];
   add('point', SALE.map(t => {
     const right = t.price * 2 - t.off;
@@ -260,6 +271,7 @@
     { id: 'count-oranges', level: 'N5', icon: 'mandarin', item: ['みかん', 'mandarins'], family: 4, extra: 2, answer: 3 },
     { id: 'count-cakes', level: 'N5', icon: 'cake', item: ['ケーキ', 'cakes'], family: 3, extra: 1, answer: 1 },
     { id: 'count-apples', level: 'N5', icon: 'apple', item: ['りんご', 'apples'], family: 5, extra: 1, answer: 2 },
+    { id: 'count-onigiri', level: 'N5', icon: 'onigiri', item: ['おにぎり', 'rice balls'], family: 3, extra: 2, answer: 0 },
   ];
   add('kadai', BUY.map(t => {
     const right = t.family + t.extra;
@@ -372,6 +384,7 @@
   const FLOOR_Q = [
     { id: 'floor-restaurant', level: 'N5', want: ['レストラン', 'restaurant'], first: 7, real: 8, answer: 3, others: [7, 6, 5] },
     { id: 'floor-books', level: 'N5', want: ['本[ほん]売[う]り場[ば]', 'book department'], first: 4, real: 2, answer: 0, others: [4, 3, 5] },
+    { id: 'floor-toys', level: 'N5', want: ['おもちゃ売[う]り場[ば]', 'toy department'], first: 5, real: 6, answer: 2, others: [5, 4, 7] },
   ];
   add('kadai', FLOOR_Q.map(t => ({
     id: t.id, level: t.level,
@@ -389,6 +402,7 @@
   const PLATFORM = [
     { id: 'platform-tokyo', level: 'N5', usual: 3, today: 5, answer: 1, others: [3, 4, 2] },
     { id: 'platform-osaka', level: 'N4', usual: 6, today: 2, answer: 2, others: [6, 1, 8] },
+    { id: 'platform-yokohama', level: 'N5', usual: 4, today: 7, answer: 0, others: [4, 5, 1] },
   ];
   add('kadai', PLATFORM.map(t => ({
     id: t.id, level: t.level,

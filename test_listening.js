@@ -11,6 +11,9 @@ const { SECTIONS } = require('./listening-data.js');
 require('./listening-data-2.js');
 require('./listening-data-3.js');
 require('./listening-data-4.js');
+require('./listening-data-5.js');
+require('./listening-data-6.js');
+require('./listening-data-7.js');
 const L = require('./listening.js');
 const Art = require('./listening-art.js');
 require('./listening-audio.js');
@@ -39,22 +42,26 @@ ok(L.speech('何[なに]で 来[き]ましたか') === 'なにで来ましたか
 ok(L.rubyHtml('水[みず]') === '<ruby>水<rt>みず</rt></ruby>', 'rubyHtml');
 ok(L.questionOf({ intro: 'AAA。BBBですか。' }) === 'BBBですか。', 'questionOf takes the last sentence');
 
-ok(SECTIONS.map(s => s.num).join() === '1,2,3,4', 'four parts, numbered 1–4');
+ok(SECTIONS.map(s => s.id).join() === 'kadai,point,gaiyou,hatsuwa,sokuji', 'five kinds of part');
+ok(['N5', 'N4'].every(lv => ['kadai', 'point', 'hatsuwa', 'sokuji'].map(id => L.partNum(SECTIONS.find(s => s.id === id), lv)).join() === '1,2,3,4'), 'N5/N4: parts numbered 1–4');
+ok(SECTIONS.map(s => L.partNum(s, 'N3')).join() === '1,2,3,4,5', 'N3: parts numbered 1–5');
+ok(['kadai', 'point', 'gaiyou', 'sokuji'].map(id => L.partNum(SECTIONS.find(s => s.id === id), 'N2')).join() === '1,2,3,4', 'N2: parts numbered 1–4, no 発話表現');
 const ids = new Set();
 const VOICES = new Set(['M', 'F']);
 const ICON_TYPES = { items: p => p.items.map(([n]) => (typeof n === 'string' ? n : n.name)), weather: p => [p.am, p.pm] };
 
 for (const section of SECTIONS) {
   furigana(section.ja, section.id);
-  ok(['pictures', 'spoken'].includes(section.kind), `${section.id}: kind`);
-  ok(section.items.length >= 30, `${section.id}: at least thirty questions`);
+  ok(['pictures', 'spoken', 'summary'].includes(section.kind), `${section.id}: kind`);
+  ok(section.items.length >= (section.kind === 'summary' ? 12 : 30), `${section.id}: enough questions (${section.items.length})`);
   const answers = {};
 
   section.items.forEach((item, index) => {
     const where = `${section.id}/${item.id}`;
     ok(!ids.has(item.id), `${where}: duplicate id`);
     ids.add(item.id);
-    ok(['N5', 'N4'].includes(item.level), `${where}: level is N5 or N4`);
+    ok(L.LEVELS.includes(item.level), `${where}: level is one of ${L.LEVELS.join()}`);
+    ok(L.TEST_LAYOUT[item.level][section.id] > 0, `${where}: ${item.level} has a ${section.id} part`);
     ok(typeof item.why === 'string' && item.why.length > 10, `${where}: explanation`);
     answers[item.answer] = (answers[item.answer] || 0) + 1;
     if (item.intro) furigana(item.intro, `${where} intro`);
@@ -69,12 +76,20 @@ for (const section of SECTIONS) {
       ok(!!item.intro && item.lines.length >= 2, `${where}: a question and a conversation`);
       ok(/か。$/.test(L.questionOf(item)), `${where}: the intro ends with a question`);
       ok(item.choices.length === 4, `${where}: four pictures`);
+      if (L.isPhrases(item)) item.choices.forEach((c, i) => { furigana(c.ja, `${where} choice ${i}`); ok(!!c.en, `${where} choice ${i}: English`); });
+      ok(L.isPhrases(item) || item.choices.every(c => c.type !== 'phrase'), `${where}: printed phrases are all or nothing`);
       item.choices.forEach((c, i) => {
         ok(c.type in Art.PICTURES, `${where} choice ${i}: picture type ${c.type}`);
         (ICON_TYPES[c.type] ? ICON_TYPES[c.type](c) : []).forEach(n => ok(n in Art.ICONS, `${where} choice ${i}: icon ${n}`));
         ok(Art.picture(c).length > 20, `${where} choice ${i}: draws`);
       });
       ok(new Set(item.choices.map(Art.picture)).size === 4, `${where}: the four pictures differ`);
+    } else if (section.kind === 'summary') {
+      ok(['N3', 'N2'].includes(item.level), `${where}: summary questions are N3/N2`);
+      ok(!!item.intro && item.lines.length >= 2, `${where}: a situation and a talk`);
+      furigana(item.question, `${where} question`);
+      ok(item.choices.length === 4, `${where}: four spoken choices`);
+      item.choices.forEach((c, i) => { furigana(c.ja, `${where} choice ${i}`); ok(!!c.en, `${where} choice ${i}: English`); });
     } else {
       ok(item.choices.length === 3, `${where}: three spoken replies`);
       ok(VOICES.has(item.replyBy || 'M'), `${where}: replyBy`);
@@ -111,6 +126,9 @@ for (const section of SECTIONS) {
       ok(script[1].line === 'intro', `${where}: question before the conversation`);
       ok(script[script.length - 1].line === 'question', `${where}: question again at the end`);
       ok(script.length === item.lines.length + 3, `${where}: one step per line`);
+    } else if (section.kind === 'summary') {
+      ok(script[1].line === 'intro' && script[script.length - 9].line === 'question', `${where}: the question comes after the talk`);
+      ok(script.filter(s => /^choice/.test(s.line)).length === 8 && script.slice(-8).every(s => s.voice === 'N'), `${where}: four choices, numbered, read by the narrator`);
     } else {
       const spoken = script.filter(s => /^choice/.test(s.line));
       ok(spoken.length === item.choices.length * 2, `${where}: each reply numbered and spoken`);
@@ -146,14 +164,16 @@ ok(speeds.size >= 8, 'speaking speeds vary');
 ok(L.castFor(SECTIONS[0], SECTIONS[0].items[0]).M.id === L.castFor(SECTIONS[0], SECTIONS[0].items[0]).M.id, 'casting is stable');
 
 // Mock tests: the JLPT layout, every question at most once.
-for (const level of ['N5', 'N4']) {
+for (const level of L.LEVELS) {
   const tests = L.mockTests(SECTIONS, level);
-  ok(tests.length >= 3, `${level}: at least three mock tests (${tests.length})`);
+  ok(tests.length >= (level === 'N5' || level === 'N4' ? 3 : 2), `${level}: enough mock tests (${tests.length})`);
+  const layout = L.TEST_LAYOUT[level];
   const seen = new Set();
   tests.forEach(t => {
-    ok(t.parts.map(p => p.length).join() === L.TEST_LAYOUT[level].join(), `${t.id}: ${L.TEST_LAYOUT[level].join('/')} questions per part`);
+    ok(t.sections.map(s => s.id).join() === Object.keys(layout).join(), `${t.id}: parts in order`);
+    ok(t.parts.map(p => p.length).join() === Object.values(layout).join(), `${t.id}: ${Object.values(layout).join('/')} questions per part`);
     t.parts.forEach((part, i) => part.forEach(({ section, item }) => {
-      ok(section === SECTIONS[i] && item.level === level, `${t.id}: ${item.id} belongs in part ${i + 1}`);
+      ok(section === t.sections[i] && item.level === level, `${t.id}: ${item.id} belongs in part ${i + 1}`);
       ok(!seen.has(item.id), `${t.id}: ${item.id} is in one test only`);
       seen.add(item.id);
     }));

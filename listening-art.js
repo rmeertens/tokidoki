@@ -61,8 +61,9 @@
     tea: `<path ${f('green')} d="M24 40h52l-6 40a8 8 0 0 1-8 6H38a8 8 0 0 1-8-6z"/><path d="M28 56h44" stroke="${C.white}" stroke-width="3"/>
       <path ${f('white')} d="M18 88h64"/><g stroke="${C.gray}"><path d="M40 32q-5-6 0-12t0-12M58 32q-5-6 0-12t0-12"/></g>`,
     beer: `<path ${f('yellow')} d="M26 30h40v54a6 6 0 0 1-6 6H32a6 6 0 0 1-6-6z"/><path ${f('white')} d="M24 32q0-14 12-12 6-10 16-4 12-6 16 6 4 10-4 10H24z"/><path d="M66 42h8a8 8 0 0 1 8 8v14a8 8 0 0 1-8 8h-8"/>`,
-    curry: `<ellipse ${f('white')} cx="50" cy="62" rx="42" ry="22"/><path ${f('white')} d="M18 60q4-20 32-20 6 0 6 10v24q-20 6-38-14z"/><path ${f('orange')} d="M56 44q24-4 34 14-2 14-34 18z"/>
-      <circle ${f('brown')} cx="70" cy="56" r="5" stroke-width="2"/><circle ${f('red')} cx="78" cy="64" r="4" stroke-width="2"/>`,
+    curry: `<ellipse ${f('white')} cx="50" cy="62" rx="44" ry="24"/><path ${f('white')} d="M12 62q2-20 30-22 8 10 4 30-20 8-34-8z"/>
+      <path fill="#c98a2c" d="M44 40q34-6 46 18-2 16-44 16-6-16-2-34z"/><g stroke-width="2"><rect ${f('orange')} x="58" y="50" width="9" height="8" rx="2"/><rect ${f('yellow')} x="72" y="56" width="9" height="8" rx="2"/><rect ${f('orange')} x="54" y="62" width="8" height="7" rx="2"/></g>
+      <path d="M70 22l22-14" stroke="${C.silver}" stroke-width="5"/><path d="M70 22l22-14" stroke-width="1.5"/><ellipse ${f('silver')} cx="66" cy="26" rx="8" ry="5" transform="rotate(-32 66 26)"/>`,
     ramen: `<path ${f('red')} d="M10 46h80q-4 38-40 40-36-2-40-40z"/><ellipse ${f('cream')} cx="50" cy="46" rx="40" ry="10"/>
       <path d="M26 46q6-6 12 0t12 0 12 0 12 0" stroke="${C.yellow}" stroke-width="4"/><circle ${f('white')} cx="66" cy="44" r="6" stroke-width="2.5"/><circle ${f('yellow')} cx="66" cy="44" r="2.5" stroke="none"/>
       <path d="M58 30l30-22M64 34l30-20" stroke="${C.brown}" stroke-width="4"/>`,
@@ -73,11 +74,12 @@
       <path ${f('wood')} d="M10 74h80v8H10z"/>`,
     cake: `<path ${f('white')} d="M18 50v30q32 14 64 0V50"/><ellipse ${f('pink')} cx="50" cy="50" rx="32" ry="10"/><path d="M18 64q32 12 64 0" stroke="${C.pink}" stroke-width="5"/>
       <g ${f('red')}><circle cx="38" cy="44" r="5"/><circle cx="54" cy="42" r="5"/><circle cx="66" cy="46" r="4"/></g>`,
-    sweets: `<rect ${f('pink')} x="12" y="34" width="76" height="46" rx="6"/><path d="M12 48h76" stroke-width="2.5"/>
-      <g ${f('choc')}><circle cx="28" cy="64" r="7"/><circle cx="50" cy="64" r="7"/><circle cx="72" cy="64" r="7"/></g><path ${f('red')} d="M44 34l6-12 6 12z"/>`,
+    sweets: `<path ${f('yellow')} d="M30 50L8 34v32z"/><path ${f('yellow')} d="M70 50l22-16v32z"/><ellipse ${f('pink')} cx="50" cy="50" rx="24" ry="17"/>
+      <path d="M38 36q-6 14 0 28M50 33q-6 17 0 34M62 36q-6 14 0 28" stroke="#fff" stroke-width="3.5"/><ellipse cx="50" cy="50" rx="24" ry="17"/>`,
     rice: `<path ${f('white')} d="M20 46q30-22 60 0"/><path ${f('red')} d="M14 46h72q-2 32-36 34-34-2-36-34z"/><path d="M38 80h24"/>
       <path d="M58 22l30-14M62 28l30-12" stroke="${C.brown}" stroke-width="4"/>`,
-    plate: `<ellipse ${f('white')} cx="50" cy="60" rx="38" ry="18"/><ellipse cx="50" cy="58" rx="24" ry="10" stroke-width="2.5"/>`,
+    plate: `<ellipse ${f('white')} cx="50" cy="56" rx="30" ry="20"/><ellipse cx="50" cy="55" rx="18" ry="11" stroke-width="2.5"/>
+      <path d="M8 26v20q0 6 4 6t4-6V26M12 52v34M8 26v14M12 26v14M16 26v14" stroke-width="2.5"/><path ${f('silver')} d="M86 26q-8 6-6 26h6v34" stroke-width="3"/>`,
     dishes: `<ellipse ${f('white')} cx="50" cy="74" rx="40" ry="12"/><ellipse ${f('white')} cx="50" cy="64" rx="40" ry="12"/><ellipse ${f('white')} cx="50" cy="54" rx="40" ry="12"/>
       <g fill="${C.sky}" stroke="none"><circle cx="70" cy="30" r="7"/><circle cx="82" cy="40" r="5"/><circle cx="60" cy="20" r="4"/></g>`,
     // things
@@ -103,20 +105,24 @@
     letter: `<rect ${f('white')} x="10" y="26" width="80" height="54" rx="4"/><path d="M10 28l40 30 40-30"/><rect ${f('red')} x="70" y="32" width="12" height="14" stroke-width="2"/>`,
     postcard: `<rect ${f('white')} x="10" y="22" width="80" height="56" rx="3"/><rect ${f('sky')} x="16" y="28" width="38" height="44" stroke-width="2.5"/><path ${f('green')} d="M16 72l12-18 10 10 8-8 8 16z" stroke-width="2"/>
       <circle ${f('orange')} cx="44" cy="38" r="5" stroke-width="2"/><path d="M62 46h22M62 56h22M62 66h22" stroke-width="2.5"/>`,
-    stamp: `<path ${f('white')} d="M18 14h64v72H18z" stroke-dasharray="4 4"/><rect ${f('pink')} x="26" y="22" width="48" height="56"/>${flowerHead(50, 50, 'red')}`,
+    stamp: `<rect ${f('white')} x="14" y="10" width="72" height="80" rx="2" stroke-width="3" stroke-dasharray="5 4"/><rect ${f('sky')} x="22" y="18" width="56" height="64"/>
+      <path ${f('green')} d="M22 82l16-24 12 12 10-10 18 22z" stroke-width="2.5"/><circle ${f('red')} cx="60" cy="34" r="7" stroke-width="2.5"/>
+      <text x="36" y="40" class="lis-art-glyph" fill="${INK}" stroke="none">84</text>`,
     ticket: `<path ${f('yellow')} d="M10 32h80v12a8 8 0 0 0 0 16v12H10V60a8 8 0 0 0 0-16z"/><path d="M66 34v36" stroke-dasharray="4 5" stroke-width="2.5"/>`,
     camera: `<rect ${f('dark')} x="10" y="32" width="80" height="50" rx="8"/><path ${f('dark')} d="M34 32l6-10h20l6 10"/>
       <circle ${f('sky')} cx="50" cy="57" r="15"/><circle cx="50" cy="57" r="7"/><rect ${f('white')} x="72" y="38" width="10" height="6" rx="2"/>`,
-    phone: `<rect ${f('white')} x="16" y="40" width="68" height="44" rx="8"/><path ${f('dark')} d="M18 30q32-16 64 0l-4 12q-28-10-56 0z"/>
-      <g fill="${INK}" stroke="none"><circle cx="38" cy="56" r="3"/><circle cx="50" cy="56" r="3"/><circle cx="62" cy="56" r="3"/><circle cx="38" cy="68" r="3"/><circle cx="50" cy="68" r="3"/><circle cx="62" cy="68" r="3"/></g>`,
+    phone: `<path ${f('red')} d="M18 82l8-30h48l8 30z"/><circle ${f('white')} cx="50" cy="66" r="11"/><g fill="${INK}" stroke="none"><circle cx="50" cy="59" r="2"/><circle cx="56" cy="63" r="2"/><circle cx="56" cy="70" r="2"/><circle cx="50" cy="73" r="2"/><circle cx="44" cy="70" r="2"/><circle cx="44" cy="63" r="2"/></g>
+      <path ${f('dark')} d="M12 42q0-16 16-16h44q16 0 16 16v6H74v-8H26v8H12z"/><path d="M82 72q10 2 8 12t8 8" stroke-width="2.5"/>`,
     smartphone: `<rect ${f('dark')} x="28" y="8" width="44" height="84" rx="8"/><rect ${f('sky')} x="33" y="18" width="34" height="58" rx="2" stroke="none"/><circle ${f('gray')} cx="50" cy="84" r="3" stroke-width="2"/>`,
     watch: `<path ${f('brown')} d="M38 8h24v84H38z"/><circle ${f('white')} cx="50" cy="50" r="22" stroke-width="4"/><path d="M50 50V36M50 50l10 6" stroke-width="3"/>`,
     necklace: `<path d="M18 16q32 70 64 0" stroke="${C.yellow}" stroke-width="5"/><path d="M18 16q32 70 64 0" stroke-width="1.5"/><path ${f('rose')} d="M50 64l10 12-10 14-10-14z"/>`,
     glasses: `<circle ${f('sky')} cx="30" cy="54" r="16"/><circle ${f('sky')} cx="70" cy="54" r="16"/><path d="M46 52q4-4 8 0M14 50L6 40M86 50l8-10" />`,
     hat: `<ellipse ${f('wood')} cx="50" cy="66" rx="44" ry="12"/><path ${f('wood')} d="M28 64q0-34 22-34t22 34"/><path d="M28 56q22 8 44 0" stroke="${C.red}" stroke-width="6"/>`,
     tshirt: `<path ${f('sky')} d="M36 14l-24 12 8 18 10-4v46h40V40l10 4 8-18-24-12q-6 8-14 8t-14-8z"/>`,
-    shoes: `<path ${f('red')} d="M10 70q0-24 14-28 6 12 22 12 24 2 34 10 10 6 10 12v4H10z"/><path d="M10 74h80" /><path d="M28 50l6 6M36 46l6 6" stroke-width="2.5"/>`,
-    towel: `<rect ${f('sky')} x="20" y="16" width="60" height="72" rx="4"/><path d="M20 30h60M20 74h60" stroke="${C.white}" stroke-width="5"/><path d="M20 30h60M20 74h60" stroke-width="1.5"/>`,
+    shoes: `<path ${f('white')} d="M6 70h88v8a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4z"/><path ${f('red')} d="M8 70q0-26 18-30l10 10q16 0 28 8 18 4 28 12z"/>
+      <path ${f('white')} d="M8 70q2-14 10-20l4 20z" stroke-width="2.5"/><path d="M34 50l6-6M42 54l6-6M50 58l6-6" stroke="#fff" stroke-width="3"/><path d="M34 50l6-6M42 54l6-6M50 58l6-6" stroke-width="1"/>`,
+    towel: `<path d="M10 18h80" stroke="${C.brown}" stroke-width="6"/><path d="M10 18h80" stroke-width="1.5"/><circle ${f('brown')} cx="10" cy="18" r="5" stroke-width="2.5"/><circle ${f('brown')} cx="90" cy="18" r="5" stroke-width="2.5"/>
+      <path ${f('sky')} d="M22 16h56v70q0 4-4 4H26q-4 0-4-4z"/><path ${f('blue')} d="M22 16h56v10H22z" stroke-width="2.5"/><path d="M22 70h56M22 78h56" stroke="#fff" stroke-width="4"/><path d="M30 90v6M40 90v6M50 90v6M60 90v6M70 90v6" stroke-width="2"/>`,
     swimsuit: `<path ${f('blue')} d="M30 12h10q4 14 10 14t10-14h10l-2 30q10 10 10 30-18 6-20 18H42q-2-12-20-18 0-20 10-30z"/>`,
     goggles: `<path d="M8 50q42-30 84 0" stroke="${C.blue}" stroke-width="5"/><rect ${f('sky')} x="16" y="42" width="30" height="22" rx="11"/><rect ${f('sky')} x="54" y="42" width="30" height="22" rx="11"/><path d="M46 52h8"/>`,
     doll: `<circle ${f('skin')} cx="50" cy="32" r="16"/><path ${f('hair')} d="M34 30q0-16 16-16t16 16q-6-8-16-8t-16 8z"/><path ${f('red')} d="M30 90l8-42h24l8 42z"/><path ${f('yellow')} d="M38 62h24v6H38z"/>
@@ -134,14 +140,16 @@
     trash: `<path ${f('gray')} d="M22 30h56l-6 60H28z"/><rect ${f('dark')} x="16" y="20" width="68" height="10" rx="3"/><path d="M42 12h16v8H42z"/><path d="M40 42v38M50 42v38M60 42v38" stroke-width="2.5"/>`,
     gift: `<rect ${f('red')} x="16" y="40" width="68" height="46" rx="4"/><rect ${f('pink')} x="12" y="30" width="76" height="14" rx="3"/>
       <path ${f('yellow')} d="M44 30h12v56H44z"/><path ${f('yellow')} d="M50 30q-20-20-24-6t24 6zM50 30q20-20 24-6t-24 6z"/>`,
+    tulip: `<path ${f('red')} d="M30 22l8 10 12-14 12 14 8-10v20q0 22-20 22T30 42z"/><path d="M50 64v28" stroke="${C.leaf}" stroke-width="5"/><path ${f('green')} d="M50 82q-18-2-22-18 16 0 22 18zM50 78q16-4 20-18-16 2-20 18z" stroke-width="2.5"/>`,
     flower: `<path ${f('leaf')} d="M38 58l12 34 12-34z"/><path d="M50 58v-10M40 58l-6-14M60 58l6-14"/>${flowerHead(50, 32, 'pink')}${flowerHead(30, 40, 'pink')}${flowerHead(70, 40, 'pink')}<path ${f('red')} d="M42 70h16l-8 8z"/>`,
     cd: `<circle ${f('sky')} cx="46" cy="54" r="34"/><circle ${f('white')} cx="46" cy="54" r="10"/><path d="M46 28a26 26 0 0 1 24 16" stroke="${C.white}" stroke-width="4"/>
       <path d="M76 14v26"/><ellipse ${f(INK)} cx="70" cy="40" rx="7" ry="5"/><path d="M76 14q8 2 10 10"/>`,
     box: `<path ${f('wood')} d="M12 38l38-16 38 16v40L50 94 12 78z"/><path d="M12 38l38 16 38-16M50 54v40"/><path d="M30 30l38 16" stroke-width="2.5"/>`,
     computer: `<rect ${f('dark')} x="14" y="18" width="72" height="48" rx="5"/><rect ${f('sky')} x="20" y="24" width="60" height="36" stroke="none"/>
       <path ${f('gray')} d="M40 66h20l4 12H36z"/><path d="M28 84h44"/>`,
-    copier: `<rect ${f('gray')} x="12" y="36" width="76" height="46" rx="6"/><path ${f('dark')} d="M20 28h60v8H20z"/>
-      <rect ${f('white')} x="62" y="40" width="30" height="12"/><circle ${f('green')} cx="24" cy="48" r="4"/><path d="M20 66h40"/>`,
+    copier: `<rect ${f('white')} x="30" y="10" width="40" height="34" rx="2"/><path d="M36 20h28M36 28h28M36 36h18" stroke-width="2.5"/>
+      <rect ${f('gray')} x="10" y="38" width="80" height="38" rx="7"/><rect ${f('dark')} x="22" y="46" width="56" height="7" rx="3" stroke-width="2.5"/><circle ${f('green')} cx="78" cy="64" r="4" stroke-width="2.5"/>
+      <path ${f('white')} d="M22 76h56l6 14H16z"/>`,
     aircon: `<rect ${f('white')} x="8" y="22" width="84" height="34" rx="10"/><path d="M14 46h72"/><circle ${f('green')} cx="80" cy="32" r="3"/>
       <g stroke="${C.blue}"><path d="M26 64q-4 8 0 16M50 64q-4 8 0 16M74 64q-4 8 0 16"/></g>`,
     tv: `<rect ${f('dark')} x="8" y="18" width="84" height="56" rx="6"/><rect ${f('sky')} x="15" y="25" width="70" height="42" stroke="none"/><path d="M40 74l-6 12M60 74l6 12M28 88h44"/>`,
@@ -168,7 +176,8 @@
       <circle ${f('dark')} cx="28" cy="74" r="9"/><circle ${f('dark')} cx="72" cy="74" r="9"/>`,
     plane: `<path ${f('white')} d="M8 52q0-8 10-8h56q18 0 20 8-2 8-20 8H18q-10 0-10-8z"/><path ${f('sky')} d="M40 46L28 20h10l20 26zM40 58L28 84h10l20-26zM14 46l-6-14h8l10 14z"/><path d="M76 48h8" stroke-width="2.5"/>`,
     ship: `<path ${f('white')} d="M8 58h84l-12 22H20z"/><rect ${f('red')} x="34" y="36" width="34" height="22"/><rect ${f('dark')} x="46" y="20" width="10" height="16"/><path d="M4 86q8-6 16 0t16 0 16 0 16 0 16 0 16 0" stroke="${C.blue}"/>`,
-    walk: `<circle ${f('skin')} cx="54" cy="16" r="9"/><path d="M52 28l-6 30 12 16v18M46 58l-12 32M50 36l-16 12M52 36l18 8" stroke-width="7"/>`,
+    walk: `<circle ${f('blue')} cx="54" cy="16" r="11"/>${tube('M53 32L48 60', 'blue', 13)}${tube('M48 60L34 88', 'blue', 10)}${tube('M48 60L64 86', 'blue', 10)}
+      ${tube('M52 38L38 56', 'blue', 8)}${tube('M52 38L68 52', 'blue', 8)}<path d="M28 90h12M60 88h12" stroke-width="5"/>`,
     hospital: `<rect ${f('white')} x="16" y="20" width="68" height="68" rx="4"/><rect ${f('red')} x="42" y="30" width="16" height="36" stroke="none"/>
       <rect ${f('red')} x="32" y="40" width="36" height="16" stroke="none"/><rect ${f('sky')} x="42" y="72" width="16" height="16"/>`,
     school: `<path ${f('cream')} d="M8 44h84v44H8z"/><path ${f('red')} d="M8 44l42-22 42 22z"/><circle ${f('white')} cx="50" cy="34" r="6" stroke-width="2.5"/>
@@ -187,7 +196,8 @@
       <text x="50" y="27" class="lis-art-glyph" fill="${INK}" stroke="none">駅</text><rect ${f('sky')} x="22" y="52" width="56" height="36"/><path d="M50 52v36"/>`,
     gate: `<rect ${f('silver')} x="10" y="40" width="16" height="48"/><rect ${f('silver')} x="42" y="40" width="16" height="48"/><rect ${f('silver')} x="74" y="40" width="16" height="48"/>
       <path ${f('orange')} d="M26 56h8v8h-8zM58 56h8v8h-8z" stroke-width="2"/><rect ${f('green')} x="14" y="44" width="8" height="6" stroke-width="1.5"/><rect ${f('green')} x="46" y="44" width="8" height="6" stroke-width="1.5"/><path d="M4 88h92"/>`,
-    library: `<path ${f('cream')} d="M10 40h80v48H10z"/><path ${f('sky')} d="M6 40L50 14l44 26z"/><g ${f('white')}><rect x="18" y="46" width="8" height="42"/><rect x="38" y="46" width="8" height="42"/><rect x="54" y="46" width="8" height="42"/><rect x="74" y="46" width="8" height="42"/></g>`,
+    library: `<path ${f('cream')} d="M10 42h80v46H10z"/><path ${f('sky')} d="M6 42L50 14l44 28z"/><path ${f('white')} d="M50 26q-7-4-14-2v12q7-2 14 2zM50 26q7-4 14-2v12q-7-2-14 2z" stroke-width="2"/>
+      <g ${f('white')}><rect x="18" y="48" width="8" height="40"/><rect x="38" y="48" width="8" height="40"/><rect x="54" y="48" width="8" height="40"/><rect x="74" y="48" width="8" height="40"/></g><path d="M6 88h88"/>`,
     pool: `<rect ${f('sky')} x="8" y="36" width="84" height="48" rx="6"/><path d="M14 52q8-6 16 0t16 0 16 0 16 0 8 0M14 68q8-6 16 0t16 0 16 0 16 0 8 0" stroke="${C.white}" stroke-width="3"/><path d="M76 36V16M86 36V16M76 22h10M76 30h10" stroke-width="3"/>`,
     mountain: `<path ${f('green')} d="M4 86l32-50 16 22 12-18 32 46z"/><path ${f('white')} d="M30 46l6-10 7 10-6 4zM58 46l6-6 6 8-6 2z" stroke-width="2.5"/><circle ${f('orange')} cx="80" cy="22" r="9"/>`,
     beach: `<rect ${f('sky')} x="4" y="40" width="92" height="26" stroke="none"/><path ${f('beige')} d="M4 66q46-12 92 0v22H4z" stroke="none"/><path d="M4 66q46-12 92 0"/><circle ${f('orange')} cx="78" cy="22" r="10"/>
@@ -219,13 +229,18 @@
     sleep: `<rect ${f('blue')} x="8" y="56" width="84" height="22" rx="4"/><path d="M8 50v38M92 66v22"/><rect ${f('white')} x="12" y="48" width="22" height="10" rx="5"/>
       <circle ${f('skin')} cx="24" cy="44" r="9"/><path ${f('sky')} d="M30 52h56q4 0 4 4H30z"/>
       <g stroke-width="3"><path d="M54 14h10l-10 12h10M70 28h7l-7 8h7"/></g>`,
-    cooking: `<ellipse ${f('dark')} cx="44" cy="62" rx="34" ry="12"/><path d="M78 60h18" stroke-width="6"/><circle ${f('white')} cx="40" cy="60" r="13" stroke="none"/><circle ${f('yellow')} cx="40" cy="60" r="6" stroke="none"/>
-      <g stroke="${C.gray}"><path d="M30 40q-4-6 0-12M46 40q-4-6 0-12"/></g>`,
-    swim: `<path d="M8 66q10-8 20 0t20 0 20 0 20 0" stroke="${C.blue}" stroke-width="5"/><circle ${f('skin')} cx="34" cy="48" r="10"/><path ${f('red')} d="M24 46q10-14 20 0z" stroke-width="2.5"/><path d="M48 52q14-14 30-6" stroke="${C.skin}" stroke-width="8"/><path d="M8 82q10-8 20 0t20 0 20 0 20 0" stroke="${C.blue}" stroke-width="5"/>`,
+    cooking: `<path d="M30 90q4-10 0-16M44 92q4-12 0-18M58 90q4-10 0-16" stroke="${C.orange}" stroke-width="4"/>
+      <circle ${f('dark')} cx="44" cy="46" r="32"/><circle fill="#6e6874" cx="44" cy="46" r="26" stroke="none"/><path d="M74 42h20a5 5 0 0 1 0 10H74" ${f('brown')}/>
+      <path ${f('white')} d="M30 40q4-14 16-10 14-2 14 10 6 10-6 16-12 6-20-2-10-4-4-14z" stroke-width="2.5"/><circle ${f('yellow')} cx="44" cy="44" r="7" stroke-width="2.5"/>`,
+    swim: `<path ${f('sky')} d="M2 60q8-6 16 0t16 0 16 0 16 0 16 0 16 0V96H2z" stroke="none"/><path d="M2 60q8-6 16 0t16 0 16 0 16 0 16 0 16 0" stroke="${C.blue}" stroke-width="4"/>
+      ${tube('M44 58Q50 24 78 30', 'skin', 9)}<circle ${f('skin')} cx="80" cy="31" r="5.5" stroke-width="3"/>
+      <circle ${f('skin')} cx="30" cy="54" r="12"/><path ${f('red')} d="M18 52q2-14 12-14t12 14z"/><path d="M22 54h16" stroke="${C.sky}" stroke-width="5"/><path d="M22 54h16" stroke-width="1.5"/>
+      <path d="M2 78q8-6 16 0t16 0 16 0 16 0 16 0 16 0" stroke="#fff" stroke-width="3"/>`,
     karaoke: `<rect ${f('dark')} x="40" y="10" width="20" height="32" rx="10"/><path d="M50 42v40M36 84h28" stroke-width="5"/><g ${f(INK)} stroke="none"><ellipse cx="22" cy="62" rx="6" ry="4"/><ellipse cx="80" cy="44" rx="6" ry="4"/></g><path d="M27 62V40l8-2M85 44V24l6-2" stroke-width="2.5"/>`,
     music: `<g ${f(INK)} stroke="none"><ellipse cx="30" cy="74" rx="12" ry="9"/><ellipse cx="72" cy="64" rx="12" ry="9"/></g><path d="M41 74V22l42-10v52" stroke-width="5"/><path d="M41 34l42-10" stroke-width="8"/>`,
     paint: `<path ${f('cream')} d="M50 12C24 12 8 30 8 52s16 36 34 36c8 0 6-10 12-14 8-4 16 4 26-4 10-8 12-20 6-34C80 22 66 12 50 12z"/><g stroke="none"><circle cx="30" cy="40" r="7" ${f('red')}/><circle cx="50" cy="30" r="7" ${f('blue')}/><circle cx="70" cy="40" r="7" ${f('yellow')}/><circle cx="28" cy="62" r="7" ${f('green')}/></g>`,
-    hiking: `<path ${f('green')} d="M4 86l32-50 16 22 12-18 32 46z"/><path ${f('white')} d="M30 46l6-10 7 10-6 4z" stroke-width="2.5"/><path d="M62 88V52" stroke="${C.brown}" stroke-width="4"/><path ${f('red')} d="M62 52l20 8-20 8z" stroke-width="2.5"/>`,
+    hiking: `<path ${f('green')} d="M4 88l34-58 18 26 10-14 30 46z"/><path d="M20 84l14-10-6-12 12-10-4-14" stroke="#fff" stroke-width="3.5" stroke-dasharray="3 6"/>
+      <path d="M38 30V8" stroke-width="3"/><path ${f('red')} d="M38 8l18 6-18 6z" stroke-width="2.5"/>${tube('M70 88V60', 'brown', 4)}<rect ${f('orange')} x="62" y="54" width="18" height="20" rx="5" stroke-width="2.5"/>`,
     study: `<rect ${f('sky')} x="10" y="50" width="56" height="38" rx="3"/><path d="M38 50v38" stroke-width="2.5"/><path d="M16 60h16M16 70h16M44 60h16M44 70h16" stroke-width="2.5"/><path ${f('yellow')} d="M78 18l10 6-24 44-10 4 0-10z"/>`,
     homework: `<rect ${f('white')} x="20" y="10" width="60" height="80" rx="4"/><path d="M30 28h40M30 42h40M30 56h40M30 70h24" stroke-width="2.5"/><path d="M62 62l6 8 14-18" stroke="${C.red}" stroke-width="5"/>`,
     work: `<rect ${f('brown')} x="12" y="34" width="76" height="50" rx="6"/><path d="M38 34v-8h24v8"/><path d="M12 52h76" stroke-width="2.5"/><rect ${f('yellow')} x="44" y="48" width="12" height="10" rx="2" stroke-width="2.5"/>`,
@@ -580,13 +595,19 @@
     return `<div class="lis-art-label${String(p.text).length > 8 ? ' lis-art-small' : ''}" lang="ja">${String(p.text).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]))}</div>`;
   }
 
+  // A printed choice in Japanese (N3, N2). The page draws these itself with
+  // furigana; this plain version is for anything else that asks.
+  function phrase(p) {
+    return `<div class="lis-art-label lis-art-small" lang="ja">${String(p.ja).replace(/\[[^\]]*\]/g, '').replace(/ /g, '')}</div>`;
+  }
+
   function price(p) {
     return `<div class="lis-art-label lis-art-price" lang="ja">${p.yen.toLocaleString('en-US')}<small>円</small></div>`;
   }
 
   const PICTURES = {
     items, clock, digital, calendar, week, weather, map, route, floor, room, key: keyScene, seats, people,
-    bus, platform, cake, home, times, text, price,
+    bus, platform, cake, home, times, text, price, phrase,
     person: p => person(p),
   };
 

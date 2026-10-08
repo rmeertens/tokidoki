@@ -4637,7 +4637,7 @@ a.chapter-card {
 .lis-options-body label { display: flex; gap: 10px; align-items: center; cursor: pointer; }
 .lis-options-body input { width: 18px; height: 18px; accent-color: var(--accent); }
 
-.lis-no-furigana .lis-script rt, .lis-no-furigana .lis-choice-text rt { visibility: hidden; }
+.lis-no-furigana .lis-script rt, .lis-no-furigana .lis-choice-text rt, .lis-no-furigana .lis-choice-phrase rt { visibility: hidden; }
 
 /* Question screen */
 .lis-wrap { max-width: 720px; margin: 0 auto; }
@@ -4690,6 +4690,13 @@ a.chapter-card {
 
 .lis-choices { display: grid; gap: 12px; }
 .lis-choices-pics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.lis-choices-phrases { grid-template-columns: 1fr; gap: 8px; }
+.lis-choices-phrases .lis-choice { flex-direction: row; align-items: center; gap: 12px; padding: 12px 14px; min-height: 0; }
+.lis-choices-phrases .lis-choice-num { margin: 0; flex: none; width: 30px; height: 30px; }
+.lis-choice-phrase { display: flex; flex-direction: column; gap: 2px; text-align: left; font-family: var(--font-jp); font-size: 1rem; line-height: 1.8; }
+.lis-choice-phrase rt { font-size: 0.55em; }
+.lis-choice-en { font-family: var(--font); font-size: 0.82rem; color: var(--text-dim); line-height: 1.4; }
+.lis-tests-none { margin: -6px 0 14px; color: var(--text-muted); font-size: 0.88rem; }
 .lis-choices-label { margin: 16px 0 8px; font-size: 0.9rem; font-weight: 600; color: var(--text-dim); }
 .lis-choices-spoken { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .lis-choice {

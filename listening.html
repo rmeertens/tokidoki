@@ -4,16 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" id="viewport-meta" content="width=device-width, initial-scale=1.0">
   <title>JLPT Listening Practice — 聴解 with Pictures | Tokidoki</title>
-  <meta name="description" content="Free JLPT N5–N4 style listening (聴解) practice: hear a conversation, then pick the right picture — clocks, calendars, maps, people — or the right spoken reply. Task, point, utterance and quick-response questions, with scripts, furigana and English.">
+  <meta name="description" content="Free JLPT N5–N2 style listening (聴解) practice: hear a conversation, then pick the right picture — clocks, calendars, maps, people — or the right spoken reply. Task, point, utterance and quick-response questions, with scripts, furigana and English.">
   <meta property="og:title" content="JLPT Listening Practice — 聴解 with Pictures | Tokidoki">
-  <meta property="og:description" content="Hear a Japanese conversation, then pick the right picture or reply — JLPT N5–N4 listening practice with scripts and English.">
+  <meta property="og:description" content="Hear a Japanese conversation, then pick the right picture or reply — JLPT N5–N2 listening practice with scripts and English.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://tokidoki.meertens.dev/listening.html">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="JLPT Listening Practice — 聴解 with Pictures | Tokidoki">
-  <meta name="twitter:description" content="Hear a Japanese conversation, then pick the right picture or reply — JLPT N5–N4 listening practice.">
+  <meta name="twitter:description" content="Hear a Japanese conversation, then pick the right picture or reply — JLPT N5–N2 listening practice.">
   <link rel="canonical" href="https://tokidoki.meertens.dev/listening.html">
-  <link rel="stylesheet" href="style.css?v=20">
+  <link rel="stylesheet" href="style.css?v=21">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXWYNZC7YH"></script>
   <script>
@@ -62,7 +62,7 @@
       <section class="lis-hero">
         <div class="lis-hero-face" aria-hidden="true">🎧</div>
         <div>
-          <p class="lis-hero-kicker" lang="ja">聴解 · JLPT N5–N4</p>
+          <p class="lis-hero-kicker" lang="ja">聴解 · JLPT N5–N2</p>
           <h2 class="lis-hero-title">Listening practice</h2>
           <p class="lis-hero-sub">Questions in the format of the JLPT listening section. Turn your sound on.</p>
         </div>
@@ -83,11 +83,20 @@
         <span class="lis-levels-label">Level</span>
         <button data-level="N5" aria-pressed="true">N5</button>
         <button data-level="N4" aria-pressed="false">N4</button>
-        <button data-level="all" aria-pressed="false">Both</button>
+        <button data-level="N3" aria-pressed="false">N3</button>
+        <button data-level="N2" aria-pressed="false">N2</button>
+        <button data-level="all" aria-pressed="false">All</button>
+      </div>
+      <div class="lis-levels" role="group" aria-label="Questions per set">
+        <span class="lis-levels-label">Set size</span>
+        <button data-set="5" aria-pressed="true">5</button>
+        <button data-set="10" aria-pressed="false">10</button>
+        <button data-set="0" aria-pressed="false">All</button>
       </div>
 
       <h3 class="lis-heading">Mock tests <span>— the real test’s layout, all four parts</span></h3>
       <div class="lis-tests" id="lis-tests"></div>
+      <p class="lis-tests-none hidden" id="lis-tests-none">No full mock test at this level yet.</p>
 
       <button class="lis-quick" id="lis-quick">
         <span class="lis-quick-icon" aria-hidden="true">⚡</span>
@@ -171,6 +180,7 @@
         </div>
         <ul class="lis-done-parts" id="lis-done-parts"></ul>
         <div class="lis-done-actions">
+          <button id="btn-lis-next-set" class="btn-primary hidden">Next 5 →</button>
           <button id="btn-lis-again" class="btn-secondary">Try again</button>
           <button id="btn-lis-review-missed" class="btn-secondary hidden">Review mistakes</button>
           <button id="btn-lis-home" class="btn-primary">Back to the parts</button>
@@ -180,31 +190,34 @@
 
   </div>
 
-  <script src="listening-data.js?v=3"></script>
-  <script src="listening-data-2.js?v=1"></script>
+  <script src="listening-data.js?v=4"></script>
+  <script src="listening-data-2.js?v=2"></script>
   <script src="listening-data-3.js?v=1"></script>
   <script src="listening-data-4.js?v=1"></script>
-  <script src="listening-art.js?v=3"></script>
-  <script src="listening-audio.js?v=3"></script>
-  <script src="listening.js?v=5"></script>
+  <script src="listening-data-5.js?v=1"></script>
+  <script src="listening-data-6.js?v=1"></script>
+  <script src="listening-data-7.js?v=1"></script>
+  <script src="listening-art.js?v=4"></script>
+  <script src="listening-audio.js?v=4"></script>
+  <script src="listening.js?v=6"></script>
   <script src="app.js?v=14"></script>
 
   <!-- Static content for search engines -->
   <section id="seo-content" aria-hidden="true">
     <h2>JLPT listening practice (聴解) with picture choices</h2>
     <p>
-      Free, no-login listening practice in the format of the JLPT N5 and N4 listening section
-      (聴解): 180 questions with natural recorded voices — fifteen different speakers, young and old, at different speeds — and seven full mock tests (four N5, three N4) in the layout of the real test. Each question plays the way the test
+      Free, no-login listening practice in the format of the JLPT N5, N4, N3 and N2 listening sections
+      (聴解): 344 questions with natural recorded voices — fifteen different speakers, young and old, at different speeds — and thirteen full mock tests (five N5, four N4, two N3, two N2) in the layout of the real test. Each question plays the way the test
       does — the question number, the situation and question, a short conversation between a man
       and a woman, and the question again. 問題1 課題理解 (task comprehension) and 問題2
       ポイント理解 (point comprehension) are answered by picking one of four pictures: clocks,
       calendars, maps and routes, cinema seats, floors of a department store, a room layout,
       people's clothes, buses and platforms, food, shopping and weather. 問題3 発話表現 (utterance expressions) shows a scene — a shop, a classroom, a
-      train, a home entrance — with an arrow over the speaker and three spoken replies, and 問題4 即時応答 (quick response) has no picture at all.
+      train, a home entrance — with an arrow over the speaker and three spoken replies, and 問題4 即時応答 (quick response) has no picture at all. At N3 and N2 the choices become printed phrases, and 概要理解 (summary comprehension) asks what a whole talk was about, with spoken choices only.
     </p>
     <p>
       After answering, read the script with furigana and English translations and tap any line
-      to hear it again. Filter by level (N5 or N4), review the questions you missed, change the
+      to hear it again. Practise in sets of 5 or 10 questions, filter by level (N5 to N2), review the questions you missed, change the
       speed, or turn on exam mode, where the audio plays once and you have 12 seconds to answer.
     </p>
   </section>
