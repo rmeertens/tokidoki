@@ -169,5 +169,20 @@
     '受付': 'reception', 'レジ': 'register', 'ガソリンスタンド': 'gaspump', '港': 'lighthouse', '田舎': 'countryside',
     '警察': 'policecar', '事故': 'crash', '故障': 'breakdown', 'コンサート': 'concert', '会議': 'meeting',
     '花見': 'hanami', '小学校': 'randoseru', '砂': 'sandcastle', '坂': 'slope',
+
+    // more things, places and doings
+    'ジーンズ': 'jeans', 'ジェット機': 'jet', '左右': 'leftright', '実験': 'microscope', '芝生': 'lawn',
+    '渋滞': 'trafficjam', '賞': 'medal', '正午': 'noon', '夜中': 'midnight', '消防': 'firetruck', '女王': 'queen',
+    '書類': 'folder', '印': 'hanko', '審判': 'whistle', '巣': 'nest', '図': 'barchart', '数字': 'numbers',
+    '頭痛': 'headache', 'スピーチ': 'podium', '咳': 'cough', '石油': 'oildrum', '握手': 'handshake', '穴': 'hole',
+    '居眠り': 'doze', '印刷': 'printer', '宇宙': 'planet', '梅': 'plumblossom', '鬼': 'oni', '画家': 'easel',
+    '化学': 'testtubes', '傷': 'bandage', '救助': 'lifebuoy', '霧': 'fog', '禁煙': 'nosmoking', '計算': 'calculator',
+    '掲示': 'bulletinboard', '煙': 'smoke', '建てる': 'crane', '碁': 'goboard', '恋人': 'couple', '琴': 'koto',
+    '小屋': 'hut', '虫歯': 'cavity', '名刺': 'meishi', '骨折': 'cast', '墓': 'grave', 'ピクニック': 'picnic',
+    '渡る': 'zebra', 'アパート': 'apartment', '汚い': 'dirty', '結婚': 'wedding', '高い': 'giraffe', '綺麗': 'sparkle',
+    'ステレオ': 'stereo', '恥ずかしい': 'embarrassed', '頑張る': 'ganbaru', '匂い': 'smell', '景色': 'landscape',
+    '招待': 'invitation', 'テスト': 'testpaper', '押し入れ': 'oshiire', 'お金持ち': 'moneybag', '放送': 'antenna',
+    'ストーブ': 'heater', '出発': 'takeoff', '込む': 'crowdedtrain', '安全': 'helmet', '湖': 'lake',
+    '特急': 'shinkansen', '姉妹': { people: ['schoolgirl', 'girl'] },
   };
 })(typeof window !== 'undefined' ? window : globalThis);

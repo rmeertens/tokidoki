@@ -1090,6 +1090,147 @@
     slope: `<path ${f('sky')} d="M2 6h96v88H2z" stroke="none"/><path ${f('grass')} d="M2 94L98 30v64z"/><path ${f('gray')} d="M2 94L98 40v12L18 94z"/><g transform="translate(46 40) scale(.36)">${ICONS.walk}</g>`,
   });
 
+  const clockFace = (h, m, fill = 'white') => {
+    const ha = ((h % 12) + m / 60) * Math.PI / 6, ma = m * Math.PI / 30;
+    return `<circle ${f(fill)} cx="50" cy="54" r="34"/><path d="M50 54L${(50 + 18 * Math.sin(ha)).toFixed(1)} ${(54 - 18 * Math.cos(ha)).toFixed(1)}" stroke-width="5"/>
+      <path d="M50 54L${(50 + 26 * Math.sin(ma)).toFixed(1)} ${(54 - 26 * Math.cos(ma)).toFixed(1)}" stroke-width="3"/><circle fill="${C.red}" cx="50" cy="54" r="3" stroke="none"/>`;
+  };
+
+  Object.assign(ICONS, {
+    jeans: `<path ${f('sky')} d="M28 10h44l6 80H56L50 36l-6 54H22z"/><path d="M28 20h44" stroke-width="2.5"/><path d="M32 22q6 10 14 6M68 22q-6 10-14 6" stroke="${C.orange}" stroke-width="2" stroke-dasharray="3 2"/>
+      <path d="M50 20v14" stroke="${C.orange}" stroke-width="2" stroke-dasharray="3 2"/><circle ${f('yellow')} cx="50" cy="15" r="2.5" stroke-width="1.5"/>`,
+    jet: `<g transform="rotate(-35 50 50)"><path ${f('silver')} d="M6 50q0-6 8-6h60l20 6-20 6H14q-8 0-8-6z"/><path ${f('silver')} d="M40 44L26 14h10l20 30zM40 56L26 86h10l20-30zM12 44L6 30h6l10 14z"/><path ${f('sky')} d="M70 46l12 4-12 4z" stroke-width="2"/></g>
+      <path d="M10 90l16-12M4 80l14-10" stroke="${C.gray}" stroke-width="3" stroke-dasharray="4 4"/>`,
+    leftright: `<path d="M22 50h56" stroke="${INK}" stroke-width="16"/><path d="M22 50h56" stroke="${C.blue}" stroke-width="10"/><path ${f('blue')} d="M4 50l24-20v40zM96 50L72 30v40z"/>`,
+    microscope: `<path ${f('dark')} d="M14 86h60v8H14z"/><path ${f('silver')} d="M30 86V70h28v16z"/><path d="M58 76q20 0 20-24-2-18-16-24" stroke-width="7"/>
+      <g transform="rotate(-30 46 34)"><rect ${f('white')} x="38" y="12" width="16" height="40" rx="3"/><rect ${f('dark')} x="40" y="4" width="12" height="10" rx="2"/></g><rect ${f('sky')} x="24" y="60" width="40" height="6" stroke-width="2.5"/>`,
+    lawn: `<path ${f('grass')} d="M2 50h96v44H2z" stroke="none"/><g stroke="${C.leaf}" stroke-width="2.5">${[10, 24, 38, 52, 66, 80, 92].map((x, i) => `<path d="M${x} ${62 + (i % 2) * 18}l3-8 3 8"/>`).join('')}</g>
+      <path d="M50 50V34" stroke-width="4"/><path d="M50 34q-20-14-38 6M50 34q20-14 38 6" stroke="${C.sky}" stroke-width="3" stroke-dasharray="4 4"/><rect ${f('silver')} x="42" y="46" width="16" height="8" rx="2"/>`,
+    trafficjam: `<path ${f('gray')} d="M2 54h96v40H2z" stroke="none"/><path d="M2 74h96" stroke="#fff" stroke-width="3" stroke-dasharray="8 6"/>
+      ${[[4, 'red'], [36, 'blue'], [68, 'yellow']].map(([x, c]) => `<path ${f(c)} d="M${x} 66l4-10h20l6 10v8H${x}z"/><circle ${f('dark')} cx="${x + 7}" cy="74" r="4"/><circle ${f('dark')} cx="${x + 23}" cy="74" r="4"/>`).join('')}
+      ${[[16, 'green'], [48, 'white'], [80, 'orange']].map(([x, c]) => `<path ${f(c)} d="M${x} 86l4-10h14l6 10v6H${x}z" stroke-width="2.5"/>`).join('')}<path d="M30 30q-4 10 0 14M56 26q-4 10 0 14" stroke="${C.red}" stroke-width="3"/>`,
+    medal: `<path ${f('blue')} d="M30 6h14l10 40H40z"/><path ${f('red')} d="M70 6H56L46 46h14z"/><circle ${f('yellow')} cx="50" cy="64" r="26"/><circle cx="50" cy="64" r="18" stroke-width="2"/><path fill="#fff" d="${starPath(50, 64, 11, 5)}" stroke="none"/>`,
+    noon: `${clockFace(12, 0)}<path ${f('orange')} d="M76 14a10 10 0 1 1 0 .1z" stroke-width="2.5"/><g stroke="${C.orange}" stroke-width="2.5"><path d="M76 0v-4M90 14h4M86 4l3-3"/></g>`,
+    midnight: `${clockFace(12, 0, 'sky').replace(`fill="${C.sky}"`, `fill="${C.navy}"`)}<path d="M50 54V36" stroke="#fff" stroke-width="5"/><path ${f('yellow')} d="M84 6a10 10 0 1 0 8 16 8 8 0 0 1-8-16z" stroke-width="2.5"/>`,
+    firetruck: `<path ${f('red')} d="M2 70V40h58v-8h18l18 22v16z"/><path ${f('sky')} d="M66 38h10l12 14H66z" stroke-width="2.5"/><path d="M6 32l50-10M14 30v-8M26 28v-8M38 26v-8M50 24v-8" stroke="${C.silver}" stroke-width="3"/>
+      <path d="M2 54h60" stroke="#fff" stroke-width="3"/><rect ${f('sky')} x="70" y="26" width="8" height="6" rx="2" stroke-width="2"/>${[18, 46, 80].map(x => `<circle ${f('dark')} cx="${x}" cy="74" r="9"/><circle ${f('silver')} cx="${x}" cy="74" r="3" stroke-width="2"/>`).join('')}`,
+    queen: `${FACE_BASE.replace('M16 50q0-38 34-38t34 38q-10-18-34-20-24 2-34 20z', 'M14 72q-2-60 36-60t36 60q-4-30-12-36-24 4-48 0-8 6-12 36z')}${EYES}${NOSE}<path d="M42 74q8 6 16 0" stroke="${C.red}"/>
+      <path ${f('yellow')} d="M26 26V8l10 10 14-14 14 14 10-10v18z"/><circle ${f('red')} cx="50" cy="18" r="3" stroke-width="1.5"/>`,
+    folder: `<path ${f('yellow')} d="M6 24h30l8 8h50v56H6z"/><rect ${f('white')} x="14" y="16" width="56" height="40" rx="2" stroke-width="2.5" transform="rotate(-4 42 36)"/><path d="M20 26h36M20 34h40M20 42h28" stroke-width="2" transform="rotate(-4 42 36)"/>
+      <path ${f('orange')} d="M6 44h88v44H6z"/>`,
+    hanko: `<rect ${f('wood')} x="38" y="10" width="24" height="52" rx="6"/><ellipse ${f('wood')} cx="50" cy="10" rx="12" ry="5"/><rect ${f('red')} x="38" y="56" width="24" height="8"/>
+      <circle cx="50" cy="82" r="12" stroke="${C.red}" stroke-width="3"/><path d="M44 76h12M50 76v12M44 84h12" stroke="${C.red}" stroke-width="2.5"/>`,
+    whistle: `<path ${f('silver')} d="M30 40h50v16H58q0 26-24 26T10 58q0-18 20-18z"/><circle ${f('dark')} cx="34" cy="58" r="8" stroke-width="2"/><path d="M80 40v16" stroke-width="2"/>
+      <path d="M30 40q-8-24-22-26" stroke="${C.red}" stroke-width="3"/><g stroke="${C.gray}" stroke-width="3"><path d="M86 30l8-8M90 48h8M86 64l6 6"/></g>`,
+    nest: `<path ${f('wood')} d="M8 52q42 10 84 0-6 34-42 34T8 52z"/><g stroke="${C.brown}" stroke-width="2.5"><path d="M12 58q38 14 76 0M18 70q32 10 64 0M10 52l14 16M88 52L74 70M30 56l10 22M70 56l-10 22"/></g>
+      <g ${f('sky')} stroke-width="2.5"><ellipse cx="38" cy="50" rx="8" ry="10"/><ellipse cx="54" cy="46" rx="8" ry="10"/><ellipse cx="68" cy="52" rx="7" ry="9"/></g>`,
+    barchart: `<path d="M10 8v82h84" stroke-width="4"/><rect ${f('blue')} x="20" y="54" width="14" height="36"/><rect ${f('green')} x="42" y="34" width="14" height="56"/><rect ${f('orange')} x="64" y="18" width="14" height="72"/>
+      <path d="M16 50l26-20 22 6 22-24" stroke="${C.red}" stroke-width="3"/>`,
+    numbers: `<rect ${f('white')} x="4" y="20" width="92" height="60" rx="8"/><text x="22" y="62" class="lis-art-glyph lis-art-glyph-lg" fill="${C.red}" stroke="none" style="font-size:34px">1</text>
+      <text x="50" y="62" class="lis-art-glyph lis-art-glyph-lg" fill="${C.blue}" stroke="none" style="font-size:34px">2</text><text x="78" y="62" class="lis-art-glyph lis-art-glyph-lg" fill="${C.green}" stroke="none" style="font-size:34px">3</text>`,
+    headache: `${FACE_BASE}<path d="M31 52l12 4M69 52l-12 4" stroke-width="3"/><path d="M40 76q10-6 20 0" stroke-width="3"/>${hand(18, 30, -30)}<g stroke="${C.red}" stroke-width="3"><path d="M60 6l6 8-6 4 8 8M80 18l-6 6 8 2"/></g>`,
+    podium: `<path d="M38 40l8-24" stroke-width="3"/><circle ${f('silver')} cx="47" cy="14" r="5" stroke-width="2"/><path ${f('wood')} d="M20 40h60l-8 52H28z"/><path ${f('brown')} d="M16 36h68v8H16z"/>
+      <circle ${f('yellow')} cx="50" cy="66" r="10" stroke-width="2.5"/><g stroke="${C.blue}" stroke-width="3"><path d="M62 14q6 6 0 12M70 8q12 12 0 24"/></g>`,
+    cough: `${FACE_BASE}<path d="M31 50l12 4M69 50l-12 4" stroke-width="3"/><ellipse ${f('red')} cx="50" cy="74" rx="8" ry="6" stroke-width="2.5"/>
+      <g ${f('white')} stroke-width="2"><circle cx="72" cy="80" r="5"/><circle cx="84" cy="74" r="4"/><circle cx="90" cy="86" r="3"/></g><g stroke="${C.gray}" stroke-width="3"><path d="M64 70l10-4M66 78h10"/></g>`,
+    oildrum: `<rect ${f('blue')} x="24" y="14" width="52" height="76" rx="4"/><ellipse ${f('blue')} cx="50" cy="14" rx="26" ry="6"/><path d="M24 38h52M24 66h52" stroke-width="3"/><circle ${f('dark')} cx="62" cy="13" r="3" stroke-width="2"/>
+      <path ${f('black')} d="M50 44q-8 10-8 14a8 8 0 0 0 16 0q0-4-8-14z" stroke-width="2"/>`,
+    handshake: `<path ${f('blue')} d="M2 44h20v28H2z"/><path ${f('green')} d="M98 44H78v28h20z"/><path ${f('skin')} d="M22 46l18-6 20 4 18-2v26l-14 10-20 2-22-8z"/>
+      <path d="M40 40l14 14q4 4 8 0M46 68l6 6M54 64l6 6M62 60l6 6" stroke-width="2.5"/>`,
+    hole: `<path ${f('grass')} d="M2 40h96v54H2z" stroke="none"/><ellipse ${f('brown')} cx="50" cy="64" rx="36" ry="16"/><ellipse fill="${INK}" cx="50" cy="68" rx="26" ry="10" stroke="none"/>
+      <g ${f('brown')} stroke-width="2"><circle cx="16" cy="50" r="5"/><circle cx="86" cy="48" r="4"/><circle cx="80" cy="84" r="4"/></g>`,
+    doze: `<rect ${f('wood')} x="4" y="68" width="92" height="10"/><path d="M14 78v16M86 78v16" stroke-width="4"/><path ${f('white')} d="M50 68l26-6v6z" stroke-width="2"/>
+      <path ${f('blue')} d="M22 68q0-20 20-22h8q8 2 8 22z"/><circle ${f('skin')} cx="42" cy="44" r="14" transform="rotate(20 42 44)"/><path fill="${C.hair}" d="M30 36q4-14 16-12 8 2 8 10-12-6-24 2z" stroke-width="2"/>
+      <path d="M38 48q3 2 6 0" stroke-width="2.5"/><text x="70" y="30" class="lis-art-glyph" fill="${C.blue}" stroke="none">Z</text><text x="84" y="16" class="lis-art-text lis-art-bold" fill="${C.blue}" stroke="none">z</text>`,
+    printer: `<rect ${f('white')} x="26" y="8" width="48" height="26" stroke-width="2.5"/><path ${f('silver')} d="M8 32h84v40H8z"/><circle ${f('green')} cx="80" cy="44" r="3" stroke-width="1.5"/>
+      <path ${f('white')} d="M24 62h52v30H24z"/><path d="M32 72h36M32 80h28" stroke-width="2"/><rect ${f('sky')} x="56" y="70" width="12" height="16" stroke-width="1.5"/>`,
+    planet: `<g fill="${C.yellow}" stroke="none"><path d="${starPath(14, 16, 5, 2)}"/><path d="${starPath(86, 84, 5, 2)}"/><path d="${starPath(84, 14, 3, 1.2)}"/></g><circle ${f('orange')} cx="50" cy="50" r="24"/>
+      <path d="M30 40q-6 8 0 16M44 30q-4 10 4 12" stroke="#fff" stroke-width="2.5" opacity=".6"/><ellipse cx="50" cy="52" rx="44" ry="12" stroke="${INK}" stroke-width="9" transform="rotate(-18 50 52)"/>
+      <ellipse cx="50" cy="52" rx="44" ry="12" stroke="${C.purple}" stroke-width="4" transform="rotate(-18 50 52)"/><path ${f('orange')} d="M26 50a24 24 0 0 0 48 0q-24 14-48 0z" stroke="none" transform="rotate(-18 50 52)"/>`,
+    plumblossom: `<path d="M8 92Q40 60 92 30M48 64q-4-20 8-30" stroke="${C.choc}" stroke-width="6"/>
+      ${[[30, 70], [64, 44], [56, 30], [84, 34]].map(([x, y]) => `<g ${f('rose')} stroke-width="2.5">${[0, 72, 144, 216, 288].map(a => `<circle cx="${(x + 8 * Math.sin(a * Math.PI / 180)).toFixed(1)}" cy="${(y - 8 * Math.cos(a * Math.PI / 180)).toFixed(1)}" r="6"/>`).join('')}</g><circle ${f('yellow')} cx="${x}" cy="${y}" r="3.5" stroke-width="1.5"/>`).join('')}`,
+    oni: `<path ${f('cream')} d="M28 30l-4-24 14 16zM72 30l4-24-14 16z"/><circle ${f('red')} cx="50" cy="56" r="34"/><path fill="${C.hair}" d="M16 50q2-32 34-34t34 34q-8-16-20-18l-4 10-10-10-10 10-4-10q-12 2-20 18z"/>
+      <path d="M30 46l14 6M70 46l-14 6" stroke-width="4"/><g ${f('yellow')} stroke-width="2.5"><circle cx="38" cy="58" r="5"/><circle cx="62" cy="58" r="5"/></g><path ${f('white')} d="M34 72q16 10 32 0v4q-16 12-32 0z" stroke-width="2.5"/><path ${f('white')} d="M38 72l3 7 3-7M56 72l3 7 3-7" stroke-width="1.5"/>`,
+    easel: `<path d="M30 92l20-80 20 80M50 12v80" stroke="${C.brown}" stroke-width="5"/><rect ${f('white')} x="20" y="22" width="60" height="44" rx="2"/><path ${f('sky')} d="M24 26h52v36H24z" stroke-width="2"/>
+      <path ${f('green')} d="M24 62l14-18 10 10 10-8 18 16z" stroke-width="2"/><circle ${f('yellow')} cx="62" cy="36" r="5" stroke-width="2"/><path d="M16 68h68" stroke="${C.brown}" stroke-width="5"/>`,
+    testtubes: `<path d="M10 40h80" stroke="${C.brown}" stroke-width="5"/><path d="M14 40v50M86 40v50" stroke="${C.brown}" stroke-width="4"/>
+      ${[[28, 'blue', 60], [50, 'pink', 50], [72, 'green', 66]].map(([x, c, lvl]) => `<path ${f('white')} d="M${x - 7} 18h14v62a7 7 0 0 1-14 0z"/><path fill="${col(c)}" stroke="none" d="M${x - 5.5} ${lvl}h11v20a5.5 5.5 0 0 1-11 0z"/><path d="M${x - 7} 18h14v62a7 7 0 0 1-14 0z"/>`).join('')}<path d="M10 40h80" stroke="${C.brown}" stroke-width="5"/>`,
+    bandage: `<g transform="rotate(-35 50 50)"><rect ${f('beige')} x="4" y="34" width="92" height="32" rx="16"/><rect ${f('cream')} x="36" y="34" width="28" height="32"/><g fill="${C.wood}" stroke="none">${[[16, 46], [24, 54], [76, 46], [84, 54], [16, 54], [84, 46]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="1.8"/>`).join('')}</g></g>`,
+    lifebuoy: `<circle cx="50" cy="50" r="30" stroke="${INK}" stroke-width="24"/><circle cx="50" cy="50" r="30" stroke="${C.white}" stroke-width="18"/>
+      <g stroke="${C.red}" stroke-width="18"><path d="M50 20a30 30 0 0 1 21 9M80 50a30 30 0 0 1-9 21M50 80a30 30 0 0 1-21-9M20 50a30 30 0 0 1 9-21"/></g><path d="M10 20q40-20 80 0" stroke="${C.wood}" stroke-width="2.5"/>`,
+    fog: `<g transform="translate(18 6) scale(.64)">${ICONS.mountain}</g><g stroke="${C.gray}" stroke-width="7" opacity=".9"><path d="M6 46h56M30 60h62M10 74h66M40 88h50"/></g>`,
+    nosmoking: `<g transform="translate(6 4) scale(.88)">${ICONS.cigarette}</g><circle cx="50" cy="50" r="40" stroke="${C.red}" stroke-width="8"/><path d="M22 22l56 56" stroke="${C.red}" stroke-width="8"/>`,
+    calculator: `<rect ${f('dark')} x="18" y="6" width="64" height="88" rx="6"/><rect ${f('mint')} x="26" y="14" width="48" height="18" rx="2"/><text x="66" y="28" class="lis-art-text lis-art-bold" fill="${INK}" stroke="none">123</text>
+      <g stroke-width="1.5">${[0, 1, 2, 3].map(r => [0, 1, 2].map(c => `<rect ${f(c === 2 ? 'orange' : 'silver')} x="${27 + c * 16}" y="${40 + r * 13}" width="12" height="9" rx="2"/>`).join('')).join('')}</g>`,
+    bulletinboard: `<rect ${f('wood')} x="6" y="12" width="88" height="70" rx="4"/><rect fill="#c9a06b" x="12" y="18" width="76" height="58" stroke-width="2"/><path d="M24 82v12M76 82v12" stroke-width="4"/>
+      <rect ${f('white')} x="18" y="24" width="26" height="30" stroke-width="2" transform="rotate(-4 31 39)"/><rect ${f('yellow')} x="52" y="22" width="28" height="22" stroke-width="2" transform="rotate(5 66 33)"/><rect ${f('sky')} x="48" y="50" width="32" height="20" stroke-width="2"/>
+      <g ${f('red')} stroke-width="1.5"><circle cx="31" cy="26" r="3"/><circle cx="66" cy="24" r="3"/><circle cx="64" cy="52" r="3"/></g>`,
+    smoke: `<g transform="translate(10 40) scale(.6)">${ICONS.house}</g><rect ${f('red')} x="56" y="34" width="10" height="20"/><g ${f('silver')} stroke-width="2.5"><circle cx="62" cy="24" r="8"/><circle cx="74" cy="14" r="9"/><circle cx="88" cy="10" r="7"/></g>`,
+    crane: `<path d="M4 94h92"/><path d="M28 94V20" stroke="${C.yellow}" stroke-width="9"/><path d="M28 94V20" stroke-width="1.5" stroke-dasharray="6 6"/><path d="M10 20h84" stroke="${C.yellow}" stroke-width="7"/><path d="M28 8l-8 12h16z" ${f('yellow')} stroke-width="2.5"/>
+      <rect ${f('dark')} x="10" y="22" width="12" height="10"/><path d="M80 24v34" stroke-width="2"/><rect ${f('brown')} x="66" y="58" width="28" height="10" stroke-width="2.5"/><rect ${f('wall')} x="46" y="72" width="44" height="22" stroke-width="2.5"/><path d="M46 80h44M60 72v22M76 72v22" stroke-width="1.5"/>`,
+    goboard: `<path ${f('wood')} d="M8 30h84v52H8z"/><path ${f('wood')} d="M8 82h84l-4 8H12z"/><g stroke-width="1.5">${[0, 1, 2, 3, 4, 5].map(i => `<path d="M${16 + i * 13.6} 36v40M14 ${38 + i * 7.4}h72"/>`).join('')}</g>
+      <g stroke-width="2">${[[29.6, 45], [43, 52], [56.6, 45], [43, 60]].map(([x, y]) => `<circle fill="${C.black}" cx="${x}" cy="${y}" r="5"/>`).join('')}${[[56.6, 60], [70, 52], [29.6, 67]].map(([x, y]) => `<circle fill="#fff" cx="${x}" cy="${y}" r="5"/>`).join('')}</g>`,
+    couple: `<path ${f('blue')} d="M8 92q0-28 20-28t20 28z"/><circle ${f('skin')} cx="28" cy="48" r="13"/><path fill="${C.hair}" d="M15 46q0-14 13-14t13 14q-6-6-13-6t-13 6z" stroke-width="2"/>
+      <path ${f('pink')} d="M52 92q0-28 20-28t20 28z"/><circle ${f('skin')} cx="72" cy="48" r="13"/><path fill="${C.hair}" d="M58 60q-4-26 14-28 18 2 14 28-2-14-14-18-12 4-14 18z" stroke-width="2"/>
+      <path ${f('red')} d="M50 30c-6-5-10-8-10-12a5 5 0 0 1 10-1 5 5 0 0 1 10 1c0 4-4 7-10 12z" stroke-width="2"/>`,
+    koto: `<path ${f('wood')} d="M4 54q46-24 92 0v12q-46-22-92 0z"/><g stroke-width="1">${[0, 1, 2, 3, 4].map(i => `<path d="M8 ${55 + i * 2}q42-22 84 0"/>`).join('')}</g>
+      <g ${f('white')} stroke-width="1.5">${[22, 38, 54, 70].map((x, i) => `<path d="M${x} ${48 - (i % 2) * 4 - (x > 30 && x < 70 ? 6 : 0)}l3-6 3 6z"/>`).join('')}</g><path d="M10 66v14M90 66v14" stroke-width="4"/>`,
+    hut: `<path ${f('grass')} d="M2 82h96v12H2z" stroke="none"/><rect ${f('wood')} x="20" y="46" width="60" height="38"/><path d="M20 56h60M20 66h60M20 76h60" stroke="${C.brown}" stroke-width="2"/>
+      <path ${f('brown')} d="M10 50l40-36 40 36z"/><rect ${f('dark')} x="42" y="60" width="16" height="24"/><rect ${f('yellow')} x="64" y="54" width="10" height="10" stroke-width="2"/>`,
+    cavity: `${ICONS.tooth}<path fill="${INK}" d="M54 24q8-2 10 6-4 6-10 2z" stroke="none"/><g stroke="${C.red}" stroke-width="3"><path d="M78 10l6-6M84 20h8M70 4l2-4"/></g>`,
+    meishi: `<rect ${f('white')} x="14" y="30" width="80" height="50" rx="3" transform="rotate(6 54 55)"/><rect ${f('white')} x="6" y="20" width="80" height="50" rx="3"/>
+      <rect ${f('blue')} x="14" y="28" width="14" height="14" rx="2" stroke-width="2"/><path d="M34 32h40M34 40h28" stroke-width="3"/><path d="M14 54h56M14 61h40" stroke-width="2"/>`,
+    cast: `<path ${f('skin')} d="M6 44q12-12 26-6l10 6v18l-10 4q-16 4-26-6z"/><rect ${f('white')} x="38" y="36" width="54" height="34" rx="12"/><path d="M50 38l6 30M66 38l6 30" stroke-width="2"/>
+      <path d="M82 22l-6 12M88 30l-10 8" stroke="${C.red}" stroke-width="3"/><path ${f('blue')} d="M38 30q30-14 50 0" stroke-width="3"/>`,
+    grave: `<path ${f('gray')} d="M14 82h72v12H14z"/><path ${f('gray')} d="M24 72h52v10H24z"/><rect ${f('gray')} x="34" y="16" width="32" height="56" rx="2"/><path d="M42 26v38M50 26v38M58 26v38" stroke-width="1.5" opacity=".4"/>
+      <g ${f('green')} stroke-width="2"><path d="M18 72q-4-14 4-18 4 10-4 18zM82 72q4-14-4-18-4 10 4 18z"/></g><path d="M50 8q-3-4 0-8" stroke="${C.gray}" stroke-width="2"/>`,
+    picnic: `<path ${f('red')} d="M4 70l44-12 48 12-44 18z"/><g stroke="#fff" stroke-width="3" opacity=".8"><path d="M26 64l22 18M48 58l22 20M14 72l40-6M34 80l48-8"/></g><path ${f('wood')} d="M32 48h36l-4 22H36z"/>
+      <path d="M38 48q12-16 24 0" stroke-width="3"/><path d="M32 54h36" stroke="${C.brown}" stroke-width="2"/><circle ${f('red')} cx="78" cy="68" r="6" stroke-width="2"/>`,
+    zebra: `<path ${f('gray')} d="M2 20h96v60H2z" stroke="none"/><g fill="#fff" stroke="none">${[0, 1, 2, 3, 4, 5].map(i => `<rect x="${8 + i * 15}" y="26" width="9" height="48"/>`).join('')}</g><path d="M2 20h96M2 80h96"/><g transform="translate(36 6) scale(.42)">${ICONS.walk}</g>`,
+    apartment: `<rect ${f('cream')} x="10" y="22" width="80" height="68"/><path ${f('brown')} d="M6 22h88v8H6z"/><path d="M10 56h80" stroke-width="3"/><path d="M10 52h80" stroke-width="1.5"/>
+      ${[16, 40, 64].map(x => `<rect ${f('brown')} x="${x}" y="34" width="12" height="18" stroke-width="2"/><rect ${f('sky')} x="${x + 13}" y="36" width="8" height="8" stroke-width="1.5"/><rect ${f('brown')} x="${x}" y="68" width="12" height="22" stroke-width="2"/><rect ${f('sky')} x="${x + 13}" y="70" width="8" height="8" stroke-width="1.5"/>`).join('')}
+      <path d="M90 56l6 34" stroke-width="2.5"/><path d="M4 90h92"/>`,
+    dirty: `<path ${f('beige')} d="M30 10h22v46l20 14q8 8 0 16-6 6-14 0L34 70q-4-4-4-10z"/><g fill="${C.choc}" stroke="none" opacity=".6"><circle cx="40" cy="30" r="4"/><circle cx="46" cy="52" r="5"/><circle cx="62" cy="76" r="4"/></g>
+      <path d="M14 30q-4-6 2-10M20 50q-6-4-2-10M74 20q6-2 6 4" stroke="${C.green}" stroke-width="3"/><g fill="${INK}" stroke="none"><circle cx="80" cy="40" r="2.5"/><circle cx="12" cy="66" r="2.5"/></g><path d="M77 37l-3-3M83 37l3-3M9 63l-3-3M15 63l3-3" stroke-width="1.5"/>`,
+    wedding: `<path ${f('white')} d="M50 6l20 14v8H30v-8z"/><path ${f('white')} d="M30 28h40v62H30z"/><path ${f('yellow')} d="M40 6h20" stroke-width="0"/><path d="M50 2v8M46 6h8" stroke-width="2.5"/><rect ${f('brown')} x="42" y="70" width="16" height="20" stroke-width="2.5"/>
+      <circle ${f('yellow')} cx="50" cy="44" r="7" stroke-width="2.5"/><path d="M6 90h88"/><ellipse cx="22" cy="72" rx="10" ry="10" stroke="${C.yellow}" stroke-width="4"/><ellipse cx="80" cy="72" rx="10" ry="10" stroke="${C.yellow}" stroke-width="4"/>
+      <path ${f('red')} d="M50 62c-4-3-6-5-6-7a3 3 0 0 1 6-1 3 3 0 0 1 6 1c0 2-2 4-6 7z" stroke="none"/>`,
+    giraffe: `<path ${f('yellow')} d="M30 92V60q-8-2-8-12 0-8 10-8h22l16-30q2-6 8-4l10 6q4 4-2 8l-10 4-16 34v34h-8V70H42v22z"/>
+      <path d="M78 6l-2-6M86 10l2-6" stroke-width="2.5"/><circle fill="${INK}" cx="82" cy="16" r="2" stroke="none"/><g fill="${C.brown}" stroke="none"><circle cx="38" cy="52" r="4"/><circle cx="52" cy="48" r="4"/><circle cx="66" cy="34" r="3.5"/><circle cx="72" cy="22" r="3"/><circle cx="60" cy="60" r="3.5"/><circle cx="34" cy="64" r="3"/></g>`,
+    sparkle: `<ellipse ${f('white')} cx="44" cy="62" rx="36" ry="26"/><ellipse cx="44" cy="62" rx="24" ry="16" stroke-width="2"/><path d="M28 54q8-6 18-6" stroke="${C.sky}" stroke-width="3"/>
+      <g ${f('yellow')} stroke-width="2"><path d="M80 14l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/><path d="M62 24l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/><path d="M88 46l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/></g>`,
+    stereo: `<rect ${f('silver')} x="4" y="30" width="92" height="52" rx="8"/><path d="M30 30v-10h40v10" stroke-width="4"/><circle ${f('dark')} cx="24" cy="58" r="14"/><circle ${f('dark')} cx="76" cy="58" r="14"/>
+      <circle ${f('silver')} cx="24" cy="58" r="5" stroke-width="2"/><circle ${f('silver')} cx="76" cy="58" r="5" stroke-width="2"/><rect ${f('sky')} x="40" y="40" width="20" height="10" stroke-width="2"/><path d="M42 62h16M42 70h16" stroke-width="2.5"/>`,
+    embarrassed: `${FACE_BASE}<path d="M31 50q7 4 14 0M55 50q7 4 14 0" stroke-width="3"/><path d="M42 74q4-4 8 0t8 0" stroke-width="2.5"/>
+      <g fill="${C.red}" stroke="none" opacity=".55"><ellipse cx="30" cy="64" rx="9" ry="6"/><ellipse cx="70" cy="64" rx="9" ry="6"/></g><g stroke="${C.red}" stroke-width="2"><path d="M24 62l4-4M30 64l4-4M66 62l4-4M72 64l4-4"/></g><path ${f('sky')} d="M84 30q-6 8-2 12 6 0 4-8z" stroke-width="2"/>`,
+    ganbaru: `${FACE_BASE}<path fill="#fff" d="M16 38q34-12 68 0v10q-34-12-68 0z" stroke-width="2.5"/><circle fill="${C.red}" cx="50" cy="38" r="5" stroke="none"/><path d="M84 40l10-8M84 44l10 4" stroke-width="2.5"/>
+      <path d="M30 54l12 2M70 54l-12 2" stroke-width="3"/><path ${f('red')} d="M40 70h20q-2 10-10 10t-10-10z" stroke-width="2.5"/>`,
+    smell: `${FACE_BASE}<path d="M31 52q7 3 14 0M55 52q7 3 14 0" stroke-width="3"/>${NOSE}<path d="M42 74q8 4 16 0" stroke-width="2.5"/>
+      <g stroke="${C.purple}" stroke-width="2.5"><path d="M66 64q6-4 10 0t10 0M68 72q6-4 10 0t10 0M66 80q6-4 10 0t10 0"/></g>`,
+    landscape: `<rect ${f('wood')} x="4" y="10" width="92" height="80" rx="3"/><rect ${f('sky')} x="12" y="18" width="76" height="64"/><path ${f('white')} d="M20 62l22-30 22 30z" stroke-width="2.5"/><path ${f('green')} d="M40 66l20-24 28 24z" stroke-width="2.5"/>
+      <path ${f('blue')} d="M12 66h76v16H12z" stroke-width="2.5"/><circle ${f('orange')} cx="74" cy="30" r="6" stroke-width="2"/><path d="M24 74q4-2 8 0M56 76q4-2 8 0" stroke="#fff" stroke-width="2"/>`,
+    invitation: `<rect ${f('cream')} x="10" y="22" width="80" height="58" rx="3"/><path d="M10 22l40 30 40-30" stroke-width="2.5"/><path ${f('red')} d="M50 62c-6-4-9-7-9-10a4.5 4.5 0 0 1 9-1 4.5 4.5 0 0 1 9 1c0 3-3 6-9 10z" stroke-width="2"/>
+      <path fill="${C.yellow}" d="${starPath(20, 12, 7, 3)}" stroke-width="1.5"/><path fill="${C.yellow}" d="${starPath(84, 92, 6, 2.5)}" stroke-width="1.5"/>`,
+    testpaper: `<rect ${f('white')} x="16" y="6" width="68" height="88" rx="2"/><path d="M26 22h30M26 40h40M26 54h40M26 68h40M26 82h30" stroke-width="2.5"/>
+      <text x="74" y="30" class="lis-art-glyph lis-art-glyph-lg" fill="${C.red}" stroke="none">100</text><ellipse cx="74" cy="24" rx="18" ry="11" stroke="${C.red}" stroke-width="3"/><path d="M66 46l4 4 8-10" stroke="${C.red}" stroke-width="3"/>`,
+    oshiire: `<rect ${f('wood')} x="6" y="8" width="88" height="84"/><path ${f('cream')} d="M10 12h40v76H10z"/><path d="M10 50h40" stroke-width="3"/><path d="M14 16h32v30M14 54h32v30" stroke-width="1.5" opacity=".4"/>
+      <path ${f('dark')} d="M54 12h36v76H54z" stroke="none"/><path d="M54 50h36" stroke="${C.wood}" stroke-width="4"/><path ${f('blue')} d="M56 22h32v26H56z" stroke-width="2"/><path ${f('pink')} d="M56 30h32v8H56z" stroke-width="2"/><path ${f('white')} d="M56 64h32v22H56z" stroke-width="2"/>`,
+    moneybag: `<path ${f('wood')} d="M34 26q-22 16-22 40 0 26 38 26t38-26q0-24-22-40z"/><path ${f('wood')} d="M32 10l8 16h20l8-16q-18 6-36 0z"/><path d="M34 26h32" stroke-width="5"/>
+      <text x="50" y="74" class="lis-art-glyph lis-art-glyph-lg" fill="${INK}" stroke="none" style="font-size:28px">¥</text><g ${f('yellow')} stroke-width="2"><ellipse cx="84" cy="86" rx="10" ry="4"/><ellipse cx="84" cy="80" rx="10" ry="4"/></g>`,
+    antenna: `<path d="M50 30L30 92M50 30l20 62M36 74h28M41 58h18M45 44h10" stroke-width="3.5"/><circle ${f('red')} cx="50" cy="26" r="6"/>
+      <g stroke="${C.blue}" stroke-width="3"><path d="M30 14q-8 12 0 24M70 14q8 12 0 24M20 6q-14 20 0 40M80 6q14 20 0 40"/></g>`,
+    heater: `<rect ${f('white')} x="14" y="20" width="72" height="66" rx="8"/><rect ${f('dark')} x="22" y="30" width="56" height="34" rx="3"/><g stroke="${C.orange}" stroke-width="4"><path d="M30 38h40M30 47h40M30 56h40"/></g>
+      <circle ${f('red')} cx="72" cy="74" r="4" stroke-width="2"/><path d="M28 74h20" stroke-width="3"/><g stroke="${C.red}" stroke-width="3"><path d="M30 14q-4-6 0-10M50 14q-4-6 0-10M70 14q-4-6 0-10"/></g>`,
+    takeoff: `<path d="M4 90h92" stroke-width="5"/><path d="M12 90h10M34 90h10M56 90h10" stroke="#fff" stroke-width="2"/><g transform="translate(18 -8) rotate(-24 50 50) scale(.86)">${ICONS.plane}</g>
+      <path d="M6 76q14-4 22-14" stroke="${C.gray}" stroke-width="3" stroke-dasharray="4 4"/>`,
+    crowdedtrain: `<rect ${f('green')} x="6" y="16" width="88" height="66" rx="10"/><rect ${f('sky')} x="14" y="24" width="72" height="34" rx="3"/>
+      <g stroke-width="1.5">${[20, 32, 44, 56, 68, 80].map((x, i) => `<circle ${f('skin')} cx="${x}" cy="${38 + (i % 2) * 6}" r="6"/><path ${f(['blue', 'red', 'navy', 'orange', 'dark', 'pink'][i])} d="M${x - 6} 58q0-10 6-10t6 10z"/>`).join('')}</g>
+      <path d="M14 66h72" stroke-width="2.5"/><circle ${f('dark')} cx="24" cy="86" r="5"/><circle ${f('dark')} cx="76" cy="86" r="5"/><path d="M2 24l-2 8M98 24l2 8" stroke="${C.red}" stroke-width="3"/>`,
+    helmet: `<path ${f('yellow')} d="M12 64q0-46 38-46t38 46z"/><path ${f('yellow')} d="M6 62h88v10H6z"/><path d="M50 18v20M34 22q-6 14-6 40M66 22q6 14 6 40" stroke-width="2.5"/><rect ${f('white')} x="40" y="42" width="20" height="12" rx="2" stroke-width="2"/><path d="M46 48h8M50 44v8" stroke="${C.green}" stroke-width="3"/>`,
+    lake: `<path ${f('white')} d="M8 58l22-34 22 34z"/><path ${f('green')} d="M36 58l22-28 30 28z"/><path ${f('green')} d="M20 46l10-22 22 34" stroke="none"/><path ${f('blue')} d="M4 58h92q-6 30-46 30T4 58z"/>
+      <path d="M22 70q6-3 12 0M58 74q6-3 12 0M40 80q6-3 12 0" stroke="#fff" stroke-width="2.5"/><g transform="translate(64 60) scale(.24)">${ICONS.sailboat}</g>`,
+  });
+
   // icon('cat') or icon({ name: 'umbrella', color: 'red', pattern: 'dots' }):
   // color swaps the object's main colour (its first fill), so "the red
   // umbrella" or "the black cat" can be drawn from one shape.
