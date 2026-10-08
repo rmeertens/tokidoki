@@ -783,7 +783,7 @@
         {
           type: 'meaning', who: 'kuro',
           prompt: 'He said 走っていたそうだ. What does 〜そうだ after a plain verb tell you about where he got this?',
-          answers: ['heard', 'hearsay', 'someone said', 'someone told', 'was told', 'apparently', 'reportedly', 'they say', 'people say', 'rumor', 'rumour', 'second hand', 'secondhand', 'second-hand', 'didn’t see', 'didn\'t see', 'did not see', 'not see'],
+          answers: ['he only heard it (hearsay)', 'heard', 'hearsay', 'someone said', 'someone told', 'was told', 'apparently', 'reportedly', 'they say', 'people say', 'rumor', 'rumour', 'second hand', 'secondhand', 'second-hand', 'didn’t see', 'didn\'t see', 'did not see', 'not see'],
           hint: 'Plain verb + そうだ is not “looks like” (that’s the ます-stem + そう). It reports something you…',
           note: '走っていたそうだ = “I hear he was running”: reported speech. Compare 走りそうだ = “he looks like he’s about to run”. Same そう, different attachment, very different meaning.',
         },
@@ -968,7 +968,7 @@
         {
           type: 'meaning', who: 'kuro',
           prompt: 'The card says 花火が始まったら、招き猫をいただきます. When will Mike strike? (English)',
-          answers: ['firework', 'fireworks', 'when the fireworks start', 'fire works'],
+          answers: ['when the fireworks start', 'firework', 'fireworks', 'fire works'],
           hint: '花火 is “fire flowers”. 〜たら here means “once … happens”.',
           note: '〜たら marks the moment something happens: 花火が始まったら = “once the fireworks start”. いただきます is the humble form of もらう — “I shall take it”. A very polite thief!',
         },
@@ -1136,7 +1136,7 @@
         {
           type: 'meaning', who: 'kuro',
           prompt: 'Madame Kitsunezuka says 書いておりません. What does that tell you about the letter? (English)',
-          answers: ['didn’t write', 'didn\'t write', 'did not write', 'not write', 'not hers', 'fake', 'forged', 'forgery', 'someone else', 'not from her'],
+          answers: ['she didn’t write it (it’s forged)', 'didn’t write', 'didn\'t write', 'did not write', 'not write', 'not hers', 'fake', 'forged', 'forgery', 'someone else', 'not from her'],
           hint: '〜ておりません is the humble 〜ていません.',
           note: '書いておりません = 書いていません, humbly: “I have not written it.” So someone forged her name.',
         },
@@ -1274,7 +1274,7 @@
         {
           type: 'meaning', who: 'kuro',
           prompt: 'Mr. Tanuki said 昼寝を始めるところだった. At three o’clock, was he already asleep? (English)',
-          answers: ['no', 'not yet', 'not asleep', 'awake', 'about to', 'was going to'],
+          answers: ['not yet', 'no', 'not asleep', 'awake', 'about to', 'was going to'],
           hint: 'Dictionary form + ところ = on the point of doing.',
           note: 'Dictionary form + ところ = about to: 始めるところ “just about to start”. So he was still awake — though that alone doesn’t make him the culprit.',
         },
@@ -1527,7 +1527,7 @@
         {
           type: 'meaning', who: 'kuro',
           prompt: 'Gonta says 逃げられてしまった — a passive of 逃げる, which has no object. How does that make Gonta sound? (English)',
-          answers: ['bad', 'annoyed', 'upset', 'unlucky', 'sorry', 'regret', 'embarrassed', 'troubled', 'inconvenienced', 'suffer', 'victim', 'unfortunate', 'ashamed'],
+          answers: ['annoyed, unlucky (it happened to him)', 'annoyed', 'bad', 'upset', 'unlucky', 'sorry', 'regret', 'embarrassed', 'troubled', 'inconvenienced', 'suffer', 'victim', 'unfortunate', 'ashamed'],
           hint: 'The passive of a verb with no object is the “suffering passive”: something happened TO me, unfortunately…',
           note: 'The suffering (adversity) passive: 雨に降られた “I got rained on”, ヤスに逃げられた “Yasu escaped on me”. It shows the speaker was hurt by it — and てしまった adds regret.',
         },
