@@ -49,6 +49,29 @@ PASSAGES.forEach(p => {
 });
 SF.LEVELS.forEach(level => check(PASSAGES.some(p => p.level === level), `${level}: no passages`));
 
+// ─── Words (story-fill-words.js) ─────────────────────────────────────────────
+// The word lists are generated from the passages by
+// scripts/tokenize_story_fill.mjs; they must still spell out the passages
+// exactly, and every word needs a dictionary entry.
+
+require('./story-fill-words.js');
+const WORDS = globalThis.STORY_FILL_WORDS;
+const stale = 'out of date — run scripts/tokenize_story_fill.mjs';
+PASSAGES.forEach(p => {
+  const pieces = WORDS.passages[p.id];
+  check(Array.isArray(pieces) && pieces.length === p.paragraphs.length, `${p.id}: word list ${stale}`);
+  if (!pieces) return;
+  pieces.forEach((par, i) => {
+    check(par.map(t => (typeof t === 'string' ? t : t[0])).join('') === p.paragraphs[i], `${p.id} paragraph ${i + 1}: word list ${stale}`);
+    par.filter(Array.isArray).forEach(([m, key]) => {
+      const g = WORDS.gloss[key];
+      check(Array.isArray(g) && g.length === 3 && g[0] && g[1], `${p.id}: no meaning for ${m} (${key})`);
+    });
+  });
+  const words = pieces.flat().filter(Array.isArray).length;
+  check(words >= 15, `${p.id}: only ${words} tappable words`);
+});
+
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 check(JSON.stringify(SF.splitBlanks('a{1}b{2}')) === '[{"text":"a"},{"blank":0},{"text":"b"},{"blank":1}]', 'splitBlanks() splits at blanks');

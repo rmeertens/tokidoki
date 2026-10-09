@@ -79,12 +79,19 @@
   }
 
   const PASSAGES = global.STORY_FILL_PASSAGES || [];
+  // Each passage split into words, from story-fill-words.js (generated).
+  const WORDS = global.STORY_FILL_WORDS || { gloss: {}, passages: {} };
+  // Saved words join the Stories flashcard deck, reviewed on stories.html.
+  const DECK_KEY = 'tokidoki_story_words';
+  const SRS_KEY = 'tokidoki_srs';
   const settings = Object.assign({ level: 'all', furigana: true }, load(SETTINGS_KEY, {}));
   const store = Object.assign({ best: {}, last: {} }, load(STORE_KEY, {}));
 
   const $ = id => document.getElementById(id);
   // attempt: { passage, order: [shuffled choice indices per blank], picks, checked, focus }
   let attempt = null;
+  // The tapped word: { p: paragraph, i: piece index } or null.
+  let selected = null;
 
   const levelOk = p => settings.level === 'all' || p.level === settings.level;
   const visible = () => PASSAGES.filter(levelOk);
@@ -117,6 +124,7 @@
   function start(id) {
     const passage = PASSAGES.find(p => p.id === id);
     if (!passage) return;
+    selected = null;
     attempt = {
       passage,
       order: passage.blanks.map(b => shuffleOrder(b.choices.length)),
@@ -142,9 +150,106 @@
     return `<a class="${cls}" href="#sf-q-${i}" data-jump="${i}"><span class="sf-blank-num">${i + 1}</span>${text}</a>${fix}`;
   }
 
+  const isBlank = t => typeof t === 'string' && /^\{\d+\}$/.test(t);
+  const blankIndex = t => Number(t.slice(1, -1)) - 1;
+
   function renderText() {
-    $('sf-text').innerHTML = attempt.passage.paragraphs.map(p =>
-      '<p>' + splitBlanks(p).map(r => ('blank' in r ? blankHtml(r.blank) : rubyHtml(r.text))).join('') + '</p>').join('');
+    const pieces = WORDS.passages[attempt.passage.id];
+    if (!pieces) {
+      $('sf-text').innerHTML = attempt.passage.paragraphs.map(p =>
+        '<p>' + splitBlanks(p).map(r => ('blank' in r ? blankHtml(r.blank) : rubyHtml(r.text))).join('') + '</p>').join('');
+      return;
+    }
+    const deck = load(DECK_KEY, {});
+    $('sf-text').innerHTML = pieces.map((par, pi) => '<p>' + par.map((t, i) => {
+      if (isBlank(t)) return blankHtml(blankIndex(t));
+      if (typeof t === 'string') return rubyHtml(t);
+      let cls = 'story-word sf-word';
+      if (deck[t[1]]) cls += ' saved';
+      if (selected && selected.p === pi && selected.i === i) cls += ' selected';
+      return `<span class="${cls}" data-p="${pi}" data-i="${i}" role="button" tabindex="0">${rubyHtml(t[0])}</span>`;
+    }).join('') + '</p>').join('');
+  }
+
+  // ─── Word panel ────────────────────────────────────────────────────────────
+
+  // The sentence around a word, in the Stories token format (words separated
+  // by spaces), with the blanks filled in with their answers.
+  function sentenceAround(pi, i) {
+    const par = WORDS.passages[attempt.passage.id][pi];
+    const ends = t => typeof t === 'string' && /[。！？]/.test(t);
+    let from = i;
+    while (from > 0 && !ends(par[from - 1])) from--;
+    let to = i;
+    while (to < par.length - 1 && !ends(par[to])) to++;
+    return par.slice(from, to + 1).map(t => {
+      if (isBlank(t)) { const b = attempt.passage.blanks[blankIndex(t)]; return b.choices[b.answer]; }
+      return (typeof t === 'string' ? t : t[0]).replace(/\s+/g, '');
+    }).filter(Boolean).join(' ');
+  }
+
+  function toggleSaved(key, pi, i) {
+    const deck = load(DECK_KEY, {});
+    if (deck[key]) {
+      delete deck[key];
+      const srs = load(SRS_KEY, {});
+      delete srs['story_word:' + key];
+      save(SRS_KEY, srs);
+    } else {
+      const [kana, meaning] = WORDS.gloss[key];
+      const p = attempt.passage;
+      deck[key] = {
+        vocab: p.level.toLowerCase(), kana, meaning, added: Date.now(),
+        jp: sentenceAround(pi, i), en: p.en[pi] || '', title: `${p.titleEn} (Story Fill-in)`, level: p.level,
+      };
+    }
+    save(DECK_KEY, deck);
+  }
+
+  function renderPanel() {
+    const panel = $('sf-panel');
+    panel.classList.toggle('open', !!selected);
+    document.body.classList.toggle('sf-panel-open', !!selected);
+    if (!selected) return;
+    const [markup, key] = WORDS.passages[attempt.passage.id][selected.p][selected.i];
+    const [reading, meaning, pos] = WORDS.gloss[key] || [plain(markup), '', ''];
+    const word = key.replace(/\(.*\)$/, '');
+    const form = plain(markup);
+    const saved = !!load(DECK_KEY, {})[key];
+    const speak = kana => (global.Pronounce ? Pronounce.buttonsHtml(kana, 'story-panel-speak') : '');
+    $('sf-panel-body').innerHTML = `
+      <div class="story-panel-kicker">Word</div>
+      <div class="story-panel-word" lang="ja">${esc(word)}</div>
+      ${reading !== word ? `<div class="story-panel-reading" lang="ja">${esc(reading)}</div>` : ''}
+      ${speak(reading)}
+      <div class="story-panel-pos">${esc(pos)}</div>
+      <div class="story-panel-meaning">${esc(meaning)}</div>
+      ${form !== word ? `<div class="story-panel-form">In the text: <span lang="ja">${esc(form)}</span></div>` : ''}
+      <div class="mys-panel-actions">
+        <button class="${saved ? 'btn-secondary' : 'btn-primary'} story-panel-add" id="sf-add-word">${saved ? '✓ In flashcards — remove' : '＋ Add to flashcards'}</button>
+      </div>
+      ${saved ? '<div class="mys-panel-tip">Review your flashcards on the <a href="stories.html#deck">Stories page</a>.</div>' : ''}`;
+    $('sf-add-word').addEventListener('click', () => {
+      toggleSaved(key, selected.p, selected.i);
+      renderText();
+      renderPanel();
+    });
+  }
+
+  function selectWord(pi, i) {
+    selected = selected && selected.p === pi && selected.i === i ? null : { p: pi, i };
+    renderText();
+    renderPanel();
+    // With "Speak words on click" on, read out the word's dictionary form.
+    const gloss = selected && WORDS.gloss[WORDS.passages[attempt.passage.id][pi][i][1]];
+    if (gloss && global.Pronounce) Pronounce.onClick(gloss[0]);
+  }
+
+  function closePanel() {
+    if (!selected) return;
+    selected = null;
+    renderText();
+    renderPanel();
   }
 
   function renderQuestions() {
@@ -218,6 +323,8 @@
 
   function goHome() {
     attempt = null;
+    selected = null;
+    renderPanel();
     renderHome();
     show('screen-chapters');
   }
@@ -243,6 +350,8 @@
     if (b && !b.disabled) pick(Number(b.dataset.blank), Number(b.dataset.choice));
   });
   $('sf-text').addEventListener('click', e => {
+    const w = e.target.closest('.sf-word');
+    if (w) { selectWord(Number(w.dataset.p), Number(w.dataset.i)); return; }
     const a = e.target.closest('[data-jump]');
     if (!a) return;
     e.preventDefault();
@@ -251,6 +360,12 @@
     const first = q.querySelector('button:not(:disabled)');
     if (first) first.focus({ preventScroll: true });
   });
+  $('sf-text').addEventListener('keydown', e => {
+    const w = e.target.closest('.sf-word');
+    if (w && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); selectWord(Number(w.dataset.p), Number(w.dataset.i)); }
+  });
+  $('sf-panel-close').addEventListener('click', closePanel);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
   $('btn-sf-check').addEventListener('click', check);
   $('btn-sf-again').addEventListener('click', () => start(attempt.passage.id));
   $('btn-sf-next').addEventListener('click', () => { const n = nextPassage(); if (n) start(n.id); });

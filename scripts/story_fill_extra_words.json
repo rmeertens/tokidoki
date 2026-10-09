@@ -1,0 +1,667 @@
+{
+  "しゅみ": [
+    "しゅみ",
+    "hobby",
+    "noun"
+  ],
+  "すきやき": [
+    "すきやき",
+    "sukiyaki (beef and vegetables simmered at the table)",
+    "noun"
+  ],
+  "てんぷら": [
+    "てんぷら",
+    "tempura (battered and deep-fried food)",
+    "noun"
+  ],
+  "ざんねん": [
+    "ざんねん",
+    "a pity, disappointing",
+    "な-adjective"
+  ],
+  "ざんねんです": [
+    "ざんねんです",
+    "it’s a pity",
+    "expression"
+  ],
+  "ざんねんでした": [
+    "ざんねんでした",
+    "it was a pity",
+    "expression"
+  ],
+  "という": [
+    "という",
+    "called, that says (quoting or naming: Xという Y)",
+    "expression"
+  ],
+  "たり": [
+    "たり",
+    "〜たり〜たりする: doing things like ~ and ~",
+    "particle"
+  ],
+  "だり": [
+    "だり",
+    "〜だり (たり after ん-verbs): doing things like ~",
+    "particle"
+  ],
+  "ことに": [
+    "ことに",
+    "〜ことにする: decide to ~",
+    "expression"
+  ],
+  "にとって": [
+    "にとって",
+    "for, to (from someone’s point of view)",
+    "particle"
+  ],
+  "スマート": [
+    "スマート",
+    "smart (スマートフォン: smartphone)",
+    "noun"
+  ],
+  "フォン": [
+    "フォン",
+    "phone (スマートフォン: smartphone)",
+    "noun"
+  ],
+  "スマートフォン": [
+    "スマートフォン",
+    "smartphone",
+    "noun"
+  ],
+  "子ども": [
+    "こども",
+    "child",
+    "noun"
+  ],
+  "休館": [
+    "きゅうかん",
+    "closed (of a library, museum…)",
+    "noun"
+  ],
+  "開館": [
+    "かいかん",
+    "open (of a library, museum…)",
+    "noun"
+  ],
+  "分館": [
+    "ぶんかん",
+    "branch (library, museum)",
+    "noun"
+  ],
+  "当館": [
+    "とうかん",
+    "this library / this building (formal)",
+    "noun"
+  ],
+  "返却": [
+    "へんきゃく",
+    "returning (something borrowed)",
+    "noun"
+  ],
+  "貸し出し": [
+    "かしだし",
+    "lending, borrowing (at a library)",
+    "noun"
+  ],
+  "以降": [
+    "いこう",
+    "on and after, from … onwards",
+    "noun"
+  ],
+  "通常": [
+    "つうじょう",
+    "usual, normal",
+    "noun"
+  ],
+  "工事": [
+    "こうじ",
+    "construction work",
+    "noun"
+  ],
+  "市立": [
+    "しりつ",
+    "city-run, municipal",
+    "noun"
+  ],
+  "皆様": [
+    "みなさま",
+    "everyone (very polite)",
+    "noun"
+  ],
+  "みなさま": [
+    "みなさま",
+    "everyone (very polite)",
+    "noun"
+  ],
+  "おかけ": [
+    "おかけ",
+    "ご迷惑をおかけする: cause (someone) trouble (humble)",
+    "expression"
+  ],
+  "レア": [
+    "レア",
+    "Léa (given name)",
+    "name"
+  ],
+  "山口": [
+    "やまぐち",
+    "Yamaguchi (family name)",
+    "name"
+  ],
+  "田中": [
+    "たなか",
+    "Tanaka (family name)",
+    "name"
+  ],
+  "佐藤": [
+    "さとう",
+    "Sato (family name)",
+    "name"
+  ],
+  "マリア": [
+    "マリア",
+    "Maria (given name)",
+    "name"
+  ],
+  "アンナ": [
+    "アンナ",
+    "Anna (given name)",
+    "name"
+  ],
+  "中国": [
+    "ちゅうごく",
+    "China",
+    "noun"
+  ],
+  "タイ": [
+    "タイ",
+    "Thailand",
+    "noun"
+  ],
+  "北海道": [
+    "ほっかいどう",
+    "Hokkaido (Japan’s northern island)",
+    "noun"
+  ],
+  "終点": [
+    "しゅうてん",
+    "last stop, end of the line",
+    "noun"
+  ],
+  "眠れる": [
+    "ねむれる",
+    "can sleep (potential of 眠る)",
+    "る-verb"
+  ],
+  "使える": [
+    "つかえる",
+    "can use (potential of 使う)",
+    "る-verb"
+  ],
+  "選べる": [
+    "えらべる",
+    "can choose (potential of 選ぶ)",
+    "る-verb"
+  ],
+  "きっかけ": [
+    "きっかけ",
+    "trigger, what started something",
+    "noun"
+  ],
+  "インターネット": [
+    "インターネット",
+    "the internet",
+    "noun"
+  ],
+  "在宅": [
+    "ざいたく",
+    "at home (在宅勤務: working from home)",
+    "noun"
+  ],
+  "勤務": [
+    "きんむ",
+    "work, duty (at a job)",
+    "noun"
+  ],
+  "ランナー": [
+    "ランナー",
+    "runner",
+    "noun"
+  ],
+  "閉店": [
+    "へいてん",
+    "closing (a shop, for good or for the day)",
+    "noun"
+  ],
+  "おにぎり": [
+    "おにぎり",
+    "rice ball",
+    "noun"
+  ],
+  "焼き": [
+    "やき",
+    "baking, grilling (焼きたて: fresh from the oven)",
+    "noun"
+  ],
+  "ピザ": [
+    "ピザ",
+    "pizza",
+    "noun"
+  ],
+  "メール": [
+    "メール",
+    "email, message",
+    "noun"
+  ],
+  "北口": [
+    "きたぐち",
+    "north exit",
+    "noun"
+  ],
+  "お世話": [
+    "おせわ",
+    "help, looking after (お世話になる: be looked after)",
+    "noun"
+  ],
+  "肉じゃが": [
+    "にくじゃが",
+    "nikujaga (simmered meat and potatoes)",
+    "noun"
+  ],
+  "くたくた": [
+    "くたくた",
+    "exhausted, worn out",
+    "adverb"
+  ],
+  "どきどき": [
+    "どきどき",
+    "(heart) pounding, nervous",
+    "adverb"
+  ],
+  "直前": [
+    "ちょくぜん",
+    "just before",
+    "noun"
+  ],
+  "寝室": [
+    "しんしつ",
+    "bedroom",
+    "noun"
+  ],
+  "持ち込む": [
+    "もちこむ",
+    "to bring in, take into",
+    "う-verb"
+  ],
+  "行き先": [
+    "いきさき",
+    "destination",
+    "noun"
+  ],
+  "えらい": [
+    "えらい",
+    "admirable, great; important",
+    "い-adjective"
+  ],
+  "知り合う": [
+    "しりあう",
+    "to get to know (each other)",
+    "う-verb"
+  ],
+  "そういう": [
+    "そういう",
+    "that kind of, such",
+    "pre-noun"
+  ],
+  "診断": [
+    "しんだん",
+    "diagnosis, check-up",
+    "noun"
+  ],
+  "ふるまう": [
+    "ふるまう",
+    "to treat (someone to food); to behave",
+    "う-verb"
+  ],
+  "きゅうり": [
+    "きゅうり",
+    "cucumber",
+    "noun"
+  ],
+  "収集": [
+    "しゅうしゅう",
+    "collection (of rubbish)",
+    "noun"
+  ],
+  "分別": [
+    "ぶんべつ",
+    "sorting (rubbish by type)",
+    "noun"
+  ],
+  "リサイクル": [
+    "リサイクル",
+    "recycling",
+    "noun"
+  ],
+  "仕組み": [
+    "しくみ",
+    "system, how something works",
+    "noun"
+  ],
+  "社員": [
+    "しゃいん",
+    "employee, staff member",
+    "noun"
+  ],
+  "出社": [
+    "しゅっしゃ",
+    "going in to the office",
+    "noun"
+  ],
+  "ボランティア": [
+    "ボランティア",
+    "volunteer",
+    "noun"
+  ],
+  "リーダー": [
+    "リーダー",
+    "leader",
+    "noun"
+  ],
+  "指示": [
+    "しじ",
+    "instructions, directions",
+    "noun"
+  ],
+  "座りこむ": [
+    "すわりこむ",
+    "to sit down (and stay there), slump down",
+    "う-verb"
+  ],
+  "お疲れさま": [
+    "おつかれさま",
+    "thanks for your hard work (greeting between colleagues)",
+    "expression"
+  ],
+  "資料": [
+    "しりょう",
+    "materials, documents",
+    "noun"
+  ],
+  "山の上": [
+    "やまのうえ",
+    "mountaintop",
+    "noun"
+  ],
+  "治安": [
+    "ちあん",
+    "public safety, law and order",
+    "noun"
+  ],
+  "夜道": [
+    "よみち",
+    "street at night",
+    "noun"
+  ],
+  "照らす": [
+    "てらす",
+    "to light up, shine on",
+    "う-verb"
+  ],
+  "カフェ": [
+    "カフェ",
+    "café",
+    "noun"
+  ],
+  "待ち遠しい": [
+    "まちどおしい",
+    "can’t wait for, long-awaited",
+    "い-adjective"
+  ],
+  "店主": [
+    "てんしゅ",
+    "shop owner",
+    "noun"
+  ],
+  "普及": [
+    "ふきゅう",
+    "spread, becoming widespread",
+    "noun"
+  ],
+  "年々": [
+    "ねんねん",
+    "year by year",
+    "adverb"
+  ],
+  "小遣い": [
+    "こづかい",
+    "pocket money",
+    "noun"
+  ],
+  "握りしめる": [
+    "にぎりしめる",
+    "to grip tightly, clutch",
+    "る-verb"
+  ],
+  "マンガ": [
+    "マンガ",
+    "manga, comics",
+    "noun"
+  ],
+  "お知らせ": [
+    "おしらせ",
+    "notice, announcement",
+    "noun"
+  ],
+  "平日": [
+    "へいじつ",
+    "weekday",
+    "noun"
+  ],
+  "おすすめ": [
+    "おすすめ",
+    "recommendation",
+    "noun"
+  ],
+  "五分": [
+    "ごふん",
+    "five minutes",
+    "noun"
+  ],
+  "かぜ": [
+    "かぜ",
+    "a cold (かぜをひく: catch a cold)",
+    "noun"
+  ],
+  "ひく": [
+    "ひく",
+    "to catch (a cold); to pull",
+    "う-verb"
+  ],
+  "林": [
+    "はやし",
+    "Hayashi (family name)",
+    "name"
+  ],
+  "やさしい": [
+    "やさしい",
+    "kind, gentle; easy",
+    "い-adjective"
+  ],
+  "はやい": [
+    "はやい",
+    "early; fast (はやく: soon, quickly)",
+    "い-adjective"
+  ],
+  "あと": [
+    "あと",
+    "after, later (〜たあとで: after doing)",
+    "noun"
+  ],
+  "ほしい": [
+    "ほしい",
+    "want (something); (〜てほしい) want someone to ~",
+    "い-adjective"
+  ],
+  "かける": [
+    "かける",
+    "to make (a phone call); to call out (声をかける); to cause (迷惑をかける)",
+    "る-verb"
+  ],
+  "かかる": [
+    "かかる",
+    "to take (time, money); (a phone call) to come in",
+    "う-verb"
+  ],
+  "つける": [
+    "つける",
+    "to attach, to turn on; 気をつける: to be careful",
+    "る-verb"
+  ],
+  "つく": [
+    "つく",
+    "to be attached; 気がつく: to notice; 区別がつく: can tell apart",
+    "う-verb"
+  ],
+  "迷う": [
+    "まよう",
+    "to get lost (道に迷う); to hesitate",
+    "う-verb"
+  ],
+  "さ": [
+    "さ",
+    "-ness: turns an adjective into a noun (よさ: goodness)",
+    "suffix"
+  ],
+  "場": [
+    "ば",
+    "place, spot (その場で: on the spot)",
+    "noun"
+  ],
+  "たま": [
+    "たま",
+    "occasional (たまに: now and then)",
+    "noun"
+  ],
+  "立てる": [
+    "たてる",
+    "役に立てる: to be able to help, be of use (potential of 立つ)",
+    "る-verb"
+  ],
+  "欠く": [
+    "かく",
+    "to lack; 欠かせない: essential, indispensable",
+    "う-verb"
+  ],
+  "方(かた)": [
+    "かた",
+    "way of doing (〜方: how to ~, e.g. 使い方)",
+    "suffix"
+  ],
+  "行き": [
+    "いき",
+    "going (stem of 行く: to go)",
+    "noun"
+  ],
+  "自動販売機": [
+    "じどうはんばいき",
+    "vending machine",
+    "noun"
+  ],
+  "ば": [
+    "ば",
+    "if (conditional: 〜ば)",
+    "particle"
+  ],
+  "一年": [
+    "いちねん",
+    "one year",
+    "noun"
+  ],
+  "四人": [
+    "よにん",
+    "four people",
+    "noun"
+  ],
+  "三千円": [
+    "さんぜんえん",
+    "3,000 yen",
+    "noun"
+  ],
+  "十人": [
+    "じゅうにん",
+    "ten people",
+    "noun"
+  ],
+  "六時半": [
+    "ろくじはん",
+    "half past six",
+    "noun"
+  ],
+  "八百円": [
+    "はっぴゃくえん",
+    "800 yen",
+    "noun"
+  ],
+  "千六百円": [
+    "せんろっぴゃくえん",
+    "1,600 yen",
+    "noun"
+  ],
+  "九時半": [
+    "くじはん",
+    "half past nine",
+    "noun"
+  ],
+  "三回": [
+    "さんかい",
+    "three times",
+    "noun"
+  ],
+  "五十": [
+    "ごじゅう",
+    "fifty",
+    "number"
+  ],
+  "三人": [
+    "さんにん",
+    "three people",
+    "noun"
+  ],
+  "一時間後": [
+    "いちじかんご",
+    "an hour later",
+    "noun"
+  ],
+  "三リットル": [
+    "さんリットル",
+    "three litres",
+    "noun"
+  ],
+  "二十代": [
+    "にじゅうだい",
+    "one’s twenties (age 20–29)",
+    "noun"
+  ],
+  "八割": [
+    "はちわり",
+    "80 per cent",
+    "noun"
+  ],
+  "数年": [
+    "すうねん",
+    "a few years, several years",
+    "noun"
+  ],
+  "一冊": [
+    "いっさつ",
+    "one (book)",
+    "noun"
+  ],
+  "すぎる": [
+    "すぎる",
+    "(after a stem) too much: 使いすぎる = use too much; to pass",
+    "る-verb"
+  ]
+}

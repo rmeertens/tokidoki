@@ -84,10 +84,6 @@
         <button data-level="N3" aria-pressed="false">N3</button>
         <button data-level="all" aria-pressed="true">All</button>
       </div>
-      <div class="wo-settings">
-        <label class="kana-script-toggle"><input type="checkbox" id="sf-opt-furigana"> Furigana</label>
-      </div>
-
       <div class="sf-list" id="sf-list"></div>
 
       <div class="reset-section">
@@ -102,8 +98,12 @@
         <button id="sf-quit" class="btn-undo" aria-label="Back to the passages">✕</button>
       </div>
 
+      <div class="wo-settings">
+        <label class="kana-script-toggle"><input type="checkbox" id="sf-opt-furigana"> Furigana</label>
+      </div>
+
       <div class="card sf-card">
-        <div class="kana-prompt-label">Read the passage, then choose the best answer for each blank.</div>
+        <div class="kana-prompt-label">Read the passage, then choose the best answer for each blank. Tap a word to look it up.</div>
         <div class="sf-text" id="sf-text" lang="ja"></div>
       </div>
 
@@ -124,6 +124,11 @@
         <button id="btn-sf-check" class="btn-primary">Check answers</button>
       </div>
 
+      <aside class="story-panel sf-panel" id="sf-panel" aria-live="polite">
+        <button class="icon-btn story-panel-close" id="sf-panel-close" aria-label="Close">✕</button>
+        <div id="sf-panel-body"></div>
+      </aside>
+
       <div class="session-actions sf-actions hidden" id="sf-actions">
         <button id="btn-sf-next" class="btn-primary hidden">Next passage →</button>
         <button id="btn-sf-again" class="btn-secondary">Try again</button>
@@ -134,7 +139,9 @@
   </div>
 
   <script src="story-fill-data.js?v=3"></script>
-  <script src="story-fill.js?v=1"></script>
+  <script src="story-fill-words.js?v=1"></script>
+  <script src="pronounce.js"></script>
+  <script src="story-fill.js?v=2"></script>
   <script src="app.js?v=20"></script>
 
   <!-- Static content for search engines -->

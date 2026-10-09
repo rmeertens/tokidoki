@@ -5496,6 +5496,39 @@ body.wo-no-furigana .wo-card rt { visibility: hidden; }
 
 body.sf-no-furigana #screen-story-fill rt { visibility: hidden; }
 
+/* Tap a word in the passage: a sheet at the bottom of the screen with its
+   meaning, like the Stories panel on a phone. */
+.sf-word { padding: 0; }
+.sf-word.selected rt { visibility: visible; }
+.story-panel.sf-panel {
+  position: fixed;
+  top: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 300;
+  width: min(100%, 720px);
+  max-height: 50dvh;
+  margin: 0 auto;
+  border-radius: var(--radius) var(--radius) 0 0;
+  border-bottom: none;
+  padding: 16px 16px calc(16px + env(safe-area-inset-bottom));
+  transform: translateY(105%);
+  transition: transform 0.25s ease;
+}
+.story-panel.sf-panel.open { transform: translateY(0); }
+.sf-panel .story-panel-close {
+  display: inline-flex;
+  position: sticky;
+  top: 0;
+  float: right;
+  margin: -8px -8px 4px 8px;
+  z-index: 1;
+  box-shadow: var(--shadow);
+}
+.sf-panel .mys-panel-actions .story-panel-add { width: auto; }
+body.sf-panel-open #screen-story-fill { padding-bottom: 50dvh; }
+
 @media (max-width: 480px) {
   .sf-text { font-size: 1.02rem; }
   .sf-choices { grid-template-columns: 1fr; }
