@@ -174,6 +174,7 @@
       label += `: ${plain(item.pieces[q.placed[slot]])} — tap to take it back`;
     }
     if (slot === item.star) cls += ' wo-slot-star';
+    if (!q.answered && (session.starOnly ? slot === item.star : slot === q.placed.indexOf(null))) cls += ' wo-next';
     const disabled = q.answered || session.starOnly || q.placed[slot] == null ? ' disabled' : '';
     return `<button class="${cls}" data-slot="${slot}" aria-label="${esc(label)}"${disabled}>${star}<span class="wo-slot-body">${body}</span></button>`;
   }
@@ -186,7 +187,10 @@
     $('wo-level').textContent = item.level;
     $('wo-prompt').textContent = session.starOnly
       ? 'Which piece goes in the ★ blank?'
-      : 'Tap the pieces into the blanks in the right order.';
+      : 'Put the pieces in the right order.';
+    $('wo-hint').textContent = q.answered ? '' : session.starOnly
+      ? 'Tap the piece that belongs in the ★ blank.'
+      : 'Tap a piece to put it in the highlighted blank · tap a filled blank to take it back.';
 
     $('wo-sentence').innerHTML = `<span class="wo-text">${rubyHtml(item.pre)}</span>`
       + item.pieces.map((_, slot) => slotHtml(q, slot)).join('')
@@ -208,6 +212,8 @@
       </button>`;
     }).join('');
 
+    // In arrange mode every piece is in the sentence by now; the empty tray would only be noise.
+    $('wo-bank').classList.toggle('hidden', q.answered && !session.starOnly);
     const full = q.placed.every(p => p != null);
     $('wo-check-area').classList.toggle('hidden', q.answered || session.starOnly);
     $('btn-wo-check').disabled = !full;
@@ -217,8 +223,9 @@
     if (q.answered) {
       const verdict = q.correct ? '<b class="wo-verdict-right">✓ Correct!</b>' : '<b class="wo-verdict-wrong">✗ Not quite.</b>';
       const starNote = !session.starOnly && !q.correct && isStarCorrect(item, q.placed[item.star])
-        ? ' <span class="wo-dim">(You had the ★ piece right.)</span>' : '';
-      feedback.innerHTML = `<div>${verdict}${starNote} ★ = <span class="wo-answer" lang="ja">${rubyHtml(item.pieces[item.star])}</span></div>
+        ? ' <span class="wo-dim">You did have the ★ piece right.</span>' : '';
+      feedback.innerHTML = `<div>${verdict}${starNote}</div>
+        <div>★ answer: <span class="wo-answer" lang="ja">${rubyHtml(item.pieces[item.star])}</span></div>
         ${!session.starOnly && !q.correct ? `<div class="wo-dim">Your order: <span lang="ja">${q.placed.map(p => esc(plain(item.pieces[p]))).join(' / ')}</span></div>` : ''}
         <div class="wo-full" lang="ja">${rubyHtml(item.pre + item.pieces.join('') + item.post)}</div>
         ${item.note ? `<div class="wo-note">${esc(item.note)}</div>` : ''}`;

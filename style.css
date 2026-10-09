@@ -5130,94 +5130,115 @@ a.chapter-card {
 .wo-settings { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 6px 0 14px; }
 .wo-review { display: block; width: 100%; margin-top: 10px; }
 
-.wo-card { align-items: stretch; }
+.wo-card { align-items: stretch; background: var(--bg-card); border-left-color: var(--salmon); }
 .wo-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
 .wo-badge { font-family: var(--font-jp); font-size: 0.8rem; font-weight: 700; color: var(--salmon); }
 .wo-level { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); border: 1px solid var(--border); border-radius: 999px; padding: 1px 8px; }
 
+/* The sentence: text runs and four blanks, wrapping as one line of text. */
 .wo-sentence {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 14px 6px;
   font-family: var(--font-jp);
   font-size: 1.3rem;
-  line-height: 2.4;
-  margin: 14px 0 6px;
-  text-align: center;
+  line-height: 1.6;
+  margin: 26px 0 10px;
 }
-.wo-text { white-space: normal; }
+.wo-text { padding-bottom: 6px; }
 .wo-slot {
   position: relative;
   display: inline-flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  min-width: 3.4em;
-  margin: 0 3px;
-  padding: 2px 6px 0;
-  border: none;
-  border-bottom: 2px solid var(--text-dim);
-  border-radius: 6px 6px 0 0;
-  background: transparent;
+  min-width: 3.6em;
+  min-height: 2.3em;
+  padding: 4px 10px;
+  border: 2px dashed var(--text-muted);
+  border-radius: 10px;
+  background: var(--bg-input);
   font: inherit;
-  line-height: 1.6;
+  font-weight: 700;
   color: var(--text);
-  vertical-align: bottom;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+  transition: border-color var(--transition), background var(--transition);
 }
 .wo-slot:not(:disabled) { cursor: pointer; }
-.wo-slot:not(:disabled):hover { background: var(--accent-dim); }
-.wo-slot-body { min-height: 1.6em; }
-.wo-blank-line { display: inline-block; width: 2.4em; }
-.wo-slot-star { border-bottom-color: var(--salmon); }
+.wo-slot-star { border-color: var(--salmon); }
 .wo-star {
   position: absolute;
-  top: -0.95em;
+  top: -1.15em;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   line-height: 1;
   color: var(--salmon);
 }
-.wo-slot.wo-filled { background: var(--accent-dim); }
-.wo-slot.wo-right { background: var(--green-dim); border-bottom-color: var(--green); }
-.wo-slot.wo-wrong { background: var(--red-dim); border-bottom-color: var(--red); }
+/* Where the next tapped piece will go. */
+.wo-slot.wo-next { border-style: solid; border-color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, var(--bg-card)); box-shadow: 0 0 0 3px var(--accent-dim); }
+.wo-slot.wo-filled { border-style: solid; border-color: var(--accent); background: var(--bg-card); }
+.wo-slot.wo-filled:not(:disabled):hover { background: var(--red-dim); border-color: var(--red); }
+.wo-slot.wo-right { border-style: solid; background: var(--green-dim); border-color: var(--green); }
+.wo-slot.wo-wrong { border-style: solid; background: var(--red-dim); border-color: var(--red); }
+.wo-blank-line { display: inline-block; width: 1em; }
 
+.wo-hint { text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px; }
+.wo-hint:empty { display: none; }
 .wo-en-row { text-align: center; min-height: 2em; }
 .wo-en { margin-top: 4px; }
 
+/* The pieces: chips that wrap, like word tiles. */
 .wo-bank {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
-  margin-top: 18px;
+  margin-top: 20px;
+  padding: 16px 12px;
+  border-radius: var(--radius);
+  background: var(--bg-input);
 }
 .wo-piece {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 14px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
+  gap: 8px;
+  padding: 10px 16px;
+  border: 2px solid var(--border);
+  border-bottom-width: 4px;
+  border-radius: 12px;
   background: var(--bg-card);
   color: var(--text);
   font-family: var(--font-jp);
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  text-align: left;
+  line-height: 1.5;
   cursor: pointer;
-  transition: all var(--transition);
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+  transition: transform var(--transition), border-color var(--transition);
 }
-.wo-piece:hover:not(:disabled) { border-color: var(--accent); transform: translateY(-1px); }
+.wo-piece:hover:not(:disabled) { border-color: var(--accent); transform: translateY(-2px); }
+.wo-piece:active:not(:disabled) { transform: translateY(1px); border-bottom-width: 2px; }
 .wo-piece:disabled { cursor: default; }
-.wo-piece.wo-used { opacity: 0.35; }
+/* A placed piece leaves an empty outline behind. */
+.wo-piece.wo-used { background: transparent; border-style: dashed; border-bottom-width: 2px; }
+.wo-piece.wo-used > * { visibility: hidden; }
 .wo-piece.correct { background: var(--green-dim); border-color: var(--green); }
 .wo-piece.wrong { background: var(--red-dim); border-color: var(--red); }
 .wo-piece-num {
-  flex: none;
   display: grid;
   place-items: center;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.3rem;
+  height: 1.3rem;
   border-radius: 50%;
   background: var(--bg-input);
   font-family: var(--font);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--text-dim);
 }
 
@@ -5235,8 +5256,11 @@ a.chapter-card {
 body.wo-no-furigana .wo-card rt { visibility: hidden; }
 
 @media (max-width: 480px) {
-  .wo-sentence { font-size: 1.1rem; }
-  .wo-bank { grid-template-columns: 1fr; }
+  .wo-sentence { font-size: 1.1rem; gap: 12px 4px; }
+  .wo-slot { min-width: 3em; padding: 4px 8px; }
+  .wo-piece { font-size: 1.1rem; padding: 8px 12px; }
+  .wo-piece-num { display: none; }
+  #wo-next-area .reveal-hint { display: none; }
 }
 
 /* Story fill-in: JLPT 文章の文法 passages (story-fill.html) */
