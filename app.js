@@ -90,8 +90,48 @@
 
   function loadSettings() {
     const defaults = { typingMode: false, hideForm: true, showContext: true, englishToJapanese: true, showExampleFront: false, showFurigana: true, flashcardFurigana: true, adjSentences: false };
-    try { return { ...defaults, ...JSON.parse(localStorage.getItem(SETTINGS_KEY)) }; }
-    catch { return defaults; }
+    let loaded;
+    try { loaded = { ...defaults, ...JSON.parse(localStorage.getItem(SETTINGS_KEY)) }; }
+    catch { loaded = { ...defaults }; }
+    // formDisplay replaced the old hideForm checkbox: 'hidden' (no form shown),
+    // 'color' (coloured badge only) or 'name' (colour + written-out form name).
+    if (!FORM_DISPLAY_MODES.includes(loaded.formDisplay)) {
+      loaded.formDisplay = loaded.hideForm ? 'color' : 'name';
+    }
+    return loaded;
+  }
+
+  const FORM_DISPLAY_MODES = ['hidden', 'color', 'name'];
+
+  // Fills a form badge according to the form-display mode. `symbol` is the
+  // ending shown next to the name, e.g. だ for an adjective sentence.
+  function renderFormBadge(badge, fi, symbol, mode) {
+    badge.style.cssText = '';
+    badge.classList.toggle('hidden', mode === 'hidden');
+    if (mode === 'hidden') {
+      badge.innerHTML = '';
+      return;
+    }
+    badge.innerHTML = mode === 'name'
+      ? `${fi.name} <span class="form-symbol">(${symbol})</span>`
+      : `<span class="form-symbol">?</span>`;
+    badge.style.background = fi.color + '22';
+    badge.style.color = fi.color;
+    badge.style.borderColor = fi.color;
+  }
+
+  // Tints the card in the form's colour (or clears it when the form is hidden).
+  function paintCardForm(form, fi, show) {
+    const NEGATIVE_FORMS = new Set(['masu-neg', 'masu-past-neg', 'nai', 'nakatta', 'adj-neg', 'adj-past-neg']);
+    const card = $('#card');
+    if (show) {
+      card.style.setProperty('--form-color', fi.color);
+      card.style.borderLeftColor = fi.color;
+    } else {
+      card.style.removeProperty('--form-color');
+      card.style.borderLeftColor = '';
+    }
+    card.classList.toggle('negative-form', show && NEGATIVE_FORMS.has(form));
   }
 
   function saveSettings(data) {
@@ -597,24 +637,8 @@
     $('#card-front').classList.remove('hidden');
     $('#card-back').classList.add('hidden');
 
-    const NEGATIVE_FORMS = new Set(['masu-neg', 'masu-past-neg', 'nai', 'nakatta', 'adj-neg', 'adj-past-neg']);
-    const card = $('#card');
-    card.style.setProperty('--form-color', fi.color);
-    card.style.borderLeftColor = fi.color;
-    card.classList.toggle('negative-form', NEGATIVE_FORMS.has(form));
-
-    const badge = $('#card-form-badge');
-    if (settings.hideForm) {
-      badge.innerHTML = `<span class="form-symbol">?</span>`;
-      badge.style.background = fi.color + '22';
-      badge.style.color = fi.color;
-      badge.style.borderColor = fi.color;
-    } else {
-      badge.innerHTML = `${fi.name} <span class="form-symbol">(${fi.symbol})</span>`;
-      badge.style.background = fi.color + '22';
-      badge.style.color = fi.color;
-      badge.style.borderColor = fi.color;
-    }
+    paintCardForm(form, fi, settings.formDisplay !== 'hidden');
+    renderFormBadge($('#card-form-badge'), fi, fi.symbol, settings.formDisplay);
 
     const kanjiEl = $('#card-kanji');
     kanjiEl.classList.remove('translate-source-ja', 'translate-source-en');
@@ -1173,11 +1197,9 @@
     $('.result-area').classList.remove('hidden');
 
     const fi = Conjugator.getFormInfo(currentCard.form);
-    const badgeBack = $('#card-form-badge-back');
-    badgeBack.innerHTML = `${fi.name} <span class="form-symbol">(${fi.symbol})</span>`;
-    badgeBack.style.background = fi.color + '22';
-    badgeBack.style.color = fi.color;
-    badgeBack.style.borderColor = fi.color;
+    // The answer side always reveals the form.
+    paintCardForm(currentCard.form, fi, true);
+    renderFormBadge($('#card-form-badge-back'), fi, fi.symbol, 'name');
 
     const kanjiBack = $('#card-kanji-back');
     kanjiBack.textContent = currentCard.verb.kanji;
@@ -1766,13 +1788,12 @@
     $('#card').classList.remove('negative-form');
     const badge = $('#card-form-badge');
     badge.style.cssText = '';
+    badge.classList.remove('hidden');
     if (card.refForm) {
-      // Adjective sentences: the form the sentence expects, in its colour.
+      // Adjective sentences: the form the sentence expects, shown per the
+      // form-display setting.
       const fi = Conjugator.getFormInfo(card.refForm);
-      badge.innerHTML = `${fi.name} <span class="form-symbol">(${card.formEnding || fi.symbol})</span>`;
-      badge.style.background = fi.color + '22';
-      badge.style.color = fi.color;
-      badge.style.borderColor = fi.color;
+      renderFormBadge(badge, fi, card.formEnding || fi.symbol, settings.formDisplay);
     } else {
       badge.innerHTML = `${sourceLang} → ${targetLang}`;
     }
@@ -1836,8 +1857,16 @@
     $('#card-front').classList.add('hidden');
     $('#card-back').classList.remove('hidden');
 
-    $('#card-form-badge-back').innerHTML = $('#card-form-badge').innerHTML;
-    $('#card-form-badge-back').style.cssText = $('#card-form-badge').style.cssText;
+    const badgeBack = $('#card-form-badge-back');
+    if (currentCard.refForm) {
+      // The answer side always reveals the form.
+      const fi = Conjugator.getFormInfo(currentCard.refForm);
+      renderFormBadge(badgeBack, fi, currentCard.formEnding || fi.symbol, 'name');
+    } else {
+      badgeBack.classList.remove('hidden');
+      badgeBack.innerHTML = $('#card-form-badge').innerHTML;
+      badgeBack.style.cssText = $('#card-form-badge').style.cssText;
+    }
     const answerEl = $('#card-kanji-back');
     if (isEnToJa) {
       answerEl.innerHTML = jaDisplay;
@@ -4415,10 +4444,14 @@
               </label>
               <label class="setting-row">
                 <div class="setting-info">
-                  <span class="setting-label">Hide form name (harder mode)</span>
-                  <span class="setting-desc">Only shows the English hint (e.g. "Polite past") — you must recall the form yourself</span>
+                  <span class="setting-label">Form label on question</span>
+                  <span class="setting-desc">Hidden, colour only, or colour with the written-out form name (e.g. "Present (だ)"). The answer side always shows it.</span>
                 </div>
-                <input type="checkbox" id="setting-hide-form" class="setting-toggle">
+                <select id="setting-form-display" class="setting-select">
+                  <option value="hidden">Hidden</option>
+                  <option value="color">Colour only</option>
+                  <option value="name">Colour + name</option>
+                </select>
               </label>
               <label class="setting-row">
                 <div class="setting-info">
@@ -4651,7 +4684,7 @@
     // Settings button
     function openSettings() {
       $('#setting-typing-mode').checked = settings.typingMode;
-      $('#setting-hide-form').checked = settings.hideForm;
+      $('#setting-form-display').value = settings.formDisplay;
       $('#setting-show-context').checked = settings.showContext;
       $('#setting-english-to-japanese').checked = settings.englishToJapanese;
       $('#setting-show-example-front').checked = settings.showExampleFront;
@@ -4673,8 +4706,9 @@
       saveSettings(settings);
     });
 
-    on('#setting-hide-form', 'change', (e) => {
-      settings.hideForm = e.target.checked;
+    on('#setting-form-display', 'change', (e) => {
+      settings.formDisplay = e.target.value;
+      settings.hideForm = e.target.value !== 'name';
       saveSettings(settings);
     });
 
