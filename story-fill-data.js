@@ -85,6 +85,76 @@
       ],
     },
 
+    {
+      id: 'n5-family', level: 'N5', title: 'わたしの 家族[かぞく]', titleEn: 'My family',
+      paragraphs: [
+        'わたしの 家族は 四人[よにん]です。父[ちち]と 母[はは]と 姉[あね]と わたしです。父は 銀行[ぎんこう]で はたらいて います。母は 料理[りょうり]が 上手[じょうず]です。毎晩[まいばん] おいしい ごはんを 作[つく]って くれます。',
+        '姉は 大学生[だいがくせい]です。英語[えいご]{1} 勉強[べんきょう]して います。姉は わたし{2} 三[みっ]つ 上[うえ]です。とても やさしいです。',
+        '週末[しゅうまつ]は 家族で よく 公園[こうえん]へ 行[い]きます。父は テニスが 好[す]きです{3}、わたしは あまり 好きでは ありません。わたしは 公園で 犬[いぬ]と 遊[あそ]ぶ{4} 好きです。',
+      ],
+      blanks: [
+        { choices: ['を', 'が', 'へ', 'と'], answer: 0,
+          why: '勉強する takes its subject of study with を: 英語を勉強する “study English”. へ marks a direction and と a partner, neither of which fits.' },
+        { choices: ['より', 'ほど', 'まで', 'から'], answer: 0,
+          why: 'Comparing ages: Xより三つ上 “three years older than X”. ほど only works with a negative (わたしほど〜ない).' },
+        { choices: ['が', 'から', 'ので', 'と'], answer: 0,
+          why: 'Father likes tennis, but I don’t — two opposite facts are joined with が (“but”). から and ので would make his liking the reason for mine.' },
+        { choices: ['のが', 'のを', 'のに', 'ので'], answer: 0,
+          why: 'の turns 犬と遊ぶ into a noun, and 好き marks what you like with が: 遊ぶのが好きです. 好き never takes を.' },
+      ],
+      en: [
+        'There are four people in my family: my father, my mother, my older sister and me. My father works at a bank. My mother is good at cooking. Every evening she makes us delicious dinners.',
+        'My sister is a university student. She studies English. She is three years older than me. She is very kind.',
+        'At weekends my family often goes to the park. My father likes tennis, but I don’t like it much. I like playing with our dog in the park.',
+      ],
+    },
+    {
+      id: 'n5-present', level: 'N5', title: '母[はは]への プレゼント', titleEn: 'A present for my mother',
+      paragraphs: [
+        'きのう、デパートへ 買[か]い物[もの]に 行[い]きました。母の たんじょう日[び]の プレゼントを 買いたかったからです。',
+        'デパートは 人[ひと]が とても 多[おお]かったです。はじめに 一階[いっかい]で かさを 見[み]ました。きれいな かさが ありましたが、少[すこ]し 高[たか]かったです。{1}、二階[にかい]へ 行きました。二階には かばんや ぼうしが ありました。わたしは 青[あお]い ぼうしを 買いました。三千円[さんぜんえん]{2}。',
+        '家[いえ]に 帰[かえ]ってから、ぼうしを 母に {3}。母は「ありがとう。とても うれしいです」と 言[い]いました。来年[らいねん]の たんじょう日には 何[なに]を あげ{4}か。今[いま]から 考[かんが]えて います。',
+      ],
+      blanks: [
+        { choices: ['それで', 'でも', 'しかし', 'または'], answer: 0,
+          why: 'The umbrella was too expensive, and because of that I went upstairs — a reason and what followed, so それで (“so”). でも and しかし set up a contrast; または means “or”.' },
+        { choices: ['でした', 'です', 'ました', 'でしょう'], answer: 0,
+          why: 'The whole story is in the past, and a price is a noun, so the polite past of です: 三千円でした. ました only goes on verbs.' },
+        { choices: ['あげました', 'もらいました', 'くれました', '買[か]いました'], answer: 0,
+          why: 'I gave the hat to my mother: ぼうしを母にあげました. もらいました would mean I received it from her, and くれる is only for things given to me.' },
+        { choices: ['ましょう', 'ました', 'ません', 'たい'], answer: 0,
+          why: '何を〜ましょうか is “what shall I ~?” — the writer is wondering what to give next year. ました is past, and たい can’t be followed directly by か here.' },
+      ],
+      en: [
+        'Yesterday I went shopping at a department store. I wanted to buy a birthday present for my mother.',
+        'The store was very crowded. First I looked at umbrellas on the first floor. There was a pretty one, but it was a little expensive, so I went to the second floor. There were bags and hats there. I bought a blue hat. It was 3,000 yen.',
+        'After I got home, I gave the hat to my mother. She said, “Thank you. I’m very happy.” What shall I give her next birthday? I’m already thinking about it.',
+      ],
+    },
+    {
+      id: 'n5-class', level: 'N5', title: '日本語[にほんご]の クラス', titleEn: 'My Japanese class',
+      paragraphs: [
+        'わたしは 毎週[まいしゅう] 火曜日[かようび]と 木曜日[もくようび]に 日本語の クラスへ 行[い]きます。クラスは 夜[よる] 七時[しちじ]{1} 九時[くじ]までです。',
+        'クラスには 学生[がくせい]が 十人[じゅうにん] います。アメリカ{2} 中国[ちゅうごく]や タイから 来[き]た 人[ひと]が います。みんな とても いい 人です。',
+        '先生[せんせい]は 山本[やまもと]先生です。先生の 話[はなし]は いつも おもしろいです。{3}、漢字[かんじ]の テストは むずかしいです。わたしは 漢字が あまり {4}。もっと 勉強[べんきょう]したいです。',
+      ],
+      blanks: [
+        { choices: ['から', 'まで', 'に', 'で'], answer: 0,
+          why: 'A time span is Xから Yまで, “from X to Y”. まで already comes after 九時, so the start needs から.' },
+        { choices: ['や', 'を', 'へ', 'で'], answer: 0,
+          why: 'や lists a few examples out of more: “people from America, China, Thailand and so on”. The second や after 中国 shows the list is already going.' },
+        { choices: ['でも', 'だから', 'そして', 'それから'], answer: 0,
+          why: 'The teacher’s talks are fun, but the kanji tests are hard — a contrast, so でも. だから would make the hard tests a result of the fun talks.' },
+        { choices: ['わかりません', 'わかります', 'できます', 'すきです'], answer: 0,
+          why: 'あまり means “not much” only with a negative verb: あまりわかりません. The next sentence (I want to study more) shows the writer is struggling.' },
+      ],
+      en: [
+        'Every Tuesday and Thursday I go to a Japanese class. The class is from seven to nine in the evening.',
+        'There are ten students in the class. There are people from America, China, Thailand and other places. Everyone is very nice.',
+        'Our teacher is Ms. Yamamoto. Her talks are always interesting. But the kanji tests are hard. I don’t understand kanji very well. I want to study more.',
+      ],
+    },
+
     // ─── N4 ──────────────────────────────────────────────────────────────────
     {
       id: 'n4-trains', level: 'N4', title: '日本[にほん]の電車[でんしゃ]', titleEn: 'Japanese trains',
@@ -153,6 +223,80 @@
         'Yesterday I left an umbrella that’s precious to me on the train. It’s an umbrella my grandmother gave me. When I told the station staff, they said, “We’ll check, so please wait a moment.”',
         'I waited about thirty minutes, but the umbrella wasn’t found. The station staff said, “If we find it, we’ll call you,” and asked for my phone number.',
         'This morning the station called. Apparently someone handed the umbrella in at the last station on the line. I went to collect it right away. I wanted to thank the person who handed it in, but I couldn’t find out their name. From now on, I’ll make sure I check I haven’t forgotten anything before getting off the train.',
+      ],
+    },
+
+    {
+      id: 'n4-moving', level: 'N4', title: '引[ひ]っ越[こ]し', titleEn: 'Moving house',
+      paragraphs: [
+        '先月[せんげつ]、新[あたら]しいアパートに引っ越しました。前[まえ]のアパートは駅[えき]から遠[とお]くて、毎朝[まいあさ]バスに乗[の]らなければなりませんでした。今度[こんど]のアパートは、駅まで歩[ある]いて五分[ごふん]{1}かかりません。',
+        '引っ越しの日[ひ]は、友達[ともだち]が三人[さんにん]手伝[てつだ]いに来[き]てくれました。荷物[にもつ]が多[おお]かったので、一人[ひとり]では{2}。みんなのおかげで、夕方[ゆうがた]には全部[ぜんぶ]運[はこ]ぶことができました。お礼[れい]に、みんなにピザを{3}。',
+        '新しい部屋[へや]は前より少[すこ]し狭[せま]いですが、窓[まど]から海[うみ]が見[み]えます。天気[てんき]がいい日は、窓を開[あ]けて海を見{4}、コーヒーを飲[の]みます。',
+      ],
+      blanks: [
+        { choices: ['しか', 'だけ', 'ぐらい', 'まで'], answer: 0,
+          why: 'しか + negative means “only”: 五分しかかかりません “it only takes five minutes”. だけ and ぐらい don’t go with a negative verb this way.' },
+        { choices: ['運[はこ]べなかったでしょう', '運べました', '運びたいです', '運んでいます'], answer: 0,
+          why: 'There was too much luggage, so on my own I “couldn’t have carried it”: potential negative + でしょう. 運べました contradicts the reason given with ので.' },
+        { choices: ['ごちそうしました', 'ごちそうになりました', 'ごちそうしてもらいました', 'いただきました'], answer: 0,
+          why: 'As thanks, I treated my friends: ごちそうする. ごちそうになる and the other two mean I was the one being treated.' },
+        { choices: ['ながら', 'ても', 'ずに', 'ために'], answer: 0,
+          why: 'Stem + ながら: two things at the same time — drinking coffee while looking at the sea. 見ずに would mean “without looking”.' },
+      ],
+      en: [
+        'Last month I moved to a new apartment. My old apartment was far from the station, and I had to take a bus every morning. From the new one, it only takes five minutes to walk to the station.',
+        'On moving day, three friends came to help me. There was a lot of luggage, so I couldn’t have carried it on my own. Thanks to everyone, we had moved it all by evening. To thank them, I treated them to pizza.',
+        'The new room is a bit smaller than before, but I can see the sea from the window. On sunny days I open the window and drink coffee while looking at the sea.',
+      ],
+    },
+    {
+      id: 'n4-exercise', level: 'N4', title: '健康[けんこう]のために', titleEn: 'For my health',
+      paragraphs: [
+        'わたしは去年[きょねん]まで、ほとんど運動[うんどう]をしませんでした。仕事[しごと]が忙[いそが]しくて、運動する時間[じかん]がなかったからです。',
+        'でも、ある日[ひ]、会社[かいしゃ]の階段[かいだん]を上[のぼ]っただけで、とても疲[つか]れてしまいました。それで、毎日[まいにち]少[すこ]しでも運動{1}ことにしました。',
+        'まず、エレベーターを使[つか]わないで、階段を使う{2}しました。それから、一[ひと]つ前[まえ]の駅[えき]でバスを降[お]りて、歩[ある]いて帰[かえ]るようにしています。はじめは大変[たいへん]でしたが、今[いま]は階段を上っても、{3}疲れなくなりました。',
+        '医者[いしゃ]に「このまま続[つづ]け{4}、もっと元気[げんき]になりますよ」と言[い]われました。これからも続けたいと思[おも]います。',
+      ],
+      blanks: [
+        { choices: ['する', 'した', 'して', 'しよう'], answer: 0,
+          why: 'Dictionary form + ことにする means “decide to do”: 運動することにしました. With the た-form it would mean pretending something happened.' },
+        { choices: ['ように', 'ために', 'そうに', 'までに'], answer: 0,
+          why: '〜ようにする means “make a point of doing”: 階段を使うようにしました. The next sentence uses the same pattern (歩いて帰るようにしています).' },
+        { choices: ['あまり', 'とても', 'もっと', 'よく'], answer: 0,
+          why: 'あまり + negative is “not very”: あまり疲れなくなりました “I don’t get very tired any more”. とても and もっと go with positive statements.' },
+        { choices: ['たら', 'ても', 'のに', 'ながら'], answer: 0,
+          why: 'A condition and its result: “if you keep this up, you’ll get even healthier” — 続けたら. ても (“even if”) would undercut the encouragement.' },
+      ],
+      en: [
+        'Until last year I hardly exercised at all. My job kept me busy and I had no time for it.',
+        'But one day I got really tired just from climbing the stairs at work. So I decided to exercise every day, even just a little.',
+        'First, I started taking the stairs instead of the lift. Then I made a habit of getting off the bus one stop early and walking home. It was hard at first, but now I don’t get very tired even when I climb stairs.',
+        'My doctor told me, “If you keep this up, you’ll get even healthier.” I want to keep going.',
+      ],
+    },
+    {
+      id: 'n4-invitation', level: 'N4', title: 'パーティーのさそい', titleEn: 'A party invitation',
+      paragraphs: [
+        'マリアさん、メールありがとう。来週[らいしゅう]の土曜日[どようび]、うちでパーティーをするので、ぜひ来[き]て{1}。',
+        'うちは、駅[えき]の北口[きたぐち]を出[で]て、まっすぐ五分[ごふん]ぐらい歩[ある]いたところにあります。コンビニのとなり{2}白[しろ]いマンションです。わからなかったら、電話[でんわ]してください。駅まで迎[むか]えに行[い]きます。',
+        'パーティーは六時[ろくじ]からです。料理[りょうり]はわたしが作[つく]るので、何[なに]も持[も]って来なくても{3}。でも、もし時間[じかん]があったら、マリアさんの国[くに]の歌[うた]を教[おし]えてほしいです。みんな楽[たの]しみにしています。',
+        '返事[へんじ]は金曜日[きんようび]{4}ください。',
+      ],
+      blanks: [
+        { choices: ['ください', 'います', 'おきます', 'しまいます'], answer: 0,
+          why: 'ぜひ (“by all means”) goes with a request: ぜひ来てください “please do come”.' },
+        { choices: ['の', 'が', 'を', 'に'], answer: 0,
+          why: 'コンビニのとなり (“next to the convenience store”) describes the building, so it joins the noun with の: となりの白いマンション.' },
+        { choices: ['いいです', 'いけません', 'なりません', 'かまいませんでした'], answer: 0,
+          why: '〜なくてもいいです means “you don’t have to”: since I’m cooking, you don’t need to bring anything. いけません and なりません would make it a rule.' },
+        { choices: ['までに', 'まで', 'から', 'ごろ'], answer: 0,
+          why: 'までに sets a deadline for a one-time action: “please reply by Friday”. まで is for something that continues until then.' },
+      ],
+      en: [
+        'Maria, thanks for your email. Next Saturday I’m having a party at my place, so please do come.',
+        'My place is about five minutes’ walk straight ahead from the north exit of the station. It’s the white apartment building next to the convenience store. If you can’t find it, give me a call and I’ll come to meet you at the station.',
+        'The party starts at six. I’m doing the cooking, so you don’t need to bring anything. But if you have time, I’d love you to teach us a song from your country. Everyone’s looking forward to it.',
+        'Please reply by Friday.',
       ],
     },
 
@@ -234,6 +378,75 @@
         'But one day, at a health check-up, I was told I wasn’t getting enough vegetables. Taking that as my cue, I decided to try cooking for myself.',
         'At first it was one failure after another. Once I meant to make curry but put in too much water and it turned into something like soup. But as I looked up recipes online and asked my mother over the phone, I gradually got better.',
         'Now I even sometimes invite friends over and cook for them. I used to think cooking was a chore, but once you try it, it’s surprisingly fun.',
+      ],
+    },
+    {
+      id: 'n3-grandfather-field', level: 'N3', title: '祖父[そふ]の畑[はたけ]', titleEn: 'My grandfather’s vegetable field',
+      paragraphs: [
+        '祖父は、田舎[いなか]で小[ちい]さな畑をやっている。毎年[まいとし]夏[なつ]になると、祖父からたくさんの野菜[やさい]が送[おく]られてくる。トマトやきゅうりは、スーパーで買[か]う{1}ずっと味[あじ]が濃[こ]い。',
+        '子[こ]どものころ、わたしは野菜が嫌[きら]いだった。母[はは]がどんなに{2}、トマトだけは食[た]べなかった。ところが、小学生[しょうがくせい]の夏休[なつやす]みに祖父の家[いえ]に泊[と]まったとき、畑でとったばかりのトマトを食べてみると、驚[おどろ]くほどおいしかった。それ{3}、わたしはトマトが大好[だいす]きになった。',
+        '祖父はもう八十歳[はっさい]を過[す]ぎているが、「畑仕事[しごと]をしている{4}、元気[げんき]でいられるんだ」と笑[わら]う。今年[ことし]の夏は、わたしも手伝[てつだ]いに行[い]くつもりだ。',
+      ],
+      blanks: [
+        { choices: ['のより', 'ほど', 'だけ', 'ばかり'], answer: 0,
+          why: 'A comparison: “much richer in flavour than the ones you buy at the supermarket” — Xのより. ほど would need a negative (〜ほど濃くない).' },
+        { choices: ['言[い]っても', '言ったら', '言うと', '言えば'], answer: 0,
+          why: 'どんなに〜ても means “no matter how much”: however much Mum told me to, I wouldn’t eat tomatoes. The conditionals たら, と and ば don’t pair with どんなに here.' },
+        { choices: ['以来[いらい]', 'までに', 'ばかり', 'ほど'], answer: 0,
+          why: 'それ以来 means “ever since then”: from that summer on, the writer loved tomatoes. それまでに would be “by then”.' },
+        { choices: ['おかげで', 'せいで', 'くせに', 'わりに'], answer: 0,
+          why: 'Farm work is the cause of something good (staying healthy), so おかげで. せいで blames a cause for something bad; くせに is a complaint.' },
+      ],
+      en: [
+        'My grandfather keeps a small vegetable field in the countryside. Every summer he sends us lots of vegetables. His tomatoes and cucumbers taste much richer than the ones from the supermarket.',
+        'As a child I hated vegetables. No matter how often my mother told me to, I would never eat tomatoes. But one summer in primary school, when I stayed at my grandfather’s house and tried a tomato just picked from the field, it was amazingly good. Ever since then I’ve loved tomatoes.',
+        'My grandfather is over eighty, but he laughs and says, “It’s thanks to working in the field that I can stay healthy.” This summer I’m planning to go and help him too.',
+      ],
+    },
+    {
+      id: 'n3-rubbish', level: 'N3', title: 'ごみの分別[ぶんべつ]', titleEn: 'Sorting the rubbish',
+      paragraphs: [
+        '日本[にほん]に来[き]てまず困[こま]ったのは、ごみの出[だ]し方[かた]だった。わたしの国[くに]では、ほとんどのごみを一[ひと]つの袋[ふくろ]に入[い]れて捨[す]てる。ところが、わたしが住[す]んでいる町[まち]では、ごみを十種類[じゅっしゅるい]以上[いじょう]に分[わ]けなければならない。{1}、燃[も]えるごみは火曜日[かようび]と金曜日[きんようび]、びんや缶[かん]は第二[だいに]水曜日[すいようび]、というように、出す日も決[き]まっている。',
+        '最初[さいしょ]のころ、わたしは曜日を間違[まちが]えて、ごみを出してしまったことがある。次[つぎ]の日、袋に「収集日[しゅうしゅうび]ではありません」という紙[かみ]が{2}、とても恥[は]ずかしかった。',
+        '{3}、慣[な]れてくると、分別も悪[わる]くないと思[おも]うようになった。リサイクルできるものが多[おお]いことに気[き]づき、物[もの]を大切[たいせつ]にするようになったからだ。面倒[めんどう]だと思っていたルール{4}、実[じつ]は環境[かんきょう]を守[まも]るための大切な仕組[しく]みなのだ。',
+      ],
+      blanks: [
+        { choices: ['しかも', 'ところが', 'なぜなら', 'だから'], answer: 0,
+          why: 'しかも adds a further point in the same direction: not only must you sort into ten types — on top of that, each has its own day. ところが would signal a surprise turn.' },
+        { choices: ['はってあって', 'はっておいて', 'はってみて', 'はってしまって'], answer: 0,
+          why: '〜てある describes the state left by someone else’s action: a note had been stuck on the bag. ておく and てみる describe the writer’s own actions.' },
+        { choices: ['しかし', 'そのため', 'それに', 'つまり'], answer: 0,
+          why: 'The essay turns from embarrassment to a positive view: しかし (“however”). そのため would make the embarrassment the reason for liking it.' },
+        { choices: ['は', 'を', 'に', 'で'], answer: 0,
+          why: 'The rules are the topic of the closing statement — “the rules I thought were a nuisance are actually…” — so は. The sentence has no verb for を, に or で to attach to.' },
+      ],
+      en: [
+        'The first thing that gave me trouble when I came to Japan was how to put out the rubbish. In my country, most rubbish goes into one bag. But in the town where I live, you have to sort it into more than ten types. What’s more, the days are fixed too — burnable rubbish on Tuesdays and Fridays, bottles and cans on the second Wednesday, and so on.',
+        'Early on, I once put the rubbish out on the wrong day. The next day there was a note stuck on the bag saying “This is not a collection day,” and I was very embarrassed.',
+        'However, as I got used to it, I came to think sorting isn’t so bad. I noticed how much can be recycled, and I started taking better care of things. The rules I thought were a nuisance are actually an important system for protecting the environment.',
+      ],
+    },
+    {
+      id: 'n3-library-notice', level: 'N3', title: '図書館[としょかん]からのお知[し]らせ', titleEn: 'A notice from the library',
+      paragraphs: [
+        '市立[しりつ]図書館をご利用[りよう]の皆様[みなさま]へ',
+        'いつも図書館をご利用いただき、ありがとうございます。当館[とうかん]では、建物[たてもの]の工事[こうじ]{1}、十月一日[じゅうがつついたち]から十月十五日[じゅうごにち]まで休館[きゅうかん]いたします。休館中[ちゅう]は、本[ほん]の貸[か]し出[だ]しや返却[へんきゃく]はできません。ご迷惑[めいわく]をおかけしますが、ご理解[りかい]{2}よろしくお願[ねが]いいたします。',
+        'なお、休館中に返却期限[きげん]が来[く]る本は、十月十六日[じゅうろくにち]以降[いこう]に返却して{3}結構[けっこう]です。また、駅前[えきまえ]の分館[ぶんかん]は通常[つうじょう]どおり開館[かいかん]しております{4}、そちらもご利用ください。',
+      ],
+      blanks: [
+        { choices: ['のため', 'にとって', 'について', 'として'], answer: 0,
+          why: 'Noun + のため gives the reason, typical of notices: “due to construction work”. にとって is “for (someone)”, について “about”, として “as”.' },
+        { choices: ['のほど', 'ばかり', 'だけ', 'まで'], answer: 0,
+          why: 'ご理解のほどよろしくお願いいたします is a fixed polite phrase in notices (“we ask for your understanding”). のほど softens the request.' },
+        { choices: ['いただければ', 'いただいて', 'くださって', 'さしあげれば'], answer: 0,
+          why: '〜ていただければ結構です politely means “it’s fine if you…”. The conditional ば is needed before 結構です; さしあげる is for giving to others.' },
+        { choices: ['ので', 'のに', 'けれど', 'ても'], answer: 0,
+          why: 'The branch library is open as usual, so please use it — a reason before a request, so ので. のに and けれど would set up a contrast.' },
+      ],
+      en: [
+        'To everyone who uses the city library:',
+        'Thank you for always using the library. Due to construction work on the building, the library will be closed from October 1 to October 15. While we are closed, you cannot borrow or return books. We apologise for the inconvenience and ask for your understanding.',
+        'Please note that books due back while we are closed may be returned on or after October 16. Also, the branch library in front of the station is open as usual, so please use it as well.',
       ],
     },
   ];
