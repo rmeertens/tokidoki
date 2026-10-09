@@ -5320,6 +5320,25 @@ a.chapter-card {
 .wo-slot.wo-wrong { border-style: solid; background: var(--red-dim); border-color: var(--red); }
 .wo-blank-line { display: inline-block; width: 1em; }
 
+/* Dragging: pieces and filled blanks can be picked up and dropped on a blank. */
+.wo-piece:not(:disabled), .wo-slot.wo-filled:not(:disabled) { touch-action: none; }
+body.wo-dragging, body.wo-dragging * { cursor: grabbing !important; }
+.wo-drag-src { opacity: 0.35; }
+.wo-drag-ghost {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  margin: 0;
+  pointer-events: none;
+  font-family: var(--font-jp);
+  line-height: 1.6;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  opacity: 0.95;
+}
+.wo-slot.wo-drop-over { border-style: solid; border-color: var(--accent); background: color-mix(in srgb, var(--accent) 22%, var(--bg-card)); box-shadow: 0 0 0 3px var(--accent-dim); }
+.wo-bank.wo-drop-over { box-shadow: inset 0 0 0 2px var(--accent); }
+
 .wo-hint { text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px; }
 .wo-hint:empty { display: none; }
 .wo-en-row { text-align: center; min-height: 2em; }

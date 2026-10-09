@@ -84,6 +84,19 @@ check(q.every(it => it.level === 'N5'), 'the level filter holds');
 check(!q.some(it => it.id === 'n5-mother-cake'), 'questions already answered right come last');
 check(WordOrder.buildQueue(ITEMS, { missed: [], last: {} }, 'all', 10, rand).length === 10, 'all levels mix');
 
+// ─── Dragging ────────────────────────────────────────────────────────────────
+
+const D = WordOrder.dropOn;
+check(D([2, 0, 1, 3], { slot: 0 }, 3).join() === '3,0,1,2', 'dragging one blank onto another swaps them');
+check(D([2, null, 1, null], { slot: 0 }, 1).join() === ',2,1,', 'dragging onto an empty blank moves the piece');
+check(D([2, null, 1, null], { slot: 1 }, 0).join() === '2,,1,', 'an empty blank cannot be dragged');
+check(D([2, null, null, null], { piece: 3 }, 2).join() === '2,,3,', 'a tray piece drops into any blank');
+check(D([2, 0, null, null], { piece: 3 }, 0).join() === '3,0,,', 'a tray piece bumps the one it lands on back to the tray');
+check(D([2, 0, null, null], { piece: 0 }, 3).join() === '2,0,,', 'a piece already in the sentence is not placed twice');
+const orig = [1, 2, null, null];
+D(orig, { slot: 0 }, 1);
+check(orig.join() === '1,2,,', 'dropping does not change the array it was given');
+
 // ─── Sets ────────────────────────────────────────────────────────────────────
 
 WordOrder.LEVELS.forEach(level => {

@@ -69,6 +69,21 @@
     return idx;
   }
 
+  // Dropping something on a blank. `from` is { slot } for a piece already in
+  // the sentence — the two blanks swap — or { piece } for one from the tray,
+  // which bumps whatever was in that blank back to the tray.
+  function dropOn(placed, from, slot) {
+    const out = placed.slice();
+    if (slot < 0 || slot >= out.length) return out;
+    if (from.slot != null) {
+      if (from.slot === slot || out[from.slot] == null) return out;
+      [out[from.slot], out[slot]] = [out[slot], out[from.slot]];
+    } else if (from.piece != null && !out.includes(from.piece)) {
+      out[slot] = from.piece;
+    }
+    return out;
+  }
+
   // A session: mistakes first, then questions not yet tried, then the rest.
   function buildQueue(items, store, level, size = SESSION_SIZE, rand = Math.random) {
     const missed = new Set(store.missed || []);
@@ -91,7 +106,7 @@
     return sets;
   }
 
-  const api = { pieces, plain, rubyHtml, isCorrect, isStarCorrect, shuffleOrder, buildQueue, setsOf, LEVELS, SESSION_SIZE, SET_SIZE };
+  const api = { pieces, plain, rubyHtml, isCorrect, isStarCorrect, shuffleOrder, dropOn, buildQueue, setsOf, LEVELS, SESSION_SIZE, SET_SIZE };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   global.WordOrder = api;
   if (typeof document === 'undefined') return;
@@ -232,7 +247,7 @@
     } else if (q.placed[slot] != null) {
       cls += ' wo-filled';
       body = rubyHtml(item.pieces[q.placed[slot]]);
-      label += `: ${plain(item.pieces[q.placed[slot]])} — tap to take it back`;
+      label += `: ${plain(item.pieces[q.placed[slot]])} — tap to take it back, or drag to swap`;
     }
     if (slot === item.star) cls += ' wo-slot-star';
     if (!q.answered && (session.starOnly ? slot === item.star : slot === q.placed.indexOf(null))) cls += ' wo-next';
@@ -251,7 +266,7 @@
       : 'Put the pieces in the right order.';
     $('wo-hint').textContent = q.answered ? '' : session.starOnly
       ? 'Tap the piece that belongs in the ★ blank.'
-      : 'Tap a piece to put it in the highlighted blank · tap a filled blank to take it back.';
+      : 'Tap or drag a piece into a blank · drag a filled blank onto another to swap · tap it to take it back.';
 
     $('wo-sentence').innerHTML = `<span class="wo-text">${rubyHtml(item.pre)}</span>`
       + item.pieces.map((_, slot) => slotHtml(q, slot)).join('')
@@ -415,6 +430,103 @@
     const b = e.target.closest('[data-slot]');
     if (b && !b.disabled) unplace(Number(b.dataset.slot));
   });
+
+  // ─── Dragging ──────────────────────────────────────────────────────────────
+  // Arrange mode only: drag a tray piece onto any blank, drag a filled blank
+  // onto another to swap them, or back to the tray to take it out. A press
+  // that barely moves is still a tap and goes through the click handlers.
+
+  const DRAG_START_PX = 6;
+  let drag = null; // { from, src, x0, y0, id, ghost, over }
+
+  function dragSource(target) {
+    const q = current();
+    if (!q || q.answered || session.starOnly) return null;
+    const piece = target.closest('#wo-bank [data-piece]');
+    if (piece && !piece.disabled) return { el: piece, from: { piece: Number(piece.dataset.piece) } };
+    const slot = target.closest('#wo-sentence [data-slot]');
+    if (slot && !slot.disabled) return { el: slot, from: { slot: Number(slot.dataset.slot) } };
+    return null;
+  }
+
+  function dropTarget(x, y) {
+    const el = document.elementFromPoint(x, y);
+    if (!el) return null;
+    const slot = el.closest('#wo-sentence [data-slot]');
+    if (slot) return { slot: Number(slot.dataset.slot), el: slot };
+    if (drag.from.slot != null && el.closest('#wo-bank')) return { bank: true, el: $('wo-bank') };
+    return null;
+  }
+
+  function setOver(t) {
+    if (drag.over && drag.over.el !== (t && t.el)) drag.over.el.classList.remove('wo-drop-over');
+    drag.over = t;
+    if (t) t.el.classList.add('wo-drop-over');
+  }
+
+  function endDrag() {
+    if (!drag) return;
+    if (drag.ghost) drag.ghost.remove();
+    if (drag.over) drag.over.el.classList.remove('wo-drop-over');
+    drag.src.classList.remove('wo-drag-src');
+    document.body.classList.remove('wo-dragging');
+    drag = null;
+  }
+
+  function onPointerDown(e) {
+    if (drag || e.button !== 0) return;
+    const s = dragSource(e.target);
+    if (!s) return;
+    drag = { from: s.from, src: s.el, x0: e.clientX, y0: e.clientY, id: e.pointerId, ghost: null, over: null };
+  }
+
+  function onPointerMove(e) {
+    if (!drag || e.pointerId !== drag.id) return;
+    if (!drag.ghost) {
+      if (Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) < DRAG_START_PX) return;
+      const r = drag.src.getBoundingClientRect();
+      const ghost = drag.src.cloneNode(true);
+      ghost.removeAttribute('id');
+      ghost.classList.add('wo-drag-ghost');
+      ghost.classList.remove('wo-next');
+      ghost.style.width = r.width + 'px';
+      ghost.style.height = r.height + 'px';
+      ghost.style.fontSize = getComputedStyle(drag.src).fontSize;
+      drag.dx = drag.x0 - r.left;
+      drag.dy = drag.y0 - r.top;
+      document.body.appendChild(ghost);
+      drag.ghost = ghost;
+      drag.src.classList.add('wo-drag-src');
+      document.body.classList.add('wo-dragging');
+    }
+    e.preventDefault();
+    drag.ghost.style.transform = `translate(${e.clientX - drag.dx}px, ${e.clientY - drag.dy}px)`;
+    setOver(dropTarget(e.clientX, e.clientY));
+  }
+
+  function onPointerUp(e) {
+    if (!drag || e.pointerId !== drag.id) return;
+    if (!drag.ghost) { drag = null; return; } // a tap: let the click handle it
+    const t = dropTarget(e.clientX, e.clientY);
+    const from = drag.from;
+    endDrag();
+    // The click that follows a drag would otherwise place or take back a piece.
+    const swallow = ev => { ev.stopPropagation(); ev.preventDefault(); };
+    document.addEventListener('click', swallow, true);
+    setTimeout(() => document.removeEventListener('click', swallow, true), 0);
+    const q = current();
+    if (!t || !q || q.answered) return;
+    if (t.bank) unplace(from.slot);
+    else { q.placed = dropOn(q.placed, from, t.slot); renderQuestion(); }
+  }
+
+  ['wo-bank', 'wo-sentence'].forEach(id => $(id).addEventListener('pointerdown', onPointerDown));
+  document.addEventListener('pointermove', onPointerMove, { passive: false });
+  document.addEventListener('pointerup', onPointerUp);
+  document.addEventListener('pointercancel', endDrag);
+  // Touch browsers fire touchmove alongside pointermove; stop the page
+  // scrolling under a piece that is being dragged.
+  document.addEventListener('touchmove', e => { if (drag && drag.ghost) e.preventDefault(); }, { passive: false });
   $('wo-en-btn').addEventListener('click', () => {
     $('wo-en').classList.remove('hidden');
     $('wo-en-btn').classList.add('hidden');
