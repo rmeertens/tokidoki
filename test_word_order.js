@@ -84,6 +84,14 @@ check(q.every(it => it.level === 'N5'), 'the level filter holds');
 check(!q.some(it => it.id === 'n5-mother-cake'), 'questions already answered right come last');
 check(WordOrder.buildQueue(ITEMS, { missed: [], last: {} }, 'all', 10, rand).length === 10, 'all levels mix');
 
+// ─── Answer comparison ───────────────────────────────────────────────────────
+
+const it0 = ITEMS[0];
+const mv = WordOrder.moves(it0, [1, 0, 2, 3]);
+check(mv[0].to === 1 && !mv[0].ok && mv[1].to === 0 && !mv[1].ok, 'swapped pieces point at each other\'s blanks');
+check(mv[2].ok && mv[2].to === 2 && mv[3].ok, 'pieces already in place point straight down');
+check(WordOrder.moves(it0, [0, 1, 2, 3]).every(m => m.ok), 'a right answer has no moves');
+
 // ─── Dragging ────────────────────────────────────────────────────────────────
 
 const D = WordOrder.dropOn;

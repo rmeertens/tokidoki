@@ -56,6 +56,17 @@
   const fits = (item, slot, piece) => piece != null && plain(item.pieces[piece]) === plain(item.pieces[slot]);
   const isStarCorrect = (item, piece) => fits(item, item.star, piece);
 
+  // For each blank of your answer: where that piece really belongs. `to` is
+  // the first matching slot, so identical pieces still line up straight.
+  function moves(item, order) {
+    return order.map((p, from) => {
+      if (p == null) return { from, to: null, ok: false };
+      if (fits(item, from, p)) return { from, to: from, ok: true };
+      const to = item.pieces.findIndex((_, slot) => fits(item, slot, p));
+      return { from, to: to < 0 ? null : to, ok: false };
+    });
+  }
+
   // The order the pieces are shown in — never the answer itself.
   function shuffleOrder(n, rand = Math.random) {
     const idx = Array.from({ length: n }, (_, i) => i);
@@ -106,7 +117,7 @@
     return sets;
   }
 
-  const api = { pieces, plain, rubyHtml, isCorrect, isStarCorrect, shuffleOrder, dropOn, buildQueue, setsOf, LEVELS, SESSION_SIZE, SET_SIZE };
+  const api = { pieces, plain, rubyHtml, isCorrect, isStarCorrect, moves, shuffleOrder, dropOn, buildQueue, setsOf, LEVELS, SESSION_SIZE, SET_SIZE };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   global.WordOrder = api;
   if (typeof document === 'undefined') return;
@@ -255,6 +266,47 @@
     return `<button class="${cls}" data-slot="${slot}" aria-label="${esc(label)}"${disabled}>${star}<span class="wo-slot-body">${body}</span></button>`;
   }
 
+  // Your order above the right one, with an arrow from each of your pieces
+  // down to the blank it belongs in: straight and green if it was already
+  // there, slanted and red if it had to move.
+  function compareHtml(item, placed) {
+    const n = placed.length;
+    const mv = moves(item, placed);
+    const chip = (markup, cls, star) => `<span class="wo-cmp-chip ${cls}" lang="ja">${star ? '<span class="wo-star" aria-hidden="true">★</span>' : ''}${rubyHtml(markup)}</span>`;
+    const yours = placed.map((p, i) => chip(item.pieces[p], mv[i].ok ? 'wo-right' : 'wo-wrong', i === item.star)).join('');
+    const right = item.pieces.map((m, i) => chip(m, mv.some(x => x.to === i && x.ok) ? 'wo-right' : '', i === item.star)).join('');
+    const said = mv.filter(m => !m.ok && m.to != null)
+      .map(m => `${esc(plain(item.pieces[placed[m.from]]))}: blank ${m.from + 1} → ${m.to + 1}`).join('; ');
+    return `<div class="wo-compare" style="--wo-n:${n}" role="group" aria-label="Your order compared with the right order. ${said ? 'Moves: ' + said : ''}">
+      <div class="wo-cmp-label">Your order</div>
+      <div class="wo-cmp-row">${yours}</div>
+      <svg class="wo-cmp-arrows" aria-hidden="true" data-moves="${esc(JSON.stringify(mv.filter(m => m.to != null)))}"></svg>
+      <div class="wo-cmp-row">${right}</div>
+      <div class="wo-cmp-label">Right order</div>
+    </div>`;
+  }
+
+  // Drawn in real pixels once the rows are laid out, so the arrowheads keep
+  // their shape at any width. Each arrow runs from the middle of one column
+  // to the middle of another.
+  function drawArrows() {
+    const svg = document.querySelector('#wo-feedback .wo-cmp-arrows');
+    if (!svg) return;
+    const w = svg.clientWidth, h = svg.clientHeight;
+    if (!w) return;
+    const n = Number(getComputedStyle(svg.parentNode).getPropertyValue('--wo-n')) || 4;
+    const x = i => (i + 0.5) * (w / n);
+    const head = (x1, y1, x2, y2) => {
+      const a = Math.atan2(y2 - y1, x2 - x1), L = 8, S = 0.45;
+      return `${x2},${y2} ${x2 - L * Math.cos(a - S)},${y2 - L * Math.sin(a - S)} ${x2 - L * Math.cos(a + S)},${y2 - L * Math.sin(a + S)}`;
+    };
+    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+    svg.innerHTML = JSON.parse(svg.dataset.moves).map(m => {
+      const x1 = x(m.from), x2 = x(m.to), y1 = 3, y2 = h - 3, cls = m.ok ? 'ok' : 'bad';
+      return `<line class="${cls}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/><polygon class="${cls}" points="${head(x1, y1, x2, y2)}"/>`;
+    }).join('');
+  }
+
   function renderQuestion() {
     const q = current();
     const { item } = q;
@@ -302,10 +354,11 @@
         ? ' <span class="wo-dim">You did have the ★ piece right.</span>' : '';
       feedback.innerHTML = `<div>${verdict}${starNote}</div>
         <div>★ answer: <span class="wo-answer" lang="ja">${rubyHtml(item.pieces[item.star])}</span></div>
-        ${!session.starOnly && !q.correct ? `<div class="wo-dim">Your order: <span lang="ja">${q.placed.map(p => esc(plain(item.pieces[p]))).join(' / ')}</span></div>` : ''}
+        ${!session.starOnly && !q.correct ? compareHtml(item, q.placed) : ''}
         <div class="wo-full" lang="ja">${rubyHtml(item.pre + item.pieces.join('') + item.post)}</div>
         ${item.note ? `<div class="wo-note">${esc(item.note)}</div>` : ''}`;
       feedback.classList.remove('hidden');
+      drawArrows();
     } else {
       feedback.classList.add('hidden');
     }
@@ -539,6 +592,7 @@
     renderQuestion();
   });
   $('btn-wo-next').addEventListener('click', next);
+  window.addEventListener('resize', drawArrows);
   $('wo-quit').addEventListener('click', goHome);
   $('btn-wo-next-set').addEventListener('click', e => start(e.currentTarget.dataset.next));
   $('btn-wo-again').addEventListener('click', () => start(session.id));

@@ -5406,6 +5406,34 @@ body.wo-dragging, body.wo-dragging * { cursor: grabbing !important; }
 .wo-note { color: var(--text-dim); }
 .wo-dim { color: var(--text-dim); font-size: 0.85rem; }
 
+/* Your order vs. the right one, with arrows showing where each piece goes. */
+.wo-compare { margin: 6px 0 2px; }
+.wo-cmp-label { font-size: 0.78rem; color: var(--text-muted); text-align: center; margin: 2px 0; }
+.wo-cmp-row { display: grid; grid-template-columns: repeat(var(--wo-n), minmax(0, 1fr)); gap: 6px; }
+.wo-cmp-chip {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.2em;
+  padding: 4px 6px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-card);
+  font-family: var(--font-jp);
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.wo-cmp-chip.wo-right { background: var(--green-dim); border-color: var(--green); }
+.wo-cmp-chip.wo-wrong { background: var(--red-dim); border-color: var(--red); }
+.wo-cmp-chip .wo-star { position: static; transform: none; margin-right: 3px; font-size: 0.75rem; }
+.wo-cmp-arrows { display: block; width: 100%; height: 40px; overflow: visible; }
+.wo-cmp-arrows .ok { stroke: var(--green); fill: var(--green); }
+.wo-cmp-arrows .bad { stroke: var(--red); fill: var(--red); }
+.wo-cmp-arrows line { stroke-width: 2.5; stroke-linecap: round; }
+
 body.wo-no-furigana .wo-card rt { visibility: hidden; }
 
 @media (max-width: 480px) {
