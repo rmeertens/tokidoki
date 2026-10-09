@@ -63,7 +63,18 @@
         </div>
       </nav>
       <div id="verb-chapters">
-        <p class="tab-intro">Practice conjugating verbs from each <strong>Genki</strong> chapter. Cards are spaced using SRS so you review what you need most.</p>
+        <p class="tab-intro">Practice conjugating verbs from each <strong>Genki</strong> chapter. Cards are spaced using SRS so you review what you need most.
+          Switch to whole sentences to translate full English sentences into Japanese instead of a single word.</p>
+        <div class="kana-settings-row">
+          <label class="kana-script-toggle">
+            <input type="radio" name="verb-mode" id="verb-mode-word" value="word" checked>
+            Single word
+          </label>
+          <label class="kana-script-toggle">
+            <input type="radio" name="verb-mode" id="verb-mode-sentences" value="sentences">
+            Whole sentences
+          </label>
+        </div>
         <h2 class="section-title">Genki I</h2>
         <div class="chapter-grid" id="chapters-genki1"></div>
         <h2 class="section-title">Genki II</h2>
@@ -181,6 +192,7 @@
   <script src="kanji-info-data.js"></script>
   <script src="examples.js"></script>
   <script src="answer-diff.js"></script>
+  <script src="en-hover.js?v=1"></script>
   <script src="romaji.js"></script>
   <script src="speech.js"></script>
   <script src="app.js?v=20"></script>

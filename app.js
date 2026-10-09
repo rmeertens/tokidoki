@@ -89,7 +89,7 @@
   const SETTINGS_KEY = 'tokidoki_settings';
 
   function loadSettings() {
-    const defaults = { typingMode: false, hideForm: true, showContext: true, englishToJapanese: true, showExampleFront: false, showFurigana: true, flashcardFurigana: true, adjSentences: false };
+    const defaults = { typingMode: false, hideForm: true, showContext: true, englishToJapanese: true, showExampleFront: false, showFurigana: true, flashcardFurigana: true, adjSentences: false, verbSentences: false };
     let loaded;
     try { loaded = { ...defaults, ...JSON.parse(localStorage.getItem(SETTINGS_KEY)) }; }
     catch { loaded = { ...defaults }; }
@@ -144,8 +144,9 @@
   let currentChapter = null;
   let studyMode = 'verbs';
   // For studyMode 'translate': which deck the sentences came from —
-  // 'sentences' (sentences.html) or 'adjectives' (whole-sentence mode on
-  // adjectives.html), so "Next 20" carries on with the same deck.
+  // 'sentences' (sentences.html), 'adjectives' or 'verbs' (whole-sentence
+  // mode on adjectives.html / verbs.html), so "Next 20" carries on with the
+  // same deck.
   let translateSource = 'sentences';
   let sessionCards = [];
   let sessionIndex = 0;
@@ -311,6 +312,8 @@
   // ─── Chapter Select ────────────────────────────────────────────────────────────
 
   function renderChapters() {
+    renderVerbModeToggle();
+    const sentenceMode = !!settings.verbSentences;
     const g1 = $('#chapters-genki1');
     const g2 = $('#chapters-genki2');
     g1.innerHTML = '';
@@ -327,14 +330,14 @@
       let chapterReviewed = 0;
       let chapterDue = 0;
 
-      verbs.forEach(v => {
-        forms.forEach(f => {
-          chapterCards++;
-          const id = cardId(v, f);
-          const state = getCardState(srsData, id);
-          if (state.repetitions > 0) chapterReviewed++;
-          if (isDue(state)) chapterDue++;
-        });
+      const ids = sentenceMode
+        ? verbSentenceCards(ch).map(c => c.id)
+        : verbs.flatMap(v => forms.map(f => cardId(v, f)));
+      ids.forEach(id => {
+        chapterCards++;
+        const state = getCardState(srsData, id);
+        if (state.repetitions > 0) chapterReviewed++;
+        if (isDue(state)) chapterDue++;
       });
 
       const pct = chapterCards > 0 ? Math.round((chapterReviewed / chapterCards) * 100) : 0;
@@ -348,16 +351,72 @@
       card.className = 'chapter-card';
       card.innerHTML = `
         <div class="chapter-card-title">${info.title}</div>
-        <div class="chapter-card-sub">${verbs.length} verbs &middot; ${forms.length} forms</div>
+        <div class="chapter-card-sub">${verbs.length} verbs &middot; ${sentenceMode ? `${chapterCards} sentences` : `${forms.length} forms`}</div>
         ${formPills ? `<div class="chapter-card-forms">${formPills}</div>` : ''}
         <div class="chapter-progress"><div class="chapter-progress-fill" style="width:${pct}%"></div></div>
         ${chapterDue > 0 ? `<div class="chapter-card-due">${chapterDue} due</div>` : ''}
       `;
-      card.addEventListener('click', () => startStudy(ch));
+      card.addEventListener('click', () => (sentenceMode ? startVerbSentenceStudy(ch) : startStudy(ch)));
 
       if (info.book === 'Genki I') g1.appendChild(card);
       else g2.appendChild(card);
     });
+  }
+
+  // Whole-sentence cards for a verb: one per form that has an example
+  // sentence (Examples.build), translated English → Japanese.
+  function verbSentenceCardId(verb, form) {
+    return `verbsent:${verb.reading}:${form}`;
+  }
+
+  function verbSentenceCards(chapter) {
+    const forms = Conjugator.getFormsForChapter(chapter);
+    const cards = [];
+    getVerbsByChapter(chapter).forEach(v => {
+      forms.forEach(f => {
+        const ex = Examples.build(v, f, Conjugator.conjugate(v, f));
+        if (!ex) return;
+        const fi = Conjugator.getFormInfo(f);
+        cards.push({
+          id: verbSentenceCardId(v, f),
+          direction: 'en-to-ja',
+          sentence: { ja: Examples.stripFurigana(ex.ja), jaHtml: Examples.furiganaHtml(ex.ja), en: ex.en },
+          hint: `${v.kanji} (${v.meaning}) · ${fi.hint}`,
+          refForm: f,
+          verb: null,
+          form: null,
+        });
+      });
+    });
+    return cards;
+  }
+
+  function startVerbSentenceStudy(chapter, cont) {
+    studyMode = 'translate';
+    translateSource = 'verbs';
+    currentChapter = chapter;
+    const all = verbSentenceCards(chapter);
+    if (all.length === 0) return;
+    const due = all.filter(c => isDue(getCardState(srsData, c.id)));
+    sessionCards = pickBatch(`verbsent:${chapter}`, due, all, cont);
+
+    sessionIndex = 0;
+    sessionCorrect = 0;
+    sessionTotal = sessionCards.length;
+    undoStack = [];
+
+    showScreen('study');
+    $('#session-complete').classList.add('hidden');
+    $('#card').classList.remove('hidden');
+    showCard();
+  }
+
+  function renderVerbModeToggle() {
+    const sentences = !!settings.verbSentences;
+    const word = $('#verb-mode-word');
+    const sent = $('#verb-mode-sentences');
+    if (word) word.checked = !sentences;
+    if (sent) sent.checked = sentences;
   }
 
   function adjCardId(adj, form) {
@@ -1362,6 +1421,8 @@
     const chapter = currentChapter;
     if (studyMode === 'translate' && translateSource === 'adjectives') {
       setContinueButton('#btn-session-continue', 'Next 20 →', () => startAdjSentenceStudy(chapter, true));
+    } else if (studyMode === 'translate' && translateSource === 'verbs') {
+      setContinueButton('#btn-session-continue', 'Next 20 →', () => startVerbSentenceStudy(chapter, true));
     } else if (studyMode === 'translate') {
       const next = TRANSLATE_SENTENCES[chapter + 1] ? chapter + 1 : null;
       setContinueButton('#btn-session-continue', next ? `Next 20: Chapter ${next} →` : 'Again ↻',
@@ -4757,6 +4818,15 @@
         settings.adjSentences = $('#adj-mode-sentences').checked;
         saveSettings(settings);
         renderAdjChapters();
+      });
+    });
+
+    // Verbs page: single word vs whole-sentence translation.
+    $$('input[name="verb-mode"]').forEach(el => {
+      el.addEventListener('change', () => {
+        settings.verbSentences = $('#verb-mode-sentences').checked;
+        saveSettings(settings);
+        renderChapters();
       });
     });
 
