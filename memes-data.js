@@ -5,7 +5,10 @@
   // grouped by JLPT level. Same format as stories-data.js — and read by the
   // same reader — with three extras per item:
   //
+  //   size   — 'long' (a few paragraphs) | 'short' (a line or three); the page
+  //            lists them under separate tabs. memes-data-2.js adds more of both.
   //   kind   — 'dajare' | 'slang' | 'pop' | 'story' | 'riddle' | 'senryu' | 'meme'
+  //            | 'twister' | 'aruaru' | 'trivia' | 'kotowaza'
   //   emoji  — shown big on the card, like the meme's picture
   //   punch  — "Why it's funny": the pun, the reference or the culture behind it
   //
@@ -259,6 +262,7 @@
     {
       id: 'meme-n5-futon',
       level: 'n5',
+      size: 'long',
       kind: 'dajare',
       emoji: '🛏️💨',
       title: '布団[ふとん]が吹[ふ]っ飛[と]んだ',
@@ -280,6 +284,7 @@
     {
       id: 'meme-n5-ikura',
       level: 'n5',
+      size: 'long',
       kind: 'dajare',
       emoji: '🍣',
       title: 'イクラはいくら？',
@@ -301,6 +306,7 @@
     {
       id: 'meme-n5-kaeru',
       level: 'n5',
+      size: 'long',
       kind: 'dajare',
       emoji: '🐸🏠',
       title: 'カエルが帰[かえ]る',
@@ -322,6 +328,7 @@
     {
       id: 'meme-n5-kusa',
       level: 'n5',
+      size: 'long',
       kind: 'slang',
       emoji: '🌱😂',
       title: '草[くさ]',
@@ -345,6 +352,7 @@
     {
       id: 'meme-n5-homework',
       level: 'n5',
+      size: 'long',
       kind: 'story',
       emoji: '🐶📄',
       title: '宿題[しゅくだい]はどこ？',
@@ -368,6 +376,7 @@
     {
       id: 'meme-n5-nau',
       level: 'n5',
+      size: 'long',
       kind: 'slang',
       emoji: '📱🍜',
       title: 'ラーメンなう',
@@ -391,6 +400,7 @@
     {
       id: 'meme-n5-ame',
       level: 'n5',
+      size: 'long',
       kind: 'story',
       emoji: '☔🍬',
       title: 'あめが好[す]き',
@@ -412,6 +422,7 @@
     {
       id: 'meme-n5-pikachu',
       level: 'n5',
+      size: 'long',
       kind: 'pop',
       emoji: '⚡🐭',
       title: 'ピカチュウの名前[なまえ]',
@@ -435,6 +446,7 @@
     {
       id: 'meme-n5-doraemon',
       level: 'n5',
+      size: 'long',
       kind: 'pop',
       emoji: '🤖🐱',
       title: 'ドラえもんの耳[みみ]',
@@ -458,6 +470,7 @@
     {
       id: 'meme-n5-neko',
       level: 'n5',
+      size: 'long',
       kind: 'dajare',
       emoji: '🐈💤',
       title: '猫[ねこ]が寝[ね]ころんだ',
@@ -483,6 +496,7 @@
     {
       id: 'meme-n4-frypan',
       level: 'n4',
+      size: 'long',
       kind: 'riddle',
       emoji: '🍳🍞',
       title: '食[た]べられないパン',
@@ -506,6 +520,7 @@
     {
       id: 'meme-n4-ikkyu',
       level: 'n4',
+      size: 'long',
       kind: 'story',
       emoji: '🌉🧘',
       title: '一休[いっきゅう]さんと橋[はし]',
@@ -529,6 +544,7 @@
     {
       id: 'meme-n4-riajuu',
       level: 'n4',
+      size: 'long',
       kind: 'slang',
       emoji: '💑💥',
       title: 'リア充[じゅう]爆発[ばくはつ]しろ',
@@ -552,6 +568,7 @@
     {
       id: 'meme-n4-yabai',
       level: 'n4',
+      size: 'long',
       kind: 'slang',
       emoji: '😱😋',
       title: 'やばい！',
@@ -575,6 +592,7 @@
     {
       id: 'meme-n4-oshi',
       level: 'n4',
+      size: 'long',
       kind: 'pop',
       emoji: '🌟💖',
       title: '推[お]しは尊[とうと]い',
@@ -596,6 +614,7 @@
     {
       id: 'meme-n4-buchou',
       level: 'n4',
+      size: 'long',
       kind: 'story',
       emoji: '🍛❄️',
       title: '部長[ぶちょう]のダジャレ',
@@ -621,6 +640,7 @@
     {
       id: 'meme-n4-chotto',
       level: 'n4',
+      size: 'long',
       kind: 'story',
       emoji: '🙅🍻',
       title: '「ちょっと…」',
@@ -646,6 +666,7 @@
     {
       id: 'meme-n4-tanuki',
       level: 'n4',
+      size: 'long',
       kind: 'riddle',
       emoji: '🦝✉️',
       title: 'たぬきの手紙[てがみ]',
@@ -669,6 +690,7 @@
     {
       id: 'meme-n4-omaewa',
       level: 'n4',
+      size: 'long',
       kind: 'pop',
       emoji: '👊💀',
       title: 'お前[まえ]はもう死[し]んでいる',
@@ -692,6 +714,7 @@
     {
       id: 'meme-n4-senryu',
       level: 'n4',
+      size: 'long',
       kind: 'senryu',
       emoji: '📝👓',
       title: 'サラリーマン川柳[せんりゅう]',
@@ -717,6 +740,7 @@
     {
       id: 'meme-n3-shirankedo',
       level: 'n3',
+      size: 'long',
       kind: 'meme',
       emoji: '🤷🐙',
       title: '知[し]らんけど',
@@ -740,6 +764,7 @@
     {
       id: 'meme-n3-keikaku',
       level: 'n3',
+      size: 'long',
       kind: 'pop',
       emoji: '📓😏',
       title: '計画通[けいかくどお]り',
@@ -763,6 +788,7 @@
     {
       id: 'meme-n3-akirame',
       level: 'n3',
+      size: 'long',
       kind: 'pop',
       emoji: '🏀🔥',
       title: 'あきらめたらそこで試合終了[しあいしゅうりょう]',
@@ -786,6 +812,7 @@
     {
       id: 'meme-n3-nigecha',
       level: 'n3',
+      size: 'long',
       kind: 'pop',
       emoji: '🤖😰',
       title: '逃[に]げちゃダメだ',
@@ -809,6 +836,7 @@
     {
       id: 'meme-n3-flag',
       level: 'n3',
+      size: 'long',
       kind: 'meme',
       emoji: '🚩⚔️',
       title: '死亡[しぼう]フラグ',
@@ -832,6 +860,7 @@
     {
       id: 'meme-n3-chuuni',
       level: 'n3',
+      size: 'long',
       kind: 'slang',
       emoji: '🦾🌑',
       title: '中二病[ちゅうにびょう]',
@@ -855,6 +884,7 @@
     {
       id: 'meme-n3-shachiku',
       level: 'n3',
+      size: 'long',
       kind: 'slang',
       emoji: '🐑🏢',
       title: '社畜[しゃちく]の一日[いちにち]',
@@ -880,6 +910,7 @@
     {
       id: 'meme-n3-kuuki',
       level: 'n3',
+      size: 'long',
       kind: 'slang',
       emoji: '😶🌫️',
       title: '空気[くうき]が読[よ]めない',
@@ -903,6 +934,7 @@
     {
       id: 'meme-n3-tokisoba',
       level: 'n3',
+      size: 'long',
       kind: 'story',
       emoji: '🍜🪙',
       title: '時[とき]そば',
@@ -932,6 +964,7 @@
     {
       id: 'meme-n3-manjuu',
       level: 'n3',
+      size: 'long',
       kind: 'story',
       emoji: '🍡😨',
       title: 'まんじゅうこわい',

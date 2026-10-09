@@ -3371,6 +3371,14 @@
     riddle: 'なぞなぞ · Riddle',
     senryu: '川柳 · Comic poem',
     meme: 'ミーム · Meme',
+    twister: '早口言葉 · Tongue twister',
+    aruaru: 'あるある · So true',
+    trivia: '雑学 · Fun fact',
+    kotowaza: 'ことわざ · Proverb',
+  };
+  const MEME_SIZES = {
+    short: '⚡ Quick ones',
+    long: '📖 Longer reads',
   };
   const STORY_WORDS_KEY = 'tokidoki_story_words';
   const STORY_PUNCT = new Set(['。', '、', '「', '」', '『', '』', '？', '！', '…']);
@@ -3589,10 +3597,26 @@
     renderStoryDeck();
   }
 
-  // Memes & Jokes list: filter chips by kind, then the cards by JLPT level.
+  // Which tab a meme is listed under: short (a line or three) or long.
+  function memeSize(m) {
+    return m.size === 'short' ? 'short' : 'long';
+  }
+
+  // Memes & Jokes list: a Quick / Longer tab, filter chips by kind, then the
+  // cards by JLPT level.
   function renderMemesList(list) {
-    const memes = window.MEMES_DATA || [];
-    const kind = MEME_KINDS[settings.memeKind] ? settings.memeKind : 'all';
+    const all = window.MEMES_DATA || [];
+    const size = MEME_SIZES[settings.memeSize] ? settings.memeSize : 'short';
+    const sizes = $('#meme-sizes');
+    if (sizes) {
+      sizes.innerHTML = Object.keys(MEME_SIZES).map(k => `
+        <button type="button" class="meme-size${k === size ? ' active' : ''}" data-size="${k}" role="tab" aria-selected="${k === size}">
+          ${MEME_SIZES[k]} <span class="meme-size-count">${all.filter(m => memeSize(m) === k).length}</span>
+        </button>
+      `).join('');
+    }
+    const memes = all.filter(m => memeSize(m) === size);
+    const kind = MEME_KINDS[settings.memeKind] && memes.some(m => m.kind === settings.memeKind) ? settings.memeKind : 'all';
     const filters = $('#meme-filters');
     if (filters) {
       const kinds = Object.keys(MEME_KINDS).filter(k => memes.some(m => m.kind === k));
@@ -3761,7 +3785,11 @@
 
     $('#story-text').classList.toggle('show-english', !!settings.storyShowEnglish);
 
-    const stories = readerItems();
+    // On the memes page, Previous / Next stay within the same tab, N5 first.
+    const stories = readerIsMemes()
+      ? readerItems().filter(m => memeSize(m) === memeSize(story))
+        .sort((a, b) => STORY_LEVELS.indexOf(a.level) - STORY_LEVELS.indexOf(b.level))
+      : readerItems();
     const idx = stories.indexOf(story);
     const prev = stories[idx - 1];
     const next = stories[idx + 1];
@@ -5306,6 +5334,14 @@
       btn.addEventListener('click', () => gradeStoryReviewAndAdvance(parseInt(btn.dataset.storyGrade, 10)));
     });
     on('#btn-story-review-done', 'click', closeStory);
+
+    on('#meme-sizes', 'click', (e) => {
+      const btn = e.target.closest('.meme-size');
+      if (!btn) return;
+      settings.memeSize = btn.dataset.size;
+      saveSettings(settings);
+      renderStoriesPage();
+    });
 
     on('#meme-filters', 'click', (e) => {
       const btn = e.target.closest('.meme-filter');

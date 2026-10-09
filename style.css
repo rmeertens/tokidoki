@@ -3144,6 +3144,45 @@ a.chapter-card {
 
 /* Memes & Jokes (memes.html) — the Stories reader plus kind filters, an
    emoji "picture" on each card and a "Why it's funny" box under the text. */
+.meme-sizes {
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.meme-size {
+  font: inherit;
+  font-weight: 700;
+  color: var(--text-dim);
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.meme-size:hover {
+  color: var(--text);
+}
+
+.meme-size.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.meme-size-count {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 1px 7px;
+  margin-left: 4px;
+}
+
 .meme-filters {
   display: flex;
   flex-wrap: wrap;

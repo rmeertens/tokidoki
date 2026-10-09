@@ -8,10 +8,12 @@ require('./stories-data.js');
 require('./mystery-words.js');
 const before = { glossary: { ...global.STORY_GLOSSARY }, grammar: { ...global.STORY_GRAMMAR } };
 require('./memes-data.js');
+const before2 = { glossary: { ...global.STORY_GLOSSARY }, grammar: { ...global.STORY_GRAMMAR } };
+require('./memes-data-2.js');
 
-const { MEMES_DATA, MEME_GLOSSARY, MEME_GRAMMAR, STORY_GLOSSARY, STORY_GRAMMAR, STORIES_DATA } = global;
+const { MEMES_DATA, MEME_GLOSSARY, MEME_GRAMMAR, MEME_GLOSSARY_2, MEME_GRAMMAR_2, STORY_GLOSSARY, STORY_GRAMMAR, STORIES_DATA } = global;
 const PUNCT = new Set(['。', '、', '「', '」', '『', '』', '？', '！', '…']);
-const KINDS = ['dajare', 'slang', 'pop', 'story', 'riddle', 'senryu', 'meme'];
+const KINDS = ['dajare', 'slang', 'pop', 'story', 'riddle', 'senryu', 'meme', 'twister', 'aruaru', 'trivia', 'kotowaza'];
 const stripFurigana = (s) => s.replace(/\[[^\]]*\]/g, '');
 const has = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
 
@@ -24,6 +26,8 @@ function check(ok, label) {
 
 Object.keys(MEME_GLOSSARY).forEach(key => check(!has(before.glossary, key), `MEME_GLOSSARY "${key}" already in STORY_GLOSSARY`));
 Object.keys(MEME_GRAMMAR).forEach(id => check(!has(before.grammar, id), `MEME_GRAMMAR "${id}" already in STORY_GRAMMAR`));
+Object.keys(MEME_GLOSSARY_2).forEach(key => check(!has(before2.glossary, key), `MEME_GLOSSARY_2 "${key}" already in STORY_GLOSSARY`));
+Object.keys(MEME_GRAMMAR_2).forEach(id => check(!has(before2.grammar, id), `MEME_GRAMMAR_2 "${id}" already in STORY_GRAMMAR`));
 
 const storyIds = new Set(STORIES_DATA.map(s => s.id));
 const ids = new Set();
@@ -33,6 +37,9 @@ MEMES_DATA.forEach(item => {
   ids.add(item.id);
   check(['n5', 'n4', 'n3'].includes(item.level), `${item.id}: unknown level ${item.level}`);
   check(KINDS.includes(item.kind), `${item.id}: unknown kind ${item.kind}`);
+  check(['short', 'long'].includes(item.size), `${item.id}: size must be short or long`);
+  if (item.size === 'short') check(item.sentences.length <= 3, `${item.id}: short item with ${item.sentences.length} sentences`);
+  if (item.size === 'long') check(item.sentences.length >= 5, `${item.id}: long item with only ${item.sentences.length} sentences`);
   check(typeof item.emoji === 'string' && item.emoji.length > 0, `${item.id}: missing emoji`);
   check(typeof item.punch === 'string' && item.punch.length > 20, `${item.id}: missing punch explanation`);
   check(typeof item.titleEn === 'string' && item.titleEn.length > 0, `${item.id}: missing English title`);
@@ -61,11 +68,11 @@ MEMES_DATA.forEach(item => {
   });
 });
 
-['n5', 'n4', 'n3'].forEach(level => {
-  check(MEMES_DATA.filter(m => m.level === level).length >= 5, `${level}: fewer than 5 items`);
-});
+['n5', 'n4', 'n3'].forEach(level => ['short', 'long'].forEach(size => {
+  check(MEMES_DATA.filter(m => m.level === level && m.size === size).length >= 5, `${level} ${size}: fewer than 5 items`);
+}));
 
-Object.entries(MEME_GLOSSARY).forEach(([key, entry]) => {
+Object.entries({ ...MEME_GLOSSARY, ...MEME_GLOSSARY_2 }).forEach(([key, entry]) => {
   check(Array.isArray(entry) && entry.length === 3 && entry.every(x => typeof x === 'string' && x),
     `glossary "${key}": expected [reading, meaning, pos]`);
   check(used.has(key), `glossary "${key}": never used`);
