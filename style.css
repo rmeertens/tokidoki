@@ -2843,6 +2843,19 @@ a.chapter-card {
   color: var(--text-dim);
 }
 
+.setting-select {
+  flex-shrink: 0;
+  margin-left: 12px;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-card);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
 .setting-toggle {
   width: 44px;
   height: 24px;
