@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" id="viewport-meta" content="width=device-width, initial-scale=1.0">
+  <title>JLPT Passage Grammar Practice — 文章の文法 fill-in | Tokidoki</title>
+  <meta name="description" content="Free JLPT-style 文章の文法 practice for N5 to N3: read a longer passage and choose the word, particle, conjunction or grammar form that fits each numbered blank, with an explanation for every answer.">
+  <meta property="og:title" content="JLPT Passage Grammar Practice | Tokidoki">
+  <meta property="og:description" content="Read a passage and fill each blank from four choices — JLPT 文章の文法, N5 to N3, with explanations. No login required.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tokidoki.meertens.dev/story-fill.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="JLPT Passage Grammar Practice | Tokidoki">
+  <meta name="twitter:description" content="Read a passage and fill each blank from four choices — JLPT 文章の文法, N5 to N3, with explanations.">
+  <link rel="canonical" href="https://tokidoki.meertens.dev/story-fill.html">
+  <link rel="stylesheet" href="style.css">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXWYNZC7YH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXWYNZC7YH');
+  </script>
+</head>
+<body data-mode="story-fill">
+  <div id="app">
+
+    <!-- Header (rendered by renderSharedChrome() in app.js) -->
+    <div id="header-mount"></div>
+
+    <!-- Screen: Choose a passage -->
+    <main id="screen-chapters" class="screen active">
+      <nav class="page-nav" aria-label="Exercises">
+        <div class="page-nav-group">
+          <span class="page-nav-label">Practice</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="verbs.html"><span class="page-nav-glyph" aria-hidden="true">食</span>Verbs</a>
+            <a class="page-nav-item" href="adjectives.html"><span class="page-nav-glyph" aria-hidden="true">高</span>Adjectives</a>
+            <a class="page-nav-item" href="custom.html"><span class="page-nav-glyph" aria-hidden="true">作</span>Build Your Own</a>
+            <a class="page-nav-item" href="bunkei.html"><span class="page-nav-glyph" aria-hidden="true">型</span>Bunkei</a>
+            <a class="page-nav-item" href="sentences.html"><span class="page-nav-glyph" aria-hidden="true">文</span>Sentences</a>
+            <a class="page-nav-item" href="stories.html"><span class="page-nav-glyph" aria-hidden="true">話</span>Stories</a>
+            <a class="page-nav-item" href="mystery.html"><span class="page-nav-glyph" aria-hidden="true">謎</span>Mystery</a>
+            <a class="page-nav-item" href="listening.html"><span class="page-nav-glyph" aria-hidden="true">聴</span>Listening</a>
+            <a class="page-nav-item" href="particles-quiz.html"><span class="page-nav-glyph" aria-hidden="true">は</span>Particles</a>
+            <a class="page-nav-item" href="word-order.html"><span class="page-nav-glyph" aria-hidden="true">★</span>Word Order</a>
+            <a class="page-nav-item active" href="story-fill.html" aria-current="page"><span class="page-nav-glyph" aria-hidden="true">章</span>Story Fill-in</a>
+            <a class="page-nav-item" href="kana.html"><span class="page-nav-glyph" aria-hidden="true">あ</span>Kana</a>
+            <a class="page-nav-item" href="kanji-quiz.html"><span class="page-nav-glyph" aria-hidden="true">字</span>Kanji Quiz</a>
+          </div>
+        </div>
+        <div class="page-nav-group">
+          <span class="page-nav-label">Reference</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="kanji.html"><span class="page-nav-glyph" aria-hidden="true">紙</span>Practice Sheets</a>
+            <a class="page-nav-item" href="kanji-hover.html"><span class="page-nav-glyph" aria-hidden="true">漢</span>Kanji Hover</a>
+            <a class="page-nav-item" href="vocabulary.html"><span class="page-nav-glyph" aria-hidden="true">語</span>Vocabulary</a>
+            <a class="page-nav-item" href="words-by-kanji.html"><span class="page-nav-glyph" aria-hidden="true">詞</span>Words by Kanji</a>
+            <a class="page-nav-item" href="notepad.html"><span class="page-nav-glyph" aria-hidden="true">書</span>Notepad</a>
+          </div>
+        </div>
+      </nav>
+      <section class="lis-hero sf-hero">
+        <div class="lis-hero-face sf-hero-face" aria-hidden="true">章</div>
+        <div>
+          <p class="lis-hero-kicker" lang="ja">文章の文法 · JLPT N5–N3</p>
+          <h2 class="lis-hero-title">Story fill-in</h2>
+          <p class="lis-hero-sub">Read a longer text and choose what fits each numbered blank — the passage question from the JLPT grammar section.</p>
+        </div>
+      </section>
+
+      <ol class="lis-steps">
+        <li><span class="lis-step-icon" aria-hidden="true">📖</span><b>Read</b><span>The whole passage — the context decides the answer.</span></li>
+        <li><span class="lis-step-icon" aria-hidden="true">✏️</span><b>Choose</b><span>One of four choices for every blank.</span></li>
+        <li><span class="lis-step-icon" aria-hidden="true">💡</span><b>Check</b><span>See why each answer fits, with an English translation.</span></li>
+      </ol>
+
+      <div class="lis-levels" role="group" aria-label="Level">
+        <span class="lis-levels-label">Level</span>
+        <button data-level="N5" aria-pressed="false">N5</button>
+        <button data-level="N4" aria-pressed="false">N4</button>
+        <button data-level="N3" aria-pressed="false">N3</button>
+        <button data-level="all" aria-pressed="true">All</button>
+      </div>
+      <div class="wo-settings">
+        <label class="kana-script-toggle"><input type="checkbox" id="sf-opt-furigana"> Furigana</label>
+      </div>
+
+      <div class="sf-list" id="sf-list"></div>
+
+      <div class="reset-section">
+        <button id="btn-sf-reset" class="btn-danger">Reset scores</button>
+      </div>
+    </main>
+
+    <!-- Screen: A passage -->
+    <main id="screen-story-fill" class="screen">
+      <div class="study-toolbar">
+        <div class="sf-toolbar-title" id="sf-title"></div>
+        <button id="sf-quit" class="btn-undo" aria-label="Back to the passages">✕</button>
+      </div>
+
+      <div class="card sf-card">
+        <div class="kana-prompt-label">Read the passage, then choose the best answer for each blank.</div>
+        <div class="sf-text" id="sf-text" lang="ja"></div>
+      </div>
+
+      <div class="sf-result hidden" id="sf-result">
+        <span class="stat-num" id="sf-score">0 / 0</span>
+        <span class="sf-score-msg" id="sf-score-msg"></span>
+      </div>
+
+      <details class="sf-translation hidden" id="sf-translation">
+        <summary>English translation</summary>
+        <div id="sf-translation-body"></div>
+      </details>
+
+      <div class="sf-questions" id="sf-questions"></div>
+
+      <div class="sf-check-area" id="sf-check-area">
+        <span class="sf-answered" id="sf-answered"></span>
+        <button id="btn-sf-check" class="btn-primary">Check answers</button>
+      </div>
+
+      <div class="session-actions sf-actions hidden" id="sf-actions">
+        <button id="btn-sf-next" class="btn-primary hidden">Next passage →</button>
+        <button id="btn-sf-again" class="btn-secondary">Try again</button>
+        <button id="btn-sf-home" class="btn-secondary">All passages</button>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="story-fill-data.js?v=1"></script>
+  <script src="story-fill.js?v=1"></script>
+  <script src="app.js?v=19"></script>
+
+  <!-- Static content for search engines -->
+  <section id="seo-content" aria-hidden="true">
+    <h2>JLPT passage grammar practice — 文章の文法</h2>
+    <p>
+      Free, no-login practice for the JLPT grammar question where you read a longer
+      passage — an essay, a letter, a short story — and choose the best word for each
+      numbered blank from four choices. The blanks test what the JLPT tests: particles,
+      conjunctions like でも, だから, それに and その結果, giving and receiving verbs,
+      verb forms, and grammar such as 〜そうです, 〜によると, 〜だけでなく and 〜をきっかけに.
+      After checking, every blank comes with an explanation of why the answer fits and the
+      other choices don't, plus an English translation of the whole passage. Passages for
+      JLPT N5, N4 and N3, with optional furigana.
+    </p>
+  </section>
+</body>
+</html>
