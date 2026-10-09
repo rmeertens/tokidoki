@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" id="viewport-meta" content="width=device-width, initial-scale=1.0">
-  <title>Graded Japanese Stories (JLPT N5–N3) | Tokidoki</title>
-  <meta name="description" content="Short graded Japanese reading stories for JLPT N5, N4 and N3. Tap any word for its reading and meaning and save it as a flashcard; tap a sentence to see which grammar it uses.">
-  <meta property="og:title" content="Graded Japanese Stories (JLPT N5–N3) | Tokidoki">
-  <meta property="og:description" content="Graded Japanese stories for N5–N3. Tap words to look them up and save flashcards, tap sentences to see their grammar.">
+  <title>Japanese Memes, Jokes &amp; Puns (JLPT N5–N3) | Tokidoki</title>
+  <meta name="description" content="Funny Japanese to browse by JLPT level: ダジャレ puns, internet slang like 草 and なう, anime catchphrases, riddles and rakugo. Tap any word for its meaning and save it as a flashcard; tap a sentence for its grammar.">
+  <meta property="og:title" content="Japanese Memes, Jokes &amp; Puns (JLPT N5–N3) | Tokidoki">
+  <meta property="og:description" content="Japanese puns, net slang, anime lines and funny stories for N5–N3. Tap words to look them up and save flashcards, tap sentences for their grammar.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://tokidoki.meertens.dev/stories.html">
+  <meta property="og:url" content="https://tokidoki.meertens.dev/memes.html">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Graded Japanese Stories (JLPT N5–N3) | Tokidoki">
-  <meta name="twitter:description" content="Graded Japanese stories for N5–N3. Tap words to look them up and save flashcards, tap sentences to see their grammar.">
-  <link rel="canonical" href="https://tokidoki.meertens.dev/stories.html">
+  <meta name="twitter:title" content="Japanese Memes, Jokes &amp; Puns (JLPT N5–N3) | Tokidoki">
+  <meta name="twitter:description" content="Japanese puns, net slang, anime lines and funny stories for N5–N3. Tap words to look them up and save flashcards, tap sentences for their grammar.">
+  <link rel="canonical" href="https://tokidoki.meertens.dev/memes.html">
   <link rel="stylesheet" href="style.css?v=24">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXWYNZC7YH"></script>
@@ -23,7 +23,7 @@
     gtag('config', 'G-XXWYNZC7YH');
   </script>
 </head>
-<body data-mode="stories">
+<body data-mode="memes">
   <div id="app">
 
     <!-- Header -->
@@ -41,8 +41,8 @@
             <a class="page-nav-item" href="custom.html"><span class="page-nav-glyph" aria-hidden="true">作</span>Build Your Own</a>
             <a class="page-nav-item" href="bunkei.html"><span class="page-nav-glyph" aria-hidden="true">型</span>Bunkei</a>
             <a class="page-nav-item" href="sentences.html"><span class="page-nav-glyph" aria-hidden="true">文</span>Sentences</a>
-            <a class="page-nav-item active" href="stories.html" aria-current="page"><span class="page-nav-glyph" aria-hidden="true">話</span>Stories</a>
-            <a class="page-nav-item" href="memes.html"><span class="page-nav-glyph" aria-hidden="true">笑</span>Memes &amp; Jokes</a>
+            <a class="page-nav-item" href="stories.html"><span class="page-nav-glyph" aria-hidden="true">話</span>Stories</a>
+            <a class="page-nav-item active" href="memes.html" aria-current="page"><span class="page-nav-glyph" aria-hidden="true">笑</span>Memes &amp; Jokes</a>
             <a class="page-nav-item" href="mystery.html"><span class="page-nav-glyph" aria-hidden="true">謎</span>Mystery</a>
             <a class="page-nav-item" href="listening.html"><span class="page-nav-glyph" aria-hidden="true">聴</span>Listening</a>
             <a class="page-nav-item" href="particles-quiz.html"><span class="page-nav-glyph" aria-hidden="true">は</span>Particles</a>
@@ -64,9 +64,11 @@
         </div>
       </nav>
       <p class="tab-intro">
-        Short graded stories, grouped by JLPT level. While reading, tap any word you
-        don&rsquo;t know to see its reading and meaning and save it as a flashcard, or tap
-        a sentence to see which grammar it uses.
+        Puns, internet slang, anime catchphrases, riddles and funny stories, grouped by
+        JLPT level. Tap any word you don&rsquo;t know to see its reading and meaning and
+        save it as a flashcard, tap a sentence to see its grammar, and open
+        &ldquo;Why it&rsquo;s funny&rdquo; for the joke behind it. Your flashcards are shared
+        with the <a href="stories.html">Stories</a> page.
       </p>
 
       <div class="kana-start-card story-deck-card" id="deck">
@@ -91,6 +93,8 @@
         <span class="story-export-status" id="story-export-status" role="status"></span>
       </div>
 
+      <div class="meme-filters" id="meme-filters" role="group" aria-label="Show only"></div>
+
       <div id="story-list"></div>
 
       <div class="reset-section">
@@ -102,6 +106,7 @@
     <main id="screen-story" class="screen">
       <div class="story-head">
         <span class="story-level-badge" id="story-level"></span>
+        <span class="meme-kind-label" id="story-kind"></span>
         <h2 class="story-title" id="story-title" lang="ja"></h2>
         <p class="story-title-en" id="story-title-en"></p>
       </div>
@@ -118,6 +123,8 @@
           <div id="story-panel-body"></div>
         </aside>
       </div>
+
+      <details class="meme-punch hidden" id="story-punch"></details>
 
       <div class="story-pager">
         <button class="btn-secondary hidden" id="btn-story-prev"></button>
@@ -170,7 +177,7 @@
         </div>
         <div class="session-actions">
           <button id="btn-story-review-continue" class="btn-primary">Next 20 →</button>
-          <button id="btn-story-review-done" class="btn-secondary">Back to Stories</button>
+          <button id="btn-story-review-done" class="btn-secondary">Back to Memes &amp; Jokes</button>
         </div>
       </div>
     </main>
@@ -185,6 +192,7 @@
   <script src="vocabulary-data.js"></script>
   <script src="kanji-info-data.js"></script>
   <script src="stories-data.js?v=15"></script>
+  <script src="memes-data.js?v=1"></script>
   <script src="mystery-words.js?v=3"></script>
   <script src="examples.js"></script>
   <script src="flashcard-export.js?v=13"></script>
@@ -195,19 +203,15 @@
 
   <!-- Static content for search engines -->
   <section id="seo-content" aria-hidden="true">
-    <h2>Graded Japanese Stories for JLPT N5, N4 and N3</h2>
+    <h2>Japanese Memes, Jokes and Pop Culture for JLPT N5, N4 and N3</h2>
     <p>
-      Free, no-login graded readers for learners of Japanese, sorted by JLPT level.
-      N5 stories use short です / ます sentences about everyday life; N4 stories link
-      clauses with 〜たら, 〜ので, 〜てしまう and giving-and-receiving verbs; N3 stories are
-      narrated in plain form with the passive, causative, hearsay 〜そうだ and more.
-      Tap any word for its dictionary form, reading and English meaning, and add it to a
-      personal flashcard deck reviewed with spaced repetition (SRS), shown together with
-      the sentence you found it in. Tap a sentence to see its English translation and
-      every grammar point it uses, with the exact words highlighted. Toggle furigana and
-      English translations on or off. Pairs well with the
-      <a href="vocabulary.html">vocabulary reference</a> and the
-      <a href="particles-quiz.html">particle quiz</a>.
+      Learn Japanese from the things Japanese people actually laugh at: ダジャレ puns like
+      布団が吹っ飛んだ and イクラはいくら, internet slang such as 草, なう, リア充 and やばい,
+      famous anime and manga lines from Pokémon, Doraemon, 北斗の拳, Death Note, Slam Dunk and
+      Evangelion, なぞなぞ riddles, サラリーマン川柳 comic poems and classic rakugo like 時そば
+      and まんじゅうこわい — all sorted by JLPT level. Tap any word for its dictionary form,
+      reading and English meaning and add it to your spaced-repetition flashcards; tap a
+      sentence for its translation and grammar points; and read why each joke is funny.
     </p>
   </section>
 </body>

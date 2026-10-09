@@ -258,10 +258,10 @@
       title.textContent = 'Particle Quiz';
     } else if (name === 'story') {
       backBtn.classList.remove('hidden');
-      title.textContent = 'Stories';
+      title.textContent = readerIsMemes() ? 'Memes & Jokes' : 'Stories';
     } else if (name === 'story-review') {
       backBtn.classList.remove('hidden');
-      title.textContent = 'Story Flashcards';
+      title.textContent = readerIsMemes() ? 'Flashcards' : 'Story Flashcards';
     } else if (name === 'bunkei') {
       backBtn.classList.remove('hidden');
       title.textContent = 'Bunkei';
@@ -3348,12 +3348,29 @@
   // their schedules live in the shared SRS store under `story_word:<key>`
   // (so Reset All Progress resets them), while the deck itself — which words,
   // and the sentence each was saved from — lives under its own key.
+  //
+  // The Memes & Jokes page (memes.html, data-mode="memes") runs this same
+  // reader over MEMES_DATA from memes-data.js, and saves into the same deck.
 
   const STORY_LEVELS = ['n5', 'n4', 'n3'];
   const STORY_LEVEL_BLURB = {
     n5: 'Short sentences in です / ます form: particles, adjectives, 〜ている.',
     n4: 'Linked clauses: 〜たら, 〜ので, 〜てしまう, giving and receiving.',
     n3: 'Plain-form narration: passive, causative, hearsay and nuance.',
+  };
+  const MEME_LEVEL_BLURB = {
+    n5: 'Puns, net slang and pop culture in simple です / ます Japanese.',
+    n4: 'Riddles, slang and office humour: 〜たら, 〜ながら, potential forms.',
+    n3: 'Anime catchphrases, rakugo and slang in plain-form narration.',
+  };
+  const MEME_KINDS = {
+    dajare: 'ダジャレ · Pun',
+    slang: 'スラング · Slang',
+    pop: 'ポップカルチャー · Pop culture',
+    story: '笑い話 · Funny story',
+    riddle: 'なぞなぞ · Riddle',
+    senryu: '川柳 · Comic poem',
+    meme: 'ミーム · Meme',
   };
   const STORY_WORDS_KEY = 'tokidoki_story_words';
   const STORY_PUNCT = new Set(['。', '、', '「', '」', '『', '』', '？', '！', '…']);
@@ -3447,14 +3464,29 @@
     return hits;
   }
 
-  function getStory(id) {
-    return (window.STORIES_DATA || []).find(s => s.id === id) || null;
+  function readerIsMemes() {
+    return document.body.dataset.mode === 'memes';
   }
 
-  // The sentence a saved word came from: a story's, or — for words saved in
-  // the mystery game (mystery.html) — the line stored with the word itself.
+  // The stories, or on the Memes & Jokes page the memes.
+  function readerItems() {
+    return (readerIsMemes() ? window.MEMES_DATA : window.STORIES_DATA) || [];
+  }
+
+  function getStory(id) {
+    return readerItems().find(s => s.id === id) || null;
+  }
+
+  // A story or meme by id, whichever page we're on (and whichever is loaded).
+  function findReaderItem(id) {
+    return [...(window.STORIES_DATA || []), ...(window.MEMES_DATA || [])].find(s => s.id === id) || null;
+  }
+
+  // The sentence a saved word came from: a story's or meme's, or — for words
+  // saved in the mystery game (mystery.html), or on a page that doesn't load
+  // that story or meme — the line stored with the word itself.
   function storyWordSource(meta) {
-    const story = getStory(meta.story);
+    const story = findReaderItem(meta.story);
     if (story && story.sentences[meta.s]) {
       return { sentence: story.sentences[meta.s], title: story.titleEn, level: story.level.toUpperCase() };
     }
@@ -3489,6 +3521,13 @@
       saveSRS(srsData);
     } else {
       words[key] = { story: storyId, s: sentenceIndex, added: Date.now() };
+      // Keep the sentence and definition with the word, so its card still
+      // works on pages that don't load this story's or meme's data.
+      const item = findReaderItem(storyId);
+      const sentence = item && item.sentences[sentenceIndex];
+      if (sentence) Object.assign(words[key], { jp: sentence.jp, en: sentence.en, title: item.titleEn, level: item.level.toUpperCase() });
+      const gloss = (window.STORY_GLOSSARY || {})[key];
+      if (gloss) words[key].gloss = gloss;
     }
     saveStoryWords(words);
   }
@@ -3499,6 +3538,7 @@
   function storyWordGloss(key, meta) {
     const glossary = window.STORY_GLOSSARY || {};
     if (glossary[key]) return glossary[key];
+    if (meta && meta.gloss) return meta.gloss;
     if (meta && meta.vocab) return [meta.kana, meta.meaning, `JLPT ${meta.vocab.toUpperCase()} vocabulary`];
     return null;
   }
@@ -3519,6 +3559,12 @@
   function renderStoriesPage() {
     const list = $('#story-list');
     if (!list) return;
+
+    if (readerIsMemes()) {
+      renderMemesList(list);
+      renderStoryDeck();
+      return;
+    }
 
     const stories = window.STORIES_DATA || [];
     list.innerHTML = STORY_LEVELS.map(level => {
@@ -3541,6 +3587,41 @@
     }).join('');
 
     renderStoryDeck();
+  }
+
+  // Memes & Jokes list: filter chips by kind, then the cards by JLPT level.
+  function renderMemesList(list) {
+    const memes = window.MEMES_DATA || [];
+    const kind = MEME_KINDS[settings.memeKind] ? settings.memeKind : 'all';
+    const filters = $('#meme-filters');
+    if (filters) {
+      const kinds = Object.keys(MEME_KINDS).filter(k => memes.some(m => m.kind === k));
+      filters.innerHTML = ['all', ...kinds].map(k => `
+        <button type="button" class="meme-filter${k === kind ? ' active' : ''}" data-kind="${k}" aria-pressed="${k === kind}">
+          ${k === 'all' ? 'All' : MEME_KINDS[k]}
+        </button>
+      `).join('');
+    }
+    const shown = kind === 'all' ? memes : memes.filter(m => m.kind === kind);
+    list.innerHTML = STORY_LEVELS.map(level => {
+      const items = shown.filter(m => m.level === level);
+      if (items.length === 0) return '';
+      return `
+        <section class="story-level">
+          <h2 class="story-level-title"><span class="story-level-badge">${level.toUpperCase()}</span>${MEME_LEVEL_BLURB[level]}</h2>
+          <div class="chapter-grid">
+            ${items.map(m => `
+              <a class="chapter-card story-card meme-card" href="#${m.id}" data-story="${m.id}">
+                <div class="meme-card-emoji" aria-hidden="true">${m.emoji}</div>
+                <div class="meme-card-kind">${MEME_KINDS[m.kind]}</div>
+                <div class="chapter-card-title story-card-title">${storyRubyHtml(m.title)}</div>
+                <div class="chapter-card-sub">${m.titleEn}</div>
+              </a>
+            `).join('')}
+          </div>
+        </section>
+      `;
+    }).join('');
   }
 
   function renderStoryDeck() {
@@ -3574,7 +3655,7 @@
               <button class="story-deck-remove" data-word="${c.key}" aria-label="Remove ${storyDisplayWord(c.key)} from flashcards" title="Remove">✕</button>
             </li>
           `).join('')
-        : '<li class="story-deck-empty">Open a story and tap any word you don\'t know, then “Add to flashcards”.</li>';
+        : `<li class="story-deck-empty">Open a ${readerIsMemes() ? 'joke' : 'story'} and tap any word you don't know, then “Add to flashcards”.</li>`;
     }
   }
 
@@ -3649,6 +3730,14 @@
     $('#story-level').textContent = story.level.toUpperCase();
     $('#story-title').innerHTML = storyTextHtml(story.title);
     $('#story-title-en').textContent = story.titleEn;
+    const kindEl = $('#story-kind');
+    if (kindEl) kindEl.textContent = story.kind ? `${story.emoji || ''} ${MEME_KINDS[story.kind] || ''}`.trim() : '';
+    const punchEl = $('#story-punch');
+    if (punchEl) {
+      punchEl.classList.toggle('hidden', !story.punch);
+      punchEl.open = false;
+      punchEl.innerHTML = story.punch ? `<summary>💡 Why it's funny</summary><p>${story.punch}</p>` : '';
+    }
     $('#story-toggle-furigana').checked = settings.showFurigana;
     $('#story-toggle-english').checked = !!settings.storyShowEnglish;
 
@@ -3672,7 +3761,7 @@
 
     $('#story-text').classList.toggle('show-english', !!settings.storyShowEnglish);
 
-    const stories = window.STORIES_DATA || [];
+    const stories = readerItems();
     const idx = stories.indexOf(story);
     const prev = stories[idx - 1];
     const next = stories[idx + 1];
@@ -4480,7 +4569,7 @@
       renderParticlesPanel();
     } else if (mode === 'bunkei') {
       renderBunkeiPage();
-    } else if (mode === 'stories') {
+    } else if (mode === 'stories' || mode === 'memes') {
       renderStoriesPage();
       if (getStory(location.hash.slice(1))) openStory(location.hash.slice(1));
     } else {
@@ -4504,7 +4593,7 @@
       else if (mode === 'kana') renderKanaPanel();
       else if (mode === 'kanji-quiz') renderKanjiQuizPanel();
       else if (mode === 'particles') renderParticlesPanel();
-      else if (mode === 'stories') closeStory();
+      else if (mode === 'stories' || mode === 'memes') closeStory();
       else if (mode === 'bunkei') renderBunkeiPage();
     });
 
@@ -5096,7 +5185,7 @@
 
     // Story cards are plain #id links, so the browser's own Back button
     // returns from a story to the list.
-    if (mode === 'stories') {
+    if (mode === 'stories' || mode === 'memes') {
       window.addEventListener('hashchange', () => {
         const id = location.hash.slice(1);
         if (getStory(id)) openStory(id);
@@ -5108,7 +5197,7 @@
     // select (their own handler below), and the Furigana / English toggles
     // keep the selection. Capture phase, so this runs before panel buttons
     // re-render the panel and detach the clicked element.
-    if (mode === 'stories') {
+    if (mode === 'stories' || mode === 'memes') {
       document.addEventListener('click', (e) => {
         if (!storySelection || !(screens.story && screens.story.classList.contains('active'))) return;
         if (e.target.closest('#story-panel, .story-sentence, .story-toggles')) return;
@@ -5218,8 +5307,16 @@
     });
     on('#btn-story-review-done', 'click', closeStory);
 
+    on('#meme-filters', 'click', (e) => {
+      const btn = e.target.closest('.meme-filter');
+      if (!btn) return;
+      settings.memeKind = btn.dataset.kind;
+      saveSettings(settings);
+      renderStoriesPage();
+    });
+
     document.addEventListener('keydown', (e) => {
-      if (mode !== 'stories') return;
+      if (mode !== 'stories' && mode !== 'memes') return;
 
       if (screens.story && screens.story.classList.contains('active')) {
         if (e.key === 'Escape' && storySelection) { consumeKey(e); clearStorySelection(); }
@@ -5262,7 +5359,7 @@
         else if (mode === 'kana') renderKanaPanel();
         else if (mode === 'kanji-quiz') renderKanjiQuizPanel();
         else if (mode === 'particles') renderParticlesPanel();
-        else if (mode === 'stories') renderStoryDeck();
+        else if (mode === 'stories' || mode === 'memes') renderStoryDeck();
         else if (mode === 'bunkei') renderBunkeiPage();
         else if (mode === 'hub') renderHub();
       }
