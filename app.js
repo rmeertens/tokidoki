@@ -4472,6 +4472,8 @@
       // mystery.js wires up its own page.
     } else if (mode === 'listening') {
       // listening.js wires up its own page.
+    } else if (mode === 'word-order') {
+      // word-order.js wires up its own page.
     } else if (mode === 'particles') {
       renderParticlesPanel();
     } else if (mode === 'bunkei') {

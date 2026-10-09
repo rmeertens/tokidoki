@@ -5123,3 +5123,118 @@ a.chapter-card {
 .en-hover-kana { font-family: var(--font-jp); color: var(--text-dim); }
 .en-hover-en { color: var(--text-muted); font-size: 0.8rem; flex-basis: 100%; }
 .en-hover-note { margin-top: 4px; font-size: 0.72rem; color: var(--text-muted); font-style: italic; }
+
+/* Word order: JLPT 文の組み立て ★ questions (word-order.html) */
+.wo-hero { background: linear-gradient(135deg, color-mix(in srgb, var(--salmon) 14%, var(--bg-card)), var(--bg-card)); }
+.wo-hero-face { color: var(--salmon); background: color-mix(in srgb, var(--salmon) 16%, var(--bg-card)); border-color: var(--salmon); }
+.wo-settings { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 6px 0 14px; }
+.wo-review { display: block; width: 100%; margin-top: 10px; }
+
+.wo-card { align-items: stretch; }
+.wo-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.wo-badge { font-family: var(--font-jp); font-size: 0.8rem; font-weight: 700; color: var(--salmon); }
+.wo-level { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); border: 1px solid var(--border); border-radius: 999px; padding: 1px 8px; }
+
+.wo-sentence {
+  font-family: var(--font-jp);
+  font-size: 1.3rem;
+  line-height: 2.4;
+  margin: 14px 0 6px;
+  text-align: center;
+}
+.wo-text { white-space: normal; }
+.wo-slot {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-width: 3.4em;
+  margin: 0 3px;
+  padding: 2px 6px 0;
+  border: none;
+  border-bottom: 2px solid var(--text-dim);
+  border-radius: 6px 6px 0 0;
+  background: transparent;
+  font: inherit;
+  line-height: 1.6;
+  color: var(--text);
+  vertical-align: bottom;
+}
+.wo-slot:not(:disabled) { cursor: pointer; }
+.wo-slot:not(:disabled):hover { background: var(--accent-dim); }
+.wo-slot-body { min-height: 1.6em; }
+.wo-blank-line { display: inline-block; width: 2.4em; }
+.wo-slot-star { border-bottom-color: var(--salmon); }
+.wo-star {
+  position: absolute;
+  top: -0.95em;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8rem;
+  line-height: 1;
+  color: var(--salmon);
+}
+.wo-slot.wo-filled { background: var(--accent-dim); }
+.wo-slot.wo-right { background: var(--green-dim); border-bottom-color: var(--green); }
+.wo-slot.wo-wrong { background: var(--red-dim); border-bottom-color: var(--red); }
+
+.wo-en-row { text-align: center; min-height: 2em; }
+.wo-en { margin-top: 4px; }
+
+.wo-bank {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+.wo-piece {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  color: var(--text);
+  font-family: var(--font-jp);
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.wo-piece:hover:not(:disabled) { border-color: var(--accent); transform: translateY(-1px); }
+.wo-piece:disabled { cursor: default; }
+.wo-piece.wo-used { opacity: 0.35; }
+.wo-piece.correct { background: var(--green-dim); border-color: var(--green); }
+.wo-piece.wrong { background: var(--red-dim); border-color: var(--red); }
+.wo-piece-num {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--bg-input);
+  font-family: var(--font);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.wo-check-area { display: flex; justify-content: center; gap: 10px; margin-top: 16px; }
+.wo-check-area .btn-primary:disabled { opacity: 0.45; cursor: default; transform: none; }
+
+.wo-feedback { display: flex; flex-direction: column; gap: 6px; }
+.wo-verdict-right { color: var(--green); }
+.wo-verdict-wrong { color: var(--red); }
+.wo-answer { font-family: var(--font-jp); font-weight: 700; color: var(--salmon); }
+.wo-full { font-family: var(--font-jp); font-size: 1.1rem; line-height: 2; }
+.wo-note { color: var(--text-dim); }
+.wo-dim { color: var(--text-dim); font-size: 0.85rem; }
+
+body.wo-no-furigana .wo-card rt { visibility: hidden; }
+
+@media (max-width: 480px) {
+  .wo-sentence { font-size: 1.1rem; }
+  .wo-bank { grid-template-columns: 1fr; }
+}
