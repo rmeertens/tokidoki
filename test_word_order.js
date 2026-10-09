@@ -33,6 +33,12 @@ ITEMS.forEach(it => {
     check(!/[一-鿿々]/.test(m.replace(/[一-鿿々]+\[[^\]]+\]/g, '')), `${name}: kanji without furigana in ${m}`);
   });
 });
+const sentences = new Set();
+ITEMS.forEach(it => {
+  const whole = WordOrder.plain(it.pre + it.pieces.join('') + it.post);
+  check(!sentences.has(whole), `${it.id}: same sentence as another question`);
+  sentences.add(whole);
+});
 WordOrder.LEVELS.forEach(level => {
   check(ITEMS.filter(it => it.level === level).length >= WordOrder.SESSION_SIZE, `${level}: fewer than a session of questions`);
 });
