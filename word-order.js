@@ -13,6 +13,7 @@
   const STORE_KEY = 'tokidoki_word_order';
   const SETTINGS_KEY = 'tokidoki_word_order_settings';
   const SESSION_SIZE = 10;
+  const SET_SIZE = 5;
   const LEVELS = ['N5', 'N4', 'N3'];
 
   // ─── Markup ────────────────────────────────────────────────────────────────
@@ -81,7 +82,16 @@
       .map(e => e.it);
   }
 
-  const api = { pieces, plain, rubyHtml, isCorrect, isStarCorrect, shuffleOrder, buildQueue, LEVELS, SESSION_SIZE };
+  // A level's questions in fixed sets of five, in data order — a set is
+  // always the same five sentences, so its best score means something.
+  function setsOf(items, level, size = SET_SIZE) {
+    const all = items.filter(it => it.level === level);
+    const sets = [];
+    for (let i = 0; i < all.length; i += size) sets.push(all.slice(i, i + size));
+    return sets;
+  }
+
+  const api = { pieces, plain, rubyHtml, isCorrect, isStarCorrect, shuffleOrder, buildQueue, setsOf, LEVELS, SESSION_SIZE, SET_SIZE };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   global.WordOrder = api;
   if (typeof document === 'undefined') return;
@@ -97,7 +107,7 @@
 
   const ITEMS = global.WORD_ORDER_ITEMS || [];
   const settings = Object.assign({ level: 'all', starOnly: false, furigana: true, english: false }, load(SETTINGS_KEY, {}));
-  const store = Object.assign({ missed: [], last: {} }, load(STORE_KEY, {}));
+  const store = Object.assign({ missed: [], last: {}, best: {} }, load(STORE_KEY, {}));
   if (!Array.isArray(store.missed)) store.missed = [];
   if (!store.last || typeof store.last !== 'object') store.last = {};
 
@@ -119,14 +129,50 @@
 
   // ─── Home ──────────────────────────────────────────────────────────────────
 
+  const LEVEL_DESC = {
+    N5: 'Basic particles, この/その, 〜てから, 〜たい, 〜ことがある',
+    N4: '〜ながら, 〜ように, 〜てもらう, 〜そう, 〜ことにする',
+    N3: '〜によると, 〜ために, 〜にとって, 〜わりに, 〜かどうか',
+  };
+  const setId = (level, k) => level + ':' + k;
+  const parseSet = id => { const m = /^(N\d):(\d+)$/.exec(id || ''); return m ? { level: m[1], k: Number(m[2]) } : null; };
+  const shownLevels = () => LEVELS.filter(l => settings.level === 'all' || settings.level === l);
+  const bestOf = id => (store.best || {})[id];
+
   function renderHome() {
     document.querySelectorAll('[data-level]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.level === settings.level)));
     const pool = ITEMS.filter(levelOk);
-    const right = pool.filter(it => store.last[it.id] === true).length;
     const missed = pool.filter(it => store.missed.includes(it.id)).length;
     $('wo-total').textContent = pool.length;
-    $('wo-right').textContent = right;
-    $('wo-missed').textContent = missed;
+    $('wo-sections').innerHTML = shownLevels().map(level => {
+      const sets = setsOf(ITEMS, level);
+      const bests = sets.map((_, k) => bestOf(setId(level, k)));
+      const done = bests.filter(Boolean).length;
+      const next = bests.findIndex(b => !b);
+      const chips = sets.map((set, k) => {
+        const b = bests[k];
+        const from = k * SET_SIZE + 1, to = k * SET_SIZE + set.length;
+        const state = !b ? (k === next ? ' lis-set-next' : '') : b.score === b.total ? ' lis-set-perfect' : ' lis-set-done';
+        return `<button class="lis-set${state}" data-set="${setId(level, k)}" aria-label="${level} set ${k + 1}: questions ${from} to ${to}${b ? `, best ${b.score} of ${b.total}` : ''}">
+          <span class="lis-set-name">Set ${k + 1}</span>
+          <span class="lis-set-range" lang="ja">${from}–${to}番</span>
+          <span class="lis-set-score">${b ? `${b.score}/${b.total}` : k === next ? 'next' : '—'}</span>
+        </button>`;
+      }).join('');
+      const n = sets.reduce((k, set) => k + set.length, 0);
+      return `<div class="lis-part-row">
+        <div class="lis-part-head">
+          <span class="lis-part-badge">${level}</span>
+          <span class="lis-part-body">
+            <span class="lis-part-title">${level} word order</span>
+            <span class="lis-part-desc" lang="ja">${esc(LEVEL_DESC[level])}</span>
+          </span>
+          <span class="lis-part-meta">${n} Qs<br>${done}/${sets.length} sets</span>
+        </div>
+        <div class="lis-sets">${chips}</div>
+      </div>`;
+    }).join('');
+    $('wo-quick-meta').textContent = `${SESSION_SIZE} random questions${settings.level === 'all' ? '' : ' · ' + settings.level}, mistakes first`;
     $('wo-review').classList.toggle('hidden', !missed);
     $('wo-review-count').textContent = missed;
     $('wo-opt-star').checked = settings.starOnly;
@@ -135,11 +181,17 @@
     applyDisplaySettings();
   }
 
-  function start(onlyMissed) {
-    const pool = onlyMissed ? ITEMS.filter(it => levelOk(it) && store.missed.includes(it.id)) : ITEMS;
-    const items = buildQueue(pool, store, settings.level);
+  // id: 'quick', 'missed', or a set like 'N4:2'.
+  function start(id) {
+    let items;
+    const set = parseSet(id);
+    if (set) items = setsOf(ITEMS, set.level)[set.k] || [];
+    else if (id === 'missed') items = buildQueue(ITEMS.filter(it => levelOk(it) && store.missed.includes(it.id)), store, 'all');
+    else items = buildQueue(ITEMS, store, settings.level);
     if (!items.length) return;
     session = {
+      id,
+      title: set ? `${set.level} · Set ${set.k + 1}` : id === 'missed' ? 'Review mistakes' : 'Quick practice',
       starOnly: settings.starOnly,
       pos: 0,
       queue: items.map(item => ({
@@ -149,6 +201,15 @@
     };
     show('screen-word-order');
     renderQuestion();
+  }
+
+  // The set after this one, moving on to the next level after the last set.
+  function nextSetId(id) {
+    const set = parseSet(id);
+    if (!set) return null;
+    if (setsOf(ITEMS, set.level)[set.k + 1]) return setId(set.level, set.k + 1);
+    const nextLevel = LEVELS[LEVELS.indexOf(set.level) + 1];
+    return nextLevel && settings.level === 'all' ? setId(nextLevel, 0) : null;
   }
 
   // ─── Question ──────────────────────────────────────────────────────────────
@@ -184,7 +245,7 @@
     const { item } = q;
     $('wo-progress-text').textContent = `${session.pos + 1} / ${session.queue.length}`;
     $('wo-bar-fill').style.width = `${(session.pos / session.queue.length) * 100}%`;
-    $('wo-level').textContent = item.level;
+    $('wo-level').textContent = session.title;
     $('wo-prompt').textContent = session.starOnly
       ? 'Which piece goes in the ★ blank?'
       : 'Put the pieces in the right order.';
@@ -300,10 +361,20 @@
   function finish() {
     const total = session.queue.length;
     const right = session.queue.filter(q => q.correct).length;
+    if (parseSet(session.id)) {
+      const prev = store.best[session.id];
+      if (!prev || right > prev.score) store.best[session.id] = { score: right, total };
+      save(STORE_KEY, store);
+    }
+    $('wo-done-title').textContent = `${session.title} complete!`;
     $('wo-done-total').textContent = total;
     $('wo-done-correct').textContent = right;
     $('wo-done-accuracy').textContent = `${Math.round((right / total) * 100)}%`;
     $('wo-done-icon').textContent = right === total ? '🎉' : right >= total / 2 ? '👍' : '📚';
+    const next = nextSetId(session.id);
+    $('btn-wo-next-set').classList.toggle('hidden', !next);
+    $('btn-wo-next-set').dataset.next = next || '';
+    if (next) { const n = parseSet(next); $('btn-wo-next-set').textContent = `Next: ${n.level} Set ${n.k + 1} →`; }
     const missed = ITEMS.filter(it => levelOk(it) && store.missed.includes(it.id)).length;
     $('btn-wo-review-missed').classList.toggle('hidden', !missed);
     $('btn-wo-review-missed').textContent = `Review mistakes (${missed})`;
@@ -330,8 +401,12 @@
       save(SETTINGS_KEY, settings);
       applyDisplaySettings();
     }));
-  $('wo-start').addEventListener('click', () => start(false));
-  $('wo-review').addEventListener('click', () => start(true));
+  $('wo-sections').addEventListener('click', e => {
+    const chip = e.target.closest('[data-set]');
+    if (chip) start(chip.dataset.set);
+  });
+  $('wo-quick').addEventListener('click', () => start('quick'));
+  $('wo-review').addEventListener('click', () => start('missed'));
   $('wo-bank').addEventListener('click', e => {
     const b = e.target.closest('[data-piece]');
     if (b && !b.disabled) place(Number(b.dataset.piece));
@@ -353,13 +428,15 @@
   });
   $('btn-wo-next').addEventListener('click', next);
   $('wo-quit').addEventListener('click', goHome);
-  $('btn-wo-again').addEventListener('click', () => start(false));
-  $('btn-wo-review-missed').addEventListener('click', () => start(true));
+  $('btn-wo-next-set').addEventListener('click', e => start(e.currentTarget.dataset.next));
+  $('btn-wo-again').addEventListener('click', () => start(session.id));
+  $('btn-wo-review-missed').addEventListener('click', () => start('missed'));
   $('btn-wo-home').addEventListener('click', goHome);
   $('btn-wo-reset').addEventListener('click', () => {
     if (!confirm('Reset your word order progress?')) return;
     store.missed = [];
     store.last = {};
+    store.best = {};
     save(STORE_KEY, store);
     renderHome();
   });
@@ -370,7 +447,8 @@
     if ($('screen-word-order-done').classList.contains('active') && e.key === ' '
         && !(e.target.closest && e.target.closest('button'))) {
       e.preventDefault();
-      start(false);
+      const next = nextSetId(session.id);
+      start(next || session.id);
       return;
     }
     if (!session || !$('screen-word-order').classList.contains('active')) return;

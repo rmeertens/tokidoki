@@ -90,13 +90,13 @@
         <label class="kana-script-toggle"><input type="checkbox" id="wo-opt-english"> Show English before answering</label>
       </div>
 
-      <div class="kana-start-card">
-        <div class="kana-start-info">
-          <span class="stat-num" id="wo-right">0</span>
-          <span class="stat-label">of <span id="wo-total">0</span> right · <span id="wo-missed">0</span> to review</span>
-        </div>
-        <button id="wo-start" class="btn-primary btn-start-custom">Start 10 questions</button>
-      </div>
+      <h3 class="lis-heading">Practise in sets of five <span>— <b id="wo-total">0</b> sentences</span></h3>
+      <div class="lis-sections" id="wo-sections"></div>
+
+      <button class="lis-quick" id="wo-quick">
+        <span class="lis-quick-icon" aria-hidden="true">⚡</span>
+        <span><b>Quick practice</b><span class="lis-quick-meta" id="wo-quick-meta"></span></span>
+      </button>
       <button id="wo-review" class="btn-secondary wo-review hidden">Review mistakes (<span id="wo-review-count">0</span>)</button>
 
       <div class="reset-section">
@@ -147,14 +147,15 @@
     <main id="screen-word-order-done" class="screen">
       <div class="session-complete">
         <div class="complete-icon" id="wo-done-icon">🎉</div>
-        <h2>Session Complete!</h2>
+        <h2 id="wo-done-title">Session Complete!</h2>
         <div class="session-stats">
           <div class="stat"><span class="stat-num" id="wo-done-total">0</span><span class="stat-label">Sentences</span></div>
           <div class="stat"><span class="stat-num" id="wo-done-correct">0</span><span class="stat-label">Correct</span></div>
           <div class="stat"><span class="stat-num" id="wo-done-accuracy">0%</span><span class="stat-label">Accuracy</span></div>
         </div>
         <div class="session-actions">
-          <button id="btn-wo-again" class="btn-primary">Next 10 →</button>
+          <button id="btn-wo-next-set" class="btn-primary hidden">Next set →</button>
+          <button id="btn-wo-again" class="btn-secondary">Try again</button>
           <button id="btn-wo-review-missed" class="btn-secondary hidden">Review mistakes</button>
           <button id="btn-wo-home" class="btn-secondary">Back</button>
         </div>
@@ -163,8 +164,8 @@
 
   </div>
 
-  <script src="word-order-data.js?v=1"></script>
-  <script src="word-order.js?v=3"></script>
+  <script src="word-order-data.js?v=2"></script>
+  <script src="word-order.js?v=4"></script>
   <script src="app.js?v=18"></script>
 
   <!-- Static content for search engines -->
@@ -177,8 +178,9 @@
       JLPT style and answer the way the test does by picking only the piece that goes
       in the ★ blank. Every sentence comes with furigana, an English translation and a
       note on the grammar that fixes the order — 〜てから, 〜ながら, 〜ために, 〜によると,
-      modifying clauses and more — across JLPT N5, N4 and N3. Mistakes come back first
-      in your next session.
+      modifying clauses and more — across JLPT N5, N4 and N3. Questions come in numbered
+      sets of five per level, with your best score kept for each set, plus a quick mixed
+      practice where mistakes come back first.
     </p>
   </section>
 </body>

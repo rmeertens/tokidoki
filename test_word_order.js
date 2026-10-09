@@ -78,5 +78,15 @@ check(q.every(it => it.level === 'N5'), 'the level filter holds');
 check(!q.some(it => it.id === 'n5-mother-cake'), 'questions already answered right come last');
 check(WordOrder.buildQueue(ITEMS, { missed: [], last: {} }, 'all', 10, rand).length === 10, 'all levels mix');
 
+// ─── Sets ────────────────────────────────────────────────────────────────────
+
+WordOrder.LEVELS.forEach(level => {
+  const sets = WordOrder.setsOf(ITEMS, level);
+  check(sets.length >= 5, `${level}: at least five sets`);
+  check(sets.every(set => set.length === WordOrder.SET_SIZE), `${level}: every set has exactly five questions`);
+  check(sets.flat().every(it => it.level === level), `${level}: sets stay within the level`);
+  check(sets.flat().length === ITEMS.filter(it => it.level === level).length, `${level}: every question is in a set`);
+});
+
 console.log(`word order: ${passed} passed, ${failed} failed`);
 if (failed) process.exit(1);
