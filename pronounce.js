@@ -7,6 +7,11 @@
 //                                  never also flip a card or open a panel.
 //   Pronounce.onClick(kana)      → call from a word's click handler: reads it
 //                                  aloud when "Speak words on click" is on.
+//   Pronounce.speakAll(texts, {slow, onStart(i), onDone(finished)})
+//                                → reads several texts one after another (a
+//                                  whole story), calling onStart before each
+//                                  and onDone once at the end or on stop().
+//   Pronounce.stop()             → stops whatever is being read.
 //   <button data-speak-toggle>   → becomes the "Speak words on click" switch.
 //                                  The setting is shared by all pages.
 //
@@ -44,21 +49,69 @@
   }
 
   let current = null; // keep a reference, or Chrome may drop the utterance
+  let sequence = null; // the speakAll() run in progress, if any
+
+  function utterance(text, slow) {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ja-JP';
+    const voice = chosenVoice();
+    if (voice) { u.voice = voice; u.lang = voice.lang; }
+    u.rate = slow ? 0.6 : 0.95;
+    return u;
+  }
+
+  const clean = text => String(text || '').replace(/[～~〜]/g, '').trim();
+
   function speak(text, slow) {
     if (!synth) return;
-    text = String(text || '').replace(/[～~〜]/g, '').trim();
+    text = clean(text);
     if (!text) return;
+    endSequence(false);
     try {
       synth.cancel();
-      const u = new SpeechSynthesisUtterance(text);
-      u.lang = 'ja-JP';
-      const voice = chosenVoice();
-      if (voice) { u.voice = voice; u.lang = voice.lang; }
-      u.rate = slow ? 0.6 : 0.95;
+      const u = utterance(text, slow);
       current = u;
       // Chrome sometimes drops an utterance queued right after cancel().
       setTimeout(() => { if (current === u) synth.speak(u); }, 50);
     } catch { /* speech unavailable */ }
+  }
+
+  function endSequence(finished) {
+    const run = sequence;
+    if (!run) return;
+    sequence = null;
+    if (run.onDone) run.onDone(finished);
+  }
+
+  // One utterance per text, each queued when the last ends, so the caller
+  // can follow along (and so long stories don't hit Chrome's length limits).
+  function speakAll(texts, opts = {}) {
+    if (!synth) return;
+    stop();
+    const run = { texts: texts.map(clean), i: -1, slow: !!opts.slow, onStart: opts.onStart, onDone: opts.onDone };
+    sequence = run;
+    const next = () => {
+      if (sequence !== run) return;
+      run.i++;
+      while (run.i < run.texts.length && !run.texts[run.i]) run.i++;
+      if (run.i >= run.texts.length) { endSequence(true); return; }
+      if (run.onStart) run.onStart(run.i);
+      try {
+        const u = utterance(run.texts[run.i], run.slow);
+        u.onend = next;
+        u.onerror = () => { if (sequence === run) endSequence(false); };
+        current = u;
+        synth.speak(u);
+      } catch { endSequence(false); }
+    };
+    // As in speak(): give cancel() a moment before queueing.
+    setTimeout(next, 50);
+  }
+
+  function stop() {
+    endSequence(false);
+    current = null;
+    try { if (synth) synth.cancel(); } catch { /* speech unavailable */ }
   }
 
   const esc = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
@@ -116,6 +169,9 @@
   global.Pronounce = {
     supported: !!synth,
     speak,
+    speakAll,
+    stop,
+    get reading() { return !!sequence; },
     buttonsHtml,
     onClick,
     get auto() { return auto; },

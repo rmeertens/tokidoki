@@ -3432,6 +3432,10 @@
   function storySentenceKana(sentence) {
     return parseStorySentence(sentence).filter(t => t.key).map(t => storyKana(t.surface)).join('');
   }
+  // For reading a whole story aloud: punctuation kept, so the voice pauses.
+  function storySentenceSpeech(sentence) {
+    return parseStorySentence(sentence).map(t => storyKana(t.surface)).join('');
+  }
 
   function storyCardHtml(text) {
     return settings.flashcardFurigana ? storyRubyHtml(text) : storyPlainText(text);
@@ -3728,9 +3732,60 @@
 
   // ── Reader screen ──
 
+  // ── Read the whole story aloud ──
+  //
+  // Sentence by sentence from the selected one (or the top), highlighting the
+  // sentence being read. Pressing the button again stops.
+
+  let storyReadingIndex = null;   // sentence being read aloud, or null
+
+  function startStoryReading(slow) {
+    if (!currentStory || !window.Pronounce) return;
+    const from = storySelection ? storySelection.s : 0;
+    const texts = currentStory.sentences.slice(from).map(storySentenceSpeech);
+    Pronounce.speakAll(texts, {
+      slow,
+      onStart: i => markStoryReading(from + i, slow),
+      onDone: () => markStoryReading(null),
+    });
+  }
+
+  function stopStoryReading() {
+    if (storyReadingIndex !== null && window.Pronounce) Pronounce.stop();
+    markStoryReading(null);
+  }
+
+  function markStoryReading(si, slow) {
+    storyReadingIndex = si;
+    $$('#story-text .story-sentence').forEach(el => {
+      el.classList.toggle('reading', Number(el.dataset.s) === si);
+    });
+    const el = si === null ? null : $(`#story-text .story-sentence[data-s="${si}"]`);
+    if (el) el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    renderStoryReadButtons(si === null ? null : !!slow);
+  }
+
+  // `readingSlow`: null when idle, else whether the slow reading is playing.
+  function renderStoryReadButtons(readingSlow) {
+    const supported = !!(window.Pronounce && Pronounce.supported);
+    const normal = $('#btn-story-read');
+    const slow = $('#btn-story-read-slow');
+    if (normal) {
+      normal.classList.toggle('hidden', !supported);
+      normal.innerHTML = readingSlow === false ? '■ Stop' : '▶ Read aloud';
+      normal.setAttribute('aria-pressed', readingSlow === false);
+    }
+    if (slow) {
+      slow.classList.toggle('hidden', !supported);
+      slow.innerHTML = readingSlow === true ? '■ Stop' : '🐢 Slowly';
+      slow.setAttribute('aria-pressed', readingSlow === true);
+    }
+  }
+
   function openStory(id) {
     const story = getStory(id);
     if (!story) return;
+    stopStoryReading();
     currentStory = story;
     storySelection = null;
     storyActiveGrammar = null;
@@ -3741,6 +3796,7 @@
   }
 
   function closeStory() {
+    stopStoryReading();
     currentStory = null;
     if (location.hash) history.replaceState(null, '', location.pathname + location.search);
     showScreen('chapters');
@@ -3784,6 +3840,12 @@
     }).join('');
 
     $('#story-text').classList.toggle('show-english', !!settings.storyShowEnglish);
+    if (storyReadingIndex !== null) {
+      const el = $(`#story-text .story-sentence[data-s="${storyReadingIndex}"]`);
+      if (el) el.classList.add('reading');
+    } else {
+      renderStoryReadButtons(null);
+    }
 
     // On the memes page, Previous / Next stay within the same tab, N5 first.
     const stories = readerIsMemes()
@@ -5292,6 +5354,15 @@
       const item = e.target.closest('.story-grammar-item');
       if (item && !item.contains(e.relatedTarget)) highlightStoryGrammar(storyActiveGrammar);
     });
+
+    // Same button again (now "Stop") stops; the other one switches speed.
+    const onStoryRead = (slow) => {
+      const btn = $(slow ? '#btn-story-read-slow' : '#btn-story-read');
+      if (btn && btn.getAttribute('aria-pressed') === 'true') stopStoryReading();
+      else startStoryReading(slow);
+    };
+    on('#btn-story-read', 'click', () => onStoryRead(false));
+    on('#btn-story-read-slow', 'click', () => onStoryRead(true));
 
     on('#story-toggle-furigana', 'change', (e) => {
       settings.showFurigana = e.target.checked;

@@ -3274,6 +3274,18 @@ a.chapter-card {
   padding: 7px 14px;
 }
 
+.story-toggles .story-read[aria-pressed="true"] {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* The sentence being read aloud. */
+.story-sentence.reading {
+  background: var(--accent-dim);
+  border-radius: var(--radius-sm);
+}
+
 .story-title {
   font-family: var(--font-jp);
   font-size: 1.7rem;
