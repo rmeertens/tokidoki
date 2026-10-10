@@ -71,7 +71,12 @@
 
 #seo-content { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
 
-html { font-size: 16px; }
+html {
+  font-size: 16px;
+  /* A flashcard flying off (swipe-cards.js) mustn't widen the page; on
+     body alone iOS Safari doesn't always clip the viewport. */
+  overflow-x: clip;
+}
 
 body {
   font-family: var(--font);
@@ -6091,4 +6096,16 @@ body.sf-panel-open #screen-story-fill { padding-bottom: 50dvh; }
   .wbk-word-row { flex-wrap: wrap; row-gap: 6px; }
   .wbk-word-meaning { flex: 1 1 8em; }
   .wbk-word-actions { flex-basis: 100%; margin-left: 0; }
+}
+
+/* While a flashcard is held (swipe-cards.js): no overscroll, pull-to-refresh
+   or back-swipe from the page behind it. */
+html.swipe-lock,
+html.swipe-lock body {
+  overscroll-behavior: none;
+}
+
+.card.swiping {
+  -webkit-touch-callout: none;
+  will-change: transform;
 }

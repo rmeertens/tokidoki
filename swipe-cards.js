@@ -81,6 +81,10 @@
 
   const threshold = card => Math.min(110, (card.offsetWidth || 300) * 0.28);
 
+  // While a card is held, the page itself stays put: no overscroll bounce,
+  // pull-to-refresh or swipe-back (html.swipe-lock in style.css).
+  const lockPage = on => doc.documentElement.classList.toggle('swipe-lock', on);
+
   doc.addEventListener('pointerdown', e => {
     if (drag || (e.pointerType === 'mouse' && e.button !== 0)) return;
     const card = cardOf(e.target);
@@ -91,20 +95,47 @@
     drag = { card, id: e.pointerId, x: e.clientX, y: e.clientY, dx: 0, active: false };
   });
 
+  // Pointer events can't stop the browser scrolling — only the touch events
+  // can. As soon as a touch on a card heads more sideways than up or down,
+  // its moves are cancelled, so the page neither scrolls nor pans while the
+  // card follows the finger. A touch that heads up or down scrolls as usual.
+  let touch = null; // { x, y, dir: null | 'x' | 'y' }
+  doc.addEventListener('touchstart', e => {
+    touch = e.touches.length === 1 && cardOf(e.target) && !e.target.closest('input, textarea, select, canvas, .kana-canvas-wrap')
+      ? { x: e.touches[0].clientX, y: e.touches[0].clientY, dir: null }
+      : null;
+  }, { passive: true });
+  doc.addEventListener('touchmove', e => {
+    if (!touch || e.touches.length !== 1) return;
+    if (!touch.dir) {
+      const dx = Math.abs(e.touches[0].clientX - touch.x);
+      const dy = Math.abs(e.touches[0].clientY - touch.y);
+      if (dx < 3 && dy < 3) return;
+      touch.dir = dx > dy ? 'x' : 'y';
+    }
+    if (touch.dir === 'x' && drag && e.cancelable) e.preventDefault();
+  }, { passive: false });
+  doc.addEventListener('touchend', () => { touch = null; }, { passive: true });
+  doc.addEventListener('touchcancel', () => { touch = null; }, { passive: true });
+
   doc.addEventListener('pointermove', e => {
     if (!drag || e.pointerId !== drag.id) return;
     const dx = e.clientX - drag.x;
     const dy = e.clientY - drag.y;
     if (!drag.active) {
-      if (Math.abs(dy) > START && Math.abs(dy) > Math.abs(dx)) { drag = null; return; } // scrolling
+      if (touch && touch.dir === 'y') { drag = null; return; } // scrolling
+      if (Math.abs(dy) > START && Math.abs(dy) > Math.abs(dx)) { drag = null; return; }
       if (Math.abs(dx) < START) return;
       drag.active = true;
+      // Follow the finger from here, without jumping by the slop.
+      drag.x += Math.sign(dx) * START;
       drag.card.classList.add('swiping');
+      lockPage(true);
       try { drag.card.setPointerCapture(e.pointerId); } catch { /* pointer already gone */ }
     }
     e.preventDefault();
-    drag.dx = dx;
-    setTilt(drag.card, dx);
+    drag.dx = e.clientX - drag.x;
+    setTilt(drag.card, drag.dx);
   });
 
   function endDrag(e, cancelled) {
@@ -112,6 +143,7 @@
     const { card, dx, active } = drag;
     drag = null;
     if (!active) return;
+    lockPage(false);
     if (!cancelled) suppressUntil = Date.now() + 400;
     if (cancelled || Math.abs(dx) < threshold(card)) { clearTilt(card, true); return; }
     fly(card, dx > 0);
