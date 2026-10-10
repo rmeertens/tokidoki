@@ -8,9 +8,11 @@
 //
 //   - tapping the card (anywhere that isn't a button, link, input or the kana
 //     drawing canvas) while its answer is hidden shows the answer;
-//   - once it's shown, dragging the card sideways tilts it, and letting go
-//     past the threshold flies it off: left = again, right = got it.
-//     A shorter drag springs back.
+//   - dragging the card sideways tilts it, and letting go past the
+//     threshold flies it off: left = again, right = got it. That works
+//     before the answer is shown too (it's shown, then graded, since the
+//     pages only take a grade for a revealed card). A shorter drag springs
+//     back.
 //
 // Works with touch, pen and mouse; vertical drags still scroll the page.
 (function (global) {
@@ -84,7 +86,8 @@
     const card = cardOf(e.target);
     if (!card || card.classList.contains('swipe-flying')) return;
     if (e.target.closest('input, textarea, select, canvas, .kana-canvas-wrap')) return;
-    if (!gradeButton(card, false) || !gradeButton(card, true)) return; // answer not shown yet
+    // Gradable now, or once its answer is shown (not while typing an answer).
+    if (!(gradeButton(card, false) && gradeButton(card, true)) && !revealButton(card)) return;
     drag = { card, id: e.pointerId, x: e.clientX, y: e.clientY, dx: 0, active: false };
   });
 
@@ -114,11 +117,11 @@
     fly(card, dx > 0);
   }
 
-  // Throws the card off to one side, presses the grade button, and brings the
-  // next card in.
+  // Throws the card off to one side, presses the grade button (showing the
+  // answer first if it's still hidden), and brings the next card in.
   function fly(card, right) {
-    const btn = gradeButton(card, right);
-    if (!btn) { clearTilt(card, true); return; }
+    const reveal = gradeButton(card, right) ? null : revealButton(card);
+    if (!reveal && !gradeButton(card, right)) { clearTilt(card, true); return; }
     card.classList.remove('swiping');
     card.classList.add('swipe-flying');
     const off = (global.innerWidth || 800) * (right ? 1 : -1);
@@ -126,8 +129,10 @@
     setTimeout(() => {
       card.classList.remove('swipe-flying');
       clearTilt(card, false);
-      suppressUntil = 0; // this click is ours
-      btn.click();
+      suppressUntil = 0; // these clicks are ours
+      if (reveal) reveal.click();
+      const btn = gradeButton(card, right);
+      if (btn) btn.click();
       card.classList.add('swipe-enter');
       setTimeout(() => card.classList.remove('swipe-enter'), 220);
     }, FLY_MS);
