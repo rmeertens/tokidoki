@@ -6608,3 +6608,30 @@ a.flashcards-link:hover .flashcards-link-btn {
   align-items: center;
   justify-content: center;
 }
+
+/* Account (optional login, sync.js) */
+#btn-account.account-in { color: var(--accent); border-color: var(--accent); }
+
+.account-body { padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 12px; }
+.account-text { margin: 0; color: var(--text); line-height: 1.5; }
+.account-sub { margin: 0; color: var(--text-dim); font-size: 0.85rem; }
+.account-form { display: flex; flex-direction: column; gap: 12px; }
+.account-field { display: flex; flex-direction: column; gap: 4px; font-size: 0.9rem; color: var(--text-dim); }
+.account-field input {
+  font: inherit;
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+}
+.account-field input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.account-field small { color: var(--text-muted); }
+.account-submit:disabled, .account-actions button:disabled { opacity: 0.6; cursor: default; }
+.account-msg { margin: 0; padding: 8px 12px; border-radius: var(--radius-sm); background: var(--green-dim); color: var(--text); font-size: 0.9rem; }
+.account-msg.account-error { background: var(--red-dim); }
+.account-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.account-links { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.account-link { background: none; border: none; padding: 0; color: var(--accent); font: inherit; font-size: 0.9rem; cursor: pointer; }
+.account-link:hover { text-decoration: underline; }
