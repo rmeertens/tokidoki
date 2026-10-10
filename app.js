@@ -2634,6 +2634,13 @@
     const withParticle = (noun, p, verb) =>
       `${furi(noun)}<span class="vp-p">${p}</span>${furi(verb)}`;
     const pairCount = vt.groups.reduce((n, g) => n + g.pairs.length, 0);
+    const exampleBlock = (type, verb, [jp, en, why]) => `
+      <div class="vt-ex vt-ex-${type}">
+        <div class="vt-ex-head">${typeTag(type)} <span lang="ja">${furi(verb)}</span></div>
+        <div class="vt-ex-jp" lang="ja">${furi(jp).replace(/\{([がを])\}/, '<span class="vp-p">$1</span>')}</div>
+        <div class="vt-ex-en">${esc(en)}</div>
+        <p class="vt-ex-why">${esc(why)}</p>
+      </div>`;
     const transitivity = `
       <div class="vt-intro">${vt.intro.map(k => `
         <div class="vt-intro-card vt-intro-${k.type}">
@@ -2642,6 +2649,7 @@
           <div class="vt-intro-example"><span lang="ja">${furi(k.example).replace(/([がを])/, '<span class="vp-p">$1</span>')}</span> <span class="vt-intro-en">${esc(k.en)}</span></div>
         </div>`).join('')}
       </div>
+      <p class="vt-tap-hint">Tap any pair below to see both verbs in a sentence and why each one is transitive or intransitive.</p>
       <ul class="vt-tips">${vt.tips.map(t => `<li>${esc(t)}</li>`).join('')}</ul>
       ${vt.groups.map(g => `
         <div class="vt-group">
@@ -2650,10 +2658,13 @@
             <table class="ref-table vt-table">
               <thead><tr><th>${typeTag('vi')} が</th><th>${typeTag('vt')} を</th><th>Meaning</th></tr></thead>
               <tbody>${g.pairs.map(p => `
-                <tr>
+                <tr class="vt-row" tabindex="0" aria-expanded="false" title="Show example sentences">
                   <td lang="ja">${withParticle(p.noun, 'が', p.vi)}</td>
                   <td lang="ja">${withParticle(p.noun, 'を', p.vt)}</td>
-                  <td class="vp-en">${esc(p.en)}</td>
+                  <td class="vp-en">${esc(p.en)}<span class="vt-row-chevron" aria-hidden="true"></span></td>
+                </tr>
+                <tr class="vt-detail" hidden>
+                  <td colspan="3"><div class="vt-ex-pair">${exampleBlock('vi', p.vi, p.ex.vi)}${exampleBlock('vt', p.vt, p.ex.vt)}</div></td>
                 </tr>`).join('')}
               </tbody>
             </table>
@@ -2663,6 +2674,23 @@
         <div class="vt-only">${typeTag(o.type)} <span class="vt-only-label">${esc(o.label)}:</span>
           <span lang="ja">${o.verbs.map(furi).join('、')}</span></div>`).join('')}
       <p class="vt-source">Pairs grouped after the <a href="https://www.mlcjapanese.co.jp/Download/ViVt.pdf" target="_blank" rel="noopener">MLC Japanese 自動詞と他動詞 chart</a>.</p>`;
+    if (!el.dataset.vtBound) {
+      el.dataset.vtBound = '1';
+      const toggle = row => {
+        const detail = row.nextElementSibling;
+        const open = detail.hidden;
+        detail.hidden = !open;
+        row.setAttribute('aria-expanded', String(open));
+      };
+      el.addEventListener('click', e => {
+        const row = e.target.closest('.vt-row');
+        if (row) toggle(row);
+      });
+      el.addEventListener('keydown', e => {
+        const row = e.target.closest('.vt-row');
+        if (row && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); toggle(row); }
+      });
+    }
     el.innerHTML = `
       <details class="ref-verb-types" open>
         <summary class="ref-disclosure">
@@ -2680,7 +2708,7 @@
           <span class="ref-disclosure-icon" aria-hidden="true">自</span>
           <span class="ref-disclosure-text">
             <span class="ref-disclosure-title">Transitive or intransitive? 自動詞と他動詞</span>
-            <span class="ref-disclosure-sub">が with intransitive, を with transitive · ${pairCount} verb pairs</span>
+            <span class="ref-disclosure-sub">が with intransitive, を with transitive · ${pairCount} verb pairs · tap a pair for examples</span>
           </span>
           <span class="ref-disclosure-chevron" aria-hidden="true"></span>
         </summary>

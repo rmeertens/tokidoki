@@ -22,6 +22,15 @@ for (const g of VERB_TRANSITIVITY.groups) {
   for (const p of g.pairs) {
     check(p.noun && p.vi && p.vt && p.en, `incomplete pair ${JSON.stringify(p)}`);
     check(p.vi !== p.vt, `${p.vi}: vi and vt are the same`);
+    check(p.ex && p.ex.vi.length === 3 && p.ex.vt.length === 3, `${p.vi}: needs a vi and a vt example`);
+    if (p.ex) {
+      check(/\{が\}/.test(p.ex.vi[0]), `${p.vi}: vi example must mark {が}`);
+      check(/\{を\}/.test(p.ex.vt[0]), `${p.vt}: vt example must mark {を}`);
+      // Every kanji run needs a [reading] so the furigana toggle works.
+      for (const jp of [p.ex.vi[0], p.ex.vt[0]]) {
+        check(!/[一-鿿々](?![一-鿿々]*\[)/.test(jp), `${jp}: kanji without furigana`);
+      }
+    }
     const key = p.vi + p.vt;
     check(!seen.has(key), `duplicate pair ${key}`);
     seen.add(key);

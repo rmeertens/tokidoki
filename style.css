@@ -1568,6 +1568,70 @@ a.chapter-card {
   font-family: var(--font-jp);
 }
 
+.vt-row { cursor: pointer; }
+.vt-row:hover td, .vt-row[aria-expanded="true"] td { background: var(--bg-card-hover); }
+.vt-row:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+.vt-row-chevron {
+  float: right;
+  width: 7px;
+  height: 7px;
+  margin: 6px 2px 0 6px;
+  border-right: 2px solid var(--text-muted);
+  border-bottom: 2px solid var(--text-muted);
+  transform: rotate(45deg);
+  transition: transform var(--transition);
+}
+
+.vt-row[aria-expanded="true"] .vt-row-chevron { transform: rotate(-135deg); margin-top: 9px; }
+
+.vt-detail > td {
+  background: var(--bg-card-hover);
+  padding-top: 0;
+}
+
+.vt-ex-pair {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 8px;
+}
+
+.vt-ex {
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--orange);
+  background: var(--bg-card);
+}
+
+.vt-ex-vt { border-left-color: var(--blue); }
+
+.vt-ex-head { font-size: 0.85rem; margin-bottom: 4px; }
+
+.vt-ex-jp {
+  font-family: var(--font-jp);
+  font-size: 1rem;
+  line-height: 1.9;
+}
+
+.vt-ex-en {
+  font-size: 0.85rem;
+  color: var(--text);
+}
+
+.vt-ex-why {
+  margin: 4px 0 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--text-dim);
+}
+
+.vt-tap-hint {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
 .vt-only {
   margin-top: 10px;
   font-size: 0.88rem;
