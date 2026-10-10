@@ -3937,6 +3937,44 @@ a.chapter-card {
   color: var(--text-muted);
 }
 
+.phrase-word-save {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.phrase-word-add {
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--bg-card);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  padding: 3px 10px;
+  cursor: pointer;
+}
+
+.phrase-word-add:hover {
+  background: var(--accent-dim);
+}
+
+.phrase-word-add.saved {
+  color: #fff;
+  background: var(--accent);
+}
+
+.phrase-explain-tip {
+  margin-top: 6px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.phrase-explain-tip a {
+  color: var(--accent);
+}
+
 .phrase-grammar-item {
   padding: 10px 12px;
   background: var(--bg-card);
