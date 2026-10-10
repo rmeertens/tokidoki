@@ -6,8 +6,8 @@
 // passwords): enter your email, click the link we send. Logged in, everything under the
 // `tokidoki_` / `tokidoki-` keys is copied to Firestore, one document per
 // user (users/{uid}, field `data`: { [key]: rawString }), and merged with
-// what's there by sync-merge.js. A sync runs when a page loads, a couple of
-// seconds after anything is saved, and when the tab is hidden.
+// what's there by sync-merge.js. A sync runs when a page loads (at most
+// every couple of minutes), when saving pauses, and when the tab is hidden.
 //
 // Firebase is only downloaded for people who open the login dialog or are
 // logged in. Set FIREBASE_CONFIG to null to hide the button altogether.
@@ -30,7 +30,14 @@
   const BASE_KEY = 'tokidoki_sync_base';    // what this device and the account last agreed on
   const TIME_KEY = 'tokidoki_sync_time';    // when that was
   const RELOAD_KEY = 'tokidoki_sync_reload';
-  const PUSH_DELAY = 2500;
+  // Saves are batched to keep database use low: a sync goes out once saving
+  // has paused for PUSH_DELAY, or MAX_WAIT after the first unsent save during
+  // non-stop study, and straight away when the tab is hidden or closed.
+  const PUSH_DELAY = 30000;
+  const MAX_WAIT = 120000;
+  // A page load only checks the account when it's been this long since the
+  // last sync (or something here hasn't been sent yet).
+  const PULL_EVERY = 120000;
 
   if (!FIREBASE_CONFIG || !window.SyncMerge || !window.localStorage) return;
   const { isTracked, mergeAll, sameSnapshot } = window.SyncMerge;
@@ -45,13 +52,16 @@
   let writingOwn = false;   // our own writes don't count as changes
   let changedSinceLoad = false;
   let pushTimer = null;
+  let pendingSince = 0;     // when the oldest unsent save happened
 
   function noteChange(key) {
     if (writingOwn || !isTracked(String(key))) return;
     changedSinceLoad = true;
     if (!user) return;
+    if (!pendingSince) pendingSince = Date.now();
     clearTimeout(pushTimer);
-    pushTimer = setTimeout(() => sync(), PUSH_DELAY);
+    const wait = Math.max(0, Math.min(PUSH_DELAY, pendingSince + MAX_WAIT - Date.now()));
+    pushTimer = setTimeout(() => sync(), wait);
   }
 
   const proto = Object.getPrototypeOf(store);
@@ -103,7 +113,7 @@
         user = u;
         if (u) {
           set(UID_KEY, u.uid);
-          if (!was) sync({ initial: true });
+          if (!was && needsPull()) sync({ initial: true });
         } else {
           forget();
         }
@@ -113,6 +123,13 @@
     }));
     ready.catch(() => { ready = null; });
     return ready;
+  }
+
+  // Whether this page load should check the account: not if this device
+  // synced moments ago and nothing has changed here since.
+  function needsPull() {
+    const last = Number(get(TIME_KEY)) || 0;
+    return Date.now() - last > PULL_EVERY || !sameSnapshot(snapshot(), loadBase());
   }
 
   function forget() {
@@ -131,6 +148,8 @@
     if (!user) return Promise.resolve();
     if (syncing) { again = true; return syncing; }
     clearTimeout(pushTimer);
+    pushTimer = null;
+    pendingSince = 0;
     status = 'Syncing…';
     render();
     syncing = run(opts || {}).then(() => {
@@ -194,6 +213,7 @@
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'hidden' && pushTimer) sync();
   });
+  window.addEventListener('pagehide', () => { if (pushTimer) sync(); });
 
   // ─── Account button and dialog ───────────────────────────────────────────────
 
