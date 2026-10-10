@@ -47,10 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let running = false;
   let visible = true;
 
-  // Play/pause switch: a control box bolted to the left end of the belt,
-  // drawn on the canvas with the belt's own steel. An invisible button sits
-  // over it for clicks and keyboard. The choice is remembered; without one
-  // the belt runs unless the system asks for reduced motion.
+  // Play/pause switch: a button set into the front of the counter, drawn on
+  // the canvas in the counter's own wood. An invisible button sits over it
+  // for clicks and keyboard. The choice is remembered; without one the belt
+  // runs unless the system asks for reduced motion.
   const PAUSE_KEY = 'tokidoki-belt-paused';
   let paused;
   try {
@@ -60,20 +60,17 @@ document.addEventListener('DOMContentLoaded', () => {
     paused = reducedMotion.matches;
   }
 
-  // 1 = dark steel, 2 = steel, 3 = slat highlight, i = icon.
-  const BOX_X = 2;
-  const BOX_Y = BELT_Y - 1;
+  // d = shaded edge, l = lit edge, f = face; the icon goes over the face.
+  const BOX_X = 3;
+  const BOX_Y = COUNTER_Y + 4;
   const BOX = [
-    '.111111111.',
-    '13333333331',
-    '12222222221',
-    '122.....221',
-    '122.....221',
-    '122.....221',
-    '122.....221',
-    '122.....221',
-    '12222222221',
-    '11111111111',
+    'ddddddddl',
+    'dfffffffl',
+    'dfffffffl',
+    'dfffffffl',
+    'dfffffffl',
+    'dfffffffl',
+    'dllllllll',
   ];
   const ICONS = {
     play: ['ii...', 'iiii.', 'iiiii', 'iiii.', 'ii...'],
@@ -145,11 +142,14 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.height = H - TOP;
     canvas.style.width = `${W * scale}px`;
     canvas.style.height = `${(H - TOP) * scale}px`;
+    // Line the hit area up with the drawn button (the footer pads the canvas
+    // down), growing it to a comfortable size on the small strip.
+    const pad = Math.max(0, Math.ceil((28 - BOX.length * scale) / 2));
     Object.assign(toggle.style, {
-      left: `${BOX_X * scale}px`,
-      top: `${(BOX_Y - TOP) * scale}px`,
-      width: `${BOX[0].length * scale}px`,
-      height: `${BOX.length * scale}px`,
+      left: `${canvas.offsetLeft + BOX_X * scale - pad}px`,
+      top: `${canvas.offsetTop + (BOX_Y - TOP) * scale - pad}px`,
+      width: `${BOX[0].length * scale + 2 * pad}px`,
+      height: `${BOX.length * scale + 2 * pad}px`,
     });
 
     const loop = Math.ceil(W / SPACING) * SPACING + SPACING;
@@ -247,14 +247,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function drawSwitch() {
-    const face = boxHover ? theme.slat : theme.steel;
-    const lit = boxHover ? theme.steel : theme.slat;
-    sprite(BOX, BOX_X, BOX_Y, { 1: theme.steelDark, 2: face, 3: lit });
-    ctx.fillStyle = theme.shadow;
-    ctx.fillRect(BOX_X + 1, BOX_Y + BOX.length, BOX[0].length, 1);
+    // Pressed, the shading flips so the button looks pushed into the wood.
+    const shade = theme.grain;
+    const lit = theme.counterEdge;
+    sprite(BOX, BOX_X, BOX_Y, {
+      d: boxDown ? lit : shade,
+      l: boxDown ? shade : lit,
+      f: boxHover ? theme.counterEdge : theme.counterTop,
+    });
     const icon = paused ? ICONS.play : ICONS.pause;
-    const press = boxDown ? 1 : 0;
-    sprite(icon, BOX_X + 3, BOX_Y + 3 + press, { i: paused ? COLORS.F : COLORS.T });
+    sprite(icon, BOX_X + 2, BOX_Y + 1, { i: paused ? COLORS.F : COLORS.T });
   }
 
   function draw(now) {
