@@ -7122,3 +7122,58 @@ a.chapter-card.news-headline-card {
 .news-saved-from {
   color: var(--text-muted);
 }
+
+/* ─── Misc (misc.html): name-them-all recall quizzes ─────────────────────── */
+
+.misc-hero { background: linear-gradient(135deg, color-mix(in srgb, var(--salmon) 14%, var(--bg-card)), var(--bg-card)); }
+.misc-hero-face { font-family: var(--font-jp); background: color-mix(in srgb, var(--salmon) 16%, var(--bg-card)); border-color: var(--salmon); }
+.misc-row { font: inherit; text-align: left; background: none; border: none; cursor: pointer; width: 100%; }
+.misc-row:hover { background: var(--bg-card-hover); }
+.misc-row-perfect .lis-part-meta { color: var(--green); font-weight: 700; }
+.misc-glyph {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  font-family: var(--font-jp);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--salmon);
+  background: color-mix(in srgb, var(--salmon) 13%, transparent);
+  border-radius: 10px;
+}
+
+.misc-status { flex: 1; display: flex; align-items: baseline; gap: 14px; }
+.misc-score { font-family: var(--font-display); font-size: 1.3rem; font-weight: 800; }
+.misc-time { font-variant-numeric: tabular-nums; color: var(--text-dim); }
+.misc-title { font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 4px; }
+.misc-desc { color: var(--text-dim); font-size: 0.9rem; line-height: 1.5; margin-bottom: 14px; }
+.misc-section + .misc-section { margin-top: 20px; }
+.misc-find { width: 100%; }
+.misc-miss { min-height: 1.3em; margin: 4px 2px 8px; font-size: 0.85rem; color: var(--orange); }
+
+.misc-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.misc-table th { text-align: left; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); padding: 4px 8px; }
+.misc-table td { padding: 6px 8px; border-top: 1px solid var(--border); font-family: var(--font-jp); }
+.misc-table-find td { height: 2.4em; }
+.misc-table-find tr:not(.misc-found):not(.misc-missed) .misc-cell { visibility: hidden; }
+.misc-table-find td:first-child { font-size: 1.1rem; font-weight: 700; }
+.misc-found td { background: var(--green-dim); }
+.misc-missed td { background: var(--red-dim); }
+.misc-prompt { font-weight: 700; white-space: nowrap; }
+.misc-table-fill td:last-child { width: 60%; }
+.misc-fill { width: 100%; padding: 6px 10px; font-size: 1rem; }
+.misc-fill:disabled { opacity: 1; background: transparent; border-color: transparent; color: var(--green); font-weight: 700; }
+.misc-missed .misc-cell, .misc-missed .misc-fill:disabled { color: var(--red); }
+.misc-wrong { animation: misc-shake 0.3s; border-color: var(--red); }
+@keyframes misc-shake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+
+.misc-result { margin-top: 16px; }
+.misc-actions { margin-top: 16px; }
+
+@media (max-width: 600px) {
+  .misc-table { font-size: 0.88rem; }
+  .misc-table td, .misc-table th { padding: 5px 4px; }
+  .misc-glyph { width: 34px; height: 34px; font-size: 1.1rem; }
+}

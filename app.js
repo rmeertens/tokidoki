@@ -4991,6 +4991,8 @@
       // listening.js wires up its own page.
     } else if (mode === 'word-order') {
       // word-order.js wires up its own page.
+    } else if (mode === 'misc') {
+      // misc.js wires up its own page.
     } else if (mode === 'story-fill') {
       // story-fill.js wires up its own page.
     } else if (mode === 'phrases') {
