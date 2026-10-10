@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" id="viewport-meta" content="width=device-width, initial-scale=1.0">
+  <title>Japanese Flashcards: Words &amp; Kanji (SRS) | Tokidoki</title>
+  <meta name="description" content="Review the Japanese words and kanji you saved while reading, with spaced repetition: word or kanji to meaning, or meaning to word or kanji. Tap or swipe to grade; export to Anki, CSV or print.">
+  <meta property="og:title" content="Japanese Flashcards: Words &amp; Kanji (SRS) | Tokidoki">
+  <meta property="og:description" content="Review the Japanese words and kanji you saved while reading, with spaced repetition: word or kanji to meaning, or meaning to word or kanji. Tap or swipe to grade; export to Anki, CSV or print.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tokidoki.meertens.dev/flashcards.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Japanese Flashcards: Words &amp; Kanji (SRS) | Tokidoki">
+  <meta name="twitter:description" content="Review the Japanese words and kanji you saved while reading, with spaced repetition: word or kanji to meaning, or meaning to word or kanji. Tap or swipe to grade; export to Anki, CSV or print.">
+  <link rel="canonical" href="https://tokidoki.meertens.dev/flashcards.html">
+  <link rel="stylesheet" href="style.css?v=32">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXWYNZC7YH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXWYNZC7YH');
+  </script>
+</head>
+<body data-mode="flashcards">
+  <div id="app">
+
+    <!-- Header (rendered by renderSharedChrome() in app.js) -->
+    <div id="header-mount"></div>
+
+    <!-- Screen: Your flashcards -->
+    <main id="screen-chapters" class="screen active">
+      <nav class="page-nav" aria-label="Exercises">
+        <div class="page-nav-group">
+          <span class="page-nav-label">Practice</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="verbs.html"><span class="page-nav-glyph" aria-hidden="true">食</span>Verbs</a>
+            <a class="page-nav-item" href="adjectives.html"><span class="page-nav-glyph" aria-hidden="true">高</span>Adjectives</a>
+            <a class="page-nav-item" href="custom.html"><span class="page-nav-glyph" aria-hidden="true">作</span>Build Your Own</a>
+            <a class="page-nav-item" href="bunkei.html"><span class="page-nav-glyph" aria-hidden="true">型</span>Bunkei</a>
+            <a class="page-nav-item" href="sentences.html"><span class="page-nav-glyph" aria-hidden="true">文</span>Sentences</a>
+            <a class="page-nav-item" href="stories.html"><span class="page-nav-glyph" aria-hidden="true">話</span>Stories</a>
+            <a class="page-nav-item" href="memes.html"><span class="page-nav-glyph" aria-hidden="true">笑</span>Memes &amp; Jokes</a>
+            <a class="page-nav-item" href="mystery.html"><span class="page-nav-glyph" aria-hidden="true">謎</span>Mystery</a>
+            <a class="page-nav-item" href="listening.html"><span class="page-nav-glyph" aria-hidden="true">聴</span>Listening</a>
+            <a class="page-nav-item" href="particles-quiz.html"><span class="page-nav-glyph" aria-hidden="true">は</span>Particles</a>
+            <a class="page-nav-item" href="word-order.html"><span class="page-nav-glyph" aria-hidden="true">★</span>Word Order</a>
+            <a class="page-nav-item" href="story-fill.html"><span class="page-nav-glyph" aria-hidden="true">章</span>Story Fill-in</a>
+            <a class="page-nav-item" href="kana.html"><span class="page-nav-glyph" aria-hidden="true">あ</span>Kana</a>
+            <a class="page-nav-item" href="kanji-quiz.html"><span class="page-nav-glyph" aria-hidden="true">字</span>Kanji Quiz</a>
+            <a class="page-nav-item active" href="flashcards.html" aria-current="page"><span class="page-nav-glyph" aria-hidden="true">札</span>Flashcards</a>
+          </div>
+        </div>
+        <div class="page-nav-group">
+          <span class="page-nav-label">Reference</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="kanji.html"><span class="page-nav-glyph" aria-hidden="true">紙</span>Practice Sheets</a>
+            <a class="page-nav-item" href="kanji-hover.html"><span class="page-nav-glyph" aria-hidden="true">漢</span>Kanji Hover</a>
+            <a class="page-nav-item" href="vocabulary.html"><span class="page-nav-glyph" aria-hidden="true">語</span>Vocabulary</a>
+            <a class="page-nav-item" href="words-by-kanji.html"><span class="page-nav-glyph" aria-hidden="true">詞</span>Words by Kanji</a>
+            <a class="page-nav-item" href="notepad.html"><span class="page-nav-glyph" aria-hidden="true">書</span>Notepad</a>
+          </div>
+        </div>
+      </nav>
+      <p class="tab-intro">
+        The words and kanji you&rsquo;ve saved anywhere on the site &mdash; from stories,
+        jokes, the mystery, Story Fill-in, the Vocabulary page or Words by Kanji &mdash;
+        reviewed with spaced repetition. Tap a card to see its answer, then tap or swipe
+        left if you didn&rsquo;t know it and right if you did.
+      </p>
+      <div class="deck-tabs" id="deck" role="tablist" aria-label="Your flashcards">
+        <button type="button" class="deck-tab active" data-deck-tab="words" role="tab" aria-selected="true">Words <span class="deck-tab-count" id="deck-tab-count-words">0</span></button>
+        <button type="button" class="deck-tab" data-deck-tab="kanji" role="tab" aria-selected="false">Kanji <span class="deck-tab-count" id="deck-tab-count-kanji">0</span></button>
+      </div>
+      <div class="kana-settings-row deck-direction" role="radiogroup" aria-label="Review direction">
+        <label class="kana-script-toggle">
+          <input type="radio" name="deck-direction" value="ja" checked>
+          <span class="deck-direction-ja">Word</span> &rarr; Meaning
+        </label>
+        <label class="kana-script-toggle">
+          <input type="radio" name="deck-direction" value="meaning">
+          Meaning &rarr; <span class="deck-direction-ja">Word</span>
+        </label>
+      </div>
+      <div class="kana-start-card story-deck-card">
+        <div class="kana-start-info">
+          <span class="stat-num" id="story-deck-due">0</span>
+          <span class="stat-label" id="story-deck-due-label">word flashcards due</span>
+        </div>
+        <button id="btn-story-review" class="btn-primary btn-start-custom">Review</button>
+      </div>
+      <details class="story-deck">
+        <summary id="story-deck-total">0 saved words</summary>
+        <ul class="story-deck-list" id="story-deck-list"></ul>
+      </details>
+      <div class="story-export hidden" id="story-export">
+        <label class="kana-script-toggle flashcard-furigana-label" title="Show readings above the kanji on your flashcards — when reviewing and in exports">
+          <input type="checkbox" class="flashcard-furigana-toggle" id="story-flashcard-furigana"> Furigana on cards
+        </label>
+        <span class="story-export-label">Export</span>
+        <button class="btn-secondary" id="btn-export-anki" title="Anki deck file — open it with Anki to import">Anki deck (.apkg)</button>
+        <button class="btn-secondary" id="btn-export-csv" title="Spreadsheet / Quizlet / other apps">CSV</button>
+        <button class="btn-secondary" id="btn-export-print" title="Cut-out cards on A4 — print, or save as PDF">Print / PDF</button>
+        <span class="story-export-status" id="story-export-status" role="status"></span>
+      </div>
+
+      <div class="reset-section">
+        <button id="btn-reset" class="btn-danger">Reset All Progress</button>
+      </div>
+    </main>
+
+    <!-- Screen: Flashcard review of saved words -->
+    <main id="screen-story-review" class="screen">
+      <div class="study-toolbar">
+        <div class="study-progress">
+          <div class="study-progress-bar"><div id="story-review-bar-fill" class="study-bar-fill"></div></div>
+          <span id="story-review-progress-text" class="study-progress-text">0 / 0</span>
+        </div>
+      </div>
+      <div id="save-indicator" class="save-indicator">Saved</div>
+
+      <div class="story-review-options">
+        <label class="kana-script-toggle flashcard-furigana-label">
+          <input type="checkbox" class="flashcard-furigana-toggle" id="story-review-furigana"> Furigana
+        </label>
+      </div>
+
+      <div id="story-review-card" class="card kana-card">
+        <div class="kana-prompt-label" id="story-review-label">Recall the reading and meaning</div>
+        <div id="story-review-prompt" class="story-review-prompt" lang="ja"></div>
+
+        <div class="reveal-area" id="story-review-reveal-area">
+          <button id="btn-story-review-reveal" class="btn-reveal">Show Answer</button>
+          <span class="reveal-hint">Tap the card or press Space</span>
+        </div>
+
+        <div class="kana-answer-area hidden" id="story-review-answer-area">
+          <div id="story-review-answer" class="story-review-answer"></div>
+          <div id="story-review-context" class="story-review-context"></div>
+          <div class="grade-buttons">
+            <button class="btn-grade btn-again" data-story-grade="1"><span class="grade-key">1</span> Didn't know</button>
+            <button class="btn-grade btn-easy" data-story-grade="4"><span class="grade-key">2</span> Got it</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="story-review-complete" class="session-complete hidden">
+        <div class="complete-icon">🎉</div>
+        <h2>Session Complete!</h2>
+        <div class="session-stats">
+          <div class="stat"><span class="stat-num" id="story-review-total">0</span><span class="stat-label">Cards</span></div>
+          <div class="stat"><span class="stat-num" id="story-review-correct">0</span><span class="stat-label">Got It</span></div>
+          <div class="stat"><span class="stat-num" id="story-review-accuracy">0%</span><span class="stat-label">Accuracy</span></div>
+        </div>
+        <div class="session-actions">
+          <button id="btn-story-review-continue" class="btn-primary">Next 20 →</button>
+          <button id="btn-story-review-done" class="btn-secondary">Back to Stories</button>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="conjugator.js"></script>
+  <script src="verbs.js"></script>
+  <script src="kana.js"></script>
+  <script src="kanji-quiz-data.js"></script>
+  <script src="sentences-data.js"></script>
+  <script src="vocabulary-data.js"></script>
+  <script src="kanji-info-data.js"></script>
+  <script src="stories-data.js?v=15"></script>
+  <script src="memes-data.js?v=2"></script>
+  <script src="memes-data-2.js?v=1"></script>
+  <script src="mystery-words.js?v=3"></script>
+  <script src="examples.js"></script>
+  <script src="flashcard-export.js?v=13"></script>
+  <script src="pronounce.js?v=2"></script>
+  <script src="kanji-cards.js?v=2"></script>
+  <script src="swipe-cards.js?v=4"></script>
+  <script src="app.js?v=26"></script>
+  <script src="sushi-sprites.js"></script>
+  <script src="sushi-belt.js"></script>
+
+
+  <!-- Static content for search engines -->
+  <section id="seo-content" aria-hidden="true">
+    <h2>Japanese word and kanji flashcards with spaced repetition</h2>
+    <p>
+      Save any Japanese word you look up while reading graded <a href="stories.html">stories</a>,
+      <a href="memes.html">memes and jokes</a> or the <a href="vocabulary.html">vocabulary list</a>,
+      and any kanji inside it, then review them here: word or kanji to meaning, or meaning to
+      word or kanji, each scheduled separately with spaced repetition. Every word card shows
+      the sentence it was saved from; every kanji card shows its on and kun readings and
+      words that use it. Export your deck to Anki, CSV or printable cards.
+    </p>
+  </section>
+</body>
+</html>

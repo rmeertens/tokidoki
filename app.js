@@ -301,7 +301,7 @@
       title.textContent = readerIsMemes() ? 'Memes & Jokes' : 'Stories';
     } else if (name === 'story-review') {
       backBtn.classList.remove('hidden');
-      title.textContent = readerIsMemes() ? 'Flashcards' : 'Story Flashcards';
+      title.textContent = 'Flashcards';
     } else if (name === 'bunkei') {
       backBtn.classList.remove('hidden');
       title.textContent = 'Bunkei';
@@ -526,7 +526,7 @@
     setDue('#hub-due-verbs', verbDue);
     setDue('#hub-due-adjectives', adjDue);
     setDue('#hub-due-kana', kanaDue);
-    setDue('#hub-due-stories', countDueStoryWords() + countDueKanjiCards());
+    setDue('#hub-due-flashcards', countDueStoryWords() + countDueKanjiCards());
   }
 
   // ─── Study Session ─────────────────────────────────────────────────────────────
@@ -3169,11 +3169,11 @@
     const n = Object.keys(words).length;
     const k = getKanjiDeck().length;
     const kanjiNote = k
-      ? ` · <b>${k}</b> kanji in your <a href="stories.html#kanji-deck">kanji flashcards</a>.`
+      ? ` · <b>${k}</b> kanji in your <a href="flashcards.html#kanji">kanji flashcards</a>.`
       : ' Hover or tap a card to see its kanji, and ＋ one to make it a kanji flashcard.';
     el.innerHTML = (n
-      ? `📚 <b>${n}</b> word${n === 1 ? '' : 's'} in your flashcards — <a href="stories.html#deck">review them on the Stories page</a>. Words already in them have an orange outline; click ＋ on a card to add it, − to remove it.`
-      : '📚 Click ＋ on a card to add the word to your flashcards, then review them on the <a href="stories.html#deck">Stories page</a>.') + kanjiNote;
+      ? `📚 <b>${n}</b> word${n === 1 ? '' : 's'} in your flashcards — <a href="flashcards.html">review them on the Flashcards page</a>. Words already in them have an orange outline; click ＋ on a card to add it, − to remove it.`
+      : '📚 Click ＋ on a card to add the word to your flashcards, then review them on the <a href="flashcards.html">Flashcards page</a>.') + kanjiNote;
   }
 
   function onVocabDeckClick(btn) {
@@ -3407,7 +3407,8 @@
   // Graded readers from stories-data.js, grouped by JLPT level. In the reader,
   // tapping a word looks it up (and can add it to a personal flashcard deck),
   // and tapping a sentence lists the grammar it uses, highlighting where each
-  // point appears. Saved words are reviewed on their own flashcard screen;
+  // point appears. Saved words are reviewed on the Flashcards page
+  // (flashcards.html, data-mode="flashcards", which runs the deck code below);
   // their schedules live in the shared SRS store under `story_word:<key>`
   // (so Reset All Progress resets them), while the deck itself — which words,
   // and the sentence each was saved from — lives under its own key.
@@ -3416,8 +3417,9 @@
   // reader over MEMES_DATA from memes-data.js, and saves into the same deck.
   //
   // Kanji flashcards are a second deck (kanji-cards.js): a looked-up word
-  // lists its kanji, each of which can be saved on its own. The deck screen
-  // shows the two under Words / Kanji tabs, and reviews whichever is open.
+  // lists its kanji, each of which can be saved on its own. flashcards.html
+  // shows the two under Words / Kanji tabs, and reviews whichever is open;
+  // the Stories and Memes pages just link there with the number due.
 
   const STORY_LEVELS = ['n5', 'n4', 'n3'];
   const STORY_LEVEL_BLURB = {
@@ -3658,9 +3660,9 @@
     const list = $('#story-list');
     if (!list) return;
 
+    renderFlashcardsLink();
     if (readerIsMemes()) {
       renderMemesList(list);
-      renderStoryDeck();
       return;
     }
 
@@ -3754,6 +3756,17 @@
     return window.KanjiCards ? KanjiCards.list() : [];
   }
 
+  // The Stories and Memes pages link to flashcards.html with the number due.
+  function renderFlashcardsLink() {
+    const el = $('#flashcards-link-due');
+    if (el) el.textContent = countDueStoryWords() + countDueKanjiCards();
+  }
+
+  function closeFlashcardReview() {
+    showScreen('chapters');
+    renderStoryDeck();
+  }
+
   function countDueKanjiCards() {
     return getKanjiDeck().filter(c => isDue(getCardState(srsData, deckCardId(c)))).length;
   }
@@ -3808,7 +3821,7 @@
               <button class="story-deck-remove" data-kanji="${c.kanji}" aria-label="Remove ${c.kanji} from kanji flashcards" title="Remove">✕</button>
             </li>
           `).join('')
-        : `<li class="story-deck-empty">Look up a word anywhere on the site — in a ${readerIsMemes() ? 'joke' : 'story'}, the Vocabulary page, Words by Kanji — and press “＋ Kanji card” next to any of its kanji.</li>`;
+        : `<li class="story-deck-empty">Look up a word anywhere on the site — in a <a href="stories.html">story</a> or <a href="memes.html">joke</a>, the <a href="vocabulary.html">Vocabulary</a> page, <a href="words-by-kanji.html">Words by Kanji</a> — and press “＋ Kanji card” next to any of its kanji.</li>`;
       return;
     }
     listEl.innerHTML = words.length
@@ -3822,7 +3835,7 @@
             <button class="story-deck-remove" data-word="${c.key}" aria-label="Remove ${storyDisplayWord(c.key)} from flashcards" title="Remove">✕</button>
           </li>
         `).join('')
-      : `<li class="story-deck-empty">Open a ${readerIsMemes() ? 'joke' : 'story'} and tap any word you don't know, then “Add word to flashcards”.</li>`;
+      : `<li class="story-deck-empty">Open a <a href="stories.html">story</a> or <a href="memes.html">joke</a> and tap any word you don't know, then “Add word to flashcards” — or press ＋ on the <a href="vocabulary.html">Vocabulary</a> page.</li>`;
   }
 
   // Saved words as plain objects for flashcard-export.js, oldest first so the
@@ -4847,7 +4860,8 @@
     if (window.KanjiCards) {
       KanjiCards.onRemove = id => { deleteDeckSRS(id); saveSRS(srsData); };
       document.addEventListener('kanjicards:change', () => {
-        if (mode === 'stories' || mode === 'memes') renderStoryDeck();
+        if (mode === 'flashcards') renderStoryDeck();
+        else if (mode === 'stories' || mode === 'memes') renderFlashcardsLink();
         else if (mode === 'vocabulary') renderVocabDeckStatus();
         else if (mode === 'hub') renderHub();
       });
@@ -4904,6 +4918,10 @@
     } else if (mode === 'stories' || mode === 'memes') {
       renderStoriesPage();
       if (getStory(location.hash.slice(1))) openStory(location.hash.slice(1));
+    } else if (mode === 'flashcards') {
+      // flashcards.html#kanji opens on the Kanji tab.
+      if (location.hash === '#kanji') settings.deckTab = 'kanji';
+      renderStoryDeck();
     } else {
       renderHub();
     }
@@ -4926,6 +4944,7 @@
       else if (mode === 'kanji-quiz') renderKanjiQuizPanel();
       else if (mode === 'particles') renderParticlesPanel();
       else if (mode === 'stories' || mode === 'memes') closeStory();
+      else if (mode === 'flashcards') closeFlashcardReview();
       else if (mode === 'bunkei') renderBunkeiPage();
     });
 
@@ -5529,7 +5548,6 @@
         const id = location.hash.slice(1);
         if (getStory(id)) openStory(id);
         else if (screens.story && screens.story.classList.contains('active')) closeStory();
-        if (id === 'kanji-deck') openKanjiDeck();
       });
     }
 
@@ -5657,14 +5675,11 @@
       });
     });
 
-    // stories.html#kanji-deck opens the deck on its Kanji tab (see also the
-    // hashchange handler above).
-    function openKanjiDeck() {
-      setStoryDeckTab('kanji');
-      const deckEl = $('#deck');
-      if (deckEl) requestAnimationFrame(() => deckEl.scrollIntoView({ block: 'start' }));
+    if (mode === 'flashcards') {
+      window.addEventListener('hashchange', () => {
+        if (location.hash === '#kanji') setStoryDeckTab('kanji');
+      });
     }
-    if ((mode === 'stories' || mode === 'memes') && location.hash === '#kanji-deck') openKanjiDeck();
 
     $$('.flashcard-furigana-toggle').forEach(el => {
       el.addEventListener('change', () => setFlashcardFurigana(el.checked));
@@ -5679,7 +5694,7 @@
     $$('.btn-grade[data-story-grade]').forEach(btn => {
       btn.addEventListener('click', () => gradeStoryReviewAndAdvance(parseInt(btn.dataset.storyGrade, 10)));
     });
-    on('#btn-story-review-done', 'click', closeStory);
+    on('#btn-story-review-done', 'click', closeFlashcardReview);
 
     on('#meme-sizes', 'click', (e) => {
       const btn = e.target.closest('.meme-size');
@@ -5698,7 +5713,7 @@
     });
 
     document.addEventListener('keydown', (e) => {
-      if (mode !== 'stories' && mode !== 'memes') return;
+      if (mode !== 'stories' && mode !== 'memes' && mode !== 'flashcards') return;
 
       if (screens.story && screens.story.classList.contains('active')) {
         if (e.key === 'Escape' && storySelection) { consumeKey(e); clearStorySelection(); }
@@ -5709,7 +5724,7 @@
 
       if (!$('#story-review-complete').classList.contains('hidden')) {
         if (continueOnSpace(e, '#btn-story-review-continue')) return;
-        if (e.key === ' ' && !focusHasOwnSpaceAction()) { consumeKey(e); closeStory(); }
+        if (e.key === ' ' && !focusHasOwnSpaceAction()) { consumeKey(e); closeFlashcardReview(); }
         return;
       }
       if (!storyReviewAnswered) {
@@ -5741,7 +5756,8 @@
         else if (mode === 'kana') renderKanaPanel();
         else if (mode === 'kanji-quiz') renderKanjiQuizPanel();
         else if (mode === 'particles') renderParticlesPanel();
-        else if (mode === 'stories' || mode === 'memes') renderStoryDeck();
+        else if (mode === 'stories' || mode === 'memes') renderFlashcardsLink();
+        else if (mode === 'flashcards') renderStoryDeck();
         else if (mode === 'bunkei') renderBunkeiPage();
         else if (mode === 'hub') renderHub();
       }

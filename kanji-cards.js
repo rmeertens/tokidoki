@@ -6,7 +6,7 @@
 // keeps the kanji's meaning and readings (so a card still works on a page that
 // doesn't load kanji-info-data.js) and the words it was saved from. Their
 // schedules go in the shared SRS store under `kanji_card:<kanji>`, so Reset
-// All Progress resets them too. Both decks are reviewed on the Stories page.
+// All Progress resets them too. Both decks are reviewed on flashcards.html.
 //
 // Anywhere a word is shown, `KanjiCards.breakdownHtml(word, from)` lists the
 // kanji in it, each with its meaning, readings and a ＋ button that adds it

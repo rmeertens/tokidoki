@@ -81,7 +81,7 @@
   const PASSAGES = global.STORY_FILL_PASSAGES || [];
   // Each passage split into words, from story-fill-words.js (generated).
   const WORDS = global.STORY_FILL_WORDS || { gloss: {}, passages: {} };
-  // Saved words join the Stories flashcard deck, reviewed on stories.html.
+  // Saved words join the word flashcard deck, reviewed on flashcards.html.
   const DECK_KEY = 'tokidoki_story_words';
   const SRS_KEY = 'tokidoki_srs';
   const settings = Object.assign({ level: 'all', furigana: true }, load(SETTINGS_KEY, {}));
@@ -230,7 +230,7 @@
         <button class="${saved ? 'btn-secondary' : 'btn-primary'} story-panel-add" id="sf-add-word">${saved ? '✓ In word flashcards — remove' : '＋ Add word to flashcards'}</button>
       </div>
       ${global.KanjiCards ? KanjiCards.breakdownHtml(word, { reading, meaning }) : ''}
-      ${saved ? '<div class="mys-panel-tip">Review your flashcards on the <a href="stories.html#deck">Stories page</a>.</div>' : ''}`;
+      ${saved ? '<div class="mys-panel-tip">Review your flashcards on the <a href="flashcards.html">Flashcards page</a>.</div>' : ''}`;
     $('sf-add-word').addEventListener('click', () => {
       toggleSaved(key, selected.p, selected.i);
       renderText();

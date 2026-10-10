@@ -120,8 +120,8 @@
   // Dialogue is written in the Stories token format (space-separated tokens,
   // `>key` for a word's dictionary form), so every word can be looked up in
   // STORY_GLOSSARY and every line's grammar in STORY_GRAMMAR. Saved words go
-  // into the Stories flashcard deck (tokidoki_story_words) and are reviewed
-  // there; each remembers the line it came from.
+  // into the word flashcard deck (tokidoki_story_words) and are reviewed on
+  // flashcards.html; each remembers the line it came from.
 
   const GLOSSARY = global.STORY_GLOSSARY || {};
   const GRAMMAR = global.STORY_GRAMMAR || {};
@@ -784,7 +784,7 @@
           <button class="story-panel-link" id="mys-word-sentence">Grammar in this sentence →</button>
         </div>
         ${global.KanjiCards ? KanjiCards.breakdownHtml(word, { reading, meaning }) : ''}
-        ${saved ? '<div class="mys-panel-tip">Review your flashcards on the <a href="stories.html#deck">Stories page</a>.</div>' : ''}`;
+        ${saved ? '<div class="mys-panel-tip">Review your flashcards on the <a href="flashcards.html">Flashcards page</a>.</div>' : ''}`;
       $('#mys-add-word').addEventListener('click', () => { toggleWord(tok.key, selection.sid); renderPanel(); });
       $('#mys-word-sentence').addEventListener('click', () => openSentence(selection.sid));
       return;
@@ -833,7 +833,7 @@
     const el = $('#mys-deck');
     if (el) {
       el.innerHTML = n
-        ? `📚 <b>${n}</b> word${n === 1 ? '' : 's'} in your flashcards — <a href="stories.html#deck">review them on the Stories page</a>.`
+        ? `📚 <b>${n}</b> word${n === 1 ? '' : 's'} in your flashcards — <a href="flashcards.html">review them on the Flashcards page</a>.`
         : '📚 Tap any word in a case to look it up and add it to your flashcards; tap a line to see its grammar.';
     }
   }
