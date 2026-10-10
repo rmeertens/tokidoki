@@ -194,6 +194,7 @@
       delete deck[key];
       const srs = load(SRS_KEY, {});
       delete srs['story_word:' + key];
+      delete srs['story_word:' + key + ':recall'];
       save(SRS_KEY, srs);
     } else {
       const [kana, meaning] = WORDS.gloss[key];

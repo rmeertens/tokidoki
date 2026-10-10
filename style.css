@@ -6013,3 +6013,44 @@ body.sf-panel-open #screen-story-fill { padding-bottom: 50dvh; }
   .card.swipe-flying { transition: none; }
   .card.swipe-enter { animation: none; }
 }
+
+/* Flashcard review direction (Stories / Memes deck): Word or Kanji → Meaning,
+   or Meaning → Word or Kanji, where the meaning is the prompt and the
+   Japanese moves to the back of the card. */
+.deck-direction {
+  margin-top: 12px;
+}
+
+.deck-direction + .story-deck-card {
+  margin-top: 12px;
+}
+
+.story-review-prompt.story-review-prompt-meaning {
+  font-family: var(--font);
+  font-size: 1.6rem;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.story-review-answer-word {
+  font-family: var(--font-jp);
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+
+.story-review-answer-word rt {
+  font-size: 0.4em;
+  font-weight: 400;
+  color: var(--text-dim);
+}
+
+.story-review-answer-word .kanji-review-char {
+  font-size: 4rem;
+  font-weight: 400;
+}
+
+.story-review-context:empty {
+  display: none;
+}

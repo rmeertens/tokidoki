@@ -3135,7 +3135,7 @@
     const saved = vocabDeckKey(item, words);
     if (saved) {
       delete words[saved];
-      delete srsData[storyWordCardId(saved)];
+      deleteDeckSRS(storyWordCardId(saved));
       saveSRS(srsData);
     } else {
       const glossary = window.STORY_GLOSSARY || {};
@@ -3588,6 +3588,25 @@
     return `story_word:${key}`;
   }
 
+  // Both decks review either way round: Japanese → meaning (the card's own
+  // id, as always) or meaning → Japanese, scheduled apart under `<id>:recall`
+  // so knowing one direction doesn't skip the other.
+  const RECALL_SUFFIX = ':recall';
+
+  function deckDirection() {
+    return settings.deckDirection === 'meaning' ? 'meaning' : 'ja';
+  }
+
+  function deckCardId(c) {
+    return deckDirection() === 'meaning' ? c.id + RECALL_SUFFIX : c.id;
+  }
+
+  // Drops a removed card's schedules, both directions.
+  function deleteDeckSRS(id) {
+    delete srsData[id];
+    delete srsData[id + RECALL_SUFFIX];
+  }
+
   function isStoryWordSaved(key) {
     return Object.prototype.hasOwnProperty.call(loadStoryWords(), key);
   }
@@ -3596,7 +3615,7 @@
     const words = loadStoryWords();
     if (words[key]) {
       delete words[key];
-      delete srsData[storyWordCardId(key)];
+      deleteDeckSRS(storyWordCardId(key));
       saveSRS(srsData);
     } else {
       words[key] = { story: storyId, s: sentenceIndex, added: Date.now() };
@@ -3630,7 +3649,7 @@
   }
 
   function countDueStoryWords() {
-    return getStoryDeck().filter(c => isDue(getCardState(srsData, c.id))).length;
+    return getStoryDeck().filter(c => isDue(getCardState(srsData, deckCardId(c)))).length;
   }
 
   // ── List screen ──
@@ -3736,7 +3755,7 @@
   }
 
   function countDueKanjiCards() {
-    return getKanjiDeck().filter(c => isDue(getCardState(srsData, c.id))).length;
+    return getKanjiDeck().filter(c => isDue(getCardState(srsData, deckCardId(c)))).length;
   }
 
   function renderStoryDeck() {
@@ -3744,8 +3763,11 @@
     const words = getStoryDeck();
     const kanji = getKanjiDeck();
     const deck = tab === 'kanji' ? kanji : words;
-    const due = deck.filter(c => isDue(getCardState(srsData, c.id))).length;
+    const due = deck.filter(c => isDue(getCardState(srsData, deckCardId(c)))).length;
     const noun = tab === 'kanji' ? 'kanji' : 'word';
+
+    $$('input[name="deck-direction"]').forEach(el => { el.checked = el.value === deckDirection(); });
+    $$('.deck-direction-ja').forEach(el => { el.textContent = tab === 'kanji' ? 'Kanji' : 'Word'; });
 
     $$('.deck-tab').forEach(btn => {
       const on = btn.dataset.deckTab === tab;
@@ -4111,10 +4133,11 @@
   // Reviews the open tab's deck: words, or kanji (cards with a `kanji`).
   function startStoryReview(cont) {
     const kanji = storyDeckTab() === 'kanji';
-    const deck = kanji ? getKanjiDeck() : getStoryDeck();
+    const recall = deckDirection() === 'meaning';
+    const deck = (kanji ? getKanjiDeck() : getStoryDeck()).map(c => ({ ...c, id: deckCardId(c), recall }));
     if (deck.length === 0) return;
     const due = deck.filter(c => isDue(getCardState(srsData, c.id)));
-    storyReviewCards = pickBatch(kanji ? 'kanji-review' : 'story-review', due, deck, cont);
+    storyReviewCards = pickBatch(`${kanji ? 'kanji-review' : 'story-review'}${recall ? '-recall' : ''}`, due, deck, cont);
     storyReviewIndex = 0;
     storyReviewCorrect = 0;
 
@@ -4136,31 +4159,42 @@
     $('#story-review-bar-fill').style.width = `${(storyReviewIndex / total) * 100}%`;
     $('#story-review-progress-text').textContent = `${storyReviewIndex + 1} / ${total}`;
 
-    renderStoryReviewText();
     $('#story-review-reveal-area').classList.remove('hidden');
     $('#story-review-answer-area').classList.add('hidden');
     const label = $('#story-review-label');
-    if (label) label.textContent = card.kanji ? 'Recall the meaning and readings' : 'Recall the reading and meaning';
+    if (label) {
+      label.textContent = card.recall
+        ? (card.kanji ? 'Recall the kanji' : 'Recall the word')
+        : (card.kanji ? 'Recall the meaning and readings' : 'Recall the reading and meaning');
+    }
+
+    // Meaning → Japanese puts the meaning on the front; the Japanese itself
+    // is on the back, in #story-review-answer-word (renderStoryReviewText).
+    const answerWord = card.recall ? '<div id="story-review-answer-word" class="story-review-answer-word" lang="ja"></div>' : '';
 
     if (card.kanji) {
       const { meaning, on, kun } = card.info;
       $('#story-review-answer').innerHTML = `
-        <div class="story-panel-meaning">${meaning}</div>
+        ${answerWord}
+        ${card.recall ? '' : `<div class="story-panel-meaning">${meaning}</div>`}
         ${on ? `<div class="kanji-review-reading" lang="ja"><span>on</span> ${on}</div>` : ''}
         ${kun ? `<div class="kanji-review-reading" lang="ja"><span>kun</span> ${kun}</div>` : ''}
       `;
+      renderStoryReviewText();
       return;
     }
 
     const [reading, meaning, pos] = card.gloss;
     const word = storyDisplayWord(card.key);
     $('#story-review-answer').innerHTML = `
+      ${answerWord}
       ${reading !== word ? `<div class="story-panel-reading" lang="ja">${reading}</div>` : ''}
       ${pronounceButtons(reading, 'story-panel-speak')}
-      <div class="story-panel-meaning">${meaning}</div>
+      ${card.recall ? '' : `<div class="story-panel-meaning">${meaning}</div>`}
       <div class="story-panel-pos">${pos}</div>
       ${kanjiBreakdownHtml(word, { reading, meaning })}
     `;
+    renderStoryReviewText();
   }
 
   // Words the kanji was saved from, then other vocabulary using it (when the
@@ -4184,8 +4218,17 @@
   function renderStoryReviewText() {
     const card = storyReviewCards[storyReviewIndex];
     if (!card) return;
+    const prompt = $('#story-review-prompt');
+    const answerWord = $('#story-review-answer-word');
+    prompt.classList.toggle('story-review-prompt-meaning', !!card.recall);
     if (card.kanji) {
-      $('#story-review-prompt').innerHTML = `<span class="kanji-review-char">${card.kanji}</span>`;
+      const glyph = `<span class="kanji-review-char">${card.kanji}</span>`;
+      if (card.recall) {
+        prompt.textContent = card.info.meaning;
+        if (answerWord) answerWord.innerHTML = glyph;
+      } else {
+        prompt.innerHTML = glyph;
+      }
       const examples = kanjiReviewExamples(card);
       $('#story-review-context').innerHTML = examples.length ? `
         <div class="story-review-context-src">Words with ${card.kanji}</div>
@@ -4198,8 +4241,14 @@
         </ul>` : '';
       return;
     }
-    const [reading] = card.gloss;
-    $('#story-review-prompt').innerHTML = storyCardHtml(storyWordFurigana(storyDisplayWord(card.key), reading));
+    const [reading, meaning] = card.gloss;
+    const wordHtml = storyCardHtml(storyWordFurigana(storyDisplayWord(card.key), reading));
+    if (card.recall) {
+      prompt.textContent = meaning;
+      if (answerWord) answerWord.innerHTML = wordHtml;
+    } else {
+      prompt.innerHTML = wordHtml;
+    }
 
     const src = storyWordSource(card.meta);
     const sentence = src && src.sentence;
@@ -4796,7 +4845,7 @@
     // this page's copy of the SRS store too, and the deck screen, counts and
     // hub badge follow every ＋ / ✓ pressed anywhere on the page.
     if (window.KanjiCards) {
-      KanjiCards.onRemove = id => { delete srsData[id]; saveSRS(srsData); };
+      KanjiCards.onRemove = id => { deleteDeckSRS(id); saveSRS(srsData); };
       document.addEventListener('kanjicards:change', () => {
         if (mode === 'stories' || mode === 'memes') renderStoryDeck();
         else if (mode === 'vocabulary') renderVocabDeckStatus();
@@ -5598,6 +5647,14 @@
 
     $$('.deck-tab').forEach(btn => {
       btn.addEventListener('click', () => setStoryDeckTab(btn.dataset.deckTab));
+    });
+
+    $$('input[name="deck-direction"]').forEach(el => {
+      el.addEventListener('change', () => {
+        settings.deckDirection = el.value;
+        saveSettings(settings);
+        renderStoryDeck();
+      });
     });
 
     // stories.html#kanji-deck opens the deck on its Kanji tab (see also the

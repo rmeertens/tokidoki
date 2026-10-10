@@ -120,6 +120,7 @@
       try {
         const srs = JSON.parse(global.localStorage.getItem(SRS_KEY)) || {};
         delete srs[cardId(ch)];
+        delete srs[cardId(ch) + ':recall']; // the meaning → kanji direction
         global.localStorage.setItem(SRS_KEY, JSON.stringify(srs));
       } catch { /* storage unavailable */ }
     }
