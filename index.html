@@ -31,7 +31,7 @@
     "publisher": { "@type": "Organization", "name": "Tokidoki", "url": "https://tokidoki.meertens.dev/", "logo": "https://tokidoki.meertens.dev/apple-touch-icon.png" }
   }
   </script>
-  <link rel="stylesheet" href="style.css?v=45">
+  <link rel="stylesheet" href="style.css?v=46">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -68,104 +68,132 @@
           <canvas id="sushi-belt" aria-hidden="true" title="Click a plate to grab it"></canvas>
         </div>
       </section>
-      <div class="chapter-grid">
-        <a class="chapter-card" href="verbs.html">
-          <div class="chapter-card-title">Verbs</div>
-          <div class="chapter-card-sub">Conjugation drills · Genki I &amp; II</div>
-          <div class="chapter-card-due" id="hub-due-verbs"></div>
-        </a>
-        <a class="chapter-card" href="adjectives.html">
-          <div class="chapter-card-title">Adjectives</div>
-          <div class="chapter-card-sub">い &amp; な adjective conjugation drills</div>
-          <div class="chapter-card-due" id="hub-due-adjectives"></div>
-        </a>
-        <a class="chapter-card" href="custom.html">
-          <div class="chapter-card-title">Build Your Own</div>
-          <div class="chapter-card-sub">Mix any verbs, adjectives &amp; forms</div>
-        </a>
-        <a class="chapter-card" href="bunkei.html">
-          <div class="chapter-card-title">Bunkei</div>
-          <div class="chapter-card-sub">Drill a verb through sentence patterns</div>
-        </a>
-        <a class="chapter-card" href="sentences.html">
-          <div class="chapter-card-title">Sentences</div>
-          <div class="chapter-card-sub">Translate full Japanese sentences</div>
-        </a>
-        <a class="chapter-card" href="stories.html">
-          <div class="chapter-card-title">Stories</div>
-          <div class="chapter-card-sub">Graded N5–N3 reading · tap words &amp; grammar</div>
-        </a>
-        <a class="chapter-card" href="flashcards.html">
-          <div class="chapter-card-title">Flashcards</div>
-          <div class="chapter-card-sub">Your saved words &amp; kanji · spaced repetition</div>
-          <div class="chapter-card-due" id="hub-due-flashcards"></div>
-        </a>
-        <a class="chapter-card" href="memes.html">
-          <div class="chapter-card-title">Memes &amp; Jokes</div>
-          <div class="chapter-card-sub">Puns, slang &amp; anime lines · N5–N3, tap to learn</div>
-        </a>
-        <a class="chapter-card" href="phrases.html">
-          <div class="chapter-card-title">Phrases</div>
-          <div class="chapter-card-sub">35 topics — first dates to anime · each with a story</div>
-        </a>
-        <a class="chapter-card" href="news.html">
-          <div class="chapter-card-title">News</div>
-          <div class="chapter-card-sub">Today's news at N5, N4 &amp; N3 · tap to learn</div>
-        </a>
-        <a class="chapter-card" href="mystery.html">
-          <div class="chapter-card-title">Mystery</div>
-          <div class="chapter-card-sub">Detective story · answer in Japanese</div>
-        </a>
-        <a class="chapter-card" href="listening.html">
-          <div class="chapter-card-title">Listening</div>
-          <div class="chapter-card-sub">JLPT 聴解 N5–N2 · 438 questions, 15 mock tests</div>
-        </a>
-        <a class="chapter-card" href="particles-quiz.html">
-          <div class="chapter-card-title">Particles</div>
-          <div class="chapter-card-sub">は, が, を, に, で &amp; more — multiple choice</div>
-        </a>
-        <a class="chapter-card" href="word-order.html">
-          <div class="chapter-card-title">Word Order</div>
-          <div class="chapter-card-sub">JLPT ★ questions · put the pieces in order</div>
-        </a>
-        <a class="chapter-card" href="story-fill.html">
-          <div class="chapter-card-title">Story Fill-in</div>
-          <div class="chapter-card-sub">JLPT 文章の文法 · fill the blanks in a passage</div>
-        </a>
-        <a class="chapter-card" href="misc.html">
-          <div class="chapter-card-title">Misc</div>
-          <div class="chapter-card-sub">Name them all — RU-verb lookalikes, te-form endings &amp; more</div>
-        </a>
-        <a class="chapter-card" href="kana.html">
-          <div class="chapter-card-title">Kana</div>
-          <div class="chapter-card-sub">Draw hiragana &amp; katakana</div>
-          <div class="chapter-card-due" id="hub-due-kana"></div>
-        </a>
-        <a class="chapter-card" href="kanji-quiz.html">
-          <div class="chapter-card-title">Kanji Quiz</div>
-          <div class="chapter-card-sub">JLPT flashcards, either direction</div>
-        </a>
-        <a class="chapter-card" href="kanji-hover.html">
-          <div class="chapter-card-title">Kanji Hover</div>
-          <div class="chapter-card-sub">Hover to peek, click to reveal for good</div>
-        </a>
-        <a class="chapter-card" href="vocabulary.html">
-          <div class="chapter-card-title">Vocabulary</div>
-          <div class="chapter-card-sub">JLPT N5–N3 words, hover to reveal</div>
-        </a>
-        <a class="chapter-card" href="words-by-kanji.html">
-          <div class="chapter-card-title">Words by Kanji</div>
-          <div class="chapter-card-sub">Click a kanji to see words that use it</div>
-        </a>
-        <a class="chapter-card" href="notepad.html">
-          <div class="chapter-card-title">Notepad</div>
-          <div class="chapter-card-sub">Type romaji or English → kanji with furigana</div>
-        </a>
-        <a class="chapter-card" href="kanji.html">
-          <div class="chapter-card-title">Practice Sheets</div>
-          <div class="chapter-card-sub">Printable PDFs — JLPT kanji &amp; kana</div>
-        </a>
-      </div>
+      <section class="hub-group">
+        <h2 class="section-title">Conjugation</h2>
+        <div class="chapter-grid">
+          <a class="chapter-card" href="verbs.html">
+            <div class="chapter-card-title">Verbs</div>
+            <div class="chapter-card-sub">Conjugation drills · Genki I &amp; II</div>
+            <div class="chapter-card-due" id="hub-due-verbs"></div>
+          </a>
+          <a class="chapter-card" href="adjectives.html">
+            <div class="chapter-card-title">Adjectives</div>
+            <div class="chapter-card-sub">い &amp; な adjective conjugation drills</div>
+            <div class="chapter-card-due" id="hub-due-adjectives"></div>
+          </a>
+          <a class="chapter-card" href="custom.html">
+            <div class="chapter-card-title">Build Your Own</div>
+            <div class="chapter-card-sub">Mix any verbs, adjectives &amp; forms</div>
+          </a>
+          <a class="chapter-card" href="bunkei.html">
+            <div class="chapter-card-title">Bunkei</div>
+            <div class="chapter-card-sub">Drill a verb through sentence patterns</div>
+          </a>
+        </div>
+      </section>
+      <section class="hub-group">
+        <h2 class="section-title">Grammar</h2>
+        <div class="chapter-grid">
+          <a class="chapter-card" href="sentences.html">
+            <div class="chapter-card-title">Sentences</div>
+            <div class="chapter-card-sub">Translate full Japanese sentences</div>
+          </a>
+          <a class="chapter-card" href="particles-quiz.html">
+            <div class="chapter-card-title">Particles</div>
+            <div class="chapter-card-sub">は, が, を, に, で &amp; more — multiple choice</div>
+          </a>
+          <a class="chapter-card" href="word-order.html">
+            <div class="chapter-card-title">Word Order</div>
+            <div class="chapter-card-sub">JLPT ★ questions · put the pieces in order</div>
+          </a>
+          <a class="chapter-card" href="story-fill.html">
+            <div class="chapter-card-title">Story Fill-in</div>
+            <div class="chapter-card-sub">JLPT 文章の文法 · fill the blanks in a passage</div>
+          </a>
+          <a class="chapter-card" href="misc.html">
+            <div class="chapter-card-title">Misc</div>
+            <div class="chapter-card-sub">Name them all — RU-verb lookalikes, te-form endings &amp; more</div>
+          </a>
+        </div>
+      </section>
+      <section class="hub-group">
+        <h2 class="section-title">Reading &amp; Listening</h2>
+        <div class="chapter-grid">
+          <a class="chapter-card" href="stories.html">
+            <div class="chapter-card-title">Stories</div>
+            <div class="chapter-card-sub">Graded N5–N3 reading · tap words &amp; grammar</div>
+          </a>
+          <a class="chapter-card" href="news.html">
+            <div class="chapter-card-title">News</div>
+            <div class="chapter-card-sub">Today's news at N5, N4 &amp; N3 · tap to learn</div>
+          </a>
+          <a class="chapter-card" href="mystery.html">
+            <div class="chapter-card-title">Mystery</div>
+            <div class="chapter-card-sub">Detective story · answer in Japanese</div>
+          </a>
+          <a class="chapter-card" href="listening.html">
+            <div class="chapter-card-title">Listening</div>
+            <div class="chapter-card-sub">JLPT 聴解 N5–N2 · 438 questions, 15 mock tests</div>
+          </a>
+        </div>
+      </section>
+      <section class="hub-group">
+        <h2 class="section-title">Phrases &amp; Culture</h2>
+        <div class="chapter-grid">
+          <a class="chapter-card" href="phrases.html">
+            <div class="chapter-card-title">Phrases</div>
+            <div class="chapter-card-sub">35 topics — first dates to anime · each with a story</div>
+          </a>
+          <a class="chapter-card" href="memes.html">
+            <div class="chapter-card-title">Memes &amp; Jokes</div>
+            <div class="chapter-card-sub">Puns, slang &amp; anime lines · N5–N3, tap to learn</div>
+          </a>
+        </div>
+      </section>
+      <section class="hub-group">
+        <h2 class="section-title">Kana &amp; Kanji</h2>
+        <div class="chapter-grid">
+          <a class="chapter-card" href="kana.html">
+            <div class="chapter-card-title">Kana</div>
+            <div class="chapter-card-sub">Draw hiragana &amp; katakana</div>
+            <div class="chapter-card-due" id="hub-due-kana"></div>
+          </a>
+          <a class="chapter-card" href="kanji-quiz.html">
+            <div class="chapter-card-title">Kanji Quiz</div>
+            <div class="chapter-card-sub">JLPT flashcards, either direction</div>
+          </a>
+          <a class="chapter-card" href="kanji-hover.html">
+            <div class="chapter-card-title">Kanji Hover</div>
+            <div class="chapter-card-sub">Hover to peek, click to reveal for good</div>
+          </a>
+          <a class="chapter-card" href="words-by-kanji.html">
+            <div class="chapter-card-title">Words by Kanji</div>
+            <div class="chapter-card-sub">Click a kanji to see words that use it</div>
+          </a>
+          <a class="chapter-card" href="kanji.html">
+            <div class="chapter-card-title">Practice Sheets</div>
+            <div class="chapter-card-sub">Printable PDFs — JLPT kanji &amp; kana</div>
+          </a>
+        </div>
+      </section>
+      <section class="hub-group">
+        <h2 class="section-title">Words &amp; Tools</h2>
+        <div class="chapter-grid">
+          <a class="chapter-card" href="vocabulary.html">
+            <div class="chapter-card-title">Vocabulary</div>
+            <div class="chapter-card-sub">JLPT N5–N3 words, hover to reveal</div>
+          </a>
+          <a class="chapter-card" href="flashcards.html">
+            <div class="chapter-card-title">Flashcards</div>
+            <div class="chapter-card-sub">Your saved words &amp; kanji · spaced repetition</div>
+            <div class="chapter-card-due" id="hub-due-flashcards"></div>
+          </a>
+          <a class="chapter-card" href="notepad.html">
+            <div class="chapter-card-title">Notepad</div>
+            <div class="chapter-card-sub">Type romaji or English → kanji with furigana</div>
+          </a>
+        </div>
+      </section>
       <div class="reset-section">
         <button id="btn-reset" class="btn-danger">Reset All Progress</button>
       </div>

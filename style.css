@@ -356,12 +356,14 @@ body.has-belt-footer #app {
 }
 
 /* Page nav: every exercise and reference page laid out as a menu board,
-   so the options are visible at a glance rather than hidden in dropdowns.
-   Each row scrolls sideways on narrow screens. */
+   grouped by category (the same groups as the home page), so the options
+   are visible at a glance rather than hidden in dropdowns. Two columns of
+   groups on wide screens; on narrow ones each group is a single row with
+   its label on the left, scrolling sideways. */
 .page-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 18px;
   margin-bottom: 18px;
   padding: 12px 14px;
   background: var(--bg-card);
@@ -374,11 +376,6 @@ body.has-belt-footer #app {
   flex-direction: column;
   gap: 6px;
   min-width: 0;
-}
-
-.page-nav-group + .page-nav-group {
-  padding-top: 10px;
-  border-top: 1px dashed var(--border);
 }
 
 .page-nav-label {
@@ -451,9 +448,23 @@ body.has-belt-footer #app {
 
 @media (max-width: 600px) {
   .page-nav {
+    grid-template-columns: 1fr;
+    gap: 8px;
     padding: 10px 0 10px 12px;
   }
+  .page-nav-group {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+  .page-nav-label {
+    flex: 0 0 68px;
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    line-height: 1.25;
+  }
   .page-nav-items {
+    flex: 1;
     flex-wrap: nowrap;
     overflow-x: auto;
     scrollbar-width: none;
@@ -463,6 +474,10 @@ body.has-belt-footer #app {
   }
   .page-nav-items::-webkit-scrollbar { display: none; }
 }
+
+/* Home page: the exercise cards grouped by category */
+.hub-group .section-title { margin-top: 22px; }
+.hero + .hub-group .section-title { margin-top: 0; }
 
 /* Chapter grid */
 .chapter-grid {
