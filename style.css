@@ -7176,7 +7176,7 @@ a.chapter-card.news-headline-card {
 .misc-table-find td:first-child { font-size: 1.1rem; font-weight: 700; }
 .misc-found td { background: var(--green-dim); }
 .misc-missed td { background: var(--red-dim); }
-.misc-prompt { font-weight: 700; white-space: nowrap; }
+.misc-prompt { font-weight: 700; line-height: 1.35; }
 .misc-table-fill td:last-child { width: 60%; }
 .misc-fill { width: 100%; padding: 6px 10px; font-size: 1rem; }
 .misc-fill:disabled { opacity: 1; background: transparent; border-color: transparent; color: var(--green); font-weight: 700; }

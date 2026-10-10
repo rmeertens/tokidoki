@@ -15,6 +15,9 @@
   /* global GENKI_VERBS */
   const VERBS = typeof GENKI_VERBS !== 'undefined' ? GENKI_VERBS
     : typeof require !== 'undefined' ? require('./verbs.js').GENKI_VERBS : [];
+  /* global GENKI_ADJECTIVES */
+  const ADJECTIVES = typeof GENKI_ADJECTIVES !== 'undefined' ? GENKI_ADJECTIVES
+    : typeof require !== 'undefined' ? require('./verbs.js').GENKI_ADJECTIVES : [];
   const STORE_KEY = 'tokidoki_misc';
 
   // ─── Quizzes ───────────────────────────────────────────────────────────────
@@ -28,6 +31,55 @@
 
   // Regular RU-verbs, for a hint when you type one of those instead.
   const RU_VERBS = VERBS.filter(v => v.type === 'ru');
+
+  // な-adjectives that look like い-adjectives. Genki only has three, so this
+  // is the common N5–N3 list rather than one built from verbs.js.
+  const NA_EI = [
+    ['きれい', 'きれい', 'pretty / clean', ['綺麗']],
+    ['嫌い', 'きらい', 'disliked'],
+    ['大嫌い', 'だいきらい', 'hated'],
+    ['有名', 'ゆうめい', 'famous'],
+    ['丁寧', 'ていねい', 'polite / careful'],
+    ['失礼', 'しつれい', 'rude'],
+    ['得意', 'とくい', 'good at'],
+    ['心配', 'しんぱい', 'worried'],
+    ['曖昧', 'あいまい', 'vague'],
+  ];
+  const I_ADJECTIVES = ADJECTIVES.filter(a => a.type === 'i-adj');
+
+  // The counters you meet most, with what they count.
+  const COUNTERS = [
+    ['people', '人', 'にん'],
+    ['people (polite)', '名', 'めい'],
+    ['small round things — apples, eggs', '個', 'こ'],
+    ['long thin things — pens, bottles, trees', '本', 'ほん'],
+    ['flat thin things — paper, shirts, tickets', '枚', 'まい'],
+    ['books and magazines', '冊', 'さつ'],
+    ['machines and vehicles', '台', 'だい'],
+    ['small animals — cats, dogs, fish', '匹', 'ひき'],
+    ['large animals — cows, horses', '頭', 'とう'],
+    ['birds (and rabbits)', '羽', 'わ'],
+    ['cups, glasses and bowls', '杯', 'はい'],
+    ['times / occurrences', '回', 'かい'],
+    ['floors of a building', '階', 'かい'],
+    ['years of age', '歳', 'さい', ['才']],
+    ['yen', '円', 'えん'],
+    ['o\'clock', '時', 'じ'],
+    ['minutes', '分', 'ふん', ['ぷん']],
+    ['seconds', '秒', 'びょう'],
+    ['hours (how long)', '時間', 'じかん'],
+    ['days', '日', 'にち', ['か']],
+    ['weeks', '週間', 'しゅうかん'],
+    ['months (how long)', 'か月', 'かげつ', ['ヶ月', 'カ月', 'ケ月', 'ヵ月', '箇月']],
+    ['years', '年', 'ねん'],
+    ['pairs of shoes and socks', '足', 'そく'],
+    ['suits and outfits', '着', 'ちゃく'],
+    ['houses and shops', '軒', 'けん'],
+    ['matters, cases, emails to answer', '件', 'けん'],
+    ['letters and emails', '通', 'つう'],
+    ['songs and tunes', '曲', 'きょく'],
+    ['number in a sequence — No. 1, 2…', '番', 'ばん'],
+  ];
 
   const TE_ROWS = [
     { key: 'う', value: 'って', ex: '買う → 買って' },
@@ -59,6 +111,26 @@
         miss(s) {
           const ru = RU_VERBS.find(v => v.kanji === s || v.reading === s);
           return ru ? `${ru.kanji} (${ru.reading}) is a regular RU-verb.` : '';
+        },
+      }],
+    },
+    {
+      id: 'na-ei',
+      glyph: '綺',
+      title: 'な-adjectives ending in い',
+      ja: 'いで終わるな形容詞',
+      desc: `They look like い-adjectives, but take な (${NA_EI.length}). Can you name them all?`,
+      sections: [{
+        type: 'find',
+        placeholder: 'Type an adjective — kanji, kana or romaji',
+        columns: ['Adjective', 'Reading', 'Meaning'],
+        items: NA_EI.map(([kanji, reading, meaning, alt = []]) => ({
+          cells: [kanji, reading, meaning],
+          accept: [kanji, reading, ...alt],
+        })),
+        miss(s) {
+          const i = I_ADJECTIVES.find(a => a.kanji === s || a.reading === s);
+          return i ? `${i.kanji} (${i.reading}) is a real い-adjective.` : '';
         },
       }],
     },
@@ -122,6 +194,20 @@
           ['5つ', 'いつつ'], ['6つ', 'むっつ'], ['7つ', 'ななつ'], ['8つ', 'やっつ'],
           ['9つ', 'ここのつ'], ['10', 'とお'],
         ].map(([prompt, answer]) => ({ prompt, answer })),
+      }],
+    },
+    {
+      id: 'counters',
+      glyph: '枚',
+      title: 'The 30 most common counters',
+      ja: '助数詞',
+      desc: 'What do you count people, pens, paper, cats and floors with? Kanji or reading both count.',
+      sections: [{
+        type: 'fill',
+        columns: ['Counts', 'Counter'],
+        items: COUNTERS.map(([prompt, kanji, reading, alt = []]) => ({
+          prompt, answer: `${kanji}（${reading}）`, accept: [kanji, reading, ...alt],
+        })),
       }],
     },
   ];

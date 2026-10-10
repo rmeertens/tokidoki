@@ -47,6 +47,25 @@ check(/RU-verb/.test(ru.miss('たべる')), 'typing a RU-verb says so');
 const kaeru = Misc.matchItems(ru, 'かえる')[0];
 check(Misc.matchItems(ru, 'かえる', new Set([kaeru])).length === 0, 'a found answer is not found again');
 
+// ─── な-adjectives ending in い ──────────────────────────────────────────────
+
+const na = Misc.QUIZZES.find(q => q.id === 'na-ei').sections[0];
+check(Misc.matchItems(na, 'yuumei').length === 1, 'romaji yuumei names 有名');
+check(Misc.matchItems(na, '綺麗').length === 1, '綺麗 names きれい');
+check(Misc.matchItems(na, 'たかい').length === 0, 'たかい is not a な-adjective');
+check(/い-adjective/.test(na.miss('たかい')), 'typing an い-adjective says so');
+
+// ─── Counters ────────────────────────────────────────────────────────────────
+
+const counters = Misc.QUIZZES.find(q => q.id === 'counters').sections[0];
+check(counters.items.length === 30, `expected 30 counters, got ${counters.items.length}`);
+const counterFor = p => ({ items: [counters.items.find(it => it.prompt.startsWith(p))] });
+check(Misc.matchItems(counterFor('long thin'), 'hon').length === 1, 'romaji hon names 本');
+check(Misc.matchItems(counterFor('long thin'), '本').length === 1, 'kanji 本');
+check(Misc.matchItems(counterFor('long thin'), 'まい').length === 0, 'まい is not for long things');
+check(Misc.matchItems(counterFor('months'), 'ヶ月').length === 1, 'ヶ月 spelling');
+check(new Set(counters.items.map(it => it.accept[0])).size === 30, 'no counter is listed twice');
+
 // ─── Te-form endings ─────────────────────────────────────────────────────────
 
 const te = Misc.QUIZZES.find(q => q.id === 'te-form').sections[0];
