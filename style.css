@@ -5948,3 +5948,68 @@ body.sf-panel-open #screen-story-fill { padding-bottom: 50dvh; }
   .sf-choices { grid-template-columns: 1fr; }
   .sf-item-score { display: none; }
 }
+
+/* Flashcards (swipe-cards.js): tap the card to show the answer, then swipe
+   it left for "again" or right for "got it". The card tilts with the finger
+   and takes on the colour of the grade it's heading for. */
+.card {
+  touch-action: pan-y;
+}
+
+.card:has(.reveal-area:not(.hidden) .btn-reveal) {
+  cursor: pointer;
+}
+
+.card.swiping {
+  cursor: grabbing;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: none;
+}
+
+.card.swipe-left {
+  border-color: color-mix(in srgb, var(--red) calc(var(--swipe, 0) * 100%), var(--border));
+  box-shadow: 0 0 0 calc(var(--swipe, 0) * 3px) var(--red-dim), var(--shadow);
+}
+
+.card.swipe-right {
+  border-color: color-mix(in srgb, var(--green) calc(var(--swipe, 0) * 100%), var(--border));
+  box-shadow: 0 0 0 calc(var(--swipe, 0) * 3px) var(--green-dim), var(--shadow);
+}
+
+.card.swipe-left .btn-again,
+.card.swipe-right .btn-easy {
+  transform: scale(calc(1 + var(--swipe, 0) * 0.08));
+}
+
+.card.swipe-settle {
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card.swipe-flying {
+  transition: transform 0.18s ease-in, opacity 0.18s ease-in;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.card.swipe-enter {
+  animation: swipe-enter 0.2s ease-out;
+}
+
+@keyframes swipe-enter {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+
+.swipe-hint {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card.swipe-settle,
+  .card.swipe-flying { transition: none; }
+  .card.swipe-enter { animation: none; }
+}

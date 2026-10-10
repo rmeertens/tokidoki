@@ -4486,7 +4486,7 @@
     input.classList.remove('correct', 'incorrect');
     input.disabled = false;
     $('#bunkei-typing').classList.toggle('hidden', !typing);
-    $('#bunkei-reveal-hint').textContent = typing ? 'Enter = check' : 'Space = show answer';
+    $('#bunkei-reveal-hint').textContent = typing ? 'Enter = check' : 'Tap the card or press Space';
     $('#bunkei-reveal-area').classList.remove('hidden');
     $('#bunkei-answer-area').classList.add('hidden');
     if (typing) setTimeout(() => input.focus(), 0);
