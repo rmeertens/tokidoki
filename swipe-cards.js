@@ -7,7 +7,9 @@
 // own grading:
 //
 //   - tapping the card (anywhere that isn't a button, link, input or the kana
-//     drawing canvas) while its answer is hidden shows the answer;
+//     drawing canvas) while its answer is hidden shows the answer; once it's
+//     shown, a tap on the left half means again and on the right half got
+//     it, and the card flies off that way as if swiped;
 //   - dragging the card sideways tilts it, and letting go past the
 //     threshold flies it off: left = again, right = got it. That works
 //     before the answer is shown too (it's shown, then graded, since the
@@ -39,7 +41,7 @@
     return visible(btn) ? btn : null;
   };
 
-  // ── Tap to reveal ──
+  // ── Tap to reveal, then tap left / right to grade ──
 
   // The click a drag ends with isn't a tap: swallow clicks for a moment after.
   let suppressUntil = 0;
@@ -54,6 +56,13 @@
     if (!card || e.target.closest(IGNORE)) return;
     const sel = global.getSelection && global.getSelection();
     if (sel && !sel.isCollapsed && card.contains(sel.anchorNode)) return; // selecting text
+    if (gradeButton(card, false) && gradeButton(card, true)) {
+      const r = card.getBoundingClientRect();
+      e.preventDefault();
+      e.stopPropagation();
+      fly(card, e.clientX > r.left + r.width / 2);
+      return;
+    }
     const btn = revealButton(card);
     if (btn) btn.click();
   }, true);
@@ -179,7 +188,7 @@
       if (row.nextElementSibling && row.nextElementSibling.classList.contains('swipe-hint')) return;
       const hint = doc.createElement('div');
       hint.className = 'swipe-hint';
-      hint.innerHTML = '<span aria-hidden="true">←</span> swipe the card <span aria-hidden="true">→</span>';
+      hint.innerHTML = '<span aria-hidden="true">←</span> tap or swipe the card <span aria-hidden="true">→</span>';
       hint.setAttribute('aria-hidden', 'true');
       row.after(hint);
     });
