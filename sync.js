@@ -9,11 +9,20 @@
 // seconds after anything is saved, and when the tab is hidden.
 //
 // Firebase is only downloaded for people who open the login dialog or are
-// logged in. Leave FIREBASE_CONFIG null to hide the button altogether.
+// logged in. Set FIREBASE_CONFIG to null to hide the button altogether.
 (function () {
   'use strict';
 
-  const FIREBASE_CONFIG = null;
+  // Public by design: it only names the Firebase project. firestore.rules is
+  // what keeps each account's data to its owner.
+  const FIREBASE_CONFIG = {
+    apiKey: 'AIzaSyCbBS7IM7i76JaUBNSpHS3nX4kbK9o1Df8',
+    authDomain: 'tokidoki---japanese-learning.firebaseapp.com',
+    projectId: 'tokidoki---japanese-learning',
+    storageBucket: 'tokidoki---japanese-learning.firebasestorage.app',
+    messagingSenderId: '539818655318',
+    appId: '1:539818655318:web:ef9bcebeb8acff28d645f7',
+  };
   const SDK = 'https://www.gstatic.com/firebasejs/11.0.2';
 
   const UID_KEY = 'tokidoki_sync_uid';      // set while logged in, so pages know to load Firebase
