@@ -3463,9 +3463,11 @@ a.chapter-card {
   color: var(--text-dim);
 }
 
-/* Phrases (phrases.html) — fun words and sentences by category, with the
-   Memes page's filter chips. With English off, a card hides its meaning and
-   note until tapped. */
+/* Phrases — phrases.html lists the categories as cards under their group;
+   each category has its own page (phrases-<id>.html) with its phrase cards
+   and a short story read aloud line by line. With English off
+   (body.phrases-hide-english), a card or story line hides its English until
+   tapped. */
 .phrase-toolbar {
   display: flex;
   flex-direction: column;
@@ -3493,33 +3495,94 @@ a.chapter-card {
   gap: 8px;
 }
 
-.phrase-chip-count {
-  font-size: 0.75em;
-  opacity: 0.7;
-  margin-left: 2px;
+.phrase-group-title {
+  margin-top: 32px;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--border);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
 }
 
-.phrase-section {
-  margin-top: 28px;
+.phrase-group {
   scroll-margin-top: 80px;
 }
 
+.phrase-cat-card {
+  text-align: left;
+}
+
+.phrase-cat-emoji {
+  font-size: 1.8rem;
+  line-height: 1.2;
+  margin-bottom: 2px;
+}
+
+.phrase-cat-title {
+  font-family: var(--font-jp);
+  line-height: 1.8;
+}
+
+.phrase-cat-title rt {
+  font-size: 0.5em;
+  color: var(--text-dim);
+}
+
+.phrase-cat-en {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.phrase-crumbs {
+  margin-top: 16px;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.phrase-crumbs a {
+  color: var(--accent);
+}
+
+.phrase-page-title,
 .phrase-section-title {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   gap: 4px 10px;
   font-family: var(--font-jp);
-  font-size: 1.3rem;
   line-height: 1.8;
 }
 
-.phrase-section-emoji {
-  font-size: 1.5rem;
+.phrase-page-title {
+  font-size: 1.7rem;
+  margin-top: 4px;
 }
 
+.phrase-section-title {
+  font-size: 1.3rem;
+}
+
+.phrase-section-title a {
+  color: inherit;
+}
+
+.phrase-section {
+  margin-top: 28px;
+}
+
+.phrase-section-emoji {
+  font-size: 1.5em;
+}
+
+.phrase-page-title rt,
 .phrase-section-title rt,
-.phrase-jp rt {
+.phrase-jp rt,
+.phrase-story-title rt,
+.phrase-story-jp rt,
+.phrase-story-who rt {
   font-size: 0.5em;
   color: var(--text-dim);
 }
@@ -3541,6 +3604,7 @@ a.chapter-card {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 12px;
+  margin-top: 12px;
 }
 
 .phrase-card {
@@ -3552,6 +3616,7 @@ a.chapter-card {
   border-radius: var(--radius);
   padding: 14px 16px;
   cursor: pointer;
+  scroll-margin-top: 90px;
   transition: border-color var(--transition), box-shadow var(--transition);
 }
 
@@ -3559,7 +3624,8 @@ a.chapter-card {
   border-color: var(--accent);
 }
 
-.phrase-card:focus-visible {
+.phrase-card:focus-visible,
+.phrase-story-line:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
@@ -3599,68 +3665,154 @@ a.chapter-card {
   font-size: 0.8rem;
 }
 
-.hide-english .phrase-card:not(.revealed) .phrase-en,
-.hide-english .phrase-card:not(.revealed) .phrase-note {
+.phrases-hide-english .phrase-card:not(.revealed) .phrase-en,
+.phrases-hide-english .phrase-card:not(.revealed) .phrase-note,
+.phrases-hide-english .phrase-story-line:not(.revealed) .phrase-story-en {
   display: none;
 }
 
-.hide-english .phrase-card:not(.revealed) .phrase-reveal-hint {
+.phrases-hide-english .phrase-card:not(.revealed) .phrase-reveal-hint {
   display: inline;
 }
 
-/* The category chips: an "All" row, then a row per group led by a chip
-   for the whole group. On phones each row scrolls sideways instead of
-   stacking up. */
-.phrase-filters {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 16px;
+.phrase-empty {
+  margin-top: 24px;
+  color: var(--text-dim);
 }
 
-.phrase-chip-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+/* The story at the end of a category page. */
+.phrase-story {
+  margin-top: 40px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
 }
 
-.phrase-group-chip {
-  font-weight: 700;
-  color: var(--text);
-  border-style: dashed;
-}
-
-@media (max-width: 600px) {
-  .phrase-chip-row {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    padding-bottom: 4px;
-    scrollbar-width: thin;
-  }
-
-  .phrase-chip-row .meme-filter {
-    flex: none;
-  }
-}
-
-.phrase-group-title {
-  margin-top: 36px;
-  padding-bottom: 6px;
-  border-bottom: 2px solid var(--border);
-  font-size: 0.85rem;
+.phrase-story-label {
+  font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-dim);
 }
 
-.phrase-group-title + .phrase-section {
-  margin-top: 16px;
+.phrase-story-title {
+  font-family: var(--font-jp);
+  font-size: 1.5rem;
+  line-height: 1.8;
+  margin-top: 4px;
 }
 
-.phrase-empty {
-  margin-top: 24px;
+.phrase-story-title-en,
+.phrase-story-hint {
   color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+.phrase-story-hint {
+  margin-top: 6px;
+  font-size: 0.85rem;
+}
+
+.phrase-story-controls {
+  margin: 12px 0;
+  gap: 8px;
+}
+
+.phrase-story-controls .story-read[aria-pressed="true"] {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.phrase-story-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.phrase-story-line {
+  display: flex;
+  gap: 12px;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  scroll-margin: 90px 0 40px;
+}
+
+.phrase-story-line:hover {
+  background: var(--bg-card-hover);
+}
+
+.phrase-story-line.reading {
+  background: var(--accent-dim);
+}
+
+.phrase-story-who {
+  flex: none;
+  width: 6.5em;
+  padding-top: 0.55em;
+  font-family: var(--font-jp);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.8;
+}
+
+.phrase-story-line.narration .phrase-story-body {
+  margin-left: calc(5.525rem + 12px); /* the speaker column: 6.5em at 0.85rem, plus the gap */
+}
+
+.phrase-story-jp {
+  font-family: var(--font-jp);
+  font-size: 1.15rem;
+  line-height: 2;
+}
+
+.phrase-story-line.narration .phrase-story-jp {
+  color: var(--text-dim);
+}
+
+.phrase-story-en {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.phrase-pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.phrase-pager-link {
+  text-decoration: none;
+}
+
+@media (max-width: 600px) {
+  .phrase-story {
+    padding: 16px 12px;
+  }
+
+  /* Speaker above the line instead of beside it. */
+  .phrase-story-line {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .phrase-story-who {
+    width: auto;
+    padding-top: 0;
+  }
+
+  .phrase-story-line.narration .phrase-story-body {
+    margin-left: 0;
+  }
+
+  .phrase-pager {
+    flex-direction: column;
+  }
 }
 
 /* Memes & Jokes (memes.html) — the Stories reader plus kind filters, an
