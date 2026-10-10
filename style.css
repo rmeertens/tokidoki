@@ -6631,3 +6631,22 @@ a.flashcards-link:hover .flashcards-link-btn {
 .account-msg { margin: 0; padding: 8px 12px; border-radius: var(--radius-sm); background: var(--green-dim); color: var(--text); font-size: 0.9rem; }
 .account-msg.account-error { background: var(--red-dim); }
 .account-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.account-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 20px;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1f1f1f;
+  background: #fff;
+  border: 1px solid #dadce0;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.account-google:hover { background: #f7f8f8; }
+.account-google:disabled { opacity: 0.6; cursor: default; }
+.account-or { display: flex; align-items: center; gap: 10px; color: var(--text-muted); font-size: 0.85rem; }
+.account-or::before, .account-or::after { content: ''; flex: 1; border-top: 1px solid var(--border); }

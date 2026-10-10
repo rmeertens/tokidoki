@@ -2,8 +2,10 @@
 // between devices. Without logging in nothing changes: progress stays in
 // localStorage as always.
 //
-// Adds an account button to the header. Logging in is by email link (no
-// passwords): enter your email, click the link we send. Logged in, everything under the
+// Adds an account button to the header. Logging in is with Google (a popup)
+// or by email link (no passwords): enter your email, click the link we
+// send. Logged out, saving every 20th word shows a note pointing at the
+// button. Logged in, everything under the
 // `tokidoki_` / `tokidoki-` keys is copied to Firestore, one document per
 // user (users/{uid}, field `data`: { [key]: rawString }), and merged with
 // what's there by sync-merge.js. A sync runs when a page loads (at most
@@ -57,11 +59,37 @@
   function noteChange(key) {
     if (writingOwn || !isTracked(String(key))) return;
     changedSinceLoad = true;
+    if (DECK_KEYS.includes(key)) remindToLogIn();
     if (!user) return;
     if (!pendingSince) pendingSince = Date.now();
     clearTimeout(pushTimer);
     const wait = Math.max(0, Math.min(PUSH_DELAY, pendingSince + MAX_WAIT - Date.now()));
     pushTimer = setTimeout(() => sync(), wait);
+  }
+
+  // ─── Reminder ────────────────────────────────────────────────────────────────
+  //
+  // Every REMIND_EVERY words (or kanji) someone saves to their flashcard
+  // decks while logged out, a hand-drawn note points at the account button.
+
+  const DECK_KEYS = ['tokidoki_story_words', 'tokidoki_kanji_cards'];
+  const REMIND_EVERY = 20;
+
+  function savedCount() {
+    let n = 0;
+    DECK_KEYS.forEach(k => { try { n += Object.keys(JSON.parse(get(k)) || {}).length; } catch { /* unreadable deck */ } });
+    return n;
+  }
+
+  const REMINDED_KEY = 'tokidoki_sync_reminded';  // the last milestone shown, so each shows once
+
+  function remindToLogIn() {
+    const n = savedCount();
+    const milestone = Math.floor(n / REMIND_EVERY);
+    if (milestone <= (Number(get(REMINDED_KEY)) || 0)) return;
+    if (user || get(UID_KEY) || !window.TokidokiCoachMark) return;
+    set(REMINDED_KEY, String(milestone));
+    window.TokidokiCoachMark.show('#btn-account', `log in to sync your ${n} words`);
   }
 
   const proto = Object.getPrototypeOf(store);
@@ -86,6 +114,7 @@
   // ─── Firebase ────────────────────────────────────────────────────────────────
 
   let fb = null;
+  let loaded = null;  // the same, once downloaded (a popup must open without waiting)
   function firebase() {
     if (!fb) {
       fb = Promise.all([
@@ -94,7 +123,8 @@
         import(`${SDK}/firebase-firestore-lite.js`),
       ]).then(([app, auth, fs]) => {
         const a = app.initializeApp(FIREBASE_CONFIG);
-        return { auth, fs, authObj: auth.getAuth(a), db: fs.getFirestore(a) };
+        loaded = { auth, fs, authObj: auth.getAuth(a), db: fs.getFirestore(a) };
+        return loaded;
       });
       fb.catch(() => { fb = null; });
     }
@@ -334,10 +364,14 @@
     title.textContent = confirming ? 'Finish logging in' : 'Save your progress';
     const intro = confirming
       ? 'This login link was opened on a different device or browser than the one it was sent from. Enter your email again to finish logging in.'
-      : 'Optional: log in to keep your progress safe and pick it up on other devices. Enter your email and we’ll send you a link to log in with. No password needed. Progress you’ve already made on this device comes along.';
+      : 'Optional: log in to keep your progress safe and pick it up on other devices. No password needed. Progress you’ve already made on this device comes along.';
+    const google = confirming ? '' : `
+      <button type="button" class="account-google" data-account-act="google"${dis}>${GOOGLE_ICON}<span>Continue with Google</span></button>
+      <div class="account-or"><span>or get a login link by email</span></div>`;
     const email = (overlay.querySelector('input[name=email]') || {}).value || sentTo || '';
     body.innerHTML = `
       <p class="account-text">${intro}</p>
+      ${google}
       <form class="account-form" novalidate>
         <label class="account-field">
           <span>Email</span>
@@ -348,14 +382,19 @@
       </form>`;
   }
 
+  const GOOGLE_ICON = '<svg viewBox="0 0 48 48" width="18" height="18" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>';
+
   const ERRORS = {
+    'auth/popup-blocked': 'Your browser blocked the Google login window. Allow pop-ups for this site and try again.',
+    'auth/account-exists-with-different-credential': 'There’s already an account with this email. Log in with an email link instead.',
+    'auth/unauthorized-domain': 'Logging in isn’t set up for this website yet.',
     'auth/invalid-email': 'That doesn’t look like an email address.',
     'auth/missing-email': 'Enter your email address.',
     'auth/invalid-action-code': 'This login link has expired or was already used. Send yourself a new one.',
     'auth/expired-action-code': 'This login link has expired. Send yourself a new one.',
     'auth/quota-exceeded': 'Too many login emails have been sent today. Please try again tomorrow.',
     'auth/too-many-requests': 'Too many tries. Wait a minute and try again.',
-    'auth/operation-not-allowed': 'Logging in by email link isn’t switched on yet.',
+    'auth/operation-not-allowed': 'This way of logging in isn’t switched on yet.',
     'auth/unauthorized-continue-uri': 'Logging in isn’t set up for this website yet.',
     'auth/network-request-failed': 'Couldn’t reach the login service. Check your connection.',
   };
@@ -454,7 +493,29 @@
     const t = e.target.closest('[data-account-act]');
     if (!t || !overlay.contains(t)) return;
     const act = t.dataset.accountAct;
-    if (act === 'change') {
+    if (act === 'google') {
+      // Open the popup straight from the click, or pop-up blockers stop it.
+      if (!loaded) {
+        message = { text: 'Still loading, try again in a moment.', error: true };
+        render();
+        start().catch(() => {});
+        return;
+      }
+      const popup = loaded.auth.signInWithPopup(loaded.authObj, new loaded.auth.GoogleAuthProvider());
+      busy = true;
+      message = null;
+      render();
+      try {
+        await popup;
+        mode = 'email';
+        message = { text: 'You’re logged in. Your progress is now saved to your account.' };
+      } catch (err) {
+        const closed = ['auth/popup-closed-by-user', 'auth/cancelled-popup-request', 'auth/user-cancelled'];
+        if (!closed.includes(err && err.code)) message = { text: errorText(err), error: true };
+      }
+      busy = false;
+      render();
+    } else if (act === 'change') {
       mode = 'email';
       message = null;
       render();

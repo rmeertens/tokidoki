@@ -259,6 +259,9 @@
     window.addEventListener('resize', hideCoachMark, { once: true });
   }
 
+  // Other scripts (sync.js) use the same notes.
+  window.TokidokiCoachMark = { show: showCoachMark, hide: hideCoachMark };
+
   function showScreen(name) {
     Object.values(screens).filter(Boolean).forEach(s => s.classList.remove('active'));
     screens[name].classList.add('active');
