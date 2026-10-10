@@ -47,7 +47,8 @@
   ];
   const I_ADJECTIVES = ADJECTIVES.filter(a => a.type === 'i-adj');
 
-  // The counters you meet most, with what they count.
+  // The counters you meet most, with what they count: the everyday thirty
+  // first, then seventy more by theme.
   const COUNTERS = [
     ['people', '人', 'にん'],
     ['people (polite)', '名', 'めい'],
@@ -79,6 +80,89 @@
     ['letters and emails', '通', 'つう'],
     ['songs and tunes', '曲', 'きょく'],
     ['number in a sequence — No. 1, 2…', '番', 'ばん'],
+  ];
+
+  const MORE_COUNTERS = [
+    ['Time and dates', [
+      ['months of the year — 1月, 2月', '月', 'がつ'],
+      ['day number — the 3rd day of a trip', '日目', 'にちめ'],
+      ['school year — a 2nd-year student', '年生', 'ねんせい'],
+      ['years (how long) — for 3 years', '年間', 'ねんかん'],
+      ['centuries', '世紀', 'せいき'],
+      ['decades of age — in your 20s', '代', 'だい'],
+      ['nights at a hotel', '泊', 'はく'],
+      ['nights / evenings — 一晩', '晩', 'ばん'],
+      ['lessons in a textbook — 第3課', '課', 'か'],
+    ]],
+    ['Things and objects', [
+      ['sets, pairs, groups — 2 couples, class 3', '組', 'くみ'],
+      ['pairs of chopsticks, bowls of rice', '膳', 'ぜん'],
+      ['grains and drops — rice, rain', '粒', 'つぶ'],
+      ['bundles — flowers, letters', '束', 'たば'],
+      ['boxes', '箱', 'はこ'],
+      ['bags', '袋', 'ふくろ'],
+      ['cans', '缶', 'かん'],
+      ['bottles (as containers)', '瓶', 'びん'],
+      ['pills and tablets', '錠', 'じょう'],
+      ['slices — cake, bread, fish', '切れ', 'きれ'],
+      ['flowers in bloom, wheels', '輪', 'りん'],
+      ['shares of stock, plants and stumps', '株', 'かぶ'],
+      ['balls, heads of lettuce, portions of noodles', '玉', 'たま', ['だま']],
+      ['blocks of tofu, guns, scissors', '丁', 'ちょう'],
+      ['chairs and tables (with legs)', '脚', 'きゃく'],
+      ['flat surfaces — mirrors, tennis courts, stages', '面', 'めん'],
+      ['copies of a newspaper or document', '部', 'ぶ'],
+      ['volumes of a series', '巻', 'かん'],
+      ['haiku and verses', '句', 'く'],
+      ['written characters', '字', 'じ'],
+      ['words (in a text)', '語', 'ご'],
+      ['lines of text', '行', 'ぎょう'],
+      ['pages', 'ページ', 'ぺーじ', ['頁']],
+      ['kinds / types', '種類', 'しゅるい'],
+    ]],
+    ['Food and drink', [
+      ['dishes on a menu, items', '品', 'ひん', ['しな']],
+      ['plates / servings', '皿', 'さら'],
+      ['portions — sushi for 2', '人前', 'にんまえ'],
+      ['mouthfuls, bites', '口', 'くち'],
+    ]],
+    ['Places, buildings and travel', [
+      ['buildings in a complex — apartment blocks', '棟', 'とう'],
+      ['households, homes', '戸', 'こ'],
+      ['rooms (formal) — a 3-room flat', '室', 'しつ'],
+      ['rooms', '部屋', 'へや'],
+      ['schools', '校', 'こう'],
+      ['companies', '社', 'しゃ'],
+      ['shops and branches (formal)', '店', 'てん'],
+      ['TV and radio stations', '局', 'きょく'],
+      ['train stations / stops', '駅', 'えき'],
+      ['train carriages', '両', 'りょう'],
+      ['car number on a train — car 5', '号車', 'ごうしゃ'],
+      ['platform number — platform 2', '番線', 'ばんせん'],
+      ['flights, services', '便', 'びん'],
+      ['aircraft', '機', 'き'],
+      ['countries', 'か国', 'かこく', ['ヶ国', 'カ国', 'ケ国', 'ヵ国', '箇国']],
+      ['places / spots', 'か所', 'かしょ', ['ヶ所', 'カ所', 'ケ所', 'ヵ所', '箇所']],
+    ]],
+    ['Ranks, scores and more', [
+      ['rank / place — 1st place', '位', 'い'],
+      ['class or prize — 1st prize', '等', 'とう'],
+      ['matches, games', '試合', 'しあい'],
+      ['episodes, stories', '話', 'わ'],
+      ['seats', '席', 'せき'],
+      ['votes', '票', 'ひょう'],
+      ['questions on a test', '問', 'もん'],
+      ['points, marks, scores', '点', 'てん'],
+      ['ways / methods — 2 ways to do it', '通り', 'とおり'],
+      ['multiples — twice, 3 times as much', '倍', 'ばい'],
+      ['tenths — 30 percent = 3__', '割', 'わり'],
+      ['degrees — temperature, angles', '度', 'ど'],
+      ['steps (walking)', '歩', 'ほ', ['ぽ']],
+      ['laps', '周', 'しゅう'],
+      ['colours (formal) — 12-colour pencils', '色', 'しょく', ['いろ']],
+      ['terms, periods — the 2nd term', '期', 'き'],
+      ['subjects at school', '科目', 'かもく'],
+    ]],
   ];
 
   const TE_ROWS = [
@@ -200,26 +284,27 @@
     {
       id: 'counters',
       glyph: '枚',
-      title: 'The 30 most common counters',
+      title: 'The 100 most common counters',
       ja: '助数詞',
-      desc: 'What do you count people, pens, paper, cats and floors with? Kanji or reading both count.',
-      sections: [{
+      desc: 'What do you count people, pens, paper, cats, floors and flights with? The everyday 30 first, then 70 more. Kanji or reading both count.',
+      sections: [['The everyday 30', COUNTERS], ...MORE_COUNTERS].map(([label, rows]) => ({
         type: 'fill',
+        label,
         columns: ['Counts', 'Counter'],
-        items: COUNTERS.map(([prompt, kanji, reading, alt = []]) => ({
+        items: rows.map(([prompt, kanji, reading, alt = []]) => ({
           prompt, answer: `${kanji}（${reading}）`, accept: [kanji, reading, ...alt],
         })),
-      }],
+      })),
     },
   ];
 
   // ─── Matching ──────────────────────────────────────────────────────────────
 
   // Kana for comparing: romaji converted, katakana folded to hiragana, and
-  // spaces, arrows and separators dropped.
+  // spaces, arrows and separators dropped (a hyphen stays: pe-ji is ぺーじ).
   function normalize(text) {
     let s = String(text).trim().toLowerCase();
-    s = s.replace(/[\s　→⇒>＞=＝\-–—~〜,、・/／]+/g, '');
+    s = s.replace(/[\s　→⇒>＞=＝–—~〜,、・/／]+/g, '');
     if (Romaji) s = Romaji.toHiragana(s, true);
     return s.replace(/[ァ-ヶ]/g, c => String.fromCharCode(c.charCodeAt(0) - 0x60));
   }
