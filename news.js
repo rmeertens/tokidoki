@@ -1,16 +1,23 @@
-// The News page (news.html): short news stories from news-data.js, each told
-// at JLPT N5, N4 and N3 — a switch on every story picks the level, and the
-// last level picked is remembered for all of them.
+// The News pages: short news stories from news-data.js, each told at JLPT
+// N5, N4 and N3.
 //
-// Tapping a headline or sentence explains it: the English, a note on the
-// sentence, each word with its reading and meaning, and the grammar it uses
-// (from news-words.js, built by scripts/tokenize_news.mjs). Words can be
-// saved to the word flashcards (tokidoki_story_words, the deck the Stories
-// and Phrases pages use, reviewed on flashcards.html) and their kanji to the
-// kanji cards. Tapping a grammar point opens its explanation, and grammar
-// can be saved too (tokidoki_saved_grammar), listed under "Saved grammar" at
-// the end of the page. Furigana and English can be switched off; 🔊 / 🐢
-// read a sentence aloud and ▶ reads a whole story.
+//   news.html          — the headlines, newest first, in the level picked
+//                        there, plus the grammar points saved from stories.
+//   news-<id>.html     — one story (body data-story="<id>"), read like a
+//                        story on the Stories page, with an N5 / N4 / N3
+//                        switch. These pages are written by
+//                        scripts/render_news_pages.mjs.
+//
+// The last level picked, on either, is remembered for both.
+//
+// In a story, tapping a word shows its reading and meaning (from
+// news-words.js, built by scripts/tokenize_news.mjs) and can save it to the
+// word flashcards (tokidoki_story_words, the deck the Stories and Phrases
+// pages use, reviewed on flashcards.html) and its kanji to the kanji cards.
+// Tapping a sentence shows its English, a note and its grammar; grammar
+// points can be saved (tokidoki_saved_grammar), listed under "Saved grammar"
+// on news.html. Furigana and English can be switched off, and ▶ / 🐢 read
+// the story aloud.
 (function (global) {
   'use strict';
 
@@ -30,6 +37,7 @@
   // The ids of a story's lines: '<story>:<level>:t' for the headline,
   // '<story>:<level>:<n>' for sentence n.
   const lineId = (item, level, n) => `${item.id}:${level}:${n}`;
+  const pageFile = id => `news-${id}.html`;
 
   // A line's Japanese, English and note, by id.
   function lineSource(items, id) {
@@ -60,7 +68,7 @@
     return d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
   }
 
-  const api = { LEVELS, lineId, lineSource, deckSentence, plainText, kanaText, rubyHtml };
+  const api = { LEVELS, lineId, pageFile, lineSource, deckSentence, plainText, kanaText, rubyHtml };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   if (typeof document === 'undefined') return;
 
@@ -77,20 +85,11 @@
     try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* storage unavailable */ }
   };
 
-  const settings = { furigana: true, english: true, level: 'N5', ...loadJson(SETTINGS_KEY, {}) };
+  const settings = { furigana: true, english: false, level: 'N5', ...loadJson(SETTINGS_KEY, {}) };
   if (!LEVELS.includes(settings.level)) settings.level = 'N5';
   const saveSettings = () => saveJson(SETTINGS_KEY, settings);
   const jpHtml = text => settings.furigana ? rubyHtml(text) : esc(plainText(text));
 
-  // Each story's level; a story follows the remembered level until its own
-  // switch is used.
-  const storyLevel = {};
-  const levelOf = item => storyLevel[item.id] || settings.level;
-
-  const openLines = new Set();      // explained lines, by id
-  const openGrammar = new Set();    // expanded grammar points, as '<line id>|<grammar id>'
-  let reading = null;               // { story, line } being read aloud
-  let readingSlow = false;
 
   // ─── Saving ────────────────────────────────────────────────────────────────
 
@@ -138,159 +137,6 @@
     saveJson(GRAMMAR_KEY, saved);
   }
 
-  const wordButton = saved => saved ? '✓ Flashcard' : '＋ Flashcard';
-  const grammarButton = saved => saved ? '✓ Saved' : '＋ Save';
-
-  function syncButtons(attr, key, saved, label) {
-    document.querySelectorAll(`[${attr}]`).forEach(btn => {
-      if (btn.getAttribute(attr) !== key) return;
-      btn.classList.toggle('saved', saved);
-      btn.setAttribute('aria-pressed', saved);
-      btn.textContent = label(saved);
-    });
-  }
-
-  // ─── Explaining a line ─────────────────────────────────────────────────────
-
-  function wordsHtml(line, id) {
-    const seen = new Set();
-    const rows = line.w.filter(p => Array.isArray(p) && words.gloss[p[1]] && !seen.has(p[1]) && seen.add(p[1])).map(([src, key]) => {
-      const [reading, meaning, pos] = words.gloss[key];
-      const surface = plainText(src);
-      const base = displayWord(key);
-      const saved = isSaved(key);
-      const kanji = global.KanjiCards ? KanjiCards.chipsHtml(base, { reading, meaning }) : '';
-      return `
-        <li class="phrase-word">
-          <span class="phrase-word-jp" lang="ja">${jpHtml(src)}</span>
-          ${base !== surface ? `<span class="phrase-word-base" lang="ja">→ ${esc(base)}</span>` : ''}
-          ${/[一-鿿々]/.test(surface + base) ? `<span class="phrase-word-reading" lang="ja">${esc(reading)}</span>` : ''}
-          <span class="phrase-word-meaning">${esc(meaning)}</span>
-          <span class="phrase-word-pos">${esc(pos)}</span>
-          <span class="phrase-word-save">
-            ${/particle/i.test(pos) ? '' : `<button type="button" class="phrase-word-add${saved ? ' saved' : ''}" data-save-word="${esc(key)}" data-line="${esc(id)}" aria-pressed="${saved}" title="Add “${esc(base)}” to your word flashcards">${wordButton(saved)}</button>`}
-            ${kanji}
-          </span>
-        </li>`;
-    });
-    return rows.length ? `<ul class="phrase-words">${rows.join('')}</ul>` : '';
-  }
-
-  function grammarHtml(line, id) {
-    const rows = line.g.filter(([gid]) => words.grammar[gid]).map(([gid, snippet]) => {
-      const g = words.grammar[gid];
-      const open = openGrammar.has(`${id}|${gid}`);
-      const saved = isGrammarSaved(gid);
-      return `
-        <li class="phrase-grammar-item news-grammar-item${open ? ' open' : ''}">
-          <div class="phrase-grammar-head">
-            <button type="button" class="news-grammar-toggle" data-grammar="${esc(gid)}" data-line="${esc(id)}" aria-expanded="${open}">
-              <span class="story-level-badge">${esc(g.level)}</span>
-              <span class="phrase-grammar-title">${g.title}</span>
-              <span class="news-grammar-snippet" lang="ja">「${esc(snippet)}」</span>
-              <span class="news-grammar-caret" aria-hidden="true">${open ? '▾' : '▸'}</span>
-            </button>
-            <button type="button" class="phrase-word-add${saved ? ' saved' : ''}" data-save-grammar="${esc(gid)}" data-line="${esc(id)}" aria-pressed="${saved}" title="Save this grammar point">${grammarButton(saved)}</button>
-          </div>
-          ${open ? `
-          <div class="phrase-grammar-pattern" lang="ja">${g.pattern}</div>
-          <p class="phrase-grammar-note">${g.note}</p>` : ''}
-        </li>`;
-    });
-    return rows.length
-      ? `<ul class="phrase-grammar">${rows.join('')}</ul>`
-      : '<p class="phrase-grammar-none">No grammar to unpack here — just nouns and names.</p>';
-  }
-
-  function explainHtml(id) {
-    const line = words.lines[id];
-    const src = lineSource(items, id);
-    if (!line || !src) return '';
-    return `
-      <div class="phrase-explain news-explain">
-        <div class="phrase-explain-head">
-          <span class="phrase-explain-label">Sentence</span>
-          ${global.Pronounce ? Pronounce.buttonsHtml(kanaText(src.jp)) : ''}
-        </div>
-        <p class="news-explain-en">${esc(src.en)}</p>
-        ${src.note ? `<p class="news-explain-note">${esc(src.note)}</p>` : ''}
-        <div class="phrase-explain-label">Words</div>
-        ${wordsHtml(line, id)}
-        <div class="phrase-explain-label">Grammar <span class="news-explain-sub">— tap one to see how it works</span></div>
-        ${grammarHtml(line, id)}
-        <p class="phrase-explain-tip">Saved words and kanji are reviewed on the <a href="flashcards.html">Flashcards page</a>; saved grammar is listed <a href="#news-saved-grammar">at the end of this page</a>.</p>
-      </div>`;
-  }
-
-  // ─── Stories ───────────────────────────────────────────────────────────────
-
-  function lineHtml(item, level, n, jp, en) {
-    const id = lineId(item, level, n);
-    const open = openLines.has(id);
-    const isTitle = n === 't';
-    const isReading = !isTitle && reading && reading.story === item.id && reading.line === n;
-    return `
-      <div class="news-line-wrap">
-        <div class="phrase-story-line news-line${isTitle ? ' news-headline' : ''}${open ? ' revealed open' : ''}${isReading ? ' reading' : ''}" data-line-id="${esc(id)}" role="button" tabindex="0" aria-expanded="${open}" title="Words and grammar">
-          <div class="phrase-story-body">
-            <div class="${isTitle ? 'news-title-jp' : 'phrase-story-jp'}" lang="ja">${jpHtml(jp)}</div>
-            <div class="phrase-story-en">${esc(en)}</div>
-          </div>
-        </div>
-        ${open ? explainHtml(id) : ''}
-      </div>`;
-  }
-
-  function storyHtml(item) {
-    const level = levelOf(item);
-    const v = item.levels[level];
-    const speaking = reading && reading.story === item.id;
-    const canSpeak = !!(global.Pronounce && Pronounce.supported);
-    return `
-      <article class="news-story" id="${esc(item.id)}" data-story="${esc(item.id)}">
-        <header class="news-story-head">
-          <span class="news-story-emoji" aria-hidden="true">${item.emoji}</span>
-          <div class="news-story-meta">
-            <div class="news-story-date">${esc(formatDate(item.date))}</div>
-            <div class="news-story-en">${esc(item.titleEn)}</div>
-          </div>
-        </header>
-        <div class="news-story-controls">
-          <div class="lis-levels news-levels" role="group" aria-label="Level">
-            <span class="lis-levels-label">Level</span>
-            ${LEVELS.filter(l => item.levels[l]).map(l => `<button type="button" data-level="${l}" aria-pressed="${l === level}">${l}</button>`).join('')}
-          </div>
-          ${canSpeak ? `
-          <div class="news-read">
-            <button type="button" class="btn-secondary story-read" data-read="normal" aria-pressed="${speaking && !readingSlow}">${speaking && !readingSlow ? '■ Stop' : '▶ Read aloud'}</button>
-            <button type="button" class="btn-secondary story-read" data-read="slow" aria-pressed="${speaking && readingSlow}">${speaking && readingSlow ? '■ Stop' : '🐢 Slowly'}</button>
-          </div>` : ''}
-        </div>
-        ${lineHtml(item, level, 't', v.title, item.titleEn)}
-        <div class="phrase-story-lines news-lines">
-          ${v.lines.map((l, i) => lineHtml(item, level, i, l[0], l[1])).join('')}
-        </div>
-        ${item.sources && item.sources.length ? `
-        <p class="news-sources">Sources: ${item.sources.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a>`).join(', ')}</p>` : ''}
-      </article>`;
-  }
-
-  function renderStory(storyId) {
-    const item = items.find(x => x.id === storyId);
-    const el = document.querySelector(`.news-story[data-story="${storyId}"]`);
-    if (!item || !el) return;
-    const wrap = document.createElement('div');
-    wrap.innerHTML = storyHtml(item);
-    el.replaceWith(wrap.firstElementChild);
-  }
-
-  function renderAll() {
-    $('#news-list').innerHTML = items.length
-      ? items.map(storyHtml).join('')
-      : '<p class="phrase-empty">No news yet — check back soon.</p>';
-    renderSavedGrammar();
-  }
-
   // ─── Saved grammar ─────────────────────────────────────────────────────────
 
   function renderSavedGrammar() {
@@ -313,136 +159,389 @@
           ${g.example ? `<div class="news-saved-example" lang="ja">${jpHtml(g.example)}</div>
           <div class="news-saved-en">${esc(g.en || '')} <span class="news-saved-from">— ${esc(g.from || '')}</span></div>` : ''}
         </li>`;
-    }).join('')}</ul>` : '<p class="phrase-grammar-none">Nothing saved yet. Open a sentence and tap <b>＋ Save</b> next to a grammar point to keep it here.</p>';
+    }).join('')}</ul>` : '<p class="phrase-grammar-none">Nothing saved yet. In a story, tap a sentence number and then <b>＋ Save grammar</b> to keep a grammar point here.</p>';
+  }
+
+  // ─── A story (news-<id>.html) ──────────────────────────────────────────────
+  //
+  // Laid out like the Stories reader: the text on the left, a panel on the
+  // right (a bottom sheet on phones). Tapping a word shows it in the panel;
+  // tapping a sentence (its number, or beside it) shows its translation, a
+  // note and its grammar — hover or tap a grammar point to light up its words.
+
+  let item = null;
+  let selection = null;      // { type: 'word', s, t } or { type: 'sentence', s }
+  let activeGrammar = null;  // index into the selected sentence's grammar
+  let reading = null;        // sentence being read aloud
+  let readingSlow = false;
+
+  const level = () => (item.levels[settings.level] ? settings.level : LEVELS.find(l => item.levels[l]));
+  const version = () => item.levels[level()];
+  const sentenceId = s => lineId(item, level(), s);
+  const sentenceWords = s => (words.lines[sentenceId(s)] || { w: [], g: [] });
+  const pronounceHtml = (text, cls) => global.Pronounce ? Pronounce.buttonsHtml(text, cls) : '';
+
+  // The word pieces a grammar snippet covers, by index.
+  function snippetPieces(s, snippet) {
+    const pieces = sentenceWords(s).w;
+    let at = 0;
+    const spans = pieces.map(p => {
+      const len = plainText(typeof p === 'string' ? p : p[0]).length;
+      const span = [at, at + len];
+      at += len;
+      return span;
+    });
+    const plain = plainText(version().lines[s][0]);
+    const from = plain.indexOf(snippet);
+    if (from === -1) return [];
+    const to = from + snippet.length;
+    return spans.map(([a, b], i) => (a < to && b > from ? i : -1)).filter(i => i !== -1);
+  }
+
+  function renderReader() {
+    const v = version();
+    $('#news-title').innerHTML = jpHtml(v.title);
+    $('#news-title-en').textContent = item.titleEn;
+    $('#news-date').textContent = formatDate(item.date);
+    document.querySelectorAll('#news-levels [data-level]').forEach(btn => {
+      btn.setAttribute('aria-pressed', btn.dataset.level === level());
+      btn.disabled = !item.levels[btn.dataset.level];
+    });
+    $('#news-toggle-furigana').checked = settings.furigana;
+    $('#news-toggle-english').checked = settings.english;
+
+    const deck = loadJson(DECK_KEY, {});
+    const text = $('#news-text');
+    text.innerHTML = v.lines.map((line, s) => {
+      const pieces = sentenceWords(s).w.map((p, t) => {
+        if (typeof p === 'string') return `<span class="story-punct">${jpHtml(p)}</span>`;
+        return `<span class="story-word${has(deck, p[1]) ? ' saved' : ''}" data-s="${s}" data-t="${t}" role="button" tabindex="0">${jpHtml(p[0])}</span>`;
+      }).join('');
+      return `
+        <div class="story-sentence${reading === s ? ' reading' : ''}" data-s="${s}">
+          <button class="story-sentence-num" data-s="${s}" aria-label="Grammar in sentence ${s + 1}" title="Show grammar">${s + 1}</button>
+          <div class="story-sentence-body">
+            <div class="story-jp" lang="ja">${pieces}</div>
+            <div class="story-en">${esc(line[1])}</div>
+          </div>
+        </div>`;
+    }).join('') + (item.sources && item.sources.length
+      ? `<p class="news-sources">Sources: ${item.sources.map(src => `<a href="${esc(src.url)}" target="_blank" rel="noopener">${esc(src.name)}</a>`).join(', ')}</p>`
+      : '');
+    text.classList.toggle('show-english', settings.english);
+    renderReadButtons();
+    renderSelection();
+  }
+
+  function renderSelection() {
+    const text = $('#news-text');
+    const panel = $('#news-panel');
+    const sel = selection;
+    text.querySelectorAll('.story-sentence').forEach(el => {
+      el.classList.toggle('selected', !!sel && Number(el.dataset.s) === sel.s);
+    });
+    text.querySelectorAll('.story-word').forEach(el => {
+      el.classList.toggle('selected', !!sel && sel.type === 'word' && Number(el.dataset.s) === sel.s && Number(el.dataset.t) === sel.t);
+    });
+    highlightGrammar(activeGrammar);
+
+    panel.classList.toggle('open', !!sel);
+    const body = $('#news-panel-body');
+    if (!sel) {
+      body.innerHTML = `
+        <p class="story-panel-empty">
+          Tap a <strong>word</strong> to look it up and add it to your flashcards.<br>
+          Tap a <strong>sentence number</strong> (or the space beside a sentence) to see its grammar — and save the grammar you want to remember.
+        </p>`;
+      return;
+    }
+
+    const line = version().lines[sel.s];
+    const id = sentenceId(sel.s);
+    if (sel.type === 'word') {
+      const [src, key] = sentenceWords(sel.s).w[sel.t];
+      const [reading, meaning, pos] = words.gloss[key];
+      const word = displayWord(key);
+      const surface = plainText(src);
+      const saved = isSaved(key);
+      body.innerHTML = `
+        <div class="story-panel-kicker">Word</div>
+        <div class="story-panel-word" lang="ja">${esc(word)}</div>
+        ${reading !== word ? `<div class="story-panel-reading" lang="ja">${esc(reading)}</div>` : ''}
+        ${pronounceHtml(reading, 'story-panel-speak')}
+        <div class="story-panel-pos">${esc(pos)}</div>
+        <div class="story-panel-meaning">${esc(meaning)}</div>
+        ${surface !== word ? `<div class="story-panel-form">In the text: <span lang="ja">${esc(surface)}</span>${pronounceHtml(kanaText(src))}</div>` : ''}
+        <button class="${saved ? 'btn-secondary' : 'btn-primary'} story-panel-add" id="btn-news-add-word">
+          ${saved ? '✓ In word flashcards — remove' : '＋ Add word to flashcards'}
+        </button>
+        ${global.KanjiCards ? KanjiCards.breakdownHtml(word, { reading, meaning }) : ''}
+        <button class="story-panel-link" id="btn-news-word-sentence">Grammar in this sentence →</button>`;
+      return;
+    }
+
+    const grammar = sentenceWords(sel.s).g.map(([gid, snippet], gi) => {
+      const g = words.grammar[gid];
+      if (!g) return '';
+      const saved = isGrammarSaved(gid);
+      return `
+        <li class="story-grammar-item${activeGrammar === gi ? ' active' : ''}" data-g="${gi}" tabindex="0">
+          <div class="story-grammar-head">
+            <span class="story-grammar-title">${g.title}</span>
+            <span class="story-grammar-level">${esc(g.level)}</span>
+          </div>
+          <div class="story-grammar-pattern" lang="ja">${g.pattern}</div>
+          <div class="story-grammar-note">${g.note}</div>
+          ${snippet ? `<div class="story-grammar-here">Here: <span lang="ja">${esc(snippet)}</span></div>` : ''}
+          <button type="button" class="phrase-word-add news-grammar-save${saved ? ' saved' : ''}" data-save-grammar="${esc(gid)}" data-line="${esc(id)}" aria-pressed="${saved}">${saved ? '✓ Saved grammar' : '＋ Save grammar'}</button>
+        </li>`;
+    }).join('');
+    body.innerHTML = `
+      <div class="story-panel-kicker">Sentence ${sel.s + 1}</div>
+      <div class="story-panel-sentence" lang="ja">${rubyHtml(line[0])}</div>
+      ${pronounceHtml(kanaText(line[0]), 'story-panel-speak')}
+      <div class="story-panel-en">${esc(line[1])}</div>
+      ${line[2] ? `<p class="news-explain-note">${esc(line[2])}</p>` : ''}
+      <div class="story-panel-kicker">Grammar</div>
+      ${grammar ? `<ul class="story-grammar-list">${grammar}</ul>` : '<p class="story-panel-empty">No grammar to unpack here — just nouns and names.</p>'}
+      <p class="phrase-explain-tip">Saved grammar is listed on the <a href="news.html#news-saved-grammar">News page</a>; saved words are reviewed on the <a href="flashcards.html">Flashcards page</a>.</p>`;
+  }
+
+  function highlightGrammar(gi) {
+    const text = $('#news-text');
+    text.querySelectorAll('.story-word.grammar-hit').forEach(el => el.classList.remove('grammar-hit'));
+    if (gi === null || !selection || selection.type !== 'sentence') return;
+    const ref = sentenceWords(selection.s).g[gi];
+    if (!ref) return;
+    snippetPieces(selection.s, ref[1]).forEach(t => {
+      const el = text.querySelector(`.story-word[data-s="${selection.s}"][data-t="${t}"]`);
+      if (el) el.classList.add('grammar-hit');
+    });
+  }
+
+  function select(sel) {
+    selection = sel;
+    activeGrammar = null;
+    renderSelection();
   }
 
   // ─── Reading aloud ─────────────────────────────────────────────────────────
 
-  function markReading(storyId, n) {
-    reading = n === null ? null : { story: storyId, line: n };
-    document.querySelectorAll('.news-line').forEach(el => {
-      const [s, , i] = el.dataset.lineId.split(':');
-      el.classList.toggle('reading', !!reading && s === storyId && String(n) === i);
+  function renderReadButtons() {
+    const supported = !!(global.Pronounce && Pronounce.supported);
+    [['#btn-news-read', false], ['#btn-news-read-slow', true]].forEach(([sel, slow]) => {
+      const btn = $(sel);
+      btn.classList.toggle('hidden', !supported);
+      const on = reading !== null && readingSlow === slow;
+      btn.setAttribute('aria-pressed', on);
+      btn.textContent = on ? '■ Stop' : (slow ? '🐢 Slowly' : '▶ Read aloud');
     });
-    const item = items.find(x => x.id === storyId);
-    const el = reading && item && document.querySelector(`.news-line[data-line-id="${CSS.escape(lineId(item, levelOf(item), n))}"]`);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
-  function readStory(item, slow) {
+  function markReading(s) {
+    reading = s;
+    document.querySelectorAll('#news-text .story-sentence').forEach(el => {
+      el.classList.toggle('reading', Number(el.dataset.s) === s);
+    });
+    const el = s === null ? null : document.querySelector(`#news-text .story-sentence[data-s="${s}"]`);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    renderReadButtons();
+  }
+
+  function stopReading() {
+    if (global.Pronounce) Pronounce.stop();
+    markReading(null);
+  }
+
+  function readStory(slow) {
     if (!global.Pronounce) return;
-    const same = reading && reading.story === item.id && readingSlow === slow;
+    if (reading !== null && readingSlow === slow) { stopReading(); return; }
     Pronounce.stop();
-    const prev = reading && reading.story;
-    reading = null;
-    if (prev && prev !== item.id) renderStory(prev);
-    if (same) { renderStory(item.id); return; }
     readingSlow = slow;
-    const v = item.levels[levelOf(item)];
-    reading = { story: item.id, line: 0 };
-    renderStory(item.id);
-    Pronounce.speakAll(v.lines.map(l => kanaText(l[0])), {
+    Pronounce.speakAll(version().lines.map(l => kanaText(l[0])), {
       slow,
-      onStart: i => markReading(item.id, i),
-      onDone: () => { reading = null; renderStory(item.id); },
+      onStart: i => markReading(i),
+      onDone: () => markReading(null),
     });
   }
 
   // ─── Events ────────────────────────────────────────────────────────────────
 
-  function setLevel(item, level) {
-    if (!item.levels[level]) return;
-    if (reading && reading.story === item.id) { Pronounce.stop(); reading = null; }
-    // Explanations belong to one level's sentences; drop the others'.
-    [...openLines].forEach(id => { if (id.startsWith(`${item.id}:`)) openLines.delete(id); });
-    storyLevel[item.id] = level;
-    settings.level = level;
-    saveSettings();
-    renderStory(item.id);
-  }
+  function initStory(id) {
+    item = items.find(x => x.id === id);
+    if (!item) {
+      $('#news-text').innerHTML = '<p class="phrase-empty">This story is no longer available. <a href="news.html">See the latest news</a>.</p>';
+      return;
+    }
+    renderReader();
 
-  function toggleLine(el) {
-    const id = el.dataset.lineId;
-    const opening = !openLines.has(id);
-    if (opening) openLines.add(id);
-    else openLines.delete(id);
-    renderStory(id.split(':')[0]);
-    const src = lineSource(items, id);
-    if (opening && src && global.Pronounce) Pronounce.onClick(kanaText(src.jp));
-    const again = document.querySelector(`.news-line[data-line-id="${CSS.escape(id)}"]`);
-    if (again) again.focus({ preventScroll: true });
-  }
+    $('#news-levels').addEventListener('click', e => {
+      const btn = e.target.closest('[data-level]');
+      if (!btn || !item.levels[btn.dataset.level]) return;
+      stopReading();
+      settings.level = btn.dataset.level;
+      saveSettings();
+      selection = null;
+      activeGrammar = null;
+      renderReader();
+    });
 
-  function init() {
-    const list = $('#news-list');
-    if (!list) return;
-    $('#news-toggle-furigana').checked = settings.furigana;
-    $('#news-toggle-english').checked = settings.english;
-    document.body.classList.toggle('phrases-hide-english', !settings.english);
-    renderAll();
-
-    // Save buttons work anywhere on the page, including the saved list.
+    // Clicking outside the panel, a sentence or the toolbars deselects.
     document.addEventListener('click', e => {
-      const w = e.target.closest && e.target.closest('[data-save-word]');
-      const g = e.target.closest && e.target.closest('[data-save-grammar]');
-      if (!w && !g) return;
-      e.preventDefault();
-      e.stopPropagation();
-      if (w) {
-        const key = w.dataset.saveWord;
-        toggleWord(key, w.dataset.line);
-        syncButtons('data-save-word', key, isSaved(key), wordButton);
-      } else {
-        const gid = g.dataset.saveGrammar;
-        toggleGrammar(gid, g.dataset.line);
-        syncButtons('data-save-grammar', gid, isGrammarSaved(gid), grammarButton);
-        renderSavedGrammar();
-      }
+      // A panel button may already have re-rendered the panel and detached
+      // the clicked element; that click was inside.
+      if (!selection || !e.target.isConnected) return;
+      if (e.target.closest('#news-panel, .story-sentence, .story-toggles, #news-levels')) return;
+      select(null);
     }, true);
 
-    list.addEventListener('click', e => {
-      const story = e.target.closest('.news-story');
-      const item = story && items.find(x => x.id === story.dataset.story);
-      if (!item) return;
-      const lvl = e.target.closest('[data-level]');
-      if (lvl) { setLevel(item, lvl.dataset.level); return; }
-      const read = e.target.closest('[data-read]');
-      if (read) { readStory(item, read.dataset.read === 'slow'); return; }
-      const gt = e.target.closest('.news-grammar-toggle');
-      if (gt) {
-        const k = `${gt.dataset.line}|${gt.dataset.grammar}`;
-        if (openGrammar.has(k)) openGrammar.delete(k);
-        else openGrammar.add(k);
-        renderStory(item.id);
-        const again = document.querySelector(`.news-grammar-toggle[data-line="${CSS.escape(gt.dataset.line)}"][data-grammar="${CSS.escape(gt.dataset.grammar)}"]`);
-        if (again) again.focus({ preventScroll: true });
+    const text = $('#news-text');
+    text.addEventListener('click', e => {
+      if (e.target.closest('a')) return;
+      const word = e.target.closest('.story-word');
+      if (word) {
+        const s = Number(word.dataset.s);
+        const t = Number(word.dataset.t);
+        select({ type: 'word', s, t });
+        if (global.Pronounce) Pronounce.onClick(kanaText(sentenceWords(s).w[t][0]));
         return;
       }
-      if (e.target.closest('.phrase-explain') || e.target.closest('a')) return;
-      const line = e.target.closest('.news-line');
-      if (line) toggleLine(line);
+      const sentence = e.target.closest('.story-sentence');
+      if (sentence) {
+        const s = Number(sentence.dataset.s);
+        select({ type: 'sentence', s });
+        if (global.Pronounce) Pronounce.onClick(kanaText(version().lines[s][0]));
+      }
     });
-    list.addEventListener('keydown', e => {
+    text.addEventListener('keydown', e => {
       if (e.key !== 'Enter' && e.key !== ' ') return;
-      const line = e.target.closest('.news-line');
-      if (!line || e.target !== line) return;
+      const word = e.target.closest('.story-word');
+      if (!word) return;
       e.preventDefault();
-      toggleLine(line);
+      select({ type: 'word', s: Number(word.dataset.s), t: Number(word.dataset.t) });
     });
 
-    $('#news-toggle-furigana').addEventListener('change', e => {
-      settings.furigana = e.target.checked;
-      saveSettings();
-      renderAll();
+    const panel = $('#news-panel');
+    panel.addEventListener('click', e => {
+      if (e.target.closest('#news-panel-close')) { select(null); return; }
+      if (e.target.closest('#btn-news-add-word')) {
+        const key = sentenceWords(selection.s).w[selection.t][1];
+        toggleWord(key, sentenceId(selection.s));
+        const saved = isSaved(key);
+        document.querySelectorAll('#news-text .story-word').forEach(el => {
+          const p = sentenceWords(Number(el.dataset.s)).w[Number(el.dataset.t)];
+          if (p[1] === key) el.classList.toggle('saved', saved);
+        });
+        renderSelection();
+        return;
+      }
+      if (e.target.closest('#btn-news-word-sentence')) { select({ type: 'sentence', s: selection.s }); return; }
+      const g = e.target.closest('.story-grammar-item');
+      if (g && !e.target.closest('a')) {
+        const gi = Number(g.dataset.g);
+        activeGrammar = activeGrammar === gi ? null : gi;
+        panel.querySelectorAll('.story-grammar-item').forEach(el => el.classList.toggle('active', Number(el.dataset.g) === activeGrammar));
+        highlightGrammar(activeGrammar);
+      }
     });
+    panel.addEventListener('keydown', e => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      const g = e.target.closest('.story-grammar-item');
+      if (!g || e.target !== g) return;
+      e.preventDefault();
+      g.click();
+    });
+    // Hovering a grammar point previews its words; leaving restores the
+    // clicked one, if any.
+    panel.addEventListener('mouseover', e => {
+      const g = e.target.closest('.story-grammar-item');
+      if (g) highlightGrammar(Number(g.dataset.g));
+    });
+    panel.addEventListener('mouseout', e => {
+      const g = e.target.closest('.story-grammar-item');
+      if (g && !g.contains(e.relatedTarget)) highlightGrammar(activeGrammar);
+    });
+
+    $('#btn-news-read').addEventListener('click', () => readStory(false));
+    $('#btn-news-read-slow').addEventListener('click', () => readStory(true));
     $('#news-toggle-english').addEventListener('change', e => {
       settings.english = e.target.checked;
       saveSettings();
-      document.body.classList.toggle('phrases-hide-english', !settings.english);
+      $('#news-text').classList.toggle('show-english', settings.english);
     });
-    window.addEventListener('pagehide', () => { if (global.Pronounce) Pronounce.stop(); });
+  }
+
+  // ─── The headlines (news.html) ─────────────────────────────────────────────
+
+  function renderHeadlines() {
+    document.querySelectorAll('#news-index-levels [data-level]').forEach(btn => {
+      btn.setAttribute('aria-pressed', btn.dataset.level === settings.level);
+    });
+    const dates = [...new Set(items.map(it => it.date))];
+    $('#news-headlines').innerHTML = dates.length ? dates.map(date => `
+      <section class="news-day">
+        <h2 class="phrase-group-title">${esc(formatDate(date))}</h2>
+        <div class="news-headline-list">
+          ${items.filter(it => it.date === date).map(it => {
+            const v = it.levels[settings.level] || it.levels[LEVELS.find(l => it.levels[l])];
+            return `
+          <a class="chapter-card news-headline-card" href="${pageFile(it.id)}">
+            <span class="news-headline-emoji" aria-hidden="true">${it.emoji}</span>
+            <span class="news-headline-text">
+              <span class="news-headline-jp" lang="ja">${jpHtml(v.title)}</span>
+              <span class="news-headline-en">${esc(it.titleEn)}</span>
+            </span>
+          </a>`;
+          }).join('')}
+        </div>
+      </section>`).join('') : '<p class="phrase-empty">No news yet — check back soon.</p>';
+  }
+
+  function initIndex() {
+    // Old links to a story on the index (news.html#<id>) go to its page.
+    const hash = decodeURIComponent(location.hash.slice(1));
+    if (items.some(it => it.id === hash)) { location.replace(pageFile(hash)); return; }
+    renderHeadlines();
+    renderSavedGrammar();
+    $('#news-index-levels').addEventListener('click', e => {
+      const btn = e.target.closest('[data-level]');
+      if (!btn) return;
+      settings.level = btn.dataset.level;
+      saveSettings();
+      renderHeadlines();
+    });
     // Saving on another tab (or a sync) updates the saved list.
     window.addEventListener('storage', e => { if (e.key === GRAMMAR_KEY) renderSavedGrammar(); });
+  }
+
+  // ─── Shared ────────────────────────────────────────────────────────────────
+
+  function init() {
+    const story = document.body.dataset.story;
+    if (!story && !$('#news-headlines')) return;
+    $('#news-toggle-furigana').checked = settings.furigana;
+    $('#news-toggle-furigana').addEventListener('change', e => {
+      settings.furigana = e.target.checked;
+      saveSettings();
+      if (story) renderReader();
+      else { renderHeadlines(); renderSavedGrammar(); }
+    });
+
+    // Grammar save buttons, in the panel and the saved list.
+    document.addEventListener('click', e => {
+      const g = e.target.closest && e.target.closest('[data-save-grammar]');
+      if (!g) return;
+      e.preventDefault();
+      e.stopPropagation();
+      const gid = g.dataset.saveGrammar;
+      toggleGrammar(gid, g.dataset.line);
+      if (story) renderSelection();
+      else renderSavedGrammar();
+    }, true);
+
+    if (story) initStory(story);
+    else initIndex();
+    window.addEventListener('pagehide', () => { if (global.Pronounce) Pronounce.stop(); });
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

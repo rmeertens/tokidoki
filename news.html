@@ -13,7 +13,7 @@
   <meta name="twitter:title" content="Easy Japanese News — N5, N4 &amp; N3 | Tokidoki">
   <meta name="twitter:description" content="Japanese news for learners, at JLPT N5, N4 and N3: switch the level of every story, tap any sentence for its words and grammar, and save words and grammar to study.">
   <link rel="canonical" href="https://tokidoki.meertens.dev/news.html">
-  <link rel="stylesheet" href="style.css?v=41">
+  <link rel="stylesheet" href="style.css?v=42">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXWYNZC7YH"></script>
   <script>
@@ -69,22 +69,27 @@
         <div>
           <p class="lis-hero-kicker" lang="ja">やさしいニュース · JLPT N5–N3</p>
           <h2 class="lis-hero-title">News</h2>
-          <p class="lis-hero-sub">Today's news from Japan, written three times — switch any story between N5, N4 and N3.</p>
+          <p class="lis-hero-sub">News from Japan, every story written three times — at N5, N4 and N3.</p>
         </div>
       </section>
 
       <ol class="lis-steps">
-        <li><span class="lis-step-icon" aria-hidden="true">📰</span><b>Pick a level</b><span>N5 is short and simple; N3 reads like a real newspaper.</span></li>
-        <li><span class="lis-step-icon" aria-hidden="true">👆</span><b>Tap a sentence</b><span>See its meaning, every word, and the grammar it uses.</span></li>
-        <li><span class="lis-step-icon" aria-hidden="true">＋</span><b>Save</b><span>Words go to your flashcards, grammar to your list below.</span></li>
+        <li><span class="lis-step-icon" aria-hidden="true">📰</span><b>Pick a story</b><span>And a level: N5 is short and simple, N3 reads like a real newspaper.</span></li>
+        <li><span class="lis-step-icon" aria-hidden="true">👆</span><b>Tap to learn</b><span>Tap a word for its meaning, a sentence number for its grammar.</span></li>
+        <li><span class="lis-step-icon" aria-hidden="true">＋</span><b>Save</b><span>Words go to your flashcards, grammar to the list below.</span></li>
       </ol>
 
       <div class="kana-settings-row phrase-toggles news-toggles">
+        <div class="lis-levels news-levels" role="group" aria-label="Level" id="news-index-levels">
+          <span class="lis-levels-label">Level</span>
+          <button type="button" data-level="N5" aria-pressed="false">N5</button>
+          <button type="button" data-level="N4" aria-pressed="false">N4</button>
+          <button type="button" data-level="N3" aria-pressed="false">N3</button>
+        </div>
         <label class="kana-script-toggle"><input type="checkbox" id="news-toggle-furigana"> Furigana</label>
-        <label class="kana-script-toggle"><input type="checkbox" id="news-toggle-english"> English</label>
       </div>
 
-      <div id="news-list" class="news-list"></div>
+      <div id="news-headlines" class="news-headlines"></div>
 
       <section class="news-saved" id="news-saved-grammar">
         <h2 class="phrase-group-title">Saved grammar <span id="news-saved-grammar-count"></span></h2>
@@ -102,9 +107,9 @@
   <script src="app.js?v=29"></script>
   <script src="sync-merge.js?v=2"></script>
   <script src="sync.js?v=6"></script>
-  <script src="news-data.js?v=1"></script>
-  <script src="news-words.js?v=1"></script>
-  <script src="news.js?v=1"></script>
+  <script src="news-data.js?v=2"></script>
+  <script src="news-words.js?v=2"></script>
+  <script src="news.js?v=2"></script>
 
   <!-- Static content for search engines -->
   <section id="seo-content" aria-hidden="true">

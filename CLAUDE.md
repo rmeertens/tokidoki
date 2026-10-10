@@ -17,3 +17,9 @@
   `npm install --no-save kuromoji` first). Re-run it after changing
   `phrases-data.js` or `phrases-stories.js`; missing words go in
   `scripts/phrase_extra_words.json`. `test_phrases.js` fails if it's stale.
+- The News story pages, `news-<id>.html`, are written by
+  `node scripts/render_news_pages.mjs` from `news.html` (head, nav, scripts)
+  and `news-data.js`; re-run it after changing either (it also updates the
+  sitemap). Their words and grammar come from `news-words.js`, built by
+  `node scripts/tokenize_news.mjs` (kuromoji, as above); missing words go in
+  `scripts/news_extra_words.json`. `test_news.js` fails if either is stale.

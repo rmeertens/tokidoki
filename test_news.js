@@ -3,6 +3,7 @@
 // in sound furigana markup (every kanji with a kana reading — the 🔊 buttons
 // read those). news-words.js (scripts/tokenize_news.mjs) must cover every
 // headline and sentence exactly, with every word and grammar point it names.
+// Every story has its own page, news-<id>.html (scripts/render_news_pages.mjs).
 // Also checks news.js's helpers.
 const fs = require('fs');
 global.window = global;
@@ -110,7 +111,22 @@ check(News.lineSource(NEWS_ITEMS, 'nope:N5:0') === null, 'lineSource() of an unk
 
 const html = fs.readFileSync(`${__dirname}/news.html`, 'utf8');
 ['news-data.js', 'news-words.js', 'news.js', 'app.js'].forEach(f => check(html.includes(`src="${f}`), `news.html doesn't load ${f}`));
-['news-list', 'news-toggle-furigana', 'news-toggle-english', 'news-saved-grammar-list', 'news-saved-grammar-count'].forEach(id => check(html.includes(`id="${id}"`), `news.html has no #${id}`));
+['news-headlines', 'news-index-levels', 'news-toggle-furigana', 'news-saved-grammar-list', 'news-saved-grammar-count'].forEach(id => check(html.includes(`id="${id}"`), `news.html has no #${id}`));
+
+// One page per story, written by scripts/render_news_pages.mjs.
+const pages = fs.readdirSync(__dirname).filter(f => /^news-\d{4}-.+\.html$/.test(f));
+const renderIt = 'run node scripts/render_news_pages.mjs';
+NEWS_ITEMS.forEach(item => {
+  const file = News.pageFile(item.id);
+  check(pages.includes(file), `${file} missing — ${renderIt}`);
+  if (!pages.includes(file)) return;
+  const page = fs.readFileSync(`${__dirname}/${file}`, 'utf8');
+  check(page.includes(`data-story="${item.id}"`), `${file}: wrong story — ${renderIt}`);
+  ['news-text', 'news-panel', 'news-panel-body', 'news-levels', 'news-toggle-furigana', 'news-toggle-english', 'btn-news-read', 'btn-news-read-slow'].forEach(id => check(page.includes(`id="${id}"`), `${file} has no #${id} — ${renderIt}`));
+  News.LEVELS.forEach(l => check(page.includes(News.plainText(item.levels[l].title)), `${file}: ${l} text out of date — ${renderIt}`));
+  check(fs.readFileSync(`${__dirname}/sitemap.xml`, 'utf8').includes(`/${file}`), `${file} missing from sitemap.xml — ${renderIt}`);
+});
+pages.forEach(f => check(NEWS_ITEMS.some(it => News.pageFile(it.id) === f), `${f} is for a story that's gone — ${renderIt}`));
 fs.readdirSync(__dirname).filter(f => f.endsWith('.html') && f !== 'index.html' && /class="page-nav"/.test(fs.readFileSync(`${__dirname}/${f}`, 'utf8'))).forEach(f => {
   check(fs.readFileSync(`${__dirname}/${f}`, 'utf8').includes('href="news.html"'), `${f}: nav has no News link`);
 });
