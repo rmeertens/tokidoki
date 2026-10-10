@@ -18,7 +18,7 @@
 //
 // Works with touch, pen and mouse; vertical drags still scroll the page.
 //
-// A card marked `data-no-swipe` (Bunkei) keeps only tap to show the answer:
+// A card marked `data-no-swipe` (Bunkei, Verbs) keeps only tap to show the answer:
 // no dragging, no tap-left / tap-right grading and no swipe hint.
 (function (global) {
   'use strict';
