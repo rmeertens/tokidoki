@@ -6627,11 +6627,7 @@ a.flashcards-link:hover .flashcards-link-btn {
   padding: 10px 12px;
 }
 .account-field input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
-.account-field small { color: var(--text-muted); }
 .account-submit:disabled, .account-actions button:disabled { opacity: 0.6; cursor: default; }
 .account-msg { margin: 0; padding: 8px 12px; border-radius: var(--radius-sm); background: var(--green-dim); color: var(--text); font-size: 0.9rem; }
 .account-msg.account-error { background: var(--red-dim); }
 .account-actions { display: flex; gap: 8px; flex-wrap: wrap; }
-.account-links { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-.account-link { background: none; border: none; padding: 0; color: var(--accent); font: inherit; font-size: 0.9rem; cursor: pointer; }
-.account-link:hover { text-decoration: underline; }

@@ -2,7 +2,8 @@
 // between devices. Without logging in nothing changes: progress stays in
 // localStorage as always.
 //
-// Adds an account button to the header. Logged in, everything under the
+// Adds an account button to the header. Logging in is by email link (no
+// passwords): enter your email, click the link we send. Logged in, everything under the
 // `tokidoki_` / `tokidoki-` keys is copied to Firestore, one document per
 // user (users/{uid}, field `data`: { [key]: rawString }), and merged with
 // what's there by sync-merge.js. A sync runs when a page loads, a couple of
@@ -202,7 +203,8 @@
 
   let button = null;
   let overlay = null;
-  let mode = 'login';   // or 'signup' / 'reset'
+  let mode = 'email';   // or 'sent' (link on its way) / 'confirm' (link opened here, email needed)
+  let sentTo = '';
   let message = null;   // { text, error }
   let busy = false;
 
@@ -237,8 +239,8 @@
     render();
   }
 
-  function open() {
-    message = null;
+  function open(keepMessage) {
+    if (keepMessage !== true) message = null;
     overlay.classList.remove('hidden');
     render();
     if (!user) {
@@ -274,14 +276,15 @@
 
     const body = overlay.querySelector('.account-body');
     // Rebuilding the form would wipe what's being typed, so only when it changes.
-    const view = JSON.stringify([user && user.email, status, user && lastSynced(), !!syncing, mode, message, busy]);
+    const view = JSON.stringify([user && user.email, status, user && lastSynced(), !!syncing, mode, sentTo, message, busy]);
     if (body.dataset.view === view) return;
     body.dataset.view = view;
     const msg = message ? `<p class="account-msg${message.error ? ' account-error' : ''}" role="status">${esc(message.text)}</p>` : '';
     const dis = busy ? ' disabled' : '';
+    const title = overlay.querySelector('#account-title');
 
     if (user) {
-      overlay.querySelector('#account-title').textContent = 'Your account';
+      title.textContent = 'Your account';
       body.innerHTML = `
         <p class="account-text">Logged in as <strong>${esc(user.email)}</strong>. Your progress is saved to your account and shared with every device you log in on.</p>
         <p class="account-sub">${esc(status || lastSynced())}</p>
@@ -294,12 +297,25 @@
       return;
     }
 
-    const titles = { login: 'Save your progress', signup: 'Create an account', reset: 'Reset your password' };
-    overlay.querySelector('#account-title').textContent = titles[mode];
-    const intro = mode === 'reset'
-      ? 'Enter your email and we’ll send you a link to choose a new password.'
-      : 'Optional: log in to keep your progress safe and pick it up on other devices. Progress you’ve already made on this device comes along.';
-    const email = (overlay.querySelector('input[name=email]') || {}).value || '';
+    if (mode === 'sent') {
+      title.textContent = 'Check your email';
+      body.innerHTML = `
+        <p class="account-text">We sent a login link to <strong>${esc(sentTo)}</strong>. Open it on this device to log in. No password needed.</p>
+        <p class="account-sub">It can take a minute to arrive. Not there? Check your spam folder.</p>
+        ${msg}
+        <div class="account-actions">
+          <button type="button" class="btn-secondary" data-account-act="resend"${dis}>Send it again</button>
+          <button type="button" class="btn-secondary" data-account-act="change"${dis}>Use another email</button>
+        </div>`;
+      return;
+    }
+
+    const confirming = mode === 'confirm';
+    title.textContent = confirming ? 'Finish logging in' : 'Save your progress';
+    const intro = confirming
+      ? 'This login link was opened on a different device or browser than the one it was sent from. Enter your email again to finish logging in.'
+      : 'Optional: log in to keep your progress safe and pick it up on other devices. Enter your email and we’ll send you a link to log in with. No password needed. Progress you’ve already made on this device comes along.';
+    const email = (overlay.querySelector('input[name=email]') || {}).value || sentTo || '';
     body.innerHTML = `
       <p class="account-text">${intro}</p>
       <form class="account-form" novalidate>
@@ -307,62 +323,106 @@
           <span>Email</span>
           <input type="email" name="email" autocomplete="email" required value="${esc(email)}">
         </label>
-        ${mode === 'reset' ? '' : `
-        <label class="account-field">
-          <span>Password</span>
-          <input type="password" name="password" required minlength="6"
-            autocomplete="${mode === 'signup' ? 'new-password' : 'current-password'}">
-          ${mode === 'signup' ? '<small>At least 6 characters</small>' : ''}
-        </label>`}
         ${msg}
-        <button type="submit" class="btn-primary account-submit"${dis}>${
-          mode === 'login' ? 'Log in' : mode === 'signup' ? 'Create account' : 'Send reset link'}</button>
-      </form>
-      <div class="account-links">
-        ${mode === 'login' ? `
-          <button type="button" class="account-link" data-account-mode="signup">New here? Create an account</button>
-          <button type="button" class="account-link" data-account-mode="reset">Forgot password?</button>` : `
-          <button type="button" class="account-link" data-account-mode="login">← Back to log in</button>`}
-      </div>`;
+        <button type="submit" class="btn-primary account-submit"${dis}>${confirming ? 'Log in' : 'Email me a login link'}</button>
+      </form>`;
   }
 
   const ERRORS = {
-    'auth/invalid-credential': 'Wrong email or password.',
-    'auth/invalid-login-credentials': 'Wrong email or password.',
-    'auth/wrong-password': 'Wrong email or password.',
-    'auth/user-not-found': 'Wrong email or password.',
     'auth/invalid-email': 'That doesn’t look like an email address.',
     'auth/missing-email': 'Enter your email address.',
-    'auth/email-already-in-use': 'There’s already an account with that email — log in instead.',
-    'auth/weak-password': 'Pick a password of at least 6 characters.',
-    'auth/missing-password': 'Enter your password.',
+    'auth/invalid-action-code': 'This login link has expired or was already used. Send yourself a new one.',
+    'auth/expired-action-code': 'This login link has expired. Send yourself a new one.',
+    'auth/quota-exceeded': 'Too many login emails have been sent today. Please try again tomorrow.',
     'auth/too-many-requests': 'Too many tries. Wait a minute and try again.',
+    'auth/operation-not-allowed': 'Logging in by email link isn’t switched on yet.',
+    'auth/unauthorized-continue-uri': 'Logging in isn’t set up for this website yet.',
     'auth/network-request-failed': 'Couldn’t reach the login service. Check your connection.',
   };
+  const errorText = err => ERRORS[err && err.code] || 'Something went wrong. Please try again.';
 
-  async function onSubmit(e) {
-    e.preventDefault();
-    if (busy) return;
-    const form = e.target;
-    const email = form.email.value.trim();
-    const password = form.password ? form.password.value : '';
+  // ─── Email link login ────────────────────────────────────────────────────────
+  //
+  // We email a link back to the page they're on. Opening it lands here with
+  // ?mode=signIn&oobCode=… on the URL, which finishLink() turns into a login.
+  // The address is remembered (EMAIL_KEY) so the same browser doesn't have
+  // to ask for it again.
+
+  const EMAIL_KEY = 'tokidoki_sync_email';
+  const LINK_PARAMS = ['apiKey', 'oobCode', 'mode', 'continueUrl', 'lang', 'tenantId'];
+  let pendingLink = null;
+
+  function linkInUrl() {
+    const p = new URLSearchParams(location.search);
+    return p.get('mode') === 'signIn' && p.has('oobCode');
+  }
+
+  // Take the login code off the address bar, so it isn't bookmarked or shared.
+  function cleanUrl() {
+    const url = new URL(location.href);
+    LINK_PARAMS.forEach(k => url.searchParams.delete(k));
+    history.replaceState(history.state, '', url.pathname + url.search + url.hash);
+  }
+
+  async function sendLink(email) {
+    await start();
+    const { auth, authObj } = await firebase();
+    await auth.sendSignInLinkToEmail(authObj, email, {
+      url: location.origin + location.pathname,
+      handleCodeInApp: true,
+    });
+    set(EMAIL_KEY, email);
+    sentTo = email;
+    mode = 'sent';
+  }
+
+  async function finishLink(email) {
     busy = true;
     message = null;
     render();
     try {
       await start();
       const { auth, authObj } = await firebase();
-      if (mode === 'reset') {
-        await auth.sendPasswordResetEmail(authObj, email);
-        mode = 'login';
-        message = { text: `If there’s an account for ${email}, a reset link is on its way. Check your inbox (and spam).` };
-      } else if (mode === 'signup') {
-        await auth.createUserWithEmailAndPassword(authObj, email, password);
-      } else {
-        await auth.signInWithEmailAndPassword(authObj, email, password);
-      }
+      if (!auth.isSignInWithEmailLink(authObj, pendingLink)) throw { code: 'auth/invalid-action-code' };
+      await auth.signInWithEmailLink(authObj, email, pendingLink);
+      pendingLink = null;
+      del(EMAIL_KEY);
+      mode = 'email';
+      message = { text: 'You’re logged in. Your progress is now saved to your account.' };
     } catch (err) {
-      message = { text: ERRORS[err && err.code] || 'Something went wrong. Please try again.', error: true };
+      if (err && err.code === 'auth/invalid-email' && mode === 'confirm') {
+        message = { text: 'That isn’t the email this link was sent to.', error: true };
+      } else {
+        pendingLink = null;
+        mode = 'email';
+        message = { text: errorText(err), error: true };
+      }
+    }
+    busy = false;
+    render();
+  }
+
+  function handleLink() {
+    pendingLink = location.href;
+    cleanUrl();
+    const email = get(EMAIL_KEY);
+    mode = email ? 'email' : 'confirm';
+    open(true);
+    if (email) finishLink(email);
+  }
+
+  async function onSubmit(e) {
+    e.preventDefault();
+    if (busy) return;
+    const email = e.target.email.value.trim();
+    if (mode === 'confirm' && pendingLink) return finishLink(email);
+    busy = true;
+    message = null;
+    render();
+    try {
+      await sendLink(email);
+    } catch (err) {
+      message = { text: errorText(err), error: true };
     }
     busy = false;
     render();
@@ -371,19 +431,27 @@
   }
 
   async function onClick(e) {
-    const t = e.target.closest('[data-account-mode], [data-account-act]');
+    const t = e.target.closest('[data-account-act]');
     if (!t || !overlay.contains(t)) return;
     const act = t.dataset.accountAct;
-    if (t.dataset.accountMode) {
-      mode = t.dataset.accountMode;
+    if (act === 'change') {
+      mode = 'email';
       message = null;
       render();
-      const email = overlay.querySelector('input[name=email]');
-      const password = overlay.querySelector('input[name=password]');
-      (email.value && password ? password : email).focus();
-      return;
-    }
-    if (act === 'sync') {
+      overlay.querySelector('input[name=email]').focus();
+    } else if (act === 'resend') {
+      busy = true;
+      message = null;
+      render();
+      try {
+        await sendLink(sentTo);
+        message = { text: 'Sent a new link. Use the newest email.' };
+      } catch (err) {
+        message = { text: errorText(err), error: true };
+      }
+      busy = false;
+      render();
+    } else if (act === 'sync') {
       await sync();
       message = status ? { text: status, error: true } : null;
       render();
@@ -394,7 +462,7 @@
         if (pushTimer) await sync();
         const { auth, authObj } = await firebase();
         await auth.signOut(authObj);
-        mode = 'login';
+        mode = 'email';
         message = { text: 'Logged out. Your progress is still on this device.' };
       } catch {
         message = { text: 'Couldn’t log out. Please try again.', error: true };
@@ -406,7 +474,8 @@
 
   function init() {
     mount();
-    if (get(UID_KEY)) start().catch(() => { render(); });
+    if (overlay && linkInUrl()) handleLink();
+    else if (get(UID_KEY)) start().catch(() => { render(); });
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
