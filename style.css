@@ -1468,6 +1468,121 @@ a.chapter-card {
   font-weight: 700;
 }
 
+/* 自 / 他 badges and the transitive/intransitive pairs */
+.vp-type {
+  display: inline-block;
+  padding: 1px 6px;
+  margin: 0 2px 2px 0;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.vp-type-vi { color: var(--orange); background: var(--orange-dim); }
+.vp-type-vt { color: var(--blue); background: var(--blue-dim); }
+
+.vp-type-line { display: block; margin-top: 2px; }
+
+.vp-pair {
+  display: block;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.vt-intro {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.vt-intro-card {
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border-left: 4px solid var(--orange);
+  background: var(--bg-input);
+}
+
+.vt-intro-vt { border-left-color: var(--blue); }
+
+.vt-intro-head {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.vt-intro-card p {
+  margin: 4px 0 6px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-dim);
+}
+
+.vt-intro-example {
+  font-family: var(--font-jp);
+  font-size: 1rem;
+}
+
+.vt-intro-en {
+  font-family: var(--font);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.vt-tips {
+  margin: 0 0 12px;
+  padding-left: 1.2em;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--text-dim);
+}
+
+.vt-tips li { margin-bottom: 4px; }
+
+.vt-group { margin-top: 14px; }
+
+.vt-group-title {
+  font-weight: 700;
+  font-size: 0.88rem;
+  margin-bottom: 4px;
+}
+
+.vt-group-note {
+  font-weight: 400;
+  color: var(--text-dim);
+}
+
+.vt-table {
+  table-layout: fixed;
+  width: 100%;
+  min-width: 340px;
+}
+
+.vt-table th:nth-child(-n+2) { width: 36%; }
+
+.vt-table td { vertical-align: top; }
+
+.vt-table td[lang="ja"] {
+  font-family: var(--font-jp);
+}
+
+.vt-only {
+  margin-top: 10px;
+  font-size: 0.88rem;
+}
+
+.vt-only-label { color: var(--text-dim); }
+
+.vt-only [lang="ja"] { font-family: var(--font-jp); }
+
+.vt-source {
+  margin: 12px 0 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
 
 /* Confusable kanji browse page */
 .confusable-group-grid {
