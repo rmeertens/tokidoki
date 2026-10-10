@@ -3659,20 +3659,151 @@ a.chapter-card {
   padding-top: 4px;
 }
 
-.phrase-reveal-hint {
-  display: none;
+.phrase-explain-hint {
   color: var(--text-muted);
   font-size: 0.8rem;
+}
+
+/* A tapped phrase or story line: its words and grammar. */
+.phrase-card.open,
+.phrase-story-line.open {
+  border-color: var(--accent);
+}
+
+.phrase-card.open {
+  grid-column: 1 / -1;
+}
+
+.phrase-story-line.open {
+  background: var(--bg-card-hover);
+}
+
+.phrase-explain {
+  margin: 6px 0 10px;
+  padding: 12px 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: auto;
+}
+
+.phrase-explain-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.phrase-explain-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.phrase-explain > .phrase-explain-label {
+  margin-top: 14px;
+}
+
+.phrase-words,
+.phrase-grammar {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.phrase-word {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed var(--border);
+}
+
+.phrase-word:last-child {
+  border-bottom: none;
+}
+
+.phrase-word-jp {
+  font-family: var(--font-jp);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.8;
+}
+
+.phrase-word-jp rt {
+  font-size: 0.5em;
+  font-weight: 400;
+  color: var(--text-dim);
+}
+
+.phrase-word-base,
+.phrase-word-reading {
+  font-family: var(--font-jp);
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+.phrase-word-meaning {
+  flex: 1 1 12em;
+}
+
+.phrase-word-pos {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.phrase-grammar-item {
+  padding: 10px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.phrase-grammar-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.phrase-grammar-title {
+  font-weight: 700;
+}
+
+.phrase-grammar-snippet {
+  font-family: var(--font-jp);
+  font-size: 1.05rem;
+  color: var(--accent);
+  margin-top: 4px;
+}
+
+.phrase-grammar-pattern {
+  font-family: var(--font-jp);
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.phrase-grammar-note {
+  margin-top: 4px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.phrase-grammar-none {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: var(--text-dim);
 }
 
 .phrases-hide-english .phrase-card:not(.revealed) .phrase-en,
 .phrases-hide-english .phrase-card:not(.revealed) .phrase-note,
 .phrases-hide-english .phrase-story-line:not(.revealed) .phrase-story-en {
   display: none;
-}
-
-.phrases-hide-english .phrase-card:not(.revealed) .phrase-reveal-hint {
-  display: inline;
 }
 
 .phrase-empty {

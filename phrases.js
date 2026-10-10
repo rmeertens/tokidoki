@@ -9,8 +9,10 @@
 //                          line by line. These pages are written by
 //                          scripts/render_phrase_pages.mjs.
 //
-// On both, the furigana and English can be switched off (tap a card or a
-// story line to reveal its English), and 🔊 / 🐢 read a phrase aloud.
+// On both, tapping a phrase card or a story line explains it: each word
+// with its reading and meaning, and the grammar it uses (from
+// phrases-words.js, built by scripts/tokenize_phrases.mjs). The furigana and
+// English can be switched off, and 🔊 / 🐢 read a phrase aloud.
 (function () {
   'use strict';
 
@@ -18,6 +20,7 @@
   const RUBY_RE = /([一-鿿々]+)\[([^\]]+)\]/g;
   const groups = window.PHRASE_GROUPS || [];
   const stories = window.PHRASE_STORIES || {};
+  const words = window.PHRASE_WORDS || { gloss: {}, grammar: {}, lines: {} };
   // Categories in group order, so each group's categories sit together.
   const data = (window.PHRASES_DATA || []).slice()
     .sort((a, b) => groups.findIndex(g => g.id === a.group) - groups.findIndex(g => g.id === b.group));
@@ -46,16 +49,81 @@
     p._search = [plainText(p.jp), kanaText(p.jp), p.en, p.note, cat.titleEn, plainText(cat.title)].join(' ').toLowerCase();
   }));
 
-  function phraseHtml(cat, p, i) {
+  // ─── Explaining a sentence ─────────────────────────────────────────────────
+
+  // Which explanations are open, by line id ('<category>:p<n>' for a phrase,
+  // '<category>:s<n>' for a story line), so a re-render keeps them open.
+  const openLines = new Set();
+
+  const displayWord = key => key.replace(/\(.*\)$/, '');
+
+  // The words of a sentence, each once: as written, its dictionary form when
+  // that differs, reading, meaning and part of speech.
+  function wordsHtml(line) {
+    const seen = new Set();
+    const rows = line.w.filter(p => Array.isArray(p) && words.gloss[p[1]] && !seen.has(p[1]) && seen.add(p[1])).map(([src, key]) => {
+      const [reading, meaning, pos] = words.gloss[key];
+      const surface = plainText(src);
+      const base = displayWord(key);
+      return `
+        <li class="phrase-word">
+          <span class="phrase-word-jp" lang="ja">${jpHtml(src)}</span>
+          ${base !== surface ? `<span class="phrase-word-base" lang="ja">→ ${esc(base)}</span>` : ''}
+          ${/[一-鿿々]/.test(surface + base) ? `<span class="phrase-word-reading" lang="ja">${esc(reading)}</span>` : ''}
+          <span class="phrase-word-meaning">${esc(meaning)}</span>
+          <span class="phrase-word-pos">${esc(pos)}</span>
+        </li>`;
+    });
+    return rows.length ? `<ul class="phrase-words">${rows.join('')}</ul>` : '';
+  }
+
+  function grammarHtml(line) {
+    const items = line.g.filter(([id]) => words.grammar[id]).map(([id, snippet]) => {
+      const g = words.grammar[id];
+      return `
+        <li class="phrase-grammar-item">
+          <div class="phrase-grammar-head">
+            <span class="story-level-badge">${esc(g.level)}</span>
+            <span class="phrase-grammar-title">${g.title}</span>
+          </div>
+          <div class="phrase-grammar-snippet" lang="ja">「${esc(snippet)}」</div>
+          <div class="phrase-grammar-pattern" lang="ja">${g.pattern}</div>
+          <p class="phrase-grammar-note">${g.note}</p>
+        </li>`;
+    });
+    return items.length
+      ? `<ul class="phrase-grammar">${items.join('')}</ul>`
+      : '<p class="phrase-grammar-none">No grammar to unpack here — it\'s a set phrase or a single word, so learn it as a whole.</p>';
+  }
+
+  function explainHtml(id, jp) {
+    const line = words.lines[id];
+    if (!line) return '';
     return `
-      <div class="phrase-card" id="p${i + 1}" data-cat="${cat.id}" data-i="${i}" tabindex="0">
+      <div class="phrase-explain">
+        <div class="phrase-explain-head">
+          <span class="phrase-explain-label">Words</span>
+          ${window.Pronounce ? Pronounce.buttonsHtml(kanaText(jp)) : ''}
+        </div>
+        ${wordsHtml(line)}
+        <div class="phrase-explain-label">Grammar</div>
+        ${grammarHtml(line)}
+      </div>`;
+  }
+
+  function phraseHtml(cat, p, i) {
+    const id = `${cat.id}:p${i}`;
+    const open = openLines.has(id);
+    return `
+      <div class="phrase-card${open ? ' revealed open' : ''}" id="p${i + 1}" data-cat="${cat.id}" data-i="${i}" tabindex="0" aria-expanded="${open}">
         <div class="phrase-jp" lang="ja">${jpHtml(p.jp)}</div>
         <div class="phrase-en">${p.en}</div>
         <div class="phrase-note">${p.note}</div>
         <div class="phrase-actions">
           ${window.Pronounce ? Pronounce.buttonsHtml(kanaText(p.jp)) : ''}
-          <span class="phrase-reveal-hint">Tap to reveal</span>
+          <span class="phrase-explain-hint">${open ? 'Hide words &amp; grammar' : 'Tap for words &amp; grammar'}</span>
         </div>
+        ${open ? explainHtml(id, p.jp) : ''}
       </div>`;
   }
 
@@ -161,14 +229,21 @@
     box.classList.remove('hidden');
     $('#phrase-story-title').innerHTML = jpHtml(story.title);
     $('#phrase-story-title-en').textContent = story.titleEn;
-    $('#phrase-story-lines').innerHTML = story.lines.map(([who, jp, en], i) => `
-      <div class="phrase-story-line${who ? '' : ' narration'}${i === readingLine ? ' reading' : ''}" data-line="${i}" role="button" tabindex="0" title="Listen to this line">
-        ${who ? `<div class="phrase-story-who" lang="ja">${jpHtml(who)}</div>` : ''}
-        <div class="phrase-story-body">
-          <div class="phrase-story-jp" lang="ja">${jpHtml(jp)}</div>
-          <div class="phrase-story-en">${en}</div>
-        </div>
-      </div>`).join('');
+    $('#phrase-story-lines').innerHTML = story.lines.map(([who, jp, en], i) => {
+      const id = `${cat.id}:s${i}`;
+      const open = openLines.has(id);
+      return `
+        <div class="phrase-story-item">
+          <div class="phrase-story-line${who ? '' : ' narration'}${i === readingLine ? ' reading' : ''}${open ? ' revealed open' : ''}" data-line="${i}" role="button" tabindex="0" aria-expanded="${open}" title="Words and grammar">
+            ${who ? `<div class="phrase-story-who" lang="ja">${jpHtml(who)}</div>` : ''}
+            <div class="phrase-story-body">
+              <div class="phrase-story-jp" lang="ja">${jpHtml(jp)}</div>
+              <div class="phrase-story-en">${en}</div>
+            </div>
+          </div>
+          ${open ? explainHtml(id, jp) : ''}
+        </div>`;
+    }).join('');
     renderReadButtons();
   }
 
@@ -211,17 +286,21 @@
     });
   }
 
-  // Tapping a story line reads just that line, and shows its English.
+  // Tapping a story line opens (or closes) its words and grammar, and reads
+  // it aloud when "Speak words on click" is on.
   function onStoryLine(el) {
     const story = stories[cat.id];
-    const line = story && story.lines[Number(el.dataset.line)];
+    const i = Number(el.dataset.line);
+    const line = story && story.lines[i];
     if (!line) return;
-    el.classList.add('revealed');
-    if (window.Pronounce) {
-      Pronounce.stop();
-      markReading(null);
-      Pronounce.speak(kanaText(line[1]), false);
-    }
+    const id = `${cat.id}:s${i}`;
+    const opening = !openLines.has(id);
+    if (opening) openLines.add(id);
+    else openLines.delete(id);
+    renderStory();
+    if (opening && window.Pronounce) Pronounce.onClick(kanaText(line[1]));
+    const again = document.querySelector(`.phrase-story-line[data-line="${i}"]`);
+    if (again) again.focus({ preventScroll: true });
   }
 
   function highlightFromHash() {
@@ -261,12 +340,23 @@
 
   // ─── Shared ────────────────────────────────────────────────────────────────
 
+  // Tapping a phrase card opens (or closes) its words and grammar.
   function onCardActivate(card) {
     const c = data.find(x => x.id === card.dataset.cat);
-    const p = c && c.phrases[Number(card.dataset.i)];
+    const i = Number(card.dataset.i);
+    const p = c && c.phrases[i];
     if (!p) return;
-    card.classList.toggle('revealed');
-    if (window.Pronounce) Pronounce.onClick(kanaText(p.jp));
+    const id = `${c.id}:p${i}`;
+    const opening = !openLines.has(id);
+    if (opening) openLines.add(id);
+    else openLines.delete(id);
+    const wrap = document.createElement('div');
+    wrap.innerHTML = phraseHtml(c, p, i);
+    const fresh = wrap.firstElementChild;
+    if (card.classList.contains('picked')) fresh.classList.add('picked');
+    card.replaceWith(fresh);
+    fresh.focus({ preventScroll: true });
+    if (opening && window.Pronounce) Pronounce.onClick(kanaText(p.jp));
   }
 
   function onToggles(rerender) {
@@ -286,6 +376,7 @@
     const list = $('#phrase-list');
     if (!list) return;
     list.addEventListener('click', e => {
+      if (e.target.closest('.phrase-explain')) return;
       const card = e.target.closest('.phrase-card');
       if (card) onCardActivate(card);
     });

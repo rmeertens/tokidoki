@@ -361,7 +361,7 @@
         ['', '八月[はちがつ]、町[まち]でお祭[まつ]りがありました。', 'In August there was a festival in town.'],
         ['', '男[おとこ]の人[ひと]たちが、神輿[みこし]をかついでいます。', 'Men are carrying a portable shrine.'],
         ['みんな', 'わっしょい！わっしょい！', 'Wasshoi! Wasshoi!'],
-        ['', 'ユキとケンは、たこ焼[や]きを買[か]いました。最後[さいご]の一[ひと]つをかけて、じゃんけんです。', 'Yuki and Ken bought takoyaki. They played rock-paper-scissors for the last one.'],
+        ['', 'ユキとケンは、たこ焼[や]きを買[か]いました。最後[さいご]の一[ひと]つを賭[か]けて、じゃんけんです。', 'Yuki and Ken bought takoyaki. They played rock-paper-scissors for the last one.'],
         ['二人[ふたり]', 'じゃんけんぽん！あいこでしょ！', 'Rock, paper, scissors! A tie, so again!'],
         ['ケン', '負[ま]けた…', 'I lost…'],
         ['ユキ', 'ドンマイ！', 'Never mind!'],

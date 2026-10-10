@@ -102,7 +102,7 @@ ${nav}
         <div class="phrase-story-label">📖 Story</div>
         <h2 class="phrase-story-title" id="phrase-story-title" lang="ja">${story ? esc(plain(story.title)) : ''}</h2>
         <p class="phrase-story-title-en" id="phrase-story-title-en">${story ? esc(story.titleEn) : ''}</p>
-        <p class="phrase-story-hint">Press play to hear the whole story, or tap a line to hear just that line.</p>
+        <p class="phrase-story-hint">Press play to hear the whole story. Tap a line to see its words and grammar.</p>
         <div class="kana-settings-row phrase-story-controls">
           <button type="button" class="btn-secondary story-read hidden" id="btn-story-read" aria-pressed="false">▶ Read aloud</button>
           <button type="button" class="btn-secondary story-read hidden" id="btn-story-read-slow" aria-pressed="false">🐢 Slowly</button>

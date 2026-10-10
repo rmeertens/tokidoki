@@ -4,12 +4,15 @@
 // category belongs to one of PHRASE_GROUPS, and has a story in
 // phrases-stories.js that uses at least two of its phrases, and a page of
 // its own, phrases-<id>.html (scripts/render_phrase_pages.mjs writes them).
+// phrases-words.js (scripts/tokenize_phrases.mjs) must cover every phrase and
+// story line exactly, with every word and grammar point it names.
 const fs = require('fs');
 global.window = global;
 require('./phrases-data.js');
 require('./phrases-stories.js');
+require('./phrases-words.js');
 
-const { PHRASES_DATA, PHRASE_GROUPS, PHRASE_STORIES } = global;
+const { PHRASES_DATA, PHRASE_GROUPS, PHRASE_STORIES, PHRASE_WORDS } = global;
 const GROUPS = new Set((PHRASE_GROUPS || []).map(g => g.id));
 const RUBY = /([一-鿿々]+)\[([^\]]*)\]/g;
 const KANJI = /[一-鿿々]/;
@@ -81,6 +84,34 @@ PHRASES_DATA.forEach(cat => {
   check(used.length >= 2, `${cat.id} story uses only ${used.length} of its phrases`);
 });
 Object.keys(PHRASE_STORIES || {}).forEach(id => check(ids.has(id), `story for unknown category ${id}`));
+
+// Words and grammar for every sentence, matching the current text.
+const stale = 'run node scripts/tokenize_phrases.mjs';
+const lineIds = new Set();
+PHRASES_DATA.forEach(cat => {
+  const story = PHRASE_STORIES[cat.id];
+  [...cat.phrases.map((p, i) => [`${cat.id}:p${i}`, p.jp]), ...((story && story.lines) || []).map((l, i) => [`${cat.id}:s${i}`, l[1]])].forEach(([id, jp]) => {
+    lineIds.add(id);
+    const line = PHRASE_WORDS.lines[id];
+    check(!!line, `${id}: no words — ${stale}`);
+    if (!line) return;
+    const joined = line.w.map(p => (typeof p === 'string' ? p : p[0])).join('');
+    check(joined === jp, `${id}: words don't match the text — ${stale}`);
+    line.w.filter(p => typeof p !== 'string').forEach(([, key]) => {
+      const g = PHRASE_WORDS.gloss[key];
+      check(Array.isArray(g) && g.length === 3 && g.every(x => typeof x === 'string' && x), `${id}: bad gloss for "${key}"`);
+    });
+    const text = plain(jp);
+    line.g.forEach(([gid, snippet]) => {
+      const g = PHRASE_WORDS.grammar[gid];
+      check(!!g && !!g.title && !!g.pattern && !!g.note, `${id}: grammar "${gid}" missing or incomplete`);
+      check(text.includes(snippet), `${id}: grammar snippet "${snippet}" not in "${text}"`);
+    });
+  });
+});
+Object.keys(PHRASE_WORDS.lines).forEach(id => check(lineIds.has(id), `phrases-words.js has a line ${id} that no longer exists — ${stale}`));
+const wordLines = Object.values(PHRASE_WORDS.lines);
+check(wordLines.filter(l => l.g.length).length / wordLines.length > 0.7, 'fewer than 70% of sentences have any grammar');
 
 const pages = fs.readdirSync(__dirname).filter(f => /^phrases-.+\.html$/.test(f));
 PHRASES_DATA.forEach(cat => {

@@ -1,0 +1,1867 @@
+{
+  "ニトリ": [
+    "ニトリ",
+    "Nitori (furniture chain)",
+    "name"
+  ],
+  "かっぱえびせん": [
+    "かっぱえびせん",
+    "Kappa Ebisen (shrimp crackers)",
+    "name"
+  ],
+  "京都": [
+    "きょうと",
+    "Kyoto",
+    "place name"
+  ],
+  "インテル": [
+    "インテル",
+    "Intel",
+    "name"
+  ],
+  "てる": [
+    "てる",
+    "is …ing (casual ている)",
+    "auxiliary verb"
+  ],
+  "100人": [
+    "ひゃくにん",
+    "100 people",
+    "number + counter"
+  ],
+  "セブン-イレブン": [
+    "セブンイレブン",
+    "Seven-Eleven",
+    "name"
+  ],
+  "コンビ": [
+    "コンビ",
+    "pair, duo (also a pun on コンビニ)",
+    "noun"
+  ],
+  "ファミリーマート": [
+    "ファミリーマート",
+    "FamilyMart (convenience store)",
+    "name"
+  ],
+  "ファイト": [
+    "ファイト",
+    "fight! (cheer: go for it!)",
+    "interjection"
+  ],
+  "一発": [
+    "いっぱつ",
+    "one shot, one go",
+    "noun"
+  ],
+  "24時間": [
+    "にじゅうよじかん",
+    "24 hours",
+    "number + counter"
+  ],
+  "戦える": [
+    "たたかえる",
+    "can fight (potential of 戦う)",
+    "verb"
+  ],
+  "ハツラツ": [
+    "はつらつ",
+    "lively, full of energy",
+    "な-adjective"
+  ],
+  "オロナミンC": [
+    "オロナミンシー",
+    "Oronamin C (vitamin drink)",
+    "name"
+  ],
+  "ロッテ": [
+    "ロッテ",
+    "Lotte (sweets maker)",
+    "name"
+  ],
+  "カラダ": [
+    "からだ",
+    "body (体, written in katakana)",
+    "noun"
+  ],
+  "ピース": [
+    "ピース",
+    "peace",
+    "noun"
+  ],
+  "カルピス": [
+    "カルピス",
+    "Calpis (milky soft drink)",
+    "name"
+  ],
+  "目のつけどころ": [
+    "めのつけどころ",
+    "where you focus, an eye for things",
+    "expression"
+  ],
+  "シャープ": [
+    "シャープ",
+    "sharp; Sharp (electronics maker)",
+    "name / adjective"
+  ],
+  "リンゴ": [
+    "りんご",
+    "apple",
+    "noun"
+  ],
+  "ハチミツ": [
+    "はちみつ",
+    "honey",
+    "noun"
+  ],
+  "とろ〜り": [
+    "とろーり",
+    "gooey, thick and melting",
+    "onomatopoeia"
+  ],
+  "ピッカピカ": [
+    "ぴっかぴか",
+    "sparkling, brand new (emphatic ピカピカ)",
+    "onomatopoeia"
+  ],
+  "一年生": [
+    "いちねんせい",
+    "first-year pupil",
+    "noun"
+  ],
+  "亭主": [
+    "ていしゅ",
+    "husband (old-fashioned)",
+    "noun"
+  ],
+  "スカッと": [
+    "すかっと",
+    "refreshingly, with a crisp feeling",
+    "adverb"
+  ],
+  "さわやか": [
+    "さわやか",
+    "refreshing, crisp",
+    "な-adjective"
+  ],
+  "コカ・コーラ": [
+    "コカコーラ",
+    "Coca-Cola",
+    "name"
+  ],
+  "たくましい": [
+    "たくましい",
+    "strong, sturdy",
+    "い-adjective"
+  ],
+  "ユキ": [
+    "ユキ",
+    "Yuki (a name)",
+    "name"
+  ],
+  "一袋": [
+    "ひとふくろ",
+    "one bag",
+    "number + counter"
+  ],
+  "え": [
+    "え",
+    "huh? what?",
+    "interjection"
+  ],
+  "お年": [
+    "おとし",
+    "year (polite); よいお年を = have a good New Year",
+    "noun"
+  ],
+  "末永い": [
+    "すえながい",
+    "long-lasting, for ever",
+    "い-adjective"
+  ],
+  "お幸せ": [
+    "おしあわせ",
+    "happiness (polite)",
+    "noun"
+  ],
+  "メリークリスマス": [
+    "メリークリスマス",
+    "Merry Christmas",
+    "expression"
+  ],
+  "ハッピーハロウィン": [
+    "ハッピーハロウィン",
+    "Happy Halloween",
+    "expression"
+  ],
+  "トリック・オア・トリート": [
+    "トリックオアトリート",
+    "trick or treat",
+    "expression"
+  ],
+  "義理チョコ": [
+    "ぎりチョコ",
+    "obligation chocolate (given to coworkers on Valentine's Day)",
+    "noun"
+  ],
+  "長生き": [
+    "ながいき",
+    "living long, a long life",
+    "noun / する-verb"
+  ],
+  "暑中お見舞い": [
+    "しょちゅうおみまい",
+    "summer greeting (asking after someone in the heat)",
+    "noun"
+  ],
+  "お年玉": [
+    "おとしだま",
+    "New Year money given to children",
+    "noun"
+  ],
+  "メアリー": [
+    "メアリー",
+    "Mary (a name)",
+    "name"
+  ],
+  "二月": [
+    "にがつ",
+    "February",
+    "noun"
+  ],
+  "七月": [
+    "しちがつ",
+    "July",
+    "noun"
+  ],
+  "七夕": [
+    "たなばた",
+    "Tanabata, the star festival (7 July)",
+    "noun"
+  ],
+  "短冊": [
+    "たんざく",
+    "paper strip for writing a wish or poem",
+    "noun"
+  ],
+  "十二月": [
+    "じゅうにがつ",
+    "December",
+    "noun"
+  ],
+  "ごちそうさまでした": [
+    "ごちそうさまでした",
+    "thank you for the meal (after eating)",
+    "set phrase"
+  ],
+  "いってきます": [
+    "いってきます",
+    "I'm off (and will be back)",
+    "set phrase"
+  ],
+  "いってらっしゃい": [
+    "いってらっしゃい",
+    "see you later (to someone leaving home)",
+    "set phrase"
+  ],
+  "お疲れさまです": [
+    "おつかれさまです",
+    "thanks for your hard work (work greeting)",
+    "set phrase"
+  ],
+  "お疲れさまでした": [
+    "おつかれさまでした",
+    "good work today (when someone finishes or leaves)",
+    "set phrase"
+  ],
+  "お先に": [
+    "おさきに",
+    "before you, ahead of you",
+    "expression"
+  ],
+  "お邪魔": [
+    "おじゃま",
+    "intrusion, disturbance; お邪魔します = sorry to intrude",
+    "noun"
+  ],
+  "いえいえ": [
+    "いえいえ",
+    "no, no (not at all)",
+    "interjection"
+  ],
+  "しょうがない": [
+    "しょうがない",
+    "it can't be helped",
+    "expression"
+  ],
+  "オランダ": [
+    "オランダ",
+    "the Netherlands",
+    "place name"
+  ],
+  "何と": [
+    "なんと",
+    "how, what (as in how to read)",
+    "adverb"
+  ],
+  "頂戴": [
+    "ちょうだい",
+    "receiving (humble); also 'give me' (casual)",
+    "noun / verb"
+  ],
+  "イベント": [
+    "イベント",
+    "event",
+    "noun"
+  ],
+  "待ち合わせ": [
+    "まちあわせ",
+    "meeting up (at an agreed place)",
+    "noun / する-verb"
+  ],
+  "改札": [
+    "かいさつ",
+    "ticket gates",
+    "noun"
+  ],
+  "割り勘": [
+    "わりかん",
+    "splitting the bill",
+    "noun"
+  ],
+  "会える": [
+    "あえる",
+    "can meet (potential of 会う)",
+    "verb"
+  ],
+  "LINE": [
+    "ライン",
+    "LINE (Japan's chat app)",
+    "name"
+  ],
+  "ピーマン": [
+    "ピーマン",
+    "green pepper",
+    "noun"
+  ],
+  "本日": [
+    "ほんじつ",
+    "today (formal)",
+    "noun"
+  ],
+  "お世話": [
+    "おせわ",
+    "care, help; お世話になります = thank you for looking after me",
+    "noun"
+  ],
+  "もう一度": [
+    "もういちど",
+    "once more, again",
+    "expression"
+  ],
+  "いただける": [
+    "いただける",
+    "can receive (humble); 〜ていただけますか = could you please…",
+    "verb"
+  ],
+  "お手伝い": [
+    "おてつだい",
+    "help (polite)",
+    "noun"
+  ],
+  "サトウさん": [
+    "サトウさん",
+    "Mr / Ms Sato",
+    "name"
+  ],
+  "タメ口": [
+    "ためぐち",
+    "casual speech (as between equals)",
+    "noun"
+  ],
+  "カラオケ": [
+    "カラオケ",
+    "karaoke",
+    "noun"
+  ],
+  "マジ": [
+    "マジ",
+    "serious, for real (slang)",
+    "noun / な-adjective"
+  ],
+  "三時間": [
+    "さんじかん",
+    "three hours",
+    "number + counter"
+  ],
+  "りょ": [
+    "りょ",
+    "OK, got it (short for 了解)",
+    "slang"
+  ],
+  "既読スルー": [
+    "きどくスルー",
+    "leaving a message on read",
+    "slang"
+  ],
+  "既読": [
+    "きどく",
+    "read (a message's 'seen' mark)",
+    "noun"
+  ],
+  "寝落ち": [
+    "ねおち",
+    "dozing off (mid-chat or mid-game)",
+    "noun / する-verb"
+  ],
+  "（笑）": [
+    "わら",
+    "(lol) — 笑 = laugh",
+    "slang"
+  ],
+  "三十分後": [
+    "さんじゅっぷんご",
+    "thirty minutes later",
+    "expression"
+  ],
+  "スリッパ": [
+    "スリッパ",
+    "slippers",
+    "noun"
+  ],
+  "素敵": [
+    "すてき",
+    "lovely, wonderful",
+    "な-adjective"
+  ],
+  "お家": [
+    "おうち",
+    "home, house (polite)",
+    "noun"
+  ],
+  "お構いなく": [
+    "おかまいなく",
+    "please don't go to any trouble",
+    "set phrase"
+  ],
+  "おいしいで": [
+    "おいしいで",
+    "it's tasty, I tell you (Kansai で = よ)",
+    "Kansai dialect"
+  ],
+  "前向き": [
+    "まえむき",
+    "positive, forward-looking",
+    "な-adjective"
+  ],
+  "おかけ": [
+    "おかけ",
+    "causing (humble); ご迷惑をおかけしました = sorry for the trouble",
+    "humble verb stem"
+  ],
+  "ゴルフ": [
+    "ゴルフ",
+    "golf",
+    "noun"
+  ],
+  "行ける": [
+    "いける",
+    "can go (potential of 行く)",
+    "verb"
+  ],
+  "新宿": [
+    "しんじゅく",
+    "Shinjuku (Tokyo)",
+    "place name"
+  ],
+  "もらえる": [
+    "もらえる",
+    "can receive; 〜てもらえますか = could you…?",
+    "verb"
+  ],
+  "スミス": [
+    "スミス",
+    "Smith (a name)",
+    "name"
+  ],
+  "温泉": [
+    "おんせん",
+    "hot spring",
+    "noun"
+  ],
+  "タトゥー": [
+    "タトゥー",
+    "tattoo",
+    "noun"
+  ],
+  "湯船": [
+    "ゆぶね",
+    "bathtub",
+    "noun"
+  ],
+  "極楽": [
+    "ごくらく",
+    "paradise, bliss",
+    "noun"
+  ],
+  "朝食": [
+    "ちょうしょく",
+    "breakfast (formal)",
+    "noun"
+  ],
+  "箱根": [
+    "はこね",
+    "Hakone (hot-spring town)",
+    "place name"
+  ],
+  "保険": [
+    "ほけん",
+    "insurance",
+    "noun"
+  ],
+  "アレルギー": [
+    "アレルギー",
+    "allergy",
+    "noun"
+  ],
+  "だるい": [
+    "だるい",
+    "sluggish, heavy, tired",
+    "い-adjective"
+  ],
+  "幹事": [
+    "かんじ",
+    "organiser (of a party)",
+    "noun"
+  ],
+  "無礼講": [
+    "ぶれいこう",
+    "a party where rank is set aside",
+    "noun"
+  ],
+  "ソフトドリンク": [
+    "ソフトドリンク",
+    "soft drink",
+    "noun"
+  ],
+  "二次会": [
+    "にじかい",
+    "second round, after-party",
+    "noun"
+  ],
+  "やばい": [
+    "やばい",
+    "oh no! / awesome (slang)",
+    "い-adjective"
+  ],
+  "かんぱーい": [
+    "かんぱい",
+    "cheers! (乾杯, drawn out)",
+    "interjection"
+  ],
+  "五杯": [
+    "ごはい",
+    "five glasses",
+    "number + counter"
+  ],
+  "海賊王": [
+    "かいぞくおう",
+    "king of the pirates",
+    "noun"
+  ],
+  "真実": [
+    "しんじつ",
+    "truth",
+    "noun"
+  ],
+  "あれれ〜": [
+    "あれれ",
+    "huh? (puzzled)",
+    "interjection"
+  ],
+  "じっちゃん": [
+    "じっちゃん",
+    "grandpa (casual)",
+    "noun"
+  ],
+  "にかけて": [
+    "にかけて",
+    "on, staking (my honour / name)",
+    "expression"
+  ],
+  "代わる": [
+    "かわる",
+    "to take the place of; 〜に代わって = in place of",
+    "verb"
+  ],
+  "おしおき": [
+    "おしおき",
+    "punishment",
+    "noun"
+  ],
+  "かめはめ波": [
+    "かめはめは",
+    "Kamehameha wave (Dragon Ball attack)",
+    "name"
+  ],
+  "クリリン": [
+    "クリリン",
+    "Krillin (Dragon Ball character)",
+    "name"
+  ],
+  "のび太": [
+    "のびた",
+    "Nobita (Doraemon character)",
+    "name"
+  ],
+  "生意気": [
+    "なまいき",
+    "cheeky, cocky",
+    "な-adjective"
+  ],
+  "親父": [
+    "おやじ",
+    "dad, old man (rough)",
+    "noun"
+  ],
+  "ジョー": [
+    "ジョー",
+    "Joe (a name)",
+    "name"
+  ],
+  "全集中": [
+    "ぜんしゅうちゅう",
+    "total concentration",
+    "noun"
+  ],
+  "領域展開": [
+    "りょういきてんかい",
+    "domain expansion",
+    "noun"
+  ],
+  "わくわく": [
+    "わくわく",
+    "excited, thrilled",
+    "onomatopoeia"
+  ],
+  "捧げる": [
+    "ささげる",
+    "to dedicate, to offer up",
+    "verb"
+  ],
+  "ピカチュウ": [
+    "ピカチュウ",
+    "Pikachu",
+    "name"
+  ],
+  "アニメ": [
+    "アニメ",
+    "anime, animation",
+    "noun"
+  ],
+  "三人": [
+    "さんにん",
+    "three people",
+    "number + counter"
+  ],
+  "セリフ": [
+    "せりふ",
+    "line (in a film or play)",
+    "noun"
+  ],
+  "タロウ": [
+    "タロウ",
+    "Taro (a name)",
+    "name"
+  ],
+  "ジャイアン": [
+    "ジャイアン",
+    "Gian (the bully in Doraemon)",
+    "name"
+  ],
+  "ゴミ": [
+    "ごみ",
+    "rubbish, garbage",
+    "noun"
+  ],
+  "40秒": [
+    "よんじゅうびょう",
+    "forty seconds",
+    "number + counter"
+  ],
+  "飛ばねえ": [
+    "とばねえ",
+    "doesn't fly (rough 飛ばない)",
+    "verb"
+  ],
+  "豚": [
+    "ぶた",
+    "pig",
+    "noun"
+  ],
+  "小僧": [
+    "こぞう",
+    "boy, brat",
+    "noun"
+  ],
+  "トトロ": [
+    "トトロ",
+    "Totoro",
+    "name"
+  ],
+  "いたもん": [
+    "いたもん",
+    "was there, I tell you! (いた + childish もん)",
+    "expression"
+  ],
+  "まっくろくろすけ": [
+    "まっくろくろすけ",
+    "soot sprites",
+    "name"
+  ],
+  "おちこんだり": [
+    "おちこんだり",
+    "feeling down (and so on) — 落ち込む + たり",
+    "verb"
+  ],
+  "バ〜ルス": [
+    "バルス",
+    "Balse (the spell in Castle in the Sky)",
+    "name"
+  ],
+  "兄ちゃん": [
+    "にいちゃん",
+    "big brother (casual)",
+    "noun"
+  ],
+  "へんじがない": [
+    "へんじがない",
+    "there is no reply (返事がない)",
+    "expression"
+  ],
+  "しかばね": [
+    "しかばね",
+    "corpse",
+    "noun"
+  ],
+  "ぼうけんのしょ": [
+    "ぼうけんのしょ",
+    "adventure log, save file (冒険の書)",
+    "noun"
+  ],
+  "いのちだいじに": [
+    "いのちだいじに",
+    "value your life (命大事に)",
+    "expression"
+  ],
+  "やせいの": [
+    "やせいの",
+    "wild (野生の)",
+    "noun + の"
+  ],
+  "とびだしてきた": [
+    "とびだしてきた",
+    "jumped out (飛び出してきた)",
+    "verb"
+  ],
+  "あがった": [
+    "あがった",
+    "went up (上がった)",
+    "verb"
+  ],
+  "波動": [
+    "はどう",
+    "wave, surge",
+    "noun"
+  ],
+  "コンティニュー": [
+    "コンティニュー",
+    "continue (in a game)",
+    "noun"
+  ],
+  "ロールプレイングゲーム": [
+    "ロールプレイングゲーム",
+    "role-playing game",
+    "noun"
+  ],
+  "資料": [
+    "しりょう",
+    "documents, materials, report",
+    "noun"
+  ],
+  "瞳": [
+    "ひとみ",
+    "eyes (poetic)",
+    "noun"
+  ],
+  "乾杯": [
+    "かんぱい",
+    "a toast; cheers!",
+    "noun / interjection"
+  ],
+  "フォース": [
+    "フォース",
+    "the Force",
+    "noun"
+  ],
+  "と共に": [
+    "とともに",
+    "together with (formal)",
+    "expression"
+  ],
+  "あらんことを": [
+    "あらんことを",
+    "may it be (old, grand style)",
+    "expression"
+  ],
+  "アイル・ビー・バック": [
+    "アイルビーバック",
+    "I'll be back",
+    "expression"
+  ],
+  "ありのまま": [
+    "ありのまま",
+    "just as it is, as you are",
+    "noun"
+  ],
+  "ゴジラ": [
+    "ゴジラ",
+    "Godzilla",
+    "name"
+  ],
+  "スター・ウォーズ": [
+    "スターウォーズ",
+    "Star Wars",
+    "name"
+  ],
+  "カサブランカ": [
+    "カサブランカ",
+    "Casablanca",
+    "name"
+  ],
+  "振り向く": [
+    "ふりむく",
+    "to turn round",
+    "verb"
+  ],
+  "お・も・て・な・し": [
+    "おもてなし",
+    "hospitality",
+    "noun"
+  ],
+  "じぇじぇじぇ": [
+    "じぇじぇじぇ",
+    "whaaat?! (Iwate dialect)",
+    "interjection"
+  ],
+  "倍返し": [
+    "ばいがえし",
+    "paying back double",
+    "noun"
+  ],
+  "神ってる": [
+    "かみってる",
+    "godlike, on a roll (slang)",
+    "verb"
+  ],
+  "インスタ映え": [
+    "インスタばえ",
+    "Instagrammable",
+    "noun"
+  ],
+  "そだねー": [
+    "そだねー",
+    "yeah, that's right (Hokkaido-style そうだね)",
+    "expression"
+  ],
+  "ONE TEAM": [
+    "ワンチーム",
+    "one team",
+    "noun"
+  ],
+  "3密": [
+    "さんみつ",
+    "the three Cs (closed spaces, crowds, close contact)",
+    "noun"
+  ],
+  "リアル二刀流": [
+    "リアルにとうりゅう",
+    "real two-sword style (pitching and hitting)",
+    "noun"
+  ],
+  "アレ": [
+    "アレ",
+    "that, 'it'",
+    "pronoun"
+  ],
+  "ふてほど": [
+    "ふてほど",
+    "short for 不適切にもほどがある (way too inappropriate)",
+    "noun"
+  ],
+  "ワイルドだろぉ": [
+    "ワイルドだろぉ",
+    "pretty wild, huh?",
+    "expression"
+  ],
+  "なでしこジャパン": [
+    "なでしこジャパン",
+    "Nadeshiko Japan (women's football team)",
+    "name"
+  ],
+  "三回": [
+    "さんかい",
+    "three times",
+    "number + counter"
+  ],
+  "お待ち": [
+    "おまち",
+    "waiting (polite); お待ちください = please wait",
+    "noun"
+  ],
+  "ポイント": [
+    "ポイント",
+    "points",
+    "noun"
+  ],
+  "店内": [
+    "てんない",
+    "inside the shop",
+    "noun"
+  ],
+  "お越し": [
+    "おこし",
+    "coming (honorific); またお越しください = please come again",
+    "noun"
+  ],
+  "まもなく": [
+    "まもなく",
+    "shortly, soon",
+    "adverb"
+  ],
+  "1番線": [
+    "いちばんせん",
+    "platform 1",
+    "number + counter"
+  ],
+  "駆け込み": [
+    "かけこみ",
+    "rushing in",
+    "noun"
+  ],
+  "乗車": [
+    "じょうしゃ",
+    "boarding (a train or bus)",
+    "noun / する-verb"
+  ],
+  "渋谷": [
+    "しぶや",
+    "Shibuya (Tokyo)",
+    "place name"
+  ],
+  "車内": [
+    "しゃない",
+    "inside the train",
+    "noun"
+  ],
+  "通話": [
+    "つうわ",
+    "phone call",
+    "noun / する-verb"
+  ],
+  "ただいま": [
+    "ただいま",
+    "right now (formal); also 'I'm home!'",
+    "adverb"
+  ],
+  "十一時半": [
+    "じゅういちじはん",
+    "half past eleven",
+    "time"
+  ],
+  "飛び込む": [
+    "とびこむ",
+    "to jump in, to dive in",
+    "verb"
+  ],
+  "終点": [
+    "しゅうてん",
+    "last stop, terminus",
+    "noun"
+  ],
+  "わっしょい": [
+    "わっしょい",
+    "heave-ho! (festival chant)",
+    "interjection"
+  ],
+  "たーまやー": [
+    "たまや",
+    "Ta-ma-ya! (cheer at fireworks)",
+    "interjection"
+  ],
+  "じゃんけんぽん": [
+    "じゃんけんぽん",
+    "rock, paper, scissors!",
+    "set phrase"
+  ],
+  "あいこでしょ": [
+    "あいこでしょ",
+    "a tie, so again!",
+    "set phrase"
+  ],
+  "せーの": [
+    "せーの",
+    "ready… go! (all together)",
+    "interjection"
+  ],
+  "ばんざーい": [
+    "ばんざい",
+    "banzai! hooray!",
+    "interjection"
+  ],
+  "日本一": [
+    "にっぽんいち",
+    "the best in Japan",
+    "noun"
+  ],
+  "はっけよい": [
+    "はっけよい",
+    "hakkeyoi! (sumo referee's call to fight)",
+    "interjection"
+  ],
+  "のこった": [
+    "のこった",
+    "still in! (sumo: the wrestlers are still in the ring)",
+    "interjection"
+  ],
+  "ニッポン": [
+    "ニッポン",
+    "Japan",
+    "name"
+  ],
+  "チャチャチャ": [
+    "チャチャチャ",
+    "cha-cha-cha (clapping rhythm)",
+    "onomatopoeia"
+  ],
+  "ドンマイ": [
+    "ドンマイ",
+    "don't mind, never mind",
+    "interjection"
+  ],
+  "ファイト、オー": [
+    "ファイトオー",
+    "fight, oh! (team cheer)",
+    "interjection"
+  ],
+  "神輿": [
+    "みこし",
+    "portable shrine",
+    "noun"
+  ],
+  "かつぐ": [
+    "かつぐ",
+    "to carry on your shoulders",
+    "verb"
+  ],
+  "ドキドキ": [
+    "どきどき",
+    "heart pounding (nerves, a crush)",
+    "onomatopoeia"
+  ],
+  "ペコペコ": [
+    "ぺこぺこ",
+    "starving (empty stomach)",
+    "onomatopoeia"
+  ],
+  "キラキラ": [
+    "きらきら",
+    "twinkling, sparkling",
+    "onomatopoeia"
+  ],
+  "ザーザー": [
+    "ざーざー",
+    "pouring (heavy rain)",
+    "onomatopoeia"
+  ],
+  "ニコニコ": [
+    "にこにこ",
+    "smiling happily",
+    "onomatopoeia"
+  ],
+  "イライラ": [
+    "いらいら",
+    "irritated",
+    "onomatopoeia"
+  ],
+  "もふもふ": [
+    "もふもふ",
+    "fluffy, soft (fur)",
+    "onomatopoeia"
+  ],
+  "シーン": [
+    "しーん",
+    "(dead silence)",
+    "onomatopoeia"
+  ],
+  "ガーン": [
+    "がーん",
+    "(shock!)",
+    "onomatopoeia"
+  ],
+  "ゴロゴロ": [
+    "ごろごろ",
+    "lazing around; rumbling",
+    "onomatopoeia"
+  ],
+  "もぐもぐ": [
+    "もぐもぐ",
+    "munching",
+    "onomatopoeia"
+  ],
+  "ふわふわ": [
+    "ふわふわ",
+    "fluffy, soft and airy",
+    "onomatopoeia"
+  ],
+  "パンケーキ": [
+    "パンケーキ",
+    "pancake",
+    "noun"
+  ],
+  "推し": [
+    "おし",
+    "your fave (the idol or character you support)",
+    "noun"
+  ],
+  "尊い": [
+    "とうとい",
+    "precious, almost holy",
+    "い-adjective"
+  ],
+  "推し活": [
+    "おしかつ",
+    "fan activities for your fave",
+    "noun"
+  ],
+  "沼": [
+    "ぬま",
+    "swamp; (slang) a hobby you can't escape",
+    "noun"
+  ],
+  "ハマる": [
+    "はまる",
+    "to get hooked on",
+    "verb"
+  ],
+  "神回": [
+    "かみかい",
+    "god-tier episode",
+    "noun"
+  ],
+  "聖地巡礼": [
+    "せいちじゅんれい",
+    "pilgrimage (to an anime's real locations)",
+    "noun"
+  ],
+  "箱推し": [
+    "はこおし",
+    "supporting the whole group",
+    "noun"
+  ],
+  "解釈違い": [
+    "かいしゃくちがい",
+    "a different interpretation (of a character)",
+    "noun"
+  ],
+  "コスプレ": [
+    "コスプレ",
+    "cosplay",
+    "noun / する-verb"
+  ],
+  "ネタバレ": [
+    "ネタバレ",
+    "spoiler",
+    "noun"
+  ],
+  "萌え〜": [
+    "もえ",
+    "moe (a warm, protective love for a cute character)",
+    "noun"
+  ],
+  "アイドル": [
+    "アイドル",
+    "idol (pop star)",
+    "noun"
+  ],
+  "レンくん": [
+    "レンくん",
+    "Ren (a name, + くん)",
+    "name"
+  ],
+  "ステージ": [
+    "ステージ",
+    "stage",
+    "noun"
+  ],
+  "ねぇ": [
+    "ねぇ",
+    "not (rough ない)",
+    "auxiliary"
+  ],
+  "ゲッツ": [
+    "ゲッツ",
+    "get's! (comedian's gag)",
+    "interjection"
+  ],
+  "グ〜": [
+    "グー",
+    "goo! (thumbs-up gag)",
+    "interjection"
+  ],
+  "ダメよ〜": [
+    "ダメよ",
+    "no~ (that's not allowed)",
+    "expression"
+  ],
+  "ダメダメ": [
+    "ダメダメ",
+    "no, no",
+    "expression"
+  ],
+  "欧米": [
+    "おうべい",
+    "Europe and America, the West",
+    "noun"
+  ],
+  "ルネッサ〜ンス": [
+    "ルネッサンス",
+    "Renaissance!",
+    "interjection"
+  ],
+  "35億": [
+    "さんじゅうごおく",
+    "3.5 billion",
+    "number"
+  ],
+  "漫才": [
+    "まんざい",
+    "comedy double act",
+    "noun"
+  ],
+  "親指": [
+    "おやゆび",
+    "thumb",
+    "noun"
+  ],
+  "残酷": [
+    "ざんこく",
+    "cruel",
+    "な-adjective"
+  ],
+  "天使": [
+    "てんし",
+    "angel",
+    "noun"
+  ],
+  "テーゼ": [
+    "テーゼ",
+    "thesis",
+    "noun"
+  ],
+  "恋するフォーチュンクッキー": [
+    "こいするフォーチュンクッキー",
+    "Fortune Cookie in Love (AKB48 song)",
+    "name"
+  ],
+  "華": [
+    "げ",
+    "flower (in 紅蓮華, crimson lotus)",
+    "noun"
+  ],
+  "ペンパイナッポーアッポーペン": [
+    "ペンパイナッポーアッポーペン",
+    "Pen-Pineapple-Apple-Pen",
+    "name"
+  ],
+  "四人": [
+    "よにん",
+    "four people",
+    "number + counter"
+  ],
+  "次に": [
+    "つぎに",
+    "next",
+    "adverb"
+  ],
+  "番": [
+    "ばん",
+    "turn (your turn)",
+    "noun"
+  ],
+  "100倍": [
+    "ひゃくばい",
+    "a hundred times",
+    "number + counter"
+  ],
+  "アンパンマン": [
+    "アンパンマン",
+    "Anpanman",
+    "name"
+  ],
+  "ドラえもん": [
+    "ドラえもん",
+    "Doraemon",
+    "name"
+  ],
+  "どこでもドア〜": [
+    "どこでもドア",
+    "Anywhere Door",
+    "name"
+  ],
+  "オラ": [
+    "おら",
+    "I (rustic, boyish)",
+    "pronoun"
+  ],
+  "しんのすけ": [
+    "しんのすけ",
+    "Shinnosuke (Crayon Shin-chan)",
+    "name"
+  ],
+  "5歳": [
+    "ごさい",
+    "five years old",
+    "number + counter"
+  ],
+  "だゾ": [
+    "だぞ",
+    "is, I tell you! (だ + ぞ)",
+    "copula + particle"
+  ],
+  "いないいない": [
+    "いないいない",
+    "not here, not here… (peekaboo)",
+    "expression"
+  ],
+  "ばあ": [
+    "ばあ",
+    "boo! (peekaboo)",
+    "interjection"
+  ],
+  "おしりかじり虫": [
+    "おしりかじりむし",
+    "the bum-biting bug",
+    "name"
+  ],
+  "ソウタ": [
+    "ソウタ",
+    "Sota (a name)",
+    "name"
+  ],
+  "一歳": [
+    "いっさい",
+    "one year old",
+    "number + counter"
+  ],
+  "キャッキャ": [
+    "きゃっきゃ",
+    "squealing with laughter",
+    "onomatopoeia"
+  ],
+  "サザエさん": [
+    "サザエさん",
+    "Sazae-san (TV cartoon)",
+    "name"
+  ],
+  "グー": [
+    "グー",
+    "rock (in rock-paper-scissors)",
+    "noun"
+  ],
+  "恐れ入る": [
+    "おそれいる",
+    "to be grateful / sorry (very polite)",
+    "verb"
+  ],
+  "ほうれんそう": [
+    "ほうれんそう",
+    "spinach; report-inform-consult (報連相)",
+    "noun"
+  ],
+  "花金": [
+    "はなきん",
+    "Friday night (out)",
+    "noun"
+  ],
+  "飲みニケーション": [
+    "のみニケーション",
+    "bonding over drinks",
+    "noun"
+  ],
+  "定時": [
+    "ていじ",
+    "regular closing time",
+    "noun"
+  ],
+  "根回し": [
+    "ねまわし",
+    "groundwork, lining up support beforehand",
+    "noun"
+  ],
+  "有給": [
+    "ゆうきゅう",
+    "paid leave",
+    "noun"
+  ],
+  "メール": [
+    "メール",
+    "email",
+    "noun"
+  ],
+  "とりあえず": [
+    "とりあえず",
+    "for now, for starters",
+    "adverb"
+  ],
+  "別腹": [
+    "べつばら",
+    "a separate stomach (room for dessert)",
+    "noun"
+  ],
+  "シメ": [
+    "しめ",
+    "the closing dish of a meal or night",
+    "noun"
+  ],
+  "猫舌": [
+    "ねこじた",
+    "can't handle hot food ('cat's tongue')",
+    "noun"
+  ],
+  "放題": [
+    "ほうだい",
+    "as much as you like",
+    "suffix"
+  ],
+  "食べっぷり": [
+    "たべっぷり",
+    "the way someone eats (with gusto)",
+    "noun"
+  ],
+  "団子": [
+    "だんご",
+    "dumpling",
+    "noun"
+  ],
+  "居酒屋": [
+    "いざかや",
+    "izakaya, Japanese pub",
+    "noun"
+  ],
+  "アイス": [
+    "アイス",
+    "ice cream",
+    "noun"
+  ],
+  "七転び八起き": [
+    "ななころびやおき",
+    "fall seven times, get up eight",
+    "proverb"
+  ],
+  "小判": [
+    "こばん",
+    "old gold coin",
+    "noun"
+  ],
+  "弘法": [
+    "こうぼう",
+    "Kobo Daishi (famous monk and calligrapher)",
+    "name"
+  ],
+  "一期一会": [
+    "いちごいちえ",
+    "once-in-a-lifetime meeting",
+    "four-kanji idiom"
+  ],
+  "十人十色": [
+    "じゅうにんといろ",
+    "everyone is different",
+    "four-kanji idiom"
+  ],
+  "一石二鳥": [
+    "いっせきにちょう",
+    "two birds with one stone",
+    "four-kanji idiom"
+  ],
+  "自業自得": [
+    "じごうじとく",
+    "you reap what you sow",
+    "four-kanji idiom"
+  ],
+  "近道": [
+    "ちかみち",
+    "shortcut",
+    "noun"
+  ],
+  "ホトトギス": [
+    "ホトトギス",
+    "lesser cuckoo (bird)",
+    "noun"
+  ],
+  "鳴かせる": [
+    "なかせる",
+    "to make (a bird) sing — causative of 鳴く",
+    "verb"
+  ],
+  "大志": [
+    "たいし",
+    "ambition",
+    "noun"
+  ],
+  "天": [
+    "てん",
+    "heaven",
+    "noun"
+  ],
+  "造る": [
+    "つくる",
+    "to create, to build",
+    "verb"
+  ],
+  "和": [
+    "わ",
+    "harmony",
+    "noun"
+  ],
+  "を以て": [
+    "をもって",
+    "by means of, with (formal)",
+    "expression"
+  ],
+  "貴い": [
+    "とうとい",
+    "precious, noble",
+    "い-adjective"
+  ],
+  "なす": [
+    "なす",
+    "to make, to regard as (classical)",
+    "verb"
+  ],
+  "為す": [
+    "なす",
+    "to do (classical)",
+    "verb"
+  ],
+  "成る": [
+    "なる",
+    "to be accomplished",
+    "verb"
+  ],
+  "何事": [
+    "なにごと",
+    "anything, everything",
+    "noun"
+  ],
+  "うーん": [
+    "うーん",
+    "hmm",
+    "interjection"
+  ],
+  "スマホ": [
+    "スマホ",
+    "smartphone",
+    "noun"
+  ],
+  "鳴き声": [
+    "なきごえ",
+    "(animal or bird) call, cry",
+    "noun"
+  ],
+  "吾輩": [
+    "わがはい",
+    "I (pompous, old-fashioned)",
+    "pronoun"
+  ],
+  "無い": [
+    "ない",
+    "there isn't, have no",
+    "い-adjective"
+  ],
+  "雪国": [
+    "ゆきぐに",
+    "snow country",
+    "noun"
+  ],
+  "メロス": [
+    "メロス",
+    "Melos (a name)",
+    "name"
+  ],
+  "激怒": [
+    "げきど",
+    "rage, fury",
+    "noun / する-verb"
+  ],
+  "恥": [
+    "はじ",
+    "shame",
+    "noun"
+  ],
+  "あけぼの": [
+    "あけぼの",
+    "dawn, daybreak",
+    "noun"
+  ],
+  "祇園精舎": [
+    "ぎおんしょうじゃ",
+    "Jetavana, a temple of the Buddha",
+    "name"
+  ],
+  "諸行無常": [
+    "しょぎょうむじょう",
+    "all things are impermanent",
+    "four-kanji idiom"
+  ],
+  "響き": [
+    "ひびき",
+    "echo, ring, sound",
+    "noun"
+  ],
+  "あり": [
+    "あり",
+    "there is (classical ある)",
+    "verb"
+  ],
+  "古池": [
+    "ふるいけ",
+    "old pond",
+    "noun"
+  ],
+  "蛙": [
+    "かわず",
+    "frog (classical reading)",
+    "noun"
+  ],
+  "柿": [
+    "かき",
+    "persimmon",
+    "noun"
+  ],
+  "なり": [
+    "なり",
+    "(classical) is, does — emphatic ending",
+    "auxiliary"
+  ],
+  "法隆寺": [
+    "ほうりゅうじ",
+    "Horyuji (temple in Nara)",
+    "place name"
+  ],
+  "ニモマケズ": [
+    "にもまけず",
+    "not losing even to (= にも負けず)",
+    "expression"
+  ],
+  "一ページ目": [
+    "いちページめ",
+    "the first page",
+    "number + counter"
+  ],
+  "俳句": [
+    "はいく",
+    "haiku",
+    "noun"
+  ],
+  "びしょびしょ": [
+    "びしょびしょ",
+    "soaking wet",
+    "onomatopoeia"
+  ],
+  "なんでやねん": [
+    "なんでやねん",
+    "why on earth?! (Kansai comeback)",
+    "Kansai dialect"
+  ],
+  "おおきに": [
+    "おおきに",
+    "thanks (Kansai)",
+    "Kansai dialect"
+  ],
+  "ほんまに": [
+    "ほんまに",
+    "really (Kansai 本当に)",
+    "Kansai dialect"
+  ],
+  "ちゃうちゃう": [
+    "ちゃうちゃう",
+    "no, no — that's not it (Kansai 違う違う)",
+    "Kansai dialect"
+  ],
+  "もうかりまっか": [
+    "もうかりまっか",
+    "making money? (Osaka merchants' hello)",
+    "Kansai dialect"
+  ],
+  "せやな": [
+    "せやな",
+    "yeah, right (Kansai そうだね)",
+    "Kansai dialect"
+  ],
+  "しんどいわ": [
+    "しんどいわ",
+    "I'm worn out (しんどい + わ)",
+    "Kansai dialect"
+  ],
+  "せやろ": [
+    "せやろ",
+    "told you so (Kansai そうだろう)",
+    "Kansai dialect"
+  ],
+  "来てな": [
+    "きてな",
+    "come, OK? (Kansai 来てね)",
+    "Kansai dialect"
+  ],
+  "付き合う": [
+    "つきあう",
+    "to go out with, to date",
+    "verb"
+  ],
+  "一目惚れ": [
+    "ひとめぼれ",
+    "love at first sight",
+    "noun / する-verb"
+  ],
+  "胸キュン": [
+    "むねキュン",
+    "heart-squeeze (romantic thrill)",
+    "noun"
+  ],
+  "壁ドン": [
+    "かべドン",
+    "wall-slam (manga romance move)",
+    "noun"
+  ],
+  "センス": [
+    "センス",
+    "taste, sense of style",
+    "noun"
+  ],
+  "花粉症": [
+    "かふんしょう",
+    "hay fever",
+    "noun"
+  ],
+  "梅雨入り": [
+    "つゆいり",
+    "start of the rainy season",
+    "noun"
+  ],
+  "夏バテ": [
+    "なつバテ",
+    "summer fatigue",
+    "noun"
+  ],
+  "ちゃう": [
+    "ちゃう",
+    "(casual てしまう) end up doing, do completely",
+    "auxiliary verb"
+  ],
+  "紅葉": [
+    "こうよう",
+    "autumn leaves",
+    "noun"
+  ],
+  "こたつ": [
+    "こたつ",
+    "heated table with a blanket",
+    "noun"
+  ],
+  "年越しそば": [
+    "としこしそば",
+    "New Year's Eve soba",
+    "noun"
+  ],
+  "六月": [
+    "ろくがつ",
+    "June",
+    "noun"
+  ],
+  "十一月": [
+    "じゅういちがつ",
+    "November",
+    "noun"
+  ],
+  "一年後": [
+    "いちねんご",
+    "a year later",
+    "expression"
+  ],
+  "わんぱく": [
+    "わんぱく",
+    "naughty, mischievous",
+    "な-adjective"
+  ],
+  "十分後": [
+    "じゅっぷんご",
+    "ten minutes later",
+    "expression"
+  ],
+  "初デート": [
+    "はつデート",
+    "first date",
+    "noun"
+  ],
+  "お会計": [
+    "おかいけい",
+    "the bill, paying (at a restaurant or shop)",
+    "noun"
+  ],
+  "何か": [
+    "なにか",
+    "something; any",
+    "pronoun"
+  ],
+  "かな": [
+    "かな",
+    "I wonder (sentence ending)",
+    "particle"
+  ],
+  "じゃんけん": [
+    "じゃんけん",
+    "rock-paper-scissors",
+    "noun"
+  ],
+  "よっ": [
+    "よっ",
+    "hey! (a cheer)",
+    "interjection"
+  ],
+  "多すぎ": [
+    "おおすぎ",
+    "too many",
+    "い-adjective + すぎ"
+  ],
+  "受ける(うける)": [
+    "うける",
+    "to receive; (slang, often ウケる) to be hilarious",
+    "verb"
+  ],
+  "つく": [
+    "つく",
+    "to be attached, to appear (e.g. a 'read' mark)",
+    "verb"
+  ],
+  "支度しな": [
+    "したくしな",
+    "get ready! (rough, from 支度しなさい)",
+    "verb (command)"
+  ],
+  "まわりこむ": [
+    "まわりこむ",
+    "to go round (in front of someone), to cut off",
+    "verb"
+  ]
+}
