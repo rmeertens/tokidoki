@@ -47,8 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let running = false;
   let visible = true;
 
-  // Play/pause toggle in the bottom-left corner. The choice is remembered;
-  // without one the belt runs unless the system asks for reduced motion.
+  // Play/pause switch: a control box bolted to the left end of the belt,
+  // drawn on the canvas with the belt's own steel. An invisible button sits
+  // over it for clicks and keyboard. The choice is remembered; without one
+  // the belt runs unless the system asks for reduced motion.
   const PAUSE_KEY = 'tokidoki-belt-paused';
   let paused;
   try {
@@ -58,37 +60,50 @@ document.addEventListener('DOMContentLoaded', () => {
     paused = reducedMotion.matches;
   }
 
-  // 7x7 pixel icons, one character per pixel like the sprites.
+  // 1 = dark steel, 2 = steel, 3 = slat highlight, i = icon.
+  const BOX_X = 2;
+  const BOX_Y = BELT_Y - 1;
+  const BOX = [
+    '.111111111.',
+    '13333333331',
+    '12222222221',
+    '122.....221',
+    '122.....221',
+    '122.....221',
+    '122.....221',
+    '122.....221',
+    '12222222221',
+    '11111111111',
+  ];
   const ICONS = {
-    play: ['X......', 'XXX....', 'XXXXX..', 'XXXXXXX', 'XXXXX..', 'XXX....', 'X......'],
-    pause: ['XX...XX', 'XX...XX', 'XX...XX', 'XX...XX', 'XX...XX', 'XX...XX', 'XX...XX'],
+    play: ['ii...', 'iiii.', 'iiiii', 'iiii.', 'ii...'],
+    pause: ['ii.ii', 'ii.ii', 'ii.ii', 'ii.ii', 'ii.ii'],
   };
-  const iconSvg = (rows) => {
-    let rects = '';
-    rows.forEach((row, y) => {
-      for (let x = 0; x < row.length; x++) {
-        if (row[x] === 'X') rects += `<rect x="${x}" y="${y}" width="1" height="1"/>`;
-      }
-    });
-    return `<svg viewBox="0 0 7 7" shape-rendering="crispEdges" aria-hidden="true">${rects}</svg>`;
-  };
+  let boxHover = false;
+  let boxDown = false;
+
   const toggle = document.createElement('button');
   toggle.type = 'button';
   toggle.className = 'belt-toggle';
   canvas.parentElement.appendChild(toggle);
   function syncToggle() {
-    toggle.innerHTML = iconSvg(paused ? ICONS.play : ICONS.pause);
     const label = paused ? 'Start the sushi belt' : 'Stop the sushi belt';
     toggle.setAttribute('aria-label', label);
     toggle.title = label;
     toggle.setAttribute('aria-pressed', String(!paused));
   }
+  const redrawIfStill = () => { if (!running) draw(performance.now()); };
   toggle.addEventListener('click', () => {
     paused = !paused;
     try { localStorage.setItem(PAUSE_KEY, paused ? '1' : '0'); } catch {}
     syncToggle();
     updateRunning();
+    redrawIfStill();
   });
+  toggle.addEventListener('pointerenter', () => { boxHover = true; redrawIfStill(); });
+  toggle.addEventListener('pointerleave', () => { boxHover = boxDown = false; redrawIfStill(); });
+  toggle.addEventListener('pointerdown', () => { boxDown = true; redrawIfStill(); });
+  toggle.addEventListener('pointerup', () => { boxDown = false; redrawIfStill(); });
   syncToggle();
 
   function readTheme() {
@@ -130,6 +145,12 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.height = H - TOP;
     canvas.style.width = `${W * scale}px`;
     canvas.style.height = `${(H - TOP) * scale}px`;
+    Object.assign(toggle.style, {
+      left: `${BOX_X * scale}px`,
+      top: `${(BOX_Y - TOP) * scale}px`,
+      width: `${BOX[0].length * scale}px`,
+      height: `${BOX.length * scale}px`,
+    });
 
     const loop = Math.ceil(W / SPACING) * SPACING + SPACING;
     plates = [];
@@ -137,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     props = [];
     // Keep the counter props clear of the play/pause button.
-    let x = Math.ceil(48 / scale) + Math.floor(Math.random() * 30);
+    let x = BOX_X + BOX[0].length + 4 + Math.floor(Math.random() * 30);
     while (x < W - 14) {
       props.push({ x, kind: pick(PROP_KINDS) });
       x += 60 + Math.floor(Math.random() * 90);
@@ -225,6 +246,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function drawSwitch() {
+    const face = boxHover ? theme.slat : theme.steel;
+    const lit = boxHover ? theme.steel : theme.slat;
+    sprite(BOX, BOX_X, BOX_Y, { 1: theme.steelDark, 2: face, 3: lit });
+    ctx.fillStyle = theme.shadow;
+    ctx.fillRect(BOX_X + 1, BOX_Y + BOX.length, BOX[0].length, 1);
+    const icon = paused ? ICONS.play : ICONS.pause;
+    const press = boxDown ? 1 : 0;
+    sprite(icon, BOX_X + 3, BOX_Y + 3 + press, { i: paused ? COLORS.F : COLORS.T });
+  }
+
   function draw(now) {
     ctx.setTransform(1, 0, 0, 1, 0, -TOP);
     ctx.clearRect(0, 0, W, H);
@@ -232,6 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
     drawPlates(now);
     drawCounter();
     drawProps();
+    drawSwitch();
     drawHearts(now);
   }
 
