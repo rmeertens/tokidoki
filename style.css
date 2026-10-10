@@ -3463,6 +3463,170 @@ a.chapter-card {
   color: var(--text-dim);
 }
 
+/* Phrases (phrases.html) — fun words and sentences by category, with the
+   Memes page's filter chips. With English off, a card hides its meaning and
+   note until tapped. */
+.phrase-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.phrase-search {
+  font: inherit;
+  width: 100%;
+  color: var(--text);
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+}
+
+.phrase-search:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.phrase-toggles {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.phrase-chip-count {
+  font-size: 0.75em;
+  opacity: 0.7;
+  margin-left: 2px;
+}
+
+.phrase-section {
+  margin-top: 28px;
+  scroll-margin-top: 80px;
+}
+
+.phrase-section-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  font-family: var(--font-jp);
+  font-size: 1.3rem;
+  line-height: 1.8;
+}
+
+.phrase-section-emoji {
+  font-size: 1.5rem;
+}
+
+.phrase-section-title rt,
+.phrase-jp rt {
+  font-size: 0.5em;
+  color: var(--text-dim);
+}
+
+.phrase-section-en {
+  font-family: var(--font);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+
+.phrase-section-blurb {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  margin: 2px 0 12px;
+}
+
+.phrase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.phrase-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.phrase-card:hover {
+  border-color: var(--accent);
+}
+
+.phrase-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.phrase-card.picked {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px var(--orange-dim);
+}
+
+.phrase-jp {
+  font-family: var(--font-jp);
+  font-size: 1.25rem;
+  line-height: 1.9;
+}
+
+.phrase-en {
+  font-weight: 600;
+}
+
+.phrase-note {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.phrase-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+.phrase-reveal-hint {
+  display: none;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.hide-english .phrase-card:not(.revealed) .phrase-en,
+.hide-english .phrase-card:not(.revealed) .phrase-note {
+  display: none;
+}
+
+.hide-english .phrase-card:not(.revealed) .phrase-reveal-hint {
+  display: inline;
+}
+
+/* On phones the category chips scroll sideways instead of stacking up. */
+@media (max-width: 600px) {
+  .meme-filters.phrase-filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scrollbar-width: thin;
+  }
+
+  .phrase-filters .meme-filter {
+    flex: none;
+  }
+}
+
+.phrase-empty {
+  margin-top: 24px;
+  color: var(--text-dim);
+}
+
 /* Memes & Jokes (memes.html) — the Stories reader plus kind filters, an
    emoji "picture" on each card and a "Why it's funny" box under the text. */
 .meme-sizes {

@@ -4911,6 +4911,8 @@
       // word-order.js wires up its own page.
     } else if (mode === 'story-fill') {
       // story-fill.js wires up its own page.
+    } else if (mode === 'phrases') {
+      // phrases.js wires up its own page.
     } else if (mode === 'particles') {
       renderParticlesPanel();
     } else if (mode === 'bunkei') {
