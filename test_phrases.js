@@ -1,10 +1,12 @@
 // Sanity checks for phrases-data.js (the Phrases page): every category and
 // phrase is filled in, ids are unique, and the furigana markup is sound —
-// every kanji has a reading in kana, since the 🔊 buttons read those.
+// every kanji has a reading in kana, since the 🔊 buttons read those. Every
+// category belongs to one of PHRASE_GROUPS.
 global.window = global;
 require('./phrases-data.js');
 
-const { PHRASES_DATA } = global;
+const { PHRASES_DATA, PHRASE_GROUPS } = global;
+const GROUPS = new Set((PHRASE_GROUPS || []).map(g => g.id));
 const RUBY = /([一-鿿々]+)\[([^\]]*)\]/g;
 const KANJI = /[一-鿿々]/;
 const KANA = /^[ぁ-ゖァ-ヺー]+$/;
@@ -19,9 +21,12 @@ function check(ok, label) {
 const ids = new Set();
 let total = 0;
 check(Array.isArray(PHRASES_DATA) && PHRASES_DATA.length >= 10, 'expected at least 10 categories');
+check(GROUPS.size > 0 && PHRASE_GROUPS.every(g => g.id && g.title), 'PHRASE_GROUPS need an id and title');
+GROUPS.forEach(g => check(PHRASES_DATA.some(c => c.group === g), `group ${g} has no categories`));
 PHRASES_DATA.forEach(cat => {
   check(/^[a-z-]+$/.test(cat.id) && !ids.has(cat.id), `${cat.id}: bad or duplicate id`);
   ids.add(cat.id);
+  check(GROUPS.has(cat.group), `${cat.id}: unknown group ${cat.group}`);
   ['emoji', 'title', 'titleEn', 'blurb'].forEach(f => check(typeof cat[f] === 'string' && cat[f].length > 0, `${cat.id}: missing ${f}`));
   check(Array.isArray(cat.phrases) && cat.phrases.length >= 6, `${cat.id}: fewer than 6 phrases`);
   const seen = new Set();

@@ -3608,18 +3608,54 @@ a.chapter-card {
   display: inline;
 }
 
-/* On phones the category chips scroll sideways instead of stacking up. */
+/* The category chips: an "All" row, then a row per group led by a chip
+   for the whole group. On phones each row scrolls sideways instead of
+   stacking up. */
+.phrase-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.phrase-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.phrase-group-chip {
+  font-weight: 700;
+  color: var(--text);
+  border-style: dashed;
+}
+
 @media (max-width: 600px) {
-  .meme-filters.phrase-filters {
+  .phrase-chip-row {
     flex-wrap: nowrap;
     overflow-x: auto;
-    padding-bottom: 6px;
+    padding-bottom: 4px;
     scrollbar-width: thin;
   }
 
-  .phrase-filters .meme-filter {
+  .phrase-chip-row .meme-filter {
     flex: none;
   }
+}
+
+.phrase-group-title {
+  margin-top: 36px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--border);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.phrase-group-title + .phrase-section {
+  margin-top: 16px;
 }
 
 .phrase-empty {

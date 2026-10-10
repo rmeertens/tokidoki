@@ -1,13 +1,18 @@
 // The Phrases page (phrases.html): fun words and sentences from
 // phrases-data.js, one section per category — ad slogans, anime lines,
-// buzzwords of the year, what to say at a wedding… Filter by category or
-// search, hide the English to test yourself, and listen to any phrase.
+// buzzwords of the year, what to say on a first date… Categories are listed
+// under their group (Real life, Pop culture, …). Filter by a category or a
+// whole group, or search; hide the English to test yourself; listen to any
+// phrase. The filter is 'all', a category id, or 'group:<id>'.
 (function () {
   'use strict';
 
   const SETTINGS_KEY = 'tokidoki_phrases';
   const RUBY_RE = /([一-鿿々]+)\[([^\]]+)\]/g;
-  const data = window.PHRASES_DATA || [];
+  const groups = window.PHRASE_GROUPS || [];
+  // Categories in group order, so each group's sections sit together.
+  const data = (window.PHRASES_DATA || []).slice()
+    .sort((a, b) => groups.findIndex(g => g.id === a.group) - groups.findIndex(g => g.id === b.group));
 
   const $ = sel => document.querySelector(sel);
 
@@ -31,24 +36,44 @@
 
   let query = '';
 
+  const isFilter = id => id === 'all' || data.some(c => c.id === id) ||
+    groups.some(g => `group:${g.id}` === id);
+
   function category() {
-    return data.some(c => c.id === settings.category) ? settings.category : 'all';
+    return isFilter(settings.category) ? settings.category : 'all';
   }
 
+  // Does the current filter show this category?
+  function shows(filter, cat) {
+    return filter === 'all' || filter === cat.id || filter === `group:${cat.group}`;
+  }
+
+  const countPhrases = cats => cats.reduce((n, c) => n + c.phrases.length, 0);
+
+  function chipHtml(id, label, count, current, extraClass = '') {
+    const on = id === current;
+    return `<button type="button" class="meme-filter${extraClass}${on ? ' active' : ''}" data-cat="${id}" aria-pressed="${on}">${label} <span class="phrase-chip-count">${count}</span></button>`;
+  }
+
+  // An "All" chip, then a row per group: the group's own chip (shows the
+  // whole group) followed by its categories.
   function renderChips() {
     const current = category();
-    const total = data.reduce((n, c) => n + c.phrases.length, 0);
-    $('#phrase-filters').innerHTML = [
-      `<button type="button" class="meme-filter${current === 'all' ? ' active' : ''}" data-cat="all" aria-pressed="${current === 'all'}">All <span class="phrase-chip-count">${total}</span></button>`,
-      ...data.map(c => `
-        <button type="button" class="meme-filter${current === c.id ? ' active' : ''}" data-cat="${c.id}" aria-pressed="${current === c.id}">
-          <span aria-hidden="true">${c.emoji}</span> ${c.titleEn} <span class="phrase-chip-count">${c.phrases.length}</span>
-        </button>`),
-    ].join('');
-    // Keep the chosen chip in view when the row scrolls sideways (phones).
-    const row = $('#phrase-filters');
-    const active = row.querySelector('.active');
-    if (active && row.scrollWidth > row.clientWidth) {
+    const filters = $('#phrase-filters');
+    filters.innerHTML = `
+      <div class="phrase-chip-row">${chipHtml('all', 'All', countPhrases(data), current)}</div>
+      ${groups.map(g => {
+        const cats = data.filter(c => c.group === g.id);
+        return `
+          <div class="phrase-chip-row">
+            ${chipHtml(`group:${g.id}`, g.title, countPhrases(cats), current, ' phrase-group-chip')}
+            ${cats.map(c => chipHtml(c.id, `<span aria-hidden="true">${c.emoji}</span> ${c.titleEn}`, c.phrases.length, current)).join('')}
+          </div>`;
+      }).join('')}`;
+    // Keep the chosen chip in view when its row scrolls sideways (phones).
+    const active = filters.querySelector('.active');
+    const row = active && active.parentElement;
+    if (row && row.scrollWidth > row.clientWidth) {
       row.scrollLeft = active.offsetLeft - row.offsetLeft - row.clientWidth / 2 + active.offsetWidth / 2;
     }
   }
@@ -70,18 +95,28 @@
   function renderList() {
     const current = category();
     const q = query.trim().toLowerCase();
+    // A search looks through every category; group headings appear whenever
+    // more than one category can show.
+    const single = !q && data.some(c => c.id === current);
+    let lastGroup = null;
     const sections = data
-      .filter(c => current === 'all' || c.id === current || q)
+      .filter(c => q || shows(current, c))
       .map(cat => {
         const items = cat.phrases.map((p, i) => [p, i]).filter(([p]) => !q || p._search.includes(q));
         if (!items.length) return '';
-        return `
+        let heading = '';
+        if (!single && cat.group !== lastGroup) {
+          const g = groups.find(x => x.id === cat.group);
+          if (g) heading = `<h2 class="phrase-group-title">${g.title}</h2>`;
+          lastGroup = cat.group;
+        }
+        return `${heading}
           <section class="phrase-section" id="cat-${cat.id}">
-            <h2 class="phrase-section-title">
+            <h3 class="phrase-section-title">
               <span class="phrase-section-emoji" aria-hidden="true">${cat.emoji}</span>
               <span lang="ja">${settings.furigana ? rubyHtml(cat.title) : plainText(cat.title)}</span>
               <span class="phrase-section-en">${cat.titleEn}</span>
-            </h2>
+            </h3>
             <p class="phrase-section-blurb">${cat.blurb}</p>
             <div class="phrase-grid">${items.map(([p, i]) => phraseHtml(cat, p, i)).join('')}</div>
           </section>`;
@@ -128,7 +163,7 @@
   function init() {
     if (!$('#phrase-list')) return;
     const fromHash = location.hash.slice(1);
-    if (data.some(c => c.id === fromHash)) settings.category = fromHash;
+    if (isFilter(fromHash)) settings.category = fromHash;
     render();
 
     $('#phrase-filters').addEventListener('click', e => {
@@ -163,7 +198,7 @@
     });
     window.addEventListener('hashchange', () => {
       const id = location.hash.slice(1);
-      if (data.some(c => c.id === id)) setCategory(id);
+      if (isFilter(id)) setCategory(id);
     });
   }
 
