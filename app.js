@@ -2748,6 +2748,8 @@
       if (verbs) renderVerbParticlesReference();
       ref.classList.toggle('hidden', !verbs);
     }
+    const startBtn = $('#btn-start-particles');
+    if (startBtn) startBtn.textContent = verbs ? 'Start Verb + Particle quiz' : 'Start Sentences quiz';
     const pool = getParticlesPool();
     const due = pool.filter(item => isDue(getCardState(srsData, item.id))).length;
     const el = $('#particles-due-count');
@@ -5368,8 +5370,17 @@
       on(`#particles-toggle-${window.PARTICLE_ROMAJI[p]}`, 'change', toggleParticlesLevel);
     });
 
+    // particles-quiz.html#verbs opens straight on the Verb + Particle quiz.
+    const verbsRadio = $('#particles-type-verbs');
+    if (verbsRadio && location.hash === '#verbs') {
+      verbsRadio.checked = true;
+      renderParticlesPanel();
+    }
     $$('input[name="particles-quiz-type"]').forEach(el => {
-      el.addEventListener('change', renderParticlesPanel);
+      el.addEventListener('change', () => {
+        history.replaceState(null, '', el.value === 'verbs' ? '#verbs' : location.pathname + location.search);
+        renderParticlesPanel();
+      });
     });
 
     on('#btn-start-particles', 'click', startParticlesStudy);

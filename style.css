@@ -1405,6 +1405,99 @@ a.chapter-card {
   text-decoration: line-through;
 }
 
+/* Particles page: Sentences / Verb + Particle mode picker */
+.pq-modes-label {
+  margin: 0 0 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.pq-modes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.pq-mode {
+  position: relative;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.pq-mode:hover { background: var(--bg-card-hover); }
+
+.pq-mode input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pq-mode:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.pq-mode:has(input:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.pq-mode-glyph {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  font-family: var(--font-jp);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  background: var(--bg-input);
+}
+
+.pq-mode:has(input:checked) .pq-mode-glyph {
+  color: #fff;
+  background: var(--accent);
+}
+
+.pq-mode-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.pq-mode-title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.pq-mode-sub {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--text-dim);
+}
+
+.pq-mode-example {
+  margin-top: 2px;
+  font-family: var(--font-jp);
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
 /* Verb + particle reference (particles-quiz.html) */
 .verb-particles-reference {
   margin-top: 20px;
