@@ -4995,6 +4995,8 @@
       // story-fill.js wires up its own page.
     } else if (mode === 'phrases') {
       // phrases.js wires up its own page.
+    } else if (mode === 'news') {
+      // news.js wires up its own page.
     } else if (mode === 'particles') {
       renderParticlesPanel();
     } else if (mode === 'bunkei') {

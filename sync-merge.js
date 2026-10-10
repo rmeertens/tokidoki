@@ -15,7 +15,7 @@
 //     the account's value the first time a device syncs, this device's after
 //
 // Rules: the SRS store keeps each card's most recently reviewed schedule;
-// the word and kanji decks keep every card either side has (unless the
+// the word and kanji decks (and saved grammar) keep every card either side has (unless the
 // other side deleted it); stats add up the reviews done on each side; game
 // stores keep the best scores and the union of "missed" lists.
 (function (global) {
@@ -124,6 +124,7 @@
     tokidoki_srs: (b, l, r) => mergeMap(b, l, r, laterReview),
     tokidoki_story_words: (b, l, r) => mergeMap(b, l, r, keepLocal),
     tokidoki_kanji_cards: (b, l, r) => mergeMap(b, l, r, keepLocal),
+    tokidoki_saved_grammar: (b, l, r) => mergeMap(b, l, r, keepLocal),
     tokidoki_stats: mergeStats,
     tokidoki_mystery: (b, l, r) => mergeMap(b, l, r, mergeChapter),
     tokidoki_word_order: mergeGameStore,

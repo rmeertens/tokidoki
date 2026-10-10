@@ -1,0 +1,452 @@
+{
+  "連休": [
+    "れんきゅう",
+    "consecutive holidays, long weekend",
+    "noun"
+  ],
+  "三連休": [
+    "さんれんきゅう",
+    "three-day weekend",
+    "noun"
+  ],
+  "南東": [
+    "なんとう",
+    "southeast",
+    "noun"
+  ],
+  "北東": [
+    "ほくとう",
+    "northeast",
+    "noun"
+  ],
+  "28号": [
+    "にじゅうはちごう",
+    "No. 28 (typhoons are numbered through the year)",
+    "number + counter"
+  ],
+  "29号": [
+    "にじゅうきゅうごう",
+    "No. 29",
+    "number + counter"
+  ],
+  "本州": [
+    "ほんしゅう",
+    "Honshu, Japan's main island",
+    "place name"
+  ],
+  "太平洋": [
+    "たいへいよう",
+    "the Pacific Ocean",
+    "place name"
+  ],
+  "かも": [
+    "かも",
+    "might (かもしれない: maybe, might)",
+    "particle"
+  ],
+  "しれる": [
+    "しれる",
+    "かもしれない: might, maybe",
+    "ichidan verb"
+  ],
+  "小笠原諸島": [
+    "おがさわらしょとう",
+    "the Ogasawara (Bonin) Islands, far south of Tokyo",
+    "place name"
+  ],
+  "七日": [
+    "なのか",
+    "the 7th (of the month); seven days",
+    "number + counter"
+  ],
+  "たり": [
+    "たり",
+    "〜たり〜たりする: do things like … and …",
+    "particle"
+  ],
+  "だり": [
+    "だり",
+    "〜だり (たり after ん): do things like …",
+    "particle"
+  ],
+  "釣り": [
+    "つり",
+    "fishing",
+    "noun"
+  ],
+  "高波": [
+    "たかなみ",
+    "high waves",
+    "noun"
+  ],
+  "海上": [
+    "かいじょう",
+    "at sea, on the sea",
+    "noun"
+  ],
+  "気象": [
+    "きしょう",
+    "weather, meteorological",
+    "noun"
+  ],
+  "上陸": [
+    "じょうりく",
+    "landfall, coming ashore",
+    "noun"
+  ],
+  "見込み": [
+    "みこみ",
+    "expectation, forecast (〜見込みだ: is expected to)",
+    "noun"
+  ],
+  "ただし": [
+    "ただし",
+    "however, but (adding a condition)",
+    "conjunction"
+  ],
+  "沿岸": [
+    "えんがん",
+    "coast, coastal waters",
+    "noun"
+  ],
+  "うねり": [
+    "うねり",
+    "swell (long ocean waves)",
+    "noun"
+  ],
+  "によって": [
+    "によって",
+    "by, because of",
+    "particle"
+  ],
+  "サーフィン": [
+    "サーフィン",
+    "surfing",
+    "noun"
+  ],
+  "アサヒ": [
+    "アサヒ",
+    "Asahi (brewer)",
+    "name"
+  ],
+  "キリン": [
+    "キリン",
+    "Kirin (brewer); also: giraffe",
+    "name"
+  ],
+  "サッポロ": [
+    "サッポロ",
+    "Sapporo (brewer, named after the city)",
+    "name"
+  ],
+  "サントリー": [
+    "サントリー",
+    "Suntory (drinks maker)",
+    "name"
+  ],
+  "九十パーセント": [
+    "きゅうじゅうパーセント",
+    "90 percent",
+    "number + counter"
+  ],
+  "八パーセント": [
+    "はちパーセント",
+    "8 percent",
+    "number + counter"
+  ],
+  "一パーセント": [
+    "いちパーセント",
+    "1 percent",
+    "number + counter"
+  ],
+  "値上げ": [
+    "ねあげ",
+    "price rise",
+    "noun"
+  ],
+  "4社": [
+    "よんしゃ",
+    "four companies (〜社 counts companies)",
+    "number + counter"
+  ],
+  "取引": [
+    "とりひき",
+    "trade, business deal (公正取引委員会: Fair Trade Commission)",
+    "noun"
+  ],
+  "公正": [
+    "こうせい",
+    "fair, just",
+    "な-adjective"
+  ],
+  "委員会": [
+    "いいんかい",
+    "committee, commission",
+    "noun"
+  ],
+  "約9割": [
+    "やくきゅうわり",
+    "about 90% (割 = tenths)",
+    "number + counter"
+  ],
+  "およそ9割": [
+    "およそきゅうわり",
+    "roughly 90%",
+    "number + counter"
+  ],
+  "疑い": [
+    "うたがい",
+    "suspicion (〜疑いがある: is suspected of)",
+    "noun"
+  ],
+  "大手": [
+    "おおて",
+    "major company, big player",
+    "noun"
+  ],
+  "立ち入る": [
+    "たちいる",
+    "to enter (立ち入り検査: on-site inspection)",
+    "う-verb"
+  ],
+  "立ち入り": [
+    "たちいり",
+    "entering (立ち入り検査: on-site inspection)",
+    "noun"
+  ],
+  "カルテル": [
+    "カルテル",
+    "cartel (companies fixing prices together)",
+    "noun"
+  ],
+  "国内": [
+    "こくない",
+    "domestic, within the country",
+    "noun"
+  ],
+  "社員": [
+    "しゃいん",
+    "employee, staff member",
+    "noun"
+  ],
+  "について": [
+    "について",
+    "about, concerning",
+    "particle"
+  ],
+  "2022年": [
+    "にせんにじゅうにねん",
+    "the year 2022",
+    "number + counter"
+  ],
+  "2025年": [
+    "にせんにじゅうごねん",
+    "the year 2025",
+    "number + counter"
+  ],
+  "10月": [
+    "じゅうがつ",
+    "October",
+    "noun"
+  ],
+  "メーカー": [
+    "メーカー",
+    "maker, manufacturer",
+    "noun"
+  ],
+  "身近": [
+    "みぢか",
+    "close to home, familiar, everyday",
+    "な-adjective"
+  ],
+  "行方": [
+    "ゆくえ",
+    "whereabouts; where something is heading",
+    "noun"
+  ],
+  "高市": [
+    "たかいち",
+    "Takaichi (Sanae Takaichi, Japan's prime minister)",
+    "name"
+  ],
+  "総理": [
+    "そうり",
+    "prime minister (総理大臣)",
+    "noun"
+  ],
+  "2年間": [
+    "にねんかん",
+    "for two years",
+    "number + counter"
+  ],
+  "1年": [
+    "いちねん",
+    "one year",
+    "number + counter"
+  ],
+  "政党": [
+    "せいとう",
+    "political party",
+    "noun"
+  ],
+  "臨時": [
+    "りんじ",
+    "temporary, extraordinary (臨時国会: extra Diet session)",
+    "noun"
+  ],
+  "引き下げる": [
+    "ひきさげる",
+    "to lower, to cut (a price or tax)",
+    "ichidan verb"
+  ],
+  "税率": [
+    "ぜいりつ",
+    "tax rate",
+    "noun"
+  ],
+  "国債": [
+    "こくさい",
+    "government bond",
+    "noun"
+  ],
+  "与党": [
+    "よとう",
+    "ruling party",
+    "noun"
+  ],
+  "野党": [
+    "やとう",
+    "opposition party",
+    "noun"
+  ],
+  "システム": [
+    "システム",
+    "system",
+    "noun"
+  ],
+  "改修": [
+    "かいしゅう",
+    "repair, upgrade",
+    "noun"
+  ],
+  "切り替える": [
+    "きりかえる",
+    "to switch (to)",
+    "ichidan verb"
+  ],
+  "給付": [
+    "きゅうふ",
+    "payment, benefit (government handout)",
+    "noun"
+  ],
+  "実質": [
+    "じっしつ",
+    "in substance, effectively",
+    "noun"
+  ],
+  "反発": [
+    "はんぱつ",
+    "pushback, opposition",
+    "noun"
+  ],
+  "消費税": [
+    "しょうひぜい",
+    "consumption tax (Japan's sales tax)",
+    "noun"
+  ],
+  "食料品": [
+    "しょくりょうひん",
+    "food, groceries",
+    "noun"
+  ],
+  "国会": [
+    "こっかい",
+    "the Diet, Japan's parliament",
+    "noun"
+  ],
+  "4月": [
+    "しがつ",
+    "April",
+    "noun"
+  ],
+  "1%案": [
+    "いちパーセントあん",
+    "the 1% plan (案: plan, proposal)",
+    "noun"
+  ],
+  "1%分": [
+    "いちパーセントぶん",
+    "the 1% portion (〜分: the amount of)",
+    "noun"
+  ],
+  "8%": [
+    "はちパーセント",
+    "8 percent",
+    "number + counter"
+  ],
+  "1%": [
+    "いちパーセント",
+    "1 percent",
+    "number + counter"
+  ],
+  "0%": [
+    "ゼロパーセント",
+    "0 percent",
+    "number + counter"
+  ],
+  "おそれ": [
+    "おそれ",
+    "fear, risk (〜おそれがある: there is a risk that)",
+    "noun"
+  ],
+  "関係者": [
+    "かんけいしゃ",
+    "people involved; (in news) sources",
+    "noun"
+  ],
+  "可能性": [
+    "かのうせい",
+    "possibility, chance",
+    "noun"
+  ],
+  "人たち": [
+    "ひとたち",
+    "people (〜たち makes a plural)",
+    "noun"
+  ],
+  "会社どうし": [
+    "かいしゃどうし",
+    "companies among themselves (〜どうし: fellow …, among each other)",
+    "noun"
+  ],
+  "太平洋側": [
+    "たいへいようがわ",
+    "the Pacific side (of Japan)",
+    "noun"
+  ],
+  "十日": [
+    "とおか",
+    "the 10th (of the month)",
+    "number + counter"
+  ],
+  "十二日": [
+    "じゅうににち",
+    "the 12th (of the month)",
+    "number + counter"
+  ],
+  "五日": [
+    "いつか",
+    "the 5th (of the month)",
+    "number + counter"
+  ],
+  "十日ごろ": [
+    "とおかごろ",
+    "around the 10th",
+    "number + counter"
+  ],
+  "十二日ごろ": [
+    "じゅうににちごろ",
+    "around the 12th",
+    "number + counter"
+  ]
+}

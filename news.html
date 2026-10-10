@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" id="viewport-meta" content="width=device-width, initial-scale=1.0">
-  <title>Confusable Kanji Groups | Tokidoki</title>
-  <meta name="description" content="Browse JLPT kanji that look alike, grouped by visual similarity — 222 groups covering 601 kanji from N5 to N1. Search by kanji or meaning, or filter by level.">
-  <meta property="og:title" content="Confusable Kanji Groups | Tokidoki">
-  <meta property="og:description" content="JLPT kanji that look alike, grouped by visual similarity, from N5 to N1.">
+  <title>Easy Japanese News — N5, N4 &amp; N3 | Tokidoki</title>
+  <meta name="description" content="Japanese news for learners, at JLPT N5, N4 and N3: switch the level of every story, tap any sentence for its words and grammar, and save words and grammar to study.">
+  <meta property="og:title" content="Easy Japanese News — N5, N4 &amp; N3 | Tokidoki">
+  <meta property="og:description" content="Japanese news for learners, at JLPT N5, N4 and N3: switch the level of every story, tap any sentence for its words and grammar, and save words and grammar to study.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://tokidoki.meertens.dev/confusable-kanji.html">
+  <meta property="og:url" content="https://tokidoki.meertens.dev/news.html">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Confusable Kanji Groups | Tokidoki">
-  <meta name="twitter:description" content="JLPT kanji that look alike, grouped by visual similarity, from N5 to N1.">
-  <link rel="canonical" href="https://tokidoki.meertens.dev/confusable-kanji.html">
-  <link rel="stylesheet" href="style.css?v=40">
+  <meta name="twitter:title" content="Easy Japanese News — N5, N4 &amp; N3 | Tokidoki">
+  <meta name="twitter:description" content="Japanese news for learners, at JLPT N5, N4 and N3: switch the level of every story, tap any sentence for its words and grammar, and save words and grammar to study.">
+  <link rel="canonical" href="https://tokidoki.meertens.dev/news.html">
+  <link rel="stylesheet" href="style.css?v=41">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXWYNZC7YH"></script>
   <script>
@@ -23,15 +23,13 @@
     gtag('config', 'G-XXWYNZC7YH');
   </script>
 </head>
-<body data-mode="confusable-browse">
+<body data-mode="news">
   <div id="app">
 
-    <!-- Header -->
     <!-- Header (rendered by renderSharedChrome() in app.js) -->
     <div id="header-mount"></div>
 
-    <!-- Screen: Confusable Kanji Browse -->
-    <main id="screen-chapters" class="screen active">
+    <main id="screen-news" class="screen active">
       <nav class="page-nav" aria-label="Exercises">
         <div class="page-nav-group">
           <span class="page-nav-label">Practice</span>
@@ -44,14 +42,14 @@
             <a class="page-nav-item" href="stories.html"><span class="page-nav-glyph" aria-hidden="true">話</span>Stories</a>
             <a class="page-nav-item" href="memes.html"><span class="page-nav-glyph" aria-hidden="true">笑</span>Memes &amp; Jokes</a>
             <a class="page-nav-item" href="phrases.html"><span class="page-nav-glyph" aria-hidden="true">言</span>Phrases</a>
-            <a class="page-nav-item" href="news.html"><span class="page-nav-glyph" aria-hidden="true">報</span>News</a>
+            <a class="page-nav-item active" href="news.html" aria-current="page"><span class="page-nav-glyph" aria-hidden="true">報</span>News</a>
             <a class="page-nav-item" href="mystery.html"><span class="page-nav-glyph" aria-hidden="true">謎</span>Mystery</a>
             <a class="page-nav-item" href="listening.html"><span class="page-nav-glyph" aria-hidden="true">聴</span>Listening</a>
             <a class="page-nav-item" href="particles-quiz.html"><span class="page-nav-glyph" aria-hidden="true">は</span>Particles</a>
             <a class="page-nav-item" href="word-order.html"><span class="page-nav-glyph" aria-hidden="true">★</span>Word Order</a>
             <a class="page-nav-item" href="story-fill.html"><span class="page-nav-glyph" aria-hidden="true">章</span>Story Fill-in</a>
             <a class="page-nav-item" href="kana.html"><span class="page-nav-glyph" aria-hidden="true">あ</span>Kana</a>
-            <a class="page-nav-item active" href="kanji-quiz.html" aria-current="page"><span class="page-nav-glyph" aria-hidden="true">字</span>Kanji Quiz</a>
+            <a class="page-nav-item" href="kanji-quiz.html"><span class="page-nav-glyph" aria-hidden="true">字</span>Kanji Quiz</a>
             <a class="page-nav-item" href="flashcards.html"><span class="page-nav-glyph" aria-hidden="true">札</span>Flashcards</a>
           </div>
         </div>
@@ -66,58 +64,59 @@
           </div>
         </div>
       </nav>
-      <p class="tab-intro">
-        Kanji that render nearly identically at a glance, grouped by visual similarity
-        (found by comparing rendered glyph shapes, plus a handful of hand-checked pairs).
-        <span id="confusable-browse-count">222 groups · 601 kanji</span> from N5 to N1.
-        This is the same pool the <a href="kanji-quiz.html">Confusing Kanji quiz</a> draws
-        its multiple-choice distractors from.
-      </p>
-      <div class="kana-settings-row">
-        <input type="search" id="confusable-browse-search" class="answer-input" placeholder="Search by kanji or meaning…" autocomplete="off">
-      </div>
-      <div class="kana-settings-row">
-        <label class="kana-script-toggle"><input type="checkbox" id="confusable-browse-toggle-n5" checked> N5</label>
-        <label class="kana-script-toggle"><input type="checkbox" id="confusable-browse-toggle-n4" checked> N4</label>
-        <label class="kana-script-toggle"><input type="checkbox" id="confusable-browse-toggle-n3" checked> N3</label>
-        <label class="kana-script-toggle"><input type="checkbox" id="confusable-browse-toggle-n2" checked> N2</label>
-        <label class="kana-script-toggle"><input type="checkbox" id="confusable-browse-toggle-n1" checked> N1</label>
+      <section class="lis-hero news-hero">
+        <div class="lis-hero-face" aria-hidden="true">報</div>
+        <div>
+          <p class="lis-hero-kicker" lang="ja">やさしいニュース · JLPT N5–N3</p>
+          <h2 class="lis-hero-title">News</h2>
+          <p class="lis-hero-sub">Today's news from Japan, written three times — switch any story between N5, N4 and N3.</p>
+        </div>
+      </section>
+
+      <ol class="lis-steps">
+        <li><span class="lis-step-icon" aria-hidden="true">📰</span><b>Pick a level</b><span>N5 is short and simple; N3 reads like a real newspaper.</span></li>
+        <li><span class="lis-step-icon" aria-hidden="true">👆</span><b>Tap a sentence</b><span>See its meaning, every word, and the grammar it uses.</span></li>
+        <li><span class="lis-step-icon" aria-hidden="true">＋</span><b>Save</b><span>Words go to your flashcards, grammar to your list below.</span></li>
+      </ol>
+
+      <div class="kana-settings-row phrase-toggles news-toggles">
+        <label class="kana-script-toggle"><input type="checkbox" id="news-toggle-furigana"> Furigana</label>
+        <label class="kana-script-toggle"><input type="checkbox" id="news-toggle-english"> English</label>
       </div>
 
-      <div class="confusable-group-grid" id="confusable-group-grid"></div>
-      <p class="tab-intro hidden" id="confusable-empty">No confusable kanji match your search.</p>
+      <div id="news-list" class="news-list"></div>
+
+      <section class="news-saved" id="news-saved-grammar">
+        <h2 class="phrase-group-title">Saved grammar <span id="news-saved-grammar-count"></span></h2>
+        <div id="news-saved-grammar-list"></div>
+      </section>
     </main>
 
   </div>
 
-  <script src="conjugator.js"></script>
-  <script src="verbs.js"></script>
-  <script src="kana.js"></script>
   <script src="kanji-quiz-data.js"></script>
-  <script src="sentences-data.js"></script>
-  <script src="vocabulary-data.js"></script>
   <script src="kanji-info-data.js"></script>
-  <script src="confusable-kanji-data.js"></script>
-  <script src="examples.js"></script>
+  <script src="pronounce.js?v=2"></script>
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=4"></script>
-  <script src="app.js?v=28"></script>
-  <script src="sync-merge.js?v=1"></script>
+  <script src="app.js?v=29"></script>
+  <script src="sync-merge.js?v=2"></script>
   <script src="sync.js?v=5"></script>
-  <script src="sushi-sprites.js"></script>
-  <script src="sushi-belt.js"></script>
+  <script src="news-data.js?v=1"></script>
+  <script src="news-words.js?v=1"></script>
+  <script src="news.js?v=1"></script>
 
   <!-- Static content for search engines -->
   <section id="seo-content" aria-hidden="true">
-    <h2>Confusable Kanji Groups</h2>
+    <h2>Easy Japanese news for JLPT N5, N4 and N3 learners</h2>
     <p>
-      A reference list of JLPT kanji (N5 through N1) that look alike enough to mix up at a
-      glance — grouped by comparing rendered glyph shapes for visual overlap, plus a small set
-      of hand-checked pairs the automatic comparison under-scored. 222 groups covering 601 of
-      the 2,213 kanji in the practice pool, sorted by hardest JLPT level then group size. Used
-      as the distractor source for the <a href="kanji-quiz.html">Confusing Kanji multiple-choice
-      quiz</a>, where you're shown one kanji from a group and asked to pick its correct meaning
-      out of four choices drawn from that group.
+      Read today's news from Japan in simple Japanese. Every story is written at three
+      levels — JLPT N5, N4 and N3 — and you can switch between them to read the same news
+      in easier or harder Japanese. Tap any sentence to see its English translation, a note
+      on how it works, each word with its reading and meaning, and the grammar it uses, such
+      as 〜によると, 〜とみられる, 〜おそれがある and 〜疑いがある. Save words to your
+      flashcards and grammar points to a list, and listen to every story read aloud.
+      Furigana and English can be switched off.
     </p>
   </section>
 </body>
