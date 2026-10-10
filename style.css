@@ -6920,7 +6920,20 @@ a.flashcards-link:hover .flashcards-link-btn {
 }
 
 /* Account (optional login, sync.js) */
-#btn-account.account-in { color: var(--accent); border-color: var(--accent); }
+/* Logged in: the button turns green with a small check. */
+#btn-account { position: relative; }
+#btn-account.account-in { color: var(--green); border-color: var(--green); background: var(--green-dim); }
+#btn-account.account-in::after {
+  content: '';
+  position: absolute;
+  right: -4px;
+  bottom: -4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--header-bg, var(--bg));
+  background: var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M3 6.2l2 2 4-4.4' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 10px no-repeat;
+}
 
 .account-body { padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 12px; }
 .account-text { margin: 0; color: var(--text); line-height: 1.5; }
