@@ -438,6 +438,7 @@
           <span class="notepad-panel-jp" lang="ja">${piecesHtml(w.p)}</span>
           ${reading !== wordText(w) ? `<span class="notepad-panel-reading" lang="ja">${esc(reading)}</span>` : ''}
           <span class="notepad-panel-meaning">${esc(w.m || '')}</span>
+          ${global.KanjiCards ? KanjiCards.chipsHtml(wordText(w), { reading, meaning: w.m || '' }) : ''}
         </li>`;
       }).join('');
       const canSpeak = !!synth;

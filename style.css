@@ -3109,10 +3109,10 @@ a.chapter-card {
 }
 
 .story-deck-row {
-  display: grid;
-  grid-template-columns: auto auto minmax(0, 1fr) auto;
+  display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
-  gap: 10px;
+  gap: 4px 10px;
   padding: 6px 0;
   border-top: 1px solid var(--border);
 }
@@ -3130,8 +3130,15 @@ a.chapter-card {
 }
 
 .story-deck-meaning {
+  flex: 1 1 10em;
+  min-width: 0;
   font-size: 0.85rem;
   overflow-wrap: anywhere;
+}
+
+.story-deck-row .speak-pair,
+.story-deck-row .kanji-cards-chips {
+  align-self: center;
 }
 
 .story-deck-remove {
@@ -3153,6 +3160,302 @@ a.chapter-card {
   font-size: 0.85rem;
   color: var(--text-dim);
   padding: 4px 0;
+}
+
+/* Words / Kanji tabs over the flashcard deck (Stories and Memes pages). */
+.deck-tabs {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+  border-bottom: 1px solid var(--border);
+  scroll-margin-top: 80px;
+}
+
+.deck-tab {
+  font: inherit;
+  font-weight: 700;
+  color: var(--text-dim);
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.deck-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.deck-tab-count {
+  display: inline-block;
+  min-width: 1.6em;
+  margin-left: 4px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--accent-dim);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.deck-tabs + .story-deck-card {
+  margin-top: 12px;
+}
+
+.kanji-deck-char {
+  font-size: 1.4rem;
+}
+
+.kanji-deck-from {
+  font-family: var(--font-jp);
+  color: var(--text-dim);
+}
+
+/* Kanji flashcards (kanji-cards.js): the ＋ / ✓ buttons, and the "Kanji in
+   this word" breakdown shown wherever a word is looked up. */
+.kanji-card-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  flex-shrink: 0;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.kanji-card-btn:hover,
+.kanji-card-btn:focus-visible {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.kanji-card-btn.saved {
+  border-color: var(--orange);
+  background: var(--orange-dim);
+  color: var(--orange);
+}
+
+.kanji-card-btn-icon {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.kanji-card-btn-label {
+  padding: 6px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.kanji-card-btn-chip {
+  padding: 3px 7px;
+  border-radius: 999px;
+}
+
+.kanji-card-btn-chip [lang="ja"] {
+  font-family: var(--font-jp);
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text);
+}
+
+.kanji-cards-chips {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.kanji-cards-breakdown {
+  margin-top: 16px;
+  text-align: left;
+}
+
+.kanji-cards-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.kanji-cards-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card-hover);
+}
+
+.kanji-cards-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+}
+
+.kanji-cards-row + .kanji-cards-row {
+  border-top: 1px dashed var(--border);
+}
+
+.kanji-cards-row.saved .kanji-cards-char {
+  color: var(--orange);
+}
+
+.kanji-cards-char {
+  font-family: var(--font-jp);
+  font-size: 1.6rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.kanji-cards-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.kanji-cards-meaning {
+  color: var(--text);
+}
+
+.kanji-cards-reading {
+  color: var(--text-dim);
+  font-size: 0.75rem;
+}
+
+/* In the Vocabulary page's small hover breakdown. */
+.vocab-kanji-breakdown-row .kanji-card-btn {
+  margin-left: auto;
+  align-self: center;
+  width: 20px;
+  height: 20px;
+  font-size: 0.7rem;
+}
+
+/* Kanji Hover cards: top-right, like the Vocabulary page's ＋. */
+.kanji-hover-add {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+}
+
+.kanji-quiz-add {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.wbk-kanji-info .kanji-card-btn {
+  margin-left: auto;
+}
+
+.wbk-word-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-left: auto;
+  align-self: center;
+}
+
+.wbk-word-add {
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-dim);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.wbk-word-add:hover,
+.wbk-word-add:focus-visible,
+.wbk-word-add.saved {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.wbk-word-add.saved {
+  background: var(--orange-dim);
+}
+
+.notepad-panel-word .kanji-cards-chips {
+  grid-column: 1 / -1;
+  margin-bottom: 4px;
+}
+
+/* Kanji flashcard review */
+.kanji-review-char {
+  font-size: 4.5rem;
+  font-weight: 400;
+}
+
+.kanji-review-reading {
+  font-family: var(--font-jp);
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+.kanji-review-reading span {
+  font-family: var(--font);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-right: 4px;
+}
+
+.kanji-review-words {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+
+.kanji-review-words li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.kanji-review-word {
+  font-family: var(--font-jp);
+  font-size: 1.1rem;
+  min-width: 4.5em;
+}
+
+.kanji-review-word rt {
+  font-size: 0.5em;
+  color: var(--text-dim);
+}
+
+.kanji-review-words li.saved-from .kanji-review-word {
+  color: var(--orange);
+}
+
+.kanji-review-word-meaning {
+  font-size: 0.85rem;
+  color: var(--text-dim);
 }
 
 /* Memes & Jokes (memes.html) — the Stories reader plus kind filters, an

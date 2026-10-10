@@ -226,8 +226,9 @@
       <div class="story-panel-meaning">${esc(meaning)}</div>
       ${form !== word ? `<div class="story-panel-form">In the text: <span lang="ja">${esc(form)}</span></div>` : ''}
       <div class="mys-panel-actions">
-        <button class="${saved ? 'btn-secondary' : 'btn-primary'} story-panel-add" id="sf-add-word">${saved ? '✓ In flashcards — remove' : '＋ Add to flashcards'}</button>
+        <button class="${saved ? 'btn-secondary' : 'btn-primary'} story-panel-add" id="sf-add-word">${saved ? '✓ In word flashcards — remove' : '＋ Add word to flashcards'}</button>
       </div>
+      ${global.KanjiCards ? KanjiCards.breakdownHtml(word, { reading, meaning }) : ''}
       ${saved ? '<div class="mys-panel-tip">Review your flashcards on the <a href="stories.html#deck">Stories page</a>.</div>' : ''}`;
     $('sf-add-word').addEventListener('click', () => {
       toggleSaved(key, selected.p, selected.i);

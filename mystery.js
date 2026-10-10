@@ -779,9 +779,10 @@
         <div class="story-panel-meaning">${esc(meaning)}</div>
         ${tok.plain !== word ? `<div class="story-panel-form">In the text: <span lang="ja">${esc(tok.plain)}</span></div>` : ''}
         <div class="mys-panel-actions">
-          <button class="${saved ? 'btn-secondary' : 'btn-primary'} story-panel-add" id="mys-add-word">${saved ? '✓ In flashcards — remove' : '＋ Add to flashcards'}</button>
+          <button class="${saved ? 'btn-secondary' : 'btn-primary'} story-panel-add" id="mys-add-word">${saved ? '✓ In word flashcards — remove' : '＋ Add word to flashcards'}</button>
           <button class="story-panel-link" id="mys-word-sentence">Grammar in this sentence →</button>
         </div>
+        ${global.KanjiCards ? KanjiCards.breakdownHtml(word, { reading, meaning }) : ''}
         ${saved ? '<div class="mys-panel-tip">Review your flashcards on the <a href="stories.html#deck">Stories page</a>.</div>' : ''}`;
       $('#mys-add-word').addEventListener('click', () => { toggleWord(tok.key, selection.sid); renderPanel(); });
       $('#mys-word-sentence').addEventListener('click', () => openSentence(selection.sid));

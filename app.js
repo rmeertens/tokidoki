@@ -526,7 +526,7 @@
     setDue('#hub-due-verbs', verbDue);
     setDue('#hub-due-adjectives', adjDue);
     setDue('#hub-due-kana', kanaDue);
-    setDue('#hub-due-stories', countDueStoryWords());
+    setDue('#hub-due-stories', countDueStoryWords() + countDueKanjiCards());
   }
 
   // ─── Study Session ─────────────────────────────────────────────────────────────
@@ -2239,6 +2239,8 @@
       answer.className = 'kanji-quiz-meaning';
       $('#kanji-quiz-answer-recap').textContent = `${currentKanjiQuizCard.kanji} · ${currentKanjiQuizCard.level.toUpperCase()}`;
     }
+    const add = $('#kanji-quiz-add');
+    if (add) add.innerHTML = window.KanjiCards ? KanjiCards.buttonHtml(currentKanjiQuizCard.kanji, null, { look: 'label' }) : '';
   }
 
   function gradeKanjiQuizAndAdvance(grade) {
@@ -2958,6 +2960,7 @@
       return `
         <div class="kanji-hover-card">
           <div class="kanji-hover-level">${level}</div>
+          ${window.KanjiCards ? `<span class="kanji-hover-add">${KanjiCards.buttonHtml(kanji)}</span>` : ''}
           <div class="kanji-hover-prompt ${promptClass}">${promptText}</div>
           <div class="kanji-hover-answer ${answerClass}">${answerText}</div>
         </div>
@@ -3068,8 +3071,10 @@
   // Shown under the word on hover/reveal, breaking it down into its
   // individual kanji with each one's own meaning and on'yomi/kun'yomi
   // reading (from kanji-info-data.js) — separate from the whole-word
-  // reading already shown by the furigana/peek above.
-  function vocabKanjiBreakdownHtml(kanjiText) {
+  // reading already shown by the furigana/peek above. Each kanji has a ＋ to
+  // save it as a kanji flashcard (kanji-cards.js), remembering `from`, the
+  // word it was spotted in.
+  function vocabKanjiBreakdownHtml(kanjiText, from) {
     if (typeof KANJI_INFO === 'undefined') return '';
     const chars = kanjiText.match(VOCAB_KANJI_CHAR_RE);
     if (!chars) return '';
@@ -3092,6 +3097,7 @@
             ${info.meaning ? `<span class="vocab-kanji-breakdown-meaning">${info.meaning}</span>` : ''}
             ${readings ? `<span class="vocab-kanji-breakdown-reading">${readings}</span>` : ''}
           </span>
+          ${window.KanjiCards && info.meaning ? KanjiCards.buttonHtml(ch, Object.assign({ word: kanjiText }, from)) : ''}
         </div>
       `);
     });
@@ -3161,9 +3167,13 @@
     if (!el) return;
     const words = loadStoryWords();
     const n = Object.keys(words).length;
-    el.innerHTML = n
+    const k = getKanjiDeck().length;
+    const kanjiNote = k
+      ? ` · <b>${k}</b> kanji in your <a href="stories.html#kanji-deck">kanji flashcards</a>.`
+      : ' Hover or tap a card to see its kanji, and ＋ one to make it a kanji flashcard.';
+    el.innerHTML = (n
       ? `📚 <b>${n}</b> word${n === 1 ? '' : 's'} in your flashcards — <a href="stories.html#deck">review them on the Stories page</a>. Words already in them have an orange outline; click ＋ on a card to add it, − to remove it.`
-      : '📚 Click ＋ on a card to add the word to your flashcards, then review them on the <a href="stories.html#deck">Stories page</a>.';
+      : '📚 Click ＋ on a card to add the word to your flashcards, then review them on the <a href="stories.html#deck">Stories page</a>.') + kanjiNote;
   }
 
   function onVocabDeckClick(btn) {
@@ -3189,6 +3199,12 @@
   const pronounceButtons = (kana, cls) => (window.Pronounce ? Pronounce.buttonsHtml(kana, cls) : '');
   const pronounceOnClick = (kana) => { if (window.Pronounce) Pronounce.onClick(kana); };
 
+  // A word's kanji, each with its meaning, readings and a button to save it
+  // as a kanji flashcard; and the same as a row of small buttons, for lists.
+  // See kanji-cards.js.
+  const kanjiBreakdownHtml = (word, from, opts) => (window.KanjiCards ? KanjiCards.breakdownHtml(word, from, opts) : '');
+  const kanjiChipsHtml = (word, from, skip) => (window.KanjiCards ? KanjiCards.chipsHtml(word, from, skip) : '');
+
   function renderVocabPage() {
     const grid = $('#vocab-grid');
     if (!grid) return;
@@ -3210,7 +3226,7 @@
       // Attached to the card itself (not the word cell) so it drops in below
       // the whole card — including the meaning — instead of overlapping
       // whichever side the word happens to be on.
-      const breakdownHtml = vocabKanjiBreakdownHtml(item.kanji);
+      const breakdownHtml = vocabKanjiBreakdownHtml(item.kanji, { reading: item.kana, meaning: item.meaning });
       const wordClass = 'vocab-hover-word' + (script === 'kanji' ? ' vocab-word-peek' : '');
       let promptHtml = showWordFirst ? wordHtml : item.meaning;
       let answerHtml = showWordFirst ? item.meaning : wordHtml;
@@ -3264,7 +3280,7 @@
         chars.forEach(ch => {
           if (seen.has(ch)) return;
           seen.add(ch);
-          (index[ch] || (index[ch] = [])).push({ level, html: w.html, kana: w.kana, meaning: w.meaning });
+          (index[ch] || (index[ch] = [])).push({ level, kanji: w.kanji, html: w.html, kana: w.kana, meaning: w.meaning });
         });
       });
     });
@@ -3343,24 +3359,42 @@
           ${meaning ? `<div class="wbk-kanji-info-meaning">${meaning}</div>` : ''}
           ${readings ? `<div class="wbk-kanji-info-reading">${readings}</div>` : ''}
         </div>
+        ${window.KanjiCards && meaning ? KanjiCards.buttonHtml(kanji, null, { look: 'label' }) : ''}
       `;
     }
 
+    // Each word can go into the word flashcards (＋ Word), and each of its
+    // kanji into the kanji flashcards.
+    wbkOverlayWords = words;
+    const deckWords = loadStoryWords();
     const list = $('#wbk-overlay-words');
     if (list) {
       list.innerHTML = words.length
-        ? words.map(w => `
+        ? words.map((w, i) => `
             <div class="wbk-word-row" data-kana="${w.kana}">
               <span class="wbk-word-jp">${w.html}</span>
               ${pronounceButtons(w.kana)}
               <span class="kanji-hover-level">${w.level}</span>
               <span class="wbk-word-meaning">${w.meaning}</span>
+              <span class="wbk-word-actions">
+                ${wbkWordButtonHtml(i, !!vocabDeckKey(w, deckWords))}
+                ${kanjiChipsHtml(w.kanji, { reading: w.kana, meaning: w.meaning }, kanji)}
+              </span>
             </div>
           `).join('')
         : `<p class="tab-intro">No word in this list (N5–N3 vocabulary) uses this kanji yet.</p>`;
     }
 
     overlay.classList.remove('hidden');
+  }
+
+  let wbkOverlayWords = [];
+
+  function wbkWordButtonHtml(i, saved) {
+    const w = wbkOverlayWords[i];
+    return `<button type="button" class="wbk-word-add${saved ? ' saved' : ''}" data-i="${i}" aria-pressed="${saved}"
+      title="${saved ? 'In your word flashcards — click to remove' : 'Add this word to your flashcards'}"
+      aria-label="${saved ? 'Remove' : 'Add'} ${w.kanji} ${saved ? 'from' : 'to'} word flashcards">${saved ? '✓ Word' : '＋ Word'}</button>`;
   }
 
   function closeWbkOverlay() {
@@ -3380,6 +3414,10 @@
   //
   // The Memes & Jokes page (memes.html, data-mode="memes") runs this same
   // reader over MEMES_DATA from memes-data.js, and saves into the same deck.
+  //
+  // Kanji flashcards are a second deck (kanji-cards.js): a looked-up word
+  // lists its kanji, each of which can be saved on its own. The deck screen
+  // shows the two under Words / Kanji tabs, and reviews whichever is open.
 
   const STORY_LEVELS = ['n5', 'n4', 'n3'];
   const STORY_LEVEL_BLURB = {
@@ -3681,19 +3719,55 @@
     }).join('');
   }
 
+  // The deck screen has a tab each for word and kanji flashcards; the due
+  // count, Review button, list and export all follow the open tab.
+  function storyDeckTab() {
+    return settings.deckTab === 'kanji' ? 'kanji' : 'words';
+  }
+
+  function setStoryDeckTab(tab) {
+    settings.deckTab = tab;
+    saveSettings(settings);
+    renderStoryDeck();
+  }
+
+  function getKanjiDeck() {
+    return window.KanjiCards ? KanjiCards.list() : [];
+  }
+
+  function countDueKanjiCards() {
+    return getKanjiDeck().filter(c => isDue(getCardState(srsData, c.id))).length;
+  }
+
   function renderStoryDeck() {
-    const deck = getStoryDeck();
+    const tab = storyDeckTab();
+    const words = getStoryDeck();
+    const kanji = getKanjiDeck();
+    const deck = tab === 'kanji' ? kanji : words;
     const due = deck.filter(c => isDue(getCardState(srsData, c.id))).length;
+    const noun = tab === 'kanji' ? 'kanji' : 'word';
+
+    $$('.deck-tab').forEach(btn => {
+      const on = btn.dataset.deckTab === tab;
+      btn.classList.toggle('active', on);
+      btn.setAttribute('aria-selected', on);
+    });
+    const wordCount = $('#deck-tab-count-words');
+    if (wordCount) wordCount.textContent = words.length;
+    const kanjiCount = $('#deck-tab-count-kanji');
+    if (kanjiCount) kanjiCount.textContent = kanji.length;
 
     const dueEl = $('#story-deck-due');
     if (dueEl) dueEl.textContent = due;
+    const dueLabel = $('#story-deck-due-label');
+    if (dueLabel) dueLabel.textContent = `${noun} flashcards due`;
     const totalEl = $('#story-deck-total');
-    if (totalEl) totalEl.textContent = `${deck.length} saved word${deck.length === 1 ? '' : 's'}`;
+    if (totalEl) totalEl.textContent = tab === 'kanji' ? `${kanji.length} saved kanji` : `${words.length} saved word${words.length === 1 ? '' : 's'}`;
 
     const btn = $('#btn-story-review');
     if (btn) {
       btn.disabled = deck.length === 0;
-      btn.textContent = deck.length === 0 ? 'No words yet' : due > 0 ? 'Review' : 'Practice all';
+      btn.textContent = deck.length === 0 ? (tab === 'kanji' ? 'No kanji yet' : 'No words yet') : due > 0 ? 'Review' : 'Practice all';
     }
 
     const exportRow = $('#story-export');
@@ -3701,19 +3775,32 @@
     $$('.flashcard-furigana-toggle').forEach(el => { el.checked = !!settings.flashcardFurigana; });
 
     const listEl = $('#story-deck-list');
-    if (listEl) {
-      listEl.innerHTML = deck.length
-        ? deck.map(c => `
-            <li class="story-deck-row">
-              <span class="story-deck-word">${storyDisplayWord(c.key)}</span>
-              <span class="story-deck-reading">${c.gloss[0] !== storyDisplayWord(c.key) ? c.gloss[0] : ''}</span>
-              <span class="story-deck-meaning">${c.gloss[1]}</span>
-              ${pronounceButtons(c.gloss[0])}
-              <button class="story-deck-remove" data-word="${c.key}" aria-label="Remove ${storyDisplayWord(c.key)} from flashcards" title="Remove">✕</button>
+    if (!listEl) return;
+    if (tab === 'kanji') {
+      listEl.innerHTML = kanji.length
+        ? kanji.map(c => `
+            <li class="story-deck-row kanji-deck-row">
+              <span class="story-deck-word kanji-deck-char" lang="ja">${c.kanji}</span>
+              <span class="story-deck-reading" lang="ja">${KanjiCards.readingsText(c.info)}</span>
+              <span class="story-deck-meaning">${c.info.meaning}${(c.meta.words || []).length ? `<span class="kanji-deck-from" lang="ja"> · ${c.meta.words.map(w => w.word).join('、')}</span>` : ''}</span>
+              <button class="story-deck-remove" data-kanji="${c.kanji}" aria-label="Remove ${c.kanji} from kanji flashcards" title="Remove">✕</button>
             </li>
           `).join('')
-        : `<li class="story-deck-empty">Open a ${readerIsMemes() ? 'joke' : 'story'} and tap any word you don't know, then “Add to flashcards”.</li>`;
+        : `<li class="story-deck-empty">Look up a word anywhere on the site — in a ${readerIsMemes() ? 'joke' : 'story'}, the Vocabulary page, Words by Kanji — and press “＋ Kanji card” next to any of its kanji.</li>`;
+      return;
     }
+    listEl.innerHTML = words.length
+      ? words.map(c => `
+          <li class="story-deck-row">
+            <span class="story-deck-word">${storyDisplayWord(c.key)}</span>
+            <span class="story-deck-reading">${c.gloss[0] !== storyDisplayWord(c.key) ? c.gloss[0] : ''}</span>
+            <span class="story-deck-meaning">${c.gloss[1]}</span>
+            ${kanjiChipsHtml(storyDisplayWord(c.key), { reading: c.gloss[0], meaning: c.gloss[1] })}
+            ${pronounceButtons(c.gloss[0])}
+            <button class="story-deck-remove" data-word="${c.key}" aria-label="Remove ${storyDisplayWord(c.key)} from flashcards" title="Remove">✕</button>
+          </li>
+        `).join('')
+      : `<li class="story-deck-empty">Open a ${readerIsMemes() ? 'joke' : 'story'} and tap any word you don't know, then “Add word to flashcards”.</li>`;
   }
 
   // Saved words as plain objects for flashcard-export.js, oldest first so the
@@ -3736,8 +3823,25 @@
     });
   }
 
+  // Saved kanji in the same shape, oldest first: the kanji on the front, its
+  // readings and meaning on the back, with the words it was saved from.
+  function getKanjiExportCards() {
+    return getKanjiDeck().reverse().map(c => ({
+      key: `kanji:${c.kanji}`,
+      word: c.kanji,
+      wordFurigana: c.kanji,
+      reading: KanjiCards.readingsText(c.info),
+      meaning: c.info.meaning,
+      pos: 'Kanji',
+      sentence: (c.meta.words || []).map(w => w.reading && w.reading !== w.word ? storyWordFurigana(w.word, w.reading) : w.word).join('、'),
+      sentenceEn: (c.meta.words || []).map(w => w.meaning).filter(Boolean).join(' · '),
+      story: '',
+      level: (c.info.level || '').toUpperCase(),
+    }));
+  }
+
   async function exportStoryDeck(format) {
-    const cards = getStoryExportCards();
+    const cards = storyDeckTab() === 'kanji' ? getKanjiExportCards() : getStoryExportCards();
     const status = $('#story-export-status');
     if (cards.length === 0 || !window.FlashcardExport) return;
     const setStatus = (text) => { if (status) status.textContent = text; };
@@ -3953,8 +4057,9 @@
         <div class="story-panel-meaning">${meaning}</div>
         ${token.plain !== word ? `<div class="story-panel-form">In the text: <span lang="ja">${token.plain}</span>${pronounceButtons(storyKana(token.surface))}</div>` : ''}
         <button class="${savedNow ? 'btn-secondary' : 'btn-primary'} story-panel-add" id="btn-story-add-word">
-          ${savedNow ? '✓ In flashcards — remove' : '＋ Add to flashcards'}
+          ${savedNow ? '✓ In word flashcards — remove' : '＋ Add word to flashcards'}
         </button>
+        ${kanjiBreakdownHtml(word, { reading, meaning })}
         <button class="story-panel-link" id="btn-story-word-sentence">Grammar in this sentence →</button>
       `;
       return;
@@ -4003,11 +4108,13 @@
 
   // ── Flashcard review ──
 
+  // Reviews the open tab's deck: words, or kanji (cards with a `kanji`).
   function startStoryReview(cont) {
-    const deck = getStoryDeck();
+    const kanji = storyDeckTab() === 'kanji';
+    const deck = kanji ? getKanjiDeck() : getStoryDeck();
     if (deck.length === 0) return;
     const due = deck.filter(c => isDue(getCardState(srsData, c.id)));
-    storyReviewCards = pickBatch('story-review', due, deck, cont);
+    storyReviewCards = pickBatch(kanji ? 'kanji-review' : 'story-review', due, deck, cont);
     storyReviewIndex = 0;
     storyReviewCorrect = 0;
 
@@ -4032,6 +4139,18 @@
     renderStoryReviewText();
     $('#story-review-reveal-area').classList.remove('hidden');
     $('#story-review-answer-area').classList.add('hidden');
+    const label = $('#story-review-label');
+    if (label) label.textContent = card.kanji ? 'Recall the meaning and readings' : 'Recall the reading and meaning';
+
+    if (card.kanji) {
+      const { meaning, on, kun } = card.info;
+      $('#story-review-answer').innerHTML = `
+        <div class="story-panel-meaning">${meaning}</div>
+        ${on ? `<div class="kanji-review-reading" lang="ja"><span>on</span> ${on}</div>` : ''}
+        ${kun ? `<div class="kanji-review-reading" lang="ja"><span>kun</span> ${kun}</div>` : ''}
+      `;
+      return;
+    }
 
     const [reading, meaning, pos] = card.gloss;
     const word = storyDisplayWord(card.key);
@@ -4040,8 +4159,23 @@
       ${pronounceButtons(reading, 'story-panel-speak')}
       <div class="story-panel-meaning">${meaning}</div>
       <div class="story-panel-pos">${pos}</div>
+      ${kanjiBreakdownHtml(word, { reading, meaning })}
     `;
+  }
 
+  // Words the kanji was saved from, then other vocabulary using it (when the
+  // page has vocabulary-data.js), up to five in all.
+  function kanjiReviewExamples(card) {
+    const out = (card.meta.words || []).map(w => ({ word: w.word, reading: w.reading, meaning: w.meaning, saved: true }));
+    if (typeof VOCAB_DATA !== 'undefined') {
+      for (const level of ['n5', 'n4', 'n3']) {
+        for (const w of VOCAB_DATA[level] || []) {
+          if (out.length >= 5) break;
+          if (w.kanji.includes(card.kanji) && !out.some(o => o.word === w.kanji)) out.push({ word: w.kanji, reading: w.kana, meaning: w.meaning });
+        }
+      }
+    }
+    return out.slice(0, 5);
   }
 
   // The card's Japanese — the word on the front and the sentence it was saved
@@ -4050,6 +4184,20 @@
   function renderStoryReviewText() {
     const card = storyReviewCards[storyReviewIndex];
     if (!card) return;
+    if (card.kanji) {
+      $('#story-review-prompt').innerHTML = `<span class="kanji-review-char">${card.kanji}</span>`;
+      const examples = kanjiReviewExamples(card);
+      $('#story-review-context').innerHTML = examples.length ? `
+        <div class="story-review-context-src">Words with ${card.kanji}</div>
+        <ul class="kanji-review-words">
+          ${examples.map(w => `
+            <li${w.saved ? ' class="saved-from"' : ''}>
+              <span class="kanji-review-word" lang="ja">${storyCardHtml(w.reading && w.reading !== w.word ? storyWordFurigana(w.word, w.reading) : w.word)}</span>
+              <span class="kanji-review-word-meaning">${w.meaning || ''}</span>
+            </li>`).join('')}
+        </ul>` : '';
+      return;
+    }
     const [reading] = card.gloss;
     $('#story-review-prompt').innerHTML = storyCardHtml(storyWordFurigana(storyDisplayWord(card.key), reading));
 
@@ -4082,7 +4230,7 @@
     if (storyReviewAnswered) return;
     storyReviewAnswered = true;
     const card = storyReviewCards[storyReviewIndex];
-    if (card) pronounceOnClick(card.gloss[0]);
+    if (card && card.gloss) pronounceOnClick(card.gloss[0]);
     $('#story-review-reveal-area').classList.add('hidden');
     $('#story-review-answer-area').classList.remove('hidden');
   }
@@ -4643,6 +4791,18 @@
     statsData = loadStats();
 
     const mode = document.body.dataset.mode || 'hub';
+
+    // Kanji flashcards (kanji-cards.js): a removed card's schedule goes from
+    // this page's copy of the SRS store too, and the deck screen, counts and
+    // hub badge follow every ＋ / ✓ pressed anywhere on the page.
+    if (window.KanjiCards) {
+      KanjiCards.onRemove = id => { delete srsData[id]; saveSRS(srsData); };
+      document.addEventListener('kanjicards:change', () => {
+        if (mode === 'stories' || mode === 'memes') renderStoryDeck();
+        else if (mode === 'vocabulary') renderVocabDeckStatus();
+        else if (mode === 'hub') renderHub();
+      });
+    }
     if (window.Romaji) {
       Romaji.attach($('#answer-input'));
       Romaji.attach($('#bunkei-input'));
@@ -5211,6 +5371,12 @@
     });
 
     on('#wbk-overlay-words', 'click', (e) => {
+      const add = e.target.closest('.wbk-word-add');
+      if (add) {
+        const w = wbkOverlayWords[+add.dataset.i];
+        if (w) add.outerHTML = wbkWordButtonHtml(+add.dataset.i, toggleVocabFlashcard(w));
+        return;
+      }
       const row = e.target.closest('.wbk-word-row');
       if (row) pronounceOnClick(row.dataset.kana);
     });
@@ -5314,6 +5480,7 @@
         const id = location.hash.slice(1);
         if (getStory(id)) openStory(id);
         else if (screens.story && screens.story.classList.contains('active')) closeStory();
+        if (id === 'kanji-deck') openKanjiDeck();
       });
     }
 
@@ -5421,9 +5588,26 @@
         if (reading) pronounceOnClick(reading.dataset.say);
         return;
       }
-      toggleStoryWord(btn.dataset.word);
+      if (btn.dataset.kanji) {
+        if (window.KanjiCards) KanjiCards.remove(btn.dataset.kanji);
+      } else {
+        toggleStoryWord(btn.dataset.word);
+      }
       renderStoryDeck();
     });
+
+    $$('.deck-tab').forEach(btn => {
+      btn.addEventListener('click', () => setStoryDeckTab(btn.dataset.deckTab));
+    });
+
+    // stories.html#kanji-deck opens the deck on its Kanji tab (see also the
+    // hashchange handler above).
+    function openKanjiDeck() {
+      setStoryDeckTab('kanji');
+      const deckEl = $('#deck');
+      if (deckEl) requestAnimationFrame(() => deckEl.scrollIntoView({ block: 'start' }));
+    }
+    if ((mode === 'stories' || mode === 'memes') && location.hash === '#kanji-deck') openKanjiDeck();
 
     $$('.flashcard-furigana-toggle').forEach(el => {
       el.addEventListener('change', () => setFlashcardFurigana(el.checked));
