@@ -4795,7 +4795,7 @@
                 <path fill="#e04b3c" d="M0 7h12v1H0z"/>
                 <path fill="#a3302a" d="M1 8h10v1H1z"/>
               </svg>
-              <h1 id="header-title">Tokidoki</h1>
+              <span id="header-title">Tokidoki</span>
             </a>
           </div>
           <div class="header-right">

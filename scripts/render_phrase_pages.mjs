@@ -50,7 +50,9 @@ function page(cat, i) {
   const prev = cats[i - 1];
   const next = cats[i + 1];
   const titleJa = plain(cat.title);
-  const title = `${cat.titleEn} in Japanese — ${titleJa} | Tokidoki`;
+  // "Movie lines, the Japanese way" doesn't need "in Japanese" as well.
+  const topic = /Japanese/.test(cat.titleEn) ? cat.titleEn : `${cat.titleEn} in Japanese`;
+  const title = `${topic} — ${titleJa} | Tokidoki`;
   const desc = `${cat.blurb} ${cat.phrases.length} Japanese phrases with furigana, English and audio, and a short story to listen to.`;
   const url = `${SITE}/phrases-${cat.id}.html`;
   const pagerLink = (c, dir) => c
@@ -68,9 +70,16 @@ function page(cat, i) {
   <meta property="og:description" content="${esc(desc)}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${url}">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:site_name" content="Tokidoki">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="${SITE}/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Tokidoki — free Japanese practice, one plate at a time">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${esc(title)}">
   <meta name="twitter:description" content="${esc(desc)}">
+  <meta name="twitter:image" content="${SITE}/og-image.png">
   <link rel="canonical" href="${url}">
 ${headExtras}</head>
 <body data-mode="phrases" data-category="${cat.id}">
@@ -121,7 +130,7 @@ ${nav}
 ${scripts}
   <!-- Static content for search engines -->
   <section id="seo-content" aria-hidden="true">
-    <h2>${esc(cat.titleEn)} in Japanese: ${esc(titleJa)}</h2>
+    <h1>${esc(topic)}: ${esc(titleJa)}</h1>
     <p>${esc(cat.blurb)}</p>
     <ul>
 ${cat.phrases.map(p => `      <li>${esc(plain(p.jp))} — ${esc(p.en)} ${esc(p.note)}</li>`).join('\n')}

@@ -29,6 +29,23 @@ const plain = s => s.replace(RUBY_RE, '$1');
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const pageFile = id => `news-${id}.html`;
 
+// Structured data so search engines know each page is a dated article.
+// `<` is escaped so no text can close the script tag.
+const jsonLd = (item, url) => JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'NewsArticle',
+  headline: item.titleEn,
+  description: `${item.titleEn}, rewritten in easy Japanese for JLPT N5, N4 and N3 learners.`,
+  inLanguage: 'ja',
+  datePublished: item.date,
+  dateModified: item.date,
+  image: [`${SITE}/og-image.png`],
+  mainEntityOfPage: url,
+  isAccessibleForFree: true,
+  author: { '@type': 'Organization', name: 'Tokidoki', url: `${SITE}/` },
+  publisher: { '@type': 'Organization', name: 'Tokidoki', url: `${SITE}/` },
+}).replace(/</g, '\\u003c');
+
 // The pieces of news.html every story page reuses.
 const index = read('news.html');
 const cut = (from, to) => {
@@ -62,11 +79,20 @@ function page(item, i) {
   <meta property="og:title" content="${esc(title)}">
   <meta property="og:description" content="${esc(desc)}">
   <meta property="og:type" content="article">
+  <meta property="article:published_time" content="${item.date}">
   <meta property="og:url" content="${url}">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:site_name" content="Tokidoki">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="${SITE}/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Tokidoki — free Japanese practice, one plate at a time">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${esc(title)}">
   <meta name="twitter:description" content="${esc(desc)}">
+  <meta name="twitter:image" content="${SITE}/og-image.png">
   <link rel="canonical" href="${url}">
+  <script type="application/ld+json">${jsonLd(item, url)}</script>
 ${headExtras}</head>
 <body data-mode="news" data-story="${esc(item.id)}">
   <!-- Written by scripts/render_news_pages.mjs — edit that, news.html or news-data.js, not this file. -->

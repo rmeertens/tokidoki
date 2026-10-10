@@ -6,6 +6,16 @@
   no pull request unless one is asked for. Run the tests (`node test_*.js`)
   before pushing.
 
+## SEO and analytics
+
+- Every page's `<head>` carries the Google tag (G-XXWYNZC7YH), a unique
+  title and description, canonical + `og:url`, the shared share image
+  (`og-image.png`, 1200×630, `summary_large_image`), and the favicon links.
+  Copy the head of an existing page when adding one, and add it to
+  `sitemap.xml` (the generated pages are added by their scripts).
+- The header's site name is a `<span>`; each page's one `<h1>` is the first
+  heading in its `#seo-content` section.
+
 ## Generated pages
 
 - The Phrases category pages, `phrases-<id>.html`, are written by
