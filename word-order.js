@@ -623,7 +623,7 @@
     if (n >= 1 && n <= q.deck.length && !q.answered) { e.preventDefault(); place(q.deck[n - 1]); }
     else if (e.key === 'Backspace' && !q.answered) { e.preventDefault(); undoLast(); }
     else if ((e.key === 'Enter' || e.key === ' ') && q.answered) { e.preventDefault(); next(); }
-    else if (e.key === 'Enter' && !session.starOnly && q.placed.every(p => p != null)) { e.preventDefault(); answer(); }
+    else if ((e.key === 'Enter' || e.key === ' ') && !session.starOnly && q.placed.every(p => p != null)) { e.preventDefault(); answer(); }
   });
 
   renderHome();
