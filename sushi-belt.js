@@ -9,9 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (mini) {
     const footer = document.createElement('footer');
     footer.className = 'belt-footer';
-    footer.setAttribute('aria-hidden', 'true');
     canvas = document.createElement('canvas');
     canvas.id = 'sushi-belt';
+    canvas.setAttribute('aria-hidden', 'true');
     canvas.title = 'Click a plate to grab it';
     footer.appendChild(canvas);
     document.body.appendChild(footer);
@@ -46,6 +46,50 @@ document.addEventListener('DOMContentLoaded', () => {
   let lastT = 0;
   let running = false;
   let visible = true;
+
+  // Play/pause toggle in the bottom-left corner. The choice is remembered;
+  // without one the belt runs unless the system asks for reduced motion.
+  const PAUSE_KEY = 'tokidoki-belt-paused';
+  let paused;
+  try {
+    const saved = localStorage.getItem(PAUSE_KEY);
+    paused = saved === null ? reducedMotion.matches : saved === '1';
+  } catch {
+    paused = reducedMotion.matches;
+  }
+
+  // 7x7 pixel icons, one character per pixel like the sprites.
+  const ICONS = {
+    play: ['X......', 'XXX....', 'XXXXX..', 'XXXXXXX', 'XXXXX..', 'XXX....', 'X......'],
+    pause: ['XX...XX', 'XX...XX', 'XX...XX', 'XX...XX', 'XX...XX', 'XX...XX', 'XX...XX'],
+  };
+  const iconSvg = (rows) => {
+    let rects = '';
+    rows.forEach((row, y) => {
+      for (let x = 0; x < row.length; x++) {
+        if (row[x] === 'X') rects += `<rect x="${x}" y="${y}" width="1" height="1"/>`;
+      }
+    });
+    return `<svg viewBox="0 0 7 7" shape-rendering="crispEdges" aria-hidden="true">${rects}</svg>`;
+  };
+  const toggle = document.createElement('button');
+  toggle.type = 'button';
+  toggle.className = 'belt-toggle';
+  canvas.parentElement.appendChild(toggle);
+  function syncToggle() {
+    toggle.innerHTML = iconSvg(paused ? ICONS.play : ICONS.pause);
+    const label = paused ? 'Start the sushi belt' : 'Stop the sushi belt';
+    toggle.setAttribute('aria-label', label);
+    toggle.title = label;
+    toggle.setAttribute('aria-pressed', String(!paused));
+  }
+  toggle.addEventListener('click', () => {
+    paused = !paused;
+    try { localStorage.setItem(PAUSE_KEY, paused ? '1' : '0'); } catch {}
+    syncToggle();
+    updateRunning();
+  });
+  syncToggle();
 
   function readTheme() {
     const cs = getComputedStyle(document.documentElement);
@@ -92,7 +136,8 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let x = -SPACING; x < loop - SPACING; x += SPACING) plates.push(newPlate(x));
 
     props = [];
-    let x = 10 + Math.floor(Math.random() * 30);
+    // Keep the counter props clear of the play/pause button.
+    let x = Math.ceil(48 / scale) + Math.floor(Math.random() * 30);
     while (x < W - 14) {
       props.push({ x, kind: pick(PROP_KINDS) });
       x += 60 + Math.floor(Math.random() * 90);
@@ -214,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateRunning() {
-    const shouldRun = visible && !document.hidden && !reducedMotion.matches;
+    const shouldRun = visible && !document.hidden && !paused;
     if (shouldRun && !running) {
       running = true;
       lastT = 0;
@@ -254,7 +299,12 @@ document.addEventListener('DOMContentLoaded', () => {
   new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; updateRunning(); })
     .observe(canvas);
   document.addEventListener('visibilitychange', updateRunning);
-  reducedMotion.addEventListener('change', updateRunning);
+  reducedMotion.addEventListener('change', () => {
+    let saved = null;
+    try { saved = localStorage.getItem(PAUSE_KEY); } catch {}
+    if (saved === null) { paused = reducedMotion.matches; syncToggle(); }
+    updateRunning();
+  });
 
   // The header takes on the hero's wall colour while it sits over the hero,
   // then settles back to the page colour once the belt scrolls under it.

@@ -253,6 +253,7 @@ body[data-mode="hub"] #header {
 }
 
 .sushi-belt-wrap {
+  position: relative;
   margin: 0 calc(-1 * max(16px, calc(50vw - 424px)));
   line-height: 0;
 }
@@ -262,6 +263,47 @@ body[data-mode="hub"] #header {
   image-rendering: pixelated;
   cursor: grab;
   touch-action: pan-y;
+}
+
+/* Pixel play/pause button sitting on the counter, bottom left of the belt. */
+.belt-toggle {
+  position: absolute;
+  left: 12px;
+  bottom: 6px;
+  width: 26px;
+  height: 26px;
+  padding: 6px;
+  display: grid;
+  place-items: center;
+  background: var(--counter-top);
+  color: var(--text);
+  border: 2px solid var(--counter-edge);
+  border-radius: 0;
+  box-shadow: 2px 2px 0 var(--belt-shadow);
+  cursor: pointer;
+  line-height: 0;
+  opacity: 0.85;
+}
+
+.belt-toggle:hover,
+.belt-toggle:focus-visible { opacity: 1; }
+
+.belt-toggle:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--belt-shadow);
+}
+
+.belt-toggle svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+.belt-footer .belt-toggle {
+  bottom: 0;
+  width: 22px;
+  height: 22px;
+  padding: 4px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -279,6 +321,7 @@ body.has-belt-footer #app {
 }
 
 .belt-footer {
+  position: relative;
   margin-top: auto;
   padding-top: 24px;
   line-height: 0;
