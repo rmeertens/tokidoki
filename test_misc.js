@@ -23,7 +23,7 @@ Misc.QUIZZES.forEach(q => {
       if (sec.type === 'find') {
         check(it.cells.length === sec.columns.length, `${q.id}#${si}.${i}: cells don't match columns`);
         // Every hidden answer can be named on its own.
-        const typed = sec.match ? it.key + it.value : it.accept[0];
+        const typed = it.accept[0];
         check(Misc.matchItems(sec, typed).includes(i), `${q.id}#${si}.${i}: "${typed}" isn't accepted`);
       } else {
         check(it.prompt && it.answer, `${q.id}#${si}.${i}: missing prompt or answer`);
@@ -69,14 +69,11 @@ check(new Set(counters.items.map(it => it.accept[0])).size === 30, 'no counter i
 // ─── Te-form endings ─────────────────────────────────────────────────────────
 
 const te = Misc.QUIZZES.find(q => q.id === 'te-form').sections[0];
-const keysOf = s => Misc.matchItems(te, s).map(i => te.items[i].key).sort().join('');
-check(keysOf('す して') === 'す', '"す して" names す');
-check(keysOf('su → shite') === 'す', 'romaji with an arrow names す');
-check(keysOf('うつる って') === 'うつる'.split('').sort().join(''), 'several endings sharing a change are named at once');
-check(keysOf('mu bu nu nde') === 'ぬぶむ', 'romaji grouped endings');
-check(keysOf('くって') === '', 'く does not become って');
-check(keysOf('うつくって') === '', 'one wrong ending in a group names none');
-check(keysOf('って') === '', 'a change alone names nothing');
+const teFor = k => ({ items: [te.items.find(it => it.prompt.startsWith('〜' + k))] });
+check(Misc.matchItems(teFor('す'), 'shite').length === 1, 'romaji shite for す');
+check(Misc.matchItems(teFor('う'), '買って').length === 1, 'the example verb in full counts');
+check(Misc.matchItems(teFor('く'), 'って').length === 0, 'く does not become って');
+check(Misc.matchItems(teFor('む'), 'nde').length === 1, 'romaji nde for む');
 check(Misc.total(Misc.QUIZZES.find(q => q.id === 'te-form')) === 13, 'te-form has 9 endings + 4 others');
 
 // ─── Fill answers ────────────────────────────────────────────────────────────

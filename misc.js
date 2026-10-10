@@ -139,16 +139,17 @@
       glyph: 'て',
       title: 'Te-form endings',
       ja: 'て形の作り方',
-      desc: 'Name every U-verb ending and what it changes to — then the RU-verbs and the irregulars.',
+      desc: 'What every U-verb ending changes to — then the RU-verbs and the irregulars.',
       sections: [
         {
-          type: 'find',
-          label: 'U-verbs — every ending and its change',
-          placeholder: 'Ending + change, e.g. "す して" or "su shite"',
-          columns: ['Ending', 'Te-form', 'Example'],
-          // Typing "うつる って" names all three at once.
-          items: TE_ROWS.map(r => ({ cells: [r.key, '→ ' + r.value, r.ex], key: r.key, value: r.value })),
-          match: matchPairs,
+          type: 'fill',
+          label: 'U-verbs — what each ending changes to',
+          columns: ['Ending', 'Te-form'],
+          // The change ("って") or the example verb in full ("買って") both count.
+          items: TE_ROWS.map(r => {
+            const [verb, te] = r.ex.split(' → ');
+            return { prompt: `〜${r.key}  (${verb})`, answer: r.value, accept: [te] };
+          }),
         },
         {
           type: 'fill',
@@ -228,26 +229,12 @@
   function matchItems(section, text, found = new Set()) {
     const s = normalize(text);
     if (!s) return [];
-    if (section.match) return section.match(section, s).filter(i => !found.has(i));
     return section.items.map((it, i) => i).filter(i => !found.has(i)
       && accepted(section.items[i]).some(a => normalize(a) === s));
   }
 
   function accepted(item) {
     return [...(item.accept || []), ...(item.answer ? [item.answer] : [])];
-  }
-
-  // "うって", "うつるって": one or more endings followed by the change they
-  // share. Every ending has to belong to that change.
-  function matchPairs(section, s) {
-    const values = [...new Set(section.items.map(it => it.value))];
-    for (const v of values) {
-      if (!s.endsWith(v) || s.length === v.length) continue;
-      const keys = [...s.slice(0, -v.length)];
-      const idx = keys.map(k => section.items.findIndex(it => it.key === k && it.value === v));
-      if (idx.every(i => i >= 0)) return [...new Set(idx)];
-    }
-    return [];
   }
 
   const total = quiz => quiz.sections.reduce((n, sec) => n + sec.items.length, 0);
@@ -466,7 +453,7 @@
     if (QUIZZES.some(q => q.id === hash)) start(hash);
   }
 
-  const api = { QUIZZES, RU_EXCEPTIONS, normalize, matchItems, matchPairs, total, better, formatTime };
+  const api = { QUIZZES, RU_EXCEPTIONS, normalize, matchItems, total, better, formatTime };
   global.Misc = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   if (typeof document !== 'undefined') {
