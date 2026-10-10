@@ -100,6 +100,32 @@ const sentences = [...lineIds].filter(id => !id.endsWith(':t')).map(id => NEWS_W
 check(sentences.every(l => l.g.length > 0), 'every sentence should have some grammar');
 check(sentences.every(l => l.w.filter(Array.isArray).length >= 2), 'every sentence should have tappable words');
 
+// ─── Recordings (news-audio.js) ──────────────────────────────────────────────
+// scripts/generate_news_audio.py records every story at every level; each
+// recording must match the text it was made from, with a time for the
+// headline and every sentence, and its file must exist.
+
+require('./news-audio.js');
+const AUDIO = global.NEWS_AUDIO || {};
+const reRecord = 'run scripts/generate_news_audio.py (see CLAUDE.md)';
+const audioKeys = new Set();
+NEWS_ITEMS.forEach(item => News.LEVELS.forEach(level => {
+  if (!item.levels[level]) return;
+  const key = News.audioKey(item, level);
+  audioKeys.add(key);
+  const rec = AUDIO[key];
+  check(!!rec, `${key}: no recording — ${reRecord}`);
+  if (!rec) return;
+  check(rec.hash === News.scriptHash(News.audioScript(item, level)), `${key}: recording is out of date — ${reRecord}`);
+  check(rec.src === `audio/news/${item.id}-${level}.mp3` && fs.existsSync(`${__dirname}/${rec.src}`), `${key}: missing file ${rec.src}`);
+  check(Array.isArray(rec.title) && rec.title.length === 2, `${key}: no headline time`);
+  check(Array.isArray(rec.steps) && rec.steps.length === item.levels[level].lines.length, `${key}: needs a time for every sentence`);
+  const times = [rec.title, ...(rec.steps || [])];
+  check(times.every((t, i) => t[0] < t[1] && (i === 0 || t[0] >= times[i - 1][1])), `${key}: times out of order`);
+}));
+Object.keys(AUDIO).forEach(k => check(audioKeys.has(k), `news-audio.js has ${k}, a story that's gone — ${reRecord}`));
+fs.readdirSync(`${__dirname}/audio/news`).forEach(f => check(Object.values(AUDIO).some(r => r.src === `audio/news/${f}`), `audio/news/${f} isn't used — ${reRecord}`));
+
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 check(News.deckSentence({ w: [['食[た]べ物[もの]', '食べ物'], 'の', ['高[たか]く', '高い']] }) === '食[た]べ物[もの] の 高[たか]く>高い', 'deckSentence() marks words written differently');
@@ -110,7 +136,7 @@ check(News.lineSource(NEWS_ITEMS, 'nope:N5:0') === null, 'lineSource() of an unk
 // ─── The page ────────────────────────────────────────────────────────────────
 
 const html = fs.readFileSync(`${__dirname}/news.html`, 'utf8');
-['news-data.js', 'news-words.js', 'news.js', 'app.js'].forEach(f => check(html.includes(`src="${f}`), `news.html doesn't load ${f}`));
+['news-data.js', 'news-words.js', 'news-audio.js', 'news.js', 'app.js'].forEach(f => check(html.includes(`src="${f}`), `news.html doesn't load ${f}`));
 ['news-headlines', 'news-index-levels', 'news-toggle-furigana', 'news-saved-grammar-list', 'news-saved-grammar-count'].forEach(id => check(html.includes(`id="${id}"`), `news.html has no #${id}`));
 
 // One page per story, written by scripts/render_news_pages.mjs.

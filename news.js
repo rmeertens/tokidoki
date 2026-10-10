@@ -17,7 +17,8 @@
 // Tapping a sentence shows its English, a note and its grammar; grammar
 // points can be saved (tokidoki_saved_grammar), listed under "Saved grammar"
 // on news.html. Furigana and English can be switched off, and ▶ / 🐢 read
-// the story aloud.
+// the story aloud — from its VOICEVOX recording (news-audio.js, made by
+// scripts/generate_news_audio.py), or the browser's voice if there is none.
 (function (global) {
   'use strict';
 
@@ -61,6 +62,35 @@
     }).filter(Boolean).join(' ');
   }
 
+  // ─── Recorded audio ────────────────────────────────────────────────────────
+  //
+  // Every story is read by a VOICEVOX newsreader voice, one MP3 per story and
+  // level in audio/news/, made by scripts/generate_news_audio.py from
+  // audioScript() below; news-audio.js indexes them (file, the script's hash,
+  // and when the headline and each sentence start and end). Browsers without
+  // a recording for the current text fall back to their own speech voice.
+
+  const NEWS_VOICE = { id: 30, name: 'No.7', style: 'アナウンス' };
+  // VOICEVOX speed scale: N5 a little slower than natural, N3 brisk.
+  const NEWS_SPEED = { N5: 0.9, N4: 1.0, N3: 1.08 };
+  const audioKey = (item, level) => `${item.id}:${level}`;
+
+  // What a recording says, in order: the headline, then every sentence, each
+  // with the pause after it in milliseconds.
+  function audioScript(item, level) {
+    const v = item.levels[level];
+    return [{ text: v.title, pause: 1000 }, ...v.lines.map(l => ({ text: l[0], pause: 600 }))]
+      .map(st => ({ ...st, voice: NEWS_VOICE.id, speed: NEWS_SPEED[level] }));
+  }
+
+  function hashString(s) {
+    let h = 0x811c9dc5;
+    for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+    return h;
+  }
+  // A fingerprint of a script, so a stale recording can be told apart.
+  const scriptHash = script => hashString(JSON.stringify(script.map(st => [st.voice, st.text, st.pause, st.speed]))).toString(16).padStart(8, '0');
+
   // A story's date for the page: "Saturday 10 October 2026".
   function formatDate(iso) {
     const d = new Date(`${iso}T12:00:00`);
@@ -68,7 +98,7 @@
     return d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
   }
 
-  const api = { LEVELS, lineId, pageFile, lineSource, deckSentence, plainText, kanaText, rubyHtml };
+  const api = { LEVELS, NEWS_VOICE, NEWS_SPEED, audioKey, audioScript, scriptHash, lineId, pageFile, lineSource, deckSentence, plainText, kanaText, rubyHtml };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   if (typeof document === 'undefined') return;
 
@@ -299,7 +329,7 @@
     body.innerHTML = `
       <div class="story-panel-kicker">Sentence ${sel.s + 1}</div>
       <div class="story-panel-sentence" lang="ja">${rubyHtml(line[0])}</div>
-      ${pronounceHtml(kanaText(line[0]), 'story-panel-speak')}
+      ${sentenceButtonsHtml(sel.s)}
       <div class="story-panel-en">${esc(line[1])}</div>
       ${line[2] ? `<p class="news-explain-note">${esc(line[2])}</p>` : ''}
       <div class="story-panel-kicker">Grammar</div>
@@ -326,9 +356,69 @@
   }
 
   // ─── Reading aloud ─────────────────────────────────────────────────────────
+  //
+  // From the story's VOICEVOX recording when there is one for the text on
+  // the page (its hash matches), else with the browser's speech voice. The
+  // 🐢 buttons play the recording at SLOW_RATE.
+
+  const SLOW_RATE = 0.7;
+  const audio = typeof Audio !== 'undefined' ? new Audio() : null;
+  let playing = null;  // { to, onTime(t), onEnd } while the recording plays
+
+  function recording() {
+    const rec = audio && global.NEWS_AUDIO && global.NEWS_AUDIO[audioKey(item, level())];
+    return rec && rec.hash === scriptHash(audioScript(item, level())) ? rec : null;
+  }
+  const canSpeak = () => !!recording() || !!(global.Pronounce && Pronounce.supported);
+
+  function stopAudio() {
+    const p = playing;
+    playing = null;
+    if (audio) audio.pause();
+    if (p && p.onEnd) p.onEnd();
+  }
+
+  // Plays the recording from `from` to `to` seconds.
+  function playRange(rec, from, to, slow, onTime, onEnd) {
+    stopAudio();
+    if (global.Pronounce) Pronounce.stop();
+    const mine = { to, onTime, onEnd };
+    playing = mine;
+    if (!audio.src.endsWith(rec.src)) audio.src = rec.src;
+    audio.playbackRate = slow ? SLOW_RATE : 1;
+    const seek = () => { try { audio.currentTime = from; } catch { /* not loaded yet */ } };
+    if (audio.readyState >= 1) seek();
+    else audio.addEventListener('loadedmetadata', () => { if (playing === mine) seek(); }, { once: true });
+    audio.play().catch(() => { if (playing === mine) stopAudio(); });
+  }
+
+  if (audio) {
+    audio.addEventListener('timeupdate', () => {
+      if (!playing) return;
+      const t = audio.currentTime;
+      if (playing.onTime) playing.onTime(t);
+      if (t >= playing.to) stopAudio();
+    });
+    audio.addEventListener('ended', () => { if (playing) stopAudio(); });
+  }
+
+  // One sentence: from its recording, or the speech voice.
+  function speakSentence(s, slow) {
+    const rec = recording();
+    if (rec && rec.steps[s]) playRange(rec, rec.steps[s][0], rec.steps[s][1], slow);
+    else if (global.Pronounce) { stopAudio(); Pronounce.speak(kanaText(version().lines[s][0]), slow); }
+  }
+
+  function sentenceButtonsHtml(s) {
+    if (!canSpeak()) return '';
+    return `<span class="speak-pair story-panel-speak">`
+      + `<button type="button" class="speak-btn" data-play="${s}" title="Listen" aria-label="Listen to sentence ${s + 1}"><span aria-hidden="true">🔊</span></button>`
+      + `<button type="button" class="speak-btn" data-play="${s}" data-slow="1" title="Listen slowly" aria-label="Listen to sentence ${s + 1} slowly"><span aria-hidden="true">🐢</span></button>`
+      + '</span>';
+  }
 
   function renderReadButtons() {
-    const supported = !!(global.Pronounce && Pronounce.supported);
+    const supported = canSpeak();
     [['#btn-news-read', false], ['#btn-news-read-slow', true]].forEach(([sel, slow]) => {
       const btn = $(sel);
       btn.classList.toggle('hidden', !supported);
@@ -338,26 +428,39 @@
     });
   }
 
+  // Highlights sentence s (-1 while the headline is read; null when done).
   function markReading(s) {
+    if (s === reading) return;
     reading = s;
     document.querySelectorAll('#news-text .story-sentence').forEach(el => {
       el.classList.toggle('reading', Number(el.dataset.s) === s);
     });
-    const el = s === null ? null : document.querySelector(`#news-text .story-sentence[data-s="${s}"]`);
+    const el = s === null || s < 0 ? null : document.querySelector(`#news-text .story-sentence[data-s="${s}"]`);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     renderReadButtons();
   }
 
   function stopReading() {
+    stopAudio();
     if (global.Pronounce) Pronounce.stop();
     markReading(null);
   }
 
+  // The whole story, headline first; the same button again stops it.
   function readStory(slow) {
-    if (!global.Pronounce) return;
     if (reading !== null && readingSlow === slow) { stopReading(); return; }
-    Pronounce.stop();
+    stopReading();
     readingSlow = slow;
+    const rec = recording();
+    if (rec) {
+      const steps = rec.steps;
+      markReading(-1);
+      playRange(rec, rec.title[0], steps[steps.length - 1][1], slow,
+        t => markReading(steps.reduce((at, [from], i) => (t >= from - 0.05 ? i : at), -1)),
+        () => markReading(null));
+      return;
+    }
+    if (!global.Pronounce) return;
     Pronounce.speakAll(version().lines.map(l => kanaText(l[0])), {
       slow,
       onStart: i => markReading(i),
@@ -410,7 +513,7 @@
       if (sentence) {
         const s = Number(sentence.dataset.s);
         select({ type: 'sentence', s });
-        if (global.Pronounce) Pronounce.onClick(kanaText(version().lines[s][0]));
+        if (global.Pronounce && Pronounce.auto) speakSentence(s, false);
       }
     });
     text.addEventListener('keydown', e => {
@@ -424,6 +527,8 @@
     const panel = $('#news-panel');
     panel.addEventListener('click', e => {
       if (e.target.closest('#news-panel-close')) { select(null); return; }
+      const play = e.target.closest('[data-play]');
+      if (play) { stopReading(); speakSentence(Number(play.dataset.play), !!play.dataset.slow); return; }
       if (e.target.closest('#btn-news-add-word')) {
         const key = sentenceWords(selection.s).w[selection.t][1];
         toggleWord(key, sentenceId(selection.s));
@@ -541,7 +646,11 @@
 
     if (story) initStory(story);
     else initIndex();
-    window.addEventListener('pagehide', () => { if (global.Pronounce) Pronounce.stop(); });
+    window.addEventListener('pagehide', () => { if (global.Pronounce) Pronounce.stop(); if (audio) audio.pause(); });
+    // A word's 🔊 (the browser's voice) cuts the recording off.
+    document.addEventListener('click', e => {
+      if (playing && e.target.closest && e.target.closest('.speak-btn[data-say]')) stopReading();
+    }, true);
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

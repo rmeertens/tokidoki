@@ -109,6 +109,7 @@ ${LEVELS.map(l => `            <button type="button" data-level="${l}" aria-pres
         ${pagerLink(newer, 'newer')}
         ${pagerLink(older, 'older')}
       </nav>
+      <p class="lis-credits">Read by VOICEVOX:No.7</p>
     </main>
 
   </div>
