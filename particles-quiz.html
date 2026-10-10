@@ -13,7 +13,7 @@
   <meta name="twitter:title" content="Japanese Particle Quiz | Tokidoki">
   <meta name="twitter:description" content="Practice は, が, を, に, で, へ, と, も, の and や with a self-graded multiple-choice quiz.">
   <link rel="canonical" href="https://tokidoki.meertens.dev/particles-quiz.html">
-  <link rel="stylesheet" href="style.css?v=39">
+  <link rel="stylesheet" href="style.css?v=40">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXWYNZC7YH"></script>
   <script>
@@ -65,6 +65,27 @@
           </div>
         </div>
       </nav>
+      <p class="pq-modes-label" id="particles-modes-label">Two ways to practise — pick one:</p>
+      <div class="pq-modes" role="radiogroup" aria-labelledby="particles-modes-label">
+        <label class="pq-mode">
+          <input type="radio" name="particles-quiz-type" id="particles-type-sentences" value="sentences" checked>
+          <span class="pq-mode-glyph" lang="ja" aria-hidden="true">文</span>
+          <span class="pq-mode-text">
+            <span class="pq-mode-title">Sentences</span>
+            <span class="pq-mode-sub">Fill the missing particle into a full sentence</span>
+            <span class="pq-mode-example" lang="ja">私＿学生です · 駅＿行きます</span>
+          </span>
+        </label>
+        <label class="pq-mode">
+          <input type="radio" name="particles-quiz-type" id="particles-type-verbs" value="verbs">
+          <span class="pq-mode-glyph" lang="ja" aria-hidden="true">動</span>
+          <span class="pq-mode-text">
+            <span class="pq-mode-title">Verb + Particle</span>
+            <span class="pq-mode-sub">Which particle a verb takes, plus transitive / intransitive pairs</span>
+            <span class="pq-mode-example" lang="ja">パン＿食べる · ドア＿開く</span>
+          </span>
+        </label>
+      </div>
       <p class="tab-intro" id="particles-intro-sentences">
         Multiple-choice practice for Japanese particles, with 200 example sentences.
         Pick the particle that completes each sentence — get an explanation when
@@ -74,25 +95,16 @@
       <p class="tab-intro hidden" id="particles-intro-verbs">
         Which particle does each verb take? Pick the particle that goes between a
         noun and a verb — パン＿食べる, 電車＿乗る, 友達＿会う — with an explanation
-        of every choice. The rules and an overview of common verbs are below.
+        of every choice. The rules, transitive and intransitive verb pairs, and an
+        overview of common verbs are below.
       </p>
-      <div class="kana-settings-row">
-        <label class="kana-script-toggle">
-          <input type="radio" name="particles-quiz-type" id="particles-type-sentences" value="sentences" checked>
-          Sentences
-        </label>
-        <label class="kana-script-toggle">
-          <input type="radio" name="particles-quiz-type" id="particles-type-verbs" value="verbs">
-          Verb + Particle
-        </label>
-      </div>
       <div class="kana-settings-row" id="particles-toggle-row"></div>
       <div class="kana-start-card">
         <div class="kana-start-info">
           <span class="stat-num" id="particles-due-count">0</span>
           <span class="stat-label">due</span>
         </div>
-        <button id="btn-start-particles" class="btn-primary btn-start-custom">Start Quiz</button>
+        <button id="btn-start-particles" class="btn-primary btn-start-custom">Start Sentences quiz</button>
       </div>
       <div id="verb-particles-reference" class="verb-particles-reference hidden"></div>
       <div class="reset-section">

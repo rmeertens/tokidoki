@@ -17,6 +17,9 @@
 //     back.
 //
 // Works with touch, pen and mouse; vertical drags still scroll the page.
+//
+// A card marked `data-no-swipe` (Bunkei) keeps only tap to show the answer:
+// no dragging, no tap-left / tap-right grading and no swipe hint.
 (function (global) {
   'use strict';
 
@@ -34,6 +37,7 @@
     const card = target.closest && target.closest('.card');
     return card && card.querySelector('.grade-buttons') ? card : null;
   }
+  const swipable = card => !card.hasAttribute('data-no-swipe');
 
   const revealButton = card => [...card.querySelectorAll('.btn-reveal')].find(visible) || null;
   const gradeButton = (card, right) => {
@@ -56,7 +60,7 @@
     if (!card || e.target.closest(IGNORE)) return;
     const sel = global.getSelection && global.getSelection();
     if (sel && !sel.isCollapsed && card.contains(sel.anchorNode)) return; // selecting text
-    if (gradeButton(card, false) && gradeButton(card, true)) {
+    if (swipable(card) && gradeButton(card, false) && gradeButton(card, true)) {
       const r = card.getBoundingClientRect();
       e.preventDefault();
       e.stopPropagation();
@@ -97,7 +101,7 @@
   doc.addEventListener('pointerdown', e => {
     if (drag || (e.pointerType === 'mouse' && e.button !== 0)) return;
     const card = cardOf(e.target);
-    if (!card || card.classList.contains('swipe-flying')) return;
+    if (!card || !swipable(card) || card.classList.contains('swipe-flying')) return;
     if (e.target.closest('input, textarea, select, canvas, .kana-canvas-wrap')) return;
     // Gradable now, or once its answer is shown (not while typing an answer).
     if (!(gradeButton(card, false) && gradeButton(card, true)) && !revealButton(card)) return;
@@ -110,7 +114,8 @@
   // card follows the finger. A touch that heads up or down scrolls as usual.
   let touch = null; // { x, y, dir: null | 'x' | 'y' }
   doc.addEventListener('touchstart', e => {
-    touch = e.touches.length === 1 && cardOf(e.target) && !e.target.closest('input, textarea, select, canvas, .kana-canvas-wrap')
+    const card = cardOf(e.target);
+    touch = e.touches.length === 1 && card && swipable(card) && !e.target.closest('input, textarea, select, canvas, .kana-canvas-wrap')
       ? { x: e.touches[0].clientX, y: e.touches[0].clientY, dir: null }
       : null;
   }, { passive: true });
@@ -185,6 +190,7 @@
   // "Swipe ← didn't know · got it →" under each card's grade buttons.
   function addHints() {
     doc.querySelectorAll('.card .grade-buttons').forEach(row => {
+      if (!swipable(row.closest('.card'))) return;
       if (row.nextElementSibling && row.nextElementSibling.classList.contains('swipe-hint')) return;
       const hint = doc.createElement('div');
       hint.className = 'swipe-hint';

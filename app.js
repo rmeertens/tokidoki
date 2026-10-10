@@ -2622,12 +2622,78 @@
           <div class="vp-rule-examples" lang="ja">${r.examples.map(furi).join('　·　')}</div>
         </div>
       </div>`).join('');
+    const typeTag = type => type === 'pair'
+      ? `${typeTag('vi')}${typeTag('vt')}`
+      : type === 'vt'
+        ? '<span class="vp-type vp-type-vt" title="Transitive (他動詞): takes an object with を"><span lang="ja">他</span> vt</span>'
+        : '<span class="vp-type vp-type-vi" title="Intransitive (自動詞): no object"><span lang="ja">自</span> vi</span>';
     const rows = window.VERB_PARTICLE_VERBS.map(v => `
       <tr>
-        <td lang="ja" class="vp-verb">${furi(v.verb)}</td>
-        <td class="vp-en">${esc(v.en)}</td>
+        <td class="vp-verb"><span lang="ja">${furi(v.verb)}</span><span class="vp-type-line">${typeTag(v.type)}</span></td>
+        <td class="vp-en">${esc(v.en)}${v.pair ? `<span class="vp-pair">↔ <span lang="ja">${furi(v.pair)}</span></span>` : ''}</td>
         <td class="vp-frames">${v.frames.map(f => `<span class="vp-frame">${particleTags(f)}</span>`).join('')}</td>
       </tr>`).join('');
+    const vt = window.VERB_TRANSITIVITY;
+    const withParticle = (noun, p, verb) =>
+      `${furi(noun)}<span class="vp-p">${p}</span>${furi(verb)}`;
+    const pairCount = vt.groups.reduce((n, g) => n + g.pairs.length, 0);
+    const exampleBlock = (type, verb, [jp, en, why]) => `
+      <div class="vt-ex vt-ex-${type}">
+        <div class="vt-ex-head">${typeTag(type)} <span lang="ja">${furi(verb)}</span></div>
+        <div class="vt-ex-jp" lang="ja">${furi(jp).replace(/\{([がを])\}/, '<span class="vp-p">$1</span>')}</div>
+        <div class="vt-ex-en">${esc(en)}</div>
+        <p class="vt-ex-why">${esc(why)}</p>
+      </div>`;
+    const transitivity = `
+      <div class="vt-intro">${vt.intro.map(k => `
+        <div class="vt-intro-card vt-intro-${k.type}">
+          <div class="vt-intro-head">${typeTag(k.type)} <span lang="ja">${k.kanji}</span> · ${esc(k.name)}</div>
+          <p>${esc(k.rule)}</p>
+          <div class="vt-intro-example"><span lang="ja">${furi(k.example).replace(/([がを])/, '<span class="vp-p">$1</span>')}</span> <span class="vt-intro-en">${esc(k.en)}</span></div>
+        </div>`).join('')}
+      </div>
+      <p class="vt-tap-hint">Tap any pair below to see both verbs in a sentence and why each one is transitive or intransitive.</p>
+      <ul class="vt-tips">${vt.tips.map(t => `<li>${esc(t)}</li>`).join('')}</ul>
+      ${vt.groups.map(g => `
+        <div class="vt-group">
+          <div class="vt-group-title">${g.vi === 'other' ? 'Other pairs' : `<span lang="ja">${g.vi}</span> intransitive ↔ <span lang="ja">${g.vt}</span> transitive`}${g.note ? ` <span class="vt-group-note">— ${esc(g.note)}</span>` : ''}</div>
+          <div class="vp-table-wrap">
+            <table class="ref-table vt-table">
+              <thead><tr><th>${typeTag('vi')} が</th><th>${typeTag('vt')} を</th><th>Meaning</th></tr></thead>
+              <tbody>${g.pairs.map(p => `
+                <tr class="vt-row" tabindex="0" aria-expanded="false" title="Show example sentences">
+                  <td lang="ja">${withParticle(p.noun, 'が', p.vi)}</td>
+                  <td lang="ja">${withParticle(p.noun, 'を', p.vt)}</td>
+                  <td class="vp-en">${esc(p.en)}<span class="vt-row-chevron" aria-hidden="true"></span></td>
+                </tr>
+                <tr class="vt-detail" hidden>
+                  <td colspan="3"><div class="vt-ex-pair">${exampleBlock('vi', p.vi, p.ex.vi)}${exampleBlock('vt', p.vt, p.ex.vt)}</div></td>
+                </tr>`).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>`).join('')}
+      ${vt.only.map(o => `
+        <div class="vt-only">${typeTag(o.type)} <span class="vt-only-label">${esc(o.label)}:</span>
+          <span lang="ja">${o.verbs.map(furi).join('、')}</span></div>`).join('')}
+      <p class="vt-source">Pairs grouped after the <a href="https://www.mlcjapanese.co.jp/Download/ViVt.pdf" target="_blank" rel="noopener">MLC Japanese 自動詞と他動詞 chart</a>.</p>`;
+    if (!el.dataset.vtBound) {
+      el.dataset.vtBound = '1';
+      const toggle = row => {
+        const detail = row.nextElementSibling;
+        const open = detail.hidden;
+        detail.hidden = !open;
+        row.setAttribute('aria-expanded', String(open));
+      };
+      el.addEventListener('click', e => {
+        const row = e.target.closest('.vt-row');
+        if (row) toggle(row);
+      });
+      el.addEventListener('keydown', e => {
+        const row = e.target.closest('.vt-row');
+        if (row && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); toggle(row); }
+      });
+    }
     el.innerHTML = `
       <details class="ref-verb-types" open>
         <summary class="ref-disclosure">
@@ -2642,10 +2708,21 @@
       </details>
       <details class="ref-verb-types" open>
         <summary class="ref-disclosure">
+          <span class="ref-disclosure-icon" aria-hidden="true">自</span>
+          <span class="ref-disclosure-text">
+            <span class="ref-disclosure-title">Transitive or intransitive? 自動詞と他動詞</span>
+            <span class="ref-disclosure-sub">が with intransitive, を with transitive · ${pairCount} verb pairs · tap a pair for examples</span>
+          </span>
+          <span class="ref-disclosure-chevron" aria-hidden="true"></span>
+        </summary>
+        <div class="ref-exc-body">${transitivity}</div>
+      </details>
+      <details class="ref-verb-types" open>
+        <summary class="ref-disclosure">
           <span class="ref-disclosure-icon" aria-hidden="true">食</span>
           <span class="ref-disclosure-text">
             <span class="ref-disclosure-title">Common verbs and their particles</span>
-            <span class="ref-disclosure-sub">${window.VERB_PARTICLE_VERBS.length} everyday verbs · 〔…〕 is the noun that goes before the particle</span>
+            <span class="ref-disclosure-sub">${window.VERB_PARTICLE_VERBS.length} everyday verbs · 〔…〕 is the noun that goes before the particle · 自 vi = intransitive, 他 vt = transitive</span>
           </span>
           <span class="ref-disclosure-chevron" aria-hidden="true"></span>
         </summary>
@@ -2674,6 +2751,8 @@
       if (verbs) renderVerbParticlesReference();
       ref.classList.toggle('hidden', !verbs);
     }
+    const startBtn = $('#btn-start-particles');
+    if (startBtn) startBtn.textContent = verbs ? 'Start Verb + Particle quiz' : 'Start Sentences quiz';
     const pool = getParticlesPool();
     const due = pool.filter(item => isDue(getCardState(srsData, item.id))).length;
     const el = $('#particles-due-count');
@@ -5294,8 +5373,17 @@
       on(`#particles-toggle-${window.PARTICLE_ROMAJI[p]}`, 'change', toggleParticlesLevel);
     });
 
+    // particles-quiz.html#verbs opens straight on the Verb + Particle quiz.
+    const verbsRadio = $('#particles-type-verbs');
+    if (verbsRadio && location.hash === '#verbs') {
+      verbsRadio.checked = true;
+      renderParticlesPanel();
+    }
     $$('input[name="particles-quiz-type"]').forEach(el => {
-      el.addEventListener('change', renderParticlesPanel);
+      el.addEventListener('change', () => {
+        history.replaceState(null, '', el.value === 'verbs' ? '#verbs' : location.pathname + location.search);
+        renderParticlesPanel();
+      });
     });
 
     on('#btn-start-particles', 'click', startParticlesStudy);

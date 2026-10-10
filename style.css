@@ -1405,6 +1405,99 @@ a.chapter-card {
   text-decoration: line-through;
 }
 
+/* Particles page: Sentences / Verb + Particle mode picker */
+.pq-modes-label {
+  margin: 0 0 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.pq-modes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.pq-mode {
+  position: relative;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.pq-mode:hover { background: var(--bg-card-hover); }
+
+.pq-mode input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pq-mode:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.pq-mode:has(input:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.pq-mode-glyph {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  font-family: var(--font-jp);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  background: var(--bg-input);
+}
+
+.pq-mode:has(input:checked) .pq-mode-glyph {
+  color: #fff;
+  background: var(--accent);
+}
+
+.pq-mode-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.pq-mode-title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.pq-mode-sub {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--text-dim);
+}
+
+.pq-mode-example {
+  margin-top: 2px;
+  font-family: var(--font-jp);
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
 /* Verb + particle reference (particles-quiz.html) */
 .verb-particles-reference {
   margin-top: 20px;
@@ -1466,6 +1559,185 @@ a.chapter-card {
 .vp-p {
   color: var(--accent);
   font-weight: 700;
+}
+
+/* 自 / 他 badges and the transitive/intransitive pairs */
+.vp-type {
+  display: inline-block;
+  padding: 1px 6px;
+  margin: 0 2px 2px 0;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.vp-type-vi { color: var(--orange); background: var(--orange-dim); }
+.vp-type-vt { color: var(--blue); background: var(--blue-dim); }
+
+.vp-type-line { display: block; margin-top: 2px; }
+
+.vp-pair {
+  display: block;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.vt-intro {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.vt-intro-card {
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border-left: 4px solid var(--orange);
+  background: var(--bg-input);
+}
+
+.vt-intro-vt { border-left-color: var(--blue); }
+
+.vt-intro-head {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.vt-intro-card p {
+  margin: 4px 0 6px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-dim);
+}
+
+.vt-intro-example {
+  font-family: var(--font-jp);
+  font-size: 1rem;
+}
+
+.vt-intro-en {
+  font-family: var(--font);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.vt-tips {
+  margin: 0 0 12px;
+  padding-left: 1.2em;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--text-dim);
+}
+
+.vt-tips li { margin-bottom: 4px; }
+
+.vt-group { margin-top: 14px; }
+
+.vt-group-title {
+  font-weight: 700;
+  font-size: 0.88rem;
+  margin-bottom: 4px;
+}
+
+.vt-group-note {
+  font-weight: 400;
+  color: var(--text-dim);
+}
+
+.vt-table {
+  table-layout: fixed;
+  width: 100%;
+  min-width: 340px;
+}
+
+.vt-table th:nth-child(-n+2) { width: 36%; }
+
+.vt-table td { vertical-align: top; }
+
+.vt-table td[lang="ja"] {
+  font-family: var(--font-jp);
+}
+
+.vt-row { cursor: pointer; }
+.vt-row:hover td, .vt-row[aria-expanded="true"] td { background: var(--bg-card-hover); }
+.vt-row:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+.vt-row-chevron {
+  float: right;
+  width: 7px;
+  height: 7px;
+  margin: 6px 2px 0 6px;
+  border-right: 2px solid var(--text-muted);
+  border-bottom: 2px solid var(--text-muted);
+  transform: rotate(45deg);
+  transition: transform var(--transition);
+}
+
+.vt-row[aria-expanded="true"] .vt-row-chevron { transform: rotate(-135deg); margin-top: 9px; }
+
+.vt-detail > td {
+  background: var(--bg-card-hover);
+  padding-top: 0;
+}
+
+.vt-ex-pair {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 8px;
+}
+
+.vt-ex {
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--orange);
+  background: var(--bg-card);
+}
+
+.vt-ex-vt { border-left-color: var(--blue); }
+
+.vt-ex-head { font-size: 0.85rem; margin-bottom: 4px; }
+
+.vt-ex-jp {
+  font-family: var(--font-jp);
+  font-size: 1rem;
+  line-height: 1.9;
+}
+
+.vt-ex-en {
+  font-size: 0.85rem;
+  color: var(--text);
+}
+
+.vt-ex-why {
+  margin: 4px 0 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--text-dim);
+}
+
+.vt-tap-hint {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.vt-only {
+  margin-top: 10px;
+  font-size: 0.88rem;
+}
+
+.vt-only-label { color: var(--text-dim); }
+
+.vt-only [lang="ja"] { font-family: var(--font-jp); }
+
+.vt-source {
+  margin: 12px 0 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
 }
 
 
@@ -3756,6 +4028,44 @@ a.chapter-card {
 .phrase-word-pos {
   font-size: 0.75rem;
   color: var(--text-muted);
+}
+
+.phrase-word-save {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.phrase-word-add {
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--bg-card);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  padding: 3px 10px;
+  cursor: pointer;
+}
+
+.phrase-word-add:hover {
+  background: var(--accent-dim);
+}
+
+.phrase-word-add.saved {
+  color: #fff;
+  background: var(--accent);
+}
+
+.phrase-explain-tip {
+  margin-top: 6px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.phrase-explain-tip a {
+  color: var(--accent);
 }
 
 .phrase-grammar-item {

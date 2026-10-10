@@ -11,8 +11,11 @@
 //
 // On both, tapping a phrase card or a story line explains it: each word
 // with its reading and meaning, and the grammar it uses (from
-// phrases-words.js, built by scripts/tokenize_phrases.mjs). The furigana and
-// English can be switched off, and 🔊 / 🐢 read a phrase aloud.
+// phrases-words.js, built by scripts/tokenize_phrases.mjs). Each word can
+// be saved to the word flashcards (tokidoki_story_words, the deck the Stories
+// page uses, reviewed on flashcards.html) and its kanji to the kanji cards.
+// The furigana and English can be switched off, and 🔊 / 🐢 read a phrase
+// aloud.
 (function () {
   'use strict';
 
@@ -57,14 +60,85 @@
 
   const displayWord = key => key.replace(/\(.*\)$/, '');
 
+  // ─── Saving words to the flashcards ────────────────────────────────────────
+
+  const DECK_KEY = 'tokidoki_story_words';
+  const SRS_KEY = 'tokidoki_srs';
+  const loadJson = (key, fallback) => {
+    try { const v = JSON.parse(localStorage.getItem(key)); return v == null ? fallback : v; } catch { return fallback; }
+  };
+  const saveJson = (key, value) => {
+    try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* storage unavailable */ }
+  };
+  const isSaved = key => Object.prototype.hasOwnProperty.call(loadJson(DECK_KEY, {}), key);
+
+  // A line's text and English, by line id.
+  function lineSource(id) {
+    const [catId, ref] = id.split(':');
+    const c = data.find(x => x.id === catId);
+    if (!c) return null;
+    const n = Number(ref.slice(1));
+    if (ref[0] === 'p') return c.phrases[n] ? { cat: c, jp: c.phrases[n].jp, en: c.phrases[n].en } : null;
+    const l = stories[c.id] && stories[c.id].lines[n];
+    return l ? { cat: c, jp: l[1], en: l[2] } : null;
+  }
+
+  // The sentence in the Stories deck's format — space-separated tokens, a
+  // word carrying its key after '>' when it's written differently — so the
+  // flashcard can show it with the saved word highlighted.
+  function deckSentence(line) {
+    return line.w.map(p => {
+      if (typeof p === 'string') return p.replace(/\s+/g, '');
+      const [src, key] = p;
+      return plainText(src) === key ? src : `${src}>${key}`;
+    }).filter(Boolean).join(' ');
+  }
+
+  function toggleSaved(key, lineId) {
+    const deck = loadJson(DECK_KEY, {});
+    if (Object.prototype.hasOwnProperty.call(deck, key)) {
+      delete deck[key];
+      const srs = loadJson(SRS_KEY, {});
+      delete srs[`story_word:${key}`];
+      delete srs[`story_word:${key}:recall`];
+      saveJson(SRS_KEY, srs);
+    } else {
+      const src = lineSource(lineId);
+      const line = words.lines[lineId];
+      deck[key] = {
+        gloss: words.gloss[key], added: Date.now(),
+        jp: line ? deckSentence(line) : '', en: src ? src.en : '',
+        title: src ? `${src.cat.titleEn} (Phrases)` : 'Phrases', level: '',
+      };
+    }
+    saveJson(DECK_KEY, deck);
+  }
+
+  function saveButtonInner(saved) {
+    return saved ? '✓ Flashcard' : '＋ Flashcard';
+  }
+
+  // Brings every save button for a word in line with the deck.
+  function syncSaveButtons(key) {
+    const saved = isSaved(key);
+    document.querySelectorAll('[data-save-word]').forEach(btn => {
+      if (btn.dataset.saveWord !== key) return;
+      btn.classList.toggle('saved', saved);
+      btn.setAttribute('aria-pressed', saved);
+      btn.textContent = saveButtonInner(saved);
+    });
+  }
+
   // The words of a sentence, each once: as written, its dictionary form when
   // that differs, reading, meaning and part of speech.
-  function wordsHtml(line) {
+  function wordsHtml(line, lineId) {
     const seen = new Set();
     const rows = line.w.filter(p => Array.isArray(p) && words.gloss[p[1]] && !seen.has(p[1]) && seen.add(p[1])).map(([src, key]) => {
       const [reading, meaning, pos] = words.gloss[key];
       const surface = plainText(src);
       const base = displayWord(key);
+      const saved = isSaved(key);
+      const kanji = window.KanjiCards ? KanjiCards.chipsHtml(base, { reading, meaning }) : '';
       return `
         <li class="phrase-word">
           <span class="phrase-word-jp" lang="ja">${jpHtml(src)}</span>
@@ -72,6 +146,10 @@
           ${/[一-鿿々]/.test(surface + base) ? `<span class="phrase-word-reading" lang="ja">${esc(reading)}</span>` : ''}
           <span class="phrase-word-meaning">${esc(meaning)}</span>
           <span class="phrase-word-pos">${esc(pos)}</span>
+          <span class="phrase-word-save">
+            ${/particle/i.test(pos) ? '' : `<button type="button" class="phrase-word-add${saved ? ' saved' : ''}" data-save-word="${esc(key)}" data-line="${esc(lineId)}" aria-pressed="${saved}" title="Add “${esc(base)}” to your word flashcards">${saveButtonInner(saved)}</button>`}
+            ${kanji}
+          </span>
         </li>`;
     });
     return rows.length ? `<ul class="phrase-words">${rows.join('')}</ul>` : '';
@@ -105,7 +183,8 @@
           <span class="phrase-explain-label">Words</span>
           ${window.Pronounce ? Pronounce.buttonsHtml(kanaText(jp)) : ''}
         </div>
-        ${wordsHtml(line)}
+        ${wordsHtml(line, id)}
+        <p class="phrase-explain-tip">Saved words and kanji are reviewed on the <a href="flashcards.html">Flashcards page</a>.</p>
         <div class="phrase-explain-label">Grammar</div>
         ${grammarHtml(line)}
       </div>`;
@@ -375,6 +454,14 @@
   function init() {
     const list = $('#phrase-list');
     if (!list) return;
+    document.addEventListener('click', e => {
+      const btn = e.target.closest && e.target.closest('[data-save-word]');
+      if (!btn) return;
+      e.preventDefault();
+      e.stopPropagation();
+      toggleSaved(btn.dataset.saveWord, btn.dataset.line);
+      syncSaveButtons(btn.dataset.saveWord);
+    }, true);
     list.addEventListener('click', e => {
       if (e.target.closest('.phrase-explain')) return;
       const card = e.target.closest('.phrase-card');
