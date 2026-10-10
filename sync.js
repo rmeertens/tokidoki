@@ -89,7 +89,7 @@
     if (milestone <= (Number(get(REMINDED_KEY)) || 0)) return;
     if (user || get(UID_KEY) || !window.TokidokiCoachMark) return;
     set(REMINDED_KEY, String(milestone));
-    window.TokidokiCoachMark.show('#btn-account', `log in to sync your ${n} words`);
+    window.TokidokiCoachMark.show('#btn-account', 'login to sync progress<br>between devices');
   }
 
   const proto = Object.getPrototypeOf(store);
