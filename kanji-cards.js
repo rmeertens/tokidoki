@@ -1,7 +1,7 @@
 // Kanji flashcards, kept apart from the word flashcards.
 //
 // Word flashcards live in tokidoki_story_words (the Stories deck, also fed by
-// the Vocabulary page, the mystery game and Story Fill-in). Kanji get their
+// the Vocabulary page, the mystery game, Story Fill-in and Phrases). Kanji get their
 // own deck here, under tokidoki_kanji_cards: { [kanji]: meta }, where meta
 // keeps the kanji's meaning and readings (so a card still works on a page that
 // doesn't load kanji-info-data.js) and the words it was saved from. Their
