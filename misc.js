@@ -19,6 +19,7 @@
   const ADJECTIVES = typeof GENKI_ADJECTIVES !== 'undefined' ? GENKI_ADJECTIVES
     : typeof require !== 'undefined' ? require('./verbs.js').GENKI_ADJECTIVES : [];
   const STORE_KEY = 'tokidoki_misc';
+  const SETTINGS_KEY = 'tokidoki_misc_settings';
 
   // ─── Quizzes ───────────────────────────────────────────────────────────────
 
@@ -333,6 +334,23 @@
     try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch { /* private mode */ }
   }
 
+  function loadSettings() {
+    try { return JSON.parse(localStorage.getItem(SETTINGS_KEY)) || {}; } catch { return {}; }
+  }
+  function saveSettings(settings) {
+    try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); } catch { /* private mode */ }
+  }
+
+  // 0…n-1 in random order (Fisher–Yates).
+  function shuffled(n, rand = Math.random) {
+    const idx = Array.from({ length: n }, (_, i) => i);
+    for (let i = n - 1; i > 0; i--) {
+      const j = Math.floor(rand() * (i + 1));
+      [idx[i], idx[j]] = [idx[j], idx[i]];
+    }
+    return idx;
+  }
+
   // Best is the higher score, then the faster time.
   function better(a, b) {
     if (!a) return true;
@@ -357,6 +375,7 @@
     let started = 0;
     let timer = null;
     let over = false;
+    const settings = loadSettings();
 
     function show(id) {
       document.querySelectorAll('.screen').forEach(s => s.classList.toggle('active', s.id === id));
@@ -395,6 +414,10 @@
       $('#misc-give-up').classList.remove('hidden');
       $('#misc-again').classList.add('hidden');
       renderQuiz();
+      // Only prompts you answer one by one have an order worth mixing up.
+      $('#misc-shuffle-row').classList.toggle('hidden', !quiz.sections.some(sec => sec.type === 'fill'));
+      $('#misc-shuffle').checked = !!settings.shuffle;
+      orderRows();
       updateScore();
       clearInterval(timer);
       timer = setInterval(updateTime, 1000);
@@ -432,6 +455,16 @@
         if (Romaji) Romaji.attach(inp);
         inp.addEventListener('input', () => onInput(inp, false));
         inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); onInput(inp, true); } });
+      });
+    }
+
+    // Puts each fill section's rows in random or list order. Answers and
+    // focus follow the rows, so this works mid-quiz too.
+    function orderRows() {
+      document.querySelectorAll('#misc-body .misc-table-fill tbody').forEach(tbody => {
+        const rows = [...tbody.children].sort((a, b) => a.dataset.row - b.dataset.row);
+        const order = settings.shuffle ? shuffled(rows.length) : rows.map((_, i) => i);
+        order.forEach(i => tbody.appendChild(rows[i]));
       });
     }
 
@@ -530,6 +563,13 @@
       if (row) start(row.dataset.quiz);
     });
     $('#misc-give-up').addEventListener('click', finish);
+    $('#misc-shuffle').addEventListener('change', e => {
+      settings.shuffle = e.target.checked;
+      saveSettings(settings);
+      orderRows();
+      const next = [...document.querySelectorAll('#misc-body input')].find(x => !x.disabled);
+      if (next) next.focus();
+    });
     $('#misc-again').addEventListener('click', () => start(quiz.id));
     $('#misc-quit').addEventListener('click', home);
 
@@ -538,7 +578,7 @@
     if (QUIZZES.some(q => q.id === hash)) start(hash);
   }
 
-  const api = { QUIZZES, RU_EXCEPTIONS, normalize, matchItems, total, better, formatTime };
+  const api = { QUIZZES, RU_EXCEPTIONS, normalize, matchItems, shuffled, total, better, formatTime };
   global.Misc = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   if (typeof document !== 'undefined') {

@@ -7164,6 +7164,8 @@ a.chapter-card.news-headline-card {
 .misc-time { font-variant-numeric: tabular-nums; color: var(--text-dim); }
 .misc-title { font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 4px; }
 .misc-desc { color: var(--text-dim); font-size: 0.9rem; line-height: 1.5; margin-bottom: 14px; }
+.misc-shuffle-row { display: inline-flex; margin-bottom: 14px; }
+.misc-shuffle-row.hidden { display: none; }
 .misc-section + .misc-section { margin-top: 20px; }
 .misc-find { width: 100%; }
 .misc-miss { min-height: 1.3em; margin: 4px 2px 8px; font-size: 0.85rem; color: var(--orange); }

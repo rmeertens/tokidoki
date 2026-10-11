@@ -86,6 +86,12 @@ const dates = Misc.QUIZZES.find(q => q.id === 'dates').sections[0];
 check(Misc.matchItems({ items: [dates.items[0]] }, 'tsuitachi').length === 1, 'romaji tsuitachi');
 check(Misc.matchItems({ items: [dates.items[0]] }, 'いちにち').length === 0, 'いちにち is not the 1st');
 
+// ─── Shuffle ─────────────────────────────────────────────────────────────────
+
+const mixed = Misc.shuffled(9);
+check(mixed.length === 9 && [...mixed].sort((a, b) => a - b).every((v, i) => v === i), 'shuffled is a permutation');
+check(Misc.shuffled(5, () => 0).join('') === '12340', 'shuffled follows its random source');
+
 // ─── Best scores ─────────────────────────────────────────────────────────────
 
 check(Misc.better(undefined, { score: 1, time: 9 }), 'first result is best');
