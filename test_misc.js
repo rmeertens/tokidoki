@@ -97,6 +97,15 @@ check(Misc.matchItems(keigoFor(1, '食べる'), 'itadaku').length === 1, 'humble
 check(Misc.matchItems(keigoFor(1, '行く'), 'うかがう').length === 1, 'うかがう for humble 行く');
 check(Misc.matchItems(keigoFor(0, '言う'), 'ossharu').length === 1, 'romaji ossharu');
 
+check(Misc.rubyHtml('召[め]し上[あ]がる') === '<ruby>召<rt>め</rt></ruby>し<ruby>上<rt>あ</rt></ruby>がる', 'furigana markup');
+check(Misc.rubyKana('ご覧[らん]になる') === 'ごらんになる' && Misc.rubyPlain('ご覧[らん]になる') === 'ご覧になる', 'kana and plain forms');
+keigo.forEach((sec, si) => sec.items.forEach(it => {
+  check(!/[[\]]/.test(it.prompt + it.answer + it.card.word + it.card.kana), `keigo ${si}: markup left in ${it.prompt}`);
+  check(!/[一-鿿]/.test(it.card.kana), `keigo ${si}: ${it.card.word} has no full reading`);
+}));
+const itadaku = keigo[1].items.find(it => it.answer === 'いただく').card;
+check(/eat.*drink.*receive/.test(itadaku.meaning), 'いただく card lists every verb it stands for');
+
 // ─── Shuffle ─────────────────────────────────────────────────────────────────
 
 const mixed = Misc.shuffled(9);

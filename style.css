@@ -7186,6 +7186,27 @@ a.chapter-card.news-headline-card {
 .misc-wrong { animation: misc-shake 0.3s; border-color: var(--red); }
 @keyframes misc-shake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
 
+.misc-prompt-en { font-family: var(--font); font-weight: 400; font-size: 0.85em; color: var(--text-dim); }
+.misc-prompt rt, .misc-answer rt { font-size: 0.55em; font-weight: 400; }
+.misc-answer { font-size: 1.05rem; font-weight: 700; color: var(--green); padding: 0 4px; }
+.misc-missed .misc-answer { color: var(--red); }
+.misc-deck-btn {
+  margin-left: 8px;
+  width: 28px;
+  height: 28px;
+  font: inherit;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--bg-card);
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+  vertical-align: middle;
+}
+.misc-deck-btn.saved { color: #fff; background: var(--orange); border-color: var(--orange); }
+.misc-tip { font-size: 0.82rem; color: var(--text-dim); margin: -4px 2px 8px; }
+.misc-tip a { color: var(--accent); }
+
 .misc-result { margin-top: 16px; }
 .misc-actions { margin-top: 16px; }
 

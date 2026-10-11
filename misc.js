@@ -21,6 +21,24 @@
   const STORE_KEY = 'tokidoki_misc';
   const SETTINGS_KEY = 'tokidoki_misc_settings';
 
+  // ─── Furigana markup: 漢字[かんじ] ─────────────────────────────────────────
+
+  const RUBY_RE = /([㐀-䶿一-鿿々〆ヶ]+)\[([^\]]+)\]/g;
+  const esc = s => String(s).replace(/[&<>"']/g, c =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const rubyPlain = m => String(m).replace(RUBY_RE, '$1');
+  const rubyKana = m => String(m).replace(RUBY_RE, '$2');
+  function rubyHtml(m) {
+    let out = '';
+    let last = 0;
+    String(m).replace(RUBY_RE, (all, t, r, i) => {
+      out += esc(m.slice(last, i)) + `<ruby>${esc(t)}<rt>${esc(r)}</rt></ruby>`;
+      last = i + all.length;
+      return all;
+    });
+    return out + esc(m.slice(last));
+  }
+
   // ─── Quizzes ───────────────────────────────────────────────────────────────
 
   // Same rule as the "RU-verbs vs U-verbs" box in the conjugation reference:
@@ -167,45 +185,60 @@
   ];
 
   // Verbs with their own keigo word instead of the regular お〜になる /
-  // お〜する pattern: [plain verb, meaning, answer shown, other accepted answers].
-  // Kana spellings of every answer count as well.
+  // お〜する pattern: [plain verb, meaning, answer, other accepted answers].
+  // Verbs and answers are in furigana markup (漢字[かんじ]); the kanji and
+  // the kana spelling of an answer both count.
   const SONKEIGO = [
     ['いる', 'to be, to stay', 'いらっしゃる', ['おいでになる']],
-    ['行く', 'to go', 'いらっしゃる', ['おいでになる']],
-    ['来る', 'to come', 'いらっしゃる', ['おいでになる', 'お見えになる', 'おみえになる', 'お越しになる', 'おこしになる']],
-    ['言う', 'to say', 'おっしゃる'],
-    ['食べる', 'to eat', '召し上がる', ['めしあがる']],
-    ['飲む', 'to drink', '召し上がる', ['めしあがる']],
+    ['行[い]く', 'to go', 'いらっしゃる', ['おいでになる']],
+    ['来[く]る', 'to come', 'いらっしゃる', ['おいでになる', 'お見えになる', 'おみえになる', 'お越しになる', 'おこしになる']],
+    ['言[い]う', 'to say', 'おっしゃる'],
+    ['食[た]べる', 'to eat', '召[め]し上[あ]がる'],
+    ['飲[の]む', 'to drink', '召[め]し上[あ]がる'],
     ['する', 'to do', 'なさる'],
-    ['見る', 'to see', 'ご覧になる', ['ごらんになる']],
-    ['知っている', 'to know', 'ご存じだ', ['ご存じ', 'ご存知', 'ご存知だ', 'ごぞんじ', 'ごぞんじだ', 'ご存じです', 'ごぞんじです']],
+    ['見[み]る', 'to see', 'ご覧[らん]になる'],
+    ['知[し]っている', 'to know', 'ご存[ぞん]じだ', ['ご存じ', 'ご存知', 'ご存知だ', 'ごぞんじ', 'ご存じです', 'ごぞんじです']],
     ['くれる', 'to give me', 'くださる', ['下さる']],
-    ['寝る', 'to sleep', 'お休みになる', ['おやすみになる']],
-    ['着る', 'to wear', 'お召しになる', ['おめしになる']],
-    ['死ぬ', 'to die', 'お亡くなりになる', ['おなくなりになる', '亡くなる', 'なくなる']],
+    ['寝[ね]る', 'to sleep', 'お休[やす]みになる'],
+    ['着[き]る', 'to wear', 'お召[め]しになる'],
+    ['死[し]ぬ', 'to die', 'お亡[な]くなりになる', ['亡くなる', 'なくなる']],
   ];
   const KENJOUGO = [
     ['いる', 'to be, to stay', 'おる', ['居る']],
-    ['行く', 'to go', '参る', ['まいる', '伺う', 'うかがう']],
-    ['来る', 'to come', '参る', ['まいる']],
-    ['言う', 'to say', '申す', ['もうす', '申し上げる', 'もうしあげる']],
-    ['食べる', 'to eat', 'いただく', ['頂く']],
-    ['飲む', 'to drink', 'いただく', ['頂く']],
+    ['行[い]く', 'to go', '参[まい]る', ['伺う', 'うかがう']],
+    ['来[く]る', 'to come', '参[まい]る'],
+    ['言[い]う', 'to say', '申[もう]す', ['申し上げる', 'もうしあげる']],
+    ['食[た]べる', 'to eat', 'いただく', ['頂く']],
+    ['飲[の]む', 'to drink', 'いただく', ['頂く']],
     ['する', 'to do', 'いたす', ['致す']],
-    ['見る', 'to see', '拝見する', ['はいけんする']],
-    ['知っている', 'to know', '存じている', ['ぞんじている', '存じておる', 'ぞんじておる', '存じ上げている', 'ぞんじあげている', '存じる', 'ぞんじる']],
+    ['見[み]る', 'to see', '拝見[はいけん]する'],
+    ['知[し]っている', 'to know', '存[ぞん]じている', ['存じておる', 'ぞんじておる', '存じ上げている', 'ぞんじあげている', '存じる', 'ぞんじる']],
     ['もらう', 'to receive', 'いただく', ['頂く']],
-    ['あげる', 'to give', '差し上げる', ['さしあげる']],
-    ['会う', 'to meet', 'お目にかかる', ['おめにかかる']],
-    ['聞く', 'to ask / to hear', '伺う', ['うかがう', '承る', 'うけたまわる']],
-    ['訪ねる', 'to visit', '伺う', ['うかがう']],
-    ['見せる', 'to show', 'お目にかける', ['おめにかける', 'ご覧に入れる', 'ごらんにいれる']],
+    ['あげる', 'to give', '差[さ]し上[あ]げる'],
+    ['会[あ]う', 'to meet', 'お目[め]にかかる'],
+    ['聞[き]く', 'to ask / to hear', '伺[うかが]う', ['承る', 'うけたまわる']],
+    ['訪[たず]ねる', 'to visit', '伺[うかが]う'],
+    ['見[み]せる', 'to show', 'お目[め]にかける', ['ご覧に入れる', 'ごらんにいれる']],
     ['わかる', 'to understand', 'かしこまる', ['承知する', 'しょうちする']],
-    ['思う', 'to think', '存じる', ['ぞんじる']],
+    ['思[おも]う', 'to think', '存[ぞん]じる'],
   ];
-  const keigoItems = rows => rows.map(([plain, meaning, answer, alt = []]) => ({
-    prompt: `${plain} (${meaning})`, answer, accept: alt,
-  }));
+  // A keigo word that stands for several verbs (いただく: eat, drink,
+  // receive) gets one flashcard with all their meanings.
+  function keigoItems(rows, kind) {
+    const meanings = {};
+    rows.forEach(([, meaning, answer]) => {
+      const w = rubyPlain(answer);
+      (meanings[w] = meanings[w] || []).push(meaning);
+    });
+    return rows.map(([verb, meaning, answer, alt = []]) => ({
+      prompt: `${rubyPlain(verb)} (${meaning})`,
+      promptHtml: `${rubyHtml(verb)} <span class="misc-prompt-en">(${esc(meaning)})</span>`,
+      answer: rubyPlain(answer),
+      answerHtml: rubyHtml(answer),
+      accept: [rubyKana(answer), ...alt],
+      card: { word: rubyPlain(answer), kana: rubyKana(answer), meaning: `(${kind}) ${meanings[rubyPlain(answer)].join('; ')}` },
+    }));
+  }
 
   const TE_ROWS = [
     { key: 'う', value: 'って', ex: '買う → 買って' },
@@ -301,13 +334,13 @@
           type: 'fill',
           label: 'Honorific 尊敬語 — raising the other person',
           columns: ['Verb', '尊敬語'],
-          items: keigoItems(SONKEIGO),
+          items: keigoItems(SONKEIGO, 'honorific'),
         },
         {
           type: 'fill',
           label: 'Humble 謙譲語 — lowering yourself',
           columns: ['Verb', '謙譲語'],
-          items: keigoItems(KENJOUGO),
+          items: keigoItems(KENJOUGO, 'humble'),
         },
       ],
     },
@@ -397,6 +430,16 @@
     try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch { /* private mode */ }
   }
 
+  // Saved words join the word flashcard deck, reviewed on flashcards.html.
+  const DECK_KEY = 'tokidoki_story_words';
+  const SRS_KEY = 'tokidoki_srs';
+  function loadJson(key) {
+    try { return JSON.parse(localStorage.getItem(key)) || {}; } catch { return {}; }
+  }
+  function saveJson(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* private mode */ }
+  }
+
   function loadSettings() {
     try { return JSON.parse(localStorage.getItem(SETTINGS_KEY)) || {}; } catch { return {}; }
   }
@@ -424,9 +467,6 @@
   const formatTime = sec => `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, '0')}`;
 
   // ─── Page ──────────────────────────────────────────────────────────────────
-
-  const esc = s => String(s).replace(/[&<>"']/g, c =>
-    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
   function initPage() {
     const $ = sel => document.querySelector(sel);
@@ -506,11 +546,13 @@
           </section>`;
         }
         const rows = sec.items.map((it, i) => `<tr data-row="${i}">
-          <td lang="ja" class="misc-prompt">${esc(it.prompt)}</td>
+          <td lang="ja" class="misc-prompt">${it.promptHtml || esc(it.prompt)}</td>
           <td><input type="text" class="answer-input misc-fill" lang="ja" data-section="${si}" data-row="${i}"
             autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="${esc(it.prompt)}"></td>
         </tr>`).join('');
-        return `<section class="misc-section" data-section="${si}">${label}
+        const tip = si === quiz.sections.findIndex(x => x.items.some(it => it.card))
+          ? '<p class="misc-tip">Answered rows get a ＋ to add the word to your <a href="flashcards.html">flashcards</a>.</p>' : '';
+        return `<section class="misc-section" data-section="${si}">${label}${tip}
           <table class="misc-table misc-table-fill"><thead>${head}</thead><tbody>${rows}</tbody></table>
         </section>`;
       }).join('');
@@ -573,10 +615,55 @@
       const row = document.querySelector(`.misc-section[data-section="${si}"] tr[data-row="${i}"]`);
       row.classList.add(how === 'found' ? 'misc-found' : 'misc-missed');
       if (sec.type === 'fill') {
+        const it = sec.items[i];
         const inp = row.querySelector('input');
-        inp.value = sec.items[i].answer;
+        inp.value = it.answer;
         inp.disabled = true;
+        if (it.answerHtml || it.card) {
+          // Shown as text instead, so it can carry furigana and a ＋.
+          inp.classList.add('hidden');
+          const cell = inp.parentElement;
+          cell.insertAdjacentHTML('beforeend', `<span class="misc-answer" lang="ja">${it.answerHtml || esc(it.answer)}</span>`
+            + (it.card ? deckButtonHtml(it.card.word) : ''));
+        }
       }
+    }
+
+    // ─── Word flashcards (the deck reviewed on flashcards.html) ──────────────
+
+    function deckButtonHtml(word) {
+      const saved = Object.prototype.hasOwnProperty.call(loadJson(DECK_KEY), word);
+      return `<button class="misc-deck-btn${saved ? ' saved' : ''}" data-word="${esc(word)}" aria-pressed="${saved}"
+        title="${saved ? 'In your flashcards — click to remove' : 'Add to flashcards'}"
+        aria-label="${saved ? 'Remove' : 'Add'} ${esc(word)} ${saved ? 'from' : 'to'} flashcards">${saved ? '✓' : '＋'}</button>`;
+    }
+
+    function cardFor(word) {
+      for (const sec of quiz.sections) {
+        const it = sec.items.find(x => x.card && x.card.word === word);
+        if (it) return it.card;
+      }
+      return null;
+    }
+
+    function toggleCard(word) {
+      const deck = loadJson(DECK_KEY);
+      if (Object.prototype.hasOwnProperty.call(deck, word)) {
+        delete deck[word];
+        const srs = loadJson(SRS_KEY);
+        delete srs[`story_word:${word}`];
+        delete srs[`story_word:${word}:recall`];
+        saveJson(SRS_KEY, srs);
+      } else {
+        const card = cardFor(word);
+        if (!card) return;
+        deck[word] = { kana: card.kana, meaning: card.meaning, added: Date.now(), title: `${quiz.title} (Misc)`, level: '' };
+      }
+      saveJson(DECK_KEY, deck);
+      // Every button for the same word (いただく appears three times) follows.
+      document.querySelectorAll('.misc-deck-btn').forEach(btn => {
+        if (btn.dataset.word === word) btn.outerHTML = deckButtonHtml(word);
+      });
     }
 
     function updateScore() {
@@ -626,6 +713,10 @@
       if (row) start(row.dataset.quiz);
     });
     $('#misc-give-up').addEventListener('click', finish);
+    $('#misc-body').addEventListener('click', e => {
+      const btn = e.target.closest('.misc-deck-btn');
+      if (btn) toggleCard(btn.dataset.word);
+    });
     $('#misc-shuffle').addEventListener('change', e => {
       settings.shuffle = e.target.checked;
       saveSettings(settings);
@@ -641,7 +732,7 @@
     if (QUIZZES.some(q => q.id === hash)) start(hash);
   }
 
-  const api = { QUIZZES, RU_EXCEPTIONS, normalize, matchItems, shuffled, total, better, formatTime };
+  const api = { rubyHtml, rubyPlain, rubyKana, QUIZZES, RU_EXCEPTIONS, normalize, matchItems, shuffled, total, better, formatTime };
   global.Misc = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   if (typeof document !== 'undefined') {
