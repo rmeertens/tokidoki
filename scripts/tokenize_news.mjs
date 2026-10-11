@@ -21,8 +21,8 @@ import { GRAMMAR_EXTRA, detectGrammar } from './jp_grammar.mjs';
 const { NEWS_ITEMS, STORY_GRAMMAR } = loadSiteData(['news-data.js', 'stories-data.js', 'mystery-words.js', 'memes-data.js', 'memes-data-2.js']);
 
 const readJson = f => JSON.parse(readFileSync(path.join(ROOT, 'scripts', f), 'utf8'));
-// Dates and percentages kuromoji splits apart; keep them whole.
-const NEWS_WHOLE = ['10月', '4月', '1%案', '1%分', '8%', '1%', '0%'];
+// Dates, percentages and names kuromoji splits apart; keep them whole.
+const NEWS_WHOLE = ['10月', '4月', '1%案', '1%分', '8%', '1%', '0%', 'クラウド', '10以上', '弱さ', 'ゲーム差', '3試合制', '硤合', '憲三', 'JR九州', '日本シリーズ', '日本ハム', 'セ・リーグ', 'パ・リーグ', 'アンリ・カガン'];
 const { segment } = await createWordFinder({
   extra: { ...readJson('phrase_extra_words.json'), ...readJson('news_extra_words.json') },
   whole: [...readJson('phrase_whole_words.json'), ...NEWS_WHOLE],
@@ -43,6 +43,7 @@ const GRAMMAR_NEWS = {
   'masu-stem-and': { level: 'N3', title: 'ます-stem + 、 — "and" (written)', pattern: 'Verb ます-stem + 、', note: 'Written Japanese often joins two sentences with the ます-stem instead of the て-form: 変え、 = 変えて、 "changes …, and".' },
   'te-ori': { level: 'N3', title: '〜ており — written 〜ていて', pattern: 'Verb て-form + おり', note: 'The formal, written version of 〜ていて: 反発しており "is objecting, and…".' },
   'ippou-conj': { level: 'N3', title: '一方 — "on the other hand"', pattern: '一方、 + sentence', note: 'At the start of a sentence, 一方 turns to a contrasting side of the story: 一方、野党は… "the opposition, meanwhile, …".' },
+  'to-naru': { level: 'N3', title: '〜となる — written 〜になる', pattern: 'Noun + となる', note: 'News and formal writing often use と for になる "become": 10人目となる "becomes the tenth".' },
   'sai': { level: 'N3', title: '〜際 — "when" (formal)', pattern: 'Verb plain form / Noun + の + 際(は / に)', note: 'A formal とき, common in news and notices: 釣りをする際は "when fishing".' },
 };
 const GRAMMAR = { ...STORY_GRAMMAR, ...GRAMMAR_EXTRA, ...GRAMMAR_NEWS };
@@ -66,14 +67,19 @@ const NEWS_RULES = [
   { id: 'tame-reason', rx: /ため(?![にの])/, replaces: ['tame-ni'] },
   { id: 'te-ori', rx: /ており/, replaces: ['te-sequence'] },
   { id: 'ippou-conj', rx: /^一方(?=、)/, back: 0 },
-  { id: 'sai', rx: /際(?=[はに、])/ },
+  { id: 'sai', rx: /(?<!実)際(?=[はに、])/ },
   { id: 'toki', rx: /とき(?=[はに、])/, replaces: ['ni-particle'] },
   { id: 'tari', rx: /[たださ]り[^。]*たりする/, replaces: [] },
   { id: 'you-ni-suru', rx: /ようにしましょう/, replaces: ['ni-suru-choice', 'mashou'] },
-  { id: 'sou-looks', rx: /そうです/, replaces: ['desu'] },
+  { id: 'sou-looks', rx: /そう(?:です|だ)(?=。|$)/, replaces: ['desu', 'da-plain'] },
   { id: 'kamoshirenai', rx: /かもしれません/, back: 2, replaces: ['masen'] },
   { id: 'to-quote', rx: /ないと(?=言|話|強調)/, back: 0, replaces: ['to-conditional'] },
   { id: 'ni-tsuite', rx: /について/ },
+  { id: 'tame-ni', rx: /ために/, replaces: ['ni-particle'] },
+  { id: 'nakereba-naranai', rx: /なければなりませんでした/, replaces: ['ba-conditional', 'masen-deshita', 'deshita'] },
+  { id: 'to-naru', rx: /となる/, replaces: ['to-with', 'plain-form'] },
+  { id: 'you-ni-naru', rx: /ようになり/, replaces: ['ni-naru', 'ni-particle'] },
+  { id: 'koto-ni-naru', rx: /ことになり/, replaces: ['ni-naru'] },
 ];
 
 const isPunct = p => !p.key && /^[、。「」　\s]+$/.test(p.src.replace(/\[[^\]]*\]/g, ''));
