@@ -385,6 +385,7 @@
   let sentTo = '';
   let message = null;   // { text, error }
   let busy = false;
+  let syncButton = '';  // 'spin' while a "Sync now" runs, 'done' for a moment after
 
   function mount() {
     const right = document.querySelector('#header .header-right');
@@ -455,7 +456,7 @@
     const body = overlay.querySelector('.account-body');
     const stats = user ? statsHtml() : '';
     // Rebuilding the form would wipe what's being typed, so only when it changes.
-    const view = JSON.stringify([user && user.email, status, user && lastSynced(), !!syncing, mode, sentTo, message, busy, stats]);
+    const view = JSON.stringify([user && user.email, status, user && lastSynced(), !!syncing, mode, sentTo, message, busy, stats, syncButton]);
     if (body.dataset.view === view) return;
     body.dataset.view = view;
     const msg = message ? `<p class="account-msg${message.error ? ' account-error' : ''}" role="status">${esc(message.text)}</p>` : '';
@@ -464,6 +465,9 @@
 
     if (user) {
       const moreOpen = !!body.querySelector('.stat-more[open]');
+      const refocus = document.activeElement && document.activeElement.dataset && document.activeElement.dataset.accountAct;
+      const syncLabel = syncButton === 'spin' ? `${SPINNER}<span>Syncing…</span>`
+        : syncButton === 'done' ? `${CHECK}<span>Synced</span>` : 'Sync now';
       title.textContent = 'Your account';
       body.innerHTML = `
         <p class="account-text">Logged in as <strong>${esc(user.email)}</strong>. Your progress is saved to your account and shared with every device you log in on.</p>
@@ -471,11 +475,12 @@
         ${msg}
         ${stats}
         <div class="account-actions">
-          <button type="button" class="btn-secondary" data-account-act="sync"${dis || (syncing ? ' disabled' : '')}>Sync now</button>
+          <button type="button" class="btn-secondary account-sync${syncButton ? ' account-sync-' + syncButton : ''}" data-account-act="sync" aria-live="polite"${dis || (syncing || syncButton ? ' disabled' : '')}>${syncLabel}</button>
           <button type="button" class="btn-secondary" data-account-act="logout"${dis}>Log out</button>
         </div>
         <p class="account-sub">Logging out keeps your progress on this device.</p>`;
       if (moreOpen) body.querySelector('.stat-more').open = true;
+      if (refocus) { const b = body.querySelector(`[data-account-act="${refocus}"]`); if (b) b.focus(); }
       return;
     }
 
@@ -653,6 +658,9 @@
       </section>`;
   }
 
+  const SPINNER = '<span class="account-spinner" aria-hidden="true"></span>';
+  const CHECK = '<svg class="account-check" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><circle cx="10" cy="10" r="8.5"/><path d="M6 10.4l2.7 2.7L14.2 7.4"/></svg>';
+
   const GOOGLE_ICON = '<svg viewBox="0 0 48 48" width="18" height="18" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>';
 
   const ERRORS = {
@@ -804,9 +812,17 @@
       busy = false;
       render();
     } else if (act === 'sync') {
-      await sync();
-      message = status ? { text: status, error: true } : null;
+      // A spinner while it runs (at least a moment, so it doesn't just
+      // flicker), then a check mark that draws itself.
+      syncButton = 'spin';
+      message = null;
       render();
+      await Promise.all([sync(), new Promise(r => setTimeout(r, 600))]);
+      const failed = !!status;
+      message = failed ? { text: status, error: true } : null;
+      syncButton = failed ? '' : 'done';
+      render();
+      if (!failed) setTimeout(() => { if (syncButton === 'done') { syncButton = ''; render(); } }, 1800);
     } else if (act === 'logout') {
       busy = true;
       render();
