@@ -74,5 +74,45 @@ ok(p.games.listening === 2, 'listening tests, not counting the missed round');
 ok(p.games.wordOrder === 1 && p.games.storyFill === 2, 'word order sets and story fill passages');
 ok(p.games.mystery === 1, 'mystery chapters solved');
 
+// Card ages, intervals and the forecast.
+p = progressStats({ tokidoki_srs: J(srs) }, NOW);
+ok(p.ages.learning === 1 && p.ages.mature === 4 && p.ages.young === 9, 'card ages: learning, young, mature');
+ok(p.intervals.find(b => b.short === '2–4w').cards === 3 && p.intervals[0].cards === 8, 'interval histogram buckets');
+ok(p.overdue === 4, 'overdue cards');
+ok(p.forecast.length === 30 && p.forecast[0].cards === 0 && p.forecast[1].cards === 5 && p.forecast[2].cards === 1, 'forecast: cards due today and tomorrow');
+ok(p.forecast[20].cards === 1 && p.forecast[29].cards === 0, 'forecast: further out');
+
+// Recording reviews into the log.
+const mem = {};
+global.localStorage = { getItem: k => (k in mem ? mem[k] : null), setItem: (k, v) => { mem[k] = String(v); } };
+const PS = require('./progress-stats.js');
+const t0 = new Date(2026, 9, 11, 9, 0, 0).getTime();
+PS.record('3_いく_te', { interval: 0 }, 4, t0);
+const e2 = PS.record('3_いく_te', { interval: 30 }, 1, t0 + 20000);
+PS.record('kana_hiragana_あ', { interval: 3 }, 4, t0 + 5 * 60000);
+let log = JSON.parse(mem.tokidoki_daylog)['2026-10-11'];
+ok(J(log.verbs) === J([2, 1, 80]) && J(log.kana) === J([1, 0, 60]), 'record: reviews, fails and seconds per kind (capped at a minute)');
+let tot = JSON.parse(mem.tokidoki_review_totals);
+ok(J(tot.hours[9]) === J([3, 1]) && tot.hours.length === 24, 'record: hour of day');
+ok(J(tot.cards.learning) === J([1, 0]) && J(tot.cards.mature) === J([1, 1]) && J(tot.cards.young) === J([1, 0]), 'record: answers by card age');
+PS.unrecord(e2);
+log = JSON.parse(mem.tokidoki_daylog)['2026-10-11'];
+tot = JSON.parse(mem.tokidoki_review_totals);
+ok(J(log.verbs) === J([1, 0, 60]) && J(tot.cards.mature) === J([0, 0]) && J(tot.hours[9]) === J([2, 0]), 'unrecord takes a review back');
+
+// Stats from the log.
+const day = (y, m, d) => PS.localDay(new Date(y, m, d, 12).getTime());
+const logData = { [day(2026, 9, 11)]: { verbs: [10, 2, 300] }, [day(2026, 9, 10)]: { kana: [5, 0, 100] }, [day(2026, 9, 9)]: { words: [3, 1, 60] }, [day(2026, 9, 5)]: { words: [7, 0, 70] } };
+const noon = new Date(2026, 9, 11, 12).getTime();
+p = progressStats({ tokidoki_daylog: J(logData), tokidoki_review_totals: J(tot) }, noon);
+ok(p.streak === 3, 'streak from the log');
+ok(p.reviewsToday === 10 && p.secondsToday === 300, 'today from the log');
+ok(p.log.reviews === 25 && p.log.passed === 22 && p.log.days === 4 && p.log.since === day(2026, 9, 5), 'all-time totals from the log');
+ok(p.calendar.length === 26 * 7 && p.calendar.find(c => c.day === day(2026, 9, 9)).reviews === 3, 'calendar of reviews');
+ok(p.calendar.filter(c => c.reviews === null).length === 6 - ((new Date(noon).getDay() + 6) % 7), 'calendar: days after today are left blank');
+ok(p.answers.find(a => a.age === 'learning').reviews === 1 && p.hours[9].reviews === 2, 'answers by age and hour from the totals');
+p = progressStats({ tokidoki_daylog: J(logData) }, new Date(2026, 9, 12, 12).getTime());
+ok(p.streak === 3 && p.reviewsToday === 0, 'nothing yet today: the streak runs to yesterday');
+
 console.log(`progress stats: ${passed} passed, ${failed} failed`);
 if (failed) process.exit(1);

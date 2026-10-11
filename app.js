@@ -39,6 +39,16 @@
   function deleteSRSCard(cardId) {
   }
 
+  // Each review also goes in the review log (progress-stats.js), for the
+  // statistics in the account dialog. Returns what undoing it needs.
+  function logReview(id, prevState, grade) {
+    return window.ProgressStats ? window.ProgressStats.record(id, prevState, grade) : null;
+  }
+
+  function unlogReview(entry) {
+    if (entry && window.ProgressStats) window.ProgressStats.unrecord(entry);
+  }
+
   function cardId(verb, form) {
     const base = verb.disambig ? `${verb.reading}_${verb.disambig}` : verb.reading;
     return `${verb.chapter}_${base}_${form}`;
@@ -71,8 +81,9 @@
         newState.interval = Math.round(newState.interval * multiplier);
       }
       newState.repetitions += 1;
-      newState.easeFactor = Math.max(1.3,
-        newState.easeFactor + (0.1 - (4 - grade) * (0.08 + (4 - grade) * 0.02))
+      // Rounded to whole percents, so it doesn't pick up float noise (2.5600000000000005).
+      newState.easeFactor = Math.max(1.3, Math.round(
+        (newState.easeFactor + (0.1 - (4 - grade) * (0.08 + (4 - grade) * 0.02))) * 100) / 100
       );
       newState.nextReview = now + newState.interval * 86400000;
     }
@@ -1282,6 +1293,7 @@
     const state = getCardState(srsData, currentCard.id);
     const newState = gradeCard(state, grade);
     srsData[currentCard.id] = newState;
+    undoStack[undoStack.length - 1].logged = logReview(currentCard.id, state, grade);
     saveSRS(srsData);
 
     statsData.totalReviews++;
@@ -1318,6 +1330,7 @@
     if (undoStack.length === 0) return;
 
     const undo = undoStack.pop();
+    unlogReview(undo.logged);
 
     if (undo.prevSrsState) {
       srsData[undo.cardId] = undo.prevSrsState;
@@ -2014,6 +2027,7 @@
     const id = currentKanaCard.id;
     const state = getCardState(srsData, id);
     srsData[id] = gradeCard(state, grade);
+    logReview(id, state, grade);
     saveSRS(srsData);
 
     updateStreak();
@@ -2261,6 +2275,7 @@
 
     const state = getCardState(srsData, id);
     srsData[id] = gradeCard(state, grade);
+    kanjiQuizUndoStack[kanjiQuizUndoStack.length - 1].logged = logReview(id, state, grade);
     saveSRS(srsData);
 
     updateStreak();
@@ -2283,6 +2298,7 @@
     if (kanjiQuizUndoStack.length === 0) return;
 
     const undo = kanjiQuizUndoStack.pop();
+    unlogReview(undo.logged);
 
     if (undo.prevSrsState) {
       srsData[undo.cardId] = undo.prevSrsState;
@@ -2481,6 +2497,7 @@
 
     const state = getCardState(srsData, id);
     srsData[id] = gradeCard(state, correct ? 4 : 1);
+    confusableUndoStack[confusableUndoStack.length - 1].logged = logReview(id, state, correct ? 4 : 1);
     saveSRS(srsData);
 
     updateStreak();
@@ -2508,6 +2525,7 @@
     if (confusableUndoStack.length === 0) return;
 
     const undo = confusableUndoStack.pop();
+    unlogReview(undo.logged);
 
     if (undo.prevSrsState) {
       srsData[undo.cardId] = undo.prevSrsState;
@@ -2858,6 +2876,7 @@
 
     const state = getCardState(srsData, id);
     srsData[id] = gradeCard(state, correct ? 4 : 1);
+    particlesUndoStack[particlesUndoStack.length - 1].logged = logReview(id, state, correct ? 4 : 1);
     saveSRS(srsData);
 
     updateStreak();
@@ -2898,6 +2917,7 @@
     if (particlesUndoStack.length === 0) return;
 
     const undo = particlesUndoStack.pop();
+    unlogReview(undo.logged);
 
     if (undo.prevSrsState) {
       srsData[undo.cardId] = undo.prevSrsState;
@@ -4382,7 +4402,9 @@
   function gradeStoryReviewAndAdvance(grade) {
     if (!storyReviewAnswered) return;
     const card = storyReviewCards[storyReviewIndex];
-    srsData[card.id] = gradeCard(getCardState(srsData, card.id), grade);
+    const state = getCardState(srsData, card.id);
+    srsData[card.id] = gradeCard(state, grade);
+    logReview(card.id, state, grade);
     saveSRS(srsData);
     flashSaveIndicator();
     if (grade > 1) storyReviewCorrect++;
@@ -4674,7 +4696,9 @@
   function gradeBunkeiAndAdvance(grade) {
     if (!bunkeiAnswered) return;
     const card = bunkeiSessionCards[bunkeiIndex];
-    srsData[card.id] = gradeCard(getCardState(srsData, card.id), grade);
+    const state = getCardState(srsData, card.id);
+    srsData[card.id] = gradeCard(state, grade);
+    logReview(card.id, state, grade);
     saveSRS(srsData);
     flashSaveIndicator();
     if (grade > 1) bunkeiCorrect++;

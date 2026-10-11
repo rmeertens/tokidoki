@@ -16,8 +16,12 @@
 //
 // Rules: the SRS store keeps each card's most recently reviewed schedule;
 // the word and kanji decks (and saved grammar) keep every card either side has (unless the
-// other side deleted it); stats add up the reviews done on each side; game
-// stores keep the best scores and the union of "missed" lists.
+// other side deleted it); stats and the review log add up the reviews done
+// on each side; game stores keep the best scores and the union of "missed"
+// lists.
+//
+// The bottom half is how that data is laid out in the account document
+// (`encodeAccount` / `decodeAccount`), built so a sync sends little.
 (function (global) {
   'use strict';
 
@@ -113,6 +117,29 @@
     return out;
   }
 
+  // Counters (numbers, or arrays and objects of them) that each side only
+  // ever adds to: the reviews done on each side since the base, added
+  // together. With no base at all (first sync) the two may overlap, so the
+  // larger of each.
+  function addCounts(l, r, b, first) {
+    if (Array.isArray(l) || Array.isArray(r)) {
+      l = Array.isArray(l) ? l : []; r = Array.isArray(r) ? r : []; b = Array.isArray(b) ? b : [];
+      return Array.from({ length: Math.max(l.length, r.length) }, (_, i) => addCounts(l[i], r[i], b[i], first));
+    }
+    if (isObj(l) || isObj(r)) {
+      l = isObj(l) ? l : {}; r = isObj(r) ? r : {}; b = isObj(b) ? b : {};
+      const out = {};
+      new Set([...Object.keys(l), ...Object.keys(r)]).forEach(k => { out[k] = addCounts(l[k], r[k], b[k], first); });
+      return out;
+    }
+    const n = v => Number(v) || 0;
+    return first ? Math.max(n(l), n(r)) : Math.max(n(l), n(r), n(l) + n(r) - n(b));
+  }
+
+  // The review log, { [day]: { [kind]: [reviews, fails, seconds] } }: a day
+  // missing from the base was studied on both sides since, so it adds up too.
+  const mergeDayLog = (b, l, r) => mergeMap(b, l, r, (le, re, be) => addCounts(le, re, be, !isObj(b)));
+
   // Mystery chapters: { [chapter]: { step, paws, solved, best } }.
   const mergeChapter = (l, r) => Object.assign({}, r, l, {
     solved: !!(l.solved || r.solved),
@@ -126,6 +153,8 @@
     tokidoki_kanji_cards: (b, l, r) => mergeMap(b, l, r, keepLocal),
     tokidoki_saved_grammar: (b, l, r) => mergeMap(b, l, r, keepLocal),
     tokidoki_stats: mergeStats,
+    tokidoki_daylog: mergeDayLog,
+    tokidoki_review_totals: (b, l, r) => addCounts(l, r, b, !isObj(b)),
     tokidoki_mystery: (b, l, r) => mergeMap(b, l, r, mergeChapter),
     tokidoki_word_order: mergeGameStore,
     tokidoki_story_fill: mergeGameStore,
@@ -168,7 +197,164 @@
     return ka.length === kb.length && ka.every(k => k in b && same(parse(a[k]), parse(b[k])));
   }
 
-  const api = { isTracked, mergeAll, mergeKey, mergeMap, mergeList, sameSnapshot, same };
+  // ─── The account document ──────────────────────────────────────────────────
+  //
+  // users/{uid} holds:
+  //   data  2 — the format. Older versions of sync.js read `data` as the
+  //         progress itself; finding a number there makes them stop with an
+  //         error before writing anything, so an old tab can't wipe this.
+  //   rev   how many times it's been written; a device that last saw this
+  //         rev knows the account still holds what it has, and skips the
+  //         download.
+  //   k     { [key]: rawString } for every key but the two below.
+  //   s     the SRS store, spread over up to 256 fields by a hash of the card
+  //         id, one card per line: `<id>\t<ease×100>,<interval>,<reps>,<due
+  //         minute>` (ids shortened, see packCards) — about a fifth of the
+  //         JSON's size.
+  //   l     the review log, one field (a JSON object) per month.
+  // Each field is a few kB at most, so a sync writes only the fields that
+  // changed (sync.js compares the old and new encodings), and the document
+  // stays far below Firestore's 1 MiB limit.
+  const FORMAT = 2;
+  const MIN = 60000;
+
+  function hash(str) {
+    let h = 0x811c9dc5;
+    for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 0x01000193); }
+    return h >>> 0;
+  }
+
+  const isCount = v => Number.isInteger(v) && v >= 0;
+  const CARD_FIELDS = 'easeFactor,interval,repetitions,nextReview';
+
+  // A card in the compact form, or as JSON if it isn't the usual shape.
+  function encodeCard(c) {
+    if (isObj(c) && Object.keys(c).sort().join() === CARD_FIELDS.split(',').sort().join()
+      && Number.isFinite(c.easeFactor) && isCount(c.interval) && isCount(c.repetitions) && Number.isFinite(c.nextReview)) {
+      return `${Math.round(c.easeFactor * 100)},${c.interval},${c.repetitions},${Math.round(c.nextReview / MIN)}`;
+    }
+    return JSON.stringify(c);
+  }
+
+  function decodeCard(v) {
+    if (!/^-?\d+,\d+,\d+,-?\d+$/.test(v)) return parse(v);
+    const [e, i, r, d] = v.split(',').map(Number);
+    return { easeFactor: e / 100, interval: i, repetitions: r, nextReview: d * MIN };
+  }
+
+  // A line per card, sorted by id. Ids in a bucket share long beginnings
+  // (kanjiquiz_n1_meaning_…), so each line gives how many characters it
+  // shares with the line before, then the rest: `21 議\t256,13,3,29336397`.
+  // An id that would break the line format goes as JSON, in full.
+  function packCards(entries) {
+    let prev = '';
+    return entries.map(([id, c]) => {
+      const v = encodeCard(c);
+      let line;
+      if (/[\t\n]/.test(id)) line = JSON.stringify([id, v]);
+      else {
+        let p = 0;
+        while (p < id.length && p < prev.length && id[p] === prev[p]) p++;
+        line = `${p} ${id.slice(p)}\t${v}`;
+      }
+      prev = id;
+      return line;
+    }).join('\n');
+  }
+
+  function unpackCards(str) {
+    let prev = '';
+    return str.split('\n').filter(Boolean).map(line => {
+      let id, v;
+      if (line[0] === '[') [id, v] = JSON.parse(line);
+      else {
+        const m = /^(\d+) ([^\t]*)\t(.*)$/.exec(line);
+        id = prev.slice(0, Number(m[1])) + m[2];
+        v = m[3];
+      }
+      prev = id;
+      return [id, decodeCard(v)];
+    });
+  }
+
+  const byKey = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
+
+  // Keys stored entry by entry, spread over the fields of one map.
+  const SPLIT = {
+    tokidoki_srs: {
+      field: 's',
+      bucket: id => (hash(id) & 255).toString(16).padStart(2, '0'),
+      pack: packCards,
+      unpack: unpackCards,
+    },
+    tokidoki_daylog: {
+      field: 'l',
+      bucket: day => String(day).slice(0, 7),
+      pack: entries => JSON.stringify(Object.fromEntries(entries)),
+      unpack: str => Object.entries(parse(str) || {}),
+    },
+  };
+  const FIELDS = ['k', ...Object.values(SPLIT).map(x => x.field)];
+
+  // { [key]: raw } → { k: { [key]: raw }, s: { [bucket]: string }, l: {…} }
+  function encodeAccount(snap) {
+    const out = {};
+    FIELDS.forEach(f => { out[f] = {}; });
+    Object.keys(snap || {}).forEach(key => {
+      const raw = snap[key];
+      const split = SPLIT[key];
+      const obj = split && parse(raw);
+      if (!split || !isObj(obj) || !Object.keys(obj).length) { out.k[key] = raw; return; }
+      const buckets = {};
+      Object.keys(obj).sort(byKey).forEach(id => { (buckets[split.bucket(id)] = buckets[split.bucket(id)] || []).push([id, obj[id]]); });
+      Object.keys(buckets).forEach(b => { out[split.field][b] = split.pack(buckets[b]); });
+    });
+    return out;
+  }
+
+  function decodeAccount(enc) {
+    enc = enc || {};
+    const out = Object.assign({}, enc.k);
+    Object.keys(SPLIT).forEach(key => {
+      const { field, unpack } = SPLIT[key];
+      const fields = isObj(enc[field]) ? enc[field] : {};
+      const names = Object.keys(fields).sort(byKey);
+      if (!names.length) return;
+      const obj = {};
+      names.forEach(n => { unpack(String(fields[n])).forEach(([id, v]) => { obj[id] = v; }); });
+      out[key] = JSON.stringify(obj);
+    });
+    return out;
+  }
+
+  // What a snapshot looks like after a trip through the account (cards'
+  // ease rounded, due times to the minute), so that alone isn't a change.
+  function canonical(snap) {
+    const out = Object.assign({}, snap);
+    if (out.tokidoki_srs != null) {
+      const back = decodeAccount(encodeAccount({ tokidoki_srs: out.tokidoki_srs }));
+      out.tokidoki_srs = back.tokidoki_srs;
+    }
+    return out;
+  }
+
+  // The fields that differ between two encodings: [[field, name, value]],
+  // value undefined for a field to delete.
+  function diffAccount(before, after) {
+    const out = [];
+    FIELDS.forEach(f => {
+      const a = (before && before[f]) || {}, b = (after && after[f]) || {};
+      new Set([...Object.keys(a), ...Object.keys(b)]).forEach(n => {
+        if (a[n] !== b[n]) out.push([f, n, b[n]]);
+      });
+    });
+    return out;
+  }
+
+  const api = {
+    isTracked, mergeAll, mergeKey, mergeMap, mergeList, sameSnapshot, same, addCounts,
+    FORMAT, FIELDS, encodeAccount, decodeAccount, canonical, diffAccount, encodeCard, decodeCard,
+  };
   global.SyncMerge = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
 })(typeof window !== 'undefined' ? window : globalThis);

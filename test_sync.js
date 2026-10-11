@@ -102,5 +102,68 @@ ok(M.sameSnapshot(M.mergeAll(m2, m2, m2), m2), 'a merged result merges to itself
 ok(M.sameSnapshot({ a: '{"x":1,"y":2}' }, { a: '{"y":2,"x":1}' }), 'sameSnapshot ignores key order');
 ok(!M.sameSnapshot({ a: '1' }, { a: '1', b: '2' }), 'sameSnapshot notices an extra key');
 
+// Review log and totals: counts from both sides add up.
+const logBase = { '2026-10-10': { verbs: [10, 2, 100] } };
+out = P(M.mergeAll({ tokidoki_daylog: J(logBase) },
+  { tokidoki_daylog: J({ '2026-10-10': { verbs: [15, 3, 150] }, '2026-10-11': { kana: [4, 1, 40] } }) },
+  { tokidoki_daylog: J({ '2026-10-10': { verbs: [12, 2, 120], words: [5, 0, 50] }, '2026-10-11': { kana: [6, 0, 60] } }) },
+).tokidoki_daylog);
+ok(J(out['2026-10-10'].verbs) === J([17, 3, 170]), 'review log: a day both sides added to sums the additions');
+ok(J(out['2026-10-10'].words) === J([5, 0, 50]), 'review log: a kind only one side has is kept');
+ok(J(out['2026-10-11'].kana) === J([10, 1, 100]), 'review log: a new day on both sides adds up');
+out = P(M.mergeAll({}, { tokidoki_daylog: J({ d: { verbs: [3, 0, 9] } }) }, { tokidoki_daylog: J({ d: { verbs: [5, 1, 4] } }) }).tokidoki_daylog);
+ok(J(out.d.verbs) === J([5, 1, 9]), 'review log: first sync takes the larger counts');
+const totBase = { hours: [[1, 0]], cards: { young: [4, 1] } };
+out = P(M.mergeAll({ tokidoki_review_totals: J(totBase) },
+  { tokidoki_review_totals: J({ hours: [[3, 1]], cards: { young: [6, 1] } }) },
+  { tokidoki_review_totals: J({ hours: [[2, 0]], cards: { young: [4, 1], mature: [2, 0] } }) },
+).tokidoki_review_totals);
+ok(J(out.hours[0]) === J([4, 1]) && J(out.cards.young) === J([6, 1]) && J(out.cards.mature) === J([2, 0]), 'review totals add up');
+
+// The account document's layout.
+const DAYMS = 86400000;
+const cards = {
+  '3_いく_te': { easeFactor: 2.5600000000000005, interval: 13, repetitions: 3, nextReview: 1760183847123 },
+  'story_word:猫|ねこ:recall': { easeFactor: 2.5, interval: 0, repetitions: 0, nextReview: 1760183800000 },
+  'odd\tid': { easeFactor: 2.5, interval: 1, repetitions: 1, nextReview: 1760183800000 },
+  '[bracket': { easeFactor: 2.5, interval: 1, repetitions: 1, nextReview: 1760183800000 },
+  'extra': { easeFactor: 2.5, interval: 1, repetitions: 1, nextReview: 1760183800000, note: 'x' },
+};
+const snap = { tokidoki_srs: J(cards), tokidoki_theme: '"dark"', 'tokidoki-notepad': 'free text', tokidoki_daylog: J({ '2026-09-30': { verbs: [1, 0, 5] }, '2026-10-01': { kana: [2, 1, 9] } }) };
+const enc = M.encodeAccount(snap);
+ok(enc.k.tokidoki_theme === '"dark"' && enc.k['tokidoki-notepad'] === 'free text' && !('tokidoki_srs' in enc.k), 'account: plain keys go in k, the SRS store does not');
+ok(Object.keys(enc.s).length >= 1 && Object.keys(enc.s).every(b => /^[0-9a-f]{2}$/.test(b)), 'account: cards spread over hex buckets');
+ok(J(Object.keys(enc.l).sort()) === J(['2026-09', '2026-10']), 'account: the review log goes by month');
+ok(Object.values(enc.s).join('\n').includes('0 3_いく_te\t256,13,3,29336397'), 'account: a card in the compact form');
+const back = M.decodeAccount(enc);
+const backCards = P(back.tokidoki_srs);
+ok(backCards['3_いく_te'].easeFactor === 2.56 && backCards['3_いく_te'].nextReview === 29336397 * 60000, 'account: a card comes back rounded');
+ok(backCards['odd\tid'].interval === 1 && backCards['[bracket'].interval === 1, 'account: awkward ids survive');
+ok(backCards.extra.note === 'x', 'account: an unusual card survives as JSON');
+ok(back['tokidoki-notepad'] === 'free text' && M.same(P(back.tokidoki_daylog), P(snap.tokidoki_daylog)), 'account: other keys come back as they were');
+ok(M.sameSnapshot(M.canonical(snap), back), 'canonical() is what a trip through the account gives');
+ok(M.sameSnapshot(M.canonical(back), back), 'canonical() is stable');
+ok(M.encodeAccount({ tokidoki_srs: '{}' }).k.tokidoki_srs === '{}', 'account: an empty SRS store stays as it is');
+ok(J(M.encodeAccount(back)) === J(enc), 'account: encoding is deterministic');
+ok(J(M.encodeAccount(snap)) === J(M.encodeAccount(JSON.parse(J(snap)))), 'account: same data, same encoding');
+
+// Only what changed is written.
+const many = {};
+for (let i = 0; i < 2000; i++) many['kana_' + i] = { easeFactor: 2.5, interval: 1, repetitions: 1, nextReview: 1760000000000 + i * 60000 };
+const before = M.encodeAccount({ tokidoki_srs: J(many), tokidoki_theme: '"dark"' });
+const many2 = Object.assign({}, many, { kana_7: { easeFactor: 2.6, interval: 3, repetitions: 2, nextReview: 1760300000000 } });
+delete many2.kana_9;
+const after = M.encodeAccount({ tokidoki_srs: J(many2), 'tokidoki-notepad': 'hi' });
+const diff = M.diffAccount(before, after);
+const sBuckets = diff.filter(d => d[0] === 's');
+ok(sBuckets.length >= 1 && sBuckets.length <= 2, 'diff: a changed and a deleted card touch at most two buckets');
+ok(diff.some(d => d[0] === 'k' && d[1] === 'tokidoki_theme' && d[2] === undefined), 'diff: a removed key is deleted');
+ok(diff.some(d => d[0] === 'k' && d[1] === 'tokidoki-notepad' && d[2] === 'hi'), 'diff: a new key is written');
+ok(M.diffAccount(before, before).length === 0, 'diff: nothing changed, nothing written');
+const bucketBytes = Math.max(...Object.values(before.s).map(v => Buffer.byteLength(v)));
+ok(bucketBytes < 2000, 'a bucket of 2000 cards stays small (' + bucketBytes + ' bytes)');
+const encBytes = Buffer.byteLength(J(before.s)), jsonBytes = Buffer.byteLength(J(many));
+ok(encBytes * 2 < jsonBytes, `the compact form is much smaller than JSON (${encBytes} vs ${jsonBytes})`);
+
 console.log(`sync: ${passed} passed, ${failed} failed`);
 if (failed) process.exit(1);

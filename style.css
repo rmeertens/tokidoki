@@ -7034,6 +7034,35 @@ a.flashcards-link:hover .flashcards-link-btn {
   .account-tiles { grid-template-columns: repeat(2, 1fr); }
 }
 
+/* Its charts: bars and a review calendar in the accent colour. */
+.stat-block { display: flex; flex-direction: column; gap: 6px; }
+.stat-title { margin: 8px 0 0; font-size: 0.85rem; font-weight: 600; color: var(--text); }
+.stat-chart { display: block; width: 100%; height: auto; overflow: visible; }
+.stat-bar { fill: var(--accent); }
+.stat-hit { fill: transparent; }
+.stat-chart g:hover .stat-bar { fill-opacity: 0.75; }
+.stat-axis { stroke: var(--border); stroke-width: 1; }
+.stat-axis-labels { position: relative; height: 1.2em; font-size: 0.7rem; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.stat-axis-labels span { position: absolute; top: 0; white-space: nowrap; }
+.stat-calendar { max-width: 440px; }
+.stat-day { fill: var(--accent); }
+.stat-legend i { background: var(--accent); }
+.stat-day.stat-l0 { fill: var(--bg-input); }
+.stat-legend i.stat-l0 { background: var(--bg-input); }
+.stat-day.stat-l1 { fill-opacity: 0.25; }
+.stat-legend i.stat-l1 { opacity: 0.25; }
+.stat-day.stat-l2 { fill-opacity: 0.45; }
+.stat-legend i.stat-l2 { opacity: 0.45; }
+.stat-day.stat-l3 { fill-opacity: 0.7; }
+.stat-legend i.stat-l3 { opacity: 0.7; }
+.stat-legend { display: flex; align-items: center; justify-content: flex-end; gap: 3px; font-size: 0.7rem; color: var(--text-muted); }
+.stat-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; }
+.stat-legend span { margin: 0 3px; }
+.stat-day:hover { stroke: var(--text); stroke-width: 1.5; }
+.stat-more { border-top: 1px solid var(--border); padding-top: 8px; }
+.stat-more summary { cursor: pointer; font-size: 0.9rem; font-weight: 600; color: var(--accent); }
+.stat-more[open] { display: flex; flex-direction: column; gap: 10px; }
+
 /* News — news.html lists the headlines by day (.news-headline-card links
    to each story's page); a story page, news-<id>.html, is read like a
    story on the Stories page (the .story-* reader and panel above), with an

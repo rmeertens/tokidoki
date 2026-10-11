@@ -16,6 +16,28 @@
 - The header's site name is a `<span>`; each page's one `<h1>` is the first
   heading in its `#seo-content` section.
 
+## Login, sync and statistics
+
+- Optional login (`sync.js`) keeps every `tokidoki_` / `tokidoki-`
+  localStorage key in one Firestore document per user, `users/{uid}`.
+  `sync-merge.js` merges it with this device's copy (rules per key) and
+  defines the document layout: `data: 2` (the format; a number so old cached
+  `sync.js` versions fail before writing), `rev`, `k` (plain keys), `s` (the
+  SRS store, compacted and spread over 256 hash buckets), `l` (review log by
+  month). It's built to be cheap: a sync reads only `data`/`rev` and
+  downloads the rest only if another device wrote since, then writes just
+  the fields that changed, with an `updateTime` precondition. It uses
+  Firestore's REST API with the login's ID token — no Firestore SDK.
+- Changing the layout means a new `data` number and converting the old one
+  in `run()` (as format 1 is). Add a merge rule in `sync-merge.js` for any
+  new key that two devices can both add to (counts, collections).
+- The account dialog's statistics come from `progress-stats.js`. Every
+  graded flashcard is recorded there (`ProgressStats.record`, called via
+  `logReview()` in `app.js`; undo calls `unrecord`) into
+  `tokidoki_daylog` and `tokidoki_review_totals`. New study modes that grade
+  SRS cards should call `logReview()` too, and new card id prefixes go in
+  `KINDS`. `test_sync.js` and `test_progress_stats.js` cover both.
+
 ## Generated pages
 
 - The Phrases category pages, `phrases-<id>.html`, are written by
