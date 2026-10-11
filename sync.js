@@ -5,7 +5,8 @@
 // Adds an account button to the header. Logging in is with Google (a popup)
 // or by email link (no passwords): enter your email, click the link we
 // send. Logged out, saving every 20th word shows a note pointing at the
-// button. Logged in, everything under the
+// button. Logged in, the dialog sums up what's been studied
+// (progress-stats.js), and everything under the
 // `tokidoki_` / `tokidoki-` keys is copied to Firestore, one document per
 // user (users/{uid}, field `data`: { [key]: rawString }), and merged with
 // what's there by sync-merge.js. A sync runs when a page loads (at most
@@ -325,8 +326,9 @@
     if (!overlay || overlay.classList.contains('hidden')) return;
 
     const body = overlay.querySelector('.account-body');
+    const stats = user ? statsHtml() : '';
     // Rebuilding the form would wipe what's being typed, so only when it changes.
-    const view = JSON.stringify([user && user.email, status, user && lastSynced(), !!syncing, mode, sentTo, message, busy]);
+    const view = JSON.stringify([user && user.email, status, user && lastSynced(), !!syncing, mode, sentTo, message, busy, stats]);
     if (body.dataset.view === view) return;
     body.dataset.view = view;
     const msg = message ? `<p class="account-msg${message.error ? ' account-error' : ''}" role="status">${esc(message.text)}</p>` : '';
@@ -339,6 +341,7 @@
         <p class="account-text">Logged in as <strong>${esc(user.email)}</strong>. Your progress is saved to your account and shared with every device you log in on.</p>
         <p class="account-sub">${esc(status || lastSynced())}</p>
         ${msg}
+        ${stats}
         <div class="account-actions">
           <button type="button" class="btn-secondary" data-account-act="sync"${dis || (syncing ? ' disabled' : '')}>Sync now</button>
           <button type="button" class="btn-secondary" data-account-act="logout"${dis}>Log out</button>
@@ -380,6 +383,52 @@
         ${msg}
         <button type="submit" class="btn-primary account-submit"${dis}>${confirming ? 'Log in' : 'Email me a login link'}</button>
       </form>`;
+  }
+
+  // ─── Progress summary ────────────────────────────────────────────────────────
+  //
+  // Logged in, the dialog also shows what's been studied so far, worked out
+  // by progress-stats.js from what's saved here.
+
+  const num = n => Number(n).toLocaleString();
+  const plural = (n, one, many) => `${num(n)} ${n === 1 ? one : (many || one + 's')}`;
+
+  function statsHtml() {
+    if (!window.ProgressStats) return '';
+    const p = window.ProgressStats.progressStats(snapshot());
+    const tile = (n, label) => `<div class="account-tile"><span class="account-tile-num">${num(n)}</span><span class="account-tile-label">${label}</span></div>`;
+    const tiles = `
+      <div class="account-tiles">
+        ${tile(p.streak, 'day streak')}
+        ${tile(p.reviewsToday, 'reviewed today')}
+        ${tile(p.total.studied, 'cards studied')}
+        ${tile(p.total.learned, 'cards learned')}
+      </div>`;
+    const rows = p.kinds.map(k => `
+        <tr><th scope="row">${esc(k.label)}</th><td>${num(k.studied)}</td><td>${num(k.learned)}</td><td>${num(k.due)}</td></tr>`).join('');
+    const table = rows ? `
+      <table class="account-stats-table">
+        <thead><tr><td></td><th scope="col">Studied</th><th scope="col">Learned</th><th scope="col">Due</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+      <p class="account-sub">Learned: next review three weeks or more away. Due: ready to review now.</p>`
+      : '<p class="account-sub">Nothing reviewed yet — study some flashcards and your progress shows up here.</p>';
+    const { decks, games } = p;
+    const extra = [
+      decks.words && `${plural(decks.words, 'word')} in your flashcards`,
+      decks.kanji && `${plural(decks.kanji, 'kanji', 'kanji')} in your kanji flashcards`,
+      decks.grammar && `${plural(decks.grammar, 'grammar point')} saved`,
+      games.listening && `${plural(games.listening, 'listening test')} taken`,
+      games.wordOrder && `${plural(games.wordOrder, 'word order set')} done`,
+      games.storyFill && `${plural(games.storyFill, 'story fill passage')} done`,
+      games.mystery && `${plural(games.mystery, 'mystery chapter')} solved`,
+    ].filter(Boolean);
+    const list = extra.length ? `<ul class="account-stats-extra">${extra.map(t => `<li>${esc(t)}</li>`).join('')}</ul>` : '';
+    return `
+      <section class="account-stats" aria-labelledby="account-stats-title">
+        <h3 id="account-stats-title" class="account-stats-title">Your progress</h3>
+        ${tiles}${table}${list}
+      </section>`;
   }
 
   const GOOGLE_ICON = '<svg viewBox="0 0 48 48" width="18" height="18" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>';

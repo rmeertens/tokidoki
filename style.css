@@ -7007,6 +7007,33 @@ a.flashcards-link:hover .flashcards-link-btn {
 .account-or { display: flex; align-items: center; gap: 10px; color: var(--text-muted); font-size: 0.85rem; }
 .account-or::before, .account-or::after { content: ''; flex: 1; border-top: 1px solid var(--border); }
 
+/* Logged in: a summary of what's been studied (progress-stats.js). */
+.account-stats { display: flex; flex-direction: column; gap: 10px; padding-top: 12px; border-top: 1px solid var(--border); }
+.account-stats-title { margin: 0; font-size: 1rem; font-weight: 700; color: var(--text); }
+.account-tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.account-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 4px;
+  text-align: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.account-tile-num { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; color: var(--accent); line-height: 1.1; }
+.account-tile-label { font-size: 0.75rem; color: var(--text-dim); line-height: 1.2; }
+.account-stats-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+.account-stats-table th, .account-stats-table td { padding: 6px 4px; border-bottom: 1px solid var(--border); text-align: right; }
+.account-stats-table th[scope=row] { text-align: left; font-weight: 500; color: var(--text); }
+.account-stats-table thead th { font-size: 0.75rem; font-weight: 600; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.03em; }
+.account-stats-table tbody tr:last-child th, .account-stats-table tbody tr:last-child td { border-bottom: none; }
+.account-stats-extra { margin: 0; padding-left: 1.2em; color: var(--text); font-size: 0.9rem; line-height: 1.6; }
+@media (max-width: 420px) {
+  .account-tiles { grid-template-columns: repeat(2, 1fr); }
+}
+
 /* News — news.html lists the headlines by day (.news-headline-card links
    to each story's page); a story page, news-<id>.html, is read like a
    story on the Stories page (the .story-* reader and panel above), with an
