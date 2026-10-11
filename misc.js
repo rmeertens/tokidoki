@@ -166,6 +166,47 @@
     ]],
   ];
 
+  // Verbs with their own keigo word instead of the regular お〜になる /
+  // お〜する pattern: [plain verb, meaning, answer shown, other accepted answers].
+  // Kana spellings of every answer count as well.
+  const SONKEIGO = [
+    ['いる', 'to be, to stay', 'いらっしゃる', ['おいでになる']],
+    ['行く', 'to go', 'いらっしゃる', ['おいでになる']],
+    ['来る', 'to come', 'いらっしゃる', ['おいでになる', 'お見えになる', 'おみえになる', 'お越しになる', 'おこしになる']],
+    ['言う', 'to say', 'おっしゃる'],
+    ['食べる', 'to eat', '召し上がる', ['めしあがる']],
+    ['飲む', 'to drink', '召し上がる', ['めしあがる']],
+    ['する', 'to do', 'なさる'],
+    ['見る', 'to see', 'ご覧になる', ['ごらんになる']],
+    ['知っている', 'to know', 'ご存じだ', ['ご存じ', 'ご存知', 'ご存知だ', 'ごぞんじ', 'ごぞんじだ', 'ご存じです', 'ごぞんじです']],
+    ['くれる', 'to give me', 'くださる', ['下さる']],
+    ['寝る', 'to sleep', 'お休みになる', ['おやすみになる']],
+    ['着る', 'to wear', 'お召しになる', ['おめしになる']],
+    ['死ぬ', 'to die', 'お亡くなりになる', ['おなくなりになる', '亡くなる', 'なくなる']],
+  ];
+  const KENJOUGO = [
+    ['いる', 'to be, to stay', 'おる', ['居る']],
+    ['行く', 'to go', '参る', ['まいる', '伺う', 'うかがう']],
+    ['来る', 'to come', '参る', ['まいる']],
+    ['言う', 'to say', '申す', ['もうす', '申し上げる', 'もうしあげる']],
+    ['食べる', 'to eat', 'いただく', ['頂く']],
+    ['飲む', 'to drink', 'いただく', ['頂く']],
+    ['する', 'to do', 'いたす', ['致す']],
+    ['見る', 'to see', '拝見する', ['はいけんする']],
+    ['知っている', 'to know', '存じている', ['ぞんじている', '存じておる', 'ぞんじておる', '存じ上げている', 'ぞんじあげている', '存じる', 'ぞんじる']],
+    ['もらう', 'to receive', 'いただく', ['頂く']],
+    ['あげる', 'to give', '差し上げる', ['さしあげる']],
+    ['会う', 'to meet', 'お目にかかる', ['おめにかかる']],
+    ['聞く', 'to ask / to hear', '伺う', ['うかがう', '承る', 'うけたまわる']],
+    ['訪ねる', 'to visit', '伺う', ['うかがう']],
+    ['見せる', 'to show', 'お目にかける', ['おめにかける', 'ご覧に入れる', 'ごらんにいれる']],
+    ['わかる', 'to understand', 'かしこまる', ['承知する', 'しょうちする']],
+    ['思う', 'to think', '存じる', ['ぞんじる']],
+  ];
+  const keigoItems = rows => rows.map(([plain, meaning, answer, alt = []]) => ({
+    prompt: `${plain} (${meaning})`, answer, accept: alt,
+  }));
+
   const TE_ROWS = [
     { key: 'う', value: 'って', ex: '買う → 買って' },
     { key: 'つ', value: 'って', ex: '待つ → 待って' },
@@ -246,6 +287,27 @@
             { prompt: 'する', answer: 'して' },
             { prompt: '来る', answer: '来て', accept: ['きて'] },
           ],
+        },
+      ],
+    },
+    {
+      id: 'keigo',
+      glyph: '敬',
+      title: 'Honorific & humble verbs',
+      ja: '尊敬語・謙譲語',
+      desc: 'The verbs with a special keigo word of their own. Honorific for what others do, humble for what you do.',
+      sections: [
+        {
+          type: 'fill',
+          label: 'Honorific 尊敬語 — raising the other person',
+          columns: ['Verb', '尊敬語'],
+          items: keigoItems(SONKEIGO),
+        },
+        {
+          type: 'fill',
+          label: 'Humble 謙譲語 — lowering yourself',
+          columns: ['Verb', '謙譲語'],
+          items: keigoItems(KENJOUGO),
         },
       ],
     },

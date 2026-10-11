@@ -86,6 +86,17 @@ const dates = Misc.QUIZZES.find(q => q.id === 'dates').sections[0];
 check(Misc.matchItems({ items: [dates.items[0]] }, 'tsuitachi').length === 1, 'romaji tsuitachi');
 check(Misc.matchItems({ items: [dates.items[0]] }, 'いちにち').length === 0, 'いちにち is not the 1st');
 
+// ─── Keigo ───────────────────────────────────────────────────────────────────
+
+const keigo = Misc.QUIZZES.find(q => q.id === 'keigo').sections;
+const keigoFor = (si, p) => ({ items: [keigo[si].items.find(it => it.prompt.startsWith(p + ' '))] });
+check(Misc.matchItems(keigoFor(0, '食べる'), 'meshiagaru').length === 1, 'romaji meshiagaru');
+check(Misc.matchItems(keigoFor(0, '食べる'), '召し上がる').length === 1, 'kanji 召し上がる');
+check(Misc.matchItems(keigoFor(0, '食べる'), 'いただく').length === 0, 'humble いただく is not the honorific');
+check(Misc.matchItems(keigoFor(1, '食べる'), 'itadaku').length === 1, 'humble itadaku');
+check(Misc.matchItems(keigoFor(1, '行く'), 'うかがう').length === 1, 'うかがう for humble 行く');
+check(Misc.matchItems(keigoFor(0, '言う'), 'ossharu').length === 1, 'romaji ossharu');
+
 // ─── Shuffle ─────────────────────────────────────────────────────────────────
 
 const mixed = Misc.shuffled(9);
