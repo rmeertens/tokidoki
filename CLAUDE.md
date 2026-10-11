@@ -85,3 +85,53 @@ cd - && $VV/venv/bin/python scripts/generate_news_audio.py --voicevox $VV
 The listening voices need all ten models; News needs only `6.vvm`. ffmpeg
 (with libmp3lame) encodes the MP3s. A News run takes about 15 seconds per
 story and level on a cloud session.
+
+## Adding today's news (daily task)
+
+The News section gets three new stories a day. Each is real news from
+Japan, told at N5, N4 and N3. To add them:
+
+1. **Pick three stories.** Search the web for the last day or two of Japan
+   news (Japan Times, Japan Today, nippon.com, NHK, Kyodo/Jiji via
+   nippon.com, and Japanese-language searches, which often turn up more).
+   Mix the topics: something serious (politics, economy, incidents),
+   something from science, culture or sport, and avoid repeating a topic
+   from the last few days unless there's real news. Skip stories that are
+   mainly about violent crime or tragedy. Check every fact (dates,
+   numbers, names, readings of names) against at least one source; say
+   "may", "is suspected", "is expected" where the source does. Never
+   invent quotes. Note the source URLs.
+2. **Write them in `news-data.js`**, at the top of `NEWS_ITEMS` (newest
+   first), using the format described at the top of that file:
+   - `id` is `<date>-<short-slug>`, `date` is today.
+   - **N5**: 6–7 short です/ます sentences, mostly N5 words; a harder word
+     is fine with a note. **N4**: 6–7 sentences, more detail, N4 grammar.
+     **N3**: 6–7 sentences in plain newspaper style (〜た / 〜だ / 〜ている,
+     によると, 〜とみられる, 〜おそれがある…). N3 sentences must be longer
+     on average than N5 (the test checks).
+   - Furigana on every kanji run, as `漢字[かんじ]`. Write dates whose
+     reading is special in kanji (七日[なのか], 十日[とおか],
+     十四日[じゅうよっか]) so the voices read them right; other numbers can
+     be digits with furigana on the counter only (4社[しゃ], 2022年[ねん]).
+     Use the official reading for names (日本[にっぽん]シリーズ).
+   - A note (third element of a line) on anything the word and grammar
+     lists don't explain: a news expression, a name, background. Notes are
+     plain text — no furigana markup.
+3. **Build the word lists**: `node scripts/tokenize_news.mjs --misses`
+   (after `npm install --no-save kuromoji`). Add every missing word to
+   `scripts/news_extra_words.json` as `[reading, meaning, part of speech]`;
+   names and compounds kuromoji splits oddly also go in `NEWS_WHOLE` in
+   that script. Re-run until 0 words are missing, then look over the new
+   lines' words and grammar (a word linked to the wrong entry, like 弱さ →
+   差, or a grammar point that doesn't fit). Fix by adding a word, tightening
+   a rule in `NEWS_RULES`, or rephrasing the sentence.
+4. **Make the pages**: `node scripts/render_news_pages.mjs` (story pages,
+   pager links, sitemap).
+5. **Record the audio**: set up VOICEVOX as above, then
+   `.../venv/bin/python scripts/generate_news_audio.py --voicevox $VV --check`
+   (every reading must match) and the same without `--check` to record. Only
+   the new stories are recorded.
+6. **Test and push**: `node test_news.js` (and the other tests), look at
+   the new pages in a browser if you can (Playwright + Chromium is
+   available: serve the repo with `python3 -m http.server` and open
+   `news.html`), then commit and push to `main`.

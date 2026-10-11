@@ -13,10 +13,11 @@ the page can highlight the sentence being read and play any one sentence.
 Each sentence is given to the voice as written, in kanji, which gives the
 most natural accent. Its reading is then checked against the furigana; when
 they differ (VOICEVOX reading 今日 as こんにち, say), kanji are swapped for
-their furigana one at a time until it reads right. Numbers have no furigana
-and are left to VOICEVOX, which reads dates, counters and percentages well.
-Stories whose script hasn't changed are skipped; recordings for stories that
-are gone are removed.
+their furigana one at a time until it reads right. Numbers and Latin
+letters have no furigana and are left to VOICEVOX, which reads dates,
+counters, percentages and names like JR or DeNA well. Stories whose script
+hasn't changed are skipped; recordings for stories that are gone are
+removed.
 
 Usage:
     python3 scripts/generate_news_audio.py --voicevox DIR [--force | --check]
@@ -104,9 +105,10 @@ def norm(s):
 
 def expected(markup):
     """A regex for how the sentence should sound: its furigana, with any
-    number (and the % or counter VOICEVOX reads with it) matching anything."""
+    number or Latin letters (8%, JR, DeNA), which have no furigana, matching
+    anything."""
     reading = "".join(r or t for t, r in pieces(markup))
-    parts = re.split(r"[0-9０-９][0-9０-９,.%％]*", reading)
+    parts = re.split(r"[0-9０-９A-Za-zＡ-Ｚａ-ｚ][0-9０-９A-Za-zＡ-Ｚａ-ｚ,.%％]*", reading)
     return re.compile(".+?".join(re.escape(norm(p)) for p in parts) + r"\Z")
 
 

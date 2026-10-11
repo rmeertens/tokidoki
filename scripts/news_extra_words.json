@@ -448,5 +448,545 @@
     "じゅうににちごろ",
     "around the 12th",
     "number + counter"
+  ],
+  "ノーベル": [
+    "ノーベル",
+    "Nobel (ノーベル賞: Nobel Prize)",
+    "name"
+  ],
+  "ノーベル賞": [
+    "ノーベルしょう",
+    "Nobel Prize",
+    "noun"
+  ],
+  "化学賞": [
+    "かがくしょう",
+    "chemistry prize",
+    "noun"
+  ],
+  "硤合": [
+    "そあい",
+    "Soai (family name)",
+    "name"
+  ],
+  "憲三": [
+    "けんそう",
+    "Kensō (given name)",
+    "name"
+  ],
+  "七十六歳": [
+    "ななじゅうろくさい",
+    "76 years old",
+    "number + counter"
+  ],
+  "九十五歳": [
+    "きゅうじゅうごさい",
+    "95 years old",
+    "number + counter"
+  ],
+  "76歳": [
+    "ななじゅうろくさい",
+    "76 years old",
+    "number + counter"
+  ],
+  "95歳": [
+    "きゅうじゅうごさい",
+    "95 years old",
+    "number + counter"
+  ],
+  "反応": [
+    "はんのう",
+    "reaction (chemical); response",
+    "noun"
+  ],
+  "スウェーデン": [
+    "スウェーデン",
+    "Sweden",
+    "place name"
+  ],
+  "王立": [
+    "おうりつ",
+    "royal",
+    "noun"
+  ],
+  "アカデミー": [
+    "アカデミー",
+    "academy",
+    "noun"
+  ],
+  "東京理科大学": [
+    "とうきょうりかだいがく",
+    "Tokyo University of Science",
+    "name"
+  ],
+  "名誉": [
+    "めいよ",
+    "honour (名誉教授: professor emeritus)",
+    "noun"
+  ],
+  "名誉教授": [
+    "めいよきょうじゅ",
+    "professor emeritus",
+    "noun"
+  ],
+  "アンリ・カガン": [
+    "アンリ・カガン",
+    "Henri Kagan (French chemist)",
+    "name"
+  ],
+  "カガン": [
+    "カガン",
+    "Kagan (Henri Kagan)",
+    "name"
+  ],
+  "分子": [
+    "ぶんし",
+    "molecule",
+    "noun"
+  ],
+  "片方": [
+    "かたほう",
+    "one side, one of a pair",
+    "noun"
+  ],
+  "日本人": [
+    "にほんじん",
+    "Japanese person",
+    "noun"
+  ],
+  "北川": [
+    "きたがわ",
+    "Kitagawa (Susumu Kitagawa, 2025 chemistry laureate)",
+    "name"
+  ],
+  "2年": [
+    "にねん",
+    "two years",
+    "number + counter"
+  ],
+  "授賞": [
+    "じゅしょう",
+    "awarding a prize (授賞理由: reason for the award)",
+    "noun"
+  ],
+  "など": [
+    "など",
+    "and so on, such as",
+    "particle"
+  ],
+  "手本": [
+    "てほん",
+    "model, example to copy",
+    "noun"
+  ],
+  "偏る": [
+    "かたよる",
+    "to lean to one side, be biased",
+    "う-verb"
+  ],
+  "という": [
+    "という",
+    "called …; (that) …",
+    "expression"
+  ],
+  "関わる": [
+    "かかわる",
+    "to be related to, concern",
+    "う-verb"
+  ],
+  "香料": [
+    "こうりょう",
+    "fragrance, flavouring",
+    "noun"
+  ],
+  "応用": [
+    "おうよう",
+    "application, practical use",
+    "noun"
+  ],
+  "受賞": [
+    "じゅしょう",
+    "winning a prize",
+    "noun"
+  ],
+  "昨年": [
+    "さくねん",
+    "last year (formal)",
+    "noun"
+  ],
+  "10人目": [
+    "じゅうにんめ",
+    "the tenth person",
+    "number + counter"
+  ],
+  "ストックホルム": [
+    "ストックホルム",
+    "Stockholm",
+    "place name"
+  ],
+  "インターネット": [
+    "インターネット",
+    "the internet",
+    "noun"
+  ],
+  "役所": [
+    "やくしょ",
+    "government office, town hall",
+    "noun"
+  ],
+  "五百": [
+    "ごひゃく",
+    "500",
+    "number + counter"
+  ],
+  "JR": [
+    "ジェイアール",
+    "JR (Japan Railways)",
+    "name"
+  ],
+  "九州": [
+    "きゅうしゅう",
+    "Kyushu (island in south-west Japan)",
+    "place name"
+  ],
+  "JR九州": [
+    "ジェイアールきゅうしゅう",
+    "JR Kyushu (railway company)",
+    "name"
+  ],
+  "メールアドレス": [
+    "メールアドレス",
+    "email address",
+    "noun"
+  ],
+  "百三十万": [
+    "ひゃくさんじゅうまん",
+    "1,300,000",
+    "number + counter"
+  ],
+  "クラウド": [
+    "クラウド",
+    "the cloud (online data storage)",
+    "noun"
+  ],
+  "サイバー": [
+    "サイバー",
+    "cyber- (サイバー攻撃: cyberattack)",
+    "noun"
+  ],
+  "ソフトバンク": [
+    "ソフトバンク",
+    "SoftBank (telecoms company; also a baseball team)",
+    "name"
+  ],
+  "IDC": [
+    "アイディーシー",
+    "IDC (IDCフロンティア: SoftBank's cloud company)",
+    "name"
+  ],
+  "フロンティア": [
+    "フロンティア",
+    "frontier (IDCフロンティア: company name)",
+    "name"
+  ],
+  "495": [
+    "よんひゃくきゅうじゅうご",
+    "495",
+    "number + counter"
+  ],
+  "自治体": [
+    "じちたい",
+    "local government (city, town, prefecture)",
+    "noun"
+  ],
+  "ウェブ": [
+    "ウェブ",
+    "web",
+    "noun"
+  ],
+  "最大": [
+    "さいだい",
+    "largest; (最大で) at most",
+    "noun"
+  ],
+  "130万人分": [
+    "ひゃくさんじゅうまんにんぶん",
+    "(the data) of 1.3 million people",
+    "number + counter"
+  ],
+  "東日本": [
+    "ひがしにほん",
+    "eastern Japan (JR東日本: JR East)",
+    "place name"
+  ],
+  "リンク": [
+    "リンク",
+    "link",
+    "noun"
+  ],
+  "子会社": [
+    "こがいしゃ",
+    "subsidiary company",
+    "noun"
+  ],
+  "ランサムウェア": [
+    "ランサムウェア",
+    "ransomware",
+    "noun"
+  ],
+  "クラウドサービス": [
+    "クラウドサービス",
+    "cloud service",
+    "noun"
+  ],
+  "提供": [
+    "ていきょう",
+    "providing, offering",
+    "noun"
+  ],
+  "未明": [
+    "みめい",
+    "early hours, before dawn",
+    "noun"
+  ],
+  "による": [
+    "による",
+    "by, caused by",
+    "particle"
+  ],
+  "ネットワーク": [
+    "ネットワーク",
+    "network",
+    "noun"
+  ],
+  "停止": [
+    "ていし",
+    "stop, shutdown",
+    "noun"
+  ],
+  "同社": [
+    "どうしゃ",
+    "the (same) company",
+    "noun"
+  ],
+  "及ぶ": [
+    "およぶ",
+    "to reach, extend to",
+    "う-verb"
+  ],
+  "流出": [
+    "りゅうしゅつ",
+    "leak, outflow",
+    "noun"
+  ],
+  "侵入": [
+    "しんにゅう",
+    "break-in, intrusion",
+    "noun"
+  ],
+  "経路": [
+    "けいろ",
+    "route, path",
+    "noun"
+  ],
+  "野球": [
+    "やきゅう",
+    "baseball",
+    "noun"
+  ],
+  "クライマックス": [
+    "クライマックス",
+    "climax (クライマックスシリーズ: the play-offs)",
+    "noun"
+  ],
+  "クライマックスシリーズ": [
+    "クライマックスシリーズ",
+    "Climax Series (Japanese baseball play-offs)",
+    "name"
+  ],
+  "シリーズ": [
+    "シリーズ",
+    "series",
+    "noun"
+  ],
+  "セ・リーグ": [
+    "セ・リーグ",
+    "Central League",
+    "name"
+  ],
+  "パ・リーグ": [
+    "パ・リーグ",
+    "Pacific League",
+    "name"
+  ],
+  "阪神": [
+    "はんしん",
+    "Hanshin (Tigers, Osaka/Kobe baseball team)",
+    "name"
+  ],
+  "二番": [
+    "にばん",
+    "number two; second place",
+    "number + counter"
+  ],
+  "三番": [
+    "さんばん",
+    "number three; third place",
+    "number + counter"
+  ],
+  "十四日": [
+    "じゅうよっか",
+    "the 14th (of the month)",
+    "number + counter"
+  ],
+  "九日": [
+    "ここのか",
+    "the 9th (of the month)",
+    "number + counter"
+  ],
+  "十二月": [
+    "じゅうにがつ",
+    "December",
+    "noun"
+  ],
+  "開幕": [
+    "かいまく",
+    "opening (of a season or event)",
+    "noun"
+  ],
+  "ファースト": [
+    "ファースト",
+    "first (ファーストステージ: first round)",
+    "noun"
+  ],
+  "ファーストステージ": [
+    "ファーストステージ",
+    "First Stage (first round)",
+    "noun"
+  ],
+  "ファイナル": [
+    "ファイナル",
+    "final",
+    "noun"
+  ],
+  "ファイナルステージ": [
+    "ファイナルステージ",
+    "Final Stage (second round)",
+    "noun"
+  ],
+  "2位": [
+    "にい",
+    "second place",
+    "number + counter"
+  ],
+  "3位": [
+    "さんい",
+    "third place",
+    "number + counter"
+  ],
+  "2勝": [
+    "にしょう",
+    "two wins",
+    "number + counter"
+  ],
+  "1勝": [
+    "いっしょう",
+    "one win",
+    "number + counter"
+  ],
+  "東京ドーム": [
+    "とうきょうドーム",
+    "Tokyo Dome (Giants' stadium)",
+    "place name"
+  ],
+  "巨人": [
+    "きょじん",
+    "the Yomiuri Giants; giant",
+    "name"
+  ],
+  "DeNA": [
+    "ディーエヌエー",
+    "DeNA (Yokohama DeNA BayStars)",
+    "name"
+  ],
+  "ベルーナドーム": [
+    "ベルーナドーム",
+    "Belluna Dome (Seibu's stadium)",
+    "place name"
+  ],
+  "西武": [
+    "せいぶ",
+    "Seibu (Lions, baseball team)",
+    "name"
+  ],
+  "日本ハム": [
+    "にっぽんハム",
+    "Nippon-Ham (Fighters, baseball team)",
+    "name"
+  ],
+  "リーグ": [
+    "リーグ",
+    "league",
+    "noun"
+  ],
+  "アドバンテージ": [
+    "アドバンテージ",
+    "advantage (a head start in wins)",
+    "noun"
+  ],
+  "CS": [
+    "シーエス",
+    "CS, the Climax Series",
+    "name"
+  ],
+  "今季": [
+    "こんき",
+    "this season",
+    "noun"
+  ],
+  "球団": [
+    "きゅうだん",
+    "(baseball) club, team",
+    "noun"
+  ],
+  "対戦": [
+    "たいせん",
+    "playing against, match-up",
+    "noun"
+  ],
+  "迎え撃つ": [
+    "むかえうつ",
+    "to take on, meet (an opponent)",
+    "う-verb"
+  ],
+  "10以上": [
+    "じゅういじょう",
+    "ten or more",
+    "number + counter"
+  ],
+  "見通し": [
+    "みとおし",
+    "outlook, expectation",
+    "noun"
+  ],
+  "日本シリーズ": [
+    "にっぽんシリーズ",
+    "the Japan Series (baseball championship)",
+    "name"
+  ],
+  "弱さ": [
+    "よわさ",
+    "weakness (弱い → 弱さ)",
+    "noun"
+  ],
+  "ゲーム差": [
+    "ゲームさ",
+    "games behind (gap in the standings)",
+    "noun"
+  ],
+  "3試合制": [
+    "さんしあいせい",
+    "three-game format (best of three)",
+    "noun"
   ]
 }

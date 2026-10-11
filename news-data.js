@@ -23,6 +23,149 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-10-11-nobel',
+      date: '2026-10-11',
+      emoji: '🏆',
+      titleEn: 'Kensō Soai wins the Nobel Prize in Chemistry — a Japanese winner two years running',
+      sources: [
+        { name: 'Tokyo University of Science', url: 'https://www.tus.ac.jp/about/nobelprize2026/index.html' },
+        { name: 'JST Science Portal', url: 'https://scienceportal.jst.go.jp/newsflash/20261007_n01/' },
+        { name: 'nippon.com', url: 'https://www.nippon.com/ja/japan-data/h02923/' },
+      ],
+      levels: {
+        N5: {
+          title: '日本[にほん]の先生[せんせい]がノーベル賞[しょう]をもらいます',
+          lines: [
+            ['七日[なのか]、ノーベル化学賞[かがくしょう]をもらう人[ひと]がわかりました。', 'On the 7th, we found out who will get the Nobel Prize in Chemistry.', '化学賞 = 化学 "chemistry" + 賞 "prize".'],
+            ['一人[ひとり]は、日本[にほん]の硤合[そあい]憲三[けんそう]さんです。', 'One of them is Kensō Soai from Japan.', '硤 is a very rare kanji — even Japanese readers need the furigana for this name.'],
+            ['硤合[そあい]さんは七十六歳[ななじゅうろくさい]で、東京[とうきょう]の大学[だいがく]の先生[せんせい]でした。', 'Mr Soai is 76 and was a professor at a university in Tokyo.'],
+            ['もう一人[ひとり]は、フランスの先生[せんせい]で、九十五歳[きゅうじゅうごさい]です。', 'The other is a professor from France, who is 95.'],
+            ['硤合[そあい]さんは、とても小[ちい]さい物[もの]が自分[じぶん]で増[ふ]える、おもしろい反応[はんのう]を見[み]つけました。', 'Mr Soai discovered an interesting reaction in which very tiny things multiply by themselves.', 'The "tiny things" are molecules (分子, ぶんし).'],
+            ['去年[きょねん]も、日本[にほん]の人[ひと]が化学賞[かがくしょう]をもらいました。', 'Last year, too, a Japanese person won the chemistry prize.'],
+            ['十二月[じゅうにがつ]に、スウェーデンで賞[しょう]をもらいます。', 'He will receive the prize in Sweden in December.'],
+          ],
+        },
+        N4: {
+          title: '硤合[そあい]憲三[けんそう]さんにノーベル化学賞[かがくしょう]',
+          lines: [
+            ['スウェーデンの王立[おうりつ]科学[かがく]アカデミーは七日[なのか]、今年[ことし]のノーベル化学賞[かがくしょう]を発表[はっぴょう]しました。', 'On the 7th, the Royal Swedish Academy of Sciences announced this year\'s Nobel Prize in Chemistry.'],
+            ['賞[しょう]をもらうのは、東京[とうきょう]理科[りか]大学[だいがく]の硤合[そあい]憲三[けんそう]名誉[めいよ]教授[きょうじゅ]と、フランスのアンリ・カガン名誉[めいよ]教授[きょうじゅ]の二人[ふたり]です。', 'The winners are Kensō Soai, professor emeritus at Tokyo University of Science, and Henri Kagan, professor emeritus in France.', '名誉教授 "professor emeritus": a retired professor who keeps the title.'],
+            ['硤合[そあい]さんは76歳[さい]、カガンさんは95歳[さい]です。', 'Soai is 76 and Kagan is 95.'],
+            ['硤合[そあい]さんは、「硤合[そあい]反応[はんのう]」と呼[よ]ばれる反応[はんのう]を見[み]つけました。', 'Soai discovered a reaction known as the "Soai reaction".', '〜と呼ばれる "called …" — the passive of 呼ぶ.'],
+            ['これは、右[みぎ]と左[ひだり]の形[かたち]がある分子[ぶんし]のうち、片方[かたほう]だけが自分[じぶん]で増[ふ]えていく反応[はんのう]です。', 'It is a reaction in which, of molecules that come in a right-handed and a left-handed shape, only one kind keeps multiplying by itself.', '〜ていく: a change that goes on and on.'],
+            ['体[からだ]を作[つく]る分子[ぶんし]がなぜ片方[かたほう]の形[かたち]だけなのかを考[かんが]えるヒントになると言[い]われています。', 'It is said to give a clue to why the molecules that make up our bodies come in only one of the two shapes.'],
+            ['日本人[にほんじん]の化学賞[かがくしょう]は、去年[きょねん]の北川[きたがわ]進[すすむ]さんに続[つづ]いて、2年[ねん]連続[れんぞく]です。', 'Following Susumu Kitagawa last year, it\'s the second year in a row a Japanese scientist has won the chemistry prize.', '〜に続いて "following …".'],
+          ],
+        },
+        N3: {
+          title: 'ノーベル化学賞[かがくしょう]に硤合[そあい]憲三[けんそう]氏[し]　日本人[にほんじん]は2年[ねん]連続[れんぞく]',
+          lines: [
+            ['スウェーデン王立[おうりつ]科学[かがく]アカデミーは七日[なのか]、今年[ことし]のノーベル化学賞[かがくしょう]を東京[とうきょう]理科[りか]大学[だいがく]の硤合[そあい]憲三[けんそう]名誉[めいよ]教授[きょうじゅ]とフランスのアンリ・カガン名誉[めいよ]教授[きょうじゅ]に贈[おく]ると発表[はっぴょう]した。', 'On the 7th, the Royal Swedish Academy of Sciences announced that this year\'s Nobel Prize in Chemistry will go to Kensō Soai of Tokyo University of Science and Henri Kagan of France, both professors emeritus.', '〜に贈る "award to"; 氏 in the headline is the formal "Mr/Ms" of newspapers.'],
+            ['授賞[じゅしょう]理由[りゆう]は、鏡[かがみ]に映[うつ]したように左右[さゆう]が反対[はんたい]の分子[ぶんし]のうち、片方[かたほう]だけを増[ふ]やす反応[はんのう]などの発見[はっけん]だ。', 'The prize is for discoveries such as reactions that multiply only one of a pair of mirror-image molecules.', '鏡に映したように "as if reflected in a mirror" — ように describes what something is like.'],
+            ['硤合[そあい]氏[し]が見[み]つけた「硤合[そあい]反応[はんのう]」では、片方[かたほう]の形[かたち]の分子[ぶんし]がわずかに多[おお]いだけで、それが自分[じぶん]を手本[てほん]として増[ふ]え続[つづ]ける。', 'In the "Soai reaction" he found, if one shape of molecule is even slightly more common, it keeps multiplying, using itself as the model.', '〜続ける "keep doing"; 〜だけで "just by / with only".'],
+            ['生命[せいめい]を作[つく]る分子[ぶんし]がなぜ片方[かたほう]の形[かたち]に偏[かたよ]っているのかという謎[なぞ]に関[かか]わる発見[はっけん]として評価[ひょうか]された。', 'It was recognised as a discovery that bears on the mystery of why the molecules of life lean to one shape.', '〜という謎 "the mystery of …": という links a whole question to the noun it explains.'],
+            ['薬[くすり]や香料[こうりょう]づくりへの応用[おうよう]も期待[きたい]されている。', 'It is also expected to find uses in making medicines and fragrances.', '〜づくり (作り) "making"; 〜への is へ + の, "towards".'],
+            ['日本人[にほんじん]の化学賞[かがくしょう]受賞[じゅしょう]は、昨年[さくねん]の北川[きたがわ]進[すすむ]氏[し]に続[つづ]き2年[ねん]連続[れんぞく]で、10人目[にんめ]となる。', 'It is the second year running a Japanese scientist has won the chemistry prize, after Susumu Kitagawa last year, and the tenth in all.', '昨年 is the formal 去年; 続き、 is the written 続いて.'],
+            ['授賞式[じゅしょうしき]は十二月[じゅうにがつ]十日[とおか]にストックホルムで行[おこな]われる。', 'The award ceremony will be held in Stockholm on December 10.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-11-cyberattack',
+      date: '2026-10-11',
+      emoji: '💻',
+      titleEn: 'Ransomware hits a SoftBank cloud company — up to 1.3 million JR Kyushu members\' email addresses may have leaked',
+      sources: [
+        { name: 'BleepingComputer', url: 'https://www.bleepingcomputer.com/news/security/ransomware-attack-disrupts-japans-idcf-cloud-used-by-govt-clients/' },
+        { name: 'nippon.com (Jiji)', url: 'https://www.nippon.com/en/news/yjj2026100700867/' },
+        { name: 'Cybernews', url: 'https://cybernews.com/security/japanese-cloud-cyberattack-railways-police-495-organizations-idcf/' },
+      ],
+      levels: {
+        N5: {
+          title: 'インターネットの会社[かいしゃ]が攻撃[こうげき]されました',
+          lines: [
+            ['七日[なのか]、インターネットのサービスの会社[かいしゃ]が、悪[わる]い人[ひと]たちに攻撃[こうげき]されました。', 'On the 7th, an internet service company was attacked by bad people.', '攻撃されました: the passive of 攻撃する "attack".'],
+            ['この会社[かいしゃ]は、たくさんの会社[かいしゃ]や町[まち]の役所[やくしょ]のデータを持[も]っています。', 'This company keeps data for lots of companies and town offices.'],
+            ['五百[ごひゃく]ぐらいの会社[かいしゃ]や役所[やくしょ]が困[こま]っています。', 'About 500 companies and offices are in trouble.'],
+            ['九日[ここのか]、JR九州[きゅうしゅう]は「お客[きゃく]さんのメールアドレスが外[そと]に出[で]たかもしれません」と言[い]いました。', 'On the 9th, JR Kyushu said, "Customers\' email addresses may have got out."', 'JR九州 is the railway company of Kyushu, the big island in the south-west.'],
+            ['メールアドレスは、いちばん多[おお]いと百三十万[ひゃくさんじゅうまん]ぐらいです。', 'At most, it is about 1.3 million email addresses.', '万 is ten thousand: 百三十万 = 130 × 10,000.'],
+            ['知[し]らない人[ひと]からのメールに気[き]をつけてください。', 'Be careful with emails from people you don\'t know.'],
+          ],
+        },
+        N4: {
+          title: 'クラウド会社[がいしゃ]にサイバー攻撃[こうげき]　JR九州[きゅうしゅう]のメールアドレスも',
+          lines: [
+            ['ソフトバンクのグループ会社[がいしゃ]「IDCフロンティア」が、七日[なのか]にサイバー攻撃[こうげき]を受[う]けました。', 'IDC Frontier, a SoftBank group company, was hit by a cyberattack on the 7th.', '攻撃を受ける "be attacked" — literally "receive an attack".'],
+            ['この会社[かいしゃ]は、インターネットでデータを預[あず]かる「クラウド」のサービスをしています。', 'The company runs a "cloud" service that looks after data on the internet.', '預かる "look after (something for someone)".'],
+            ['攻撃[こうげき]のため、会社[かいしゃ]はシステムを止[と]めなければなりませんでした。', 'Because of the attack, the company had to shut down its systems.', '〜なければなりませんでした "had to".'],
+            ['このサービスを使[つか]っている495の会社[かいしゃ]や自治体[じちたい]に影響[えいきょう]が出[で]ています。', 'The 495 companies and local governments using the service are affected.', '自治体 "local government" — a city, town or prefecture.'],
+            ['JR九州[きゅうしゅう]は九日[ここのか]、ウェブ会員[かいいん]のメールアドレスが、最大[さいだい]で130万[まん]人分[にんぶん]、外[そと]に出[で]たかもしれないと発表[はっぴょう]しました。', 'On the 9th, JR Kyushu announced that the email addresses of up to 1.3 million web members may have got out.', '最大で "at most"; 〜人分 "worth for … people".'],
+            ['JR東日本[ひがしにほん]も、会員[かいいん]の情報[じょうほう]が外[そと]に出[で]たかもしれないと言[い]っています。', 'JR East also says its members\' information may have got out.'],
+            ['あやしいメールが来[き]ても、リンクを開[ひら]かないようにしましょう。', 'Even if a suspicious email arrives, make sure not to open the links.', '〜ても "even if"; 〜ないようにする "make sure not to".'],
+          ],
+        },
+        N3: {
+          title: 'ソフトバンク子会社[こがいしゃ]にランサムウェア攻撃[こうげき]　495の企業[きぎょう]・自治体[じちたい]に影響[えいきょう]',
+          lines: [
+            ['ソフトバンクの子会社[こがいしゃ]でクラウドサービスを提供[ていきょう]するIDCフロンティアは、七日[なのか]未明[みめい]にランサムウェアによる攻撃[こうげき]を受[う]け、ネットワークとシステムを停止[ていし]した。', 'IDC Frontier, a SoftBank subsidiary that provides cloud services, was hit by a ransomware attack in the early hours of the 7th and shut down its network and systems.', '未明 "before dawn"; ランサムウェア is software that locks data and demands a ransom.'],
+            ['同社[どうしゃ]によると、影響[えいきょう]はサービスを利用[りよう]する495の企業[きぎょう]や自治体[じちたい]に及[およ]んでいる。', 'According to the company, the damage extends to 495 businesses and local governments that use the service.', '同社 "the same company" — news avoids repeating a name. 及ぶ "reach, extend to".'],
+            ['JR九州[きゅうしゅう]は九日[ここのか]、ウェブ会員[かいいん]最大[さいだい]130万[まん]人分[にんぶん]のメールアドレスが流出[りゅうしゅつ]したおそれがあると発表[はっぴょう]した。', 'On the 9th, JR Kyushu announced that the email addresses of up to 1.3 million web members may have leaked.', '流出 "leak (of data)".'],
+            ['JR東日本[ひがしにほん]グループでも、会員[かいいん]情報[じょうほう]が流出[りゅうしゅつ]した可能性[かのうせい]があるという。', 'Member data may also have leaked at the JR East group, it is reported.'],
+            ['データが実際[じっさい]に盗[ぬす]まれたかどうかや、侵入[しんにゅう]の経路[けいろ]については、現在[げんざい]も調査[ちょうさ]が続[つづ]いている。', 'Whether data was actually stolen, and how the attackers got in, is still being investigated.', '〜かどうか "whether or not".'],
+            ['鉄道[てつどう]や自治体[じちたい]など、社会[しゃかい]を支[ささ]えるシステムの弱[よわ]さが改[あらた]めて明[あき]らかになった形[かたち]だ。', 'The attack has once again shown how weak the systems that hold up society — railways, local governments — can be.', '〜形だ "it amounts to …" — a common way for news to sum up.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-11-climax-series',
+      date: '2026-10-11',
+      emoji: '⚾',
+      titleEn: 'Baseball\'s Climax Series begins — with a new two-win advantage rule this year',
+      sources: [
+        { name: 'Standmate (rules & schedule)', url: 'https://standmate.jp/blog/pro-yakyu-climax-series-guide' },
+        { name: 'Baseball Channel', url: 'https://www.baseballchannel.jp/npb/294388/' },
+        { name: 'NPB', url: 'https://npb.jp/news/detail/20260908_03.html' },
+      ],
+      levels: {
+        N5: {
+          title: '野球[やきゅう]の「クライマックスシリーズ」が始[はじ]まりました',
+          lines: [
+            ['十日[とおか]、プロ野球[やきゅう]の「クライマックスシリーズ」が始[はじ]まりました。', 'On the 10th, professional baseball\'s Climax Series began.'],
+            ['これは、日本[にっぽん]シリーズに出[で]るチームを決[き]める試合[しあい]です。', 'These are the games that decide which teams play in the Japan Series.', '日本シリーズ is read にっぽんシリーズ — the official name uses にっぽん.'],
+            ['セ・リーグは阪神[はんしん]、パ・リーグはソフトバンクが一番[いちばん]になりました。', 'Hanshin came first in the Central League, and SoftBank in the Pacific League.', 'セ・リーグ and パ・リーグ are short for セントラル and パシフィック.'],
+            ['今[いま]は、二番[にばん]と三番[さんばん]のチームが試合[しあい]をしています。', 'Right now, the second- and third-placed teams are playing.'],
+            ['先[さき]に二回[にかい]勝[か]ったチームが、次[つぎ]の試合[しあい]に行[い]きます。', 'The team that wins twice first goes on to the next round.', '先に "first, before the other".'],
+            ['次[つぎ]の試合[しあい]は、十四日[じゅうよっか]から始[はじ]まります。', 'The next round starts on the 14th.', '十四日 is じゅうよっか, not じゅうよんにち.'],
+          ],
+        },
+        N4: {
+          title: 'プロ野球[やきゅう]のクライマックスシリーズ開幕[かいまく]　新[あたら]しいルールも',
+          lines: [
+            ['プロ野球[やきゅう]のクライマックスシリーズが、十日[とおか]に始[はじ]まりました。', 'Professional baseball\'s Climax Series began on the 10th.'],
+            ['日本[にっぽん]シリーズに出[で]るチームを決[き]めるために、セ・リーグとパ・リーグでそれぞれ試合[しあい]が行[おこな]われます。', 'To decide the teams for the Japan Series, games are held in each of the Central and Pacific Leagues.', '〜ために "in order to"; それぞれ "each".'],
+            ['ファーストステージでは2位[い]と3位[い]のチームが戦[たたか]い、先[さき]に2勝[しょう]したチームが次[つぎ]に進[すす]みます。', 'In the First Stage, the second- and third-placed teams play, and the first to win two games goes through.', '〜位 is a ranking: 2位 "second place". 〜勝 counts wins.'],
+            ['セ・リーグは東京[とうきょう]ドームで巨人[きょじん]とDeNA、パ・リーグはベルーナドームで西武[せいぶ]と日本[にっぽん]ハムが戦[たたか]っています。', 'In the Central League the Giants play DeNA at Tokyo Dome; in the Pacific League Seibu play Nippon-Ham at Belluna Dome.', '巨人 "giant" is the Yomiuri Giants; 日本ハム is also read にっぽん.'],
+            ['十四日[じゅうよっか]からのファイナルステージでは、リーグで優勝[ゆうしょう]した阪神[はんしん]とソフトバンクが待[ま]っています。', 'In the Final Stage from the 14th, the league champions Hanshin and SoftBank are waiting.'],
+            ['今年[ことし]から、相手[あいて]との差[さ]がとても大[おお]きいときは、優勝[ゆうしょう]したチームに2勝[しょう]のアドバンテージがつくようになりました。', 'From this year, when the gap to the opponent is very large, the champion starts with a two-win advantage.', '〜ようになりました "it has come to be that" — a new situation.'],
+            ['パ・リーグでは、ソフトバンクにこの2勝[しょう]のアドバンテージがつく見込[みこ]みです。', 'In the Pacific League, SoftBank is expected to get this two-win advantage.'],
+          ],
+        },
+        N3: {
+          title: 'プロ野球[やきゅう]CS開幕[かいまく]　今季[こんき]から「2勝[しょう]アドバンテージ」',
+          lines: [
+            ['プロ野球[やきゅう]の日本[にっぽん]シリーズ出場[しゅつじょう]をかけたクライマックスシリーズが十日[とおか]、開幕[かいまく]した。', 'Professional baseball\'s Climax Series, with places in the Japan Series at stake, opened on the 10th.', '〜をかけた "with … at stake".'],
+            ['ファーストステージはリーグ2位[い]と3位[い]による3試合[しあい]制[せい]で、先[さき]に2勝[しょう]した球団[きゅうだん]がファイナルステージに進[すす]む。', 'The First Stage is a best-of-three between the second- and third-placed teams, and the first club to two wins goes to the Final Stage.', '〜による "by, between"; 〜制 "system": 3試合制 "three-game format".'],
+            ['セ・リーグは巨人[きょじん]とDeNAが東京[とうきょう]ドームで、パ・リーグは西武[せいぶ]と日本[にっぽん]ハムがベルーナドームで対戦[たいせん]している。', 'In the Central League the Giants face DeNA at Tokyo Dome, and in the Pacific League Seibu face Nippon-Ham at Belluna Dome.'],
+            ['十四日[じゅうよっか]に始[はじ]まるファイナルステージでは、リーグ優勝[ゆうしょう]の阪神[はんしん]とソフトバンクが勝[か]ち上[あ]がった球団[きゅうだん]を迎[むか]え撃[う]つ。', 'In the Final Stage starting on the 14th, league champions Hanshin and SoftBank take on the clubs that come through.', '迎え撃つ "lie in wait for, take on" — a sports-news favourite.'],
+            ['今季[こんき]からは、ゲーム差[さ]が10以上[いじょう]ある場合[ばあい]などに、優勝[ゆうしょう]球団[きゅうだん]のアドバンテージが1勝[しょう]から2勝[しょう]に増[ふ]える。', 'From this season, in cases such as a gap of ten or more games, the champion\'s advantage grows from one win to two.', '今季 "this season". 〜場合 "in the case of".'],
+            ['パ・リーグではソフトバンクに2勝[しょう]のアドバンテージが与[あた]えられる見通[みとお]しで、新[あたら]しいルールが初[はじ]めて使[つか]われることになりそうだ。', 'In the Pacific League SoftBank is expected to be given a two-win advantage, so the new rule looks set to be used for the first time.', '見通し "outlook, expectation"; 〜ことになりそうだ "looks like it will end up …".'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-10-10-typhoons',
       date: '2026-10-10',
       emoji: '🌀',
