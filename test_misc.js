@@ -59,7 +59,7 @@ check(/い-adjective/.test(na.miss('たかい')), 'typing an い-adjective says 
 
 const counters = { items: Misc.QUIZZES.find(q => q.id === 'counters').sections.flatMap(sec => sec.items) };
 check(counters.items.length === 100, `expected 100 counters, got ${counters.items.length}`);
-check(Misc.QUIZZES.find(q => q.id === 'counters').sections[0].items.length === 30, 'the everyday 30 come first');
+check(Misc.QUIZZES.find(q => q.id === 'counters').sections.length === 1, 'counters are one list');
 const counterFor = p => ({ items: [counters.items.find(it => it.prompt.startsWith(p))] });
 check(Misc.matchItems(counterFor('long thin'), 'hon').length === 1, 'romaji hon names 本');
 check(Misc.matchItems(counterFor('long thin'), '本').length === 1, 'kanji 本');

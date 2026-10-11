@@ -287,15 +287,16 @@
       glyph: '枚',
       title: 'The 100 most common counters',
       ja: '助数詞',
-      desc: 'What do you count people, pens, paper, cats, floors and flights with? The everyday 30 first, then 70 more. Kanji or reading both count.',
-      sections: [['The everyday 30', COUNTERS], ...MORE_COUNTERS].map(([label, rows]) => ({
+      desc: 'What do you count people, pens, paper, cats, floors and flights with? Kanji or reading both count.',
+      // One list: the everyday thirty first, then the rest.
+      sections: [{
         type: 'fill',
-        label,
         columns: ['Counts', 'Counter'],
-        items: rows.map(([prompt, kanji, reading, alt = []]) => ({
-          prompt, answer: `${kanji}（${reading}）`, accept: [kanji, reading, ...alt],
-        })),
-      })),
+        items: [...COUNTERS, ...MORE_COUNTERS.flatMap(([, rows]) => rows)]
+          .map(([prompt, kanji, reading, alt = []]) => ({
+            prompt, answer: `${kanji}（${reading}）`, accept: [kanji, reading, ...alt],
+          })),
+      }],
     },
   ];
 
