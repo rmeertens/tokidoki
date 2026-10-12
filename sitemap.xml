@@ -116,6 +116,21 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-10-12-prudential.html</loc>
+    <lastmod>2026-10-12</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-10-12-mmx.html</loc>
+    <lastmod>2026-10-12</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-10-12-komeito.html</loc>
+    <lastmod>2026-10-12</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://tokidoki.meertens.dev/news-2026-10-11-nobel.html</loc>
     <lastmod>2026-10-11</lastmod>
     <priority>0.6</priority>

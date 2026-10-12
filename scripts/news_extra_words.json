@@ -988,5 +988,435 @@
     "さんしあいせい",
     "three-game format (best of three)",
     "noun"
+  ],
+  "プルデンシャル": [
+    "プルデンシャル",
+    "Prudential (the insurance company)",
+    "name"
+  ],
+  "ジブラルタ": [
+    "ジブラルタ",
+    "Gibraltar (as in Gibraltar Life, an insurer)",
+    "name"
+  ],
+  "60億円": [
+    "ろくじゅうおくえん",
+    "6 billion yen",
+    "number + counter"
+  ],
+  "十三日": [
+    "じゅうさんにち",
+    "the 13th",
+    "noun"
+  ],
+  "一部": [
+    "いちぶ",
+    "a part, partial",
+    "noun"
+  ],
+  "業務": [
+    "ぎょうむ",
+    "business, operations, work",
+    "noun"
+  ],
+  "31日": [
+    "さんじゅういちにち",
+    "the 31st",
+    "number + counter"
+  ],
+  "何より": [
+    "なにより",
+    "more than anything, above all",
+    "adverb"
+  ],
+  "風土": [
+    "ふうど",
+    "climate; culture (of an organization)",
+    "noun"
+  ],
+  "指摘": [
+    "してき",
+    "pointing out",
+    "noun / suru verb"
+  ],
+  "親会社": [
+    "おやがいしゃ",
+    "parent company",
+    "noun"
+  ],
+  "支払い": [
+    "しはらい",
+    "payment",
+    "noun"
+  ],
+  "どおり": [
+    "どおり",
+    "as, in accordance with",
+    "suffix"
+  ],
+  "3カ月超": [
+    "さんかげつちょう",
+    "more than three months",
+    "noun"
+  ],
+  "顧客": [
+    "こきゃく",
+    "customer, client",
+    "noun"
+  ],
+  "に対し": [
+    "にたいし",
+    "toward, against, to (formal)",
+    "expression"
+  ],
+  "新規": [
+    "しんき",
+    "new (customers, contracts)",
+    "noun"
+  ],
+  "総額": [
+    "そうがく",
+    "total amount",
+    "noun"
+  ],
+  "優先": [
+    "ゆうせん",
+    "priority, giving priority",
+    "noun / suru verb"
+  ],
+  "長年": [
+    "ながねん",
+    "many years, long years",
+    "noun"
+  ],
+  "放置": [
+    "ほうち",
+    "leaving as it is, neglect",
+    "noun / suru verb"
+  ],
+  "プルデンシャル・ホールディング・オブ・ジャパン": [
+    "プルデンシャル・ホールディング・オブ・ジャパン",
+    "Prudential Holdings of Japan (parent of Prudential Life)",
+    "name"
+  ],
+  "自主": [
+    "じしゅ",
+    "voluntary, independent",
+    "noun"
+  ],
+  "火星": [
+    "かせい",
+    "Mars",
+    "noun"
+  ],
+  "種子島": [
+    "たねがしま",
+    "Tanegashima (island in Kagoshima where Japan launches rockets)",
+    "name"
+  ],
+  "MMX": [
+    "エムエムエックス",
+    "MMX (Martian Moons eXploration, a JAXA probe)",
+    "name"
+  ],
+  "探査": [
+    "たんさ",
+    "exploration, probing",
+    "noun / suru verb"
+  ],
+  "フォボス": [
+    "フォボス",
+    "Phobos (a moon of Mars)",
+    "name"
+  ],
+  "2031年": [
+    "にせんさんじゅういちねん",
+    "the year 2031",
+    "number + counter"
+  ],
+  "打ち上げる": [
+    "うちあげる",
+    "to launch (a rocket)",
+    "verb"
+  ],
+  "JAXA": [
+    "ジャクサ",
+    "JAXA (Japan Aerospace Exploration Agency)",
+    "name"
+  ],
+  "4時": [
+    "よじ",
+    "4 o'clock",
+    "number + counter"
+  ],
+  "41分": [
+    "よんじゅういっぷん",
+    "41 minutes",
+    "number + counter"
+  ],
+  "10号機": [
+    "じゅうごうき",
+    "the 10th unit (of a rocket)",
+    "number + counter"
+  ],
+  "鹿児島": [
+    "かごしま",
+    "Kagoshima (prefecture in southern Kyushu)",
+    "name"
+  ],
+  "種子島宇宙センター": [
+    "たねがしまうちゅうセンター",
+    "Tanegashima Space Center",
+    "name"
+  ],
+  "予備": [
+    "よび",
+    "spare, reserve",
+    "noun"
+  ],
+  "10グラム": [
+    "じゅうグラム",
+    "10 grams",
+    "number + counter"
+  ],
+  "約1年後": [
+    "やくいちねんご",
+    "about a year later",
+    "noun"
+  ],
+  "3年": [
+    "さんねん",
+    "three years",
+    "number + counter"
+  ],
+  "持ち帰る": [
+    "もちかえる",
+    "to bring back, take home",
+    "verb"
+  ],
+  "試料": [
+    "しりょう",
+    "sample (for study)",
+    "noun"
+  ],
+  "開発": [
+    "かいはつ",
+    "development",
+    "noun / suru verb"
+  ],
+  "悪天候": [
+    "あくてんこう",
+    "bad weather",
+    "noun"
+  ],
+  "設ける": [
+    "もうける",
+    "to set up, establish",
+    "verb"
+  ],
+  "着陸": [
+    "ちゃくりく",
+    "landing",
+    "noun / suru verb"
+  ],
+  "採取": [
+    "さいしゅ",
+    "collecting, taking (samples)",
+    "noun / suru verb"
+  ],
+  "ダイモス": [
+    "ダイモス",
+    "Deimos (a moon of Mars)",
+    "name"
+  ],
+  "観測": [
+    "かんそく",
+    "observation",
+    "noun / suru verb"
+  ],
+  "約3年間": [
+    "やくさんねんかん",
+    "about three years",
+    "noun"
+  ],
+  "当初": [
+    "とうしょ",
+    "at first, originally",
+    "noun"
+  ],
+  "2024年": [
+    "にせんにじゅうよねん",
+    "the year 2024",
+    "number + counter"
+  ],
+  "試み": [
+    "こころみ",
+    "attempt, trial",
+    "noun"
+  ],
+  "公明党": [
+    "こうめいとう",
+    "Komeito (a political party)",
+    "name"
+  ],
+  "岡本": [
+    "おかもと",
+    "Okamoto (surname)",
+    "name"
+  ],
+  "三成": [
+    "みつなり",
+    "Mitsunari (given name)",
+    "name"
+  ],
+  "政策": [
+    "せいさく",
+    "policy",
+    "noun"
+  ],
+  "竹谷": [
+    "たけや",
+    "Takeya (surname)",
+    "name"
+  ],
+  "とし子": [
+    "としこ",
+    "Toshiko (given name)",
+    "name"
+  ],
+  "政務": [
+    "せいむ",
+    "political affairs, administration",
+    "noun"
+  ],
+  "任期": [
+    "にんき",
+    "term of office",
+    "noun"
+  ],
+  "西田": [
+    "にしだ",
+    "Nishida (surname)",
+    "name"
+  ],
+  "統一": [
+    "とういつ",
+    "unification, unified",
+    "noun / suru verb"
+  ],
+  "2028年": [
+    "にせんにじゅうはちねん",
+    "the year 2028",
+    "number + counter"
+  ],
+  "参議院": [
+    "さんぎいん",
+    "House of Councillors (upper house)",
+    "noun"
+  ],
+  "立て直す": [
+    "たてなおす",
+    "to rebuild, set right again",
+    "verb"
+  ],
+  "立て直し": [
+    "たてなおし",
+    "rebuilding, putting back on track",
+    "noun"
+  ],
+  "都内": [
+    "とない",
+    "within Tokyo",
+    "noun"
+  ],
+  "満了": [
+    "まんりょう",
+    "expiry, completion (of a term)",
+    "noun / suru verb"
+  ],
+  "後任": [
+    "こうにん",
+    "successor",
+    "noun"
+  ],
+  "留任": [
+    "りゅうにん",
+    "staying in one's post",
+    "noun / suru verb"
+  ],
+  "政調": [
+    "せいちょう",
+    "policy research (short for 政務調査会)",
+    "noun"
+  ],
+  "中野": [
+    "なかの",
+    "Nakano (surname)",
+    "name"
+  ],
+  "参院": [
+    "さんいん",
+    "House of Councillors (short for 参議院)",
+    "noun"
+  ],
+  "めぐる": [
+    "めぐる",
+    "to revolve around, concern",
+    "verb"
+  ],
+  "動き": [
+    "うごき",
+    "movement, development",
+    "noun"
+  ],
+  "金融庁": [
+    "きんゆうちょう",
+    "Financial Services Agency (supervises banks and insurers)",
+    "name"
+  ],
+  "探査機": [
+    "たんさき",
+    "space probe",
+    "noun"
+  ],
+  "保険金": [
+    "ほけんきん",
+    "insurance payout",
+    "noun"
+  ],
+  "幹事長": [
+    "かんじちょう",
+    "secretary-general (of a party)",
+    "noun"
+  ],
+  "統一地方選": [
+    "とういつちほうせん",
+    "unified local elections (held nationwide at once)",
+    "noun"
+  ],
+  "党大会": [
+    "とうたいかい",
+    "party convention",
+    "noun"
+  ],
+  "存在感": [
+    "そんざいかん",
+    "sense of presence, influence",
+    "noun"
+  ],
+  "世界初": [
+    "せかいはつ",
+    "a world first",
+    "noun"
+  ],
+  "参院選": [
+    "さんいんせん",
+    "House of Councillors election",
+    "noun"
+  ],
+  "実仁": [
+    "まこと",
+    "Makoto (given name)",
+    "name"
   ]
 }

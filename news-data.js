@@ -23,6 +23,146 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-10-12-prudential',
+      date: '2026-10-12',
+      emoji: '🏢',
+      titleEn: 'Regulator orders Prudential Life and Gibraltar Life to stop new sales for over three months after employee fraud',
+      sources: [
+        { name: 'nippon.com (Jiji)', url: 'https://www.nippon.com/en/news/yjj2026100900686/' },
+        { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/business/2026/10/09/companies/prudential-business-suspension-order/' },
+        { name: 'Prudential Financial', url: 'https://news.prudential.com/us-en/latest-news/prudential-news/2026/q1/PRUDENTIAL-OF-JAPAN-IMPLEMENTS-VOLUNTARY-90-DAY-SUSPENSION-OF-NEW-SALES-TO-ADDRESS-PREVIOUSLY-DISCLOSED-EMPLOYEE-MISCONDUCT' },
+      ],
+      levels: {
+        N5: {
+          title: '保険[ほけん]の会社[かいしゃ]が、新[あたら]しい保険[ほけん]を売[う]れなくなります',
+          lines: [
+            ['九日[ここのか]、国[くに]は二[ふた]つの保険[ほけん]の会社[かいしゃ]に「新[あたら]しい保険[ほけん]を売[う]ってはいけません」と言[い]いました。', 'On the 9th, the government told two insurance companies, "You must not sell new insurance."', '国 here is the Financial Services Agency (金融庁), which supervises banks and insurers.'],
+            ['会社[かいしゃ]の名前[なまえ]は、プルデンシャル生命[せいめい]とジブラルタ生命[せいめい]です。', 'The companies are Prudential Life and Gibraltar Life.', '生命 in 生命保険 means "life": 生命保険 = life insurance.'],
+            ['この会社[かいしゃ]で働[はたら]いていた人[ひと]たちが、お客[きゃく]さんのお金[かね]をだまして取[と]りました。', 'People who worked at the company tricked customers and took their money.'],
+            ['取[と]られたお金[かね]は、全部[ぜんぶ]で60億円[おくえん]より多[おお]いと言[い]われています。', 'The money taken is said to be more than 6 billion yen in total.', '億 is a hundred million: 60億円 = 6,000,000,000 yen.'],
+            ['十三日[じゅうさんにち]から来年[らいねん]の一月[いちがつ]の終[お]わりまで、新[あたら]しい保険[ほけん]は売[う]れません。', 'From the 13th until the end of January next year, they cannot sell new insurance.'],
+            ['今[いま]、保険[ほけん]に入[はい]っている人[ひと]は、これからも、お金[かね]をもらうことができます。', 'People who already have insurance can continue to receive payments.'],
+          ],
+        },
+        N4: {
+          title: '金融庁[きんゆうちょう]、プルデンシャル生命[せいめい]などに一部[いちぶ]業務[ぎょうむ]停止[ていし]命令[めいれい]',
+          lines: [
+            ['金融庁[きんゆうちょう]は九日[ここのか]、プルデンシャル生命[せいめい]とジブラルタ生命[せいめい]に、一部[いちぶ]業務[ぎょうむ]停止[ていし]命令[めいれい]を出[だ]しました。', 'On the 9th, the Financial Services Agency issued a partial business suspension order to Prudential Life and Gibraltar Life.', '一部業務停止命令: an order to stop part of a business (here, new sales), not the whole company.'],
+            ['十三日[じゅうさんにち]から来年[らいねん]1月[がつ]31日[にち]まで、新[あたら]しい保険[ほけん]の契約[けいやく]を結[むす]ぶことができません。', 'From the 13th until January 31 next year, they cannot sign new insurance contracts.', '契約を結ぶ "sign a contract"; 〜ことができません "cannot".'],
+            ['会社[かいしゃ]で働[はたら]いていた人[ひと]たちが、お客[きゃく]さんからお金[かね]をだまし取[と]っていたことが分[わ]かったからです。', 'This is because it came to light that people who had worked at the company had been swindling customers out of money.', 'だまし取る "swindle, take by deceit".'],
+            ['だまし取[と]られたお金[かね]は、合計[ごうけい]で60億円[おくえん]を超[こ]えるとされています。', 'The money taken is said to exceed 6 billion yen in total.', '〜とされています "is regarded as …" — the news is passing on a figure from reports.'],
+            ['金融庁[きんゆうちょう]は、営業[えいぎょう]成績[せいせき]を何[なに]より大切[たいせつ]にする会社[かいしゃ]の風土[ふうど]が問題[もんだい]だったと指摘[してき]しました。', 'The agency pointed out that the company culture of valuing sales results above all else was the problem.', '風土 "climate, culture (of an organization)"; 何より "more than anything".'],
+            ['親会社[おやがいしゃ]にも、業務[ぎょうむ]を直[なお]すように命[めい]じる業務[ぎょうむ]改善[かいぜん]命令[めいれい]が出[だ]されました。', 'An order to improve its operations was also issued to the parent company.'],
+            ['すでに保険[ほけん]に入[はい]っている人[ひと]への保険金[ほけんきん]の支払[しはら]いは、これまでどおり続[つづ]きます。', 'Payments to people who already have insurance will continue as before.', '保険金 "insurance payout".'],
+          ],
+        },
+        N3: {
+          title: '金融庁[きんゆうちょう]、プルデンシャル生命[せいめい]などに3カ月[げつ]超[こ]の一部[いちぶ]業務[ぎょうむ]停止[ていし]命令[めいれい]',
+          lines: [
+            ['金融庁[きんゆうちょう]は九日[ここのか]、元[もと]社員[しゃいん]らが顧客[こきゃく]から金銭[きんせん]をだまし取[と]っていた問題[もんだい]で、プルデンシャル生命[せいめい]とジブラルタ生命[せいめい]に対[たい]し、一部[いちぶ]業務[ぎょうむ]停止[ていし]命令[めいれい]を出[だ]した。', 'On the 9th, over the problem of former employees and others swindling customers out of money, the Financial Services Agency issued a partial business suspension order to Prudential Life and Gibraltar Life.', '〜に対し "toward, against" — the formal newspaper form of 〜に対して.'],
+            ['停止[ていし]期間[きかん]は十三日[じゅうさんにち]から来年[らいねん]1月[がつ]31日[にち]までで、この間[あいだ]は新規[しんき]の保険[ほけん]契約[けいやく]を結[むす]ぶことができない。', 'The suspension runs from the 13th to January 31 next year, and during that time they cannot sign new insurance contracts.', '新規 "new (customers, contracts)".'],
+            ['被害[ひがい]の総額[そうがく]は60億円[おくえん]を超[こ]えるとされ、金融庁[きんゆうちょう]は営業[えいぎょう]成績[せいせき]を最優先[さいゆうせん]する企業[きぎょう]風土[ふうど]を長年[ながねん]放置[ほうち]したことが原因[げんいん]だと指摘[してき]した。', 'The total damage is said to exceed 6 billion yen, and the agency pointed out that the cause was leaving a corporate culture that put sales results first untouched for many years.', '放置 "leave as it is, neglect".'],
+            ['親会社[おやがいしゃ]のプルデンシャル・ホールディング・オブ・ジャパンには、業務[ぎょうむ]改善[かいぜん]命令[めいれい]を出[だ]した。', 'The parent company, Prudential Holdings of Japan, was given a business improvement order.', '業務改善命令 is milder than a suspension: it orders a company to fix how it operates.'],
+            ['すでに契約[けいやく]している顧客[こきゃく]への保険金[ほけんきん]の支払[しはら]いなどは、これまでどおり続[つづ]く。', 'Payments to customers who already have contracts will continue as before.'],
+            ['プルデンシャル生命[せいめい]は、今年[ことし]2月[がつ]から新規[しんき]の販売[はんばい]を自主的[じしゅてき]に止[と]めている。', 'Prudential Life has been voluntarily holding off new sales since February this year.', '自主的に "of one\'s own accord".'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-12-mmx',
+      date: '2026-10-12',
+      emoji: '🚀',
+      titleEn: 'Japan\'s MMX probe to launch on the 20th, aiming to bring back samples from Mars\'s moon Phobos',
+      sources: [
+        { name: 'JAXA', url: 'https://www.jaxa.jp/press/2026/08/20260820-1_j.html' },
+        { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/08/20/japan/science-health/mars-mission-october-launch/' },
+        { name: 'sorae', url: 'https://sorae.info/space/20260821-mmx.html' },
+      ],
+      levels: {
+        N5: {
+          title: '火星[かせい]の月[つき]へ行[い]くロケットが、もうすぐ飛[と]びます',
+          lines: [
+            ['日本[にほん]は、二十日[はつか]の朝[あさ]早[はや]く、ロケットを飛[と]ばす予定[よてい]です。', 'Japan plans to launch a rocket early in the morning on the 20th.', '二十日 is read はつか, not にじゅうにち.'],
+            ['ロケットは種子島[たねがしま]から飛[と]びます。', 'The rocket will take off from Tanegashima.', 'Tanegashima is a small island in the south of Japan where the space center is.'],
+            ['このロケットは「H3」で、「MMX」という探査機[たんさき]を運[はこ]びます。', 'This rocket is the "H3", and it will carry a probe called "MMX".', '探査機 "space probe": a machine sent to explore.'],
+            ['MMXは、火星[かせい]の月[つき]の「フォボス」に行[い]きます。', 'MMX will go to Phobos, a moon of Mars.'],
+            ['フォボスで砂[すな]や石[いし]を取[と]って、地球[ちきゅう]に持[も]って帰[かえ]ります。', 'It will collect sand and rocks on Phobos and bring them back to Earth.'],
+            ['地球[ちきゅう]に帰[かえ]るのは、2031年[ねん]の予定[よてい]です。', 'It is due to return to Earth in 2031.'],
+          ],
+        },
+        N4: {
+          title: '火星[かせい]の月[つき]を調[しら]べる探査機[たんさき]「MMX」、二十日[はつか]に打[う]ち上[あ]げへ',
+          lines: [
+            ['JAXAは、火星[かせい]の月[つき]を調[しら]べる探査機[たんさき]「MMX」を、二十日[はつか]の午前[ごぜん]4時[じ]41分[ふん]に打[う]ち上[あ]げる予定[よてい]です。', 'JAXA plans to launch the "MMX" probe, which will study the moons of Mars, at 4:41 a.m. on the 20th.', '火星の月 = 火星の衛星 "the moons of Mars"; the news often says 衛星 for natural satellites.'],
+            ['ロケットは「H3」の10号機[ごうき]で、鹿児島県[かごしまけん]の種子島[たねがしま]宇宙[うちゅう]センターから飛[と]びます。', 'The rocket is the 10th H3, and it will lift off from the Tanegashima Space Center in Kagoshima Prefecture.'],
+            ['天気[てんき]などで打[う]ち上[あ]げられないときのために、十一月[じゅういちがつ]七日[なのか]まで予備[よび]の期間[きかん]があります。', 'In case it cannot launch because of the weather and so on, there is a spare period until November 7.', '予備 "spare, backup".'],
+            ['MMXは、火星[かせい]の二[ふた]つの月[つき]のうち、フォボスに降[お]りて、10グラム以上[いじょう]の砂[すな]や石[いし]を集[あつ]める計画[けいかく]です。', 'Of Mars\'s two moons, MMX plans to land on Phobos and collect at least 10 grams of sand and rocks.', '〜のうち "among …".'],
+            ['打[う]ち上[あ]げの約[やく]1年後[ねんご]に火星[かせい]の近[ちか]くに着[つ]き、3年[ねん]ほどそこで調[しら]べる予定[よてい]です。', 'It is expected to reach the area around Mars about a year after launch and study it there for about three years.'],
+            ['集[あつ]めた砂[すな]や石[いし]を地球[ちきゅう]に持[も]って帰[かえ]るのは、2031年[ねん]の予定[よてい]です。', 'The sand and rocks it collects are due to be brought back to Earth in 2031.'],
+            ['火星[かせい]の月[つき]から砂[すな]や石[いし]を持[も]ち帰[かえ]るのは、世界[せかい]で初[はじ]めてになります。', 'Bringing back sand and rocks from a moon of Mars would be a world first.', 'Japan\'s earlier probes Hayabusa and Hayabusa2 brought back samples from asteroids, not from a moon.'],
+          ],
+        },
+        N3: {
+          title: '火星[かせい]衛星[えいせい]探査機[たんさき]「MMX」、二十日[はつか]に打[う]ち上[あ]げ　フォボスの試料[しりょう]を地球[ちきゅう]へ',
+          lines: [
+            ['宇宙[うちゅう]航空[こうくう]研究[けんきゅう]開発[かいはつ]機構[きこう]（JAXA）は、火星[かせい]衛星[えいせい]探査機[たんさき]「MMX」を載[の]せたH3ロケット10号機[ごうき]を、二十日[はつか]午前[ごぜん]4時[じ]41分[ふん]に種子島[たねがしま]宇宙[うちゅう]センターから打[う]ち上[あ]げる予定[よてい]だ。', 'The Japan Aerospace Exploration Agency (JAXA) plans to launch the 10th H3 rocket, carrying the Martian moons probe "MMX", from the Tanegashima Space Center at 4:41 a.m. on the 20th.', '号機 counts rockets of one type: 10号機 = the 10th unit.'],
+            ['悪天候[あくてんこう]などに備[そな]え、十一月[じゅういちがつ]七日[なのか]までの予備[よび]期間[きかん]も設[もう]けられている。', 'A spare period until November 7 has also been set in preparation for bad weather and the like.', '〜に備え "in preparation for …".'],
+            ['MMXは火星[かせい]の衛星[えいせい]フォボスに着陸[ちゃくりく]し、10グラム以上[いじょう]の試料[しりょう]を採取[さいしゅ]する計画[けいかく]で、もう一[ひと]つの衛星[えいせい]ダイモスの観測[かんそく]も行[おこな]う。', 'MMX plans to land on Mars\'s moon Phobos and collect at least 10 grams of samples, and it will also observe the other moon, Deimos.', '試料 "sample (for study)"; 採取 "collect, take".'],
+            ['探査機[たんさき]は打[う]ち上[あ]げの約[やく]1年後[ねんご]に火星[かせい]圏[けん]に到着[とうちゃく]し、約[やく]3年間[ねんかん]滞在[たいざい]する見通[みとお]しで、試料[しりょう]は2031年[ねん]に地球[ちきゅう]に戻[もど]る予定[よてい]だ。', 'The probe is expected to reach the Mars area about a year after launch and stay about three years, and the samples are due to return to Earth in 2031.', '火星圏 "the Mars region (near Mars)"; 見通し "outlook, expectation".'],
+            ['当初[とうしょ]は2024年[ねん]の打[う]ち上[あ]げを予定[よてい]していたが、H3ロケットの開発[かいはつ]の遅[おく]れなどで延期[えんき]されてきた。', 'It was originally planned for launch in 2024 but has been postponed because of delays in developing the H3 rocket and other reasons.', '延期されてきた: 〜てきた shows the delay built up over time.'],
+            ['成功[せいこう]すれば、火星[かせい]の衛星[えいせい]から試料[しりょう]を持[も]ち帰[かえ]る世界[せかい]初[はつ]の試[こころ]みとなる。', 'If it succeeds, it will be the world\'s first attempt to bring back samples from a Martian moon.', '世界初の "world-first" — a favorite of headlines.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-12-komeito',
+      date: '2026-10-12',
+      emoji: '🏛️',
+      titleEn: 'Komeito picks Mitsunari Okamoto as its new leader',
+      sources: [
+        { name: 'nippon.com (Jiji)', url: 'https://www.nippon.com/en/news/yjj2026093000114/' },
+        { name: 'nippon.com (Jiji)', url: 'https://www.nippon.com/en/news/yjj2026100300232/komeito-launches-new-leadership-team-under-okamoto.html' },
+        { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/10/04/japan/politics/komeito-new-leadership-team/' },
+      ],
+      levels: {
+        N5: {
+          title: '公明党[こうめいとう]の新[あたら]しい代表[だいひょう]は岡本[おかもと]さん',
+          lines: [
+            ['公明党[こうめいとう]は、三日[みっか]に新[あたら]しい代表[だいひょう]を決[き]めました。', 'Komeito chose a new leader on the 3rd.', '代表 is the "leader" of a party. 公明党 is one of Japan\'s political parties.'],
+            ['新[あたら]しい代表[だいひょう]は、岡本[おかもと]三成[みつなり]さんです。', 'The new leader is Mitsunari Okamoto.'],
+            ['岡本[おかもと]さんは、前[まえ]は党[とう]の政策[せいさく]をまとめる仕事[しごと]をしていました。', 'Mr Okamoto used to be in charge of putting together the party\'s policies.', '政策 "policy".'],
+            ['前[まえ]の代表[だいひょう]は、竹谷[たけや]とし子[こ]さんでした。', 'The previous leader was Toshiko Takeya.'],
+            ['代表[だいひょう]の仕事[しごと]は、二年[にねん]です。', 'The term as leader is two years.'],
+            ['来年[らいねん]の春[はる]には、全国[ぜんこく]で町[まち]や県[けん]の選挙[せんきょ]があります。', 'Next spring, there will be elections for towns and prefectures all over the country.', 'These are the "unified local elections" (統一地方選挙), held at the same time across Japan every four years.'],
+          ],
+        },
+        N4: {
+          title: '公明党[こうめいとう]の新[あたら]しい代表[だいひょう]に岡本[おかもと]三成[みつなり]氏[し]',
+          lines: [
+            ['公明党[こうめいとう]は三日[みっか]、東京[とうきょう]で党大会[とうたいかい]を開[ひら]き、岡本[おかもと]三成[みつなり]氏[し]を新[あたら]しい代表[だいひょう]に選[えら]びました。', 'On the 3rd, Komeito held a party convention in Tokyo and chose Mitsunari Okamoto as its new leader.', '氏 is a polite way to refer to a man in news writing, like さん.'],
+            ['岡本[おかもと]氏[し]は、これまで党[とう]の政策[せいさく]をまとめる政務[せいむ]調査[ちょうさ]会長[かいちょう]でした。', 'Mr Okamoto had been the party\'s policy chief.', '政務調査会長 is often shortened to 政調会長 (policy chief).'],
+            ['前[まえ]の代表[だいひょう]の竹谷[たけや]とし子[こ]氏[し]は、任期[にんき]が終[お]わりました。', 'The previous leader, Toshiko Takeya, reached the end of her term.', '任期 "term of office".'],
+            ['代表[だいひょう]の任期[にんき]は二年[にねん]です。', 'The leader\'s term is two years.'],
+            ['幹事長[かんじちょう]は、西田[にしだ]実仁[まこと]氏[し]が続[つづ]けてつとめます。', 'Makoto Nishida will continue as secretary-general.', '幹事長 "secretary-general": the person who runs a party\'s daily business and elections.'],
+            ['岡本[おかもと]氏[し]は、来年[らいねん]春[はる]の統一[とういつ]地方選[ちほうせん]と、2028年[ねん]の参議院[さんぎいん]選挙[せんきょ]に向[む]けて、党[とう]を立[た]て直[なお]したいと考[かんが]えています。', 'Mr Okamoto wants to rebuild the party ahead of the unified local elections next spring and the House of Councillors election in 2028.', '立て直す "rebuild, get back on track"; 〜に向けて "toward …".'],
+          ],
+        },
+        N3: {
+          title: '公明党[こうめいとう]、新代表[しんだいひょう]に岡本[おかもと]三成[みつなり]氏[し]　党[とう]の立[た]て直[なお]しが課題[かだい]',
+          lines: [
+            ['公明党[こうめいとう]は三日[みっか]、東京[とうきょう]都内[とない]で党大会[とうたいかい]を開[ひら]き、前[ぜん]政務[せいむ]調査[ちょうさ]会長[かいちょう]の岡本[おかもと]三成[みつなり]氏[し]を新[あたら]しい代表[だいひょう]に選[えら]んだ。', 'On the 3rd, Komeito held a party convention in Tokyo and chose Mitsunari Okamoto, its former policy chief, as the new leader.', '都内 "within Tokyo".'],
+            ['任期[にんき]が満了[まんりょう]した竹谷[たけや]とし子[こ]前[ぜん]代表[だいひょう]の後任[こうにん]となる。', 'He succeeds Toshiko Takeya, the former leader, whose term has ended.', '後任 "successor"; 満了 "expiry (of a term)".'],
+            ['代表[だいひょう]の任期[にんき]は二年[にねん]で、幹事長[かんじちょう]には西田[にしだ]実仁[まこと]氏[し]が留任[りゅうにん]し、新[あら]たな政調[せいちょう]会長[かいちょう]には中野[なかの]洋昌[ひろまさ]氏[し]が就[つ]いた。', 'The leader\'s term is two years; Makoto Nishida stays on as secretary-general, and Hiromasa Nakano takes the post of policy chief.', '留任 "stay in one\'s post".'],
+            ['岡本[おかもと]氏[し]は、来年[らいねん]春[はる]の統一[とういつ]地方選[ちほうせん]や2028年[ねん]の参院選[さんいんせん]に向[む]け、党[とう]の立[た]て直[なお]しを急[いそ]ぐ考[かんが]えを示[しめ]している。', 'Mr Okamoto has indicated that he intends to move quickly to rebuild the party ahead of next spring\'s unified local elections and the 2028 Upper House election.', '参院選 = 参議院選挙. 〜考えを示す "to indicate one\'s intention".'],
+            ['公明党[こうめいとう]は現在[げんざい]、野党[やとう]の立場[たちば]にある。', 'Komeito is currently in opposition.', '野党 "opposition party" (the opposite is 与党, the ruling party).'],
+            ['政党[せいとう]をめぐる動[うご]きが続[つづ]く中[なか]で、新[あたら]しい代表[だいひょう]がどのように党[とう]の存在感[そんざいかん]を高[たか]めるのかが注目[ちゅうもく]される。', 'As moves involving the political parties continue, attention will be on how the new leader raises the party\'s presence.', '存在感 "sense of presence"; 注目される "will draw attention".'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-10-11-nobel',
       date: '2026-10-11',
       emoji: '🏆',
