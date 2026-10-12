@@ -487,7 +487,7 @@
         words: ['焼[や]き魚[ざかな]|grilled fish', '納豆[なっとう]|natto (fermented soybeans)', 'におい|smell', '駅前[えきまえ]|in front of the station', 'カレーうどん|curry udon'],
         verbs: ['作[つく]ってくれる|make (for me)', '慣[な]れる|get used to', '気[き]に入[い]る|come to like', '食[た]べてみる|try eating'],
         grammar: [
-          'Aより Bのほうが|B more than A|肉[にく]より魚[さかな]のほうが好[す]きです。|I like fish more than meat.',
+          'AよりBのほうが|B more than A|肉[にく]より魚[さかな]のほうが好[す]きです。|I like fish more than meat.',
           '〜たことがあります|have done … before|納豆[なっとう]を食[た]べたことがあります。|I\'ve eaten natto.',
           '〜てくれる|do (kindly) for me|母[はは]がよく作[つく]ってくれます。|My mother often makes it for me.',
         ],

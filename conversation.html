@@ -20,7 +20,7 @@
   <meta name="twitter:description" content="Answer everyday questions in Japanese — your weekend, family, food, dreams — with step-by-step hints (words, verbs, grammar, a way to begin) and a sample answer for JLPT N5, N4 and N3.">
   <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
   <link rel="canonical" href="https://tokidoki.meertens.dev/conversation.html">
-  <link rel="stylesheet" href="style.css?v=54">
+  <link rel="stylesheet" href="style.css?v=55">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -42,7 +42,7 @@
     <div id="header-mount"></div>
 
     <!-- Screen: Conversation starters -->
-    <main id="screen-chapters" class="screen active cs-main">
+    <main id="screen-chapters" class="screen active">
       <nav class="page-nav" aria-label="Exercises">
         <div class="page-nav-group">
           <span class="page-nav-label">Conjugation</span>
@@ -109,29 +109,40 @@
       </section>
 
       <ol class="lis-steps">
-        <li><span class="lis-step-icon" aria-hidden="true">✍️</span><b>Write</b><span>Answer in Japanese — type romaji and it turns into kana.</span></li>
-        <li><span class="lis-step-icon" aria-hidden="true">💡</span><b>Hints</b><span>Words, verbs, grammar, then a way to begin. Tap one to add it.</span></li>
-        <li><span class="lis-step-icon" aria-hidden="true">⚖️</span><b>Compare</b><span>See a sample answer for your level and borrow what you like.</span></li>
+        <li><span class="lis-step-icon" aria-hidden="true">✍️</span><b>Write</b><span>Pick a question and answer it in Japanese — romaji turns into kana.</span></li>
+        <li><span class="lis-step-icon" aria-hidden="true">🔓</span><b>Unlock</b><span>Every hint is there, locked: words, verbs, grammar, a way to begin.</span></li>
+        <li><span class="lis-step-icon" aria-hidden="true">⚖️</span><b>Compare</b><span>Unlock the sample answer for your level and borrow what you like.</span></li>
       </ol>
 
-      <div class="lis-levels" role="group" aria-label="Level" id="cs-levels">
+      <div class="lis-levels cs-level-btns" role="group" aria-label="Level">
         <span class="lis-levels-label">Level</span>
         <button data-level="N5" aria-pressed="true">N5</button>
         <button data-level="N4" aria-pressed="false">N4</button>
         <button data-level="N3" aria-pressed="false">N3</button>
       </div>
-      <div class="wo-settings">
+
+      <h3 class="lis-heading">Pick a question <span>— <b id="cs-total">0</b> questions, each at three levels<span id="cs-done"></span></span></h3>
+      <div class="cs-topics" id="cs-topics"></div>
+      <button class="lis-quick" id="cs-random-list">
+        <span class="lis-quick-icon" aria-hidden="true">🎲</span>
+        <span><b>Surprise me</b><span class="lis-quick-meta">Open a random question</span></span>
+      </button>
+    </main>
+
+    <!-- Screen: one question (conversation.html#<id>) -->
+    <main id="screen-conversation" class="screen cs-main">
+      <div class="cs-toolbar">
+        <a class="cs-back" href="#">← All questions</a>
+        <div class="lis-levels cs-level-btns" role="group" aria-label="Level">
+          <button data-level="N5" aria-pressed="true">N5</button>
+          <button data-level="N4" aria-pressed="false">N4</button>
+          <button data-level="N3" aria-pressed="false">N3</button>
+        </div>
         <label class="kana-script-toggle"><input type="checkbox" id="cs-opt-furigana" checked> Furigana</label>
       </div>
 
-      <h3 class="lis-heading">Pick a question <span>— <b id="cs-total">0</b> questions, each at three levels</span></h3>
-      <div class="cs-topics" id="cs-topics"></div>
-
       <div class="card cs-card" id="cs-card">
-        <div class="cs-head">
-          <span class="cs-meta" id="cs-meta"></span>
-          <span class="wo-level cs-level" id="cs-level"></span>
-        </div>
+        <div class="cs-head"><span class="cs-meta" id="cs-meta"></span></div>
         <div class="cs-q" id="cs-q" lang="ja"></div>
         <div class="cs-q-en-row">
           <button class="btn-hint" id="cs-en-btn">Show English</button>
@@ -147,25 +158,28 @@
           <span class="cs-saved" id="cs-saved" role="status"></span>
           <button class="cs-clear" id="cs-clear" type="button">Clear</button>
         </div>
+      </div>
 
-        <div class="cs-hints" id="cs-hints" aria-live="polite"></div>
-        <button class="btn-secondary cs-hint-btn" id="cs-hint-btn">💡 Show a hint</button>
-
-        <button class="btn-primary cs-compare-btn" id="cs-compare-btn" aria-expanded="false" aria-controls="cs-compare">Compare with a sample answer</button>
-        <div class="cs-compare hidden" id="cs-compare" aria-live="polite"></div>
-
-        <div class="cs-nav">
-          <button class="btn-secondary" id="cs-prev">← Previous</button>
-          <button class="btn-secondary" id="cs-random">🎲 Random</button>
-          <button class="btn-secondary" id="cs-next">Next →</button>
+      <div class="cs-board">
+        <div class="cs-board-head">
+          <h3>Hints <span>— tap a tile to unlock it, tap an unlocked word to add it to your answer</span></h3>
+          <span class="cs-unlocked" id="cs-unlocked"></span>
         </div>
+        <div class="cs-hints" id="cs-hints"></div>
+        <div class="cs-sample" id="cs-sample" aria-live="polite"></div>
+      </div>
+
+      <div class="cs-nav">
+        <button class="btn-secondary" id="cs-prev">← Previous</button>
+        <button class="btn-secondary" id="cs-random">🎲 Random</button>
+        <button class="btn-secondary" id="cs-next">Next →</button>
       </div>
     </main>
 
   </div>
 
   <script src="conversation-data.js?v=1"></script>
-  <script src="conversation.js?v=1"></script>
+  <script src="conversation.js?v=2"></script>
   <script src="romaji.js?v=8"></script>
   <script src="pronounce.js?v=2"></script>
   <script src="kanji-cards.js?v=2"></script>

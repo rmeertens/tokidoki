@@ -1,7 +1,9 @@
-// Conversation starters (conversation.html): pick a question, write a few
-// sentences in Japanese, and open hints one step at a time — words to talk
-// about, verbs, grammar, then a way to begin — before comparing with a
-// sample answer. Hints and answers differ per JLPT level.
+// Conversation starters (conversation.html): pick a question from the list
+// and it opens on its own page (conversation.html#<id>), where you write a
+// few sentences in Japanese. Every hint is there as a locked tile — words to
+// talk about, verbs, grammar, a way to begin, the sample answer — showing
+// only its English until you unlock it. Hints and answers differ per JLPT
+// level.
 //
 // The questions live in conversation-data.js. What you write is kept per
 // question and level in tokidoki_conversation (synced with the account;
@@ -89,7 +91,12 @@
 
   const answerKey = (id, level) => id + ':' + level;
 
-  const api = { pieces, plain, kana, rubyHtml, parseHint, levelData, insertable, insertAt, charCount, answerKey, LEVELS, STEPS };
+  // Every unlockable hint of a level, in order, with a stable id.
+  function hintItems(d) {
+    return STEPS.flatMap(s => d[s.key].map((h, i) => Object.assign({ id: s.key + '-' + i, step: s.key }, h)));
+  }
+
+  const api = { pieces, plain, kana, rubyHtml, parseHint, levelData, insertable, insertAt, charCount, answerKey, hintItems, LEVELS, STEPS };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   global.Conversation = api;
   if (typeof document === 'undefined') return;
@@ -105,70 +112,70 @@
 
   const TOPICS = global.CONVERSATION_TOPICS || [];
   const GROUPS = global.CONVERSATION_GROUPS || [];
-  const settings = Object.assign({ level: 'N5', furigana: true, topic: TOPICS[0] && TOPICS[0].id }, load(SETTINGS_KEY, {}));
+  const settings = Object.assign({ level: 'N5', furigana: true }, load(SETTINGS_KEY, {}));
   if (!LEVELS.includes(settings.level)) settings.level = 'N5';
   const store = Object.assign({ answers: {} }, load(STORE_KEY, {}));
   if (!store.answers || typeof store.answers !== 'object') store.answers = {};
 
-  let hintStep = 0;       // how many hint steps are open
+  let topic = null;            // the open question, or null on the list
+  let unlocked = new Set();    // hint ids unlocked on this visit ('answer' for the sample)
   let showEnglish = false;
-  let compared = false;
   let saveTimer = null;
 
   const $ = id => document.getElementById(id);
-  const topicIndex = id => Math.max(0, TOPICS.findIndex(t => t.id === id));
-  const current = () => TOPICS[topicIndex(settings.topic)];
+  const byId = id => TOPICS.find(t => t.id === id);
+  const indexOf = t => TOPICS.indexOf(t);
+  const written = (t, level) => charCount((store.answers[answerKey(t.id, level)] || {}).text) > 0;
 
   function speakBtns(markup) {
     return global.Pronounce ? Pronounce.buttonsHtml(kana(markup)) : '';
   }
 
-  // ─── Rendering ─────────────────────────────────────────────────────────────
+  // ─── The list ──────────────────────────────────────────────────────────────
 
   function renderLevels() {
-    document.querySelectorAll('#cs-levels button').forEach(b => {
+    document.querySelectorAll('.cs-level-btns button').forEach(b => {
       b.setAttribute('aria-pressed', String(b.dataset.level === settings.level));
     });
   }
 
   function renderTopics() {
-    const box = $('cs-topics');
-    box.innerHTML = GROUPS.map(g => {
+    $('cs-topics').innerHTML = GROUPS.map(g => {
       const items = TOPICS.filter(t => t.group === g.id);
       if (!items.length) return '';
       return `<div class="cs-group">
         <div class="cs-group-name">${esc(g.name)} <span lang="ja">${esc(plain(g.ja))}</span></div>
         <div class="cs-group-items">${items.map(t => {
-          const written = charCount((store.answers[answerKey(t.id, settings.level)] || {}).text) > 0;
-          const active = t.id === settings.topic;
-          return `<button class="cs-topic${active ? ' active' : ''}${written ? ' written' : ''}" data-topic="${esc(t.id)}"${active ? ' aria-current="true"' : ''}>
-            <span class="cs-topic-ja" lang="ja">${esc(plain(levelData(t, settings.level).q.ja))}</span>
-            <span class="cs-topic-en">${esc(levelData(t, settings.level).q.en)}</span>
-            ${written ? '<span class="cs-topic-check" aria-label="written">✓</span>' : ''}
-          </button>`;
+          const d = levelData(t, settings.level);
+          const done = written(t, settings.level);
+          return `<a class="cs-topic${done ? ' written' : ''}" href="#${esc(t.id)}">
+            <span class="cs-topic-ja" lang="ja">${esc(plain(d.q.ja))}</span>
+            <span class="cs-topic-en">${esc(d.q.en)}</span>
+            <span class="cs-topic-go" aria-hidden="true">${done ? '✓' : '›'}</span>
+          </a>`;
         }).join('')}</div>
       </div>`;
     }).join('');
+    const n = TOPICS.filter(t => written(t, settings.level)).length;
+    $('cs-done').textContent = n ? ` · ${n} answered at ${settings.level}` : '';
   }
 
+  // ─── A question ────────────────────────────────────────────────────────────
+
   function renderQuestion() {
-    const t = current();
-    const d = levelData(t, settings.level);
-    const i = topicIndex(t.id);
-    const group = GROUPS.find(g => g.id === t.group);
-    $('cs-meta').textContent = `${group ? group.name : ''} · ${i + 1} / ${TOPICS.length}`;
-    $('cs-level').textContent = settings.level;
+    const d = levelData(topic, settings.level);
+    const group = GROUPS.find(g => g.id === topic.group);
+    $('cs-meta').textContent = `${group ? group.name : ''} · ${indexOf(topic) + 1} / ${TOPICS.length}`;
     $('cs-q').innerHTML = `<span class="cs-q-text">${rubyHtml(d.q.ja)}</span>${speakBtns(d.q.ja)}`;
     $('cs-q-en').textContent = d.q.en;
     $('cs-q-en').classList.toggle('hidden', !showEnglish);
     $('cs-en-btn').textContent = showEnglish ? 'Hide English' : 'Show English';
-
-    const saved = store.answers[answerKey(t.id, settings.level)];
+    const saved = store.answers[answerKey(topic.id, settings.level)];
     $('cs-answer').value = saved ? saved.text : '';
     $('cs-saved').textContent = '';
     renderCount();
     renderHints();
-    renderCompare();
+    renderSample();
   }
 
   function renderCount() {
@@ -176,68 +183,71 @@
     $('cs-count').textContent = n ? `${n} character${n === 1 ? '' : 's'}` : '';
   }
 
-  function hintChip(h, step) {
-    const tap = step !== 'grammar';
+  function lockedTile(h, id) {
+    return `<button class="cs-tile cs-locked" data-unlock="${id}" aria-label="Unlock: ${esc(h.en)}">
+      <span class="cs-lock" aria-hidden="true">🔒</span><span class="cs-tile-en">${esc(h.en)}</span>
+    </button>`;
+  }
+
+  function openTile(h, step) {
     const body = `<span class="cs-chip-ja" lang="ja">${rubyHtml(h.ja)}</span><span class="cs-chip-en">${esc(h.en)}</span>`;
-    return tap
-      ? `<button class="cs-chip" data-insert="${esc(insertable(h.ja))}" title="Add to your answer">${body}<span class="cs-chip-add" aria-hidden="true">＋</span></button>`
-      : `<div class="cs-grammar">
-          <div class="cs-grammar-head">${body}</div>
-          ${h.ex ? `<div class="cs-grammar-ex"><span lang="ja">${rubyHtml(h.ex)}</span>${speakBtns(h.ex)}</div>
-          <div class="cs-grammar-ex-en">${esc(h.exEn)}</div>` : ''}
-        </div>`;
+    if (step !== 'grammar') {
+      return `<button class="cs-tile cs-chip" data-insert="${esc(insertable(h.ja))}" title="Add to your answer">${body}<span class="cs-chip-add" aria-hidden="true">＋</span></button>`;
+    }
+    return `<div class="cs-tile cs-grammar">
+      <div class="cs-grammar-head">${body}</div>
+      <div class="cs-grammar-ex"><span lang="ja">${rubyHtml(h.ex)}</span>${speakBtns(h.ex)}</div>
+      <div class="cs-grammar-ex-en">${esc(h.exEn)}</div>
+    </div>`;
   }
 
   function renderHints() {
-    const d = levelData(current(), settings.level);
-    const steps = STEPS.filter(s => d[s.key].length);
-    $('cs-hints').innerHTML = steps.slice(0, hintStep).map((s, i) => `
-      <section class="cs-hint-step cs-hint-${s.key}">
-        <h4><span aria-hidden="true">${s.icon}</span> Hint ${i + 1} · ${s.title}</h4>
-        <div class="cs-hint-items${s.key === 'grammar' ? ' cs-hint-grammar' : ''}">${d[s.key].map(h => hintChip(h, s.key)).join('')}</div>
-      </section>`).join('');
-    const btn = $('cs-hint-btn');
-    if (hintStep >= steps.length) {
-      btn.disabled = true;
-      btn.textContent = 'All hints shown';
-    } else {
-      btn.disabled = false;
-      btn.textContent = `💡 ${hintStep ? 'Next hint' : 'Show a hint'} (${hintStep + 1}/${steps.length}): ${steps[hintStep].title.toLowerCase()}`;
-    }
+    const d = levelData(topic, settings.level);
+    const all = hintItems(d);
+    $('cs-hints').innerHTML = STEPS.filter(s => d[s.key].length).map(s => {
+      const items = all.filter(h => h.step === s.key);
+      const open = items.filter(h => unlocked.has(h.id)).length;
+      return `<section class="cs-hint-step cs-hint-${s.key}">
+        <div class="cs-hint-title">
+          <h4><span aria-hidden="true">${s.icon}</span> ${s.title} <span>${open} / ${items.length}</span></h4>
+          ${open < items.length ? `<button class="cs-unlock-all" data-unlock-step="${s.key}">Unlock all</button>` : ''}
+        </div>
+        <div class="cs-hint-items${s.key === 'grammar' ? ' cs-hint-grammar' : ''}">${items.map(h =>
+          unlocked.has(h.id) ? openTile(h, s.key) : lockedTile(h, h.id)).join('')}</div>
+      </section>`;
+    }).join('');
+    const open = all.filter(h => unlocked.has(h.id)).length;
+    $('cs-unlocked').textContent = `${open} / ${all.length} unlocked`;
   }
 
-  function renderCompare() {
-    const box = $('cs-compare');
-    const btn = $('cs-compare-btn');
-    btn.textContent = compared ? 'Hide the sample answer' : `Compare with a sample answer (${settings.level})`;
-    btn.setAttribute('aria-expanded', String(compared));
-    box.classList.toggle('hidden', !compared);
-    if (!compared) { box.innerHTML = ''; return; }
-    const d = levelData(current(), settings.level);
+  function renderSample() {
+    const box = $('cs-sample');
+    const d = levelData(topic, settings.level);
+    if (!unlocked.has('answer')) {
+      box.innerHTML = `<button class="cs-sample-locked" data-unlock="answer">
+        <span class="cs-lock" aria-hidden="true">🔒</span>
+        <span><b>Sample answer · ${settings.level}</b><span>Unlock it when you've written yours, and compare.</span></span>
+      </button>`;
+      return;
+    }
     const mine = $('cs-answer').value.trim();
-    box.innerHTML = `
+    box.innerHTML = `<div class="cs-compare">
       <div class="cs-compare-col cs-compare-mine">
         <h4>You wrote <span>${charCount(mine)} characters</span></h4>
-        ${mine ? `<p lang="ja">${esc(mine).replace(/\n/g, '<br>')}</p>` : '<p class="cs-empty">Nothing yet — try writing a sentence or two first, then compare.</p>'}
+        ${mine ? `<p lang="ja">${esc(mine).replace(/\n/g, '<br>')}</p>` : '<p class="cs-empty">Nothing yet — try a sentence or two, then compare.</p>'}
       </div>
       <div class="cs-compare-col cs-compare-sample">
         <h4>Sample answer · ${settings.level} <span>${charCount(plain(d.answer.ja))} characters</span> ${speakBtns(d.answer.ja)}</h4>
         <p lang="ja" class="cs-sample-ja">${rubyHtml(d.answer.ja)}</p>
         <p class="cs-sample-en">${esc(d.answer.en)}</p>
       </div>
-      <p class="cs-compare-tip">There's no single right answer. Look for words, grammar and linking phrases you could borrow — then try rewriting yours.</p>`;
+      <p class="cs-compare-tip">There's no single right answer. Borrow words, grammar and linking phrases you like — then try rewriting yours.</p>
+    </div>`;
   }
 
   function renderFurigana() {
-    document.querySelector('.cs-main').classList.toggle('cs-no-furigana', !settings.furigana);
+    document.body.classList.toggle('cs-no-furigana', !settings.furigana);
     $('cs-opt-furigana').checked = settings.furigana;
-  }
-
-  function renderAll() {
-    renderLevels();
-    renderTopics();
-    renderQuestion();
-    renderFurigana();
   }
 
   // ─── Actions ───────────────────────────────────────────────────────────────
@@ -247,63 +257,65 @@
   function saveAnswer() {
     clearTimeout(saveTimer);
     saveTimer = null;
-    const t = current();
-    const key = answerKey(t.id, settings.level);
+    if (!topic) return;
+    const key = answerKey(topic.id, settings.level);
     const text = $('cs-answer').value;
-    const had = !!store.answers[key];
     if (text.trim()) store.answers[key] = { text, t: Date.now() };
     else delete store.answers[key];
     save(STORE_KEY, store);
     $('cs-saved').textContent = text.trim() ? 'Saved' : '';
-    if (had !== !!store.answers[key]) renderTopics();
   }
 
-  function openTopic(id, { scroll = true } = {}) {
+  // Shows the list or a question, from the address: conversation.html#<id>.
+  function route() {
     if (saveTimer) saveAnswer();
-    settings.topic = TOPICS[topicIndex(id)].id;
-    saveSettings();
-    hintStep = 0;
-    compared = false;
-    showEnglish = false;
-    if (location.hash.slice(1) !== settings.topic) history.replaceState(null, '', '#' + settings.topic);
-    renderTopics();
-    renderQuestion();
-    if (scroll) $('cs-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const t = byId(decodeURIComponent(location.hash.slice(1)));
+    if (t !== topic || !t) { unlocked = new Set(); showEnglish = false; }
+    topic = t || null;
+    $('screen-chapters').classList.toggle('active', !topic);
+    $('screen-conversation').classList.toggle('active', !!topic);
+    renderLevels();
+    if (topic) {
+      document.title = `${plain(levelData(topic, settings.level).q.ja)} – Conversation Starters | Tokidoki`;
+      renderQuestion();
+    } else {
+      document.title = TITLE;
+      renderTopics();
+    }
+    window.scrollTo(0, 0);
   }
 
   function setLevel(level) {
     if (saveTimer) saveAnswer();
     settings.level = level;
     saveSettings();
-    hintStep = 0;
-    compared = false;
+    unlocked = new Set();
     renderLevels();
-    renderTopics();
-    renderQuestion();
+    if (topic) renderQuestion();
+    else renderTopics();
   }
 
   function insertIntoAnswer(text) {
     const ta = $('cs-answer');
     const r = insertAt(ta.value, ta.selectionStart, ta.selectionEnd, text);
     ta.value = r.value;
-    ta.focus();
+    ta.focus({ preventScroll: true });
     try { ta.setSelectionRange(r.caret, r.caret); } catch { /* not focused */ }
     renderCount();
     saveAnswer();
+    const flash = $('cs-answer');
+    flash.classList.remove('cs-flash');
+    void flash.offsetWidth;
+    flash.classList.add('cs-flash');
   }
+
+  const TITLE = document.title;
 
   function init() {
     if (!TOPICS.length) return;
-    const fromHash = TOPICS.find(t => t.id === location.hash.slice(1));
-    if (fromHash) settings.topic = fromHash.id;
-    if (!TOPICS.some(t => t.id === settings.topic)) settings.topic = TOPICS[0].id;
     $('cs-total').textContent = TOPICS.length;
 
-    document.querySelectorAll('#cs-levels button').forEach(b => b.addEventListener('click', () => setLevel(b.dataset.level)));
-    $('cs-topics').addEventListener('click', e => {
-      const b = e.target.closest('[data-topic]');
-      if (b) openTopic(b.dataset.topic);
-    });
+    document.querySelectorAll('.cs-level-btns button').forEach(b => b.addEventListener('click', () => setLevel(b.dataset.level)));
     $('cs-opt-furigana').addEventListener('change', e => { settings.furigana = e.target.checked; saveSettings(); renderFurigana(); });
     $('cs-en-btn').addEventListener('click', () => { showEnglish = !showEnglish; renderQuestion(); });
 
@@ -317,38 +329,43 @@
     });
     ta.addEventListener('blur', () => { if (saveTimer) saveAnswer(); });
 
-    $('cs-hint-btn').addEventListener('click', () => { hintStep++; renderHints(); });
-    $('cs-hints').addEventListener('click', e => {
+    $('screen-conversation').addEventListener('click', e => {
+      const one = e.target.closest('[data-unlock]');
+      if (one) {
+        unlocked.add(one.dataset.unlock);
+        if (one.dataset.unlock === 'answer') { saveAnswer(); renderSample(); } else renderHints();
+        return;
+      }
+      const step = e.target.closest('[data-unlock-step]');
+      if (step) {
+        hintItems(levelData(topic, settings.level)).filter(h => h.step === step.dataset.unlockStep).forEach(h => unlocked.add(h.id));
+        renderHints();
+        return;
+      }
       const chip = e.target.closest('[data-insert]');
       if (chip) insertIntoAnswer(chip.dataset.insert);
-    });
-    $('cs-compare-btn').addEventListener('click', () => {
-      if (saveTimer) saveAnswer();
-      compared = !compared;
-      renderCompare();
     });
     $('cs-clear').addEventListener('click', () => {
       if (!ta.value.trim() || confirm('Clear what you wrote for this question?')) {
         ta.value = '';
         renderCount();
         saveAnswer();
-        if (compared) renderCompare();
+        if (unlocked.has('answer')) renderSample();
       }
     });
-    const step = d => openTopic(TOPICS[(topicIndex(settings.topic) + d + TOPICS.length) % TOPICS.length].id);
-    $('cs-prev').addEventListener('click', () => step(-1));
-    $('cs-next').addEventListener('click', () => step(1));
+    const go = t => { location.hash = t.id; };
+    $('cs-prev').addEventListener('click', () => go(TOPICS[(indexOf(topic) - 1 + TOPICS.length) % TOPICS.length]));
+    $('cs-next').addEventListener('click', () => go(TOPICS[(indexOf(topic) + 1) % TOPICS.length]));
     $('cs-random').addEventListener('click', () => {
-      const others = TOPICS.filter(t => t.id !== settings.topic);
-      openTopic(others[Math.floor(Math.random() * others.length)].id);
+      const others = TOPICS.filter(t => t !== topic);
+      go(others[Math.floor(Math.random() * others.length)]);
     });
-    window.addEventListener('hashchange', () => {
-      const id = location.hash.slice(1);
-      if (id && id !== settings.topic && TOPICS.some(t => t.id === id)) openTopic(id);
-    });
+    $('cs-random-list').addEventListener('click', () => go(TOPICS[Math.floor(Math.random() * TOPICS.length)]));
+    window.addEventListener('hashchange', route);
     window.addEventListener('pagehide', () => { if (saveTimer) saveAnswer(); });
 
-    renderAll();
+    renderFurigana();
+    route();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

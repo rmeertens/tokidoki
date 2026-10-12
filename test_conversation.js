@@ -80,6 +80,10 @@ r = C.insertAt('', null, null, '犬');
 ok(r.value === '犬' && r.caret === 1, 'insertAt with no caret appends');
 ok(C.charCount('日本 語\nです') === 5, 'charCount skips spaces');
 ok(C.answerKey('food', 'N4') === 'food:N4', 'answerKey');
+const items = C.hintItems(C.levelData(CONVERSATION_TOPICS[0], 'N5'));
+ok(items[0].id === 'words-0' && items[0].step === 'words', 'hintItems: words first');
+ok(new Set(items.map(h => h.id)).size === items.length, 'hintItems: unique ids');
+ok(items[items.length - 1].step === 'start', 'hintItems: the way to begin last');
 
 // ─── Sync ──────────────────────────────────────────────────────────────────
 const J = JSON.stringify;
