@@ -20,7 +20,7 @@
   <meta name="twitter:description" content="Free JLPT kanji flashcard quiz (N5–N1), either direction, scheduled with spaced repetition.">
   <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
   <link rel="canonical" href="https://tokidoki.meertens.dev/kanji-quiz.html">
-  <link rel="stylesheet" href="style.css?v=52">
+  <link rel="stylesheet" href="style.css?v=53">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -139,6 +139,7 @@
           </div>
           <button id="btn-start-kanji-quiz" class="btn-primary btn-start-custom">Start Quiz</button>
         </div>
+        <div class="upcoming-reviews hidden" id="kanji-quiz-upcoming"></div>
         <p class="tab-intro" id="confusable-browse-link-row" style="margin-top:8px">
           <a href="confusable-kanji.html">Browse all confusable kanji groups &rarr;</a>
         </p>
@@ -192,6 +193,7 @@
           <button id="btn-kanji-quiz-continue" class="btn-primary">Next 20 →</button>
           <button id="btn-kanji-quiz-back-to-chapters" class="btn-secondary">Back to Chapters</button>
         </div>
+        <div class="upcoming-reviews hidden" id="kanji-quiz-session-upcoming"></div>
       </div>
     </main>
 
@@ -236,6 +238,7 @@
           <button id="btn-confusable-continue" class="btn-primary">Next 20 →</button>
           <button id="btn-confusable-back-to-chapters" class="btn-secondary">Back to Chapters</button>
         </div>
+        <div class="upcoming-reviews hidden" id="confusable-session-upcoming"></div>
       </div>
     </main>
 
@@ -252,7 +255,7 @@
   <script src="examples.js"></script>
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=4"></script>
-  <script src="app.js?v=32"></script>
+  <script src="app.js?v=33"></script>
   <script src="sync-merge.js?v=3"></script>
   <script src="progress-stats.js?v=2"></script>
   <script src="sync.js?v=9"></script>

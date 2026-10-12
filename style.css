@@ -2371,6 +2371,50 @@ a.chapter-card {
   flex-direction: column;
 }
 
+/* Kanji quiz: when studied cards come due again, and Learn ahead */
+.upcoming-reviews {
+  margin-top: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 20px;
+  text-align: left;
+}
+.session-complete .upcoming-reviews {
+  margin-top: 24px;
+  width: 100%;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.upcoming-title {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.upcoming-next {
+  margin: 0 0 10px;
+  font-size: 0.9rem;
+}
+.upcoming-when {
+  color: var(--text-muted);
+}
+.upcoming-buckets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-bottom: 12px;
+}
+.upcoming-bucket {
+  display: flex;
+  flex-direction: column;
+}
+.upcoming-bucket .stat-num {
+  font-size: 1.3rem;
+}
+.upcoming-ahead {
+  width: 100%;
+}
+
 .kana-card {
   align-items: center;
   -webkit-user-select: none;

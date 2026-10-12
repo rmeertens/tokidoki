@@ -2180,14 +2180,81 @@
     const due = pool.filter(k => isDue(getCardState(srsData, k.id))).length;
     const el = $('#kanji-quiz-due-count');
     if (el) el.textContent = due;
+    renderUpcomingReviews('#kanji-quiz-upcoming', pool,
+      isConfusable ? () => startConfusableStudy(false, true) : () => startKanjiQuizStudy(false, true));
   }
 
-  function startKanjiQuizStudy(cont) {
+  // ─── Coming up / learn ahead (kanji quiz and Confusing Kanji) ──────────────────
+  //
+  // Cards you've studied that aren't due yet, soonest first. "Learn ahead"
+  // studies the next batch of these before their time.
+
+  function upcomingCards(pool) {
+    return pool
+      .filter(c => srsData[c.id] && !isDue(srsData[c.id]))
+      .sort((a, b) => srsData[a.id].nextReview - srsData[b.id].nextReview);
+  }
+
+  function formatTimeUntil(t) {
+    const min = Math.max(1, Math.round((t - Date.now()) / 60000));
+    if (min < 60) return `in ${min} min`;
+    const h = Math.round(min / 60);
+    if (h < 24) return `in ${h} h`;
+    const d = Math.round(h / 24);
+    return d === 1 ? 'in 1 day' : `in ${d} days`;
+  }
+
+  // Counts per day bucket (later today, tomorrow, the next 7 days, later),
+  // the time until the first one, and a "Learn ahead" button.
+  function renderUpcomingReviews(sel, pool, onLearnAhead) {
+    const box = $(sel);
+    if (!box) return;
+    const upcoming = upcomingCards(pool);
+    box.classList.toggle('hidden', upcoming.length === 0);
+    if (upcoming.length === 0) { box.innerHTML = ''; return; }
+
+    const midnight = new Date();
+    midnight.setHours(24, 0, 0, 0);
+    const dayMs = 86400000;
+    const buckets = [
+      ['Later today', midnight.getTime()],
+      ['Tomorrow', midnight.getTime() + dayMs],
+      ['Next 7 days', midnight.getTime() + 7 * dayMs],
+      ['Later', Infinity],
+    ].map(([label, end]) => ({ label, end, count: 0 }));
+    upcoming.forEach(c => {
+      buckets.find(b => srsData[c.id].nextReview < b.end).count++;
+    });
+
+    const first = srsData[upcoming[0].id].nextReview;
+    const n = Math.min(20, upcoming.length);
+    box.innerHTML = `
+      <div class="upcoming-title">Coming up</div>
+      <p class="upcoming-next">Next card available again <strong>${formatTimeUntil(first)}</strong>
+        <span class="upcoming-when">(${new Date(first).toLocaleString([], { weekday: 'short', hour: '2-digit', minute: '2-digit' })})</span></p>
+      <div class="upcoming-buckets">
+        ${buckets.filter(b => b.count > 0).map(b =>
+          `<div class="upcoming-bucket"><span class="stat-num">${b.count}</span><span class="stat-label">${b.label}</span></div>`).join('')}
+      </div>
+      <button type="button" class="btn-secondary upcoming-ahead">Learn ahead: next ${n} card${n === 1 ? '' : 's'} →</button>`;
+    box.querySelector('.upcoming-ahead').onclick = onLearnAhead;
+  }
+
+  let kanjiQuizAhead = false;
+
+  // ahead: study the soonest not-yet-due cards instead (Learn ahead).
+  function startKanjiQuizStudy(cont, ahead) {
     const pool = getKanjiQuizPool();
     if (pool.length === 0) return;
 
-    const due = pool.filter(k => isDue(getCardState(srsData, k.id)));
-    kanjiQuizSessionCards = pickBatch('kanji-quiz', due, pool, cont);
+    kanjiQuizAhead = !!ahead;
+    if (ahead) {
+      kanjiQuizSessionCards = upcomingCards(pool).slice(0, 20);
+      if (kanjiQuizSessionCards.length === 0) return;
+    } else {
+      const due = pool.filter(k => isDue(getCardState(srsData, k.id)));
+      kanjiQuizSessionCards = pickBatch('kanji-quiz', due, pool, cont);
+    }
 
     kanjiQuizIndex = 0;
     kanjiQuizCorrect = 0;
@@ -2329,7 +2396,8 @@
     $('#kanji-quiz-session-total').textContent = kanjiQuizTotal;
     $('#kanji-quiz-session-correct').textContent = kanjiQuizCorrect;
     $('#kanji-quiz-session-accuracy').textContent = (kanjiQuizTotal > 0 ? Math.round((kanjiQuizCorrect / kanjiQuizTotal) * 100) : 0) + '%';
-    setContinueButton('#btn-kanji-quiz-continue', 'Next 20 →', () => startKanjiQuizStudy(true));
+    setContinueButton('#btn-kanji-quiz-continue', 'Next 20 →', () => startKanjiQuizStudy(true, kanjiQuizAhead));
+    renderUpcomingReviews('#kanji-quiz-session-upcoming', getKanjiQuizPool(), () => startKanjiQuizStudy(false, true));
   }
 
   // ─── Confusing Kanji (multiple-choice, using visually-similar kanji groups) ────
@@ -2409,12 +2477,20 @@
     return result;
   }
 
-  function startConfusableStudy(cont) {
+  let confusableAhead = false;
+
+  function startConfusableStudy(cont, ahead) {
     const pool = getConfusablePool();
     if (pool.length === 0) return;
 
-    const due = pool.filter(k => isDue(getCardState(srsData, k.id)));
-    confusableSessionCards = pickBatch('confusable', due, pool, cont);
+    confusableAhead = !!ahead;
+    if (ahead) {
+      confusableSessionCards = upcomingCards(pool).slice(0, 20);
+      if (confusableSessionCards.length === 0) return;
+    } else {
+      const due = pool.filter(k => isDue(getCardState(srsData, k.id)));
+      confusableSessionCards = pickBatch('confusable', due, pool, cont);
+    }
 
     confusableIndex = 0;
     confusableCorrect = 0;
@@ -2556,7 +2632,8 @@
     $('#confusable-session-total').textContent = confusableTotal;
     $('#confusable-session-correct').textContent = confusableCorrect;
     $('#confusable-session-accuracy').textContent = (confusableTotal > 0 ? Math.round((confusableCorrect / confusableTotal) * 100) : 0) + '%';
-    setContinueButton('#btn-confusable-continue', 'Next 20 →', () => startConfusableStudy(true));
+    setContinueButton('#btn-confusable-continue', 'Next 20 →', () => startConfusableStudy(true, confusableAhead));
+    renderUpcomingReviews('#confusable-session-upcoming', getConfusablePool(), () => startConfusableStudy(false, true));
   }
 
   // ─── Particle quiz (multiple-choice fill-in-the-blank) ─────────────────────────
