@@ -146,6 +146,14 @@
     best: Math.max(l.best || 0, r.best || 0),
   });
 
+  // Conversation starters: { answers: { 'topic:N5': { text, t } } } — the
+  // newer text of each answer.
+  const newerText = (l, r) => ((r && r.t) || 0) > ((l && l.t) || 0) ? r : l;
+  function mergeConversation(b, l, r) {
+    b = isObj(b) ? b : {};
+    return Object.assign({}, r, l, { answers: mergeMap(b.answers, l.answers, r.answers, newerText) });
+  }
+
   // How to merge a key both sides changed: (base, local, remote) → value.
   const RULES = {
     tokidoki_srs: (b, l, r) => mergeMap(b, l, r, laterReview),
@@ -159,6 +167,7 @@
     tokidoki_word_order: mergeGameStore,
     tokidoki_story_fill: mergeGameStore,
     tokidoki_listening: mergeGameStore,
+    tokidoki_conversation: mergeConversation,
   };
 
   // One key, as raw strings (null = not set). Returns the merged raw string, or null.
