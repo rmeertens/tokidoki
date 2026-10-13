@@ -7495,3 +7495,83 @@ a.chapter-card.news-headline-card {
   .cs-q { font-size: 1.2rem; }
   .cs-group-items { grid-template-columns: 1fr; }
 }
+
+/* Typed answers: Flashcards "Type answers" and Vocabulary typing practice */
+.kana-card .answer-input {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+.kana-card .typing-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.story-review-options {
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.typed-result {
+  margin-bottom: 12px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.typed-result:empty {
+  display: none;
+}
+
+.typed-result .answer-diff {
+  max-width: 360px;
+  margin: 8px auto 0;
+}
+
+.typed-result-note {
+  color: var(--text-dim);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.btn-grade.grade-suggested {
+  outline: 3px solid var(--text);
+  outline-offset: 2px;
+}
+
+.vocab-toolbar-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.vocab-typing-card {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.vocab-typing-card .vocab-pic {
+  width: 180px;
+  height: 160px;
+  margin: 0 auto;
+}
+
+.vocab-typing-card .vocab-pic .lis-art { width: 136px; max-width: 136px; }
+.vocab-typing-card .vocab-pic .lis-art-person { width: 96px; }
+.vocab-typing-card .vocab-pic .lis-art-items .lis-art { width: 64px; }
+.vocab-typing-card .vocab-pic .vocab-pic-people .lis-art-person { width: 50px; }
+
+.vocab-typing-deck {
+  margin-top: 12px;
+}
+
+.vocab-typing-card .reveal-area {
+  margin-top: 16px;
+}
+
+.vocab-typing-missed {
+  max-width: 480px;
+  margin: 0 auto 20px;
+}

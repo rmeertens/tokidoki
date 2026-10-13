@@ -185,6 +185,7 @@
     particles: $('#screen-particles'),
     story: $('#screen-story'),
     'story-review': $('#screen-story-review'),
+    'vocab-typing': $('#screen-vocab-typing'),
     bunkei: $('#screen-bunkei'),
   };
 
@@ -316,6 +317,9 @@
     } else if (name === 'story-review') {
       backBtn.classList.remove('hidden');
       title.textContent = 'Flashcards';
+    } else if (name === 'vocab-typing') {
+      backBtn.classList.remove('hidden');
+      title.textContent = 'Vocabulary';
     } else if (name === 'bunkei') {
       backBtn.classList.remove('hidden');
       title.textContent = 'Bunkei';
@@ -3439,6 +3443,133 @@
     if (empty) empty.classList.toggle('hidden', items.length !== 0);
   }
 
+  // ── Typing practice ──
+  //
+  // "Type the answers" goes through the words on the page (same levels,
+  // flashcard filter and direction), 20 at a time in a shuffled order: type
+  // the meaning for Word → Meaning, the word (kana or kanji) for the other
+  // two. It's practice only — nothing is scheduled — but each answer has a
+  // ＋ to put the word in the flashcards.
+
+  const VOCAB_TYPING_BATCH = 20;
+  let vocabTyping = null; // { pool, start, batch, i, correct, missed, answered, direction, script }
+
+  function startVocabTyping() {
+    const words = loadStoryWords();
+    let pool = buildVocabPool();
+    if ($('#vocab-only-deck') && $('#vocab-only-deck').checked) pool = pool.filter(item => vocabDeckKey(item, words));
+    if (!pool.length || !window.TypedAnswer) return;
+    shuffle(pool);
+    vocabTyping = { pool, start: 0, direction: getVocabDirection(), script: getVocabScript() };
+    nextVocabTypingBatch();
+  }
+
+  function nextVocabTypingBatch() {
+    const t = vocabTyping;
+    if (t.batch) t.start += t.batch.length;
+    if (t.start >= t.pool.length) { shuffle(t.pool); t.start = 0; }
+    t.batch = t.pool.slice(t.start, t.start + VOCAB_TYPING_BATCH);
+    t.i = 0;
+    t.correct = 0;
+    t.missed = [];
+    showScreen('vocab-typing');
+    $('#vocab-typing-complete').classList.add('hidden');
+    $('#vocab-typing-card').classList.remove('hidden');
+    showVocabTypingCard();
+  }
+
+  function vocabTypingWantsWord() {
+    return vocabTyping.direction !== 'word-to-meaning';
+  }
+
+  function showVocabTypingCard() {
+    const t = vocabTyping;
+    if (t.i >= t.batch.length) { finishVocabTyping(); return; }
+    const item = t.batch[t.i];
+    t.answered = false;
+    const wantsWord = vocabTypingWantsWord();
+
+    $('#vocab-typing-bar-fill').style.width = `${(t.i / t.batch.length) * 100}%`;
+    $('#vocab-typing-progress-text').textContent = `${t.i + 1} / ${t.batch.length}`;
+    $('#vocab-typing-label').textContent = wantsWord ? 'Type the word' : 'Type the meaning';
+
+    const prompt = $('#vocab-typing-prompt');
+    prompt.classList.toggle('story-review-prompt-meaning', t.direction === 'meaning-to-word');
+    if (t.direction === 'picture-to-word') prompt.innerHTML = vocabPictureHtml(item.kanji);
+    else if (t.direction === 'meaning-to-word') prompt.textContent = item.meaning;
+    else prompt.innerHTML = t.script === 'kana' ? item.kana : t.script === 'furigana' ? item.html : item.kanji;
+
+    $('#vocab-typing-area').classList.remove('hidden');
+    $('#vocab-typing-answer-area').classList.add('hidden');
+    const input = $('#vocab-typing-input');
+    input.value = '';
+    input.className = 'answer-input';
+    input.lang = wantsWord ? 'ja' : 'en';
+    input.placeholder = wantsWord ? 'Type it in hiragana…' : 'Type the meaning in English…';
+    input.focus();
+    setTimeout(() => input.focus(), 0);
+  }
+
+  function checkVocabTyping(skip) {
+    const t = vocabTyping;
+    if (!t || t.answered) return;
+    t.answered = true;
+    const item = t.batch[t.i];
+    const input = $('#vocab-typing-input');
+    const typed = skip ? '' : (window.Romaji ? Romaji.flush(input) : input.value).trim();
+    const result = typedAnswerResult(typed, vocabTypingWantsWord() ? { answers: [item.kanji, item.kana] } : { meaning: item.meaning });
+    if (result.ok) t.correct++;
+    else t.missed.push(item);
+
+    $('#vocab-typing-result').innerHTML = result.html;
+    const saved = !!vocabDeckKey(item, loadStoryWords());
+    $('#vocab-typing-answer').innerHTML = `
+      <div class="story-review-answer-word" lang="ja">${item.html}</div>
+      ${item.kana !== item.kanji ? `<div class="story-panel-reading" lang="ja">${item.kana}</div>` : ''}
+      ${pronounceButtons(item.kana, 'story-panel-speak')}
+      <div class="story-panel-meaning">${item.meaning}</div>
+      <button type="button" class="btn-secondary vocab-typing-deck" aria-pressed="${saved}">${saved ? '✓ In your flashcards' : '＋ Add to flashcards'}</button>
+    `;
+    $('#vocab-typing-area').classList.add('hidden');
+    $('#vocab-typing-answer-area').classList.remove('hidden');
+    $('#btn-vocab-typing-next').focus();
+    pronounceOnClick(item.kana);
+  }
+
+  function nextVocabTypingCard() {
+    if (!vocabTyping || !vocabTyping.answered) return;
+    vocabTyping.i++;
+    showVocabTypingCard();
+  }
+
+  function finishVocabTyping() {
+    const t = vocabTyping;
+    $('#vocab-typing-card').classList.add('hidden');
+    $('#vocab-typing-complete').classList.remove('hidden');
+    $('#vocab-typing-bar-fill').style.width = '100%';
+    const total = t.batch.length;
+    $('#vocab-typing-total').textContent = total;
+    $('#vocab-typing-correct').textContent = t.correct;
+    $('#vocab-typing-accuracy').textContent = total ? `${Math.round((t.correct / total) * 100)}%` : '0%';
+    $('#vocab-typing-missed').innerHTML = t.missed.length ? `
+      <div class="story-review-context-src">To look at again</div>
+      <ul class="kanji-review-words">
+        ${t.missed.map(item => `
+          <li>
+            <span class="kanji-review-word" lang="ja">${item.html}</span>
+            <span class="kanji-review-word-meaning">${item.meaning}</span>
+          </li>`).join('')}
+      </ul>` : '';
+    // After the last batch the words go round again, reshuffled.
+    setContinueButton('#btn-vocab-typing-continue', 'Next 20 →', nextVocabTypingBatch);
+  }
+
+  function closeVocabTyping() {
+    vocabTyping = null;
+    showScreen('chapters');
+    renderVocabPage();
+  }
+
   // ─── Words by kanji page (words-by-kanji.html) ───────────────────────────────
   //
   // Browse kanji (same JLPT N5-N1 lists as Kanji Hover); clicking one opens an
@@ -3639,6 +3770,9 @@
   let storyReviewIndex = 0;
   let storyReviewCorrect = 0;
   let storyReviewAnswered = false;
+  // With "Type answers" on: whether the typed answer was right, so Enter /
+  // Space grades the card that way (1 / 2 still pick either grade).
+  let storyReviewTypedOk = null;
 
   function storyRubyHtml(text) {
     return text.replace(STORY_FURIGANA_RE, '<ruby>$1<rp>(</rp><rt>$2</rt><rp>)</rp></ruby>');
@@ -3987,6 +4121,7 @@
     const exportRow = $('#story-export');
     if (exportRow) exportRow.classList.toggle('hidden', deck.length === 0);
     $$('.flashcard-furigana-toggle').forEach(el => { el.checked = !!settings.flashcardFurigana; });
+    $$('.flashcard-typing-toggle').forEach(el => { el.checked = !!settings.deckTyping; });
 
     const listEl = $('#story-deck-list');
     if (!listEl) return;
@@ -4351,13 +4486,33 @@
     $('#story-review-bar-fill').style.width = `${(storyReviewIndex / total) * 100}%`;
     $('#story-review-progress-text').textContent = `${storyReviewIndex + 1} / ${total}`;
 
-    $('#story-review-reveal-area').classList.remove('hidden');
+    const typing = deckTyping();
+    $('#story-review-reveal-area').classList.toggle('hidden', typing);
     $('#story-review-answer-area').classList.add('hidden');
+    storyReviewTypedOk = null;
+    $$('#story-review-answer-area .btn-grade').forEach(b => b.classList.remove('grade-suggested'));
+    const typedEl = $('#story-review-typed');
+    if (typedEl) typedEl.innerHTML = '';
+    const typingArea = $('#story-review-typing');
+    if (typingArea) {
+      typingArea.classList.toggle('hidden', !typing);
+      const input = $('#story-review-input');
+      input.value = '';
+      input.className = 'answer-input';
+      // Romaji → hiragana only when the answer is Japanese.
+      input.lang = card.recall ? 'ja' : 'en';
+      input.placeholder = card.recall
+        ? (card.kanji ? 'Type the kanji or a reading…' : 'Type the word in hiragana…')
+        : 'Type the meaning in English…';
+      if (typing) { input.focus(); setTimeout(() => input.focus(), 0); }
+    }
     const label = $('#story-review-label');
     if (label) {
-      label.textContent = card.recall
-        ? (card.kanji ? 'Recall the kanji' : 'Recall the word')
-        : (card.kanji ? 'Recall the meaning and readings' : 'Recall the reading and meaning');
+      label.textContent = typing
+        ? (card.recall ? (card.kanji ? 'Type the kanji or a reading' : 'Type the word') : 'Type the meaning')
+        : card.recall
+          ? (card.kanji ? 'Recall the kanji' : 'Recall the word')
+          : (card.kanji ? 'Recall the meaning and readings' : 'Recall the reading and meaning');
     }
 
     // Meaning → Japanese puts the meaning on the front; the Japanese itself
@@ -4473,7 +4628,78 @@
     const card = storyReviewCards[storyReviewIndex];
     if (card && card.gloss) pronounceOnClick(card.gloss[0]);
     $('#story-review-reveal-area').classList.add('hidden');
+    const typingArea = $('#story-review-typing');
+    if (typingArea) typingArea.classList.add('hidden');
     $('#story-review-answer-area').classList.remove('hidden');
+    if (storyReviewTypedOk !== null) {
+      const btn = $(`#story-review-answer-area .btn-grade[data-story-grade="${storyReviewTypedOk ? 4 : 1}"]`);
+      if (btn) btn.classList.add('grade-suggested');
+    }
+  }
+
+  // ── Typed answers (Flashcards "Type answers", Vocabulary typing practice) ──
+
+  function deckTyping() {
+    return !!settings.deckTyping && !!window.TypedAnswer;
+  }
+
+  function setDeckTyping(on) {
+    settings.deckTyping = on;
+    saveSettings(settings);
+    $$('.flashcard-typing-toggle').forEach(el => { el.checked = on; });
+    if (screens['story-review'] && screens['story-review'].classList.contains('active') && !storyReviewAnswered) showStoryReviewCard();
+  }
+
+  // What counts as a right answer for a card: { meaning } when it's typed in
+  // English, { answers } (spellings and readings) when it's Japanese.
+  function deckTypedExpect(card) {
+    if (card.kanji) {
+      return card.recall
+        ? { answers: [card.kanji, ...TypedAnswer.kanjiReadings(card.info)] }
+        : { meaning: card.info.meaning };
+    }
+    const [reading, meaning] = card.gloss;
+    return card.recall ? { answers: [storyDisplayWord(card.key), reading] } : { meaning };
+  }
+
+  const escText = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  // A typed answer marked against `expect`: { ok, html } — ✓, or ✗ with what
+  // was typed (a character diff for Japanese).
+  function typedAnswerResult(typed, expect) {
+    if (!typed) return { ok: false, html: '<span class="bunkei-ng">Skipped</span>' };
+    if (expect.answers) {
+      const answers = expect.answers.filter(Boolean);
+      if (TypedAnswer.checkJapanese(typed, answers)) return { ok: true, html: '<span class="bunkei-ok">✓ Correct</span>' };
+      if (!window.AnswerDiff) return { ok: false, html: `<span class="bunkei-ng">✗ You typed</span> <span lang="ja">${escText(typed)}</span>` };
+      const d = AnswerDiff.diff(typed, AnswerDiff.closest(typed, answers));
+      return {
+        ok: false,
+        html: '<span class="bunkei-ng">✗ Not quite</span>'
+          + '<div class="answer-diff" lang="ja">'
+          + `<div><span class="answer-diff-label">You typed</span>${AnswerDiff.toHtml(d.typed, 'diff-wrong')}</div>`
+          + `<div><span class="answer-diff-label">Expected</span>${AnswerDiff.toHtml(d.expected, 'diff-missing')}</div>`
+          + '</div>',
+      };
+    }
+    const result = TypedAnswer.checkMeaning(typed, expect.meaning);
+    if (result === 'exact') return { ok: true, html: '<span class="bunkei-ok">✓ Correct</span>' };
+    if (result === 'close') return { ok: true, html: `<span class="bunkei-ok">✓ Almost</span> <span class="typed-result-note">— check the spelling: “${escText(typed)}”</span>` };
+    return { ok: false, html: `<span class="bunkei-ng">✗ You typed</span> <span class="typed-result-note">“${escText(typed)}”</span>` };
+  }
+
+  function checkStoryReviewTyped() {
+    if (storyReviewAnswered) return;
+    const card = storyReviewCards[storyReviewIndex];
+    if (!card) return;
+    const input = $('#story-review-input');
+    const typed = (window.Romaji ? Romaji.flush(input) : input.value).trim();
+    const result = typedAnswerResult(typed, deckTypedExpect(card));
+    storyReviewTypedOk = result.ok;
+    input.className = 'answer-input ' + (result.ok ? 'correct' : 'incorrect');
+    input.blur();
+    $('#story-review-typed').innerHTML = result.html;
+    revealStoryReviewAnswer();
   }
 
   function gradeStoryReviewAndAdvance(grade) {
@@ -5050,6 +5276,8 @@
       });
     }
     if (window.Romaji) {
+      Romaji.attach($('#story-review-input'));
+      Romaji.attach($('#vocab-typing-input'));
       Romaji.attach($('#answer-input'));
       Romaji.attach($('#bunkei-input'));
     }
@@ -5136,6 +5364,7 @@
       else if (mode === 'particles') renderParticlesPanel();
       else if (mode === 'stories' || mode === 'memes') closeStory();
       else if (mode === 'flashcards') closeFlashcardReview();
+      else if (mode === 'vocabulary') renderVocabPage();
       else if (mode === 'bunkei') renderBunkeiPage();
     });
 
@@ -5624,6 +5853,31 @@
     });
 
     on('#btn-vocab-shuffle', 'click', shuffleVocabOrder);
+    on('#btn-vocab-typing', 'click', startVocabTyping);
+    on('#btn-vocab-typing-check', 'click', () => checkVocabTyping(false));
+    on('#btn-vocab-typing-skip', 'click', () => checkVocabTyping(true));
+    on('#btn-vocab-typing-next', 'click', nextVocabTypingCard);
+    on('#btn-vocab-typing-done', 'click', closeVocabTyping);
+    on('#vocab-typing-answer', 'click', (e) => {
+      const btn = e.target.closest('.vocab-typing-deck');
+      if (!btn || !vocabTyping) return;
+      const saved = toggleVocabFlashcard(vocabTyping.batch[vocabTyping.i]);
+      btn.setAttribute('aria-pressed', saved);
+      btn.textContent = saved ? '✓ In your flashcards' : '＋ Add to flashcards';
+    });
+    document.addEventListener('keydown', (e) => {
+      if (mode !== 'vocabulary' || !screens['vocab-typing'] || !screens['vocab-typing'].classList.contains('active') || !vocabTyping) return;
+      if (!$('#vocab-typing-complete').classList.contains('hidden')) {
+        if (e.key === 'Enter' && !focusHasOwnSpaceAction()) { consumeKey(e); $('#btn-vocab-typing-continue').click(); }
+        return;
+      }
+      if (e.key !== 'Enter' || e.isComposing) return;
+      if (!vocabTyping.answered) { consumeKey(e); checkVocabTyping(false); return; }
+      const el = document.activeElement;
+      if (el && el.tagName === 'BUTTON' && el !== $('#btn-vocab-typing-next')) return;
+      consumeKey(e);
+      nextVocabTypingCard();
+    }, true);
 
 
     // ─── Words by kanji page ────────────────────────────────────────────────────
@@ -5884,6 +6138,11 @@
     $$('.flashcard-furigana-toggle').forEach(el => {
       el.addEventListener('change', () => setFlashcardFurigana(el.checked));
     });
+    $$('.flashcard-typing-toggle').forEach(el => {
+      el.addEventListener('change', () => setDeckTyping(el.checked));
+    });
+    on('#btn-story-review-check', 'click', checkStoryReviewTyped);
+    on('#btn-story-review-skip', 'click', () => { storyReviewTypedOk = false; revealStoryReviewAnswer(); });
 
     on('#btn-export-anki', 'click', () => exportStoryDeck('anki'));
     on('#btn-export-csv', 'click', () => exportStoryDeck('csv'));
@@ -5928,7 +6187,17 @@
         return;
       }
       if (!storyReviewAnswered) {
+        if (deckTyping()) {
+          // Keys go to the answer box; Enter checks it.
+          if (e.key === 'Enter' && !e.isComposing) { consumeKey(e); checkStoryReviewTyped(); }
+          return;
+        }
         if (e.key === ' ' || e.key === 'Enter') { consumeKey(e); revealStoryReviewAnswer(); }
+        return;
+      }
+      if (storyReviewTypedOk !== null && (e.key === 'Enter' || e.key === ' ')) {
+        consumeKey(e);
+        gradeStoryReviewAndAdvance(storyReviewTypedOk ? 4 : 1);
         return;
       }
       if (e.key === '1') { consumeKey(e); gradeStoryReviewAndAdvance(1); return; }

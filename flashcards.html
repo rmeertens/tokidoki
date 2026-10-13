@@ -20,7 +20,7 @@
   <meta name="twitter:description" content="Review the Japanese words and kanji you saved while reading, with spaced repetition: word or kanji to meaning, or meaning to word or kanji. Tap or swipe to grade; export to Anki, CSV or print.">
   <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
   <link rel="canonical" href="https://tokidoki.meertens.dev/flashcards.html">
-  <link rel="stylesheet" href="style.css?v=55">
+  <link rel="stylesheet" href="style.css?v=56">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -103,7 +103,8 @@
         The words and kanji you&rsquo;ve saved anywhere on the site &mdash; from stories,
         jokes, the mystery, Story Fill-in, the Vocabulary page or Words by Kanji &mdash;
         reviewed with spaced repetition. Tap a card to see its answer, then tap or swipe
-        left if you didn&rsquo;t know it and right if you did.
+        left if you didn&rsquo;t know it and right if you did &mdash; or tick <i>Type answers</i>
+        to type the meaning, or the word in hiragana, before you see it.
       </p>
       <div class="deck-tabs" id="deck" role="tablist" aria-label="Your flashcards">
         <button type="button" class="deck-tab active" data-deck-tab="words" role="tab" aria-selected="true">Words <span class="deck-tab-count" id="deck-tab-count-words">0</span></button>
@@ -117,6 +118,9 @@
         <label class="kana-script-toggle">
           <input type="radio" name="deck-direction" value="meaning">
           Meaning &rarr; <span class="deck-direction-ja">Word</span>
+        </label>
+        <label class="kana-script-toggle" title="Type the answer — the meaning in English, or the word in hiragana (romaji turns into kana as you type) — before seeing it">
+          <input type="checkbox" class="flashcard-typing-toggle" id="deck-typing"> Type answers
         </label>
       </div>
       <div class="kana-start-card story-deck-card">
@@ -160,6 +164,9 @@
         <label class="kana-script-toggle flashcard-furigana-label">
           <input type="checkbox" class="flashcard-furigana-toggle" id="story-review-furigana"> Furigana
         </label>
+        <label class="kana-script-toggle flashcard-furigana-label">
+          <input type="checkbox" class="flashcard-typing-toggle" id="story-review-typing-toggle"> Type answers
+        </label>
       </div>
 
       <div id="story-review-card" class="card kana-card">
@@ -171,7 +178,18 @@
           <span class="reveal-hint">Tap the card or press Space</span>
         </div>
 
+        <div class="typing-area hidden" id="story-review-typing">
+          <div class="answer-area">
+            <input type="text" id="story-review-input" class="answer-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+            <button id="btn-story-review-check" class="btn-primary">Check</button>
+          </div>
+          <div class="typing-buttons">
+            <button id="btn-story-review-skip" class="btn-secondary">Show Answer</button>
+          </div>
+        </div>
+
         <div class="kana-answer-area hidden" id="story-review-answer-area">
+          <div id="story-review-typed" class="typed-result"></div>
           <div id="story-review-answer" class="story-review-answer"></div>
           <div id="story-review-context" class="story-review-context"></div>
           <div class="grade-buttons">
@@ -208,11 +226,14 @@
   <script src="memes-data-2.js?v=1"></script>
   <script src="mystery-words.js?v=3"></script>
   <script src="examples.js"></script>
+  <script src="romaji.js"></script>
+  <script src="answer-diff.js"></script>
+  <script src="typed-answer.js"></script>
   <script src="flashcard-export.js?v=13"></script>
   <script src="pronounce.js?v=2"></script>
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=4"></script>
-  <script src="app.js?v=33"></script>
+  <script src="app.js?v=34"></script>
   <script src="sync-merge.js?v=4"></script>
   <script src="progress-stats.js?v=2"></script>
   <script src="sync.js?v=9"></script>
