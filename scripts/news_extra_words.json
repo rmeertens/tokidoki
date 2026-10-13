@@ -1418,5 +1418,405 @@
     "まこと",
     "Makoto (given name)",
     "name"
+  ],
+  "49.8パーセント": [
+    "よんじゅうきゅうてんはちパーセント",
+    "number with unit",
+    "number + counter"
+  ],
+  "88.6パーセント": [
+    "はちじゅうはちてんろくパーセント",
+    "number with unit",
+    "number + counter"
+  ],
+  "49.7パーセント": [
+    "よんじゅうきゅうてんななパーセント",
+    "number with unit",
+    "number + counter"
+  ],
+  "84.2パーセント": [
+    "はちじゅうよんてんにパーセント",
+    "number with unit",
+    "number + counter"
+  ],
+  "74.4パーセント": [
+    "ななじゅうよんてんよんパーセント",
+    "number with unit",
+    "number + counter"
+  ],
+  "69.7パーセント": [
+    "ろくじゅうきゅうてんななパーセント",
+    "number with unit",
+    "number + counter"
+  ],
+  "50.1パーセント": [
+    "ごじゅうてんいちパーセント",
+    "number with unit",
+    "number + counter"
+  ],
+  "0.3ポイント": [
+    "れいてんさんポイント",
+    "number with unit",
+    "number + counter"
+  ],
+  "39ポイント": [
+    "さんじゅうきゅうポイント",
+    "number with unit",
+    "number + counter"
+  ],
+  "3.1パーセント": [
+    "さんてんいちパーセント",
+    "number with unit",
+    "number + counter"
+  ],
+  "5.2パーセント": [
+    "ごてんにパーセント",
+    "number with unit",
+    "number + counter"
+  ],
+  "1.4パーセント": [
+    "いちてんよんパーセント",
+    "number with unit",
+    "number + counter"
+  ],
+  "0.1パーセント": [
+    "れいてんいちパーセント",
+    "number with unit",
+    "number + counter"
+  ],
+  "0.5パーセント": [
+    "れいてんごパーセント",
+    "number with unit",
+    "number + counter"
+  ],
+  "50パーセント": [
+    "ごじゅうパーセント",
+    "number with unit",
+    "number + counter"
+  ],
+  "4.0度": [
+    "よんてんれいど",
+    "number with unit",
+    "number + counter"
+  ],
+  "3.6度": [
+    "さんてんろくど",
+    "number with unit",
+    "number + counter"
+  ],
+  "4度": [
+    "よんど",
+    "number with unit",
+    "number + counter"
+  ],
+  "エルニーニョ": [
+    "えるにーにょ",
+    "El Niño, a warming of the sea in the eastern Pacific that changes weather worldwide",
+    "noun"
+  ],
+  "気象庁": [
+    "きしょうちょう",
+    "Japan Meteorological Agency",
+    "noun"
+  ],
+  "民放": [
+    "みんぽう",
+    "commercial broadcasting (not NHK)",
+    "noun"
+  ],
+  "下回る": [
+    "したまわる",
+    "to fall below",
+    "verb"
+  ],
+  "上回る": [
+    "うわまわる",
+    "to exceed, to be above",
+    "verb"
+  ],
+  "購読": [
+    "こうどく",
+    "subscription",
+    "noun"
+  ],
+  "半数": [
+    "はんすう",
+    "half (of a number)",
+    "noun"
+  ],
+  "前年度": [
+    "ぜんねんど",
+    "the previous fiscal year",
+    "noun"
+  ],
+  "低下": [
+    "ていか",
+    "decline, drop",
+    "noun"
+  ],
+  "男女": [
+    "だんじょ",
+    "men and women",
+    "noun"
+  ],
+  "回答": [
+    "かいとう",
+    "answer, reply (to a survey)",
+    "noun"
+  ],
+  "海面": [
+    "かいめん",
+    "sea surface",
+    "noun"
+  ],
+  "水温": [
+    "すいおん",
+    "water temperature",
+    "noun"
+  ],
+  "史上": [
+    "しじょう",
+    "in history, on record",
+    "noun"
+  ],
+  "赤道": [
+    "せきどう",
+    "the equator",
+    "noun"
+  ],
+  "付近": [
+    "ふきん",
+    "vicinity, around",
+    "noun"
+  ],
+  "平年": [
+    "へいねん",
+    "a normal year (the long-term average)",
+    "noun"
+  ],
+  "監視": [
+    "かんし",
+    "monitoring, watching",
+    "noun"
+  ],
+  "海域": [
+    "かいいき",
+    "sea area",
+    "noun"
+  ],
+  "統計": [
+    "とうけい",
+    "statistics",
+    "noun"
+  ],
+  "ピーク": [
+    "ぴーく",
+    "peak",
+    "noun"
+  ],
+  "訪れ": [
+    "おとずれ",
+    "arrival, visit",
+    "noun"
+  ],
+  "速報": [
+    "そくほう",
+    "bulletin, news flash",
+    "noun"
+  ],
+  "以降": [
+    "いこう",
+    "since, after",
+    "noun"
+  ],
+  "顕著": [
+    "けんちょ",
+    "marked, remarkable",
+    "na-adjective"
+  ],
+  "大幅": [
+    "おおはば",
+    "large-scale, big (change)",
+    "na-adjective"
+  ],
+  "各地": [
+    "かくち",
+    "every region, various places",
+    "noun"
+  ],
+  "世帯": [
+    "せたい",
+    "household",
+    "noun"
+  ],
+  "変動": [
+    "へんどう",
+    "fluctuation, change",
+    "noun"
+  ],
+  "項目": [
+    "こうもく",
+    "item, category",
+    "noun"
+  ],
+  "光熱": [
+    "こうねつ",
+    "fuel and light (utilities)",
+    "noun"
+  ],
+  "家計": [
+    "かけい",
+    "household finances",
+    "noun"
+  ],
+  "家計調査": [
+    "かけいちょうさ",
+    "Household Survey (monthly, by the government)",
+    "noun"
+  ],
+  "総務省": [
+    "そうむしょう",
+    "Ministry of Internal Affairs and Communications",
+    "noun"
+  ],
+  "前年": [
+    "ぜんねん",
+    "the previous year",
+    "noun"
+  ],
+  "同月": [
+    "どうげつ",
+    "the same month",
+    "noun"
+  ],
+  "調整": [
+    "ちょうせい",
+    "adjustment",
+    "noun"
+  ],
+  "NHK": [
+    "えぬえいちけー",
+    "NHK, Japan's public broadcaster",
+    "noun"
+  ],
+  "ぎめ": [
+    "ぎめ",
+    "decided by (月ぎめ = by the month)",
+    "suffix"
+  ],
+  "九月": [
+    "くがつ",
+    "September",
+    "noun"
+  ],
+  "1949年": [
+    "せんきゅうひゃくよんじゅうきゅうねん",
+    "the year 1949",
+    "number + counter"
+  ],
+  "1997年": [
+    "せんきゅうひゃくきゅうじゅうななねん",
+    "the year 1997",
+    "number + counter"
+  ],
+  "2008年": [
+    "にせんはちねん",
+    "the year 2008",
+    "number + counter"
+  ],
+  "2026年度": [
+    "にせんにじゅうろくねんど",
+    "fiscal 2026",
+    "number + counter"
+  ],
+  "18年": [
+    "じゅうはちねん",
+    "18 years",
+    "number + counter"
+  ],
+  "18歳": [
+    "じゅうはっさい",
+    "18 years old",
+    "number + counter"
+  ],
+  "5000人": [
+    "ごせんにん",
+    "5,000 people",
+    "number + counter"
+  ],
+  "2676人": [
+    "にせんろっぴゃくななじゅうろくにん",
+    "2,676 people",
+    "number + counter"
+  ],
+  "17日": [
+    "じゅうしちにち",
+    "the 17th",
+    "number + counter"
+  ],
+  "16日": [
+    "じゅうろくにち",
+    "the 16th",
+    "number + counter"
+  ],
+  "12月": [
+    "じゅうにがつ",
+    "December",
+    "number + counter"
+  ],
+  "3か月": [
+    "さんかげつ",
+    "three months",
+    "number + counter"
+  ],
+  "9か月": [
+    "きゅうかげつ",
+    "nine months",
+    "number + counter"
+  ],
+  "9カ月": [
+    "きゅうかげつ",
+    "nine months",
+    "number + counter"
+  ],
+  "12": [
+    "じゅうに",
+    "twelve",
+    "number"
+  ],
+  "11": [
+    "じゅういち",
+    "eleven",
+    "number"
+  ],
+  "12月ごろ": [
+    "じゅうにがつごろ",
+    "around December",
+    "number + counter"
+  ],
+  "九": [
+    "きゅう",
+    "nine",
+    "number"
+  ],
+  "か月": [
+    "かげつ",
+    "months (counter)",
+    "counter"
+  ],
+  "カ月": [
+    "かげつ",
+    "months (counter)",
+    "counter"
+  ],
+  "九か月": [
+    "きゅうかげつ",
+    "nine months",
+    "number + counter"
+  ],
+  "九カ月": [
+    "きゅうかげつ",
+    "nine months",
+    "number + counter"
   ]
 }

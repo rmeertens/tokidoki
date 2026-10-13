@@ -22,7 +22,7 @@ const { NEWS_ITEMS, STORY_GRAMMAR } = loadSiteData(['news-data.js', 'stories-dat
 
 const readJson = f => JSON.parse(readFileSync(path.join(ROOT, 'scripts', f), 'utf8'));
 // Dates, percentages and names kuromoji splits apart; keep them whole.
-const NEWS_WHOLE = ['10月', '4月', '1%案', '1%分', '8%', '1%', '0%', 'クラウド', '10以上', '弱さ', 'ゲーム差', '3試合制', '硤合', '憲三', 'JR九州', '日本シリーズ', '日本ハム', 'セ・リーグ', 'パ・リーグ', 'アンリ・カガン', '金融庁', '探査機', '保険金', '幹事長', '統一地方選', '党大会', '存在感', '世界初', '参院選', '実仁'];
+const NEWS_WHOLE = ['10月', '4月', '1%案', '1%分', '8%', '1%', '0%', 'クラウド', '10以上', '弱さ', 'ゲーム差', '3試合制', '硤合', '憲三', 'JR九州', '日本シリーズ', '日本ハム', 'セ・リーグ', 'パ・リーグ', 'アンリ・カガン', '金融庁', '探査機', '保険金', '幹事長', '統一地方選', '党大会', '存在感', '世界初', '参院選', '実仁', '49.8パーセント', '88.6パーセント', '49.7パーセント', '84.2パーセント', '74.4パーセント', '69.7パーセント', '50.1パーセント', '0.3ポイント', '39ポイント', '3.1パーセント', '5.2パーセント', '1.4パーセント', '0.1パーセント', '0.5パーセント', '50パーセント', '4.0度', '3.6度', '4度'];
 const { segment } = await createWordFinder({
   extra: { ...readJson('phrase_extra_words.json'), ...readJson('news_extra_words.json') },
   whole: [...readJson('phrase_whole_words.json'), ...NEWS_WHOLE],

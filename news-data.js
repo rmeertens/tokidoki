@@ -23,6 +23,146 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-10-13-newspaper',
+      date: '2026-10-13',
+      emoji: '📰',
+      titleEn: 'Newspaper subscriptions in Japan fall below 50% for the first time',
+      sources: [
+        { name: 'nippon.com (Jiji)', url: 'https://www.nippon.com/en/news/yjj2026101100107/' },
+      ],
+      levels: {
+        N5: {
+          title: '新聞[しんぶん]を買[か]っている人[ひと]が、半分[はんぶん]より少[すく]なくなりました',
+          lines: [
+            ['新聞[しんぶん]を毎月[まいつき]買[か]っている人[ひと]が、半分[はんぶん]より少[すく]なくなりました。', 'The number of people who buy a newspaper every month has fallen below half.'],
+            ['調査[ちょうさ]では、新聞[しんぶん]を買[か]っている人[ひと]は49.8パーセントでした。', 'In the survey, 49.8 percent of people buy a newspaper.', '調査 here is a yearly survey by the Japan Press Research Institute (新聞通信調査会).'],
+            ['50パーセントより少[すく]なくなったのは、調査[ちょうさ]を始[はじ]めてから初[はじ]めてです。', 'It is the first time since the survey began that it has dropped below 50 percent.'],
+            ['この調査[ちょうさ]は2008年[ねん]に始[はじ]まりました。そのときは88.6パーセントでした。', 'This survey began in 2008. At that time, the figure was 88.6 percent.'],
+            ['一週間[いっしゅうかん]に新聞[しんぶん]でニュースを見[み]る人[ひと]も、49.7パーセントで、半分[はんぶん]より少[すく]なかったです。', 'The share of people who read news in a newspaper in a week was also below half, at 49.7 percent.'],
+            ['ニュースを見[み]る方法[ほうほう]で一番[いちばん]多[おお]いのは、テレビで、84.2パーセントでした。', 'The most common way to follow the news was TV, at 84.2 percent.', 'This is commercial TV (民放). People could pick more than one way, so the numbers add up to more than 100 percent.'],
+          ],
+        },
+        N4: {
+          title: '新聞[しんぶん]を取[と]っている人[ひと]の割合[わりあい]、初[はじ]めて半分[はんぶん]を下回[したまわ]る',
+          lines: [
+            ['新聞通信調査会[しんぶんつうしんちょうさかい]の調査[ちょうさ]で、新聞[しんぶん]を毎月[まいつき]取[と]っている人[ひと]の割合[わりあい]が49.8パーセントになりました。', 'In a survey by the Japan Press Research Institute, the share of people who take a newspaper every month came to 49.8 percent.', '新聞を取る means "to subscribe to a newspaper".'],
+            ['去年[きょねん]より0.3ポイント下[さ]がり、調査[ちょうさ]を始[はじ]めてから初[はじ]めて50パーセントを下回[したまわ]りました。', 'It fell 0.3 points from last year, dropping below 50 percent for the first time since the survey began.', '下回る "to fall below" (the opposite is 上回る).'],
+            ['調査[ちょうさ]が始[はじ]まった2008年[ねん]は88.6パーセントで、18年[ねん]で大[おお]きく減[へ]りました。', 'In 2008, when the survey began, it was 88.6 percent, so it has fallen sharply in 18 years.'],
+            ['一週間[いっしゅうかん]に新聞[しんぶん]でニュースを知[し]る人[ひと]も49.7パーセントで、初[はじ]めて半分[はんぶん]を切[き]りました。', 'The share of people who learn the news from a newspaper in a week was also 49.7 percent, falling below half for the first time.', '半分を切る "to drop below half".'],
+            ['ニュースを知[し]る方法[ほうほう]で一番[いちばん]多[おお]かったのは、民放[みんぽう]のテレビで84.2パーセントでした。', 'The most common way to learn the news was commercial TV, at 84.2 percent.', '民放 = 民間放送, commercial (non-NHK) broadcasters.'],
+            ['インターネットは74.4パーセント、NHKのテレビは69.7パーセントでした。', 'The internet was at 74.4 percent and NHK TV at 69.7 percent.'],
+            ['調査[ちょうさ]は7月[がつ]から8月[がつ]に、18歳[さい]以上[いじょう]の5000人[にん]に行[おこな]い、2676人[にん]が答[こた]えました。', 'The survey was given to 5,000 people aged 18 or over from July to August, and 2,676 answered.'],
+          ],
+        },
+        N3: {
+          title: '新聞[しんぶん]の購読率[こうどくりつ]、調査[ちょうさ]開始[かいし]以来[いらい]初[はじ]めて半数[はんすう]割[わ]れ',
+          lines: [
+            ['新聞通信調査会[しんぶんつうしんちょうさかい]がまとめた2026年度[ねんど]の調査[ちょうさ]によると、新聞[しんぶん]の月[つき]ぎめ購読率[こうどくりつ]は49.8パーセントで、2008年[ねん]の調査[ちょうさ]開始[かいし]以来[いらい]、初[はじ]めて50パーセントを下回[したまわ]った。', 'According to the fiscal 2026 survey compiled by the Japan Press Research Institute, the monthly newspaper subscription rate was 49.8 percent, falling below 50 percent for the first time since the survey began in 2008.', '月ぎめ means paying by the month. 〜以来 "ever since".'],
+            ['前年度[ぜんねんど]の50.1パーセントから0.3ポイント低下[ていか]しており、開始[かいし]時[じ]の88.6パーセントからは約[やく]39ポイント下[さ]がった。', 'It fell 0.3 points from 50.1 percent the previous year, and about 39 points from 88.6 percent at the start.'],
+            ['一週間[いっしゅうかん]に新聞[しんぶん]でニュースに触[ふ]れる人[ひと]の割合[わりあい]も49.7パーセントと、初[はじ]めて半数[はんすう]を下回[したまわ]った。', 'The share of people who come into contact with the news through newspapers in a week was also 49.7 percent, below half for the first time.', '半数割れ in the headline means "falling below half".'],
+            ['ニュースを得[え]る手段[しゅだん]では、民放[みんぽう]テレビが84.2パーセントで最[もっと]も多[おお]かった。', 'As a way of getting the news, commercial TV was the most common, at 84.2 percent.', '得る "to get, obtain" — a written-style verb for 手に入れる.'],
+            ['インターネットの74.4パーセント、NHKテレビの69.7パーセントが続[つづ]いた。', 'The internet at 74.4 percent and NHK TV at 69.7 percent followed.'],
+            ['調査[ちょうさ]は7月[がつ]17日[にち]から8月[がつ]16日[にち]にかけて、全国[ぜんこく]の18歳[さい]以上[いじょう]の男女[だんじょ]5000人[にん]を対象[たいしょう]に行[おこな]われ、2676人[にん]が回答[かいとう]した。', 'The survey was carried out from July 17 to August 16 on 5,000 men and women aged 18 or over across the country, and 2,676 responded.', '〜を対象に "targeting, aimed at".'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-13-el-nino',
+      date: '2026-10-13',
+      emoji: '🌊',
+      titleEn: 'El Niño is the strongest on record, Japan Meteorological Agency says',
+      sources: [
+        { name: 'Jiji Press', url: 'https://www.jiji.com/jc/article?k=2026100900927&g=soc&m=rss' },
+        { name: 'Weathernews (JMA El Niño bulletin)', url: 'https://weathernews.jp/news/202610/090161/' },
+        { name: 'Weathernews (JMA 3-month forecast)', url: 'https://weathernews.jp/news/202609/180161/' },
+      ],
+      levels: {
+        N5: {
+          title: 'エルニーニョが、とても強[つよ]くなっています',
+          lines: [
+            ['九日[ここのか]、気象庁[きしょうちょう]は「エルニーニョが、とても強[つよ]くなっています」と言[い]いました。', 'On the 9th, the Japan Meteorological Agency said, "El Niño has become very strong."', '気象庁 is the Japan Meteorological Agency. エルニーニョ is when the sea near the equator in the eastern Pacific gets warmer than usual, which changes the weather around the world.'],
+            ['エルニーニョは、太平洋[たいへいよう]の海[うみ]の水[みず]が、いつもより暖[あたた]かくなることです。', 'El Niño is when the water of the Pacific Ocean becomes warmer than usual.'],
+            ['九月[くがつ]の海[うみ]の水[みず]の温度[おんど]は、いつもの年[とし]より4度[ど]高[たか]かったです。', 'In September, the temperature of the sea water was 4 degrees higher than in a normal year.', 'This is the water in the area the agency watches for El Niño.'],
+            ['これは、1949年[ねん]から今[いま]までで、一番[いちばん]高[たか]い温度[おんど]です。', 'This is the highest since 1949, when the records begin.'],
+            ['エルニーニョは春[はる]から続[つづ]いています。冬[ふゆ]まで続[つづ]くと言[い]われています。', 'El Niño has continued since spring. It is said that it will last until winter.'],
+            ['十一月[じゅういちがつ]か十二月[じゅうにがつ]に、一番[いちばん]強[つよ]くなるかもしれません。', 'It may become strongest in November or December.'],
+            ['日本[にほん]では、今年[ことし]の冬[ふゆ]が来[く]るのが遅[おそ]くなるかもしれません。', 'In Japan, winter may come late this year.', 'The agency three-month forecast says it is likely that the start of winter will be late.'],
+          ],
+        },
+        N4: {
+          title: 'エルニーニョ現象[げんしょう]、海面[かいめん]水温[すいおん]が観測[かんそく]史上[しじょう]最高[さいこう]に',
+          lines: [
+            ['気象庁[きしょうちょう]は九日[ここのか]、今年[ことし]のエルニーニョ現象[げんしょう]が過去[かこ]最大[さいだい]の強[つよ]さになっていると発表[はっぴょう]しました。', 'On the 9th, the Japan Meteorological Agency announced that this year\'s El Niño has become the strongest on record.'],
+            ['エルニーニョ現象[げんしょう]は、太平洋[たいへいよう]の赤道[せきどう]付近[ふきん]で、海面[かいめん]の水温[すいおん]が平年[へいねん]より高[たか]くなる現象[げんしょう]です。', 'El Niño is a phenomenon in which the sea surface temperature near the equator in the Pacific becomes higher than normal.', '平年 "a normal year" — the average over many years.'],
+            ['気象庁[きしょうちょう]が監視[かんし]している海域[かいいき]では、9月[がつ]の水温[すいおん]が平年[へいねん]より4.0度[ど]高[たか]くなりました。', 'In the sea area the agency monitors, the water temperature in September was 4.0 degrees higher than normal.'],
+            ['1949年[ねん]に統計[とうけい]を取[と]り始[はじ]めてから、これまでで一番[いちばん]高[たか]かったのは、1997年[ねん]12月[がつ]の3.6度[ど]でした。', 'Since statistics began in 1949, the highest so far had been 3.6 degrees, in December 1997.'],
+            ['エルニーニョ現象[げんしょう]は春[はる]から続[つづ]いていて、冬[ふゆ]の間[あいだ]も続[つづ]く見通[みとお]しです。', 'El Niño has continued since spring and is expected to last through the winter.', '見通し "outlook, forecast".'],
+            ['ピークは11月[がつ]から12月[がつ]ごろとみられています。', 'The peak is thought to come around November to December.', 'Some reports say December; the agency expects the peak in late autumn to early winter.'],
+            ['3か月[げつ]予報[よほう]では、10月[がつ]から12月[がつ]の気温[きおん]は全国[ぜんこく]で平年[へいねん]より高[たか]く、冬[ふゆ]の訪[おとず]れは遅[おく]れる可能性[かのうせい]が高[たか]いとされています。', 'The three-month forecast says temperatures from October to December will be higher than normal across the country, and the start of winter is likely to be late.', '冬の訪れ "the arrival of winter". This forecast was issued in September.'],
+          ],
+        },
+        N3: {
+          title: 'エルニーニョ現象[げんしょう]、監視[かんし]海域[かいいき]の水温[すいおん]が観測[かんそく]史上[しじょう]最高[さいこう]に　気象庁[きしょうちょう]',
+          lines: [
+            ['気象庁[きしょうちょう]は九日[ここのか]、エルニーニョ監視[かんし]速報[そくほう]を発表[はっぴょう]し、今年[ことし]のエルニーニョ現象[げんしょう]が、統計[とうけい]のある1949年[ねん]以降[いこう]で最[もっと]も強[つよ]い状態[じょうたい]にあるとした。', 'On the 9th, the Japan Meteorological Agency issued its El Niño bulletin and said this year\'s El Niño is the strongest since records began in 1949.', 'エルニーニョ監視速報 is the agency\'s monthly bulletin on El Niño conditions.'],
+            ['9月[がつ]の監視[かんし]海域[かいいき]の海面[かいめん]水温[すいおん]は、平年[へいねん]との差[さ]がプラス4.0度[ど]で、これまで最[もっと]も高[たか]かった1997年[ねん]12月[がつ]のプラス3.6度[ど]を上回[うわまわ]った。', 'The sea surface temperature in the monitored area in September was 4.0 degrees above normal, exceeding the previous highest, 3.6 degrees above normal in December 1997.'],
+            ['現象[げんしょう]は今年[ことし]春[はる]から続[つづ]いているとみられ、冬[ふゆ]の間[あいだ]も続[つづ]く見通[みとお]しで、ピークは11月[がつ]から12月[がつ]ごろになる可能性[かのうせい]がある。', 'The phenomenon is thought to have continued since spring this year and is expected to last through the winter, with a possible peak around November to December.', 'とみられ is the written form of とみられて: "is thought to be".'],
+            ['気象庁[きしょうちょう]が9月[がつ]に出[だ]した3か月[げつ]予報[よほう]では、10月[がつ]から12月[がつ]の気温[きおん]は全国[ぜんこく]的[てき]に平年[へいねん]より高[たか]く、冬[ふゆ]の訪[おとず]れが遅[おそ]くなる可能性[かのうせい]が高[たか]いとされている。', 'In the three-month forecast the agency issued in September, temperatures from October to December are above normal nationwide, and the arrival of winter is likely to be late.'],
+            ['同[おな]じように顕著[けんちょ]なエルニーニョが起[お]きた1997年[ねん]は、11月[がつ]から12月[がつ]にかけて全国[ぜんこく]的[てき]に気温[きおん]が大幅[おおはば]に高[たか]く、冬[ふゆ]の訪[おとず]れが遅[おく]れた。', 'In 1997, when a similarly marked El Niño occurred, temperatures were far above normal across the country from November to December, and winter arrived late.', '顕著 "marked, remarkable".'],
+            ['エルニーニョ現象[げんしょう]は世界[せかい]各地[かくち]の天候[てんこう]に影響[えいきょう]を与[あた]えることがあり、今後[こんご]の動[うご]きが注目[ちゅうもく]される。', 'El Niño can affect the weather in many parts of the world, and its movements from here on are being watched closely.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-13-household-spending',
+      date: '2026-10-13',
+      emoji: '🛒',
+      titleEn: 'Household spending falls for the ninth month in a row, down 3.1% in August',
+      sources: [
+        { name: 'Business Today Malaysia', url: 'https://www.businesstoday.com.my/2026/10/09/japan-household-spending-falls-for-ninth-straight-month/' },
+        { name: 'investingLive', url: 'https://investinglive.com/news/japan-household-spending-falls-for-ninth-straight-month-but-drop-smaller-than-expected/' },
+      ],
+      levels: {
+        N5: {
+          title: '家[いえ]の人[ひと]が使[つか]ったお金[かね]が、九[きゅう]か月[げつ]少[すく]なくなっています',
+          lines: [
+            ['九日[ここのか]、国[くに]が八月[はちがつ]の、家[いえ]のお金[かね]の使[つか]い方[かた]を発表[はっぴょう]しました。', 'On the 9th, the government announced how households used money in August.', 'The Ministry of Internal Affairs and Communications (総務省) makes this report every month.'],
+            ['二人[ふたり]以上[いじょう]で住[す]んでいる家[いえ]が使[つか]ったお金[かね]は、去年[きょねん]の八月[はちがつ]より3.1パーセント少[すく]なかったです。', 'The money used by homes with two or more people was 3.1 percent less than last August.', 'The numbers are adjusted for price changes.'],
+            ['去年[きょねん]より少[すく]なかったのは、九[きゅう]か月[げつ]続[つづ]いています。', 'It has been less than the year before for nine months in a row.'],
+            ['電気[でんき]やガス、水道[すいどう]のお金[かね]は、5.2パーセント少[すく]なかったです。', 'The money for electricity, gas and water was 5.2 percent less.'],
+            ['食[た]べ物[もの]のお金[かね]も、1.4パーセント少[すく]なかったです。', 'The money for food was also 1.4 percent less.'],
+            ['前[まえ]の月[つき]の七月[しちがつ]と比[くら]べると、0.1パーセント多[おお]かったです。', 'Compared with the month before, July, it was 0.1 percent more.'],
+            ['少[すく]なくなった数字[すうじ]は、専門家[せんもんか]の予想[よそう]より小[ちい]さかったです。', 'The size of the drop was smaller than experts had predicted.'],
+          ],
+        },
+        N4: {
+          title: '8月[がつ]の家計[かけい]支出[ししゅつ]、九[きゅう]か月[げつ]連続[れんぞく]で減少[げんしょう]',
+          lines: [
+            ['総務省[そうむしょう]は九日[ここのか]、8月[がつ]の家計調査[かけいちょうさ]の結果[けっか]を発表[はっぴょう]しました。', 'On the 9th, the Ministry of Internal Affairs and Communications announced the results of its August household survey.', '家計調査 is a monthly survey of what households earn and spend.'],
+            ['二人[ふたり]以上[いじょう]の世帯[せたい]の消費[しょうひ]支出[ししゅつ]は、物価[ぶっか]の変動[へんどう]を除[のぞ]いた実質[じっしつ]で、去年[きょねん]の8月[がつ]より3.1パーセント減[へ]りました。', 'Consumer spending by households of two or more people fell 3.1 percent from last August in real terms, excluding price changes.', '実質 "real terms" means the effect of rising prices has been taken out.'],
+            ['前[まえ]の年[とし]を下回[したまわ]るのは、九[きゅう]か月[げつ]連続[れんぞく]です。', 'It has fallen below the previous year for nine months in a row.', '連続 "in a row".'],
+            ['項目[こうもく]別[べつ]では、光熱[こうねつ]・水道[すいどう]が5.2パーセント、食料[しょくりょう]が1.4パーセント減[へ]りました。', 'By item, utilities (fuel, light and water) fell 5.2 percent and food fell 1.4 percent.', '光熱・水道 covers electricity, gas and water bills.'],
+            ['前[まえ]の月[つき]と比[くら]べると、季節[きせつ]の影響[えいきょう]を除[のぞ]いた数字[すうじ]で0.1パーセント増[ふ]えました。', 'Compared with the previous month, it rose 0.1 percent when the effect of the season is removed.'],
+            ['ただ、専門家[せんもんか]が予想[よそう]していた増[ふ]え方[かた]よりは小[ちい]さかったです。', 'However, the rise was smaller than the experts had expected.', 'Economists had expected a rise of about 0.5 percent.'],
+            ['去年[きょねん]と比[くら]べた減[へ]り方[かた]は、専門家[せんもんか]の予想[よそう]より小[ちい]さかったです。', 'The size of the yearly drop was smaller than the experts had predicted.', 'The forecast was for a drop of about 3.5 to 3.6 percent.'],
+          ],
+        },
+        N3: {
+          title: '8月[がつ]の家計[かけい]支出[ししゅつ]、実質[じっしつ]3.1パーセント減[げん]　九[きゅう]カ月[げつ]連続[れんぞく]のマイナス',
+          lines: [
+            ['総務省[そうむしょう]が九日[ここのか]発表[はっぴょう]した8月[がつ]の家計調査[かけいちょうさ]によると、二人[ふたり]以上[いじょう]の世帯[せたい]の消費[しょうひ]支出[ししゅつ]は、物価[ぶっか]変動[へんどう]を除[のぞ]いた実質[じっしつ]で前年[ぜんねん]同月[どうげつ]比[ひ]3.1パーセント減[げん]となった。', 'According to the August household survey released by the Ministry of Internal Affairs and Communications on the 9th, consumer spending by households of two or more people fell 3.1 percent from a year earlier in real terms.', '前年同月比 "compared with the same month a year earlier".'],
+            ['前年[ぜんねん]を下回[したまわ]るのは九[きゅう]カ月[げつ]連続[れんぞく]で、市場[しじょう]の予想[よそう]よりは減少[げんしょう]幅[はば]が小[ちい]さかった。', 'It was below the previous year for the ninth month in a row, though the fall was smaller than the market had expected.', '減少幅 "the size of the decline". Forecasts were for a fall of about 3.5 to 3.6 percent.'],
+            ['項目[こうもく]別[べつ]では、光熱[こうねつ]・水道[すいどう]が5.2パーセント、食料[しょくりょう]が1.4パーセントそれぞれ減[へ]った。', 'By item, utilities fell 5.2 percent and food 1.4 percent.', 'それぞれ "respectively, each".'],
+            ['一方[いっぽう]、交通[こうつう]・通信[つうしん]は前年[ぜんねん]を下回[したまわ]らず、自動車[じどうしゃ]への支出[ししゅつ]がわずかに増[ふ]えた。', 'On the other hand, transport and communication did not fall below the previous year, and spending on cars rose slightly.'],
+            ['前[まえ]の月[つき]と比[くら]べると、季節[きせつ]調整[ちょうせい]済[ず]みで0.1パーセント増[ぞう]となったが、市場[しじょう]の予想[よそう]の0.5パーセント増[ぞう]には届[とど]かなかった。', 'Compared with the previous month, it rose 0.1 percent on a seasonally adjusted basis, but fell short of the 0.5 percent rise the market had expected.', '季節調整 removes regular seasonal ups and downs so months can be compared.'],
+            ['家計調査[かけいちょうさ]は、全国[ぜんこく]の世帯[せたい]の収入[しゅうにゅう]や支出[ししゅつ]を毎月[まいつき]調[しら]べる統計[とうけい]で、景気[けいき]を見[み]る材料[ざいりょう]の一[ひと]つになっている。', 'The household survey is a statistic that checks the income and spending of households nationwide every month, and is one of the indicators used to read the economy.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-10-12-prudential',
       date: '2026-10-12',
       emoji: '🏢',
