@@ -56,6 +56,13 @@
   `node scripts/tokenize_news.mjs` (kuromoji, as above); missing words go in
   `scripts/news_extra_words.json`. `test_news.js` fails if either is stale.
 
+- The Vocab Quiz's topic sets (`vocab-groups.js`) are built by
+  `node scripts/build_vocab_groups.mjs` (kuromoji, as above) from
+  `vocabulary-data.js`: part of speech from kuromoji, topic from keywords in
+  the English meaning (`THEMES` in the script), 20–50 words per set. Fix a
+  word in the wrong topic in `scripts/vocab_group_overrides.json` and re-run;
+  `test_vocab_groups.js` fails if a word is missing or a set is out of range.
+
 ## Recorded voices (VOICEVOX)
 
 Listening questions and News stories play pre-recorded MP3s made with
