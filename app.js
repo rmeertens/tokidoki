@@ -5934,6 +5934,9 @@
         if (e.key === 'Enter' && !focusHasOwnSpaceAction()) { consumeKey(e); $('#btn-vocab-typing-continue').click(); }
         return;
       }
+      // Letters go into the answer box even after a click moved the focus.
+      const box = $('#vocab-typing-input');
+      if (!vocabTyping.answered && e.key.length === 1 && e.key !== ' ' && !e.ctrlKey && !e.metaKey && !e.altKey && document.activeElement !== box) box.focus();
       if (e.key !== 'Enter' || e.isComposing) return;
       if (!vocabTyping.answered) { consumeKey(e); checkVocabTyping(false); return; }
       const el = document.activeElement;
@@ -6247,9 +6250,22 @@
 
       if (!(screens['story-review'] && screens['story-review'].classList.contains('active'))) return;
 
+      // While a card waits for a typed answer, letters always go into the
+      // answer box — even if a click moved the focus off it — so "fu" for
+      // フランス is never taken as a shortcut.
+      const answerBox = $('#story-review-input');
+      const plainKey = e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey;
+      if (deckTyping() && !storyReviewAnswered && answerBox && $('#story-review-complete').classList.contains('hidden')) {
+        if (plainKey && e.key !== ' ' && document.activeElement !== answerBox) answerBox.focus();
+        if (document.activeElement === answerBox || plainKey) {
+          if (e.key === 'Enter' && !e.isComposing) { consumeKey(e); checkStoryReviewTyped(); }
+          return;
+        }
+      }
+
       // F: furigana on/off, V: read aloud on/off (not while typing an answer).
       const typingInBox = document.activeElement && ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName) && document.activeElement.type !== 'checkbox';
-      if (!typingInBox && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      if (!typingInBox && plainKey) {
         if (e.key === 'f' || e.key === 'F') { consumeKey(e); setFlashcardFurigana(!settings.flashcardFurigana); return; }
         if (e.key === 'v' || e.key === 'V') { consumeKey(e); setFlashcardSpeak(!flashcardSpeak()); return; }
       }
