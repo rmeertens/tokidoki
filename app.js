@@ -3502,6 +3502,7 @@
     $$('[data-vq-level]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.vqLevel === level)));
     $$('[data-vq-direction]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.vqDirection === direction)));
     $$('[data-vq-script]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.vqScript === vqScript())));
+    syncVqToggles();
 
     // One row per theme; its sets are the theme's groups.
     const groups = vqGroups(level);
@@ -3585,10 +3586,7 @@
     $('#vocab-typing-progress-text').textContent = `${t.i + 1} / ${t.items.length}`;
     $('#vocab-typing-label').textContent = wantsWord ? 'Type the word' : 'Type the meaning';
 
-    const prompt = $('#vocab-typing-prompt');
-    prompt.classList.toggle('story-review-prompt-meaning', wantsWord);
-    if (wantsWord) prompt.textContent = item.meaning;
-    else prompt.innerHTML = t.script === 'kana' ? item.kana : t.script === 'furigana' ? item.html : item.kanji;
+    renderVocabTypingText();
 
     $('#vocab-typing-area').classList.remove('hidden');
     $('#vocab-typing-answer-area').classList.add('hidden');
@@ -3600,6 +3598,34 @@
     if (window.KanjiIme) KanjiIme.reset(input);
     input.focus();
     setTimeout(() => input.focus(), 0);
+  }
+
+  // The prompt and the answer word, with or without furigana; re-run when
+  // the Furigana box above the card is flipped mid-word.
+  function renderVocabTypingText() {
+    const t = vocabTyping;
+    const item = t && t.items[t.i];
+    if (!item) return;
+    const script = vqScript();
+    const prompt = $('#vocab-typing-prompt');
+    prompt.classList.toggle('story-review-prompt-meaning', vocabTypingWantsWord());
+    if (vocabTypingWantsWord()) prompt.textContent = item.meaning;
+    else prompt.innerHTML = script === 'kana' ? item.kana : script === 'furigana' ? item.html : item.kanji;
+    const word = $('#vocab-typing-answer .story-review-answer-word');
+    if (word) word.innerHTML = script === 'kanji' ? item.kanji : item.html;
+    syncVqToggles();
+  }
+
+  function syncVqToggles() {
+    const furigana = $('#vq-furigana');
+    if (furigana) furigana.checked = vqScript() === 'furigana';
+    $$('.flashcard-speak-toggle').forEach(el => { el.checked = flashcardSpeak(); });
+  }
+
+  function setVqFurigana(on) {
+    settings.vqScript = on ? 'furigana' : 'kanji';
+    saveSettings(settings);
+    renderVocabTypingText();
   }
 
   function checkVocabTyping(skip) {
@@ -3623,7 +3649,7 @@
     $('#vocab-typing-result').innerHTML = result.html;
     const saved = !!vocabDeckKey(item, loadStoryWords());
     $('#vocab-typing-answer').innerHTML = `
-      <div class="story-review-answer-word" lang="ja">${item.html}</div>
+      <div class="story-review-answer-word" lang="ja">${vqScript() === 'kanji' ? item.kanji : item.html}</div>
       ${item.kana !== item.kanji ? `<div class="story-panel-reading" lang="ja">${item.kana}</div>` : ''}
       ${pronounceButtons(item.kana, 'story-panel-speak')}
       <div class="story-panel-meaning">${item.meaning}</div>
@@ -3632,7 +3658,7 @@
     $('#vocab-typing-area').classList.add('hidden');
     $('#vocab-typing-answer-area').classList.remove('hidden');
     $('#btn-vocab-typing-next').focus();
-    pronounceOnClick(item.kana);
+    if (flashcardSpeak() && window.Pronounce) Pronounce.speak(item.kana);
   }
 
   function nextVocabTypingCard() {
@@ -6073,6 +6099,7 @@
         renderVocabQuizPage();
       }));
     });
+    on('#vq-furigana', 'change', (e) => setVqFurigana(e.target.checked));
     on('#btn-vocab-typing-again', 'click', () => { if (vocabTyping) startVocabQuiz(vocabTyping.id); });
     on('#btn-vocab-typing-check', 'click', () => checkVocabTyping(false));
     on('#btn-vocab-typing-skip', 'click', () => checkVocabTyping(true));
@@ -6095,6 +6122,12 @@
       // Letters go into the answer box even after a click moved the focus.
       const box = $('#vocab-typing-input');
       if (!vocabTyping.answered && e.key.length === 1 && e.key !== ' ' && !e.ctrlKey && !e.metaKey && !e.altKey && document.activeElement !== box) box.focus();
+      // F: furigana, V: read aloud — once the answer is shown, so they
+      // never take a letter meant for the answer box.
+      if (vocabTyping.answered && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        if (e.key === 'f' || e.key === 'F') { consumeKey(e); setVqFurigana(vqScript() !== 'furigana'); return; }
+        if (e.key === 'v' || e.key === 'V') { consumeKey(e); setFlashcardSpeak(!flashcardSpeak()); return; }
+      }
       if (e.key !== 'Enter' || e.isComposing) return;
       if (!vocabTyping.answered) { consumeKey(e); checkVocabTyping(false); return; }
       const el = document.activeElement;
