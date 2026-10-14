@@ -7619,3 +7619,31 @@ a.chapter-card.news-headline-card {
 #story-review-card.no-furigana .story-panel-reading {
   display: none;
 }
+
+/* Vocabulary typing practice: missed words, each with a flashcard button */
+.vocab-typing-missed-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.vocab-missed-list li {
+  align-items: center;
+}
+
+.vocab-missed-list .kanji-review-word-meaning {
+  flex: 1;
+}
+
+.vocab-missed-list .vocab-missed-add {
+  position: static;
+  flex-shrink: 0;
+}
+
+.vocab-missed-list .vocab-missed-add[aria-pressed="true"] {
+  border-color: var(--orange);
+  color: var(--orange);
+}

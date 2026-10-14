@@ -3552,17 +3552,49 @@
     $('#vocab-typing-total').textContent = total;
     $('#vocab-typing-correct').textContent = t.correct;
     $('#vocab-typing-accuracy').textContent = total ? `${Math.round((t.correct / total) * 100)}%` : '0%';
-    $('#vocab-typing-missed').innerHTML = t.missed.length ? `
-      <div class="story-review-context-src">To look at again</div>
-      <ul class="kanji-review-words">
-        ${t.missed.map(item => `
+    renderVocabTypingMissed();
+    // After the last batch the words go round again, reshuffled.
+    setContinueButton('#btn-vocab-typing-continue', 'Next 20 →', nextVocabTypingBatch);
+  }
+
+  // The words missed this round, each with a ＋ / ✓ for the flashcards,
+  // and a button that adds all of them at once.
+  function renderVocabTypingMissed() {
+    const t = vocabTyping;
+    const el = $('#vocab-typing-missed');
+    if (!t.missed.length) { el.innerHTML = ''; return; }
+    const words = loadStoryWords();
+    const saved = t.missed.map(item => !!vocabDeckKey(item, words));
+    const left = saved.filter(x => !x).length;
+    el.innerHTML = `
+      <div class="vocab-typing-missed-head">
+        <span class="story-review-context-src">To look at again</span>
+        <button type="button" class="btn-secondary vocab-missed-add-all"${left ? '' : ' disabled'}>${left ? `＋ Add ${left === 1 ? 'it' : `all ${left}`} to flashcards` : '✓ All in your flashcards'}</button>
+      </div>
+      <ul class="kanji-review-words vocab-missed-list">
+        ${t.missed.map((item, i) => `
           <li>
             <span class="kanji-review-word" lang="ja">${item.html}</span>
             <span class="kanji-review-word-meaning">${item.meaning}</span>
+            <button type="button" class="vocab-deck-btn vocab-missed-add" data-i="${i}" aria-pressed="${saved[i]}"
+              title="${saved[i] ? 'In your flashcards — click to remove' : 'Add to flashcards'}"
+              aria-label="${saved[i] ? 'Remove' : 'Add'} ${item.kanji} ${saved[i] ? 'from' : 'to'} flashcards">${saved[i] ? '✓' : '＋'}</button>
           </li>`).join('')}
-      </ul>` : '';
-    // After the last batch the words go round again, reshuffled.
-    setContinueButton('#btn-vocab-typing-continue', 'Next 20 →', nextVocabTypingBatch);
+      </ul>`;
+  }
+
+  function onVocabTypingMissedClick(e) {
+    const t = vocabTyping;
+    if (!t) return;
+    if (e.target.closest('.vocab-missed-add-all')) {
+      const words = loadStoryWords();
+      t.missed.filter(item => !vocabDeckKey(item, words)).forEach(item => toggleVocabFlashcard(item));
+    } else {
+      const btn = e.target.closest('.vocab-missed-add');
+      if (!btn) return;
+      toggleVocabFlashcard(t.missed[+btn.dataset.i]);
+    }
+    renderVocabTypingMissed();
   }
 
   function closeVocabTyping() {
@@ -5921,6 +5953,7 @@
     on('#btn-vocab-typing-skip', 'click', () => checkVocabTyping(true));
     on('#btn-vocab-typing-next', 'click', nextVocabTypingCard);
     on('#btn-vocab-typing-done', 'click', closeVocabTyping);
+    on('#vocab-typing-missed', 'click', onVocabTypingMissedClick);
     on('#vocab-typing-answer', 'click', (e) => {
       const btn = e.target.closest('.vocab-typing-deck');
       if (!btn || !vocabTyping) return;
