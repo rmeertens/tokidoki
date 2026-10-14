@@ -1386,9 +1386,7 @@
     if (studyMode === 'translate' && translateSource === 'adjectives') {
       setContinueButton('#btn-session-continue', 'Next 20 →', () => startAdjSentenceStudy(chapter, true));
     } else if (studyMode === 'translate') {
-      const next = TRANSLATE_SENTENCES[chapter + 1] ? chapter + 1 : null;
-      setContinueButton('#btn-session-continue', next ? `Next 20: Chapter ${next} →` : 'Again ↻',
-        () => startTranslateStudy(next || chapter));
+      setContinueButton('#btn-session-continue', 'Next 20 →', () => startTranslateStudy(chapter, true));
     } else if (studyMode === 'verbs') {
       setContinueButton('#btn-session-continue', 'Next 20 →', () => startStudy(chapter, true));
     } else if (studyMode === 'adjectives') {
@@ -1731,12 +1729,29 @@
   // loaded before this script) — shared with the printable translation
   // worksheets, which read the same file outside the browser.
 
-  let translatePanelRendered = false;
+  // One entry per sentence of a chapter. Each sentence has two SRS cards,
+  // one per direction (tr_<ch>_<i>_en-to-ja / _ja-to-en); a sentence counts
+  // as learned once either direction was last graded right, and is due when
+  // it's new or a direction it was studied in is due. The direction asked
+  // is a due one when there is one, else picked at random.
+  const TRANSLATE_DIRS = ['en-to-ja', 'ja-to-en'];
+
+  function translateSentenceItems(chapter) {
+    return (TRANSLATE_SENTENCES[chapter] || []).map((sentence, i) => {
+      const states = TRANSLATE_DIRS.map(d => srsData[`tr_${chapter}_${i}_${d}`]);
+      const studied = TRANSLATE_DIRS.filter((d, k) => states[k]);
+      const dueDirs = studied.filter(d => isDue(states[TRANSLATE_DIRS.indexOf(d)]));
+      return {
+        id: `tr_${chapter}_${i}`,
+        sentence,
+        learned: states.some(st => st && st.repetitions > 0),
+        due: studied.length === 0 || dueDirs.length > 0,
+        dueDirs,
+      };
+    });
+  }
 
   function renderTranslateChapters() {
-    if (translatePanelRendered) return;
-    translatePanelRendered = true;
-
     const g1 = $('#translate-chapters-genki1');
     const g2 = $('#translate-chapters-genki2');
     g1.innerHTML = '';
@@ -1749,41 +1764,46 @@
       const info = CHAPTER_INFO[ch] || (typeof EXTRA_CHAPTER_INFO !== 'undefined' && EXTRA_CHAPTER_INFO[ch]);
       if (!info) return;
 
+      const items = translateSentenceItems(ch);
+      const learned = items.filter(it => it.learned).length;
+      const due = items.filter(it => it.due).length;
+      const pct = items.length > 0 ? Math.round((learned / items.length) * 100) : 0;
+
       const card = document.createElement('div');
       card.className = 'chapter-card';
       card.innerHTML = `
         <div class="chapter-card-title">${info.title}</div>
-        <div class="chapter-card-sub">${sentences.length} sentences</div>
+        <div class="chapter-card-sub">${sentences.length} sentences &middot; ${learned} learned</div>
         <div class="chapter-card-forms">
           <span class="form-tag">EN → JA</span>
           <span class="form-tag">JA → EN</span>
         </div>
+        <div class="chapter-progress"><div class="chapter-progress-fill" style="width:${pct}%"></div></div>
+        ${due > 0 ? `<div class="chapter-card-due">${due} due</div>` : ''}
       `;
       card.addEventListener('click', () => startTranslateStudy(ch));
       (ch <= 12 ? g1 : g2).appendChild(card);
     });
   }
 
-  function startTranslateStudy(chapter) {
+  function startTranslateStudy(chapter, cont) {
     studyMode = 'translate';
     translateSource = 'sentences';
     currentChapter = chapter;
 
-    const sentences = TRANSLATE_SENTENCES[chapter];
-    if (!sentences || sentences.length === 0) return;
+    const items = translateSentenceItems(chapter);
+    if (items.length === 0) return;
 
-    sessionCards = [];
-    sentences.forEach((s, i) => {
-      const dir = Math.random() < 0.5 ? 'en-to-ja' : 'ja-to-en';
-      sessionCards.push({
-        sentence: s,
-        direction: dir,
-        id: `tr_${chapter}_${i}_${dir}`,
-        verb: null,
-        form: null,
-      });
+    // 20 at a time like the verb chapters: due sentences first (failed
+    // ones before the rest), then the others.
+    const batch = pickBatch(`translate:${chapter}`, items.filter(it => it.due), items, cont);
+    const failedFirst = it => (it.dueDirs.some(d => (srsData[`${it.id}_${d}`] || {}).repetitions === 0) ? 0 : 1);
+    batch.sort((a, b) => failedFirst(a) - failedFirst(b));
+    sessionCards = batch.map(it => {
+      const pool = it.dueDirs.length ? it.dueDirs : TRANSLATE_DIRS;
+      const dir = pool[Math.floor(Math.random() * pool.length)];
+      return { sentence: it.sentence, direction: dir, id: `${it.id}_${dir}`, verb: null, form: null };
     });
-    shuffle(sessionCards);
 
     sessionIndex = 0;
     sessionCorrect = 0;
@@ -5684,6 +5704,7 @@
       showScreen('chapters');
       if (mode === 'verbs') renderChapters();
       else if (mode === 'adjectives') renderAdjChapters();
+      else if (mode === 'translate') renderTranslateChapters();
       else if (mode === 'kana') renderKanaPanel();
       else if (mode === 'kanji-quiz') renderKanjiQuizPanel();
       else if (mode === 'particles') renderParticlesPanel();
@@ -5826,6 +5847,7 @@
       showScreen('chapters');
       if (mode === 'verbs') renderChapters();
       else if (mode === 'adjectives') renderAdjChapters();
+      else if (mode === 'translate') renderTranslateChapters();
     });
 
     // ─── Kana practice ───────────────────────────────────────────────────────────
@@ -6598,6 +6620,7 @@
         statsData = loadStats();
         if (mode === 'verbs') renderChapters();
         else if (mode === 'adjectives') renderAdjChapters();
+        else if (mode === 'translate') renderTranslateChapters();
         else if (mode === 'kana') renderKanaPanel();
         else if (mode === 'kanji-quiz') renderKanjiQuizPanel();
         else if (mode === 'particles') renderParticlesPanel();
