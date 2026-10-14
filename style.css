@@ -7614,3 +7614,8 @@ a.chapter-card.news-headline-card {
 @media (pointer: coarse) {
   .kanji-candidates-hint { display: none; }
 }
+
+/* Flashcards with Furigana off: no hiragana reading under the word either */
+#story-review-card.no-furigana .story-panel-reading {
+  display: none;
+}

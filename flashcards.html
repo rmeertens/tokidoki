@@ -20,7 +20,7 @@
   <meta name="twitter:description" content="Review the Japanese words and kanji you saved while reading, with spaced repetition: word or kanji to meaning, or meaning to word or kanji. Tap or swipe to grade; export to Anki, CSV or print.">
   <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
   <link rel="canonical" href="https://tokidoki.meertens.dev/flashcards.html">
-  <link rel="stylesheet" href="style.css?v=57">
+  <link rel="stylesheet" href="style.css?v=58">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -136,7 +136,7 @@
         <ul class="story-deck-list" id="story-deck-list"></ul>
       </details>
       <div class="story-export hidden" id="story-export">
-        <label class="kana-script-toggle flashcard-furigana-label" title="Show readings above the kanji on the front of your flashcards (the answer side always has them) and in exports">
+        <label class="kana-script-toggle flashcard-furigana-label" title="Show readings above the kanji on your flashcards — when reviewing and in exports">
           <input type="checkbox" class="flashcard-furigana-toggle" id="story-flashcard-furigana"> Furigana on cards
         </label>
         <span class="story-export-label">Export</span>
@@ -162,8 +162,11 @@
       <div id="save-indicator" class="save-indicator">Saved</div>
 
       <div class="story-review-options">
-        <label class="kana-script-toggle flashcard-furigana-label">
+        <label class="kana-script-toggle flashcard-furigana-label" title="Readings above the kanji, and the word in hiragana (F)">
           <input type="checkbox" class="flashcard-furigana-toggle" id="story-review-furigana"> Furigana
+        </label>
+        <label class="kana-script-toggle flashcard-furigana-label" title="Read the word aloud when its answer is shown (V)">
+          <input type="checkbox" class="flashcard-speak-toggle" id="story-review-speak"> &#128266; Read aloud
         </label>
         <label class="kana-script-toggle flashcard-furigana-label">
           <input type="checkbox" class="flashcard-typing-toggle" id="story-review-typing-toggle"> Type answers
@@ -235,7 +238,7 @@
   <script src="pronounce.js?v=2"></script>
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=4"></script>
-  <script src="app.js?v=35"></script>
+  <script src="app.js?v=36"></script>
   <script src="sync-merge.js?v=4"></script>
   <script src="progress-stats.js?v=2"></script>
   <script src="sync.js?v=9"></script>

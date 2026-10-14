@@ -4123,6 +4123,7 @@
     if (exportRow) exportRow.classList.toggle('hidden', deck.length === 0);
     $$('.flashcard-furigana-toggle').forEach(el => { el.checked = !!settings.flashcardFurigana; });
     $$('.flashcard-typing-toggle').forEach(el => { el.checked = !!settings.deckTyping; });
+    $$('.flashcard-speak-toggle').forEach(el => { el.checked = flashcardSpeak(); });
 
     const listEl = $('#story-deck-list');
     if (!listEl) return;
@@ -4562,13 +4563,14 @@
   }
 
   // The card's Japanese — the word on the front and the sentence it was saved
-  // from (word highlighted) on the back. The furigana setting is for the
-  // front: once the answer is shown, everything has its readings. Re-run
-  // when the setting changes mid-card and when the answer is shown.
+  // from (word highlighted) on the back — with or without furigana (and the
+  // word's reading in hiragana), per the Furigana switch. Re-run when it's
+  // flipped mid-card.
   function renderStoryReviewText() {
     const card = storyReviewCards[storyReviewIndex];
     if (!card) return;
-    const frontHtml = text => (storyReviewAnswered ? storyRubyHtml(text) : storyCardHtml(text));
+    const reviewCard = $('#story-review-card');
+    if (reviewCard) reviewCard.classList.toggle('no-furigana', !settings.flashcardFurigana);
     const prompt = $('#story-review-prompt');
     const answerWord = $('#story-review-answer-word');
     prompt.classList.toggle('story-review-prompt-meaning', !!card.recall);
@@ -4586,7 +4588,7 @@
         <ul class="kanji-review-words">
           ${examples.map(w => `
             <li${w.saved ? ' class="saved-from"' : ''}>
-              <span class="kanji-review-word" lang="ja">${storyRubyHtml(w.reading && w.reading !== w.word ? storyWordFurigana(w.word, w.reading) : w.word)}</span>
+              <span class="kanji-review-word" lang="ja">${storyCardHtml(w.reading && w.reading !== w.word ? storyWordFurigana(w.word, w.reading) : w.word)}</span>
               <span class="kanji-review-word-meaning">${w.meaning || ''}</span>
             </li>`).join('')}
         </ul>` : '';
@@ -4596,9 +4598,9 @@
     const wordText = storyWordFurigana(storyDisplayWord(card.key), reading);
     if (card.recall) {
       prompt.textContent = meaning;
-      if (answerWord) answerWord.innerHTML = storyRubyHtml(wordText);
+      if (answerWord) answerWord.innerHTML = storyCardHtml(wordText);
     } else {
-      prompt.innerHTML = frontHtml(wordText);
+      prompt.innerHTML = storyCardHtml(wordText);
     }
 
     const src = storyWordSource(card.meta);
@@ -4606,7 +4608,7 @@
     const ctx = $('#story-review-context');
     if (sentence) {
       const html = parseStorySentence(sentence).map(t => {
-        const piece = storyRubyHtml(t.surface);
+        const piece = storyCardHtml(t.surface);
         return t.key === card.key ? `<mark>${piece}</mark>` : piece;
       }).join('');
       ctx.innerHTML = `
@@ -4617,6 +4619,20 @@
     } else {
       ctx.innerHTML = '';
     }
+  }
+
+  // "Read aloud": the word is spoken when its answer is shown. Until it's
+  // set here it follows the site-wide "Speak words on click".
+  function flashcardSpeak() {
+    if (typeof settings.flashcardSpeak === 'boolean') return settings.flashcardSpeak;
+    return !!(window.Pronounce && Pronounce.auto);
+  }
+
+  function setFlashcardSpeak(on) {
+    settings.flashcardSpeak = on;
+    saveSettings(settings);
+    $$('.flashcard-speak-toggle').forEach(el => { el.checked = on; });
+    if (!on && window.Pronounce) Pronounce.stop();
   }
 
   function setFlashcardFurigana(on) {
@@ -4630,12 +4646,11 @@
     if (storyReviewAnswered) return;
     storyReviewAnswered = true;
     const card = storyReviewCards[storyReviewIndex];
-    if (card && card.gloss) pronounceOnClick(card.gloss[0]);
+    if (card && card.gloss && flashcardSpeak() && window.Pronounce) Pronounce.speak(card.gloss[0]);
     $('#story-review-reveal-area').classList.add('hidden');
     const typingArea = $('#story-review-typing');
     if (typingArea) typingArea.classList.add('hidden');
     $('#story-review-answer-area').classList.remove('hidden');
-    renderStoryReviewText();
     if (storyReviewTypedOk !== null) {
       const btn = $(`#story-review-answer-area .btn-grade[data-story-grade="${storyReviewTypedOk ? 4 : 1}"]`);
       if (btn) btn.classList.add('grade-suggested');
@@ -6189,6 +6204,9 @@
     $$('.flashcard-typing-toggle').forEach(el => {
       el.addEventListener('change', () => setDeckTyping(el.checked));
     });
+    $$('.flashcard-speak-toggle').forEach(el => {
+      el.addEventListener('change', () => setFlashcardSpeak(el.checked));
+    });
     on('#btn-story-review-check', 'click', checkStoryReviewTyped);
     on('#btn-story-review-skip', 'click', () => { storyReviewTypedOk = false; revealStoryReviewAnswer(); });
 
@@ -6228,6 +6246,13 @@
       }
 
       if (!(screens['story-review'] && screens['story-review'].classList.contains('active'))) return;
+
+      // F: furigana on/off, V: read aloud on/off (not while typing an answer).
+      const typingInBox = document.activeElement && ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName) && document.activeElement.type !== 'checkbox';
+      if (!typingInBox && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        if (e.key === 'f' || e.key === 'F') { consumeKey(e); setFlashcardFurigana(!settings.flashcardFurigana); return; }
+        if (e.key === 'v' || e.key === 'V') { consumeKey(e); setFlashcardSpeak(!flashcardSpeak()); return; }
+      }
 
       if (!$('#story-review-complete').classList.contains('hidden')) {
         if (continueOnSpace(e, '#btn-story-review-continue')) return;
