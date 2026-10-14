@@ -276,9 +276,11 @@
   const fromPieces = (pieces, hint, d) => fromWords([d ? { p: pieces, m: hint || '', d } : { p: pieces, m: hint || '' }], hint);
 
   // Text typed after a double quote is kept exactly as typed (English, names,
-  // anything) until the closing quote; curly and full-width quotes count too.
+  // anything) until the closing quote, and Enter then adds it; curly and
+  // full-width quotes count too.
   const QUOTE = /["“”＂]/;
   const isLiteral = raw => !!raw && QUOTE.test(raw[0]);
+  const isOpenLiteral = raw => isLiteral(raw) && !QUOTE.test(raw.slice(1));
 
   // Candidate spellings for what's in the input box, best first.
   //   opts.katakana — prefer katakana over hiragana for plain kana
@@ -287,7 +289,7 @@
     opts = opts || {};
     if (isLiteral(raw)) {
       const text = raw.slice(1).replace(/["“”＂]$/, '');
-      return text ? [fromPieces([{ t: text }], 'as typed – close with "')] : [];
+      return text ? [fromPieces([{ t: text }], isOpenLiteral(raw) ? 'as typed – close with "' : 'as typed – Enter to add')] : [];
     }
     const plain = t => fromPieces([{ t }], kanaMeaning(toHira(t), dict));
     const list = [];
@@ -340,7 +342,7 @@
   }
 
   const isParticle = s => PARTICLES.has(toHira(s));
-  const api = { buildDictionary, candidates, isLiteral, isParticle, segment, align, englishMatches, mergePieces, toHira, toKata };
+  const api = { buildDictionary, candidates, isLiteral, isOpenLiteral, isParticle, segment, align, englishMatches, mergePieces, toHira, toKata };
   global.Notepad = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
 
@@ -620,18 +622,20 @@
 
     input.addEventListener('input', (e) => {
       if (e.isComposing) { renderPaper(); return; }
-      const v = input.value;
-      const lastCh = v.slice(-1);
+      let v = input.value;
       if (isLiteral(v)) {
-        // Inside quotes nothing is converted or committed until the closing quote.
-        if (v.length > 1 && QUOTE.test(lastCh)) {
-          const text = v.slice(1, -1);
-          input.value = '';
-          if (text) insert([{ p: [{ t: text }] }]);
-        }
-        refresh();
-        return;
+        // Inside quotes nothing is converted or committed. After the closing
+        // quote Enter (or Space) adds the text; typing on adds it, and what
+        // was typed after it is handled as fresh input.
+        const close = v.slice(1).search(QUOTE) + 1;
+        if (!close || close === v.length - 1) { refresh(); return; }
+        const rest = v.slice(close + 1);
+        input.value = v.slice(0, close + 1);
+        refresh(); commit();
+        if (!rest.trim()) return;
+        input.value = v = rest;
       }
+      const lastCh = v.slice(-1);
       if (QUOTE.test(lastCh)) {
         // An opening quote after romaji commits the romaji first.
         input.value = v.slice(0, -1);
@@ -666,8 +670,8 @@
       if (e.isComposing || e.keyCode === 229 || e.ctrlKey || e.metaKey || e.altKey) return;
       const hasText = input.value.length > 0;
       const consume = () => { e.preventDefault(); e.stopPropagation(); };
-      if (isLiteral(input.value)) {
-        // Quoted text: keys type themselves; only the closing quote (or Esc) ends it.
+      if (isOpenLiteral(input.value)) {
+        // Quoted text: keys type themselves until the closing quote (or Esc).
         if (e.key === 'Enter') consume();
         else if (e.key === 'Escape') { consume(); cancel(); }
         return;

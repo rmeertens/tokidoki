@@ -60,6 +60,8 @@ check('"hello world', 'hello world');
 check('"Tokyo Tower"', 'Tokyo Tower');
 check('“neko', 'neko');
 checkEq('lone quote', Notepad.candidates('"', dict), []);
+checkEq('closed hint', Notepad.candidates('"Tokyo Tower"', dict)[0].hint, 'as typed – Enter to add');
+checkEq('isOpenLiteral', ['"a', '"a"', '"', 'a'].map(Notepad.isOpenLiteral), [true, false, true, false]);
 checkEq('isLiteral', ['"a', 'a"', '', 'neko'].map(Notepad.isLiteral), [true, false, false, false]);
 
 // Sentence candidates keep word boundaries and meanings for the breakdown panel.

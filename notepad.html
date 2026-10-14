@@ -109,8 +109,9 @@
       </p>
       <p class="tab-intro">
         To mix in English (or anything else you want kept as it is), start with a double quote:
-        everything up to the closing <kbd>"</kbd> goes in exactly as typed, spaces and all &mdash;
-        <em>kore wa "Tokyo Tower" desu</em> gives これは Tokyo Tower です.
+        nothing is converted until the closing <kbd>"</kbd>, and <kbd>Enter</kbd> then adds the text
+        exactly as typed, spaces and all &mdash; <em>kore wa "Tokyo Tower"</em> <kbd>Enter</kbd>
+        <em>desu</em> gives これは Tokyo Tower です.
       </p>
 
       <div class="notepad-paper" id="notepad-paper" lang="ja" aria-live="polite"></div>
@@ -129,7 +130,7 @@
         <kbd>1</kbd>&ndash;<kbd>9</kbd> choose &middot; <kbd>Esc</kbd> or ✕ cancel &middot; <kbd>Backspace</kbd> deletes from the notepad &middot;
         <kbd>&larr;</kbd><kbd>&rarr;</kbd> move the cursor &middot; click a sentence to see its words, hear it, or edit it, or its ✕ to remove it &middot;
         <kbd>.</kbd> <kbd>,</kbd> <kbd>?</kbd> <kbd>!</kbd> type 。、？！ &middot; <kbd>-</kbd> is ー &middot;
-        <kbd>"</kbd>&hellip;<kbd>"</kbd> keeps the text in between as typed (English, names)
+        <kbd>"</kbd>&hellip;<kbd>"</kbd> then <kbd>Enter</kbd> adds the text in between as typed (English, names)
       </p>
 
       <div class="kana-settings-row notepad-options">
@@ -164,7 +165,7 @@
   <script src="sync-merge.js?v=5"></script>
   <script src="progress-stats.js?v=2"></script>
   <script src="sync.js?v=9"></script>
-  <script src="notepad.js?v=4"></script>
+  <script src="notepad.js?v=5"></script>
   <script src="sushi-sprites.js"></script>
   <script src="sushi-belt.js"></script>
 
