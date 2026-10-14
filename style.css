@@ -7124,7 +7124,52 @@ a.flashcards-link:hover .flashcards-link-btn {
 .stat-legend { display: flex; align-items: center; justify-content: flex-end; gap: 3px; font-size: 0.7rem; color: var(--text-muted); }
 .stat-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; }
 .stat-legend span { margin: 0 3px; }
-.stat-day:hover { stroke: var(--text); stroke-width: 1.5; }
+.stat-day:hover, .stat-day.stat-on { stroke: var(--text); stroke-width: 1.5; }
+.stat-missed { fill-opacity: 0.3; }
+.stat-chart g.stat-on .stat-bar { fill-opacity: 0.75; }
+.stat-chart g.stat-on .stat-missed, .stat-chart g:hover .stat-missed { fill-opacity: 0.2; }
+.stat-chart g.stat-on .stat-hit { fill: var(--text); fill-opacity: 0.08; }
+.stat-legend .stat-legend-max { margin-left: auto; }
+.stat-daily + .stat-axis-labels + .stat-legend { justify-content: flex-start; }
+.stat-days { display: flex; flex-direction: column; gap: 6px; }
+.stat-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 8px; }
+.stat-switch { display: inline-flex; border: 1px solid var(--border); border-radius: 999px; overflow: hidden; }
+.stat-switch button {
+  padding: 3px 10px;
+  font: inherit;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.stat-switch button + button { border-left: 1px solid var(--border); }
+.stat-switch button[aria-pressed="true"] { color: #fff; background: var(--accent); }
+.account-stats { position: relative; }
+.stat-tip {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 150px;
+  max-width: 260px;
+  padding: 7px 10px;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  color: var(--text);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+  font-variant-numeric: tabular-nums;
+}
+.stat-tip[hidden] { display: none; }
+.stat-tip span { color: var(--text-dim); }
+.stat-tip ul { margin: 3px 0 0; padding: 3px 0 0; list-style: none; border-top: 1px solid var(--border); }
+.stat-tip li { display: flex; justify-content: space-between; gap: 12px; }
+.stat-tip li span:first-child { color: var(--text); }
 .stat-more { border-top: 1px solid var(--border); padding-top: 8px; }
 .stat-more summary { cursor: pointer; font-size: 0.9rem; font-weight: 600; color: var(--accent); }
 .stat-more[open] { display: flex; flex-direction: column; gap: 10px; }

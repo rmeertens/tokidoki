@@ -415,6 +415,9 @@
     overlay.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
     overlay.addEventListener('submit', onSubmit);
     overlay.addEventListener('click', onClick);
+    overlay.addEventListener('pointerover', showTip);
+    overlay.addEventListener('click', showTip);  // a tap on a touch screen
+    overlay.querySelector('.settings-overlay-content').addEventListener('scroll', () => showTip({ target: overlay }));
     render();
   }
 
@@ -557,7 +560,8 @@
   }).join('')}</div>`;
   const barCentre = (i, count) => (i + 0.5) / count;
 
-  // A GitHub-style calendar: a column per week, Monday at the top.
+  // A GitHub-style calendar: a column per week, Monday at the top. Each day
+  // carries its index in the calendar (data-day) for dayTip().
   function calendarSvg(days) {
     const cell = 13, gap = 3, weeks = days.length / 7;
     const max = Math.max(1, ...days.map(d => d.reviews || 0));
@@ -565,10 +569,68 @@
     const rects = days.map((d, i) => {
       if (d.reviews == null) return '';
       const x = Math.floor(i / 7) * (cell + gap), y = (i % 7) * (cell + gap);
-      return `<rect class="stat-day stat-l${level(d.reviews)}" x="${x}" y="${y}" width="${cell}" height="${cell}" rx="3"><title>${esc(dateLabel(d.day))}: ${plural(d.reviews, 'review')}</title></rect>`;
+      return `<rect class="stat-day stat-l${level(d.reviews)}" data-day="${i}" x="${x}" y="${y}" width="${cell}" height="${cell}" rx="3"/>`;
     }).join('');
     return `<svg class="stat-chart stat-calendar" viewBox="0 0 ${weeks * (cell + gap) - gap} ${7 * (cell + gap) - gap}" role="img" aria-hidden="true">${rects}</svg>`;
   }
+
+  // The same days as a graph: a bar a day, right answers below missed ones,
+  // with the months along the bottom.
+  function dailySvg(days) {
+    const shown = days.filter(d => d.reviews != null);
+    const W = 440, H = 88, gap = 0.6;
+    const max = Math.max(1, ...shown.map(d => d.reviews));
+    const w = (W - gap * (shown.length - 1)) / shown.length;
+    const y = v => Math.round((v / max) * (H - 4) * 10) / 10;
+    const cols = shown.map((d, i) => {
+      const x = (i * (w + gap)).toFixed(2), wd = w.toFixed(2);
+      const all = d.reviews ? Math.max(2, y(d.reviews)) : 0;
+      const right = d.reviews ? all * d.passed / d.reviews : 0;
+      const bars = all ? `<rect class="stat-bar stat-missed" x="${x}" y="${H - all}" width="${wd}" height="${(all - right).toFixed(1)}"/>`
+        + (right ? `<rect class="stat-bar" x="${x}" y="${(H - right).toFixed(1)}" width="${wd}" height="${right.toFixed(1)}"/>` : '') : '';
+      return `<g data-day="${i}"><rect class="stat-hit" x="${x}" y="0" width="${(w + gap).toFixed(2)}" height="${H}"/>${bars}</g>`;
+    }).join('');
+    const months = [];
+    shown.forEach((d, i) => {
+      if (i && d.day.endsWith('-01')) months.push([barCentre(i, shown.length), new Date(d.day + 'T12:00:00').toLocaleDateString([], { month: 'short' })]);
+    });
+    const svg = `<svg class="stat-chart stat-daily" viewBox="0 0 ${W} ${H + 1}" role="img" aria-hidden="true"><line class="stat-axis" x1="0" x2="${W}" y1="${H + 0.5}" y2="${H + 0.5}"/>${cols}</svg>`;
+    return svg + axis(months) + `<div class="stat-legend"><i></i><span>Right</span><i class="stat-l1"></i><span>Missed</span><span class="stat-legend-max">Most in a day: ${num(max)}</span></div>`;
+  }
+
+  // What hovering (or tapping) a day shows.
+  let calendarDays = [];
+  function dayTip(d) {
+    if (!d.reviews) return `<strong>${esc(dateLabel(d.day))}</strong><span>No reviews</span>`;
+    const kinds = d.kinds.map(k => `<li><span>${esc(k.label)}</span><span>${num(k.reviews)} · ${pct(k.passed, k.reviews)}</span></li>`).join('');
+    return `<strong>${esc(dateLabel(d.day))}</strong>
+      <span>${plural(d.reviews, 'review')} · ${pct(d.passed, d.reviews)} right · ${d.seconds < 60 ? '<1 min' : duration(d.seconds)}</span>
+      ${d.kinds.length > 1 ? `<ul>${kinds}</ul>` : d.kinds.length ? `<span class="stat-tip-kind">${esc(d.kinds[0].label)}</span>` : ''}`;
+  }
+
+  function showTip(e) {
+    const target = e.target.closest && e.target.closest('[data-day]');
+    const tip = overlay.querySelector('.stat-tip');
+    if (!tip) return;
+    const graph = target && target.closest('.stat-days');
+    const d = target && (graph.classList.contains('stat-days-graph')
+      ? calendarDays.filter(x => x.reviews != null) : calendarDays)[Number(target.dataset.day)];
+    overlay.querySelectorAll('.stat-on').forEach(el => el.classList.remove('stat-on'));
+    if (!d) { tip.hidden = true; return; }
+    target.classList.add('stat-on');
+    tip.innerHTML = dayTip(d);
+    tip.hidden = false;
+    // Above the day, kept inside the stats section.
+    const box = tip.offsetParent.getBoundingClientRect(), at = target.getBoundingClientRect();
+    const left = Math.max(0, Math.min(box.width - tip.offsetWidth, at.left + at.width / 2 - box.left - tip.offsetWidth / 2));
+    const above = at.top - box.top - tip.offsetHeight - 8;
+    tip.style.left = left + 'px';
+    tip.style.top = (above >= 0 ? above : at.bottom - box.top + 8) + 'px';
+  }
+
+  // The calendar or the graph, whichever was picked last.
+  const VIEW_KEY = 'tokidoki_stats_view';
+  const daysView = () => (get(VIEW_KEY) === 'graph' ? 'graph' : 'calendar');
 
   function statsHtml() {
     if (!window.ProgressStats) return '';
@@ -586,11 +648,17 @@
       ? `<p class="account-sub">${plural(lg.reviews, 'review')} on ${plural(lg.days, 'day')} since ${esc(dateLabel(lg.since))} · ${duration(lg.seconds)} · ${pct(lg.passed, lg.reviews)} right${p.secondsToday ? ` · ${duration(p.secondsToday)} today` : ''}</p>`
       : '';
 
+    calendarDays = p.calendar;
+    const graph = daysView() === 'graph';
+    const switcher = `<div class="stat-switch" role="group" aria-label="Show reviews as">${['calendar', 'graph'].map(v =>
+      `<button type="button" data-account-act="view-${v}" aria-pressed="${(v === 'graph') === graph}">${v === 'graph' ? 'Graph' : 'Calendar'}</button>`).join('')}</div>`;
     const calendar = `
       <div class="stat-block">
-        <h4 class="stat-title">Reviews, last 6 months</h4>
-        ${calendarSvg(p.calendar)}
-        <div class="stat-legend"><span>Less</span>${[0, 1, 2, 3, 4].map(l => `<i class="stat-l${l}"></i>`).join('')}<span>More</span></div>
+        <div class="stat-head"><h4 class="stat-title">Reviews, last 6 months</h4>${switcher}</div>
+        <div class="stat-days stat-days-${graph ? 'graph' : 'calendar'}">
+        ${graph ? dailySvg(p.calendar) : `${calendarSvg(p.calendar)}
+        <div class="stat-legend"><span>Less</span>${[0, 1, 2, 3, 4].map(l => `<i class="stat-l${l}"></i>`).join('')}<span>More</span></div>`}
+        </div>
       </div>`;
 
     const week = p.forecast.slice(0, 7).reduce((t, d) => t + d.cards, 0);
@@ -655,6 +723,7 @@
       <section class="account-stats" aria-labelledby="account-stats-title">
         <h3 id="account-stats-title" class="account-stats-title">Your progress</h3>
         ${tiles}${summary}${calendar}${forecast}${table}${more}${list}
+        <div class="stat-tip" role="tooltip" hidden></div>
       </section>`;
   }
 
@@ -772,6 +841,13 @@
     const t = e.target.closest('[data-account-act]');
     if (!t || !overlay.contains(t)) return;
     const act = t.dataset.accountAct;
+    if (act === 'view-calendar' || act === 'view-graph') {
+      set(VIEW_KEY, act.slice(5));
+      render();
+      const b = overlay.querySelector(`[data-account-act="${act}"]`);
+      if (b) b.focus();
+      return;
+    }
     if (act === 'google') {
       // Open the popup straight from the click, or pop-up blockers stop it.
       if (!loaded) {

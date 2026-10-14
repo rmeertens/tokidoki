@@ -165,14 +165,17 @@
     // Reviews, from the review log.
     const log = obj(data[LOG_KEY]);
     const perDay = {};
+    const perDayKinds = {};
     let reviews = 0, fails = 0, seconds = 0;
     Object.keys(log).forEach(day => {
       const t = [0, 0, 0];
-      Object.values(isObj(log[day]) ? log[day] : {}).forEach(v => {
+      const byKind = isObj(log[day]) ? log[day] : {};
+      Object.values(byKind).forEach(v => {
         if (Array.isArray(v)) for (let j = 0; j < 3; j++) t[j] += n(v[j]);
       });
       if (!t[0]) return;
       perDay[day] = t;
+      perDayKinds[day] = byKind;
       reviews += t[0]; fails += t[1]; seconds += t[2];
     });
     let logStreak = 0;
@@ -188,13 +191,24 @@
     const todayLog = perDay[today] || [0, 0, 0];
 
     // The calendar: CALENDAR_WEEKS columns of Monday–Sunday, ending this week.
+    // Days with reviews also say how they went, and in which practice.
+    const dayKinds = day => {
+      const byKind = perDayKinds[day] || {};
+      return Object.keys(byKind).map(id => {
+        const v = Array.isArray(byKind[id]) ? byKind[id] : [];
+        const k = KINDS.find(x => x.id === id);
+        return { id, label: k ? k.label : 'Other', reviews: n(v[0]), passed: n(v[0]) - n(v[1]) };
+      }).filter(k => k.reviews > 0).sort((a, b) => b.reviews - a.reviews);
+    };
     const back = (new Date(now).getDay() + 6) % 7;  // days since Monday
     const first = addDays(now, -back - (CALENDAR_WEEKS - 1) * 7);
     const calendar = [];
     for (let i = 0; i < CALENDAR_WEEKS * 7; i++) {
       const t = addDays(first, i);
       const day = localDay(t);
-      calendar.push({ day, reviews: day > today ? null : (perDay[day] || [0])[0] });
+      if (day > today) { calendar.push({ day, reviews: null }); continue; }
+      const [r, f, secs] = perDay[day] || [0, 0, 0];
+      calendar.push({ day, reviews: r, passed: r - f, seconds: secs, kinds: r ? dayKinds(day) : [] });
     }
 
     const totals = obj(data[TOTALS_KEY]);
