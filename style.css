@@ -5437,7 +5437,7 @@ a.chapter-card {
   font: inherit;
 }
 .notepad-panel {
-  margin-bottom: 12px;
+  margin: 12px 0;
   padding: 12px 16px;
   background: var(--bg-card);
   border: 1px solid var(--border);
