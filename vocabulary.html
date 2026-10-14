@@ -20,7 +20,7 @@
   <meta name="twitter:description" content="JLPT vocabulary (N5-N3), hover to peek the meaning (or word), click to reveal for good.">
   <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
   <link rel="canonical" href="https://tokidoki.meertens.dev/vocabulary.html">
-  <link rel="stylesheet" href="style.css?v=59">
+  <link rel="stylesheet" href="style.css?v=60">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -95,6 +95,7 @@
           <span class="page-nav-label">Words &amp; Tools</span>
           <div class="page-nav-items">
             <a class="page-nav-item active" href="vocabulary.html" aria-current="page"><span class="page-nav-glyph" aria-hidden="true">語</span>Vocabulary</a>
+            <a class="page-nav-item" href="vocab-quiz.html"><span class="page-nav-glyph" aria-hidden="true">試</span>Vocab Quiz</a>
             <a class="page-nav-item" href="flashcards.html"><span class="page-nav-glyph" aria-hidden="true">札</span>Flashcards</a>
             <a class="page-nav-item" href="notepad.html"><span class="page-nav-glyph" aria-hidden="true">書</span>Notepad</a>
           </div>
@@ -107,10 +108,8 @@
         pick Picture &rarr; Word to name the things in over 600 drawings. Click ＋ on a card
         to add the word to your flashcards; words already in them have an orange outline.
         Click &#128266; to hear a word, or &#128034; to hear it slowly &mdash; or turn on
-        <i>Speak words on click</i> to hear every card you click. Press <i>Type the answers</i>
-        to go through the words one at a time and type each meaning &mdash; or, for
-        Meaning &rarr; Word and Picture &rarr; Word, the word itself: romaji turns into
-        hiragana as you type, and Space (or a tap on a suggestion) turns it into kanji.
+        <i>Speak words on click</i> to hear every card you click. To test yourself by
+        typing the answers, in topic sets, open the <a href="vocab-quiz.html">Vocab Quiz</a>.
       </p>
       <div class="kana-settings-row">
         <button type="button" class="btn-secondary speak-toggle hidden" data-speak-toggle aria-pressed="false">&#128266; Speak words on click: Off</button>
@@ -154,60 +153,13 @@
       <p class="vocab-deck-status" id="vocab-deck-status"></p>
       <div class="kanji-hover-toolbar">
         <p class="tab-intro" id="vocab-count"></p>
-        <div class="vocab-toolbar-buttons">
-          <button id="btn-vocab-typing" class="btn-secondary" title="Go through these words one at a time, typing each answer">&#9000; Type the answers</button>
-          <button id="btn-vocab-shuffle" class="btn-secondary">&#128256; Shuffle</button>
-        </div>
+        <button id="btn-vocab-shuffle" class="btn-secondary">&#128256; Shuffle</button>
       </div>
 
       <div class="vocab-hover-grid" id="vocab-grid"></div>
       <p class="tab-intro hidden" id="vocab-empty">No words match &mdash; check the levels, or add words to your flashcards with ＋.</p>
     </main>
 
-    <!-- Screen: typing practice over the words above -->
-    <main id="screen-vocab-typing" class="screen">
-      <div class="study-toolbar">
-        <div class="study-progress">
-          <div class="study-progress-bar"><div id="vocab-typing-bar-fill" class="study-bar-fill"></div></div>
-          <span id="vocab-typing-progress-text" class="study-progress-text">0 / 0</span>
-        </div>
-      </div>
-      <div id="vocab-typing-card" class="card kana-card vocab-typing-card">
-        <div class="kana-prompt-label" id="vocab-typing-label">Type the meaning</div>
-        <div id="vocab-typing-prompt" class="story-review-prompt" lang="ja"></div>
-        <div class="typing-area" id="vocab-typing-area">
-          <div class="answer-area">
-            <input type="text" id="vocab-typing-input" class="answer-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-            <button id="btn-vocab-typing-check" class="btn-primary">Check</button>
-          </div>
-          <div class="typing-buttons">
-            <button id="btn-vocab-typing-skip" class="btn-secondary">Show Answer</button>
-          </div>
-        </div>
-        <div class="kana-answer-area hidden" id="vocab-typing-answer-area">
-          <div id="vocab-typing-result" class="typed-result"></div>
-          <div id="vocab-typing-answer" class="story-review-answer"></div>
-          <div class="reveal-area">
-            <button id="btn-vocab-typing-next" class="btn-reveal">Next &rarr;</button>
-            <span class="reveal-hint">or press Enter</span>
-          </div>
-        </div>
-      </div>
-      <div id="vocab-typing-complete" class="session-complete hidden">
-        <div class="complete-icon">🎉</div>
-        <h2>Session Complete!</h2>
-        <div class="session-stats">
-          <div class="stat"><span class="stat-num" id="vocab-typing-total">0</span><span class="stat-label">Words</span></div>
-          <div class="stat"><span class="stat-num" id="vocab-typing-correct">0</span><span class="stat-label">Right</span></div>
-          <div class="stat"><span class="stat-num" id="vocab-typing-accuracy">0%</span><span class="stat-label">Accuracy</span></div>
-        </div>
-        <div id="vocab-typing-missed" class="vocab-typing-missed"></div>
-        <div class="session-actions">
-          <button id="btn-vocab-typing-continue" class="btn-primary">Next 20 →</button>
-          <button id="btn-vocab-typing-done" class="btn-secondary">Back to the list</button>
-        </div>
-      </div>
-    </main>
 
   </div>
 
@@ -223,15 +175,11 @@
   <script src="stories-data.js?v=15"></script>
   <script src="mystery-words.js?v=3"></script>
   <script src="examples.js"></script>
-  <script src="romaji.js"></script>
-  <script src="kanji-ime.js"></script>
-  <script src="answer-diff.js"></script>
-  <script src="typed-answer.js"></script>
   <script src="pronounce.js"></script>
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=4"></script>
-  <script src="app.js?v=38"></script>
-  <script src="sync-merge.js?v=4"></script>
+  <script src="app.js?v=39"></script>
+  <script src="sync-merge.js?v=5"></script>
   <script src="progress-stats.js?v=2"></script>
   <script src="sync.js?v=9"></script>
   <script src="sushi-sprites.js"></script>
@@ -250,9 +198,8 @@
       kanji, or spelled out entirely in hiragana/katakana. Filter which JLPT levels
       appear. The Picture &rarr; Word direction shows a drawing for each word that can be
       pictured &mdash; foods, animals, clothes, places, the body, colours &mdash; and hides
-      the Japanese word until you hover or click. Typing practice goes through the same
-      words one at a time: type the English meaning, or type the Japanese word in hiragana
-      (romaji turns into kana as you type, and Space turns the kana into kanji), and see straight away whether it was right. Any word can be added to the same personal
+      the Japanese word until you hover or click. To test yourself on the same words by typing
+      the answers, in sets grouped by topic, use the <a href="vocab-quiz.html">vocabulary quiz</a>. Any word can be added to the same personal
       flashcard deck as the <a href="stories.html">Stories</a> page, where it is reviewed with
       spaced repetition, and words already in the deck get an orange outline. Pairs well with the <a href="kanji-hover.html">Kanji Hover</a> reference
       and the <a href="kanji.html">printable practice sheets</a>.

@@ -84,7 +84,8 @@
 
   const higherScore = (l, r) => ((r && r.score) || 0) > ((l && l.score) || 0) ? r : l;
 
-  // Scores per set plus the ids last missed: word order, story fill, listening.
+  // Scores per set plus the ids last missed: word order, story fill, listening,
+  // vocab quiz.
   function mergeGameStore(b, l, r) {
     b = isObj(b) ? b : {};
     const out = Object.assign({}, r, l);
@@ -167,6 +168,7 @@
     tokidoki_word_order: mergeGameStore,
     tokidoki_story_fill: mergeGameStore,
     tokidoki_listening: mergeGameStore,
+    tokidoki_vocab_quiz: mergeGameStore,
     tokidoki_conversation: mergeConversation,
   };
 

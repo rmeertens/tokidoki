@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" id="viewport-meta" content="width=device-width, initial-scale=1.0">
+  <title>Vocabulary Quiz by Topic | Tokidoki</title>
+  <meta name="description" content="Test yourself on JLPT vocabulary (N5-N3) in topic sets of 20-50 words — food, family, time, verbs of movement and more. Type the meaning or the word (romaji turns into kana and kanji), track your best score per set and review the words you missed.">
+  <meta property="og:title" content="Vocabulary Quiz by Topic | Tokidoki">
+  <meta property="og:description" content="JLPT vocabulary (N5-N3) in topic sets of 20-50 words. Type the meaning or the word, and track your best score per set.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tokidoki.meertens.dev/vocab-quiz.html">
+  <meta property="og:site_name" content="Tokidoki">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://tokidoki.meertens.dev/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Tokidoki — free Japanese practice, one plate at a time">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Vocabulary Quiz by Topic | Tokidoki">
+  <meta name="twitter:description" content="JLPT vocabulary (N5-N3) in topic sets of 20-50 words — type the meaning or the word.">
+  <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
+  <link rel="canonical" href="https://tokidoki.meertens.dev/vocab-quiz.html">
+  <link rel="stylesheet" href="style.css?v=60">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="theme-color" content="#f6f0e4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#16141b" media="(prefers-color-scheme: dark)">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXWYNZC7YH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXWYNZC7YH');
+  </script>
+</head>
+<body data-mode="vocab-quiz">
+  <div id="app">
+
+    <!-- Header -->
+    <!-- Header (rendered by renderSharedChrome() in app.js) -->
+    <div id="header-mount"></div>
+
+    <!-- Screen: Vocab Quiz home -->
+    <main id="screen-chapters" class="screen active">
+      <nav class="page-nav" aria-label="Exercises">
+        <div class="page-nav-group">
+          <span class="page-nav-label">Conjugation</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="verbs.html"><span class="page-nav-glyph" aria-hidden="true">食</span>Verbs</a>
+            <a class="page-nav-item" href="adjectives.html"><span class="page-nav-glyph" aria-hidden="true">高</span>Adjectives</a>
+            <a class="page-nav-item" href="custom.html"><span class="page-nav-glyph" aria-hidden="true">作</span>Build Your Own</a>
+            <a class="page-nav-item" href="bunkei.html"><span class="page-nav-glyph" aria-hidden="true">型</span>Bunkei</a>
+          </div>
+        </div>
+        <div class="page-nav-group">
+          <span class="page-nav-label">Grammar</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="sentences.html"><span class="page-nav-glyph" aria-hidden="true">文</span>Sentences</a>
+            <a class="page-nav-item" href="particles-quiz.html"><span class="page-nav-glyph" aria-hidden="true">は</span>Particles</a>
+            <a class="page-nav-item" href="word-order.html"><span class="page-nav-glyph" aria-hidden="true">★</span>Word Order</a>
+            <a class="page-nav-item" href="story-fill.html"><span class="page-nav-glyph" aria-hidden="true">章</span>Story Fill-in</a>
+            <a class="page-nav-item" href="misc.html"><span class="page-nav-glyph" aria-hidden="true">雑</span>Misc</a>
+          </div>
+        </div>
+        <div class="page-nav-group">
+          <span class="page-nav-label">Reading &amp; Listening</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="stories.html"><span class="page-nav-glyph" aria-hidden="true">話</span>Stories</a>
+            <a class="page-nav-item" href="news.html"><span class="page-nav-glyph" aria-hidden="true">報</span>News</a>
+            <a class="page-nav-item" href="mystery.html"><span class="page-nav-glyph" aria-hidden="true">謎</span>Mystery</a>
+            <a class="page-nav-item" href="listening.html"><span class="page-nav-glyph" aria-hidden="true">聴</span>Listening</a>
+          </div>
+        </div>
+        <div class="page-nav-group">
+          <span class="page-nav-label">Phrases &amp; Culture</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="phrases.html"><span class="page-nav-glyph" aria-hidden="true">言</span>Phrases</a>
+            <a class="page-nav-item" href="memes.html"><span class="page-nav-glyph" aria-hidden="true">笑</span>Memes &amp; Jokes</a>
+            <a class="page-nav-item" href="conversation.html"><span class="page-nav-glyph" aria-hidden="true">談</span>Conversation</a>
+          </div>
+        </div>
+        <div class="page-nav-group">
+          <span class="page-nav-label">Kana &amp; Kanji</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="kana.html"><span class="page-nav-glyph" aria-hidden="true">あ</span>Kana</a>
+            <a class="page-nav-item" href="kanji-quiz.html"><span class="page-nav-glyph" aria-hidden="true">字</span>Kanji Quiz</a>
+            <a class="page-nav-item" href="kanji-hover.html"><span class="page-nav-glyph" aria-hidden="true">漢</span>Kanji Hover</a>
+            <a class="page-nav-item" href="words-by-kanji.html"><span class="page-nav-glyph" aria-hidden="true">詞</span>Words by Kanji</a>
+            <a class="page-nav-item" href="kanji.html"><span class="page-nav-glyph" aria-hidden="true">紙</span>Practice Sheets</a>
+          </div>
+        </div>
+        <div class="page-nav-group">
+          <span class="page-nav-label">Words &amp; Tools</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="vocabulary.html"><span class="page-nav-glyph" aria-hidden="true">語</span>Vocabulary</a>
+            <a class="page-nav-item active" href="vocab-quiz.html" aria-current="page"><span class="page-nav-glyph" aria-hidden="true">試</span>Vocab Quiz</a>
+            <a class="page-nav-item" href="flashcards.html"><span class="page-nav-glyph" aria-hidden="true">札</span>Flashcards</a>
+            <a class="page-nav-item" href="notepad.html"><span class="page-nav-glyph" aria-hidden="true">書</span>Notepad</a>
+          </div>
+        </div>
+      </nav>
+      <section class="lis-hero">
+        <div class="lis-hero-face" aria-hidden="true">📝</div>
+        <div>
+          <p class="lis-hero-kicker" lang="ja">語彙 · JLPT N5–N3</p>
+          <h2 class="lis-hero-title">Vocabulary quiz</h2>
+          <p class="lis-hero-sub">The JLPT word lists in topic sets of 20&ndash;50 words. Type each answer &mdash; romaji turns into hiragana as you type, and Space turns it into kanji. To browse the words instead, open <a href="vocabulary.html">Vocabulary</a>.</p>
+        </div>
+      </section>
+
+      <div class="lis-levels" role="group" aria-label="Level">
+        <span class="lis-levels-label">Level</span>
+        <button data-vq-level="n5" aria-pressed="true">N5</button>
+        <button data-vq-level="n4" aria-pressed="false">N4</button>
+        <button data-vq-level="n3" aria-pressed="false">N3</button>
+      </div>
+      <div class="lis-levels" role="group" aria-label="Direction">
+        <span class="lis-levels-label">Type</span>
+        <button data-vq-direction="word-to-meaning" aria-pressed="true">The meaning</button>
+        <button data-vq-direction="meaning-to-word" aria-pressed="false">The word</button>
+      </div>
+      <div class="lis-levels" role="group" aria-label="How words are written">
+        <span class="lis-levels-label">Show</span>
+        <button data-vq-script="kanji" aria-pressed="true">Kanji</button>
+        <button data-vq-script="furigana" aria-pressed="false">Furigana</button>
+        <button data-vq-script="kana" aria-pressed="false">Kana only</button>
+      </div>
+
+      <button class="lis-review hidden" id="vq-review">↺ Review the words you missed <span class="lis-review-count" id="vq-review-count">0</span></button>
+
+      <h3 class="lis-heading">Practise by topic <span>&mdash; <b id="vq-total">0</b> words in <b id="vq-sets">0</b> sets</span></h3>
+      <div class="lis-sections" id="vq-sections"></div>
+    </main>
+
+    <!-- Screen: typing practice over the words above -->
+    <main id="screen-vocab-typing" class="screen">
+      <div class="study-toolbar">
+        <div class="study-progress">
+          <div class="study-progress-bar"><div id="vocab-typing-bar-fill" class="study-bar-fill"></div></div>
+          <span id="vocab-typing-progress-text" class="study-progress-text">0 / 0</span>
+        </div>
+      </div>
+      <div id="vocab-typing-card" class="card kana-card vocab-typing-card">
+        <div class="kana-prompt-label" id="vocab-typing-label">Type the meaning</div>
+        <div id="vocab-typing-prompt" class="story-review-prompt" lang="ja"></div>
+        <div class="typing-area" id="vocab-typing-area">
+          <div class="answer-area">
+            <input type="text" id="vocab-typing-input" class="answer-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+            <button id="btn-vocab-typing-check" class="btn-primary">Check</button>
+          </div>
+          <div class="typing-buttons">
+            <button id="btn-vocab-typing-skip" class="btn-secondary">Show Answer</button>
+          </div>
+        </div>
+        <div class="kana-answer-area hidden" id="vocab-typing-answer-area">
+          <div id="vocab-typing-result" class="typed-result"></div>
+          <div id="vocab-typing-answer" class="story-review-answer"></div>
+          <div class="reveal-area">
+            <button id="btn-vocab-typing-next" class="btn-reveal">Next &rarr;</button>
+            <span class="reveal-hint">or press Enter</span>
+          </div>
+        </div>
+      </div>
+      <div id="vocab-typing-complete" class="session-complete hidden">
+        <div class="complete-icon">🎉</div>
+        <h2>Session Complete!</h2>
+        <div class="session-stats">
+          <div class="stat"><span class="stat-num" id="vocab-typing-total">0</span><span class="stat-label">Words</span></div>
+          <div class="stat"><span class="stat-num" id="vocab-typing-correct">0</span><span class="stat-label">Right</span></div>
+          <div class="stat"><span class="stat-num" id="vocab-typing-accuracy">0%</span><span class="stat-label">Accuracy</span></div>
+        </div>
+        <div id="vocab-typing-missed" class="vocab-typing-missed"></div>
+        <div class="session-actions">
+          <button id="btn-vocab-typing-continue" class="btn-primary">Next set →</button>
+          <button id="btn-vocab-typing-again" class="btn-secondary">Try again</button>
+          <button id="btn-vocab-typing-done" class="btn-secondary">All sets</button>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="conjugator.js"></script>
+  <script src="verbs.js"></script>
+  <script src="kana.js"></script>
+  <script src="kanji-quiz-data.js"></script>
+  <script src="sentences-data.js"></script>
+  <script src="vocabulary-data.js"></script>
+  <script src="listening-art.js?v=8"></script>
+  <script src="vocab-pictures.js"></script>
+  <script src="kanji-info-data.js"></script>
+  <script src="stories-data.js?v=15"></script>
+  <script src="mystery-words.js?v=3"></script>
+  <script src="examples.js"></script>
+  <script src="vocab-groups.js"></script>
+  <script src="romaji.js"></script>
+  <script src="kanji-ime.js"></script>
+  <script src="answer-diff.js"></script>
+  <script src="typed-answer.js"></script>
+  <script src="pronounce.js"></script>
+  <script src="kanji-cards.js?v=2"></script>
+  <script src="swipe-cards.js?v=4"></script>
+  <script src="app.js?v=39"></script>
+  <script src="sync-merge.js?v=5"></script>
+  <script src="progress-stats.js?v=2"></script>
+  <script src="sync.js?v=9"></script>
+  <script src="sushi-sprites.js"></script>
+  <script src="sushi-belt.js"></script>
+
+
+  <!-- Static content for search engines -->
+  <section id="seo-content" aria-hidden="true">
+    <h1>Japanese vocabulary quiz by topic (JLPT N5&ndash;N3)</h1>
+    <p>
+      Test yourself on the JLPT N5, N4 and N3 vocabulary lists, sorted into topic sets of 20 to 50
+      words: numbers and time, food and drink, the body and health, people and family, school,
+      places and transport, nature and weather, verbs of moving, daily life, talking and making,
+      adjectives for people and for things, adverbs and connecting words, and more. Type the English
+      meaning of each Japanese word, or type the Japanese word for each meaning &mdash; romaji turns
+      into hiragana as you type and Space converts it to kanji. Each set keeps your best score, the
+      words you miss can be reviewed together or added to your <a href="flashcards.html">flashcards</a>,
+      and the whole list can be browsed on the <a href="vocabulary.html">Vocabulary</a> page.
+    </p>
+  </section>
+</body>
+</html>

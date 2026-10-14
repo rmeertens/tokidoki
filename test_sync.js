@@ -93,6 +93,11 @@ out = P(M.mergeAll({ tokidoki_word_order: J(goBase) },
 ok(out.best.s1.score === 7 && out.best.s2.score === 2, 'game store: best score per set');
 ok(out.last.q3 === true && out.last.q5 === false, 'game store: last answers from both sides');
 ok(J(out.missed.slice().sort()) === J(['q2', 'q4', 'q5']), 'game store: missed lists merged, fixed ones dropped');
+out = P(M.mergeAll({ tokidoki_vocab_quiz: J({ best: {}, missed: ['n5|犬|いぬ'] }) },
+  { tokidoki_vocab_quiz: J({ best: { 'n5-food:m': { score: 30, total: 35 } }, missed: [] }) },
+  { tokidoki_vocab_quiz: J({ best: { 'n5-food:m': { score: 33, total: 35 } }, missed: ['n5|犬|いぬ', 'n4|空気|くうき'] }) },
+).tokidoki_vocab_quiz);
+ok(out.best['n5-food:m'].score === 33 && J(out.missed) === J(['n4|空気|くうき']), 'vocab quiz: best scores and missed words merged');
 
 // Merging is stable: syncing again changes nothing.
 const l2 = { tokidoki_srs: J(srsLocal), tokidoki_theme: '"dark"' };

@@ -319,7 +319,7 @@
       title.textContent = 'Flashcards';
     } else if (name === 'vocab-typing') {
       backBtn.classList.remove('hidden');
-      title.textContent = 'Vocabulary';
+      title.textContent = 'Vocab Quiz';
     } else if (name === 'bunkei') {
       backBtn.classList.remove('hidden');
       title.textContent = 'Bunkei';
@@ -3443,35 +3443,127 @@
     if (empty) empty.classList.toggle('hidden', items.length !== 0);
   }
 
-  // ── Typing practice ──
+  // ─── Vocab Quiz (vocab-quiz.html) ───────────────────────────────────────────
   //
-  // "Type the answers" goes through the words on the page (same levels,
-  // flashcard filter and direction), 20 at a time in a shuffled order: type
-  // the meaning for Word → Meaning, the word (kana or kanji) for the other
-  // two. It's practice only — nothing is scheduled — but each answer has a
-  // ＋ to put the word in the flashcards.
+  // The vocabulary as a typing quiz, in the topic sets of vocab-groups.js
+  // (20–50 words each, built by scripts/build_vocab_groups.mjs), laid out like
+  // the Listening page: pick a level, then a set. Type the meaning, or the
+  // word (romaji → kana → kanji via romaji.js / kanji-ime.js). It's practice
+  // only — nothing is scheduled — but each set keeps its best score per
+  // direction, the words missed can be reviewed together, and any word can
+  // go into the flashcards.
 
-  const VOCAB_TYPING_BATCH = 20;
-  let vocabTyping = null; // { pool, start, batch, i, correct, missed, answered, direction, script }
+  const VQ_KEY = 'tokidoki_vocab_quiz';
+  const VQ_REVIEW_MAX = 50;
+  let vocabTyping = null; // { id, level, items, i, correct, missed, answered, direction, script }
 
-  function startVocabTyping() {
-    const words = loadStoryWords();
-    let pool = buildVocabPool();
-    if ($('#vocab-only-deck') && $('#vocab-only-deck').checked) pool = pool.filter(item => vocabDeckKey(item, words));
-    if (!pool.length || !window.TypedAnswer) return;
-    shuffle(pool);
-    vocabTyping = { pool, start: 0, direction: getVocabDirection(), script: getVocabScript() };
-    nextVocabTypingBatch();
+  function loadVq() {
+    let store = {};
+    try { store = JSON.parse(localStorage.getItem(VQ_KEY)) || {}; } catch { /* corrupt */ }
+    if (!store.best || typeof store.best !== 'object') store.best = {};
+    if (!Array.isArray(store.missed)) store.missed = [];
+    return store;
   }
 
-  function nextVocabTypingBatch() {
-    const t = vocabTyping;
-    if (t.batch) t.start += t.batch.length;
-    if (t.start >= t.pool.length) { shuffle(t.pool); t.start = 0; }
-    t.batch = t.pool.slice(t.start, t.start + VOCAB_TYPING_BATCH);
-    t.i = 0;
-    t.correct = 0;
-    t.missed = [];
+  function saveVq(store) {
+    try { localStorage.setItem(VQ_KEY, JSON.stringify(store)); } catch { /* storage full or unavailable */ }
+  }
+
+  const vqLevel = () => (VOCAB_LEVELS.includes(settings.vqLevel) ? settings.vqLevel : 'n5');
+  const vqDirection = () => (settings.vqDirection === 'meaning-to-word' ? 'meaning-to-word' : 'word-to-meaning');
+  const vqScript = () => (['kanji', 'furigana', 'kana'].includes(settings.vqScript) ? settings.vqScript : 'kanji');
+  const vqBestKey = (id, direction) => `${id}:${direction === 'meaning-to-word' ? 'w' : 'm'}`;
+
+  // A level's words by "漢字|かな"; a word listed twice (後 as "afterwards"
+  // and as "the rest") keeps every meaning, so either counts as right.
+  const vqWordMaps = {};
+  function vqWord(level, key) {
+    if (!vqWordMaps[level]) {
+      const map = {};
+      (VOCAB_DATA[level] || []).forEach(w => {
+        const k = `${w.kanji}|${w.kana}`;
+        if (map[k]) map[k].meaning += `; ${w.meaning}`;
+        else map[k] = { level, kanji: w.kanji, kana: w.kana, html: w.html, meaning: w.meaning };
+      });
+      vqWordMaps[level] = map;
+    }
+    return vqWordMaps[level][key] || null;
+  }
+
+  const vqGroups = level => ((window.VOCAB_GROUPS || {})[level] || []);
+  const vqMissedHere = (store, level) => store.missed.filter(k => k.startsWith(`${level}|`));
+
+  function renderVocabQuizPage() {
+    const el = $('#vq-sections');
+    if (!el) return;
+    const level = vqLevel();
+    const direction = vqDirection();
+    const store = loadVq();
+    $$('[data-vq-level]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.vqLevel === level)));
+    $$('[data-vq-direction]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.vqDirection === direction)));
+    $$('[data-vq-script]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.vqScript === vqScript())));
+
+    // One row per theme; its sets are the theme's groups.
+    const groups = vqGroups(level);
+    const rows = [];
+    groups.forEach(g => {
+      const last = rows[rows.length - 1];
+      if (last && last.theme === g.theme) last.groups.push(g);
+      else rows.push({ theme: g.theme, title: g.title, groups: [g] });
+    });
+    const themes = window.VOCAB_THEMES || {};
+    const firstKana = key => key.split('|')[1].replace(/^[～〜]/, '').charAt(0);
+    let firstOpen = true;
+    el.innerHTML = rows.map(row => {
+      const n = row.groups.reduce((k, g) => k + g.words.length, 0);
+      const bests = row.groups.map(g => store.best[vqBestKey(g.id, direction)]);
+      const done = bests.filter(Boolean).length;
+      const sample = row.groups[0].words.slice(0, 4).map(k => k.split('|')[0]).join('、');
+      const chips = row.groups.map((g, k) => {
+        const b = bests[k];
+        const next = !b && firstOpen;
+        if (next) firstOpen = false;
+        const state = !b ? (next ? ' lis-set-next' : '') : b.score === b.total ? ' lis-set-perfect' : ' lis-set-done';
+        const range = `${firstKana(g.words[0])}–${firstKana(g.words[g.words.length - 1])}`;
+        return `<button class="lis-set${state}" data-vq-set="${g.id}" aria-label="${escText(row.title)}, set ${k + 1}: ${g.words.length} words${b ? `, best ${b.score} of ${b.total}` : ''}">
+          <span class="lis-set-name">${row.groups.length > 1 ? `Set ${k + 1}` : 'Start'}</span>
+          ${row.groups.length > 1 ? `<span class="lis-set-range" lang="ja">${range}</span>` : ''}
+          <span class="lis-set-score">${b ? `${b.score}/${b.total}` : next ? 'next' : `${g.words.length} words`}</span>
+        </button>`;
+      }).join('');
+      return `<div class="lis-part-row">
+        <div class="lis-part-head">
+          <span class="lis-part-badge" lang="ja">${escText((themes[row.theme] || {}).ja || '')}</span>
+          <span class="lis-part-body">
+            <span class="lis-part-title">${escText(row.title)}</span>
+            <span class="lis-part-desc" lang="ja">${escText(sample)}…</span>
+          </span>
+          <span class="lis-part-meta">${n} words<br>${done}/${row.groups.length} set${row.groups.length === 1 ? '' : 's'}</span>
+        </div>
+        <div class="lis-sets">${chips}</div>
+      </div>`;
+    }).join('');
+    $('#vq-total').textContent = groups.reduce((k, g) => k + g.words.length, 0);
+    $('#vq-sets').textContent = groups.length;
+    const missed = vqMissedHere(store, level).length;
+    $('#vq-review').classList.toggle('hidden', !missed);
+    $('#vq-review-count').textContent = missed;
+  }
+
+  // Starts a set by its id, or "missed" for the words missed at this level.
+  function startVocabQuiz(id) {
+    if (!window.TypedAnswer) return;
+    const level = vqLevel();
+    let keys;
+    if (id === 'missed') keys = vqMissedHere(loadVq(), level).slice(-VQ_REVIEW_MAX).map(k => k.slice(level.length + 1));
+    else {
+      const g = vqGroups(level).find(x => x.id === id);
+      keys = g ? g.words : [];
+    }
+    const items = keys.map(k => vqWord(level, k)).filter(Boolean);
+    if (!items.length) return;
+    shuffle(items);
+    vocabTyping = { id, level, items, i: 0, correct: 0, missed: [], answered: false, direction: vqDirection(), script: vqScript() };
     showScreen('vocab-typing');
     $('#vocab-typing-complete').classList.add('hidden');
     $('#vocab-typing-card').classList.remove('hidden');
@@ -3484,19 +3576,18 @@
 
   function showVocabTypingCard() {
     const t = vocabTyping;
-    if (t.i >= t.batch.length) { finishVocabTyping(); return; }
-    const item = t.batch[t.i];
+    if (t.i >= t.items.length) { finishVocabTyping(); return; }
+    const item = t.items[t.i];
     t.answered = false;
     const wantsWord = vocabTypingWantsWord();
 
-    $('#vocab-typing-bar-fill').style.width = `${(t.i / t.batch.length) * 100}%`;
-    $('#vocab-typing-progress-text').textContent = `${t.i + 1} / ${t.batch.length}`;
+    $('#vocab-typing-bar-fill').style.width = `${(t.i / t.items.length) * 100}%`;
+    $('#vocab-typing-progress-text').textContent = `${t.i + 1} / ${t.items.length}`;
     $('#vocab-typing-label').textContent = wantsWord ? 'Type the word' : 'Type the meaning';
 
     const prompt = $('#vocab-typing-prompt');
-    prompt.classList.toggle('story-review-prompt-meaning', t.direction === 'meaning-to-word');
-    if (t.direction === 'picture-to-word') prompt.innerHTML = vocabPictureHtml(item.kanji);
-    else if (t.direction === 'meaning-to-word') prompt.textContent = item.meaning;
+    prompt.classList.toggle('story-review-prompt-meaning', wantsWord);
+    if (wantsWord) prompt.textContent = item.meaning;
     else prompt.innerHTML = t.script === 'kana' ? item.kana : t.script === 'furigana' ? item.html : item.kanji;
 
     $('#vocab-typing-area').classList.remove('hidden');
@@ -3515,12 +3606,19 @@
     const t = vocabTyping;
     if (!t || t.answered) return;
     t.answered = true;
-    const item = t.batch[t.i];
+    const item = t.items[t.i];
     const input = $('#vocab-typing-input');
     const typed = skip ? '' : (window.Romaji ? Romaji.flush(input) : input.value).trim();
     const result = typedAnswerResult(typed, vocabTypingWantsWord() ? { answers: [item.kanji, item.kana] } : { meaning: item.meaning });
     if (result.ok) t.correct++;
     else t.missed.push(item);
+
+    // The missed list follows every answer, so a set left halfway still counts.
+    const store = loadVq();
+    const key = `${item.level}|${item.kanji}|${item.kana}`;
+    store.missed = store.missed.filter(k => k !== key);
+    if (!result.ok) store.missed.push(key);
+    saveVq(store);
 
     $('#vocab-typing-result').innerHTML = result.html;
     const saved = !!vocabDeckKey(item, loadStoryWords());
@@ -3548,13 +3646,22 @@
     $('#vocab-typing-card').classList.add('hidden');
     $('#vocab-typing-complete').classList.remove('hidden');
     $('#vocab-typing-bar-fill').style.width = '100%';
-    const total = t.batch.length;
+    const total = t.items.length;
     $('#vocab-typing-total').textContent = total;
     $('#vocab-typing-correct').textContent = t.correct;
     $('#vocab-typing-accuracy').textContent = total ? `${Math.round((t.correct / total) * 100)}%` : '0%';
+    if (t.id !== 'missed') {
+      const store = loadVq();
+      const bk = vqBestKey(t.id, t.direction);
+      const prev = store.best[bk];
+      if (!prev || t.correct > prev.score || total !== prev.total) store.best[bk] = { score: t.correct, total };
+      saveVq(store);
+    }
     renderVocabTypingMissed();
-    // After the last batch the words go round again, reshuffled.
-    setContinueButton('#btn-vocab-typing-continue', 'Next 20 →', nextVocabTypingBatch);
+    const groups = vqGroups(t.level);
+    const at = groups.findIndex(g => g.id === t.id);
+    const next = t.id === 'missed' ? null : groups[at + 1];
+    setContinueButton('#btn-vocab-typing-continue', 'Next set →', next ? () => startVocabQuiz(next.id) : null);
   }
 
   // The words missed this round, each with a ＋ / ✓ for the flashcards,
@@ -3600,7 +3707,7 @@
   function closeVocabTyping() {
     vocabTyping = null;
     showScreen('chapters');
-    renderVocabPage();
+    renderVocabQuizPage();
   }
 
   // ─── Words by kanji page (words-by-kanji.html) ───────────────────────────────
@@ -5405,6 +5512,8 @@
       renderKanjiHoverPage();
     } else if (mode === 'vocabulary') {
       renderVocabPage();
+    } else if (mode === 'vocab-quiz') {
+      renderVocabQuizPage();
     } else if (mode === 'words-by-kanji') {
       renderWbkPage();
     } else if (mode === 'notepad') {
@@ -5460,6 +5569,7 @@
       else if (mode === 'stories' || mode === 'memes') closeStory();
       else if (mode === 'flashcards') closeFlashcardReview();
       else if (mode === 'vocabulary') renderVocabPage();
+      else if (mode === 'vocab-quiz') renderVocabQuizPage();
       else if (mode === 'bunkei') renderBunkeiPage();
     });
 
@@ -5948,7 +6058,22 @@
     });
 
     on('#btn-vocab-shuffle', 'click', shuffleVocabOrder);
-    on('#btn-vocab-typing', 'click', startVocabTyping);
+
+    // ─── Vocab Quiz page ────────────────────────────────────────────────────────
+
+    on('#vq-sections', 'click', (e) => {
+      const btn = e.target.closest('[data-vq-set]');
+      if (btn) startVocabQuiz(btn.dataset.vqSet);
+    });
+    on('#vq-review', 'click', () => startVocabQuiz('missed'));
+    [['vqLevel', 'vqLevel'], ['vqDirection', 'vqDirection'], ['vqScript', 'vqScript']].forEach(([attr, key]) => {
+      $$(`[data-${attr.replace(/[A-Z]/g, c => '-' + c.toLowerCase())}]`).forEach(btn => btn.addEventListener('click', () => {
+        settings[key] = btn.dataset[attr];
+        saveSettings(settings);
+        renderVocabQuizPage();
+      }));
+    });
+    on('#btn-vocab-typing-again', 'click', () => { if (vocabTyping) startVocabQuiz(vocabTyping.id); });
     on('#btn-vocab-typing-check', 'click', () => checkVocabTyping(false));
     on('#btn-vocab-typing-skip', 'click', () => checkVocabTyping(true));
     on('#btn-vocab-typing-next', 'click', nextVocabTypingCard);
@@ -5957,12 +6082,12 @@
     on('#vocab-typing-answer', 'click', (e) => {
       const btn = e.target.closest('.vocab-typing-deck');
       if (!btn || !vocabTyping) return;
-      const saved = toggleVocabFlashcard(vocabTyping.batch[vocabTyping.i]);
+      const saved = toggleVocabFlashcard(vocabTyping.items[vocabTyping.i]);
       btn.setAttribute('aria-pressed', saved);
       btn.textContent = saved ? '✓ In your flashcards' : '＋ Add to flashcards';
     });
     document.addEventListener('keydown', (e) => {
-      if (mode !== 'vocabulary' || !screens['vocab-typing'] || !screens['vocab-typing'].classList.contains('active') || !vocabTyping) return;
+      if (mode !== 'vocab-quiz' || !screens['vocab-typing'] || !screens['vocab-typing'].classList.contains('active') || !vocabTyping) return;
       if (!$('#vocab-typing-complete').classList.contains('hidden')) {
         if (e.key === 'Enter' && !focusHasOwnSpaceAction()) { consumeKey(e); $('#btn-vocab-typing-continue').click(); }
         return;
