@@ -106,7 +106,7 @@
         <div>
           <p class="lis-hero-kicker" lang="ja">語彙 · JLPT N5–N3</p>
           <h2 class="lis-hero-title">Vocabulary quiz</h2>
-          <p class="lis-hero-sub">The JLPT word lists in topic sets of 20&ndash;50 words. Type each answer &mdash; romaji turns into hiragana as you type, and Space turns it into kanji. To browse the words instead, open <a href="vocabulary.html">Vocabulary</a>.</p>
+          <p class="lis-hero-sub">The JLPT word lists in topic sets of 20&ndash;50 words. Type each answer &mdash; romaji turns into hiragana as you type, and Space turns it into kanji. With <i>Repeat missed</i> on, a word you get wrong comes back until you have every word right. To browse the words instead, open <a href="vocabulary.html">Vocabulary</a>.</p>
         </div>
       </section>
 
@@ -149,6 +149,9 @@
         <label class="kana-script-toggle flashcard-furigana-label" title="Read the word aloud when its answer is shown (V)">
           <input type="checkbox" class="flashcard-speak-toggle" id="vq-speak"> &#128266; Read aloud
         </label>
+        <label class="kana-script-toggle flashcard-furigana-label" title="A word you get wrong comes back a few words later, until every word in the set has been right once">
+          <input type="checkbox" id="vq-repeat"> &#8635; Repeat missed
+        </label>
       </div>
       <div id="vocab-typing-card" class="card kana-card vocab-typing-card">
         <div class="kana-prompt-label" id="vocab-typing-label">Type the meaning</div>
@@ -176,7 +179,7 @@
         <h2>Session Complete!</h2>
         <div class="session-stats">
           <div class="stat"><span class="stat-num" id="vocab-typing-total">0</span><span class="stat-label">Words</span></div>
-          <div class="stat"><span class="stat-num" id="vocab-typing-correct">0</span><span class="stat-label">Right</span></div>
+          <div class="stat"><span class="stat-num" id="vocab-typing-correct">0</span><span class="stat-label">Right first time</span></div>
           <div class="stat"><span class="stat-num" id="vocab-typing-accuracy">0%</span><span class="stat-label">Accuracy</span></div>
         </div>
         <div id="vocab-typing-missed" class="vocab-typing-missed"></div>
@@ -208,7 +211,7 @@
   <script src="pronounce.js"></script>
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=4"></script>
-  <script src="app.js?v=40"></script>
+  <script src="app.js?v=41"></script>
   <script src="sync-merge.js?v=5"></script>
   <script src="progress-stats.js?v=2"></script>
   <script src="sync.js?v=9"></script>

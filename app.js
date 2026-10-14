@@ -3455,7 +3455,13 @@
 
   const VQ_KEY = 'tokidoki_vocab_quiz';
   const VQ_REVIEW_MAX = 50;
-  let vocabTyping = null; // { id, level, items, i, correct, missed, answered, direction, script }
+  // items is the queue of words to ask, with repeats[i] marking a missed
+  // word asked again (Repeat missed); total counts the set's words, correct
+  // those right the first time and learned those right at all.
+  let vocabTyping = null; // { id, level, items, repeats, i, total, correct, learned, missed, answered, direction }
+  const VQ_REPEAT_GAP = 4; // a missed word comes back after this many others
+
+  const vqRepeat = () => settings.vqRepeat !== false;
 
   function loadVq() {
     let store = {};
@@ -3564,7 +3570,7 @@
     const items = keys.map(k => vqWord(level, k)).filter(Boolean);
     if (!items.length) return;
     shuffle(items);
-    vocabTyping = { id, level, items, i: 0, correct: 0, missed: [], answered: false, direction: vqDirection(), script: vqScript() };
+    vocabTyping = { id, level, items, repeats: items.map(() => false), i: 0, total: items.length, correct: 0, learned: 0, missed: [], answered: false, direction: vqDirection() };
     showScreen('vocab-typing');
     $('#vocab-typing-complete').classList.add('hidden');
     $('#vocab-typing-card').classList.remove('hidden');
@@ -3582,9 +3588,8 @@
     t.answered = false;
     const wantsWord = vocabTypingWantsWord();
 
-    $('#vocab-typing-bar-fill').style.width = `${(t.i / t.items.length) * 100}%`;
-    $('#vocab-typing-progress-text').textContent = `${t.i + 1} / ${t.items.length}`;
-    $('#vocab-typing-label').textContent = wantsWord ? 'Type the word' : 'Type the meaning';
+    renderVocabTypingProgress();
+    $('#vocab-typing-label').textContent = (t.repeats[t.i] ? 'Once more — ' : '') + (wantsWord ? 'type the word' : 'type the meaning');
 
     renderVocabTypingText();
 
@@ -3616,7 +3621,35 @@
     syncVqToggles();
   }
 
+  // With repeats on, progress is how many words have been right so far;
+  // without, how far through the set.
+  function renderVocabTypingProgress() {
+    const t = vocabTyping;
+    const repeating = t.items.length > t.total || vqRepeat();
+    const done = repeating ? t.learned : t.i;
+    $('#vocab-typing-bar-fill').style.width = `${(done / t.total) * 100}%`;
+    $('#vocab-typing-progress-text').textContent = repeating
+      ? `${t.learned} / ${t.total} right${t.items.length > t.i + 1 ? ` · ${t.items.length - t.i - 1} to go` : ''}`
+      : `${Math.min(t.i + 1, t.total)} / ${t.total}`;
+  }
+
+  function setVqRepeat(on) {
+    settings.vqRepeat = on;
+    saveSettings(settings);
+    const t = vocabTyping;
+    // Turned off mid-set: the repeats still waiting are dropped.
+    if (!on && t) {
+      for (let j = t.items.length - 1; j > t.i; j--) {
+        if (t.repeats[j]) { t.items.splice(j, 1); t.repeats.splice(j, 1); }
+      }
+    }
+    syncVqToggles();
+    if (t) renderVocabTypingProgress();
+  }
+
   function syncVqToggles() {
+    const repeat = $('#vq-repeat');
+    if (repeat) repeat.checked = vqRepeat();
     const furigana = $('#vq-furigana');
     if (furigana) furigana.checked = vqScript() === 'furigana';
     $$('.flashcard-speak-toggle').forEach(el => { el.checked = flashcardSpeak(); });
@@ -3636,15 +3669,29 @@
     const input = $('#vocab-typing-input');
     const typed = skip ? '' : (window.Romaji ? Romaji.flush(input) : input.value).trim();
     const result = typedAnswerResult(typed, vocabTypingWantsWord() ? { answers: [item.kanji, item.kana] } : { meaning: item.meaning });
-    if (result.ok) t.correct++;
-    else t.missed.push(item);
+    const repeat = t.repeats[t.i];
+    if (result.ok) {
+      t.learned++;
+      if (!repeat) t.correct++;
+    } else {
+      if (!repeat) t.missed.push(item);
+      if (vqRepeat()) {
+        const at = Math.min(t.items.length, t.i + 1 + VQ_REPEAT_GAP);
+        t.items.splice(at, 0, item);
+        t.repeats.splice(at, 0, true);
+      }
+    }
 
-    // The missed list follows every answer, so a set left halfway still counts.
+    // The missed list follows every first answer, so a set left halfway
+    // still counts; getting a word right on a repeat doesn't clear it.
     const store = loadVq();
     const key = `${item.level}|${item.kanji}|${item.kana}`;
-    store.missed = store.missed.filter(k => k !== key);
-    if (!result.ok) store.missed.push(key);
+    if (!repeat || !result.ok) {
+      store.missed = store.missed.filter(k => k !== key);
+      if (!result.ok) store.missed.push(key);
+    }
     saveVq(store);
+    renderVocabTypingProgress();
 
     $('#vocab-typing-result').innerHTML = result.html;
     const saved = !!vocabDeckKey(item, loadStoryWords());
@@ -3672,7 +3719,7 @@
     $('#vocab-typing-card').classList.add('hidden');
     $('#vocab-typing-complete').classList.remove('hidden');
     $('#vocab-typing-bar-fill').style.width = '100%';
-    const total = t.items.length;
+    const total = t.total;
     $('#vocab-typing-total').textContent = total;
     $('#vocab-typing-correct').textContent = t.correct;
     $('#vocab-typing-accuracy').textContent = total ? `${Math.round((t.correct / total) * 100)}%` : '0%';
@@ -6100,6 +6147,7 @@
       }));
     });
     on('#vq-furigana', 'change', (e) => setVqFurigana(e.target.checked));
+    on('#vq-repeat', 'change', (e) => setVqRepeat(e.target.checked));
     on('#btn-vocab-typing-again', 'click', () => { if (vocabTyping) startVocabQuiz(vocabTyping.id); });
     on('#btn-vocab-typing-check', 'click', () => checkVocabTyping(false));
     on('#btn-vocab-typing-skip', 'click', () => checkVocabTyping(true));
