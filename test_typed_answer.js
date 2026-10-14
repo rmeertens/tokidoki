@@ -44,6 +44,13 @@ ja('てれび', ['テレビ', 'テレビ'], true);
 ja('あい', ['会う', 'あう'], false);
 ja('', ['会う', 'あう'], false);
 ja(' あ う ', ['会う', 'あう'], true);
+// A leading ～ (counters, suffixes) never has to be typed.
+ja('かい', ['～階', '～かい'], true);
+ja('階', ['～階', '～かい'], true);
+ja('～かい', ['～階', '～かい'], true);
+ja('さん', ['～さん', '～さん'], true);
+meaning('years old', '~ years old', 'exact');
+meaning("o'clock", "~ o'clock (time)", 'exact');
 
 const readings = TypedAnswer.kanjiReadings({ on: 'ジョウ・ショウ', kun: 'うえ・-うえ・あ.がる' });
 if (readings.join(',') === 'ジョウ,ショウ,うえ,うえ,あがる') passed++;

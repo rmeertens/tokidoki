@@ -104,11 +104,12 @@
     return results.includes('close') ? 'close' : 'exact';
   }
 
-  // Japanese, compared as hiragana without spaces or punctuation.
+  // Japanese, compared as hiragana without spaces or punctuation. The ～ of
+  // a word like ～階 (NFKC makes it a plain ~) is never typed.
   function kanaKey(s) {
     return String(s).normalize('NFKC')
       .replace(/[ァ-ヶ]/g, k => String.fromCharCode(k.charCodeAt(0) - 0x60))
-      .replace(/[\s　。、．，,.!?！？「」『』・～〜\-]/g, '');
+      .replace(/[\s　。、．，,.!?！？「」『』・~～〜\-]/g, '');
   }
 
   function checkJapanese(typed, answers) {

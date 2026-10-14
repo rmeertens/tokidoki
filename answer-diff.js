@@ -2,10 +2,11 @@
 // answer can show exactly which characters were off. Each side comes back
 // as a list of { ch, ok } — ok is false for a character that isn't part of
 // the longest common subsequence (typed wrong/extra on the typed side,
-// missing on the expected side). Spaces and punctuation are never marked.
+// missing on the expected side). Spaces, punctuation and the ～ of a
+// counter or suffix (～階) are never marked.
 
 (function (global) {
-  const IGNORED = /[\s　。、．，,.!?！？「」]/;
+  const IGNORED = /[\s　。、．，,.!?！？「」~～〜]/;
 
   // Katakana and hiragana count as the same letter, as do full/half width forms.
   function fold(ch) {
