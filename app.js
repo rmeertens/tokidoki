@@ -3586,6 +3586,7 @@
     if (t.i >= t.items.length) { finishVocabTyping(); return; }
     const item = t.items[t.i];
     t.answered = false;
+    t.graded = false;
     const wantsWord = vocabTypingWantsWord();
 
     renderVocabTypingProgress();
@@ -3669,8 +3670,35 @@
     const input = $('#vocab-typing-input');
     const typed = skip ? '' : (window.Romaji ? Romaji.flush(input) : input.value).trim();
     const result = typedAnswerResult(typed, vocabTypingWantsWord() ? { answers: [item.kanji, item.kana] } : { meaning: item.meaning });
+    t.suggested = result.ok;
+
+    $('#vocab-typing-result').innerHTML = result.html;
+    const saved = !!vocabDeckKey(item, loadStoryWords());
+    $('#vocab-typing-answer').innerHTML = `
+      <div class="story-review-answer-word" lang="ja">${vqScript() === 'kanji' ? item.kanji : item.html}</div>
+      ${item.kana !== item.kanji ? `<div class="story-panel-reading" lang="ja">${item.kana}</div>` : ''}
+      ${pronounceButtons(item.kana, 'story-panel-speak')}
+      <div class="story-panel-meaning">${item.meaning}</div>
+      <button type="button" class="btn-secondary vocab-typing-deck" aria-pressed="${saved}">${saved ? '✓ In your flashcards' : '＋ Add to flashcards'}</button>
+    `;
+    $('#vocab-typing-area').classList.add('hidden');
+    $('#vocab-typing-answer-area').classList.remove('hidden');
+    // The grade the typed answer earned is outlined; 1 / 2 (or a tap) can
+    // overrule it — a synonym the checker didn't know, a lucky guess.
+    $$('[data-vq-grade]').forEach(b => b.classList.toggle('grade-suggested', (b.dataset.vqGrade === '2') === result.ok));
+    input.blur();
+    if (flashcardSpeak() && window.Pronounce) Pronounce.speak(item.kana);
+  }
+
+  // 1 Again / 2 Correct: counts the word, puts a missed one back in the queue
+  // (Repeat missed), and moves on.
+  function gradeVocabTyping(ok) {
+    const t = vocabTyping;
+    if (!t || !t.answered || t.graded) return;
+    t.graded = true;
+    const item = t.items[t.i];
     const repeat = t.repeats[t.i];
-    if (result.ok) {
+    if (ok) {
       t.learned++;
       if (!repeat) t.correct++;
     } else {
@@ -3686,31 +3714,12 @@
     // still counts; getting a word right on a repeat doesn't clear it.
     const store = loadVq();
     const key = `${item.level}|${item.kanji}|${item.kana}`;
-    if (!repeat || !result.ok) {
+    if (!repeat || !ok) {
       store.missed = store.missed.filter(k => k !== key);
-      if (!result.ok) store.missed.push(key);
+      if (!ok) store.missed.push(key);
     }
     saveVq(store);
-    renderVocabTypingProgress();
-
-    $('#vocab-typing-result').innerHTML = result.html;
-    const saved = !!vocabDeckKey(item, loadStoryWords());
-    $('#vocab-typing-answer').innerHTML = `
-      <div class="story-review-answer-word" lang="ja">${vqScript() === 'kanji' ? item.kanji : item.html}</div>
-      ${item.kana !== item.kanji ? `<div class="story-panel-reading" lang="ja">${item.kana}</div>` : ''}
-      ${pronounceButtons(item.kana, 'story-panel-speak')}
-      <div class="story-panel-meaning">${item.meaning}</div>
-      <button type="button" class="btn-secondary vocab-typing-deck" aria-pressed="${saved}">${saved ? '✓ In your flashcards' : '＋ Add to flashcards'}</button>
-    `;
-    $('#vocab-typing-area').classList.add('hidden');
-    $('#vocab-typing-answer-area').classList.remove('hidden');
-    $('#btn-vocab-typing-next').focus();
-    if (flashcardSpeak() && window.Pronounce) Pronounce.speak(item.kana);
-  }
-
-  function nextVocabTypingCard() {
-    if (!vocabTyping || !vocabTyping.answered) return;
-    vocabTyping.i++;
+    t.i++;
     showVocabTypingCard();
   }
 
@@ -6151,7 +6160,7 @@
     on('#btn-vocab-typing-again', 'click', () => { if (vocabTyping) startVocabQuiz(vocabTyping.id); });
     on('#btn-vocab-typing-check', 'click', () => checkVocabTyping(false));
     on('#btn-vocab-typing-skip', 'click', () => checkVocabTyping(true));
-    on('#btn-vocab-typing-next', 'click', nextVocabTypingCard);
+    $$('[data-vq-grade]').forEach(btn => btn.addEventListener('click', () => gradeVocabTyping(btn.dataset.vqGrade === '2')));
     on('#btn-vocab-typing-done', 'click', closeVocabTyping);
     on('#vocab-typing-missed', 'click', onVocabTypingMissedClick);
     on('#vocab-typing-answer', 'click', (e) => {
@@ -6176,12 +6185,14 @@
         if (e.key === 'f' || e.key === 'F') { consumeKey(e); setVqFurigana(vqScript() !== 'furigana'); return; }
         if (e.key === 'v' || e.key === 'V') { consumeKey(e); setFlashcardSpeak(!flashcardSpeak()); return; }
       }
-      if (e.key !== 'Enter' || e.isComposing) return;
-      if (!vocabTyping.answered) { consumeKey(e); checkVocabTyping(false); return; }
-      const el = document.activeElement;
-      if (el && el.tagName === 'BUTTON' && el !== $('#btn-vocab-typing-next')) return;
-      consumeKey(e);
-      nextVocabTypingCard();
+      if (!vocabTyping.answered) {
+        if (e.key === 'Enter' && !e.isComposing) { consumeKey(e); checkVocabTyping(false); }
+        return;
+      }
+      // 1 = again, 2 = correct, Enter / Space = whichever the answer earned.
+      if (e.key === '1') { consumeKey(e); gradeVocabTyping(false); return; }
+      if (e.key === '2') { consumeKey(e); gradeVocabTyping(true); return; }
+      if (e.key === 'Enter' || (e.key === ' ' && !focusHasOwnSpaceAction())) { consumeKey(e); gradeVocabTyping(vocabTyping.suggested); }
     }, true);
 
 

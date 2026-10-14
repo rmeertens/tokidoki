@@ -168,10 +168,11 @@
         <div class="kana-answer-area hidden" id="vocab-typing-answer-area">
           <div id="vocab-typing-result" class="typed-result"></div>
           <div id="vocab-typing-answer" class="story-review-answer"></div>
-          <div class="reveal-area">
-            <button id="btn-vocab-typing-next" class="btn-reveal">Next &rarr;</button>
-            <span class="reveal-hint">or press Enter</span>
+          <div class="grade-buttons">
+            <button class="btn-grade btn-again" data-vq-grade="1"><span class="grade-key">1</span> Again</button>
+            <button class="btn-grade btn-easy" data-vq-grade="2"><span class="grade-key">2</span> Correct</button>
           </div>
+          <span class="reveal-hint">Enter takes the outlined one</span>
         </div>
       </div>
       <div id="vocab-typing-complete" class="session-complete hidden">
@@ -211,7 +212,7 @@
   <script src="pronounce.js"></script>
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=4"></script>
-  <script src="app.js?v=41"></script>
+  <script src="app.js?v=42"></script>
   <script src="sync-merge.js?v=5"></script>
   <script src="progress-stats.js?v=2"></script>
   <script src="sync.js?v=9"></script>
