@@ -49,5 +49,14 @@ const readings = TypedAnswer.kanjiReadings({ on: 'ジョウ・ショウ', kun: '
 if (readings.join(',') === 'ジョウ,ショウ,うえ,うえ,あがる') passed++;
 else { failed++; console.log(`  FAIL: kanjiReadings → ${readings.join(',')}`); }
 
+// kanji-ime.js: what Space goes through for a reading.
+const KanjiIme = require('./kanji-ime.js');
+const choices = KanjiIme.choices('あお', k => (k === 'あお' ? ['青'] : []));
+if (choices.join(',') === 'あお,青,アオ') passed++;
+else { failed++; console.log(`  FAIL: choices → ${choices.join(',')}`); }
+const kata = KanjiIme.choices('テレビ', () => []);
+if (kata.join(',') === 'テレビ,てれび') passed++;
+else { failed++; console.log(`  FAIL: katakana choices → ${kata.join(',')}`); }
+
 console.log(`${passed} passed, ${failed} failed`);
 if (failed) process.exit(1);

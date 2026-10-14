@@ -20,7 +20,7 @@
   <meta name="twitter:description" content="JLPT vocabulary (N5-N3), hover to peek the meaning (or word), click to reveal for good.">
   <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
   <link rel="canonical" href="https://tokidoki.meertens.dev/vocabulary.html">
-  <link rel="stylesheet" href="style.css?v=56">
+  <link rel="stylesheet" href="style.css?v=57">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -109,7 +109,8 @@
         Click &#128266; to hear a word, or &#128034; to hear it slowly &mdash; or turn on
         <i>Speak words on click</i> to hear every card you click. Press <i>Type the answers</i>
         to go through the words one at a time and type each meaning &mdash; or, for
-        Meaning &rarr; Word and Picture &rarr; Word, the word itself, in hiragana.
+        Meaning &rarr; Word and Picture &rarr; Word, the word itself: romaji turns into
+        hiragana as you type, and Space (or a tap on a suggestion) turns it into kanji.
       </p>
       <div class="kana-settings-row">
         <button type="button" class="btn-secondary speak-toggle hidden" data-speak-toggle aria-pressed="false">&#128266; Speak words on click: Off</button>
@@ -223,12 +224,13 @@
   <script src="mystery-words.js?v=3"></script>
   <script src="examples.js"></script>
   <script src="romaji.js"></script>
+  <script src="kanji-ime.js"></script>
   <script src="answer-diff.js"></script>
   <script src="typed-answer.js"></script>
   <script src="pronounce.js"></script>
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=4"></script>
-  <script src="app.js?v=34"></script>
+  <script src="app.js?v=35"></script>
   <script src="sync-merge.js?v=4"></script>
   <script src="progress-stats.js?v=2"></script>
   <script src="sync.js?v=9"></script>
@@ -250,7 +252,7 @@
       pictured &mdash; foods, animals, clothes, places, the body, colours &mdash; and hides
       the Japanese word until you hover or click. Typing practice goes through the same
       words one at a time: type the English meaning, or type the Japanese word in hiragana
-      (romaji turns into kana as you type), and see straight away whether it was right. Any word can be added to the same personal
+      (romaji turns into kana as you type, and Space turns the kana into kanji), and see straight away whether it was right. Any word can be added to the same personal
       flashcard deck as the <a href="stories.html">Stories</a> page, where it is reviewed with
       spaced repetition, and words already in the deck get an orange outline. Pairs well with the <a href="kanji-hover.html">Kanji Hover</a> reference
       and the <a href="kanji.html">printable practice sheets</a>.

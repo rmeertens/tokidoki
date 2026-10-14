@@ -3505,7 +3505,8 @@
     input.value = '';
     input.className = 'answer-input';
     input.lang = wantsWord ? 'ja' : 'en';
-    input.placeholder = wantsWord ? 'Type it in hiragana…' : 'Type the meaning in English…';
+    input.placeholder = wantsWord ? 'Type the word (romaji is fine)…' : 'Type the meaning in English…';
+    if (window.KanjiIme) KanjiIme.reset(input);
     input.focus();
     setTimeout(() => input.focus(), 0);
   }
@@ -4502,8 +4503,9 @@
       // Romaji → hiragana only when the answer is Japanese.
       input.lang = card.recall ? 'ja' : 'en';
       input.placeholder = card.recall
-        ? (card.kanji ? 'Type the kanji or a reading…' : 'Type the word in hiragana…')
+        ? (card.kanji ? 'Type the kanji or a reading…' : 'Type the word (romaji is fine)…')
         : 'Type the meaning in English…';
+      if (window.KanjiIme) KanjiIme.reset(input);
       if (typing) { input.focus(); setTimeout(() => input.focus(), 0); }
     }
     const label = $('#story-review-label');
@@ -4560,11 +4562,13 @@
   }
 
   // The card's Japanese — the word on the front and the sentence it was saved
-  // from (word highlighted) on the back — with or without furigana. Re-run
-  // when the furigana setting changes mid-card.
+  // from (word highlighted) on the back. The furigana setting is for the
+  // front: once the answer is shown, everything has its readings. Re-run
+  // when the setting changes mid-card and when the answer is shown.
   function renderStoryReviewText() {
     const card = storyReviewCards[storyReviewIndex];
     if (!card) return;
+    const frontHtml = text => (storyReviewAnswered ? storyRubyHtml(text) : storyCardHtml(text));
     const prompt = $('#story-review-prompt');
     const answerWord = $('#story-review-answer-word');
     prompt.classList.toggle('story-review-prompt-meaning', !!card.recall);
@@ -4582,19 +4586,19 @@
         <ul class="kanji-review-words">
           ${examples.map(w => `
             <li${w.saved ? ' class="saved-from"' : ''}>
-              <span class="kanji-review-word" lang="ja">${storyCardHtml(w.reading && w.reading !== w.word ? storyWordFurigana(w.word, w.reading) : w.word)}</span>
+              <span class="kanji-review-word" lang="ja">${storyRubyHtml(w.reading && w.reading !== w.word ? storyWordFurigana(w.word, w.reading) : w.word)}</span>
               <span class="kanji-review-word-meaning">${w.meaning || ''}</span>
             </li>`).join('')}
         </ul>` : '';
       return;
     }
     const [reading, meaning] = card.gloss;
-    const wordHtml = storyCardHtml(storyWordFurigana(storyDisplayWord(card.key), reading));
+    const wordText = storyWordFurigana(storyDisplayWord(card.key), reading);
     if (card.recall) {
       prompt.textContent = meaning;
-      if (answerWord) answerWord.innerHTML = wordHtml;
+      if (answerWord) answerWord.innerHTML = storyRubyHtml(wordText);
     } else {
-      prompt.innerHTML = wordHtml;
+      prompt.innerHTML = frontHtml(wordText);
     }
 
     const src = storyWordSource(card.meta);
@@ -4602,7 +4606,7 @@
     const ctx = $('#story-review-context');
     if (sentence) {
       const html = parseStorySentence(sentence).map(t => {
-        const piece = storyCardHtml(t.surface);
+        const piece = storyRubyHtml(t.surface);
         return t.key === card.key ? `<mark>${piece}</mark>` : piece;
       }).join('');
       ctx.innerHTML = `
@@ -4631,6 +4635,7 @@
     const typingArea = $('#story-review-typing');
     if (typingArea) typingArea.classList.add('hidden');
     $('#story-review-answer-area').classList.remove('hidden');
+    renderStoryReviewText();
     if (storyReviewTypedOk !== null) {
       const btn = $(`#story-review-answer-area .btn-grade[data-story-grade="${storyReviewTypedOk ? 4 : 1}"]`);
       if (btn) btn.classList.add('grade-suggested');
@@ -4686,6 +4691,45 @@
     if (result === 'exact') return { ok: true, html: '<span class="bunkei-ok">✓ Correct</span>' };
     if (result === 'close') return { ok: true, html: `<span class="bunkei-ok">✓ Almost</span> <span class="typed-result-note">— check the spelling: “${escText(typed)}”</span>` };
     return { ok: false, html: `<span class="bunkei-ng">✗ You typed</span> <span class="typed-result-note">“${escText(typed)}”</span>` };
+  }
+
+  // Kanji spellings for a reading, for the answer boxes' kana → kanji
+  // conversion (kanji-ime.js): words from the vocabulary list, the stories'
+  // glossary and the flashcards, then single kanji by their readings
+  // (上 for じょう, 上がる for あがる).
+  let kanaKanjiDict = null;
+
+  function kanjiCandidates(kana) {
+    if (!kanaKanjiDict) {
+      kanaKanjiDict = new Map();
+      const key = r => String(r).replace(/[ァ-ヶ]/g, k => String.fromCharCode(k.charCodeAt(0) - 0x60)).replace(/[～〜\s]/g, '');
+      const add = (reading, word) => {
+        if (!reading || !word) return;
+        const k = key(reading);
+        const w = String(word).replace(/[～〜]/g, '');
+        if (!k || !w || key(w) === k) return;
+        if (!kanaKanjiDict.has(k)) kanaKanjiDict.set(k, []);
+        const list = kanaKanjiDict.get(k);
+        if (!list.includes(w)) list.push(w);
+      };
+      if (typeof VOCAB_DATA !== 'undefined') VOCAB_LEVELS.forEach(level => (VOCAB_DATA[level] || []).forEach(w => add(w.kana, w.kanji)));
+      Object.entries(window.STORY_GLOSSARY || {}).forEach(([word, gloss]) => add(gloss[0], storyDisplayWord(word)));
+      Object.entries(loadStoryWords()).forEach(([word, meta]) => add(meta.kana || (meta.gloss && meta.gloss[0]), storyDisplayWord(word)));
+      if (typeof KANJI_INFO !== 'undefined') {
+        Object.entries(KANJI_INFO).forEach(([ch, info]) => {
+          String(info.on || '').split('・').forEach(r => add(r.replace(/-/g, ''), ch));
+          String(info.kun || '').split('・').forEach(r => {
+            const [stem, okurigana = ''] = r.replace(/-/g, '').split('.');
+            // Readings listed without their okurigana (食: たべる) aren't the
+            // kanji alone when a word spells it out (食べる).
+            const words = kanaKanjiDict.get(key(stem + okurigana)) || [];
+            if (!okurigana && words.some(w => w[0] === ch && /^[ぁ-ゖ]+$/.test(w.slice(1)))) return;
+            add(stem + okurigana, ch + okurigana);
+          });
+        });
+      }
+    }
+    return kanaKanjiDict.get(kana) || [];
   }
 
   function checkStoryReviewTyped() {
@@ -5280,6 +5324,10 @@
       Romaji.attach($('#vocab-typing-input'));
       Romaji.attach($('#answer-input'));
       Romaji.attach($('#bunkei-input'));
+    }
+    if (window.KanjiIme) {
+      KanjiIme.attach($('#story-review-input'), kanjiCandidates);
+      KanjiIme.attach($('#vocab-typing-input'), kanjiCandidates);
     }
     if (window.Speech) {
       Speech.attach($('#answer-input'));

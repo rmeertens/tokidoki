@@ -7575,3 +7575,42 @@ a.chapter-card.news-headline-card {
   max-width: 480px;
   margin: 0 auto 20px;
 }
+
+/* Kana → kanji suggestions under an answer box (kanji-ime.js) */
+.kanji-candidates {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  max-width: 360px;
+  margin-top: 8px;
+}
+
+.kanji-candidate {
+  padding: 4px 10px;
+  font-family: var(--font-jp);
+  font-size: 1.05rem;
+  color: var(--text);
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.kanji-candidate:hover,
+.kanji-candidate.active {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.kanji-candidates-hint {
+  font-family: var(--font);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+@media (pointer: coarse) {
+  .kanji-candidates-hint { display: none; }
+}

@@ -20,7 +20,7 @@
   <meta name="twitter:description" content="Review the Japanese words and kanji you saved while reading, with spaced repetition: word or kanji to meaning, or meaning to word or kanji. Tap or swipe to grade; export to Anki, CSV or print.">
   <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
   <link rel="canonical" href="https://tokidoki.meertens.dev/flashcards.html">
-  <link rel="stylesheet" href="style.css?v=56">
+  <link rel="stylesheet" href="style.css?v=57">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -104,7 +104,8 @@
         jokes, the mystery, Story Fill-in, the Vocabulary page or Words by Kanji &mdash;
         reviewed with spaced repetition. Tap a card to see its answer, then tap or swipe
         left if you didn&rsquo;t know it and right if you did &mdash; or tick <i>Type answers</i>
-        to type the meaning, or the word in hiragana, before you see it.
+        to type the meaning, or the word, before you see it (romaji turns into hiragana as you
+        type; Space or a tap on a suggestion turns it into kanji).
       </p>
       <div class="deck-tabs" id="deck" role="tablist" aria-label="Your flashcards">
         <button type="button" class="deck-tab active" data-deck-tab="words" role="tab" aria-selected="true">Words <span class="deck-tab-count" id="deck-tab-count-words">0</span></button>
@@ -135,7 +136,7 @@
         <ul class="story-deck-list" id="story-deck-list"></ul>
       </details>
       <div class="story-export hidden" id="story-export">
-        <label class="kana-script-toggle flashcard-furigana-label" title="Show readings above the kanji on your flashcards — when reviewing and in exports">
+        <label class="kana-script-toggle flashcard-furigana-label" title="Show readings above the kanji on the front of your flashcards (the answer side always has them) and in exports">
           <input type="checkbox" class="flashcard-furigana-toggle" id="story-flashcard-furigana"> Furigana on cards
         </label>
         <span class="story-export-label">Export</span>
@@ -227,13 +228,14 @@
   <script src="mystery-words.js?v=3"></script>
   <script src="examples.js"></script>
   <script src="romaji.js"></script>
+  <script src="kanji-ime.js"></script>
   <script src="answer-diff.js"></script>
   <script src="typed-answer.js"></script>
   <script src="flashcard-export.js?v=13"></script>
   <script src="pronounce.js?v=2"></script>
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=4"></script>
-  <script src="app.js?v=34"></script>
+  <script src="app.js?v=35"></script>
   <script src="sync-merge.js?v=4"></script>
   <script src="progress-stats.js?v=2"></script>
   <script src="sync.js?v=9"></script>
