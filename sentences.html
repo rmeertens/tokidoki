@@ -103,6 +103,20 @@
       </nav>
       <div id="translate-panel">
         <p class="tab-intro">Translate full sentences using the verbs and grammar you've learned. Pick a chapter to start.</p>
+        <div class="kana-settings-row" id="translate-direction-row" role="radiogroup" aria-label="Translation direction">
+          <label class="kana-script-toggle">
+            <input type="radio" name="translate-direction" value="both" checked>
+            Both
+          </label>
+          <label class="kana-script-toggle">
+            <input type="radio" name="translate-direction" value="ja-to-en">
+            Japanese &rarr; English
+          </label>
+          <label class="kana-script-toggle">
+            <input type="radio" name="translate-direction" value="en-to-ja">
+            English &rarr; Japanese
+          </label>
+        </div>
         <h2 class="section-title">Genki I</h2>
         <div class="chapter-grid" id="translate-chapters-genki1"></div>
         <h2 class="section-title">Genki II</h2>
@@ -227,7 +241,7 @@
   <script src="speech.js"></script>
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=4"></script>
-  <script src="app.js?v=45"></script>
+  <script src="app.js?v=46"></script>
   <script src="sync-merge.js?v=5"></script>
   <script src="progress-stats.js?v=2"></script>
   <script src="sync.js?v=9"></script>

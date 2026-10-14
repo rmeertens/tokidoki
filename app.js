@@ -1736,13 +1736,20 @@
   // as learned once either direction was last graded right, and is due when
   // it's new or a direction it was studied in is due. The direction asked
   // is a due one when there is one, else picked at random.
+  // The directions picked above the chapters (Both, Japanese → English or
+  // English → Japanese) limit which cards are asked, counted and due.
   const TRANSLATE_DIRS = ['en-to-ja', 'ja-to-en'];
 
+  function translateDirs() {
+    return TRANSLATE_DIRS.includes(settings.translateDirection) ? [settings.translateDirection] : TRANSLATE_DIRS;
+  }
+
   function translateSentenceItems(chapter) {
+    const dirs = translateDirs();
     return (TRANSLATE_SENTENCES[chapter] || []).map((sentence, i) => {
-      const states = TRANSLATE_DIRS.map(d => srsData[`tr_${chapter}_${i}_${d}`]);
-      const studied = TRANSLATE_DIRS.filter((d, k) => states[k]);
-      const dueDirs = studied.filter(d => isDue(states[TRANSLATE_DIRS.indexOf(d)]));
+      const states = dirs.map(d => srsData[`tr_${chapter}_${i}_${d}`]);
+      const studied = dirs.filter((d, k) => states[k]);
+      const dueDirs = studied.filter(d => isDue(states[dirs.indexOf(d)]));
       return {
         id: `tr_${chapter}_${i}`,
         sentence,
@@ -1754,6 +1761,8 @@
   }
 
   function renderTranslateChapters() {
+    const dir = TRANSLATE_DIRS.includes(settings.translateDirection) ? settings.translateDirection : 'both';
+    $$('input[name="translate-direction"]').forEach(el => { el.checked = el.value === dir; });
     const g1 = $('#translate-chapters-genki1');
     const g2 = $('#translate-chapters-genki2');
     g1.innerHTML = '';
@@ -1777,8 +1786,7 @@
         <div class="chapter-card-title">${info.title}</div>
         <div class="chapter-card-sub">${sentences.length} sentences &middot; ${learned} learned</div>
         <div class="chapter-card-forms">
-          <span class="form-tag">EN → JA</span>
-          <span class="form-tag">JA → EN</span>
+          ${translateDirs().map(d => `<span class="form-tag">${d === 'en-to-ja' ? 'EN → JA' : 'JA → EN'}</span>`).join('')}
         </div>
         <div class="chapter-progress"><div class="chapter-progress-fill" style="width:${pct}%"></div></div>
         ${due > 0 ? `<div class="chapter-card-due">${due} due</div>` : ''}
@@ -1798,11 +1806,11 @@
 
     // 20 at a time like the verb chapters: due sentences first (failed
     // ones before the rest), then the others.
-    const batch = pickBatch(`translate:${chapter}`, items.filter(it => it.due), items, cont);
+    const batch = pickBatch(`translate:${chapter}:${translateDirs().join()}`, items.filter(it => it.due), items, cont);
     const failedFirst = it => (it.dueDirs.some(d => (srsData[`${it.id}_${d}`] || {}).repetitions === 0) ? 0 : 1);
     batch.sort((a, b) => failedFirst(a) - failedFirst(b));
     sessionCards = batch.map(it => {
-      const pool = it.dueDirs.length ? it.dueDirs : TRANSLATE_DIRS;
+      const pool = it.dueDirs.length ? it.dueDirs : translateDirs();
       const dir = pool[Math.floor(Math.random() * pool.length)];
       return { sentence: it.sentence, direction: dir, id: `${it.id}_${dir}`, verb: null, form: null };
     });
@@ -5876,6 +5884,12 @@
 
     on('#setting-show-furigana', 'change', (e) => setStudyFurigana(e.target.checked));
     on('#study-furigana', 'change', (e) => setStudyFurigana(e.target.checked));
+    $$('input[name="translate-direction"]').forEach(el => el.addEventListener('change', () => {
+      if (!el.checked) return;
+      settings.translateDirection = el.value;
+      saveSettings(settings);
+      renderTranslateChapters();
+    }));
 
     // Reveal button (default mode)
     on('#btn-reveal', 'click', showAnswer);
