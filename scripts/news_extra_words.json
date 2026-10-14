@@ -1818,5 +1818,405 @@
     "きゅうかげつ",
     "nine months",
     "number + counter"
+  ],
+  "金メダル": [
+    "きんメダル",
+    "gold medal",
+    "noun"
+  ],
+  "アゼルバイジャン": [
+    "アゼルバイジャン",
+    "Azerbaijan",
+    "place name"
+  ],
+  "バクー": [
+    "バクー",
+    "Baku, capital of Azerbaijan",
+    "place name"
+  ],
+  "選手権": [
+    "せんしゅけん",
+    "championship",
+    "noun"
+  ],
+  "十一日": [
+    "じゅういちにち",
+    "the 11th (of the month)",
+    "number + counter"
+  ],
+  "決勝": [
+    "けっしょう",
+    "the final (of a competition)",
+    "noun"
+  ],
+  "ロシア": [
+    "ロシア",
+    "Russia",
+    "place name"
+  ],
+  "種目": [
+    "しゅもく",
+    "event (in a sport)",
+    "noun"
+  ],
+  "八回目": [
+    "はっかいめ",
+    "the eighth time",
+    "number + counter"
+  ],
+  "世界一": [
+    "せかいいち",
+    "number one in the world",
+    "noun"
+  ],
+  "混合": [
+    "こんごう",
+    "mixed",
+    "noun"
+  ],
+  "準決勝": [
+    "じゅんけっしょう",
+    "semifinal",
+    "noun"
+  ],
+  "中国": [
+    "ちゅうごく",
+    "China",
+    "place name"
+  ],
+  "王座": [
+    "おうざ",
+    "the throne, the top title",
+    "noun"
+  ],
+  "奪還": [
+    "だっかん",
+    "taking back, recovery",
+    "noun"
+  ],
+  "前回": [
+    "ぜんかい",
+    "last time, previous",
+    "noun"
+  ],
+  "敗れる": [
+    "やぶれる",
+    "to be defeated, to lose",
+    "ichidan verb"
+  ],
+  "取り戻す": [
+    "とりもどす",
+    "to take back, to regain",
+    "godan verb"
+  ],
+  "頂点": [
+    "ちょうてん",
+    "the top, the peak",
+    "noun"
+  ],
+  "マンガ": [
+    "マンガ",
+    "manga (Japanese comics)",
+    "noun"
+  ],
+  "外務省": [
+    "がいむしょう",
+    "the Foreign Ministry",
+    "noun"
+  ],
+  "南米": [
+    "なんべい",
+    "South America",
+    "place name"
+  ],
+  "ファン": [
+    "ファン",
+    "fan",
+    "noun"
+  ],
+  "来年度": [
+    "らいねんど",
+    "next fiscal year",
+    "noun"
+  ],
+  "18億3000万円": [
+    "じゅうはちおくさんぜんまんえん",
+    "1.83 billion yen",
+    "number + counter"
+  ],
+  "アプリ": [
+    "アプリ",
+    "app",
+    "noun"
+  ],
+  "キャラクター": [
+    "キャラクター",
+    "character",
+    "noun"
+  ],
+  "コピー": [
+    "コピー",
+    "copy",
+    "noun"
+  ],
+  "国々": [
+    "くにぐに",
+    "countries",
+    "noun"
+  ],
+  "2027年度": [
+    "にせんにじゅうななねんど",
+    "fiscal 2027",
+    "number + counter"
+  ],
+  "中南米": [
+    "ちゅうなんべい",
+    "Latin America",
+    "place name"
+  ],
+  "概算": [
+    "がいさん",
+    "rough estimate (概算要求: preliminary budget request)",
+    "noun"
+  ],
+  "海賊版": [
+    "かいぞくばん",
+    "pirated copy",
+    "noun"
+  ],
+  "発信": [
+    "はっしん",
+    "sending out (information, a message)",
+    "noun"
+  ],
+  "強化": [
+    "きょうか",
+    "strengthening",
+    "noun"
+  ],
+  "ポップ": [
+    "ポップ",
+    "pop",
+    "noun"
+  ],
+  "カルチャー": [
+    "カルチャー",
+    "culture",
+    "noun"
+  ],
+  "パワー": [
+    "パワー",
+    "power",
+    "noun"
+  ],
+  "グローバル": [
+    "グローバル",
+    "global",
+    "noun"
+  ],
+  "サウス": [
+    "サウス",
+    "south",
+    "noun"
+  ],
+  "途上": [
+    "とじょう",
+    "on the way, developing (途上国: developing country)",
+    "noun"
+  ],
+  "方針": [
+    "ほうしん",
+    "policy, plan",
+    "noun"
+  ],
+  "開拓": [
+    "かいたく",
+    "developing (a new market), pioneering",
+    "noun"
+  ],
+  "計上": [
+    "けいじょう",
+    "including in a budget",
+    "noun"
+  ],
+  "コンテンツ": [
+    "コンテンツ",
+    "content",
+    "noun"
+  ],
+  "交流": [
+    "こうりゅう",
+    "exchange, interaction",
+    "noun"
+  ],
+  "著作": [
+    "ちょさく",
+    "authorship (著作権: copyright)",
+    "noun"
+  ],
+  "侵害": [
+    "しんがい",
+    "infringement",
+    "noun"
+  ],
+  "配信": [
+    "はいしん",
+    "distribution, streaming",
+    "noun"
+  ],
+  "後押し": [
+    "あとおし",
+    "backing, support",
+    "noun"
+  ],
+  "基金": [
+    "ききん",
+    "fund, foundation",
+    "noun"
+  ],
+  "1月": [
+    "いちがつ",
+    "January",
+    "noun"
+  ],
+  "西アフリカ": [
+    "にしアフリカ",
+    "West Africa",
+    "place name"
+  ],
+  "コートジボワール": [
+    "コートジボワール",
+    "Côte d'Ivoire (Ivory Coast)",
+    "place name"
+  ],
+  "ドラゴン": [
+    "ドラゴン",
+    "dragon",
+    "noun"
+  ],
+  "80か所": [
+    "はちじゅっかしょ",
+    "80 places",
+    "number + counter"
+  ],
+  "6か所": [
+    "ろっかしょ",
+    "6 places",
+    "number + counter"
+  ],
+  "約3700か所": [
+    "やくさんぜんななひゃっかしょ",
+    "about 3,700 places",
+    "number + counter"
+  ],
+  "線路": [
+    "せんろ",
+    "railway track",
+    "noun"
+  ],
+  "共同通信": [
+    "きょうどうつうしん",
+    "Kyodo News (news agency)",
+    "name"
+  ],
+  "県庁": [
+    "けんちょう",
+    "prefectural government office",
+    "noun"
+  ],
+  "10年": [
+    "じゅうねん",
+    "ten years",
+    "number + counter"
+  ],
+  "134台": [
+    "ひゃくさんじゅうよんだい",
+    "134 (vehicles)",
+    "number + counter"
+  ],
+  "計134台": [
+    "けいひゃくさんじゅうよんだい",
+    "134 vehicles in total",
+    "number + counter"
+  ],
+  "所在地": [
+    "しょざいち",
+    "location, seat",
+    "noun"
+  ],
+  "アンダーパス": [
+    "アンダーパス",
+    "underpass (a road that dips under a railway or road)",
+    "noun"
+  ],
+  "冠水": [
+    "かんすい",
+    "flooding (of roads, fields)",
+    "noun"
+  ],
+  "33": [
+    "さんじゅうさん",
+    "33",
+    "number"
+  ],
+  "こうした": [
+    "こうした",
+    "this kind of, such",
+    "adnominal"
+  ],
+  "千葉": [
+    "ちば",
+    "Chiba",
+    "place name"
+  ],
+  "2人": [
+    "ふたり",
+    "two people",
+    "number + counter"
+  ],
+  "国土交通省": [
+    "こくどこうつうしょう",
+    "the Ministry of Land, Infrastructure, Transport and Tourism",
+    "noun"
+  ],
+  "水没": [
+    "すいぼつ",
+    "being submerged",
+    "noun"
+  ],
+  "車両": [
+    "しゃりょう",
+    "vehicle",
+    "noun"
+  ],
+  "少なくとも": [
+    "すくなくとも",
+    "at least",
+    "adverb"
+  ],
+  "事前": [
+    "じぜん",
+    "in advance, beforehand",
+    "noun"
+  ],
+  "追加": [
+    "ついか",
+    "adding, addition",
+    "noun"
+  ],
+  "進入": [
+    "しんにゅう",
+    "entering",
+    "noun"
+  ],
+  "呼びかける": [
+    "よびかける",
+    "to call on, to urge",
+    "ichidan verb"
+  ],
+  "二人": [
+    "ふたり",
+    "two people",
+    "number + counter"
   ]
 }

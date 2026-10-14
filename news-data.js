@@ -23,6 +23,139 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-10-14-judo',
+      date: '2026-10-14',
+      emoji: '🥋',
+      titleEn: 'Japan wins the mixed team title at the World Judo Championships',
+      sources: [
+        { name: 'nippon.com (Jiji)', url: 'https://www.nippon.com/en/news/yjj2026101200164/' },
+        { name: 'Euronews', url: 'https://www.euronews.com/2026/10/11/judo-japan-reclaim-mixed-team-world-title-with-eighth-gold-in-baku' },
+      ],
+      levels: {
+        N5: {
+          title: '柔道[じゅうどう]の世界[せかい]大会[たいかい]で、日本[にっぽん]が金[きん]メダルを取[と]りました',
+          lines: [
+            ['アゼルバイジャンのバクーで、柔道[じゅうどう]の世界[せかい]選手権[せんしゅけん]がありました。', 'The judo World Championships were held in Baku, Azerbaijan.', 'Baku is the capital of Azerbaijan.'],
+            ['男[おとこ]の人[ひと]と女[おんな]の人[ひと]が一緒[いっしょ]に出[で]る団体戦[だんたいせん]で、日本[にっぽん]が一番[いちばん]になりました。', 'In the team event, where men and women compete together, Japan came first.', 'This is the "mixed team" event: each team has both men and women, and the team wins by winning more matches.'],
+            ['十一日[じゅういちにち]の決勝[けっしょう]で、日本[にっぽん]はロシアに勝[か]ちました。', 'In the final on the 11th, Japan beat Russia.'],
+            ['4対[たい]1でした。', 'The score was 4 to 1.'],
+            ['日本[にっぽん]がこの種目[しゅもく]で優勝[ゆうしょう]したのは、八回目[はっかいめ]です。', 'This is the eighth time Japan has won this event.', '種目 means an event in a sport.'],
+            ['前[まえ]の大会[たいかい]では、決勝[けっしょう]で負[ま]けました。ですから、今回[こんかい]は日本[にっぽん]がまた世界[せかい]一[いち]になりました。', 'At the last championships Japan lost in the final, so this time Japan became the world number one again.'],
+          ],
+        },
+        N4: {
+          title: '柔道[じゅうどう]世界[せかい]選手権[せんしゅけん]、混合[こんごう]団体[だんたい]で日本[にっぽん]が優勝[ゆうしょう]',
+          lines: [
+            ['アゼルバイジャンのバクーで行[おこな]われている柔道[じゅうどう]の世界[せかい]選手権[せんしゅけん]で、日本[にっぽん]が混合[こんごう]団体[だんたい]で優勝[ゆうしょう]しました。', 'At the judo World Championships in Baku, Azerbaijan, Japan won the mixed team event.', '混合団体 is a team event in which men and women are on the same team.'],
+            ['十一日[じゅういちにち]の決勝[けっしょう]で、日本[にっぽん]はロシアを4対[たい]1でやぶりました。', 'In the final on the 11th, Japan beat Russia 4 to 1.'],
+            ['準決勝[じゅんけっしょう]では、中国[ちゅうごく]に勝[か]っています。', 'In the semifinal, Japan had beaten China.'],
+            ['この種目[しゅもく]で日本[にっぽん]が金[きん]メダルを取[と]るのは、八回目[はっかいめ]です。', 'This is Japan\'s eighth gold medal in this event.'],
+            ['日本[にっぽん]は、前[まえ]の大会[たいかい]の決勝[けっしょう]で負[ま]けていたので、世界[せかい]一[いち]の座[ざ]を取[と]りもどしました。', 'Japan had lost in the final of the previous championships, so it took back the title of world number one.', '取りもどす "to take back, to regain".'],
+            ['ロシアは、この種目[しゅもく]で初[はじ]めて決勝[けっしょう]に進[すす]みましたが、あと一歩[いっぽ]とどきませんでした。', 'Russia reached the final of this event for the first time, but fell just short.', 'あと一歩 "just one step more".'],
+          ],
+        },
+        N3: {
+          title: '柔道[じゅうどう]世界[せかい]選手権[せんしゅけん]、混合[こんごう]団体[だんたい]で日本[にっぽん]が王座[おうざ]奪還[だっかん]',
+          lines: [
+            ['アゼルバイジャンのバクーで開[ひら]かれている柔道[じゅうどう]の世界[せかい]選手権[せんしゅけん]は十一日[じゅういちにち]、混合[こんごう]団体[だんたい]の決勝[けっしょう]が行[おこな]われ、日本[にっぽん]がロシアを4対[たい]1で下[くだ]して優勝[ゆうしょう]した。', 'On the 11th at the judo World Championships in Baku, Azerbaijan, the mixed team final was held, and Japan won by beating Russia 4 to 1.', '下す "to defeat". 混合団体 is a team event with both men and women.'],
+            ['日本[にっぽん]は準決勝[じゅんけっしょう]で中国[ちゅうごく]を破[やぶ]り、決勝[けっしょう]に進[すす]んでいた。', 'Japan had beaten China in the semifinal and advanced to the final.'],
+            ['この種目[しゅもく]での日本[にっぽん]の優勝[ゆうしょう]は八回目[はっかいめ]となる。', 'This is Japan\'s eighth gold medal in this event.'],
+            ['日本[にっぽん]は前回[ぜんかい]大会[たいかい]の決勝[けっしょう]で敗[やぶ]れており、世界[せかい]一[いち]の座[ざ]を取[と]り戻[もど]した形[かたち]だ。', 'Japan had lost in the final of the previous championships, so it has regained the world number one position.', '取り戻した形だ describes the result as a "regaining".'],
+            ['一方[いっぽう]、ロシアはこの種目[しゅもく]で初[はじ]めて決勝[けっしょう]に進[すす]んだが、頂点[ちょうてん]には届[とど]かなかった。', 'Russia, for its part, reached the final of this event for the first time, but could not reach the top.', '頂点 "the peak, the top".'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-14-soft-power',
+      date: '2026-10-14',
+      emoji: '📚',
+      titleEn: 'Japan plans to spread manga and anime in Latin America and Africa',
+      sources: [
+        { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/10/14/japan/japan-soft-power-diplomacy/' },
+        { name: 'Honolulu Star-Advertiser (Jiji)', url: 'https://www.staradvertiser.com/2026/09/24/news/ministry-to-promote-anime-manga-in-southern-countries/' },
+      ],
+      levels: {
+        N5: {
+          title: '日本[にっぽん]のマンガとアニメを、世界[せかい]の国[くに]に広[ひろ]めます',
+          lines: [
+            ['日本[にっぽん]の外務省[がいむしょう]は、マンガとアニメを外国[がいこく]に広[ひろ]めたいと考[かんが]えています。', 'Japan\'s Foreign Ministry wants to spread manga and anime to foreign countries.', '外務省 is the Ministry of Foreign Affairs.'],
+            ['特[とく]に、南米[なんべい]やアフリカの国[くに]に、日本[にっぽん]のファンをふやしたいです。', 'In particular, it wants to increase Japan\'s fans in countries in South America and Africa.', 'The articles say "Latin America", which is mostly the same area as 南米 plus Central America.'],
+            ['そのために、来年度[らいねんど]のお金[かね]として、18億[おく]3000万[まん]円[えん]を国[くに]に頼[たの]んでいます。', 'For this, it is asking the government for 1.83 billion yen for next fiscal year.', 'This is a request in the budget plan (概算要求). The final amount may change.'],
+            ['アニメのコンサートを開[ひら]いたり、日本語[にほんご]を勉強[べんきょう]するアプリを作[つく]ったりします。', 'It will hold anime concerts and make an app for studying Japanese.'],
+            ['アプリには、マンガのキャラクターが出[で]てきます。', 'Manga characters will appear in the app.'],
+            ['悪[わる]いコピーを止[と]めることも大切[たいせつ]だと考[かんが]えています。', 'It also thinks that stopping illegal copies is important.', 'The bad copies meant here are pirated (illegal) copies of manga and anime.'],
+          ],
+        },
+        N4: {
+          title: '外務省[がいむしょう]、マンガとアニメで南[みなみ]の国々[くにぐに]との関係[かんけい]を強[つよ]くしたい',
+          lines: [
+            ['日本[にっぽん]の外務省[がいむしょう]は、2027年度[ねんど]から、マンガやアニメなどの日本[にっぽん]文化[ぶんか]を使[つか]った外交[がいこう]を強[つよ]めることにしました。', 'Japan\'s Foreign Ministry has decided to step up diplomacy that uses Japanese culture, such as manga and anime, from fiscal 2027.', 'This kind of diplomacy is called "soft power" diplomacy: gaining friends through attraction, not force.'],
+            ['中南米[ちゅうなんべい]やアフリカなど、これまでファンが少[すく]なかった国[くに]に広[ひろ]げたいと考[かんが]えています。', 'It wants to spread it to places such as Latin America and Africa, where fans have so far been few.', '"Global South" is the term for emerging and developing countries, many of them in the southern half of the world.'],
+            ['外務省[がいむしょう]は、そのために18億[おく]3000万[まん]円[えん]を、来年度[らいねんど]の予算[よさん]の概算[がいさん]要求[ようきゅう]に入[い]れました。', 'The ministry has put 1.83 billion yen for this in its preliminary budget request for next fiscal year.', '概算要求 is a ministry\'s first budget request, which can still be changed.'],
+            ['日本[にっぽん]の会社[かいしゃ]と現地[げんち]の人[ひと]がつながる機会[きかい]を作[つく]ったり、正[ただ]しい方法[ほうほう]で作品[さくひん]を見[み]られるようにしたりします。', 'It will create chances for Japanese companies to connect with local people, and make it possible to watch works in a legal way.'],
+            ['海賊版[かいぞくばん]を防[ふせ]ぐことも目的[もくてき]の一[ひと]つです。', 'Preventing pirated copies is also one of the aims.', '海賊版 "pirated copy".'],
+            ['アニメのコンサートや、マンガのキャラクターが出[で]る日本語[にほんご]学習[がくしゅう]アプリも考[かんが]えられています。', 'Anime concerts and a Japanese-learning app with manga characters are also being considered.'],
+          ],
+        },
+        N3: {
+          title: '外務省[がいむしょう]、マンガ・アニメで新興[しんこう]国[こく]への発信[はっしん]強化[きょうか]へ',
+          lines: [
+            ['外務省[がいむしょう]は、2027年度[ねんど]から、マンガやアニメなど日本[にっぽん]のポップカルチャーを活用[かつよう]した「ソフトパワー外交[がいこう]」を、グローバルサウスと呼[よ]ばれる新興[しんこう]国[こく]や途上国[とじょうこく]で強化[きょうか]する方針[ほうしん]だ。', 'The Foreign Ministry plans to strengthen "soft power diplomacy" using Japanese pop culture such as manga and anime in emerging and developing countries known as the Global South, starting in fiscal 2027.', 'グローバルサウス "Global South". 方針だ "it is the policy to".'],
+            ['市場[しじょう]の開拓[かいたく]が進[すす]んでいない中南米[ちゅうなんべい]やアフリカでファン層[そう]を広[ひろ]げ、欧米[おうべい]やアジア以外[いがい]にも日本[にっぽん]への関心[かんしん]を高[たか]めたい考[かんが]えだ。', 'It wants to widen the fan base in Latin America and Africa, where the market has not been developed much, and raise interest in Japan beyond the West and Asia.'],
+            ['2027年度[ねんど]予算[よさん]の概算[がいさん]要求[ようきゅう]には、関連[かんれん]費用[ひよう]として18億[おく]3000万[まん]円[えん]を計上[けいじょう]した。', 'In its preliminary request for the fiscal 2027 budget, it has set aside 1.83 billion yen in related costs.', '計上する "to include in a budget". The request may still change before the budget is decided.'],
+            ['日本[にっぽん]のコンテンツ業界[ぎょうかい]と対象[たいしょう]地域[ちいき]を結[むす]ぶ交流[こうりゅう]の場[ば]をつくり、海賊版[かいぞくばん]による著作権[ちょさくけん]侵害[しんがい]を防[ふせ]ぎながら、正規[せいき]の配信[はいしん]を後押[あとお]しする。', 'It will create places for exchange between Japan\'s content industry and the target regions, and support legal distribution while preventing copyright infringement by pirated copies.', '正規の "legitimate, official".'],
+            ['現地[げんち]の翻訳者[ほんやくしゃ]が日本[にっぽん]文化[ぶんか]を学[まな]ぶ機会[きかい]を設[もう]けるほか、マンガのキャラクターを使[つか]った日本語[にほんご]学習[がくしゅう]アプリの開発[かいはつ]も検討[けんとう]している。', 'Besides giving local translators chances to learn about Japanese culture, it is also considering developing a Japanese-learning app using manga characters.'],
+            ['国際[こくさい]交流[こうりゅう]基金[ききん]は1月[がつ]、西[にし]アフリカのコートジボワールで、「ドラゴンボールZ」などの曲[きょく]を使[つか]ったアニメコンサートを開[ひら]いている。', 'In January the Japan Foundation held an anime concert in Côte d\'Ivoire, West Africa, featuring songs from "Dragon Ball Z" and other series.', '国際交流基金 is the Japan Foundation, which promotes Japanese culture abroad.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-14-underpass',
+      date: '2026-10-14',
+      emoji: '🌧️',
+      titleEn: 'Cars submerged at 80 underpasses in prefectural capitals over the past decade, survey finds',
+      sources: [
+        { name: 'Kyodo News (via Infoseek)', url: 'https://news.infoseek.co.jp/topics/kyodo_1481985329809883691/' },
+        { name: 'Japan Today (Kyodo)', url: 'https://japantoday.com/category/national/update1-80-underpasses-in-japan-saw-vehicles-submerged-over-past-decade-survey' },
+      ],
+      levels: {
+        N5: {
+          title: '大雨[おおあめ]で、車[くるま]が水[みず]に入[はい]った道[みち]が80か所[しょ]ありました',
+          lines: [
+            ['雨[あめ]がたくさん降[ふ]ると、道[みち]が水[みず]でいっぱいになることがあります。', 'When a lot of rain falls, roads can fill up with water.'],
+            ['特[とく]に、線路[せんろ]の下[した]を通[とお]る、低[ひく]い道[みち]が危[あぶ]ないです。', 'Low roads that go under railways are especially dangerous.', 'These roads are called アンダーパス (underpasses).'],
+            ['共同通信[きょうどうつうしん]が調[しら]べました。', 'Kyodo News did a survey.'],
+            ['県庁[けんちょう]がある市[し]では、この10年[ねん]ぐらいで、80か所[しょ]の道[みち]に車[くるま]が水[みず]に入[はい]りました。', 'In the cities with prefectural governments, cars were caught in the water on 80 roads in about the last ten years.', '県庁がある市 means prefectural capitals.'],
+            ['全部[ぜんぶ]で134台[だい]の車[くるま]が水[みず]に入[はい]りました。', 'In all, 134 cars were caught in the water.'],
+            ['雨[あめ]が強[つよ]いときは、低[ひく]い道[みち]に入[はい]らないでください。', 'When the rain is heavy, please do not enter low roads.'],
+          ],
+        },
+        N4: {
+          title: '県庁所在地[けんちょうしょざいち]のアンダーパス、10年[ねん]で80か所[しょ]が冠水[かんすい]',
+          lines: [
+            ['共同通信[きょうどうつうしん]の調査[ちょうさ]で、県庁[けんちょう]がある市[し]のアンダーパスで、この10年[ねん]ほどの間[あいだ]に、車[くるま]が水[みず]に入[はい]った場所[ばしょ]が80か所[しょ]あったことが分[わ]かりました。', 'A Kyodo News survey found that in about the last ten years there were 80 underpasses in prefectural capitals where vehicles were caught in floodwater.', 'アンダーパス is a road that dips down to pass under a railway or road. Water collects in it easily.'],
+            ['水[みず]に入[はい]った車[くるま]は、合計[ごうけい]で134台[だい]でした。', 'The number of vehicles caught in the water was 134 in total.'],
+            ['調査[ちょうさ]では、33の県庁所在地[けんちょうしょざいち]で、こうしたことがあったそうです。', 'According to the survey, this had happened in 33 prefectural capitals.', '県庁所在地 "the city where a prefectural government is located".'],
+            ['8月[がつ]には、千葉県[ちばけん]で大雨[おおあめ]があり、二人[ふたり]が亡[な]くなりました。', 'In August, there was heavy rain in Chiba Prefecture, and two people died.'],
+            ['大雨[おおあめ]のあと、国土交通省[こくどこうつうしょう]は、雨[あめ]が強[つよ]いときに前[まえ]もって通行[つうこう]を止[と]める場所[ばしょ]を、全国[ぜんこく]で6か所[しょ]ふやしました。', 'After the heavy rain, the Ministry of Land, Infrastructure, Transport and Tourism added six places nationwide where traffic is stopped in advance when the rain is heavy.', '予防通行規制 is the system of closing a road in advance when heavy rain is expected.'],
+            ['雨[あめ]の日[ひ]は、低[ひく]い道[みち]を通[とお]らないようにすることが大切[たいせつ]です。', 'On rainy days, it is important to avoid low roads.'],
+          ],
+        },
+        N3: {
+          title: '県庁所在地[けんちょうしょざいち]のアンダーパス、10年[ねん]で80か所[しょ]が水没[すいぼつ]被害[ひがい]　共同通信[きょうどうつうしん]調査[ちょうさ]',
+          lines: [
+            ['共同通信[きょうどうつうしん]の調査[ちょうさ]によると、県庁[けんちょう]所在地[しょざいち]にあるアンダーパスで、過去[かこ]10年[ねん]ほどの間[あいだ]に車両[しゃりょう]が水没[すいぼつ]した場所[ばしょ]は少[すく]なくとも80か所[しょ]に上[のぼ]った。', 'According to a Kyodo News survey, there were at least 80 underpasses in prefectural capitals where vehicles were submerged during the past decade or so.', '〜に上る "to amount to". アンダーパス is a road that dips under a railway or another road.'],
+            ['水没[すいぼつ]した車両[しゃりょう]は計[けい]134台[だい]で、33の県庁[けんちょう]所在地[しょざいち]で確認[かくにん]された。', 'A total of 134 vehicles were submerged, and cases were confirmed in 33 prefectural capitals.'],
+            ['8月[がつ]には千葉県[ちばけん]で記録的[きろくてき]な大雨[おおあめ]となり、二人[ふたり]が死亡[しぼう]した。', 'In August, record-level heavy rain fell in Chiba Prefecture, and two people died.', 'The reports link this survey to the Chiba rain. The Chiba rain is described here only in general terms.'],
+            ['これを受[う]けて国土交通省[こくどこうつうしょう]は、大雨[おおあめ]のときに事前[じぜん]に通行[つうこう]を規制[きせい]する場所[ばしょ]を、全国[ぜんこく]で6か所[しょ]追加[ついか]した。', 'In response, the Ministry of Land, Infrastructure, Transport and Tourism added six more places nationwide where traffic is restricted in advance during heavy rain.', 'これを受けて "in response to this".'],
+            ['アンダーパスは全国[ぜんこく]に約[やく]3700か所[しょ]あるとされ、専門家[せんもんか]は、冠水[かんすい]した道[みち]には進入[しんにゅう]しないよう呼[よ]びかけている。', 'There are said to be about 3,700 underpasses nationwide, and experts are urging people not to enter flooded roads.', 'The 3,700 figure is from a ministry count as of 2022 (reported by the Yomiuri).'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-10-13-newspaper',
       date: '2026-10-13',
       emoji: '📰',
