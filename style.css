@@ -7710,3 +7710,15 @@ a.chapter-card.news-headline-card {
   border-color: var(--orange);
   color: var(--orange);
 }
+
+/* Words & grammar under an answered sentence (sentences.html) */
+.translate-explain {
+  max-width: 600px;
+  margin: 16px auto 0;
+  text-align: left;
+}
+
+.translate-explain .phrase-explain {
+  margin: 0;
+  background: var(--bg-card);
+}

@@ -634,6 +634,8 @@
 
   function showCard() {
     $$('#card-back .btn-grade').forEach(b => b.classList.remove('grade-suggested'));
+    const explain = $('#translate-explain');
+    if (explain) explain.classList.add('hidden');
     const furiLabel = $('#study-furigana-label');
     if (furiLabel) furiLabel.classList.toggle('hidden', studyMode !== 'translate');
     if (sessionIndex >= sessionCards.length) {
@@ -1940,6 +1942,66 @@
     // mismatch there suggests nothing.
     const suggest = translateSuggestedGrade(typed);
     if (suggest) $(`#card-back .btn-grade[data-grade="${suggest}"]`).classList.add('grade-suggested');
+
+    renderTranslateExplain();
+  }
+
+  // ─── Words & grammar under an answered sentence ───────────────────────────
+  // From sentences-words.js (scripts/tokenize_sentences.mjs): every word of
+  // the sentence with its reading and meaning, then the grammar it uses —
+  // the same breakdown as the Phrases and News pages.
+
+  function translateLineId(card) {
+    const m = /^tr_(\d+)_(\d+)_/.exec(card && card.id || '');
+    return m ? `${m[1]}:${m[2]}` : null;
+  }
+
+  function renderTranslateExplain() {
+    const box = $('#translate-explain');
+    if (!box) return;
+    const data = window.SENTENCE_WORDS;
+    const id = translateSource === 'sentences' ? translateLineId(currentCard) : null;
+    const line = data && id ? data.lines[id] : null;
+    box.classList.toggle('hidden', !line);
+    if (!line) { box.innerHTML = ''; return; }
+
+    const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const seen = new Set();
+    // Particles are left to the grammar list, which says what each one does.
+    const words = line.w.filter(p => Array.isArray(p) && data.gloss[p[1]] && !/particle/i.test(data.gloss[p[1]][2]) && !seen.has(p[1]) && seen.add(p[1]))
+      .map(([src, key]) => {
+        const [reading, meaning, pos] = data.gloss[key];
+        const surface = Examples.stripFurigana(src);
+        const base = key.replace(/\(.*\)$/, '');
+        return `
+          <li class="phrase-word">
+            <span class="phrase-word-jp" lang="ja">${esc(surface)}</span>
+            ${base !== surface ? `<span class="phrase-word-base" lang="ja">→ ${esc(base)}</span>` : ''}
+            ${/[一-鿿々]/.test(surface + base) ? `<span class="phrase-word-reading" lang="ja">${esc(reading)}</span>` : ''}
+            <span class="phrase-word-meaning">${esc(meaning)}</span>
+            <span class="phrase-word-pos">${esc(pos)}</span>
+          </li>`;
+      });
+    const grammar = line.g.filter(([gid]) => data.grammar[gid]).map(([gid, snippet]) => {
+      const g = data.grammar[gid];
+      return `
+        <li class="phrase-grammar-item">
+          <div class="phrase-grammar-head">
+            <span class="story-level-badge">${esc(g.level)}</span>
+            <span class="phrase-grammar-title">${g.title}</span>
+          </div>
+          <div class="phrase-grammar-snippet" lang="ja">「${esc(snippet)}」</div>
+          <div class="phrase-grammar-pattern" lang="ja">${g.pattern}</div>
+          <p class="phrase-grammar-note">${g.note}</p>
+        </li>`;
+    });
+    box.innerHTML = `
+      <div class="phrase-explain">
+        <div class="phrase-explain-label">Words</div>
+        ${words.length ? `<ul class="phrase-words">${words.join('')}</ul>` : ''}
+        <div class="phrase-explain-label">Grammar</div>
+        ${grammar.length ? `<ul class="phrase-grammar">${grammar.join('')}</ul>` : '<p class="phrase-grammar-none">No grammar to unpack here — it\'s a set phrase, so learn it as a whole.</p>'}
+      </div>`;
   }
 
   function translateSuggestedGrade(typed) {

@@ -56,6 +56,13 @@
   `node scripts/tokenize_news.mjs` (kuromoji, as above); missing words go in
   `scripts/news_extra_words.json`. `test_news.js` fails if either is stale.
 
+- The words and grammar shown under an answered Sentences card come from
+  `sentences-words.js`, built by `node scripts/tokenize_sentences.mjs`
+  (kuromoji, as above) from `sentences-data.js`. Re-run it after changing a
+  sentence; missing words go in `scripts/sentence_extra_words.json`, and
+  Genki grammar the shared rules miss goes in `SENTENCE_RULES` there.
+  `test_sentences.js` fails if it's stale.
+
 - The Vocab Quiz's topic sets (`vocab-groups.js`) are built by
   `node scripts/build_vocab_groups.mjs` (kuromoji, as above) from
   `vocabulary-data.js`: part of speech from kuromoji, topic from keywords in

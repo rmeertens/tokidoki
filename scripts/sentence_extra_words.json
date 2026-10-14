@@ -1,0 +1,642 @@
+{
+  "何歳": [
+    "なんさい",
+    "how old",
+    "question word"
+  ],
+  "イギリス": [
+    "イギリス",
+    "Britain, the UK",
+    "noun (place)"
+  ],
+  "東京大学": [
+    "とうきょうだいがく",
+    "the University of Tokyo",
+    "noun (name)"
+  ],
+  "日本人": [
+    "にほんじん",
+    "Japanese person",
+    "noun"
+  ],
+  "何年生": [
+    "なんねんせい",
+    "what year (of school)",
+    "question word"
+  ],
+  "カナダ": [
+    "カナダ",
+    "Canada",
+    "noun (place)"
+  ],
+  "看護": [
+    "かんご",
+    "nursing (看護師: nurse)",
+    "noun"
+  ],
+  "看護師": [
+    "かんごし",
+    "nurse",
+    "noun"
+  ],
+  "十九歳": [
+    "じゅうきゅうさい",
+    "nineteen years old",
+    "number + counter"
+  ],
+  "十八歳": [
+    "じゅうはっさい",
+    "eighteen years old",
+    "number + counter"
+  ],
+  "四十五歳": [
+    "よんじゅうごさい",
+    "forty-five years old",
+    "number + counter"
+  ],
+  "オーストラリア": [
+    "オーストラリア",
+    "Australia",
+    "noun (place)"
+  ],
+  "マリア": [
+    "マリア",
+    "Maria (a name)",
+    "noun (name)"
+  ],
+  "メキシコ": [
+    "メキシコ",
+    "Mexico",
+    "noun (place)"
+  ],
+  "スペイン": [
+    "スペイン",
+    "Spain",
+    "noun (place)"
+  ],
+  "山下": [
+    "やました",
+    "Yamashita (a family name)",
+    "noun (name)"
+  ],
+  "555": [
+    "ごごご",
+    "555",
+    "number"
+  ],
+  "1234": [
+    "いちにさんよん",
+    "1234 (phone numbers are read digit by digit)",
+    "number"
+  ],
+  "ロバート": [
+    "ロバート",
+    "Robert (a name)",
+    "noun (name)"
+  ],
+  "四年生": [
+    "よねんせい",
+    "fourth-year student",
+    "number + counter"
+  ],
+  "アリゾナ": [
+    "アリゾナ",
+    "Arizona",
+    "noun (place)"
+  ],
+  "千円": [
+    "せんえん",
+    "1,000 yen",
+    "number + counter"
+  ],
+  "三時半": [
+    "さんじはん",
+    "half past three",
+    "number + counter"
+  ],
+  "三百円": [
+    "さんびゃくえん",
+    "300 yen",
+    "number + counter"
+  ],
+  "Tシャツ": [
+    "ティーシャツ",
+    "T-shirt",
+    "noun"
+  ],
+  "八千円": [
+    "はっせんえん",
+    "8,000 yen",
+    "number + counter"
+  ],
+  "たけし": [
+    "たけし",
+    "Takeshi (a given name)",
+    "noun (name)"
+  ],
+  "十一時": [
+    "じゅういちじ",
+    "eleven o'clock",
+    "number + counter"
+  ],
+  "カフェ": [
+    "カフェ",
+    "café",
+    "noun"
+  ],
+  "九時ごろ": [
+    "くじごろ",
+    "around nine o'clock",
+    "number + counter"
+  ],
+  "沖縄": [
+    "おきなわ",
+    "Okinawa",
+    "noun (place)"
+  ],
+  "三枚": [
+    "さんまい",
+    "three (flat things)",
+    "number + counter"
+  ],
+  "二枚": [
+    "にまい",
+    "two (flat things)",
+    "number + counter"
+  ],
+  "三十ページ": [
+    "さんじゅうページ",
+    "page thirty",
+    "number + counter"
+  ],
+  "メガネ": [
+    "めがね",
+    "glasses",
+    "noun"
+  ],
+  "神戸": [
+    "こうべ",
+    "Kobe",
+    "noun (place)"
+  ],
+  "野球": [
+    "やきゅう",
+    "baseball",
+    "noun"
+  ],
+  "さようなら": [
+    "さようなら",
+    "goodbye",
+    "expression"
+  ],
+  "バーベキュー": [
+    "バーベキュー",
+    "barbecue",
+    "noun"
+  ],
+  "北海道": [
+    "ほっかいどう",
+    "Hokkaido",
+    "noun (place)"
+  ],
+  "寿司": [
+    "すし",
+    "sushi",
+    "noun"
+  ],
+  "すし": [
+    "すし",
+    "sushi",
+    "noun"
+  ],
+  "喧嘩": [
+    "けんか",
+    "fight, quarrel",
+    "noun"
+  ],
+  "富士山": [
+    "ふじさん",
+    "Mt. Fuji",
+    "noun (place)"
+  ],
+  "りんご": [
+    "りんご",
+    "apple",
+    "noun"
+  ],
+  "福岡": [
+    "ふくおか",
+    "Fukuoka",
+    "noun (place)"
+  ],
+  "チケット": [
+    "チケット",
+    "ticket",
+    "noun"
+  ],
+  "三泊": [
+    "さんぱく",
+    "three nights (stay)",
+    "number + counter"
+  ],
+  "サボる": [
+    "サボる",
+    "to skip (class, work)",
+    "verb"
+  ],
+  "たり": [
+    "たり",
+    "〜たり〜たりする: do things like … and …",
+    "particle"
+  ],
+  "だり": [
+    "だり",
+    "〜だり (たり after ん): do things like … and …",
+    "particle"
+  ],
+  "てんぷら": [
+    "てんぷら",
+    "tempura",
+    "noun"
+  ],
+  "中国": [
+    "ちゅうごく",
+    "China",
+    "noun (place)"
+  ],
+  "中国語": [
+    "ちゅうごくご",
+    "Chinese (language)",
+    "noun"
+  ],
+  "もう少し": [
+    "もうすこし",
+    "a little more",
+    "adverb"
+  ],
+  "ホームステイ": [
+    "ホームステイ",
+    "homestay",
+    "noun"
+  ],
+  "編む": [
+    "あむ",
+    "to knit",
+    "verb"
+  ],
+  "弾ける": [
+    "ひける",
+    "can play (an instrument) — potential of 弾く",
+    "verb (potential)"
+  ],
+  "話せる": [
+    "はなせる",
+    "can speak — potential of 話す",
+    "verb (potential)"
+  ],
+  "読める": [
+    "よめる",
+    "can read — potential of 読む",
+    "verb (potential)"
+  ],
+  "書ける": [
+    "かける",
+    "can write — potential of 書く",
+    "verb (potential)"
+  ],
+  "聞ける": [
+    "きける",
+    "can hear / listen — potential of 聞く",
+    "verb (potential)"
+  ],
+  "走れる": [
+    "はしれる",
+    "can run — potential of 走る",
+    "verb (potential)"
+  ],
+  "使える": [
+    "つかえる",
+    "can use — potential of 使う",
+    "verb (potential)"
+  ],
+  "持てる": [
+    "もてる",
+    "can carry / hold — potential of 持つ",
+    "verb (potential)"
+  ],
+  "泳げる": [
+    "およげる",
+    "can swim — potential of 泳ぐ",
+    "verb (potential)"
+  ],
+  "乗れる": [
+    "のれる",
+    "can ride — potential of 乗る",
+    "verb (potential)"
+  ],
+  "納豆": [
+    "なっとう",
+    "natto (fermented soybeans)",
+    "noun"
+  ],
+  "八時間": [
+    "はちじかん",
+    "eight hours",
+    "number + counter"
+  ],
+  "五本": [
+    "ごほん",
+    "five (long things, bottles)",
+    "number + counter"
+  ],
+  "三本": [
+    "さんぼん",
+    "three (long things, pens)",
+    "number + counter"
+  ],
+  "かも": [
+    "かも",
+    "かもしれない: might, maybe",
+    "expression"
+  ],
+  "しれる": [
+    "しれる",
+    "かもしれない / かもしれません: might, maybe",
+    "expression"
+  ],
+  "三匹": [
+    "さんびき",
+    "three (small animals)",
+    "number + counter"
+  ],
+  "マフラー": [
+    "マフラー",
+    "scarf",
+    "noun"
+  ],
+  "小遣い": [
+    "こづかい",
+    "pocket money",
+    "noun"
+  ],
+  "五冊": [
+    "ごさつ",
+    "five (books)",
+    "number + counter"
+  ],
+  "手作り": [
+    "てづくり",
+    "homemade, handmade",
+    "noun"
+  ],
+  "下ろす": [
+    "おろす",
+    "to withdraw (money); to take down",
+    "verb"
+  ],
+  "大学院": [
+    "だいがくいん",
+    "graduate school",
+    "noun"
+  ],
+  "コピー": [
+    "コピー",
+    "copy",
+    "noun"
+  ],
+  "おごる": [
+    "おごる",
+    "to treat (someone to a meal)",
+    "verb"
+  ],
+  "朝寝坊": [
+    "あさねぼう",
+    "oversleeping",
+    "noun"
+  ],
+  "ます": [
+    "ます",
+    "polite verb ending",
+    "auxiliary"
+  ],
+  "ルームメイト": [
+    "ルームメイト",
+    "roommate",
+    "noun"
+  ],
+  "なあ": [
+    "なあ",
+    "sentence ending: wish, feeling (いいなあ: I wish)",
+    "particle"
+  ],
+  "足る": [
+    "たりる",
+    "to be enough (足りない: not enough)",
+    "verb"
+  ],
+  "ピザ": [
+    "ピザ",
+    "pizza",
+    "noun"
+  ],
+  "エアコン": [
+    "エアコン",
+    "air conditioner",
+    "noun"
+  ],
+  "ご存知": [
+    "ごぞんじ",
+    "know (honorific: ご存知です)",
+    "honorific expression"
+  ],
+  "書き": [
+    "かき",
+    "お書きになる: write (honorific of 書く)",
+    "verb stem"
+  ],
+  "戻り": [
+    "もどり",
+    "お戻りになる: return (honorific of 戻る)",
+    "verb stem"
+  ],
+  "何時ごろ": [
+    "なんじごろ",
+    "about what time",
+    "question word"
+  ],
+  "住まい": [
+    "すまい",
+    "お住まい: where you live (honorific)",
+    "noun"
+  ],
+  "お忙しい": [
+    "おいそがしい",
+    "busy (honorific of 忙しい)",
+    "adjective"
+  ],
+  "田中": [
+    "たなか",
+    "Tanaka (a family name)",
+    "noun (name)"
+  ],
+  "後ほど": [
+    "のちほど",
+    "later (polite)",
+    "adverb"
+  ],
+  "存じる": [
+    "ぞんじる",
+    "to know (humble of 知る)",
+    "verb (humble)"
+  ],
+  "何人": [
+    "なんにん",
+    "how many people",
+    "question word"
+  ],
+  "という": [
+    "という",
+    "called, named",
+    "expression"
+  ],
+  "お目にかかる": [
+    "おめにかかる",
+    "to meet (humble of 会う)",
+    "verb (humble)"
+  ],
+  "後で": [
+    "あとで",
+    "later",
+    "adverb"
+  ],
+  "お決まり": [
+    "おきまり",
+    "decided (polite: お決まりですか)",
+    "noun"
+  ],
+  "ポスター": [
+    "ポスター",
+    "poster",
+    "noun"
+  ],
+  "多く": [
+    "おおく",
+    "many, a lot (多くの人: many people)",
+    "noun"
+  ],
+  "世界中": [
+    "せかいじゅう",
+    "all over the world",
+    "noun"
+  ],
+  "社員": [
+    "しゃいん",
+    "employee",
+    "noun"
+  ],
+  "せっかく": [
+    "せっかく",
+    "with much trouble; specially",
+    "adverb"
+  ],
+  "ハンバーガー": [
+    "ハンバーガー",
+    "hamburger",
+    "noun"
+  ],
+  "モデル": [
+    "モデル",
+    "model",
+    "noun"
+  ],
+  "残業": [
+    "ざんぎょう",
+    "overtime work",
+    "noun"
+  ],
+  "飲ます": [
+    "のます",
+    "make drink — 飲まされる: be made to drink (short causative-passive)",
+    "verb (causative)"
+  ],
+  "走らす": [
+    "はしらす",
+    "make run — 走らされる: be made to run",
+    "verb (causative)"
+  ],
+  "やらす": [
+    "やらす",
+    "make do — やらされる: be made to do",
+    "verb (causative)"
+  ],
+  "習わす": [
+    "ならわす",
+    "make learn — 習わされる: be made to take lessons",
+    "verb (causative)"
+  ],
+  "持たす": [
+    "もたす",
+    "make carry — 持たされる: be made to carry",
+    "verb (causative)"
+  ],
+  "待たす": [
+    "またす",
+    "make wait — 待たされる: be kept waiting",
+    "verb (causative)"
+  ],
+  "行かす": [
+    "いかす",
+    "make go — 行かされる: be made to go",
+    "verb (causative)"
+  ],
+  "買わす": [
+    "かわす",
+    "make buy — 買わされる: be made to buy",
+    "verb (causative)"
+  ],
+  "読み方": [
+    "よみかた",
+    "how to read, reading",
+    "noun"
+  ],
+  "外食": [
+    "がいしょく",
+    "eating out",
+    "noun"
+  ],
+  "ひく(ひい)": [
+    "ひく",
+    "to catch (a cold): 風邪をひく",
+    "う-verb"
+  ],
+  "いい": [
+    "いい",
+    "good, fine (といい: I hope)",
+    "い-adjective"
+  ],
+  "かどうか": [
+    "かどうか",
+    "whether or not",
+    "expression"
+  ],
+  "でございます": [
+    "でございます",
+    "is — very polite です",
+    "expression"
+  ],
+  "読み": [
+    "よみ",
+    "お読みになる: read (honorific of 読む)",
+    "verb stem"
+  ],
+  "すぎる": [
+    "すぎる",
+    "too (much) — after a verb stem or adjective: 食べすぎる, 高すぎる",
+    "auxiliary verb"
+  ],
+  "おりる(おり)": [
+    "おる",
+    "to be — humble of いる (おります, 〜ております)",
+    "verb (humble)"
+  ]
+}
