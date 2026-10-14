@@ -633,6 +633,9 @@
 
 
   function showCard() {
+    $$('#card-back .btn-grade').forEach(b => b.classList.remove('grade-suggested'));
+    const furiLabel = $('#study-furigana-label');
+    if (furiLabel) furiLabel.classList.toggle('hidden', studyMode !== 'translate');
     if (sessionIndex >= sessionCards.length) {
       finishSession();
       return;
@@ -1835,6 +1838,8 @@
     }
     kanjiEl.classList.toggle('translate-source-ja', !isEnToJa);
     kanjiEl.classList.toggle('translate-source-en', isEnToJa);
+    const furiToggle = $('#study-furigana');
+    if (furiToggle) furiToggle.checked = !!settings.showFurigana;
 
     $('#card-prompt').textContent = `Translate to ${targetLang}`;
     // Adjective sentences say which adjective and form the sentence drills.
@@ -1909,6 +1914,40 @@
     if (lastTypedCorrect) sessionCorrect++;
     exEl.innerHTML = typedHtml
       + `<div class="translate-original-label">Translation</div><div class="translate-original">${originalContent}</div>`;
+
+    // Box the grade the typed answer points to: Easy when it matched,
+    // Again when Japanese was off. English can be worded many ways, so a
+    // mismatch there suggests nothing.
+    const suggest = translateSuggestedGrade(typed);
+    if (suggest) $(`#card-back .btn-grade[data-grade="${suggest}"]`).classList.add('grade-suggested');
+  }
+
+  function translateSuggestedGrade(typed) {
+    if (!settings.typingMode || !typed || !currentCard) return 0;
+    if (lastTypedCorrect) return 4;
+    return currentCard.direction === 'en-to-ja' ? 1 : 0;
+  }
+
+  // Re-show the Japanese on the current sentence card with or without
+  // furigana (the toggle above the card, F, or the setting).
+  function setStudyFurigana(on) {
+    settings.showFurigana = !!on;
+    saveSettings(settings);
+    $$('#study-furigana, #setting-show-furigana').forEach(el => { el.checked = settings.showFurigana; });
+    refreshTranslateFurigana();
+  }
+
+  function refreshTranslateFurigana() {
+    if (studyMode !== 'translate' || !currentCard || !currentCard.sentence) return;
+    const s = currentCard.sentence;
+    const ja = settings.showFurigana ? (s.jaHtml || s.ja) : s.ja;
+    if (currentCard.direction === 'en-to-ja') {
+      if (answered) $('#card-kanji-back').innerHTML = ja;
+    } else {
+      $('#card-kanji').innerHTML = ja;
+      const orig = $('#card-example-sentence .translate-original');
+      if (answered && orig) orig.innerHTML = ja;
+    }
   }
 
   // What was typed, set against the answer: a character diff when it's off.
@@ -5752,10 +5791,8 @@
       saveSettings(settings);
     });
 
-    on('#setting-show-furigana', 'change', (e) => {
-      settings.showFurigana = e.target.checked;
-      saveSettings(settings);
-    });
+    on('#setting-show-furigana', 'change', (e) => setStudyFurigana(e.target.checked));
+    on('#study-furigana', 'change', (e) => setStudyFurigana(e.target.checked));
 
     // Reveal button (default mode)
     on('#btn-reveal', 'click', showAnswer);
@@ -6596,11 +6633,20 @@
         return;
       }
 
+      // F: furigana on/off on sentence cards (not while typing an answer).
+      if (studyMode === 'translate' && (e.key === 'f' || e.key === 'F')
+          && !e.ctrlKey && !e.metaKey && !e.altKey
+          && !(e.target && e.target.id === 'answer-input')) {
+        consumeKey(e);
+        setStudyFurigana(!settings.showFurigana);
+        return;
+      }
+
       if (answered) {
         if (e.key === '1') { consumeKey(e); gradeAndAdvance(1); return; }
         if (e.key === '2' || e.key === ' ') { consumeKey(e); gradeAndAdvance(4); return; }
         if (e.key === 'Enter' && settings.typingMode
-            && (studyMode !== 'translate' || currentCard.direction === 'en-to-ja')) {
+            && (studyMode !== 'translate' || translateSuggestedGrade(true))) {
           consumeKey(e);
           gradeAndAdvance(lastTypedCorrect ? 4 : 1);
           return;
