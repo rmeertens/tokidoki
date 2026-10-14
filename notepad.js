@@ -274,11 +274,20 @@
   }
   const fromPieces = (pieces, hint) => fromWords([{ p: pieces, m: hint || '' }], hint);
 
+  // Text typed after a double quote is kept exactly as typed (English, names,
+  // anything) until the closing quote; curly and full-width quotes count too.
+  const QUOTE = /["“”＂]/;
+  const isLiteral = raw => !!raw && QUOTE.test(raw[0]);
+
   // Candidate spellings for what's in the input box, best first.
   //   opts.katakana — prefer katakana over hiragana for plain kana
   //   opts.kanaFirst — prefer kana over kanji suggestions
   function candidates(raw, dict, opts) {
     opts = opts || {};
+    if (isLiteral(raw)) {
+      const text = raw.slice(1).replace(/["“”＂]$/, '');
+      return text ? [fromPieces([{ t: text }], 'as typed – close with "')] : [];
+    }
     const plain = t => fromPieces([{ t }], kanaMeaning(toHira(t), dict));
     const list = [];
     const seen = new Set();
@@ -329,7 +338,7 @@
     return list;
   }
 
-  const api = { buildDictionary, candidates, segment, align, englishMatches, mergePieces, toHira, toKata };
+  const api = { buildDictionary, candidates, isLiteral, segment, align, englishMatches, mergePieces, toHira, toKata };
   global.Notepad = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
 
@@ -550,6 +559,24 @@
       if (e.isComposing) { renderPaper(); return; }
       const v = input.value;
       const lastCh = v.slice(-1);
+      if (isLiteral(v)) {
+        // Inside quotes nothing is converted or committed until the closing quote.
+        if (v.length > 1 && QUOTE.test(lastCh)) {
+          const text = v.slice(1, -1);
+          input.value = '';
+          if (text) insert([{ p: [{ t: text }] }]);
+        }
+        refresh();
+        return;
+      }
+      if (QUOTE.test(lastCh)) {
+        // An opening quote after romaji commits the romaji first.
+        input.value = v.slice(0, -1);
+        if (input.value.trim()) { refresh(); commit(); }
+        input.value = lastCh;
+        refresh();
+        return;
+      }
       if (lastCh === ' ' || lastCh === '　') {
         // Space commits the highlighted candidate; on its own it's a space.
         input.value = v.slice(0, -1);
@@ -576,6 +603,12 @@
       if (e.isComposing || e.keyCode === 229 || e.ctrlKey || e.metaKey || e.altKey) return;
       const hasText = input.value.length > 0;
       const consume = () => { e.preventDefault(); e.stopPropagation(); };
+      if (isLiteral(input.value)) {
+        // Quoted text: keys type themselves; only the closing quote (or Esc) ends it.
+        if (e.key === 'Enter') consume();
+        else if (e.key === 'Escape') { consume(); cancel(); }
+        return;
+      }
       if (e.key === 'Enter') {
         consume();
         if (hasText) commit(); else { insert([{ p: [{ t: '\n' }] }]); renderPaper(); }

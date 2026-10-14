@@ -55,6 +55,13 @@ check('house', '家[いえ]');
 check('neko', 'ねこ', { kanaFirst: true });
 check('neko', 'ネコ', { katakana: true });
 
+// Quoted text stays exactly as typed until the closing quote.
+check('"hello world', 'hello world');
+check('"Tokyo Tower"', 'Tokyo Tower');
+check('“neko', 'neko');
+checkEq('lone quote', Notepad.candidates('"', dict), []);
+checkEq('isLiteral', ['"a', 'a"', '', 'neko'].map(Notepad.isLiteral), [true, false, false, false]);
+
 // Sentence candidates keep word boundaries and meanings for the breakdown panel.
 const words = Notepad.candidates('watashihagakuseidesu', dict)[0].words;
 checkEq('words', words.map(w => w.p.map(p => p.t).join('')), ['私', 'は', '学生', 'です']);
