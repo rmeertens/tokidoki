@@ -67,6 +67,12 @@ const words = Notepad.candidates('watashihagakuseidesu', dict)[0].words;
 checkEq('words', words.map(w => w.p.map(p => p.t).join('')), ['私', 'は', '学生', 'です']);
 checkEq('meanings', words.map(w => !!w.m), [true, true, true, true]);
 
+// Conjugated words remember their dictionary form, for saving to the flashcards.
+checkEq('dict form', Notepad.candidates('tabemashita', dict)[0].words[0].d, ['食べる', 'たべる']);
+checkEq('dict form in sentence', Notepad.candidates('kinoueigawomimashita', dict)[0].words.map(w => w.d || null),
+  [null, null, null, ['見る', 'みる']]);
+checkEq('particle', ['は', 'を', '猫'].map(Notepad.isParticle), [true, true, false]);
+
 checkEq('align 食べる', Notepad.align('食べる', 'たべる'), [{ t: '食', r: 'た' }, { t: 'べる' }]);
 checkEq('align 取り消す', Notepad.align('取り消す', 'とりけす'), [{ t: '取', r: 'と' }, { t: 'り' }, { t: '消', r: 'け' }, { t: 'す' }]);
 checkEq('merge', Notepad.mergePieces([{ t: 'あ' }, { t: 'い' }, { t: '猫', r: 'ねこ' }]), [{ t: 'あい' }, { t: '猫', r: 'ねこ' }]);

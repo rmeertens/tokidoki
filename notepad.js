@@ -148,7 +148,7 @@
       const last = e.text.slice(-1);
       if (HAS_KANJI.test(e.text) && last === e.reading.slice(-1) && 'うくぐすつぬぶむるい'.includes(last)
           && e.reading.length > 1) {
-        const stem = { text: e.text.slice(0, -1), reading: e.reading.slice(0, -1), last, meaning: e.meaning, rank: e.rank, hits: e.hits };
+        const stem = { text: e.text.slice(0, -1), reading: e.reading.slice(0, -1), last, meaning: e.meaning, rank: e.rank, hits: e.hits, base: [e.text, e.reading] };
         if (/行く$/.test(e.text)) stem.last = '行く';
         if (last === 'る') {
           stem.ichidan = e.ichidan != null ? e.ichidan
@@ -158,7 +158,7 @@
         push(stems, stem.reading, stem);
       }
       if (e.text === '来る') {
-        ['き', 'こ'].forEach(r => push(stems, r, { text: '来', reading: r, last: '', ichidan: true, meaning: e.meaning, rank: 0, hits: e.hits, pieces: [{ t: '来', r }] }));
+        ['き', 'こ'].forEach(r => push(stems, r, { text: '来', reading: r, last: '', ichidan: true, meaning: e.meaning, rank: 0, hits: e.hits, base: [e.text, e.reading], pieces: [{ t: '来', r }] }));
       }
     });
     // Easier words first; among equals, the one more of the lists share.
@@ -190,14 +190,15 @@
 
   // Splits a kana string into words, picking the cheapest path: dictionary
   // words cost ~1, particles less, a stem plus its conjugated ending a bit
-  // more, and an unknown kana 3. Returns words: { p: furigana pieces, m: meaning }.
+  // more, and an unknown kana 3. Returns words: { p: furigana pieces, m: meaning },
+  // plus d: [dictionary form, reading] for a conjugated word (食べました → 食べる).
   function segment(kana, dict) {
     const n = kana.length;
     const best = new Array(n + 1).fill(Infinity);
     const back = new Array(n + 1);
     best[0] = 0;
-    const relax = (i, j, cost, p, m) => {
-      if (best[i] + cost < best[j]) { best[j] = best[i] + cost; back[j] = { i, word: { p, m: m || '' } }; }
+    const relax = (i, j, cost, p, m, d) => {
+      if (best[i] + cost < best[j]) { best[j] = best[i] + cost; back[j] = { i, word: d ? { p, m: m || '', d } : { p, m: m || '' } }; }
     };
     for (let i = 0; i < n; i++) {
       if (best[i] === Infinity) continue;
@@ -214,7 +215,7 @@
             if (!HIRAGANA_CHAR.test(t.slice(-1))) break;
                         let st = null;
             stems.forEach(x => { if (validTail(t, x) && (!st || stemCost(x, tail) < stemCost(st, tail))) st = x; });
-            if (st) relax(i, i + len + tail, stemCost(st, tail), st.pieces.concat({ t }), st.meaning);
+            if (st) relax(i, i + len + tail, stemCost(st, tail), st.pieces.concat({ t }), st.meaning, st.base);
           }
         }
       }
@@ -272,7 +273,7 @@
     const pieces = mergePieces([].concat(...words.map(w => w.p)));
     return { words, pieces, text: pieces.map(p => p.t).join(''), hint: hint || '' };
   }
-  const fromPieces = (pieces, hint) => fromWords([{ p: pieces, m: hint || '' }], hint);
+  const fromPieces = (pieces, hint, d) => fromWords([d ? { p: pieces, m: hint || '', d } : { p: pieces, m: hint || '' }], hint);
 
   // Text typed after a double quote is kept exactly as typed (English, names,
   // anything) until the closing quote; curly and full-width quotes count too.
@@ -330,7 +331,7 @@
       });
     }
     conj.sort((a, b) => a.cost - b.cost).slice(0, 6)
-      .forEach(c => add(fromPieces(c.st.pieces.concat({ t: c.tail }), c.st.meaning)));
+      .forEach(c => add(fromPieces(c.st.pieces.concat({ t: c.tail }), c.st.meaning, c.st.base)));
 
     add(plain(hira));
     add(plain(toKata(hira)));
@@ -338,7 +339,8 @@
     return list;
   }
 
-  const api = { buildDictionary, candidates, isLiteral, segment, align, englishMatches, mergePieces, toHira, toKata };
+  const isParticle = s => PARTICLES.has(toHira(s));
+  const api = { buildDictionary, candidates, isLiteral, isParticle, segment, align, englishMatches, mergePieces, toHira, toKata };
   global.Notepad = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
 
@@ -347,6 +349,8 @@
   if (typeof document === 'undefined') return;
 
   const STORAGE_KEY = 'tokidoki-notepad';
+  const DECK_KEY = 'tokidoki_story_words';
+  const SRS_KEY = 'tokidoki_srs';
   const PUNCT = { '.': '。', ',': '、', '?': '？', '!': '！', '(': '（', ')': '）', '[': '「', ']': '」', ':': '：', '~': '〜' };
   const SENTENCE_END = /[。？！]$/;
 
@@ -438,15 +442,73 @@
       paper.innerHTML = html;
     }
 
+    // ─── Word flashcards (tokidoki_story_words, reviewed on flashcards.html) ──
+    // A word is saved in its dictionary form (食べました → 食べる) with its
+    // reading and meaning, and the sentence it came from. It counts as saved
+    // when the deck has it under any key with the same spelling and reading
+    // (also when added on the Vocabulary or Stories pages).
+
+    const deckWord = w => (w.d ? { text: w.d[0], reading: w.d[1] } : { text: wordText(w), reading: wordReading(w) });
+    const canSave = w => !!w.m && !isParticle(wordText(w));
+    const displayKey = key => key.replace(/\(.*\)$/, '');
+    function deckReading(key, meta) {
+      const g = (global.STORY_GLOSSARY || {})[key] || meta.gloss;
+      return g ? g[0] : meta.kana;
+    }
+    function deckKeyOf(dw, deck) {
+      deck = deck || load(DECK_KEY, {});
+      return Object.keys(deck).find(k => displayKey(k) === dw.text && toHira(deckReading(k, deck[k]) || '') === toHira(dw.reading)) || null;
+    }
+    // The sentence in the Stories deck's format: space-separated tokens with
+    // 漢字[かな] furigana, a word carrying its deck key after '>'.
+    function deckSentence(start, end, savedKey, savedIndex) {
+      return doc.slice(start, end).map((w, i) => {
+        const text = wordText(w);
+        if (/^[\s　]*$/.test(text)) return '';
+        if (/^[。、？！「」『』…]+$/.test(text)) return text.split('').join(' ');
+        const marked = w.p.map(x => (x.r && HAS_KANJI.test(x.t) ? `${x.t}[${x.r}]` : x.t)).join('').replace(/\s+/g, '\u00a0');
+        const key = start + i === savedIndex ? savedKey : (w.d ? w.d[0] : text);
+        return key === text ? marked : `${marked}>${key}`;
+      }).filter(Boolean).join(' ');
+    }
+    function toggleFlashcard(i) {
+      const w = doc[i];
+      if (!w || !canSave(w)) return;
+      const dw = deckWord(w);
+      const deck = load(DECK_KEY, {});
+      const have = deckKeyOf(dw, deck);
+      if (have) {
+        delete deck[have];
+        const srs = load(SRS_KEY, {});
+        delete srs[`story_word:${have}`];
+        delete srs[`story_word:${have}:recall`];
+        save(SRS_KEY, srs);
+      } else {
+        const g = (global.STORY_GLOSSARY || {})[dw.text];
+        const key = !g || toHira(g[0]) === toHira(dw.reading) ? dw.text : `${dw.text}(${dw.reading})`;
+        const sn = sentences().find(x => x.start <= i && i < x.end) || { start: i, end: i + 1 };
+        deck[key] = {
+          gloss: [dw.reading, w.m, ''], added: Date.now(),
+          jp: deckSentence(sn.start, sn.end, key, i), en: '', title: 'Notepad', level: '',
+        };
+      }
+      save(DECK_KEY, deck);
+    }
+
     function renderPanel() {
       if (!selected) { panel.classList.add('hidden'); panel.innerHTML = ''; return; }
       const words = doc.slice(selected.start, selected.end);
-      const rows = words.filter(w => !/^[\s　。、？！「」（）：〜]*$/.test(wordText(w))).map(w => {
+      const deck = load(DECK_KEY, {});
+      const rows = words.map((w, j) => [w, selected.start + j]).filter(([w]) => !/^[\s　。、？！「」（）：〜]*$/.test(wordText(w))).map(([w, i]) => {
         const reading = wordReading(w);
+        const dw = deckWord(w);
+        const saved = canSave(w) && !!deckKeyOf(dw, deck);
         return `<li class="notepad-panel-word">
           <span class="notepad-panel-jp" lang="ja">${piecesHtml(w.p)}</span>
           ${reading !== wordText(w) ? `<span class="notepad-panel-reading" lang="ja">${esc(reading)}</span>` : ''}
           <span class="notepad-panel-meaning">${esc(w.m || '')}</span>
+          ${canSave(w) ? `<button type="button" class="phrase-word-add notepad-panel-add${saved ? ' saved' : ''}" data-flashcard="${i}" aria-pressed="${saved}"
+            title="${saved ? `“${esc(dw.text)}” is in your flashcards — click to remove` : `Add “${esc(dw.text)}” to your word flashcards`}">${saved ? '✓ Flashcard' : '＋ Flashcard'}</button>` : ''}
           ${global.KanjiCards ? KanjiCards.chipsHtml(wordText(w), { reading, meaning: w.m || '' }) : ''}
         </li>`;
       }).join('');
@@ -458,6 +520,7 @@
         </div>
         <div class="notepad-panel-reading-line" lang="ja">${esc(words.map(wordReading).join(''))}</div>
         ${rows ? `<ul class="notepad-panel-words">${rows}</ul>` : ''}
+        ${rows.includes('data-flashcard') ? '<p class="phrase-explain-tip">Saved words are reviewed on the <a href="flashcards.html">Flashcards page</a>.</p>' : ''}
         <div class="notepad-panel-actions">
           ${canSpeak ? '<button type="button" class="btn-secondary" data-act="speak">🔊 Listen</button><button type="button" class="btn-secondary" data-act="speak-slow">🐢 Slowly</button>' : ''}
           <button type="button" class="btn-secondary" data-act="copy">Copy</button>
@@ -502,7 +565,7 @@
     }
 
     function insert(words) {
-      doc.splice(pos, 0, ...words.map(w => ({ p: w.p.map(x => ({ ...x })), m: w.m || '' })));
+      doc.splice(pos, 0, ...words.map(w => ({ p: w.p.map(x => ({ ...x })), m: w.m || '', ...(w.d ? { d: w.d } : {}) })));
       pos += words.length;
       changed();
     }
@@ -728,6 +791,8 @@
     }
 
     panel.addEventListener('click', (e) => {
+      const add = e.target.closest('[data-flashcard]');
+      if (add) { toggleFlashcard(Number(add.dataset.flashcard)); renderPanel(); return; }
       const btn = e.target.closest('[data-act]');
       if (!btn || !selected) return;
       const words = doc.slice(selected.start, selected.end);

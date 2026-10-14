@@ -5451,7 +5451,7 @@ a.chapter-card {
 .notepad-panel-words { list-style: none; display: flex; flex-direction: column; margin-bottom: 10px; }
 .notepad-panel-word {
   display: grid;
-  grid-template-columns: 8.5em 8.5em 1fr;
+  grid-template-columns: 8.5em 8.5em 1fr auto;
   align-items: baseline;
   gap: 4px 12px;
   padding: 4px 0;
@@ -5461,10 +5461,12 @@ a.chapter-card {
 .notepad-panel-jp { font-family: var(--font-jp); font-size: 1.15rem; line-height: 2; grid-column: 1; }
 .notepad-panel-reading { font-family: var(--font-jp); color: var(--text-dim); font-size: 0.9rem; grid-column: 2; }
 .notepad-panel-meaning { color: var(--text-dim); font-size: 0.85rem; grid-column: 3; }
+.notepad-panel-add { grid-column: 4; justify-self: end; white-space: nowrap; }
 .notepad-panel-actions { display: flex; flex-wrap: wrap; gap: 8px; }
 @media (max-width: 560px) {
   .notepad-panel-word { grid-template-columns: auto 1fr; }
   .notepad-panel-meaning { grid-column: 1 / -1; }
+  .notepad-panel-add { grid-column: 1 / -1; justify-self: start; }
 }
 
 /* ─── Mystery (mystery.html): ことば探偵クロ ─────────────────────────────── */
