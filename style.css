@@ -1625,7 +1625,29 @@ a.chapter-card {
 .vp-type-vi { color: var(--orange); background: var(--orange-dim); }
 .vp-type-vt { color: var(--blue); background: var(--blue-dim); }
 
+.vp-type[data-tip] { cursor: help; }
+.vp-type[data-tip]:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
 .vp-type-line { display: block; margin-top: 2px; }
+
+/* Explanation shown over a 自 vi / 他 vt badge on hover, focus or tap */
+.vp-type-tip {
+  position: fixed;
+  z-index: 500;
+  max-width: min(280px, calc(100vw - 16px));
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blue);
+  background: var(--bg-card);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  font-size: 0.8rem;
+  line-height: 1.45;
+  pointer-events: none;
+}
+
+.vp-type-tip-vi { border-left-color: var(--orange); }
 
 .vp-romaji {
   display: block;

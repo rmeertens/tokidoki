@@ -3019,6 +3019,43 @@
     });
   }
 
+  // Short explanations for the 自 vi / 他 vt tags in the verb overview.
+  const VP_TYPE_TIPS = {
+    vt: '他動詞 · Transitive: someone does the action to something. That thing is the object, marked を — パンを食べる, ドアを開ける.',
+    vi: '自動詞 · Intransitive: something happens by itself, with no object. The thing is the subject, marked が — ドアが開く, 雨が降る.',
+  };
+
+  // One floating tip, positioned over the tag — fixed to the viewport so the
+  // tables' scroll wrappers can't clip it.
+  function showVpTypeTip(tag) {
+    let tip = document.getElementById('vp-type-tip');
+    if (!tip) {
+      tip = document.createElement('div');
+      tip.id = 'vp-type-tip';
+      tip.className = 'vp-type-tip';
+      tip.setAttribute('role', 'tooltip');
+      document.body.appendChild(tip);
+      document.addEventListener('click', e => { if (!e.target.closest('.vp-type')) hideVpTypeTip(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') hideVpTypeTip(); });
+      window.addEventListener('scroll', hideVpTypeTip, true);
+    }
+    const type = tag.dataset.tip;
+    tip.className = `vp-type-tip vp-type-tip-${type}`;
+    tip.textContent = VP_TYPE_TIPS[type];
+    tip.hidden = false;
+    const r = tag.getBoundingClientRect();
+    const w = tip.offsetWidth, h = tip.offsetHeight;
+    const left = Math.max(8, Math.min(r.left + r.width / 2 - w / 2, window.innerWidth - w - 8));
+    const top = r.top - h - 8 >= 8 ? r.top - h - 8 : r.bottom + 8;
+    tip.style.left = `${left}px`;
+    tip.style.top = `${top}px`;
+  }
+
+  function hideVpTypeTip() {
+    const tip = document.getElementById('vp-type-tip');
+    if (tip) tip.hidden = true;
+  }
+
   // Rules + verb overview table for the Verb + Particle quiz, built once
   // from verb-particles-data.js — on the start screen and, via the header's
   // ? button, in the reference overlay (`target`).
@@ -3042,9 +3079,7 @@
       </div>`).join('');
     const typeTag = type => type === 'pair'
       ? `${typeTag('vi')}${typeTag('vt')}`
-      : type === 'vt'
-        ? '<span class="vp-type vp-type-vt" title="Transitive (他動詞): takes an object with を"><span lang="ja">他</span> vt</span>'
-        : '<span class="vp-type vp-type-vi" title="Intransitive (自動詞): no object"><span lang="ja">自</span> vi</span>';
+      : `<span class="vp-type vp-type-${type}" tabindex="0" role="button" aria-label="${VP_TYPE_TIPS[type]}" data-tip="${type}"><span lang="ja">${type === 'vt' ? '他' : '自'}</span> ${type}</span>`;
     const romaji = t => `<span class="vp-romaji">${esc(window.VERB_PARTICLE_ROMAJI(t))}</span>`;
     // data-verbs: the plain verb(s) of a row, for jumping to the verb of the
     // current card from the ? overlay.
@@ -3107,11 +3142,32 @@
         detail.hidden = !open;
         row.setAttribute('aria-expanded', String(open));
       };
+      // 自 vi / 他 vt tags explain themselves on hover, focus or tap.
+      el.addEventListener('mouseover', e => {
+        const tag = e.target.closest('.vp-type');
+        if (tag) showVpTypeTip(tag);
+      });
+      el.addEventListener('mouseout', e => {
+        const tag = e.target.closest('.vp-type');
+        if (tag && !tag.contains(e.relatedTarget)) hideVpTypeTip();
+      });
+      el.addEventListener('focusin', e => {
+        const tag = e.target.closest('.vp-type');
+        if (tag) showVpTypeTip(tag);
+      });
+      el.addEventListener('focusout', hideVpTypeTip);
+      el.addEventListener('scroll', hideVpTypeTip, true);
       el.addEventListener('click', e => {
+        const tag = e.target.closest('.vp-type');
+        if (tag) { e.stopPropagation(); showVpTypeTip(tag); return; }
         const row = e.target.closest('.vt-row');
         if (row) toggle(row);
       });
       el.addEventListener('keydown', e => {
+        if (e.target.closest('.vp-type')) {
+          if (e.key === 'Enter' || e.key === ' ') e.preventDefault();
+          return;
+        }
         const row = e.target.closest('.vt-row');
         if (row && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); toggle(row); }
       });
@@ -6102,6 +6158,7 @@
     }
 
     function closeReference() {
+      hideVpTypeTip();
       $('#ref-overlay').classList.add('hidden');
       document.body.style.overflow = '';
     }
