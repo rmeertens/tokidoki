@@ -2053,7 +2053,11 @@
       const alt = sentence.jaHtml.split(ie).join('うち');
       answers.push(kana(alt), alt.replace(/<rp>.*?<\/rp>|<rt>.*?<\/rt>|<\/?ruby>/g, ''));
     }
-    const key = s => s.normalize('NFKC').toLowerCase().replace(/[\s　。、．，,.!?！？「」'"’]/g, '');
+    // Katakana counts the same as hiragana (typing gives hiragana: アメリカ
+    // can be typed あめりか), and punctuation is ignored, as in the diff.
+    const key = s => s.normalize('NFKC').toLowerCase()
+      .replace(/[ァ-ヶ]/g, k => String.fromCharCode(k.charCodeAt(0) - 0x60))
+      .replace(/[\s　。、．，,.!?！？「」『』'"’~～〜・]/g, '');
     lastTypedCorrect = answers.some(a => key(a) === key(typed));
     if (lastTypedCorrect) {
       return `<div class="translate-typed"><span class="bunkei-ok">✓ Correct</span></div>`;
@@ -2061,6 +2065,11 @@
     if (!window.AnswerDiff) return '';
     const target = AnswerDiff.closest(typed, answers);
     const d = AnswerDiff.diff(typed, target);
+    // Nothing to mark (only differences the diff doesn't count): it's right.
+    if (d.typed.every(c => c.ok) && d.expected.every(c => c.ok)) {
+      lastTypedCorrect = true;
+      return `<div class="translate-typed"><span class="bunkei-ok">✓ Correct</span></div>`;
+    }
     return `<div class="translate-typed answer-diff"${isEnToJa ? ' lang="ja"' : ''}>`
       + `<div><span class="answer-diff-label">You typed</span>${AnswerDiff.toHtml(d.typed, 'diff-wrong')}</div>`
       + `<div><span class="answer-diff-label">Expected</span>${AnswerDiff.toHtml(d.expected, 'diff-missing')}</div>`
