@@ -62,6 +62,12 @@
   sentence; missing words go in `scripts/sentence_extra_words.json`, and
   Genki grammar the shared rules miss goes in `SENTENCE_RULES` there.
   `test_sentences.js` fails if it's stale.
+- A typed English → Japanese Sentences answer also counts in another word
+  order (友達と日曜日に… for 日曜日に友達と…) and with or without 私は for an
+  "I" sentence: `sentence-orders.js` builds those versions from the words in
+  `sentences-words.js`, conservatively (only noun phrases before a simple
+  verb move; nothing moves into or out of a clause). `test_sentence_orders.js`
+  lists what must and mustn't be accepted.
 
 - The Vocab Quiz's topic sets (`vocab-groups.js`) are built by
   `node scripts/build_vocab_groups.mjs` (kuromoji, as above) from

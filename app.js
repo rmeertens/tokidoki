@@ -2070,12 +2070,20 @@
         if (typed.startsWith(spelling, i)) { hit = j; len = spelling.length; break; }
         if (r && t.startsWith(r, i)) { hit = j; len = r.length; break; }
       }
+      // A word typed somewhere else in the sentence (another word order):
+      // anywhere, as long as its reading is more than one kana.
+      if (hit === -1) {
+        for (let j = 0; j < pieces.length; j++) {
+          const [spelling, r] = pieces[j];
+          if (r.length > 1 && /[一-鿿々ァ-ヶ]/.test(spelling) && t.startsWith(r, i)) { hit = j; len = r.length; break; }
+        }
+      }
       if (hit === -1) { out += typed[i]; i++; continue; }
       const spelling = pieces[hit][0];
       // Punctuation and particles keep what was typed; only words change.
       out += /[一-鿿々ァ-ヶー]/.test(spelling) ? spelling : typed.slice(i, i + len);
       i += len;
-      k = hit + 1;
+      k = Math.max(k, hit + 1);
     }
     return out;
   }
@@ -2194,19 +2202,34 @@
     }
   }
 
+  // Every way of writing the sentence that counts as right, the sentence
+  // itself first.
+  function translateVersions(sentence) {
+    const data = window.SENTENCE_WORDS;
+    const id = translateSource === 'sentences' && currentCard && currentCard.sentence === sentence
+      ? translateLineId(currentCard) : null;
+    if (!window.SentenceOrders || !data || !id) return [sentence];
+    return SentenceOrders.variants(sentence, data.lines[id], data.gloss);
+  }
+
   // What was typed, set against the answer: a character diff when it's off.
   function translateTypedHtml(typed, sentence, isEnToJa) {
     if (!settings.typingMode || !typed) return '';
     const kana = html => (window.EnHover ? EnHover.kanaOfRuby(html) : html);
-    const answers = isEnToJa
-      ? [sentence.ja, kana(sentence.jaHtml || sentence.ja)]
-      : [sentence.en];
-    // 家 read いえ can just as well be read うち.
-    const ie = '<ruby>家<rp>(</rp><rt>いえ</rt><rp>)</rp></ruby>';
-    if (isEnToJa && sentence.jaHtml && sentence.jaHtml.includes(ie)) {
-      const alt = sentence.jaHtml.split(ie).join('うち');
-      answers.push(kana(alt), alt.replace(/<rp>.*?<\/rp>|<rt>.*?<\/rt>|<\/?ruby>/g, ''));
-    }
+    // Other word orders (友達と日曜日に… for 日曜日に友達と…) and the sentence
+    // with or without 私は count too (sentence-orders.js).
+    const versions = isEnToJa ? translateVersions(sentence) : [sentence];
+    const answers = [];
+    versions.forEach(v => {
+      if (!isEnToJa) { answers.push(v.en); return; }
+      answers.push(v.ja, kana(v.jaHtml || v.ja));
+      // 家 read いえ can just as well be read うち.
+      const ie = '<ruby>家<rp>(</rp><rt>いえ</rt><rp>)</rp></ruby>';
+      if (v.jaHtml && v.jaHtml.includes(ie)) {
+        const alt = v.jaHtml.split(ie).join('うち');
+        answers.push(kana(alt), alt.replace(/<rp>.*?<\/rp>|<rt>.*?<\/rt>|<\/?ruby>/g, ''));
+      }
+    });
     // Katakana counts the same as hiragana (typing gives hiragana: アメリカ
     // can be typed あめりか), and punctuation is ignored, as in the diff.
     const key = s => s.normalize('NFKC').toLowerCase()
@@ -2219,7 +2242,7 @@
     if (!window.AnswerDiff) return '';
     // The answer spelt the way it was typed (kanji where the kanji was typed),
     // so a kanji word typed right isn't held against a kana answer.
-    if (isEnToJa) answers.push(spelledAsTyped(typed, sentence));
+    if (isEnToJa) versions.forEach(v => answers.push(spelledAsTyped(typed, v)));
     const target = AnswerDiff.closest(typed, answers);
     const d = AnswerDiff.diff(typed, target);
     // Nothing to mark (only differences the diff doesn't count): it's right.
