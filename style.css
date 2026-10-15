@@ -7722,3 +7722,22 @@ a.chapter-card.news-headline-card {
   margin: 0;
   background: var(--bg-card);
 }
+
+/* Retry boxes under a wrong typed sentence answer (sentences.html) */
+.translate-retry-try {
+  margin-top: 10px;
+}
+
+.translate-retry-try .answer-area {
+  margin: 0 auto;
+}
+
+.translate-retry-try .retry-input:disabled {
+  opacity: 0.75;
+}
+
+/* Phones: the sentence switches (Furigana, Kanji, Retry) wrap under the progress bar */
+@media (max-width: 480px) {
+  .study-toolbar { flex-wrap: wrap; }
+  .study-toolbar .study-progress { flex-basis: 100%; }
+}

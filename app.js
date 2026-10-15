@@ -638,8 +638,7 @@
     if (explain) explain.classList.add('hidden');
     const furiLabel = $('#study-furigana-label');
     if (furiLabel) furiLabel.classList.toggle('hidden', studyMode !== 'translate');
-    const kanjiLabel = $('#study-auto-kanji-label');
-    if (kanjiLabel) kanjiLabel.classList.toggle('hidden', studyMode !== 'translate' || !settings.typingMode);
+    $$('#study-auto-kanji-label, #study-retry-label').forEach(el => el.classList.toggle('hidden', studyMode !== 'translate' || !settings.typingMode));
     if (sessionIndex >= sessionCards.length) {
       finishSession();
       return;
@@ -1876,6 +1875,8 @@
     if (furiToggle) furiToggle.checked = !!settings.showFurigana;
     const kanjiToggle = $('#study-auto-kanji');
     if (kanjiToggle) kanjiToggle.checked = !!settings.autoKanji;
+    const retryToggle = $('#study-retry');
+    if (retryToggle) retryToggle.checked = !!settings.retryTyping;
 
     $('#card-prompt').textContent = `Translate to ${targetLang}`;
     // Adjective sentences say which adjective and form the sentence drills.
@@ -1949,7 +1950,10 @@
     const typedHtml = translateTypedHtml(typed, sentence, isEnToJa);
     if (lastTypedCorrect) sessionCorrect++;
     exEl.innerHTML = typedHtml
+      + '<div class="translate-retry"></div>'
       + `<div class="translate-original-label">Translation</div><div class="translate-original">${originalContent}</div>`;
+    // "Retry": after a wrong typed answer, a new box to type it again.
+    if (settings.retryTyping && settings.typingMode && typed && !lastTypedCorrect) addRetryBox(isEnToJa);
 
     // Box the grade the typed answer points to: Easy when it matched,
     // Again when Japanese was off. English can be worded many ways, so a
@@ -1958,6 +1962,50 @@
     if (suggest) $(`#card-back .btn-grade[data-grade="${suggest}"]`).classList.add('grade-suggested');
 
     renderTranslateExplain();
+  }
+
+  // ─── Retry a wrong typed answer ────────────────────────────────────────────
+  // Each try gets its own box under the last one, checked like the first
+  // answer; a wrong try adds another box. The card's grade still goes by the
+  // first answer.
+
+  function addRetryBox(isEnToJa) {
+    const area = $('#card-example-sentence .translate-retry');
+    if (!area) return;
+    const row = document.createElement('div');
+    row.className = 'translate-retry-try';
+    row.innerHTML = `
+      <div class="answer-area">
+        <input type="text" class="answer-input retry-input" placeholder="${isEnToJa ? 'Try again in Japanese...' : 'Try again in English...'}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" lang="${isEnToJa ? 'ja' : 'en'}">
+        <button type="button" class="btn-primary retry-check">Check</button>
+      </div>
+      <div class="retry-result"></div>`;
+    area.appendChild(row);
+    const input = row.querySelector('.retry-input');
+    if (window.Romaji) Romaji.attach(input);
+    input.addEventListener('input', (e) => { if (!e.isComposing) autoKanjiInput(input); });
+    row.querySelector('.retry-check').addEventListener('click', () => checkRetry(row));
+    setTimeout(() => input.focus(), 50);
+  }
+
+  function checkRetry(row) {
+    const input = row.querySelector('.retry-input');
+    if (!input || input.disabled || !currentCard || !currentCard.sentence) return;
+    if (window.Romaji) Romaji.flush(input);
+    autoKanjiInput(input);
+    const typed = input.value.trim();
+    if (!typed) return;
+    const isEnToJa = currentCard.direction === 'en-to-ja';
+    // The grade (and Enter's) stays with the first answer.
+    const first = lastTypedCorrect;
+    const html = translateTypedHtml(typed, currentCard.sentence, isEnToJa);
+    const right = lastTypedCorrect;
+    lastTypedCorrect = first;
+    row.querySelector('.retry-result').innerHTML = html;
+    input.disabled = true;
+    row.querySelector('.retry-check').remove();
+    if (right) $('#key-capture').focus();
+    else addRetryBox(isEnToJa);
   }
 
   // ─── Auto kanji while typing a Japanese answer ─────────────────────────────
@@ -2012,7 +2060,7 @@
 
   function autoKanjiInput(input) {
     if (!settings.autoKanji || studyMode !== 'translate' || !currentCard || !currentCard.sentence
-        || currentCard.direction !== 'en-to-ja' || answered) return;
+        || currentCard.direction !== 'en-to-ja' || (answered && !input.classList.contains('retry-input'))) return;
     const value = input.value;
     const atEnd = input.selectionStart === value.length;
     // Only the kana before any romaji still being typed.
@@ -5964,6 +6012,15 @@
 
     on('#setting-show-furigana', 'change', (e) => setStudyFurigana(e.target.checked));
     on('#study-furigana', 'change', (e) => setStudyFurigana(e.target.checked));
+    on('#study-retry', 'change', (e) => {
+      settings.retryTyping = e.target.checked;
+      saveSettings(settings);
+      // Turned on with a wrong answer showing: offer the box right away.
+      if (settings.retryTyping && answered && studyMode === 'translate' && !lastTypedCorrect
+          && $('#card-example-sentence .translate-typed.answer-diff') && !$('.translate-retry-try')) {
+        addRetryBox(currentCard.direction === 'en-to-ja');
+      }
+    });
     on('#study-auto-kanji', 'change', (e) => {
       settings.autoKanji = e.target.checked;
       saveSettings(settings);
@@ -6805,6 +6862,11 @@
       }
       if (overlayOpen('ref-overlay')) return;
       if (!(screens.study && screens.study.classList.contains('active'))) return;
+      // Typing in a retry box: Enter checks it, every other key just types.
+      if (e.target && e.target.classList && e.target.classList.contains('retry-input')) {
+        if (e.key === 'Enter' && !e.isComposing) { consumeKey(e); checkRetry(e.target.closest('.translate-retry-try')); }
+        return;
+      }
       if (overlayOpen('settings-overlay')) return;
 
       if (!$('#session-complete').classList.contains('hidden')) {
