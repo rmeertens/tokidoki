@@ -605,4 +605,41 @@
 
   global.VERB_PARTICLE_FURIGANA = parseFurigana;
 
+  // Hepburn romaji of a `kanji[reading]` word, shown beside the verbs in
+  // the reference tables so they can be found with the browser's search
+  // (taberu, kaeru…). Long vowels are written out (koohii, benkyou).
+  const ROMAJI = {
+    あ: 'a', い: 'i', う: 'u', え: 'e', お: 'o', か: 'ka', き: 'ki', く: 'ku', け: 'ke', こ: 'ko',
+    が: 'ga', ぎ: 'gi', ぐ: 'gu', げ: 'ge', ご: 'go', さ: 'sa', し: 'shi', す: 'su', せ: 'se', そ: 'so',
+    ざ: 'za', じ: 'ji', ず: 'zu', ぜ: 'ze', ぞ: 'zo', た: 'ta', ち: 'chi', つ: 'tsu', て: 'te', と: 'to',
+    だ: 'da', ぢ: 'ji', づ: 'zu', で: 'de', ど: 'do', な: 'na', に: 'ni', ぬ: 'nu', ね: 'ne', の: 'no',
+    は: 'ha', ひ: 'hi', ふ: 'fu', へ: 'he', ほ: 'ho', ば: 'ba', び: 'bi', ぶ: 'bu', べ: 'be', ぼ: 'bo',
+    ぱ: 'pa', ぴ: 'pi', ぷ: 'pu', ぺ: 'pe', ぽ: 'po', ま: 'ma', み: 'mi', む: 'mu', め: 'me', も: 'mo',
+    や: 'ya', ゆ: 'yu', よ: 'yo', ら: 'ra', り: 'ri', る: 'ru', れ: 're', ろ: 'ro', わ: 'wa', を: 'o', ん: 'n',
+    ぁ: 'a', ぃ: 'i', ぅ: 'u', ぇ: 'e', ぉ: 'o',
+  };
+  const SMALL_Y = { ゃ: 'a', ゅ: 'u', ょ: 'o' };
+  function toRomaji(text) {
+    const kana = text.replace(/\]する/g, '] する').replace(/([一-鿿々]+)\[([^\]]+)\]/g, '$2')
+      .replace(/[ァ-ヶ]/g, c => String.fromCharCode(c.charCodeAt(0) - 0x60));
+    let out = '';
+    let double = false;
+    for (let i = 0; i < kana.length; i++) {
+      const c = kana[i];
+      let syl;
+      if (c === 'っ') { double = true; continue; }
+      if (c === 'ー') { syl = (out.match(/[aeiou]$/) || [''])[0]; }
+      else if (SMALL_Y[kana[i + 1]] && ROMAJI[c] && /i$/.test(ROMAJI[c]) && c !== 'い') {
+        const base = ROMAJI[c].slice(0, -1);
+        syl = (/(sh|ch|j)$/.test(base) ? base : base + 'y') + SMALL_Y[kana[++i]];
+      } else if (ROMAJI[c]) syl = ROMAJI[c];
+      else syl = c === '／' ? ' / ' : c;
+      if (double && /^[a-z]/.test(syl)) syl = (syl.startsWith('ch') ? 't' : syl[0]) + syl;
+      double = false;
+      out += syl;
+    }
+    return out;
+  }
+  global.VERB_PARTICLE_ROMAJI = toRomaji;
+
 })(window);

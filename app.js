@@ -2981,10 +2981,11 @@
       : type === 'vt'
         ? '<span class="vp-type vp-type-vt" title="Transitive (他動詞): takes an object with を"><span lang="ja">他</span> vt</span>'
         : '<span class="vp-type vp-type-vi" title="Intransitive (自動詞): no object"><span lang="ja">自</span> vi</span>';
+    const romaji = t => `<span class="vp-romaji">${esc(window.VERB_PARTICLE_ROMAJI(t))}</span>`;
     const rows = window.VERB_PARTICLE_VERBS.map(v => `
       <tr>
-        <td class="vp-verb"><span lang="ja">${furi(v.verb)}</span><span class="vp-type-line">${typeTag(v.type)}</span></td>
-        <td class="vp-en">${esc(v.en)}${v.pair ? `<span class="vp-pair">↔ <span lang="ja">${furi(v.pair)}</span></span>` : ''}</td>
+        <td class="vp-verb"><span lang="ja">${furi(v.verb)}</span>${romaji(v.verb)}<span class="vp-type-line">${typeTag(v.type)}</span></td>
+        <td class="vp-en">${esc(v.en)}${v.pair ? `<span class="vp-pair">↔ <span lang="ja">${furi(v.pair)}</span> ${esc(window.VERB_PARTICLE_ROMAJI(v.pair))}</span>` : ''}</td>
         <td class="vp-frames">${v.frames.map(f => `<span class="vp-frame">${particleTags(f)}</span>`).join('')}</td>
       </tr>`).join('');
     const vt = window.VERB_TRANSITIVITY;
@@ -3016,8 +3017,8 @@
               <thead><tr><th>${typeTag('vi')} が</th><th>${typeTag('vt')} を</th><th>Meaning</th></tr></thead>
               <tbody>${g.pairs.map(p => `
                 <tr class="vt-row" tabindex="0" aria-expanded="false" title="Show example sentences">
-                  <td lang="ja">${withParticle(p.noun, 'が', p.vi)}</td>
-                  <td lang="ja">${withParticle(p.noun, 'を', p.vt)}</td>
+                  <td><span lang="ja">${withParticle(p.noun, 'が', p.vi)}</span>${romaji(p.vi)}</td>
+                  <td><span lang="ja">${withParticle(p.noun, 'を', p.vt)}</span>${romaji(p.vt)}</td>
                   <td class="vp-en">${esc(p.en)}<span class="vt-row-chevron" aria-hidden="true"></span></td>
                 </tr>
                 <tr class="vt-detail" hidden>
@@ -3029,7 +3030,7 @@
         </div>`).join('')}
       ${vt.only.map(o => `
         <div class="vt-only">${typeTag(o.type)} <span class="vt-only-label">${esc(o.label)}:</span>
-          <span lang="ja">${o.verbs.map(furi).join('、')}</span></div>`).join('')}
+          ${o.verbs.map(v => `<span lang="ja">${furi(v)}</span> <span class="vp-romaji-inline">(${esc(window.VERB_PARTICLE_ROMAJI(v))})</span>`).join('、')}</div>`).join('')}
       <p class="vt-source">Pairs grouped after the <a href="https://www.mlcjapanese.co.jp/Download/ViVt.pdf" target="_blank" rel="noopener">MLC Japanese 自動詞と他動詞 chart</a>.</p>`;
     if (!el.dataset.vtBound) {
       el.dataset.vtBound = '1';

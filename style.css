@@ -1627,6 +1627,14 @@ a.chapter-card {
 
 .vp-type-line { display: block; margin-top: 2px; }
 
+.vp-romaji {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.vp-romaji-inline { font-size: 0.85em; color: var(--text-muted); }
+
 .vp-pair {
   display: block;
   white-space: nowrap;
