@@ -126,6 +126,21 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-10-15-farm-minister.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-10-15-reporter-russia.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-10-15-disney-cruise.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://tokidoki.meertens.dev/news-2026-10-14-judo.html</loc>
     <lastmod>2026-10-14</lastmod>
     <priority>0.6</priority>

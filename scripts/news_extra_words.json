@@ -2218,5 +2218,545 @@
     "ふたり",
     "two people",
     "number + counter"
+  ],
+  "ヤナ・カズオ": [
+    "やなかずお",
+    "Kazuo Yana (the agriculture minister who resigned)",
+    "name"
+  ],
+  "ヤナ": [
+    "やな",
+    "Yana (surname)",
+    "name"
+  ],
+  "内閣": [
+    "ないかく",
+    "cabinet (government)",
+    "noun"
+  ],
+  "辞任": [
+    "じにん",
+    "resignation",
+    "noun / suru verb"
+  ],
+  "辞表": [
+    "じひょう",
+    "letter of resignation",
+    "noun"
+  ],
+  "市長": [
+    "しちょう",
+    "mayor",
+    "noun"
+  ],
+  "報じる": [
+    "ほうじる",
+    "to report (in the news)",
+    "verb"
+  ],
+  "取り消す": [
+    "とりけす",
+    "to cancel, to take back",
+    "verb"
+  ],
+  "あやまつ": [
+    "あやまる",
+    "to apologize",
+    "verb"
+  ],
+  "問責": [
+    "もんせき",
+    "censure (holding someone responsible)",
+    "noun"
+  ],
+  "決議": [
+    "けつぎ",
+    "resolution, motion",
+    "noun"
+  ],
+  "法案": [
+    "ほうあん",
+    "bill (proposed law)",
+    "noun"
+  ],
+  "話し合い": [
+    "はなしあい",
+    "discussion, talks",
+    "noun"
+  ],
+  "十七日": [
+    "じゅうしちにち",
+    "the 17th (day of the month)",
+    "noun"
+  ],
+  "水産": [
+    "すいさん",
+    "fisheries",
+    "noun"
+  ],
+  "不祥事": [
+    "ふしょうじ",
+    "scandal, improper incident",
+    "noun"
+  ],
+  "閣僚": [
+    "かくりょう",
+    "cabinet minister",
+    "noun"
+  ],
+  "早苗": [
+    "さなえ",
+    "Sanae (given name)",
+    "name"
+  ],
+  "受理": [
+    "じゅり",
+    "acceptance (of a document)",
+    "noun / suru verb"
+  ],
+  "任命": [
+    "にんめい",
+    "appointment (to a post)",
+    "noun / suru verb"
+  ],
+  "受け止める": [
+    "うけとめる",
+    "to take, to receive; to take seriously",
+    "verb"
+  ],
+  "支持": [
+    "しじ",
+    "support, backing",
+    "noun / suru verb"
+  ],
+  "受け取れる": [
+    "うけとれる",
+    "can be taken as, can be understood as",
+    "verb"
+  ],
+  "発言": [
+    "はつげん",
+    "remark, statement",
+    "noun / suru verb"
+  ],
+  "撤回": [
+    "てっかい",
+    "withdrawal, retraction",
+    "noun / suru verb"
+  ],
+  "謝罪": [
+    "しゃざい",
+    "apology",
+    "noun / suru verb"
+  ],
+  "審議": [
+    "しんぎ",
+    "deliberation (in the Diet)",
+    "noun / suru verb"
+  ],
+  "構え": [
+    "かまえ",
+    "stance, posture",
+    "noun"
+  ],
+  "改造": [
+    "かいぞう",
+    "reshuffle; remodeling",
+    "noun / suru verb"
+  ],
+  "入閣": [
+    "にゅうかく",
+    "joining the cabinet",
+    "noun / suru verb"
+  ],
+  "起用": [
+    "きよう",
+    "appointment, giving someone a post",
+    "noun / suru verb"
+  ],
+  "北海道新聞": [
+    "ほっかいどうしんぶん",
+    "the Hokkaido Shimbun (newspaper)",
+    "name"
+  ],
+  "サハリン": [
+    "さはりん",
+    "Sakhalin (Russian island north of Hokkaido)",
+    "place name"
+  ],
+  "スパイ": [
+    "すぱい",
+    "spy, spying",
+    "noun"
+  ],
+  "裁判所": [
+    "さいばんしょ",
+    "court",
+    "noun"
+  ],
+  "二か月": [
+    "にかげつ",
+    "two months",
+    "noun"
+  ],
+  "外務": [
+    "がいむ",
+    "foreign affairs",
+    "noun"
+  ],
+  "連邦": [
+    "れんぽう",
+    "federation, federal",
+    "noun"
+  ],
+  "保安庁": [
+    "ほあんちょう",
+    "security service (agency)",
+    "noun"
+  ],
+  "FSB": [
+    "エフエスビー",
+    "FSB (Russia's Federal Security Service)",
+    "name"
+  ],
+  "防衛": [
+    "ぼうえい",
+    "defense",
+    "noun / suru verb"
+  ],
+  "モスクワ": [
+    "もすくわ",
+    "Moscow",
+    "place name"
+  ],
+  "茂木": [
+    "もてぎ",
+    "Motegi (surname)",
+    "name"
+  ],
+  "人道的": [
+    "じんどうてき",
+    "humane, humanitarian",
+    "na-adjective"
+  ],
+  "制裁": [
+    "せいさい",
+    "sanctions; punishment",
+    "noun / suru verb"
+  ],
+  "北方領土": [
+    "ほっぽうりょうど",
+    "the Northern Territories (islands off Hokkaido claimed by Japan)",
+    "noun"
+  ],
+  "両国": [
+    "りょうこく",
+    "both countries",
+    "noun"
+  ],
+  "容疑": [
+    "ようぎ",
+    "suspicion (of a crime)",
+    "noun"
+  ],
+  "外相": [
+    "がいしょう",
+    "foreign minister",
+    "noun"
+  ],
+  "扱い": [
+    "あつかい",
+    "treatment, handling",
+    "noun"
+  ],
+  "ユジノサハリンスク": [
+    "ゆじのさはりんすく",
+    "Yuzhno-Sakhalinsk (city on Sakhalin)",
+    "place name"
+  ],
+  "支局": [
+    "しきょく",
+    "branch bureau (of a news organization)",
+    "noun"
+  ],
+  "に関する": [
+    "にかんする",
+    "concerning, related to",
+    "grammar"
+  ],
+  "収集": [
+    "しゅうしゅう",
+    "collection, gathering",
+    "noun / suru verb"
+  ],
+  "出国": [
+    "しゅっこく",
+    "leaving the country",
+    "noun / suru verb"
+  ],
+  "移送": [
+    "いそう",
+    "transfer (of a person)",
+    "noun / suru verb"
+  ],
+  "同日": [
+    "どうじつ",
+    "the same day",
+    "noun"
+  ],
+  "勾留": [
+    "こうりゅう",
+    "detention (pending trial)",
+    "noun / suru verb"
+  ],
+  "早期": [
+    "そうき",
+    "early stage, early",
+    "noun"
+  ],
+  "時点": [
+    "じてん",
+    "point in time",
+    "noun"
+  ],
+  "接触": [
+    "せっしょく",
+    "contact",
+    "noun / suru verb"
+  ],
+  "メディア": [
+    "めでぃあ",
+    "media",
+    "noun"
+  ],
+  "特派": [
+    "とくは",
+    "dispatch (as a special correspondent)",
+    "noun"
+  ],
+  "損なう": [
+    "そこなう",
+    "to harm, to damage",
+    "verb"
+  ],
+  "遺憾": [
+    "いかん",
+    "regret; regrettable",
+    "na-adjective"
+  ],
+  "ディズニー": [
+    "でぃずにー",
+    "Disney",
+    "name"
+  ],
+  "オリエンタルランド": [
+    "おりえんたるらんど",
+    "Oriental Land (company that runs Tokyo Disney Resort)",
+    "name"
+  ],
+  "客船": [
+    "きゃくせん",
+    "passenger ship",
+    "noun"
+  ],
+  "イマジネーション": [
+    "いまじねーしょん",
+    "imagination",
+    "noun"
+  ],
+  "2029年": [
+    "にせんにじゅうくねん",
+    "the year 2029",
+    "noun"
+  ],
+  "リゾート": [
+    "りぞーと",
+    "resort",
+    "noun"
+  ],
+  "クルーズ": [
+    "くるーず",
+    "cruise",
+    "noun"
+  ],
+  "運営": [
+    "うんえい",
+    "management, operation",
+    "noun / suru verb"
+  ],
+  "造船": [
+    "ぞうせん",
+    "shipbuilding",
+    "noun"
+  ],
+  "登録": [
+    "とうろく",
+    "registration",
+    "noun / suru verb"
+  ],
+  "一年中": [
+    "いちねんじゅう",
+    "all year round",
+    "noun"
+  ],
+  "組み合わせる": [
+    "くみあわせる",
+    "to combine",
+    "verb"
+  ],
+  "楽しむ": [
+    "たのしむ",
+    "to enjoy",
+    "verb"
+  ],
+  "ウォルト・ディズニー": [
+    "うぉると・でぃずにー",
+    "Walt Disney",
+    "name"
+  ],
+  "イマジニア": [
+    "いまじにあ",
+    "Imagineer (Disney designer)",
+    "noun"
+  ],
+  "リング": [
+    "りんぐ",
+    "-ring (as in Imagineering)",
+    "noun"
+  ],
+  "就航": [
+    "しゅうこう",
+    "entering service (of a ship or plane)",
+    "noun / suru verb"
+  ],
+  "カンパニー": [
+    "かんぱにー",
+    "company",
+    "noun"
+  ],
+  "ブランド": [
+    "ぶらんど",
+    "brand",
+    "noun"
+  ],
+  "事業": [
+    "じぎょう",
+    "business, enterprise",
+    "noun"
+  ],
+  "建造": [
+    "けんぞう",
+    "construction (of a ship or building)",
+    "noun / suru verb"
+  ],
+  "手がける": [
+    "てがける",
+    "to handle, to work on",
+    "verb"
+  ],
+  "船籍": [
+    "せんせき",
+    "ship's registry (nationality)",
+    "noun"
+  ],
+  "通年": [
+    "つうねん",
+    "all year, throughout the year",
+    "noun"
+  ],
+  "短期": [
+    "たんき",
+    "short term",
+    "noun"
+  ],
+  "運航": [
+    "うんこう",
+    "operation of a ship or flight",
+    "noun / suru verb"
+  ],
+  "担う": [
+    "になう",
+    "to bear, to be in charge of",
+    "verb"
+  ],
+  "設立": [
+    "せつりつ",
+    "establishment",
+    "noun / suru verb"
+  ],
+  "農林水産大臣": [
+    "のうりんすいさんだいじん",
+    "Minister of Agriculture, Forestry and Fisheries (the \"farm minister\")",
+    "noun"
+  ],
+  "農林水産相": [
+    "のうりんすいさんしょう",
+    "agriculture minister (short, newspaper form)",
+    "noun"
+  ],
+  "農林水産": [
+    "のうりんすいさん",
+    "agriculture, forestry and fisheries",
+    "noun"
+  ],
+  "副大臣": [
+    "ふくだいじん",
+    "vice minister",
+    "noun"
+  ],
+  "記者団": [
+    "きしゃだん",
+    "group of reporters, press corps",
+    "noun"
+  ],
+  "支持者": [
+    "ししゃ",
+    "supporter",
+    "noun"
+  ],
+  "情報機関": [
+    "じょうほうきかん",
+    "intelligence agency",
+    "noun"
+  ],
+  "スパイ罪": [
+    "すぱいざい",
+    "crime of espionage",
+    "noun"
+  ],
+  "特派員": [
+    "とくはいん",
+    "special correspondent",
+    "noun"
+  ],
+  "日本初": [
+    "にほんはつ",
+    "first in Japan",
+    "noun"
+  ],
+  "クルーズ船": [
+    "くるーずせん",
+    "cruise ship",
+    "noun"
+  ],
+  "造船所": [
+    "ぞうせんじょ",
+    "shipyard",
+    "noun"
+  ],
+  "船名": [
+    "せんめい",
+    "name of a ship",
+    "noun"
+  ],
+  "茂木敏充": [
+    "もてぎとしみつ",
+    "Toshimitsu Motegi (foreign minister)",
+    "name"
+  ],
+  "武部新": [
+    "たけべあらた",
+    "Arata Takebe (lawmaker expected to be the new agriculture minister)",
+    "name"
   ]
 }

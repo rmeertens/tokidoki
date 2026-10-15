@@ -23,6 +23,147 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-10-15-farm-minister',
+      date: '2026-10-15',
+      emoji: '🏛️',
+      titleEn: 'Agriculture Minister Yana resigns — the first scandal-related resignation in the Takaichi cabinet',
+      sources: [
+        { name: 'nippon.com (Jiji)', url: 'https://www.nippon.com/en/news/yjj2026101400736/' },
+        { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/10/14/japan/politics/takaichi-cabinet-yana-parliament-resigns/' },
+        { name: 'nippon.com (Jiji)', url: 'https://www.nippon.com/en/news/yjj2026101500352/' },
+      ],
+      levels: {
+        N5: {
+          title: '農林水産大臣[のうりんすいさんだいじん]が、やめました',
+          lines: [
+            ['十四日[じゅうよっか]、ヤナ・カズオ農林水産大臣[のうりんすいさんだいじん]が、大臣[だいじん]をやめました。', 'On the 14th, Agriculture Minister Kazuo Yana resigned as minister.', '農林水産大臣 is the minister for agriculture, forestry and fisheries ("farm minister" in English news).'],
+            ['高市[たかいち]総理[そうり]大臣[だいじん]は、やめることを認[みと]めました。', 'Prime Minister Takaichi accepted his resignation.'],
+            ['ヤナさんは、道[みち]を作[つく]るお金[かね]について、よくないことを言[い]いました。', 'Mr. Yana said something inappropriate about money for building roads.', 'He was reported to have suggested that road budgets were cut for towns whose mayors had not supported him. He took the remarks back and apologized on October 5.'],
+            ['野党[やとう]は、ヤナさんにやめてほしいと言[い]っていました。', 'The opposition parties had been saying they wanted Mr. Yana to resign.', '野党 means the opposition parties.'],
+            ['高市[たかいち]内閣[ないかく]で、問題[もんだい]のためにやめた大臣[だいじん]は、初[はじ]めてです。', 'He is the first minister in the Takaichi cabinet to resign over a problem.'],
+            ['次[つぎ]の大臣[だいじん]は、武部新[たけべあらた]さんになるようです。', 'It seems the next minister will be Arata Takebe.', 'Jiji Press reported that Takaichi was expected to name him.'],
+          ],
+        },
+        N4: {
+          title: 'ヤナ農林水産大臣[のうりんすいさんだいじん]が辞任[じにん]、高市[たかいち]内閣[ないかく]で初[はじ]めて',
+          lines: [
+            ['十四日[じゅうよっか]、ヤナ・カズオ農林水産大臣[のうりんすいさんだいじん]が、高市[たかいち]総理[そうり]大臣[だいじん]に辞表[じひょう]を出[だ]しました。', 'On the 14th, Agriculture Minister Kazuo Yana submitted his letter of resignation to Prime Minister Takaichi.', '辞表 is a resignation letter.'],
+            ['高市[たかいち]総理[そうり]大臣[だいじん]は辞表[じひょう]を受[う]け取[と]り、ヤナさんを大臣[だいじん]に選[えら]んだ責任[せきにん]は重[おも]いと話[はな]しました。', 'Takaichi accepted the letter and said she takes seriously her responsibility for choosing Mr. Yana as minister.'],
+            ['ヤナさんは、自分[じぶん]を応援[おうえん]しなかった市長[しちょう]の町[まち]の道路[どうろ]予算[よさん]が減[へ]らされた、という話[はなし]をしたと報[ほう]じられました。', 'It was reported that Mr. Yana had said that road budgets were cut for towns whose mayors did not support him.', '報じられる "to be reported (in the news)".'],
+            ['ヤナさんは十月[じゅうがつ]五日[いつか]に、この話[はなし]を取[と]り消[け]してあやまっていました。', 'On October 5, Mr. Yana had taken back the remarks and apologized.'],
+            ['野党[やとう]は、大臣[だいじん]の責任[せきにん]を問[と]う問責[もんせき]決議案[けつぎあん]を出[だ]すことを考[かんが]えていました。', 'The opposition parties had been considering submitting a censure motion over the minister\'s responsibility.', '問責決議案 is a censure motion; the opposition considered one in the House of Councillors (the upper house).'],
+            ['食料品[しょくりょうひん]の消費税[しょうひぜい]を下[さ]げる法案[ほうあん]について、ヤナさんがやめるまで国会[こっかい]で話[はな]し合[あ]わないという野党[やとう]もありました。', 'Some opposition parties said they would not take part in talks on the bill to cut the consumption tax on food until Mr. Yana resigned.'],
+            ['ヤナさんは九月[くがつ]十七日[じゅうしちにち]に大臣[だいじん]になったばかりで、次[つぎ]の大臣[だいじん]は武部新[たけべあらた]さんになる見通[みとお]しです。', 'Mr. Yana had become minister on September 17, and Arata Takebe is expected to be the next minister.', '見通し "outlook, expectation". Takebe is a six-term lawmaker and a former vice minister at the Agriculture Ministry.'],
+          ],
+        },
+        N3: {
+          title: 'ヤナ農林水産相[のうりんすいさんしょう]が辞任[じにん]、高市[たかいち]内閣[ないかく]で不祥事[ふしょうじ]による閣僚[かくりょう]辞任[じにん]は初[はじ]めて',
+          lines: [
+            ['ヤナ・カズオ農林水産相[のうりんすいさんしょう]は十四日[じゅうよっか]、高市[たかいち]早苗[さなえ]首相[しゅしょう]に辞表[じひょう]を提出[ていしゅつ]し、受理[じゅり]された。', 'Agriculture Minister Kazuo Yana submitted his resignation to Prime Minister Sanae Takaichi on the 14th, and it was accepted.', '農林水産相 is the newspaper short form of 農林水産大臣. 受理 "to accept (a document)".'],
+            ['高市[たかいち]首相[しゅしょう]は記者団[きしゃだん]に対[たい]し、任命[にんめい]した責任[せきにん]を重[おも]く受[う]け止[と]めていると述[の]べた。', 'Takaichi told reporters that she takes seriously her responsibility for having appointed him.', '重く受け止める "to take (something) seriously" is a standard expression for officials.'],
+            ['ヤナ氏[し]は、自身[じしん]を支持[しじ]しなかった市長[しちょう]の自治体[じちたい]への道路[どうろ]予算[よさん]を減[へ]らしたと受[う]け取[と]れる発言[はつげん]をしたと報[ほう]じられ、十月[じゅうがつ]五日[いつか]に撤回[てっかい]して謝罪[しゃざい]していた。', 'Mr. Yana had been reported to have made remarks that could be taken to mean road budgets were cut for municipalities whose mayors did not support him, and on October 5 he retracted them and apologized.', '氏 is a written-style "Mr." used in newspapers. 撤回 "to withdraw (a statement)".'],
+            ['このほか、選挙[せんきょ]運動[うんどう]で支持者[ししゃ]に無料[むりょう]のバスを提供[ていきょう]した疑[うたが]いも指摘[してき]されていた。', 'In addition, it had been pointed out that he was suspected of providing free buses to supporters during his election campaign.', 'The allegation is that this violated the Public Offices Election Law.'],
+            ['野党[やとう]は辞任[じにん]を求[もと]め、参院[さんいん]では問責[もんせき]決議案[けつぎあん]の提出[ていしゅつ]を検討[けんとう]していたほか、食料品[しょくりょうひん]の消費税[しょうひぜい]を下[さ]げる法案[ほうあん]の審議[しんぎ]に応[おう]じない構[かま]えを見[み]せる党[とう]もあった。', 'The opposition demanded his resignation and was considering a censure motion in the upper house, and some parties also signaled they would not take part in deliberations on the bill to cut the consumption tax on food.', '参院 is short for 参議院 (House of Councillors). 構えを見せる "to show a stance of".'],
+            ['高市[たかいち]内閣[ないかく]で閣僚[かくりょう]が不祥事[ふしょうじ]で辞任[じにん]するのは初[はじ]めてで、ヤナ氏[し]は九月[くがつ]十七日[じゅうしちにち]の内閣[ないかく]改造[かいぞう]で入閣[にゅうかく]したばかりだった。', 'This is the first time a cabinet minister has resigned over a scandal in the Takaichi cabinet; Mr. Yana had joined the cabinet only in the reshuffle on September 17.', '不祥事 "a scandal, an improper incident". 内閣改造 is a cabinet reshuffle.'],
+            ['後任[こうにん]には、元[もと]農林水産[のうりんすいさん]副大臣[ふくだいじん]の武部新[たけべあらた]氏[し]が起用[きよう]される見通[みとお]しだ。', 'Arata Takebe, a former vice minister of agriculture, forestry and fisheries, is expected to be appointed as his successor.', '起用 "to appoint, to give a post to".'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-15-reporter-russia',
+      date: '2026-10-15',
+      emoji: '📰',
+      titleEn: 'Russia detains a Hokkaido Shimbun reporter on suspicion of spying; Japan asks for humane treatment',
+      sources: [
+        { name: 'nippon.com (Jiji)', url: 'https://www.nippon.com/en/news/yjj2026101400001/' },
+        { name: 'nippon.com (Jiji)', url: 'https://www.nippon.com/en/news/yjj2026101400412/' },
+        { name: 'Meduza', url: 'https://meduza.io/en/news/2026/10/13/russian-court-orders-japanese-journalist-held-on-espionage-charges' },
+      ],
+      levels: {
+        N5: {
+          title: 'ロシアで、日本[にっぽん]の記者[きしゃ]がつかまりました',
+          lines: [
+            ['ロシアで、日本[にっぽん]の新聞[しんぶん]の記者[きしゃ]がつかまりました。', 'In Russia, a reporter for a Japanese newspaper has been detained.'],
+            ['北海道新聞[ほっかいどうしんぶん]の記者[きしゃ]で、サハリンにいました。', 'He is a reporter for the Hokkaido Shimbun and was in Sakhalin.', 'Sakhalin is a Russian island just north of Hokkaido.'],
+            ['ロシアの組織[そしき]は、この記者[きしゃ]にスパイの疑[うたが]いがあると言[い]っています。', 'A Russian agency says this reporter is suspected of spying.', 'The agency is the Federal Security Service (FSB). Japan has not accepted the accusation.'],
+            ['十三日[じゅうさんにち]、裁判所[さいばんしょ]は、記者[きしゃ]を二[に]か月[げつ]ちかく外[そと]に出[だ]さないことを決[き]めました。', 'On the 13th, a court decided to keep the reporter locked up for nearly two months.', 'Reports differ slightly on the exact length; it runs to around the middle of December.'],
+            ['日本[にっぽん]の外務[がいむ]大臣[だいじん]は、記者[きしゃ]のことをすぐ教[おし]えて、大切[たいせつ]にしてくださいと、ロシアにお願[ねが]いしました。', 'Japan\'s foreign minister asked Russia to tell Japan about the reporter right away and to treat him with care.'],
+            ['日本[にっぽん]の人[ひと]は、まだ記者[きしゃ]に会[あ]えていません。', 'Japanese officials have not been able to meet the reporter yet.', 'This was the situation as of the 14th, according to Jiji Press.'],
+          ],
+        },
+        N4: {
+          title: 'ロシアが日本人[にほんじん]記者[きしゃ]をスパイの疑[うたが]いで拘束[こうそく]',
+          lines: [
+            ['ロシアの連邦[れんぽう]保安庁[ほあんちょう]（FSB）は十三日[じゅうさんにち]、北海道新聞[ほっかいどうしんぶん]の記者[きしゃ]をスパイの疑[うたが]いでつかまえたと発表[はっぴょう]しました。', 'On the 13th, Russia\'s Federal Security Service (FSB) announced that it had detained a Hokkaido Shimbun reporter on suspicion of spying.', '連邦保安庁 is the Federal Security Service, Russia\'s main security agency.'],
+            ['FSBによると、記者[きしゃ]はロシアの防衛[ぼうえい]力[りょく]についての情報[じょうほう]を集[あつ]めていた疑[うたが]いがあります。', 'According to the FSB, the reporter is suspected of collecting information about Russia\'s defense capabilities.', 'Only the FSB says this. Japan has not confirmed any of it.'],
+            ['モスクワの裁判所[さいばんしょ]は同[おな]じ日[ひ]、記者[きしゃ]を二[に]か月[げつ]ちかく拘束[こうそく]することを認[みと]めました。', 'On the same day, a court in Moscow approved holding the reporter for nearly two months.', '拘束 "to detain, to hold in custody".'],
+            ['茂木[もてぎ]外務[がいむ]大臣[だいじん]は十四日[じゅうよっか]、ロシアに、早[はや]く情報[じょうほう]を出[だ]し、記者[きしゃ]を人道的[じんどうてき]にあつかうように求[もと]めました。', 'On the 14th, Foreign Minister Motegi asked Russia to provide information quickly and to treat the reporter humanely.', '人道的 "humane".'],
+            ['日本[にっぽん]の政府[せいふ]は、まだ記者[きしゃ]と連絡[れんらく]が取[と]れていません。', 'The Japanese government has not yet been able to contact the reporter.'],
+            ['ロシアの外務省[がいむしょう]は、日本[にっぽん]が記者[きしゃ]を使[つか]って情報[じょうほう]を集[あつ]めようとしているとして、残念[ざんねん]だと述[の]べています。', 'Russia\'s Foreign Ministry says it is regrettable, claiming that Japan is trying to use reporters to collect information.', 'This is Russia\'s claim. 〜として means "on the grounds that".'],
+            ['日本[にっぽん]はロシアへの制裁[せいさい]に加[くわ]わっていて、北方[ほっぽう]領土[りょうど]の問題[もんだい]も解決[かいけつ]していないため、両国[りょうこく]の関係[かんけい]は難[むずか]しい状態[じょうたい]です。', 'Japan has joined the sanctions against Russia and the Northern Territories problem is still unsolved, so relations between the two countries are in a difficult state.', '北方領土 are the islands off Hokkaido (the southern Kurils) that both countries claim.'],
+          ],
+        },
+        N3: {
+          title: 'ロシア、北海道新聞[ほっかいどうしんぶん]の記者[きしゃ]をスパイ容疑[ようぎ]で拘束[こうそく]　茂木[もてぎ]外相[がいしょう]は人道的[じんどうてき]な扱[あつか]いを要求[ようきゅう]',
+          lines: [
+            ['ロシア連邦[れんぽう]保安庁[ほあんちょう]（FSB）は十三日[じゅうさんにち]、北海道新聞[ほっかいどうしんぶん]のユジノサハリンスク支局[しきょく]の日本人[にほんじん]記者[きしゃ]を、スパイ容疑[ようぎ]で拘束[こうそく]したと発表[はっぴょう]した。', 'On the 13th, Russia\'s Federal Security Service (FSB) announced that it had detained a Japanese reporter of the Hokkaido Shimbun\'s Yuzhno-Sakhalinsk bureau on suspicion of espionage.', '支局 is a branch bureau of a news organization. 容疑 "suspicion (of a crime)".'],
+            ['FSBは、記者[きしゃ]がロシアの防衛[ぼうえい]力[りょく]に関[かん]する情報[じょうほう]を収集[しゅうしゅう]し、日本[にっぽん]の情報機関[じょうほうきかん]のために活動[かつどう]していたとしている。', 'The FSB says the reporter collected information on Russia\'s defense capabilities and was working for a Japanese intelligence agency.', 'This is the FSB\'s claim only; とする "to hold that, to claim".'],
+            ['記者[きしゃ]は出国[しゅっこく]しようとしていたところを拘束[こうそく]され、モスクワに移送[いそう]されたと報[ほう]じられている。', 'It is reported that the reporter was detained just as he was about to leave Russia and was taken to Moscow.', '〜ようとしていたところ "just when (he) was about to ...". The detail comes from Meduza.'],
+            ['モスクワの裁判所[さいばんしょ]は同日[どうじつ]、スパイ罪[ざい]での記者[きしゃ]の勾留[こうりゅう]を二[に]か月[げつ]近[ちか]く認[みと]める決定[けってい]をした。', 'On the same day, a Moscow court decided to allow the reporter to be held on a spying charge for nearly two months.', '勾留 "detention (pending trial)".'],
+            ['茂木敏充[もてぎとしみつ]外相[がいしょう]は十四日[じゅうよっか]、ロシアに対[たい]し、早期[そうき]の情報[じょうほう]提供[ていきょう]と記者[きしゃ]の人道的[じんどうてき]な扱[あつか]いを求[もと]めた。', 'On the 14th, Foreign Minister Toshimitsu Motegi asked Russia for early provision of information and humane treatment of the reporter.', '外相 is the short form of 外務大臣.'],
+            ['日本[にっぽん]政府[せいふ]は十四日[じゅうよっか]の時点[じてん]で記者[きしゃ]と接触[せっしょく]できていないという。', 'As of the 14th, the Japanese government has reportedly not been able to make contact with the reporter.', '〜という at the end of a sentence means "it is said that".'],
+            ['ロシア外務省[がいむしょう]は、日本[にっぽん]が外国[がいこく]メディアの記者[きしゃ]の資格[しかく]を持[も]つ特派員[とくはいん]を使[つか]い、ロシアの安全[あんぜん]を損[そこ]なう情報[じょうほう]を集[あつ]めようとしているとして、遺憾[いかん]の意[い]を示[しめ]した。', 'Russia\'s Foreign Ministry expressed regret, claiming that Japan is trying to use correspondents with foreign-journalist status to collect information that harms Russia\'s security.', '遺憾の意を示す "to express regret" is a stock phrase of diplomacy. This is Russia\'s claim.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-15-disney-cruise',
+      date: '2026-10-15',
+      emoji: '🚢',
+      titleEn: 'Japan\'s first Disney cruise ship is named "Disney Imagination"',
+      sources: [
+        { name: 'nippon.com (Jiji)', url: 'https://www.nippon.com/en/news/yjj2026101400388/' },
+        { name: 'Disney Parks Blog', url: 'https://disneyparksblog.com/dcl/disney-and-oriental-land-co-ltd-embark-on-expanded-relationship-to-launch-disney-cruise-vacations-in-japan/' },
+      ],
+      levels: {
+        N5: {
+          title: '日本[にっぽん]のディズニーの船[ふね]の名前[なまえ]が決[き]まりました',
+          lines: [
+            ['オリエンタルランドは、十四日[じゅうよっか]に、新[あたら]しい船[ふね]の名前[なまえ]を言[い]いました。', 'On the 14th, Oriental Land announced the name of its new ship.', 'Oriental Land is the company that runs Tokyo Disney Resort.'],
+            ['ディズニーの大[おお]きな客船[きゃくせん]です。', 'It is a big Disney passenger ship.', '客船 is a passenger ship (a cruise ship).'],
+            ['名前[なまえ]は「ディズニー・イマジネーション」です。', 'Its name is "Disney Imagination".'],
+            ['日本[にっぽん]で、ディズニーの船[ふね]ができるのは、初[はじ]めてです。', 'It is the first time Japan will have a Disney ship.'],
+            ['2029年[ねん]の春[はる]に、船[ふね]の旅[たび]が始[はじ]まる予定[よてい]です。', 'The ship trips are scheduled to start in the spring of 2029.'],
+            ['この船[ふね]は、東京[とうきょう]ディズニーリゾートの会社[かいしゃ]の船[ふね]です。', 'This ship belongs to the company that runs Tokyo Disney Resort.'],
+          ],
+        },
+        N4: {
+          title: '日本初[にほんはつ]のディズニークルーズ船[せん]、名前[なまえ]は「ディズニー・イマジネーション」',
+          lines: [
+            ['東京[とうきょう]ディズニーリゾートを運営[うんえい]するオリエンタルランドは十四日[じゅうよっか]、日本[にっぽん]で初[はじ]めてのディズニークルーズ船[せん]の名前[なまえ]を「ディズニー・イマジネーション」にすると発表[はっぴょう]しました。', 'On the 14th, Oriental Land, which runs Tokyo Disney Resort, announced that Japan\'s first Disney cruise ship will be named "Disney Imagination".', 'クルーズ船 is a cruise ship. 運営する "to run, to operate".'],
+            ['船[ふね]の旅[たび]が始[はじ]まるのは、2029年[ねん]の春[はる]の予定[よてい]です。', 'The cruises are scheduled to begin in the spring of 2029.'],
+            ['計画[けいかく]では、船[ふね]はドイツの造船所[ぞうせんじょ]で造[つく]られます。', 'According to the plan, the ship will be built at a shipyard in Germany.', '造船所 is a shipyard. The yard named in the plan is Meyer Werft.'],
+            ['日本[にっぽん]の船[ふね]として登録[とうろく]され、一年中[いちねんじゅう]、日本[にっぽん]から出発[しゅっぱつ]する旅[たび]をします。', 'It will be registered as a Japanese ship and make trips from Japan all year round.'],
+            ['主[おも]に東京[とうきょう]から出[で]る短[みじか]い旅行[りょこう]で、ディズニーリゾートと組[く]み合[あ]わせて楽[たの]しむこともできます。', 'The trips will mainly be short ones from Tokyo, and you can also enjoy them together with a visit to Disney Resort.', '組み合わせる "to combine".'],
+            ['船[ふね]のデザインは、ウォルト・ディズニー・イマジニアリングが考[かんが]えています。', 'The ship\'s design is being created by Walt Disney Imagineering.', 'Imagineering is the Disney group that designs its theme parks and attractions.'],
+          ],
+        },
+        N3: {
+          title: '日本初[にほんはつ]のディズニークルーズ船[せん]の船名[せんめい]は「ディズニー・イマジネーション」　2029年[ねん]春[はる]に就航[しゅうこう]へ',
+          lines: [
+            ['東京[とうきょう]ディズニーリゾートを運営[うんえい]するオリエンタルランドは十四日[じゅうよっか]、日本初[にほんはつ]のディズニークルーズ船[せん]の船名[せんめい]を「ディズニー・イマジネーション」に決[き]めたと発表[はっぴょう]した。', 'On the 14th, Oriental Land, which runs Tokyo Disney Resort, announced that it has named Japan\'s first Disney cruise ship "Disney Imagination".', '船名 is the name of a ship.'],
+            ['就航[しゅうこう]は2029年[ねん]春[はる]を予定[よてい]している。', 'The ship is scheduled to enter service in the spring of 2029.', '就航 "to enter service (of a ship or aircraft)".'],
+            ['同社[どうしゃ]は2024年[ねん]、米[べい]ウォルト・ディズニー・カンパニーとの関係[かんけい]を広[ひろ]げ、ディズニーブランドのクルーズ事業[じぎょう]を日本[にっぽん]で始[はじ]めると明[あき]らかにしていた。', 'In 2024 the company had revealed that it would expand its relationship with The Walt Disney Company and start a Disney-branded cruise business in Japan.', '同社 "the said company". 米 is a written abbreviation for America/the U.S.'],
+            ['船[ふね]はドイツの造船所[ぞうせんじょ]で建造[けんぞう]される計画[けいかく]で、デザインはウォルト・ディズニー・イマジニアリングが手[て]がける。', 'The ship is planned to be built at a shipyard in Germany, with the design handled by Walt Disney Imagineering.', '手がける "to handle, to work on personally".'],
+            ['日本[にっぽん]船籍[せんせき]で、通年[つうねん]、東京[とうきょう]を中心[ちゅうしん]に短期[たんき]のクルーズを運航[うんこう]する見通[みとお]しだ。', 'It will be registered in Japan and is expected to run short cruises centered on Tokyo throughout the year.', '船籍 is the country where a ship is registered.'],
+            ['オリエンタルランドは今年[ことし]、クルーズ事業[じぎょう]を担[にな]う子会社[こがいしゃ]を設立[せつりつ]しており、準備[じゅんび]が進[すす]んでいる。', 'Oriental Land set up a subsidiary this year to handle the cruise business, and preparations are moving forward.', '担う "to bear, to be in charge of".'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-10-14-judo',
       date: '2026-10-14',
       emoji: '🥋',
