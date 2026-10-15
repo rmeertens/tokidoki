@@ -5815,7 +5815,8 @@
       Romaji.attach($('#vocab-typing-input'));
       Romaji.attach($('#answer-input'));
       // After romaji.js has made it hiragana: the kanji, if that's on.
-      $('#answer-input').addEventListener('input', (e) => { if (!e.isComposing) autoKanjiInput(e.target); });
+      const answerInput = $('#answer-input');
+      if (answerInput) answerInput.addEventListener('input', (e) => { if (!e.isComposing) autoKanjiInput(e.target); });
       Romaji.attach($('#bunkei-input'));
     }
     if (window.KanjiIme) {
