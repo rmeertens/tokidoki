@@ -2046,6 +2046,13 @@
     return out;
   }
 
+  // The sentence with each kanji word in kanji if the answer has it that way,
+  // else in kana: what to compare a mixed kanji/kana answer with.
+  function spelledAsTyped(typed, sentence) {
+    return sentencePieces(sentence).map(([spelling, reading]) =>
+      (/[一-鿿々]/.test(spelling) && !typed.includes(spelling) ? reading : spelling)).join('');
+  }
+
   function autoKanji(typed, pieces) {
     const t = kataToHira(typed);
     let out = '', i = 0, k = 0;
@@ -2210,6 +2217,9 @@
       return `<div class="translate-typed"><span class="bunkei-ok">✓ Correct</span></div>`;
     }
     if (!window.AnswerDiff) return '';
+    // The answer spelt the way it was typed (kanji where the kanji was typed),
+    // so a kanji word typed right isn't held against a kana answer.
+    if (isEnToJa) answers.push(spelledAsTyped(typed, sentence));
     const target = AnswerDiff.closest(typed, answers);
     const d = AnswerDiff.diff(typed, target);
     // Nothing to mark (only differences the diff doesn't count): it's right.
@@ -5574,7 +5584,7 @@
   function bunkeiTypedResult(typed, built) {
     if (Bunkei.matches(typed, built)) return { ok: true, html: '<span class="bunkei-ok">✓ Correct</span>' };
     if (!window.AnswerDiff) return { ok: false, html: '<span class="bunkei-ng">✗ Not quite — compare with the answer</span>' };
-    const target = AnswerDiff.closest(typed, [built.kana, built.plain]);
+    const target = AnswerDiff.closest(typed, [built.kana, built.plain, spelledAsTyped(typed, { jaHtml: Examples.furiganaHtml(built.ja) })]);
     const d = AnswerDiff.diff(typed, target);
     if (d.typed.every(c => c.ok) && d.expected.every(c => c.ok)) return { ok: true, html: '<span class="bunkei-ok">✓ Correct</span>' };
     return {
