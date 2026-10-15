@@ -638,6 +638,8 @@
     if (explain) explain.classList.add('hidden');
     const furiLabel = $('#study-furigana-label');
     if (furiLabel) furiLabel.classList.toggle('hidden', studyMode !== 'translate');
+    const kanjiLabel = $('#study-auto-kanji-label');
+    if (kanjiLabel) kanjiLabel.classList.toggle('hidden', studyMode !== 'translate' || !settings.typingMode);
     if (sessionIndex >= sessionCards.length) {
       finishSession();
       return;
@@ -756,7 +758,9 @@
     if (answered) return;
 
     if (studyMode === 'translate') {
-      revealTranslateAnswer(Romaji.flush($('#answer-input')).trim());
+      Romaji.flush($('#answer-input'));
+      autoKanjiInput($('#answer-input'));
+      revealTranslateAnswer($('#answer-input').value.trim());
       return;
     }
 
@@ -1870,6 +1874,8 @@
     kanjiEl.classList.toggle('translate-source-en', isEnToJa);
     const furiToggle = $('#study-furigana');
     if (furiToggle) furiToggle.checked = !!settings.showFurigana;
+    const kanjiToggle = $('#study-auto-kanji');
+    if (kanjiToggle) kanjiToggle.checked = !!settings.autoKanji;
 
     $('#card-prompt').textContent = `Translate to ${targetLang}`;
     // Adjective sentences say which adjective and form the sentence drills.
@@ -1952,6 +1958,69 @@
     if (suggest) $(`#card-back .btn-grade[data-grade="${suggest}"]`).classList.add('grade-suggested');
 
     renderTranslateExplain();
+  }
+
+  // ─── Auto kanji while typing a Japanese answer ─────────────────────────────
+  // With "Kanji" ticked, the kana typed for an English → Japanese sentence
+  // turns into the sentence's own spelling as it's typed: たべました → 食べました,
+  // あめりか → アメリカ. Each word converts once its whole reading is typed,
+  // so a misspelt word stays in kana (and the rest of the answer picks up
+  // again after it).
+
+  const kataToHira = t => t.replace(/[ァ-ヶ]/g, k => String.fromCharCode(k.charCodeAt(0) - 0x60));
+
+  // The sentence as [spelling, reading] pieces: a kanji word with its
+  // furigana, a katakana word, or a single kana / punctuation character.
+  function sentencePieces(sentence) {
+    const out = [];
+    const re = /<ruby>(.*?)<rp>\(<\/rp><rt>(.*?)<\/rt><rp>\)<\/rp><\/ruby>|<ruby>(.*?)<rt>(.*?)<\/rt><\/ruby>|([ァ-ヺー]+|[\s\S])/g;
+    let m;
+    while ((m = re.exec(sentence.jaHtml || sentence.ja))) {
+      if (m[1] !== undefined) out.push([m[1], kataToHira(m[2])]);
+      else if (m[3] !== undefined) out.push([m[3], kataToHira(m[4])]);
+      else out.push([m[5], kataToHira(m[5])]);
+    }
+    return out;
+  }
+
+  function autoKanji(typed, pieces) {
+    const t = kataToHira(typed);
+    let out = '', i = 0, k = 0;
+    while (i < typed.length) {
+      // The next piece (or one of the few after it, after a slip) whose
+      // whole reading is typed here (or that's already converted).
+      // Still typing the next word: leave it be.
+      const rest = t.slice(i);
+      if (pieces[k] && rest.length < pieces[k][1].length && pieces[k][1].startsWith(rest)) { out += typed.slice(i); break; }
+      let hit = -1, len = 0;
+      for (let j = k; j < Math.min(pieces.length, k + 4); j++) {
+        const [spelling, r] = pieces[j];
+        const word = r.length > 1 || /[一-鿿々ァ-ヶ]/.test(spelling);
+        if (j > k && !word) continue;
+        if (typed.startsWith(spelling, i)) { hit = j; len = spelling.length; break; }
+        if (r && t.startsWith(r, i)) { hit = j; len = r.length; break; }
+      }
+      if (hit === -1) { out += typed[i]; i++; continue; }
+      const spelling = pieces[hit][0];
+      // Punctuation and particles keep what was typed; only words change.
+      out += /[一-鿿々ァ-ヶー]/.test(spelling) ? spelling : typed.slice(i, i + len);
+      i += len;
+      k = hit + 1;
+    }
+    return out;
+  }
+
+  function autoKanjiInput(input) {
+    if (!settings.autoKanji || studyMode !== 'translate' || !currentCard || !currentCard.sentence
+        || currentCard.direction !== 'en-to-ja' || answered) return;
+    const value = input.value;
+    const atEnd = input.selectionStart === value.length;
+    // Only the kana before any romaji still being typed.
+    const m = value.match(/^(.*?)([a-zA-Z']*)$/s);
+    const converted = autoKanji(m[1], sentencePieces(currentCard.sentence)) + m[2];
+    if (converted === value) return;
+    input.value = converted;
+    if (atEnd) input.setSelectionRange(converted.length, converted.length);
   }
 
   // ─── Words & grammar under an answered sentence ───────────────────────────
@@ -5697,6 +5766,8 @@
       Romaji.attach($('#story-review-input'));
       Romaji.attach($('#vocab-typing-input'));
       Romaji.attach($('#answer-input'));
+      // After romaji.js has made it hiragana: the kanji, if that's on.
+      $('#answer-input').addEventListener('input', (e) => { if (!e.isComposing) autoKanjiInput(e.target); });
       Romaji.attach($('#bunkei-input'));
     }
     if (window.KanjiIme) {
@@ -5893,6 +5964,12 @@
 
     on('#setting-show-furigana', 'change', (e) => setStudyFurigana(e.target.checked));
     on('#study-furigana', 'change', (e) => setStudyFurigana(e.target.checked));
+    on('#study-auto-kanji', 'change', (e) => {
+      settings.autoKanji = e.target.checked;
+      saveSettings(settings);
+      const input = $('#answer-input');
+      if (input && !answered) { autoKanjiInput(input); input.focus(); }
+    });
     $$('input[name="translate-direction"]').forEach(el => el.addEventListener('change', () => {
       if (!el.checked) return;
       settings.translateDirection = el.value;
