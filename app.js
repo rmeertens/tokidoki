@@ -1953,7 +1953,7 @@
       + '<div class="translate-retry"></div>'
       + `<div class="translate-original-label">Translation</div><div class="translate-original">${originalContent}</div>`;
     // "Retry": after a wrong typed answer, a new box to type it again.
-    if (settings.retryTyping && settings.typingMode && typed && !lastTypedCorrect) addRetryBox(isEnToJa);
+    if (settings.retryTyping && settings.typingMode && typed && !lastTypedCorrect) addTranslateRetryBox();
 
     // Box the grade the typed answer points to: Easy when it matched,
     // Again when Japanese was off. English can be worded many ways, so a
@@ -1969,17 +1969,19 @@
   // answer; a wrong try adds another box. The card's grade still goes by the
   // first answer.
 
-  function addRetryBox(isEnToJa) {
-    const area = $('#card-example-sentence .translate-retry');
+  // addRetryBox(area, opts): opts.ja (a Japanese answer), opts.check(typed)
+  // → { ok, html }, opts.onRight() once a try is right.
+  function addRetryBox(area, opts) {
     if (!area) return;
     const row = document.createElement('div');
     row.className = 'translate-retry-try';
     row.innerHTML = `
       <div class="answer-area">
-        <input type="text" class="answer-input retry-input" placeholder="${isEnToJa ? 'Try again in Japanese...' : 'Try again in English...'}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" lang="${isEnToJa ? 'ja' : 'en'}">
+        <input type="text" class="answer-input retry-input" placeholder="${opts.ja ? 'Try again in Japanese...' : 'Try again in English...'}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" lang="${opts.ja ? 'ja' : 'en'}">
         <button type="button" class="btn-primary retry-check">Check</button>
       </div>
       <div class="retry-result"></div>`;
+    row.retry = { area, opts };
     area.appendChild(row);
     const input = row.querySelector('.retry-input');
     if (window.Romaji) Romaji.attach(input);
@@ -1989,23 +1991,36 @@
   }
 
   function checkRetry(row) {
-    const input = row.querySelector('.retry-input');
-    if (!input || input.disabled || !currentCard || !currentCard.sentence) return;
+    const input = row && row.querySelector('.retry-input');
+    if (!input || input.disabled) return;
     if (window.Romaji) Romaji.flush(input);
     autoKanjiInput(input);
     const typed = input.value.trim();
     if (!typed) return;
-    const isEnToJa = currentCard.direction === 'en-to-ja';
-    // The grade (and Enter's) stays with the first answer.
-    const first = lastTypedCorrect;
-    const html = translateTypedHtml(typed, currentCard.sentence, isEnToJa);
-    const right = lastTypedCorrect;
-    lastTypedCorrect = first;
-    row.querySelector('.retry-result').innerHTML = html;
+    const { area, opts } = row.retry;
+    const res = opts.check(typed);
+    row.querySelector('.retry-result').innerHTML = res.html;
     input.disabled = true;
     row.querySelector('.retry-check').remove();
-    if (right) $('#key-capture').focus();
-    else addRetryBox(isEnToJa);
+    if (res.ok) opts.onRight();
+    else addRetryBox(area, opts);
+  }
+
+  // A retry box for the Sentences card showing.
+  function addTranslateRetryBox() {
+    const isEnToJa = currentCard.direction === 'en-to-ja';
+    addRetryBox($('#card-example-sentence .translate-retry'), {
+      ja: isEnToJa,
+      check: typed => {
+        // The grade (and Enter's) stays with the first answer.
+        const first = lastTypedCorrect;
+        const html = translateTypedHtml(typed, currentCard.sentence, isEnToJa);
+        const ok = lastTypedCorrect;
+        lastTypedCorrect = first;
+        return { ok, html };
+      },
+      onRight: () => $('#key-capture').focus(),
+    });
   }
 
   // ─── Auto kanji while typing a Japanese answer ─────────────────────────────
@@ -2058,14 +2073,29 @@
     return out;
   }
 
+  // The sentence being answered in Japanese, if what's typed in `input`
+  // should convert: a Sentences card (English → Japanese) or a Bunkei card,
+  // in its answer box before checking or in a retry box after.
+  function autoKanjiSentence(input) {
+    const retry = input.classList.contains('retry-input');
+    if (document.body.dataset.mode === 'bunkei') {
+      const card = bunkeiSessionCards[bunkeiIndex];
+      if (!card || !card.built || (bunkeiAnswered && !retry)) return null;
+      return { jaHtml: Examples.furiganaHtml(card.built.ja) };
+    }
+    if (studyMode !== 'translate' || !currentCard || !currentCard.sentence
+        || currentCard.direction !== 'en-to-ja' || (answered && !retry)) return null;
+    return currentCard.sentence;
+  }
+
   function autoKanjiInput(input) {
-    if (!settings.autoKanji || studyMode !== 'translate' || !currentCard || !currentCard.sentence
-        || currentCard.direction !== 'en-to-ja' || (answered && !input.classList.contains('retry-input'))) return;
+    const sentence = settings.autoKanji ? autoKanjiSentence(input) : null;
+    if (!sentence) return;
     const value = input.value;
     const atEnd = input.selectionStart === value.length;
     // Only the kana before any romaji still being typed.
     const m = value.match(/^(.*?)([a-zA-Z']*)$/s);
-    const converted = autoKanji(m[1], sentencePieces(currentCard.sentence)) + m[2];
+    const converted = autoKanji(m[1], sentencePieces(sentence)) + m[2];
     if (converted === value) return;
     input.value = converted;
     if (atEnd) input.setSelectionRange(converted.length, converted.length);
@@ -5277,6 +5307,8 @@
   let bunkeiIndex = 0;
   let bunkeiCorrect = 0;
   let bunkeiAnswered = false;
+  // Whether the typed answer was right (null: nothing typed).
+  let bunkeiTypedOk = null;
 
   function bunkeiVerbKey(verb) {
     return verb.disambig ? `${verb.kanji}_${verb.disambig}` : verb.kanji;
@@ -5491,6 +5523,12 @@
     input.classList.remove('correct', 'incorrect');
     input.disabled = false;
     $('#bunkei-typing').classList.toggle('hidden', !typing);
+    $$('#bunkei-auto-kanji-label, #bunkei-retry-label').forEach(el => el.classList.toggle('hidden', !typing));
+    $('#bunkei-auto-kanji').checked = !!settings.autoKanji;
+    $('#bunkei-retry').checked = !!settings.retryTyping;
+    $('#bunkei-retry-area').innerHTML = '';
+    $$('[data-bunkei-grade]').forEach(b => b.classList.remove('grade-suggested'));
+    bunkeiTypedOk = null;
     $('#bunkei-reveal-hint').textContent = typing ? 'Enter = check' : 'Tap the card or press Space';
     $('#bunkei-reveal-area').classList.remove('hidden');
     $('#bunkei-answer-area').classList.add('hidden');
@@ -5506,20 +5544,19 @@
 
     const input = $('#bunkei-input');
     if (window.Speech) Speech.stopAll();
-    const typed = Romaji.flush(input).trim();
+    Romaji.flush(input);
+    autoKanjiInput(input);
+    const typed = input.value.trim();
     const result = $('#bunkei-result');
     if (bunkeiSettings.typing && typed) {
-      const ok = Bunkei.matches(typed, built);
-      input.classList.add(ok ? 'correct' : 'incorrect');
-      result.innerHTML = ok ? '<span class="bunkei-ok">✓ Correct</span>' : '<span class="bunkei-ng">✗ Not quite — compare with the answer</span>';
-      if (!ok && window.AnswerDiff) {
-        const target = AnswerDiff.closest(typed, [built.kana, built.plain]);
-        const d = AnswerDiff.diff(typed, target);
-        result.innerHTML += `<div class="answer-diff" lang="ja">`
-          + `<div><span class="answer-diff-label">You typed</span>${AnswerDiff.toHtml(d.typed, 'diff-wrong')}</div>`
-          + `<div><span class="answer-diff-label">Expected</span>${AnswerDiff.toHtml(d.expected, 'diff-missing')}</div>`
-          + `</div>`;
-      }
+      const res = bunkeiTypedResult(typed, built);
+      bunkeiTypedOk = res.ok;
+      input.classList.add(res.ok ? 'correct' : 'incorrect');
+      result.innerHTML = res.html;
+      // Box the grade the answer points to (Enter picks it), and with Retry
+      // on, a box to type a wrong answer again.
+      $(`[data-bunkei-grade="${res.ok ? 4 : 1}"]`).classList.add('grade-suggested');
+      if (!res.ok && settings.retryTyping) addBunkeiRetryBox();
     } else {
       result.innerHTML = '';
     }
@@ -5529,7 +5566,34 @@
     $('#bunkei-note').innerHTML = `<strong lang="ja">${card.pattern.name}</strong> — ${card.pattern.note}`;
     $('#bunkei-reveal-area').classList.add('hidden');
     $('#bunkei-answer-area').classList.remove('hidden');
-    document.activeElement && document.activeElement.blur && document.activeElement.blur();
+    if (!$('#bunkei-retry-area .retry-input')) document.activeElement && document.activeElement.blur && document.activeElement.blur();
+  }
+
+  // ✓ Correct, or ✗ with a character diff against the closest answer. A diff
+  // with nothing to mark (only differences it doesn't count) is right.
+  function bunkeiTypedResult(typed, built) {
+    if (Bunkei.matches(typed, built)) return { ok: true, html: '<span class="bunkei-ok">✓ Correct</span>' };
+    if (!window.AnswerDiff) return { ok: false, html: '<span class="bunkei-ng">✗ Not quite — compare with the answer</span>' };
+    const target = AnswerDiff.closest(typed, [built.kana, built.plain]);
+    const d = AnswerDiff.diff(typed, target);
+    if (d.typed.every(c => c.ok) && d.expected.every(c => c.ok)) return { ok: true, html: '<span class="bunkei-ok">✓ Correct</span>' };
+    return {
+      ok: false,
+      html: '<span class="bunkei-ng">✗ Not quite — compare with the answer</span>'
+        + `<div class="answer-diff" lang="ja">`
+        + `<div><span class="answer-diff-label">You typed</span>${AnswerDiff.toHtml(d.typed, 'diff-wrong')}</div>`
+        + `<div><span class="answer-diff-label">Expected</span>${AnswerDiff.toHtml(d.expected, 'diff-missing')}</div>`
+        + `</div>`,
+    };
+  }
+
+  function addBunkeiRetryBox() {
+    const card = bunkeiSessionCards[bunkeiIndex];
+    addRetryBox($('#bunkei-retry-area'), {
+      ja: true,
+      check: typed => bunkeiTypedResult(typed, card.built),
+      onRight: () => document.activeElement && document.activeElement.blur && document.activeElement.blur(),
+    });
   }
 
   function gradeBunkeiAndAdvance(grade) {
@@ -5816,9 +5880,9 @@
       Romaji.attach($('#vocab-typing-input'));
       Romaji.attach($('#answer-input'));
       // After romaji.js has made it hiragana: the kanji, if that's on.
-      const answerInput = $('#answer-input');
-      if (answerInput) answerInput.addEventListener('input', (e) => { if (!e.isComposing) autoKanjiInput(e.target); });
+      on('#answer-input', 'input', (e) => { if (!e.isComposing) autoKanjiInput(e.target); });
       Romaji.attach($('#bunkei-input'));
+      on('#bunkei-input', 'input', (e) => { if (!e.isComposing) autoKanjiInput(e.target); });
     }
     if (window.KanjiIme) {
       KanjiIme.attach($('#story-review-input'), kanjiCandidates);
@@ -6020,7 +6084,7 @@
       // Turned on with a wrong answer showing: offer the box right away.
       if (settings.retryTyping && answered && studyMode === 'translate' && !lastTypedCorrect
           && $('#card-example-sentence .translate-typed.answer-diff') && !$('.translate-retry-try')) {
-        addRetryBox(currentCard.direction === 'en-to-ja');
+        addTranslateRetryBox();
       }
     });
     on('#study-auto-kanji', 'change', (e) => {
@@ -6566,6 +6630,16 @@
       btn.addEventListener('click', () => gradeBunkeiAndAdvance(parseInt(btn.dataset.bunkeiGrade, 10)));
     });
     on('#btn-bunkei-back', 'click', backToBunkeiSetup);
+    on('#bunkei-auto-kanji', 'change', (e) => {
+      settings.autoKanji = e.target.checked;
+      saveSettings(settings);
+      if (!bunkeiAnswered) { autoKanjiInput($('#bunkei-input')); $('#bunkei-input').focus(); }
+    });
+    on('#bunkei-retry', 'change', (e) => {
+      settings.retryTyping = e.target.checked;
+      saveSettings(settings);
+      if (settings.retryTyping && bunkeiAnswered && bunkeiTypedOk === false && !$('#bunkei-retry-area .retry-input')) addBunkeiRetryBox();
+    });
 
     document.addEventListener('keydown', (e) => {
       if (mode !== 'bunkei') return;
@@ -6573,6 +6647,11 @@
 
       if (!$('#bunkei-session-complete').classList.contains('hidden')) {
         if (e.key === ' ' && !focusHasOwnSpaceAction()) { consumeKey(e); backToBunkeiSetup(); }
+        return;
+      }
+      // Typing in a retry box: Enter checks it, every other key just types.
+      if (e.target && e.target.classList && e.target.classList.contains('retry-input')) {
+        if (e.key === 'Enter' && !e.isComposing) { consumeKey(e); checkRetry(e.target.closest('.translate-retry-try')); }
         return;
       }
       const inInput = document.activeElement === $('#bunkei-input');
@@ -6586,7 +6665,9 @@
         return;
       }
       if (e.key === '1') { consumeKey(e); gradeBunkeiAndAdvance(1); return; }
-      if (e.key === '2' || e.key === ' ' || e.key === 'Enter') { consumeKey(e); gradeBunkeiAndAdvance(4); }
+      // Enter takes the grade a typed answer points to.
+      if (e.key === 'Enter') { consumeKey(e); gradeBunkeiAndAdvance(bunkeiTypedOk === false ? 1 : 4); return; }
+      if (e.key === '2' || e.key === ' ') { consumeKey(e); gradeBunkeiAndAdvance(4); }
     }, true);
 
     // ─── Stories page ────────────────────────────────────────────────────────────

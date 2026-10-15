@@ -158,6 +158,8 @@
           <div class="study-progress-bar"><div id="bunkei-bar-fill" class="study-bar-fill"></div></div>
           <span id="bunkei-progress-text" class="study-progress-text">0 / 0</span>
         </div>
+        <label class="study-furigana-toggle hidden" id="bunkei-auto-kanji-label" title="Turn what you type into kanji as you go"><input type="checkbox" id="bunkei-auto-kanji"> Kanji</label>
+        <label class="study-furigana-toggle hidden" id="bunkei-retry-label" title="After a wrong answer, type it again in a new box"><input type="checkbox" id="bunkei-retry"> Retry</label>
       </div>
       <div id="save-indicator" class="save-indicator">Saved</div>
 
@@ -179,6 +181,7 @@
 
         <div class="bunkei-answer hidden" id="bunkei-answer-area">
           <div class="bunkei-result" id="bunkei-result"></div>
+          <div class="translate-retry" id="bunkei-retry-area"></div>
           <div class="bunkei-ja" id="bunkei-ja" lang="ja"></div>
           <div class="bunkei-note" id="bunkei-note"></div>
           <div class="grade-buttons">
@@ -217,7 +220,7 @@
   <script src="speech.js?v=7"></script>
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=5"></script>
-  <script src="app.js?v=51"></script>
+  <script src="app.js?v=52"></script>
   <script src="sync-merge.js?v=5"></script>
   <script src="progress-stats.js?v=2"></script>
   <script src="sync.js?v=9"></script>
