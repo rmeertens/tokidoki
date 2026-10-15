@@ -7749,3 +7749,29 @@ a.chapter-card.news-headline-card {
   .study-toolbar { flex-wrap: wrap; }
   .study-toolbar .study-progress { flex-basis: 100%; }
 }
+
+/* Verb + particle overview in the ? overlay (particles-quiz.html) */
+.ref-content-vp {
+  padding: 12px 16px;
+  overflow-x: visible;
+}
+
+.ref-content-vp .ref-verb-types:last-child { margin-bottom: 0; }
+
+.vt-only .ref-row-current {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  border-radius: 4px;
+  padding: 0 3px;
+}
+
+@media (max-width: 600px) {
+  .ref-overlay[data-kind="verb-particles"] { padding: 8px; }
+  .ref-overlay[data-kind="verb-particles"] .ref-overlay-panel { padding: 14px 12px; }
+  .ref-content-vp { padding: 8px; }
+  /* Verb | meaning over particles, so the particles never scroll out of view. */
+  .ref-content-vp .vp-table thead { display: none; }
+  .ref-content-vp .vp-table tr.vp-row { display: grid; grid-template-columns: 7.5em 1fr; }
+  .ref-content-vp .vp-table tr.vp-row .vp-verb { white-space: normal; }
+  .ref-content-vp .vp-table tr.vp-row .vp-verb { grid-row: span 2; }
+  .ref-content-vp .vp-table tr.vp-row .vp-frames { border-top: none; padding-top: 0; }
+}

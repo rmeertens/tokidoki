@@ -111,6 +111,7 @@
     { verb: 'わかる', type: 'vi', en: 'to understand', frames: ['〔thing〕が'] },
     { verb: 'できる', type: 'vi', en: 'to be able to', frames: ['〔skill〕が'] },
     { verb: '要[い]る', type: 'vi', en: 'to need', frames: ['〔thing〕が'] },
+    { verb: '降[ふ]る', type: 'vi', en: 'to fall (rain, snow)', frames: ['〔rain/snow〕が'] },
     { verb: '見[み]える／聞[き]こえる', type: 'vi', en: 'to be visible / audible', pair: '見[み]る／聞[き]く', frames: ['〔thing〕が'] },
     { verb: '始[はじ]まる', type: 'vi', en: '(something) starts', pair: '始[はじ]める', frames: ['〔event〕が', '〔time〕に／から'] },
     { verb: '始[はじ]める', type: 'vt', en: 'to start (something)', pair: '始[はじ]まる', frames: ['〔thing〕を'] },

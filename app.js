@@ -3020,9 +3020,10 @@
   }
 
   // Rules + verb overview table for the Verb + Particle quiz, built once
-  // from verb-particles-data.js.
-  function renderVerbParticlesReference() {
-    const el = $('#verb-particles-reference');
+  // from verb-particles-data.js — on the start screen and, via the header's
+  // ? button, in the reference overlay (`target`).
+  function renderVerbParticlesReference(target) {
+    const el = target || $('#verb-particles-reference');
     if (!el || !window.VERB_PARTICLE_RULES) return;
     const furiKey = settings.showFurigana ? 'on' : 'off';
     if (el.dataset.furigana === furiKey) return;
@@ -3045,8 +3046,11 @@
         ? '<span class="vp-type vp-type-vt" title="Transitive (他動詞): takes an object with を"><span lang="ja">他</span> vt</span>'
         : '<span class="vp-type vp-type-vi" title="Intransitive (自動詞): no object"><span lang="ja">自</span> vi</span>';
     const romaji = t => `<span class="vp-romaji">${esc(window.VERB_PARTICLE_ROMAJI(t))}</span>`;
+    // data-verbs: the plain verb(s) of a row, for jumping to the verb of the
+    // current card from the ? overlay.
+    const plainVerbs = (...vs) => esc(vs.map(v => window.VERB_PARTICLE_FURIGANA(v).plain).join('／'));
     const rows = window.VERB_PARTICLE_VERBS.map(v => `
-      <tr>
+      <tr class="vp-row" data-verbs="${plainVerbs(v.verb)}">
         <td class="vp-verb"><span lang="ja">${furi(v.verb)}</span>${romaji(v.verb)}<span class="vp-type-line">${typeTag(v.type)}</span></td>
         <td class="vp-en">${esc(v.en)}${v.pair ? `<span class="vp-pair">↔ <span lang="ja">${furi(v.pair)}</span> ${esc(window.VERB_PARTICLE_ROMAJI(v.pair))}</span>` : ''}</td>
         <td class="vp-frames">${v.frames.map(f => `<span class="vp-frame">${particleTags(f)}</span>`).join('')}</td>
@@ -3079,7 +3083,7 @@
             <table class="ref-table vt-table">
               <thead><tr><th>${typeTag('vi')} が</th><th>${typeTag('vt')} を</th><th>Meaning</th></tr></thead>
               <tbody>${g.pairs.map(p => `
-                <tr class="vt-row" tabindex="0" aria-expanded="false" title="Show example sentences">
+                <tr class="vt-row" tabindex="0" aria-expanded="false" title="Show example sentences" data-verbs="${plainVerbs(p.vi, p.vt)}">
                   <td><span lang="ja">${withParticle(p.noun, 'が', p.vi)}</span>${romaji(p.vi)}</td>
                   <td><span lang="ja">${withParticle(p.noun, 'を', p.vt)}</span>${romaji(p.vt)}</td>
                   <td class="vp-en">${esc(p.en)}<span class="vt-row-chevron" aria-hidden="true"></span></td>
@@ -3093,7 +3097,7 @@
         </div>`).join('')}
       ${vt.only.map(o => `
         <div class="vt-only">${typeTag(o.type)} <span class="vt-only-label">${esc(o.label)}:</span>
-          ${o.verbs.map(v => `<span lang="ja">${furi(v)}</span> <span class="vp-romaji-inline">(${esc(window.VERB_PARTICLE_ROMAJI(v))})</span>`).join('、')}</div>`).join('')}
+          ${o.verbs.map(v => `<span lang="ja" data-verbs="${plainVerbs(v)}">${furi(v)}</span> <span class="vp-romaji-inline">(${esc(window.VERB_PARTICLE_ROMAJI(v))})</span>`).join('、')}</div>`).join('')}
       <p class="vt-source">Pairs grouped after the <a href="https://www.mlcjapanese.co.jp/Download/ViVt.pdf" target="_blank" rel="noopener">MLC Japanese 自動詞と他動詞 chart</a>.</p>`;
     if (!el.dataset.vtBound) {
       el.dataset.vtBound = '1';
@@ -3155,6 +3159,28 @@
       </details>`;
   }
 
+  // Finds the overview entry for a quiz verb (似ている → 似る): its row in
+  // the common-verbs table, else its transitive/intransitive pair, else the
+  // "only" lists. Expands what it's in and marks it as the current verb.
+  function showVerbInParticlesReference(root, verbPlain) {
+    root.querySelectorAll('.ref-row-current').forEach(r => r.classList.remove('ref-row-current'));
+    if (!verbPlain) return null;
+    const names = new Set([verbPlain, verbPlain.replace(/ている$/, 'る')]);
+    const matches = el => (el.dataset.verbs || '').split('／').some(v => names.has(v));
+    const found = [...root.querySelectorAll('.vp-row[data-verbs]')].find(matches)
+      || [...root.querySelectorAll('.vt-row[data-verbs]')].find(matches)
+      || [...root.querySelectorAll('.vt-only [data-verbs]')].find(matches);
+    if (!found) return null;
+    const details = found.closest('details');
+    if (details) details.open = true;
+    if (found.classList.contains('vt-row') && found.nextElementSibling.hidden) {
+      found.nextElementSibling.hidden = false;
+      found.setAttribute('aria-expanded', 'true');
+    }
+    found.classList.add('ref-row-current');
+    return found;
+  }
+
   function renderParticlesPanel() {
     renderParticleToggles();
     const verbs = getParticlesQuizType() === 'verbs';
@@ -3169,6 +3195,8 @@
       if (verbs) renderVerbParticlesReference();
       ref.classList.toggle('hidden', !verbs);
     }
+    const refBtn = $('#btn-ref');
+    if (refBtn && $('#ref-overlay[data-kind="verb-particles"]')) refBtn.classList.toggle('hidden', !verbs);
     const startBtn = $('#btn-start-particles');
     if (startBtn) startBtn.textContent = verbs ? 'Start Verb + Particle quiz' : 'Start Sentences quiz';
     const pool = getParticlesPool();
@@ -5742,6 +5770,7 @@
     if (headerMount) {
       const showRef = headerMount.hasAttribute('data-ref');
       const showSettings = headerMount.hasAttribute('data-settings');
+      const refLabel = headerMount.getAttribute('data-ref') || 'Conjugation reference';
       headerMount.outerHTML = `
         <header id="header">
           <div class="header-left">
@@ -5760,7 +5789,7 @@
           </div>
           <div class="header-right">
             <button id="btn-theme" class="icon-btn" aria-label="Toggle theme">◐</button>
-            ${showRef ? '<button id="btn-ref" class="icon-btn" aria-label="Conjugation reference">?</button>' : ''}
+            ${showRef ? `<button id="btn-ref" class="icon-btn" aria-label="${refLabel}" title="${refLabel}">?</button>` : ''}
             ${showSettings ? '<button id="btn-settings" class="icon-btn" aria-label="Settings">⚙</button>' : ''}
           </div>
         </header>`;
@@ -5829,7 +5858,19 @@
     }
 
     const refMount = document.getElementById('ref-mount');
-    if (refMount) {
+    if (refMount && refMount.dataset.kind === 'verb-particles') {
+      refMount.outerHTML = `
+        <div id="ref-overlay" class="ref-overlay hidden" data-kind="verb-particles" role="dialog" aria-modal="true" aria-label="Verbs and their particles">
+          <div id="ref-backdrop" class="ref-backdrop"></div>
+          <div class="ref-overlay-panel">
+            <div class="ref-overlay-header">
+              <h2 class="section-title" style="margin:0">Verbs and their particles</h2>
+              <button id="btn-ref-close" class="icon-btn" aria-label="Close">✕</button>
+            </div>
+            <div id="ref-content" class="ref-content ref-content-vp"></div>
+          </div>
+        </div>`;
+    } else if (refMount) {
       const defaultTab = refMount.getAttribute('data-default-tab') || 'verb';
       refMount.outerHTML = `
         <div id="ref-overlay" class="ref-overlay hidden" role="dialog" aria-modal="true" aria-label="Conjugation Reference">
@@ -6015,6 +6056,19 @@
     // Reference overlay
     function openReference() {
       const overlay = $('#ref-overlay');
+      if (overlay.dataset.kind === 'verb-particles') {
+        // On a Verb + Particle card, jump to that card's verb.
+        const content = $('#ref-content');
+        renderVerbParticlesReference(content);
+        const card = $('#screen-particles.active') && currentParticleCard;
+        const verb = card && card.afterPlain ? card.afterPlain : null;
+        const found = showVerbInParticlesReference(content, verb);
+        overlay.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        if (found) setTimeout(() => found.scrollIntoView({ block: 'center', behavior: 'smooth' }), 50);
+        else overlay.scrollTop = 0;
+        return;
+      }
       // Translate cards have no word; adjective sentence cards carry the
       // form they drill as refForm. Off a card, the page decides the tab.
       const word = currentCard && currentCard.verb;
