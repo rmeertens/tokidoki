@@ -1,4 +1,24 @@
 {
+  "11": [
+    "じゅういち",
+    "eleven",
+    "number"
+  ],
+  "12": [
+    "じゅうに",
+    "twelve",
+    "number"
+  ],
+  "33": [
+    "さんじゅうさん",
+    "33",
+    "number"
+  ],
+  "495": [
+    "よんひゃくきゅうじゅうご",
+    "495",
+    "number + counter"
+  ],
   "連休": [
     "れんきゅう",
     "consecutive holidays, long weekend",
@@ -688,11 +708,6 @@
     "フロンティア",
     "frontier (IDCフロンティア: company name)",
     "name"
-  ],
-  "495": [
-    "よんひゃくきゅうじゅうご",
-    "495",
-    "number + counter"
   ],
   "自治体": [
     "じちたい",
@@ -1779,16 +1794,6 @@
     "nine months",
     "number + counter"
   ],
-  "12": [
-    "じゅうに",
-    "twelve",
-    "number"
-  ],
-  "11": [
-    "じゅういち",
-    "eleven",
-    "number"
-  ],
   "12月ごろ": [
     "じゅうにがつごろ",
     "around December",
@@ -2153,11 +2158,6 @@
     "かんすい",
     "flooding (of roads, fields)",
     "noun"
-  ],
-  "33": [
-    "さんじゅうさん",
-    "33",
-    "number"
   ],
   "こうした": [
     "こうした",
@@ -2758,5 +2758,485 @@
     "たけべあらた",
     "Arata Takebe (lawmaker expected to be the new agriculture minister)",
     "name"
+  ],
+  "十五日": [
+    "じゅうごにち",
+    "the 15th (day of the month)",
+    "noun"
+  ],
+  "約5パーセント": [
+    "やくごパーセント",
+    "about 5 percent",
+    "number + counter"
+  ],
+  "6万4426円": [
+    "ろくまんよんせんよんひゃくにじゅうろくえん",
+    "64,426 (the Nikkei closing figure)",
+    "number + counter"
+  ],
+  "AI": [
+    "エーアイ",
+    "AI, artificial intelligence",
+    "noun"
+  ],
+  "エーアイ": [
+    "エーアイ",
+    "AI (spoken form)",
+    "noun"
+  ],
+  "財務省": [
+    "ざいむしょう",
+    "Ministry of Finance",
+    "noun"
+  ],
+  "3318円": [
+    "さんぜんさんびゃくじゅうはちえん",
+    "3,318 (points of the Nikkei average)",
+    "number + counter"
+  ],
+  "株式": [
+    "かぶしき",
+    "shares, stocks",
+    "noun"
+  ],
+  "株価": [
+    "かぶか",
+    "stock price",
+    "noun"
+  ],
+  "終値": [
+    "おわりね",
+    "closing price",
+    "noun"
+  ],
+  "4.9％": [
+    "よんてんきゅうパーセント",
+    "4.9 percent",
+    "number + counter"
+  ],
+  "4.90％": [
+    "よんてんきゅうゼロパーセント",
+    "4.90 percent",
+    "number + counter"
+  ],
+  "3番目": [
+    "さんばんめ",
+    "third",
+    "number + counter"
+  ],
+  "半導体": [
+    "はんどうたい",
+    "semiconductor, computer chip",
+    "noun"
+  ],
+  "アドバンテスト": [
+    "アドバンテスト",
+    "Advantest (maker of chip-testing equipment)",
+    "noun (name)"
+  ],
+  "15％": [
+    "じゅうごパーセント",
+    "15 percent",
+    "number + counter"
+  ],
+  "金利": [
+    "きんり",
+    "interest rate",
+    "noun"
+  ],
+  "コアウィーブ": [
+    "コアウィーブ",
+    "CoreWeave (US AI computing company)",
+    "noun (name)"
+  ],
+  "指数": [
+    "しすう",
+    "index (of prices)",
+    "noun"
+  ],
+  "約8％": [
+    "やくはちパーセント",
+    "about 8 percent",
+    "number + counter"
+  ],
+  "幹部": [
+    "かんぶ",
+    "senior official, executive",
+    "noun"
+  ],
+  "G20": [
+    "ジートゥエンティー",
+    "the G20",
+    "noun"
+  ],
+  "G7": [
+    "ジーセブン",
+    "the G7",
+    "noun"
+  ],
+  "おびやかす": [
+    "おびやかす",
+    "to threaten",
+    "verb"
+  ],
+  "脅かす": [
+    "おびやかす",
+    "to threaten",
+    "verb"
+  ],
+  "3318円安": [
+    "さんぜんさんびゃくじゅうはちえんやす",
+    "down 3,318 (points)",
+    "number + counter"
+  ],
+  "下落": [
+    "げらく",
+    "a fall, a decline (of prices)",
+    "noun"
+  ],
+  "歴代": [
+    "れきだい",
+    "successive generations; all-time (record)",
+    "noun"
+  ],
+  "急落": [
+    "きゅうらく",
+    "a sharp fall, plunge",
+    "noun"
+  ],
+  "前日": [
+    "ぜんじつ",
+    "the previous day",
+    "noun"
+  ],
+  "3600円": [
+    "さんぜんろっぴゃくえん",
+    "3,600 (points)",
+    "number + counter"
+  ],
+  "直後": [
+    "ちょくご",
+    "right after",
+    "noun"
+  ],
+  "押し下げる": [
+    "おしさげる",
+    "to push down",
+    "verb"
+  ],
+  "背景": [
+    "はいけい",
+    "background",
+    "noun"
+  ],
+  "米国": [
+    "べいこく",
+    "the United States",
+    "noun"
+  ],
+  "利上げ": [
+    "りあげ",
+    "an interest rate hike",
+    "noun"
+  ],
+  "早まる": [
+    "はやまる",
+    "to come sooner, to be brought forward",
+    "verb"
+  ],
+  "見方": [
+    "みかた",
+    "a view, a way of seeing",
+    "noun"
+  ],
+  "債務": [
+    "さいむ",
+    "debt, obligation",
+    "noun"
+  ],
+  "投資": [
+    "とうし",
+    "investment",
+    "noun"
+  ],
+  "資金": [
+    "しきん",
+    "funds, capital",
+    "noun"
+  ],
+  "調達": [
+    "ちょうたつ",
+    "procurement, raising (funds)",
+    "noun"
+  ],
+  "懸念": [
+    "けねん",
+    "concern, worry",
+    "noun"
+  ],
+  "重し": [
+    "おもし",
+    "a weight, a drag",
+    "noun"
+  ],
+  "総合": [
+    "そうごう",
+    "comprehensive, overall",
+    "noun"
+  ],
+  "当局": [
+    "とうきょく",
+    "the authorities",
+    "noun"
+  ],
+  "認識": [
+    "にんしき",
+    "recognition, understanding",
+    "noun"
+  ],
+  "ヤマト運輸": [
+    "ヤマトうんゆ",
+    "Yamato Transport (Kuroneko delivery company)",
+    "noun (name)"
+  ],
+  "約531万件": [
+    "やくごひゃくさんじゅういちまんけん",
+    "about 5.31 million items",
+    "number + counter"
+  ],
+  "531万件": [
+    "ごひゃくさんじゅういちまんけん",
+    "5.31 million items",
+    "number + counter"
+  ],
+  "後払い": [
+    "あとばらい",
+    "paying afterwards, deferred payment",
+    "noun"
+  ],
+  "クレジットカード": [
+    "クレジットカード",
+    "credit card",
+    "noun"
+  ],
+  "十六日": [
+    "じゅうろくにち",
+    "the 16th (day of the month)",
+    "noun"
+  ],
+  "二十八日": [
+    "にじゅうはちにち",
+    "the 28th (day of the month)",
+    "noun"
+  ],
+  "第三者": [
+    "だいさんしゃ",
+    "a third party, an outsider",
+    "noun"
+  ],
+  "アクセス": [
+    "アクセス",
+    "access",
+    "noun"
+  ],
+  "再開": [
+    "さいかい",
+    "restart, resumption",
+    "noun"
+  ],
+  "調べ": [
+    "しらべ",
+    "an investigation, a check",
+    "noun"
+  ],
+  "物流": [
+    "ぶつりゅう",
+    "logistics",
+    "noun"
+  ],
+  "佐川急便": [
+    "さがわきゅうびん",
+    "Sagawa Express (delivery company)",
+    "noun (name)"
+  ],
+  "公表": [
+    "こうひょう",
+    "public announcement",
+    "noun"
+  ],
+  "翌日": [
+    "よくじつ",
+    "the next day",
+    "noun"
+  ],
+  "氏名": [
+    "しめい",
+    "full name",
+    "noun"
+  ],
+  "明細": [
+    "めいさい",
+    "details, itemized statement",
+    "noun"
+  ],
+  "漏れる": [
+    "もれる",
+    "to leak, to escape",
+    "verb"
+  ],
+  "不審": [
+    "ふしん",
+    "suspicious",
+    "na-adjective"
+  ],
+  "シクラメン": [
+    "シクラメン",
+    "cyclamen (a flowering plant)",
+    "noun"
+  ],
+  "ゲノム": [
+    "ゲノム",
+    "genome (all of an organism's genes)",
+    "noun"
+  ],
+  "埼玉工業大学": [
+    "さいたまこうぎょうだいがく",
+    "Saitama Institute of Technology",
+    "noun (name)"
+  ],
+  "精度": [
+    "せいど",
+    "precision, accuracy",
+    "noun"
+  ],
+  "解読": [
+    "かいどく",
+    "decoding, deciphering",
+    "noun"
+  ],
+  "秋田": [
+    "あきた",
+    "Akita (surname)",
+    "noun (name)"
+  ],
+  "祐介": [
+    "ゆうすけ",
+    "Yusuke (given name)",
+    "noun (name)"
+  ],
+  "読み解く": [
+    "よみとく",
+    "to read and make sense of, to decode",
+    "verb"
+  ],
+  "DNA": [
+    "ディーエヌエー",
+    "DNA",
+    "noun"
+  ],
+  "研究所": [
+    "けんきゅうじょ",
+    "research institute",
+    "noun"
+  ],
+  "九州大学": [
+    "きゅうしゅうだいがく",
+    "Kyushu University",
+    "noun (name)"
+  ],
+  "香川大学": [
+    "かがわだいがく",
+    "Kagawa University",
+    "noun (name)"
+  ],
+  "約14億8000万": [
+    "やくじゅうよんおくはっせんまん",
+    "about 1.48 billion",
+    "number + counter"
+  ],
+  "球根": [
+    "きゅうこん",
+    "bulb (of a plant)",
+    "noun"
+  ],
+  "遺伝子": [
+    "いでんし",
+    "gene",
+    "noun"
+  ],
+  "品種": [
+    "ひんしゅ",
+    "variety, breed",
+    "noun"
+  ],
+  "役立つ": [
+    "やくだつ",
+    "to be useful",
+    "verb"
+  ],
+  "園芸": [
+    "えんげい",
+    "gardening, horticulture",
+    "noun"
+  ],
+  "九州大": [
+    "きゅうしゅうだい",
+    "Kyushu University (short)",
+    "noun (name)"
+  ],
+  "香川大": [
+    "かがわだい",
+    "Kagawa University (short)",
+    "noun (name)"
+  ],
+  "遺伝": [
+    "いでん",
+    "heredity, genetics",
+    "noun"
+  ],
+  "特定": [
+    "とくてい",
+    "identification; specific",
+    "noun"
+  ],
+  "成果": [
+    "せいか",
+    "result, outcome",
+    "noun"
+  ],
+  "生かす": [
+    "いかす",
+    "to make use of",
+    "verb"
+  ],
+  "改良": [
+    "かいりょう",
+    "improvement",
+    "noun"
+  ],
+  "スピード": [
+    "スピード",
+    "speed",
+    "noun"
+  ],
+  "前日比": [
+    "ぜんじつひ",
+    "compared with the previous day",
+    "noun"
+  ],
+  "クロネコ": [
+    "クロネコ",
+    "Kuroneko (\"black cat\", Yamato's delivery brand)",
+    "noun (name)"
+  ],
+  "秋田祐介": [
+    "あきたゆうすけ",
+    "Yusuke Akita (professor, Saitama Institute of Technology)",
+    "noun (name)"
+  ],
+  "許し": [
+    "ゆるし",
+    "permission",
+    "noun"
   ]
 }

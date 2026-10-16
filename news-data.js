@@ -23,6 +23,148 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-10-16-nikkei-plunge',
+      date: '2026-10-16',
+      emoji: '📉',
+      titleEn: 'Nikkei average plunges 3,318 points on an AI-stock selloff — the third-largest point drop on record',
+      sources: [
+        { name: 'News On Japan', url: 'https://newsonjapan.com/article/151072.php' },
+        { name: 'JapanNews24', url: 'https://japannews24.com/nikkei-plunges-3318-points-as-ai-selloff-shakes-tokyo/' },
+        { name: 'Bloomberg', url: 'https://www.bloomberg.com/news/newsletters/2026-10-15/ai-selloff-deepens-in-asia-as-funding-fears-mount' },
+      ],
+      levels: {
+        N5: {
+          title: '東京[とうきょう]の株[かぶ]の値段[ねだん]が、とても下[さ]がりました',
+          lines: [
+            ['十五日[じゅうごにち]、東京[とうきょう]の株[かぶ]の値段[ねだん]が、とても下[さ]がりました。', 'On the 15th, stock prices in Tokyo fell a lot.', '株 means shares of a company. 株の値段 is the stock price.'],
+            ['「日経平均[にっけいへいきん]」という数字[すうじ]は、一日[いちにち]で約[やく]5パーセント下[さ]がりました。', 'The number called the "Nikkei average" fell about 5 percent in one day.', '日経平均 (the Nikkei 225) is the best-known number showing how Tokyo stocks are doing as a whole.'],
+            ['終[お]わりの数字[すうじ]は、6万[まん]4426円[えん]でした。', 'The closing figure was 64,426.', 'The Nikkei average is traditionally counted in 円 even though it is an index. It fell 3,318 from the day before.'],
+            ['AIに関係[かんけい]がある会社[かいしゃ]の株[かぶ]を、売[う]る人[ひと]が多[おお]かったです。', 'Many people sold shares in companies related to AI.'],
+            ['アメリカで物[もの]の値段[ねだん]が高[たか]くなっていて、心配[しんぱい]する人[ひと]がふえました。', 'Prices of goods are rising in the US, and more people became worried.', 'US inflation figures released on the 14th were higher than expected.'],
+            ['日本[にっぽん]の財務省[ざいむしょう]の人[ひと]は、お金[かね]の世界[せかい]に大[おお]きな危険[きけん]はないと話[はな]しています。', 'A Japanese Finance Ministry official says there is no big danger to the financial world.', 'The official said the G7 and G20 had not seen a risk to financial stability.'],
+          ],
+        },
+        N4: {
+          title: '日経平均[にっけいへいきん]が3318円[えん]下[さ]がる、AI関連[かんれん]の株[かぶ]が売[う]られる',
+          lines: [
+            ['十五日[じゅうごにち]、東京[とうきょう]株式[かぶしき]市場[しじょう]で日経平均[にっけいへいきん]株価[かぶか]が大[おお]きく下[さ]がり、終値[おわりね]は前[まえ]の日[ひ]より3318円[えん]安[やす]い6万[まん]4426円[えん]でした。', 'On the 15th, the Nikkei average fell sharply on the Tokyo market, closing at 64,426, down 3,318 from the previous day.', '終値 is the closing price. 前の日より安い "lower than the day before".'],
+            ['下[さ]がった割合[わりあい]は約[やく]4.9％で、下[さ]がった数字[すうじ]の大[おお]きさは、これまでで3番目[ばんめ]です。', 'It fell about 4.9 percent, and the size of the drop is the third largest ever.', 'Third largest in points, not in percent.'],
+            ['特[とく]に、半導体[はんどうたい]の検査[けんさ]装置[そうち]をつくるアドバンテストが、15％近[ちか]く下[さ]がりました。', 'In particular, Advantest, which makes chip-testing equipment, fell by nearly 15 percent.', '半導体 means semiconductors (computer chips).'],
+            ['十四日[じゅうよっか]に出[で]たアメリカの物価[ぶっか]の数字[すうじ]が予想[よそう]より高[たか]く、アメリカの中央銀行[ちゅうおうぎんこう]が早[はや]く金利[きんり]を上[あ]げるのではないかと心配[しんぱい]されました。', 'The US price figures released on the 14th were higher than expected, and people worried that the US central bank might raise interest rates sooner.', 'The US central bank is the Federal Reserve. 金利を上げる "to raise interest rates".'],
+            ['また、AIの設備[せつび]のために借金[しゃっきん]をしているアメリカの会社[かいしゃ]コアウィーブの問題[もんだい]で、お金[かね]の集[あつ]め方[かた]への不安[ふあん]も広[ひろ]がりました。', 'Worry also spread about how AI spending is financed, because of trouble over the debts of the US company CoreWeave.', 'CoreWeave provides computing power for AI. Bloomberg linked the selloff to its debt problems.'],
+            ['韓国[かんこく]の株[かぶ]の指数[しすう]も、約[やく]8％下[さ]がりました。', 'South Korea\'s main stock index also fell about 8 percent.', 'The index is the KOSPI. Samsung and SK Hynix each fell more than 9 percent.'],
+            ['日本[にっぽん]の財務省[ざいむしょう]の幹部[かんぶ]は、G7とG20では金融[きんゆう]の安定[あんてい]をおびやかす危険[きけん]は見[み]られていないと話[はな]しました。', 'A Japanese Finance Ministry official said the G7 and G20 do not see a risk to financial stability.', '金融 means finance. おびやかす "to threaten".'],
+          ],
+        },
+        N3: {
+          title: '日経平均[にっけいへいきん]が3318円[えん]安[やす]、AI関連株[かんれんかぶ]に売[う]り　下落[げらく]幅[はば]は歴代[れきだい]3位[い]',
+          lines: [
+            ['十五日[じゅうごにち]の東京[とうきょう]株式[かぶしき]市場[しじょう]で日経平均[にっけいへいきん]株価[かぶか]は急落[きゅうらく]し、終値[おわりね]は前日[ぜんじつ]比[ひ]3318円[えん]（4.90％）安[やす]の6万[まん]4426円[えん]だった。', 'On the Tokyo market on the 15th, the Nikkei average plunged, closing at 64,426, down 3,318 (4.90 percent) from the previous day.', '前日比 "compared with the previous day". 急落 "a sharp fall".'],
+            ['下落[げらく]幅[はば]は歴代[れきだい]3番目[ばんめ]の大[おお]きさで、取引[とりひき]時間[じかん]中[ちゅう]には3600円[えん]以上[いじょう]下[さ]がる場面[ばめん]もあった。', 'The drop was the third largest on record, and at one point during trading it was down more than 3,600.', '場面 here means "a moment, a point (in the day)".'],
+            ['売[う]りは取引[とりひき]開始[かいし]直後[ちょくご]から広[ひろ]がり、半導体[はんどうたい]検査[けんさ]装置[そうち]大手[おおて]のアドバンテストが15％近[ちか]く下落[げらく]して、指数[しすう]を最[もっと]も押[お]し下[さ]げた。', 'Selling spread from right after trading began, and Advantest, a major maker of chip-testing equipment, fell nearly 15 percent, dragging the index down the most.', '押し下げる "to push down". 大手 "a major company".'],
+            ['背景[はいけい]には、十四日[じゅうよっか]に発表[はっぴょう]された米国[べいこく]の物価[ぶっか]統計[とうけい]が市場[しじょう]の予想[よそう]を上回[うわまわ]り、米国[べいこく]の利上[りあ]げが早[はや]まるとの見方[みかた]が強[つよ]まったことがある。', 'Behind it was the view, strengthened when US price data released on the 14th beat market expectations, that US interest rate hikes might come sooner.', '上回る "to exceed". 見方が強まる "a view gains strength".'],
+            ['米国[べいこく]のAI関連[かんれん]企業[きぎょう]コアウィーブの債務[さいむ]問題[もんだい]で、AI投資[とうし]の資金[しきん]調達[ちょうたつ]への懸念[けねん]が広[ひろ]がったことも重[おも]しとなった。', 'Spreading concern about how AI investment is financed, triggered by the debt problems of the US firm CoreWeave, also weighed on the market.', '重しとなる "to act as a weight (on prices)". 債務 "debt".'],
+            ['韓国[かんこく]の総合[そうごう]株価[かぶか]指数[しすう]が約[やく]8％下落[げらく]するなど、影響[えいきょう]はアジアの市場[しじょう]全体[ぜんたい]に及[およ]んだ。', 'The impact reached Asian markets as a whole, with South Korea\'s main stock index falling about 8 percent.', '及ぶ "to extend to, to reach".'],
+            ['財務省[ざいむしょう]の当局者[とうきょくしゃ]は、G7やG20では金融[きんゆう]の安定[あんてい]を脅[おびや]かす危険[きけん]はないとの認識[にんしき]が示[しめ]されたと述[の]べた。', 'A Finance Ministry official said that the G7 and G20 showed an understanding that there is no risk threatening financial stability.', '当局者 "an official (of the authorities)".'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-16-yamato-leak',
+      date: '2026-10-16',
+      emoji: '📦',
+      titleEn: 'Yamato Transport: about 5.31 million customer records leaked from its deferred-payment service',
+      sources: [
+        { name: 'Kyodo via Yahoo! News Japan', url: 'https://news.yahoo.co.jp/articles/df806895ace5e27c1314563694a8b8545a5a0cc3' },
+        { name: 'ECnomikata', url: 'https://ecnomikata.com/ecnews/51854/' },
+        { name: 'Rocket Boys', url: 'https://rocket-boys.co.jp/?p=43156' },
+      ],
+      levels: {
+        N5: {
+          title: 'ヤマト運輸[うんゆ]から、お客[きゃく]さんの情報[じょうほう]が出[で]ました',
+          lines: [
+            ['ヤマト運輸[うんゆ]から、お客[きゃく]さんの情報[じょうほう]がたくさん外[そと]に出[で]ました。', 'A lot of customer information leaked out of Yamato Transport.', 'Yamato Transport is the company behind the Kuroneko delivery service.'],
+            ['数[かず]は、約[やく]531万[まん]件[けん]です。', 'The number is about 5.31 million items.', '件 counts items or records.'],
+            ['「クロネコ代金[だいきん]後払[あとばら]い」は、荷物[にもつ]を受[う]け取[と]ってから、お金[かね]をはらうサービスです。', '"Kuroneko Deferred Payment" is a service where you pay after you receive your package.'],
+            ['九月[くがつ]に、知[し]らない人[ひと]が、許[ゆる]しを取[と]らずにこのサービスに入[はい]ったことが分[わ]かりました。', 'In September, it was found that someone had entered this service without permission.', 'The company found the unauthorized access on September 28.'],
+            ['名前[なまえ]や住所[じゅうしょ]、電話[でんわ]番号[ばんごう]などが、外[そと]に出[で]たようです。', 'It seems that names, addresses, phone numbers and more leaked out.'],
+            ['クレジットカードの番号[ばんごう]とパスワードは、入[はい]っていないそうです。', 'They say credit card numbers and passwords were not included.', 'This is from the company\'s announcement on October 2.'],
+          ],
+        },
+        N4: {
+          title: 'ヤマト運輸[うんゆ]の後払[あとばら]いサービスから531万件[まんけん]の情報[じょうほう]が流出[りゅうしゅつ]',
+          lines: [
+            ['ヤマト運輸[うんゆ]の「クロネコ代金[だいきん]後払[あとばら]いサービス」から、約[やく]531万件[まんけん]の顧客[こきゃく]情報[じょうほう]が外[そと]に出[で]たことが分[わ]かったと、十六日[じゅうろくにち]に共同[きょうどう]通信[つうしん]などが伝[つた]えました。', 'On the 16th, Kyodo News and others reported that about 5.31 million items of customer information had been found to have leaked from Yamato Transport\'s "Kuroneko Deferred Payment Service".', '流出 "a leak, to flow out". 顧客 "a customer".'],
+            ['このサービスは、ネットで買[か]った物[もの]を受[う]け取[と]ったあと、コンビニなどでお金[かね]をはらうものです。', 'With this service, you pay at a convenience store or similar after receiving what you bought online.'],
+            ['会社[かいしゃ]は九月[くがつ]二十八日[にじゅうはちにち]に第三者[だいさんしゃ]による不正[ふせい]アクセスを見[み]つけ、すぐにサービスを止[と]めました。', 'On September 28, the company found unauthorized access by a third party and stopped the service right away.', '第三者 "a third party, an outsider". 不正アクセス "unauthorized access (hacking)". The company announced it the next day.'],
+            ['十月[じゅうがつ]二日[ふつか]には、名前[なまえ]、住所[じゅうしょ]、電話[でんわ]番号[ばんごう]、メールアドレス、買[か]った物[もの]の内容[ないよう]や請求[せいきゅう]金額[きんがく]などが出[で]たおそれがあると説明[せつめい]していました。', 'On October 2, it had explained that names, addresses, phone numbers, email addresses, details of what was bought and the amounts billed might have leaked.', '請求金額 "the amount billed".'],
+            ['クレジットカードの情報[じょうほう]とパスワードは、含[ふく]まれていないということです。', 'It is said that credit card information and passwords are not included.'],
+            ['サービスは九日[ここのか]に再開[さいかい]されましたが、調[しら]べは続[つづ]いています。', 'The service restarted on the 9th, but the investigation is continuing.', '再開 "to resume, to restart".'],
+            ['物流[ぶつりゅう]業界[ぎょうかい]では、佐川急便[さがわきゅうびん]でも不正[ふせい]アクセスが公表[こうひょう]されています。', 'In the delivery industry, unauthorized access has also been announced at Sagawa Express.', '物流 "logistics, distribution of goods".'],
+          ],
+        },
+        N3: {
+          title: 'ヤマト運輸[うんゆ]、「クロネコ代金後払[だいきんあとばら]い」から約[やく]531万件[まんけん]の顧客[こきゃく]情報[じょうほう]が流出[りゅうしゅつ]',
+          lines: [
+            ['ヤマト運輸[うんゆ]は十六日[じゅうろくにち]、後払[あとばら]いサービス「クロネコ代金[だいきん]後払[あとばら]い」への不正[ふせい]アクセスで、約[やく]531万件[まんけん]の顧客[こきゃく]情報[じょうほう]が流出[りゅうしゅつ]したことを確認[かくにん]したと、共同[きょうどう]通信[つうしん]が報[ほう]じた。', 'Kyodo News reported that on the 16th Yamato Transport confirmed that about 5.31 million items of customer information had leaked through unauthorized access to its deferred-payment service "Kuroneko Deferred Payment".', '〜と報じた "reported that ...". Whether the figure counts items or people was not made clear in the report.'],
+            ['同社[どうしゃ]は九月[くがつ]二十八日[にじゅうはちにち]に第三者[だいさんしゃ]による不正[ふせい]アクセスを確認[かくにん]してサービスを停止[ていし]し、翌日[よくじつ]に公表[こうひょう]した。', 'On September 28 the company confirmed unauthorized access by a third party, suspended the service, and made it public the next day.', '同社 "the company in question" (newspaper style). 公表 "to make public".'],
+            ['十月[じゅうがつ]二日[ふつか]の発表[はっぴょう]では、氏名[しめい]、住所[じゅうしょ]、電話[でんわ]番号[ばんごう]、メールアドレス、商品[しょうひん]の明細[めいさい]や請求[せいきゅう]金額[きんがく]などが漏[も]れた可能性[かのうせい]があるとしていた。', 'In its October 2 announcement, it had said that names, addresses, phone numbers, email addresses, itemized purchases and billed amounts might have leaked.', '明細 "details, an itemized statement". 可能性がある "there is a possibility".'],
+            ['クレジットカード情報[じょうほう]やパスワードは含[ふく]まれないという。', 'Credit card information and passwords are reportedly not included.'],
+            ['サービスは九日[ここのか]に再開[さいかい]されたが、情報[じょうほう]漏[も]れの経緯[けいい]や影響[えいきょう]の範囲[はんい]については、調査[ちょうさ]が続[つづ]いている。', 'The service resumed on the 9th, but the investigation continues into how the leak happened and how far its effects reach.', '経緯 "how things came about, the course of events".'],
+            ['物流[ぶつりゅう]業界[ぎょうかい]では、佐川急便[さがわきゅうびん]でも不正[ふせい]アクセスが公表[こうひょう]されている。', 'In the logistics industry, unauthorized access has also been announced at Sagawa Express.'],
+            ['対象[たいしょう]となる利用者[りようしゃ]は、不審[ふしん]なメールや電話[でんわ]に注意[ちゅうい]する必要[ひつよう]がある。', 'Affected users need to be careful about suspicious emails and phone calls.', '不審 "suspicious". This is general advice after a leak of contact details, not a quote from the company.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-16-cyclamen-genome',
+      date: '2026-10-16',
+      emoji: '🌸',
+      titleEn: 'Japanese team decodes the cyclamen genome in high precision — a world first',
+      sources: [
+        { name: 'Saitama Institute of Technology', url: 'https://www.sit.ac.jp/news/261013_hana/' },
+        { name: 'Univ-Journal Online', url: 'https://univ-journal.jp/1002370/' },
+        { name: 'Sankei Shimbun via Yahoo! News Japan', url: 'https://news.yahoo.co.jp/articles/26c5f85885ed98d6487a5861f04504420eaa602a' },
+      ],
+      levels: {
+        N5: {
+          title: 'シクラメンの「ゲノム」が、くわしくわかりました',
+          lines: [
+            ['シクラメンの「ゲノム」が、とてもくわしくわかりました。', 'Scientists have learned the "genome" of the cyclamen in great detail.', 'The genome is all of a living thing\'s genetic information. Cyclamen is a popular winter flowering plant.'],
+            ['世界[せかい]で初[はじ]めてです。', 'It is the first time in the world.'],
+            ['埼玉[さいたま]工業[こうぎょう]大学[だいがく]などの研究[けんきゅう]チームが、十三日[じゅうさんにち]に発表[はっぴょう]しました。', 'A research team including Saitama Institute of Technology announced it on the 13th.'],
+            ['ゲノムは、生[い]き物[もの]の体[からだ]の設計図[せっけいず]のようなものです。', 'A genome is like a blueprint of a living thing\'s body.'],
+            ['花[はな]の色[いろ]や形[かたち]、かおりを決[き]めるものを、さがしやすくなります。', 'It becomes easier to find the things that decide a flower\'s color, shape and scent.'],
+            ['研究[けんきゅう]チームは、青[あお]い花[はな]のシクラメンも作[つく]りたいと考[かんが]えています。', 'The research team also hopes to make a blue cyclamen.', 'Professor Akita was quoted wanting to develop a deep blue flower.'],
+          ],
+        },
+        N4: {
+          title: 'シクラメンのゲノムを世界[せかい]で初[はじ]めて高[こう]精度[せいど]で解読[かいどく]',
+          lines: [
+            ['埼玉[さいたま]工業[こうぎょう]大学[だいがく]の秋田[あきた]祐介[ゆうすけ]教授[きょうじゅ]たちの研究[けんきゅう]チームは、シクラメンのゲノムを高[こう]精度[せいど]で読[よ]み解[と]くことに、世界[せかい]で初[はじ]めて成功[せいこう]したと発表[はっぴょう]しました。', 'A research team led by Professor Yusuke Akita of Saitama Institute of Technology announced it had succeeded, for the first time in the world, in decoding the cyclamen genome in high precision.', '解読 "to decode". 高精度 "high precision".'],
+            ['研究[けんきゅう]には、かずさDNA研究所[けんきゅうじょ]、九州[きゅうしゅう]大学[だいがく]、香川[かがわ]大学[だいがく]も加[くわ]わりました。', 'The Kazusa DNA Research Institute, Kyushu University and Kagawa University also took part in the research.'],
+            ['読[よ]み解[と]かれたゲノムの長[なが]さは、約[やく]14億[おく]8000万[まん]塩基対[えんきつい]です。', 'The decoded genome is about 1.48 billion base pairs long.', '塩基対 "base pairs", the units used to measure the length of DNA.'],
+            ['ゲノムは生[い]き物[もの]の設計図[せっけいず]のようなもので、花[はな]の形[かたち]、色[いろ]、かおり、球根[きゅうこん]の育[そだ]ち方[かた]に関[かか]わる遺伝子[いでんし]を探[さが]しやすくなります。', 'A genome is like a living thing\'s blueprint, and it becomes easier to look for the genes involved in flower shape, color, scent and how the bulb grows.', '遺伝子 "a gene". 球根 "a bulb".'],
+            ['研究[けんきゅう]チームは、このデータが、丈夫[じょうぶ]なシクラメンなど新[あたら]しい品種[ひんしゅ]を作[つく]るのに役立[やくだ]つと期待[きたい]しています。', 'The team expects this data to help create new varieties, such as sturdier cyclamens.', '品種 "a variety (of plant)".'],
+            ['秋田[あきた]教授[きょうじゅ]は、真[ま]っ青[さお]な花[はな]を作[つく]りたいと話[はな]しています。', 'Professor Akita says he wants to create a deep blue flower.', '真っ青 "deep blue". The wish was quoted in a Sankei Shimbun report.'],
+          ],
+        },
+        N3: {
+          title: 'シクラメンの高精度[こうせいど]ゲノム解読[かいどく]に世界初[せかいはつ]成功[せいこう]　埼玉工業大[さいたまこうぎょうだい]など',
+          lines: [
+            ['埼玉工業大[さいたまこうぎょうだい]の秋田祐介[あきたゆうすけ]教授[きょうじゅ]らの研究[けんきゅう]チームは十三日[じゅうさんにち]、園芸[えんげい]植物[しょくぶつ]シクラメンの高精度[こうせいど]なゲノム解読[かいどく]に世界[せかい]で初[はじ]めて成功[せいこう]したと発表[はっぴょう]した。', 'On the 13th, a team led by Professor Yusuke Akita of Saitama Institute of Technology announced that it had succeeded, for the first time in the world, in a high-precision decoding of the genome of the garden plant cyclamen.', '園芸植物 "a horticultural (garden) plant". 〜らの "and others, together with".'],
+            ['かずさDNA研究所[けんきゅうじょ]、九州大[きゅうしゅうだい]、香川大[かがわだい]との共同[きょうどう]研究[けんきゅう]で、ゲノムの大[おお]きさは約[やく]14億[おく]8000万[まん]塩基対[えんきつい]に及[およ]ぶという。', 'In joint research with the Kazusa DNA Research Institute, Kyushu University and Kagawa University, the genome is said to be about 1.48 billion base pairs in size.', '〜に及ぶ "to reach (a size or extent)".'],
+            ['ゲノムは生物[せいぶつ]の遺伝[いでん]情報[じょうほう]の全体[ぜんたい]を指[さ]し、解読[かいどく]によって、どの遺伝子[いでんし]がどんな性質[せいしつ]に関[かか]わるかを調[しら]べやすくなる。', 'The genome means the whole of an organism\'s genetic information, and decoding it makes it easier to investigate which genes are involved in which traits.', '性質 "a trait, a property".'],
+            ['チームは、花[はな]の形[かたち]や色[いろ]、香[かお]り、球根[きゅうこん]の成長[せいちょう]に関[かか]わる遺伝子[いでんし]の特定[とくてい]が進[すす]むと期待[きたい]している。', 'The team expects that identifying the genes involved in flower shape, color, scent and bulb growth will move forward.', '特定 "to identify, to pinpoint".'],
+            ['秋田教授[あきたきょうじゅ]は、解読[かいどく]の成果[せいか]を生[い]かし、真[ま]っ青[さお]な花[はな]の品種[ひんしゅ]を開発[かいはつ]したいと話[はな]しているという。', 'Professor Akita is reportedly saying he wants to make use of the results of the decoding to develop a variety with deep blue flowers.', '成果を生かす "to make use of results". The wish was in the headline of a Sankei Shimbun report.'],
+            ['品種[ひんしゅ]改良[かいりょう]のスピードが上[あ]がり、より丈夫[じょうぶ]な植物[しょくぶつ]が生[う]まれる可能性[かのうせい]もある。', 'Breeding may also speed up, and sturdier plants may be produced.', '品種改良 "breeding, improving a variety". 可能性もある "there is also a possibility".'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-10-15-farm-minister',
       date: '2026-10-15',
       emoji: '🏛️',
