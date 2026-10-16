@@ -38,6 +38,14 @@
   SRS cards should call `logReview()` too, and new card id prefixes go in
   `KINDS`. `test_sync.js` and `test_progress_stats.js` cover both.
 
+- Logged-in users can save their own Claude API key in the account dialog
+  (`tokidoki_claude_key`, so it syncs with the account; logging out removes
+  it from the device). `claude-feedback.js` uses it for feedback on
+  Conversation starters answers, calling the Claude API from the browser
+  with the official SDK, vendored as one bundle in
+  `vendor/anthropic-sdk.mjs` (version and build command at its top; loaded
+  only when needed). `test_claude_feedback.js` covers the request and reply.
+
 ## Generated pages
 
 - The Phrases category pages, `phrases-<id>.html`, are written by

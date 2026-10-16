@@ -19,6 +19,11 @@
 // firestore.rules still applies), which is what allows reading part of a
 // document — and saves downloading the Firestore SDK.
 //
+// Logged in, the dialog also takes the user's own Claude API key, for
+// feedback on what they write (claude-feedback.js). It's saved like the rest
+// of their progress, so it's in their account, and logging out removes it
+// from the device.
+//
 // Firebase is only downloaded for people who open the login dialog or are
 // logged in. Set FIREBASE_CONFIG to null to hide the button altogether.
 (function () {
@@ -49,6 +54,7 @@
   // A page load only checks the account when it's been this long since the
   // last sync (or something here hasn't been sent yet).
   const PULL_EVERY = 120000;
+  const CLAUDE_KEY = 'tokidoki_claude_key';  // the user's own Claude API key (claude-feedback.js)
 
   if (!FIREBASE_CONFIG || !window.SyncMerge || !window.localStorage) return;
   const { isTracked, mergeAll, sameSnapshot, FORMAT, FIELDS, encodeAccount, decodeAccount, canonical, diffAccount } = window.SyncMerge;
@@ -154,6 +160,7 @@
           if (!was && needsPull()) sync({ initial: true });
         } else {
           forget();
+          if (get(CLAUDE_KEY)) { del(CLAUDE_KEY); claudeChanged(); }  // the key belongs to the account, not the device
         }
         render();
         if (first) { first = false; resolve(); }
@@ -386,6 +393,8 @@
   let message = null;   // { text, error }
   let busy = false;
   let syncButton = '';  // 'spin' while a "Sync now" runs, 'done' for a moment after
+  let claudeMsg = null; // { text, error } for the Claude key section
+  let claudeBusy = false;
 
   function mount() {
     const right = document.querySelector('#header .header-right');
@@ -459,7 +468,7 @@
     const body = overlay.querySelector('.account-body');
     const stats = user ? statsHtml() : '';
     // Rebuilding the form would wipe what's being typed, so only when it changes.
-    const view = JSON.stringify([user && user.email, status, user && lastSynced(), !!syncing, mode, sentTo, message, busy, stats, syncButton]);
+    const view = JSON.stringify([user && user.email, status, user && lastSynced(), !!syncing, mode, sentTo, message, busy, stats, syncButton, get(CLAUDE_KEY), claudeMsg, claudeBusy]);
     if (body.dataset.view === view) return;
     body.dataset.view = view;
     const msg = message ? `<p class="account-msg${message.error ? ' account-error' : ''}" role="status">${esc(message.text)}</p>` : '';
@@ -469,6 +478,7 @@
     if (user) {
       const moreOpen = !!body.querySelector('.stat-more[open]');
       const refocus = document.activeElement && document.activeElement.dataset && document.activeElement.dataset.accountAct;
+      const typedKey = (body.querySelector('input[name=claude-key]') || {}).value || '';
       const syncLabel = syncButton === 'spin' ? `${SPINNER}<span>Syncing…</span>`
         : syncButton === 'done' ? `${CHECK}<span>Synced</span>` : 'Sync now';
       title.textContent = 'Your account';
@@ -477,12 +487,15 @@
         <p class="account-sub">${esc(status || lastSynced())}</p>
         ${msg}
         ${stats}
+        ${claudeHtml()}
         <div class="account-actions">
           <button type="button" class="btn-secondary account-sync${syncButton ? ' account-sync-' + syncButton : ''}" data-account-act="sync" aria-live="polite"${dis || (syncing || syncButton ? ' disabled' : '')}>${syncLabel}</button>
           <button type="button" class="btn-secondary" data-account-act="logout"${dis}>Log out</button>
         </div>
         <p class="account-sub">Logging out keeps your progress on this device.</p>`;
       if (moreOpen) body.querySelector('.stat-more').open = true;
+      const keyInput = body.querySelector('input[name=claude-key]');
+      if (keyInput && typedKey) keyInput.value = typedKey;
       if (refocus) { const b = body.querySelector(`[data-account-act="${refocus}"]`); if (b) b.focus(); }
       return;
     }
@@ -520,6 +533,77 @@
         ${msg}
         <button type="submit" class="btn-primary account-submit"${dis}>${confirming ? 'Log in' : 'Email me a login link'}</button>
       </form>`;
+  }
+
+  // ─── Claude API key ──────────────────────────────────────────────────────────
+
+  function claudeHtml() {
+    const key = get(CLAUDE_KEY);
+    const msg = claudeMsg ? `<p class="account-msg${claudeMsg.error ? ' account-error' : ''}" role="status">${esc(claudeMsg.text)}</p>` : '';
+    const dis = claudeBusy ? ' disabled' : '';
+    const about = `<p class="account-sub">Requests go from your browser straight to Anthropic and are billed to your
+      Anthropic account (a few cents per feedback). The key is saved in your Tokidoki account so it works on your
+      other devices, and logging out removes it from this one. A key with a spending limit is a good idea.</p>`;
+    if (key) {
+      return `<section class="account-claude">
+        <h3>✨ Claude feedback</h3>
+        <p class="account-text">Your Claude API key <code>…${esc(key.slice(-4))}</code> is saved. Get feedback on your answers on the
+          <a href="conversation.html">Conversation starters</a> page.</p>
+        ${msg}
+        <div class="account-actions"><button type="button" class="btn-secondary" data-account-act="claude-remove"${dis}>Remove key</button></div>
+        ${about}
+      </section>`;
+    }
+    return `<section class="account-claude">
+      <h3>✨ Claude feedback</h3>
+      <p class="account-text">Add your own <a href="https://platform.claude.com/settings/keys" target="_blank" rel="noopener">Claude API key</a>
+        and Claude can give feedback on what you write on the <a href="conversation.html">Conversation starters</a> page.</p>
+      <form class="account-claude-form" novalidate>
+        <label class="account-field">
+          <span>Claude API key</span>
+          <input type="password" name="claude-key" autocomplete="off" spellcheck="false" placeholder="sk-ant-…">
+        </label>
+        ${msg}
+        <button type="submit" class="btn-primary"${dis}>${claudeBusy ? `${SPINNER}<span>Checking…</span>` : 'Save key'}</button>
+      </form>
+      ${about}
+    </section>`;
+  }
+
+  // Pages that offer feedback (conversation.js) listen for this.
+  const claudeChanged = () => window.dispatchEvent(new Event('tokidoki:claude-key'));
+
+  // Loads claude-feedback.js (and with it the SDK) only when a key is saved.
+  function claudeFeedback() {
+    if (window.ClaudeFeedback) return Promise.resolve(window.ClaudeFeedback);
+    return new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = '/claude-feedback.js';
+      s.onload = () => resolve(window.ClaudeFeedback);
+      s.onerror = () => reject(new Error('Couldn’t load the Claude feedback code. Check your connection.'));
+      document.head.appendChild(s);
+    });
+  }
+
+  async function saveClaudeKey(form) {
+    const key = form['claude-key'].value.trim();
+    if (!key) { claudeMsg = { text: 'Paste your key first.', error: true }; render(); return; }
+    claudeBusy = true;
+    claudeMsg = null;
+    render();
+    try {
+      const cf = await claudeFeedback();
+      await cf.check(key);
+      set(CLAUDE_KEY, key);
+      claudeChanged();
+      claudeMsg = { text: 'Key saved. It works!' };
+      const input = overlay.querySelector('input[name=claude-key]');
+      if (input) input.value = '';
+    } catch (err) {
+      claudeMsg = { text: err.message, error: true };
+    }
+    claudeBusy = false;
+    render();
   }
 
   // ─── Progress summary ────────────────────────────────────────────────────────
@@ -820,6 +904,10 @@
 
   async function onSubmit(e) {
     e.preventDefault();
+    if (e.target.classList.contains('account-claude-form')) {
+      if (!claudeBusy) saveClaudeKey(e.target);
+      return;
+    }
     if (busy) return;
     const email = e.target.email.value.trim();
     if (mode === 'confirm' && pendingLink) return finishLink(email);
@@ -899,6 +987,11 @@
       syncButton = failed ? '' : 'done';
       render();
       if (!failed) setTimeout(() => { if (syncButton === 'done') { syncButton = ''; render(); } }, 1800);
+    } else if (act === 'claude-remove') {
+      del(CLAUDE_KEY);
+      claudeChanged();
+      claudeMsg = { text: 'Key removed from your account.' };
+      render();
     } else if (act === 'logout') {
       busy = true;
       render();

@@ -147,12 +147,14 @@
     best: Math.max(l.best || 0, r.best || 0),
   });
 
-  // Conversation starters: { answers: { 'topic:N5': { text, t } } } — the
-  // newer text of each answer.
+  // Conversation starters: { answers: { 'topic:N5': { text, t } },
+  // feedback: { 'topic:N5': { for, result, t } } } — the newer of each.
   const newerText = (l, r) => ((r && r.t) || 0) > ((l && l.t) || 0) ? r : l;
   function mergeConversation(b, l, r) {
     b = isObj(b) ? b : {};
-    return Object.assign({}, r, l, { answers: mergeMap(b.answers, l.answers, r.answers, newerText) });
+    const out = Object.assign({}, r, l, { answers: mergeMap(b.answers, l.answers, r.answers, newerText) });
+    if (isObj(l.feedback) || isObj(r.feedback)) out.feedback = mergeMap(b.feedback, l.feedback, r.feedback, newerText);
+    return out;
   }
 
   // How to merge a key both sides changed: (base, local, remote) → value.

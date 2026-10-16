@@ -7,6 +7,10 @@
 // kana words you type turn into kanji. Hints and answers differ per JLPT
 // level.
 //
+// Logged in with a Claude API key in their account, people can also ask
+// Claude for feedback on what they wrote (claude-feedback.js); the latest
+// feedback on each answer is kept with it.
+//
 // The questions live in conversation-data.js. What you write is kept per
 // question and level in tokidoki_conversation (synced with the account;
 // sync-merge.js keeps the newer text of each). The pure parts are exported
@@ -335,8 +339,9 @@
   const GROUPS = global.CONVERSATION_GROUPS || [];
   const settings = Object.assign({ level: 'N5', furigana: true, kanji: true }, load(SETTINGS_KEY, {}));
   if (!LEVELS.includes(settings.level)) settings.level = 'N5';
-  const store = Object.assign({ answers: {} }, load(STORE_KEY, {}));
+  const store = Object.assign({ answers: {}, feedback: {} }, load(STORE_KEY, {}));
   if (!store.answers || typeof store.answers !== 'object') store.answers = {};
+  if (!store.feedback || typeof store.feedback !== 'object') store.feedback = {};
 
   let topic = null;            // the open question, or null on the list
   let unlocked = new Set();    // hint ids unlocked on this visit ('answer' for the sample)
@@ -344,6 +349,8 @@
   let fresh = new Set();       // just unlocked by your answer: these get the animation
   let kanjiDict = null;        // for the open question (its hint words come first)
   let autoTimer = null;
+  let asking = null;           // the answer key Claude is reviewing right now
+  let askError = '';
   let noteTimer = null;
   let showEnglish = false;
   let saveTimer = null;
@@ -403,6 +410,94 @@
     spotHints(false);
     renderHints();
     renderSample();
+    askError = '';
+    renderAi();
+    renderFeedback();
+  }
+
+  // ─── Feedback from Claude ──────────────────────────────────────────────────
+
+  const CF = () => global.ClaudeFeedback;
+
+  // The button under the answer, or how to get it.
+  function renderAi() {
+    // Only rebuilt when it changes: clicking the button blurs the answer box,
+    // which re-renders, and a rebuilt button would never get the click.
+    const set = html => { if (box.dataset.html !== html) { box.innerHTML = html; box.dataset.html = html; } };
+    const box = $('cs-ai');
+    if (!CF()) { set(''); return; }
+    const key = answerKey(topic.id, settings.level);
+    if (!CF().key()) {
+      set(`<button class="cs-ai-setup" data-ai="account">✨ ${CF().loggedIn()
+        ? 'Get feedback from Claude: add your Claude API key in your account'
+        : 'Log in and add a Claude API key to get feedback from Claude'}</button>`);
+      return;
+    }
+    const empty = !$('cs-answer').value.trim();
+    const busy = asking === key;
+    set(`<button class="btn-secondary cs-ai-btn" data-ai="ask"${empty || asking ? ' disabled' : ''}>
+        ${busy ? '<span class="account-spinner" aria-hidden="true"></span> Claude is reading your answer…' : '✨ Feedback from Claude'}
+      </button>
+      <span class="cs-ai-note">${empty ? 'Write something first' : 'Uses your Claude API key · a few cents'}</span>
+      ${askError ? `<p class="cs-ai-error" role="alert">${esc(askError)}</p>` : ''}`);
+  }
+
+  function renderFeedback() {
+    const box = $('cs-feedback');
+    const fb = store.feedback[answerKey(topic.id, settings.level)];
+    box.classList.toggle('hidden', !fb);
+    if (!fb) { box.innerHTML = ''; return; }
+    const r = fb.result;
+    const stale = fb.for.trim() !== $('cs-answer').value.trim();
+    box.innerHTML = `
+      <div class="cs-fb-head">
+        <h3>✨ Claude’s feedback <span>${esc(settings.level)}</span></h3>
+        <button class="cs-fb-close" data-ai="dismiss" aria-label="Remove this feedback">✕</button>
+      </div>
+      ${stale ? '<p class="cs-fb-stale">This is about an earlier version of your answer. Ask again for feedback on what you have now.</p>' : ''}
+      <p class="cs-fb-summary">${esc(r.summary)}</p>
+      ${r.went_well.length ? `<ul class="cs-fb-good">${r.went_well.map(w => `<li>👍 ${esc(w)}</li>`).join('')}</ul>` : ''}
+      ${r.corrections.length ? `<h4>Corrections</h4><ol class="cs-fb-fixes">${r.corrections.map(c => `
+        <li><div class="cs-fb-fix" lang="ja"><s>${esc(c.original)}</s> <span aria-hidden="true">→</span> <b>${rubyHtml(c.fixed)}</b></div>
+          <div class="cs-fb-why">${esc(c.why)}</div></li>`).join('')}</ol>` : '<p class="cs-fb-none">No mistakes found. 🎉</p>'}
+      ${r.corrections.length ? `<h4>Your answer, corrected</h4>
+        <p class="cs-fb-ja" lang="ja">${rubyHtml(r.corrected)}</p>
+        <button class="btn-secondary cs-fb-use" data-ai="use">Use this version</button>` : ''}
+      <h4>A more natural version ${speakBtns(r.natural)}</h4>
+      <p class="cs-fb-ja" lang="ja">${rubyHtml(r.natural)}</p>
+      <p class="cs-fb-en">${esc(r.natural_en)}</p>
+      <p class="cs-fb-next">💡 <b>Try next:</b> ${esc(r.try_next)}</p>`;
+  }
+
+  async function askClaude() {
+    if (saveTimer) saveAnswer();
+    const t = topic;
+    const level = settings.level;
+    const key = answerKey(t.id, level);
+    const answer = $('cs-answer').value;
+    const d = levelData(t, level);
+    asking = key;
+    askError = '';
+    renderAi();
+    try {
+      const result = await CF().feedback({
+        question: plain(d.q.ja),
+        questionEn: d.q.en,
+        level,
+        hints: hintItems(d).map(h => plain(h.ja)),
+        answer,
+      });
+      store.feedback[key] = { for: answer, result, t: Date.now() };
+      save(STORE_KEY, store);
+    } catch (err) {
+      askError = err.message;
+    }
+    asking = null;
+    if (topic === t && settings.level === level) {
+      renderAi();
+      renderFeedback();
+      if (!askError) $('cs-feedback').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
   function renderCount() {
@@ -574,6 +669,8 @@
   function afterTyping(final) {
     convertKanji(final);
     renderCount();
+    if (!asking) renderAi();
+    if (store.feedback[answerKey(topic.id, settings.level)]) renderFeedback();
     clearTimeout(autoTimer);
     autoTimer = setTimeout(() => { if (topic && spotHints(true)) renderHints(); }, final ? 0 : 300);
   }
@@ -655,6 +752,27 @@
     });
     $('cs-random-list').addEventListener('click', () => go(TOPICS[Math.floor(Math.random() * TOPICS.length)]));
     window.addEventListener('hashchange', route);
+    window.addEventListener('tokidoki:claude-key', () => { if (topic) renderAi(); });
+    $('screen-conversation').addEventListener('click', e => {
+      const b = e.target.closest('[data-ai]');
+      if (!b) return;
+      const act = b.dataset.ai;
+      if (act === 'ask') askClaude();
+      else if (act === 'account') { const acc = document.getElementById('btn-account'); if (acc) acc.click(); }
+      else if (act === 'dismiss') {
+        delete store.feedback[answerKey(topic.id, settings.level)];
+        save(STORE_KEY, store);
+        renderFeedback();
+      } else if (act === 'use') {
+        const fb = store.feedback[answerKey(topic.id, settings.level)];
+        $('cs-answer').value = plain(fb.result.corrected);
+        fb.for = $('cs-answer').value;
+        saveAnswer();
+        save(STORE_KEY, store);
+        afterTyping(true);
+        renderFeedback();
+      }
+    });
     window.addEventListener('pagehide', () => { if (saveTimer) saveAnswer(); });
 
     renderFurigana();
