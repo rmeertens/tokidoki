@@ -85,6 +85,61 @@ ok(items[0].id === 'words-0' && items[0].step === 'words', 'hintItems: words fir
 ok(new Set(items.map(h => h.id)).size === items.length, 'hintItems: unique ids');
 ok(items[items.length - 1].step === 'start', 'hintItems: the way to begin last');
 
+// ─── Hints your answer uses ────────────────────────────────────────────────
+const weekend = C.hintItems(C.levelData(CONVERSATION_TOPICS.find(t => t.id === 'weekend'), 'N4'));
+const usedIn = text => C.usedHints(text, weekend);
+const has = (text, id) => usedIn(text).includes(id);
+ok(has('久しぶりに友達に会いました。', 'words-0'), 'uses: a word in kanji');
+ok(has('ひさしぶりに', 'words-0'), 'uses: the same word in kana');
+ok(has('友達に会いました。', 'verbs-1'), 'uses: a verb in another form (会う → 会いました)');
+ok(!has('会社に行きました。', 'verbs-1'), 'uses: a lone kanji inside another word does not count (会社)');
+ok(has('疲れました', 'verbs-2') && has('つかれた', 'verbs-2'), 'uses: verb stems, kanji or kana');
+ok(has('掃除をしたり、洗濯をしたりしました。', 'grammar-0'), 'uses: a pattern with two parts (〜たり〜たりしました)');
+ok(!has('掃除をしました。', 'grammar-0'), 'uses: half a pattern does not count');
+ok(has('食べてから', 'grammar-1'), 'uses: 〜てから');
+ok(!has('せんた', 'words-2'), 'uses: nouns are not cut short (洗濯 needs all of せんたく)');
+ok(usedIn('').length === 0 && usedIn('はい。').length === 0, 'uses: nothing in a short answer');
+// Every hint can be spotted when you write it out: its words in its own example
+// or its plain form.
+CONVERSATION_TOPICS.forEach(t => C.LEVELS.forEach(level => {
+  C.hintItems(C.levelData(t, level)).forEach(h => {
+    if (C.matchForms(h, h.step).length && h.step !== 'grammar') ok(C.usedHints(C.insertable(h.ja), [h]).length === 1, `${t.id} ${level}: ${h.ja} is spotted when written`);
+  });
+}));
+
+// Nearly every grammar point is spotted in its own example sentence.
+let spotted = 0, grammarTotal = 0;
+CONVERSATION_TOPICS.forEach(t => C.LEVELS.forEach(level => {
+  C.hintItems(C.levelData(t, level)).filter(h => h.step === 'grammar').forEach(h => {
+    grammarTotal++;
+    if (C.usedHints(C.plain(h.ex), [h]).length) spotted++;
+  });
+}));
+ok(spotted / grammarTotal > 0.95, `uses: grammar spotted in its own example (${spotted}/${grammarTotal})`);
+ok(has('友達と会うことにしました', 'verbs-1'), 'uses: 会う in its dictionary form');
+
+// ─── Writing in kanji ──────────────────────────────────────────────────────
+const dict = C.buildKanjiDict(CONVERSATION_TOPICS);
+const kanji = (text, upto) => C.toKanji(text, dict, upto == null ? text.length + 1 : upto).text;
+ok(kanji('どようび は ともだちと えいがを みました。') === '土曜日 は 友達と 映画を 見ました。', 'kanji: words become kanji');
+ok(kanji('わたしはかわいいねこが') === '私はかわいい猫が', 'kanji: a noun after an adjective');
+ok(kanji('いいえ、') === 'いいえ、', 'kanji: いいえ is not 家');
+ok(kanji('かいしゃい', 5) === 'かいしゃい', 'kanji: a word that might go on (かいしゃ|い) waits');
+ok(kanji('かいしゃいんです', 8) === '会社員です', 'kanji: the longest word wins');
+ok(kanji('どようび', 4) === 'どようび', 'kanji: the word at the caret stays kana');
+ok(kanji('すし と ケーキ') === 'すし と ケーキ', 'kanji: words without kanji stay');
+let k = C.toKanji('ははと ', dict, 4);
+ok(k.text === '母と ' && k.caret === 3 && k.changed[0].to === '母', 'kanji: caret moves with the shorter text');
+ok(kanji('あいました。') === '会いました。' && kanji('かえって ') === '帰って ', 'kanji: verbs in other forms (会う, 帰る)');
+ok(kanji('べんきょうしました。') === '勉強しました。' && kanji('たべてから') === '食べてから', 'kanji: する verbs and ichidan verbs');
+const vf = (w, r) => C.verbForms(w, r).forms;
+ok(vf('見る', 'みる').includes('て') && vf('帰る', 'かえる').includes('って'), 'verbForms: 見る is ichidan, 帰る is godan');
+ok(vf('行く', 'いく').includes('って') && vf('泳ぐ', 'およぐ').includes('いで') && vf('読む', 'よむ').includes('んで'), 'verbForms: te-forms');
+ok(C.verbForms('来る', 'くる') === null && C.verbForms('名前', 'なまえ') === null, 'verbForms: 来る and nouns are left alone');
+ok(dict.get('なか') === '中' && dict.get('かわ') === '川', 'kanji: the commonest spelling of a reading');
+ok(!dict.has('はん') && !dict.has('きも'), 'kanji: no pieces of longer words (ご飯, 気持ち)');
+[...dict].forEach(([r, w]) => ok(/^[ぁ-ゖー]+$/.test(r) && /[㐀-䶿一-鿿々]/.test(w), `kanji: ${r} → ${w} is kana → kanji`));
+
 // ─── Sync ──────────────────────────────────────────────────────────────────
 const J = JSON.stringify;
 const base = { answers: { 'food:N5': { text: 'すしです。', t: 1 }, 'hobby:N5': { text: 'テニス', t: 1 } } };

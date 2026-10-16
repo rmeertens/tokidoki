@@ -7797,3 +7797,40 @@ a.chapter-card.news-headline-card {
   .ref-content-vp .vp-table tr.vp-row .vp-verb { grid-row: span 2; }
   .ref-content-vp .vp-table tr.vp-row .vp-frames { border-top: none; padding-top: 0; }
 }
+
+
+/* Hints your answer uses: unlocked with a pop, marked with a check */
+.cs-answer-meta { flex-wrap: wrap; }
+.cs-note { order: 5; flex-basis: 100%; font-size: 0.82rem; font-weight: 700; color: var(--accent); opacity: 0; max-height: 0; overflow: hidden; transition: opacity 0.3s ease, max-height 0.3s ease; }
+.cs-note.cs-note-show { opacity: 1; max-height: 3em; }
+.cs-tile.cs-used { border-color: color-mix(in srgb, var(--green) 60%, var(--border)); background: var(--green-dim); }
+.cs-grammar { position: relative; }
+.cs-used-badge { font-size: 0.78rem; font-weight: 700; color: var(--green); }
+.cs-grammar .cs-used-badge { position: absolute; top: 8px; right: 10px; }
+.cs-tile.cs-pop { animation: cs-pop 0.9s cubic-bezier(.2,1.4,.4,1); position: relative; }
+.cs-tile.cs-pop::after {
+  content: '✨';
+  position: absolute;
+  top: -10px;
+  right: -6px;
+  font-size: 1rem;
+  animation: cs-sparkle 1.1s ease forwards;
+  pointer-events: none;
+}
+@keyframes cs-pop {
+  0% { transform: scale(0.6) rotate(-4deg); opacity: 0; box-shadow: 0 0 0 0 var(--green); }
+  45% { transform: scale(1.12) rotate(1deg); opacity: 1; box-shadow: 0 0 0 6px color-mix(in srgb, var(--green) 35%, transparent); }
+  100% { transform: none; box-shadow: 0 0 0 0 transparent; }
+}
+@keyframes cs-sparkle { 0% { opacity: 0; transform: scale(0.4); } 30% { opacity: 1; transform: scale(1.3); } 100% { opacity: 0; transform: translateY(-12px) scale(0.8); } }
+.cs-unlocked.cs-bump { animation: cs-bump 0.6s ease; display: inline-block; }
+@keyframes cs-bump { 40% { transform: scale(1.25); color: var(--green); } }
+@media (prefers-reduced-motion: reduce) {
+  .cs-tile.cs-pop, .cs-tile.cs-pop::after, .cs-unlocked.cs-bump { animation: none; }
+}
+.cs-grammar.cs-pop { animation-name: cs-pop-wide; }
+@keyframes cs-pop-wide {
+  0% { transform: scaleY(0.6); opacity: 0; }
+  45% { transform: scale(1.02); opacity: 1; box-shadow: 0 0 0 6px color-mix(in srgb, var(--green) 35%, transparent); }
+  100% { transform: none; box-shadow: 0 0 0 0 transparent; }
+}

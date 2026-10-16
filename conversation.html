@@ -20,7 +20,7 @@
   <meta name="twitter:description" content="Answer everyday questions in Japanese — your weekend, family, food, dreams — with step-by-step hints (words, verbs, grammar, a way to begin) and a sample answer for JLPT N5, N4 and N3.">
   <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
   <link rel="canonical" href="https://tokidoki.meertens.dev/conversation.html">
-  <link rel="stylesheet" href="style.css?v=66">
+  <link rel="stylesheet" href="style.css?v=67">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -139,6 +139,7 @@
           <button data-level="N4" aria-pressed="false">N4</button>
           <button data-level="N3" aria-pressed="false">N3</button>
         </div>
+        <label class="kana-script-toggle" title="Words you type in kana turn into kanji (どようび → 土曜日)"><input type="checkbox" id="cs-opt-kanji" checked> Kanji</label>
         <label class="kana-script-toggle"><input type="checkbox" id="cs-opt-furigana" checked> Furigana</label>
       </div>
 
@@ -157,13 +158,14 @@
         <div class="cs-answer-meta">
           <span id="cs-count"></span>
           <span class="cs-saved" id="cs-saved" role="status"></span>
+          <span class="cs-note" id="cs-note" aria-live="polite"></span>
           <button class="cs-clear" id="cs-clear" type="button">Clear</button>
         </div>
       </div>
 
       <div class="cs-board">
         <div class="cs-board-head">
-          <h3>Hints <span>— tap a tile to unlock it, tap an unlocked word to add it to your answer</span></h3>
+          <h3>Hints <span>— tap a tile to unlock it, or use the word in your answer; tap an unlocked word to add it</span></h3>
           <span class="cs-unlocked" id="cs-unlocked"></span>
         </div>
         <div class="cs-hints" id="cs-hints"></div>
@@ -180,7 +182,7 @@
   </div>
 
   <script src="conversation-data.js?v=1"></script>
-  <script src="conversation.js?v=2"></script>
+  <script src="conversation.js?v=3"></script>
   <script src="romaji.js?v=8"></script>
   <script src="pronounce.js?v=2"></script>
   <script src="kanji-cards.js?v=2"></script>
