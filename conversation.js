@@ -377,7 +377,8 @@
   let topic = null;            // the open question, or null on the list
   let unlocked = new Set();    // hint ids unlocked on this visit ('answer' for the sample)
   let used = new Set();        // hint ids your answer uses
-  let fresh = new Set();       // just unlocked by your answer: these get the animation
+  let fresh = new Set();       // just unlocked by your answer: these get the pop
+  let opening = new Set();     // just unlocked by a tap: these fade in
   let kanjiDict = null;        // for the open question (its hint words come first)
   let kanjiCands = null;       // the same, every spelling, plus the vocabulary list once loaded
   let vocabLoading = null;
@@ -479,10 +480,10 @@
     const box = $('cs-feedback');
     const fb = store.feedback[answerKey(topic.id, settings.level)];
     box.classList.toggle('hidden', !fb);
-    if (!fb) { box.innerHTML = ''; return; }
+    if (!fb) { box.innerHTML = ''; box.dataset.html = ''; return; }
     const r = fb.result;
     const stale = fb.for.trim() !== $('cs-answer').value.trim();
-    box.innerHTML = `
+    const html = `
       <div class="cs-fb-head">
         <h3>✨ Claude’s feedback <span>${esc(settings.level)}</span></h3>
         <button class="cs-fb-close" data-ai="dismiss" aria-label="Remove this feedback">✕</button>
@@ -500,6 +501,9 @@
       <p class="cs-fb-ja" lang="ja">${rubyHtml(r.natural)}</p>
       <p class="cs-fb-en">${esc(r.natural_en)}</p>
       <p class="cs-fb-next">💡 <b>Try next:</b> ${esc(r.try_next)}</p>`;
+    // Typing calls this on every key: rebuild only when it changes (the
+    // "earlier version" note), or the panel would flicker.
+    if (box.dataset.html !== html) { box.innerHTML = html; box.dataset.html = html; }
   }
 
   async function askClaude() {
@@ -545,7 +549,7 @@
   }
 
   function openTile(h, step) {
-    const cls = (used.has(h.id) ? ' cs-used' : '') + (fresh.has(h.id) ? ' cs-pop' : '');
+    const cls = (used.has(h.id) ? ' cs-used' : '') + (fresh.has(h.id) ? ' cs-pop' : opening.has(h.id) ? ' cs-opening' : '');
     const badge = used.has(h.id) ? '<span class="cs-used-badge" title="You used this">✓</span>' : '';
     const body = `<span class="cs-chip-ja" lang="ja">${rubyHtml(h.ja)}</span><span class="cs-chip-en">${esc(h.en)}</span>`;
     if (step !== 'grammar') {
@@ -561,7 +565,7 @@
   function renderHints() {
     const d = levelData(topic, settings.level);
     const all = hintItems(d);
-    $('cs-hints').innerHTML = STEPS.filter(s => d[s.key].length).map(s => {
+    const html = STEPS.filter(s => d[s.key].length).map(s => {
       const items = all.filter(h => h.step === s.key);
       const open = items.filter(h => unlocked.has(h.id)).length;
       return `<section class="cs-hint-step cs-hint-${s.key}">
@@ -573,6 +577,10 @@
           unlocked.has(h.id) ? openTile(h, s.key) : lockedTile(h, h.id)).join('')}</div>
       </section>`;
     }).join('');
+    // Rebuilt only when something changed, so nothing on the board flickers.
+    const board = $('cs-hints');
+    if (board.dataset.html !== html) { board.innerHTML = html; board.dataset.html = html; }
+    opening = new Set();
     const open = all.filter(h => unlocked.has(h.id)).length;
     const n = all.filter(h => used.has(h.id)).length;
     $('cs-unlocked').textContent = `${open} / ${all.length} unlocked` + (n ? ` · ${n} used` : '');
@@ -664,8 +672,10 @@
 
   // Unlocks the hints your answer uses. With `animate`, newly unlocked ones
   // pop and are named under the answer box.
+  // Returns whether anything changed (so the board needs drawing again).
   function spotHints(animate) {
     const items = hintItems(levelData(topic, settings.level));
+    const was = [...used].join();
     used = new Set(usedHints($('cs-answer').value, items));
     const news = items.filter(h => used.has(h.id) && !unlocked.has(h.id));
     news.forEach(h => unlocked.add(h.id));
@@ -673,7 +683,7 @@
     news.forEach(h => fresh.add(h.id));
     const names = [...new Set(news.map(h => plain(h.ja)))];
     if (names.length) note(`✨ Unlocked by your answer: ${names.join('、')}`);
-    return true;
+    return news.length > 0 || [...used].join() !== was;
   }
 
   function note(text) {
@@ -791,12 +801,13 @@
       const one = e.target.closest('[data-unlock]');
       if (one) {
         unlocked.add(one.dataset.unlock);
+        opening.add(one.dataset.unlock);
         if (one.dataset.unlock === 'answer') { saveAnswer(); renderSample(); } else renderHints();
         return;
       }
       const step = e.target.closest('[data-unlock-step]');
       if (step) {
-        hintItems(levelData(topic, settings.level)).filter(h => h.step === step.dataset.unlockStep).forEach(h => unlocked.add(h.id));
+        hintItems(levelData(topic, settings.level)).filter(h => h.step === step.dataset.unlockStep && !unlocked.has(h.id)).forEach(h => { unlocked.add(h.id); opening.add(h.id); });
         renderHints();
         return;
       }

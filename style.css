@@ -7508,7 +7508,7 @@ a.chapter-card.news-headline-card {
 .cs-hint-items { display: flex; flex-wrap: wrap; gap: 6px; }
 .cs-hint-items.cs-hint-grammar { flex-direction: column; gap: 8px; }
 
-.cs-tile { animation: cs-in 0.25s ease; }
+.cs-tile.cs-opening { animation: cs-in 0.25s ease; }
 @keyframes cs-in { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: none; } }
 .cs-locked {
   display: inline-flex;
