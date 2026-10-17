@@ -4,8 +4,14 @@
 // buttons under the box. Space swaps the kana for the first one, Space
 // again for the next, round to the kana again; tapping a button picks it.
 //
-// attach(input, lookup) — lookup(hiragana) returns kanji spellings, best
-// first. Only works while the input's lang is Japanese, like romaji.js.
+// attach(input, lookup, opts) — lookup(hiragana) returns kanji spellings,
+// best first. Only works while the input's lang is Japanese, like romaji.js.
+// opts (all optional, for boxes where you write whole sentences):
+//   suffix   look up the word just before the caret — the longest end of
+//            the kana run that has kanji (わたしはにほん → にほん) — rather
+//            than the whole run; nothing to offer means Space types a space
+//   enabled  () => whether to offer anything right now
+// After a pick the input gets an 'ime:pick' event.
 (function (global) {
   'use strict';
 
@@ -21,7 +27,7 @@
     return list.filter((c, i) => c && list.indexOf(c) === i);
   }
 
-  function attach(input, lookup) {
+  function attach(input, lookup, opts = {}) {
     if (!input || input.dataset.ime) return;
     input.dataset.ime = 'on';
     const bar = document.createElement('div');
@@ -32,15 +38,25 @@
 
     // { start, end, list, idx }: the stretch of text being converted.
     let state = null;
-    const enabled = () => (input.getAttribute('lang') || '').startsWith('ja');
+    const enabled = () => (input.getAttribute('lang') || '').startsWith('ja') && (!opts.enabled || opts.enabled());
     const caret = () => (input.selectionStart == null ? input.value.length : input.selectionStart);
 
     function current() {
       if (!enabled()) return null;
       const pos = caret();
       if (state && state.end === pos && input.value.slice(state.start, state.end) === state.list[state.idx]) return state;
-      const m = input.value.slice(0, pos).match(KANA_RUN);
+      let before = input.value.slice(0, pos);
+      // A final n that romaji.js is still holding (にほn) is read as ん.
+      if (opts.suffix && /[ぁ-ゖ]n$/.test(before)) before = before.slice(0, -1) + 'ん';
+      const m = before.match(KANA_RUN);
       if (!m) return null;
+      if (opts.suffix) {
+        for (let n = m[0].length; n >= 2; n--) {
+          const kana = m[0].slice(-n);
+          if ((lookup(toHiragana(kana)) || []).length) return { start: pos - n, end: pos, list: choices(kana, lookup), idx: 0 };
+        }
+        return null;
+      }
       const list = choices(m[0], lookup);
       if (list.length < 2) return null;
       return { start: pos - m[0].length, end: pos, list, idx: 0 };
@@ -67,6 +83,7 @@
       try { input.setSelectionRange(end, end); } catch { /* not focused */ }
       state = { start: s.start, end, list: s.list, idx };
       render();
+      input.dispatchEvent(new Event('ime:pick'));
     }
 
     input.addEventListener('keydown', (e) => {

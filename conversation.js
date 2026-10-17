@@ -235,8 +235,9 @@
 
   // reading → kanji spelling. `prefer` (hint words of the open question)
   // wins over the rest and may be as short as two kana.
-  function buildKanjiDict(topics, prefer = []) {
-    // reading → { spelling: how often it appears }; the commonest wins.
+  // reading → { spelling: how often it appears }. `extra` adds other words
+  // as { kana, kanji } (the vocabulary list), verbs with their forms.
+  function spellings(topics, prefer = [], extra = []) {
     const seen = new Map();
     const add = (reading, word, min, weight = 1) => {
       if (!KANJI_CHAR.test(word) || !HIRA_RE.test(reading) || Array.from(reading).length < min) return;
@@ -270,11 +271,36 @@
       const next = (all[i + 1] && all[i + 1].t[0]) || '';
       if (edge(prev) && !/[ァ-ヺ]/.test(prev) && edge(next)) add(p.r, p.t, 2);
     }));
+    extra.forEach(w => {
+      if (!w || !w.kanji || !w.kana) return;
+      const reading = w.kana.replace(/[〜~]/g, '');
+      add(reading, w.kanji.replace(/[〜~]/g, ''), 1, 0.5);
+      const v = verbForms(w.kanji, reading);
+      if (v) {
+        const stemKana = reading.slice(0, reading.length - (w.kanji.length - v.stem.length));
+        v.forms.forEach(f => add(stemKana + f, v.stem + f, 2, 0.5));
+      }
+    });
+    return seen;
+  }
+
+  const ranked = m => [...m].sort((x, y) => y[1] - x[1]).map(e => e[0]);
+
+  // reading → the one spelling Auto writes (the commonest).
+  function buildKanjiDict(topics, prefer = []) {
+    const seen = spellings(topics, prefer);
     const dict = new Map();
     seen.forEach((m, reading) => {
-      if (!PREFIXES.has(reading)) dict.set(reading, [...m].sort((x, y) => y[1] - x[1])[0][0]);
+      if (!PREFIXES.has(reading)) dict.set(reading, ranked(m)[0]);
     });
     return dict;
+  }
+
+  // reading → every spelling, commonest first: what Pick offers.
+  function buildKanjiCandidates(topics, prefer = [], extra = []) {
+    const out = new Map();
+    spellings(topics, prefer, extra).forEach((m, reading) => out.set(reading, ranked(m)));
+    return out;
   }
 
   // Kana that may come right before a word: particles and the like.
@@ -304,7 +330,9 @@
         if (!text.startsWith(r, i)) return false;
         const end = i + r.length;
         if (end >= upto) return end === text.length && upto > text.length;
-        // What follows has to end the word: かいしゃ|いん stays until it's かいしゃいん.
+        // What follows has to end the word: かいしゃ|いん stays until it's
+        // かいしゃいん, and いま|s (romaji still being typed) until it's います.
+        if (/[a-zA-Z']/.test(text[end])) return false;
         return !/[ぁ-ゖ]/.test(text[end]) || BEFORE.test(text[end]);
       });
       if (k) {
@@ -321,7 +349,7 @@
     return { text: out, caret, changed };
   }
 
-  const api = { pieces, plain, kana, rubyHtml, parseHint, levelData, insertable, insertAt, charCount, answerKey, hintItems, stem, verbForms, matchForms, hasForm, usedHints, buildKanjiDict, toKanji, LEVELS, STEPS };
+  const api = { pieces, plain, kana, rubyHtml, parseHint, levelData, insertable, insertAt, charCount, answerKey, hintItems, stem, verbForms, matchForms, hasForm, usedHints, buildKanjiDict, buildKanjiCandidates, toKanji, LEVELS, STEPS };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   global.Conversation = api;
   if (typeof document === 'undefined') return;
@@ -337,7 +365,10 @@
 
   const TOPICS = global.CONVERSATION_TOPICS || [];
   const GROUPS = global.CONVERSATION_GROUPS || [];
-  const settings = Object.assign({ level: 'N5', furigana: true, kanji: true }, load(SETTINGS_KEY, {}));
+  const settings = Object.assign({ level: 'N5', furigana: true, kanji: 'pick' }, load(SETTINGS_KEY, {}));
+  // Kanji: 'pick' offers spellings under the box (Space or a tap converts),
+  // 'auto' converts finished words by itself, 'off' leaves kana alone.
+  if (!['off', 'pick', 'auto'].includes(settings.kanji)) settings.kanji = settings.kanji === false ? 'off' : 'pick';
   if (!LEVELS.includes(settings.level)) settings.level = 'N5';
   const store = Object.assign({ answers: {}, feedback: {} }, load(STORE_KEY, {}));
   if (!store.answers || typeof store.answers !== 'object') store.answers = {};
@@ -348,6 +379,8 @@
   let used = new Set();        // hint ids your answer uses
   let fresh = new Set();       // just unlocked by your answer: these get the animation
   let kanjiDict = null;        // for the open question (its hint words come first)
+  let kanjiCands = null;       // the same, every spelling, plus the vocabulary list once loaded
+  let vocabLoading = null;
   let autoTimer = null;
   let asking = null;           // the answer key Claude is reviewing right now
   let askError = '';
@@ -603,7 +636,7 @@
     if (saveTimer) saveAnswer();
     const t = byId(decodeURIComponent(location.hash.slice(1)));
     if (t !== topic || !t) { unlocked = new Set(); showEnglish = false; }
-    if (t && t !== topic) kanjiDict = null;
+    if (t && t !== topic) kanjiDict = kanjiCands = null;
     topic = t || null;
     $('screen-chapters').classList.toggle('active', !topic);
     $('screen-conversation').classList.toggle('active', !!topic);
@@ -623,7 +656,7 @@
     settings.level = level;
     saveSettings();
     unlocked = new Set();
-    kanjiDict = null;
+    kanjiDict = kanjiCands = null;
     renderLevels();
     if (topic) renderQuestion();
     else renderTopics();
@@ -653,9 +686,35 @@
     noteTimer = setTimeout(() => el.classList.remove('cs-note-show'), 3500);
   }
 
-  // With the Kanji switch on: the kana words you've typed past become kanji.
+  function renderKanjiMode() {
+    document.querySelectorAll('.cs-kanji-mode button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.kanji === settings.kanji)));
+  }
+
+  // Spellings for the reading before the caret (Pick): this page's words
+  // first, then the JLPT vocabulary list, loaded the first time it's needed.
+  function kanjiLookup(reading) {
+    if (!topic) return [];
+    if (!kanjiCands) {
+      const vocab = global.VOCAB_DATA ? ['n5', 'n4', 'n3'].flatMap(l => global.VOCAB_DATA[l] || []) : [];
+      kanjiCands = buildKanjiCandidates(TOPICS, hintItems(levelData(topic, settings.level)).filter(h => h.step !== 'grammar').map(h => h.ja), vocab);
+    }
+    return kanjiCands.get(reading) || [];
+  }
+
+  function loadVocab() {
+    if (global.VOCAB_DATA || vocabLoading) return;
+    vocabLoading = new Promise(resolve => {
+      const s = document.createElement('script');
+      s.src = 'vocabulary-data.js';
+      s.onload = () => { kanjiCands = null; resolve(); };
+      s.onerror = () => { vocabLoading = null; resolve(); };
+      document.head.appendChild(s);
+    });
+  }
+
+  // With Kanji on Auto: the kana words you've typed past become kanji.
   function convertKanji(final) {
-    if (!settings.kanji) return;
+    if (settings.kanji !== 'auto') return;
     const ta = $('cs-answer');
     if (!kanjiDict) kanjiDict = buildKanjiDict(TOPICS, hintItems(levelData(topic, settings.level)).filter(h => h.step !== 'grammar').map(h => h.ja));
     const caret = final ? ta.value.length + 1 : ta.selectionStart;
@@ -697,16 +756,25 @@
 
     document.querySelectorAll('.cs-level-btns button').forEach(b => b.addEventListener('click', () => setLevel(b.dataset.level)));
     $('cs-opt-furigana').addEventListener('change', e => { settings.furigana = e.target.checked; saveSettings(); renderFurigana(); });
-    $('cs-opt-kanji').checked = settings.kanji;
-    $('cs-opt-kanji').addEventListener('change', e => {
-      settings.kanji = e.target.checked;
-      saveSettings();
-      if (settings.kanji && topic) { afterTyping(true); saveAnswer(); }
-    });
     $('cs-en-btn').addEventListener('click', () => { showEnglish = !showEnglish; renderQuestion(); });
 
     const ta = $('cs-answer');
+    // Romaji first: the kanji picker reads the kana it has just written.
     if (global.Romaji) Romaji.attach(ta);
+    renderKanjiMode();
+    document.querySelectorAll('.cs-kanji-mode button').forEach(b => b.addEventListener('click', () => {
+      settings.kanji = b.dataset.kanji;
+      saveSettings();
+      renderKanjiMode();
+      if (global.KanjiIme) KanjiIme.reset(ta);
+      if (settings.kanji === 'pick') loadVocab();
+      if (settings.kanji === 'auto' && topic) { afterTyping(true); saveAnswer(); }
+    }));
+    if (global.KanjiIme) {
+      KanjiIme.attach(ta, kanjiLookup, { suffix: true, enabled: () => settings.kanji === 'pick' && !!topic });
+      ta.addEventListener('ime:pick', () => { afterTyping(false); clearTimeout(saveTimer); saveTimer = setTimeout(saveAnswer, 600); });
+      ta.addEventListener('focus', () => { if (settings.kanji === 'pick') loadVocab(); });
+    }
     ta.addEventListener('input', e => {
       if (!e.isComposing) afterTyping(false);
       $('cs-saved').textContent = '';

@@ -139,7 +139,12 @@
           <button data-level="N4" aria-pressed="false">N4</button>
           <button data-level="N3" aria-pressed="false">N3</button>
         </div>
-        <label class="kana-script-toggle" title="Words you type in kana turn into kanji (どようび → 土曜日)"><input type="checkbox" id="cs-opt-kanji" checked> Kanji</label>
+        <div class="lis-levels cs-kanji-mode" role="group" aria-label="Kanji">
+          <span class="lis-levels-label">Kanji</span>
+          <button data-kanji="off" aria-pressed="false" title="Leave what you type in kana">Off</button>
+          <button data-kanji="pick" aria-pressed="true" title="Show kanji spellings under the box: Space or a tap converts, like the Notepad">Pick</button>
+          <button data-kanji="auto" aria-pressed="false" title="Turn finished words into kanji by themselves (どようび は → 土曜日 は)">Auto</button>
+        </div>
         <label class="kana-script-toggle"><input type="checkbox" id="cs-opt-furigana" checked> Furigana</label>
       </div>
 
@@ -185,7 +190,8 @@
   </div>
 
   <script src="conversation-data.js?v=1"></script>
-  <script src="conversation.js?v=4"></script>
+  <script src="kanji-ime.js?v=2"></script>
+  <script src="conversation.js?v=5"></script>
   <script src="claude-feedback.js?v=1"></script>
   <script src="romaji.js?v=8"></script>
   <script src="pronounce.js?v=2"></script>
