@@ -44,7 +44,9 @@
   Conversation starters answers, calling the Claude API from the browser
   with the official SDK, vendored as one bundle in
   `vendor/anthropic-sdk.mjs` (version and build command at its top; loaded
-  only when needed). `test_claude_feedback.js` covers the request and reply.
+  only when needed). The reply streams, and the panel fills in as it
+  arrives (`partialJSON` reads the unfinished JSON). `test_claude_feedback.js`
+  covers the request, the streamed and the final reply.
 
 ## Generated pages
 

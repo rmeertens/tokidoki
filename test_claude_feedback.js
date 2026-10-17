@@ -47,6 +47,36 @@ throws(() => CF.readResponse(resp({ stop_reason: 'max_tokens' })), /cut off/, 'm
 throws(() => CF.readResponse(resp({ content: [{ type: 'text', text: '{"summary":"x"}' }] })), /incomplete/, 'missing fields');
 throws(() => CF.readResponse(resp({ content: [{ type: 'text', text: 'oops' }] })), /couldn’t be read/, 'not JSON');
 
+// ─── Reading the reply as it streams in ────────────────────────────────────
+const sample = Object.assign({}, result, {
+  summary: 'Nice "start" — 久しぶりに\nworks \\ well',
+  corrections: [{ original: '友達を会いました', fixed: '友達[ともだち]に会[あ]いました', why: 'Use に with 会う.' }],
+  natural: '土曜日[どようび]は久[ひさ]しぶりに友達[ともだち]に会[あ]いました。',
+});
+const full = JSON.stringify(sample);
+let prefixesOk = true, grows = true, prev = null;
+for (let k = 0; k <= full.length; k++) {
+  let v;
+  try { v = CF.partialJSON(full.slice(0, k)); } catch (e) { prefixesOk = false; console.log('  at', k, e.message); break; }
+  if (k > 0 && (typeof v !== 'object' || v === null)) { prefixesOk = false; break; }
+  // What's been shown never has to be taken back: every field only grows.
+  if (prev) Object.keys(prev).forEach(key => {
+    const a = JSON.stringify(prev[key]), b = JSON.stringify(v[key]);
+    if (typeof prev[key] === 'string' && !(v[key] || '').startsWith(prev[key])) grows = false;
+    if (b === undefined) grows = false;
+    void a;
+  });
+  prev = v;
+}
+ok(prefixesOk, 'partialJSON: every prefix of a reply reads as an object');
+ok(grows, 'partialJSON: fields only grow as more arrives');
+ok(JSON.stringify(CF.partialJSON(full)) === full, 'partialJSON: the whole reply reads exactly');
+ok(JSON.stringify(CF.partialJSON('{"summary":"Hel')) === '{"summary":"Hel"}', 'partialJSON: a string cut off mid-way');
+ok(JSON.stringify(CF.partialJSON('{"summary":"Hi","went_well":["a","b')) === '{"summary":"Hi","went_well":["a","b"]}', 'partialJSON: an array cut off mid-way');
+ok(JSON.stringify(CF.partialJSON('{"summary":"Hi","went_')) === '{"summary":"Hi"}', 'partialJSON: a key not finished yet is left out');
+ok(JSON.stringify(CF.partialJSON('{"summary":"a\\')) === '{"summary":"a"}' && JSON.stringify(CF.partialJSON('{"summary":"\\u30')) === '{"summary":""}', 'partialJSON: a half escape waits');
+ok(CF.partialJSON('') === undefined && CF.partialJSON('  ') === undefined, 'partialJSON: nothing yet');
+
 // ─── Errors ────────────────────────────────────────────────────────────────
 class APIError extends Error {}
 class AuthenticationError extends APIError {}

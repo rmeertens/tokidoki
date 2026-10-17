@@ -384,6 +384,7 @@
   let vocabLoading = null;
   let autoTimer = null;
   let asking = null;           // the answer key Claude is reviewing right now
+  let live = null;             // { key, result }: the feedback streaming in
   let askError = '';
   let noteTimer = null;
   let showEnglish = false;
@@ -476,31 +477,58 @@
       ${askError ? `<p class="cs-ai-error" role="alert">${esc(askError)}</p>` : ''}`);
   }
 
-  function renderFeedback() {
-    const box = $('cs-feedback');
-    const fb = store.feedback[answerKey(topic.id, settings.level)];
-    box.classList.toggle('hidden', !fb);
-    if (!fb) { box.innerHTML = ''; box.dataset.html = ''; return; }
-    const r = fb.result;
-    const stale = fb.for.trim() !== $('cs-answer').value.trim();
-    const html = `
+  // Feedback as it streams in (live) or as saved. Fields that haven't
+  // started yet are left out; while live, a cursor shows where Claude is
+  // writing and buttons wait until it's done.
+  function feedbackHtml(r, { live = false, stale = false } = {}) {
+    const keys = Object.keys(r);
+    const writing = live ? keys[keys.length - 1] : null;
+    const caret = k => (live && k === writing ? '<span class="cs-fb-caret" aria-hidden="true"></span>' : '');
+    // Mid-stream furigana can stop inside its brackets (友達[とも): leave that part out until it closes.
+    const ja = (k, m) => rubyHtml(live ? String(m).replace(/\[[^\]]*$/, '') : m) + caret(k);
+    const has = k => r[k] != null;
+    const fixes = Array.isArray(r.corrections) ? r.corrections : [];
+    const parts = [`
       <div class="cs-fb-head">
         <h3>✨ Claude’s feedback <span>${esc(settings.level)}</span></h3>
-        <button class="cs-fb-close" data-ai="dismiss" aria-label="Remove this feedback">✕</button>
-      </div>
-      ${stale ? '<p class="cs-fb-stale">This is about an earlier version of your answer. Ask again for feedback on what you have now.</p>' : ''}
-      <p class="cs-fb-summary">${esc(r.summary)}</p>
-      ${r.went_well.length ? `<ul class="cs-fb-good">${r.went_well.map(w => `<li>👍 ${esc(w)}</li>`).join('')}</ul>` : ''}
-      ${r.corrections.length ? `<h4>Corrections</h4><ol class="cs-fb-fixes">${r.corrections.map(c => `
-        <li><div class="cs-fb-fix" lang="ja"><s>${esc(c.original)}</s> <span aria-hidden="true">→</span> <b>${rubyHtml(c.fixed)}</b></div>
-          <div class="cs-fb-why">${esc(c.why)}</div></li>`).join('')}</ol>` : '<p class="cs-fb-none">No mistakes found. 🎉</p>'}
-      ${r.corrections.length ? `<h4>Your answer, corrected</h4>
-        <p class="cs-fb-ja" lang="ja">${rubyHtml(r.corrected)}</p>
-        <button class="btn-secondary cs-fb-use" data-ai="use">Use this version</button>` : ''}
-      <h4>A more natural version ${speakBtns(r.natural)}</h4>
-      <p class="cs-fb-ja" lang="ja">${rubyHtml(r.natural)}</p>
-      <p class="cs-fb-en">${esc(r.natural_en)}</p>
-      <p class="cs-fb-next">💡 <b>Try next:</b> ${esc(r.try_next)}</p>`;
+        ${live ? '<span class="cs-fb-live">writing…</span>' : '<button class="cs-fb-close" data-ai="dismiss" aria-label="Remove this feedback">✕</button>'}
+      </div>`];
+    if (stale) parts.push('<p class="cs-fb-stale">This is about an earlier version of your answer. Ask again for feedback on what you have now.</p>');
+    if (!keys.length) parts.push('<p class="cs-fb-thinking"><span class="account-spinner" aria-hidden="true"></span> Claude is reading your answer and thinking it over…</p>');
+    if (has('summary')) parts.push(`<p class="cs-fb-summary">${esc(r.summary)}${caret('summary')}</p>`);
+    if (Array.isArray(r.went_well) && r.went_well.length) {
+      parts.push(`<ul class="cs-fb-good">${r.went_well.map(w => `<li>👍 ${esc(w)}</li>`).join('')}${caret('went_well')}</ul>`);
+    }
+    if (fixes.length) {
+      parts.push(`<h4>Corrections</h4><ol class="cs-fb-fixes">${fixes.map(f => `
+        <li><div class="cs-fb-fix" lang="ja">${f.original != null ? `<s>${esc(f.original)}</s>` : ''}${f.fixed != null ? ` <span aria-hidden="true">→</span> <b>${ja('', f.fixed)}</b>` : ''}</div>
+          ${f.why != null ? `<div class="cs-fb-why">${esc(f.why)}</div>` : ''}</li>`).join('')}</ol>${caret('corrections')}`);
+    } else if (has('corrections') && (!live || has('corrected'))) {
+      parts.push('<p class="cs-fb-none">No mistakes found. 🎉</p>');
+    }
+    if (has('corrected') && fixes.length) {
+      parts.push(`<h4>Your answer, corrected</h4><p class="cs-fb-ja" lang="ja">${ja('corrected', r.corrected)}</p>`);
+      if (!live) parts.push('<button class="btn-secondary cs-fb-use" data-ai="use">Use this version</button>');
+    }
+    if (has('natural')) {
+      parts.push(`<h4>A more natural version ${live ? '' : speakBtns(r.natural)}</h4><p class="cs-fb-ja" lang="ja">${ja('natural', r.natural)}</p>`);
+    }
+    if (has('natural_en')) parts.push(`<p class="cs-fb-en">${esc(r.natural_en)}${caret('natural_en')}</p>`);
+    if (has('try_next')) parts.push(`<p class="cs-fb-next">💡 <b>Try next:</b> ${esc(r.try_next)}${caret('try_next')}</p>`);
+    return parts.join('');
+  }
+
+  function renderFeedback() {
+    const box = $('cs-feedback');
+    const key = answerKey(topic.id, settings.level);
+    const fb = store.feedback[key];
+    const streaming = live && live.key === key;
+    box.classList.toggle('hidden', !fb && !streaming);
+    box.classList.toggle('cs-fb-streaming', !!streaming);
+    if (!fb && !streaming) { box.innerHTML = ''; box.dataset.html = ''; return; }
+    const html = streaming
+      ? feedbackHtml(live.result, { live: true })
+      : feedbackHtml(fb.result, { stale: fb.for.trim() !== $('cs-answer').value.trim() });
     // Typing calls this on every key: rebuild only when it changes (the
     // "earlier version" note), or the panel would flicker.
     if (box.dataset.html !== html) { box.innerHTML = html; box.dataset.html = html; }
@@ -513,9 +541,19 @@
     const key = answerKey(t.id, level);
     const answer = $('cs-answer').value;
     const d = levelData(t, level);
+    const here = () => topic === t && settings.level === level;
     asking = key;
     askError = '';
+    live = { key, result: {} };
     renderAi();
+    renderFeedback();
+    $('cs-feedback').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    // Partial replies come in fast: draw at most once a frame.
+    let frame = 0;
+    const onPartial = soFar => {
+      live.result = soFar;
+      if (!frame) frame = requestAnimationFrame(() => { frame = 0; if (here() && live) renderFeedback(); });
+    };
     try {
       const result = await CF().feedback({
         question: plain(d.q.ja),
@@ -523,19 +561,21 @@
         level,
         hints: hintItems(d).map(h => plain(h.ja)),
         answer,
-      });
+      }, { onPartial });
       store.feedback[key] = { for: answer, result, t: Date.now() };
       save(STORE_KEY, store);
     } catch (err) {
       askError = err.message;
     }
+    cancelAnimationFrame(frame);
     asking = null;
-    if (topic === t && settings.level === level) {
+    live = null;
+    if (here()) {
       renderAi();
       renderFeedback();
-      if (!askError) $('cs-feedback').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
+
 
   function renderCount() {
     const n = charCount($('cs-answer').value);

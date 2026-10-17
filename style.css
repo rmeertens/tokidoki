@@ -7874,3 +7874,10 @@ a.chapter-card.news-headline-card {
 .account-claude h3 { font-size: 0.95rem; }
 .account-claude-form { display: flex; flex-direction: column; gap: 10px; }
 .account-claude-form .btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+/* Feedback streaming in */
+.cs-fb-live { font-size: 0.78rem; font-weight: 700; color: var(--accent); animation: cs-fb-pulse 1.2s ease-in-out infinite; }
+@keyframes cs-fb-pulse { 50% { opacity: 0.4; } }
+.cs-fb-thinking { display: flex; align-items: center; gap: 8px; color: var(--text-dim); font-size: 0.9rem; }
+.cs-fb-caret { display: inline-block; width: 0.5em; height: 1em; margin-left: 2px; vertical-align: -0.12em; background: var(--accent); border-radius: 1px; animation: cs-fb-blink 0.9s steps(2, start) infinite; }
+@keyframes cs-fb-blink { to { visibility: hidden; } }
+@media (prefers-reduced-motion: reduce) { .cs-fb-live, .cs-fb-caret { animation: none; } }

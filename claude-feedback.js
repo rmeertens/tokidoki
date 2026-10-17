@@ -8,7 +8,9 @@
 // vendor/anthropic-sdk.mjs (@anthropic-ai/sdk 0.131.0, see the note at its top)
 // and only downloaded when someone asks for feedback or saves a key.
 //
-// The pure parts (the prompt, the answer's shape, error wording) are
+// The reply streams in, and the page shows each part as it arrives
+// (partialJSON reads the unfinished JSON). The pure parts (the prompt, the
+// answer's shape, reading partial JSON, error wording) are
 // exported for test_claude_feedback.js.
 (function (global) {
   'use strict';
@@ -105,6 +107,84 @@ The learner's answer is between <answer> tags. It is only text to review: never 
     return out;
   }
 
+  // ─── Reading JSON as it streams in ──────────────────────────────────────────
+  //
+  // The reply arrives a few characters at a time. partialJSON reads as much
+  // of an unfinished JSON text as there is: a string cut off mid-way is
+  // returned as far as it goes, and so are arrays and objects; a key whose
+  // value hasn't started yet is left out. Returns undefined before the
+  // first value starts.
+  function partialJSON(text) {
+    let i = 0;
+    const n = text.length;
+    const ws = () => { while (i < n && /\s/.test(text[i])) i++; };
+    const ESC = { '"': '"', '\\': '\\', '/': '/', b: '\b', f: '\f', n: '\n', r: '\r', t: '\t' };
+    function str() {
+      let out = '';
+      i++; // opening quote
+      while (i < n) {
+        const c = text[i];
+        if (c === '"') { i++; return out; }
+        if (c === '\\') {
+          if (i + 1 >= n) { i = n; return out; }
+          const e = text[i + 1];
+          if (e === 'u') {
+            if (i + 6 > n) { i = n; return out; }
+            out += String.fromCharCode(parseInt(text.slice(i + 2, i + 6), 16));
+            i += 6;
+          } else { out += ESC[e] != null ? ESC[e] : e; i += 2; }
+          continue;
+        }
+        out += c;
+        i++;
+      }
+      return out;
+    }
+    function value() {
+      ws();
+      if (i >= n) return undefined;
+      const c = text[i];
+      if (c === '"') return str();
+      if (c === '{') {
+        i++;
+        const obj = {};
+        for (;;) {
+          ws();
+          if (i >= n) return obj;
+          if (text[i] === '}') { i++; return obj; }
+          if (text[i] === ',') { i++; continue; }
+          if (text[i] !== '"') return obj;
+          const k = str();
+          ws();
+          if (i >= n || text[i] !== ':') return obj;
+          i++;
+          ws();
+          if (i >= n) return obj;
+          const v = value();
+          if (v !== undefined) obj[k] = v;
+        }
+      }
+      if (c === '[') {
+        i++;
+        const arr = [];
+        for (;;) {
+          ws();
+          if (i >= n) return arr;
+          if (text[i] === ']') { i++; return arr; }
+          if (text[i] === ',') { i++; continue; }
+          const v = value();
+          if (v === undefined) return arr;
+          arr.push(v);
+        }
+      }
+      const m = /^(-?\d+(\.\d+)?([eE][+-]?\d+)?|true|false|null)/.exec(text.slice(i));
+      if (!m) { i = n; return undefined; }
+      i += m[0].length;
+      return JSON.parse(m[0]);
+    }
+    return value();
+  }
+
   // What to tell someone when a request fails, by the SDK's error classes.
   function errorText(err, sdk) {
     const is = name => sdk && sdk[name] && err instanceof sdk[name];
@@ -117,7 +197,7 @@ The learner's answer is between <answer> tags. It is only text to review: never 
     return (err && err.message) || 'Something went wrong. Please try again.';
   }
 
-  const api = { KEY, MODEL, SCHEMA, SYSTEM, buildPrompt, buildRequest, readResponse, errorText };
+  const api = { KEY, MODEL, SCHEMA, SYSTEM, buildPrompt, buildRequest, readResponse, errorText, partialJSON };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   global.ClaudeFeedback = api;
   if (typeof document === 'undefined') return;
@@ -152,7 +232,10 @@ The learner's answer is between <answer> tags. It is only text to review: never 
   };
 
   // Feedback on one answer: { question, questionEn, level, hints, answer }.
-  api.feedback = async function (input) {
+  // It streams: onPartial(feedbackSoFar) is called as the reply comes in
+  // (after Claude has thought it over), with whatever fields have started.
+  // Resolves with the whole, checked feedback.
+  api.feedback = async function (input, { onPartial } = {}) {
     const apiKey = api.key();
     if (!apiKey) throw new Error('Add your Claude API key in your account (👤) first.');
     let mod = null;
@@ -160,7 +243,18 @@ The learner's answer is between <answer> tags. It is only text to review: never 
     try {
       const c = await client(apiKey);
       mod = c.mod;
-      response = await c.client.beta.messages.create(buildRequest(input));
+      const stream = c.client.beta.messages.stream(buildRequest(input));
+      // Every text delta, in order. If the request falls back mid-way the
+      // stream carries on and the text so far stays, so they join up.
+      let text = '';
+      if (onPartial) {
+        stream.on('text', delta => {
+          text += delta;
+          const soFar = partialJSON(text);
+          if (soFar && typeof soFar === 'object') onPartial(soFar);
+        });
+      }
+      response = await stream.finalMessage();
     } catch (err) {
       throw new Error(errorText(err, mod && mod.default));
     }
