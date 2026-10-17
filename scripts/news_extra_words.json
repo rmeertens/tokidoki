@@ -3238,5 +3238,335 @@
     "ゆるし",
     "permission",
     "noun"
+  ],
+  "100億ドル": [
+    "ひゃくおくドル",
+    "10 billion dollars",
+    "number + counter"
+  ],
+  "13年ぶり": [
+    "じゅうさんねんぶり",
+    "for the first time in 13 years",
+    "expression"
+  ],
+  "2013年": [
+    "にせんじゅうさんねん",
+    "2013",
+    "number + counter"
+  ],
+  "2015年": [
+    "にせんじゅうごねん",
+    "2015",
+    "number + counter"
+  ],
+  "2023年": [
+    "にせんにじゅうさんねん",
+    "2023",
+    "number + counter"
+  ],
+  "30個": [
+    "さんじゅっこ",
+    "30 (items)",
+    "number + counter"
+  ],
+  "30号": [
+    "さんじゅうごう",
+    "No. 30",
+    "number + counter"
+  ],
+  "3年間": [
+    "さんねんかん",
+    "for three years",
+    "number + counter"
+  ],
+  "3時": [
+    "さんじ",
+    "3 o'clock",
+    "number + counter"
+  ],
+  "3時ごろ": [
+    "さんじごろ",
+    "around 3 o'clock",
+    "noun"
+  ],
+  "8年ぶり": [
+    "はちねんぶり",
+    "for the first time in eight years",
+    "expression"
+  ],
+  "チャンパー": [
+    "チャンパー",
+    "Champi (name of Typhoon No. 30)",
+    "noun (name)"
+  ],
+  "お供え": [
+    "おそなえ",
+    "an offering",
+    "noun"
+  ],
+  "さつき": [
+    "さつき",
+    "Satsuki (given name)",
+    "noun (name)"
+  ],
+  "はるか": [
+    "はるか",
+    "far away, far off",
+    "adverb"
+  ],
+  "ばらつき": [
+    "ばらつき",
+    "spread, variation",
+    "noun"
+  ],
+  "スワップ": [
+    "スワップ",
+    "swap",
+    "noun"
+  ],
+  "タイ": [
+    "タイ",
+    "Thailand",
+    "noun (name)"
+  ],
+  "ドル": [
+    "ドル",
+    "dollar",
+    "noun"
+  ],
+  "バンコク": [
+    "バンコク",
+    "Bangkok",
+    "noun (name)"
+  ],
+  "ヒョンイル": [
+    "ヒョンイル",
+    "Hyung-il (Korean given name)",
+    "noun (name)"
+  ],
+  "フィリピン": [
+    "フィリピン",
+    "the Philippines",
+    "noun (name)"
+  ],
+  "マリアナ": [
+    "マリアナ",
+    "Mariana",
+    "noun (name)"
+  ],
+  "マーシャル": [
+    "マーシャル",
+    "Marshall",
+    "noun (name)"
+  ],
+  "マーシャル諸島": [
+    "マーシャルしょとう",
+    "the Marshall Islands",
+    "noun (name)"
+  ],
+  "マリアナ諸島": [
+    "マリアナしょとう",
+    "the Mariana Islands",
+    "noun (name)"
+  ],
+  "トラック諸島": [
+    "トラックしょとう",
+    "the Chuuk (Truk) Islands",
+    "noun (name)"
+  ],
+  "一年": [
+    "いちねん",
+    "one year",
+    "noun"
+  ],
+  "三日間": [
+    "みっかかん",
+    "for three days",
+    "noun"
+  ],
+  "九段北": [
+    "くだんきた",
+    "Kudankita (district in Tokyo)",
+    "noun (name)"
+  ],
+  "仕組み": [
+    "しくみ",
+    "mechanism, structure",
+    "noun"
+  ],
+  "企画": [
+    "きかく",
+    "planning",
+    "noun"
+  ],
+  "会談": [
+    "かいだん",
+    "talks, a meeting",
+    "noun"
+  ],
+  "供物": [
+    "くもつ",
+    "an offering",
+    "noun"
+  ],
+  "共有": [
+    "きょうゆう",
+    "sharing",
+    "noun"
+  ],
+  "到達": [
+    "とうたつ",
+    "reaching, arrival",
+    "noun"
+  ],
+  "前半": [
+    "ぜんはん",
+    "the first half",
+    "noun"
+  ],
+  "助け合える": [
+    "たすけあえる",
+    "to be able to help each other",
+    "verb"
+  ],
+  "勢力": [
+    "せいりょく",
+    "strength, power, force",
+    "noun"
+  ],
+  "十九日": [
+    "じゅうくにち",
+    "the 19th (day of the month)",
+    "noun"
+  ],
+  "協定": [
+    "きょうてい",
+    "agreement, accord",
+    "noun"
+  ],
+  "参拝": [
+    "さんぱい",
+    "visiting a shrine to pray",
+    "noun"
+  ],
+  "合意": [
+    "ごうい",
+    "agreement, consent",
+    "noun"
+  ],
+  "合祀": [
+    "ごうし",
+    "enshrining together",
+    "noun"
+  ],
+  "向き": [
+    "むき",
+    "direction",
+    "noun"
+  ],
+  "外貨": [
+    "がいか",
+    "foreign currency",
+    "noun"
+  ],
+  "奉納": [
+    "ほうのう",
+    "dedicating (an offering to a shrine)",
+    "noun"
+  ],
+  "延長": [
+    "えんちょう",
+    "extension",
+    "noun"
+  ],
+  "戦犯": [
+    "せんぱん",
+    "war criminal",
+    "noun"
+  ],
+  "春季": [
+    "しゅんき",
+    "spring (season)",
+    "noun"
+  ],
+  "最新": [
+    "さいしん",
+    "the latest",
+    "noun"
+  ],
+  "流動": [
+    "りゅうどう",
+    "flowing, liquid",
+    "noun"
+  ],
+  "片山": [
+    "かたやま",
+    "Katayama (surname)",
+    "noun (name)"
+  ],
+  "狙い": [
+    "ねらい",
+    "aim, target",
+    "noun"
+  ],
+  "発生": [
+    "はっせい",
+    "occurrence, forming",
+    "noun"
+  ],
+  "秋季": [
+    "しゅうき",
+    "autumn (season)",
+    "noun"
+  ],
+  "第二次": [
+    "だいにじ",
+    "the second (round, war)",
+    "noun"
+  ],
+  "米ドル": [
+    "べいドル",
+    "US dollar",
+    "noun"
+  ],
+  "規模": [
+    "きぼ",
+    "scale, size",
+    "noun"
+  ],
+  "諸島": [
+    "しょとう",
+    "islands, archipelago",
+    "noun"
+  ],
+  "象徴": [
+    "しょうちょう",
+    "symbol",
+    "noun"
+  ],
+  "財務": [
+    "ざいむ",
+    "finance, financial affairs",
+    "noun"
+  ],
+  "財政": [
+    "ざいせい",
+    "public finance",
+    "noun"
+  ],
+  "通例": [
+    "つうれい",
+    "custom, usual practice",
+    "noun"
+  ],
+  "靖国神社": [
+    "やすくにじんじゃ",
+    "Yasukuni Shrine",
+    "noun (name)"
+  ],
+  "30": [
+    "さんじゅう",
+    "30",
+    "number"
   ]
 }

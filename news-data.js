@@ -23,6 +23,143 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-10-17-typhoon-30',
+      date: '2026-10-17',
+      emoji: '🌀',
+      titleEn: 'Typhoon No. 30 forms — the first time in 13 years the count has reached 30 in a year',
+      sources: [
+        { name: 'Weathernews', url: 'https://weathernews.jp/news/202610/150201/' },
+        { name: 'Weathernews (forecast)', url: 'https://weathernews.jp/news/202610/160021/' },
+      ],
+      levels: {
+        N5: {
+          title: '台風[たいふう]30号[ごう]ができました',
+          lines: [
+            ['十五日[じゅうごにち]に、台風[たいふう]30号[ごう]ができました。', 'On the 15th, Typhoon No. 30 formed.', '台風 are numbered in the order they form each year.'],
+            ['台風[たいふう]の名前[なまえ]は「チャンパー」です。', 'The typhoon\'s name is "Champi".', 'Typhoons also get names from a list of 140 names offered by countries in the region.'],
+            ['一年[いちねん]に30個[こ]できるのは、13年[ねん]ぶりです。', 'It is the first time in 13 years that 30 have formed in one year.', '13年ぶり "for the first time in 13 years". The last year with 30 was 2013.'],
+            ['台風[たいふう]は、日本[にっぽん]のはるか南[みなみ]の海[うみ]を西[にし]へ進[すす]んでいます。', 'The typhoon is moving west over the sea far south of Japan.'],
+            ['来週[らいしゅう]の前半[ぜんはん]に、とても強[つよ]い台風[たいふう]になりそうです。', 'It looks likely to become a very strong typhoon in the first half of next week.'],
+            ['このあとどこへ行[い]くか、まだわかりません。天気[てんき]の情報[じょうほう]を見[み]てください。', 'It is not yet clear where it will go next. Please check the weather information.'],
+          ],
+        },
+        N4: {
+          title: '台風[たいふう]30号[ごう]が発生[はっせい]、30号[ごう]は13年[ねん]ぶり',
+          lines: [
+            ['十五日[じゅうごにち]の午後[ごご]3時[じ]ごろ、マーシャル諸島[しょとう]の近[ちか]くで台風[たいふう]30号[ごう]「チャンパー」が発生[はっせい]しました。', 'Around 3 p.m. on the 15th, Typhoon No. 30, "Champi", formed near the Marshall Islands.', 'The Marshall Islands are in the Pacific, far to the southeast of Japan.'],
+            ['一年[いちねん]の台風[たいふう]の数[かず]が30に届[とど]くのは、2013年[ねん]以来[いらい]13年[ねん]ぶりです。', 'It is the first time since 2013, 13 years, that the yearly number of typhoons has reached 30.', '以来 "since". 届く "to reach".'],
+            ['台風[たいふう]は今[いま]、西[にし]へ進[すす]んでいます。', 'The typhoon is now moving west.'],
+            ['海[うみ]の水[みず]の温度[おんど]が高[たか]いため、台風[たいふう]は強[つよ]くなりやすく、来週[らいしゅう]の前半[ぜんはん]には「非常[ひじょう]に強[つよ]い」勢力[せいりょく]になる見込[みこ]みです。', 'Because the sea water is warm, the typhoon strengthens easily, and it is expected to become "very strong" in the first half of next week.', '非常に強い is a rank in the Japan Meteorological Agency\'s scale of typhoon strength. 見込み "expectation, forecast".'],
+            ['そのあとの進路[しんろ]は、予想[よそう]の差[さ]が大[おお]きいです。', 'After that, the forecasts for its path differ a lot.', '進路 "path, course".'],
+            ['進路[しんろ]によっては、日本[にっぽん]に影響[えいきょう]が出[で]るかもしれません。', 'Depending on its path, it may affect Japan.'],
+            ['最新[さいしん]の台風[たいふう]情報[じょうほう]に気[き]をつけてください。', 'Please keep an eye on the latest typhoon information.'],
+          ],
+        },
+        N3: {
+          title: '台風[たいふう]30号[ごう]が発生[はっせい]　30号[ごう]到達[とうたつ]は13年[ねん]ぶり',
+          lines: [
+            ['十五日[じゅうごにち]午後[ごご]3時[じ]、マーシャル諸島[しょとう]付近[ふきん]で台風[たいふう]30号[ごう]（アジア名[めい]チャンパー）が発生[はっせい]した。', 'At 3 p.m. on the 15th, Typhoon No. 30 (Asian name Champi) formed near the Marshall Islands.', 'The "Asian name" is the name from the list shared by the countries in the region.'],
+            ['年間[ねんかん]の発生[はっせい]数[すう]が30に達[たっ]するのは、2013年[ねん]以来[いらい]13年[ねん]ぶり。', 'The yearly count reaching 30 is the first time in 13 years, since 2013.', '年間 "per year, over the year". 達する "to reach".'],
+            ['台風[たいふう]は西[にし]へ進[すす]んでおり、トラック諸島[しょとう]やマリアナ諸島[しょとう]を通[とお]って、フィリピンの東[ひがし]へ向[む]かうとみられる。', 'The typhoon is moving west and is expected to head toward the east of the Philippines via the Chuuk and Mariana Islands.', 'とみられる "is thought to / is expected to", a news expression.'],
+            ['海面[かいめん]の水温[すいおん]が高[たか]く、発達[はったつ]しやすい環境[かんきょう]を進[すす]むため、来週[らいしゅう]前半[ぜんはん]には「非常[ひじょう]に強[つよ]い」勢力[せいりょく]になる見通[みとお]しだ。', 'Because it is moving through an environment of warm sea-surface temperatures where it develops easily, it is forecast to become "very strong" in the first half of next week.', '見通し "outlook, forecast".'],
+            ['ただ、その先[さき]の進路[しんろ]は予想[よそう]のばらつきが大[おお]きく、北寄[きたよ]りに向[む]きを変[か]える可能性[かのうせい]もある。', 'However, forecasts for its later path vary widely, and there is also a possibility that it will turn northward.', '〜寄り "leaning toward ~". ばらつき "spread, variation".'],
+            ['進路[しんろ]次第[しだい]では、日本[にっぽん]に影響[えいきょう]が及[およ]ぶおそれもあり、今後[こんご]の台風[たいふう]情報[じょうほう]に注意[ちゅうい]が必要[ひつよう]だ。', 'Depending on its path, there is a risk that Japan will be affected, so attention to future typhoon information is needed.', '〜次第 "depending on ~". おそれ "a risk, a fear".'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-17-currency-swap',
+      date: '2026-10-17',
+      emoji: '🤝',
+      titleEn: 'Japan and South Korea agree to extend their $10 billion currency swap by three years',
+      sources: [
+        { name: 'The Korea Times', url: 'https://www.koreatimes.co.kr/economy/20261015/seoul-tokyo-agree-to-extend-10-bil-currency-swap-deal-by-another-3-years' },
+        { name: 'The Korea Herald', url: 'https://biz.heraldcorp.com/article/10904115' },
+        { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/latest-news/' },
+      ],
+      levels: {
+        N5: {
+          title: '日本[にっぽん]と韓国[かんこく]が、お金[かね]の約束[やくそく]を続[つづ]けます',
+          lines: [
+            ['日本[にっぽん]と韓国[かんこく]は、お金[かね]の約束[やくそく]を、あと3年[ねん]続[つづ]けることにしました。', 'Japan and South Korea decided to continue a money agreement for three more years.', 'This agreement is called a "currency swap": each country can borrow the other\'s money (here, US dollars) if it is short.'],
+            ['十五日[じゅうごにち]に、タイのバンコクで、二[ふた]つの国[くに]のお金[かね]の大臣[だいじん]が話[はな]しました。', 'On the 15th, the two countries\' finance ministers talked in Bangkok, Thailand.', 'The ministers were in Bangkok for the IMF and World Bank meetings.'],
+            ['金額[きんがく]は、100億[おく]ドルのままです。', 'The amount stays at 10 billion dollars.'],
+            ['約束[やくそく]は、今年[ことし]の11月[がつ]の終[お]わりまででした。', 'The agreement was to last until the end of this year\'s November.'],
+            ['これから、2029年[ねん]の11月[がつ]まで続[つづ]きます。', 'Now it will continue until November 2029.'],
+            ['二[ふた]つの国[くに]は、お金[かね]の足[た]りない時[とき]に助[たす]け合[あ]えます。', 'The two countries can help each other when money runs short.'],
+          ],
+        },
+        N4: {
+          title: '日本[にっぽん]と韓国[かんこく]、100億[おく]ドルの通貨[つうか]スワップを3年[ねん]延長[えんちょう]',
+          lines: [
+            ['日本[にっぽん]と韓国[かんこく]は、100億[おく]ドルの通貨[つうか]スワップを3年[ねん]延長[えんちょう]することで合意[ごうい]しました。', 'Japan and South Korea agreed to extend their 10-billion-dollar currency swap by three years.', '通貨スワップ: an agreement that lets two countries exchange currencies in an emergency.'],
+            ['十五日[じゅうごにち]、タイのバンコクで、片山[かたやま]財務[ざいむ]大臣[だいじん]と韓国[かんこく]の副首相[ふくしゅしょう]が会[あ]って決[き]めました。', 'On the 15th, Finance Minister Katayama and South Korea\'s deputy prime minister met in Bangkok and decided it.', 'The Korean side was Lee Hyung-il, deputy prime minister and minister of finance.'],
+            ['もとの期限[きげん]は、今年[ことし]の11月[がつ]の終[お]わりでした。', 'The original deadline was the end of this November.', '期限 "deadline, time limit".'],
+            ['新[あたら]しい期限[きげん]は、2029年[ねん]の11月[がつ]で、金額[きんがく]は変[か]わりません。', 'The new deadline is November 2029, and the amount does not change.'],
+            ['この通貨[つうか]スワップは、2023年[ねん]に、8年[ねん]ぶりに再開[さいかい]されたものです。', 'This currency swap was restarted in 2023 after eight years.', 'The earlier swap had ended in 2015 when relations between the countries were poor.'],
+            ['アメリカのドルだけを使[つか]います。', 'It uses only US dollars.'],
+            ['二[ふた]つの国[くに]は、外国[がいこく]のお金[かね]は十分[じゅうぶん]あると考[かんが]えていて、このスワップは協力[きょうりょく]のしるしだと話[はな]しています。', 'The two countries think they have enough foreign currency, and say the swap is a sign of cooperation.', 'しるし "a sign, a symbol".'],
+          ],
+        },
+        N3: {
+          title: '日韓[にっかん]通貨[つうか]スワップ、3年間[ねんかん]延長[えんちょう]で合意[ごうい]　規模[きぼ]は100億[おく]ドルのまま',
+          lines: [
+            ['日本[にっぽん]と韓国[かんこく]は十五日[じゅうごにち]、タイのバンコクで財務相[ざいむしょう]会談[かいだん]を開[ひら]き、100億[おく]ドルの通貨[つうか]スワップ協定[きょうてい]を3年間[ねんかん]延長[えんちょう]することで合意[ごうい]した。', 'Japan and South Korea held a finance ministers\' meeting in Bangkok, Thailand, on the 15th and agreed to extend their 10-billion-dollar currency swap agreement by three years.', '財務相会談 "a finance ministers\' meeting". It took place on the sidelines of the IMF and World Bank meetings.'],
+            ['会談[かいだん]したのは、片山[かたやま]さつき財務相[ざいむしょう]と、韓国[かんこく]の李[イ]・ヒョンイル副首相[ふくしゅしょう]兼[けん]企画[きかく]財政相[ざいせいしょう]である。', 'The ministers who met were Finance Minister Satsuki Katayama and South Korea\'s Deputy Prime Minister and Minister of Economy and Finance, Lee Hyung-il.', '兼 "concurrently, doubling as".'],
+            ['協定[きょうてい]は今年[ことし]11月[がつ]末[まつ]に期限[きげん]を迎[むか]える予定[よてい]だったが、2029年[ねん]11月[がつ]まで延[の]びる。', 'The agreement was due to expire at the end of this November, but it will now run until November 2029.', '期限を迎える "to reach the deadline, expire".'],
+            ['規模[きぼ]は変[か]わらず、米[べい]ドルだけを使[つか]う仕組[しく]みも維持[いじ]される。', 'The size does not change, and the arrangement of using only US dollars is also maintained.', '仕組み "mechanism, structure".'],
+            ['両国[りょうこく]は2023年[ねん]12月[がつ]に、2015年[ねん]に終[お]わって以来[いらい]8年[ねん]ぶりに通貨[つうか]スワップを再開[さいかい]していた。', 'In December 2023 the two countries had restarted the currency swap for the first time in eight years since it ended in 2015.'],
+            ['両国[りょうこく]の当局[とうきょく]は、外貨[がいか]の流動性[りゅうどうせい]は十分[じゅうぶん]だとの認識[にんしき]を共有[きょうゆう]し、スワップは金融[きんゆう]協力[きょうりょく]の象徴[しょうちょう]だとしている。', 'Authorities of both countries share the understanding that foreign-currency liquidity is sufficient, and say the swap is a symbol of financial cooperation.', '流動性 "liquidity" (how easily money can be moved or exchanged). 象徴 "symbol".'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-17-yasukuni-offering',
+      date: '2026-10-17',
+      emoji: '⛩️',
+      titleEn: 'Prime Minister Takaichi sends a ritual offering to Yasukuni Shrine for its autumn festival but is expected not to visit',
+      sources: [
+        { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/10/17/japan/politics/takaichi-yasukuni-shrine-offering/' },
+        { name: 'Sakigake (Kyodo), spring festival', url: 'https://www.sakigake.jp/news/article/20260421CO0015/' },
+      ],
+      levels: {
+        N5: {
+          title: '高市[たかいち]首相[しゅしょう]が、靖国[やすくに]神社[じんじゃ]にお供[そな]えをしました',
+          lines: [
+            ['十七日[じゅうしちにち]は、東京[とうきょう]の靖国[やすくに]神社[じんじゃ]の秋[あき]のお祭[まつ]りの、はじめの日[ひ]です。', 'The 17th is the first day of the autumn festival at Yasukuni Shrine in Tokyo.', 'Yasukuni Shrine honors people who died in wars. The festival lasts three days, through the 19th.'],
+            ['高市[たかいち]早苗[さなえ]首相[しゅしょう]は、神社[じんじゃ]に木[き]の枝[えだ]の「真榊[まさかき]」をおくりました。', 'Prime Minister Sanae Takaichi sent an offering of a "masakaki" tree branch to the shrine.', '真榊 is a branch of the sacred sakaki tree, offered to the gods. Prime ministers have traditionally sent one at festival time.'],
+            ['でも、首相[しゅしょう]は、お祭[まつ]りの間[あいだ]に神社[じんじゃ]へ行[い]かないと思[おも]われます。', 'But the prime minister is thought not to go to the shrine during the festival.'],
+            ['春[はる]のお祭[まつ]りの時[とき]も、首相[しゅしょう]は同[おな]じようにしました。', 'In the spring festival too, the prime minister did the same.'],
+            ['首相[しゅしょう]が神社[じんじゃ]へ行[い]くと、中国[ちゅうごく]や韓国[かんこく]が怒[おこ]ることがあります。', 'When a prime minister goes to the shrine, China and South Korea sometimes get angry.'],
+          ],
+        },
+        N4: {
+          title: '高市[たかいち]首相[しゅしょう]、靖国[やすくに]神社[じんじゃ]に真榊[まさかき]を奉納[ほうのう]、参拝[さんぱい]は見送[みおく]る見通[みとお]し',
+          lines: [
+            ['東京[とうきょう]の靖国[やすくに]神社[じんじゃ]で、十七日[じゅうしちにち]から三日間[みっかかん]、秋[あき]の例大祭[れいたいさい]が行[おこな]われます。', 'The autumn grand festival is held at Yasukuni Shrine in Tokyo for three days from the 17th.', '例大祭 "grand festival", held every spring and autumn.'],
+            ['高市[たかいち]早苗[さなえ]首相[しゅしょう]は、初日[しょにち]の十七日[じゅうしちにち]に、「真榊[まさかき]」という木[き]の枝[えだ]を神社[じんじゃ]に奉納[ほうのう]しました。', 'On the first day, the 17th, Prime Minister Sanae Takaichi presented a tree branch called a "masakaki" to the shrine.', '奉納 "to dedicate (an offering to a shrine)".'],
+            ['真榊[まさかき]は、これまでの首相[しゅしょう]も例大祭[れいたいさい]のたびに送[おく]ってきました。', 'Previous prime ministers also sent a masakaki at each festival.'],
+            ['首相[しゅしょう]は、お祭[まつ]りの間[あいだ]、参拝[さんぱい]はしない見通[みとお]しです。', 'The prime minister is expected not to visit the shrine during the festival.', '参拝 "to visit and pray at a shrine".'],
+            ['今年[ことし]の春[はる]の例大祭[れいたいさい]でも、首相[しゅしょう]は真榊[まさかき]を奉納[ほうのう]して、参拝[さんぱい]は見送[みおく]りました。', 'At this spring\'s festival too, the prime minister presented a masakaki and held off on a visit.', '見送る "to hold off, to give up for now".'],
+            ['首相[しゅしょう]の参拝[さんぱい]には、中国[ちゅうごく]や韓国[かんこく]が強[つよ]く反対[はんたい]することが多[おお]いです。', 'China and South Korea often strongly oppose a prime minister\'s visit.', 'Many people in these countries see the shrine as a symbol of past Japanese military action.'],
+          ],
+        },
+        N3: {
+          title: '高市首相[たかいちしゅしょう]、靖国神社[やすくにじんじゃ]に真榊[まさかき]を奉納[ほうのう]　秋季[しゅうき]例大祭[れいたいさい]、参拝[さんぱい]は見送[みおく]りへ',
+          lines: [
+            ['高市[たかいち]早苗[さなえ]首相[しゅしょう]は十七日[じゅうしちにち]、東京[とうきょう]・九段北[くだんきた]の靖国神社[やすくにじんじゃ]の秋季[しゅうき]例大祭[れいたいさい]に合[あ]わせて、「内閣[ないかく]総理[そうり]大臣[だいじん]」名[めい]で供物[くもつ]の「真榊[まさかき]」を奉納[ほうのう]した。', 'On the 17th, Prime Minister Sanae Takaichi presented a masakaki offering in the name of "Prime Minister" to mark the autumn grand festival at Yasukuni Shrine in Kudankita, Tokyo.', '〜に合わせて "to coincide with ~, timed to ~". 供物 "an offering".'],
+            ['例大祭[れいたいさい]は十七日[じゅうしちにち]から十九日[じゅうくにち]までの三日間[みっかかん]で、首相[しゅしょう]は期間[きかん]中[ちゅう]の参拝[さんぱい]を見送[みおく]るとみられる。', 'The grand festival lasts three days, from the 17th to the 19th, and the prime minister is expected to hold off on a visit during that period.'],
+            ['歴代[れきだい]の首相[しゅしょう]は、例大祭[れいたいさい]の際[さい]に真榊[まさかき]を奉納[ほうのう]するのが通例[つうれい]となっている。', 'It has become customary for successive prime ministers to present a masakaki at the grand festivals.', '通例 "custom, usual practice". 歴代 "successive, all through history".'],
+            ['高市[たかいち]首相[しゅしょう]は今年[ことし]四月[しがつ]の春季[しゅんき]例大祭[れいたいさい]でも、真榊[まさかき]を奉納[ほうのう]した一方[いっぽう]、参拝[さんぱい]はしなかった。', 'At this April\'s spring grand festival as well, Prime Minister Takaichi presented a masakaki but did not visit.', '〜一方 "while, on the other hand".'],
+            ['靖国神社[やすくにじんじゃ]には、第二次[だいにじ]世界[せかい]大戦[たいせん]のA級[きゅう]戦犯[せんぱん]も合[ごう]祀[し]されており、首相[しゅしょう]の参拝[さんぱい]は中国[ちゅうごく]や韓国[かんこく]の反発[はんぱつ]を招[まね]いてきた。', 'Class-A war criminals of the Second World War are also enshrined at Yasukuni, and prime ministerial visits have drawn backlash from China and South Korea.', '合祀 "enshrinement together with others". 反発を招く "to provoke backlash".'],
+            ['首相[しゅしょう]の参拝[さんぱい]見送[みおく]りは、外交[がいこう]問題[もんだい]になるのを避[さ]ける狙[ねら]いがあるとみられている。', 'The prime minister\'s decision to hold off on a visit is thought to aim at avoiding a diplomatic problem.', '狙い "aim, intention".'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-10-16-nikkei-plunge',
       date: '2026-10-16',
       emoji: '📉',
