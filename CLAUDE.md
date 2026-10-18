@@ -79,6 +79,16 @@
   verb move; nothing moves into or out of a clause). `test_sentence_orders.js`
   lists what must and mustn't be accepted.
 
+- Conversation starters spot the hints an answer uses by meaning, not by
+  spelling: the answer is split into words, each taken back to its
+  dictionary form by `jp-deinflect.js` (泳いで → 泳ぐ), and compared with
+  each hint's dictionary forms in `conversation-words.js`, built by
+  `node scripts/build_conversation_words.mjs` (kuromoji, as above) from
+  `conversation-data.js`. Re-run it after changing a question or hint;
+  `test_conversation.js` fails if it's stale, and holds typical learner
+  answers with the hints each must and mustn't unlock — add one when a
+  sentence unlocks the wrong thing.
+
 - The Vocab Quiz's topic sets (`vocab-groups.js`) are built by
   `node scripts/build_vocab_groups.mjs` (kuromoji, as above) from
   `vocabulary-data.js`: part of speech from kuromoji, topic from keywords in

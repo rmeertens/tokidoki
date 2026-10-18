@@ -70,6 +70,7 @@
     const d = topic[level] || {};
     const q = d.q || topic.q;
     return {
+      key: topic.id + ':' + level,
       q: { ja: q[0], en: q[1] },
       words: (d.words || []).map(parseHint),
       verbs: (d.verbs || []).map(parseHint),
@@ -99,7 +100,14 @@
 
   // Every unlockable hint of a level, in order, with a stable id.
   function hintItems(d) {
-    return STEPS.flatMap(s => d[s.key].map((h, i) => Object.assign({ id: s.key + '-' + i, step: s.key }, h)));
+    const lemmas = (global.CONVERSATION_WORDS || {}).hints || {};
+    return STEPS.flatMap(s => d[s.key].map((h, i) => {
+      const id = s.key + '-' + i;
+      const item = Object.assign({ id, step: s.key }, h);
+      const l = d.key && lemmas[d.key + ':' + id];
+      if (l) item.lemmas = l;
+      return item;
+    }));
   }
 
   // ─── Spotting hints in your answer ─────────────────────────────────────────
@@ -305,6 +313,127 @@
     return true;
   }
 
+  // ─── Words in your answer ──────────────────────────────────────────────────
+  //
+  // Word and verb hints unlock by meaning, not by spelling: the answer is
+  // split into words, each word is taken back to its dictionary form
+  // (jp-deinflect.js: 泳いで → 泳ぐ, 明るくて → 明るい, たべません → たべる),
+  // and a hint is used when its dictionary forms (worked out at build time,
+  // conversation-words.js) appear in order — in kanji or in kana.
+  //
+  // The split picks the fewest, longest known words (the page's words, the
+  // JLPT list once loaded, particles), so 日本 isn't 日 + 本 and 面白かった
+  // isn't 面白 + かった (買った). Grammar hints are patterns (matchForms).
+
+  const FUNCTION_WORDS = ('は が を に で と も の へ や か ね よ な わ ぞ さ から まで より だけ しか ので のに けど けれど けれども でも って など ごろ くらい ぐらい ずつ ほど ばかり とか し '
+    + 'だ です でした でしょう だった じゃ では ではない じゃない '
+    + 'とても よく もう まだ ちょっと たくさん いつも ときどき すこし ぜんぜん あまり いっしょ みんな わたし ぼく これ それ あれ どれ この その あの どの ここ そこ あそこ どこ なに なん だれ いつ どう どうして なぜ はい いいえ そして それから だから じゃあ そう こう ああ').split(' ');
+  // Verbs every answer leans on, known even before the JLPT list has loaded.
+  const CORE_WORDS = [['いる', 'いる'], ['ある', 'ある'], ['する', 'する'], ['なる', 'なる'], ['来る', 'くる'], ['行く', 'いく'],
+    ['できる', 'できる'], ['言う', 'いう'], ['思う', 'おもう'], ['見る', 'みる'], ['いい', 'いい'], ['好き', 'すき']];
+  const deinflectWord = w => (global.JpDeinflect ? global.JpDeinflect.deinflect(w) : [{ base: w, type: '' }]);
+
+  let lexCache = null;
+  // form → entries { base, kana }: dictionary forms and their readings.
+  function lexicon() {
+    const vocab = global.VOCAB_DATA ? ['n5', 'n4', 'n3'].flatMap(l => global.VOCAB_DATA[l] || []) : [];
+    const words = (global.CONVERSATION_WORDS || {}).words || [];
+    const sig = words.length + ':' + vocab.length;
+    if (lexCache && lexCache.sig === sig) return lexCache.map;
+    const map = new Map();
+    const add = (base, kana) => {
+      if (!base) return;
+      kana = kana || base;
+      [base, kana].forEach(k => {
+        if (!map.has(k)) map.set(k, []);
+        const list = map.get(k);
+        if (!list.some(e => e.base === base && e.kana === kana)) list.push({ base, kana });
+      });
+    };
+    CORE_WORDS.forEach(([b, k]) => add(b, k));
+    words.forEach(([b, k]) => add(b, k));
+    Object.values((global.CONVERSATION_WORDS || {}).hints || {}).forEach(ls => ls.forEach(([b, k]) => add(b, k)));
+    vocab.forEach(w => { if (w.kanji && w.kana) add(w.kanji.replace(/[〜~]/g, ''), w.kana.replace(/[〜~]/g, '')); });
+    lexCache = { sig, map };
+    return map;
+  }
+
+  const VERB_END = /[うくぐすつぬぶむる]$/;
+  const typeFits = (type, base) => !type || (type === 'adj' ? /い$/.test(base) : VERB_END.test(base));
+  const RUN = /^([ァ-ヺー]+|[a-zA-Z0-9０-９]+|[一二三四五六七八九十百千万〇]+)/;
+
+  // Splits text into words: [{ surface, from, entries, known }]. Spaces and
+  // punctuation always end a word; `from` counts characters without spaces.
+  function segment(text, lex = lexicon()) {
+    const tokens = [];
+    let offset = 0;
+    String(text || '').split(/(\s+|[、。,.!?！？「」（）()…・]+)/).forEach(chunk => {
+      if (!chunk || /^\s+$/.test(chunk)) return;
+      if (/^[、。,.!?！？「」（）()…・]+$/.test(chunk)) { offset += chunk.length; return; }
+      const n = chunk.length;
+      // best[i]: the cheapest split of chunk[0, i) — a known word costs 1
+      // (a one-kana word 1.6), an unknown character 3.
+      const best = new Array(n + 1).fill(null);
+      best[0] = { cost: 0 };
+      for (let i = 0; i < n; i++) {
+        if (!best[i]) continue;
+        const edge = (len, cost, entries) => {
+          const c = best[i].cost + cost;
+          if (!best[i + len] || c < best[i + len].cost) best[i + len] = { cost: c, from: i, len, entries };
+        };
+        const run = RUN.exec(chunk.slice(i));
+        if (run) edge(run[0].length, 1, [{ base: run[0], kana: run[0] }]);
+        for (let len = 1; len <= Math.min(10, n - i); len++) {
+          const w = chunk.substr(i, len);
+          // A particle and a word can share a spelling (し: "and" or する's stem): keep both.
+          const fn = FUNCTION_WORDS.includes(w);
+          const entries = fn ? [{ base: w, kana: w, fn: true }] : [];
+          deinflectWord(w).forEach(c => (lex.get(c.base) || []).forEach(e => {
+            if (typeFits(c.type, e.base) && !entries.some(x => x.base === e.base && x.kana === e.kana && x.type === c.type)) entries.push(Object.assign({ type: c.type }, e));
+          }));
+          // A one-kana particle costs a touch more, so しか|いません beats し|かいません.
+          if (entries.length) edge(len, fn ? (len === 1 ? 1.05 : 1) : len === 1 && /[ぁ-ゖ]/.test(w) ? 1.6 : 1, entries);
+        }
+        edge(1, 3, null);
+      }
+      const parts = [];
+      for (let i = n; i > 0; i = best[i].from) parts.unshift(best[i]);
+      parts.forEach(p => {
+        tokens.push({ surface: chunk.substr(p.from, p.len), from: offset + p.from, entries: p.entries || [], known: !!p.entries });
+      });
+      offset += n;
+    });
+    return tokens;
+  }
+
+  // Whether the words use a hint's dictionary forms, in order (each within
+  // a few words of the last: 背が高い, 年をとった).
+  function usesLemmas(tokens, lemmas) {
+    // A word fits a dictionary form if it is it: written in kanji, the same
+    // kanji (済ませて isn't 住む; 留学する begins with 留学, so counts);
+    // written in kana, the same reading. And the same kind of word, so the
+    // verb はる (はないです) isn't the noun 春.
+    const kindFits = (kind, type) => !kind || !type || (kind === 'v' ? /^v/.test(type) : kind === 'a' ? type === 'adj' : false);
+    const fits = (t, [base, kana, kind]) => {
+      if (t.surface === base) return true;
+      const inKanji = KANJI_CHAR.test(t.surface);
+      return t.entries.some(e => kindFits(kind, e.type) && (inKanji
+        ? e.base === base || (KANJI_CHAR.test(base) && Array.from(base).length >= 2 && e.base.startsWith(base))
+        : !!kana && e.kana === kana));
+    };
+    // A する-verb hint (料理します) counts for its noun (料理を作ります) — a
+    // noun of two kanji or more, so 気にする isn't just 気.
+    if (lemmas.length > 1 && lemmas[lemmas.length - 1][0] === 'する' && Array.from(lemmas[lemmas.length - 2][0]).length >= 2) lemmas = lemmas.slice(0, -1);
+    const from = (k, start) => {
+      if (k === lemmas.length) return true;
+      for (let j = start; j < tokens.length && (k === 0 || j <= start + 3); j++) {
+        if (fits(tokens[j], lemmas[k]) && from(k + 1, j + 1)) return true;
+      }
+      return false;
+    };
+    return from(0, 0);
+  }
+
   // The ids of the hints (from hintItems) your answer uses.
   function usedHints(answer, items) {
     // Spaces you type mark where words start, so they're kept in one version.
@@ -312,8 +441,34 @@
     const a = spaced.replace(/ /g, '');
     if (!a) return [];
     const bare = a.replace(PUNCT, '');
-    return items.filter(h => matchForms(h, h.step).some(f => hasForm(a, f) || hasForm(bare, f) || hasForm(spaced, f))).map(h => h.id);
+    const tokens = segment(spaced);
+    // Where words start, for patterns that begin with a kanji (〜方 isn't in 夕方).
+    const starts = new Set(tokens.map(t => t.from));
+    const startsAt = (f, text) => {
+      const first = f[0];
+      if (!KANJI_CHAR.test(first[0])) return true;
+      for (let i = text.indexOf(first); i >= 0; i = text.indexOf(first, i + 1)) if (starts.has(i)) return true;
+      return false;
+    };
+    return items.filter(h => {
+      if (h.lemmas && h.step !== 'grammar' && h.step !== 'start') {
+        const whole = plain(h.ja).replace(/[〜~]/g, '');
+        // The hint written whole (掃除機 as one word) always counts. Its
+        // dictionary forms count when they hold every kanji of it — not 人
+        // alone for 一人で, or 度 for 一度 (the number isn't a form).
+        const kind = h.lemmas.length === 1 ? h.lemmas[0][2] : undefined;
+        if (usesLemmas(tokens, [[whole, kana(h.ja).replace(/[〜~]/g, ''), kind]])) return true;
+        const inForms = h.lemmas.map(l => l[0]).join('');
+        // In kana (そのために), most of it: not just その.
+        const covered = KANJI_CHAR.test(whole)
+          ? [...whole].every(c => !KANJI_CHAR.test(c) || inForms.includes(c))
+          : Array.from(inForms).length * 5 >= Array.from(whole).length * 3;
+        return covered && usesLemmas(tokens, h.lemmas);
+      }
+      return matchForms(h, h.step).some(f => (hasForm(a, f) && startsAt(f, a)) || hasForm(bare, f) && h.step !== 'grammar' || hasForm(spaced, f));
+    }).map(h => h.id);
   }
+
 
   // ─── Writing in kanji ──────────────────────────────────────────────────────
   //
@@ -482,7 +637,12 @@
     return { text: out, caret, changed };
   }
 
-  const api = { pieces, plain, kana, rubyHtml, parseHint, levelData, insertable, insertAt, charCount, answerKey, hintItems, stem, stems, verbForms, matchForms, hasForm, usedHints, buildKanjiDict, buildKanjiCandidates, toKanji, LEVELS, STEPS };
+  if (typeof module !== 'undefined' && module.exports) {
+    try { global.JpDeinflect = global.JpDeinflect || require('./jp-deinflect.js'); } catch { /* not in Node */ }
+    try { if (!global.CONVERSATION_WORDS) require('./conversation-words.js'); } catch { /* not built yet */ }
+  }
+
+  const api = { pieces, plain, kana, rubyHtml, parseHint, levelData, insertable, insertAt, charCount, answerKey, hintItems, stem, stems, verbForms, matchForms, hasForm, usedHints, segment, usesLemmas, buildKanjiDict, buildKanjiCandidates, toKanji, LEVELS, STEPS };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   global.Conversation = api;
   if (typeof document === 'undefined') return;
@@ -823,6 +983,7 @@
     $('screen-conversation').classList.toggle('active', !!topic);
     renderLevels();
     if (topic) {
+      loadVocab();
       document.title = `${plain(levelData(topic, settings.level).q.ja)} – Conversation Starters | Tokidoki`;
       renderQuestion();
     } else {
@@ -889,7 +1050,12 @@
     vocabLoading = new Promise(resolve => {
       const s = document.createElement('script');
       s.src = 'vocabulary-data.js';
-      s.onload = () => { kanjiCands = null; resolve(); };
+      // More known words: the kanji picker and the hint spotting both use them.
+      s.onload = () => {
+        kanjiCands = null;
+        if (topic && spotHints(false) !== null) renderHints();
+        resolve();
+      };
       s.onerror = () => { vocabLoading = null; resolve(); };
       document.head.appendChild(s);
     });

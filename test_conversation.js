@@ -107,9 +107,45 @@ CONVERSATION_TOPICS.forEach(t => C.LEVELS.forEach(level => {
   });
 }));
 
+// conversation-words.js is made from conversation-data.js.
+{
+  const W = require('./conversation-words.js');
+  const hash = require('crypto').createHash('sha1').update(require('fs').readFileSync(require.resolve('./conversation-data.js'))).digest('hex').slice(0, 16);
+  ok(W.source === hash, 'conversation-words.js is up to date — run node scripts/build_conversation_words.mjs (after npm install --no-save kuromoji)');
+  CONVERSATION_TOPICS.forEach(t => C.LEVELS.forEach(level => C.hintItems(C.levelData(t, level)).forEach(h => {
+    if (h.step === 'words' || h.step === 'verbs') ok(Array.isArray(h.lemmas) && h.lemmas.length > 0, `${t.id} ${level} ${h.ja}: has dictionary forms`);
+  })));
+}
+// Splitting answers into words.
+const split = t => C.segment(t).map(x => x.surface).join('|');
+ok(split('わたしは日本に住んでいます') === 'わたし|は|日本|に|住んでいます', 'segment: 日本 is one word, 住んでいます another');
+ok(split('とても面白かったです') === 'とても|面白かったです', 'segment: 面白かった is one word (not 面白 + かった)');
+ok(split('どようびに ともだちと えいがを みました') === 'どようび|に|ともだち|と|えいが|を|みました', 'segment: kana with spaces');
+ok(split('ちちとははとあにがいます') === 'ちち|と|はは|と|あに|が|います', 'segment: kana without spaces');
+ok(split('彼しかいません') === '彼|しか|いません', 'segment: しか|いません, not し|かいません');
+
 // Answers as a learner might type them (kana or kanji, spaces or not, other
 // forms of the words): the hints each must unlock, and some it mustn't.
 const LEARNER = [
+  // A second set, written before the word matcher was run on it.
+
+  ['weekend', 'N5', 'にちようびは こうえんに いきました。ともだちと はなしました。', ['日曜日', '公園', '行きました', '友達', '話しました', '〜ました'], ['映画']],
+  ['weekend', 'N4', '久しぶりに友達に会って、カフェで話したり、散歩したりしました。', ['久しぶりに', 'カフェ', '散歩', '会う', '〜たり〜たりしました'], ['洗濯', '片付ける']],
+  ['family', 'N5', 'いもうとが ふたり います。母は やさしいです。', ['妹', '母', '優しいです', 'います'], ['犬', '父']],
+  ['food', 'N4', '魚より肉のほうが好きです。母がよく焼き魚を作ってくれました。', ['焼き魚', '作ってくれる', 'AよりBのほうが', '〜てくれる'], ['納豆']],
+  ['hometown', 'N5', 'えきのちかくに おおきい スーパーが あります。でも、みせは すくないです。', ['駅', 'スーパー', 'あります', '少ないです', '〜に〜があります'], ['川', '静かです']],
+  ['morning', 'N5', 'まいあさ 6じに おきて、パンを たべます。', ['パン', '起きます', '食べます'], ['シャワー', 'コーヒー']],
+  ['today', 'N4', '電車が遅れて、会社に遅刻してしまいました。', ['遅刻', '遅れる', '〜てしまいました'], ['会議']],
+  ['hobby', 'N5', 'しゅみは テニスです。よく こうえんで テニスを します。', ['テニス', 'します', 'よく〜ます'], ['音楽', '本']],
+  ['travel', 'N5', 'きょうとに いきたいです。おてらを みたいです。', ['お寺', '行きたいです', '見たいです', '〜に行きたいです'], ['海', '温泉']],
+  ['season', 'N5', 'あきが いちばん すきです。すずしいですから。', ['秋', '涼しいです', '〜が一番好きです'], ['桜', '冬']],
+  ['cooking', 'N4', '一人暮らしを始めてから、自炊するようにしています。', ['自炊', '始める', '〜ようにしています'], ['外食']],
+  ['shopping', 'N3', 'ジャケットに一目ぼれして、ついかってしまいました。', ['一目ぼれ', 'つい〜てしまう'], ['口コミ']],
+  ['childhood', 'N4', '子供のころ、毎日虫を集めていました。', ['虫', '集める', '〜ていました'], ['森']],
+  ['friend', 'N4', '親友とは大学で知り合いました。いつも話を聞いてくれます。', ['親友', '知り合う', '話を聞く', '〜てくれます'], ['性格']],
+  ['smartphone', 'N5', 'まいにち スマホで しゃしんを とります。ちずも みます。', ['スマホ', '写真', '撮ります', '地図', '見ます', '〜で〜ます'], ['友達']],
+  ['future', 'N5', 'いつか せんせいに なりたいです。', ['先生', 'なりたいです', 'いつか〜たいです', '〜になりたいです'], ['医者']],
+
   ['weekend', 'N5', 'どようびに ともだちと えいがを みました。たのしかったです。', ['土曜日', '友達', '映画', '〜ました', '〜かったです'], ['公園', '〜と一緒に']],
   ['weekend', 'N5', '土曜日は友達と映画を見ました。面白かったです。', ['土曜日', '友達', '映画', '〜ました', '〜かったです'], ['日曜日']],
   ['family', 'N5', 'ちちと ははと あにが います。いぬも います。', ['父', '母', '兄', '犬', 'います'], ['姉', '妹', '弟']],
