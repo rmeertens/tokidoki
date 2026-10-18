@@ -382,7 +382,7 @@ const Conjugator = (() => {
       explanation: '<p>The <strong>negative</strong> of adjectives ("is not ~"). い-adjectives and な-adjectives follow different patterns.</p>'
         + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Plain</th><th>Polite</th></tr></thead><tbody>'
         + '<tr><td>い-adjective</td><td>Drop <b>い</b>, add <b>くない</b></td><td>高い → 高<b>くない</b></td><td>高<b>くないです</b></td></tr>'
-        + '<tr><td>な-adjective</td><td>Add <b>じゃない</b></td><td>静か → 静か<b>じゃない</b></td><td>静か<b>じゃないです</b></td></tr>'
+        + '<tr><td>な-adjective</td><td>Add <b>じゃない</b> (or <b>ではない</b>)</td><td>静か → 静か<b>じゃない</b></td><td>静か<b>じゃないです</b></td></tr>'
         + '</tbody></table>'
         + '<p class="conj-note"><strong>Exception:</strong> いい (good) → <b>よくない</b> (not いくない). The irregular stem よ- is used for all conjugations of いい.<br>Similarly: かっこいい → <b>かっこよくない</b></p>' },
 
@@ -398,7 +398,7 @@ const Conjugator = (() => {
       explanation: '<p>The <strong>past negative</strong> of adjectives ("was not ~"). Builds on the negative form by changing ない to なかった (since ない conjugates like an い-adjective).</p>'
         + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Plain</th><th>Polite</th></tr></thead><tbody>'
         + '<tr><td>い-adjective</td><td>Drop <b>い</b>, add <b>くなかった</b></td><td>高い → 高<b>くなかった</b></td><td>高<b>くなかったです</b></td></tr>'
-        + '<tr><td>な-adjective</td><td>Add <b>じゃなかった</b></td><td>静か → 静か<b>じゃなかった</b></td><td>静か<b>じゃなかったです</b></td></tr>'
+        + '<tr><td>な-adjective</td><td>Add <b>じゃなかった</b> (or <b>ではなかった</b>)</td><td>静か → 静か<b>じゃなかった</b></td><td>静か<b>じゃなかったです</b></td></tr>'
         + '</tbody></table>'
         + '<p class="conj-note"><strong>Exception:</strong> いい → <b>よくなかった</b>、かっこいい → <b>かっこよくなかった</b></p>' },
 
@@ -509,11 +509,53 @@ const Conjugator = (() => {
     return conjugateKanji(adj, form);
   }
 
+  // Other spellings of an adjective that are just as right as the word
+  // list's: a kanji or kana spelling it doesn't use (面白い for おもしろい,
+  // 良い / よい for いい). `sense` marks a spelling for another sense of the
+  // word (早い is "early", 速い "fast"), which counts on a word card but not
+  // in a sentence where it would mean something else.
+  const ADJ_OTHER_SPELLINGS = {
+    'おもしろい': [{ kanji: '面白い' }],
+    'おいしい':   [{ kanji: '美味しい' }],
+    'いい':       [{ kanji: '良い', reading: 'よい' }],
+    'かっこいい': [{ kanji: 'かっこ良い', reading: 'かっこよい' }],
+    'はやい':     [{ kanji: '早い', sense: 'early' }],
+    'あたたかい': [{ kanji: '温かい', sense: 'warm to the touch' }],
+    'きれい':     [{ kanji: '綺麗' }],
+    'にぎやか':   [{ kanji: '賑やか' }],
+  };
+
+  // Every answer that counts as right for an adjective in a form, the way
+  // the card shows it first: kana (katakana for a katakana word like
+  // ハンサム), then the kanji spelling, then the other spellings, each with
+  // ではない / ではなかった as well as じゃない / じゃなかった for a な-adjective.
+  // `sameSense` leaves out the spellings for another sense of the word.
+  function adjAnswers(adj, form, { sameSense = false } = {}) {
+    const answers = [];
+    const add = a => { if (a && !answers.includes(a)) answers.push(a); };
+    const hiragana = conjugateAdjective(adj, form);
+    const kanji = conjugateKanji(adj, form);
+    if (kanji && /^[ァ-ヶー]/.test(adj.kanji)) add(kanji);
+    add(hiragana);
+    add(kanji);
+    (ADJ_OTHER_SPELLINGS[adj.reading] || []).forEach(alt => {
+      if (sameSense && alt.sense) return;
+      const word = { ...adj, kanji: alt.kanji, reading: alt.reading || adj.reading };
+      add(conjugateAdjective(word, form));
+      add(conjugateKanji(word, form));
+    });
+    if (adj.type === 'na-adj') {
+      answers.slice().forEach(a => add(a.replace(/じゃ(ない|なかった)$/, 'では$1')));
+    }
+    return answers;
+  }
+
   return {
     conjugate,
     conjugateAdjective,
     conjugateKanji,
     conjugateAdjKanji,
+    adjAnswers,
     getFormsForChapter,
     getAdjFormsForChapter,
     getFormInfo,

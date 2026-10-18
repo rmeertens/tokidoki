@@ -302,6 +302,22 @@ assert(Conjugator.conjugateKanji({ kanji: '好き', reading: 'すき', type: 'na
 assert(Conjugator.conjugateKanji({ kanji: '高い', reading: 'たかい', type: 'i-adj' }, 'adj-past'), '高かった', '高い → adj-past (kanji)');
 assert(Conjugator.conjugateKanji({ kanji: 'きれい', reading: 'きれい', type: 'na-adj' }, 'adj-te'), null, 'きれい has no kanji spelling');
 
+// --- Every accepted answer for an adjective card ---
+console.log('Testing accepted adjective answers');
+const adjAns = (kanji, reading, type, form, opts) => Conjugator.adjAnswers({ kanji, reading, type }, form, opts).join(' / ');
+assert(adjAns('高い', 'たかい', 'i-adj', 'adj-neg'), 'たかくない / 高くない', '高い → plain kana and kanji');
+assert(adjAns('静か', 'しずか', 'na-adj', 'adj-neg'), 'しずかじゃない / 静かじゃない / しずかではない / 静かではない', '静か → じゃない or ではない');
+assert(adjAns('静か', 'しずか', 'na-adj', 'adj-past-neg'), 'しずかじゃなかった / 静かじゃなかった / しずかではなかった / 静かではなかった', '静か → じゃなかった or ではなかった');
+assert(adjAns('静か', 'しずか', 'na-adj', 'adj-past'), 'しずかだった / 静かだった', '静か → past has one ending');
+assert(adjAns('おもしろい', 'おもしろい', 'i-adj', 'adj-past'), 'おもしろかった / 面白かった', 'おもしろい → 面白い');
+assert(adjAns('いい', 'いい', 'i-adj', 'adj-present'), 'いい / よい / 良い', 'いい → よい, 良い');
+assert(adjAns('いい', 'いい', 'i-adj', 'adj-te'), 'よくて / 良くて', 'いい → 良くて');
+assert(adjAns('かっこいい', 'かっこいい', 'i-adj', 'adj-neg'), 'かっこよくない / かっこ良くない', 'かっこいい → かっこ良くない');
+assert(adjAns('ハンサム', 'はんさむ', 'na-adj', 'adj-present'), 'ハンサムだ / はんさむだ', 'ハンサム shown in katakana first');
+assert(adjAns('速い', 'はやい', 'i-adj', 'adj-neg'), 'はやくない / 速くない / 早くない', 'はやい "fast / early" → 早い too');
+assert(adjAns('速い', 'はやい', 'i-adj', 'adj-neg', { sameSense: true }), 'はやくない / 速くない', 'not 早い in a sentence about speed');
+assert(adjAns('暖かい', 'あたたかい', 'i-adj', 'adj-neg', { sameSense: true }), 'あたたかくない / 暖かくない', 'not 温かい in a sentence about the weather');
+
 // --- Test getFormsForChapter ---
 console.log('\nTesting getFormsForChapter...');
 const ch3Forms = Conjugator.getFormsForChapter(3);

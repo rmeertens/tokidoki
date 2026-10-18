@@ -425,6 +425,8 @@
           sentence: { ja: Examples.stripFurigana(ex.ja), jaHtml: Examples.furiganaHtml(ex.ja), en: ex.en },
           hint: `${a.kanji} (${a.meaning}) · ${fi.hint}`,
           refForm: f,
+          adj: a,
+          adjForm: conj,
           // The ending for this adjective's type: 〜くない for い, 〜じゃない for な.
           formEnding: conj.slice(a.type === 'i-adj' ? a.reading.length - 1 : a.reading.length) || 'だ',
           verb: null,
@@ -766,9 +768,8 @@
   function getCorrectAnswer(card) {
     const { verb, form } = card;
     const isAdj = studyMode === 'adjectives' || (studyMode === 'custom' && isAdjCard(card));
-    const hiragana = isAdj
-      ? Conjugator.conjugateAdjective(verb, form)
-      : Conjugator.conjugate(verb, form);
+    if (isAdj) return Conjugator.adjAnswers(verb, form);
+    const hiragana = Conjugator.conjugate(verb, form);
     const kanji = Conjugator.conjugateKanji(verb, form);
     const answers = [hiragana];
     if (kanji && kanji !== hiragana) answers.push(kanji);
@@ -2227,11 +2228,33 @@
   // Every way of writing the sentence that counts as right, the sentence
   // itself first.
   function translateVersions(sentence) {
+    if (translateSource === 'adjectives' && currentCard && currentCard.sentence === sentence && currentCard.adj) {
+      return adjSentenceVersions(sentence, currentCard.adj, currentCard.refForm, currentCard.adjForm);
+    }
     const data = window.SENTENCE_WORDS;
     const id = translateSource === 'sentences' && currentCard && currentCard.sentence === sentence
       ? translateLineId(currentCard) : null;
     if (!window.SentenceOrders || !data || !id) return [sentence];
     return SentenceOrders.variants(sentence, data.lines[id], data.gloss);
+  }
+
+  // An adjective sentence with the adjective in each of its other spellings
+  // (面白くない, 静かではない): the kana version swaps it in jaHtml, the
+  // kanji one in ja.
+  function adjSentenceVersions(sentence, adj, form, conj) {
+    const versions = [sentence];
+    const kanjiConj = Conjugator.conjugateKanji(adj, form) || conj;
+    const inJa = sentence.ja.includes(kanjiConj) ? kanjiConj : conj;
+    if (!sentence.ja.includes(inJa)) return versions;
+    const kanaOf = window.EnHover ? EnHover.kanaOfRuby(sentence.jaHtml || sentence.ja) : null;
+    Conjugator.adjAnswers(adj, form, { sameSense: true }).forEach(a => {
+      if (a === inJa) return;
+      const ja = sentence.ja.split(inJa).join(a);
+      const v = { ja, en: sentence.en };
+      if (kanaOf && kanaOf.includes(conj)) v.jaHtml = kanaOf.split(conj).join(a);
+      versions.push(v);
+    });
+    return versions;
   }
 
   // What was typed, set against the answer: a character diff when it's off.
