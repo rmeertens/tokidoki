@@ -23,6 +23,149 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-10-18-false-quake-alert',
+      date: '2026-10-18',
+      emoji: '🚨',
+      titleEn: 'JMA mistakenly issues a magnitude 9.9 earthquake alert, withdraws it 12 minutes later',
+      sources: [
+        { name: 'BNO News', url: 'https://bnonews.com/index.php/2026/10/japan-mistakenly-issues-warning-for-magnitude-9-9-earthquake/' },
+        { name: 'Malay Mail (on the apology)', url: 'https://malaymail.com/news/world/2026/10/17/japan-apologises-after-erroneous-99-magnitude-earthquake-alert-disrupts-transport/239432' },
+        { name: 'Jiji Press (interim measure)', url: 'https://www.jiji.com/jc/archives?g=soc_archive_0' },
+      ],
+      levels: {
+        N5: {
+          title: 'まちがった地震[じしん]の知[し]らせ',
+          lines: [
+            ['十六日[じゅうろくにち]のひるに、気象庁[きしょうちょう]がまちがった地震[じしん]の知[し]らせを出[だ]しました。', 'At midday on the 16th, the Japan Meteorological Agency issued a mistaken earthquake alert.', '気象庁 is the Japan Meteorological Agency (JMA).'],
+            ['「マグニチュード9.9の大[おお]きい地震[じしん]が来[く]る」という知[し]らせでした。', 'The alert said that a huge magnitude 9.9 earthquake was coming.'],
+            ['たくさんの人[ひと]のスマートフォンが、大[おお]きい音[おと]で鳴[な]りました。', 'The smartphones of many people rang loudly.'],
+            ['でも、本当[ほんとう]の地震[じしん]は、ロシアの近[ちか]くで起[お]きた、ずっと小[ちい]さい地震[じしん]でした。', 'But the real earthquake was a much smaller one that happened near Russia.', 'The real quake was about magnitude 6.9, near the Kamchatka Peninsula.'],
+            ['日本[にっぽん]はゆれませんでした。津波[つなみ]の心配[しんぱい]もありませんでした。', 'Japan did not shake. There was no tsunami worry, either.'],
+            ['気象庁[きしょうちょう]は、約[やく]12分[ふん]あとに、知[し]らせを取[と]り消[け]しました。', 'About 12 minutes later, the JMA withdrew the alert.'],
+            ['電車[でんしゃ]などが少[すこ]しとまりました。気象庁[きしょうちょう]の人[ひと]は、あやまりました。', 'Trains and other services stopped for a little while. A JMA official apologized.'],
+          ],
+        },
+        N4: {
+          title: '気象庁[きしょうちょう]、マグニチュード9.9の地震[じしん]の知[し]らせをまちがって出[だ]す',
+          lines: [
+            ['十六日[じゅうろくにち]の昼[ひる]の12時[じ]半[はん]すぎ、気象庁[きしょうちょう]は、千島列島[ちしまれっとう]の近[ちか]くでマグニチュード9.9の地震[じしん]が起[お]きるという緊急[きんきゅう]地震[じしん]速報[そくほう]を出[だ]しました。', 'A little after 12:30 p.m. on the 16th, the JMA issued an emergency earthquake alert saying a magnitude 9.9 earthquake had occurred near the Kuril Islands.', '緊急地震速報 is the "Earthquake Early Warning" sent to phones and TVs just before strong shaking.'],
+            ['たくさんの人[ひと]のスマートフォンで、大[おお]きい警報[けいほう]の音[おと]が鳴[な]りました。', 'On the smartphones of many people, a loud alarm sounded.'],
+            ['しかし、実際[じっさい]に起[お]きたのは、カムチャツカ半島[はんとう]の近[ちか]くのマグニチュード6.9の地震[じしん]でした。', 'However, what actually happened was a magnitude 6.9 earthquake near the Kamchatka Peninsula.'],
+            ['日本[にっぽん]ではゆれがなく、津波[つなみ]の警報[けいほう]も出[で]ませんでした。', 'There was no shaking in Japan, and no tsunami warning was issued.'],
+            ['気象庁[きしょうちょう]は約[やく]12分[ふん]後[ご]に知[し]らせを取[と]り消[け]しました。', 'The JMA withdrew the alert about 12 minutes later.'],
+            ['気象庁[きしょうちょう]によると、地震[じしん]の震源[しんげん]の場所[ばしょ]を計算[けいさん]するときに間違[まちが]いがあったそうです。', 'According to the JMA, there was a mistake when the location of the earthquake\'s epicenter was calculated.', '震源 "epicenter".'],
+            ['電車[でんしゃ]などが一時[いちじ]とまり、気象庁[きしょうちょう]の担当者[たんとうしゃ]は「申[もう]し訳[わけ]ありません」とあやまりました。', 'Trains and other services stopped for a time, and a JMA official apologized, saying "We are very sorry."', '申し訳ありません is a formal apology.'],
+          ],
+        },
+        N3: {
+          title: '気象庁[きしょうちょう]、M9.9の緊急[きんきゅう]地震[じしん]速報[そくほう]を誤[あやま]って発表[はっぴょう]　約[やく]12分[ふん]後[ご]に取[と]り消[け]し',
+          lines: [
+            ['気象庁[きしょうちょう]は十六日[じゅうろくにち]の昼[ひる]すぎ、千島列島[ちしまれっとう]付近[ふきん]でマグニチュード9.9の地震[じしん]が発生[はっせい]したとする緊急[きんきゅう]地震[じしん]速報[そくほう]を誤[あやま]って発表[はっぴょう]した。', 'In the early afternoon of the 16th, the JMA mistakenly issued an Earthquake Early Warning saying a magnitude 9.9 earthquake had occurred near the Kuril Islands.', '誤って "by mistake".'],
+            ['警報[けいほう]は多[おお]くの人[ひと]の携帯[けいたい]電話[でんわ]にも届[とど]き、大[おお]きな警報音[けいほうおん]が鳴[な]り響[ひび]いた。', 'The alert also reached many people\'s mobile phones, and loud alarm sounds rang out.'],
+            ['実際[じっさい]に起[お]きたのは、ロシアのカムチャツカ半島[はんとう]付近[ふきん]を震源[しんげん]とするマグニチュード6.9の地震[じしん]で、日本[にっぽん]国内[こくない]でゆれは観測[かんそく]されず、津波[つなみ]警報[けいほう]も出[で]なかった。', 'What actually happened was a magnitude 6.9 earthquake centered near Russia\'s Kamchatka Peninsula; no shaking was observed in Japan and no tsunami warning was issued.'],
+            ['気象庁[きしょうちょう]は約[やく]12分[ふん]後[ご]に速報[そくほう]を取[と]り消[け]したが、一部[いちぶ]の交通[こうつう]機関[きかん]で運転[うんてん]の見合[みあ]わせなどの影響[えいきょう]が出[で]た。', 'The JMA withdrew the alert about 12 minutes later, but there was some impact, such as suspended services on parts of the transport network.', '運転の見合わせ "suspension of service".'],
+            ['同庁[どうちょう]は、震源[しんげん]の距離[きょり]の計算[けいさん]に誤[あやま]りがあったと説明[せつめい]し、担当者[たんとうしゃ]が謝罪[しゃざい]した。', 'The agency explained that there had been an error in calculating the distance to the epicenter, and an official apologized.', '同庁 "the same agency", i.e. the JMA.'],
+            ['十七日[じゅうしちにち]、気象庁[きしょうちょう]は当面[とうめん]の再発[さいはつ]防止策[ぼうしさく]として、震源[しんげん]までの距離[きょり]が700キロを超[こ]える地震[じしん]は速報[そくほう]の対象[たいしょう]外[がい]にすると発表[はっぴょう]した。', 'On the 17th, as an interim measure to prevent a repeat, the JMA announced that earthquakes more than 700 km from the epicenter would be excluded from the alerts.', '当面の "for the time being".'],
+            ['今回[こんかい]の誤[あやま]りについては、人為的[じんいてき]なミスだったことも明[あき]らかになっている。', 'It has also become clear that this error was a human mistake.', '人為的 "man-made, human".'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-18-foreign-residents',
+      date: '2026-10-18',
+      emoji: '🌏',
+      titleEn: 'Foreign residents in Japan reach a record of about 4.28 million at the end of June',
+      sources: [
+        { name: 'VOV (Immigration Services Agency data)', url: 'https://english.vov.vn/en/society/vietnamese-community-remains-japans-second-largest-foreign-group-post1341896.vov' },
+        { name: 'Jiji Press / Nippon.com (end-2025 figure)', url: 'https://www.nippon.com/en/news/yjj2026032700900' },
+      ],
+      levels: {
+        N5: {
+          title: '日本[にほん]に住[す]む外国人[がいこくじん]がふえました',
+          lines: [
+            ['十六日[じゅうろくにち]に、出入国[しゅつにゅうこく]在留[ざいりゅう]管理庁[かんりちょう]が新[あたら]しい数[かず]を出[だ]しました。', 'On the 16th, the Immigration Services Agency released new numbers.', '出入国在留管理庁 is the Immigration Services Agency of Japan.'],
+            ['今年[ことし]の6月[がつ]の終[お]わりに、日本[にほん]に住[す]んでいる外国人[がいこくじん]は、約[やく]428万[まん]人[にん]でした。', 'At the end of June this year, about 4.28 million foreign people were living in Japan.'],
+            ['去年[きょねん]の終[お]わりより、約[やく]3.8%ふえました。今[いま]までで、いちばん多[おお]い数[かず]です。', 'That is about 3.8% more than at the end of last year. It is the biggest number ever.'],
+            ['いちばん多[おお]いのは中国[ちゅうごく]の人[ひと]で、約[やく]94万[まん]人[にん]です。', 'The largest group is people from China, about 940,000.'],
+            ['2番目[ばんめ]はベトナムの人[ひと]で、約[やく]69万[まん]人[にん]です。', 'The second is people from Vietnam, about 690,000.'],
+            ['そのあとは、韓国[かんこく]の人[ひと]、フィリピンの人[ひと]の順[じゅん]です。', 'After that come people from Korea and then the Philippines.'],
+            ['この数[かず]には、短[みじか]い旅行[りょこう]で来[き]た人[ひと]は入[はい]っていません。', 'This number does not include people who came for a short trip.'],
+          ],
+        },
+        N4: {
+          title: '日本[にほん]で暮[く]らす外国人[がいこくじん]、6月[がつ]末[まつ]で過去[かこ]最多[さいた]の約[やく]428万[まん]人[にん]',
+          lines: [
+            ['出入国[しゅつにゅうこく]在留[ざいりゅう]管理庁[かんりちょう]は十六日[じゅうろくにち]、今年[ことし]6月[がつ]末[まつ]の在留[ざいりゅう]外国人[がいこくじん]の数[かず]を発表[はっぴょう]しました。', 'On the 16th, the Immigration Services Agency announced the number of foreign residents at the end of June this year.', '在留外国人 "foreign residents" (people legally living in Japan).'],
+            ['その数[かず]は428万[まん]1026人[にん]で、去年[きょねん]末[まつ]より約[やく]3.8%多[おお]く、過去[かこ]最多[さいた]です。', 'The number was 4,281,026, about 3.8% more than at the end of last year and the highest on record.', '去年末 (end of last year) was 4,125,395, the first time the number passed 4 million.'],
+            ['国[くに]や地域[ちいき]別[べつ]では、中国[ちゅうごく]が約[やく]94万[まん]人[にん]でいちばん多[おお]く、ベトナムが約[やく]69万[まん]人[にん]で続[つづ]いています。', 'By country or region, China is the largest at about 940,000, followed by Vietnam at about 690,000.'],
+            ['3番目[ばんめ]は韓国[かんこく]で約[やく]41万[まん]人[にん]、4番目[ばんめ]はフィリピンで約[やく]36万[まん]人[にん]です。', 'Third is Korea at about 410,000, and fourth is the Philippines at about 360,000.'],
+            ['在留[ざいりゅう]資格[しかく]では、永住者[えいじゅうしゃ]が約[やく]96万[まん]人[にん]でいちばん多[おお]いです。', 'By status of residence, permanent residents are the largest group at about 960,000.', '在留資格 "status of residence" (visa type). 永住者 "permanent resident".'],
+            ['短期[たんき]で日本[にほん]に来[き]た旅行者[りょこうしゃ]は、この数[かず]に入[はい]っていません。', 'Short-term visitors to Japan are not included in this number.'],
+            ['日本[にほん]では働[はたら]く人[ひと]が足[た]りない会社[かいしゃ]が多[おお]く、外国人[がいこくじん]の働[はたら]く人[ひと]がふえています。', 'In Japan, many companies do not have enough workers, and the number of foreign workers is increasing.'],
+          ],
+        },
+        N3: {
+          title: '在留[ざいりゅう]外国人[がいこくじん]、6月[がつ]末[まつ]で過去[かこ]最多[さいた]の428万[まん]人[にん]　出入国[しゅつにゅうこく]在留[ざいりゅう]管理庁[かんりちょう]',
+          lines: [
+            ['出入国[しゅつにゅうこく]在留[ざいりゅう]管理庁[かんりちょう]は十六日[じゅうろくにち]、今年[ことし]6月[がつ]末[まつ]時点[じてん]で日本[にほん]に在留[ざいりゅう]する外国人[がいこくじん]が428万[まん]1026人[にん]になったと発表[はっぴょう]した。', 'On the 16th, the Immigration Services Agency announced that the number of foreign residents in Japan at the end of June this year had reached 4,281,026.', '時点 "point in time".'],
+            ['去年[きょねん]末[まつ]の412万[まん]5395人[にん]から約[やく]3.8%増[ふ]え、過去[かこ]最多[さいた]を更新[こうしん]した。', 'This was an increase of about 3.8% from 4,125,395 at the end of last year, and it set a new record.', '更新 here means "to break (a record)". Last year\'s end-of-year number was the first to exceed 4 million.'],
+            ['国籍[こくせき]・地域[ちいき]別[べつ]では、中国[ちゅうごく]が94万[まん]1031人[にん]で最[もっと]も多[おお]く、ベトナムの69万[まん]3800人[にん]、韓国[かんこく]の40万[まん]8700人[にん]、フィリピンの36万[まん]2800人[にん]が続[つづ]いた。', 'By nationality or region, China was the largest at 941,031, followed by Vietnam at 693,800, Korea at 408,700 and the Philippines at 362,800.'],
+            ['在留[ざいりゅう]資格[しかく]別[べつ]では、永住者[えいじゅうしゃ]が96万[まん]1342人[にん]で最[もっと]も多[おお]かった。', 'By status of residence, permanent residents were the largest group at 961,342.'],
+            ['観光[かんこう]などで短期[たんき]滞在[たいざい]する人[ひと]は、この統計[とうけい]に含[ふく]まれていない。', 'People staying for a short time, for example as tourists, are not included in these statistics.'],
+            ['人手[ひとで]不足[ぶそく]を背景[はいけい]に、外国人[がいこくじん]労働者[ろうどうしゃ]を受[う]け入[い]れる動[うご]きが続[つづ]いており、今後[こんご]も増[ふ]える可能性[かのうせい]がある。', 'Against a background of labor shortages, moves to accept foreign workers are continuing, and the number may keep rising.', '人手不足 "labor shortage". 背景 "background".'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-18-imf-japan-gdp',
+      date: '2026-10-18',
+      emoji: '📊',
+      titleEn: 'IMF projects India to overtake Japan as the world\'s fourth-largest economy in 2027',
+      sources: [
+        { name: 'The Star (AFP)', url: 'https://www.thestar.com.my/aseanplus/aseanplus-news/2026/10/15/india-expected-to-overtake-japan-as-world039s-4th-largest-economy-in-2027-imf' },
+        { name: 'Cambodianess (AFP)', url: 'https://cambodianess.com/article/india-expected-to-overtake-japan-as-worlds-4th-largest-economy-in-2027-imf' },
+      ],
+      levels: {
+        N5: {
+          title: '日本[にほん]の経済[けいざい]、2027年[ねん]に5番目[ばんめ]になりそうです',
+          lines: [
+            ['十五日[じゅうごにち]に、IMF（国際[こくさい]通貨[つうか]基金[ききん]）が、アジアの経済[けいざい]について話[はな]しました。', 'On the 15th, the IMF (International Monetary Fund) spoke about Asia\'s economy.'],
+            ['今年[ことし]、日本[にほん]の経済[けいざい]は、世界[せかい]で4番目[ばんめ]に大[おお]きいままです。', 'This year, Japan\'s economy remains the fourth biggest in the world.'],
+            ['でも、来年[らいねん]は、インドが日本[にほん]より大[おお]きくなりそうです。', 'But next year, India looks likely to become bigger than Japan.'],
+            ['そのとき、日本[にほん]はイギリスよりも小[ちい]さくなって、6番目[ばんめ]になりそうです。', 'At that time, Japan looks likely to become smaller than the United Kingdom as well, and be sixth.'],
+            ['インドの経済[けいざい]は、今年[ことし]、7%ぐらいのびる見込[みこ]みです。', 'India\'s economy is expected to grow about 7% this year.', '見込み "expectation".'],
+            ['日本[にほん]は、0.7%ぐらいしかのびません。', 'Japan will grow only about 0.7%.'],
+            ['エネルギーの値段[ねだん]や、ものの値段[ねだん]が上[あ]がっていて、むずかしいのです。', 'Energy prices and other prices are rising, and that makes it hard.'],
+          ],
+        },
+        N4: {
+          title: 'IMF、2027年[ねん]にインドが日本[にほん]をぬいて世界[せかい]4位[い]になると予測[よそく]',
+          lines: [
+            ['IMF（国際[こくさい]通貨[つうか]基金[ききん]）は十五日[じゅうごにち]、アジア太平洋[たいへいよう]地域[ちいき]の経済[けいざい]の見通[みとお]しを発表[はっぴょう]しました。', 'On the 15th, the IMF (International Monetary Fund) released its economic outlook for the Asia-Pacific region.', '見通し "outlook, forecast".'],
+            ['それによると、今年[ことし]は日本[にほん]が名目[めいもく]GDPで世界[せかい]4位[い]のままです。', 'According to it, Japan remains fourth in the world in nominal GDP this year.', 'GDP (国内総生産) is the total value of goods and services a country makes in a year. 名目 means measured at current prices, in dollars.'],
+            ['しかし、2027年[ねん]にはインドが約[やく]4兆[ちょう]5200億[おく]ドルで4位[い]になる見込[みこ]みです。', 'However, in 2027 India is expected to become fourth, at about $4.52 trillion.'],
+            ['日本[にほん]は、インドとイギリスの両方[りょうほう]に抜[ぬ]かれて、6位[い]になると予測[よそく]されています。', 'Japan is forecast to be overtaken by both India and the United Kingdom, and fall to sixth.', '抜かれる "to be overtaken" (passive of 抜く).'],
+            ['インドの今年[ことし]の成長率[せいちょうりつ]は、7%に引[ひ]き上[あ]げられました。', 'India\'s growth rate for this year was raised to 7%.'],
+            ['日本[にほん]は、エネルギーの値段[ねだん]と物価[ぶっか]の上[あ]がりが重[おも]くのしかかり、0.7%に下[さ]がる見通[みとお]しです。', 'For Japan, the burden of rising energy and consumer prices is expected to pull growth down to 0.7%.', '物価 "prices (in general)".'],
+            ['日本銀行[にほんぎんこう]は、金利[きんり]を約[やく]30年[ねん]ぶりの高[たか]い水準[すいじゅん]に上[あ]げています。', 'The Bank of Japan has raised interest rates to a level that is the highest in about 30 years.', '金利 "interest rate". 水準 "level".'],
+          ],
+        },
+        N3: {
+          title: 'IMF、2027年[ねん]にインドが日本[にほん]を抜[ぬ]き世界[せかい]4位[い]の経済[けいざい]大国[たいこく]に　日本[にほん]は6位[い]の見通[みとお]し',
+          lines: [
+            ['国際[こくさい]通貨[つうか]基金[ききん]（IMF）は十五日[じゅうごにち]に発表[はっぴょう]したアジア太平洋[たいへいよう]地域[ちいき]の経済[けいざい]見通[みとお]しで、2027年[ねん]にインドが日本[にほん]を抜[ぬ]いて名目[めいもく]GDP世界[せかい]4位[い]になるとの予測[よそく]を示[しめ]した。', 'In its Asia-Pacific regional economic outlook released on the 15th, the International Monetary Fund (IMF) projected that India will overtake Japan in 2027 to become fourth in the world by nominal GDP.', '名目GDP is GDP at current prices, compared in US dollars.'],
+            ['それによると、今年[ことし]は日本[にっぽん]が4位[い]を維持[いじ]するが、来年[らいねん]はインドが約[やく]4兆[ちょう]5200億[おく]ドルで4位[い]に浮上[ふじょう]する。', 'According to it, Japan will keep fourth place this year, but next year India will rise to fourth with about $4.52 trillion.', '浮上 "to surface, rise up".'],
+            ['日本[にっぽん]はインドに加[くわ]え、イギリスにも抜[ぬ]かれて6位[い]に下[さ]がる見通[みとお]しだ。', 'Japan is expected to be overtaken by the United Kingdom as well as India, and to fall to sixth.'],
+            ['IMFはインドの今年[ことし]の成長率[せいちょうりつ]見通[みとお]しを7.0%に引[ひ]き上[あ]げた一方[いっぽう]、日本[にっぽん]は0.7%に減速[げんそく]するとみている。', 'While the IMF raised its growth forecast for India this year to 7.0%, it expects Japan to slow to 0.7%.', '一方 "on the other hand".'],
+            ['日本[にっぽん]の減速[げんそく]の背景[はいけい]には、エネルギー価格[かかく]の上昇[じょうしょう]や物価[ぶっか]高[だか]があるという。', 'Rising energy prices and high inflation are said to be behind Japan\'s slowdown.', '物価高 "high prices, inflation".'],
+            ['日本銀行[にほんぎんこう]は利上[りあ]げを進[すす]めており、政策[せいさく]金利[きんり]は約[やく]30年[ねん]ぶりの高[たか]い水準[すいじゅん]になっている。', 'The Bank of Japan has been pushing ahead with rate hikes, and its policy interest rate is at a level not seen in about 30 years.', '政策金利 "policy interest rate".'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-10-17-typhoon-30',
       date: '2026-10-17',
       emoji: '🌀',

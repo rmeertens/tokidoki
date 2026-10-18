@@ -126,6 +126,21 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-10-18-false-quake-alert.html</loc>
+    <lastmod>2026-10-18</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-10-18-foreign-residents.html</loc>
+    <lastmod>2026-10-18</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-10-18-imf-japan-gdp.html</loc>
+    <lastmod>2026-10-18</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://tokidoki.meertens.dev/news-2026-10-17-typhoon-30.html</loc>
     <lastmod>2026-10-17</lastmod>
     <priority>0.6</priority>

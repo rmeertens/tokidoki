@@ -3568,5 +3568,400 @@
     "さんじゅう",
     "30",
     "number"
+  ],
+  "12時半すぎ": [
+    "じゅうにじはんすぎ",
+    "a little after 12:30",
+    "time"
+  ],
+  "2027年": [
+    "にせんにじゅうななねん",
+    "the year 2027",
+    "number + counter"
+  ],
+  "2番目": [
+    "にばんめ",
+    "second",
+    "number + counter"
+  ],
+  "36万2800人": [
+    "さんじゅうろくまんにせんはっぴゃくにん",
+    "362,800 people",
+    "number + counter"
+  ],
+  "40万8700人": [
+    "よんじゅうまんはっせんななひゃくにん",
+    "408,700 people",
+    "number + counter"
+  ],
+  "412万5395人": [
+    "よんひゃくじゅうにまんごせんさんびゃくきゅうじゅうごにん",
+    "4,125,395 people",
+    "number + counter"
+  ],
+  "428万1026人": [
+    "よんひゃくにじゅうはちまんせんにじゅうろくにん",
+    "4,281,026 people",
+    "number + counter"
+  ],
+  "428万人": [
+    "よんひゃくにじゅうはちまんにん",
+    "4.28 million people",
+    "number + counter"
+  ],
+  "4位": [
+    "よんい",
+    "4th place",
+    "number + counter"
+  ],
+  "4番目": [
+    "よんばんめ",
+    "fourth",
+    "number + counter"
+  ],
+  "5番目": [
+    "ごばんめ",
+    "fifth",
+    "number + counter"
+  ],
+  "69万3800人": [
+    "ろくじゅうきゅうまんさんぜんはっぴゃくにん",
+    "693,800 people",
+    "number + counter"
+  ],
+  "6位": [
+    "ろくい",
+    "6th place",
+    "number + counter"
+  ],
+  "6番目": [
+    "ろくばんめ",
+    "sixth",
+    "number + counter"
+  ],
+  "700キロ": [
+    "ななひゃくキロ",
+    "700 kilometers",
+    "number + counter"
+  ],
+  "94万1031人": [
+    "きゅうじゅうよんまんせんさんじゅういちにん",
+    "941,031 people",
+    "number + counter"
+  ],
+  "96万1342人": [
+    "きゅうじゅうろくまんせんさんびゃくよんじゅうににん",
+    "961,342 people",
+    "number + counter"
+  ],
+  "GDP": [
+    "ジーディーピー",
+    "GDP, gross domestic product",
+    "noun"
+  ],
+  "IMF": [
+    "アイエムエフ",
+    "the IMF, International Monetary Fund",
+    "organization"
+  ],
+  "のしかかる": [
+    "のしかかる",
+    "to weigh on, to press down on",
+    "godan verb"
+  ],
+  "まちがう": [
+    "まちがう",
+    "to make a mistake, to be wrong",
+    "godan verb"
+  ],
+  "イギリス": [
+    "イギリス",
+    "the United Kingdom, Britain",
+    "place name"
+  ],
+  "インド": [
+    "インド",
+    "India",
+    "place name"
+  ],
+  "カムチャツカ": [
+    "カムチャツカ",
+    "Kamchatka (Russian peninsula)",
+    "place name"
+  ],
+  "スマート": [
+    "スマート",
+    "smart (スマートフォン: smartphone)",
+    "noun"
+  ],
+  "フォン": [
+    "フォン",
+    "phone (スマートフォン: smartphone)",
+    "noun"
+  ],
+  "マグニチュード": [
+    "マグニチュード",
+    "magnitude (of an earthquake)",
+    "noun"
+  ],
+  "上がり": [
+    "あがり",
+    "a rise, an increase",
+    "noun"
+  ],
+  "上昇": [
+    "じょうしょう",
+    "rise, increase",
+    "noun"
+  ],
+  "人手": [
+    "ひとで",
+    "hands, workers; manpower",
+    "noun"
+  ],
+  "人為": [
+    "じんい",
+    "human action, man-made",
+    "noun"
+  ],
+  "再発": [
+    "さいはつ",
+    "recurrence, happening again",
+    "noun"
+  ],
+  "出入国": [
+    "しゅつにゅうこく",
+    "entering and leaving a country",
+    "noun"
+  ],
+  "列島": [
+    "れっとう",
+    "island chain, archipelago",
+    "noun"
+  ],
+  "半島": [
+    "はんとう",
+    "peninsula",
+    "noun"
+  ],
+  "取り消し": [
+    "とりけし",
+    "cancellation, withdrawal",
+    "noun"
+  ],
+  "受け入れる": [
+    "うけいれる",
+    "to accept, to take in",
+    "ichidan verb"
+  ],
+  "同庁": [
+    "どうちょう",
+    "the same agency",
+    "noun"
+  ],
+  "名目": [
+    "めいもく",
+    "nominal; name, pretext",
+    "noun"
+  ],
+  "在留": [
+    "ざいりゅう",
+    "residing (in a foreign country)",
+    "noun"
+  ],
+  "多く": [
+    "おおく",
+    "many, much; most",
+    "noun"
+  ],
+  "大国": [
+    "たいこく",
+    "great power, major country",
+    "noun"
+  ],
+  "引き上げる": [
+    "ひきあげる",
+    "to raise, to pull up",
+    "ichidan verb"
+  ],
+  "当面": [
+    "とうめん",
+    "for the time being, at present",
+    "noun"
+  ],
+  "日本銀行": [
+    "にほんぎんこう",
+    "the Bank of Japan",
+    "organization"
+  ],
+  "更新": [
+    "こうしん",
+    "renewal, update; breaking (a record)",
+    "noun"
+  ],
+  "最多": [
+    "さいた",
+    "the most, the largest number",
+    "noun"
+  ],
+  "月末": [
+    "げつまつ",
+    "end of the month",
+    "noun"
+  ],
+  "永住": [
+    "えいじゅう",
+    "permanent residence",
+    "noun"
+  ],
+  "津波": [
+    "つなみ",
+    "tsunami",
+    "noun"
+  ],
+  "浮上": [
+    "ふじょう",
+    "surfacing, rising to the top",
+    "noun"
+  ],
+  "減速": [
+    "げんそく",
+    "slowing down, slowdown",
+    "noun"
+  ],
+  "物価高": [
+    "ぶっかだか",
+    "high prices, inflation",
+    "noun"
+  ],
+  "管理庁": [
+    "かんりちょう",
+    "management agency",
+    "noun"
+  ],
+  "約12分": [
+    "やくじゅうにふん",
+    "about 12 minutes",
+    "number + counter"
+  ],
+  "約12分後": [
+    "やくじゅうにふんご",
+    "about 12 minutes later",
+    "number + counter"
+  ],
+  "約30年ぶり": [
+    "やくさんじゅうねんぶり",
+    "for the first time in about 30 years",
+    "number + counter"
+  ],
+  "約36万人": [
+    "やくさんじゅうろくまんにん",
+    "about 360,000 people",
+    "number + counter"
+  ],
+  "約41万人": [
+    "やくよんじゅういちまんにん",
+    "about 410,000 people",
+    "number + counter"
+  ],
+  "約428万人": [
+    "やくよんひゃくにじゅうはちまんにん",
+    "about 4.28 million people",
+    "number + counter"
+  ],
+  "約4兆5200億ドル": [
+    "やくよんちょうごせんにひゃくおくドル",
+    "about $4.52 trillion",
+    "number + counter"
+  ],
+  "約69万人": [
+    "やくろくじゅうきゅうまんにん",
+    "about 690,000 people",
+    "number + counter"
+  ],
+  "約94万人": [
+    "やくきゅうじゅうよんまんにん",
+    "about 940,000 people",
+    "number + counter"
+  ],
+  "約96万人": [
+    "やくきゅうじゅうろくまんにん",
+    "about 960,000 people",
+    "number + counter"
+  ],
+  "緊急": [
+    "きんきゅう",
+    "emergency, urgent",
+    "noun"
+  ],
+  "見合わせ": [
+    "みあわせ",
+    "postponement, suspension (of service)",
+    "noun"
+  ],
+  "誤る": [
+    "あやまる",
+    "to make a mistake, to err",
+    "godan verb"
+  ],
+  "警報": [
+    "けいほう",
+    "warning, alarm",
+    "noun"
+  ],
+  "防止": [
+    "ぼうし",
+    "prevention",
+    "noun"
+  ],
+  "震源": [
+    "しんげん",
+    "epicenter",
+    "noun"
+  ],
+  "鳴り響く": [
+    "なりひびく",
+    "to ring out, to resound",
+    "godan verb"
+  ],
+  "千島列島": [
+    "ちしまれっとう",
+    "the Kuril Islands",
+    "place name"
+  ],
+  "約3.8%": [
+    "やくさんてんはちパーセント",
+    "about 3.8%",
+    "number + counter"
+  ],
+  "3.8%": [
+    "さんてんはちパーセント",
+    "3.8%",
+    "number + counter"
+  ],
+  "7.0%": [
+    "ななてんゼロパーセント",
+    "7.0%",
+    "number + counter"
+  ],
+  "6月": [
+    "ろくがつ",
+    "June",
+    "number + counter"
+  ],
+  "6月末": [
+    "ろくがつまつ",
+    "end of June",
+    "number + counter"
+  ],
+  "7%": [
+    "ななパーセント",
+    "7%",
+    "number + counter"
+  ],
+  "0.7%": [
+    "れいてんななパーセント",
+    "0.7%",
+    "number + counter"
   ]
 }
