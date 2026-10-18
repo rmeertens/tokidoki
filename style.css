@@ -7861,9 +7861,14 @@ a.chapter-card.news-headline-card {
 .cs-fb-good { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; padding: 0; }
 .cs-fb-good li { font-size: 0.82rem; padding: 4px 10px; border-radius: 999px; background: var(--green-dim); }
 .cs-fb-fixes { padding-left: 1.3em; display: flex; flex-direction: column; gap: 8px; }
-.cs-fb-fix { font-family: var(--font-jp); font-size: 1rem; line-height: 2; }
-.cs-fb-fix s { color: var(--red); text-decoration-thickness: 1.5px; }
-.cs-fb-fix b { color: var(--green); font-weight: 700; }
+.cs-fb-fix { font-family: var(--font-jp); font-size: 1.05rem; display: grid; gap: 0; margin-bottom: 2px; }
+.cs-fb-wrong, .cs-fb-right { display: flex; align-items: baseline; gap: 8px; line-height: 2.1; }
+.cs-fb-wrong { color: var(--red); }
+.cs-fb-right { color: var(--green); font-weight: 700; }
+.cs-fb-sign { flex: none; width: 1em; font-family: var(--font); font-size: 0.8rem; font-weight: 700; text-align: center; }
+.cs-fb-fix mark { color: inherit; border-radius: 3px; padding: 0 1px; }
+.cs-fb-wrong mark { background: var(--red-dim); }
+.cs-fb-right mark { background: var(--green-dim); }
 .cs-fb-why { font-size: 0.85rem; color: var(--text-dim); line-height: 1.45; }
 .cs-fb-none { margin-top: 10px; font-size: 0.9rem; }
 .cs-fb-ja { font-family: var(--font-jp); font-size: 1.02rem; line-height: 2; }

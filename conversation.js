@@ -794,7 +794,7 @@
     }
     if (fixes.length) {
       parts.push(`<h4>Corrections</h4><ol class="cs-fb-fixes">${fixes.map(f => `
-        <li><div class="cs-fb-fix" lang="ja">${f.original != null ? `<s>${esc(f.original)}</s>` : ''}${f.fixed != null ? ` <span aria-hidden="true">→</span> <b>${ja('', f.fixed)}</b>` : ''}</div>
+        <li>${fixHtml(f.original, f.fixed, live)}
           ${f.why != null ? `<div class="cs-fb-why">${esc(f.why)}</div>` : ''}</li>`).join('')}</ol>${caret('corrections')}`);
     } else if (has('corrections') && (!live || has('corrected'))) {
       parts.push('<p class="cs-fb-none">No mistakes found. 🎉</p>');
@@ -809,6 +809,48 @@
     if (has('natural_en')) parts.push(`<p class="cs-fb-en">${esc(r.natural_en)}${caret('natural_en')}</p>`);
     if (has('try_next')) parts.push(`<p class="cs-fb-next">💡 <b>Try next:</b> ${esc(r.try_next)}${caret('try_next')}</p>`);
     return parts.join('');
+  }
+
+  // A correction as two lines, yours (red) over the fix (green), with what
+  // changed marked on both (answer-diff.js). They're compared by reading,
+  // so writing ともだち where the fix has 友達 isn't a change: the fix's
+  // furigana gives its kanji's readings, and the same kanji in your words
+  // read the same.
+  function fixHtml(original, fixed, live) {
+    if (original == null) return '';
+    const fixedMarkup = fixed == null ? null : live ? String(fixed).replace(/\[[^\]]*$/, '') : fixed;
+    // Units: a kanji run with its reading, or one character.
+    const fixUnits = fixedMarkup == null ? [] : pieces(fixedMarkup).flatMap(p => (p.r
+      ? [{ html: `<ruby>${esc(p.t)}<rt>${esc(p.r)}</rt></ruby>`, kana: p.r }]
+      : Array.from(p.t).map(ch => ({ html: esc(ch), kana: ch }))));
+    const readings = pieces(fixedMarkup || '').filter(p => p.r).sort((x, y) => y.t.length - x.t.length);
+    const mineUnits = [];
+    for (let i = 0; i < original.length;) {
+      const hit = readings.find(p => original.startsWith(p.t, i));
+      if (hit) { mineUnits.push({ html: esc(hit.t), kana: hit.r }); i += hit.t.length; continue; }
+      const ch = Array.from(original.slice(i))[0];
+      mineUnits.push({ html: esc(ch), kana: ch });
+      i += ch.length;
+    }
+    // Diff the readings, then mark each unit that has a changed character.
+    const flagged = (units, side) => {
+      let k = 0;
+      return units.map(u => {
+        const n = Array.from(u.kana).length;
+        const changed = side && side.slice(k, k + n).some(c => !c.ok);
+        k += n;
+        return changed ? `<mark>${u.html}</mark>` : u.html;
+      }).join('');
+    };
+    const d = fixedMarkup != null && global.AnswerDiff
+      ? global.AnswerDiff.diff(mineUnits.map(u => u.kana).join(''), fixUnits.map(u => u.kana).join(''))
+      : null;
+    const mine = flagged(mineUnits, d && d.typed);
+    const fix = fixedMarkup == null ? '' : flagged(fixUnits, d && d.expected) + (live ? '<span class="cs-fb-caret" aria-hidden="true"></span>' : '');
+    return `<div class="cs-fb-fix" lang="ja">
+        <div class="cs-fb-wrong"><span class="cs-fb-sign" aria-label="You wrote">✗</span><span>${mine}</span></div>
+        ${fixedMarkup != null ? `<div class="cs-fb-right"><span class="cs-fb-sign" aria-label="Better">✓</span><span>${fix}</span></div>` : ''}
+      </div>`;
   }
 
   function renderFeedback() {
