@@ -55,6 +55,18 @@ check(Misc.matchItems(na, '綺麗').length === 1, '綺麗 names きれい');
 check(Misc.matchItems(na, 'たかい').length === 0, 'たかい is not a な-adjective');
 check(/い-adjective/.test(na.miss('たかい')), 'typing an い-adjective says so');
 
+// ─── Ways to say "but" ───────────────────────────────────────────────────────
+
+const but = Misc.QUIZZES.find(q => q.id === 'but').sections[0];
+check(but.items.length === 10, `expected 10 ways to say "but", got ${but.items.length}`);
+check(Misc.matchItems(but, 'kedo').length === 1, 'romaji kedo names けど');
+check(Misc.matchItems(but, 'ga').length === 1, 'romaji ga names が');
+check(Misc.matchItems(but, 'ケレドモ').length === 1, 'katakana ケレドモ names けれども');
+check(Misc.matchItems(but, 'それでも').length === 1 && Misc.matchItems(but, 'でも').length === 1, 'でも and それでも are separate');
+check(Misc.matchItems(but, 'だから').length === 0, 'だから is not "but"');
+check(/therefore/.test(but.miss('だから')), 'typing だから says what it means');
+check(but.miss('ねこ') === '', 'no hint for unrelated words');
+
 // ─── Counters ────────────────────────────────────────────────────────────────
 
 const counters = { items: Misc.QUIZZES.find(q => q.id === 'counters').sections.flatMap(sec => sec.items) };

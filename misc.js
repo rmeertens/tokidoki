@@ -240,6 +240,27 @@
     }));
   }
 
+  // The ways to say "but": [word, meaning, typical use].
+  const BUT_WORDS = [
+    ['が', 'but / although', 'Connects clauses; often polite or neutral'],
+    ['けど', 'but / though', 'Everyday conversation'],
+    ['けれど', 'but / although', 'Slightly more formal than けど'],
+    ['けれども', 'although / however', 'More formal or deliberate'],
+    ['でも', 'but / however', 'Often starts a new statement'],
+    ['しかし', 'however', 'Formal writing, presentations'],
+    ['ですが', 'but / however', 'Polite, often at the beginning of a response'],
+    ['なのに', 'even though / despite that', 'Expresses an unexpected result'],
+    ['それでも', 'even so / nevertheless', 'Something happens despite the contrast'],
+    ['ところが', 'however / contrary to expectations', 'Introduces a surprising result'],
+  ];
+  // Other linking words you might type instead, for a hint.
+  const NOT_BUT = {
+    'そして': 'and (then)', 'それから': 'and then / after that', 'それに': 'besides / on top of that',
+    'だから': 'so / therefore', 'ですから': 'so / therefore (polite)', 'から': 'because / so',
+    'ので': 'because / so', 'それで': 'and so / that\'s why', 'すると': 'and then / thereupon',
+    'また': 'also / again', 'しかも': 'moreover', 'のに': 'even though — close! The one on the list starts with な',
+  };
+
   const TE_ROWS = [
     { key: 'う', value: 'って', ex: '買う → 買って' },
     { key: 'つ', value: 'って', ex: '待つ → 待って' },
@@ -290,6 +311,26 @@
         miss(s) {
           const i = I_ADJECTIVES.find(a => a.kanji === s || a.reading === s);
           return i ? `${i.kanji} (${i.reading}) is a real い-adjective.` : '';
+        },
+      }],
+    },
+    {
+      id: 'but',
+      glyph: '逆',
+      title: 'Ways to say "but"',
+      ja: '逆接の言い方',
+      desc: `From casual けど to formal しかし (${BUT_WORDS.length}). Can you name them all?`,
+      sections: [{
+        type: 'find',
+        placeholder: 'Type a word — kana or romaji',
+        columns: ['Japanese', 'Meaning', 'Typical use'],
+        items: BUT_WORDS.map(([word, meaning, use]) => ({
+          cells: [word, meaning, use],
+          accept: [word],
+        })),
+        miss(s) {
+          const other = NOT_BUT[s];
+          return other ? `${s} means ${other}.` : '';
         },
       }],
     },
