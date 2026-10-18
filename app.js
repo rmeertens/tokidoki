@@ -274,6 +274,21 @@
   // Other scripts (sync.js) use the same notes.
   window.TokidokiCoachMark = { show: showCoachMark, hide: hideCoachMark };
 
+  // The settings panel lives in the overlay on the chapter list and at the
+  // top of the study screen while studying.
+  function placeSettingsPanel(inline) {
+    const panel = $('.settings-panel');
+    const host = inline ? $('#study-settings') : $('#settings-overlay .settings-overlay-content');
+    if (panel && host && panel.parentElement !== host) host.appendChild(panel);
+  }
+
+  // A changed setting shows on the card in front of you, not just the next one.
+  function redrawStudyCard() {
+    if (!screens.study || !screens.study.classList.contains('active')) return;
+    if (answered || sessionIndex >= sessionCards.length) return;
+    showCard();
+  }
+
   function showScreen(name) {
     Object.values(screens).filter(Boolean).forEach(s => s.classList.remove('active'));
     screens[name].classList.add('active');
@@ -282,7 +297,14 @@
     if (name === 'study') {
       consecutiveMisses = 0;
       refHintShown = false;
-      showCoachMark('#btn-settings', 'settings here');
+      const inline = $('#study-settings');
+      if (inline) {
+        placeSettingsPanel(true);
+        $('#settings-overlay')?.classList.add('hidden');
+        inline.open = !!settings.studySettingsOpen;
+      } else {
+        showCoachMark('#btn-settings', 'settings here');
+      }
     }
 
     // Disable pinch/double-tap zoom only while the kana canvas is on screen —
@@ -5913,6 +5935,17 @@
         </div>`;
     }
 
+    // On the study screen the same settings sit at the top, above the card,
+    // so they can be changed mid-session; the panel moves there (see
+    // placeSettingsPanel) and the overlay is only used from the chapter list.
+    const studyScreen = document.getElementById('screen-study');
+    if (studyScreen && document.getElementById('settings-overlay')) {
+      studyScreen.insertAdjacentHTML('afterbegin', `
+        <details id="study-settings" class="study-settings">
+          <summary class="study-settings-summary">⚙ Settings</summary>
+        </details>`);
+    }
+
     const refMount = document.getElementById('ref-mount');
     if (refMount && refMount.dataset.kind === 'verb-particles') {
       refMount.outerHTML = `
@@ -6175,13 +6208,27 @@
     }, true);
 
     // Settings button
-    function openSettings() {
+    function syncSettingsControls() {
+      if (!$('#setting-typing-mode')) return;
       $('#setting-typing-mode').checked = settings.typingMode;
       $('#setting-form-display').value = settings.formDisplay;
       $('#setting-show-context').checked = settings.showContext;
       $('#setting-english-to-japanese').checked = settings.englishToJapanese;
       $('#setting-show-example-front').checked = settings.showExampleFront;
       $('#setting-show-furigana').checked = settings.showFurigana;
+    }
+
+    function openSettings() {
+      // While studying, the gear opens the settings above the card instead.
+      const inline = $('#study-settings');
+      if (inline && screens.study && screens.study.classList.contains('active')) {
+        syncSettingsControls();
+        inline.open = !inline.open;
+        if (inline.open) inline.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        return;
+      }
+      placeSettingsPanel(false);
+      syncSettingsControls();
       $('#settings-overlay').classList.remove('hidden');
     }
 
@@ -6189,6 +6236,11 @@
       $('#settings-overlay').classList.add('hidden');
     }
 
+    syncSettingsControls();
+    on('#study-settings', 'toggle', (e) => {
+      settings.studySettingsOpen = e.target.open;
+      saveSettings(settings);
+    });
     on('#btn-settings', 'click', openSettings);
     on('#btn-close-settings', 'click', closeSettings);
     on('.settings-overlay-backdrop', 'click', closeSettings);
@@ -6197,27 +6249,32 @@
     on('#setting-typing-mode', 'change', (e) => {
       settings.typingMode = e.target.checked;
       saveSettings(settings);
+      redrawStudyCard();
     });
 
     on('#setting-form-display', 'change', (e) => {
       settings.formDisplay = e.target.value;
       settings.hideForm = e.target.value !== 'name';
       saveSettings(settings);
+      redrawStudyCard();
     });
 
     on('#setting-show-context', 'change', (e) => {
       settings.showContext = e.target.checked;
       saveSettings(settings);
+      redrawStudyCard();
     });
 
     on('#setting-english-to-japanese', 'change', (e) => {
       settings.englishToJapanese = e.target.checked;
       saveSettings(settings);
+      redrawStudyCard();
     });
 
     on('#setting-show-example-front', 'change', (e) => {
       settings.showExampleFront = e.target.checked;
       saveSettings(settings);
+      redrawStudyCard();
     });
 
     on('#setting-show-furigana', 'change', (e) => setStudyFurigana(e.target.checked));

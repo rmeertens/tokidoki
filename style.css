@@ -3289,6 +3289,49 @@ a.chapter-card {
   transform: translateX(20px);
 }
 
+/* Settings at the top of the study screen (the overlay's panel, moved here) */
+.study-settings {
+  margin-bottom: 14px;
+}
+
+.study-settings-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  transition: background var(--transition), color var(--transition);
+}
+
+.study-settings-summary::-webkit-details-marker { display: none; }
+.study-settings-summary::after { content: '▾'; font-size: 0.75rem; }
+.study-settings[open] .study-settings-summary::after { content: '▴'; }
+.study-settings-summary:hover { background: var(--bg-card-hover); color: var(--text); }
+
+.study-settings .settings-panel {
+  margin-top: 8px;
+}
+
+.study-settings .setting-row {
+  padding: 10px 14px;
+  gap: 12px;
+}
+
+.study-settings .setting-row + .setting-row {
+  border-top: 1px solid var(--border);
+}
+
+.study-settings .setting-label { font-size: 0.88rem; }
+.study-settings .setting-desc { font-size: 0.72rem; }
+
 /* Vimium compatibility: hidden input to capture focus */
 .key-capture {
   position: absolute;
