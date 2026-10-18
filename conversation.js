@@ -106,8 +106,8 @@
   //
   // A hint unlocks by itself once your answer uses it. Each hint gives a few
   // "forms" — lists of fragments that must appear in order — in kanji and in
-  // kana. Verbs and adjectives also match by their stem (行[い]きました →
-  // 行き, 出[で]かける → 出かけ), and patterns split at their 〜 / A / B
+  // kana. Verbs and adjectives also match by the stems their forms share
+  // (stems() below), and patterns split at their 〜 / A / B
   // (〜たり〜たりしました → たり … たりし).
 
   const HIRA_RE = /^[ぁ-ゖー]+$/;
@@ -133,41 +133,171 @@
     return Array.from(w).length >= min ? w : word;
   }
 
+  // Every stem the forms of a word share, so any of them can be spotted:
+  // 明るい → 明る (明るくて, 明るかった); 泳ぎました → 泳ぎ, 泳い (泳いで);
+  // 帰りました → 帰っ (帰って); 澄む → 澄み, 澄ん (澄んで); 年をとる →
+  // 年をとっ (年をとったら); 勉強します → 勉強し. `inflects` is false for
+  // words that don't conjugate (洗濯 stays whole).
+  const I_STEM = { う: 'い', く: 'き', ぐ: 'ぎ', す: 'し', つ: 'ち', ぬ: 'に', ぶ: 'び', む: 'み', る: 'り' };
+  const TE_STEM = { い: 'っ', き: 'い', ぎ: 'い', し: 'し', ち: 'っ', に: 'ん', び: 'ん', み: 'ん', り: 'っ' };
+  function stems(word, inflects = true, isGodan = null) {
+    const out = new Set([word]);
+    const s = stem(word, 1, inflects);
+    out.add(s);
+    if (!inflects) return [...out];
+    const end = POLITE.find(e => word.endsWith(e) && word.length - e.length >= 1);
+    const w = end ? word.slice(0, -end.length) : word;
+    const last = w.slice(-1);
+    const body = w.slice(0, -1);
+    if (w.endsWith('する') && w.length > 2) { out.add(w.slice(0, -2) + 'し'); out.add(w.slice(0, -2)); }
+    else if (end && last === 'し' && new RegExp('[' + KANJI + ']{2}$').test(body)) out.add(body); // 勉強します → 勉強 (not 話します → 話)
+    // The plain forms of a polite one: ています → ている, ていました → ていた,
+    // られました → られた, ません → ない (ichidan-style, and godan by the
+    // stem's last kana: 行きます → 行く, 行きました → 行った).
+    const U = { い: 'う', き: 'く', ぎ: 'ぐ', し: 'す', ち: 'つ', に: 'ぬ', び: 'ぶ', み: 'む', り: 'る' };
+    const A = { い: 'わ', き: 'か', ぎ: 'が', し: 'さ', ち: 'た', に: 'な', び: 'ば', み: 'ま', り: 'ら' };
+    // Godan changes only for a real verb stem (泳ぎ, 読み: kanji, then one
+    // kana) — not for a pattern's own kana (てき, てい).
+    // The helper verbs in patterns count too: 〜てしまいました → てしまった.
+    // In kana (かえります) there's no kanji to tell, so the kanji spelling's
+    // answer is passed in as isGodan.
+    const godan = !!U[last] && (isGodan != null ? isGodan : KANJI_CHAR.test(body.slice(-1)) || /(しまい|もらい|おき|あり)$/.test(w));
+    const teStem = /行$/.test(body) && last === 'き' ? 'っ' : TE_STEM[last];
+    // Any ます-stem takes these (食べます → 食べません, たべたい).
+    if (/^ま(す|した|せん|せんでした)$/.test(end || '') && Array.from(w).length >= 2) ['ます', 'ました', 'ません', 'たい', 'ましょう'].forEach(e => out.add(w + e));
+    if (end === 'ます') { out.add(w + 'る'); if (godan) out.add(body + U[last]); }
+    if (end === 'ました') { out.add(w + 'た'); if (godan) out.add(body + teStem + (teStem === 'ん' || (teStem === 'い' && last === 'ぎ') ? 'だ' : 'た')); }
+    if (end === 'ません') { out.add(w + 'ない'); if (godan) out.add(body + A[last] + 'ない'); }
+    if (end === 'ませんでした') out.add(w + 'なかった');
+    if (last === 'い' && body && (!end || end === 'です')) out.add(body);                // 明るい, 小さいです (not います)
+    if (godan) out.add(body + teStem);                                                    // 泳ぎ → 泳い
+    if (!end && I_STEM[last] && body) {                                                  // 澄む → 澄み, 澄ん
+      out.add(body + I_STEM[last]);
+      const te = /^行/.test(word) ? 'っ' : { う: 'っ', つ: 'っ', る: 'っ', む: 'ん', ぶ: 'ん', ぬ: 'ん', く: 'い', ぐ: 'い', す: 'し' }[last];
+      out.add(body + te);
+    }
+    return [...out].filter(x => x);
+  }
+
   // Long enough to mean something on its own: any kanji, katakana of two or
-  // more, hiragana of three or more (two for grammar).
-  function meaningful(frags, grammar) {
+  // more, hiragana of three or more (two for grammar, and two for a word
+  // that stands on its own: まず, うち — see hasForm).
+  function meaningful(frags, grammar, bounded) {
     const all = frags.join('');
     if (!all) return false;
     if (KANJI_CHAR.test(all)) return true;
-    return Array.from(all).length >= (grammar || !HIRA_RE.test(all) ? 2 : 3);
+    return Array.from(all).length >= (grammar || bounded || !HIRA_RE.test(all) ? 2 : 3);
   }
+
+  const PUNCT = /[、。,.!?！？「」]/g;
+
+  // Short enough to turn up inside other words: three kana or fewer, or a
+  // stem of two (かい-ません, か-った, き-ました). Longer ones (れんしゅう) don't.
+  const ENDINGS = /(ませんでした|ました|ません|ましょう|ます|でした|です|たい|って|んで|いて|して|った|んだ|いた|した|ない|る|た|て)$/;
+  const shortKana = w => Array.from(w).length <= 3 || Array.from(w.replace(ENDINGS, '')).length <= 2;
 
   function matchForms(h, step) {
     const grammar = step === 'grammar' || /[〜~A-Z]/.test(h.ja);
+    const p = plain(h.ja);
+    // Conjugates: a verb, or a word written with kanji and kana after it (明るい, 年をとる).
+    const inflects = step !== 'words' || (KANJI_CHAR.test(p) && /[ぁ-ゖ]$/.test(p));
     const out = [];
-    [plain(h.ja), kana(h.ja)].forEach(text => {
+    const push = (f, bounded) => {
+      if (!meaningful(f, grammar, bounded) || out.some(o => o.join('|') === f.join('|'))) return;
+      if (bounded) f.bounded = true;
+      // A lone kanji word (犬, 本) mustn't be part of another word; a
+      // pattern's (〜派, 〜歳) is meant to follow one.
+      if (!grammar) f.lone = true;
+      // A word in kana has to start a word (after a space, punctuation or a
+      // particle): かった isn't 買った in 面白かった, nor かいません in しかいません.
+      if (!grammar && f.length === 1 && HIRA_RE.test(f[0]) && shortKana(f[0])) f.edge = true;
+      out.push(f);
+    };
+    // Whether the word is a godan verb, from its kanji spelling (帰ります: a
+    // kanji, then り), so its kana spelling (かえります) conjugates the same.
+    const lastFrag = p.split(/[〜~A-Z\s/]+/).filter(Boolean).pop() || '';
+    const masu = /(ます|ました|ません)$/.exec(lastFrag);
+    const stemEnd = masu ? lastFrag.slice(0, -masu[0].length) : lastFrag;
+    const isGodan = /[いきぎしちにびみり]$/.test(stemEnd) && (KANJI_CHAR.test(stemEnd.slice(-2, -1)) || /(しまい|もらい|おき|あり)$/.test(stemEnd));
+    [p, kana(h.ja)].forEach(text => {
+      addForms(text);
+      // Without its punctuation too, as long as every piece is still a real
+      // piece (は〜で、は… stripped to は…で…は would match anything).
+      const bare = text.replace(PUNCT, '');
+      if (bare !== text && bare.split(/[〜~A-Z\s/]+/).filter(Boolean).every(f => Array.from(f).length >= 2 || KANJI_CHAR.test(f))) addForms(bare);
+    });
+    return out;
+
+    function addForms(text) {
       const frags = text.replace(/\([^)]*\)/g, '〜').split(/[〜~A-Z\s/]+/).filter(Boolean)
         .filter((f, i, all) => all.length === 1 || !/^(だ|です)$/.test(f)); // まさに〜だ
       if (!frags.length) return;
-      const last = frags.length - 1;
-      const cut = frags.slice(0, last).concat(stem(frags[last], grammar ? 2 : 1, step !== 'words'));
-      // 〜てほしい also comes as 読んでほしい, 〜たもの as 遊んだもの.
-      const voiced = f => f.map((x, i) => (i === 0 && grammar ? x.replace(/^て/, 'で').replace(/^た/, 'だ') : x));
-      [cut, frags, voiced(cut)].forEach(f => {
-        if (meaningful(f, grammar) && !out.some(o => o.join('|') === f.join('|'))) out.push(f);
+      const lastI = frags.length - 1;
+      // A short kana word on its own (まず, うち) has to stand alone in the answer.
+      const short = !grammar && frags.length === 1 && HIRA_RE.test(frags[0]) && Array.from(frags[0]).length === 2;
+      stems(frags[lastI], inflects, isGodan).forEach(end => {
+        // A pattern cut down to a tiny stem matches anything (〜日でした → 日,
+        // 〜てきました → てい): keep 3 characters, or 2 with a kanji.
+        const n = Array.from(end).length;
+        if (grammar && end !== frags[lastI] && !(n >= 3 || (n >= 2 && KANJI_CHAR.test(end)))) return;
+        const f = frags.slice(0, lastI).concat(end);
+        push(f, short);
+        if (grammar) {
+          // 〜てほしい also comes as 読んでほしい, 〜たもの as 遊んだもの.
+          push(f.map((x, i) => (i === 0 ? x.replace(/^て/, 'で').replace(/^た/, 'だ') : x)));
+          // 〜が好きです also counts as 音楽も好きです, and 〜と言われます as
+          // …とよく言われます (a word between the particle and the rest).
+          const lead = /^[がをにはもでと]/.exec(f[0]);
+          if (lead && f[0].length > 1) {
+            const rest = f[0].slice(1);
+            if (KANJI_CHAR.test(rest) || Array.from(rest).length >= 3) {
+              if (lead[0] !== 'と') push([rest].concat(f.slice(1)));
+              push([lead[0], rest].concat(f.slice(1)));
+            }
+          }
+        }
       });
-    });
-    return out;
+    }
   }
 
   // Whether `answer` contains the fragments in order. A lone kanji (犬, 本)
-  // must stand on its own, so 本 doesn't match inside 日本.
+  // must stand on its own, so 本 doesn't match inside 日本 — though a number
+  // may sit next to it (朝七時, 五千円). A short kana word (まず) must too.
+  const NUMERAL = /[一二三四五六七八九十百千万何数半毎0-9０-９]/;
+  const lonely = (answer, i, len) => {
+    const prev = answer[i - 1] || '', next = answer[i + len] || '';
+    return (!KANJI_CHAR.test(prev) || NUMERAL.test(prev)) && (!KANJI_CHAR.test(next) || NUMERAL.test(next));
+  };
+  // Starts after the start, punctuation or a particle — not straight after
+  // a kanji (くに isn't 国 in 近くに) — and ends before anything but more kana.
+  const standsAlone = (answer, i, len) => {
+    const prev = answer[i - 1] || '', next = answer[i + len] || '';
+    const before = !prev || /[、。,.!?！？「」\s]/.test(prev) || PARTICLE.test(prev);
+    const after = !next || !/[ぁ-ゖ]/.test(next) || PARTICLE.test(next);
+    return before && after;
+  };
+  // One kanji and kana (習い, 切る) can't be the end of a longer word
+  // (見習い, 裏切る): no kanji right before it, unless a number.
+  const ONE_KANJI_LEAD = new RegExp('^[' + KANJI + '](?![' + KANJI + '])');
+  const startsWord = (answer, i) => {
+    const prev = answer[i - 1] || '';
+    // Particles, but not や: it's more often inside a word (やすくなる).
+    return !prev || /[、。,.!?！？「」\s]/.test(prev) || /[はがをにでともへの]/.test(prev);
+  };
   function hasForm(answer, frags) {
     let from = 0;
     for (const f of frags) {
       let i = answer.indexOf(f, from);
-      if (frags.length === 1 && Array.from(f).length === 1) {
-        while (i >= 0 && (KANJI_CHAR.test(answer[i - 1] || '') || KANJI_CHAR.test(answer[i + f.length] || ''))) i = answer.indexOf(f, i + 1);
+      if (frags.lone && frags.length === 1 && Array.from(f).length === 1) {
+        while (i >= 0 && !lonely(answer, i, f.length)) i = answer.indexOf(f, i + 1);
+      } else if (frags.lone && frags.length === 1 && ONE_KANJI_LEAD.test(f)) {
+        while (i >= 0 && KANJI_CHAR.test(answer[i - 1] || '') && !NUMERAL.test(answer[i - 1])) i = answer.indexOf(f, i + 1);
+      }
+      if (frags.edge) {
+        while (i >= 0 && !startsWord(answer, i)) i = answer.indexOf(f, i + 1);
+      }
+      if (frags.bounded) {
+        while (i >= 0 && !standsAlone(answer, i, f.length)) i = answer.indexOf(f, i + 1);
       }
       if (i < 0) return false;
       from = i + f.length;
@@ -177,9 +307,12 @@
 
   // The ids of the hints (from hintItems) your answer uses.
   function usedHints(answer, items) {
-    const a = String(answer || '').replace(/\s/g, '');
+    // Spaces you type mark where words start, so they're kept in one version.
+    const spaced = String(answer || '').replace(/\s+/g, ' ').trim();
+    const a = spaced.replace(/ /g, '');
     if (!a) return [];
-    return items.filter(h => matchForms(h, h.step).some(f => hasForm(a, f))).map(h => h.id);
+    const bare = a.replace(PUNCT, '');
+    return items.filter(h => matchForms(h, h.step).some(f => hasForm(a, f) || hasForm(bare, f) || hasForm(spaced, f))).map(h => h.id);
   }
 
   // ─── Writing in kanji ──────────────────────────────────────────────────────
@@ -349,7 +482,7 @@
     return { text: out, caret, changed };
   }
 
-  const api = { pieces, plain, kana, rubyHtml, parseHint, levelData, insertable, insertAt, charCount, answerKey, hintItems, stem, verbForms, matchForms, hasForm, usedHints, buildKanjiDict, buildKanjiCandidates, toKanji, LEVELS, STEPS };
+  const api = { pieces, plain, kana, rubyHtml, parseHint, levelData, insertable, insertAt, charCount, answerKey, hintItems, stem, stems, verbForms, matchForms, hasForm, usedHints, buildKanjiDict, buildKanjiCandidates, toKanji, LEVELS, STEPS };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   global.Conversation = api;
   if (typeof document === 'undefined') return;

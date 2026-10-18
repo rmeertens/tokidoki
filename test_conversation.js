@@ -107,6 +107,46 @@ CONVERSATION_TOPICS.forEach(t => C.LEVELS.forEach(level => {
   });
 }));
 
+// Answers as a learner might type them (kana or kanji, spaces or not, other
+// forms of the words): the hints each must unlock, and some it mustn't.
+const LEARNER = [
+  ['weekend', 'N5', 'どようびに ともだちと えいがを みました。たのしかったです。', ['土曜日', '友達', '映画', '〜ました', '〜かったです'], ['公園', '〜と一緒に']],
+  ['weekend', 'N5', '土曜日は友達と映画を見ました。面白かったです。', ['土曜日', '友達', '映画', '〜ました', '〜かったです'], ['日曜日']],
+  ['family', 'N5', 'ちちと ははと あにが います。いぬも います。', ['父', '母', '兄', '犬', 'います'], ['姉', '妹', '弟']],
+  ['friend', 'N5', 'ゆきさんは とても あかるくて おもしろい ひとです。', ['明るい', '面白い', '〜人です'], ['背が高い']],
+  ['friend', 'N5', 'ケンさんは背が高くて、明るい人です。よく話します。', ['背が高い', '明るい', '話します', '〜人です'], ['面白い']],
+  ['food', 'N5', 'わたしは すしが いちばん すきです。でも にくは あまり たべません。', ['すし', '肉', '好きです', '食べます', '一番〜', 'あまり〜ません'], ['野菜']],
+  ['hometown', 'N5', 'わたしの まちは ちいさくて しずかです。えきの まえに スーパーが あります。', ['町', '駅', 'スーパー', '小さいです', '静かです', 'あります', '〜に〜があります', '〜くて、〜'], ['川', 'レストラン']],
+  ['today', 'N5', 'けさ 7じに おきました。うちに かえってから ねました。', ['起きました', '帰りました', '〜てから'], ['働きました']],
+  ['best-trip', 'N5', 'きょねん かぞくと うみで およいで、たのしかったです。', ['去年', '家族', '海', '泳ぎました', '楽しかったです', '〜かったです'], ['天気']],
+  ['morning', 'N4', 'まず コーヒーを のみながら ニュースを みます。', ['まず', 'ニュース', '〜ながら'], ['お弁当']],
+  ['hobby', 'N4', 'ギターを ひくことが すきです。まいにち れんしゅうを つづけています。', ['ギター', '練習', '続ける'], ['曲']],
+  ['shopping', 'N4', 'セールで そうじきを かいました。かってよかったです。', ['セール', '掃除機', '〜てよかった'], ['ネット']],
+  ['city-country', 'N4', '年をとったら、いなかで のんびり くらしたいです。', ['年をとる', '暮らす'], ['家賃']],
+  ['best-trip', 'N4', 'みちに まよって しまいました。でも 地元の人が あんないしてくれました。', ['道に迷う', '地元の人', '案内する', '〜てしまいました'], ['鳥居']],
+  ['hobby', 'N3', 'さいきん しょうぎに はまっています。やればやるほど おもしろいです。', ['将棋', 'はまる', '〜ば〜ほど'], ['仲間']],
+  ['weekend', 'N3', 'おゆに ゆっくり つかって、げんきに なりました。', ['つかる'], ['家事']],
+  ['season', 'N3', '空気が澄んでいて、山がよく見えます。', ['空気が澄む'], ['こたつ']],
+  ['introduce', 'N5', 'わたしは がくせいです。にほんごを べんきょうしています。', ['学生', '勉強しています'], ['会社員']],
+];
+LEARNER.forEach(([id, level, answer, must, mustNot]) => {
+  const items = C.hintItems(C.levelData(CONVERSATION_TOPICS.find(t => t.id === id), level));
+  const used = new Set(C.usedHints(answer, items).map(x => C.plain(items.find(h => h.id === x).ja)));
+  must.forEach(m => ok(used.has(m), `learner ${id} ${level}: ${m} spotted in ${answer}`));
+  mustNot.forEach(m => ok(!used.has(m), `learner ${id} ${level}: ${m} not spotted in ${answer}`));
+});
+// Forms of words, and words inside other words.
+const usedIn2 = (id, level, text) => { const items = C.hintItems(C.levelData(CONVERSATION_TOPICS.find(t => t.id === id), level)); return C.usedHints(text, items).map(x => C.plain(items.find(h => h.id === x).ja)); };
+ok(usedIn2('friend', 'N5', '明るくて').includes('明るい') && usedIn2('friend', 'N5', 'あかるかった').includes('明るい'), 'uses: an adjective in other forms');
+ok(usedIn2('today', 'N5', '朝七時に').includes('朝'), 'uses: a lone kanji next to a number (朝七時)');
+ok(usedIn2('shopping', 'N5', '五千円でした').includes('〜円'), 'uses: a counter after a number (五千円)');
+ok(!usedIn2('travel', 'N5', '北海道に行きたい').includes('海'), 'uses: 海 is not in 北海道');
+ok(!usedIn2('hobby', 'N5', '日本の歌').includes('本'), 'uses: 本 is not in 日本');
+ok(!usedIn2('shopping', 'N5', 'とても面白かったです').includes('買いました') && !usedIn2('shopping', 'N5', '彼しかいません').length, 'uses: かった in 面白かった is not 買った');
+ok(!usedIn2('hometown', 'N5', '両立しやすくなりました').includes('少ないです'), 'uses: すくな in やすくなりました is not 少ない');
+ok(usedIn2('family', 'N4', '父に似ているとよく言われます').includes('〜と言われます'), 'uses: a word between a pattern\'s particle and the rest');
+ok(usedIn2('hometown', 'N4', '静かだし、自然も多いし').includes('〜し、〜し'), 'uses: 〜し、〜し');
+
 // Nearly every grammar point is spotted in its own example sentence.
 let spotted = 0, grammarTotal = 0;
 CONVERSATION_TOPICS.forEach(t => C.LEVELS.forEach(level => {
