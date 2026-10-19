@@ -640,14 +640,14 @@
       $('#misc-desc').textContent = quiz.desc;
       $('#misc-result').classList.add('hidden');
       $('#misc-give-up').classList.remove('hidden');
-      $('#misc-give-up').textContent = later() ? 'Check answers' : 'Give up';
       $('#misc-again').classList.add('hidden');
       renderQuiz();
       // Only prompts you answer one by one have an order worth mixing up, or
-      // answers worth checking at the end.
+      // answers worth typing again.
       $('#misc-toggles').classList.toggle('hidden', !quiz.sections.some(sec => sec.type === 'fill'));
       $('#misc-shuffle').checked = !!settings.shuffle;
-      $('#misc-later').checked = !!settings.later;
+      $('#misc-retype').checked = !!settings.retype;
+      $('#misc-body').classList.remove('misc-retype-on');
       orderRows();
       updateScore();
       clearInterval(timer);
@@ -702,7 +702,7 @@
     }
 
     function onInput(inp, enter) {
-      if (over) return;
+      if (over) { if (inp.dataset.retype) onRetype(inp, enter); return; }
       const si = +inp.dataset.section;
       const sec = quiz.sections[si];
       const text = enter && Romaji ? Romaji.flush(inp) : inp.value;
@@ -720,14 +720,13 @@
           miss.textContent = again ? 'Already got that one.' : (sec.miss && sec.miss(s)) || 'Not one of them.';
           inp.select();
         }
-      } else if (later()) {
-        // Answers wait for Check answers; Enter just moves on.
-        if (enter) nextInput(inp, 1);
       } else {
         const i = +inp.dataset.row;
         if (matchItems({ items: [sec.items[i]] }, text).length) {
           reveal(si, i, 'found');
-          nextInput(inp, 0);
+          const open = [...document.querySelectorAll('#misc-body input')];
+          const next = open.slice(open.indexOf(inp)).concat(open).find(x => !x.disabled);
+          if (next) next.focus();
         } else if (enter) {
           inp.classList.remove('misc-wrong');
           void inp.offsetWidth;
@@ -738,33 +737,6 @@
       if (found.every((f, s) => f.size === quiz.sections[s].items.length)) finish();
     }
 
-    // In "check at the end" mode, fill answers are only marked by Check answers.
-    function later() {
-      return !!settings.later;
-    }
-
-    // Focuses the next open answer box, in the order shown (from `skip`
-    // boxes after inp, wrapping round).
-    function nextInput(inp, skip) {
-      const open = [...document.querySelectorAll('#misc-body input')];
-      const at = open.indexOf(inp) + skip;
-      const next = open.slice(at).concat(open.slice(0, at)).find(x => !x.disabled && x !== inp);
-      if (next) next.focus();
-    }
-
-    // Marks every typed fill answer: right ones count, wrong ones are kept
-    // to show next to the answer.
-    function checkFilled() {
-      quiz.sections.forEach((sec, si) => {
-        if (sec.type !== 'fill') return;
-        sec.items.forEach((it, i) => {
-          if (found[si].has(i)) return;
-          const inp = document.querySelector(`.misc-section[data-section="${si}"] tr[data-row="${i}"] input`);
-          if (matchItems({ items: [it] }, inp.value).length) reveal(si, i, 'found');
-        });
-      });
-    }
-
     function reveal(si, i, how) {
       const sec = quiz.sections[si];
       if (how === 'found') found[si].add(i);
@@ -773,18 +745,63 @@
       if (sec.type === 'fill') {
         const it = sec.items[i];
         const inp = row.querySelector('input');
-        const typed = how === 'missed' ? inp.value.trim() : '';
         inp.value = it.answer;
         inp.disabled = true;
-        if (it.answerHtml || it.card || typed) {
-          // Shown as text instead, so it can carry furigana, a ＋ and what
-          // you typed wrong.
-          inp.classList.add('hidden');
-          const cell = inp.parentElement;
-          cell.insertAdjacentHTML('beforeend', (typed ? `<span class="misc-typed" lang="ja">${esc(typed)}</span>` : '')
-            + `<span class="misc-answer" lang="ja">${it.answerHtml || esc(it.answer)}</span>`
-            + (it.card ? deckButtonHtml(it.card.word) : ''));
-        }
+        // Shown as text instead, so it can carry furigana and a ＋, and be
+        // clicked to type it again after the results.
+        inp.classList.add('hidden');
+        const cell = inp.parentElement;
+        cell.insertAdjacentHTML('beforeend', `<span class="misc-answer" lang="ja">${it.answerHtml || esc(it.answer)}</span>`
+          + (it.card ? deckButtonHtml(it.card.word) : ''));
+      }
+    }
+
+    // ─── Typing answers again after the results ──────────────────────────────
+    // With the option on, clicking a fill answer hides it and opens its box
+    // again; typing it right shows it in green. The score stays as it was.
+
+    function retypeOn() {
+      $('#misc-body').classList.toggle('misc-retype-on', over && !!settings.retype);
+    }
+
+    function startRetype(row) {
+      const inp = row.querySelector('input');
+      const answer = row.querySelector('.misc-answer');
+      if (!inp || !answer) return;
+      row.classList.remove('misc-retyped');
+      answer.classList.add('hidden');
+      inp.value = '';
+      inp.dataset.retype = '1';
+      inp.disabled = false;
+      inp.classList.remove('hidden', 'misc-wrong');
+      inp.focus();
+    }
+
+    // Closes the box and shows the answer again (green if you typed it).
+    function endRetype(inp, right) {
+      const row = inp.closest('tr');
+      delete inp.dataset.retype;
+      inp.disabled = true;
+      inp.classList.add('hidden');
+      row.querySelector('.misc-answer').classList.remove('hidden');
+      if (right) row.classList.add('misc-retyped');
+    }
+
+    function onRetype(inp, enter) {
+      const sec = quiz.sections[+inp.dataset.section];
+      const text = enter && Romaji ? Romaji.flush(inp) : inp.value;
+      if (matchItems({ items: [sec.items[+inp.dataset.row]] }, text).length) {
+        endRetype(inp, true);
+        // On to the next answer still to get right, if any.
+        const rows = [...document.querySelectorAll('#misc-body .misc-table-fill tr[data-row]')];
+        const at = rows.indexOf(inp.closest('tr'));
+        const next = rows.slice(at + 1).concat(rows.slice(0, at))
+          .find(r => r.classList.contains('misc-missed') && !r.classList.contains('misc-retyped'));
+        if (next) startRetype(next);
+      } else if (enter) {
+        inp.classList.remove('misc-wrong');
+        void inp.offsetWidth;
+        inp.classList.add('misc-wrong');
       }
     }
 
@@ -827,10 +844,7 @@
 
     function updateScore() {
       const n = found.reduce((a, f) => a + f.size, 0);
-      // Before checking, count the boxes filled in instead.
-      const filled = [...document.querySelectorAll('#misc-body .misc-fill:not(:disabled)')].filter(x => x.value.trim()).length;
-      $('#misc-score').textContent = later() && !over && filled
-        ? `${n + filled} / ${total(quiz)} filled` : `${n} / ${total(quiz)}`;
+      $('#misc-score').textContent = `${n} / ${total(quiz)}`;
     }
 
     function elapsed() { return Math.round((Date.now() - started) / 1000); }
@@ -838,10 +852,8 @@
 
     function finish() {
       if (over) return;
-      if (later()) checkFilled();
       over = true;
       clearInterval(timer);
-      updateScore();
       updateTime();
       quiz.sections.forEach((sec, si) => sec.items.forEach((_, i) => {
         if (!found[si].has(i)) reveal(si, i, 'missed');
@@ -855,9 +867,11 @@
       const best = better(store[quiz.id], result);
       if (best) { store[quiz.id] = result; saveStore(store); }
       const res = $('#misc-result');
-      res.innerHTML = score === n
+      res.innerHTML = (score === n
         ? `🎉 All ${n} in ${formatTime(result.time)}${best ? ' — a new best!' : ''}`
-        : `You named ${score} of ${n}. The ones you missed are in red.${best ? ' New best!' : ''}`;
+        : `You named ${score} of ${n}. The ones you missed are in red.${best ? ' New best!' : ''}`)
+        + (settings.retype && quiz.sections.some(sec => sec.type === 'fill') ? ' Click an answer to type it again.' : '');
+      retypeOn();
       res.classList.remove('hidden');
       $('#misc-give-up').classList.add('hidden');
       $('#misc-again').classList.remove('hidden');
@@ -879,7 +893,21 @@
     $('#misc-give-up').addEventListener('click', finish);
     $('#misc-body').addEventListener('click', e => {
       const btn = e.target.closest('.misc-deck-btn');
-      if (btn) toggleCard(btn.dataset.word);
+      if (btn) { toggleCard(btn.dataset.word); return; }
+      const answer = e.target.closest('.misc-table-fill .misc-answer');
+      if (answer && over && settings.retype) startRetype(answer.closest('tr'));
+    });
+    // Escape, or leaving the box empty, shows the answer again.
+    $('#misc-body').addEventListener('keydown', e => {
+      if (e.key === 'Escape' && e.target.dataset.retype) endRetype(e.target, false);
+    });
+    $('#misc-body').addEventListener('focusout', e => {
+      if (e.target.dataset.retype && !e.target.value.trim()) endRetype(e.target, false);
+    });
+    $('#misc-retype').addEventListener('change', e => {
+      settings.retype = e.target.checked;
+      saveSettings(settings);
+      if (quiz) retypeOn();
     });
     $('#misc-shuffle').addEventListener('change', e => {
       settings.shuffle = e.target.checked;
@@ -887,18 +915,6 @@
       orderRows();
       const next = [...document.querySelectorAll('#misc-body input')].find(x => !x.disabled);
       if (next) next.focus();
-    });
-    $('#misc-later').addEventListener('change', e => {
-      settings.later = e.target.checked;
-      saveSettings(settings);
-      if (!quiz || over) return;
-      $('#misc-give-up').textContent = later() ? 'Check answers' : 'Give up';
-      // Switching back: what's already typed is marked straight away.
-      if (!later()) {
-        checkFilled();
-        if (found.every((f, s) => f.size === quiz.sections[s].items.length)) finish();
-      }
-      updateScore();
     });
     $('#misc-again').addEventListener('click', () => start(quiz.id));
     $('#misc-quit').addEventListener('click', home);

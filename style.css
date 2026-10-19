@@ -7425,7 +7425,9 @@ a.chapter-card.news-headline-card {
 .misc-toggles { display: flex; flex-wrap: wrap; gap: 8px 12px; margin-bottom: 14px; }
 .misc-toggles.hidden { display: none; }
 .misc-shuffle-row { display: inline-flex; }
-.misc-typed { color: var(--red); text-decoration: line-through; font-weight: 400; margin-right: 6px; }
+.misc-retype-on .misc-table-fill .misc-answer { cursor: pointer; text-decoration: underline dotted; text-underline-offset: 4px; }
+.misc-missed.misc-retyped td { background: var(--green-dim); }
+.misc-missed.misc-retyped .misc-answer { color: var(--green); }
 .misc-section + .misc-section { margin-top: 20px; }
 .misc-find { width: 100%; }
 .misc-miss { min-height: 1.3em; margin: 4px 2px 8px; font-size: 0.85rem; color: var(--orange); }
