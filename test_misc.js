@@ -118,6 +118,37 @@ keigo.forEach((sec, si) => sec.items.forEach(it => {
 const itadaku = keigo[1].items.find(it => it.answer === 'いただく').card;
 check(/eat.*drink.*receive/.test(itadaku.meaning), 'いただく card lists every verb it stands for');
 
+// ─── Bunkei patterns ─────────────────────────────────────────────────────────
+
+global.Conjugator = require('./conjugator.js');
+require('./examples.js');
+const Bunkei = require('./bunkei-data.js');
+const { GENKI_VERBS } = require('./verbs.js');
+const bunkei = Misc.QUIZZES.find(q => q.id === 'bunkei').sections;
+const bunkeiRows = bunkei.flatMap(sec => sec.items.map(it => ({ ...it, level: sec.label })));
+// Same patterns, levels and forms as the Bunkei drill, in the same order.
+check(bunkeiRows.map(it => it.id).join() === Bunkei.PATTERNS.map(p => p.id).join(), 'bunkei: patterns differ from bunkei-data.js');
+Bunkei.PATTERNS.forEach(p => {
+  const it = bunkeiRows.find(r => r.id === p.id);
+  if (!it) return;
+  check(it.level === p.level, `bunkei ${p.id}: level ${it.level}, drill says ${p.level}`);
+  check(it.answer === p.name.replace(/^\w+ /, ''), `bunkei ${p.id}: form ${it.answer}, drill says ${p.name}`);
+  check(it.prompt.startsWith(p.meaning + ' '), `bunkei ${p.id}: meaning differs from the drill's "${p.meaning}"`);
+  // The example is what the drill builds for that verb.
+  const verb = GENKI_VERBS.find(v => v.kanji === it.prompt.match(/\(([^()]+)\)$/)[1] && !v.disambig);
+  const built = Bunkei.build(verb, p.id);
+  const example = it.accept[2];
+  check(built && built.plain.includes(example), `bunkei ${p.id}: drill sentence "${built && built.plain}" doesn't contain ${example}`);
+});
+const bunkeiFor = id => ({ items: [bunkeiRows.find(it => it.id === id)] });
+check(Misc.matchItems(bunkeiFor('sasete-kudasai'), 'させてください').length === 1, 'bunkei: the ending counts');
+check(Misc.matchItems(bunkeiFor('sasete-kudasai'), 'tabesasetekudasai').length === 1, 'bunkei: the whole example in romaji counts');
+check(Misc.matchItems(bunkeiFor('sasete-kudasai'), 'てください').length === 0, 'bunkei: てください is not "please let me"');
+check(Misc.matchItems(bunkeiFor('hou-ga-ii'), 'たほうがいいです').length === 1, 'bunkei: kana for 方');
+check(Misc.matchItems(bunkeiFor('potential'), 'られます').length === 1, 'bunkei: られます without the brackets');
+check(Misc.matchItems(bunkeiFor('volitional-to-omou'), 'ようとおもっています').length === 1, 'bunkei: kana for 思って');
+check(Misc.matchItems(bunkeiFor('te-kureru'), '作ってくれました').length === 1, 'bunkei: favours use 作る');
+
 // ─── Shuffle ─────────────────────────────────────────────────────────────────
 
 const mixed = Misc.shuffled(9);

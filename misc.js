@@ -261,6 +261,77 @@
     'また': 'also / again', 'しかも': 'moreover', 'のに': 'even though — close! The one on the list starts with な',
   };
 
+  // The Bunkei drill's sentence patterns (bunkei.html), by level: [pattern id,
+  // the form, an example, other accepted answers]. In furigana markup; the
+  // kanji and kana spellings both count, and so does the whole example.
+  // test_misc.js checks this matches PATTERNS in bunkei-data.js.
+  const BUNKEI = [
+    ['N5', [
+      ['te-kudasai', 'please do', '〜てください', '食[た]べてください'],
+      ['naide-kudasai', 'please don\'t', '〜ないでください', '食[た]べないでください'],
+      ['tai', 'want to', '〜たいです', '食[た]べたいです', ['たい']],
+      ['masen-ka', 'won\'t you…? (invitation)', '〜ませんか', '食[た]べませんか'],
+      ['mashou', 'let\'s', '〜ましょう', '食[た]べましょう'],
+      ['te-iru', 'am doing (now)', '〜ています', '食[た]べています', ['ている']],
+      ['te-mo-ii', 'may I…?', '〜てもいいですか', '食[た]べてもいいですか', ['てもいい', 'てもいいです']],
+      ['te-wa-ikenai', 'must not', '〜てはいけません', '食[た]べてはいけません', ['てはいけない']],
+      ['te-kara', 'after doing', '〜てから', '食[た]べてから'],
+      ['mae-ni', 'before doing', '〜前[まえ]に', '食[た]べる前[まえ]に', ['る前[まえ]に']],
+    ]],
+    ['N4', [
+      ['potential', 'can', '〜(ら)れます', '食[た]べられます', ['られます', 'れます', 'られる', 'れる']],
+      ['potential-neg', 'can\'t', '〜(ら)れません', '食[た]べられません', ['られません', 'れません', 'られない', 'れない']],
+      ['nakereba-naranai', 'must, have to', '〜なければなりません', '食[た]べなければなりません', ['なければならない']],
+      ['nakute-mo-ii', 'don\'t have to', '〜なくてもいいです', '食[た]べなくてもいいです', ['なくてもいい']],
+      ['sasete-kudasai', 'please let me', '〜させてください', '食[た]べさせてください'],
+      ['ta-koto-ga-aru', 'have (ever) done', '〜たことがあります', '食[た]べたことがあります', ['たことがある']],
+      ['te-shimau', 'ended up doing (regret)', '〜てしまいました', '食[た]べてしまいました', ['てしまう', 'てしまった', 'ちゃった']],
+      ['te-oku', 'do in advance', '〜ておきます', '食[た]べておきます', ['ておく']],
+      ['te-miru', 'try doing', '〜てみます', '食[た]べてみます', ['てみる']],
+      ['tsumori', 'plan to, intend to', '〜つもりです', '食[た]べるつもりです', ['つもり']],
+      ['volitional-to-omou', 'thinking of doing', '〜(よ)うと思[おも]っています', '食[た]べようと思[おも]っています',
+        ['ようと思[おも]っています', 'うと思[おも]っています', 'ようと思[おも]う', 'うと思[おも]う']],
+      ['hou-ga-ii', 'you\'d better', '〜た方[ほう]がいいです', '食[た]べた方[ほう]がいいです', ['た方[ほう]がいい']],
+      ['kamoshirenai', 'might', '〜かもしれません', '食[た]べるかもしれません', ['かもしれない']],
+      ['te-hoshii', 'want someone to', '〜てほしいです', '食[た]べてほしいです', ['てほしい']],
+      ['nagara', 'while doing', '〜ながら', '食[た]べながら'],
+      ['tara', 'once, when (I\'ve done)', '〜たら', '食[た]べたら'],
+      ['ba-yokatta', 'I wish I had', '〜ばよかったです', '食[た]べればよかったです', ['ばよかった', 'ればよかったです', 'ればよかった']],
+      ['you-ni-naru', 'can now, have come to', '〜ようになりました', '食[た]べられるようになりました', ['ようになる', 'ようになった']],
+      ['te-ageru', 'shall I … for you?', '〜てあげましょうか', '作[つく]ってあげましょうか', ['てあげる']],
+      ['te-kureru', 'did … for me', '〜てくれました', '作[つく]ってくれました', ['てくれる', 'てくれた']],
+      ['te-morau', 'had someone do … for me', '〜てもらいました', '作[つく]ってもらいました', ['てもらう', 'てもらった']],
+      ['passive', 'had … done to me', '〜(ら)れました', '食[た]べられました', ['られました', 'れました', 'られた', 'れた']],
+      ['sugiru', 'did too much', '〜すぎました', '食[た]べすぎました', ['すぎる', 'すぎた', '過[す]ぎました', '過[す]ぎる']],
+      ['hajimeru', 'started doing', '〜始[はじ]めました', '読[よ]み始[はじ]めました', ['始[はじ]める']],
+    ]],
+    ['N3', [
+      ['causative-passive', 'was made to', '〜させられました', '食[た]べさせられました', ['させられる', 'させられた']],
+      ['beki', 'should, ought to', '〜べきです', '食[た]べるべきです', ['べき', 'べきだ']],
+      ['koto-ni-suru', 'decided to', '〜ことにしました', '食[た]べることにしました', ['ことにする', 'ことにした']],
+      ['you-ni-suru', 'make a point of', '〜ようにしています', '食[た]べるようにしています', ['ようにする', 'ようにしている']],
+      ['wake-ni-wa-ikanai', 'can\'t possibly', '〜わけにはいきません', '食[た]べるわけにはいきません', ['わけにはいかない']],
+      ['koto-wa-nai', 'there\'s no need to', '〜ことはありません', '食[た]べることはありません', ['ことはない']],
+      ['te-bakari', 'do nothing but', '〜てばかりいます', '食[た]べてばかりいます', ['てばかりいる', 'てばかり']],
+      ['you-to-suru', 'tried to (but couldn\'t)', '〜(よ)うとしました', '食[た]べようとしました', ['ようとしました', 'うとしました', 'ようとした', 'うとした']],
+      ['zuni', 'without doing', '〜ずに', '食[た]べずに'],
+    ]],
+  ];
+  // The prompt shows the example's verb: 食べる, or 作る for the favours and
+  // 読む for 〜始める, which read oddly with "eat".
+  const BUNKEI_VERBS = { 食: '食[た]べる', 作: '作[つく]る', 読: '読[よ]む' };
+  const bunkeiItems = rows => rows.map(([id, meaning, form, example, alt = []]) => {
+    const verb = BUNKEI_VERBS[example[0]];
+    return {
+      id,
+      prompt: `${meaning}  (${rubyPlain(verb)})`,
+      promptHtml: `${esc(meaning)} <span class="misc-prompt-en">(${rubyHtml(verb)})</span>`,
+      answer: rubyPlain(form),
+      answerHtml: `${rubyHtml(form)} <span class="misc-prompt-en">${rubyHtml(example)}</span>`,
+      accept: [form, example, ...alt].flatMap(m => [rubyPlain(m), rubyKana(m)]),
+    };
+  });
+
   const TE_ROWS = [
     { key: 'う', value: 'って', ex: '買う → 買って' },
     { key: 'つ', value: 'って', ex: '待つ → 待って' },
@@ -363,6 +434,19 @@
           ],
         },
       ],
+    },
+    {
+      id: 'bunkei',
+      glyph: '型',
+      title: 'Bunkei patterns',
+      ja: '文型',
+      desc: `The ${BUNKEI.reduce((n, [, rows]) => n + rows.length, 0)} sentence patterns from the Bunkei drill, N5 to N3: what form says "please let me", "must", "might"…? The ending (させてください) or the whole verb (食べさせてください) both count.`,
+      sections: BUNKEI.map(([level, rows]) => ({
+        type: 'fill',
+        label: level,
+        columns: ['Meaning', 'Pattern'],
+        items: bunkeiItems(rows),
+      })),
     },
     {
       id: 'keigo',
