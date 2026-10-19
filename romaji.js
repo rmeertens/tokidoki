@@ -2,6 +2,8 @@
 // "kinou wa" becomes "きのう わ"; text that is already kana or kanji is left
 // alone. An unfinished syllable ("k", "ky", a lone "n") stays as typed until
 // the next letter decides it; flush() settles it (a trailing "n" → ん).
+// In an answer box, western punctuation also becomes Japanese (, → 、 and
+// . → 。) and spaces after Japanese text are dropped, as Japanese has none.
 (function (global) {
   'use strict';
 
@@ -96,6 +98,29 @@
     return out;
   }
 
+  const PUNCT = { ',': '、', '.': '。', '?': '？', '!': '！' };
+  const JAPANESE = /[\u3001-\u303f\u3041-\u30ff\u3400-\u9fff\uf900-\ufaff\uff01-\uff0f\uff1a-\uff1f]/;
+  const isDigit = ch => ch >= '0' && ch <= '9';
+
+  // Romaji → hiragana, then , . ? ! → 、。？！ (not inside a number: 3.5,
+  // 1,000) and no spaces after Japanese text ("kinou wa." → きのうわ。).
+  function toJapanese(text, final) {
+    const src = toHiragana(text, final);
+    let out = '';
+    for (let i = 0; i < src.length; i++) {
+      const c = src[i];
+      const prev = out[out.length - 1];
+      if (PUNCT[c] && !((c === '.' || c === ',') && isDigit(prev) && isDigit(src[i + 1]))) {
+        out += PUNCT[c];
+      } else if ((c === ' ' || c === '\u3000') && prev && JAPANESE.test(prev)) {
+        // dropped
+      } else {
+        out += c;
+      }
+    }
+    return out;
+  }
+
   function enabled(input) {
     return (input.getAttribute('lang') || '').startsWith('ja');
   }
@@ -104,7 +129,7 @@
     if (!enabled(input)) return;
     const value = input.value;
     const caret = input.selectionStart == null ? value.length : input.selectionStart;
-    const before = toHiragana(value.slice(0, caret), final);
+    const before = toJapanese(value.slice(0, caret), final);
     const next = before + value.slice(caret);
     if (next === value) return;
     input.value = next;
@@ -130,7 +155,7 @@
     return input.value;
   }
 
-  global.Romaji = { toHiragana, attach, flush };
+  global.Romaji = { toHiragana, toJapanese, attach, flush };
 
   if (typeof module !== 'undefined' && module.exports) {
     module.exports = global.Romaji;

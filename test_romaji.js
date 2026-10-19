@@ -40,5 +40,23 @@ check('kinyoubi', 'きにょうび');
 check('kin\'youbi', 'きんようび');
 check('sanpo', 'さんぽ');
 
+// Answer boxes: Japanese punctuation, no spaces between Japanese words.
+function checkJa(input, expected, final = true) {
+  const got = Romaji.toJapanese(input, final);
+  if (got === expected) passed++;
+  else { failed++; console.log(`  FAIL: toJapanese ${JSON.stringify(input)} → ${got} (expected ${expected})`); }
+}
+checkJa('kinou wa, sushi wo tabemashita.', 'きのうわ、すしをたべました。');
+checkJa('hon.', 'ほん。');
+checkJa('hon ', 'ほん', false);
+checkJa('genki desu ka?', 'げんきですか？');
+checkJa('sugoi!', 'すごい！');
+checkJa('食べます. ', '食べます。');
+checkJa('きのう　わ', 'きのうわ');
+checkJa('3.5jikan', '3.5じかん');
+checkJa('1,000en', '1,000えん');
+checkJa('2. ', '2。');
+checkJa('k', 'k', false);
+
 console.log(`${passed} passed, ${failed} failed`);
 if (failed) process.exit(1);
