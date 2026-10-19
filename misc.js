@@ -640,11 +640,14 @@
       $('#misc-desc').textContent = quiz.desc;
       $('#misc-result').classList.add('hidden');
       $('#misc-give-up').classList.remove('hidden');
+      $('#misc-give-up').textContent = later() ? 'Check answers' : 'Give up';
       $('#misc-again').classList.add('hidden');
       renderQuiz();
-      // Only prompts you answer one by one have an order worth mixing up.
-      $('#misc-shuffle-row').classList.toggle('hidden', !quiz.sections.some(sec => sec.type === 'fill'));
+      // Only prompts you answer one by one have an order worth mixing up, or
+      // answers worth checking at the end.
+      $('#misc-toggles').classList.toggle('hidden', !quiz.sections.some(sec => sec.type === 'fill'));
       $('#misc-shuffle').checked = !!settings.shuffle;
+      $('#misc-later').checked = !!settings.later;
       orderRows();
       updateScore();
       clearInterval(timer);
@@ -717,13 +720,14 @@
           miss.textContent = again ? 'Already got that one.' : (sec.miss && sec.miss(s)) || 'Not one of them.';
           inp.select();
         }
+      } else if (later()) {
+        // Answers wait for Check answers; Enter just moves on.
+        if (enter) nextInput(inp, 1);
       } else {
         const i = +inp.dataset.row;
         if (matchItems({ items: [sec.items[i]] }, text).length) {
           reveal(si, i, 'found');
-          const open = [...document.querySelectorAll('#misc-body input')];
-          const next = open.slice(open.indexOf(inp)).concat(open).find(x => !x.disabled);
-          if (next) next.focus();
+          nextInput(inp, 0);
         } else if (enter) {
           inp.classList.remove('misc-wrong');
           void inp.offsetWidth;
@@ -734,6 +738,33 @@
       if (found.every((f, s) => f.size === quiz.sections[s].items.length)) finish();
     }
 
+    // In "check at the end" mode, fill answers are only marked by Check answers.
+    function later() {
+      return !!settings.later;
+    }
+
+    // Focuses the next open answer box, in the order shown (from `skip`
+    // boxes after inp, wrapping round).
+    function nextInput(inp, skip) {
+      const open = [...document.querySelectorAll('#misc-body input')];
+      const at = open.indexOf(inp) + skip;
+      const next = open.slice(at).concat(open.slice(0, at)).find(x => !x.disabled && x !== inp);
+      if (next) next.focus();
+    }
+
+    // Marks every typed fill answer: right ones count, wrong ones are kept
+    // to show next to the answer.
+    function checkFilled() {
+      quiz.sections.forEach((sec, si) => {
+        if (sec.type !== 'fill') return;
+        sec.items.forEach((it, i) => {
+          if (found[si].has(i)) return;
+          const inp = document.querySelector(`.misc-section[data-section="${si}"] tr[data-row="${i}"] input`);
+          if (matchItems({ items: [it] }, inp.value).length) reveal(si, i, 'found');
+        });
+      });
+    }
+
     function reveal(si, i, how) {
       const sec = quiz.sections[si];
       if (how === 'found') found[si].add(i);
@@ -742,13 +773,16 @@
       if (sec.type === 'fill') {
         const it = sec.items[i];
         const inp = row.querySelector('input');
+        const typed = how === 'missed' ? inp.value.trim() : '';
         inp.value = it.answer;
         inp.disabled = true;
-        if (it.answerHtml || it.card) {
-          // Shown as text instead, so it can carry furigana and a ＋.
+        if (it.answerHtml || it.card || typed) {
+          // Shown as text instead, so it can carry furigana, a ＋ and what
+          // you typed wrong.
           inp.classList.add('hidden');
           const cell = inp.parentElement;
-          cell.insertAdjacentHTML('beforeend', `<span class="misc-answer" lang="ja">${it.answerHtml || esc(it.answer)}</span>`
+          cell.insertAdjacentHTML('beforeend', (typed ? `<span class="misc-typed" lang="ja">${esc(typed)}</span>` : '')
+            + `<span class="misc-answer" lang="ja">${it.answerHtml || esc(it.answer)}</span>`
             + (it.card ? deckButtonHtml(it.card.word) : ''));
         }
       }
@@ -793,7 +827,10 @@
 
     function updateScore() {
       const n = found.reduce((a, f) => a + f.size, 0);
-      $('#misc-score').textContent = `${n} / ${total(quiz)}`;
+      // Before checking, count the boxes filled in instead.
+      const filled = [...document.querySelectorAll('#misc-body .misc-fill:not(:disabled)')].filter(x => x.value.trim()).length;
+      $('#misc-score').textContent = later() && !over && filled
+        ? `${n + filled} / ${total(quiz)} filled` : `${n} / ${total(quiz)}`;
     }
 
     function elapsed() { return Math.round((Date.now() - started) / 1000); }
@@ -801,8 +838,10 @@
 
     function finish() {
       if (over) return;
+      if (later()) checkFilled();
       over = true;
       clearInterval(timer);
+      updateScore();
       updateTime();
       quiz.sections.forEach((sec, si) => sec.items.forEach((_, i) => {
         if (!found[si].has(i)) reveal(si, i, 'missed');
@@ -848,6 +887,18 @@
       orderRows();
       const next = [...document.querySelectorAll('#misc-body input')].find(x => !x.disabled);
       if (next) next.focus();
+    });
+    $('#misc-later').addEventListener('change', e => {
+      settings.later = e.target.checked;
+      saveSettings(settings);
+      if (!quiz || over) return;
+      $('#misc-give-up').textContent = later() ? 'Check answers' : 'Give up';
+      // Switching back: what's already typed is marked straight away.
+      if (!later()) {
+        checkFilled();
+        if (found.every((f, s) => f.size === quiz.sections[s].items.length)) finish();
+      }
+      updateScore();
     });
     $('#misc-again').addEventListener('click', () => start(quiz.id));
     $('#misc-quit').addEventListener('click', home);
