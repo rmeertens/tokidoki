@@ -23,6 +23,147 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-10-19-flu-season',
+      date: '2026-10-19',
+      emoji: '🤧',
+      titleEn: 'Flu spreads early: 12.81 cases per clinic nationwide, about five times last year',
+      sources: [
+        { name: 'Resemom (Ministry of Health data)', url: 'https://resemom.jp/article/2026/10/16/87922.html' },
+        { name: 'Nippon TV News (via Yahoo! News Japan)', url: 'https://news.yahoo.co.jp/articles/098d448fe431dbd1015d59e4daf57a8ec257d332' },
+        { name: 'Nikkei (flu season began)', url: 'https://www.nikkei.com/article/DGXZQOUD285AJ0Y6A820C2000000/' },
+      ],
+      levels: {
+        N5: {
+          title: 'インフルエンザが早[はや]くふえています',
+          lines: [
+            ['十六日[じゅうろくにち]に、厚生労働省[こうせいろうどうしょう]が、インフルエンザの数[かず]を発表[はっぴょう]しました。', 'On the 16th, the Ministry of Health, Labour and Welfare announced the flu numbers.', '厚生労働省 is the Ministry of Health, Labour and Welfare.'],
+            ['10月[がつ]の最初[さいしょ]の週[しゅう]に、1つの病院[びょういん]で、平均[へいきん]12.81人[にん]のインフルエンザの人[ひと]がいました。', 'In the first week of October, there were 12.81 flu patients on average per medical clinic.', 'The count is "per reporting clinic" (定点), a few thousand clinics across Japan. The week was October 5–11.'],
+            ['去年[きょねん]の今[いま]ごろより、約[やく]5倍[ばい]です。', 'That is about five times the number at this time last year.'],
+            ['沖縄[おきなわ]県[けん]がいちばん多[おお]く、31人[にん]ぐらいでした。', 'Okinawa Prefecture had the most, at about 31.'],
+            ['29の都道府県[とどうふけん]で、「注意[ちゅうい]」のレベルの10人[にん]を超[こ]えました。', 'In 29 prefectures, the number went over 10, the "caution" level.'],
+            ['学校[がっこう]で、クラスを休[やす]みにしたところもたくさんあります。', 'Many schools also closed some classes.'],
+            ['手[て]をよく洗[あら]って、体[からだ]に気[き]をつけてください。', 'Please wash your hands well and take care of your health.'],
+          ],
+        },
+        N4: {
+          title: 'インフルエンザ、全国[ぜんこく]で去年[きょねん]の約[やく]5倍[ばい]　早[はや]い流行[りゅうこう]',
+          lines: [
+            ['厚生労働省[こうせいろうどうしょう]は十六日[じゅうろくにち]、十月[じゅうがつ]五日[いつか]から十一日[じゅういちにち]までのインフルエンザの発生[はっせい]状況[じょうきょう]を発表[はっぴょう]しました。', 'On the 16th, the Ministry of Health, Labour and Welfare announced the flu situation for October 5 to 11.'],
+            ['全国[ぜんこく]の病院[びょういん]やクリニック1か所[しょ]あたりの患者[かんじゃ]数[すう]は12.81人[にん]で、前[まえ]の週[しゅう]の11.35人[にん]より増[ふ]えました。', 'The number of patients per clinic nationwide was 12.81, up from 11.35 the week before.'],
+            ['去年[きょねん]の同[おな]じ時期[じき]と比[くら]べて、約[やく]5倍[ばい]になっています。', 'Compared with the same time last year, it is about five times higher.'],
+            ['都道府県[とどうふけん]別[べつ]では、沖縄[おきなわ]が31.34人[にん]でいちばん多[おお]く、神奈川[かながわ]が21.60人[にん]、埼玉[さいたま]が20.99人[にん]でした。', 'By prefecture, Okinawa was the highest at 31.34, then Kanagawa at 21.60 and Saitama at 20.99.'],
+            ['10人[にん]を超[こ]えて「注意報[ちゅういほう]」のレベルになったのは、29の都道府県[とどうふけん]です。', 'Twenty-nine prefectures went over 10, which is the "advisory" level.', '注意報 is an advisory. One patient per clinic means a flu season has started, 10 an advisory and 30 a warning (警報).'],
+            ['学校[がっこう]では、学級[がっきゅう]閉鎖[へいさ]が1,339件[けん]、学年[がくねん]閉鎖[へいさ]が333件[けん]ありました。', 'At schools there were 1,339 class closures and 333 grade closures.', '学級閉鎖 means a class is closed for a few days to stop the spread.'],
+            ['今年[ことし]は流行[りゅうこう]の始[はじ]まりも早[はや]かったので、手洗[てあら]いなどに気[き]をつけてください。', 'The flu season also started early this year, so please be careful about things like washing your hands.'],
+          ],
+        },
+        N3: {
+          title: 'インフルエンザ患者[かんじゃ]、1医療[いりょう]機関[きかん]あたり12.81人[にん]　前年[ぜんねん]同期[どうき]の約[やく]5倍[ばい]',
+          lines: [
+            ['厚生労働省[こうせいろうどうしょう]は十六日[じゅうろくにち]、十月[じゅうがつ]五日[いつか]から十一日[じゅういちにち]までの1週間[しゅうかん]に報告[ほうこく]されたインフルエンザの患者[かんじゃ]数[すう]を発表[はっぴょう]した。', 'On the 16th, the Ministry of Health, Labour and Welfare announced the number of flu patients reported in the week of October 5 to 11.'],
+            ['全国[ぜんこく]の定点[ていてん]医療[いりょう]機関[きかん]1か所[しょ]あたりの患者[かんじゃ]数[すう]は12.81人[にん]で、前[まえ]の週[しゅう]の11.35人[にん]から増[ふ]えた。', 'The number of patients per designated reporting medical institution nationwide was 12.81, up from 11.35 the previous week.', '定点医療機関 are the clinics that report flu cases every week; the "per clinic" figure is used to compare weeks and regions.'],
+            ['前年[ぜんねん]の同[おな]じ時期[じき]の約[やく]5倍[ばい]にあたる。', 'This is about five times the figure for the same period last year.'],
+            ['都道府県[とどうふけん]別[べつ]では、沖縄[おきなわ]が31.34人[にん]で最[もっと]も多[おお]く、神奈川[かながわ]の21.60人[にん]、埼玉[さいたま]の20.99人[にん]などが続[つづ]いた。', 'By prefecture, Okinawa was the highest at 31.34, followed by Kanagawa at 21.60, Saitama at 20.99 and others.'],
+            ['注意報[ちゅういほう]の目安[めやす]とされる10人[にん]を超[こ]えたのは、29都道府県[とどふけん]だった。', 'Twenty-nine prefectures exceeded 10, the guideline for an advisory.', '目安 "a guideline, a rough standard".'],
+            ['休校[きゅうこう]や学級[がっきゅう]閉鎖[へいさ]などの措置[そち]をとった学校[がっこう]も多[おお]く、今季[こんき]は流行[りゅうこう]入[い]りが例年[れいねん]より早[はや]かったこともあり、専門家[せんもんか]は手洗[てあら]いなどの対策[たいさく]を呼[よ]びかけている。', 'Many schools took measures such as closing classes, and as the season also began earlier than usual, experts are urging precautions such as hand washing.', 'The season began in late August, the second earliest since records began in 1999 (apart from 2023, when the previous season simply continued).'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-19-food-tax-bill',
+      date: '2026-10-19',
+      emoji: '🏛️',
+      titleEn: 'Consumption tax cut bill to enter Diet debate on October 20, with Takaichi attending',
+      sources: [
+        { name: 'Nippon.com / Jiji Press', url: 'https://www.nippon.com/ja/news/yjj2026101600416/' },
+        { name: 'Kyodo News (via Yahoo! News Japan)', url: 'https://news.yahoo.co.jp/articles/41b4f60274cbdc239c56bcfc999af8db7269ed3f' },
+        { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261016de60357' },
+      ],
+      levels: {
+        N5: {
+          title: '税金[ぜいきん]を安[やす]くする法律[ほうりつ]の話[はなし]が始[はじ]まります',
+          lines: [
+            ['あした二十日[はつか]、国会[こっかい]で、消費税[しょうひぜい]を安[やす]くする法律[ほうりつ]の話[はなし]が始[はじ]まります。', 'Tomorrow, the 20th, talks in the Diet on a law to lower the consumption tax will begin.', '消費税 is the consumption tax (sales tax). The bill is about the tax on food.'],
+            ['高市[たかいち]首相[しゅしょう]も、衆議院[しゅうぎいん]に出[で]ます。', 'Prime Minister Takaichi will also attend the House of Representatives.'],
+            ['今[いま]の消費税[しょうひぜい]は、食[た]べ物[もの]を買[か]うときも、お金[かね]がかかります。', 'With the current consumption tax, you pay tax even when you buy food.', 'Food is currently taxed at a reduced rate of 8%.'],
+            ['政府[せいふ]は、これを安[やす]くしたいと考[かんが]えています。', 'The government wants to make this cheaper.'],
+            ['でも、安[やす]くするためのお金[かね]を、どうやって集[あつ]めるのか、まだはっきりしていません。', 'But it is still not clear how to get the money to pay for the cut.'],
+            ['野党[やとう]は、そのことをくわしく聞[き]きたいと言[い]っています。', 'The opposition parties say they want to ask about that in detail.'],
+          ],
+        },
+        N4: {
+          title: '消費税[しょうひぜい]を安[やす]くする法案[ほうあん]、二十日[はつか]から国会[こっかい]で話[はな]し合[あ]い',
+          lines: [
+            ['食[た]べ物[もの]の消費税[しょうひぜい]を安[やす]くする法案[ほうあん]の話[はな]し合[あ]いが、二十日[はつか]に衆議院[しゅうぎいん]の本会議[ほんかいぎ]で始[はじ]まることになりました。', 'It has been decided that debate on the bill to lower the consumption tax on food will begin at the House of Representatives plenary session on the 20th.', '審議入り "entering deliberation" is the news term for the first debate on a bill. 本会議 is the plenary session.'],
+            ['自民党[じみんとう]と衆議院[しゅうぎいん]の会派[かいは]「中道[ちゅうどう]」が十六日[じゅうろくにち]に話[はな]し合[あ]って決[き]めました。', 'The Liberal Democratic Party and the lower house group "Chudo" agreed on this in talks on the 16th.', '国会対策委員長 (Diet affairs chiefs) of each party meet to set the Diet schedule.'],
+            ['高市[たかいち]首相[しゅしょう]も本会議[ほんかいぎ]に出[で]ます。', 'Prime Minister Takaichi will also attend the plenary session.'],
+            ['政府[せいふ]と与党[よとう]は、11月[がつ]のはじめまでに衆議院[しゅうぎいん]で決[き]め、十二月[じゅうにがつ]十二日[じゅうににち]の国会[こっかい]の終[お]わりまでに成立[せいりつ]させたいと考[かんが]えています。', 'The government and ruling parties hope to pass it through the lower house by early November and enact it by December 12, when the Diet session ends.'],
+            ['首相[しゅしょう]は、お金[かね]の出[だ]し方[かた]について、赤字[あかじ]国債[こくさい]は使[つか]わず、支出[ししゅつ]と収入[しゅうにゅう]の両方[りょうほう]を見直[みなお]すと話[はな]しています。', 'The Prime Minister has said that, as for where the money will come from, she will not use deficit bonds and will review both spending and revenue.', '赤字国債 are government bonds issued to cover a budget deficit.'],
+            ['野党[やとう]は、お金[かね]の出[だ]し方[かた]と仕組[しく]みを、くわしく聞[き]くつもりです。', 'The opposition parties plan to ask in detail about how the money will be found and how the system will work.'],
+          ],
+        },
+        N3: {
+          title: '消費減税法案[しょうひげんぜいほうあん]、二十日[はつか]に審議入[しんぎい]り　首相[しゅしょう]出席[しゅっせき]、財源[ざいげん]と制度[せいど]設計[せっけい]が焦点[しょうてん]',
+          lines: [
+            ['食料品[しょくりょうひん]の消費税[しょうひぜい]を引[ひ]き下[さ]げる法案[ほうあん]が、二十日[はつか]に衆院[しゅういん]本会議[ほんかいぎ]で審議入[しんぎい]りすることになった。', 'The bill to lower the consumption tax on food will enter deliberation at the lower house plenary session on the 20th.', '審議入り is when the first debate on a bill begins.'],
+            ['自民党[じみんとう]と衆院[しゅういん]会派[かいは]「中道[ちゅうどう]」の国対[こくたい]委員長[いいんちょう]が十六日[じゅうろくにち]に会談[かいだん]し、合意[ごうい]した。', 'The Diet affairs chiefs of the LDP and the lower house group "Chudo" met on the 16th and reached an agreement.', '国対 is short for 国会対策 (Diet affairs).'],
+            ['高市[たかいち]早苗[さなえ]首相[しゅしょう]が出席[しゅっせき]する。', 'Prime Minister Sanae Takaichi will attend.'],
+            ['政府[せいふ]・与党[よとう]は11月[がつ]上旬[じょうじゅん]までの衆院[しゅういん]通過[つうか]を目指[めざ]し、十二月[じゅうにがつ]十二日[じゅうににち]の会期[かいき]末[まつ]までの成立[せいりつ]を期[き]している。', 'The government and ruling parties aim to pass the bill through the lower house by early November and hope to enact it by the end of the session on December 12.', '期す "to aim for, to be determined to achieve".'],
+            ['首相[しゅしょう]は財源[ざいげん]について、赤字[あかじ]国債[こくさい]に頼[たよ]らず、歳出[さいしゅつ]と歳入[さいにゅう]の両面[りょうめん]の見直[みなお]しで確保[かくほ]する考[かんが]えを示[しめ]してきたが、具体的[ぐたいてき]な制度[せいど]設計[せっけい]にはなお不透明[ふとうめい]な部分[ぶぶん]が多[おお]い。', 'On funding, the Prime Minister has indicated she would secure it by reviewing both spending and revenue rather than relying on deficit bonds, but many parts of the concrete system design remain unclear.', '歳出 "government spending", 歳入 "government revenue".'],
+            ['野党[やとう]は審議[しんぎ]で財源[ざいげん]や制度[せいど]の詳細[しょうさい]を追及[ついきゅう]する構[かま]えだ。', 'The opposition parties are ready to press for details on funding and the system in the debate.', '追及する "to press, to question closely".'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-19-android-mynumber',
+      date: '2026-10-19',
+      emoji: '📱',
+      titleEn: '"My Number Card on Android" to launch on October 20',
+      sources: [
+        { name: 'PC Watch (Impress)', url: 'https://www.watch.impress.co.jp/docs/news/2145179.html' },
+        { name: 'Infoseek News (ITmedia Mobile)', url: 'https://news.infoseek.co.jp/article/itmedia_mobile_20261019071' },
+      ],
+      levels: {
+        N5: {
+          title: 'スマホでマイナンバーカードが使[つか]えます',
+          lines: [
+            ['あした二十日[はつか]から、アンドロイドのスマートフォンで、マイナンバーカードが使[つか]えるようになります。', 'From tomorrow, the 20th, you will be able to use the My Number Card on an Android smartphone.', 'The My Number Card is Japan\'s national ID card.'],
+            ['デジタル庁[ちょう]が、二日[ふつか]に発表[はっぴょう]しました。', 'The Digital Agency announced this on the 2nd.', 'デジタル庁 is the Digital Agency of the government.'],
+            ['スマホを使[つか]って、自分[じぶん]がだれか、見[み]せることができます。', 'With your smartphone, you can show who you are.'],
+            ['年齢[ねんれい]や、住[す]んでいるところも、見[み]せることができます。', 'You can also show your age and where you live.'],
+            ['お店[みせ]の人[ひと]は、専用[せんよう]のアプリで、それをたしかめます。', 'The shop staff check it with a special app.'],
+            ['でも、使[つか]えるスマホは、少[すこ]しだけです。', 'But only some smartphones can use it.'],
+            ['デジタル庁[ちょう]のホームページに、そのスマホの名前[なまえ]が出[で]ます。', 'The names of those smartphones will appear on the Digital Agency website.'],
+          ],
+        },
+        N4: {
+          title: '「Androidのマイナンバーカード」、二十日[はつか]から始[はじ]まる',
+          lines: [
+            ['デジタル庁[ちょう]は、「Androidのマイナンバーカード」のサービスを二十日[はつか]に始[はじ]めると、二日[ふつか]に発表[はっぴょう]しました。', 'The Digital Agency announced on the 2nd that it will start the "My Number Card on Android" service on the 20th.'],
+            ['Googleウォレットを使[つか]って、スマートフォンの中[なか]にマイナンバーカードを入[い]れることができます。', 'Using Google Wallet, you can put your My Number Card inside your smartphone.', 'Google Wallet is Google\'s app for cards and passes on Android phones.'],
+            ['お店[みせ]や会社[かいしゃ]などで、本人[ほんにん]確認[かくにん]、年齢[ねんれい]確認[かくにん]、住民[じゅうみん]確認[かくにん]ができるようになります。', 'At shops, companies and other places, it will become possible to confirm identity, age and residence.', '確認 "confirmation". Users prove it with a fingerprint or face scan (biometrics).'],
+            ['使[つか]うときは、指紋[しもん]や顔[かお]で本人[ほんにん]だとたしかめます。', 'When you use it, you confirm that it is you with your fingerprint or face.'],
+            ['お店[みせ]の人[ひと]は、iPhoneの場合[ばあい]と同[おな]じ「マイナンバーカード対面[たいめん]確認[かくにん]アプリ」を使[つか]います。', 'Shop staff use the same "My Number Card in-person verification app" as for the iPhone.'],
+            ['すべてのスマホで使[つか]えるわけではなく、決[き]まった基準[きじゅん]のセキュリティーチップが必要[ひつよう]です。', 'It cannot be used on every smartphone; a security chip that meets set standards is needed.'],
+            ['使[つか]える機種[きしゅ]は、二十日[はつか]までにデジタル庁[ちょう]のウェブサイトで発表[はっぴょう]される予定[よてい]です。', 'The models that can use it are due to be announced on the Digital Agency website by the 20th.'],
+          ],
+        },
+        N3: {
+          title: '「Androidのマイナンバーカード」、二十日[はつか]に提供[ていきょう]開始[かいし]　対応[たいおう]機種[きしゅ]は限[かぎ]られる見通[みとお]し',
+          lines: [
+            ['デジタル庁[ちょう]は、Googleウォレットに搭載[とうさい]して使[つか]う「Androidのマイナンバーカード」の提供[ていきょう]を、二十日[はつか]に始[はじ]めると二日[ふつか]に発表[はっぴょう]した。', 'The Digital Agency announced on the 2nd that it will begin offering the "My Number Card on Android," which is loaded into Google Wallet, on the 20th.', '搭載 "to load, to install (on a device)".'],
+            ['生体[せいたい]認証[にんしょう]を使[つか]い、対面[たいめん]のサービスで本人[ほんにん]確認[かくにん]や年齢[ねんれい]確認[かくにん]、住民[じゅうみん]確認[かくにん]ができるという。', 'It is said that identity, age and residence checks can be done at in-person services using biometric authentication.', '生体認証 "biometric authentication" (fingerprint, face, etc.). という at the end marks reported information.'],
+            ['店舗[てんぽ]側[がわ]は、iPhone版[ばん]でも使[つか]われているデジタル庁[ちょう]の「マイナンバーカード対面[たいめん]確認[かくにん]アプリ」で読[よ]み取[と]る。', 'On the store side, it is read with the Digital Agency\'s "My Number Card in-person verification app," which is also used for the iPhone version.'],
+            ['すでにスマホ用[よう]電子[でんし]証明書[しょうめいしょ]を使[つか]っている人[ひと]は、新[あたら]しいサービスに更新[こうしん]できるとされる。', 'People who already use the smartphone electronic certificate are said to be able to update to the new service.', '電子証明書 is an electronic certificate used to log in to online government services.'],
+            ['対応[たいおう]するのは、一定[いってい]の基準[きじゅん]を満[み]たすセキュリティーチップを備[そな]えた機種[きしゅ]に限[かぎ]られる。', 'Only models equipped with a security chip that meets certain standards are supported.'],
+            ['機種[きしゅ]の一覧[いちらん]は、二十日[はつか]までにデジタル庁[ちょう]のウェブサイトで公開[こうかい]される予定[よてい]だ。', 'A list of models is due to be published on the Digital Agency website by the 20th.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-10-18-false-quake-alert',
       date: '2026-10-18',
       emoji: '🚨',

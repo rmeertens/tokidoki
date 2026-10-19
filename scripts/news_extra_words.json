@@ -3963,5 +3963,440 @@
     "れいてんななパーセント",
     "0.7%",
     "number + counter"
+  ],
+  "10人": [
+    "じゅうにん",
+    "10 people",
+    "number + counter"
+  ],
+  "11日": [
+    "じゅういちにち",
+    "the 11th",
+    "date"
+  ],
+  "12日": [
+    "じゅうににち",
+    "the 12th",
+    "date"
+  ],
+  "1か所あたり": [
+    "いっかしょあたり",
+    "per one place",
+    "expression"
+  ],
+  "1週間": [
+    "いっしゅうかん",
+    "one week",
+    "noun"
+  ],
+  "20": [
+    "にじゅう",
+    "twenty",
+    "number"
+  ],
+  "21": [
+    "にじゅういち",
+    "twenty-one",
+    "number"
+  ],
+  "29": [
+    "にじゅうきゅう",
+    "twenty-nine",
+    "number"
+  ],
+  "31": [
+    "さんじゅういち",
+    "thirty-one",
+    "number"
+  ],
+  "31人": [
+    "さんじゅういちにん",
+    "31 people",
+    "number + counter"
+  ],
+  "333件": [
+    "さんびゃくさんじゅうさんけん",
+    "333 cases",
+    "number + counter"
+  ],
+  "339件": [
+    "さんびゃくさんじゅうきゅうけん",
+    "339 cases",
+    "number + counter"
+  ],
+  "34人": [
+    "さんじゅうよにん",
+    "34 people",
+    "number + counter"
+  ],
+  "35人": [
+    "さんじゅうごにん",
+    "35 people",
+    "number + counter"
+  ],
+  "5日": [
+    "いつか",
+    "the 5th",
+    "date"
+  ],
+  "60人": [
+    "ろくじゅうにん",
+    "60 people",
+    "number + counter"
+  ],
+  "81人": [
+    "はちじゅういちにん",
+    "81 people",
+    "number + counter"
+  ],
+  "99人": [
+    "きゅうじゅうきゅうにん",
+    "99 people",
+    "number + counter"
+  ],
+  "665": [
+    "ろっぴゃくろくじゅうご",
+    "665",
+    "number"
+  ],
+  "Android": [
+    "アンドロイド",
+    "Android (smartphone operating system)",
+    "noun"
+  ],
+  "Google": [
+    "グーグル",
+    "Google",
+    "noun"
+  ],
+  "iPhone": [
+    "アイフォーン",
+    "iPhone",
+    "noun"
+  ],
+  "アンドロイド": [
+    "アンドロイド",
+    "Android",
+    "noun"
+  ],
+  "インフルエンザ": [
+    "インフルエンザ",
+    "influenza, flu",
+    "noun"
+  ],
+  "ウェブサイト": [
+    "ウェブサイト",
+    "website",
+    "noun"
+  ],
+  "ウォレット": [
+    "ウォレット",
+    "wallet (Google Wallet)",
+    "noun"
+  ],
+  "クリニック": [
+    "クリニック",
+    "clinic",
+    "noun"
+  ],
+  "セキュリティー": [
+    "セキュリティー",
+    "security",
+    "noun"
+  ],
+  "チップ": [
+    "チップ",
+    "chip",
+    "noun"
+  ],
+  "デジタル": [
+    "デジタル",
+    "digital",
+    "noun"
+  ],
+  "ホームページ": [
+    "ホームページ",
+    "website, homepage",
+    "noun"
+  ],
+  "マイナンバーカード": [
+    "マイナンバーカード",
+    "My Number Card (Japan's national ID card)",
+    "noun"
+  ],
+  "一定": [
+    "いってい",
+    "fixed, certain, set",
+    "noun / na-adjective"
+  ],
+  "一覧": [
+    "いちらん",
+    "list, overview",
+    "noun"
+  ],
+  "上旬": [
+    "じょうじゅん",
+    "first ten days of a month",
+    "noun"
+  ],
+  "不透明": [
+    "ふとうめい",
+    "unclear, opaque",
+    "na-adjective"
+  ],
+  "両面": [
+    "りょうめん",
+    "both sides, both aspects",
+    "noun"
+  ],
+  "中道": [
+    "ちゅうどう",
+    "Chudo (a lower house group); the middle road",
+    "noun"
+  ],
+  "休校": [
+    "きゅうこう",
+    "school closure",
+    "noun"
+  ],
+  "会期": [
+    "かいき",
+    "(Diet) session period",
+    "noun"
+  ],
+  "会派": [
+    "かいは",
+    "parliamentary group, caucus",
+    "noun"
+  ],
+  "使える": [
+    "つかえる",
+    "to be usable, can use",
+    "ichidan verb"
+  ],
+  "例年": [
+    "れいねん",
+    "a normal year, usual",
+    "noun"
+  ],
+  "公開": [
+    "こうかい",
+    "making public, release",
+    "noun / suru-verb"
+  ],
+  "労働省": [
+    "ろうどうしょう",
+    "Ministry of Labour",
+    "noun"
+  ],
+  "同期": [
+    "どうき",
+    "same period",
+    "noun"
+  ],
+  "国対": [
+    "こくたい",
+    "Diet affairs (short for 国会対策)",
+    "noun"
+  ],
+  "基準": [
+    "きじゅん",
+    "standard, criterion",
+    "noun"
+  ],
+  "埼玉": [
+    "さいたま",
+    "Saitama",
+    "noun"
+  ],
+  "学年": [
+    "がくねん",
+    "school year, grade",
+    "noun"
+  ],
+  "学級": [
+    "がっきゅう",
+    "class (at school)",
+    "noun"
+  ],
+  "定点": [
+    "ていてん",
+    "fixed point, designated reporting site",
+    "noun"
+  ],
+  "対応": [
+    "たいおう",
+    "response, support, compatibility",
+    "noun / suru-verb"
+  ],
+  "対策": [
+    "たいさく",
+    "measures, countermeasures",
+    "noun"
+  ],
+  "対面": [
+    "たいめん",
+    "face to face, in person",
+    "noun"
+  ],
+  "専用": [
+    "せんよう",
+    "exclusive use, dedicated",
+    "noun"
+  ],
+  "店舗": [
+    "てんぽ",
+    "store, shop",
+    "noun"
+  ],
+  "成立": [
+    "せいりつ",
+    "establishment, passage (of a bill)",
+    "noun / suru-verb"
+  ],
+  "手洗い": [
+    "てあらい",
+    "hand washing",
+    "noun"
+  ],
+  "指紋": [
+    "しもん",
+    "fingerprint",
+    "noun"
+  ],
+  "措置": [
+    "そち",
+    "measure, step",
+    "noun"
+  ],
+  "搭載": [
+    "とうさい",
+    "loading, installing (on a device)",
+    "noun / suru-verb"
+  ],
+  "期す": [
+    "きす",
+    "to aim for, to resolve to achieve",
+    "godan verb"
+  ],
+  "歳入": [
+    "さいにゅう",
+    "annual revenue (of a government)",
+    "noun"
+  ],
+  "歳出": [
+    "さいしゅつ",
+    "annual expenditure (of a government)",
+    "noun"
+  ],
+  "沖縄": [
+    "おきなわ",
+    "Okinawa",
+    "noun"
+  ],
+  "注意報": [
+    "ちゅういほう",
+    "advisory",
+    "noun"
+  ],
+  "満たす": [
+    "みたす",
+    "to fulfill, to satisfy",
+    "godan verb"
+  ],
+  "焦点": [
+    "しょうてん",
+    "focus, focal point",
+    "noun"
+  ],
+  "生体": [
+    "せいたい",
+    "living body, biometric",
+    "noun"
+  ],
+  "目安": [
+    "めやす",
+    "guideline, rough standard",
+    "noun"
+  ],
+  "確保": [
+    "かくほ",
+    "securing, ensuring",
+    "noun / suru-verb"
+  ],
+  "神奈川": [
+    "かながわ",
+    "Kanagawa",
+    "noun"
+  ],
+  "約5倍": [
+    "やくごばい",
+    "about five times",
+    "expression"
+  ],
+  "自民党": [
+    "じみんとう",
+    "Liberal Democratic Party (LDP)",
+    "noun"
+  ],
+  "衆議院": [
+    "しゅうぎいん",
+    "House of Representatives (lower house)",
+    "noun"
+  ],
+  "衆院": [
+    "しゅういん",
+    "lower house (short for 衆議院)",
+    "noun"
+  ],
+  "見直し": [
+    "みなおし",
+    "review, reconsideration",
+    "noun"
+  ],
+  "見直す": [
+    "みなおす",
+    "to review, to reconsider",
+    "godan verb"
+  ],
+  "詳細": [
+    "しょうさい",
+    "details",
+    "noun"
+  ],
+  "認証": [
+    "にんしょう",
+    "authentication",
+    "noun / suru-verb"
+  ],
+  "読み取る": [
+    "よみとる",
+    "to read, to scan",
+    "godan verb"
+  ],
+  "財源": [
+    "ざいげん",
+    "source of funds, funding",
+    "noun"
+  ],
+  "赤字": [
+    "あかじ",
+    "deficit",
+    "noun"
+  ],
+  "追及": [
+    "ついきゅう",
+    "pressing, questioning closely",
+    "noun / suru-verb"
+  ],
+  "都道府県": [
+    "とどうふけん",
+    "prefectures (all of Japan's)",
+    "noun"
+  ],
+  "閉鎖": [
+    "へいさ",
+    "closure",
+    "noun / suru-verb"
   ]
 }
