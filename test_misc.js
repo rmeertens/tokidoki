@@ -17,7 +17,7 @@ Misc.QUIZZES.forEach(q => {
   ids.add(q.id);
   check(q.title && q.desc && q.glyph, `${q.id}: missing title, description or glyph`);
   q.sections.forEach((sec, si) => {
-    check(['find', 'fill'].includes(sec.type), `${q.id}#${si}: unknown type ${sec.type}`);
+    check(['find', 'fill', 'choice'].includes(sec.type), `${q.id}#${si}: unknown type ${sec.type}`);
     check(sec.items.length > 0, `${q.id}#${si}: no items`);
     sec.items.forEach((it, i) => {
       if (sec.type === 'find') {
@@ -25,6 +25,12 @@ Misc.QUIZZES.forEach(q => {
         // Every hidden answer can be named on its own.
         const typed = it.accept[0];
         check(Misc.matchItems(sec, typed).includes(i), `${q.id}#${si}.${i}: "${typed}" isn't accepted`);
+      } else if (sec.type === 'choice') {
+        check(it.prompt && it.answer, `${q.id}#${si}.${i}: missing prompt or answer`);
+        // Four options, the right one among them, none spelled the same.
+        const opts = Misc.choiceOptions(sec, i);
+        check(opts.length === Math.min(4, sec.items.length) && opts.includes(i), `${q.id}#${si}.${i}: options ${opts}`);
+        check(new Set(opts.map(j => sec.items[j].answer)).size === opts.length, `${q.id}#${si}.${i}: repeated option`);
       } else {
         check(it.prompt && it.answer, `${q.id}#${si}.${i}: missing prompt or answer`);
         check(Misc.matchItems({ items: [it] }, it.answer).length === 1, `${q.id}#${si}.${i}: its own answer isn't accepted`);
@@ -148,6 +154,23 @@ check(Misc.matchItems(bunkeiFor('hou-ga-ii'), 'たほうがいいです').length
 check(Misc.matchItems(bunkeiFor('potential'), 'られます').length === 1, 'bunkei: られます without the brackets');
 check(Misc.matchItems(bunkeiFor('volitional-to-omou'), 'ようとおもっています').length === 1, 'bunkei: kana for 思って');
 check(Misc.matchItems(bunkeiFor('te-kureru'), '作ってくれました').length === 1, 'bunkei: favours use 作る');
+
+// Multiple choice both ways, with the same patterns as the typed quiz.
+['bunkei-form', 'bunkei-meaning'].forEach(id => {
+  const q = Misc.QUIZZES.find(x => x.id === id);
+  check(q.sections.map(sec => sec.label).join() === bunkei.map(sec => sec.label).join(), `${id}: levels differ`);
+  const rows = q.sections.flatMap(sec => sec.items);
+  check(rows.map(it => it.id).join() === bunkeiRows.map(it => it.id).join(), `${id}: patterns differ`);
+  rows.forEach(it => {
+    const typed = bunkeiRows.find(r => r.id === it.id);
+    const meaning = typed.prompt.replace(/ +\([^()]+\)$/, '');
+    check(id === 'bunkei-form' ? it.prompt === meaning && it.answer === typed.answer
+      : it.prompt === typed.answer && it.answer === meaning, `${id} ${it.id}: prompt or answer differs`);
+    check(it.note && !/[[\]]/.test(Misc.rubyPlain(it.note)), `${id} ${it.id}: no example`);
+  });
+});
+const n5 = Misc.QUIZZES.find(x => x.id === 'bunkei-meaning').sections[0];
+check(Misc.choiceOptions(n5, 3, () => 0.5).join() !== '' && Misc.choiceOptions(n5, 3, () => 0).includes(3), 'choiceOptions keeps the answer');
 
 // ─── Shuffle ─────────────────────────────────────────────────────────────────
 

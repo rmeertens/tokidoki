@@ -7469,6 +7469,22 @@ a.chapter-card.news-headline-card {
 .misc-tip { font-size: 0.82rem; color: var(--text-dim); margin: -4px 2px 8px; }
 .misc-tip a { color: var(--accent); }
 
+.misc-table-choice td:last-child { width: 62%; }
+.misc-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.misc-choice {
+  font: inherit; font-family: var(--font-jp); text-align: left; line-height: 1.35;
+  padding: 7px 10px; border: 1px solid var(--border); border-radius: 8px;
+  background: var(--bg-card); color: var(--text); cursor: pointer;
+}
+.misc-choice:hover:not(:disabled) { background: var(--bg-card-hover); border-color: var(--accent); }
+.misc-choice:disabled { cursor: default; opacity: 0.55; }
+.misc-choice rt { font-size: 0.55em; }
+.misc-choice.misc-choice-picked, .misc-choice.misc-choice-right { opacity: 1; font-weight: 700; }
+.misc-choice.misc-choice-picked { border-color: var(--red); color: var(--red); }
+.misc-choice.misc-choice-right { border-color: var(--green); color: var(--green); }
+.misc-choice-note { margin-top: 6px; font-size: 0.9rem; color: var(--text-dim); }
+.misc-choice-note rt { font-size: 0.55em; }
+
 .misc-result { margin-top: 16px; }
 .misc-actions { margin-top: 16px; }
 
@@ -7476,6 +7492,8 @@ a.chapter-card.news-headline-card {
   .misc-table { font-size: 0.88rem; }
   .misc-table td, .misc-table th { padding: 5px 4px; }
   .misc-glyph { width: 34px; height: 34px; font-size: 1.1rem; }
+  .misc-table-choice td:first-child { width: 34%; }
+  .misc-choices { grid-template-columns: 1fr; }
 }
 
 /* ─── Conversation starters (conversation.html) ─────────────────────────── */

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" id="viewport-meta" content="width=device-width, initial-scale=1.0">
   <title>Misc Japanese Quizzes — name them all | Tokidoki</title>
-  <meta name="description" content="Quick “can you name them all?” quizzes for the lists Japanese learners must know by heart: the U-verbs that end in える or いる, every te-form ending and its change, honorific and humble keigo verbs, the N5–N3 bunkei sentence patterns, counters, the odd dates of the month, the ways to say “but” and more.">
+  <meta name="description" content="Quick “can you name them all?” quizzes for the lists Japanese learners must know by heart: the U-verbs that end in える or いる, every te-form ending and its change, honorific and humble keigo verbs, the N5–N3 bunkei sentence patterns (also as multiple choice), counters, the odd dates of the month, the ways to say “but” and more.">
   <meta property="og:title" content="Misc Japanese Quizzes | Tokidoki">
   <meta property="og:description" content="Can you name all the RU-verb lookalikes, or every te-form ending? Quick recall quizzes. No login required.">
   <meta property="og:type" content="website">
@@ -20,7 +20,7 @@
   <meta name="twitter:description" content="Can you name all the RU-verb lookalikes, or every te-form ending? Quick recall quizzes.">
   <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
   <link rel="canonical" href="https://tokidoki.meertens.dev/misc.html">
-  <link rel="stylesheet" href="style.css?v=73">
+  <link rel="stylesheet" href="style.css?v=76">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -128,7 +128,7 @@
         <p class="misc-desc" id="misc-desc"></p>
         <div class="misc-toggles" id="misc-toggles">
           <label class="kana-script-toggle misc-shuffle-row"><input type="checkbox" id="misc-shuffle"> Shuffle the order</label>
-          <label class="kana-script-toggle misc-shuffle-row"><input type="checkbox" id="misc-retype"> Type answers again after the results</label>
+          <label class="kana-script-toggle misc-shuffle-row" id="misc-retype-row"><input type="checkbox" id="misc-retype"> Type answers again after the results</label>
         </div>
         <div id="misc-body"></div>
         <div class="particle-explanation misc-result hidden" id="misc-result" aria-live="polite"></div>
@@ -143,7 +143,7 @@
 
   <script src="verbs.js"></script>
   <script src="romaji.js"></script>
-  <script src="misc.js?v=11"></script>
+  <script src="misc.js?v=12"></script>
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=4"></script>
   <script src="app.js?v=61"></script>
@@ -161,7 +161,7 @@
       (きれい, 嫌い, 有名, 丁寧, 失礼 and more); every U-verb ending and its
       te-form change (う・つ・る → って, む・ぶ・ぬ → んで, く → いて, ぐ → いで, す → して)
       plus RU-verbs, 行く, する and 来る; the 43 bunkei sentence patterns from 〜てください and 〜たことがあります to
-      〜させられました and 〜わけにはいきません; the special honorific and humble keigo verbs
+      〜させられました and 〜わけにはいきません, typed or as multiple choice both ways (meaning → form and form → meaning); the special honorific and humble keigo verbs
       (いらっしゃる, おっしゃる, 召し上がる, 参る, 申す, 拝見する, いただく …); the irregular dates of the month from ついたち to
       にじゅうよっか; counting things from ひとつ to とお; and the 100 most common counters
       (人, 個, 本, 枚, 冊, 台, 匹, 杯, 回, 階, 泊, 両, 便, 位 …); and the ways to say

@@ -332,6 +332,16 @@
     };
   });
 
+  // The same patterns as multiple choice, either way round: the meaning with
+  // the forms of that level to pick from, or the form with the meanings.
+  // After answering, the example shows the pattern on a verb.
+  const bunkeiChoiceItems = (rows, pick) => rows.map(([id, meaning, form, example]) => {
+    const note = rubyHtml(example);
+    return pick === 'form'
+      ? { id, prompt: meaning, answer: rubyPlain(form), answerHtml: rubyHtml(form), note }
+      : { id, prompt: rubyPlain(form), promptHtml: rubyHtml(form), answer: meaning, note };
+  });
+
   const TE_ROWS = [
     { key: 'う', value: 'って', ex: '買う → 買って' },
     { key: 'つ', value: 'って', ex: '待つ → 待って' },
@@ -449,6 +459,32 @@
       })),
     },
     {
+      id: 'bunkei-form',
+      glyph: '形',
+      title: 'Bunkei: pick the form',
+      ja: '文型 — 意味から形へ',
+      desc: 'Multiple choice: which form says "must", "might", "please let me"…? Four forms from the same level to pick from.',
+      sections: BUNKEI.map(([level, rows]) => ({
+        type: 'choice',
+        label: level,
+        columns: ['Meaning', 'Form'],
+        items: bunkeiChoiceItems(rows, 'form'),
+      })),
+    },
+    {
+      id: 'bunkei-meaning',
+      glyph: '意',
+      title: 'Bunkei: pick the meaning',
+      ja: '文型 — 形から意味へ',
+      desc: 'Multiple choice the other way round: what does 〜てしまいました, 〜わけにはいきません… mean? Four meanings to pick from.',
+      sections: BUNKEI.map(([level, rows]) => ({
+        type: 'choice',
+        label: level,
+        columns: ['Form', 'Meaning'],
+        items: bunkeiChoiceItems(rows, 'meaning'),
+      })),
+    },
+    {
       id: 'keigo',
       glyph: '敬',
       title: 'Honorific & humble verbs',
@@ -544,6 +580,19 @@
     return [...(item.accept || []), ...(item.answer ? [item.answer] : [])];
   }
 
+  // The options for multiple-choice item i: its own answer and up to n - 1
+  // others from the same section (none spelled the same), in random order.
+  function choiceOptions(section, i, rand = Math.random, n = 4) {
+    const seen = new Set([section.items[i].answer]);
+    const others = shuffled(section.items.length, rand).filter(j => {
+      if (seen.has(section.items[j].answer)) return false;
+      seen.add(section.items[j].answer);
+      return true;
+    }).slice(0, n - 1);
+    const opts = [i, ...others];
+    return shuffled(opts.length, rand).map(k => opts[k]);
+  }
+
   const total = quiz => quiz.sections.reduce((n, sec) => n + sec.items.length, 0);
 
   // ─── Storage ───────────────────────────────────────────────────────────────
@@ -600,6 +649,7 @@
 
     let quiz = null;
     let found = [];       // per section, a Set of item indices
+    let wrong = [];       // per section, the multiple-choice items answered wrong
     let started = 0;
     let timer = null;
     let over = false;
@@ -615,7 +665,8 @@
       list.innerHTML = QUIZZES.map(q => {
         const best = store[q.id];
         const n = total(q);
-        const meta = best ? `Best ${best.score} / ${n}<br>${formatTime(best.time)}` : `${n} to name`;
+        const choice = q.sections.every(sec => sec.type === 'choice');
+        const meta = best ? `Best ${best.score} / ${n}<br>${formatTime(best.time)}` : `${n} ${choice ? 'questions' : 'to name'}`;
         return `<button class="lis-part-row misc-row${best && best.score === n ? ' misc-row-perfect' : ''}" data-quiz="${q.id}">
           <span class="lis-part-head">
             <span class="misc-glyph" lang="ja" aria-hidden="true">${esc(q.glyph)}</span>
@@ -634,6 +685,7 @@
       quiz = QUIZZES.find(q => q.id === id);
       if (!quiz) return;
       found = quiz.sections.map(() => new Set());
+      wrong = quiz.sections.map(() => new Set());
       over = false;
       started = Date.now();
       $('#misc-title').textContent = quiz.title;
@@ -642,9 +694,10 @@
       $('#misc-give-up').classList.remove('hidden');
       $('#misc-again').classList.add('hidden');
       renderQuiz();
-      // Only prompts you answer one by one have an order worth mixing up, or
-      // answers worth typing again.
-      $('#misc-toggles').classList.toggle('hidden', !quiz.sections.some(sec => sec.type === 'fill'));
+      // Only prompts you answer one by one have an order worth mixing up, and
+      // only typed ones answers worth typing again.
+      $('#misc-toggles').classList.toggle('hidden', !quiz.sections.some(sec => sec.type !== 'find'));
+      $('#misc-retype-row').classList.toggle('hidden', !quiz.sections.some(sec => sec.type === 'fill'));
       $('#misc-shuffle').checked = !!settings.shuffle;
       $('#misc-retype').checked = !!settings.retype;
       $('#misc-body').classList.remove('misc-retype-on');
@@ -655,7 +708,7 @@
       updateTime();
       show('screen-misc-quiz');
       history.replaceState(null, '', '#' + id);
-      const first = document.querySelector('#misc-body input');
+      const first = document.querySelector('#misc-body input, #misc-body .misc-choice');
       if (first) first.focus();
     }
 
@@ -671,6 +724,17 @@
               placeholder="${esc(sec.placeholder || 'Type an answer')}" autocomplete="off" autocapitalize="off" spellcheck="false">
             <div class="misc-miss" aria-live="polite"></div>
             <table class="misc-table misc-table-find"><thead>${head}</thead><tbody>${rows}</tbody></table>
+          </section>`;
+        }
+        if (sec.type === 'choice') {
+          const rows = sec.items.map((it, i) => `<tr data-row="${i}">
+            <td lang="ja" class="misc-prompt">${it.promptHtml || esc(it.prompt)}</td>
+            <td><div class="misc-choices">${choiceOptions(sec, i).map(j => `<button class="misc-choice" lang="ja"
+              data-section="${si}" data-row="${i}" data-opt="${j}">${sec.items[j].answerHtml || esc(sec.items[j].answer)}</button>`).join('')}</div>
+              ${it.note ? `<div class="misc-choice-note hidden" lang="ja">${it.note}</div>` : ''}</td>
+          </tr>`).join('');
+          return `<section class="misc-section" data-section="${si}">${label}
+            <table class="misc-table misc-table-choice"><thead>${head}</thead><tbody>${rows}</tbody></table>
           </section>`;
         }
         const rows = sec.items.map((it, i) => `<tr data-row="${i}">
@@ -691,10 +755,10 @@
       });
     }
 
-    // Puts each fill section's rows in random or list order. Answers and
-    // focus follow the rows, so this works mid-quiz too.
+    // Puts each fill or choice section's rows in random or list order.
+    // Answers and focus follow the rows, so this works mid-quiz too.
     function orderRows() {
-      document.querySelectorAll('#misc-body .misc-table-fill tbody').forEach(tbody => {
+      document.querySelectorAll('#misc-body .misc-table-fill tbody, #misc-body .misc-table-choice tbody').forEach(tbody => {
         const rows = [...tbody.children].sort((a, b) => a.dataset.row - b.dataset.row);
         const order = settings.shuffle ? shuffled(rows.length) : rows.map((_, i) => i);
         order.forEach(i => tbody.appendChild(rows[i]));
@@ -734,7 +798,21 @@
         }
       }
       updateScore();
-      if (found.every((f, s) => f.size === quiz.sections[s].items.length)) finish();
+      if (allAnswered()) finish();
+    }
+
+    const allAnswered = () => found.every((f, s) => f.size + wrong[s].size === quiz.sections[s].items.length);
+
+    // One pick per question: right is found, wrong is missed straight away.
+    function onChoice(btn) {
+      if (over || btn.disabled) return;
+      const si = +btn.dataset.section;
+      const i = +btn.dataset.row;
+      btn.classList.add('misc-choice-picked');
+      if (+btn.dataset.opt === i) reveal(si, i, 'found');
+      else { wrong[si].add(i); reveal(si, i, 'missed'); }
+      updateScore();
+      if (allAnswered()) finish();
     }
 
     function reveal(si, i, how) {
@@ -753,6 +831,13 @@
         const cell = inp.parentElement;
         cell.insertAdjacentHTML('beforeend', `<span class="misc-answer" lang="ja">${it.answerHtml || esc(it.answer)}</span>`
           + (it.card ? deckButtonHtml(it.card.word) : ''));
+      } else if (sec.type === 'choice') {
+        row.querySelectorAll('.misc-choice').forEach(b => {
+          b.disabled = true;
+          if (+b.dataset.opt === i) b.classList.add('misc-choice-right');
+        });
+        const note = row.querySelector('.misc-choice-note');
+        if (note) note.classList.remove('hidden');
       }
     }
 
@@ -856,7 +941,7 @@
       clearInterval(timer);
       updateTime();
       quiz.sections.forEach((sec, si) => sec.items.forEach((_, i) => {
-        if (!found[si].has(i)) reveal(si, i, 'missed');
+        if (!found[si].has(i) && !wrong[si].has(i)) reveal(si, i, 'missed');
       }));
       document.querySelectorAll('#misc-body input').forEach(inp => { inp.disabled = true; });
       document.querySelectorAll('.misc-miss').forEach(el => { el.textContent = ''; });
@@ -867,9 +952,10 @@
       const best = better(store[quiz.id], result);
       if (best) { store[quiz.id] = result; saveStore(store); }
       const res = $('#misc-result');
+      const choice = quiz.sections.every(sec => sec.type === 'choice');
       res.innerHTML = (score === n
         ? `🎉 All ${n} in ${formatTime(result.time)}${best ? ' — a new best!' : ''}`
-        : `You named ${score} of ${n}. The ones you missed are in red.${best ? ' New best!' : ''}`)
+        : `You ${choice ? 'got' : 'named'} ${score} of ${n}. The ones you missed are in red.${best ? ' New best!' : ''}`)
         + (settings.retype && quiz.sections.some(sec => sec.type === 'fill') ? ' Click an answer to type it again.' : '');
       retypeOn();
       res.classList.remove('hidden');
@@ -894,6 +980,8 @@
     $('#misc-body').addEventListener('click', e => {
       const btn = e.target.closest('.misc-deck-btn');
       if (btn) { toggleCard(btn.dataset.word); return; }
+      const choice = e.target.closest('.misc-choice');
+      if (choice) { onChoice(choice); return; }
       const answer = e.target.closest('.misc-table-fill .misc-answer');
       if (answer && over && settings.retype) startRetype(answer.closest('tr'));
     });
@@ -913,7 +1001,7 @@
       settings.shuffle = e.target.checked;
       saveSettings(settings);
       orderRows();
-      const next = [...document.querySelectorAll('#misc-body input')].find(x => !x.disabled);
+      const next = [...document.querySelectorAll('#misc-body input, #misc-body .misc-choice')].find(x => !x.disabled);
       if (next) next.focus();
     });
     $('#misc-again').addEventListener('click', () => start(quiz.id));
@@ -924,7 +1012,7 @@
     if (QUIZZES.some(q => q.id === hash)) start(hash);
   }
 
-  const api = { rubyHtml, rubyPlain, rubyKana, QUIZZES, RU_EXCEPTIONS, normalize, matchItems, shuffled, total, better, formatTime };
+  const api = { rubyHtml, rubyPlain, rubyKana, QUIZZES, RU_EXCEPTIONS, normalize, matchItems, choiceOptions, shuffled, total, better, formatTime };
   global.Misc = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   if (typeof document !== 'undefined') {
