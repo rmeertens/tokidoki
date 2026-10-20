@@ -406,11 +406,10 @@
       const cards = getChunkCards(chunk);
       const [pct, due] = idsProgress(cards.map(([v, f]) => cardId(v, f)));
       const verbs = getVerbsForChunk(chunk);
-      const forms = [...new Set(cards.map(([, f]) => f))];
       return chunkCard({
         title: chunk.title,
-        sub: chunk.verbsFrom ? `${chunk.sub} &middot; ${cards.length} cards` : `${chunk.sub} &middot; ${verbs.length} verbs`,
-        pills: chunk.verbsFrom ? formPillsHTML(forms, f => Conjugator.getFormInfo(f)) : '',
+        sub: `${chunk.sub} &middot; ${verbs.length} verbs`,
+        pills: formPillsHTML(chunk.newForms, f => Conjugator.getFormInfo(f)),
         pct,
         due,
         onClick: () => startStudy(chunk.id),
@@ -429,27 +428,24 @@
   }
 
   function adjSentenceCards(chunkId) {
-    const forms = Conjugator.ADJ_ALL_FORMS;
     const cards = [];
-    getAdjectivesForChunk(getAdjChunk(chunkId)).forEach(a => {
-      forms.forEach(f => {
-        const conj = Conjugator.conjugateAdjective(a, f);
-        const ex = Examples.build(a, f, conj);
-        if (!ex) return;
-        const fi = Conjugator.getFormInfo(f);
-        cards.push({
-          id: adjSentenceCardId(a, f),
-          direction: 'en-to-ja',
-          sentence: { ja: Examples.stripFurigana(ex.ja), jaHtml: Examples.furiganaHtml(ex.ja), en: ex.en },
-          hint: `${a.kanji} (${a.meaning}) · ${fi.hint}`,
-          refForm: f,
-          adj: a,
-          adjForm: conj,
-          // The ending for this adjective's type: 〜くない for い, 〜じゃない for な.
-          formEnding: conj.slice(a.type === 'i-adj' ? a.reading.length - 1 : a.reading.length) || 'だ',
-          verb: null,
-          form: null,
-        });
+    getAdjChunkCards(getAdjChunk(chunkId)).forEach(([a, f]) => {
+      const conj = Conjugator.conjugateAdjective(a, f);
+      const ex = Examples.build(a, f, conj);
+      if (!ex) return;
+      const fi = Conjugator.getFormInfo(f);
+      cards.push({
+        id: adjSentenceCardId(a, f),
+        direction: 'en-to-ja',
+        sentence: { ja: Examples.stripFurigana(ex.ja), jaHtml: Examples.furiganaHtml(ex.ja), en: ex.en },
+        hint: `${a.kanji} (${a.meaning}) · ${fi.hint}`,
+        refForm: f,
+        adj: a,
+        adjForm: conj,
+        // The ending for this adjective's type: 〜くない for い, 〜じゃない for な.
+        formEnding: conj.slice(a.type === 'i-adj' ? a.reading.length - 1 : a.reading.length) || 'だ',
+        verb: null,
+        form: null,
       });
     });
     return cards;
@@ -486,12 +482,11 @@
   function renderAdjChapters() {
     renderAdjModeToggle();
     const sentenceMode = !!settings.adjSentences;
-    const forms = Conjugator.ADJ_ALL_FORMS;
     renderLevelSections($('#adj-chunks'), ADJ_CHUNKS, chunk => {
       const adjs = getAdjectivesForChunk(chunk);
       const ids = sentenceMode
         ? adjSentenceCards(chunk.id).map(c => c.id)
-        : adjs.flatMap(a => forms.map(f => adjCardId(a, f)));
+        : getAdjChunkCards(chunk).map(([a, f]) => adjCardId(a, f));
       const [pct, due] = idsProgress(ids);
       const iCount = adjs.filter(a => a.type === 'i-adj').length;
       const naCount = adjs.filter(a => a.type === 'na-adj').length;
@@ -499,7 +494,7 @@
       return chunkCard({
         title: chunk.title,
         sub: `${chunk.sub} &middot; ${typeSummary}${sentenceMode ? ` &middot; ${ids.length} sentences` : ''}`,
-        pills: '',
+        pills: formPillsHTML(chunk.newForms, f => Conjugator.ADJ_FORM_INFO[f]),
         pct,
         due,
         onClick: () => (sentenceMode ? startAdjSentenceStudy(chunk.id) : startAdjStudy(chunk.id)),
@@ -574,13 +569,7 @@
   function startAdjStudy(chunkId, cont) {
     studyMode = 'adjectives';
     currentChunk = chunkId;
-    const adjs = getAdjectivesForChunk(getAdjChunk(chunkId));
-    const forms = Conjugator.ADJ_ALL_FORMS;
-
-    const all = [];
-    adjs.forEach(a => {
-      forms.forEach(f => all.push({ verb: a, form: f, id: adjCardId(a, f) }));
-    });
+    const all = getAdjChunkCards(getAdjChunk(chunkId)).map(([a, f]) => ({ verb: a, form: f, id: adjCardId(a, f) }));
     const due = all.filter(c => isDue(getCardState(srsData, c.id)));
     sessionCards = pickBatch(`adjectives:${chunkId}`, due, all, cont);
 
@@ -1560,7 +1549,7 @@
       ...ALL_VERBS.map(v => ({ ...v, wordType: 'verb' })),
       ...ALL_ADJECTIVES.map(a => ({ ...a, wordType: 'adj' })),
     ];
-    const groups = [...VERB_CHUNKS.filter(c => !c.verbsFrom), ...ADJ_CHUNKS];
+    const groups = [...VERB_CHUNKS, ...ADJ_CHUNKS];
     const groupTitle = id => {
       const c = groups.find(g => g.id === id);
       return `${c.level} · ${c.title}${ADJ_CHUNKS.includes(c) ? ' (adjectives)' : ''}`;

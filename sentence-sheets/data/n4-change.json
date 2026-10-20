@@ -5,9 +5,9 @@
   "level": "N4",
   "sentences": [
     {
-      "ja": "飛行機は電車より速いです。",
-      "jaHtml": "<ruby>飛行機<rp>(</rp><rt>ひこうき</rt><rp>)</rp></ruby>は<ruby>電車<rp>(</rp><rt>でんしゃ</rt><rp>)</rp></ruby>より<ruby>速<rp>(</rp><rt>はや</rt><rp>)</rp></ruby>いです。",
-      "en": "Airplanes are faster than trains."
+      "ja": "先生になりたいです。",
+      "jaHtml": "<ruby>先生<rp>(</rp><rt>せんせい</rt><rp>)</rp></ruby>になりたいです。",
+      "en": "I want to become a teacher."
     },
     {
       "ja": "この本はあの本より面白いです。",
@@ -15,14 +15,9 @@
       "en": "This book is more interesting than that book."
     },
     {
-      "ja": "このホテルはあのホテルより安いです。",
-      "jaHtml": "このホテルはあのホテルより<ruby>安<rp>(</rp><rt>やす</rt><rp>)</rp></ruby>いです。",
-      "en": "This hotel is cheaper than that hotel."
-    },
-    {
-      "ja": "バスは電車より遅いです。",
-      "jaHtml": "バスは<ruby>電車<rp>(</rp><rt>でんしゃ</rt><rp>)</rp></ruby>より<ruby>遅<rp>(</rp><rt>おそ</rt><rp>)</rp></ruby>いです。",
-      "en": "Buses are slower than trains."
+      "ja": "犬は猫より大きいです。",
+      "jaHtml": "<ruby>犬<rp>(</rp><rt>いぬ</rt><rp>)</rp></ruby>は<ruby>猫<rp>(</rp><rt>ねこ</rt><rp>)</rp></ruby>より<ruby>大<rp>(</rp><rt>おお</rt><rp>)</rp></ruby>きいです。",
+      "en": "Dogs are bigger than cats."
     },
     {
       "ja": "季節の中で、春が一番好きです。",
@@ -30,19 +25,9 @@
       "en": "Of all the seasons, I like spring best."
     },
     {
-      "ja": "クラスの中で、田中さんが一番背が高いです。",
-      "jaHtml": "クラスの<ruby>中<rp>(</rp><rt>なか</rt><rp>)</rp></ruby>で、<ruby>田中<rp>(</rp><rt>たなか</rt><rp>)</rp></ruby>さんが<ruby>一番<rp>(</rp><rt>いちばん</rt><rp>)</rp></ruby><ruby>背<rp>(</rp><rt>せ</rt><rp>)</rp></ruby>が<ruby>高<rp>(</rp><rt>たか</rt><rp>)</rp></ruby>いです。",
-      "en": "Mr. Tanaka is the tallest in the class."
-    },
-    {
-      "ja": "新幹線はバスより速いです。",
-      "jaHtml": "<ruby>新幹線<rp>(</rp><rt>しんかんせん</rt><rp>)</rp></ruby>はバスより<ruby>速<rp>(</rp><rt>はや</rt><rp>)</rp></ruby>いです。",
-      "en": "The bullet train is faster than the bus."
-    },
-    {
-      "ja": "東京は大阪より大きいです。",
-      "jaHtml": "<ruby>東京<rp>(</rp><rt>とうきょう</rt><rp>)</rp></ruby>は<ruby>大阪<rp>(</rp><rt>おおさか</rt><rp>)</rp></ruby>より<ruby>大<rp>(</rp><rt>おお</rt><rp>)</rp></ruby>きいです。",
-      "en": "Tokyo is bigger than Osaka."
+      "ja": "日本語が上手になりました。",
+      "jaHtml": "<ruby>日本語<rp>(</rp><rt>にほんご</rt><rp>)</rp></ruby>が<ruby>上手<rp>(</rp><rt>じょうず</rt><rp>)</rp></ruby>になりました。",
+      "en": "My Japanese has gotten better."
     },
     {
       "ja": "日本の料理の中で、何が一番おいしいですか。",
@@ -55,9 +40,14 @@
       "en": "Mr. Tanaka became a teacher."
     },
     {
-      "ja": "この中で、どれが一番安いですか。",
-      "jaHtml": "この<ruby>中<rp>(</rp><rt>なか</rt><rp>)</rp></ruby>で、どれが<ruby>一番<rp>(</rp><rt>いちばん</rt><rp>)</rp></ruby><ruby>安<rp>(</rp><rt>やす</rt><rp>)</rp></ruby>いですか。",
-      "en": "Which of these is the cheapest?"
+      "ja": "有名になりたいです。",
+      "jaHtml": "<ruby>有名<rp>(</rp><rt>ゆうめい</rt><rp>)</rp></ruby>になりたいです。",
+      "en": "I want to become famous."
+    },
+    {
+      "ja": "子供の時、歌手になりたかったです。",
+      "jaHtml": "<ruby>子供<rp>(</rp><rt>こども</rt><rp>)</rp></ruby>の<ruby>時<rp>(</rp><rt>とき</rt><rp>)</rp></ruby>、<ruby>歌手<rp>(</rp><rt>かしゅ</rt><rp>)</rp></ruby>になりたかったです。",
+      "en": "When I was a child, I wanted to become a singer."
     },
     {
       "ja": "早く元気になってください。",
@@ -65,9 +55,9 @@
       "en": "Please get well soon."
     },
     {
-      "ja": "私は一日に八時間も寝ます。",
-      "jaHtml": "<ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>は<ruby>一日<rp>(</rp><rt>いちにち</rt><rp>)</rp></ruby>に<ruby>八時間<rp>(</rp><rt>はちじかん</rt><rp>)</rp></ruby>も<ruby>寝<rp>(</rp><rt>ね</rt><rp>)</rp></ruby>ます。",
-      "en": "I sleep as much as eight hours a day."
+      "ja": "彼は泳げるようになりました。",
+      "jaHtml": "<ruby>彼<rp>(</rp><rt>かれ</rt><rp>)</rp></ruby>は<ruby>泳<rp>(</rp><rt>およ</rt><rp>)</rp></ruby>げるようになりました。",
+      "en": "He has become able to swim."
     },
     {
       "ja": "ビールを五本も飲みました。",
@@ -80,9 +70,19 @@
       "en": "I became able to speak Japanese."
     },
     {
-      "ja": "部屋を明るくしました。",
-      "jaHtml": "<ruby>部屋<rp>(</rp><rt>へや</rt><rp>)</rp></ruby>を<ruby>明<rp>(</rp><rt>あか</rt><rp>)</rp></ruby>るくしました。",
-      "en": "I made the room brighter."
+      "ja": "早く寝れば元気になります。",
+      "jaHtml": "<ruby>早<rp>(</rp><rt>はや</rt><rp>)</rp></ruby>く<ruby>寝<rp>(</rp><rt>ね</rt><rp>)</rp></ruby>れば<ruby>元気<rp>(</rp><rt>げんき</rt><rp>)</rp></ruby>になります。",
+      "en": "If you go to bed early, you'll feel better."
+    },
+    {
+      "ja": "練習すれば上手になります。",
+      "jaHtml": "<ruby>練習<rp>(</rp><rt>れんしゅう</rt><rp>)</rp></ruby>すれば<ruby>上手<rp>(</rp><rt>じょうず</rt><rp>)</rp></ruby>になります。",
+      "en": "If you practice, you'll get better."
+    },
+    {
+      "ja": "部屋をきれいにしました。",
+      "jaHtml": "<ruby>部屋<rp>(</rp><rt>へや</rt><rp>)</rp></ruby>をきれいにしました。",
+      "en": "I made the room clean."
     },
     {
       "ja": "髪を短くしました。",
@@ -90,9 +90,9 @@
       "en": "I cut my hair short."
     },
     {
-      "ja": "音を小さくしてください。",
-      "jaHtml": "<ruby>音<rp>(</rp><rt>おと</rt><rp>)</rp></ruby>を<ruby>小<rp>(</rp><rt>ちい</rt><rp>)</rp></ruby>さくしてください。",
-      "en": "Please turn the volume down."
+      "ja": "母のような料理人になりたいです。",
+      "jaHtml": "<ruby>母<rp>(</rp><rt>はは</rt><rp>)</rp></ruby>のような<ruby>料理人<rp>(</rp><rt>りょうりにん</rt><rp>)</rp></ruby>になりたいです。",
+      "en": "I want to become a cook like my mother."
     },
     {
       "ja": "ハンバーガーのような食べ物は体によくないです。",
@@ -100,9 +100,9 @@
       "en": "Foods like hamburgers aren't good for your health."
     },
     {
-      "ja": "京都のような古い町が好きです。",
-      "jaHtml": "<ruby>京都<rp>(</rp><rt>きょうと</rt><rp>)</rp></ruby>のような<ruby>古<rp>(</rp><rt>ふる</rt><rp>)</rp></ruby>い<ruby>町<rp>(</rp><rt>まち</rt><rp>)</rp></ruby>が<ruby>好<rp>(</rp><rt>す</rt><rp>)</rp></ruby>きです。",
-      "en": "I like old towns like Kyoto."
+      "ja": "あの人はまるでモデルのようです。",
+      "jaHtml": "あの<ruby>人<rp>(</rp><rt>ひと</rt><rp>)</rp></ruby>はまるでモデルのようです。",
+      "en": "That person is just like a model."
     }
   ]
 }

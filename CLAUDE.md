@@ -84,8 +84,12 @@
 
 - Verbs, adjectives, sentences, Build Your Own and Bunkei are grouped in
   themed chunks by JLPT level (N5 / N4 / N3), never by a textbook's
-  chapters. Verb and adjective chunks are `VERB_CHUNKS` / `ADJ_CHUNKS` in
-  `verbs.js`; each word's `group` puts it in one. A verb's `chapter` number
+  chapters, but still in teaching order: each verb / adjective chunk brings
+  its words (each word's `group`) and maybe new forms (`newForms`: polite,
+  past, て, plain…), and drills each word + form in the first chunk where
+  both are known (`VERB_CHUNKS` / `ADJ_CHUNKS` in `verbs.js`). Sentence
+  chunks are in the same order, each sentence in the last chunk its grammar
+  needs. A verb's `chapter` number
   is only part of its SRS card ids (`3_いく_masu`, like the sentences'
   `tr_3_0_…`) — keep it unchanged so saved progress carries over, and give a
   new verb any unused number.

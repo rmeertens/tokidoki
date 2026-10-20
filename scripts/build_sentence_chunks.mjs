@@ -3,9 +3,10 @@
 // JLPT level and grammar point, from the grammar sentences-words.js found
 // in each sentence (scripts/tokenize_sentences.mjs).
 //
-// A sentence goes in the first chunk of PRIORITY that has one of its grammar
-// points, so it lands with the hardest thing it practises: 先生に書かせられ
-// ました is causative-passive practice, not past tense. Chunks bigger than
+// The chunks come in teaching order (です, polite, past, adjectives, て, …),
+// and a sentence goes in the last chunk that has one of its grammar points,
+// so it never uses grammar a later chunk introduces: 先生に書かせられました
+// is causative-passive practice, not past tense. Chunks bigger than
 // MAX are cut into parts (Past tense 1, 2, …) in the sentences' own order.
 //
 //   node scripts/build_sentence_chunks.mjs           write sentence-chunks.js
@@ -25,7 +26,7 @@ vm.createContext(box);
 for (const f of ['sentences-data.js', 'sentences-words.js']) vm.runInContext(readFileSync(path.join(ROOT, f), 'utf8'), box);
 const { TRANSLATE_SENTENCES, SENTENCE_WORDS } = box.window;
 
-// In page order. `grammar` is the grammar ids (jp_grammar.mjs and
+// In page (teaching) order. `grammar` is the grammar ids (jp_grammar.mjs and
 // SENTENCE_RULES) that put a sentence here.
 export const CHUNKS = [
   { id: 'n5-desu', level: 'N5', title: 'です sentences', sub: 'X は Y です, this / that, questions', grammar: ['desu', 'deshita', 'dewa-arimasen', 'da-plain'] },
@@ -49,11 +50,9 @@ export const CHUNKS = [
   { id: 'n3-expressions', level: 'N3', title: 'N3 expressions', sub: '〜はず, 〜のに, 〜そうだ…', grammar: ['hazu', 'kata', 'koto-ni-suru', 'koto-ni-shite-iru', 'ni-yoru-to', 'noni', 'sou-hearsay', 'te-kuru'] },
 ];
 
-// Which chunk wins when a sentence has grammar from several: the hardest,
-// most specific first; plain tense and です last.
-const PRIORITY = ['n3-causative', 'n3-passive', 'n3-expressions', 'n4-keigo', 'n4-potential', 'n4-giving',
-  'n4-conditionals', 'n4-wants', 'n4-te-forms', 'n4-advice', 'n4-thinking', 'n4-change',
-  'n5-plain', 'n5-te', 'n5-te-iru', 'n5-adjectives', 'n5-past', 'n5-masu', 'n5-desu'];
+// Which chunk wins when a sentence has grammar from several: the last one
+// in page order, so no sentence uses grammar a later chunk brings in.
+const PRIORITY = CHUNKS.map(c => c.id).reverse();
 
 export function buildChunks() {
   const known = new Set(Object.keys(SENTENCE_WORDS.grammar));

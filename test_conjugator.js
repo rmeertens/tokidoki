@@ -338,10 +338,15 @@ VERB_CHUNKS.forEach(c => getChunkCards(c).forEach(([v, f]) => {
   pairs.add(key);
 }));
 const cardsOf = id => getChunkCards(VERB_CHUNKS.find(c => c.id === id));
-assert(cardsOf('n5-basics').some(([v, f]) => f === 'potential'), false, 'N5 chunks drill N5 forms only');
-assert(cardsOf('n4-potential').some(([v]) => v.kanji === '食べる'), true, 'N4 potential chunk has 食べる');
-assert(cardsOf('n4-potential').some(([v]) => v.kanji === 'ある'), false, 'no potential for ある');
+const formsOf = id => new Set(cardsOf(id).map(([, f]) => f));
+assert([...formsOf('n5-basics')].join(), 'masu,masu-neg', 'the first chunk drills the polite forms only');
+assert(formsOf('n5-routine').has('te'), false, 'て comes after the polite past');
+assert(cardsOf('n5-study').some(([v, f]) => v.kanji === '行く' && f === 'te'), true, 'a new form is drilled on the verbs that came before');
+assert(cardsOf('n4-giving').some(([v, f]) => v.kanji === '食べる' && f === 'potential'), true, '食べる gets its potential form');
+assert(cardsOf('n4-giving').some(([v]) => v.kanji === 'ある'), false, 'no potential for ある');
 assert(cardsOf('n4-keigo').some(([, f]) => f === 'passive'), false, 'keigo verbs keep to the N5 forms');
+ALL_VERBS.filter(v => v.group !== 'n4-keigo' && v.kanji !== 'ある').forEach(v =>
+  assert(pairs.has(`${v.chapter}_${v.reading}_${v.disambig || ''}_masu`), true, `${v.kanji} is drilled in ます`));
 
 // --- Verify all verbs in DB can be conjugated without error ---
 console.log('\nConjugating all verbs across all forms...');

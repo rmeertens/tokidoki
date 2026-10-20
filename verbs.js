@@ -269,47 +269,48 @@ const ALL_VERBS = [
   { kanji: 'ためる', reading: 'ためる', meaning: 'to save (money)', type: 'ru', group: 'n3-life', chapter: 21 },
 ];
 
-// The Verbs page's chunks, by JLPT level. A topic chunk drills its own verbs
-// (`group` above) in the forms of its level: N5 has the polite, て and plain
-// forms and たい, N4 and N3 every form. Keigo verbs keep to the N5 forms (a
-// passive いらっしゃる is no use to anyone). The N4 form chunks take one N4
-// conjugation through all the N5 verbs, so 食べる gets its 食べられる too.
+// The Verbs page's chunks, by JLPT level, in the order they're meant to be
+// worked through. Each one brings its own verbs (`group` above) and maybe
+// new forms (`newForms`), in the classic order: polite, polite past, て,
+// plain, plain past, たい, then potential, volitional, ば, passive and
+// causative. A chunk drills its own verbs in every form known by then, plus
+// its new forms for the verbs of earlier chunks, so each verb + form is in
+// exactly one chunk: the first one where both are known. Keigo verbs keep
+// to the N5 forms (a passive いらっしゃる is no use to anyone).
 //
 // A verb's `chapter` is only part of its cards' SRS ids (3_いく_masu); it's
 // kept so saved progress carries over, and has no say in where it's shown.
 const VERB_CHUNKS = [
-  { id: 'n5-basics', level: 'N5', title: 'Basic verbs', sub: 'go, come, be, know…' },
-  { id: 'n5-routine', level: 'N5', title: 'Daily routine', sub: 'eat, sleep, wash, work…' },
-  { id: 'n5-study', level: 'N5', title: 'Study & talking', sub: 'read, write, ask, learn…' },
-  { id: 'n5-going', level: 'N5', title: 'Getting around', sub: 'ride, enter, swim, climb…' },
-  { id: 'n5-things', level: 'N5', title: 'Things & shopping', sub: 'buy, lend, put, use…' },
-  { id: 'n5-around', level: 'N5', title: 'Doors, lights & weather', sub: 'open, turn on, rain, begin…' },
-  { id: 'n5-life', level: 'N5', title: 'Clothes & life events', sub: 'wear, marry, sing, be born…' },
-  { id: 'n4-potential', level: 'N4', title: 'Potential: can do', sub: 'every N5 verb', forms: ['potential'], verbsFrom: 'N5' },
-  { id: 'n4-volitional', level: 'N4', title: 'Volitional & ば', sub: "let's… / if… · every N5 verb", forms: ['volitional', 'ba'], verbsFrom: 'N5' },
-  { id: 'n4-passive', level: 'N4', title: 'Passive', sub: 'is done (by)… · every N5 verb', forms: ['passive'], verbsFrom: 'N5' },
-  { id: 'n4-causative', level: 'N4', title: 'Causative & causative-passive', sub: 'make / be made to… · every N5 verb', forms: ['causative', 'causative-passive'], verbsFrom: 'N5' },
-  { id: 'n4-keigo', level: 'N4', title: 'Honorific & humble verbs', sub: 'いらっしゃる, 申す…', forms: 'N5' },
-  { id: 'n4-giving', level: 'N4', title: 'Giving, helping & telling', sub: 'receive, send, explain…' },
-  { id: 'n4-feelings', level: 'N4', title: 'Thoughts & feelings', sub: 'think, worry, laugh, decide…' },
-  { id: 'n4-pairs', level: 'N4', title: 'Things that happen', sub: 'drop / fall, break, find…' },
-  { id: 'n4-handling', level: 'N4', title: 'Handling things', sub: 'tidy, carry, wrap, bake…' },
-  { id: 'n4-plans', level: 'N4', title: 'Plans & errands', sub: 'hurry, book, move, pay…' },
-  { id: 'n4-school', level: 'N4', title: 'School, work & sport', sub: 'graduate, quit, win…' },
-  { id: 'n3-people', level: 'N3', title: 'People & relationships', sub: 'invite, date, help…' },
-  { id: 'n3-feelings', level: 'N3', title: 'Effort & feelings', sub: 'give up, endure, be moved…' },
-  { id: 'n3-life', level: 'N3', title: 'Life & work', sub: 'study abroad, order, save…' },
+  { id: 'n5-basics', level: 'N5', title: 'Basic verbs', sub: 'go, come, be, know…', newForms: ['masu', 'masu-neg'] },
+  { id: 'n5-routine', level: 'N5', title: 'Daily routine', sub: 'eat, sleep, wash, work…', newForms: ['masu-past', 'masu-past-neg'] },
+  { id: 'n5-study', level: 'N5', title: 'Study & talking', sub: 'read, write, ask, learn…', newForms: ['te'] },
+  { id: 'n5-going', level: 'N5', title: 'Getting around', sub: 'ride, enter, swim, climb…', newForms: ['nai', 'dict'] },
+  { id: 'n5-things', level: 'N5', title: 'Things & shopping', sub: 'buy, lend, put, use…', newForms: ['ta', 'nakatta'] },
+  { id: 'n5-around', level: 'N5', title: 'Doors, lights & weather', sub: 'open, turn on, rain, begin…', newForms: ['tai'] },
+  { id: 'n5-life', level: 'N5', title: 'Clothes & life events', sub: 'wear, marry, sing, be born…', newForms: [] },
+  { id: 'n4-giving', level: 'N4', title: 'Giving, helping & telling', sub: 'receive, send, explain…', newForms: ['potential'] },
+  { id: 'n4-feelings', level: 'N4', title: 'Thoughts & feelings', sub: 'think, worry, laugh, decide…', newForms: ['volitional'] },
+  { id: 'n4-plans', level: 'N4', title: 'Plans & errands', sub: 'hurry, book, move, pay…', newForms: ['ba'] },
+  { id: 'n4-pairs', level: 'N4', title: 'Things that happen', sub: 'drop / fall, break, find…', newForms: ['passive'] },
+  { id: 'n4-keigo', level: 'N4', title: 'Honorific & humble verbs', sub: 'いらっしゃる, 申す…', newForms: [] },
+  { id: 'n4-handling', level: 'N4', title: 'Handling things', sub: 'tidy, carry, wrap, bake…', newForms: ['causative'] },
+  { id: 'n4-school', level: 'N4', title: 'School, work & sport', sub: 'graduate, quit, win…', newForms: ['causative-passive'] },
+  { id: 'n3-people', level: 'N3', title: 'People & relationships', sub: 'invite, date, help…', newForms: [] },
+  { id: 'n3-feelings', level: 'N3', title: 'Effort & feelings', sub: 'give up, endure, be moved…', newForms: [] },
+  { id: 'n3-life', level: 'N3', title: 'Life & work', sub: 'study abroad, order, save…', newForms: [] },
 ];
 
 // Forms that don't exist for a verb, or that nobody says: no potential or
-// volitional for things that just happen, and no passive or causative for
-// states.
+// volitional for things that just happen, no passive or causative for
+// states, and no N4 forms for keigo verbs.
 const NOT_DONE_ON_PURPOSE = ['ある', '分かる', 'できる', '要る', '見える', '聞こえる', '足りる', 'かかる', '込む',
   '降る', '晴れる', '咲く', '始まる', '閉まる', '開く', '消える', '壊れる', '汚れる', '落ちる', '見つかる', '決まる',
   '生まれる', '疲れる', '困る', '遅くなる', '喉が渇く', '間に合う', '似合う'];
 const STATES = ['ある', '分かる', 'できる', '要る', '見える', '聞こえる', '足りる', '似合う', 'かかる', '込む'];
+const N4_FORMS = ['potential', 'volitional', 'ba', 'passive', 'causative', 'causative-passive'];
 
 function verbHasForm(verb, form) {
+  if (verb.group === 'n4-keigo' && N4_FORMS.includes(form)) return false;
   if (['potential', 'volitional'].includes(form) && NOT_DONE_ON_PURPOSE.includes(verb.kanji)) return false;
   if (['passive', 'causative', 'causative-passive'].includes(form) && STATES.includes(verb.kanji)) return false;
   return true;
@@ -322,17 +323,21 @@ function getVerbChunk(id) {
   return VERB_CHUNKS.find(c => c.id === id) || null;
 }
 
+// The verbs a chunk brings.
 function getVerbsForChunk(chunk) {
-  return chunk.verbsFrom
-    ? ALL_VERBS.filter(v => verbLevel(v) === chunk.verbsFrom)
-    : ALL_VERBS.filter(v => v.group === chunk.id);
+  return ALL_VERBS.filter(v => v.group === chunk.id);
 }
 
-// Every [verb, form] pair a chunk drills.
+// Every [verb, form] pair a chunk drills: its own verbs in all the forms
+// known by then, then its new forms for the verbs that came before.
 function getChunkCards(chunk) {
-  const C = typeof Conjugator !== 'undefined' ? Conjugator : require('./conjugator.js');
-  const forms = Array.isArray(chunk.forms) ? chunk.forms : C.getFormsForLevel(chunk.forms || chunk.level);
-  return getVerbsForChunk(chunk).flatMap(v => forms.filter(f => verbHasForm(v, f)).map(f => [v, f]));
+  const i = VERB_CHUNKS.indexOf(chunk);
+  const known = VERB_CHUNKS.slice(0, i + 1).flatMap(c => c.newForms);
+  const pairs = (verbs, forms) => verbs.flatMap(v => forms.filter(f => verbHasForm(v, f)).map(f => [v, f]));
+  return [
+    ...pairs(getVerbsForChunk(chunk), known),
+    ...pairs(VERB_CHUNKS.slice(0, i).flatMap(getVerbsForChunk), chunk.newForms),
+  ];
 }
 
 const ALL_ADJECTIVES = [
@@ -404,13 +409,14 @@ const ALL_ADJECTIVES = [
   { kanji: '幸せ', reading: 'しあわせ', meaning: 'happy', type: 'na-adj', group: 'adj-n4-people' },
 ];
 
-// The Adjectives page's chunks, by topic and JLPT level. Every chunk drills
-// all the adjective forms.
+// The Adjectives page's chunks, by topic and JLPT level, introducing the
+// forms in order the same way as the verbs: present and negative, then the
+// past, then the て-form and adverb.
 const ADJ_CHUNKS = [
-  { id: 'adj-n5-things', level: 'N5', title: 'Size, distance & amount', sub: 'big, far, many…' },
-  { id: 'adj-n5-opinions', level: 'N5', title: 'Opinions & character', sub: 'fun, busy, famous, quiet…' },
-  { id: 'adj-n5-senses', level: 'N5', title: 'Weather, taste & body', sub: 'cold, sweet, painful…' },
-  { id: 'adj-n4-people', level: 'N4', title: 'Feelings & people', sub: 'kind, sad, strict, honest…' },
+  { id: 'adj-n5-things', level: 'N5', title: 'Size, distance & amount', sub: 'big, far, many…', newForms: ['adj-present', 'adj-neg'] },
+  { id: 'adj-n5-opinions', level: 'N5', title: 'Opinions & character', sub: 'fun, busy, famous, quiet…', newForms: ['adj-past', 'adj-past-neg'] },
+  { id: 'adj-n5-senses', level: 'N5', title: 'Weather, taste & body', sub: 'cold, sweet, painful…', newForms: ['adj-te', 'adj-adverb'] },
+  { id: 'adj-n4-people', level: 'N4', title: 'Feelings & people', sub: 'kind, sad, strict, honest…', newForms: [] },
 ];
 
 function getAdjChunk(id) {
@@ -421,6 +427,17 @@ function getAdjectivesForChunk(chunk) {
   return ALL_ADJECTIVES.filter(a => a.group === chunk.id);
 }
 
+// Every [adjective, form] pair a chunk drills, as getChunkCards.
+function getAdjChunkCards(chunk) {
+  const i = ADJ_CHUNKS.indexOf(chunk);
+  const known = ADJ_CHUNKS.slice(0, i + 1).flatMap(c => c.newForms);
+  const pairs = (adjs, forms) => adjs.flatMap(a => forms.map(f => [a, f]));
+  return [
+    ...pairs(getAdjectivesForChunk(chunk), known),
+    ...pairs(ADJ_CHUNKS.slice(0, i).flatMap(getAdjectivesForChunk), chunk.newForms),
+  ];
+}
+
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { ALL_VERBS, VERB_CHUNKS, getVerbChunk, getVerbsForChunk, getChunkCards, verbHasForm, verbLevel, ALL_ADJECTIVES, ADJ_CHUNKS, getAdjChunk, getAdjectivesForChunk };
+  module.exports = { ALL_VERBS, VERB_CHUNKS, getVerbChunk, getVerbsForChunk, getChunkCards, verbHasForm, verbLevel, ALL_ADJECTIVES, ADJ_CHUNKS, getAdjChunk, getAdjectivesForChunk, getAdjChunkCards };
 }

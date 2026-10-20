@@ -5,9 +5,14 @@
   "level": "N4",
   "sentences": [
     {
-      "ja": "鍵をなくしてしまいました。",
-      "jaHtml": "<ruby>鍵<rp>(</rp><rt>かぎ</rt><rp>)</rp></ruby>をなくしてしまいました。",
-      "en": "I lost my keys."
+      "ja": "大学を卒業してから、日本で働きたいです。",
+      "jaHtml": "<ruby>大学<rp>(</rp><rt>だいがく</rt><rp>)</rp></ruby>を<ruby>卒業<rp>(</rp><rt>そつぎょう</rt><rp>)</rp></ruby>してから、<ruby>日本<rp>(</rp><rt>にほん</rt><rp>)</rp></ruby>で<ruby>働<rp>(</rp><rt>はたら</rt><rp>)</rp></ruby>きたいです。",
+      "en": "After graduating from university, I want to work in Japan."
+    },
+    {
+      "ja": "この音楽が聞けてよかったです。",
+      "jaHtml": "この<ruby>音楽<rp>(</rp><rt>おんがく</rt><rp>)</rp></ruby>が<ruby>聞<rp>(</rp><rt>き</rt><rp>)</rp></ruby>けてよかったです。",
+      "en": "I'm glad I got to hear this music."
     },
     {
       "ja": "この靴をはいてみてもいいですか。",
@@ -20,89 +25,84 @@
       "en": "Before the trip, I'll book a hotel in advance."
     },
     {
-      "ja": "旅行の前に、お金を下ろしておきました。",
-      "jaHtml": "<ruby>旅行<rp>(</rp><rt>りょこう</rt><rp>)</rp></ruby>の<ruby>前<rp>(</rp><rt>まえ</rt><rp>)</rp></ruby>に、お<ruby>金<rp>(</rp><rt>かね</rt><rp>)</rp></ruby>を<ruby>下<rp>(</rp><rt>お</rt><rp>)</rp></ruby>ろしておきました。",
-      "en": "I withdrew money before the trip."
+      "ja": "駅の近くのホテルを予約しておきました。",
+      "jaHtml": "<ruby>駅<rp>(</rp><rt>えき</rt><rp>)</rp></ruby>の<ruby>近<rp>(</rp><rt>ちか</rt><rp>)</rp></ruby>くのホテルを<ruby>予約<rp>(</rp><rt>よやく</rt><rp>)</rp></ruby>しておきました。",
+      "en": "I booked a hotel near the station in advance."
     },
     {
-      "ja": "電車に乗り遅れてしまいました。",
-      "jaHtml": "<ruby>電車<rp>(</rp><rt>でんしゃ</rt><rp>)</rp></ruby>に<ruby>乗<rp>(</rp><rt>の</rt><rp>)</rp></ruby>り<ruby>遅<rp>(</rp><rt>おく</rt><rp>)</rp></ruby>れてしまいました。",
-      "en": "I missed the train."
+      "ja": "この単語を辞書で調べておきました。",
+      "jaHtml": "この<ruby>単語<rp>(</rp><rt>たんご</rt><rp>)</rp></ruby>を<ruby>辞書<rp>(</rp><rt>じしょ</rt><rp>)</rp></ruby>で<ruby>調<rp>(</rp><rt>しら</rt><rp>)</rp></ruby>べておきました。",
+      "en": "I looked up this word in the dictionary beforehand."
     },
     {
-      "ja": "昨日は電話しなくてごめんなさい。",
-      "jaHtml": "<ruby>昨日<rp>(</rp><rt>きのう</rt><rp>)</rp></ruby>は<ruby>電話<rp>(</rp><rt>でんわ</rt><rp>)</rp></ruby>しなくてごめんなさい。",
-      "en": "Sorry I didn't call yesterday."
+      "ja": "宿題をしてから、テレビを見ました。",
+      "jaHtml": "<ruby>宿題<rp>(</rp><rt>しゅくだい</rt><rp>)</rp></ruby>をしてから、テレビを<ruby>見<rp>(</rp><rt>み</rt><rp>)</rp></ruby>ました。",
+      "en": "I watched TV after doing my homework."
     },
     {
-      "ja": "シャワーを浴びてから、寝ます。",
-      "jaHtml": "シャワーを<ruby>浴<rp>(</rp><rt>あ</rt><rp>)</rp></ruby>びてから、<ruby>寝<rp>(</rp><rt>ね</rt><rp>)</rp></ruby>ます。",
-      "en": "I go to bed after taking a shower."
+      "ja": "顔を洗ってから、出かけました。",
+      "jaHtml": "<ruby>顔<rp>(</rp><rt>かお</rt><rp>)</rp></ruby>を<ruby>洗<rp>(</rp><rt>あら</rt><rp>)</rp></ruby>ってから、<ruby>出<rp>(</rp><rt>で</rt><rp>)</rp></ruby>かけました。",
+      "en": "I washed my face and then went out."
     },
     {
-      "ja": "財布を落としてしまいました。",
-      "jaHtml": "<ruby>財布<rp>(</rp><rt>さいふ</rt><rp>)</rp></ruby>を<ruby>落<rp>(</rp><rt>お</rt><rp>)</rp></ruby>としてしまいました。",
-      "en": "I dropped my wallet."
+      "ja": "宿題をもう全部やってしまいました。",
+      "jaHtml": "<ruby>宿題<rp>(</rp><rt>しゅくだい</rt><rp>)</rp></ruby>をもう<ruby>全部<rp>(</rp><rt>ぜんぶ</rt><rp>)</rp></ruby>やってしまいました。",
+      "en": "I've already finished all my homework."
     },
     {
-      "ja": "電車の中に傘を忘れてしまいました。",
-      "jaHtml": "<ruby>電車<rp>(</rp><rt>でんしゃ</rt><rp>)</rp></ruby>の<ruby>中<rp>(</rp><rt>なか</rt><rp>)</rp></ruby>に<ruby>傘<rp>(</rp><rt>かさ</rt><rp>)</rp></ruby>を<ruby>忘<rp>(</rp><rt>わす</rt><rp>)</rp></ruby>れてしまいました。",
-      "en": "I left my umbrella on the train."
+      "ja": "テレビを見ながら晩ご飯を食べました。",
+      "jaHtml": "テレビを<ruby>見<rp>(</rp><rt>み</rt><rp>)</rp></ruby>ながら<ruby>晩<rp>(</rp><rt>ばん</rt><rp>)</rp></ruby>ご<ruby>飯<rp>(</rp><rt>はん</rt><rp>)</rp></ruby>を<ruby>食<rp>(</rp><rt>た</rt><rp>)</rp></ruby>べました。",
+      "en": "I ate dinner while watching TV."
     },
     {
-      "ja": "電車の中で寝てしまいました。",
-      "jaHtml": "<ruby>電車<rp>(</rp><rt>でんしゃ</rt><rp>)</rp></ruby>の<ruby>中<rp>(</rp><rt>なか</rt><rp>)</rp></ruby>で<ruby>寝<rp>(</rp><rt>ね</rt><rp>)</rp></ruby>てしまいました。",
-      "en": "I fell asleep on the train."
+      "ja": "大切な書類をなくしてしまいました。",
+      "jaHtml": "<ruby>大切<rp>(</rp><rt>たいせつ</rt><rp>)</rp></ruby>な<ruby>書類<rp>(</rp><rt>しょるい</rt><rp>)</rp></ruby>をなくしてしまいました。",
+      "en": "I lost an important document."
     },
     {
-      "ja": "レポートを書いてしまいました。",
-      "jaHtml": "レポートを<ruby>書<rp>(</rp><rt>か</rt><rp>)</rp></ruby>いてしまいました。",
-      "en": "I've finished writing the report."
+      "ja": "歩きながら電話をしてはいけません。",
+      "jaHtml": "<ruby>歩<rp>(</rp><rt>ある</rt><rp>)</rp></ruby>きながら<ruby>電話<rp>(</rp><rt>でんわ</rt><rp>)</rp></ruby>をしてはいけません。",
+      "en": "You shouldn't talk on the phone while walking."
     },
     {
-      "ja": "シャツが汚れてしまいました。",
-      "jaHtml": "シャツが<ruby>汚<rp>(</rp><rt>よご</rt><rp>)</rp></ruby>れてしまいました。",
-      "en": "My shirt got dirty."
+      "ja": "シャツを汚してしまいました。",
+      "jaHtml": "シャツを<ruby>汚<rp>(</rp><rt>よご</rt><rp>)</rp></ruby>してしまいました。",
+      "en": "I got my shirt dirty."
     },
     {
-      "ja": "雨で電車が止まってしまいました。",
-      "jaHtml": "<ruby>雨<rp>(</rp><rt>あめ</rt><rp>)</rp></ruby>で<ruby>電車<rp>(</rp><rt>でんしゃ</rt><rp>)</rp></ruby>が<ruby>止<rp>(</rp><rt>と</rt><rp>)</rp></ruby>まってしまいました。",
-      "en": "The trains stopped because of the rain."
+      "ja": "試験に合格してよかったです。",
+      "jaHtml": "<ruby>試験<rp>(</rp><rt>しけん</rt><rp>)</rp></ruby>に<ruby>合格<rp>(</rp><rt>ごうかく</rt><rp>)</rp></ruby>してよかったです。",
+      "en": "I'm glad I passed the exam."
     },
     {
-      "ja": "あの映画を見てよかったです。",
-      "jaHtml": "あの<ruby>映画<rp>(</rp><rt>えいが</rt><rp>)</rp></ruby>を<ruby>見<rp>(</rp><rt>み</rt><rp>)</rp></ruby>てよかったです。",
-      "en": "I'm glad I saw that movie."
+      "ja": "朝ご飯を食べないで、学校に来ました。",
+      "jaHtml": "<ruby>朝<rp>(</rp><rt>あさ</rt><rp>)</rp></ruby>ご<ruby>飯<rp>(</rp><rt>はん</rt><rp>)</rp></ruby>を<ruby>食<rp>(</rp><rt>た</rt><rp>)</rp></ruby>べないで、<ruby>学校<rp>(</rp><rt>がっこう</rt><rp>)</rp></ruby>に<ruby>来<rp>(</rp><rt>き</rt><rp>)</rp></ruby>ました。",
+      "en": "I came to school without eating breakfast."
     },
     {
-      "ja": "宿題をしないで、寝てしまいました。",
-      "jaHtml": "<ruby>宿題<rp>(</rp><rt>しゅくだい</rt><rp>)</rp></ruby>をしないで、<ruby>寝<rp>(</rp><rt>ね</rt><rp>)</rp></ruby>てしまいました。",
-      "en": "I fell asleep without doing my homework."
+      "ja": "辞書を使わないで、この本を読みました。",
+      "jaHtml": "<ruby>辞書<rp>(</rp><rt>じしょ</rt><rp>)</rp></ruby>を<ruby>使<rp>(</rp><rt>つか</rt><rp>)</rp></ruby>わないで、この<ruby>本<rp>(</rp><rt>ほん</rt><rp>)</rp></ruby>を<ruby>読<rp>(</rp><rt>よ</rt><rp>)</rp></ruby>みました。",
+      "en": "I read this book without using a dictionary."
     },
     {
-      "ja": "テーブルの上に花が飾ってあります。",
-      "jaHtml": "テーブルの<ruby>上<rp>(</rp><rt>うえ</rt><rp>)</rp></ruby>に<ruby>花<rp>(</rp><rt>はな</rt><rp>)</rp></ruby>が<ruby>飾<rp>(</rp><rt>かざ</rt><rp>)</rp></ruby>ってあります。",
-      "en": "Flowers have been put on the table as decoration."
+      "ja": "壁にカレンダーが掛けてあります。",
+      "jaHtml": "<ruby>壁<rp>(</rp><rt>かべ</rt><rp>)</rp></ruby>にカレンダーが<ruby>掛<rp>(</rp><rt>か</rt><rp>)</rp></ruby>けてあります。",
+      "en": "A calendar has been hung on the wall."
     },
     {
-      "ja": "窓が開けてあります。",
-      "jaHtml": "<ruby>窓<rp>(</rp><rt>まど</rt><rp>)</rp></ruby>が<ruby>開<rp>(</rp><rt>あ</rt><rp>)</rp></ruby>けてあります。",
-      "en": "The window has been left open."
+      "ja": "黒板に名前が書いてあります。",
+      "jaHtml": "<ruby>黒板<rp>(</rp><rt>こくばん</rt><rp>)</rp></ruby>に<ruby>名前<rp>(</rp><rt>なまえ</rt><rp>)</rp></ruby>が<ruby>書<rp>(</rp><rt>か</rt><rp>)</rp></ruby>いてあります。",
+      "en": "A name is written on the blackboard."
     },
     {
-      "ja": "晩ご飯が作ってあります。",
-      "jaHtml": "<ruby>晩<rp>(</rp><rt>ばん</rt><rp>)</rp></ruby>ご<ruby>飯<rp>(</rp><rt>はん</rt><rp>)</rp></ruby>が<ruby>作<rp>(</rp><rt>つく</rt><rp>)</rp></ruby>ってあります。",
-      "en": "Dinner has been made."
+      "ja": "試合に負けてしまいました。",
+      "jaHtml": "<ruby>試合<rp>(</rp><rt>しあい</rt><rp>)</rp></ruby>に<ruby>負<rp>(</rp><rt>ま</rt><rp>)</rp></ruby>けてしまいました。",
+      "en": "I lost the game."
     },
     {
-      "ja": "高くても、このかばんを買います。",
-      "jaHtml": "<ruby>高<rp>(</rp><rt>たか</rt><rp>)</rp></ruby>くても、このかばんを<ruby>買<rp>(</rp><rt>か</rt><rp>)</rp></ruby>います。",
-      "en": "I'll buy this bag even if it's expensive."
-    },
-    {
-      "ja": "日本語が下手でも、話してみてください。",
-      "jaHtml": "<ruby>日本語<rp>(</rp><rt>にほんご</rt><rp>)</rp></ruby>が<ruby>下手<rp>(</rp><rt>へた</rt><rp>)</rp></ruby>でも、<ruby>話<rp>(</rp><rt>はな</rt><rp>)</rp></ruby>してみてください。",
-      "en": "Even if your Japanese isn't good, please try speaking."
+      "ja": "寒くても、毎朝走ります。",
+      "jaHtml": "<ruby>寒<rp>(</rp><rt>さむ</rt><rp>)</rp></ruby>くても、<ruby>毎朝<rp>(</rp><rt>まいあさ</rt><rp>)</rp></ruby><ruby>走<rp>(</rp><rt>はし</rt><rp>)</rp></ruby>ります。",
+      "en": "I run every morning even when it's cold."
     }
   ]
 }
