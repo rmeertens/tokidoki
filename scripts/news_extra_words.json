@@ -4398,5 +4398,345 @@
     "へいさ",
     "closure",
     "noun / suru-verb"
+  ],
+  "1時間": [
+    "いちじかん",
+    "one hour",
+    "noun"
+  ],
+  "約1時間後": [
+    "やくいちじかんご",
+    "about an hour later",
+    "noun"
+  ],
+  "約5年": [
+    "やくごねん",
+    "about five years",
+    "noun"
+  ],
+  "3月末": [
+    "さんがつまつ",
+    "end of March",
+    "noun"
+  ],
+  "45": [
+    "よんじゅうご",
+    "45",
+    "number"
+  ],
+  "45人": [
+    "よんじゅうごにん",
+    "45 people",
+    "number + counter"
+  ],
+  "59": [
+    "ごじゅうきゅう",
+    "59",
+    "number"
+  ],
+  "59歳": [
+    "ごじゅうきゅうさい",
+    "59 years old",
+    "number + counter"
+  ],
+  "55万2207票": [
+    "ごじゅうごまんにせんにひゃくななひょう",
+    "552,207 votes",
+    "number + counter"
+  ],
+  "5万人": [
+    "ごまんにん",
+    "50,000 people",
+    "number + counter"
+  ],
+  "6人": [
+    "ろくにん",
+    "six people",
+    "number + counter"
+  ],
+  "6号機": [
+    "ろくごうき",
+    "unit No. 6",
+    "noun"
+  ],
+  "9号機": [
+    "きゅうごうき",
+    "unit No. 9",
+    "noun"
+  ],
+  "8月ごろ": [
+    "はちがつごろ",
+    "around August",
+    "noun"
+  ],
+  "十八日": [
+    "じゅうはちにち",
+    "the 18th",
+    "noun"
+  ],
+  "そのもの": [
+    "そのもの",
+    "itself",
+    "noun"
+  ],
+  "ハラスメント": [
+    "ハラスメント",
+    "harassment",
+    "noun"
+  ],
+  "パワハラ": [
+    "パワハラ",
+    "power harassment",
+    "noun"
+  ],
+  "上限": [
+    "じょうげん",
+    "upper limit, cap",
+    "noun"
+  ],
+  "下ごしらえ": [
+    "したごしらえ",
+    "preparation (of food)",
+    "noun"
+  ],
+  "介護": [
+    "かいご",
+    "nursing care",
+    "noun"
+  ],
+  "働ける": [
+    "はたらける",
+    "can work",
+    "verb"
+  ],
+  "出せる": [
+    "だせる",
+    "can put out, can serve",
+    "verb"
+  ],
+  "分離": [
+    "ぶんり",
+    "separation",
+    "noun"
+  ],
+  "受け入れ": [
+    "うけいれ",
+    "acceptance",
+    "noun"
+  ],
+  "外食": [
+    "がいしょく",
+    "eating out, restaurant",
+    "noun"
+  ],
+  "実績": [
+    "じっせき",
+    "track record, results",
+    "noun"
+  ],
+  "岩石": [
+    "がんせき",
+    "rock",
+    "noun"
+  ],
+  "市議": [
+    "しぎ",
+    "city assembly member",
+    "noun"
+  ],
+  "年内": [
+    "ねんない",
+    "within the year",
+    "noun"
+  ],
+  "年寄り": [
+    "としより",
+    "older person",
+    "noun"
+  ],
+  "弁護士": [
+    "べんごし",
+    "lawyer",
+    "noun"
+  ],
+  "当選": [
+    "とうせん",
+    "winning an election",
+    "noun"
+  ],
+  "得票": [
+    "とくひょう",
+    "votes won",
+    "noun"
+  ],
+  "技能": [
+    "ぎのう",
+    "skill",
+    "noun"
+  ],
+  "投入": [
+    "とうにゅう",
+    "putting in, injection",
+    "noun"
+  ],
+  "投開票": [
+    "とうかいひょう",
+    "voting and counting (same day)",
+    "noun"
+  ],
+  "接客": [
+    "せっきゃく",
+    "serving customers",
+    "noun"
+  ],
+  "施設": [
+    "しせつ",
+    "facility",
+    "noun"
+  ],
+  "有識者": [
+    "ゆうしきしゃ",
+    "expert, learned person",
+    "noun"
+  ],
+  "民主党": [
+    "みんしゅとう",
+    "Democratic Party",
+    "noun"
+  ],
+  "無所属": [
+    "むしょぞく",
+    "independent (no party)",
+    "noun"
+  ],
+  "獲得": [
+    "かくとく",
+    "winning, gaining",
+    "noun"
+  ],
+  "福祉": [
+    "ふくし",
+    "welfare",
+    "noun"
+  ],
+  "立候補": [
+    "りっこうほ",
+    "running as a candidate",
+    "noun"
+  ],
+  "維新": [
+    "いしん",
+    "Ishin (the Japan Innovation Party)",
+    "noun"
+  ],
+  "職員": [
+    "しょくいん",
+    "staff member",
+    "noun"
+  ],
+  "職場": [
+    "しょくば",
+    "workplace",
+    "noun"
+  ],
+  "自民": [
+    "じみん",
+    "LDP (Liberal Democratic Party)",
+    "noun"
+  ],
+  "見込む": [
+    "みこむ",
+    "to expect, to forecast",
+    "verb"
+  ],
+  "調理": [
+    "ちょうり",
+    "cooking",
+    "noun"
+  ],
+  "足る": [
+    "たる",
+    "to be enough",
+    "verb"
+  ],
+  "軌道": [
+    "きどう",
+    "orbit; track",
+    "noun"
+  ],
+  "辞職": [
+    "じしょく",
+    "resignation",
+    "noun"
+  ],
+  "閣議": [
+    "かくぎ",
+    "Cabinet meeting",
+    "noun"
+  ],
+  "食材": [
+    "しょくざい",
+    "ingredients",
+    "noun"
+  ],
+  "飲食料品": [
+    "いんしょくりょうひん",
+    "food and beverages",
+    "noun"
+  ],
+  "新人": [
+    "しんじん",
+    "newcomer",
+    "noun"
+  ],
+  "横浜": [
+    "よこはま",
+    "Yokohama",
+    "noun"
+  ],
+  "竹春": [
+    "たけはる",
+    "Takeharu (given name)",
+    "noun"
+  ],
+  "山中": [
+    "やまなか",
+    "Yamanaka (surname)",
+    "noun"
+  ],
+  "原沢": [
+    "はらさわ",
+    "Harasawa (surname)",
+    "noun"
+  ],
+  "敦美": [
+    "あつみ",
+    "Atsumi (given name)",
+    "noun"
+  ],
+  "文子": [
+    "ふみこ",
+    "Fumiko (given name)",
+    "noun"
+  ],
+  "45.56%": [
+    "よんじゅうごてんごろくパーセント",
+    "45.56%",
+    "number"
+  ],
+  "41.64%": [
+    "よんじゅういってんろくよんパーセント",
+    "41.64%",
+    "number"
+  ],
+  "39.5%": [
+    "さんじゅうきゅうてんごパーセント",
+    "39.5%",
+    "number"
+  ],
+  "二人目": [
+    "ふたりめ",
+    "the second person",
+    "noun"
   ]
 }

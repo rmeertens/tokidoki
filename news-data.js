@@ -23,6 +23,147 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-10-20-mmx-launch',
+      date: '2026-10-20',
+      emoji: '🚀',
+      titleEn: 'H3 rocket launches Japan\'s MMX probe toward Mars\'s moon Phobos',
+      sources: [
+        { name: 'KSB (ANN)', url: 'https://news.ksb.co.jp/ann/article/16978222' },
+        { name: 'Mynavi News', url: 'https://news.mynavi.jp/techplus/article/20261020-5156160/' },
+        { name: 'sorae', url: 'https://sorae.info/ssn/20261020-h3f10-mmx.html' },
+      ],
+      levels: {
+        N5: {
+          title: '火星[かせい]の月[つき]へ行[い]くロケットが、飛[と]びました',
+          lines: [
+            ['二十日[はつか]の朝[あさ]4時[じ]41分[ふん]に、ロケットが種子島[たねがしま]から飛[と]びました。', 'At 4:41 in the morning on the 20th, the rocket took off from Tanegashima.'],
+            ['ロケットは「H3」です。', 'The rocket is the "H3".'],
+            ['「MMX」という探査機[たんさき]を運[はこ]びました。', 'It carried a probe called "MMX".', '探査機 "space probe": a machine sent to explore.'],
+            ['1時間[じかん]ぐらいあとで、MMXはロケットからはなれて、火星[かせい]のほうへ向[む]かいました。', 'About an hour later, MMX separated from the rocket and headed toward Mars.'],
+            ['MMXは、火星[かせい]の月[つき]の「フォボス」に行[い]きます。', 'MMX will go to Phobos, a moon of Mars.'],
+            ['フォボスの砂[すな]や石[いし]を取[と]って、2031年[ねん]に地球[ちきゅう]に持[も]って帰[かえ]る予定[よてい]です。', 'It plans to collect sand and rocks on Phobos and bring them back to Earth in 2031.', 'It would be the first time in the world to bring back samples from a moon of Mars.'],
+          ],
+        },
+        N4: {
+          title: 'H3ロケット10号機[ごうき]、打[う]ち上[あ]げ成功[せいこう]　火星[かせい]の月[つき]へ探査機[たんさき]「MMX」',
+          lines: [
+            ['JAXAは二十日[はつか]の午前[ごぜん]4時[じ]41分[ふん]、H3ロケット10号機[ごうき]を種子島[たねがしま]宇宙[うちゅう]センターから打[う]ち上[あ]げました。', 'At 4:41 a.m. on the 20th, JAXA launched the 10th H3 rocket from the Tanegashima Space Center.', '号機 counts rockets of one type: 10号機 = the 10th unit.'],
+            ['ロケットは、火星[かせい]の月[つき]を調[しら]べる探査機[たんさき]「MMX」を載[の]せていました。', 'The rocket was carrying the "MMX" probe, which will study the moons of Mars.'],
+            ['打[う]ち上[あ]げから約[やく]1時間後[じかんご]に、MMXはロケットから分[わ]かれて、予定[よてい]の軌道[きどう]に入[はい]りました。', 'About an hour after launch, MMX separated from the rocket and entered its planned orbit.', '軌道 "orbit".'],
+            ['MMXは2027年[ねん]8月[がつ]ごろに火星[かせい]の近[ちか]くに着[つ]く予定[よてい]です。', 'MMX is expected to reach the area around Mars around August 2027.'],
+            ['そのあと、火星[かせい]の月[つき]のフォボスに降[お]りて、砂[すな]や石[いし]を集[あつ]めます。', 'After that, it will land on Phobos, a moon of Mars, and collect sand and rocks.'],
+            ['地球[ちきゅう]に帰[かえ]ってくるのは、2031年[ねん]の予定[よてい]です。', 'It is due to come back to Earth in 2031.'],
+            ['うまくいけば、火星[かせい]の月[つき]から砂[すな]や石[いし]を持[も]ち帰[かえ]るのは、世界[せかい]で初[はじ]めてになります。', 'If all goes well, it will be the first in the world to bring back sand and rocks from a moon of Mars.'],
+          ],
+        },
+        N3: {
+          title: 'H3ロケット10号機[ごうき]の打[う]ち上[あ]げに成功[せいこう]　火星[かせい]衛星[えいせい]探査機[たんさき]「MMX」、約[やく]5年[ねん]の旅[たび]へ',
+          lines: [
+            ['宇宙[うちゅう]航空[こうくう]研究[けんきゅう]開発[かいはつ]機構[きこう]（JAXA）は二十日[はつか]午前[ごぜん]4時[じ]41分[ふん]、火星[かせい]衛星[えいせい]探査機[たんさき]「MMX」を載[の]せたH3ロケット10号機[ごうき]を、鹿児島県[かごしまけん]の種子島[たねがしま]宇宙[うちゅう]センターから打[う]ち上[あ]げた。', 'At 4:41 a.m. on the 20th, the Japan Aerospace Exploration Agency (JAXA) launched the 10th H3 rocket, carrying the Martian moons probe "MMX", from the Tanegashima Space Center in Kagoshima Prefecture.'],
+            ['ロケットは打[う]ち上[あ]げの約[やく]1時間後[じかんご]にMMXを分離[ぶんり]し、計画[けいかく]どおりの軌道[きどう]に投入[とうにゅう]した。', 'About an hour after launch, the rocket separated MMX and put it into the planned orbit.', '軌道に投入する "to put into orbit"; 〜どおり "just as …".'],
+            ['MMXは2027年[ねん]8月[がつ]ごろに火星[かせい]圏[けん]に到着[とうちゃく]し、衛星[えいせい]フォボスに着陸[ちゃくりく]して砂[すな]や岩石[がんせき]を採取[さいしゅ]する計画[けいかく]だ。', 'MMX plans to arrive in the Mars region around August 2027, land on the moon Phobos and collect sand and rock.', '火星圏 "the Mars region (near Mars)"; 採取 "collect, take".'],
+            ['試料[しりょう]を積[つ]んだ探査機[たんさき]が地球[ちきゅう]に戻[もど]るのは、2031年[ねん]の予定[よてい]で、旅[たび]は約[やく]5年[ねん]に及[およ]ぶ。', 'The probe carrying the samples is due to return to Earth in 2031, so the journey will last about five years.', '〜に及ぶ "to extend to, to last as long as …".'],
+            ['成功[せいこう]すれば、火星[かせい]の衛星[えいせい]から試料[しりょう]を持[も]ち帰[かえ]る世界[せかい]初[はつ]の試[こころ]みとなる。', 'If it succeeds, it will be the world\'s first attempt to bring back samples from a Martian moon.', '世界初の "world-first" — a favorite of headlines.'],
+            ['H3ロケットは今回[こんかい]の成功[せいこう]で、6号機[ごうき]、9号機[ごうき]に続[つづ]く実績[じっせき]を重[かさ]ねた。', 'With this success, the H3 rocket has added to its record, following the 6th and 9th units.', '実績を重ねる "to build up a track record".'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-20-yokohama-mayor',
+      date: '2026-10-20',
+      emoji: '🗳️',
+      titleEn: 'Lawyer Atsumi Harasawa wins the Yokohama mayoral election after the previous mayor resigned over power harassment',
+      sources: [
+        { name: 'Jiji Press (via nippon.com)', url: 'https://www.nippon.com/ja/news/yjj20261019n007096/' },
+        { name: 'Nikkei', url: 'https://www.nikkei.com/article/DGXZQOCC02AQM0S6A001C2000000/' },
+        { name: 'Kanaloco (Kanagawa Shimbun)', url: 'https://www.kanaloco.jp/news/government/electiondata/article-1313459.html' },
+      ],
+      levels: {
+        N5: {
+          title: '横浜[よこはま]に新[あたら]しい市長[しちょう]が決[き]まりました',
+          lines: [
+            ['十八日[じゅうはちにち]に、横浜市[よこはまし]で市長[しちょう]を決[き]める選挙[せんきょ]がありました。', 'On the 18th, there was an election in Yokohama to choose a mayor.'],
+            ['新[あたら]しい市長[しちょう]は、弁護士[べんごし]の原沢[はらさわ]敦美[あつみ]さんです。', 'The new mayor is a lawyer, Atsumi Harasawa.', '弁護士 "lawyer".'],
+            ['原沢[はらさわ]さんは59歳[さい]の女[おんな]の人[ひと]です。', 'Ms. Harasawa is a 59-year-old woman.'],
+            ['前[まえ]の市長[しちょう]は、働[はたら]く人[ひと]にひどいことを言[い]ったことが問題[もんだい]になって、やめました。', 'The previous mayor quit after saying cruel things to the people working for him became a problem.', 'This is the "power harassment" (パワハラ) problem.'],
+            ['それで、今回[こんかい]の選挙[せんきょ]になりました。', 'That is why there was an election this time.'],
+            ['選挙[せんきょ]に行[い]った人[ひと]は、100人[にん]のうち45人[にん]ぐらいでした。', 'About 45 out of 100 people went to vote.', 'The turnout was 45.56%.'],
+          ],
+        },
+        N4: {
+          title: '横浜市長選[よこはましちょうせん]、原沢[はらさわ]敦美[あつみ]さんが初当選[はつとうせん]',
+          lines: [
+            ['横浜市長選[よこはましちょうせん]は十八日[じゅうはちにち]に投票[とうひょう]があり、弁護士[べんごし]の原沢[はらさわ]敦美[あつみ]さん（59歳[さい]）が初[はじ]めて当選[とうせん]しました。', 'The Yokohama mayoral election was held on the 18th, and lawyer Atsumi Harasawa (59) was elected for the first time.', '初当選 "elected for the first time".'],
+            ['原沢[はらさわ]さんは無所属[むしょぞく]の新人[しんじん]で、55万[まん]2207票[ひょう]をもらいました。', 'Ms. Harasawa, a newcomer running as an independent, received 552,207 votes.', '無所属 "independent (no party)". She won about 39.5% of the votes.'],
+            ['前[まえ]の市長[しちょう]は、職員[しょくいん]へのパワーハラスメントの問題[もんだい]でやめました。', 'The previous mayor resigned over a power harassment problem involving city staff.'],
+            ['その前[まえ]の市長[しちょう]も立候補[りっこうほ]しましたが、3位[い]でした。', 'The former mayor also ran, but came in third.'],
+            ['投票率[とうひょうりつ]は45.56%で、前回[ぜんかい]の41.64%より高[たか]くなりました。', 'Turnout was 45.56%, higher than the 41.64% last time.', '投票率 "voter turnout".'],
+            ['横浜市[よこはまし]の女性[じょせい]の市長[しちょう]は、林[はやし]文子[ふみこ]さんに続[つづ]いて、二人目[ふたりめ]です。', 'She is the second woman to be mayor of Yokohama, after Fumiko Hayashi.'],
+          ],
+        },
+        N3: {
+          title: '横浜市長選[よこはましちょうせん]、原沢[はらさわ]敦美[あつみ]氏[し]が初当選[はつとうせん]　パワハラ辞職[じしょく]の前市長[ぜんしちょう]ら6人[にん]破[やぶ]る',
+          lines: [
+            ['任期[にんき]途中[とちゅう]で辞職[じしょく]した山中[やまなか]竹春[たけはる]前市長[ぜんしちょう]の後任[こうにん]を選[えら]ぶ横浜市長選[よこはましちょうせん]は十八日[じゅうはちにち]に投開票[とうかいひょう]され、無所属[むしょぞく]新人[しんじん]で弁護士[べんごし]の原沢[はらさわ]敦美[あつみ]氏[し]（59）が初当選[はつとうせん]した。', 'In the Yokohama mayoral election held on the 18th to choose a successor to former mayor Takeharu Yamanaka, who resigned partway through his term, newcomer and lawyer Atsumi Harasawa (59), running as an independent, was elected for the first time.', '投開票 = 投票 + 開票: voting and counting on the same day. 〜氏 is the newspaper way of saying Mr. / Ms.'],
+            ['山中[やまなか]氏[し]は、職員[しょくいん]らへのパワーハラスメントが問題[もんだい]となって辞職[じしょく]していた。', 'Mr. Yamanaka had resigned after power harassment toward staff and others became a problem.'],
+            ['原沢[はらさわ]氏[し]は55万[まん]2207票[ひょう]を獲得[かくとく]し、得票率[とくひょうりつ]は約[やく]39.5%だった。', 'Ms. Harasawa won 552,207 votes, a share of about 39.5%.', '獲得 "to win, to gain"; 得票率 "share of the vote".'],
+            ['自民[じみん]、維新[いしん]、国民[こくみん]民主党[みんしゅとう]の県組織[けんそしき]が推薦[すいせん]し、公明党[こうめいとう]の市議団[しぎだん]も支持[しじ]した。', 'The prefectural branches of the LDP, Ishin and the Democratic Party for the People recommended her, and the Komeito city assembly group also backed her.', '推薦 "to recommend (officially back a candidate)".'],
+            ['山中[やまなか]氏[し]も立候補[りっこうほ]したが、3位[い]に終[お]わった。', 'Mr. Yamanaka also ran but finished third.'],
+            ['投票率[とうひょうりつ]は45.56%で、前回[ぜんかい]を上回[うわまわ]った。', 'Turnout was 45.56%, topping the previous election.', '上回る "to exceed".'],
+            ['横浜市[よこはまし]の女性[じょせい]市長[しちょう]は、林[はやし]文子[ふみこ]氏[し]に続[つづ]いて二人目[ふたりめ]となる。', 'She will be the second woman to serve as mayor of Yokohama, following Fumiko Hayashi.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-20-school-meal-workers',
+      date: '2026-10-20',
+      emoji: '🍱',
+      titleEn: 'Government plans to resume accepting foreign workers for hospital and care-facility meal services under a different category',
+      sources: [
+        { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261019de61741' },
+        { name: 'Nikkei', url: 'https://www.nikkei.com/article/DGXZQOUA1909G0Z11C26A0000000/' },
+        { name: 'nippon.com (Jiji)', url: 'https://www.nippon.com/ja/news/yjj2026101900749/' },
+      ],
+      levels: {
+        N5: {
+          title: '病院[びょういん]のごはんを作[つく]る外国人[がいこくじん]を、また受[う]け入[い]れます',
+          lines: [
+            ['日本[にほん]の国[くに]は、外国[がいこく]から来[き]て働[はたら]く人[ひと]について、新[あたら]しい案[あん]を出[だ]しました。', 'Japan\'s government has put out a new plan about people who come from abroad to work.'],
+            ['今[いま]、レストランなどの仕事[しごと]では、新[あたら]しい外国人[がいこくじん]を受[う]け入[い]れていません。', 'At the moment, new foreign workers are not being accepted for jobs such as restaurants.'],
+            ['でも、病院[びょういん]や、お年寄[としよ]りの施設[しせつ]で、ごはんを作[つく]る仕事[しごと]は、人[ひと]が足[た]りません。', 'But hospitals and facilities for older people do not have enough people to cook meals.', '施設 "facility".'],
+            ['それで、この仕事[しごと]は別[べつ]の分野[ぶんや]にして、また外国人[がいこくじん]を受[う]け入[い]れる案[あん]です。', 'So the plan is to put this work in a different field and accept foreign workers again.'],
+            ['来年[らいねん]の4月[がつ]から始[はじ]める予定[よてい]だと言[い]われています。', 'It is reported that it is planned to start in April next year.'],
+            ['まだ、決[き]まっていません。', 'It has not been decided yet.'],
+          ],
+        },
+        N4: {
+          title: '病院[びょういん]や施設[しせつ]の給食[きゅうしょく]、外国人[がいこくじん]の受[う]け入[い]れを再開[さいかい]する案[あん]',
+          lines: [
+            ['政府[せいふ]は十九日[じゅうくにち]、外国人[がいこくじん]が働[はたら]ける「特定[とくてい]技能[ぎのう]」という制度[せいど]について、新[あたら]しい案[あん]を専門家[せんもんか]の会議[かいぎ]に示[しめ]しました。', 'On the 19th, the government showed a panel of experts a new plan about the "Specified Skilled Worker" system, which lets foreigners work in Japan.', '特定技能 is a status of residence for foreign workers in fields short of people.'],
+            ['今年[ことし]の4月[がつ]から、「外食業[がいしょくぎょう]」では新[あたら]しい人[ひと]の受[う]け入[い]れが止[と]まっています。', 'Since April this year, accepting new people has been stopped in the "restaurant industry" field.'],
+            ['2029年[ねん]3月[がつ]までの上限[じょうげん]の5万人[まんにん]を超[こ]えそうだからです。', 'This is because the limit of 50,000 people through March 2029 is likely to be exceeded.', '上限 "upper limit, cap".'],
+            ['案[あん]は、病院[びょういん]や介護[かいご]施設[しせつ]の給食[きゅうしょく]の仕事[しごと]を、食品[しょくひん]工場[こうじょう]などの「飲食料品[いんしょくりょうひん]製造業[せいぞうぎょう]」の分野[ぶんや]に移[うつ]すものです。', 'The plan would move meal-service work at hospitals and care facilities to the "food and beverage manufacturing" field, which includes food factories.', '給食 "meal service (school lunches, hospital meals)".'],
+            ['入院[にゅういん]している人[ひと]などの食事[しょくじ]を出[だ]せなくなるおそれがあるからです。', 'This is because there is a risk that meals could no longer be served to people in hospital and others.'],
+            ['来年[らいねん]の4月[がつ]から受[う]け入[い]れを再開[さいかい]する方向[ほうこう]で、政府[せいふ]は年内[ねんない]に決[き]めたいと考[かんが]えています。', 'The aim is to resume accepting workers from April next year, and the government wants to decide within the year.', 'Reports differ slightly on the start: NHK and Jiji say April next year, while Nikkei says from applications in fiscal 2027.'],
+          ],
+        },
+        N3: {
+          title: '医療[いりょう]・福祉[ふくし]施設[しせつ]の給食業[きゅうしょくぎょう]、外国人[がいこくじん]の受[う]け入[い]れ再開[さいかい]へ　特定[とくてい]技能[ぎのう]の分野[ぶんや]を変更[へんこう]案[あん]',
+          lines: [
+            ['政府[せいふ]は十九日[じゅうくにち]、有識者[ゆうしきしゃ]会議[かいぎ]で、在留[ざいりゅう]資格[しかく]「特定[とくてい]技能[ぎのう]」の「外食業[がいしょくぎょう]」分野[ぶんや]のうち、病院[びょういん]や介護[かいご]施設[しせつ]などの給食[きゅうしょく]業務[ぎょうむ]を別[べつ]の分野[ぶんや]で受[う]け入[い]れ直[なお]す案[あん]を示[しめ]した。', 'At a panel of experts on the 19th, the government presented a plan to accept meal-service work at hospitals, care facilities and the like, which falls under the "restaurant industry" field of the "Specified Skilled Worker" residence status, under a different field.', '有識者会議 "a panel of experts"; 受け入れ直す "to accept again (in a new way)".'],
+            ['外食業[がいしょくぎょう]分野[ぶんや]では、2029年[ねん]3月[がつ]末[まつ]までの上限[じょうげん]5万人[まんにん]を超[こ]えると見込[みこ]まれるため、今年[ことし]4月[がつ]から新規[しんき]の受[う]け入[い]れが止[と]まっている。', 'In the restaurant industry field, accepting new workers has been stopped since April this year because the cap of 50,000 people through the end of March 2029 is expected to be exceeded.', '見込まれる "is expected / is forecast".'],
+            ['このままでは入院患者[にゅういんかんじゃ]らへの食事[しょくじ]の提供[ていきょう]が難[むずか]しくなるおそれがあるとして、政府[せいふ]は対応[たいおう]を検討[けんとう]してきた。', 'Seeing a risk that, as things stand, it could become difficult to provide meals to hospital patients and others, the government has been considering a response.', '〜おそれがある "there is a risk that …".'],
+            ['案[あん]では、給食[きゅうしょく]業務[ぎょうむ]を食品[しょくひん]工場[こうじょう]などが対象[たいしょう]の「飲食料品[いんしょくりょうひん]製造業[せいぞうぎょう]」分野[ぶんや]に移[うつ]す。', 'Under the plan, meal-service work would be moved to the "food and beverage manufacturing" field, which covers food factories and the like.'],
+            ['こうした施設[しせつ]では、食材[しょくざい]の下[した]ごしらえや調理[ちょうり]が中心[ちゅうしん]で、接客[せっきゃく]の割合[わりあい]が低[ひく]い職場[しょくば]が多[おお]いという。', 'At these facilities, the work is mainly preparing and cooking ingredients, and many workplaces are said to involve little dealing with customers.', '下ごしらえ "preparation (of ingredients)"; 接客 "serving customers".'],
+            ['来年[らいねん]4月[がつ]ごろからの再開[さいかい]を目指[めざ]し、政府[せいふ]は年内[ねんない]の閣議[かくぎ]決定[けってい]を目指[めざ]す方針[ほうしん]だ。', 'Aiming to resume around April next year, the government intends to seek a Cabinet decision within the year.', '閣議決定 "Cabinet decision". Reports differ slightly on timing: Nikkei says the switch would apply to new applications from fiscal 2027.'],
+            ['外食業[がいしょくぎょう]そのものの受[う]け入[い]れ停止[ていし]は、当面[とうめん]続[つづ]くとみられる。', 'The halt on accepting workers in the restaurant industry itself is expected to continue for the time being.', '〜とみられる "is thought/expected to …"; 当面 "for the time being".'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-10-19-flu-season',
       date: '2026-10-19',
       emoji: '🤧',
