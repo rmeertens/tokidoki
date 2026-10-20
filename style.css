@@ -7933,3 +7933,11 @@ a.chapter-card.news-headline-card {
 .cs-fb-caret { display: inline-block; width: 0.5em; height: 1em; margin-left: 2px; vertical-align: -0.12em; background: var(--accent); border-radius: 1px; animation: cs-fb-blink 0.9s steps(2, start) infinite; }
 @keyframes cs-fb-blink { to { visibility: hidden; } }
 @media (prefers-reduced-motion: reduce) { .cs-fb-live, .cs-fb-caret { animation: none; } }
+
+/* Home page: what the site is for, above the quick guides */
+.hub-about-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 14px 16px; max-width: 70ch; }
+.hub-about-card p { color: var(--text-dim); font-size: 0.92rem; line-height: 1.6; }
+.hub-about-card p + p { margin-top: 8px; }
+.hub-about-card strong { color: var(--text); }
+.hub-about-card a { color: var(--accent); font-weight: 600; }
