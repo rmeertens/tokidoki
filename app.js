@@ -5513,6 +5513,7 @@
   let bunkeiAnswered = false;
   // Whether the typed answer was right (null: nothing typed).
   let bunkeiTypedOk = null;
+  let bunkeiRepeats = 0;            // cards re-queued by "Repeat until all correct"
 
   function bunkeiVerbKey(verb) {
     return verb.disambig ? `${verb.kanji}_${verb.disambig}` : verb.kanji;
@@ -5529,6 +5530,7 @@
       patterns: window.Bunkei ? Bunkei.PATTERNS.filter(p => p.level === 'N5' || p.level === 'N4').map(p => p.id) : [],
       typing: false,
       hint: true,
+      repeat: false,
     };
     try { return { ...defaults, ...JSON.parse(localStorage.getItem(BUNKEI_KEY)) }; }
     catch { return defaults; }
@@ -5565,6 +5567,7 @@
 
     $('#bunkei-toggle-typing').checked = !!bunkeiSettings.typing;
     $('#bunkei-toggle-hint').checked = !!bunkeiSettings.hint;
+    $('#bunkei-toggle-repeat').checked = !!bunkeiSettings.repeat;
 
     renderBunkeiSelectedVerbs();
     renderBunkeiVerbList();
@@ -5686,6 +5689,7 @@
     bunkeiSessionCards = due.length > 0 ? due : pool;
     bunkeiIndex = 0;
     bunkeiCorrect = 0;
+    bunkeiRepeats = 0;
     showScreen('bunkei');
     $('#bunkei-session-complete').classList.add('hidden');
     $('#bunkei-card').classList.remove('hidden');
@@ -5809,7 +5813,12 @@
     logReview(card.id, state, grade);
     saveSRS(srsData);
     flashSaveIndicator();
-    if (grade > 1) bunkeiCorrect++;
+    // Only the first try of each sentence counts towards the score.
+    if (grade > 1 && !card.repeat) bunkeiCorrect++;
+    if (grade === 1 && bunkeiSettings.repeat) {
+      bunkeiSessionCards.push({ ...card, repeat: true });
+      bunkeiRepeats++;
+    }
     bunkeiIndex++;
     showBunkeiCard();
   }
@@ -5818,7 +5827,7 @@
     $('#bunkei-card').classList.add('hidden');
     $('#bunkei-session-complete').classList.remove('hidden');
     $('#bunkei-bar-fill').style.width = '100%';
-    const total = bunkeiSessionCards.length;
+    const total = bunkeiSessionCards.length - bunkeiRepeats;
     $('#bunkei-session-total').textContent = total;
     $('#bunkei-session-correct').textContent = bunkeiCorrect;
     $('#bunkei-session-accuracy').textContent = total ? `${Math.round((bunkeiCorrect / total) * 100)}%` : '0%';
@@ -6886,6 +6895,10 @@
     });
     on('#bunkei-toggle-typing', 'change', (e) => {
       bunkeiSettings.typing = e.target.checked;
+      saveBunkeiSettings(bunkeiSettings);
+    });
+    on('#bunkei-toggle-repeat', 'change', (e) => {
+      bunkeiSettings.repeat = e.target.checked;
       saveBunkeiSettings(bunkeiSettings);
     });
     on('#bunkei-toggle-hint', 'change', (e) => {
