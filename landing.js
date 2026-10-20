@@ -50,7 +50,7 @@
     var html = '<div class="lp-progress"><span>Question ' + (i + 1) + ' of ' + qs.length +
       '</span><span class="lp-bar"><i style="width:' + (i / qs.length * 100) + '%"></i></span></div>' +
       '<div class="lp-prompt">' + q.prompt + '</div>';
-    if (q.audio) html += '<button type="button" class="lp-play" id="lp-play">▶ Play</button>';
+    if (q.audio) html += '<button type="button" class="btn-secondary lp-play" id="lp-play">▶ Play</button>';
     html += '<div class="lp-options" role="group" aria-label="Choices">';
     order.forEach(function (idx, pos) {
       html += '<button type="button" class="lp-opt" data-i="' + idx + '" aria-keyshortcuts="' + (pos + 1) + '">' +
@@ -95,7 +95,7 @@
     root.querySelector('.lp-feedback').innerHTML =
       '<div class="lp-verdict ' + (ok ? 'ok' : 'no') + '">' + (ok ? 'Correct!' : 'Not quite.') + '</div>' +
       '<div class="lp-explain">' + q.explain + '</div>' +
-      '<button type="button" class="lp-btn" id="lp-next">' + (last ? 'See my score' : 'Next question') + '</button>';
+      '<button type="button" class="btn-primary lp-btn" id="lp-next">' + (last ? 'See my score' : 'Next question') + '</button>';
     var next = document.getElementById('lp-next');
     next.focus();
     next.addEventListener('click', function () { if (last) finish(); else { i++; render(); } });
@@ -107,8 +107,8 @@
     root.removeAttribute('data-done');
     root.innerHTML = '<div class="lp-score"><strong>' + score + ' / ' + qs.length + '</strong>' +
       '<p>' + (score === qs.length ? 'Perfect run.' : 'Nice work. The full practice shows you the ones you miss again.') + '</p>' +
-      '<a class="lp-btn" id="lp-cta-end" href="' + data.cta.href + '">' + data.cta.label + '</a>' +
-      '<button type="button" class="lp-btn alt" id="lp-again">Try again</button></div>';
+      '<a class="btn-primary lp-btn" id="lp-cta-end" href="' + data.cta.href + '">' + data.cta.label + '</a>' +
+      '<button type="button" class="btn-secondary lp-btn" id="lp-again">Try again</button></div>';
     document.getElementById('lp-again').addEventListener('click', function () {
       i = 0; score = 0; started = false; render();
     });

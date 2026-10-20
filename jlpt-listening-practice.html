@@ -20,13 +20,13 @@
   <meta name="twitter:description" content="Free JLPT listening practice: try real-format quick-response questions with audio right now, then continue to 438 questions and 15 mock tests for N5–N2.">
   <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
   <link rel="canonical" href="https://tokidoki.meertens.dev/jlpt-listening-practice.html">
-  <link rel="stylesheet" href="landing.css?v=1">
+  <link rel="stylesheet" href="style.css?v=72">
+  <link rel="stylesheet" href="landing.css?v=2">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta name="theme-color" content="#f6f0e4" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#16141b" media="(prefers-color-scheme: dark)">
-  <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('tokidoki_theme')||'light')}catch(e){}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"JLPT listening practice (N5–N2)","description":"Free JLPT listening practice: try real-format quick-response questions with audio right now, then continue to 438 questions and 15 mock tests for N5–N2.","url":"https://tokidoki.meertens.dev/jlpt-listening-practice.html","inLanguage":"en","learningResourceType":"quiz","educationalLevel":"Beginner","isAccessibleForFree":true,"teaches":"JLPT listening comprehension","isPartOf":{"@type":"WebSite","name":"Tokidoki","url":"https://tokidoki.meertens.dev/"}}</script>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXWYNZC7YH"></script>
@@ -37,26 +37,91 @@
     gtag('config', 'G-XXWYNZC7YH');
   </script>
 </head>
-<body>
-  <header class="lp-top">
-    <a class="lp-brand" href="index.html"><span lang="ja">回転寿司</span>Tokidoki</a>
-    <a class="lp-full" href="listening.html" data-cta>Full practice →</a>
-  </header>
-  <main class="lp">
-    <h1>JLPT listening practice (N5–N2)</h1>
-    <p class="lp-sub">Free, no login. Warm up with 6 quick questions, or <a href="listening.html" data-cta>open the full practice →</a></p>
-    <div class="lp-quiz" id="lp-quiz"><noscript><p><a href="listening.html">Open the full listening practice →</a></p></noscript></div>
-    
+<body data-mode="guide">
+  <!-- Written by scripts/render_landing_pages.mjs — edit that, not this file. -->
+  <div id="app">
+
+    <!-- Header (rendered by renderSharedChrome() in app.js) -->
+    <div id="header-mount"></div>
+
+    <main class="screen active lp">
+      <nav class="page-nav" aria-label="Exercises">
+        <div class="page-nav-group">
+          <span class="page-nav-label">Conjugation</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="verbs.html"><span class="page-nav-glyph" aria-hidden="true">食</span>Verbs</a>
+            <a class="page-nav-item" href="adjectives.html"><span class="page-nav-glyph" aria-hidden="true">高</span>Adjectives</a>
+            <a class="page-nav-item" href="custom.html"><span class="page-nav-glyph" aria-hidden="true">作</span>Build Your Own</a>
+            <a class="page-nav-item" href="bunkei.html"><span class="page-nav-glyph" aria-hidden="true">型</span>Bunkei</a>
+          </div>
+        </div>
+        <div class="page-nav-group">
+          <span class="page-nav-label">Grammar</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="sentences.html"><span class="page-nav-glyph" aria-hidden="true">文</span>Sentences</a>
+            <a class="page-nav-item" href="particles-quiz.html"><span class="page-nav-glyph" aria-hidden="true">は</span>Particles</a>
+            <a class="page-nav-item" href="word-order.html"><span class="page-nav-glyph" aria-hidden="true">★</span>Word Order</a>
+            <a class="page-nav-item" href="story-fill.html"><span class="page-nav-glyph" aria-hidden="true">章</span>Story Fill-in</a>
+            <a class="page-nav-item" href="misc.html"><span class="page-nav-glyph" aria-hidden="true">雑</span>Misc</a>
+          </div>
+        </div>
+        <div class="page-nav-group">
+          <span class="page-nav-label">Reading &amp; Listening</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="stories.html"><span class="page-nav-glyph" aria-hidden="true">話</span>Stories</a>
+            <a class="page-nav-item" href="news.html"><span class="page-nav-glyph" aria-hidden="true">報</span>News</a>
+            <a class="page-nav-item" href="mystery.html"><span class="page-nav-glyph" aria-hidden="true">謎</span>Mystery</a>
+            <a class="page-nav-item" href="listening.html"><span class="page-nav-glyph" aria-hidden="true">聴</span>Listening</a>
+          </div>
+        </div>
+        <div class="page-nav-group">
+          <span class="page-nav-label">Phrases &amp; Culture</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="phrases.html"><span class="page-nav-glyph" aria-hidden="true">言</span>Phrases</a>
+            <a class="page-nav-item" href="memes.html"><span class="page-nav-glyph" aria-hidden="true">笑</span>Memes &amp; Jokes</a>
+            <a class="page-nav-item" href="conversation.html"><span class="page-nav-glyph" aria-hidden="true">談</span>Conversation</a>
+          </div>
+        </div>
+        <div class="page-nav-group">
+          <span class="page-nav-label">Kana &amp; Kanji</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="kana.html"><span class="page-nav-glyph" aria-hidden="true">あ</span>Kana</a>
+            <a class="page-nav-item" href="kanji-quiz.html"><span class="page-nav-glyph" aria-hidden="true">字</span>Kanji Quiz</a>
+            <a class="page-nav-item" href="kanji-hover.html"><span class="page-nav-glyph" aria-hidden="true">漢</span>Kanji Hover</a>
+            <a class="page-nav-item" href="words-by-kanji.html"><span class="page-nav-glyph" aria-hidden="true">詞</span>Words by Kanji</a>
+            <a class="page-nav-item" href="kanji.html"><span class="page-nav-glyph" aria-hidden="true">紙</span>Practice Sheets</a>
+          </div>
+        </div>
+        <div class="page-nav-group">
+          <span class="page-nav-label">Words &amp; Tools</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="vocabulary.html"><span class="page-nav-glyph" aria-hidden="true">語</span>Vocabulary</a>
+            <a class="page-nav-item" href="vocab-quiz.html"><span class="page-nav-glyph" aria-hidden="true">試</span>Vocab Quiz</a>
+            <a class="page-nav-item" href="flashcards.html"><span class="page-nav-glyph" aria-hidden="true">札</span>Flashcards</a>
+            <a class="page-nav-item" href="notepad.html"><span class="page-nav-glyph" aria-hidden="true">書</span>Notepad</a>
+          </div>
+        </div>
+      </nav>
+      <section class="lis-hero lp-hero">
+        <div class="lis-hero-face lp-hero-face" aria-hidden="true" lang="ja">聴</div>
+        <div>
+          <p class="lis-hero-kicker" lang="ja">聴解 · JLPT N5–N2</p>
+          <h1 class="lis-hero-title">JLPT listening practice (N5–N2)</h1>
+          <p class="lis-hero-sub">Free, no login. Warm up with 6 quick questions, or <a href="listening.html" data-cta>open the full practice →</a></p>
+        </div>
+      </section>
+      <div class="lp-quiz" id="lp-quiz"><noscript><p><a href="listening.html">Open the full listening practice →</a></p></noscript></div>
+      
 <section class="lp-ref">
-  <h2>Pick your level</h2>
+  <h2 class="lis-heading">Pick your level</h2>
   <p>Free JLPT-style listening (聴解) with 438 questions and 15 mock tests, scripts with furigana and English after every question.</p>
   <div class="lp-levels">
-    <a href="listening.html" data-cta>N5 practice</a><a href="listening.html" data-cta>N4 practice</a>
-    <a href="listening.html" data-cta>N3 practice</a><a href="listening.html" data-cta>N2 practice</a>
+    <a class="btn-secondary" href="listening.html" data-cta>N5 practice</a><a class="btn-secondary" href="listening.html" data-cta>N4 practice</a>
+    <a class="btn-secondary" href="listening.html" data-cta>N3 practice</a><a class="btn-secondary" href="listening.html" data-cta>N2 practice</a>
   </div>
 </section>
 <section class="lp-ref">
-  <h2>What the listening section asks</h2>
+  <h2 class="lis-heading">What the listening section asks</h2>
   <ul>
     <li><strong lang="ja">課題理解</strong>: hear what someone has to do, then pick it from four pictures.</li>
     <li><strong lang="ja">ポイント理解</strong>: listen for one detail (when, why, which).</li>
@@ -64,10 +129,20 @@
     <li><strong lang="ja">即時応答</strong>: the quick-response type above: one line, three replies, pick the natural one.</li>
   </ul>
 </section>
-    <nav class="lp-more" aria-label="More practice"><strong>More free practice</strong><ul><li><a href="genki-verb-conjugation-chart.html">Japanese verb conjugation chart (Genki I &amp; II)</a></li><li><a href="wa-vs-ga.html">は vs が: which particle?</a></li><li><a href="verbs.html">Verb conjugation drills</a></li><li><a href="adjectives.html">Adjective drills</a></li><li><a href="particles-quiz.html">Particle quiz</a></li><li><a href="listening.html">JLPT listening</a></li><li><a href="news.html">Easy Japanese news (N5–N3)</a></li><li><a href="stories.html">Graded reading</a></li><li><a href="kana.html">Hiragana &amp; katakana</a></li><li><a href="kanji-quiz.html">Kanji quiz</a></li></ul></nav>
-    <p class="lp-credit">Voices: VOICEVOX:No.7, VOICEVOX:玄野武宏, VOICEVOX:青山龍星, VOICEVOX:剣崎雌雄, VOICEVOX:雀松朱司, VOICEVOX:麒ヶ島宗麟, VOICEVOX:白上虎太郎, VOICEVOX:ちび式じい, VOICEVOX:冥鳴ひまり, VOICEVOX:九州そら, VOICEVOX:四国めたん, VOICEVOX:もち子(cv 明日葉よもぎ), VOICEVOX:東北イタコ, VOICEVOX:春日部つむぎ, VOICEVOX:雨晴はう</p>
-  </main>
+      <section class="lp-ref">
+        <h2 class="lis-heading">More quick guides</h2>
+        <div class="chapter-grid"><a class="chapter-card" href="genki-verb-conjugation-chart.html"><div class="chapter-card-title">Verb Conjugation Chart</div><div class="chapter-card-sub">Every Genki form at a glance · 6-question quiz</div></a><a class="chapter-card" href="wa-vs-ga.html"><div class="chapter-card-title">は vs が</div><div class="chapter-card-sub">Topic or subject? · rule of thumb + quiz</div></a></div>
+      </section>
+      <p class="lis-credits">Voices: VOICEVOX:No.7, VOICEVOX:玄野武宏, VOICEVOX:青山龍星, VOICEVOX:剣崎雌雄, VOICEVOX:雀松朱司, VOICEVOX:麒ヶ島宗麟, VOICEVOX:白上虎太郎, VOICEVOX:ちび式じい, VOICEVOX:冥鳴ひまり, VOICEVOX:九州そら, VOICEVOX:四国めたん, VOICEVOX:もち子(cv 明日葉よもぎ), VOICEVOX:東北イタコ, VOICEVOX:春日部つむぎ, VOICEVOX:雨晴はう</p>
+    </main>
+
+  </div>
+
   <script type="application/json" id="lp-data">{"page":"jlpt-listening-practice","cta":{"href":"listening.html","label":"Open the full listening practice →","lead":"open the full practice →"},"questions":[{"prompt":"Listen to the line, then pick the natural reply.\u003cspan class=\"lp-en\">Press play, then choose 1, 2 or 3. You can replay it here; the real test plays once.\u003c/span>","audio":"audio/listening/sokuji-country.mp3","options":["1","2","3"],"answer":1,"fixed":true,"explain":"\u003cp>\u003cspan lang=\"ja\">お\u003cruby>国\u003crp>(\u003c/rp>\u003crt>くに\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby>は どちらですか。\u003c/span> (Where are you from?)\u003c/p>\u003col>\u003cli>\u003cspan lang=\"ja\">あちらです。\u003c/span> — It’s over there.\u003c/li>\u003cli>\u003cspan lang=\"ja\">アメリカです。\u003c/span> — America.\u003c/li>\u003cli>\u003cspan lang=\"ja\">\u003cruby>日本語\u003crp>(\u003c/rp>\u003crt>にほんご\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby>です。\u003c/span> — Japanese (the language).\u003c/li>\u003c/ol>\u003cp>お国はどちらですか politely asks which country you are from — どちら here isn’t a direction.\u003c/p>"},{"prompt":"Listen to the line, then pick the natural reply.\u003cspan class=\"lp-en\">Press play, then choose 1, 2 or 3. You can replay it here; the real test plays once.\u003c/span>","audio":"audio/listening/sokuji-time.mp3","options":["1","2","3"],"answer":2,"fixed":true,"explain":"\u003cp>\u003cspan lang=\"ja\">すみません、\u003cruby>今\u003crp>(\u003c/rp>\u003crt>いま\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby> \u003cruby>何時\u003crp>(\u003c/rp>\u003crt>なんじ\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby>ですか。\u003c/span> (Excuse me, what time is it now?)\u003c/p>\u003col>\u003cli>\u003cspan lang=\"ja\">\u003cruby>三時間\u003crp>(\u003c/rp>\u003crt>さんじかん\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby>です。\u003c/span> — Three hours.\u003c/li>\u003cli>\u003cspan lang=\"ja\">\u003cruby>三日\u003crp>(\u003c/rp>\u003crt>みっか\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby>です。\u003c/span> — It’s the third.\u003c/li>\u003cli>\u003cspan lang=\"ja\">\u003cruby>三時\u003crp>(\u003c/rp>\u003crt>さんじ\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby>です。\u003c/span> — Three o’clock.\u003c/li>\u003c/ol>\u003cp>何時 asks the time: 三時. 三時間 is a length of time and 三日 a date.\u003c/p>"},{"prompt":"Listen to the line, then pick the natural reply.\u003cspan class=\"lp-en\">Press play, then choose 1, 2 or 3. You can replay it here; the real test plays once.\u003c/span>","audio":"audio/listening/sokuji-tea.mp3","options":["1","2","3"],"answer":0,"fixed":true,"explain":"\u003cp>\u003cspan lang=\"ja\">お\u003cruby>茶\u003crp>(\u003c/rp>\u003crt>ちゃ\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby>を もう \u003cruby>一杯\u003crp>(\u003c/rp>\u003crt>いっぱい\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby> いかがですか。\u003c/span> (Would you like another cup of tea?)\u003c/p>\u003col>\u003cli>\u003cspan lang=\"ja\">はい、いただきます。\u003c/span> — Yes, I’d love one.\u003c/li>\u003cli>\u003cspan lang=\"ja\">はい、いかがです。\u003c/span> — (not a real reply)\u003c/li>\u003cli>\u003cspan lang=\"ja\">いいえ、\u003cruby>飲\u003crp>(\u003c/rp>\u003crt>の\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby>みませんでした。\u003c/span> — No, I didn’t drink it.\u003c/li>\u003c/ol>\u003cp>Accept an offer with いただきます (or decline with いいえ、けっこうです).\u003c/p>"},{"prompt":"Listen to the line, then pick the natural reply.\u003cspan class=\"lp-en\">Press play, then choose 1, 2 or 3. You can replay it here; the real test plays once.\u003c/span>","audio":"audio/listening/sokuji-lunch.mp3","options":["1","2","3"],"answer":1,"fixed":true,"explain":"\u003cp>\u003cspan lang=\"ja\">\u003cruby>一緒\u003crp>(\u003c/rp>\u003crt>いっしょ\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby>に \u003cruby>昼\u003crp>(\u003c/rp>\u003crt>ひる\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby>ご\u003cruby>飯\u003crp>(\u003c/rp>\u003crt>はん\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby>を \u003cruby>食\u003crp>(\u003c/rp>\u003crt>た\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby>べませんか。\u003c/span> (Won’t you have lunch with me?)\u003c/p>\u003col>\u003cli>\u003cspan lang=\"ja\">はい、\u003cruby>食\u003crp>(\u003c/rp>\u003crt>た\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby>べませんでした。\u003c/span> — Yes, I didn’t eat.\u003c/li>\u003cli>\u003cspan lang=\"ja\">ええ、\u003cruby>食\u003crp>(\u003c/rp>\u003crt>た\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby>べましょう。\u003c/span> — Sure, let’s eat.\u003c/li>\u003cli>\u003cspan lang=\"ja\">いいえ、\u003cruby>昼\u003crp>(\u003c/rp>\u003crt>ひる\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby>ご\u003cruby>飯\u003crp>(\u003c/rp>\u003crt>はん\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby>です。\u003c/span> — No, it’s lunch.\u003c/li>\u003c/ol>\u003cp>〜ませんか is an invitation; accept with 〜ましょう.\u003c/p>"},{"prompt":"Listen to the line, then pick the natural reply.\u003cspan class=\"lp-en\">Press play, then choose 1, 2 or 3. You can replay it here; the real test plays once.\u003c/span>","audio":"audio/listening/sokuji-sorry.mp3","options":["1","2","3"],"answer":0,"fixed":true,"explain":"\u003cp>\u003cspan lang=\"ja\">\u003cruby>遅\u003crp>(\u003c/rp>\u003crt>おそ\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby>く なって、すみません。\u003c/span> (Sorry I’m late.)\u003c/p>\u003col>\u003cli>\u003cspan lang=\"ja\">いいえ、\u003cruby>大丈夫\u003crp>(\u003c/rp>\u003crt>だいじょうぶ\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby>ですよ。\u003c/span> — No problem.\u003c/li>\u003cli>\u003cspan lang=\"ja\">どういたしまして。\u003c/span> — You’re welcome.\u003c/li>\u003cli>\u003cspan lang=\"ja\">はい、\u003cruby>遅\u003crp>(\u003c/rp>\u003crt>おそ\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby>いです。\u003c/span> — Yes, it’s slow.\u003c/li>\u003c/ol>\u003cp>Reply to an apology with いいえ、大丈夫ですよ. どういたしまして answers thanks, not an apology.\u003c/p>"},{"prompt":"Listen to the line, then pick the natural reply.\u003cspan class=\"lp-en\">Press play, then choose 1, 2 or 3. You can replay it here; the real test plays once.\u003c/span>","audio":"audio/listening/sokuji-seat.mp3","options":["1","2","3"],"answer":2,"fixed":true,"explain":"\u003cp>\u003cspan lang=\"ja\">すみません、この \u003cruby>席\u003crp>(\u003c/rp>\u003crt>せき\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby>、\u003cruby>空\u003crp>(\u003c/rp>\u003crt>あ\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby>いて いますか。\u003c/span> (Excuse me, is this seat free?)\u003c/p>\u003col>\u003cli>\u003cspan lang=\"ja\">はい、\u003cruby>空\u003crp>(\u003c/rp>\u003crt>あ\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby>きました。\u003c/span> — Yes, it became free.\u003c/li>\u003cli>\u003cspan lang=\"ja\">いいえ、\u003cruby>座\u003crp>(\u003c/rp>\u003crt>すわ\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby>りません。\u003c/span> — No, I won’t sit.\u003c/li>\u003cli>\u003cspan lang=\"ja\">ええ、どうぞ。\u003c/span> — Yes, go ahead.\u003c/li>\u003c/ol>\u003cp>ええ、どうぞ offers the seat. 空きました describes a change, not the seat being free now.\u003c/p>"}]}</script>
-  <script src="landing.js?v=1"></script>
+  <script src="app.js?v=59"></script>
+  <script src="sync-merge.js?v=6"></script>
+  <script src="progress-stats.js?v=2"></script>
+  <script src="sync.js?v=10"></script>
+  <script src="landing.js?v=2"></script>
 </body>
 </html>
