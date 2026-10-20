@@ -1,5 +1,5 @@
 const Conjugator = require('./conjugator.js');
-const { GENKI_VERBS } = require('./verbs.js');
+const { ALL_VERBS } = require('./verbs.js');
 
 let passed = 0;
 let failed = 0;
@@ -318,29 +318,35 @@ assert(adjAns('速い', 'はやい', 'i-adj', 'adj-neg'), 'はやくない / 速
 assert(adjAns('速い', 'はやい', 'i-adj', 'adj-neg', { sameSense: true }), 'はやくない / 速くない', 'not 早い in a sentence about speed');
 assert(adjAns('暖かい', 'あたたかい', 'i-adj', 'adj-neg', { sameSense: true }), 'あたたかくない / 暖かくない', 'not 温かい in a sentence about the weather');
 
-// --- Test getFormsForChapter ---
-console.log('\nTesting getFormsForChapter...');
-const ch3Forms = Conjugator.getFormsForChapter(3);
-assert(ch3Forms.includes('masu'), true, 'Ch3 has masu');
-assert(ch3Forms.includes('masu-neg'), true, 'Ch3 has masu-neg');
-assert(ch3Forms.includes('te'), false, 'Ch3 does NOT have te');
+// --- Test getFormsForLevel ---
+console.log('\nTesting getFormsForLevel...');
+const n5Forms = Conjugator.getFormsForLevel('N5');
+assert(n5Forms.includes('masu'), true, 'N5 has masu');
+assert(n5Forms.includes('te'), true, 'N5 has te');
+assert(n5Forms.includes('tai'), true, 'N5 has tai');
+assert(n5Forms.includes('potential'), false, 'N5 does NOT have potential');
+assert(Conjugator.getFormsForLevel('N4').length, Conjugator.ALL_FORMS.length, 'N4 has all forms');
 
-const ch6Forms = Conjugator.getFormsForChapter(6);
-assert(ch6Forms.includes('te'), true, 'Ch6 has te');
-assert(ch6Forms.includes('nai'), false, 'Ch6 does NOT have nai');
-
-const ch13Forms = Conjugator.getFormsForChapter(13);
-assert(ch13Forms.includes('potential'), true, 'Ch13 has potential');
-assert(ch13Forms.includes('passive'), false, 'Ch13 does NOT have passive');
-
-const ch23Forms = Conjugator.getFormsForChapter(23);
-assert(ch23Forms.includes('causative-passive'), true, 'Ch23 has causative-passive');
-assert(ch23Forms.length, Conjugator.ALL_FORMS.length, 'Ch23 has all forms');
+// --- Test the Verbs page chunks ---
+console.log('\nTesting verb chunks...');
+const { VERB_CHUNKS, getChunkCards, verbLevel } = require('./verbs.js');
+ALL_VERBS.forEach(v => assert(!!verbLevel(v), true, `${v.kanji} is in a chunk`));
+const pairs = new Set();
+VERB_CHUNKS.forEach(c => getChunkCards(c).forEach(([v, f]) => {
+  const key = `${v.chapter}_${v.reading}_${v.disambig || ''}_${f}`;
+  assert(pairs.has(key), false, `${v.kanji} ${f} is in one chunk only (${c.id})`);
+  pairs.add(key);
+}));
+const cardsOf = id => getChunkCards(VERB_CHUNKS.find(c => c.id === id));
+assert(cardsOf('n5-basics').some(([v, f]) => f === 'potential'), false, 'N5 chunks drill N5 forms only');
+assert(cardsOf('n4-potential').some(([v]) => v.kanji === '食べる'), true, 'N4 potential chunk has 食べる');
+assert(cardsOf('n4-potential').some(([v]) => v.kanji === 'ある'), false, 'no potential for ある');
+assert(cardsOf('n4-keigo').some(([, f]) => f === 'passive'), false, 'keigo verbs keep to the N5 forms');
 
 // --- Verify all verbs in DB can be conjugated without error ---
 console.log('\nConjugating all verbs across all forms...');
 let conjErrors = 0;
-GENKI_VERBS.forEach(v => {
+ALL_VERBS.forEach(v => {
   Conjugator.ALL_FORMS.forEach(f => {
     try {
       const result = Conjugator.conjugate(v, f);

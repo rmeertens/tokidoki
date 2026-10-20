@@ -1,0 +1,108 @@
+{
+  "id": "n4-potential",
+  "order": 10,
+  "title": "Can do: potential",
+  "level": "N4",
+  "sentences": [
+    {
+      "ja": "ピアノが弾けます。",
+      "jaHtml": "ピアノが<ruby>弾<rp>(</rp><rt>ひ</rt><rp>)</rp></ruby>けます。",
+      "en": "I can play piano."
+    },
+    {
+      "ja": "日本語が話せるようになりました。",
+      "jaHtml": "<ruby>日本語<rp>(</rp><rt>にほんご</rt><rp>)</rp></ruby>が<ruby>話<rp>(</rp><rt>はな</rt><rp>)</rp></ruby>せるようになりました。",
+      "en": "I became able to speak Japanese."
+    },
+    {
+      "ja": "漢字が読めません。",
+      "jaHtml": "<ruby>漢字<rp>(</rp><rt>かんじ</rt><rp>)</rp></ruby>が<ruby>読<rp>(</rp><rt>よ</rt><rp>)</rp></ruby>めません。",
+      "en": "I can't read kanji."
+    },
+    {
+      "ja": "納豆が食べられます。",
+      "jaHtml": "<ruby>納豆<rp>(</rp><rt>なっとう</rt><rp>)</rp></ruby>が<ruby>食<rp>(</rp><rt>た</rt><rp>)</rp></ruby>べられます。",
+      "en": "I can eat natto."
+    },
+    {
+      "ja": "漢字が書けます。",
+      "jaHtml": "<ruby>漢字<rp>(</rp><rt>かんじ</rt><rp>)</rp></ruby>が<ruby>書<rp>(</rp><rt>か</rt><rp>)</rp></ruby>けます。",
+      "en": "I can write kanji."
+    },
+    {
+      "ja": "この音楽が聞けてよかったです。",
+      "jaHtml": "この<ruby>音楽<rp>(</rp><rt>おんがく</rt><rp>)</rp></ruby>が<ruby>聞<rp>(</rp><rt>き</rt><rp>)</rp></ruby>けてよかったです。",
+      "en": "I'm glad I got to hear this music."
+    },
+    {
+      "ja": "速く走れません。",
+      "jaHtml": "<ruby>速<rp>(</rp><rt>はや</rt><rp>)</rp></ruby>く<ruby>走<rp>(</rp><rt>はし</rt><rp>)</rp></ruby>れません。",
+      "en": "I can't run fast."
+    },
+    {
+      "ja": "辛い物が食べられません。",
+      "jaHtml": "<ruby>辛<rp>(</rp><rt>から</rt><rp>)</rp></ruby>い<ruby>物<rp>(</rp><rt>もの</rt><rp>)</rp></ruby>が<ruby>食<rp>(</rp><rt>た</rt><rp>)</rp></ruby>べられません。",
+      "en": "I can't eat spicy food."
+    },
+    {
+      "ja": "この店でカードが使えます。",
+      "jaHtml": "この<ruby>店<rp>(</rp><rt>みせ</rt><rp>)</rp></ruby>でカードが<ruby>使<rp>(</rp><rt>つか</rt><rp>)</rp></ruby>えます。",
+      "en": "You can use a card at this store."
+    },
+    {
+      "ja": "重い荷物が持てません。",
+      "jaHtml": "<ruby>重<rp>(</rp><rt>おも</rt><rp>)</rp></ruby>い<ruby>荷物<rp>(</rp><rt>にもつ</rt><rp>)</rp></ruby>が<ruby>持<rp>(</rp><rt>も</rt><rp>)</rp></ruby>てません。",
+      "en": "I can't carry heavy luggage."
+    },
+    {
+      "ja": "私は日本語も中国語も話せます。",
+      "jaHtml": "<ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>は<ruby>日本語<rp>(</rp><rt>にほんご</rt><rp>)</rp></ruby>も<ruby>中国語<rp>(</rp><rt>ちゅうごくご</rt><rp>)</rp></ruby>も<ruby>話<rp>(</rp><rt>はな</rt><rp>)</rp></ruby>せます。",
+      "en": "I can speak both Japanese and Chinese."
+    },
+    {
+      "ja": "朝早く起きられません。",
+      "jaHtml": "<ruby>朝<rp>(</rp><rt>あさ</rt><rp>)</rp></ruby><ruby>早<rp>(</rp><rt>はや</rt><rp>)</rp></ruby>く<ruby>起<rp>(</rp><rt>お</rt><rp>)</rp></ruby>きられません。",
+      "en": "I can't get up early in the morning."
+    },
+    {
+      "ja": "彼は泳げるようになりました。",
+      "jaHtml": "<ruby>彼<rp>(</rp><rt>かれ</rt><rp>)</rp></ruby>は<ruby>泳<rp>(</rp><rt>およ</rt><rp>)</rp></ruby>げるようになりました。",
+      "en": "He has become able to swim."
+    },
+    {
+      "ja": "日本語の新聞が読めますか。",
+      "jaHtml": "<ruby>日本語<rp>(</rp><rt>にほんご</rt><rp>)</rp></ruby>の<ruby>新聞<rp>(</rp><rt>しんぶん</rt><rp>)</rp></ruby>が<ruby>読<rp>(</rp><rt>よ</rt><rp>)</rp></ruby>めますか。",
+      "en": "Can you read a Japanese newspaper?"
+    },
+    {
+      "ja": "まだ漢字があまり読めません。",
+      "jaHtml": "まだ<ruby>漢字<rp>(</rp><rt>かんじ</rt><rp>)</rp></ruby>があまり<ruby>読<rp>(</rp><rt>よ</rt><rp>)</rp></ruby>めません。",
+      "en": "I still can't read kanji very well."
+    },
+    {
+      "ja": "明日のパーティーに来られますか。",
+      "jaHtml": "<ruby>明日<rp>(</rp><rt>あした</rt><rp>)</rp></ruby>のパーティーに<ruby>来<rp>(</rp><rt>こ</rt><rp>)</rp></ruby>られますか。",
+      "en": "Can you come to tomorrow's party?"
+    },
+    {
+      "ja": "雨で、海で泳げませんでした。",
+      "jaHtml": "<ruby>雨<rp>(</rp><rt>あめ</rt><rp>)</rp></ruby>で、<ruby>海<rp>(</rp><rt>うみ</rt><rp>)</rp></ruby>で<ruby>泳<rp>(</rp><rt>およ</rt><rp>)</rp></ruby>げませんでした。",
+      "en": "Because of the rain, I couldn't swim in the sea."
+    },
+    {
+      "ja": "妹は自転車に乗れるようになりました。",
+      "jaHtml": "<ruby>妹<rp>(</rp><rt>いもうと</rt><rp>)</rp></ruby>は<ruby>自転車<rp>(</rp><rt>じてんしゃ</rt><rp>)</rp></ruby>に<ruby>乗<rp>(</rp><rt>の</rt><rp>)</rp></ruby>れるようになりました。",
+      "en": "My younger sister has become able to ride a bicycle."
+    },
+    {
+      "ja": "この部屋から富士山が見られます。",
+      "jaHtml": "この<ruby>部屋<rp>(</rp><rt>へや</rt><rp>)</rp></ruby>から<ruby>富士山<rp>(</rp><rt>ふじさん</rt><rp>)</rp></ruby>が<ruby>見<rp>(</rp><rt>み</rt><rp>)</rp></ruby>られます。",
+      "en": "You can see Mt. Fuji from this room."
+    },
+    {
+      "ja": "日本語が話せる人を探しています。",
+      "jaHtml": "<ruby>日本語<rp>(</rp><rt>にほんご</rt><rp>)</rp></ruby>が<ruby>話<rp>(</rp><rt>はな</rt><rp>)</rp></ruby>せる<ruby>人<rp>(</rp><rt>ひと</rt><rp>)</rp></ruby>を<ruby>探<rp>(</rp><rt>さが</rt><rp>)</rp></ruby>しています。",
+      "en": "I'm looking for someone who can speak Japanese."
+    }
+  ]
+}

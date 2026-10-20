@@ -1,0 +1,108 @@
+{
+  "id": "n5-te-iru",
+  "order": 6,
+  "title": "〜ている",
+  "level": "N5",
+  "sentences": [
+    {
+      "ja": "彼は東京に住んでいます。",
+      "jaHtml": "<ruby>彼<rp>(</rp><rt>かれ</rt><rp>)</rp></ruby>は<ruby>東京<rp>(</rp><rt>とうきょう</rt><rp>)</rp></ruby>に<ruby>住<rp>(</rp><rt>す</rt><rp>)</rp></ruby>んでいます。",
+      "en": "He lives in Tokyo."
+    },
+    {
+      "ja": "私はメガネをかけています。",
+      "jaHtml": "<ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>はメガネをかけています。",
+      "en": "I wear glasses."
+    },
+    {
+      "ja": "あの人を知っていますか。",
+      "jaHtml": "あの<ruby>人<rp>(</rp><rt>ひと</rt><rp>)</rp></ruby>を<ruby>知<rp>(</rp><rt>し</rt><rp>)</rp></ruby>っていますか。",
+      "en": "Do you know that person?"
+    },
+    {
+      "ja": "彼女は大阪に住んでいます。",
+      "jaHtml": "<ruby>彼女<rp>(</rp><rt>かのじょ</rt><rp>)</rp></ruby>は<ruby>大阪<rp>(</rp><rt>おおさか</rt><rp>)</rp></ruby>に<ruby>住<rp>(</rp><rt>す</rt><rp>)</rp></ruby>んでいます。",
+      "en": "She lives in Osaka."
+    },
+    {
+      "ja": "その俳優を知っていますか。",
+      "jaHtml": "その<ruby>俳優<rp>(</rp><rt>はいゆう</rt><rp>)</rp></ruby>を<ruby>知<rp>(</rp><rt>し</rt><rp>)</rp></ruby>っていますか。",
+      "en": "Do you know that actor?"
+    },
+    {
+      "ja": "兄はもう結婚しています。",
+      "jaHtml": "<ruby>兄<rp>(</rp><rt>あに</rt><rp>)</rp></ruby>はもう<ruby>結婚<rp>(</rp><rt>けっこん</rt><rp>)</rp></ruby>しています。",
+      "en": "My older brother is already married."
+    },
+    {
+      "ja": "姉は東京の大学に行っています。",
+      "jaHtml": "<ruby>姉<rp>(</rp><rt>あね</rt><rp>)</rp></ruby>は<ruby>東京<rp>(</rp><rt>とうきょう</rt><rp>)</rp></ruby>の<ruby>大学<rp>(</rp><rt>だいがく</rt><rp>)</rp></ruby>に<ruby>行<rp>(</rp><rt>い</rt><rp>)</rp></ruby>っています。",
+      "en": "My older sister goes to a university in Tokyo."
+    },
+    {
+      "ja": "妹は高校に行っています。",
+      "jaHtml": "<ruby>妹<rp>(</rp><rt>いもうと</rt><rp>)</rp></ruby>は<ruby>高校<rp>(</rp><rt>こうこう</rt><rp>)</rp></ruby>に<ruby>行<rp>(</rp><rt>い</rt><rp>)</rp></ruby>っています。",
+      "en": "My younger sister goes to high school."
+    },
+    {
+      "ja": "本を読んでいます。",
+      "jaHtml": "<ruby>本<rp>(</rp><rt>ほん</rt><rp>)</rp></ruby>を<ruby>読<rp>(</rp><rt>よ</rt><rp>)</rp></ruby>んでいます。",
+      "en": "He's reading a book."
+    },
+    {
+      "ja": "映画がまだ始まっていません。",
+      "jaHtml": "<ruby>映画<rp>(</rp><rt>えいが</rt><rp>)</rp></ruby>がまだ<ruby>始<rp>(</rp><rt>はじ</rt><rp>)</rp></ruby>まっていません。",
+      "en": "The movie hasn't started yet."
+    },
+    {
+      "ja": "帽子をかぶっている人はだれですか。",
+      "jaHtml": "<ruby>帽子<rp>(</rp><rt>ぼうし</rt><rp>)</rp></ruby>をかぶっている<ruby>人<rp>(</rp><rt>ひと</rt><rp>)</rp></ruby>はだれですか。",
+      "en": "Who is the person wearing a hat?"
+    },
+    {
+      "ja": "めがねをかけている人が山田さんです。",
+      "jaHtml": "めがねをかけている<ruby>人<rp>(</rp><rt>ひと</rt><rp>)</rp></ruby>が<ruby>山田<rp>(</rp><rt>やまだ</rt><rp>)</rp></ruby>さんです。",
+      "en": "The person wearing glasses is Mr. Yamada."
+    },
+    {
+      "ja": "レストランで働いています。",
+      "jaHtml": "レストランで<ruby>働<rp>(</rp><rt>はたら</rt><rp>)</rp></ruby>いています。",
+      "en": "I work at a restaurant."
+    },
+    {
+      "ja": "この会社で働いています。",
+      "jaHtml": "この<ruby>会社<rp>(</rp><rt>かいしゃ</rt><rp>)</rp></ruby>で<ruby>働<rp>(</rp><rt>はたら</rt><rp>)</rp></ruby>いています。",
+      "en": "I work at this company."
+    },
+    {
+      "ja": "私が住んでいる町は小さいです。",
+      "jaHtml": "<ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>が<ruby>住<rp>(</rp><rt>す</rt><rp>)</rp></ruby>んでいる<ruby>町<rp>(</rp><rt>まち</rt><rp>)</rp></ruby>は<ruby>小<rp>(</rp><rt>ちい</rt><rp>)</rp></ruby>さいです。",
+      "en": "The town I live in is small."
+    },
+    {
+      "ja": "お金に困っています。",
+      "jaHtml": "お<ruby>金<rp>(</rp><rt>かね</rt><rp>)</rp></ruby>に<ruby>困<rp>(</rp><rt>こま</rt><rp>)</rp></ruby>っています。",
+      "en": "I'm having money problems."
+    },
+    {
+      "ja": "電車が込んでいます。",
+      "jaHtml": "<ruby>電車<rp>(</rp><rt>でんしゃ</rt><rp>)</rp></ruby>が<ruby>込<rp>(</rp><rt>こ</rt><rp>)</rp></ruby>んでいます。",
+      "en": "The train is crowded."
+    },
+    {
+      "ja": "電気が消えています。",
+      "jaHtml": "<ruby>電気<rp>(</rp><rt>でんき</rt><rp>)</rp></ruby>が<ruby>消<rp>(</rp><rt>き</rt><rp>)</rp></ruby>えています。",
+      "en": "The light is off."
+    },
+    {
+      "ja": "窓が開いていますね。閉めましょうか。",
+      "jaHtml": "<ruby>窓<rp>(</rp><rt>まど</rt><rp>)</rp></ruby>が<ruby>開<rp>(</rp><rt>あ</rt><rp>)</rp></ruby>いていますね。<ruby>閉<rp>(</rp><rt>し</rt><rp>)</rp></ruby>めましょうか。",
+      "en": "The window is open. Shall I close it?"
+    },
+    {
+      "ja": "お金をためています。",
+      "jaHtml": "お<ruby>金<rp>(</rp><rt>かね</rt><rp>)</rp></ruby>をためています。",
+      "en": "I am saving money."
+    }
+  ]
+}

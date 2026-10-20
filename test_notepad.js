@@ -6,7 +6,7 @@ require('./stories-data.js');
 const fs = require('fs');
 const vm = require('vm');
 vm.runInThisContext(fs.readFileSync(require.resolve('./verbs.js'), 'utf8')
-  + ';globalThis.GENKI_VERBS = GENKI_VERBS; globalThis.GENKI_ADJECTIVES = GENKI_ADJECTIVES;');
+  + ';globalThis.ALL_VERBS = ALL_VERBS; globalThis.ALL_ADJECTIVES = ALL_ADJECTIVES;');
 const Notepad = require('./notepad.js');
 
 const dict = Notepad.buildDictionary();

@@ -1,0 +1,108 @@
+{
+  "id": "n4-keigo",
+  "order": 16,
+  "title": "Honorific & humble speech",
+  "level": "N4",
+  "sentences": [
+    {
+      "ja": "先生はもういらっしゃいますか。",
+      "jaHtml": "<ruby>先生<rp>(</rp><rt>せんせい</rt><rp>)</rp></ruby>はもういらっしゃいますか。",
+      "en": "Is the teacher here already? (honorific)"
+    },
+    {
+      "ja": "社長はもうお帰りになりました。",
+      "jaHtml": "<ruby>社長<rp>(</rp><rt>しゃちょう</rt><rp>)</rp></ruby>はもうお<ruby>帰<rp>(</rp><rt>かえ</rt><rp>)</rp></ruby>りになりました。",
+      "en": "The president has already gone home."
+    },
+    {
+      "ja": "先生はもうご存知です。",
+      "jaHtml": "<ruby>先生<rp>(</rp><rt>せんせい</rt><rp>)</rp></ruby>はもうご<ruby>存知<rp>(</rp><rt>ぞんじ</rt><rp>)</rp></ruby>です。",
+      "en": "The teacher already knows."
+    },
+    {
+      "ja": "社長はもうお休みになりました。",
+      "jaHtml": "<ruby>社長<rp>(</rp><rt>しゃちょう</rt><rp>)</rp></ruby>はもうお<ruby>休<rp>(</rp><rt>やす</rt><rp>)</rp></ruby>みになりました。",
+      "en": "The president has already gone to bed."
+    },
+    {
+      "ja": "部長は何時にお戻りになりますか。",
+      "jaHtml": "<ruby>部長<rp>(</rp><rt>ぶちょう</rt><rp>)</rp></ruby>は<ruby>何時<rp>(</rp><rt>なんじ</rt><rp>)</rp></ruby>にお<ruby>戻<rp>(</rp><rt>もど</rt><rp>)</rp></ruby>りになりますか。",
+      "en": "What time will the department head return?"
+    },
+    {
+      "ja": "少々お待ちください。",
+      "jaHtml": "<ruby>少々<rp>(</rp><rt>しょうしょう</rt><rp>)</rp></ruby>お<ruby>待<rp>(</rp><rt>ま</rt><rp>)</rp></ruby>ちください。",
+      "en": "Please wait a moment."
+    },
+    {
+      "ja": "ご家族はどちらに住んでいらっしゃいますか。",
+      "jaHtml": "ご<ruby>家族<rp>(</rp><rt>かぞく</rt><rp>)</rp></ruby>はどちらに<ruby>住<rp>(</rp><rt>す</rt><rp>)</rp></ruby>んでいらっしゃいますか。",
+      "en": "Where does your family live?"
+    },
+    {
+      "ja": "先生は今、研究室にいらっしゃいます。",
+      "jaHtml": "<ruby>先生<rp>(</rp><rt>せんせい</rt><rp>)</rp></ruby>は<ruby>今<rp>(</rp><rt>いま</rt><rp>)</rp></ruby>、<ruby>研究室<rp>(</rp><rt>けんきゅうしつ</rt><rp>)</rp></ruby>にいらっしゃいます。",
+      "en": "The professor is in the office now."
+    },
+    {
+      "ja": "どうぞ、ご自由にお取りください。",
+      "jaHtml": "どうぞ、ご<ruby>自由<rp>(</rp><rt>じゆう</rt><rp>)</rp></ruby>にお<ruby>取<rp>(</rp><rt>と</rt><rp>)</rp></ruby>りください。",
+      "en": "Please help yourself."
+    },
+    {
+      "ja": "先生、何をお飲みになりますか。",
+      "jaHtml": "<ruby>先生<rp>(</rp><rt>せんせい</rt><rp>)</rp></ruby>、<ruby>何<rp>(</rp><rt>なに</rt><rp>)</rp></ruby>をお<ruby>飲<rp>(</rp><rt>の</rt><rp>)</rp></ruby>みになりますか。",
+      "en": "Professor, what would you like to drink?"
+    },
+    {
+      "ja": "お忙しいところ、来てくださってありがとうございます。",
+      "jaHtml": "お<ruby>忙<rp>(</rp><rt>いそが</rt><rp>)</rp></ruby>しいところ、<ruby>来<rp>(</rp><rt>き</rt><rp>)</rp></ruby>てくださってありがとうございます。",
+      "en": "Thank you for coming when you're busy."
+    },
+    {
+      "ja": "先生のお宅に伺いました。",
+      "jaHtml": "<ruby>先生<rp>(</rp><rt>せんせい</rt><rp>)</rp></ruby>のお<ruby>宅<rp>(</rp><rt>たく</rt><rp>)</rp></ruby>に<ruby>伺<rp>(</rp><rt>うかが</rt><rp>)</rp></ruby>いました。",
+      "en": "I visited the teacher's home. (humble)"
+    },
+    {
+      "ja": "田中と申します。",
+      "jaHtml": "<ruby>田中<rp>(</rp><rt>たなか</rt><rp>)</rp></ruby>と<ruby>申<rp>(</rp><rt>もう</rt><rp>)</rp></ruby>します。",
+      "en": "My name is Tanaka. (humble)"
+    },
+    {
+      "ja": "資料を拝見しました。",
+      "jaHtml": "<ruby>資料<rp>(</rp><rt>しりょう</rt><rp>)</rp></ruby>を<ruby>拝見<rp>(</rp><rt>はいけん</rt><rp>)</rp></ruby>しました。",
+      "en": "I have looked at the materials (humbly)."
+    },
+    {
+      "ja": "お名前を伺ってもよろしいですか。",
+      "jaHtml": "お<ruby>名前<rp>(</rp><rt>なまえ</rt><rp>)</rp></ruby>を<ruby>伺<rp>(</rp><rt>うかが</rt><rp>)</rp></ruby>ってもよろしいですか。",
+      "en": "May I ask your name?"
+    },
+    {
+      "ja": "明日また参ります。",
+      "jaHtml": "<ruby>明日<rp>(</rp><rt>あした</rt><rp>)</rp></ruby>また<ruby>参<rp>(</rp><rt>まい</rt><rp>)</rp></ruby>ります。",
+      "en": "I will come again tomorrow (humbly)."
+    },
+    {
+      "ja": "父は今出かけております。",
+      "jaHtml": "<ruby>父<rp>(</rp><rt>ちち</rt><rp>)</rp></ruby>は<ruby>今<rp>(</rp><rt>いま</rt><rp>)</rp></ruby><ruby>出<rp>(</rp><rt>で</rt><rp>)</rp></ruby>かけております。",
+      "en": "My father is out right now. (humble)"
+    },
+    {
+      "ja": "明日の会議には私が参ります。",
+      "jaHtml": "<ruby>明日<rp>(</rp><rt>あした</rt><rp>)</rp></ruby>の<ruby>会議<rp>(</rp><rt>かいぎ</rt><rp>)</rp></ruby>には<ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>が<ruby>参<rp>(</rp><rt>まい</rt><rp>)</rp></ruby>ります。",
+      "en": "I will attend tomorrow's meeting. (humble)"
+    },
+    {
+      "ja": "コーヒーをいただきます。",
+      "jaHtml": "コーヒーをいただきます。",
+      "en": "I'll have some coffee. (humble)"
+    },
+    {
+      "ja": "こちらは田中でございます。",
+      "jaHtml": "こちらは<ruby>田中<rp>(</rp><rt>たなか</rt><rp>)</rp></ruby>でございます。",
+      "en": "This is Tanaka speaking. (humble)"
+    }
+  ]
+}

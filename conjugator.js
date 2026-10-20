@@ -170,7 +170,7 @@ const Conjugator = (() => {
   }
 
   const FORM_INFO = {
-    'masu':        { name: 'Polite', nameJp: 'ます形', hint: 'Polite present/future', symbol: 'ます', color: '#2196F3', chapter: 3,
+    'masu':        { name: 'Polite', nameJp: 'ます形', hint: 'Polite present/future', symbol: 'ます', color: '#2196F3', level: 'N5',
       explanation: '<p>The <strong>ます form</strong> is the standard polite form used in everyday Japanese conversation, at work, and with people you don\'t know well. It expresses present tense ("I do") and future tense ("I will do").</p>'
         + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example</th></tr></thead><tbody>'
         + '<tr><td>Ru-verb</td><td>Drop <b>る</b>, add <b>ます</b></td><td>食べ<b>る</b> → 食べ<b>ます</b></td></tr>'
@@ -180,7 +180,7 @@ const Conjugator = (() => {
         + '</tbody></table>'
         + '<p class="conj-note">The い-row mapping for u-verbs: う→い, く→き, ぐ→ぎ, す→し, つ→ち, ぬ→に, ぶ→び, む→み, る→り</p>' },
 
-    'masu-neg':    { name: 'Polite negative', nameJp: 'ません形', hint: 'Polite negative', symbol: 'ません', color: '#FF8F00', chapter: 3,
+    'masu-neg':    { name: 'Polite negative', nameJp: 'ません形', hint: 'Polite negative', symbol: 'ません', color: '#FF8F00', level: 'N5',
       explanation: '<p>The <strong>polite negative</strong> uses the same verb stem as the ます form, but adds <b>ません</b> instead. It means "do not do" in polite speech. An alternative modern form is ない + です (e.g. 食べないです).</p>'
         + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example</th></tr></thead><tbody>'
         + '<tr><td>Ru-verb</td><td>Drop <b>る</b>, add <b>ません</b></td><td>食べる → 食べ<b>ません</b></td></tr>'
@@ -189,7 +189,7 @@ const Conjugator = (() => {
         + '<tr class="irr-row"><td>くる</td><td>Irregular (vowel き)</td><td>くる → <b>きません</b></td></tr>'
         + '</tbody></table>' },
 
-    'masu-past':   { name: 'Polite past', nameJp: 'ました形', hint: 'Polite past', symbol: 'ました', color: '#00ACC1', chapter: 4,
+    'masu-past':   { name: 'Polite past', nameJp: 'ました形', hint: 'Polite past', symbol: 'ました', color: '#00ACC1', level: 'N5',
       explanation: '<p>The <strong>polite past</strong> expresses "did" in polite speech. It uses the same verb stem as the ます form, but adds <b>ました</b>.</p>'
         + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example</th></tr></thead><tbody>'
         + '<tr><td>Ru-verb</td><td>Drop <b>る</b>, add <b>ました</b></td><td>食べる → 食べ<b>ました</b></td></tr>'
@@ -198,7 +198,7 @@ const Conjugator = (() => {
         + '<tr class="irr-row"><td>くる</td><td>Irregular (vowel き)</td><td>くる → <b>きました</b></td></tr>'
         + '</tbody></table>' },
 
-    'masu-past-neg': { name: 'Polite past neg.', nameJp: 'ませんでした形', hint: 'Polite past negative', symbol: 'ませんでした', color: '#AB47BC', chapter: 4,
+    'masu-past-neg': { name: 'Polite past neg.', nameJp: 'ませんでした形', hint: 'Polite past negative', symbol: 'ませんでした', color: '#AB47BC', level: 'N5',
       explanation: '<p>The <strong>polite past negative</strong> means "did not do" in polite speech. Same stem as ます form, add <b>ませんでした</b>. An alternative is なかったです.</p>'
         + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example</th></tr></thead><tbody>'
         + '<tr><td>Ru-verb</td><td>Drop <b>る</b>, add <b>ませんでした</b></td><td>食べる → 食べ<b>ませんでした</b></td></tr>'
@@ -206,7 +206,7 @@ const Conjugator = (() => {
         + '<tr class="irr-row"><td>する</td><td>Irregular</td><td>する → <b>しませんでした</b></td></tr>'
         + '<tr class="irr-row"><td>くる</td><td>Irregular (vowel き)</td><td>くる → <b>きませんでした</b></td></tr>'
         + '</tbody></table>' },
-    'te':          { name: 'Te-form', nameJp: 'て形', hint: 'Connecting / request', symbol: 'て', color: '#4CAF50', chapter: 6,
+    'te':          { name: 'Te-form', nameJp: 'て形', hint: 'Connecting / request', symbol: 'て', color: '#4CAF50', level: 'N5',
       explanation: '<p>The <strong>て form</strong> is one of the most important conjugations. It connects actions ("I ate <em>and</em> went home"), makes requests (〜てください), and is the basis for many grammar patterns like 〜ている (ongoing action), 〜てもいい (permission), and 〜てはいけない (prohibition).</p>'
         + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example</th></tr></thead><tbody>'
         + '<tr><td>Ru-verb</td><td>Drop <b>る</b>, add <b>て</b></td><td>食べる → 食べ<b>て</b></td></tr>'
@@ -223,7 +223,7 @@ const Conjugator = (() => {
         + '</tbody></table>'
         + '<p class="conj-note"><strong>Exception:</strong> 行く → 行<b>って</b> (not 行いて)</p>' },
 
-    'nai':         { name: 'Plain negative', nameJp: 'ない形', hint: 'Plain negative', symbol: 'ない', color: '#F44336', chapter: 8,
+    'nai':         { name: 'Plain negative', nameJp: 'ない形', hint: 'Plain negative', symbol: 'ない', color: '#F44336', level: 'N5',
       explanation: '<p>The <strong>ない form</strong> is the plain/casual negative ("don\'t do"). It is used in casual speech and inside many grammar patterns like 〜ないでください (please don\'t), 〜なければならない (must do), and 〜ないと (if not).</p>'
         + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example</th></tr></thead><tbody>'
         + '<tr><td>Ru-verb</td><td>Drop <b>る</b>, add <b>ない</b></td><td>食べる → 食べ<b>ない</b></td></tr>'
@@ -234,7 +234,7 @@ const Conjugator = (() => {
         + '<p class="conj-note"><strong>Exception:</strong> Verbs ending in <b>う</b> change to <b>わ</b> (not あ): 買<b>う</b> → 買<b>わない</b></p>'
         + '<p class="conj-note">The あ-row mapping: く→か, ぐ→が, す→さ, つ→た, ぬ→な, ぶ→ば, む→ま, る→ら, う→<b>わ</b></p>' },
 
-    'dict':        { name: 'Dictionary', nameJp: '辞書形', hint: 'Plain present/future', symbol: '辞書', color: '#9C27B0', chapter: 8,
+    'dict':        { name: 'Dictionary', nameJp: '辞書形', hint: 'Plain present/future', symbol: '辞書', color: '#9C27B0', level: 'N5',
       explanation: '<p>The <strong>dictionary form</strong> (辞書形) is the base form of the verb — the form you find in dictionaries. It functions as the plain present/future tense in casual speech and appears inside many grammar constructions.</p>'
         + '<table class="conj-table"><thead><tr><th>Usage</th><th>Pattern</th><th>Example</th></tr></thead><tbody>'
         + '<tr><td>Casual present</td><td>Verb (dict)</td><td>明日行<b>く</b>。 (I\'ll go tomorrow.)</td></tr>'
@@ -244,7 +244,7 @@ const Conjugator = (() => {
         + '</tbody></table>'
         + '<p class="conj-note">Ru-verbs always end in <b>る</b> (with an え or い vowel sound before it). U-verbs can end in any of the う-row kana: う, く, ぐ, す, つ, ぬ, ぶ, む, る.</p>' },
 
-    'ta':          { name: 'Plain past', nameJp: 'た形', hint: 'Plain past', symbol: 'た', color: '#FDD835', chapter: 9,
+    'ta':          { name: 'Plain past', nameJp: 'た形', hint: 'Plain past', symbol: 'た', color: '#FDD835', level: 'N5',
       explanation: '<p>The <strong>た form</strong> is the plain past tense ("did"). It follows the exact same sound-change rules as the て form, but uses <b>た/だ</b> instead of <b>て/で</b>. It is also used in the pattern 〜たことがある (have experienced).</p>'
         + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example</th></tr></thead><tbody>'
         + '<tr><td>Ru-verb</td><td>Drop <b>る</b>, add <b>た</b></td><td>食べる → 食べ<b>た</b></td></tr>'
@@ -260,7 +260,7 @@ const Conjugator = (() => {
         + '<tr><td>す</td><td>→ <b>した</b></td><td>話す → 話<b>した</b></td></tr>'
         + '</tbody></table>'
         + '<p class="conj-note"><strong>Exception:</strong> 行く → 行<b>った</b> (not 行いた)</p>' },
-    'nakatta':     { name: 'Plain past neg.', nameJp: 'なかった形', hint: 'Plain past negative', symbol: 'なかった', color: '#D32F2F', chapter: 9,
+    'nakatta':     { name: 'Plain past neg.', nameJp: 'なかった形', hint: 'Plain past negative', symbol: 'なかった', color: '#D32F2F', level: 'N5',
       explanation: '<p>The <strong>plain past negative</strong> means "didn\'t do." To form it, first make the ない form, then replace <b>ない</b> with <b>なかった</b>. This works the same way for all verb types since it builds on the ない form.</p>'
         + '<table class="conj-table"><thead><tr><th>Type</th><th>ない form</th><th>なかった form</th></tr></thead><tbody>'
         + '<tr><td>Ru-verb</td><td>食べ<b>ない</b></td><td>食べ<b>なかった</b></td></tr>'
@@ -272,7 +272,7 @@ const Conjugator = (() => {
         + '</tbody></table>'
         + '<p class="conj-note">Think of it as: ない conjugates like an い-adjective (ない → なかった, just like 高い → 高かった).</p>' },
 
-    'tai':         { name: 'Want to', nameJp: 'たい形', hint: 'Want to ~', symbol: 'たい', color: '#E91E63', chapter: 11,
+    'tai':         { name: 'Want to', nameJp: 'たい形', hint: 'Want to ~', symbol: 'たい', color: '#E91E63', level: 'N5',
       explanation: '<p>The <strong>たい form</strong> expresses the speaker\'s desire to do something ("I want to ~"). It uses the same stem as the ます form and adds <b>たい</b>. The たい form itself conjugates like an い-adjective (たくない, たかった, etc.).</p>'
         + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example</th></tr></thead><tbody>'
         + '<tr><td>Ru-verb</td><td>Drop <b>る</b>, add <b>たい</b></td><td>食べる → 食べ<b>たい</b></td></tr>'
@@ -282,7 +282,7 @@ const Conjugator = (() => {
         + '</tbody></table>'
         + '<p class="conj-note">Only used for the speaker\'s own desires (first person). For third person, use 〜たがっている. The object particle を can optionally become が with たい.</p>' },
 
-    'potential':   { name: 'Potential', nameJp: '可能形', hint: 'Can do ~', symbol: '可能', color: '#7B1FA2', chapter: 13,
+    'potential':   { name: 'Potential', nameJp: '可能形', hint: 'Can do ~', symbol: '可能', color: '#7B1FA2', level: 'N4',
       explanation: '<p>The <strong>potential form</strong> expresses ability — "can do" or "be able to." The result is a ru-verb, so it conjugates further like a ru-verb (e.g. 書ける → 書けない, 書けます).</p>'
         + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example</th></tr></thead><tbody>'
         + '<tr><td>Ru-verb</td><td>Drop <b>る</b>, add <b>られる</b></td><td>食べる → 食べ<b>られる</b></td></tr>'
@@ -293,7 +293,7 @@ const Conjugator = (() => {
         + '<p class="conj-note">In casual speech, ru-verb <b>られる</b> is often shortened to <b>れる</b> (ら抜き言葉): 食べられる → 食べれる. This is very common but considered informal.</p>'
         + '<p class="conj-note">The え-row mapping: う→え, く→け, ぐ→げ, す→せ, つ→て, ぬ→ね, ぶ→べ, む→め, る→れ</p>' },
 
-    'volitional':  { name: 'Volitional', nameJp: '意向形', hint: "Let's ~ / intend to", symbol: '意向', color: '#00BCD4', chapter: 15,
+    'volitional':  { name: 'Volitional', nameJp: '意向形', hint: "Let's ~ / intend to", symbol: '意向', color: '#00BCD4', level: 'N4',
       explanation: '<p>The <strong>volitional form</strong> expresses "let\'s do" or "I shall do." It is the plain equivalent of ましょう. It is also used with と思う to express intention (〜ようと思う = "I think I\'ll…").</p>'
         + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example</th></tr></thead><tbody>'
         + '<tr><td>Ru-verb</td><td>Drop <b>る</b>, add <b>よう</b></td><td>食べる → 食べ<b>よう</b></td></tr>'
@@ -303,7 +303,7 @@ const Conjugator = (() => {
         + '</tbody></table>'
         + '<p class="conj-note">The お-row mapping: う→お, く→こ, ぐ→ご, す→そ, つ→と, ぬ→の, ぶ→ぼ, む→も, る→ろ</p>' },
 
-    'passive':     { name: 'Passive', nameJp: '受身形', hint: 'Is done to ~', symbol: '受身', color: '#1565C0', chapter: 21,
+    'passive':     { name: 'Passive', nameJp: '受身形', hint: 'Is done to ~', symbol: '受身', color: '#1565C0', level: 'N4',
       explanation: '<p>The <strong>passive form</strong> means "is done (to someone)." Japanese passive has two uses: <em>direct passive</em> (the subject receives the action) and <em>indirect/suffering passive</em> (the subject is adversely affected). The result is a ru-verb.</p>'
         + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example</th></tr></thead><tbody>'
         + '<tr><td>Ru-verb</td><td>Drop <b>る</b>, add <b>られる</b></td><td>食べる → 食べ<b>られる</b></td></tr>'
@@ -314,7 +314,7 @@ const Conjugator = (() => {
         + '<p class="conj-note"><strong>Exception:</strong> U-verbs ending in <b>う</b> change to <b>わ</b>: 買<b>う</b> → 買<b>われる</b></p>'
         + '<p class="conj-note">Note: ru-verb passive (られる) looks identical to the potential form. Context determines which meaning is intended.</p>' },
 
-    'causative':   { name: 'Causative', nameJp: '使役形', hint: 'Make/let do ~', symbol: '使役', color: '#EF6C00', chapter: 22,
+    'causative':   { name: 'Causative', nameJp: '使役形', hint: 'Make/let do ~', symbol: '使役', color: '#EF6C00', level: 'N4',
       explanation: '<p>The <strong>causative form</strong> means "make someone do" or "let someone do." Whether it means forcing or allowing depends on context and the particles used. The result is a ru-verb.</p>'
         + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example</th></tr></thead><tbody>'
         + '<tr><td>Ru-verb</td><td>Drop <b>る</b>, add <b>させる</b></td><td>食べる → 食べ<b>させる</b></td></tr>'
@@ -325,7 +325,7 @@ const Conjugator = (() => {
         + '<p class="conj-note"><strong>Exception:</strong> U-verbs ending in <b>う</b> change to <b>わ</b>: 買<b>う</b> → 買<b>わせる</b></p>'
         + '<p class="conj-note">"Make": 先生は学生に本を読ま<b>せた</b> (The teacher made the students read a book.)<br>"Let": お母さんは子供にゲームをさ<b>せた</b> (Mom let the child play games.)</p>' },
 
-    'ba':          { name: 'Conditional', nameJp: 'ば形', hint: 'If ~', symbol: 'ば', color: '#009688', chapter: 22,
+    'ba':          { name: 'Conditional', nameJp: 'ば形', hint: 'If ~', symbol: 'ば', color: '#009688', level: 'N4',
       explanation: '<p>The <strong>ば conditional</strong> means "if ~." It expresses general or hypothetical conditions. It is often used for advice (〜ばいい = "it would be good if") and habitual conditions.</p>'
         + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example</th></tr></thead><tbody>'
         + '<tr><td>Ru-verb</td><td>Drop <b>る</b>, add <b>れば</b></td><td>食べる → 食べ<b>れば</b></td></tr>'
@@ -335,7 +335,7 @@ const Conjugator = (() => {
         + '</tbody></table>'
         + '<p class="conj-note">Compare with other conditionals: 〜たら (more concrete/sequential), 〜と (automatic/natural result), 〜なら (topic-based condition).</p>' },
 
-    'causative-passive': { name: 'Causative-Passive', nameJp: '使役受身形', hint: 'Is made to do ~', symbol: '使役受身', color: '#BF360C', chapter: 23,
+    'causative-passive': { name: 'Causative-Passive', nameJp: '使役受身形', hint: 'Is made to do ~', symbol: '使役受身', color: '#BF360C', level: 'N4',
       explanation: '<p>The <strong>causative-passive</strong> means "to be made to do" — the subject is forced to do something against their will. It combines the causative and passive forms. The result is a ru-verb.</p>'
         + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example</th></tr></thead><tbody>'
         + '<tr><td>Ru-verb</td><td>Drop <b>る</b>, add <b>させられる</b></td><td>食べる → 食べ<b>させられる</b></td></tr>'
@@ -349,8 +349,10 @@ const Conjugator = (() => {
 
   const ALL_FORMS = Object.keys(FORM_INFO);
 
-  function getFormsForChapter(chapter) {
-    return ALL_FORMS.filter(f => FORM_INFO[f].chapter <= chapter);
+  // The forms drilled at a level: N5 has the polite, て and plain forms and
+  // たい; N4 and up add potential, volitional, ば, passive and causative.
+  function getFormsForLevel(level) {
+    return level === 'N5' ? ALL_FORMS.filter(f => FORM_INFO[f].level === 'N5') : ALL_FORMS.slice();
   }
 
   function getFormInfo(form) {
@@ -360,7 +362,7 @@ const Conjugator = (() => {
   // ─── Adjective Conjugation ──────────────────────────────────────────────────
 
   const ADJ_FORM_INFO = {
-    'adj-present':   { name: 'Present', nameJp: '現在形', hint: 'Plain present', symbol: 'だ/い', color: '#9C27B0', chapter: 5,
+    'adj-present':   { name: 'Present', nameJp: '現在形', hint: 'Plain present', symbol: 'だ/い', color: '#9C27B0', level: 'N5',
       explanation: '<p class="conj-note" style="background:#fff3e0;border-left:3px solid #FF9800"><strong>⚠ Careful:</strong> Some な-adjectives end in い and look like い-adjectives — but they conjugate as な-adjectives!</p>'
         + '<table class="conj-table"><thead><tr><th>な-adjective ending in い</th><th>Reading</th><th>Meaning</th></tr></thead><tbody>'
         + '<tr><td>きれい</td><td>kirei</td><td>beautiful / clean</td></tr>'
@@ -378,7 +380,7 @@ const Conjugator = (() => {
         + '</tbody></table>'
         + '<p class="conj-note">な-adjectives use <b>な</b> when modifying a noun (静か<b>な</b>人) but <b>だ</b>/<b>です</b> at the end of a sentence.</p>' },
 
-    'adj-neg':       { name: 'Negative', nameJp: '否定形', hint: 'Plain negative', symbol: 'くない', color: '#F44336', chapter: 5,
+    'adj-neg':       { name: 'Negative', nameJp: '否定形', hint: 'Plain negative', symbol: 'くない', color: '#F44336', level: 'N5',
       explanation: '<p>The <strong>negative</strong> of adjectives ("is not ~"). い-adjectives and な-adjectives follow different patterns.</p>'
         + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Plain</th><th>Polite</th></tr></thead><tbody>'
         + '<tr><td>い-adjective</td><td>Drop <b>い</b>, add <b>くない</b></td><td>高い → 高<b>くない</b></td><td>高<b>くないです</b></td></tr>'
@@ -386,7 +388,7 @@ const Conjugator = (() => {
         + '</tbody></table>'
         + '<p class="conj-note"><strong>Exception:</strong> いい (good) → <b>よくない</b> (not いくない). The irregular stem よ- is used for all conjugations of いい.<br>Similarly: かっこいい → <b>かっこよくない</b></p>' },
 
-    'adj-past':      { name: 'Past', nameJp: '過去形', hint: 'Plain past', symbol: 'かった', color: '#FF9800', chapter: 9,
+    'adj-past':      { name: 'Past', nameJp: '過去形', hint: 'Plain past', symbol: 'かった', color: '#FF9800', level: 'N5',
       explanation: '<p>The <strong>plain past</strong> of adjectives ("was ~"). い-adjectives change their ending; な-adjectives add だった.</p>'
         + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Plain</th><th>Polite</th></tr></thead><tbody>'
         + '<tr><td>い-adjective</td><td>Drop <b>い</b>, add <b>かった</b></td><td>高い → 高<b>かった</b></td><td>高<b>かったです</b></td></tr>'
@@ -394,7 +396,7 @@ const Conjugator = (() => {
         + '</tbody></table>'
         + '<p class="conj-note"><strong>Exception:</strong> いい → <b>よかった</b>、かっこいい → <b>かっこよかった</b></p>' },
 
-    'adj-past-neg':  { name: 'Past negative', nameJp: '過去否定形', hint: 'Plain past negative', symbol: 'なかった', color: '#D32F2F', chapter: 9,
+    'adj-past-neg':  { name: 'Past negative', nameJp: '過去否定形', hint: 'Plain past negative', symbol: 'なかった', color: '#D32F2F', level: 'N5',
       explanation: '<p>The <strong>past negative</strong> of adjectives ("was not ~"). Builds on the negative form by changing ない to なかった (since ない conjugates like an い-adjective).</p>'
         + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Plain</th><th>Polite</th></tr></thead><tbody>'
         + '<tr><td>い-adjective</td><td>Drop <b>い</b>, add <b>くなかった</b></td><td>高い → 高<b>くなかった</b></td><td>高<b>くなかったです</b></td></tr>'
@@ -402,7 +404,7 @@ const Conjugator = (() => {
         + '</tbody></table>'
         + '<p class="conj-note"><strong>Exception:</strong> いい → <b>よくなかった</b>、かっこいい → <b>かっこよくなかった</b></p>' },
 
-    'adj-te':        { name: 'Te-form', nameJp: 'て形', hint: 'Connecting / and...', symbol: 'くて', color: '#4CAF50', chapter: 9,
+    'adj-te':        { name: 'Te-form', nameJp: 'て形', hint: 'Connecting / and...', symbol: 'くて', color: '#4CAF50', level: 'N5',
       explanation: '<p>The <strong>て form</strong> of adjectives connects them in a sentence ("A and B," "A, so B"). It works like "and" for listing multiple descriptions.</p>'
         + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example</th></tr></thead><tbody>'
         + '<tr><td>い-adjective</td><td>Drop <b>い</b>, add <b>くて</b></td><td>高い → 高<b>くて</b></td></tr>'
@@ -411,7 +413,7 @@ const Conjugator = (() => {
         + '<p class="conj-note"><strong>Exception:</strong> いい → <b>よくて</b>、かっこいい → <b>かっこよくて</b></p>'
         + '<p class="conj-note">Example: この部屋は広<b>くて</b>、明るいです。(This room is spacious <em>and</em> bright.)<br>この町は静か<b>で</b>、きれいです。(This town is quiet <em>and</em> beautiful.)</p>' },
 
-    'adj-adverb':    { name: 'Adverb', nameJp: '副詞形', hint: 'Adverb form', symbol: 'く/に', color: '#00BCD4', chapter: 10,
+    'adj-adverb':    { name: 'Adverb', nameJp: '副詞形', hint: 'Adverb form', symbol: 'く/に', color: '#00BCD4', level: 'N5',
       explanation: '<p>The <strong>adverb form</strong> turns adjectives into adverbs that modify verbs. い-adjectives use <b>く</b> and な-adjectives use <b>に</b>.</p>'
         + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example sentence</th></tr></thead><tbody>'
         + '<tr><td>い-adjective</td><td>Drop <b>い</b>, add <b>く</b></td><td>早い → 早<b>く</b>走る (run quickly)</td></tr>'
@@ -422,10 +424,6 @@ const Conjugator = (() => {
   };
 
   const ADJ_ALL_FORMS = Object.keys(ADJ_FORM_INFO);
-
-  function getAdjFormsForChapter(chapter) {
-    return ADJ_ALL_FORMS.filter(f => ADJ_FORM_INFO[f].chapter <= chapter);
-  }
 
   function conjugateAdjective(adj, form) {
     const { reading, type } = adj;
@@ -556,8 +554,7 @@ const Conjugator = (() => {
     conjugateKanji,
     conjugateAdjKanji,
     adjAnswers,
-    getFormsForChapter,
-    getAdjFormsForChapter,
+    getFormsForLevel,
     getFormInfo,
     FORM_INFO,
     ALL_FORMS,

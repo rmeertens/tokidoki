@@ -38,7 +38,7 @@ const cut = (from, to) => {
 };
 const headExtras = cut('  <link rel="stylesheet"', '</head>');
 const nav = cut('      <nav class="page-nav"', '</nav>') + '</nav>';
-const scripts = cut('  <script src="conjugator.js">', '  <!-- Static content');
+const scripts = cut('  <script src="conjugator.js', '  <!-- Static content');
 
 // Categories in the order the index lists them.
 const groupOrder = id => PHRASE_GROUPS.findIndex(g => g.id === id);

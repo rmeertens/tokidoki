@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" id="viewport-meta" content="width=device-width, initial-scale=1.0">
-  <title>Adjective Conjugation Practice — Genki I &amp; II | Tokidoki</title>
-  <meta name="description" content="Practice Japanese i-adjective and na-adjective conjugation — present, negative, past, te-form, and more — chapter by chapter from Genki I &amp; II. Free, no login.">
-  <meta property="og:title" content="Adjective Conjugation Practice — Genki I &amp; II | Tokidoki">
-  <meta property="og:description" content="Drill Japanese i-adjective and na-adjective conjugations chapter by chapter using spaced repetition. Free and no login required.">
+  <title>Adjective Conjugation Practice — JLPT N5 &amp; N4 | Tokidoki</title>
+  <meta name="description" content="Practice Japanese i-adjective and na-adjective conjugation — present, negative, past, te-form, and more — in themed JLPT N5 and N4 chunks. Free, no login.">
+  <meta property="og:title" content="Adjective Conjugation Practice — JLPT N5 &amp; N4 | Tokidoki">
+  <meta property="og:description" content="Drill Japanese i-adjective and na-adjective conjugations in themed JLPT chunks using spaced repetition. Free and no login required.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://tokidoki.meertens.dev/adjectives.html">
   <meta property="og:site_name" content="Tokidoki">
@@ -16,8 +16,8 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Tokidoki — free Japanese practice, one plate at a time">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Adjective Conjugation Practice — Genki I &amp; II | Tokidoki">
-  <meta name="twitter:description" content="Free SRS flashcard drills for Genki i-adjective and na-adjective conjugations.">
+  <meta name="twitter:title" content="Adjective Conjugation Practice — JLPT N5 &amp; N4 | Tokidoki">
+  <meta name="twitter:description" content="Free SRS flashcard drills for Japanese i-adjective and na-adjective conjugations.">
   <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
   <link rel="canonical" href="https://tokidoki.meertens.dev/adjectives.html">
   <link rel="stylesheet" href="style.css?v=72">
@@ -102,7 +102,7 @@
         </div>
       </nav>
       <div id="adj-chapters">
-        <p class="tab-intro">Drill i-adjective and na-adjective conjugations — negative, past, and more — chapter by chapter.
+        <p class="tab-intro">Drill i-adjective and na-adjective conjugations — negative, past, and more — in themed chunks by JLPT level.
           Switch to whole sentences to translate full English sentences into Japanese instead of a single word.</p>
         <div class="kana-settings-row">
           <label class="kana-script-toggle">
@@ -114,10 +114,7 @@
             Whole sentences
           </label>
         </div>
-        <h2 class="section-title">Genki I</h2>
-        <div class="chapter-grid" id="adj-chapters-genki1"></div>
-        <h2 class="section-title">Genki II</h2>
-        <div class="chapter-grid" id="adj-chapters-genki2"></div>
+        <div id="adj-chunks"></div>
       </div>
       <div class="reset-section">
         <button id="btn-reset" class="btn-danger">Reset All Progress</button>
@@ -212,7 +209,7 @@
         </div>
         <div class="session-actions">
           <button id="btn-session-continue" class="btn-primary">Next 20 →</button>
-          <button id="btn-back-to-chapters" class="btn-secondary">Back to Chapters</button>
+          <button id="btn-back-to-chapters" class="btn-secondary">Back to Chunks</button>
         </div>
       </div>
     </main>
@@ -225,11 +222,11 @@
 
   </div>
 
-  <script src="conjugator.js?v=8"></script>
-  <script src="verbs.js"></script>
+  <script src="conjugator.js?v=9"></script>
+  <script src="verbs.js?v=8"></script>
   <script src="kana.js"></script>
   <script src="kanji-quiz-data.js"></script>
-  <script src="sentences-data.js"></script>
+  <script src="sentences-data.js?v=8"></script>
   <script src="vocabulary-data.js"></script>
   <script src="kanji-info-data.js"></script>
   <script src="examples.js"></script>
@@ -239,7 +236,7 @@
   <script src="speech.js"></script>
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=4"></script>
-  <script src="app.js?v=62"></script>
+  <script src="app.js?v=63"></script>
   <script src="sync-merge.js?v=6"></script>
   <script src="progress-stats.js?v=2"></script>
   <script src="sync.js?v=10"></script>
@@ -248,11 +245,11 @@
 
   <!-- Static content for search engines -->
   <section id="seo-content" aria-hidden="true">
-    <h1>Japanese Adjective Conjugation Practice — Genki I &amp; II</h1>
+    <h1>Japanese Adjective Conjugation Practice — N5 &amp; N4</h1>
     <p>
       Practise <strong>i-adjective</strong> and <strong>na-adjective</strong> conjugations
       including present, negative, past, past-negative, te-form, and adverb forms.
-      Chapters span the adjective grammar introduced across both Genki volumes.
+      Adjectives are grouped by topic and JLPT level, N5 and N4.
     </p>
     <p>
       Cards are scheduled with <strong>spaced repetition (SRS)</strong> so you review what

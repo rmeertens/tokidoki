@@ -42,7 +42,7 @@ Misc.QUIZZES.forEach(q => {
 // ─── RU-verb lookalikes ────────────────────────────────────────────────────
 
 const ru = Misc.QUIZZES.find(q => q.id === 'ru-exceptions').sections[0];
-check(Misc.RU_EXCEPTIONS.length === 8, `expected the 8 Genki exceptions, got ${Misc.RU_EXCEPTIONS.length}`);
+check(Misc.RU_EXCEPTIONS.length === 8, `expected the 8 exceptions, got ${Misc.RU_EXCEPTIONS.length}`);
 ['帰る', '入る', '知る', '要る', '切る', 'しゃべる', '参る', '走る'].forEach(v =>
   check(Misc.RU_EXCEPTIONS.some(e => e.kanji === v), `${v} missing from the exceptions`));
 check(Misc.matchItems(ru, 'kaeru').length === 1, 'romaji kaeru names 帰る');
@@ -129,7 +129,7 @@ check(/eat.*drink.*receive/.test(itadaku.meaning), 'いただく card lists ever
 global.Conjugator = require('./conjugator.js');
 require('./examples.js');
 const Bunkei = require('./bunkei-data.js');
-const { GENKI_VERBS } = require('./verbs.js');
+const { ALL_VERBS } = require('./verbs.js');
 const bunkei = Misc.QUIZZES.find(q => q.id === 'bunkei').sections;
 const bunkeiRows = bunkei.flatMap(sec => sec.items.map(it => ({ ...it, level: sec.label })));
 // Same patterns, levels and forms as the Bunkei drill, in the same order.
@@ -141,7 +141,7 @@ Bunkei.PATTERNS.forEach(p => {
   check(it.answer === p.name.replace(/^\w+ /, ''), `bunkei ${p.id}: form ${it.answer}, drill says ${p.name}`);
   check(it.prompt.startsWith(p.meaning + ' '), `bunkei ${p.id}: meaning differs from the drill's "${p.meaning}"`);
   // The example is what the drill builds for that verb.
-  const verb = GENKI_VERBS.find(v => v.kanji === it.prompt.match(/\(([^()]+)\)$/)[1] && !v.disambig);
+  const verb = ALL_VERBS.find(v => v.kanji === it.prompt.match(/\(([^()]+)\)$/)[1] && !v.disambig);
   const built = Bunkei.build(verb, p.id);
   const example = it.accept[2];
   check(built && built.plain.includes(example), `bunkei ${p.id}: drill sentence "${built && built.plain}" doesn't contain ${example}`);

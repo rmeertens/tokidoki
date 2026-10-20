@@ -1,0 +1,108 @@
+{
+  "id": "n4-giving",
+  "order": 11,
+  "title": "Giving & receiving favours",
+  "level": "N4",
+  "sentences": [
+    {
+      "ja": "母にセーターを編んであげました。",
+      "jaHtml": "<ruby>母<rp>(</rp><rt>はは</rt><rp>)</rp></ruby>にセーターを<ruby>編<rp>(</rp><rt>あ</rt><rp>)</rp></ruby>んであげました。",
+      "en": "I knitted a sweater for my mother."
+    },
+    {
+      "ja": "兄がカメラを貸してくれました。",
+      "jaHtml": "<ruby>兄<rp>(</rp><rt>あに</rt><rp>)</rp></ruby>がカメラを<ruby>貸<rp>(</rp><rt>か</rt><rp>)</rp></ruby>してくれました。",
+      "en": "My older brother lent me a camera."
+    },
+    {
+      "ja": "友達がノートを貸してくれました。",
+      "jaHtml": "<ruby>友達<rp>(</rp><rt>ともだち</rt><rp>)</rp></ruby>がノートを<ruby>貸<rp>(</rp><rt>か</rt><rp>)</rp></ruby>してくれました。",
+      "en": "A friend lent me a notebook."
+    },
+    {
+      "ja": "兄が宿題を手伝ってくれました。",
+      "jaHtml": "<ruby>兄<rp>(</rp><rt>あに</rt><rp>)</rp></ruby>が<ruby>宿題<rp>(</rp><rt>しゅくだい</rt><rp>)</rp></ruby>を<ruby>手伝<rp>(</rp><rt>てつだ</rt><rp>)</rp></ruby>ってくれました。",
+      "en": "My older brother helped me with my homework."
+    },
+    {
+      "ja": "友達が駅まで送ってくれました。",
+      "jaHtml": "<ruby>友達<rp>(</rp><rt>ともだち</rt><rp>)</rp></ruby>が<ruby>駅<rp>(</rp><rt>えき</rt><rp>)</rp></ruby>まで<ruby>送<rp>(</rp><rt>おく</rt><rp>)</rp></ruby>ってくれました。",
+      "en": "A friend gave me a ride to the station."
+    },
+    {
+      "ja": "同僚にペンを貸してあげました。",
+      "jaHtml": "<ruby>同僚<rp>(</rp><rt>どうりょう</rt><rp>)</rp></ruby>にペンを<ruby>貸<rp>(</rp><rt>か</rt><rp>)</rp></ruby>してあげました。",
+      "en": "I lent a pen to a coworker."
+    },
+    {
+      "ja": "先輩にいろいろなことを教えてもらいました。",
+      "jaHtml": "<ruby>先輩<rp>(</rp><rt>せんぱい</rt><rp>)</rp></ruby>にいろいろなことを<ruby>教<rp>(</rp><rt>おし</rt><rp>)</rp></ruby>えてもらいました。",
+      "en": "I was taught many things by my senior."
+    },
+    {
+      "ja": "友達にお金を貸してあげました。",
+      "jaHtml": "<ruby>友達<rp>(</rp><rt>ともだち</rt><rp>)</rp></ruby>にお<ruby>金<rp>(</rp><rt>かね</rt><rp>)</rp></ruby>を<ruby>貸<rp>(</rp><rt>か</rt><rp>)</rp></ruby>してあげました。",
+      "en": "I lent money to a friend."
+    },
+    {
+      "ja": "推薦状を書いていただけませんか。",
+      "jaHtml": "<ruby>推薦状<rp>(</rp><rt>すいせんじょう</rt><rp>)</rp></ruby>を<ruby>書<rp>(</rp><rt>か</rt><rp>)</rp></ruby>いていただけませんか。",
+      "en": "Could you write me a recommendation letter?"
+    },
+    {
+      "ja": "手伝ってくれてありがとう。",
+      "jaHtml": "<ruby>手伝<rp>(</rp><rt>てつだ</rt><rp>)</rp></ruby>ってくれてありがとう。",
+      "en": "Thanks for helping me."
+    },
+    {
+      "ja": "ルームメイトが晩ご飯を作ってくれました。",
+      "jaHtml": "ルームメイトが<ruby>晩<rp>(</rp><rt>ばん</rt><rp>)</rp></ruby>ご<ruby>飯<rp>(</rp><rt>はん</rt><rp>)</rp></ruby>を<ruby>作<rp>(</rp><rt>つく</rt><rp>)</rp></ruby>ってくれました。",
+      "en": "My roommate made dinner for me."
+    },
+    {
+      "ja": "すみませんが、写真を撮っていただけませんか。",
+      "jaHtml": "すみませんが、<ruby>写真<rp>(</rp><rt>しゃしん</rt><rp>)</rp></ruby>を<ruby>撮<rp>(</rp><rt>と</rt><rp>)</rp></ruby>っていただけませんか。",
+      "en": "Excuse me, could you take a photo for me?"
+    },
+    {
+      "ja": "もう少しゆっくり話していただけませんか。",
+      "jaHtml": "もう<ruby>少<rp>(</rp><rt>すこ</rt><rp>)</rp></ruby>しゆっくり<ruby>話<rp>(</rp><rt>はな</rt><rp>)</rp></ruby>していただけませんか。",
+      "en": "Could you speak a little more slowly?"
+    },
+    {
+      "ja": "友達が道を教えてくれました。",
+      "jaHtml": "<ruby>友達<rp>(</rp><rt>ともだち</rt><rp>)</rp></ruby>が<ruby>道<rp>(</rp><rt>みち</rt><rp>)</rp></ruby>を<ruby>教<rp>(</rp><rt>おし</rt><rp>)</rp></ruby>えてくれました。",
+      "en": "A friend showed me the way."
+    },
+    {
+      "ja": "私は弟に宿題を手伝ってあげました。",
+      "jaHtml": "<ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>は<ruby>弟<rp>(</rp><rt>おとうと</rt><rp>)</rp></ruby>に<ruby>宿題<rp>(</rp><rt>しゅくだい</rt><rp>)</rp></ruby>を<ruby>手伝<rp>(</rp><rt>てつだ</rt><rp>)</rp></ruby>ってあげました。",
+      "en": "I helped my younger brother with his homework."
+    },
+    {
+      "ja": "姉に髪を切ってもらいました。",
+      "jaHtml": "<ruby>姉<rp>(</rp><rt>あね</rt><rp>)</rp></ruby>に<ruby>髪<rp>(</rp><rt>かみ</rt><rp>)</rp></ruby>を<ruby>切<rp>(</rp><rt>き</rt><rp>)</rp></ruby>ってもらいました。",
+      "en": "I had my older sister cut my hair."
+    },
+    {
+      "ja": "おばあさんの荷物を持ってあげました。",
+      "jaHtml": "おばあさんの<ruby>荷物<rp>(</rp><rt>にもつ</rt><rp>)</rp></ruby>を<ruby>持<rp>(</rp><rt>も</rt><rp>)</rp></ruby>ってあげました。",
+      "en": "I carried an elderly woman's luggage for her."
+    },
+    {
+      "ja": "先生に作文を直していただきました。",
+      "jaHtml": "<ruby>先生<rp>(</rp><rt>せんせい</rt><rp>)</rp></ruby>に<ruby>作文<rp>(</rp><rt>さくぶん</rt><rp>)</rp></ruby>を<ruby>直<rp>(</rp><rt>なお</rt><rp>)</rp></ruby>していただきました。",
+      "en": "I had the teacher correct my essay."
+    },
+    {
+      "ja": "来てくれてありがとうございました。",
+      "jaHtml": "<ruby>来<rp>(</rp><rt>き</rt><rp>)</rp></ruby>てくれてありがとうございました。",
+      "en": "Thank you for coming."
+    },
+    {
+      "ja": "いろいろ教えてくれて、ありがとう。",
+      "jaHtml": "いろいろ<ruby>教<rp>(</rp><rt>おし</rt><rp>)</rp></ruby>えてくれて、ありがとう。",
+      "en": "Thanks for teaching me so many things."
+    }
+  ]
+}

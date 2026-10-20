@@ -1,0 +1,108 @@
+{
+  "id": "n5-masu",
+  "order": 2,
+  "title": "Verbs: 〜ます / 〜ません",
+  "level": "N5",
+  "sentences": [
+    {
+      "ja": "机の上に本があります。",
+      "jaHtml": "<ruby>机<rp>(</rp><rt>つくえ</rt><rp>)</rp></ruby>の<ruby>上<rp>(</rp><rt>うえ</rt><rp>)</rp></ruby>に<ruby>本<rp>(</rp><rt>ほん</rt><rp>)</rp></ruby>があります。",
+      "en": "There is a book on the desk."
+    },
+    {
+      "ja": "私は朝六時に起きます。",
+      "jaHtml": "<ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>は<ruby>朝<rp>(</rp><rt>あさ</rt><rp>)</rp></ruby><ruby>六<rp>(</rp><rt>ろく</rt><rp>)</rp></ruby><ruby>時<rp>(</rp><rt>じ</rt><rp>)</rp></ruby>に<ruby>起<rp>(</rp><rt>お</rt><rp>)</rp></ruby>きます。",
+      "en": "I wake up at 6 in the morning."
+    },
+    {
+      "ja": "私は十一時に寝ます。",
+      "jaHtml": "<ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>は<ruby>十<rp>(</rp><rt>じゅう</rt><rp>)</rp></ruby><ruby>一<rp>(</rp><rt>いち</rt><rp>)</rp></ruby><ruby>時<rp>(</rp><rt>じ</rt><rp>)</rp></ruby>に<ruby>寝<rp>(</rp><rt>ね</rt><rp>)</rp></ruby>ます。",
+      "en": "I go to bed at 11."
+    },
+    {
+      "ja": "私は魚を食べません。",
+      "jaHtml": "<ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>は<ruby>魚<rp>(</rp><rt>さかな</rt><rp>)</rp></ruby>を<ruby>食<rp>(</rp><rt>た</rt><rp>)</rp></ruby>べません。",
+      "en": "I don't eat fish."
+    },
+    {
+      "ja": "私はよくテニスをします。",
+      "jaHtml": "<ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>はよくテニスをします。",
+      "en": "I often play tennis."
+    },
+    {
+      "ja": "日曜日にどこへ行きますか。",
+      "jaHtml": "<ruby>日曜日<rp>(</rp><rt>にちようび</rt><rp>)</rp></ruby>にどこへ<ruby>行<rp>(</rp><rt>い</rt><rp>)</rp></ruby>きますか。",
+      "en": "Where will you go on Sunday?"
+    },
+    {
+      "ja": "私はたいてい七時に朝ご飯を食べます。",
+      "jaHtml": "<ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>はたいてい<ruby>七時<rp>(</rp><rt>しちじ</rt><rp>)</rp></ruby>に<ruby>朝<rp>(</rp><rt>あさ</rt><rp>)</rp></ruby>ご<ruby>飯<rp>(</rp><rt>はん</rt><rp>)</rp></ruby>を<ruby>食<rp>(</rp><rt>た</rt><rp>)</rp></ruby>べます。",
+      "en": "I usually eat breakfast at seven."
+    },
+    {
+      "ja": "兄は毎日大学に行きます。",
+      "jaHtml": "<ruby>兄<rp>(</rp><rt>あに</rt><rp>)</rp></ruby>は<ruby>毎日<rp>(</rp><rt>まいにち</rt><rp>)</rp></ruby><ruby>大学<rp>(</rp><rt>だいがく</rt><rp>)</rp></ruby>に<ruby>行<rp>(</rp><rt>い</rt><rp>)</rp></ruby>きます。",
+      "en": "My older brother goes to university every day."
+    },
+    {
+      "ja": "私は毎日日本語を話します。",
+      "jaHtml": "<ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>は<ruby>毎日<rp>(</rp><rt>まいにち</rt><rp>)</rp></ruby><ruby>日本語<rp>(</rp><rt>にほんご</rt><rp>)</rp></ruby>を<ruby>話<rp>(</rp><rt>はな</rt><rp>)</rp></ruby>します。",
+      "en": "I speak Japanese every day."
+    },
+    {
+      "ja": "大学の近くに本屋があります。",
+      "jaHtml": "<ruby>大学<rp>(</rp><rt>だいがく</rt><rp>)</rp></ruby>の<ruby>近<rp>(</rp><rt>ちか</rt><rp>)</rp></ruby>くに<ruby>本屋<rp>(</rp><rt>ほんや</rt><rp>)</rp></ruby>があります。",
+      "en": "There is a bookstore near the university."
+    },
+    {
+      "ja": "今日は授業がありません。",
+      "jaHtml": "<ruby>今日<rp>(</rp><rt>きょう</rt><rp>)</rp></ruby>は<ruby>授業<rp>(</rp><rt>じゅぎょう</rt><rp>)</rp></ruby>がありません。",
+      "en": "I don't have class today."
+    },
+    {
+      "ja": "英語で手紙を書きます。",
+      "jaHtml": "<ruby>英語<rp>(</rp><rt>えいご</rt><rp>)</rp></ruby>で<ruby>手紙<rp>(</rp><rt>てがみ</rt><rp>)</rp></ruby>を<ruby>書<rp>(</rp><rt>か</rt><rp>)</rp></ruby>きます。",
+      "en": "I write a letter in English."
+    },
+    {
+      "ja": "休みの日に一緒に出かけましょう。",
+      "jaHtml": "<ruby>休<rp>(</rp><rt>やす</rt><rp>)</rp></ruby>みの<ruby>日<rp>(</rp><rt>ひ</rt><rp>)</rp></ruby>に<ruby>一緒<rp>(</rp><rt>いっしょ</rt><rp>)</rp></ruby>に<ruby>出<rp>(</rp><rt>で</rt><rp>)</rp></ruby>かけましょう。",
+      "en": "Let's go out together on our day off."
+    },
+    {
+      "ja": "私は兄弟が二人います。",
+      "jaHtml": "<ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>は<ruby>兄弟<rp>(</rp><rt>きょうだい</rt><rp>)</rp></ruby>が<ruby>二人<rp>(</rp><rt>ふたり</rt><rp>)</rp></ruby>います。",
+      "en": "I have two siblings."
+    },
+    {
+      "ja": "毎朝運動します。",
+      "jaHtml": "<ruby>毎朝<rp>(</rp><rt>まいあさ</rt><rp>)</rp></ruby><ruby>運動<rp>(</rp><rt>うんどう</rt><rp>)</rp></ruby>します。",
+      "en": "I exercise every morning."
+    },
+    {
+      "ja": "大学まで自転車で行きます。",
+      "jaHtml": "<ruby>大学<rp>(</rp><rt>だいがく</rt><rp>)</rp></ruby>まで<ruby>自転車<rp>(</rp><rt>じてんしゃ</rt><rp>)</rp></ruby>で<ruby>行<rp>(</rp><rt>い</rt><rp>)</rp></ruby>きます。",
+      "en": "I go to the university by bicycle."
+    },
+    {
+      "ja": "テストの前に緊張します。",
+      "jaHtml": "テストの<ruby>前<rp>(</rp><rt>まえ</rt><rp>)</rp></ruby>に<ruby>緊張<rp>(</rp><rt>きんちょう</rt><rp>)</rp></ruby>します。",
+      "en": "I get nervous before tests."
+    },
+    {
+      "ja": "すみません、明日は行けません。",
+      "jaHtml": "すみません、<ruby>明日<rp>(</rp><rt>あした</rt><rp>)</rp></ruby>は<ruby>行<rp>(</rp><rt>い</rt><rp>)</rp></ruby>けません。",
+      "en": "Sorry, I can't go tomorrow."
+    },
+    {
+      "ja": "窓から山が見えます。",
+      "jaHtml": "<ruby>窓<rp>(</rp><rt>まど</rt><rp>)</rp></ruby>から<ruby>山<rp>(</rp><rt>やま</rt><rp>)</rp></ruby>が<ruby>見<rp>(</rp><rt>み</rt><rp>)</rp></ruby>えます。",
+      "en": "I can see the mountain from the window."
+    },
+    {
+      "ja": "コンビニに寄りましょう。",
+      "jaHtml": "コンビニに<ruby>寄<rp>(</rp><rt>よ</rt><rp>)</rp></ruby>りましょう。",
+      "en": "Let's stop by the convenience store."
+    }
+  ]
+}

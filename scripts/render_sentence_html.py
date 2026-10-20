@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """Render the per-grammar-point translation worksheets to standalone print HTML.
 
-Reads sentence-sheets/data/ch{N}.json (see extract_sentence_data.mjs) and
-writes, per Genki chapter, four sheets:
-  - ch{N}-to-english.html          Japanese sentences shown, write the English translation
-  - ch{N}-to-english-answers.html  answer key for that sheet — Japanese
-                                    question printed first, English answer below
-  - ch{N}-to-japanese.html         English sentences shown, write the Japanese translation
-  - ch{N}-to-japanese-answers.html answer key for that sheet — English
-                                    question printed first, Japanese answer below
+Reads sentence-sheets/data/<chunk>.json (see extract_sentence_data.mjs) and
+writes, per grammar chunk, four sheets:
+  - <chunk>-to-english.html          Japanese sentences shown, write the English translation
+  - <chunk>-to-english-answers.html  answer key for that sheet — Japanese
+                                      question printed first, English answer below
+  - <chunk>-to-japanese.html         English sentences shown, write the Japanese translation
+  - <chunk>-to-japanese-answers.html answer key for that sheet — English
+                                      question printed first, Japanese answer below
 Each answer key mirrors its own worksheet's direction (question always
 before its answer) rather than one answer key covering both directions,
 where the fixed field order would be backwards for one of them.
@@ -32,19 +32,16 @@ def main():
     out_dir = Path(sys.argv[1])
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    chapter_files = sorted(DATA_DIR.glob("ch*.json"), key=lambda p: int(p.stem[2:]))
-    for path in chapter_files:
-        data = json.loads(path.read_text())
-        num = data["number"]
-        grammar_title = data["title"].split(": ", 1)[-1]  # "Ch 3: First Verbs" -> "First Verbs"
-        title = f"Ch {num} — {grammar_title}"
+    sheets = sorted((json.loads(p.read_text()) for p in DATA_DIR.glob("*.json")), key=lambda d: d["order"])
+    for data in sheets:
+        title = f"{data['level']} — {data['title']}"
         items = data["sentences"]
 
-        stem = f"tokidoki-sentences-ch{num}"
+        stem = f"tokidoki-sentences-{data['id']}"
 
         to_english = render_sentence_worksheet_page(
             f"{title}: Translate to English",
-            f"{data['book']} ({data['level']}) — read each Japanese sentence and write its English translation on the lines below.",
+            f"{data['level']} grammar — read each Japanese sentence and write its English translation on the lines below.",
             items, "jaHtml", "jp",
         )
         (out_dir / f"{stem}-to-english.html").write_text(to_english)
@@ -56,7 +53,7 @@ def main():
 
         to_japanese = render_sentence_worksheet_page(
             f"{title}: Translate to Japanese",
-            f"{data['book']} ({data['level']}) — read each English sentence and write its Japanese translation on the lines below.",
+            f"{data['level']} grammar — read each English sentence and write its Japanese translation on the lines below.",
             items, "en", "en",
         )
         (out_dir / f"{stem}-to-japanese.html").write_text(to_japanese)
@@ -66,7 +63,7 @@ def main():
         )
         (out_dir / f"{stem}-to-japanese-answers.html").write_text(to_japanese_answers)
 
-        print(f"ch{num} ({data['level']}): {len(items)} sentences → 4 sheets")
+        print(f"{data['id']} ({data['level']}): {len(items)} sentences → 4 sheets")
 
 
 if __name__ == "__main__":

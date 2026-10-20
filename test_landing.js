@@ -11,7 +11,7 @@ function ok(cond, label) {
   else { failed++; console.log(`  FAIL: ${label}`); }
 }
 
-const PAGES = ['genki-verb-conjugation-chart', 'wa-vs-ga', 'jlpt-listening-practice'];
+const PAGES = ['verb-conjugation-chart', 'wa-vs-ga', 'jlpt-listening-practice'];
 const sitemap = fs.readFileSync('sitemap.xml', 'utf8');
 
 try {

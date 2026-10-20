@@ -70,8 +70,25 @@
   `sentences-words.js`, built by `node scripts/tokenize_sentences.mjs`
   (kuromoji, as above) from `sentences-data.js`. Re-run it after changing a
   sentence; missing words go in `scripts/sentence_extra_words.json`, and
-  Genki grammar the shared rules miss goes in `SENTENCE_RULES` there.
+  grammar the shared rules miss goes in `SENTENCE_RULES` there.
   `test_sentences.js` fails if it's stale.
+- The Sentences page shows its sentences in chunks by JLPT level and grammar
+  point, `sentence-chunks.js`, built by `node scripts/build_sentence_chunks.mjs`
+  from the grammar in `sentences-words.js` (each sentence goes with the
+  hardest grammar it uses; re-run after `tokenize_sentences.mjs`). The
+  printable worksheets follow the same chunks: `node scripts/extract_sentence_data.mjs`
+  (also rewrites the list on `kanji.html`), then `render_sentence_html.py` and
+  `render_sheets_pdfs.mjs` / `stamp_sheet_belts.mjs`.
+
+## Chunks, not textbook chapters
+
+- Verbs, adjectives, sentences, Build Your Own and Bunkei are grouped in
+  themed chunks by JLPT level (N5 / N4 / N3), never by a textbook's
+  chapters. Verb and adjective chunks are `VERB_CHUNKS` / `ADJ_CHUNKS` in
+  `verbs.js`; each word's `group` puts it in one. A verb's `chapter` number
+  is only part of its SRS card ids (`3_いく_masu`, like the sentences'
+  `tr_3_0_…`) — keep it unchanged so saved progress carries over, and give a
+  new verb any unused number.
 - A typed English → Japanese Sentences answer also counts in another word
   order (友達と日曜日に… for 日曜日に友達と…) and with or without 私は for an
   "I" sentence: `sentence-orders.js` builds those versions from the words in

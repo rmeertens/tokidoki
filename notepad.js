@@ -95,8 +95,8 @@
     const src = sources || {
       vocab: global.VOCAB_DATA,
       glossary: global.STORY_GLOSSARY,
-      verbs: typeof GENKI_VERBS !== 'undefined' ? GENKI_VERBS : null, // eslint-disable-line no-undef
-      adjectives: typeof GENKI_ADJECTIVES !== 'undefined' ? GENKI_ADJECTIVES : null, // eslint-disable-line no-undef
+      verbs: typeof ALL_VERBS !== 'undefined' ? ALL_VERBS : null, // eslint-disable-line no-undef
+      adjectives: typeof ALL_ADJECTIVES !== 'undefined' ? ALL_ADJECTIVES : null, // eslint-disable-line no-undef
     };
     const entries = [];
     const seen = new Map();

@@ -11,13 +11,13 @@
   'use strict';
 
   const Romaji = global.Romaji || (typeof require !== 'undefined' ? require('./romaji.js') : null);
-  // verbs.js declares GENKI_VERBS as a top-level const, so it isn't on window.
-  /* global GENKI_VERBS */
-  const VERBS = typeof GENKI_VERBS !== 'undefined' ? GENKI_VERBS
-    : typeof require !== 'undefined' ? require('./verbs.js').GENKI_VERBS : [];
-  /* global GENKI_ADJECTIVES */
-  const ADJECTIVES = typeof GENKI_ADJECTIVES !== 'undefined' ? GENKI_ADJECTIVES
-    : typeof require !== 'undefined' ? require('./verbs.js').GENKI_ADJECTIVES : [];
+  // verbs.js declares ALL_VERBS as a top-level const, so it isn't on window.
+  /* global ALL_VERBS */
+  const VERBS = typeof ALL_VERBS !== 'undefined' ? ALL_VERBS
+    : typeof require !== 'undefined' ? require('./verbs.js').ALL_VERBS : [];
+  /* global ALL_ADJECTIVES */
+  const ADJECTIVES = typeof ALL_ADJECTIVES !== 'undefined' ? ALL_ADJECTIVES
+    : typeof require !== 'undefined' ? require('./verbs.js').ALL_ADJECTIVES : [];
   const STORE_KEY = 'tokidoki_misc';
   const SETTINGS_KEY = 'tokidoki_misc_settings';
 
@@ -51,7 +51,7 @@
   // Regular RU-verbs, for a hint when you type one of those instead.
   const RU_VERBS = VERBS.filter(v => v.type === 'ru');
 
-  // な-adjectives that look like い-adjectives. Genki only has three, so this
+  // な-adjectives that look like い-adjectives. verbs.js only has three, so this
   // is the common N5–N3 list rather than one built from verbs.js.
   const NA_EI = [
     ['きれい', 'きれい', 'pretty / clean', ['綺麗']],

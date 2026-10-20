@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" id="viewport-meta" content="width=device-width, initial-scale=1.0">
   <title>Japanese Sentence Translation Practice | Tokidoki</title>
-  <meta name="description" content="Translate full Japanese sentences from Genki chapters 3–12. Practice both Japanese-to-English and English-to-Japanese, with optional furigana. Free, no login.">
+  <meta name="description" content="Translate full Japanese sentences grouped by JLPT level (N5–N3) and grammar point. Practice both Japanese-to-English and English-to-Japanese, with optional furigana. Free, no login.">
   <meta property="og:title" content="Japanese Sentence Translation Practice | Tokidoki">
-  <meta property="og:description" content="Translate full Japanese sentences taken from Genki chapters 3–12, in either direction, with optional furigana readings.">
+  <meta property="og:description" content="Translate full Japanese sentences by JLPT level and grammar point, in either direction, with optional furigana readings.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://tokidoki.meertens.dev/sentences.html">
   <meta property="og:site_name" content="Tokidoki">
@@ -17,7 +17,7 @@
   <meta property="og:image:alt" content="Tokidoki — free Japanese practice, one plate at a time">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Japanese Sentence Translation Practice | Tokidoki">
-  <meta name="twitter:description" content="Translate full Japanese sentences taken from Genki chapters 3–12, in either direction, with optional furigana readings.">
+  <meta name="twitter:description" content="Translate full Japanese sentences by JLPT level and grammar point, in either direction, with optional furigana readings.">
   <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
   <link rel="canonical" href="https://tokidoki.meertens.dev/sentences.html">
   <link rel="stylesheet" href="style.css?v=72">
@@ -102,7 +102,7 @@
         </div>
       </nav>
       <div id="translate-panel">
-        <p class="tab-intro">Translate full sentences using the verbs and grammar you've learned. Pick a chapter to start.</p>
+        <p class="tab-intro">Translate full sentences using the verbs and grammar you've learned. Pick a chunk to start: each one practises a grammar point, from N5 to N3.</p>
         <div class="kana-settings-row" id="translate-direction-row" role="radiogroup" aria-label="Translation direction">
           <label class="kana-script-toggle">
             <input type="radio" name="translate-direction" value="both" checked>
@@ -117,10 +117,7 @@
             English &rarr; Japanese
           </label>
         </div>
-        <h2 class="section-title">Genki I</h2>
-        <div class="chapter-grid" id="translate-chapters-genki1"></div>
-        <h2 class="section-title">Genki II</h2>
-        <div class="chapter-grid" id="translate-chapters-genki2"></div>
+        <div id="translate-chunks"></div>
       </div>
       <div class="reset-section">
         <button id="btn-reset" class="btn-danger">Reset All Progress</button>
@@ -218,7 +215,7 @@
         </div>
         <div class="session-actions">
           <button id="btn-session-continue" class="btn-primary">Next 20 →</button>
-          <button id="btn-back-to-chapters" class="btn-secondary">Back to Chapters</button>
+          <button id="btn-back-to-chapters" class="btn-secondary">Back to Chunks</button>
         </div>
       </div>
     </main>
@@ -228,12 +225,13 @@
 
   </div>
 
-  <script src="conjugator.js"></script>
-  <script src="verbs.js"></script>
+  <script src="conjugator.js?v=9"></script>
+  <script src="verbs.js?v=8"></script>
   <script src="kana.js"></script>
   <script src="kanji-quiz-data.js"></script>
-  <script src="sentences-data.js"></script>
+  <script src="sentences-data.js?v=8"></script>
   <script src="sentences-words.js?v=1"></script>
+  <script src="sentence-chunks.js?v=1"></script>
   <script src="sentence-orders.js?v=1"></script>
   <script src="en-hover.js?v=1"></script>
   <script src="vocabulary-data.js"></script>
@@ -244,7 +242,7 @@
   <script src="speech.js"></script>
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=4"></script>
-  <script src="app.js?v=62"></script>
+  <script src="app.js?v=63"></script>
   <script src="sync-merge.js?v=6"></script>
   <script src="progress-stats.js?v=2"></script>
   <script src="sync.js?v=10"></script>
@@ -255,7 +253,7 @@
   <section id="seo-content" aria-hidden="true">
     <h1>Japanese Sentence Translation Practice</h1>
     <p>
-      Translate full Japanese sentences taken from Genki chapters 3–12. Toggle between
+      Translate full Japanese sentences grouped by JLPT level (N5 to N3) and grammar point. Toggle between
       Japanese-to-English and English-to-Japanese modes, with optional furigana readings
       above kanji. A good way to practice grammar and vocabulary together, not just
       isolated conjugation forms.

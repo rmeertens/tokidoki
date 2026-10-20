@@ -5,7 +5,7 @@
 global.window = global;
 global.Conjugator = require('./conjugator.js');
 require('./examples.js');
-const { GENKI_VERBS } = require('./verbs.js');
+const { ALL_VERBS } = require('./verbs.js');
 const Bunkei = require('./bunkei-data.js');
 require('./vocabulary-data.js');
 require('./sentences-data.js');
@@ -47,7 +47,7 @@ ok(H.kanaOfRuby('<ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>は') ===
 // Every Bunkei sentence: the drilled verb's English gets a hint for the
 // verb itself, and the object for its Japanese.
 let sentences = 0;
-Bunkei.usableVerbs(GENKI_VERBS).forEach(verb => Bunkei.patternsFor(verb).forEach(pattern => {
+Bunkei.usableVerbs(ALL_VERBS).forEach(verb => Bunkei.patternsFor(verb).forEach(pattern => {
   const b = Bunkei.build(verb, pattern.id);
   const s = { ja: b.plain, kana: b.kana, words: b.words };
   sentences++;

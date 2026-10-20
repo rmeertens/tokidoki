@@ -1,70 +1,87 @@
 #!/usr/bin/env node
-// Build sentence-sheets/data/ch{N}.json from sentences-data.js (the
-// window.TRANSLATE_SENTENCES global shared with the Sentences flashcard
-// mode) and verbs.js's CHAPTER_INFO (chapter titles/book), so the
-// printable translation worksheets stay in sync with the live site's
-// sentence bank — one source of truth, no hand-copied content.
+// Build sentence-sheets/data/<chunk>.json — one printable translation
+// worksheet per grammar chunk of the Sentences page (sentence-chunks.js),
+// 20 of its sentences from sentences-data.js spread over the whole chunk —
+// and the worksheet list on kanji.html (between the sentence-sheets
+// markers), so the sheets stay in sync with the live site's sentence bank.
 //
 // Usage: node scripts/extract_sentence_data.mjs
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+// then render_sentence_html.py and render_sheets_pdfs.mjs (see there).
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, rmSync } from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "..");
+const PER_SHEET = 20;
 
-// sentences-data.js assigns to `window.TRANSLATE_SENTENCES` inside an
-// IIFE, so a plain object sandbox as `window` captures it directly.
-const sentencesSrc = readFileSync(path.join(REPO_ROOT, "sentences-data.js"), "utf8");
 const sandbox = { window: {} };
 vm.createContext(sandbox);
-vm.runInContext(sentencesSrc, sandbox);
-const TRANSLATE_SENTENCES = sandbox.window.TRANSLATE_SENTENCES;
-if (!TRANSLATE_SENTENCES) throw new Error("TRANSLATE_SENTENCES not found in sentences-data.js");
-// Chapters that predate verb conjugation (currently 1-2) have no entry in
-// verbs.js's CHAPTER_INFO — sentences-data.js carries their title/book here.
-const EXTRA_CHAPTER_INFO = sandbox.window.EXTRA_CHAPTER_INFO || {};
-
-// verbs.js declares `const CHAPTER_INFO = {...}` as a bare top-level
-// script (no window assignment) — vm doesn't reflect top-level const
-// bindings onto the sandbox, so pull just that object literal out with a
-// bracket-matching scan and eval it standalone. It's static data (no
-// references to anything else in verbs.js), so this is safe.
-const verbsSrc = readFileSync(path.join(REPO_ROOT, "verbs.js"), "utf8");
-const marker = "const CHAPTER_INFO = ";
-const startIdx = verbsSrc.indexOf(marker);
-if (startIdx === -1) throw new Error("CHAPTER_INFO not found in verbs.js");
-const braceStart = verbsSrc.indexOf("{", startIdx);
-let depth = 0, endIdx = -1;
-for (let i = braceStart; i < verbsSrc.length; i++) {
-  if (verbsSrc[i] === "{") depth++;
-  else if (verbsSrc[i] === "}") { depth--; if (depth === 0) { endIdx = i + 1; break; } }
+for (const f of ["sentences-data.js", "sentence-chunks.js"]) {
+  vm.runInContext(readFileSync(path.join(REPO_ROOT, f), "utf8"), sandbox);
 }
-const CHAPTER_INFO = new Function(`return (${verbsSrc.slice(braceStart, endIdx)});`)();
+const { TRANSLATE_SENTENCES, SENTENCE_CHUNKS } = sandbox.window;
 
-// Genki I and II don't map onto JLPT levels precisely, but Genki I
-// (chapters 3-12) is a reasonable approximation of N5 grammar, and
-// Genki II (13-23) mostly covers N4 (edging into N3 by its later
-// chapters) — same rough labeling used for the practice sheets page.
-const bookToLevel = { "Genki I": "N5", "Genki II": "N4" };
+// A chunk cut into parts (Past tense 1, 2, 3) is one worksheet.
+const sheets = [];
+for (const c of SENTENCE_CHUNKS) {
+  const id = c.id.replace(/-\d+$/, "");
+  let sheet = sheets.find(s => s.id === id);
+  if (!sheet) sheets.push(sheet = { id, level: c.level, title: c.title.replace(/ \(\d+\)$/, ""), sub: c.sub, refs: [] });
+  sheet.refs.push(...c.sentences);
+}
 
 const outDir = path.join(REPO_ROOT, "sentence-sheets", "data");
 mkdirSync(outDir, { recursive: true });
-
-const chapters = Object.keys(TRANSLATE_SENTENCES).map(Number).sort((a, b) => a - b);
-for (const num of chapters) {
-  const info = CHAPTER_INFO[num] || EXTRA_CHAPTER_INFO[num];
-  if (!info) throw new Error(`No CHAPTER_INFO/EXTRA_CHAPTER_INFO for chapter ${num}`);
-  const sentences = TRANSLATE_SENTENCES[num];
+for (const f of readdirSync(outDir)) rmSync(path.join(outDir, f));
+sheets.forEach((sheet, n) => {
+  const step = sheet.refs.length / Math.min(PER_SHEET, sheet.refs.length);
+  const picked = Array.from({ length: Math.min(PER_SHEET, sheet.refs.length) }, (_, k) => sheet.refs[Math.floor(k * step)]);
   const data = {
-    number: num,
-    title: info.title,
-    book: info.book,
-    level: bookToLevel[info.book] || null,
-    sentences: sentences.map(({ ja, jaHtml, en }) => ({ ja, jaHtml, en })),
+    id: sheet.id,
+    order: n + 1,
+    title: sheet.title,
+    level: sheet.level,
+    sentences: picked.map(ref => {
+      const [set, i] = ref.split(":");
+      const { ja, jaHtml, en } = TRANSLATE_SENTENCES[set][i];
+      return { ja, jaHtml, en };
+    }),
   };
-  const outPath = path.join(outDir, `ch${num}.json`);
+  const outPath = path.join(outDir, `${sheet.id}.json`);
   writeFileSync(outPath, JSON.stringify(data, null, 2) + "\n");
-  console.log(`ch${num}: ${info.title} (${data.level}) — ${sentences.length} sentences -> ${path.relative(REPO_ROOT, outPath)}`);
+  console.log(`${sheet.id}: ${sheet.title} (${sheet.level}) — ${data.sentences.length} sentences -> ${path.relative(REPO_ROOT, outPath)}`);
+});
+
+// The worksheet cards on kanji.html.
+const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const pdf = (id, kind) => `sentence-sheets/tokidoki-sentences-${id}-${kind}.pdf`;
+const LEVEL_NAMES = { N5: "N5 grammar", N4: "N4 grammar", N3: "N3 grammar" };
+let html = "";
+for (const level of ["N5", "N4", "N3"]) {
+  const these = sheets.filter(s => s.level === level);
+  if (!these.length) continue;
+  html += `      <h2 class="section-title">${LEVEL_NAMES[level]}</h2>\n      <div class="chapter-grid">\n`;
+  for (const s of these) {
+    html += `        <div class="chapter-card">
+          <div class="chapter-card-title">${esc(s.title)}</div>
+          <div class="chapter-card-sub">${esc(s.sub)} · ${Math.min(PER_SHEET, s.refs.length)} sentences</div>
+          <div class="chapter-card-links">
+            <a href="${pdf(s.id, "to-english")}" target="_blank" rel="noopener">To English</a>
+            <a href="${pdf(s.id, "to-english-answers")}" target="_blank" rel="noopener">Answer key</a>
+            <a href="${pdf(s.id, "to-japanese")}" target="_blank" rel="noopener">To Japanese</a>
+            <a href="${pdf(s.id, "to-japanese-answers")}" target="_blank" rel="noopener">Answer key</a>
+          </div>
+        </div>\n`;
+  }
+  html += "      </div>\n";
 }
+const kanjiPath = path.join(REPO_ROOT, "kanji.html");
+const page = readFileSync(kanjiPath, "utf8");
+const START = "      <!-- sentence-sheets: written by scripts/extract_sentence_data.mjs -->\n";
+const END = "      <!-- /sentence-sheets -->\n";
+const a = page.indexOf(START), b = page.indexOf(END);
+if (a === -1 || b === -1) throw new Error("kanji.html: no sentence-sheets markers");
+writeFileSync(kanjiPath, page.slice(0, a + START.length) + html + page.slice(b));
+console.log(`kanji.html: ${sheets.length} worksheets`);

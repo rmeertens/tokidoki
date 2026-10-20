@@ -3,7 +3,7 @@
 // known sentences come out exactly right.
 global.Conjugator = require('./conjugator.js');
 require('./examples.js');
-const { GENKI_VERBS } = require('./verbs.js');
+const { ALL_VERBS } = require('./verbs.js');
 const Bunkei = require('./bunkei-data.js');
 
 let passed = 0;
@@ -13,7 +13,7 @@ function check(ok, label) {
   else { failed++; console.log(`  FAIL: ${label}`); }
 }
 
-const verbs = Bunkei.usableVerbs(GENKI_VERBS);
+const verbs = Bunkei.usableVerbs(ALL_VERBS);
 check(verbs.length > 100, `expected 100+ usable verbs, got ${verbs.length}`);
 
 let combos = 0;

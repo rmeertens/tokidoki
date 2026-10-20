@@ -1,0 +1,108 @@
+{
+  "id": "n4-advice",
+  "order": 14,
+  "title": "Advice, rules & reasons",
+  "level": "N4",
+  "sentences": [
+    {
+      "ja": "部屋を掃除しなければなりません。",
+      "jaHtml": "<ruby>部屋<rp>(</rp><rt>へや</rt><rp>)</rp></ruby>を<ruby>掃除<rp>(</rp><rt>そうじ</rt><rp>)</rp></ruby>しなければなりません。",
+      "en": "I have to clean the room."
+    },
+    {
+      "ja": "漢字を覚えなければなりません。",
+      "jaHtml": "<ruby>漢字<rp>(</rp><rt>かんじ</rt><rp>)</rp></ruby>を<ruby>覚<rp>(</rp><rt>おぼ</rt><rp>)</rp></ruby>えなければなりません。",
+      "en": "I have to memorize kanji."
+    },
+    {
+      "ja": "私はお金がないから、旅行に行かない。",
+      "jaHtml": "<ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>はお<ruby>金<rp>(</rp><rt>かね</rt><rp>)</rp></ruby>がないから、<ruby>旅行<rp>(</rp><rt>りょこう</rt><rp>)</rp></ruby>に<ruby>行<rp>(</rp><rt>い</rt><rp>)</rp></ruby>かない。",
+      "en": "I don't have money, so I'm not going on a trip."
+    },
+    {
+      "ja": "天気がよかったから、海に行きました。",
+      "jaHtml": "<ruby>天気<rp>(</rp><rt>てんき</rt><rp>)</rp></ruby>がよかったから、<ruby>海<rp>(</rp><rt>うみ</rt><rp>)</rp></ruby>に<ruby>行<rp>(</rp><rt>い</rt><rp>)</rp></ruby>きました。",
+      "en": "The weather was good, so I went to the beach."
+    },
+    {
+      "ja": "昨日食べすぎました。",
+      "jaHtml": "<ruby>昨日<rp>(</rp><rt>きのう</rt><rp>)</rp></ruby><ruby>食<rp>(</rp><rt>た</rt><rp>)</rp></ruby>べすぎました。",
+      "en": "I ate too much yesterday."
+    },
+    {
+      "ja": "薬を飲んだほうがいいですよ。",
+      "jaHtml": "<ruby>薬<rp>(</rp><rt>くすり</rt><rp>)</rp></ruby>を<ruby>飲<rp>(</rp><rt>の</rt><rp>)</rp></ruby>んだほうがいいですよ。",
+      "en": "You'd better take some medicine."
+    },
+    {
+      "ja": "風邪をひいたので、学校を休みました。",
+      "jaHtml": "<ruby>風邪<rp>(</rp><rt>かぜ</rt><rp>)</rp></ruby>をひいたので、<ruby>学校<rp>(</rp><rt>がっこう</rt><rp>)</rp></ruby>を<ruby>休<rp>(</rp><rt>やす</rt><rp>)</rp></ruby>みました。",
+      "en": "I caught a cold, so I stayed home from school."
+    },
+    {
+      "ja": "このかばんは高すぎます。",
+      "jaHtml": "このかばんは<ruby>高<rp>(</rp><rt>たか</rt><rp>)</rp></ruby>すぎます。",
+      "en": "This bag is too expensive."
+    },
+    {
+      "ja": "この部屋は暑すぎます。",
+      "jaHtml": "この<ruby>部屋<rp>(</rp><rt>へや</rt><rp>)</rp></ruby>は<ruby>暑<rp>(</rp><rt>あつ</rt><rp>)</rp></ruby>すぎます。",
+      "en": "This room is too hot."
+    },
+    {
+      "ja": "今日は出かけないほうがいいですよ。",
+      "jaHtml": "<ruby>今日<rp>(</rp><rt>きょう</rt><rp>)</rp></ruby>は<ruby>出<rp>(</rp><rt>で</rt><rp>)</rp></ruby>かけないほうがいいですよ。",
+      "en": "You'd better not go out today."
+    },
+    {
+      "ja": "雨が降っているので、出かけません。",
+      "jaHtml": "<ruby>雨<rp>(</rp><rt>あめ</rt><rp>)</rp></ruby>が<ruby>降<rp>(</rp><rt>ふ</rt><rp>)</rp></ruby>っているので、<ruby>出<rp>(</rp><rt>で</rt><rp>)</rp></ruby>かけません。",
+      "en": "It's raining, so I won't go out."
+    },
+    {
+      "ja": "お金がないので、旅行に行けません。",
+      "jaHtml": "お<ruby>金<rp>(</rp><rt>かね</rt><rp>)</rp></ruby>がないので、<ruby>旅行<rp>(</rp><rt>りょこう</rt><rp>)</rp></ruby>に<ruby>行<rp>(</rp><rt>い</rt><rp>)</rp></ruby>けません。",
+      "en": "I don't have money, so I can't go on a trip."
+    },
+    {
+      "ja": "毎日薬を飲まなければいけません。",
+      "jaHtml": "<ruby>毎日<rp>(</rp><rt>まいにち</rt><rp>)</rp></ruby><ruby>薬<rp>(</rp><rt>くすり</rt><rp>)</rp></ruby>を<ruby>飲<rp>(</rp><rt>の</rt><rp>)</rp></ruby>まなければいけません。",
+      "en": "I have to take medicine every day."
+    },
+    {
+      "ja": "このテストは長すぎて、終わりませんでした。",
+      "jaHtml": "このテストは<ruby>長<rp>(</rp><rt>なが</rt><rp>)</rp></ruby>すぎて、<ruby>終<rp>(</rp><rt>お</rt><rp>)</rp></ruby>わりませんでした。",
+      "en": "This test was too long, and I couldn't finish it."
+    },
+    {
+      "ja": "約束を守らなければなりません。",
+      "jaHtml": "<ruby>約束<rp>(</rp><rt>やくそく</rt><rp>)</rp></ruby>を<ruby>守<rp>(</rp><rt>まも</rt><rp>)</rp></ruby>らなければなりません。",
+      "en": "You must keep your promise."
+    },
+    {
+      "ja": "この町は静かだし、きれいだし、好きです。",
+      "jaHtml": "この<ruby>町<rp>(</rp><rt>まち</rt><rp>)</rp></ruby>は<ruby>静<rp>(</rp><rt>しず</rt><rp>)</rp></ruby>かだし、きれいだし、<ruby>好<rp>(</rp><rt>す</rt><rp>)</rp></ruby>きです。",
+      "en": "This town is quiet and pretty, so I like it."
+    },
+    {
+      "ja": "明日は来なくてもいいです。",
+      "jaHtml": "<ruby>明日<rp>(</rp><rt>あした</rt><rp>)</rp></ruby>は<ruby>来<rp>(</rp><rt>こ</rt><rp>)</rp></ruby>なくてもいいです。",
+      "en": "You don't have to come tomorrow."
+    },
+    {
+      "ja": "明日は早く起きなくてもいいです。",
+      "jaHtml": "<ruby>明日<rp>(</rp><rt>あした</rt><rp>)</rp></ruby>は<ruby>早<rp>(</rp><rt>はや</rt><rp>)</rp></ruby>く<ruby>起<rp>(</rp><rt>お</rt><rp>)</rp></ruby>きなくてもいいです。",
+      "en": "I don't have to get up early tomorrow."
+    },
+    {
+      "ja": "早く寝なさい。",
+      "jaHtml": "<ruby>早<rp>(</rp><rt>はや</rt><rp>)</rp></ruby>く<ruby>寝<rp>(</rp><rt>ね</rt><rp>)</rp></ruby>なさい。",
+      "en": "Go to bed early."
+    },
+    {
+      "ja": "宿題をしなさい。",
+      "jaHtml": "<ruby>宿題<rp>(</rp><rt>しゅくだい</rt><rp>)</rp></ruby>をしなさい。",
+      "en": "Do your homework."
+    }
+  ]
+}

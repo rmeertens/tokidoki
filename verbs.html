@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" id="viewport-meta" content="width=device-width, initial-scale=1.0">
-  <title>Verb Conjugation Practice — Genki I &amp; II | Tokidoki</title>
-  <meta name="description" content="Practice Japanese verb conjugation — masu-form, て-form, potential, passive, and more — chapter by chapter from Genki I &amp; II, with spaced repetition. Free, no login.">
-  <meta property="og:title" content="Verb Conjugation Practice — Genki I &amp; II | Tokidoki">
-  <meta property="og:description" content="Drill Japanese verb conjugations chapter by chapter using spaced repetition. Covers all Genki I &amp; II forms — free and no login required.">
+  <title>Verb Conjugation Practice — JLPT N5 to N3 | Tokidoki</title>
+  <meta name="description" content="Practice Japanese verb conjugation — masu-form, て-form, potential, passive, and more — in themed JLPT N5, N4 and N3 chunks, with spaced repetition. Free, no login.">
+  <meta property="og:title" content="Verb Conjugation Practice — JLPT N5 to N3 | Tokidoki">
+  <meta property="og:description" content="Drill Japanese verb conjugations in JLPT N5–N3 chunks using spaced repetition. Covers every N5 and N4 form — free and no login required.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://tokidoki.meertens.dev/verbs.html">
   <meta property="og:site_name" content="Tokidoki">
@@ -16,8 +16,8 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Tokidoki — free Japanese practice, one plate at a time">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Verb Conjugation Practice — Genki I &amp; II | Tokidoki">
-  <meta name="twitter:description" content="Free SRS flashcard drills for Genki verb conjugations. Practice masu, て-form, potential, passive, and more.">
+  <meta name="twitter:title" content="Verb Conjugation Practice — JLPT N5 to N3 | Tokidoki">
+  <meta name="twitter:description" content="Free SRS flashcard drills for Japanese verb conjugations. Practice masu, て-form, potential, passive, and more.">
   <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
   <link rel="canonical" href="https://tokidoki.meertens.dev/verbs.html">
   <link rel="stylesheet" href="style.css?v=72">
@@ -101,11 +101,8 @@
         </div>
       </nav>
       <div id="verb-chapters">
-        <p class="tab-intro">Practice conjugating verbs from each <strong>Genki</strong> chapter. Cards are spaced using SRS so you review what you need most.</p>
-        <h2 class="section-title">Genki I</h2>
-        <div class="chapter-grid" id="chapters-genki1"></div>
-        <h2 class="section-title">Genki II</h2>
-        <div class="chapter-grid" id="chapters-genki2"></div>
+        <p class="tab-intro">Practice conjugating verbs in small chunks by JLPT level: N5 verbs in the N5 forms, then each N4 form on its own, then N4 and N3 verbs in every form. Cards are spaced using SRS so you review what you need most.</p>
+        <div id="verb-chunks"></div>
       </div>
       <div class="reset-section">
         <button id="btn-reset" class="btn-danger">Reset All Progress</button>
@@ -197,7 +194,7 @@
         </div>
         <div class="session-actions">
           <button id="btn-session-continue" class="btn-primary">Next 20 →</button>
-          <button id="btn-back-to-chapters" class="btn-secondary">Back to Chapters</button>
+          <button id="btn-back-to-chapters" class="btn-secondary">Back to Chunks</button>
         </div>
       </div>
     </main>
@@ -210,11 +207,11 @@
 
   </div>
 
-  <script src="conjugator.js"></script>
-  <script src="verbs.js"></script>
+  <script src="conjugator.js?v=9"></script>
+  <script src="verbs.js?v=8"></script>
   <script src="kana.js"></script>
   <script src="kanji-quiz-data.js"></script>
-  <script src="sentences-data.js"></script>
+  <script src="sentences-data.js?v=8"></script>
   <script src="vocabulary-data.js"></script>
   <script src="kanji-info-data.js"></script>
   <script src="examples.js"></script>
@@ -223,7 +220,7 @@
   <script src="speech.js"></script>
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=4"></script>
-  <script src="app.js?v=62"></script>
+  <script src="app.js?v=63"></script>
   <script src="sync-merge.js?v=6"></script>
   <script src="progress-stats.js?v=2"></script>
   <script src="sync.js?v=10"></script>
@@ -232,10 +229,10 @@
 
   <!-- Static content for search engines -->
   <section id="seo-content" aria-hidden="true">
-    <h1>Japanese Verb Conjugation Practice — Genki I &amp; II</h1>
+    <h1>Japanese Verb Conjugation Practice — JLPT N5 to N3</h1>
     <p>
-      Work through chapters 3–23 of Genki I and II. Each chapter introduces the conjugation
-      forms taught in that unit — starting with the <strong>masu-form</strong> and
+      Work through verbs in themed chunks by JLPT level, N5 to N3, covering the conjugation
+      forms of each level — starting with the <strong>masu-form</strong> and
       <strong>masu-negative</strong>, then adding <strong>te-form</strong>,
       <strong>ta-form</strong>, <strong>nai-form</strong>, <strong>dictionary form</strong>,
       <strong>tai-form</strong>, <strong>potential</strong>, <strong>volitional</strong>,

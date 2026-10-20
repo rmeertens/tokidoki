@@ -1,0 +1,108 @@
+{
+  "id": "n3-causative",
+  "order": 18,
+  "title": "Causative & causative-passive",
+  "level": "N3",
+  "sentences": [
+    {
+      "ja": "母は私に野菜を食べさせました。",
+      "jaHtml": "<ruby>母<rp>(</rp><rt>はは</rt><rp>)</rp></ruby>は<ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>に<ruby>野菜<rp>(</rp><rt>やさい</rt><rp>)</rp></ruby>を<ruby>食<rp>(</rp><rt>た</rt><rp>)</rp></ruby>べさせました。",
+      "en": "Mom made me eat vegetables."
+    },
+    {
+      "ja": "先生は学生に本を読ませました。",
+      "jaHtml": "<ruby>先生<rp>(</rp><rt>せんせい</rt><rp>)</rp></ruby>は<ruby>学生<rp>(</rp><rt>がくせい</rt><rp>)</rp></ruby>に<ruby>本<rp>(</rp><rt>ほん</rt><rp>)</rp></ruby>を<ruby>読<rp>(</rp><rt>よ</rt><rp>)</rp></ruby>ませました。",
+      "en": "The teacher made the students read a book."
+    },
+    {
+      "ja": "上司は私に資料を作らせました。",
+      "jaHtml": "<ruby>上司<rp>(</rp><rt>じょうし</rt><rp>)</rp></ruby>は<ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>に<ruby>資料<rp>(</rp><rt>しりょう</rt><rp>)</rp></ruby>を<ruby>作<rp>(</rp><rt>つく</rt><rp>)</rp></ruby>らせました。",
+      "en": "My boss had me make the materials."
+    },
+    {
+      "ja": "親は子供に野菜を食べさせました。",
+      "jaHtml": "<ruby>親<rp>(</rp><rt>おや</rt><rp>)</rp></ruby>は<ruby>子供<rp>(</rp><rt>こども</rt><rp>)</rp></ruby>に<ruby>野菜<rp>(</rp><rt>やさい</rt><rp>)</rp></ruby>を<ruby>食<rp>(</rp><rt>た</rt><rp>)</rp></ruby>べさせました。",
+      "en": "The parent made the child eat vegetables."
+    },
+    {
+      "ja": "母は妹に薬を飲ませました。",
+      "jaHtml": "<ruby>母<rp>(</rp><rt>はは</rt><rp>)</rp></ruby>は<ruby>妹<rp>(</rp><rt>いもうと</rt><rp>)</rp></ruby>に<ruby>薬<rp>(</rp><rt>くすり</rt><rp>)</rp></ruby>を<ruby>飲<rp>(</rp><rt>の</rt><rp>)</rp></ruby>ませました。",
+      "en": "My mother made my younger sister take medicine."
+    },
+    {
+      "ja": "私にも行かせてください。",
+      "jaHtml": "<ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>にも<ruby>行<rp>(</rp><rt>い</rt><rp>)</rp></ruby>かせてください。",
+      "en": "Please let me go too."
+    },
+    {
+      "ja": "子供に好きなことをさせたいです。",
+      "jaHtml": "<ruby>子供<rp>(</rp><rt>こども</rt><rp>)</rp></ruby>に<ruby>好<rp>(</rp><rt>す</rt><rp>)</rp></ruby>きなことをさせたいです。",
+      "en": "I want to let my children do what they like."
+    },
+    {
+      "ja": "後輩にコピーを取らせました。",
+      "jaHtml": "<ruby>後輩<rp>(</rp><rt>こうはい</rt><rp>)</rp></ruby>にコピーを<ruby>取<rp>(</rp><rt>と</rt><rp>)</rp></ruby>らせました。",
+      "en": "I had my junior make copies."
+    },
+    {
+      "ja": "少し考えさせてください。",
+      "jaHtml": "<ruby>少<rp>(</rp><rt>すこ</rt><rp>)</rp></ruby>し<ruby>考<rp>(</rp><rt>かんが</rt><rp>)</rp></ruby>えさせてください。",
+      "en": "Please let me think about it a little."
+    },
+    {
+      "ja": "両親は私に好きな仕事をさせてくれました。",
+      "jaHtml": "<ruby>両親<rp>(</rp><rt>りょうしん</rt><rp>)</rp></ruby>は<ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>に<ruby>好<rp>(</rp><rt>す</rt><rp>)</rp></ruby>きな<ruby>仕事<rp>(</rp><rt>しごと</rt><rp>)</rp></ruby>をさせてくれました。",
+      "en": "My parents let me do the work I liked."
+    },
+    {
+      "ja": "母は弟にピアノを習わせています。",
+      "jaHtml": "<ruby>母<rp>(</rp><rt>はは</rt><rp>)</rp></ruby>は<ruby>弟<rp>(</rp><rt>おとうと</rt><rp>)</rp></ruby>にピアノを<ruby>習<rp>(</rp><rt>なら</rt><rp>)</rp></ruby>わせています。",
+      "en": "My mother has my younger brother take piano lessons."
+    },
+    {
+      "ja": "親に野菜を食べさせられました。",
+      "jaHtml": "<ruby>親<rp>(</rp><rt>おや</rt><rp>)</rp></ruby>に<ruby>野菜<rp>(</rp><rt>やさい</rt><rp>)</rp></ruby>を<ruby>食<rp>(</rp><rt>た</rt><rp>)</rp></ruby>べさせられました。",
+      "en": "I was made to eat vegetables by my parents."
+    },
+    {
+      "ja": "部屋を掃除させられました。",
+      "jaHtml": "<ruby>部屋<rp>(</rp><rt>へや</rt><rp>)</rp></ruby>を<ruby>掃除<rp>(</rp><rt>そうじ</rt><rp>)</rp></ruby>させられました。",
+      "en": "I was made to clean the room."
+    },
+    {
+      "ja": "私は上司に残業させられました。",
+      "jaHtml": "<ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>は<ruby>上司<rp>(</rp><rt>じょうし</rt><rp>)</rp></ruby>に<ruby>残業<rp>(</rp><rt>ざんぎょう</rt><rp>)</rp></ruby>させられました。",
+      "en": "I was made to work overtime by my boss."
+    },
+    {
+      "ja": "私は先生にスピーチをさせられました。",
+      "jaHtml": "<ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>は<ruby>先生<rp>(</rp><rt>せんせい</rt><rp>)</rp></ruby>にスピーチをさせられました。",
+      "en": "I was made to give a speech by the teacher."
+    },
+    {
+      "ja": "私は毎日五キロ走らされました。",
+      "jaHtml": "<ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>は<ruby>毎日<rp>(</rp><rt>まいにち</rt><rp>)</rp></ruby><ruby>五<rp>(</rp><rt>ご</rt><rp>)</rp></ruby>キロ<ruby>走<rp>(</rp><rt>はし</rt><rp>)</rp></ruby>らされました。",
+      "en": "I was made to run five kilometers every day."
+    },
+    {
+      "ja": "私は毎週漢字のテストを受けさせられました。",
+      "jaHtml": "<ruby>私<rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>は<ruby>毎週<rp>(</rp><rt>まいしゅう</rt><rp>)</rp></ruby><ruby>漢字<rp>(</rp><rt>かんじ</rt><rp>)</rp></ruby>のテストを<ruby>受<rp>(</rp><rt>う</rt><rp>)</rp></ruby>けさせられました。",
+      "en": "I was made to take a kanji test every week."
+    },
+    {
+      "ja": "先輩に荷物を持たされました。",
+      "jaHtml": "<ruby>先輩<rp>(</rp><rt>せんぱい</rt><rp>)</rp></ruby>に<ruby>荷物<rp>(</rp><rt>にもつ</rt><rp>)</rp></ruby>を<ruby>持<rp>(</rp><rt>も</rt><rp>)</rp></ruby>たされました。",
+      "en": "I was made to carry the luggage by my senior."
+    },
+    {
+      "ja": "母に毎日ピアノを練習させられました。",
+      "jaHtml": "<ruby>母<rp>(</rp><rt>はは</rt><rp>)</rp></ruby>に<ruby>毎日<rp>(</rp><rt>まいにち</rt><rp>)</rp></ruby>ピアノを<ruby>練習<rp>(</rp><rt>れんしゅう</rt><rp>)</rp></ruby>させられました。",
+      "en": "I was made to practice the piano every day by my mother."
+    },
+    {
+      "ja": "子供の時、嫌いな野菜を食べさせられました。",
+      "jaHtml": "<ruby>子供<rp>(</rp><rt>こども</rt><rp>)</rp></ruby>の<ruby>時<rp>(</rp><rt>とき</rt><rp>)</rp></ruby>、<ruby>嫌<rp>(</rp><rt>きら</rt><rp>)</rp></ruby>いな<ruby>野菜<rp>(</rp><rt>やさい</rt><rp>)</rp></ruby>を<ruby>食<rp>(</rp><rt>た</rt><rp>)</rp></ruby>べさせられました。",
+      "en": "When I was a child, I was made to eat vegetables I didn't like."
+    }
+  ]
+}

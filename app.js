@@ -152,7 +152,7 @@
   let settings = loadSettings();
   let srsData = loadSRS();
   let statsData = loadStats();
-  let currentChapter = null;
+  let currentChunk = null;
   let studyMode = 'verbs';
   // For studyMode 'translate': which deck the sentences came from —
   // 'sentences' (sentences.html) or 'adjectives' (whole-sentence mode on
@@ -320,7 +320,7 @@
       title.textContent = 'Tokidoki';
     } else if (name === 'study') {
       backBtn.classList.remove('hidden');
-      title.textContent = studyMode === 'translate' ? 'Translate Sentences' : studyMode === 'custom' ? 'Custom Session' : (CHAPTER_INFO[currentChapter]?.title || 'Study');
+      title.textContent = studyMode === 'translate' ? 'Translate Sentences' : studyMode === 'custom' ? 'Custom Session' : (getVerbChunk(currentChunk)?.title || getAdjChunk(currentChunk)?.title || 'Study');
     } else if (name === 'kana') {
       backBtn.classList.remove('hidden');
       title.textContent = 'Kana Practice';
@@ -348,55 +348,73 @@
     }
   }
 
-  // ─── Chapter Select ────────────────────────────────────────────────────────────
+  // ─── Chunk Select ──────────────────────────────────────────────────────────────
+
+  const LEVEL_NAMES = { N5: 'N5 · Beginner', N4: 'N4 · Elementary', N3: 'N3 · Intermediate' };
+
+  // Fills `container` with a heading and a grid of cards per JLPT level.
+  function renderLevelSections(container, chunks, makeCard) {
+    container.innerHTML = '';
+    ['N5', 'N4', 'N3'].forEach(level => {
+      const cards = chunks.filter(c => c.level === level).map(makeCard).filter(Boolean);
+      if (cards.length === 0) return;
+      const h = document.createElement('h2');
+      h.className = 'section-title';
+      h.textContent = LEVEL_NAMES[level];
+      const grid = document.createElement('div');
+      grid.className = 'chapter-grid';
+      cards.forEach(c => grid.appendChild(c));
+      container.append(h, grid);
+    });
+  }
+
+  function chunkCard({ title, sub, pills, pct, due, onClick }) {
+    const card = document.createElement('div');
+    card.className = 'chapter-card';
+    card.innerHTML = `
+      <div class="chapter-card-title">${title}</div>
+      <div class="chapter-card-sub">${sub}</div>
+      ${pills ? `<div class="chapter-card-forms">${pills}</div>` : ''}
+      <div class="chapter-progress"><div class="chapter-progress-fill" style="width:${pct}%"></div></div>
+      ${due > 0 ? `<div class="chapter-card-due">${due} due</div>` : ''}
+    `;
+    card.addEventListener('click', onClick);
+    return card;
+  }
+
+  // Progress over a list of SRS card ids: [percent reviewed, number due].
+  function idsProgress(ids) {
+    let reviewed = 0;
+    let due = 0;
+    ids.forEach(id => {
+      const state = getCardState(srsData, id);
+      if (state.repetitions > 0) reviewed++;
+      if (isDue(state)) due++;
+    });
+    return [ids.length > 0 ? Math.round((reviewed / ids.length) * 100) : 0, due];
+  }
+
+  function formPillsHTML(forms, infoOf) {
+    return forms.map(f => {
+      const fi = infoOf(f);
+      return `<span class="form-pill" style="background:${fi.color}22;color:${fi.color}">${fi.symbol} ${fi.name}</span>`;
+    }).join('');
+  }
 
   function renderChapters() {
-    const g1 = $('#chapters-genki1');
-    const g2 = $('#chapters-genki2');
-    g1.innerHTML = '';
-    g2.innerHTML = '';
-
-    const chapters = getAllChapters();
-
-    chapters.forEach(ch => {
-      const info = CHAPTER_INFO[ch];
-      const verbs = getVerbsByChapter(ch);
-      const forms = Conjugator.getFormsForChapter(ch);
-
-      let chapterCards = 0;
-      let chapterReviewed = 0;
-      let chapterDue = 0;
-
-      verbs.forEach(v => {
-        forms.forEach(f => {
-          chapterCards++;
-          const id = cardId(v, f);
-          const state = getCardState(srsData, id);
-          if (state.repetitions > 0) chapterReviewed++;
-          if (isDue(state)) chapterDue++;
-        });
+    renderLevelSections($('#verb-chunks'), VERB_CHUNKS, chunk => {
+      const cards = getChunkCards(chunk);
+      const [pct, due] = idsProgress(cards.map(([v, f]) => cardId(v, f)));
+      const verbs = getVerbsForChunk(chunk);
+      const forms = [...new Set(cards.map(([, f]) => f))];
+      return chunkCard({
+        title: chunk.title,
+        sub: chunk.verbsFrom ? `${chunk.sub} &middot; ${cards.length} cards` : `${chunk.sub} &middot; ${verbs.length} verbs`,
+        pills: chunk.verbsFrom ? formPillsHTML(forms, f => Conjugator.getFormInfo(f)) : '',
+        pct,
+        due,
+        onClick: () => startStudy(chunk.id),
       });
-
-      const pct = chapterCards > 0 ? Math.round((chapterReviewed / chapterCards) * 100) : 0;
-
-      const formPills = (info.newForms || []).map(f => {
-        const fi = Conjugator.getFormInfo(f);
-        return `<span class="form-pill" style="background:${fi.color}22;color:${fi.color}">${fi.symbol} ${fi.name}</span>`;
-      }).join('');
-
-      const card = document.createElement('div');
-      card.className = 'chapter-card';
-      card.innerHTML = `
-        <div class="chapter-card-title">${info.title}</div>
-        <div class="chapter-card-sub">${verbs.length} verbs &middot; ${forms.length} forms</div>
-        ${formPills ? `<div class="chapter-card-forms">${formPills}</div>` : ''}
-        <div class="chapter-progress"><div class="chapter-progress-fill" style="width:${pct}%"></div></div>
-        ${chapterDue > 0 ? `<div class="chapter-card-due">${chapterDue} due</div>` : ''}
-      `;
-      card.addEventListener('click', () => startStudy(ch));
-
-      if (info.book === 'Genki I') g1.appendChild(card);
-      else g2.appendChild(card);
     });
   }
 
@@ -410,10 +428,10 @@
     return `adjsent:${adj.reading}:${form}`;
   }
 
-  function adjSentenceCards(chapter) {
-    const forms = Conjugator.getAdjFormsForChapter(chapter);
+  function adjSentenceCards(chunkId) {
+    const forms = Conjugator.ADJ_ALL_FORMS;
     const cards = [];
-    getAdjectivesByChapter(chapter).forEach(a => {
+    getAdjectivesForChunk(getAdjChunk(chunkId)).forEach(a => {
       forms.forEach(f => {
         const conj = Conjugator.conjugateAdjective(a, f);
         const ex = Examples.build(a, f, conj);
@@ -437,14 +455,14 @@
     return cards;
   }
 
-  function startAdjSentenceStudy(chapter, cont) {
+  function startAdjSentenceStudy(chunkId, cont) {
     studyMode = 'translate';
     translateSource = 'adjectives';
-    currentChapter = chapter;
-    const all = adjSentenceCards(chapter);
+    currentChunk = chunkId;
+    const all = adjSentenceCards(chunkId);
     if (all.length === 0) return;
     const due = all.filter(c => isDue(getCardState(srsData, c.id)));
-    sessionCards = pickBatch(`adjsent:${chapter}`, due, all, cont);
+    sessionCards = pickBatch(`adjsent:${chunkId}`, due, all, cont);
 
     sessionIndex = 0;
     sessionCorrect = 0;
@@ -468,56 +486,24 @@
   function renderAdjChapters() {
     renderAdjModeToggle();
     const sentenceMode = !!settings.adjSentences;
-    const g1 = $('#adj-chapters-genki1');
-    const g2 = $('#adj-chapters-genki2');
-    g1.innerHTML = '';
-    g2.innerHTML = '';
-
-    const chapters = getAllAdjChapters();
-
-    chapters.forEach(ch => {
-      const info = ADJ_CHAPTER_INFO[ch];
-      const adjs = getAdjectivesByChapter(ch);
-      const forms = Conjugator.getAdjFormsForChapter(ch);
-
-      let chapterCards = 0;
-      let chapterReviewed = 0;
-      let chapterDue = 0;
-
+    const forms = Conjugator.ADJ_ALL_FORMS;
+    renderLevelSections($('#adj-chunks'), ADJ_CHUNKS, chunk => {
+      const adjs = getAdjectivesForChunk(chunk);
       const ids = sentenceMode
-        ? adjSentenceCards(ch).map(c => c.id)
+        ? adjSentenceCards(chunk.id).map(c => c.id)
         : adjs.flatMap(a => forms.map(f => adjCardId(a, f)));
-      ids.forEach(id => {
-        chapterCards++;
-        const state = getCardState(srsData, id);
-        if (state.repetitions > 0) chapterReviewed++;
-        if (isDue(state)) chapterDue++;
-      });
-
-      const pct = chapterCards > 0 ? Math.round((chapterReviewed / chapterCards) * 100) : 0;
-
-      const formPills = (info.newForms || []).map(f => {
-        const fi = Conjugator.ADJ_FORM_INFO[f];
-        return `<span class="form-pill" style="background:${fi.color}22;color:${fi.color}">${fi.symbol} ${fi.name}</span>`;
-      }).join('');
-
+      const [pct, due] = idsProgress(ids);
       const iCount = adjs.filter(a => a.type === 'i-adj').length;
       const naCount = adjs.filter(a => a.type === 'na-adj').length;
       const typeSummary = [iCount && `${iCount} い`, naCount && `${naCount} な`].filter(Boolean).join(' · ');
-
-      const card = document.createElement('div');
-      card.className = 'chapter-card';
-      card.innerHTML = `
-        <div class="chapter-card-title">${info.title}</div>
-        <div class="chapter-card-sub">${typeSummary} &middot; ${sentenceMode ? `${chapterCards} sentences` : `${forms.length} forms`}</div>
-        ${formPills ? `<div class="chapter-card-forms">${formPills}</div>` : ''}
-        <div class="chapter-progress"><div class="chapter-progress-fill" style="width:${pct}%"></div></div>
-        ${chapterDue > 0 ? `<div class="chapter-card-due">${chapterDue} due</div>` : ''}
-      `;
-      card.addEventListener('click', () => (sentenceMode ? startAdjSentenceStudy(ch) : startAdjStudy(ch)));
-
-      if (info.book === 'Genki I') g1.appendChild(card);
-      else g2.appendChild(card);
+      return chunkCard({
+        title: chunk.title,
+        sub: `${chunk.sub} &middot; ${typeSummary}${sentenceMode ? ` &middot; ${ids.length} sentences` : ''}`,
+        pills: '',
+        pct,
+        due,
+        onClick: () => (sentenceMode ? startAdjSentenceStudy(chunk.id) : startAdjStudy(chunk.id)),
+      });
     });
   }
 
@@ -525,22 +511,16 @@
 
   function countDueVerbs() {
     let due = 0;
-    getAllChapters().forEach(ch => {
-      const forms = Conjugator.getFormsForChapter(ch);
-      getVerbsByChapter(ch).forEach(v => {
-        forms.forEach(f => { if (isDue(getCardState(srsData, cardId(v, f)))) due++; });
-      });
+    VERB_CHUNKS.forEach(chunk => {
+      getChunkCards(chunk).forEach(([v, f]) => { if (isDue(getCardState(srsData, cardId(v, f)))) due++; });
     });
     return due;
   }
 
   function countDueAdjectives() {
     let due = 0;
-    getAllAdjChapters().forEach(ch => {
-      const forms = Conjugator.getAdjFormsForChapter(ch);
-      getAdjectivesByChapter(ch).forEach(a => {
-        forms.forEach(f => { if (isDue(getCardState(srsData, adjCardId(a, f)))) due++; });
-      });
+    ALL_ADJECTIVES.forEach(a => {
+      Conjugator.ADJ_ALL_FORMS.forEach(f => { if (isDue(getCardState(srsData, adjCardId(a, f)))) due++; });
     });
     return due;
   }
@@ -573,18 +553,12 @@
 
   // ─── Study Session ─────────────────────────────────────────────────────────────
 
-  function startStudy(chapter, cont) {
+  function startStudy(chunkId, cont) {
     studyMode = 'verbs';
-    currentChapter = chapter;
-    const verbs = getVerbsByChapter(chapter);
-    const forms = Conjugator.getFormsForChapter(chapter);
-
-    const all = [];
-    verbs.forEach(v => {
-      forms.forEach(f => all.push({ verb: v, form: f, id: cardId(v, f) }));
-    });
+    currentChunk = chunkId;
+    const all = getChunkCards(getVerbChunk(chunkId)).map(([v, f]) => ({ verb: v, form: f, id: cardId(v, f) }));
     const due = all.filter(c => isDue(getCardState(srsData, c.id)));
-    sessionCards = pickBatch(`verbs:${chapter}`, due, all, cont);
+    sessionCards = pickBatch(`verbs:${chunkId}`, due, all, cont);
 
     sessionIndex = 0;
     sessionCorrect = 0;
@@ -597,18 +571,18 @@
     showCard();
   }
 
-  function startAdjStudy(chapter, cont) {
+  function startAdjStudy(chunkId, cont) {
     studyMode = 'adjectives';
-    currentChapter = chapter;
-    const adjs = getAdjectivesByChapter(chapter);
-    const forms = Conjugator.getAdjFormsForChapter(chapter);
+    currentChunk = chunkId;
+    const adjs = getAdjectivesForChunk(getAdjChunk(chunkId));
+    const forms = Conjugator.ADJ_ALL_FORMS;
 
     const all = [];
     adjs.forEach(a => {
       forms.forEach(f => all.push({ verb: a, form: f, id: adjCardId(a, f) }));
     });
     const due = all.filter(c => isDue(getCardState(srsData, c.id)));
-    sessionCards = pickBatch(`adjectives:${chapter}`, due, all, cont);
+    sessionCards = pickBatch(`adjectives:${chunkId}`, due, all, cont);
 
     sessionIndex = 0;
     sessionCorrect = 0;
@@ -1410,15 +1384,15 @@
     const acc = sessionIndex > 0 ? Math.round((sessionCorrect / sessionIndex) * 100) : 0;
     $('#session-accuracy').textContent = acc + '%';
 
-    const chapter = currentChapter;
+    const chunk = currentChunk;
     if (studyMode === 'translate' && translateSource === 'adjectives') {
-      setContinueButton('#btn-session-continue', 'Next 20 →', () => startAdjSentenceStudy(chapter, true));
+      setContinueButton('#btn-session-continue', 'Next 20 →', () => startAdjSentenceStudy(chunk, true));
     } else if (studyMode === 'translate') {
-      setContinueButton('#btn-session-continue', 'Next 20 →', () => startTranslateStudy(chapter, true));
+      setContinueButton('#btn-session-continue', 'Next 20 →', () => startTranslateStudy(chunk, true));
     } else if (studyMode === 'verbs') {
-      setContinueButton('#btn-session-continue', 'Next 20 →', () => startStudy(chapter, true));
+      setContinueButton('#btn-session-continue', 'Next 20 →', () => startStudy(chunk, true));
     } else if (studyMode === 'adjectives') {
-      setContinueButton('#btn-session-continue', 'Next 20 →', () => startAdjStudy(chapter, true));
+      setContinueButton('#btn-session-continue', 'Next 20 →', () => startAdjStudy(chunk, true));
     } else if (studyMode === 'custom') {
       setContinueButton('#btn-session-continue', 'Next 30 →', () => startCustomStudy(true));
     } else {
@@ -1431,7 +1405,7 @@
   function buildVerbTypeHTML() {
     const eSounds = 'えけせてねへめれげぜでべぺ';
     const iSounds = 'いきしちにひみりぎじびぴ';
-    const exceptions = GENKI_VERBS.filter(v => {
+    const exceptions = ALL_VERBS.filter(v => {
       if (v.type !== 'u' || !v.reading.endsWith('る')) return false;
       const before = v.reading[v.reading.length - 2];
       return eSounds.includes(before) || iSounds.includes(before);
@@ -1494,7 +1468,7 @@
           <td style="font-family:var(--font);font-size:0.8rem">${fi.name}</td>
           <td>${iExample}</td>
           <td>${naExample}</td>
-          <td style="font-family:var(--font);font-size:0.75rem;color:var(--text-dim)">Ch ${fi.chapter}</td>
+          <td style="font-family:var(--font);font-size:0.75rem;color:var(--text-dim)">${fi.level}</td>
         </tr>
         <tr class="ref-explanation-row hidden" data-form-detail="${form}">
           <td colspan="5">
@@ -1512,7 +1486,7 @@
           <td>${ruExample}</td>
           <td>${uExample}</td>
           <td>${irrExample}</td>
-          <td style="font-family:var(--font);font-size:0.75rem;color:var(--text-dim)">Ch ${fi.chapter}</td>
+          <td style="font-family:var(--font);font-size:0.75rem;color:var(--text-dim)">${fi.level}</td>
         </tr>
         <tr class="ref-explanation-row hidden" data-form-detail="${form}">
           <td colspan="6">
@@ -1523,8 +1497,8 @@
     });
 
     const thead = verbType === 'adj'
-      ? '<tr><th></th><th>Form</th><th>い-adj (高い)</th><th>な-adj (静か)</th><th>Ch</th></tr>'
-      : '<tr><th></th><th>Form</th><th>Ru (食べる)</th><th>U (書く)</th><th>Irr (する/くる)</th><th>Ch</th></tr>';
+      ? '<tr><th></th><th>Form</th><th>い-adj (高い)</th><th>な-adj (静か)</th><th>Level</th></tr>'
+      : '<tr><th></th><th>Form</th><th>Ru (食べる)</th><th>U (書く)</th><th>Irr (する/くる)</th><th>Level</th></tr>';
 
     const verbTypeSection = verbType !== 'adj' ? buildVerbTypeHTML() : '';
 
@@ -1583,23 +1557,26 @@
     }).join('');
 
     const allWords = [
-      ...GENKI_VERBS.map(v => ({ ...v, wordType: 'verb' })),
-      ...GENKI_ADJECTIVES.map(a => ({ ...a, wordType: 'adj' })),
+      ...ALL_VERBS.map(v => ({ ...v, wordType: 'verb' })),
+      ...ALL_ADJECTIVES.map(a => ({ ...a, wordType: 'adj' })),
     ];
-    const chapters = [...new Set(allWords.map(w => w.chapter))].sort((a, b) => a - b);
-
+    const groups = [...VERB_CHUNKS.filter(c => !c.verbsFrom), ...ADJ_CHUNKS];
+    const groupTitle = id => {
+      const c = groups.find(g => g.id === id);
+      return `${c.level} · ${c.title}${ADJ_CHUNKS.includes(c) ? ' (adjectives)' : ''}`;
+    };
     let verbsHTML = '';
-    chapters.forEach(ch => {
-      const words = allWords.filter(w => w.chapter === ch);
-      verbsHTML += `<div class="custom-chapter-group" data-chapter="${ch}">
+    groups.map(c => c.id).forEach(ch => {
+      const words = allWords.filter(w => w.group === ch);
+      verbsHTML += `<div class="custom-chapter-group" data-group="${ch}">
         <div class="custom-chapter-header">
-          <span>Ch ${ch}</span>
-          <button class="btn-toggle-chapter btn-toggle-all" data-chapter="${ch}">Deselect All</button>
+          <span>${groupTitle(ch)}</span>
+          <button class="btn-toggle-chapter btn-toggle-all" data-group="${ch}">Deselect All</button>
         </div>
         ${words.map(w => {
           const key = wordKey(w);
           return `<label class="custom-check-item verb-check-item">
-            <input type="checkbox" checked data-verb-key="${key}" data-chapter="${ch}" class="custom-verb-cb">
+            <input type="checkbox" checked data-verb-key="${key}" data-group="${ch}" class="custom-verb-cb">
             <span class="custom-check-kanji">${w.kanji}</span>
             <span class="custom-check-sub">${w.meaning}</span>
           </label>`;
@@ -1628,12 +1605,12 @@
     verbsContainer.addEventListener('change', (e) => {
       if (!e.target.classList.contains('custom-verb-cb')) return;
       const key = e.target.dataset.verbKey;
-      const ch = e.target.dataset.chapter;
+      const ch = e.target.dataset.group;
       if (e.target.checked) customVerbsSelected.add(key);
       else customVerbsSelected.delete(key);
-      const chCbs = verbsContainer.querySelectorAll(`.custom-verb-cb[data-chapter="${ch}"]`);
+      const chCbs = verbsContainer.querySelectorAll(`.custom-verb-cb[data-group="${ch}"]`);
       const chSelected = [...chCbs].filter(cb => cb.checked).length;
-      syncToggleBtn(verbsContainer.querySelector(`.btn-toggle-chapter[data-chapter="${ch}"]`), chSelected, chCbs.length);
+      syncToggleBtn(verbsContainer.querySelector(`.btn-toggle-chapter[data-group="${ch}"]`), chSelected, chCbs.length);
       const allVerbCbs = verbsContainer.querySelectorAll('.custom-verb-cb');
       syncToggleBtn($('#btn-toggle-verbs'), [...allVerbCbs].filter(cb => cb.checked).length, allVerbCbs.length);
       updateCustomCount();
@@ -1664,21 +1641,21 @@
       });
       syncToggleBtn($('#btn-toggle-verbs'), [...totalCbs].filter(cb => cb.checked).length, totalCbs.length);
       verbsContainer.querySelectorAll('.btn-toggle-chapter').forEach(btn => {
-        const ch = btn.dataset.chapter;
-        const chCbs = verbsContainer.querySelectorAll(`.custom-verb-cb[data-chapter="${ch}"]`);
+        const ch = btn.dataset.group;
+        const chCbs = verbsContainer.querySelectorAll(`.custom-verb-cb[data-group="${ch}"]`);
         const chSelected = [...chCbs].filter(cb => cb.checked).length;
         syncToggleBtn(btn, chSelected, chCbs.length);
       });
       updateCustomCount();
     });
 
-    // Per-chapter toggle
+    // Per-group toggle
     verbsContainer.addEventListener('click', (e) => {
       const btn = e.target.closest('.btn-toggle-chapter');
       if (!btn) return;
       e.preventDefault();
-      const ch = btn.dataset.chapter;
-      const chCbs = verbsContainer.querySelectorAll(`.custom-verb-cb[data-chapter="${ch}"]`);
+      const ch = btn.dataset.group;
+      const chCbs = verbsContainer.querySelectorAll(`.custom-verb-cb[data-group="${ch}"]`);
       const chSelected = [...chCbs].filter(cb => cb.checked).length;
       const allOn = chSelected >= chCbs.length;
       chCbs.forEach(cb => {
@@ -1714,11 +1691,11 @@
     if (customFormsSelected.size === 0 || customVerbsSelected.size === 0) return;
 
     studyMode = 'custom';
-    currentChapter = null;
+    currentChunk = null;
 
     const allWords = [
-      ...GENKI_VERBS.map(v => ({ ...v, wordType: 'verb' })),
-      ...GENKI_ADJECTIVES.map(a => ({ ...a, wordType: 'adj' })),
+      ...ALL_VERBS.map(v => ({ ...v, wordType: 'verb' })),
+      ...ALL_ADJECTIVES.map(a => ({ ...a, wordType: 'adj' })),
     ];
 
     const verbForms = [...customFormsSelected].filter(f => Conjugator.FORM_INFO[f]);
@@ -1757,12 +1734,13 @@
   // loaded before this script) — shared with the printable translation
   // worksheets, which read the same file outside the browser.
 
-  // One entry per sentence of a chapter. Each sentence has two SRS cards,
-  // one per direction (tr_<ch>_<i>_en-to-ja / _ja-to-en); a sentence counts
+  // One entry per sentence of a chunk (SENTENCE_CHUNKS, sentence-chunks.js:
+  // "3:0" is TRANSLATE_SENTENCES[3][0]). Each sentence has two SRS cards,
+  // one per direction (tr_<set>_<i>_en-to-ja / _ja-to-en); a sentence counts
   // as learned once either direction was last graded right, and is due when
   // it's new or a direction it was studied in is due. The direction asked
   // is a due one when there is one, else picked at random.
-  // The directions picked above the chapters (Both, Japanese → English or
+  // The directions picked above the chunks (Both, Japanese → English or
   // English → Japanese) limit which cards are asked, counted and due.
   const TRANSLATE_DIRS = ['en-to-ja', 'ja-to-en'];
 
@@ -1770,14 +1748,21 @@
     return TRANSLATE_DIRS.includes(settings.translateDirection) ? [settings.translateDirection] : TRANSLATE_DIRS;
   }
 
-  function translateSentenceItems(chapter) {
+  function sentenceChunk(id) {
+    return (window.SENTENCE_CHUNKS || []).find(c => c.id === id) || null;
+  }
+
+  function translateSentenceItems(chunkId) {
     const dirs = translateDirs();
-    return (TRANSLATE_SENTENCES[chapter] || []).map((sentence, i) => {
-      const states = dirs.map(d => srsData[`tr_${chapter}_${i}_${d}`]);
+    const chunk = sentenceChunk(chunkId);
+    return (chunk ? chunk.sentences : []).map(ref => {
+      const [set, i] = ref.split(':');
+      const sentence = TRANSLATE_SENTENCES[set][i];
+      const states = dirs.map(d => srsData[`tr_${set}_${i}_${d}`]);
       const studied = dirs.filter((d, k) => states[k]);
       const dueDirs = studied.filter(d => isDue(states[dirs.indexOf(d)]));
       return {
-        id: `tr_${chapter}_${i}`,
+        id: `tr_${set}_${i}`,
         sentence,
         learned: states.some(st => st && st.repetitions > 0),
         due: studied.length === 0 || dueDirs.length > 0,
@@ -1789,50 +1774,32 @@
   function renderTranslateChapters() {
     const dir = TRANSLATE_DIRS.includes(settings.translateDirection) ? settings.translateDirection : 'both';
     $$('input[name="translate-direction"]').forEach(el => { el.checked = el.value === dir; });
-    const g1 = $('#translate-chapters-genki1');
-    const g2 = $('#translate-chapters-genki2');
-    g1.innerHTML = '';
-    g2.innerHTML = '';
-
-    Object.keys(TRANSLATE_SENTENCES).map(Number).sort((a, b) => a - b).forEach(ch => {
-      const sentences = TRANSLATE_SENTENCES[ch];
-      // Chapters 1-2 predate verb conjugation, so they only exist in
-      // EXTRA_CHAPTER_INFO (sentences-data.js), not verbs.js's CHAPTER_INFO.
-      const info = CHAPTER_INFO[ch] || (typeof EXTRA_CHAPTER_INFO !== 'undefined' && EXTRA_CHAPTER_INFO[ch]);
-      if (!info) return;
-
-      const items = translateSentenceItems(ch);
+    const dirTags = translateDirs().map(d => `<span class="form-tag">${d === 'en-to-ja' ? 'EN → JA' : 'JA → EN'}</span>`).join('');
+    renderLevelSections($('#translate-chunks'), window.SENTENCE_CHUNKS || [], chunk => {
+      const items = translateSentenceItems(chunk.id);
       const learned = items.filter(it => it.learned).length;
-      const due = items.filter(it => it.due).length;
-      const pct = items.length > 0 ? Math.round((learned / items.length) * 100) : 0;
-
-      const card = document.createElement('div');
-      card.className = 'chapter-card';
-      card.innerHTML = `
-        <div class="chapter-card-title">${info.title}</div>
-        <div class="chapter-card-sub">${sentences.length} sentences &middot; ${learned} learned</div>
-        <div class="chapter-card-forms">
-          ${translateDirs().map(d => `<span class="form-tag">${d === 'en-to-ja' ? 'EN → JA' : 'JA → EN'}</span>`).join('')}
-        </div>
-        <div class="chapter-progress"><div class="chapter-progress-fill" style="width:${pct}%"></div></div>
-        ${due > 0 ? `<div class="chapter-card-due">${due} due</div>` : ''}
-      `;
-      card.addEventListener('click', () => startTranslateStudy(ch));
-      (ch <= 12 ? g1 : g2).appendChild(card);
+      return chunkCard({
+        title: chunk.title,
+        sub: `${chunk.sub} &middot; ${items.length} sentences &middot; ${learned} learned`,
+        pills: dirTags,
+        pct: items.length > 0 ? Math.round((learned / items.length) * 100) : 0,
+        due: items.filter(it => it.due).length,
+        onClick: () => startTranslateStudy(chunk.id),
+      });
     });
   }
 
-  function startTranslateStudy(chapter, cont) {
+  function startTranslateStudy(chunkId, cont) {
     studyMode = 'translate';
     translateSource = 'sentences';
-    currentChapter = chapter;
+    currentChunk = chunkId;
 
-    const items = translateSentenceItems(chapter);
+    const items = translateSentenceItems(chunkId);
     if (items.length === 0) return;
 
-    // 20 at a time like the verb chapters: due sentences first (failed
+    // 20 at a time like the verb chunks: due sentences first (failed
     // ones before the rest), then the others.
-    const batch = pickBatch(`translate:${chapter}:${translateDirs().join()}`, items.filter(it => it.due), items, cont);
+    const batch = pickBatch(`translate:${chunkId}:${translateDirs().join()}`, items.filter(it => it.due), items, cont);
     const failedFirst = it => (it.dueDirs.some(d => (srsData[`${it.id}_${d}`] || {}).repetitions === 0) ? 0 : 1);
     batch.sort((a, b) => failedFirst(a) - failedFirst(b));
     sessionCards = batch.map(it => {
@@ -5520,7 +5487,7 @@
   }
 
   function getBunkeiVerbs() {
-    if (!bunkeiVerbs) bunkeiVerbs = window.Bunkei ? Bunkei.usableVerbs(GENKI_VERBS) : [];
+    if (!bunkeiVerbs) bunkeiVerbs = window.Bunkei ? Bunkei.usableVerbs(ALL_VERBS) : [];
     return bunkeiVerbs;
   }
 
@@ -5592,15 +5559,15 @@
     const query = ($('#bunkei-verb-search').value || '').trim().toLowerCase();
     const chosen = new Set(bunkeiSettings.verbs);
     const matches = v => !query || v.kanji.includes(query) || v.reading.includes(query) || v.meaning.toLowerCase().includes(query);
-    const byChapter = {};
-    getBunkeiVerbs().filter(matches).forEach(v => { (byChapter[v.chapter] = byChapter[v.chapter] || []).push(v); });
-    const chapters = Object.keys(byChapter).map(Number).sort((a, b) => a - b);
+    const byGroup = {};
+    getBunkeiVerbs().filter(matches).forEach(v => { (byGroup[v.group] = byGroup[v.group] || []).push(v); });
+    const chapters = VERB_CHUNKS.map(c => c.id).filter(id => byGroup[id]);
     $('#bunkei-verb-list').innerHTML = chapters.length
       ? chapters.map(ch => `
           <div class="bunkei-verb-group">
-            <div class="bunkei-verb-group-title">Genki ch. ${ch}</div>
+            <div class="bunkei-verb-group-title">${getVerbChunk(ch).level} · ${getVerbChunk(ch).title}</div>
             <div class="bunkei-verb-chips">
-              ${byChapter[ch].map(v => `
+              ${byGroup[ch].map(v => `
                 <button class="bunkei-chip${chosen.has(bunkeiVerbKey(v)) ? ' selected' : ''}" data-verb="${bunkeiVerbKey(v)}" aria-pressed="${chosen.has(bunkeiVerbKey(v))}">
                   <span class="bunkei-chip-jp" lang="ja">${v.kanji}</span>
                   <span class="bunkei-chip-meaning">${v.meaning.replace(/^to /, '')}</span>

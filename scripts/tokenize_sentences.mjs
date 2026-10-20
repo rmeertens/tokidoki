@@ -26,7 +26,7 @@ const { segment } = await createWordFinder({
   whole: [...readJson('phrase_whole_words.json'), '(?<=と)いい', 'かどうか', 'でございます'],
 });
 
-// Genki grammar the Stories notes don't cover, in the same shape.
+// Grammar the Stories notes don't cover, in the same shape.
 const GRAMMAR_SENTENCES = {
   'nakute-mo-ii': { level: 'N4', title: '〜なくてもいい — "don\'t have to"', pattern: 'Verb ない-form − い + くても いい', note: 'Says something isn\'t necessary: 来なくてもいい "you don\'t have to come". The opposite of 〜なければいけない.' },
   'mitai': { level: 'N4', title: '〜みたい — "seems / looks like"', pattern: 'Plain form / Noun + みたい(です)', note: 'A guess from what you see or hear: 風邪をひいたみたい "seems to have caught a cold". After a noun it can also mean "like": 歌手みたい "like a singer". Casual next to 〜ようだ.' },

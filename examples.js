@@ -29,7 +29,6 @@
   };
 
   const VERB_CONTEXTS = {
-    // Chapter 3
     '行く': { pre: '学校[がっこう]に', v: 'go', o: 'to school' },
     '帰る': { pre: '家[いえ]に', v: 'go', o: 'home' },
     '聞く': { pre: '音楽[おんがく]を', v: 'listen', o: 'to music' },
@@ -44,7 +43,6 @@
     '来る': { pre: '日本[にほん]に', v: 'come', o: 'to Japan' },
     'する': { pre: '運動[うんどう]を', potPre: '運動[うんどう]が', v: 'get', o: 'exercise' },
     '勉強する': { pre: '日本語[にほんご]を', v: 'study', o: 'Japanese' },
-    // Chapter 4
     '会う': { pre: '友達[ともだち]に', v: 'meet', o: 'a friend' },
     'ある': { kind: 'ev', sub: '机[つくえ]の上[うえ]に本[ほん]が', s: 'there', v: 'be', o: 'a book on the desk', skip: ['te'] },
     '買う': { pre: '新[あたら]しい靴[くつ]を', v: 'buy', o: 'new shoes' },
@@ -53,12 +51,10 @@
     '待つ': { pre: 'バスを', v: 'wait', o: 'for the bus' },
     '分かる': { kind: 'st', pre: '日本語[にほんご]が', v: 'understand', o: 'Japanese' },
     'いる': { pre: '教室[きょうしつ]に', v: 'be', o: 'in the classroom' },
-    // Chapter 5
     '泳ぐ': { pre: 'プールで', v: 'swim', o: 'in the pool' },
     '乗る': { pre: '電車[でんしゃ]に', v: 'ride', o: 'the train' },
     'やる': { pre: 'スポーツを', v: 'play', o: 'sports' },
     '出かける': { pre: '週末[しゅうまつ]に', v: 'go out', o: 'on the weekend' },
-    // Chapter 6
     '遊ぶ': { pre: '公園[こうえん]で', v: 'play', o: 'in the park' },
     '急ぐ': { pre: '駅[えき]まで', v: 'hurry', o: 'to the station' },
     '返す': { pre: '本[ほん]を', v: 'return', o: 'the book' },
@@ -81,7 +77,6 @@
     '電話をかける': { pre: '母[はは]に', v: 'call', o: 'Mom' },
     '連れてくる': { pre: '友達[ともだち]を', v: 'bring', o: 'a friend' },
     '持ってくる': { pre: 'お弁当[べんとう]を', v: 'bring', o: 'a boxed lunch' },
-    // Chapter 7
     '歌う': { pre: '歌[うた]を', v: 'sing', o: 'a song' },
     'かぶる': { pre: '帽子[ぼうし]を', v: 'put on', o: 'a hat' },
     '知る': {
@@ -101,7 +96,6 @@
     '勤める': { pre: '会社[かいしゃ]に', v: 'work', o: 'for a company' },
     '痩せる': { pre: '夏[なつ]までに', v: 'lose', o: 'weight by summer', skip: ['dict', 'passive', 'causative'] },
     '結婚する': { pre: '彼女[かのじょ]と', v: 'marry', o: 'her', skip: ['dict', 'volitional', 'causative', 'causative-passive'] },
-    // Chapter 8
     '降る': { kind: 'ev', sub: '雨[あめ]が', s: 'it', v: 'rain' },
     '洗う': { pre: '皿[さら]を', v: 'wash', o: 'the dishes' },
     '言う': { pre: '「ありがとう」と', v: 'say', o: '"thank you"' },
@@ -119,7 +113,6 @@
     '洗濯する': { pre: '服[ふく]を', v: 'wash', o: 'clothes' },
     '掃除する': { pre: '部屋[へや]を', v: 'clean', o: 'the room' },
     '料理する': { pre: '晩[ばん]ご飯[はん]を', v: 'cook', o: 'dinner' },
-    // Chapter 9
     '踊る': { pre: 'パーティーで', v: 'dance', o: 'at the party' },
     '終わる': { kind: 'ev', sub: '授業[じゅぎょう]が', s: 'class', v: 'end', skip: ['te'] },
     '始まる': { kind: 'ev', sub: '映画[えいが]が', s: 'the movie', v: 'start', skip: ['te'] },
@@ -129,7 +122,6 @@
     '出る': { pre: '授業[じゅぎょう]に', v: 'attend', o: 'class' },
     '運動する': { pre: '公園[こうえん]で', v: 'exercise', o: 'in the park' },
     '散歩する': { pre: '公園[こうえん]で', v: 'take a walk', o: 'in the park' },
-    // Chapter 10
     'かかる': {
       kind: 'ev', sub: '駅[えき]まで一時間[いちじかん]', s: 'it', v: 'take', o: 'an hour to get to the station',
       skip: ['te', 'ba'],
@@ -139,7 +131,6 @@
     '払う': { pre: 'お金[かね]を', v: 'pay', o: 'the money', skip: ['dict'] },
     '決める': { pre: '予定[よてい]を', v: 'decide on', o: 'the plans' },
     '練習する': { pre: 'テニスを', v: 'practice', o: 'tennis' },
-    // Chapter 11
     '取る': { pre: '日本語[にほんご]の授業[じゅぎょう]を', v: 'take', o: 'a Japanese class' },
     '習う': { pre: '日本語[にほんご]を', v: 'learn', o: 'Japanese' },
     '登る': { pre: '山[やま]に', v: 'climb', o: 'a mountain' },
@@ -152,7 +143,6 @@
     'ダイエットする': { pre: '夏[なつ]の前[まえ]に', v: 'go on a diet', o: 'before summer' },
     '遅刻する': { kind: 'nv', pre: '学校[がっこう]に', v: 'be late', o: 'for school' },
     '留学する': { pre: 'アメリカに', v: 'study abroad', o: 'in America' },
-    // Chapter 12
     '喉が渇く': { kind: 'nv', pre: '', v: 'get thirsty', o: '' },
     'なくす': { kind: 'nv', pre: '鍵[かぎ]を', v: 'lose', o: 'my keys' },
     '別れる': {
@@ -164,7 +154,6 @@
       pre: '将来[しょうらい]のことを', v: 'worry', o: 'about the future',
       skip: ['te', 'dict', 'tai', 'potential', 'volitional', 'causative', 'ba', 'causative-passive'],
     },
-    // Chapter 13
     '編む': { pre: 'セーターを', v: 'knit', o: 'a sweater' },
     '貸す': { pre: 'お金[かね]を', v: 'lend', o: 'money' },
     '頑張る': { pre: '試験[しけん]のために', v: 'work hard', o: 'for the exam' },
@@ -181,7 +170,6 @@
       },
     },
     '感動する': { kind: 'nv', pre: '映画[えいが]に', v: 'be moved', o: 'by the movie', skip: ['te'] },
-    // Chapter 14
     '送る': { pre: '荷物[にもつ]を', v: 'send', o: 'a package' },
     '似合う': { kind: 'ev', sub: 'この服[ふく]は', pre: '私[わたし]に', s: 'this outfit', v: 'suit', o: 'me', skip: ['te'] },
     '諦める': { pre: '夢[ゆめ]を', v: 'give up', o: 'on the dream', skip: ['dict', 'volitional'] },
@@ -189,7 +177,6 @@
     'くれる': { kind: 'ev', sub: '友達[ともだち]が', pre: '本[ほん]を', s: 'my friend', v: 'give', o: 'me a book', skip: ['te'] },
     'できる': { kind: 'ev', sub: '宿題[しゅくだい]が', s: 'my homework', v: 'be finished', skip: ['te'] },
     '相談する': { pre: '先生[せんせい]に', v: 'consult', o: 'the teacher' },
-    // Chapter 15
     '売る': { pre: '車[くるま]を', v: 'sell', o: 'the car' },
     '下ろす': { pre: 'お金[かね]を', v: 'withdraw', o: 'money' },
     '描く': { pre: '絵[え]を', v: 'draw', o: 'a picture' },
@@ -210,7 +197,6 @@
     '観光する': { pre: '京都[きょうと]を', v: 'go sightseeing', o: 'in Kyoto' },
     '卒業する': { pre: '大学[だいがく]を', v: 'graduate', o: 'from university', skip: ['dict'] },
     '予約する': { pre: 'レストランを', v: 'book', o: 'a restaurant' },
-    // Chapter 16
     '起こす': { pre: '妹[いもうと]を', v: 'wake up', o: 'my little sister' },
     'おごる': { pre: '友達[ともだち]に昼[ひる]ご飯[はん]を', v: 'treat', o: 'a friend to lunch' },
     '落ち込む': { kind: 'nv', pre: '失敗[しっぱい]して', v: 'feel down', o: 'after a failure' },
@@ -227,7 +213,6 @@
     '朝寝坊する': { kind: 'nv', pre: '日曜日[にちようび]に', v: 'oversleep', o: 'on Sunday' },
     '案内する': { pre: '友達[ともだち]に町[まち]を', v: 'show', o: 'my friend around the town' },
     '説明する': { pre: '問題[もんだい]を', v: 'explain', o: 'the problem' },
-    // Chapter 17
     '選ぶ': { pre: 'プレゼントを', v: 'choose', o: 'a present' },
     '込む': { kind: 'ev', sub: '電車[でんしゃ]が', s: 'the train', v: 'get crowded', skip: ['ba'] },
     '脱ぐ': {
@@ -243,7 +228,6 @@
       pre: '夫[おっと]と', v: 'divorce', o: 'my husband',
       skip: ['te', 'dict', 'volitional', 'passive', 'causative', 'ba', 'causative-passive'],
     },
-    // Chapter 18
     '開く': { kind: 'ev', sub: 'ドアが', s: 'the door', v: 'open' },
     '謝る': { pre: '先生[せんせい]に', v: 'apologize', o: 'to the teacher' },
     '押す': { pre: 'ボタンを', v: 'press', o: 'the button' },
@@ -260,7 +244,6 @@
     '壊れる': { kind: 'ev', sub: 'パソコンが', s: 'the computer', v: 'break', skip: ['ba'] },
     '汚れる': { kind: 'ev', sub: '服[ふく]が', s: 'my clothes', pl: true, v: 'get dirty', skip: ['ba'] },
     '注文する': { pre: 'ピザを', v: 'order', o: 'pizza' },
-    // Chapter 19
     'いらっしゃる': { kind: 'hon', sub: '先生[せんせい]が', pre: '教室[きょうしつ]に', s: 'the teacher', v: 'be', o: 'in the classroom', skip: ['te'] },
     '怒る': { kind: 'ev', sub: '母[はは]が', s: 'Mom', v: 'get angry', skip: ['ba'] },
     'おっしゃる': { kind: 'hon', sub: '先生[せんせい]が', pre: 'そう', s: 'the teacher', v: 'say', o: 'so', skip: ['te'] },
@@ -279,7 +262,6 @@
     },
     '招待する': { pre: '先生[せんせい]を結婚式[けっこんしき]に', v: 'invite', o: 'the teacher to the wedding' },
     '注意する': { pre: '車[くるま]に', v: 'watch out', o: 'for cars' },
-    // Chapter 20
     '致す': { kind: 'hum', pre: 'お手伝[てつだ]いを', v: 'help', o: 'you', skip: ['tai'] },
     '頂く': { kind: 'hum', pre: 'お土産[みやげ]を', v: 'receive', o: 'a souvenir' },
     '伺う': { kind: 'hum', pre: '先生[せんせい]のお宅[たく]に', v: 'visit', o: "the teacher's home" },
@@ -293,7 +275,6 @@
     '伝える': { pre: 'メッセージを', v: 'pass on', o: 'the message' },
     '交換する': { pre: '電話[でんわ]番号[ばんごう]を', v: 'exchange', o: 'phone numbers' },
     '生活する': { pre: '東京[とうきょう]で', v: 'live', o: 'in Tokyo' },
-    // Chapter 21
     '置く': { pre: '机[つくえ]の上[うえ]にかばんを', v: 'put', o: 'the bag on the desk' },
     '触る': { pre: '猫[ねこ]に', v: 'touch', o: 'the cat' },
     '捕まる': { kind: 'ev', sub: '泥棒[どろぼう]が', s: 'the thief', v: 'get caught' },
@@ -314,7 +295,6 @@
       skip: ['dict', 'volitional', 'causative', 'ba', 'causative-passive'],
     },
     '連絡する': { pre: '友達[ともだち]に', v: 'contact', o: 'a friend' },
-    // Chapter 22
     '勝つ': { pre: '試合[しあい]に', v: 'win', o: 'the game' },
     '運ぶ': { pre: '荷物[にもつ]を', v: 'carry', o: 'the luggage' },
     '走る': { pre: '公園[こうえん]で', v: 'run', o: 'in the park' },
@@ -326,7 +306,6 @@
     '賛成する': { pre: 'この意見[いけん]に', v: 'agree', o: 'with this opinion' },
     '反対する': { pre: 'その計画[けいかく]に', v: 'oppose', o: 'that plan' },
     '翻訳する': { pre: 'この本[ほん]を', v: 'translate', o: 'this book' },
-    // Chapter 23
     '受ける': { pre: '試験[しけん]を', v: 'take', o: 'the exam' },
     '答える': { pre: '質問[しつもん]に', v: 'answer', o: 'the question' },
     '離れる': { pre: '家[いえ]から', v: 'move away', o: 'from home' },

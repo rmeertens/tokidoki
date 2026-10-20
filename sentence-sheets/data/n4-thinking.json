@@ -1,0 +1,108 @@
+{
+  "id": "n4-thinking",
+  "order": 9,
+  "title": "Thoughts & guesses",
+  "level": "N4",
+  "sentences": [
+    {
+      "ja": "明日雨が降ると思います。",
+      "jaHtml": "<ruby>明日<rp>(</rp><rt>あした</rt><rp>)</rp></ruby><ruby>雨<rp>(</rp><rt>あめ</rt><rp>)</rp></ruby>が<ruby>降<rp>(</rp><rt>ふ</rt><rp>)</rp></ruby>ると<ruby>思<rp>(</rp><rt>おも</rt><rp>)</rp></ruby>います。",
+      "en": "I think it will rain tomorrow."
+    },
+    {
+      "ja": "彼は来ないと思います。",
+      "jaHtml": "<ruby>彼<rp>(</rp><rt>かれ</rt><rp>)</rp></ruby>は<ruby>来<rp>(</rp><rt>こ</rt><rp>)</rp></ruby>ないと<ruby>思<rp>(</rp><rt>おも</rt><rp>)</rp></ruby>います。",
+      "en": "I don't think he will come."
+    },
+    {
+      "ja": "今日は寒いと思います。",
+      "jaHtml": "<ruby>今日<rp>(</rp><rt>きょう</rt><rp>)</rp></ruby>は<ruby>寒<rp>(</rp><rt>さむ</rt><rp>)</rp></ruby>いと<ruby>思<rp>(</rp><rt>おも</rt><rp>)</rp></ruby>います。",
+      "en": "I think it's cold today."
+    },
+    {
+      "ja": "あの人は先生だと思います。",
+      "jaHtml": "あの<ruby>人<rp>(</rp><rt>ひと</rt><rp>)</rp></ruby>は<ruby>先生<rp>(</rp><rt>せんせい</rt><rp>)</rp></ruby>だと<ruby>思<rp>(</rp><rt>おも</rt><rp>)</rp></ruby>います。",
+      "en": "I think that person is a teacher."
+    },
+    {
+      "ja": "すしが一番おいしいと思います。",
+      "jaHtml": "すしが<ruby>一番<rp>(</rp><rt>いちばん</rt><rp>)</rp></ruby>おいしいと<ruby>思<rp>(</rp><rt>おも</rt><rp>)</rp></ruby>います。",
+      "en": "I think sushi is the most delicious."
+    },
+    {
+      "ja": "どうしたんですか。",
+      "jaHtml": "どうしたんですか。",
+      "en": "What's wrong?"
+    },
+    {
+      "ja": "どうして昨日授業を休んだんですか。",
+      "jaHtml": "どうして<ruby>昨日<rp>(</rp><rt>きのう</rt><rp>)</rp></ruby><ruby>授業<rp>(</rp><rt>じゅぎょう</rt><rp>)</rp></ruby>を<ruby>休<rp>(</rp><rt>やす</rt><rp>)</rp></ruby>んだんですか。",
+      "en": "Why did you miss class yesterday?"
+    },
+    {
+      "ja": "明日はたぶん晴れるでしょう。",
+      "jaHtml": "<ruby>明日<rp>(</rp><rt>あした</rt><rp>)</rp></ruby>はたぶん<ruby>晴<rp>(</rp><rt>は</rt><rp>)</rp></ruby>れるでしょう。",
+      "en": "It will probably be sunny tomorrow."
+    },
+    {
+      "ja": "アレルギーがあるんです。",
+      "jaHtml": "アレルギーがあるんです。",
+      "en": "It's that I have an allergy."
+    },
+    {
+      "ja": "そのケーキはおいしそうですね。",
+      "jaHtml": "そのケーキはおいしそうですね。",
+      "en": "That cake looks delicious."
+    },
+    {
+      "ja": "田中さんは今日元気そうですね。",
+      "jaHtml": "<ruby>田中<rp>(</rp><rt>たなか</rt><rp>)</rp></ruby>さんは<ruby>今日<rp>(</rp><rt>きょう</rt><rp>)</rp></ruby><ruby>元気<rp>(</rp><rt>げんき</rt><rp>)</rp></ruby>そうですね。",
+      "en": "Mr. Tanaka looks well today."
+    },
+    {
+      "ja": "今日は雪が降りそうですね。",
+      "jaHtml": "<ruby>今日<rp>(</rp><rt>きょう</rt><rp>)</rp></ruby>は<ruby>雪<rp>(</rp><rt>ゆき</rt><rp>)</rp></ruby>が<ruby>降<rp>(</rp><rt>ふ</rt><rp>)</rp></ruby>りそうですね。",
+      "en": "It looks like it's going to snow today."
+    },
+    {
+      "ja": "明日は雪が降るかもしれません。",
+      "jaHtml": "<ruby>明日<rp>(</rp><rt>あした</rt><rp>)</rp></ruby>は<ruby>雪<rp>(</rp><rt>ゆき</rt><rp>)</rp></ruby>が<ruby>降<rp>(</rp><rt>ふ</rt><rp>)</rp></ruby>るかもしれません。",
+      "en": "It might snow tomorrow."
+    },
+    {
+      "ja": "明日は寒いかもしれません。",
+      "jaHtml": "<ruby>明日<rp>(</rp><rt>あした</rt><rp>)</rp></ruby>は<ruby>寒<rp>(</rp><rt>さむ</rt><rp>)</rp></ruby>いかもしれません。",
+      "en": "It might be cold tomorrow."
+    },
+    {
+      "ja": "あの人は歌手みたいですね。",
+      "jaHtml": "あの<ruby>人<rp>(</rp><rt>ひと</rt><rp>)</rp></ruby>は<ruby>歌手<rp>(</rp><rt>かしゅ</rt><rp>)</rp></ruby>みたいですね。",
+      "en": "That person looks like a singer."
+    },
+    {
+      "ja": "外は雨が降っているみたいです。",
+      "jaHtml": "<ruby>外<rp>(</rp><rt>そと</rt><rp>)</rp></ruby>は<ruby>雨<rp>(</rp><rt>あめ</rt><rp>)</rp></ruby>が<ruby>降<rp>(</rp><rt>ふ</rt><rp>)</rp></ruby>っているみたいです。",
+      "en": "It seems to be raining outside."
+    },
+    {
+      "ja": "この服、パジャマみたいですね。",
+      "jaHtml": "この<ruby>服<rp>(</rp><rt>ふく</rt><rp>)</rp></ruby>、パジャマみたいですね。",
+      "en": "These clothes look like pajamas, don't they?"
+    },
+    {
+      "ja": "パーティーに何人来るか分かりません。",
+      "jaHtml": "パーティーに<ruby>何人<rp>(</rp><rt>なんにん</rt><rp>)</rp></ruby><ruby>来<rp>(</rp><rt>く</rt><rp>)</rp></ruby>るか<ruby>分<rp>(</rp><rt>わ</rt><rp>)</rp></ruby>かりません。",
+      "en": "I don't know how many people will come to the party."
+    },
+    {
+      "ja": "「となりのトトロ」という映画を見ました。",
+      "jaHtml": "「となりのトトロ」という<ruby>映画<rp>(</rp><rt>えいが</rt><rp>)</rp></ruby>を<ruby>見<rp>(</rp><rt>み</rt><rp>)</rp></ruby>ました。",
+      "en": "I saw a movie called \"My Neighbor Totoro.\""
+    },
+    {
+      "ja": "明日雨が降るかどうか分かりません。",
+      "jaHtml": "<ruby>明日<rp>(</rp><rt>あした</rt><rp>)</rp></ruby><ruby>雨<rp>(</rp><rt>あめ</rt><rp>)</rp></ruby>が<ruby>降<rp>(</rp><rt>ふ</rt><rp>)</rp></ruby>るかどうか<ruby>分<rp>(</rp><rt>わ</rt><rp>)</rp></ruby>かりません。",
+      "en": "I don't know whether it will rain tomorrow."
+    }
+  ]
+}
