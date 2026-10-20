@@ -491,6 +491,17 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://tokidoki.meertens.dev/blog.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/blog-learning-japanese.html</loc>
+    <lastmod>2026-10-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://tokidoki.meertens.dev/about.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>

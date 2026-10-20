@@ -7947,3 +7947,20 @@ a.chapter-card.news-headline-card {
 .about-photo img { display: block; width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--border); }
 .about-photo figcaption { color: var(--text-muted); font-size: 0.82rem; line-height: 1.5; margin-top: 6px; }
 .about-photo figcaption [lang="ja"] { white-space: nowrap; }
+
+/* Home page: link under the Blog & tips cards */
+.hub-more { margin-top: 10px; font-size: 0.9rem; }
+.hub-more a { color: var(--accent); font-weight: 600; }
+
+/* Blog posts (blog-*.html): readable long-form text */
+.post { max-width: 70ch; margin-top: 24px; }
+.post h2 { font-family: var(--font-display); font-size: 1.2rem; color: var(--text); margin: 28px 0 8px; }
+.post p, .post li { color: var(--text-dim); font-size: 0.97rem; line-height: 1.7; }
+.post p + p { margin-top: 10px; }
+.post ul { margin: 8px 0 10px 1.3em; }
+.post li + li { margin-top: 6px; }
+.post strong { color: var(--text); }
+.post a { color: var(--accent); }
+.post [lang="ja"] { font-family: var(--font-jp); white-space: nowrap; }
+.post-aside { margin-top: 32px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
+.post-aside h2 { margin-top: 0; font-size: 1rem; }

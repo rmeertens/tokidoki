@@ -238,6 +238,11 @@ const NAV = (cut('      <nav class="page-nav"', '</nav>') + '</nav>')
 const SCRIPTS = ['app.js', 'sync-merge.js', 'progress-stats.js', 'sync.js']
   .map(f => (NEWS.match(new RegExp(`  <script src="${f.replace('.', '\\.')}[^"]*"></script>\n`)) || die(`news.html: no ${f}`))[0]).join('');
 
+// The hand-written blog posts (blog.html lists them, with these guides).
+const BLOG_POSTS = [
+  ['blog-learning-japanese.html', "How I'm Learning Japanese", 'Tips & resources for every level · blog post'],
+];
+
 function render(p) {
   const url = `${SITE}/${p.file}`;
   const ld = {
@@ -247,8 +252,9 @@ function render(p) {
   };
   const data = { page: p.file.replace('.html', ''), cta: p.cta, questions: p.quiz };
   const json = o => JSON.stringify(o).replace(/</g, '\\u003c');
-  const more = PAGES.filter(x => x !== p).map(x => `<a class="chapter-card" href="${x.file}">` +
-    `<div class="chapter-card-title">${esc(x.hero.card[0])}</div><div class="chapter-card-sub">${esc(x.hero.card[1])}</div></a>`).join('');
+  const more = [...BLOG_POSTS, ...PAGES.filter(x => x !== p).map(x => [x.file, ...x.hero.card])]
+    .map(([file, title, sub]) => `<a class="chapter-card" href="${file}">` +
+      `<div class="chapter-card-title">${esc(title)}</div><div class="chapter-card-sub">${esc(sub)}</div></a>`).join('');
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -307,8 +313,9 @@ ${NAV}
       <div class="lp-quiz" id="lp-quiz"><noscript><p><a href="${p.cta.href}">${p.cta.label}</a></p></noscript></div>
       ${p.body}
       <section class="lp-ref">
-        <h2 class="lis-heading">More quick guides</h2>
+        <h2 class="lis-heading">More from the blog</h2>
         <div class="chapter-grid">${more}</div>
+        <p><a href="blog.html">All posts &amp; tips →</a></p>
       </section>${p.credit ? `
       <p class="lis-credits">Voices: ${esc(p.credit.replace(/^Voices:\s*/, ''))}</p>` : ''}
     </main>
