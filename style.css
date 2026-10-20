@@ -7941,3 +7941,9 @@ a.chapter-card.news-headline-card {
 .hub-about-card p + p { margin-top: 8px; }
 .hub-about-card strong { color: var(--text); }
 .hub-about-card a { color: var(--accent); font-weight: 600; }
+
+/* About me page: the photo under the first heading */
+.about-photo { margin: 4px 0 14px; max-width: 560px; }
+.about-photo img { display: block; width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--border); }
+.about-photo figcaption { color: var(--text-muted); font-size: 0.82rem; line-height: 1.5; margin-top: 6px; }
+.about-photo figcaption [lang="ja"] { white-space: nowrap; }
