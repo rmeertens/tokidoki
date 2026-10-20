@@ -5719,6 +5719,7 @@
     const hint = $('#bunkei-pattern-hint');
     hint.innerHTML = `<span lang="ja">${card.pattern.name}</span> · ${card.pattern.meaning}`;
     hint.classList.toggle('hidden', !bunkeiSettings.hint);
+    $('#bunkei-hint').checked = !!bunkeiSettings.hint;
 
     const typing = !!bunkeiSettings.typing;
     const input = $('#bunkei-input');
@@ -6890,6 +6891,13 @@
     on('#bunkei-toggle-hint', 'change', (e) => {
       bunkeiSettings.hint = e.target.checked;
       saveBunkeiSettings(bunkeiSettings);
+    });
+    on('#bunkei-hint', 'change', (e) => {
+      bunkeiSettings.hint = e.target.checked;
+      saveBunkeiSettings(bunkeiSettings);
+      $('#bunkei-toggle-hint').checked = bunkeiSettings.hint;
+      $('#bunkei-pattern-hint').classList.toggle('hidden', !bunkeiSettings.hint);
+      if (bunkeiSettings.typing && !bunkeiAnswered) $('#bunkei-input').focus();
     });
     on('#btn-start-bunkei', 'click', startBunkeiStudy);
     on('#btn-bunkei-reveal', 'click', revealBunkeiAnswer);
