@@ -4443,6 +4443,7 @@
   // With "Type answers" on: whether the typed answer was right, so Enter /
   // Space grades the card that way (1 / 2 still pick either grade).
   let storyReviewTypedOk = null;
+  let storyReviewUndoStack = [];
 
   function storyRubyHtml(text) {
     return text.replace(STORY_FURIGANA_RE, '<ruby>$1<rp>(</rp><rt>$2</rt><rp>)</rp></ruby>');
@@ -5138,6 +5139,7 @@
     storyReviewCards = pickBatch(`${kanji ? 'kanji-review' : 'story-review'}${recall ? '-recall' : ''}`, due, deck, cont);
     storyReviewIndex = 0;
     storyReviewCorrect = 0;
+    storyReviewUndoStack = [];
 
     showScreen('story-review');
     $('#story-review-complete').classList.add('hidden');
@@ -5152,6 +5154,7 @@
     }
     const card = storyReviewCards[storyReviewIndex];
     storyReviewAnswered = false;
+    updateStoryReviewUndoButton();
 
     const total = storyReviewCards.length;
     $('#story-review-bar-fill').style.width = `${(storyReviewIndex / total) * 100}%`;
@@ -5434,8 +5437,14 @@
     if (!storyReviewAnswered) return;
     const card = storyReviewCards[storyReviewIndex];
     const state = getCardState(srsData, card.id);
+    storyReviewUndoStack.push({
+      cardId: card.id,
+      prevSrsState: srsData[card.id] ? { ...srsData[card.id] } : null,
+      index: storyReviewIndex,
+      correct: storyReviewCorrect,
+    });
     srsData[card.id] = gradeCard(state, grade);
-    logReview(card.id, state, grade);
+    storyReviewUndoStack[storyReviewUndoStack.length - 1].logged = logReview(card.id, state, grade);
     saveSRS(srsData);
     flashSaveIndicator();
     if (grade > 1) storyReviewCorrect++;
@@ -5443,10 +5452,43 @@
     showStoryReviewCard();
   }
 
+  function updateStoryReviewUndoButton() {
+    const btn = $('#btn-story-review-undo');
+    if (btn) btn.classList.toggle('hidden', storyReviewUndoStack.length === 0);
+  }
+
+  // Takes back the last grade (a mis-tap or a wrong swipe): restores the
+  // card's SRS state and shows it again to be graded anew.
+  function undoLastStoryReviewGrade() {
+    if (storyReviewUndoStack.length === 0) return;
+
+    const undo = storyReviewUndoStack.pop();
+    unlogReview(undo.logged);
+
+    if (undo.prevSrsState) {
+      srsData[undo.cardId] = undo.prevSrsState;
+      saveSRS(srsData);
+    } else {
+      delete srsData[undo.cardId];
+      saveSRS(srsData);
+      deleteSRSCard(undo.cardId);
+    }
+
+    storyReviewIndex = undo.index;
+    storyReviewCorrect = undo.correct;
+
+    $('#story-review-complete').classList.add('hidden');
+    $('#story-review-card').classList.remove('hidden');
+
+    showStoryReviewCard();
+    flashSaveIndicator();
+  }
+
   function finishStoryReview() {
     $('#story-review-card').classList.add('hidden');
     $('#story-review-complete').classList.remove('hidden');
     $('#story-review-bar-fill').style.width = '100%';
+    updateStoryReviewUndoButton();
     const total = storyReviewCards.length;
     $('#story-review-total').textContent = total;
     $('#story-review-correct').textContent = storyReviewCorrect;
@@ -7060,6 +7102,7 @@
       btn.addEventListener('click', () => gradeStoryReviewAndAdvance(parseInt(btn.dataset.storyGrade, 10)));
     });
     on('#btn-story-review-done', 'click', closeFlashcardReview);
+    on('#btn-story-review-undo', 'click', undoLastStoryReviewGrade);
 
     on('#meme-sizes', 'click', (e) => {
       const btn = e.target.closest('.meme-size');
@@ -7087,6 +7130,14 @@
 
       if (!(screens['story-review'] && screens['story-review'].classList.contains('active'))) return;
 
+      // Ctrl/Cmd+Z takes back the last grade — except in the answer box,
+      // where it undoes typing.
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'z' || e.key === 'Z') && !e.shiftKey && document.activeElement !== $('#story-review-input')) {
+        consumeKey(e);
+        undoLastStoryReviewGrade();
+        return;
+      }
+
       // While a card waits for a typed answer, letters always go into the
       // answer box — even if a click moved the focus off it — so "fu" for
       // フランス is never taken as a shortcut.
@@ -7105,6 +7156,7 @@
       if (!typingInBox && plainKey) {
         if (e.key === 'f' || e.key === 'F') { consumeKey(e); setFlashcardFurigana(!settings.flashcardFurigana); return; }
         if (e.key === 'v' || e.key === 'V') { consumeKey(e); setFlashcardSpeak(!flashcardSpeak()); return; }
+        if (e.key === 'z' || e.key === 'Z') { consumeKey(e); undoLastStoryReviewGrade(); return; }
       }
 
       if (!$('#story-review-complete').classList.contains('hidden')) {
