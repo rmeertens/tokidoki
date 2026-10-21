@@ -79,7 +79,20 @@
   background: linear-gradient(var(--border), var(--border)) top center / calc(100% - 32px) 1px no-repeat;
   color: var(--text-dim); font-size: 0.85rem; line-height: 1.6;
 }
-#seo-content.page-about h1 { font-size: 0.95rem; font-weight: 600; color: var(--text-dim); margin-bottom: 6px; }
+/* Folded away behind its heading; the text stays in the page for search
+   engines and opens on a tap. */
+#seo-content.page-about summary {
+  display: flex; align-items: baseline; gap: 6px; cursor: pointer;
+  list-style: none; user-select: none;
+}
+#seo-content.page-about summary::-webkit-details-marker { display: none; }
+#seo-content.page-about summary::before {
+  content: "▸"; font-size: 0.8rem; transition: transform 0.15s;
+}
+#seo-content.page-about details[open] > summary::before { transform: rotate(90deg); }
+#seo-content.page-about summary:hover h1 { color: var(--text); }
+#seo-content.page-about details[open] > summary { margin-bottom: 6px; }
+#seo-content.page-about h1 { font-size: 0.95rem; font-weight: 600; color: var(--text-dim); }
 #seo-content.page-about h2,
 #seo-content.page-about h3 { font-size: 0.88rem; font-weight: 600; margin: 14px 0 4px; }
 #seo-content.page-about p { margin-bottom: 8px; }
