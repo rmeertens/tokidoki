@@ -11,7 +11,7 @@ const PASSAGES = globalThis.STORY_FILL_PASSAGES;
 const STORIES = globalThis.PARTICLE_STORIES;
 // Everything a particle-story blank may ask for.
 const PARTICLES = ['は', 'が', 'を', 'に', 'で', 'へ', 'と', 'も', 'の', 'や', 'から', 'まで', 'より', 'か',
-  'しか', 'だけ', 'ばかり', 'ほど', 'でも', 'には', 'では'];
+  'しか', 'だけ', 'ばかり', 'ほど', 'ぐらい', 'くらい', 'でも', 'には', 'では'];
 
 let passed = 0;
 let failed = 0;

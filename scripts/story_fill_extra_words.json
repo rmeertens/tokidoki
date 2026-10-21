@@ -763,5 +763,225 @@
     "ごみぶくろ",
     "rubbish bag",
     "noun"
+  ],
+  "字幕": [
+    "じまく",
+    "subtitles",
+    "noun"
+  ],
+  "返品": [
+    "へんぴん",
+    "returning an item (for a refund)",
+    "noun"
+  ],
+  "銭湯": [
+    "せんとう",
+    "public bathhouse",
+    "noun"
+  ],
+  "たんじょうび": [
+    "たんじょうび",
+    "birthday",
+    "noun"
+  ],
+  "三さつ": [
+    "さんさつ",
+    "three (books)",
+    "noun"
+  ],
+  "りんご": [
+    "りんご",
+    "apple",
+    "noun"
+  ],
+  "電池": [
+    "でんち",
+    "battery",
+    "noun"
+  ],
+  "五匹": [
+    "ごひき",
+    "five (fish, small animals)",
+    "noun"
+  ],
+  "二箱": [
+    "ふたはこ",
+    "two boxes",
+    "noun"
+  ],
+  "一箱": [
+    "ひとはこ",
+    "one box, each box",
+    "noun"
+  ],
+  "三十個": [
+    "さんじゅっこ",
+    "thirty (things)",
+    "noun"
+  ],
+  "沖縄": [
+    "おきなわ",
+    "Okinawa",
+    "proper noun"
+  ],
+  "三番目": [
+    "さんばんめ",
+    "third (in order)",
+    "noun"
+  ],
+  "温泉": [
+    "おんせん",
+    "hot spring",
+    "noun"
+  ],
+  "四時間": [
+    "よじかん",
+    "four hours",
+    "noun"
+  ],
+  "十二キロ": [
+    "じゅうにキロ",
+    "twelve kilometres",
+    "noun"
+  ],
+  "乗れる": [
+    "のれる",
+    "can ride (potential of 乗る)",
+    "る-verb"
+  ],
+  "二十四時間": [
+    "にじゅうよじかん",
+    "twenty-four hours",
+    "noun"
+  ],
+  "深夜": [
+    "しんや",
+    "late at night, the small hours",
+    "noun"
+  ],
+  "募集": [
+    "ぼしゅう",
+    "recruiting, advertising (for staff)",
+    "noun"
+  ],
+  "アニメ": [
+    "アニメ",
+    "anime, animation",
+    "noun"
+  ],
+  "登場人物": [
+    "とうじょうじんぶつ",
+    "characters (in a story or film)",
+    "noun"
+  ],
+  "スピード": [
+    "スピード",
+    "speed",
+    "noun"
+  ],
+  "何となく": [
+    "なんとなく",
+    "somehow, vaguely",
+    "adverb"
+  ],
+  "かもしれない": [
+    "かもしれない",
+    "might, may",
+    "expression"
+  ],
+  "サイズ": [
+    "サイズ",
+    "size",
+    "noun"
+  ],
+  "セール品": [
+    "セールひん",
+    "sale item",
+    "noun"
+  ],
+  "試着": [
+    "しちゃく",
+    "trying on (clothes)",
+    "noun"
+  ],
+  "それなり": [
+    "それなり",
+    "in its own way; a certain amount of",
+    "noun"
+  ],
+  "昔ながら": [
+    "むかしながら",
+    "old-fashioned, as it always was",
+    "expression"
+  ],
+  "入り口": [
+    "いりぐち",
+    "entrance",
+    "noun"
+  ],
+  "富士山": [
+    "ふじさん",
+    "Mount Fuji",
+    "proper noun"
+  ],
+  "味わえる": [
+    "あじわえる",
+    "can enjoy, can experience (potential of 味わう)",
+    "る-verb"
+  ],
+  "なので": [
+    "なので",
+    "because (it is), so (after a noun or な-adjective)",
+    "conjunction"
+  ],
+  "かいもの": [
+    "かいもの",
+    "shopping",
+    "noun"
+  ],
+  "キャンプ場": [
+    "キャンプじょう",
+    "campsite",
+    "noun"
+  ],
+  "運動場": [
+    "うんどうじょう",
+    "sports ground, playing field",
+    "noun"
+  ],
+  "抜く": [
+    "ぬく",
+    "to overtake, to pass; to pull out",
+    "う-verb"
+  ],
+  "から揚げ": [
+    "からあげ",
+    "Japanese fried chicken",
+    "noun"
+  ],
+  "五キロ": [
+    "ごキロ",
+    "five kilos (or kilometres)",
+    "noun"
+  ],
+  "三年": [
+    "さんねん",
+    "three years",
+    "noun"
+  ],
+  "つれる": [
+    "つれる",
+    "(fish) to be caught, to bite; to take (someone) along",
+    "る-verb"
+  ],
+  "十分": [
+    "じゅっぷん",
+    "ten minutes (also じゅうぶん: enough)",
+    "noun"
+  ],
+  "なしで": [
+    "なしで",
+    "without",
+    "expression"
   ]
 }

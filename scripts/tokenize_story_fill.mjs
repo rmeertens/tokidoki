@@ -23,7 +23,7 @@ const OUTPUTS = [
 const EXTRA = JSON.parse(readFileSync(path.join(ROOT, 'scripts', 'story_fill_extra_words.json'), 'utf8'));
 
 // Kuromoji splits these oddly in kana-heavy text; keep them whole.
-const WHOLE = ['しゅみ', 'すきやき', 'てんぷら', 'ざんねん', 'スマートフォン', '自動販売機', 'へや', 'まど', 'おべんとう', 'つくえ', 'ゴミ袋'];
+const WHOLE = ['しゅみ', 'すきやき', 'てんぷら', 'ざんねん', 'スマートフォン', '自動販売機', 'へや', 'まど', 'おべんとう', 'つくえ', 'ゴミ袋', 'たんじょうび', '三さつ', 'りんご', 'かもしれない', '試着', 'セール品', '登場人物', '昔ながら', 'かいもの', 'から揚げ', 'なしで'];
 const { segment } = await createWordFinder({ extra: EXTRA, whole: WHOLE });
 
 for (const o of OUTPUTS) {
