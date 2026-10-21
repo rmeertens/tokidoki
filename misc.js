@@ -288,6 +288,7 @@
       ['te-shimau', 'ended up doing (regret)', '〜てしまいました', '食[た]べてしまいました', ['てしまう', 'てしまった', 'ちゃった']],
       ['te-oku', 'do in advance', '〜ておきます', '食[た]べておきます', ['ておく']],
       ['te-miru', 'try doing', '〜てみます', '食[た]べてみます', ['てみる']],
+      ['te-mimashou', 'let\'s try doing', '〜てみましょう', '食[た]べてみましょう'],
       ['te-kuru', 'go and do (and come back)', '〜てきます', '食[た]べてきます', ['てくる']],
       ['tsumori', 'plan to, intend to', '〜つもりです', '食[た]べるつもりです', ['つもり']],
       ['volitional-to-omou', 'thinking of doing', '〜(よ)うと思[おも]っています', '食[た]べようと思[おも]っています',

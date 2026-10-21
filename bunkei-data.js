@@ -123,6 +123,13 @@
     '洗う', '散歩する', '送る', '出す', '聞く_ask', '相談する', '謝る', '着替える', '払う', '撮る_photo',
     '遊ぶ', '泳ぐ', '走る', '電話をかける', '手伝う', '片付ける']);
 
+  // New things to try out together, for 〜てみましょう
+  // (寿司を食べてみましょう "let's try eating sushi").
+  const TRY_TOGETHER = only(['見る', '飲む', '食べる', '作る', '料理する', '話す', '読む', '書く', '聞く_ask',
+    '言う', '覚える', '習う', '泳ぐ', '乗る', '登る', '走る', '使う', '歌う', '弾く', '着る_wear', 'かぶる',
+    '編む', '焼く', '運転する', '泊まる', '調べる', '描く_draw', '踊る', '育てる', '訳す', '注文する',
+    '観光する', '住む', '相談する', '押す', '散歩する', '練習する', '撮る_photo', '起きる', '寝る']);
+
   // 〜てから: the drill verb happens first, then this second action
   // (寿司を食べてから → 歯を磨きます). Keyed like NAGARA; every usable verb has
   // an entry (test_bunkei.js checks), so add one here for any new verb.
@@ -467,6 +474,11 @@
       repeated: true,
       ja: p => `一度[いちど]${p.pre}${p.c('te')}みます。`,
       en: p => `I'll try ${p.ing} ${p.o} once.` },
+    { id: 'te-mimashou', level: 'N4', name: '〜てみましょう', meaning: 'let\'s try doing',
+      note: 'Suggesting you both try something to see how it goes: て-form + みましょう.',
+      only: TRY_TOGETHER,
+      ja: p => `${p.pre}${p.c('te')}みましょう。`,
+      en: p => `Let's try ${p.ing} ${p.o}.` },
     { id: 'te-kuru', level: 'N4', name: '〜てきます', meaning: 'go and do (and come back)',
       note: 'Going somewhere to do something, then coming back: て-form + きます (来ます).',
       only: ERRANDS,

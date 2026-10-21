@@ -68,6 +68,7 @@ expect('書く', 'te-morau', '兄に手紙を書いてもらいました。', 'I
 expect('食べる', 'passive', '弟に寿司を食べられました。', 'My little brother ate my sushi.');
 expect('盗む', 'passive', '誰かに財布を盗まれました。', 'Someone stole my wallet.');
 expect('飲む', 'sugiru', 'コーヒーを飲みすぎました。', 'I drank too much coffee.');
+expect('食べる', 'te-mimashou', '寿司を食べてみましょう。', "Let's try eating sushi.");
 expect('借りる', 'te-kuru', '本を借りてきます。', "I'll go borrow a book and come back.");
 expect('磨く', 'te-kuru', '歯を磨いてきます。');
 expect('勉強する', 'hajimeru', '先月から日本語を勉強し始めました。', 'I started studying Japanese last month.');
