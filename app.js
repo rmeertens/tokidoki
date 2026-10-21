@@ -5884,7 +5884,7 @@
         <header id="header">
           <div class="header-left">
             <button id="btn-back" class="icon-btn hidden" aria-label="Back">←</button>
-            <a href="index.html" class="header-title-link">
+            <a href="./" class="header-title-link">
               <svg class="header-logo" viewBox="0 0 12 9" width="24" height="18" shape-rendering="crispEdges" aria-hidden="true">
                 <path fill="#f58a5b" d="M3 0h7v1H3zM1 1h10v1H1zM0 2h12v1H0z"/>
                 <path fill="#ffd4bb" d="M3 1h1v1H3zM7 1h1v1H7zM4 2h1v1H4zM8 2h1v1H8z"/>

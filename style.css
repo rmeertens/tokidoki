@@ -71,6 +71,23 @@
 
 #seo-content { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
 
+/* On the practice pages the same text is shown as a quiet "about this page"
+   note under the app, so visitors and search engines see the same thing. */
+#seo-content.page-about {
+  position: static; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal;
+  max-width: 880px; margin: 8px auto 0; padding: 20px 16px 40px;
+  background: linear-gradient(var(--border), var(--border)) top center / calc(100% - 32px) 1px no-repeat;
+  color: var(--text-dim); font-size: 0.85rem; line-height: 1.6;
+}
+#seo-content.page-about h1 { font-size: 0.95rem; font-weight: 600; color: var(--text-dim); margin-bottom: 6px; }
+#seo-content.page-about h2,
+#seo-content.page-about h3 { font-size: 0.88rem; font-weight: 600; margin: 14px 0 4px; }
+#seo-content.page-about p { margin-bottom: 8px; }
+#seo-content.page-about strong { font-weight: 600; color: inherit; }
+#seo-content.page-about a { color: var(--accent); text-decoration: none; }
+#seo-content.page-about a:hover { text-decoration: underline; }
+#seo-content.page-about ul, #seo-content.page-about ol { padding-left: 1.2em; margin-bottom: 8px; }
+
 html {
   font-size: 16px;
   /* A flashcard flying off (swipe-cards.js) mustn't widen the page; on
