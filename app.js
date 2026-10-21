@@ -292,6 +292,9 @@
   function showScreen(name) {
     Object.values(screens).filter(Boolean).forEach(s => s.classList.remove('active'));
     screens[name].classList.add('active');
+    // A new screen starts at its top — Start buttons sit low on the setup
+    // pages, and the page below (the about text) shouldn't stay in view.
+    window.scrollTo(0, 0);
 
     hideCoachMark();
     if (name === 'study') {
