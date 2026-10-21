@@ -117,6 +117,12 @@
   const BEDTIME = only(['磨く', '勉強する', '洗う', '片付ける', '消す', '電話をかける', '連絡する',
     '書く', '読む', '洗濯する', '掃除する', '着替える', '脱ぐ', '食べる', '謝る', '練習する', '調べる']);
 
+  // Errands: things you can pop out to do and come back from, for 〜てきます
+  // (本を借りてきます "I'll go borrow a book and come back").
+  const ERRANDS = only(['買う_buy', '借りる', '返す', '下ろす', '呼ぶ', '見る', '食べる', '飲む', '磨く',
+    '洗う', '散歩する', '送る', '出す', '聞く_ask', '相談する', '謝る', '着替える', '払う', '撮る_photo',
+    '遊ぶ', '泳ぐ', '走る', '電話をかける', '手伝う', '片付ける']);
+
   // 〜てから: the drill verb happens first, then this second action
   // (寿司を食べてから → 歯を磨きます). Keyed like NAGARA; every usable verb has
   // an entry (test_bunkei.js checks), so add one here for any new verb.
@@ -461,6 +467,11 @@
       repeated: true,
       ja: p => `一度[いちど]${p.pre}${p.c('te')}みます。`,
       en: p => `I'll try ${p.ing} ${p.o} once.` },
+    { id: 'te-kuru', level: 'N4', name: '〜てきます', meaning: 'go and do (and come back)',
+      note: 'Going somewhere to do something, then coming back: て-form + きます (来ます).',
+      only: ERRANDS,
+      ja: p => `${p.pre}${p.c('te')}きます。`,
+      en: p => `I'll go ${p.v} ${p.o} and come back.` },
     { id: 'tsumori', level: 'N4', name: '〜つもりです', meaning: 'plan to, intend to',
       note: 'A plan you have already made: dictionary form + つもりです.',
       ja: p => `来年[らいねん]、${p.pre}${p.c('dict')}つもりです。`,
