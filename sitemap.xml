@@ -141,6 +141,21 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-10-21-abnormal-delivery.html</loc>
+    <lastmod>2026-10-21</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-10-21-police-data-leak.html</loc>
+    <lastmod>2026-10-21</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-10-21-malaysia-counterdrone.html</loc>
+    <lastmod>2026-10-21</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://tokidoki.meertens.dev/news-2026-10-20-mmx-launch.html</loc>
     <lastmod>2026-10-20</lastmod>
     <priority>0.6</priority>

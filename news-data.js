@@ -23,6 +23,148 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-10-21-abnormal-delivery',
+      date: '2026-10-21',
+      emoji: '👶',
+      titleEn: 'Obstetricians\' society to stop using the term "abnormal delivery" when explaining births to mothers',
+      sources: [
+        { name: 'Kyodo News (via Yahoo! News)', url: 'https://news.yahoo.co.jp/articles/c1b33f291e9b90d72eb65e4385b5a1ccd62aba32' },
+        { name: 'Niigata Nippo (Kyodo)', url: 'https://www.niigata-nippo.co.jp/articles/-/927522' },
+        { name: 'Mainichi Shimbun (via Infoseek)', url: 'https://news.infoseek.co.jp/article/mainichi_20261020k0000m100151000c/' },
+      ],
+      levels: {
+        N5: {
+          title: '「異常分娩[いじょうぶんべん]」という言葉[ことば]を、使[つか]わないことにしました',
+          lines: [
+            ['産婦人科[さんふじんか]の医者[いしゃ]の学会[がっかい]が、「異常分娩[いじょうぶんべん]」という言葉[ことば]を使[つか]わないことにしました。', 'A society of obstetricians and gynecologists decided to stop using the word "abnormal delivery".', '分娩 "childbirth" (a medical word). 学会 "academic society".'],
+            ['分娩[ぶんべん]は、子[こ]どもが生[う]まれることです。', '分娩 means a child being born.'],
+            ['「異常[いじょう]」は、よくないという意味[いみ]に聞[き]こえます。', '"異常" sounds like it means something bad.'],
+            ['でも、お母[かあ]さんや赤[あか]ちゃんに問題[もんだい]があったわけではありません。', 'But that does not mean there was a problem with the mother or the baby.'],
+            ['それを聞[き]いて、悲[かな]しい気持[きも]ちになるお母[かあ]さんもいます。', 'Some mothers feel sad when they hear it.'],
+            ['これからは、「吸引分娩[きゅういんぶんべん]」のように、したことの名前[なまえ]を言[い]います。', 'From now on, doctors will say the name of what was done, like "vacuum delivery".', '吸引分娩 "vacuum-assisted delivery".'],
+          ],
+        },
+        N4: {
+          title: '「異常分娩[いじょうぶんべん]」の言葉[ことば]を見直[みなお]し　妊婦[にんぷ]への説明[せつめい]では使[つか]わない方針[ほうしん]',
+          lines: [
+            ['日本産科婦人科学会[にほんさんかふじんかがっかい]は、「異常分娩[いじょうぶんべん]」という言葉[ことば]を、妊婦[にんぷ]や出産[しゅっさん]した人[ひと]への説明[せつめい]では原則[げんそく]として使[つか]わない方針[ほうしん]をまとめ、厚生労働省[こうせいろうどうしょう]に報告[ほうこく]しました。', 'The Japan Society of Obstetrics and Gynecology has decided, as a rule, not to use the term "abnormal delivery" when explaining things to pregnant women and new mothers, and reported this to the Ministry of Health, Labour and Welfare.', '原則として "as a rule, in principle".'],
+            ['異常分娩[いじょうぶんべん]は、帝王切開[ていおうせっかい]や吸引分娩[きゅういんぶんべん]などを含[ふく]む言葉[ことば]です。', '"Abnormal delivery" is a term that includes Caesarean sections, vacuum deliveries and more.'],
+            ['でも、お母[かあ]さんや赤[あか]ちゃんに医学的[いがくてき]な問題[もんだい]があったという意味[いみ]ではありません。', 'But it does not mean the mother or baby had a medical problem.'],
+            ['自分[じぶん]の出産[しゅっさん]は劣[おと]っていたと思[おも]って、心[こころ]が苦[くる]しくなる人[ひと]がいると指摘[してき]されていました。', 'It had been pointed out that some people come to think their own birth was inferior and feel distressed.', '劣る "to be inferior".'],
+            ['これからは、「経腟分娩[けいちつぶんべん]」「吸引分娩[きゅういんぶんべん]」のように、行[おこな]った処置[しょち]の名前[なまえ]を具体的[ぐたいてき]に言[い]う方向[ほうこう]です。', 'From now on, the plan is to name the procedure that was done specifically, such as "vaginal delivery" or "vacuum delivery".'],
+            ['学会[がっかい]が会員[かいいん]1383人[にん]に聞[き]いたところ、妊婦[にんぷ]への説明[せつめい]で異常分娩[いじょうぶんべん]を使[つか]うことがある人[ひと]は、33.9%でした。', 'When the society asked 1,383 of its members, 33.9% said they sometimes use "abnormal delivery" when explaining things to pregnant women.'],
+            ['厚生労働省[こうせいろうどうしょう]も、通知[つうち]などで「保険[ほけん]診療[しんりょう]を伴[ともな]う分娩[ぶんべん]」という言[い]い方[かた]を使[つか]い、前[まえ]の通知[つうち]も少[すこ]しずつ見直[みなお]す方針[ほうしん]です。', 'The ministry will also use the phrase "deliveries involving insured medical treatment" in its notices, and will review earlier notices little by little.', '伴う "to involve, to go with".'],
+          ],
+        },
+        N3: {
+          title: '「異常分娩[いじょうぶんべん]」の用語[ようご]を見直[みなお]し　妊産婦[にんさんぷ]への説明[せつめい]では原則[げんそく]使[つか]わず　産科婦人科学会[さんかふじんかがっかい]',
+          lines: [
+            ['日本産科婦人科学会[にほんさんかふじんかがっかい]は、帝王切開[ていおうせっかい]や吸引分娩[きゅういんぶんべん]などを指[さ]す「異常分娩[いじょうぶんべん]」という用語[ようご]を、妊産婦[にんさんぷ]への説明[せつめい]では原則[げんそく]として使[つか]わない方針[ほうしん]をまとめ、厚生労働省[こうせいろうどうしょう]に報告[ほうこく]した。', 'The Japan Society of Obstetrics and Gynecology has decided, as a rule, not to use the term "abnormal delivery" (which refers to Caesarean and vacuum deliveries, among others) when explaining things to pregnant and postpartum women, and has reported this to the Ministry of Health, Labour and Welfare.', '妊産婦 "pregnant and postpartum women".'],
+            ['異常分娩[いじょうぶんべん]は、必[かなら]ずしも母子[ぼし]に医学的[いがくてき]な異常[いじょう]があったことを意味[いみ]しないが、経験[けいけん]した女性[じょせい]が自分[じぶん]の出産[しゅっさん]を劣[おと]ったものと受[う]け止[と]め、精神的[せいしんてき]な負担[ふたん]になる可能性[かのうせい]が指摘[してき]されていた。', '"Abnormal delivery" does not necessarily mean there was a medical abnormality in the mother or child, but it had been pointed out that women who went through it might see their own birth as inferior, which could weigh on them mentally.', '必ずしも〜ない "not necessarily"; 受け止める "to take (something) in a certain way".'],
+            ['今後[こんご]は「正常[せいじょう]分娩[ぶんべん]」「異常[いじょう]分娩[ぶんべん]」のいずれも使[つか]わず、「経腟[けいちつ]分娩[ぶんべん]」「吸引[きゅういん]分娩[ぶんべん]」など、実施[じっし]した処置[しょち]の名称[めいしょう]を具体的[ぐたいてき]に示[しめ]す方向[ほうこう]だ。', 'From now on, neither "normal delivery" nor "abnormal delivery" will be used; instead, the name of the procedure carried out, such as "vaginal delivery" or "vacuum delivery", will be given specifically.', 'いずれも〜ず "neither … nor …".'],
+            ['学会[がっかい]が会員[かいいん]1383人[にん]に行[おこな]った調査[ちょうさ]では、妊産婦[にんさんぷ]への説明[せつめい]で異常分娩[いじょうぶんべん]を使[つか]うことがあると答[こた]えた人[ひと]は33.9%だった。', 'In a survey of 1,383 of its members, 33.9% answered that they sometimes use "abnormal delivery" when explaining things to pregnant and postpartum women.'],
+            ['厚生労働省[こうせいろうどうしょう]は、出産[しゅっさん]育児[いくじ]一時金[いちじきん]に関[かん]する通知[つうち]などで「保険[ほけん]診療[しんりょう]を伴[ともな]う分娩[ぶんべん]」という表現[ひょうげん]を用[もち]いる方針[ほうしん]で、過去[かこ]の通知[つうち]も順次[じゅんじ]見直[みなお]す。', 'The ministry plans to use the expression "deliveries involving insured medical treatment" in notices about the childbirth and childcare lump-sum benefit and other documents, and will review past notices one after another.', '出産育児一時金 "childbirth and childcare lump-sum allowance".'],
+            ['民間[みんかん]の保険[ほけん]会社[がいしゃ]にも、表現[ひょうげん]の見直[みなお]しを呼[よ]びかけるという。', 'It will also reportedly call on private insurance companies to review their wording.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-21-police-data-leak',
+      date: '2026-10-21',
+      emoji: '🚓',
+      titleEn: 'Data on about 125,000 police officers and staff may have leaked after unauthorized access to a cloud service',
+      sources: [
+        { name: 'Jiji Press', url: 'https://www.jiji.com/jc/article?k=2026102100348&g=soc' },
+        { name: 'Kyodo News (via Yahoo! News)', url: 'https://news.yahoo.co.jp/articles/77e5aca2d935755a9b774381cc61dd3e612930a6' },
+        { name: 'Jiji Press (via Yahoo! News)', url: 'https://news.yahoo.co.jp/articles/1c439925741aba4f428fe94f233cde18a88f75c6' },
+      ],
+      levels: {
+        N5: {
+          title: '警察[けいさつ]の人[ひと]の情報[じょうほう]が、外[そと]に出[で]たかもしれません',
+          lines: [
+            ['警察[けいさつ]の人[ひと]の情報[じょうほう]が、外[そと]に出[で]たかもしれません。', 'Information about police staff may have gotten out.'],
+            ['「アルカディア」という会社[かいしゃ]のサービスに、悪[わる]い人[ひと]が入[はい]ったからです。', 'This is because a bad person got into the service of a company called "Arcadia".', '不正アクセス "unauthorized access" is the news word for this.'],
+            ['警察官[けいさつかん]など、約[やく]12万[まん]5000人[にん]の名前[なまえ]やメールアドレスです。', 'It is the names and email addresses of about 125,000 police officers and others.'],
+            ['地震[じしん]のときに、仲間[なかま]が無事[ぶじ]か調[しら]べるシステムに入[はい]っていました。', 'They were in a system for checking if colleagues are safe when an earthquake happens.'],
+            ['名前[なまえ]がわかると、にせの警察官[けいさつかん]の電話[でんわ]に使[つか]われるかもしれません。', 'If names become known, they might be used for phone calls by fake police officers.'],
+            ['ただ、情報[じょうほう]が出[で]たと決[き]まったわけではありません。', 'However, it is not certain that the information got out.'],
+          ],
+        },
+        N4: {
+          title: '警察官[けいさつかん]ら約[やく]12万[まん]5000人分[にんぶん]の情報[じょうほう]が流出[りゅうしゅつ]か　クラウドサービスへの不正[ふせい]アクセス',
+          lines: [
+            ['大阪府[おおさかふ]箕面市[みのおし]の会社[かいしゃ]「アルカディア」のクラウドサービスに不正[ふせい]アクセスがあり、警察官[けいさつかん]や職員[しょくいん]の個人[こじん]情報[じょうほう]が流出[りゅうしゅつ]した可能性[かのうせい]があることが分[わ]かりました。', 'It has become clear that unauthorized access to the cloud service of the Osaka-based company Arcadia (Minoh City) may have leaked the personal information of police officers and staff.', '流出 "to leak out".'],
+            ['時事通信[じじつうしん]によると、20の府県警[ふけんけい]で、合計[ごうけい]約[やく]12万[まん]5000人分[にんぶん]です。', 'According to Jiji Press, it covers 20 prefectural police forces, about 125,000 people in total.', 'Kyodo News reports 22 prefectural police forces, so the numbers differ between reports.'],
+            ['流出[りゅうしゅつ]したおそれがあるのは、災害[さいがい]のときに職員[しょくいん]の無事[ぶじ]を確[たし]かめるシステムに登録[とうろく]された、名前[なまえ]やメールアドレスなどです。', 'What may have leaked is the names, email addresses and so on registered in a system used to check on staff safety during disasters.'],
+            ['メールアドレスの多[おお]くは、私用[しよう]の携帯電話[けいたいでんわ]のものとみられます。', 'Most of the addresses are thought to be for private mobile phones.'],
+            ['防犯[ぼうはん]メールに登録[とうろく]した市民[しみん]や会社[かいしゃ]のメールアドレス、1万[まん]8000件[けん]以上[いじょう]も流出[りゅうしゅつ]したおそれがあります。', 'More than 18,000 email addresses of citizens and companies registered for crime-prevention mail may also have leaked.'],
+            ['埼玉県警[さいたまけんけい]は十九日[じゅうくにち]、約[やく]1万[まん]3000人分[にんぶん]の情報[じょうほう]が流出[りゅうしゅつ]したかもしれないと発表[はっぴょう]しました。', 'On the 19th, Saitama Prefectural Police announced that information on about 13,000 people may have leaked.'],
+            ['警察官[けいさつかん]の名前[なまえ]や所属[しょぞく]が知[し]られると、にせ警察官[けいさつかん]の詐欺[さぎ]に使[つか]われたり、捜査員[そうさいん]が危険[きけん]になったりするおそれがあると指摘[してき]されています。', 'It has been pointed out that if officers\' names and units become known, they could be used in fake-police scams, or investigators could be put in danger.', 'ニセ警官詐欺 "fake police officer scams".'],
+          ],
+        },
+        N3: {
+          title: '警察官[けいさつかん]・職員[しょくいん]約[やく]12万[まん]5000人分[にんぶん]の情報[じょうほう]流出[りゅうしゅつ]か　クラウド型[がた]サービス「アルカディア」に不正[ふせい]アクセス',
+          lines: [
+            ['大阪府[おおさかふ]箕面市[みのおし]のアルカディアが提供[ていきょう]するクラウド型[がた]サービスへの不正[ふせい]アクセスで、全国[ぜんこく]20府県警[ふけんけい]の警察官[けいさつかん]・職員[しょくいん]の個人[こじん]情報[じょうほう]計[けい]約[やく]12万[まん]5000人分[にんぶん]が流出[りゅうしゅつ]した可能性[かのうせい]があることが、警察庁[けいさつちょう]への取材[しゅざい]で分[わ]かった。', 'Unauthorized access to a cloud service provided by Arcadia of Minoh, Osaka, may have leaked personal information on about 125,000 police officers and staff in total at 20 prefectural police forces nationwide, it has emerged from inquiries to the National Police Agency.', '取材で分かった "it became clear through (the reporter\'s) inquiries"; a standard newspaper phrase.'],
+            ['共同通信[きょうどうつうしん]は対象[たいしょう]を22府県警[ふけんけい]と伝[つた]えており、報道[ほうどう]によって数字[すうじ]に違[ちが]いがある。', 'Kyodo News reports the number of forces as 22, so the figures differ between reports.'],
+            ['流出[りゅうしゅつ]したおそれがあるのは、災害時[さいがいじ]の職員[しょくいん]安否[あんぴ]確認[かくにん]システムに登録[とうろく]された氏名[しめい]やメールアドレスなどで、大半[たいはん]は私用[しよう]の携帯電話[けいたいでんわ]のアドレスとみられる。', 'What may have leaked is names, email addresses and other details registered in the staff safety-confirmation system for disasters; most of the addresses are thought to be for private mobile phones.', '安否確認 "checking whether someone is safe".'],
+            ['防犯[ぼうはん]メールに登録[とうろく]した市民[しみん]や企業[きぎょう]のアドレス1万[まん]8000件[けん]超[こ]も、漏[も]えいした可能性[かのうせい]がある。', 'More than 18,000 addresses of citizens and companies registered for crime-prevention mail may also have leaked.', '〜超 "more than …".'],
+            ['同社[どうしゃ]は、メディアサーバーの脆弱性[ぜいじゃくせい]が悪用[あくよう]され、ログイン用[よう]の情報[じょうほう]が盗[ぬす]まれた可能性[かのうせい]があるとしている。', 'The company says a vulnerability in a media server may have been exploited and login information stolen.', '脆弱性 "vulnerability"; 悪用 "to abuse, exploit".'],
+            ['埼玉県警[さいたまけんけい]は十九日[じゅうくにち]、委託先[いたくさき]への不正[ふせい]アクセスにより約[やく]1万[まん]3000人分[にんぶん]が流出[りゅうしゅつ]した可能性[かのうせい]があると公表[こうひょう]している。', 'On the 19th, Saitama Prefectural Police announced that information on about 13,000 people may have leaked through unauthorized access to a contractor.', '委託先 "the party work is outsourced to".'],
+            ['警察官[けいさつかん]の氏名[しめい]や所属[しょぞく]が悪用[あくよう]されれば、ニセ警官[けいかん]詐欺[さぎ]の被害[ひがい]が広[ひろ]がったり、捜査員[そうさいん]の身[み]に危険[きけん]が及[およ]んだりするおそれがあると指摘[してき]されている。', 'It has been pointed out that if officers\' names and units are misused, fake-police fraud could spread and investigators could be put in danger.', '身に危険が及ぶ "danger reaches one personally".'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-21-malaysia-counterdrone',
+      date: '2026-10-21',
+      emoji: '🛡️',
+      titleEn: 'Japan to provide Malaysia\'s navy with a ¥1.65 billion counter-drone system under its security aid program',
+      sources: [
+        { name: 'Jiji Press (via nippon.com)', url: 'https://www.nippon.com/ja/news/yjj2026102001045/' },
+        { name: 'Jiji Press', url: 'https://www.jiji.com/jc/article?k=2026102001045&g=pol&m=rss' },
+        { name: 'Nikkei', url: 'https://www.nikkei.com/article/DGXZQOUA194QU0Z11C26A0000000/' },
+      ],
+      levels: {
+        N5: {
+          title: '日本[にほん]がマレーシアに、ドローンをふせぐ機械[きかい]をあげます',
+          lines: [
+            ['日本[にほん]の政府[せいふ]は、マレーシアに、ドローンをふせぐ機械[きかい]をあげます。', 'The Japanese government will give Malaysia equipment to defend against drones.'],
+            ['二十日[はつか]に、政府[せいふ]が発表[はっぴょう]しました。', 'The government announced it on the 20th.'],
+            ['お金[かね]は、約[やく]16億[おく]5000万円[まんえん]です。', 'The cost is about 1.65 billion yen.'],
+            ['機械[きかい]は、あやしいドローンをレーダーで見[み]つけます。', 'The equipment finds suspicious drones with radar.'],
+            ['そして、カメラで、あぶないドローンかどうかを見[み]ます。', 'Then it checks with a camera whether the drone is dangerous.'],
+            ['あぶないドローンは、あみを持[も]ったドローンで止[と]めます。', 'A dangerous drone is stopped by a drone carrying a net.', 'The net drone catches the other drone in a net.'],
+          ],
+        },
+        N4: {
+          title: 'マレーシア海軍[かいぐん]にドローン対処[たいしょ]システムを提供[ていきょう]　約[やく]16億[おく]5000万円[まんえん]',
+          lines: [
+            ['政府[せいふ]は二十日[はつか]、マレーシア海軍[かいぐん]にドローン対処[たいしょ]システムを提供[ていきょう]すると発表[はっぴょう]しました。', 'On the 20th, the government announced that it will provide a counter-drone system to the Malaysian navy.', '対処 "dealing with, countering".'],
+            ['日本[にほん]の「政府[せいふ]安全[あんぜん]保障[ほしょう]能力[のうりょく]強化[きょうか]支援[しえん]（OSA）」という制度[せいど]を使[つか]います。', 'It uses Japan\'s "Official Security Assistance (OSA)" program.', 'OSA: Japan gives equipment free of charge to friendly countries\' armed forces to help build up their security capabilities.'],
+            ['金額[きんがく]は約[やく]16億[おく]5000万円[まんえん]で、マレーシアへのOSAは3回目[かいめ]です。', 'The amount is about 1.65 billion yen, and this is the third OSA for Malaysia.'],
+            ['システムは、あやしいドローンを見[み]つける中距離[ちゅうきょり]レーダー、危険[きけん]かどうかを調[しら]べる高性能[こうせいのう]カメラ、あみでドローンを止[と]めるドローンの三[みっ]つです。', 'The system has three parts: a medium-range radar that finds suspicious drones, a high-performance camera that checks whether they are dangerous, and a drone that stops drones with a net.'],
+            ['OSAでこのようなシステムを提供[ていきょう]するのは初[はじ]めてです。', 'This is the first time a system like this is being provided through OSA.'],
+            ['茂木外相[もてぎがいしょう]とマレーシアのカレド国防相[こくぼうしょう]が、そのための文書[ぶんしょ]に署名[しょめい]しました。', 'Foreign Minister Motegi and Malaysia\'s Defense Minister Khaled signed the documents for this.', '外相 = 外務大臣 "foreign minister"; 国防相 "defense minister".'],
+            ['前回[ぜんかい]は2025年[ねん]10月[がつ]で、約[やく]31億円[おくえん]を使[つか]って、潜水[せんすい]作業[さぎょう]を助[たす]ける船[ふね]などを提供[ていきょう]することが決[き]まりました。', 'Last time, in October 2025, it was decided to provide a ship to support diving work and other items at a cost of about 3.1 billion yen.'],
+          ],
+        },
+        N3: {
+          title: 'マレーシア海軍[かいぐん]にドローン対処[たいしょ]システム供与[きょうよ]へ　OSAで16億[おく]5000万円[まんえん]、同国[どうこく]向[む]け3回目[かいめ]',
+          lines: [
+            ['政府[せいふ]は二十日[はつか]、マレーシア海軍[かいぐん]にドローン対処[たいしょ]システムを供与[きょうよ]すると発表[はっぴょう]した。', 'On the 20th, the government announced that it will provide a counter-drone system to the Malaysian navy.', '供与 "provision, grant".'],
+            ['政府[せいふ]安全[あんぜん]保障[ほしょう]能力[のうりょく]強化[きょうか]支援[しえん]（OSA）の枠組[わくぐ]みで、金額[きんがく]は16億[おく]5000万円[まんえん]。', 'It is under the Official Security Assistance (OSA) framework, at a cost of 1.65 billion yen.', 'OSA gives equipment free of charge to friendly countries\' armed forces; it began in fiscal 2023.'],
+            ['マレーシアへのOSAは、今回[こんかい]で3件目[けんめ]となる。', 'This will be the third OSA project for Malaysia.'],
+            ['システムは、不審[ふしん]な無人機[むじんき]を探知[たんち]する中距離[ちゅうきょり]レーダー、攻撃[こうげき]目的[もくてき]かどうかを判断[はんだん]する高機能[こうきのう]カメラ、見[み]つけた機体[きたい]に網[あみ]をかけて無力化[むりょくか]するドローンの三[みっ]つで構成[こうせい]される。', 'The system consists of three parts: a medium-range radar that detects suspicious unmanned aircraft, a high-function camera that judges whether they are meant for attack, and a drone that throws a net over the aircraft found to neutralize it.', '無力化 "to neutralize".'],
+            ['OSAでドローン対処[たいしょ]システムを供与[きょうよ]するのは初[はじ]めてという。', 'It is reportedly the first time a counter-drone system is being provided through OSA.'],
+            ['茂木[もてぎ]外相[がいしょう]とカレド国防相[こくぼうしょう]が、提供[ていきょう]に関[かん]する文書[ぶんしょ]に署名[しょめい]した。', 'Foreign Minister Motegi and Defense Minister Khaled signed documents on the provision.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-10-20-mmx-launch',
       date: '2026-10-20',
       emoji: '🚀',

@@ -4738,5 +4738,390 @@
     "ふたりめ",
     "the second person",
     "noun"
+  ],
+  "産婦人科": [
+    "さんふじんか",
+    "obstetrics and gynecology",
+    "noun"
+  ],
+  "学会": [
+    "がっかい",
+    "academic society",
+    "noun"
+  ],
+  "分娩": [
+    "ぶんべん",
+    "childbirth, delivery",
+    "noun"
+  ],
+  "子ども": [
+    "こども",
+    "child",
+    "noun"
+  ],
+  "妊婦": [
+    "にんぷ",
+    "pregnant woman",
+    "noun"
+  ],
+  "出産": [
+    "しゅっさん",
+    "childbirth",
+    "noun"
+  ],
+  "原則": [
+    "げんそく",
+    "principle, general rule",
+    "noun"
+  ],
+  "帝王切開": [
+    "ていおうせっかい",
+    "Caesarean section",
+    "noun"
+  ],
+  "処置": [
+    "しょち",
+    "treatment, procedure",
+    "noun"
+  ],
+  "1383人": [
+    "せんさんびゃくはちじゅうさんにん",
+    "1,383 people",
+    "number + counter"
+  ],
+  "通知": [
+    "つうち",
+    "notice, notification",
+    "noun"
+  ],
+  "診療": [
+    "しんりょう",
+    "medical treatment",
+    "noun"
+  ],
+  "伴う": [
+    "ともなう",
+    "to accompany, to involve",
+    "verb"
+  ],
+  "用語": [
+    "ようご",
+    "term, terminology",
+    "noun"
+  ],
+  "妊産婦": [
+    "にんさんぷ",
+    "pregnant and postpartum women",
+    "noun"
+  ],
+  "母子": [
+    "ぼし",
+    "mother and child",
+    "noun"
+  ],
+  "負担": [
+    "ふたん",
+    "burden",
+    "noun"
+  ],
+  "正常": [
+    "せいじょう",
+    "normal",
+    "na-adjective"
+  ],
+  "吸引": [
+    "きゅういん",
+    "suction, vacuum",
+    "noun"
+  ],
+  "名称": [
+    "めいしょう",
+    "name, title",
+    "noun"
+  ],
+  "育児": [
+    "いくじ",
+    "childcare",
+    "noun"
+  ],
+  "一時金": [
+    "いちじきん",
+    "lump-sum payment",
+    "noun"
+  ],
+  "順次": [
+    "じゅんじ",
+    "in order, one after another",
+    "adverb"
+  ],
+  "民間": [
+    "みんかん",
+    "private (sector)",
+    "noun"
+  ],
+  "アルカディア": [
+    "あるかでぃあ",
+    "Arcadia (company name)",
+    "noun"
+  ],
+  "警察官": [
+    "けいさつかん",
+    "police officer",
+    "noun"
+  ],
+  "約12万5000人": [
+    "やくじゅうにまんごせんにん",
+    "about 125,000 people",
+    "number + counter"
+  ],
+  "約12万5000人分": [
+    "やくじゅうにまんごせんにんぶん",
+    "for about 125,000 people",
+    "number + counter"
+  ],
+  "箕面": [
+    "みのお",
+    "Minoh (city in Osaka)",
+    "noun"
+  ],
+  "時事通信": [
+    "じじつうしん",
+    "Jiji Press",
+    "noun"
+  ],
+  "府県警": [
+    "ふけんけい",
+    "prefectural police forces",
+    "noun"
+  ],
+  "災害": [
+    "さいがい",
+    "disaster",
+    "noun"
+  ],
+  "防犯": [
+    "ぼうはん",
+    "crime prevention",
+    "noun"
+  ],
+  "1万8000件": [
+    "いちまんはっせんけん",
+    "18,000 cases/items",
+    "number + counter"
+  ],
+  "約1万3000人分": [
+    "やくいちまんさんぜんにんぶん",
+    "for about 13,000 people",
+    "number + counter"
+  ],
+  "所属": [
+    "しょぞく",
+    "affiliation, unit",
+    "noun"
+  ],
+  "詐欺": [
+    "さぎ",
+    "fraud, scam",
+    "noun"
+  ],
+  "報道": [
+    "ほうどう",
+    "news report",
+    "noun"
+  ],
+  "安否": [
+    "あんぴ",
+    "safety, whether someone is safe",
+    "noun"
+  ],
+  "アドレス": [
+    "あどれす",
+    "address (email)",
+    "noun"
+  ],
+  "1万8000件超": [
+    "いちまんはっせんけんちょう",
+    "over 18,000 items",
+    "number + counter"
+  ],
+  "漏えい": [
+    "ろうえい",
+    "leak",
+    "noun"
+  ],
+  "サーバー": [
+    "さーばー",
+    "server",
+    "noun"
+  ],
+  "脆弱": [
+    "ぜいじゃく",
+    "fragile, vulnerable",
+    "na-adjective"
+  ],
+  "悪用": [
+    "あくよう",
+    "misuse, exploitation",
+    "noun"
+  ],
+  "ログイン": [
+    "ろぐいん",
+    "login",
+    "noun"
+  ],
+  "委託": [
+    "いたく",
+    "entrusting, outsourcing",
+    "noun"
+  ],
+  "により": [
+    "により",
+    "by, due to, depending on",
+    "expression"
+  ],
+  "マレーシア": [
+    "まれーしあ",
+    "Malaysia",
+    "noun"
+  ],
+  "約16億5000万円": [
+    "やくじゅうろくおくごせんまんえん",
+    "about 1.65 billion yen",
+    "number + counter"
+  ],
+  "レーダー": [
+    "れーだー",
+    "radar",
+    "noun"
+  ],
+  "あみ": [
+    "あみ",
+    "net",
+    "noun"
+  ],
+  "海軍": [
+    "かいぐん",
+    "navy",
+    "noun"
+  ],
+  "対処": [
+    "たいしょ",
+    "dealing with, coping",
+    "noun"
+  ],
+  "支援": [
+    "しえん",
+    "support, assistance",
+    "noun"
+  ],
+  "OSA": [
+    "おーえすえー",
+    "OSA (Official Security Assistance)",
+    "noun"
+  ],
+  "3回目": [
+    "さんかいめ",
+    "the third time",
+    "number + counter"
+  ],
+  "中距離": [
+    "ちゅうきょり",
+    "medium range",
+    "noun"
+  ],
+  "高性能": [
+    "こうせいのう",
+    "high-performance",
+    "na-adjective"
+  ],
+  "カレド": [
+    "かれど",
+    "Khaled (name)",
+    "noun"
+  ],
+  "国防": [
+    "こくぼう",
+    "national defense",
+    "noun"
+  ],
+  "文書": [
+    "ぶんしょ",
+    "document",
+    "noun"
+  ],
+  "約31億円": [
+    "やくさんじゅういちおくえん",
+    "about 3.1 billion yen",
+    "number + counter"
+  ],
+  "潜水": [
+    "せんすい",
+    "diving",
+    "noun"
+  ],
+  "供与": [
+    "きょうよ",
+    "provision, grant",
+    "noun"
+  ],
+  "16億5000万円": [
+    "じゅうろくおくごせんまんえん",
+    "1.65 billion yen",
+    "number + counter"
+  ],
+  "同国": [
+    "どうこく",
+    "the same country",
+    "noun"
+  ],
+  "枠組み": [
+    "わくぐみ",
+    "framework",
+    "noun"
+  ],
+  "3件目": [
+    "さんけんめ",
+    "the third case",
+    "number + counter"
+  ],
+  "無人": [
+    "むじん",
+    "unmanned",
+    "noun"
+  ],
+  "探知": [
+    "たんち",
+    "detection",
+    "noun"
+  ],
+  "機体": [
+    "きたい",
+    "aircraft body, airframe",
+    "noun"
+  ],
+  "無力": [
+    "むりょく",
+    "powerless",
+    "na-adjective"
+  ],
+  "ドローン": [
+    "どろーん",
+    "drone",
+    "noun"
+  ],
+  "警察庁": [
+    "けいさつちょう",
+    "National Police Agency",
+    "noun"
+  ],
+  "取材": [
+    "しゅざい",
+    "news gathering, interview",
+    "noun"
+  ],
+  "22": [
+    "にじゅうに",
+    "twenty-two",
+    "number"
   ]
 }
