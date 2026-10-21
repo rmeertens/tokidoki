@@ -1533,6 +1533,14 @@ a.chapter-card {
   background: var(--bg-input);
 }
 
+/* The Story mode is its own page (particles-story.html), so its card is a link. */
+a.pq-mode { color: inherit; text-decoration: none; }
+a.pq-mode:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.pq-mode.pq-mode-current {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+.pq-mode.pq-mode-current .pq-mode-glyph,
 .pq-mode:has(input:checked) .pq-mode-glyph {
   color: #fff;
   background: var(--accent);
@@ -6803,6 +6811,20 @@ body.wo-no-furigana .wo-card rt { visibility: hidden; }
 .sf-blank.sf-right { background: var(--green-dim); border-color: var(--green); }
 .sf-blank.sf-wrong { background: var(--red-dim); border-color: var(--red); text-decoration: line-through; text-decoration-color: var(--red); }
 .sf-fix { color: var(--green); font-weight: 700; margin-right: 3px; }
+/* Particle stories: a blank you type into. */
+.sf-typed { cursor: text; padding-right: 2px; }
+.sf-typed:focus-within { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-dim); }
+.sf-input {
+  width: 3.2em;
+  padding: 0 2px;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  line-height: inherit;
+  outline: none;
+}
+.sf-also { font-size: 0.85rem; color: var(--text-dim); }
 
 .sf-result {
   display: flex;

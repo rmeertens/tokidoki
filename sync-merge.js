@@ -169,6 +169,7 @@
     tokidoki_mystery: (b, l, r) => mergeMap(b, l, r, mergeChapter),
     tokidoki_word_order: mergeGameStore,
     tokidoki_story_fill: mergeGameStore,
+    tokidoki_particle_story: mergeGameStore,
     tokidoki_listening: mergeGameStore,
     tokidoki_vocab_quiz: mergeGameStore,
     tokidoki_conversation: mergeConversation,

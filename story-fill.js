@@ -2,16 +2,19 @@
 // text with numbered blanks, pick one of four choices for each blank, then
 // check: every blank shows whether you had it right and why the answer fits.
 //
-// The passages live in story-fill-data.js. The pure parts (markup, splitting
-// a paragraph at its blanks, shuffling, scoring) are exported for
-// test_story_fill.js.
+// The passages live in story-fill-data.js. particles-story.html (body
+// data-typed="particles") runs the same page on particle-story-data.js: every
+// blank is a particle you type in instead of picking from four. The pure
+// parts (markup, splitting a paragraph at its blanks, shuffling, reading a
+// typed particle, scoring) are exported for test_story_fill.js.
 (function (global) {
   'use strict';
 
   const KANJI = '㐀-䶿一-鿿々〆ヶ';
   const RUBY_RE = new RegExp('([' + KANJI + ']+)\\[([^\\]]+)\\]', 'g');
   const BLANK_RE = /\{(\d+)\}/g;
-  const STORE_KEY = 'tokidoki_story_fill';
+  const TYPED = typeof document !== 'undefined' && document.body.dataset.typed === 'particles';
+  const STORE_KEY = TYPED ? 'tokidoki_particle_story' : 'tokidoki_story_fill';
   const SETTINGS_KEY = 'tokidoki_story_fill_settings';
   const LEVELS = ['N5', 'N4', 'N3'];
 
@@ -61,10 +64,29 @@
     return idx;
   }
 
-  // `picks` holds the chosen choice index (into blank.choices) per blank.
-  const score = (passage, picks) => passage.blanks.filter((b, i) => picks[i] === b.answer).length;
+  // A typed particle as kana. Romaji is read the way particles are spoken:
+  // "wa" → は, "e" → へ, "o" → を ("dewa" → では). Kana typed as わ stays わ.
+  function typedParticle(text) {
+    let t = String(text == null ? '' : text).normalize('NFKC').toLowerCase().replace(/[\s、。,.]/g, '');
+    t = t.replace(/[ァ-ヶ]/g, c => String.fromCharCode(c.charCodeAt(0) - 0x60));
+    if (!/[a-z]/.test(t)) return t;
+    const R = global.Romaji || (typeof require === 'function' ? require('./romaji.js') : null);
+    t = R ? R.toHiragana(t, true) : t;
+    if (t === 'え') return 'へ';
+    if (t === 'お') return 'を';
+    return t.replace(/わ$/, 'は');
+  }
 
-  const api = { rubyHtml, plain, splitBlanks, blankOrder, shuffleOrder, score, LEVELS };
+  // The answer as shown, and every answer that counts.
+  const answerText = b => ('choices' in b ? b.choices[b.answer] : b.answer);
+  const accepted = b => [b.answer, ...(b.also || [])];
+
+  // `picks` holds, per blank, the chosen choice index (into blank.choices) or,
+  // for a typed blank, the text typed.
+  const isRight = (b, pick) => ('choices' in b ? pick === b.answer : pick != null && accepted(b).includes(typedParticle(pick)));
+  const score = (passage, picks) => passage.blanks.filter((b, i) => isRight(b, picks[i])).length;
+
+  const api = { rubyHtml, plain, splitBlanks, blankOrder, shuffleOrder, typedParticle, isRight, score, LEVELS };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   global.StoryFill = api;
   if (typeof document === 'undefined') return;
@@ -78,9 +100,9 @@
     try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* storage unavailable */ }
   }
 
-  const PASSAGES = global.STORY_FILL_PASSAGES || [];
+  const PASSAGES = (TYPED ? global.PARTICLE_STORIES : global.STORY_FILL_PASSAGES) || [];
   // Each passage split into words, from story-fill-words.js (generated).
-  const WORDS = global.STORY_FILL_WORDS || { gloss: {}, passages: {} };
+  const WORDS = (TYPED ? global.PARTICLE_STORY_WORDS : global.STORY_FILL_WORDS) || { gloss: {}, passages: {} };
   // Saved words join the word flashcard deck, reviewed on flashcards.html.
   const DECK_KEY = 'tokidoki_story_words';
   const SRS_KEY = 'tokidoki_srs';
@@ -127,18 +149,36 @@
     selected = null;
     attempt = {
       passage,
-      order: passage.blanks.map(b => shuffleOrder(b.choices.length)),
+      order: passage.blanks.map(b => ('choices' in b ? shuffleOrder(b.choices.length) : null)),
       picks: passage.blanks.map(() => null),
       checked: false,
     };
     $('sf-title').innerHTML = `<span class="sf-item-level">${esc(passage.level)}</span> <span lang="ja">${rubyHtml(passage.title)}</span>`;
     show('screen-story-fill');
     renderAttempt();
+    const first = document.querySelector('.sf-input');
+    if (first) first.focus({ preventScroll: true });
   }
 
   // ─── Passage ───────────────────────────────────────────────────────────────
 
+  // A typed blank: an input until checked, then what you wrote, marked.
+  function typedBlankHtml(i) {
+    const { passage, picks, checked } = attempt;
+    const b = passage.blanks[i];
+    const pick = picks[i] || '';
+    const num = `<span class="sf-blank-num">${i + 1}</span>`;
+    if (!checked) {
+      return `<span class="sf-blank sf-typed${pick ? ' sf-picked' : ''}">${num}<input class="sf-input" data-blank="${i}" value="${esc(pick)}"
+        lang="ja" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="next" aria-label="Particle ${i + 1}"></span>`;
+    }
+    const right = isRight(b, pick);
+    const fix = right ? '' : `<span class="sf-fix">${esc(b.answer)}</span>`;
+    return `<a class="sf-blank sf-typed ${right ? 'sf-right' : 'sf-wrong'}" href="#sf-q-${i}" data-jump="${i}">${num}${esc(typedParticle(pick)) || '&nbsp;'}</a>${fix}`;
+  }
+
   function blankHtml(i) {
+    if (TYPED) return typedBlankHtml(i);
     const { passage, picks, checked } = attempt;
     const b = passage.blanks[i];
     const pick = picks[i];
@@ -183,7 +223,7 @@
     let to = i;
     while (to < par.length - 1 && !ends(par[to])) to++;
     return par.slice(from, to + 1).map(t => {
-      if (isBlank(t)) { const b = attempt.passage.blanks[blankIndex(t)]; return b.choices[b.answer]; }
+      if (isBlank(t)) return answerText(attempt.passage.blanks[blankIndex(t)]);
       return (typeof t === 'string' ? t : t[0]).replace(/\s+/g, '');
     }).filter(Boolean).join(' ');
   }
@@ -201,7 +241,7 @@
       const p = attempt.passage;
       deck[key] = {
         vocab: p.level.toLowerCase(), kana, meaning, added: Date.now(),
-        jp: sentenceAround(pi, i), en: p.en[pi] || '', title: `${p.titleEn} (Story Fill-in)`, level: p.level,
+        jp: sentenceAround(pi, i), en: p.en[pi] || '', title: `${p.titleEn} (${TYPED ? 'Particle story' : 'Story Fill-in'})`, level: p.level,
       };
     }
     save(DECK_KEY, deck);
@@ -254,7 +294,26 @@
     renderPanel();
   }
 
+  // Typed blanks have nothing to choose from, so they're listed only once
+  // checked: what you wrote, the answer, and why.
+  function renderTypedQuestions() {
+    const { passage, picks, checked } = attempt;
+    $('sf-questions').innerHTML = !checked ? '' : blankOrder(passage).map(i => {
+      const b = passage.blanks[i];
+      const right = isRight(b, picks[i]);
+      const also = (b.also || []).length ? ` <span class="sf-also">(also right: <span lang="ja">${b.also.map(esc).join('、')}</span>)</span>` : '';
+      const result = right
+        ? `<b class="sf-verdict-right">✓ <span lang="ja">${esc(typedParticle(picks[i]))}</span></b>`
+        : `<b class="sf-verdict-wrong">✗ You wrote <span lang="ja">${esc(typedParticle(picks[i])) || '—'}</span>; the answer is <span lang="ja">${esc(b.answer)}</span></b>`;
+      return `<div class="sf-q ${right ? 'sf-q-right' : 'sf-q-wrong'}" id="sf-q-${i}">
+        <div class="sf-q-head"><span class="sf-q-num">${i + 1}</span>${result}${also}</div>
+        <div class="particle-explanation sf-why">${esc(b.why)}</div>
+      </div>`;
+    }).join('');
+  }
+
   function renderQuestions() {
+    if (TYPED) { renderTypedQuestions(); return; }
     const { passage, order, picks, checked } = attempt;
     $('sf-questions').innerHTML = blankOrder(passage).map(i => {
       const b = passage.blanks[i];
@@ -281,9 +340,7 @@
     const { passage, picks, checked } = attempt;
     renderText();
     renderQuestions();
-    const answered = picks.filter(p => p != null).length;
-    $('sf-answered').textContent = `${answered} / ${passage.blanks.length} answered`;
-    $('btn-sf-check').disabled = answered < passage.blanks.length;
+    renderAnswered();
     $('sf-check-area').classList.toggle('hidden', checked);
     $('sf-result').classList.toggle('hidden', !checked);
     $('sf-actions').classList.toggle('hidden', !checked);
@@ -298,6 +355,13 @@
     }
   }
 
+  function renderAnswered() {
+    const { passage, picks } = attempt;
+    const answered = picks.filter(p => p != null && p !== '').length;
+    $('sf-answered').textContent = `${answered} / ${passage.blanks.length} answered`;
+    $('btn-sf-check').disabled = answered < passage.blanks.length;
+  }
+
   function pick(i, c) {
     if (!attempt || attempt.checked) return;
     attempt.picks[i] = c;
@@ -306,7 +370,7 @@
 
   function check() {
     const { passage, picks } = attempt;
-    if (picks.some(p => p == null)) return;
+    if (picks.some(p => p == null || p === '')) return;
     attempt.checked = true;
     const s = score(passage, picks);
     const prev = store.best[passage.id];
@@ -362,7 +426,33 @@
     const first = q.querySelector('button:not(:disabled)');
     if (first) first.focus({ preventScroll: true });
   });
+  // Typed blanks: the text is kept as you type (without re-rendering, so the
+  // input keeps its focus), shown as kana when you leave it, and Enter moves
+  // on to the next blank, then to Check.
+  $('sf-text').addEventListener('input', e => {
+    const input = e.target.closest('.sf-input');
+    if (!input || !attempt || attempt.checked) return;
+    attempt.picks[Number(input.dataset.blank)] = input.value.trim();
+    input.parentElement.classList.toggle('sf-picked', !!input.value.trim());
+    renderAnswered();
+  });
+  $('sf-text').addEventListener('focusout', e => {
+    const input = e.target.closest('.sf-input');
+    if (!input || !attempt || attempt.checked) return;
+    const kana = typedParticle(input.value);
+    if (kana !== input.value) input.value = kana;
+    attempt.picks[Number(input.dataset.blank)] = kana;
+  });
   $('sf-text').addEventListener('keydown', e => {
+    const input = e.target.closest('.sf-input');
+    if (input && e.key === 'Enter') {
+      e.preventDefault();
+      const inputs = [...document.querySelectorAll('.sf-input')];
+      const next = inputs.slice(inputs.indexOf(input) + 1).find(el => !el.value.trim()) || inputs.find(el => !el.value.trim());
+      if (next) next.focus();
+      else { input.blur(); $('btn-sf-check').focus(); }
+      return;
+    }
     const w = e.target.closest('.sf-word');
     if (w && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); selectWord(Number(w.dataset.p), Number(w.dataset.i)); }
   });

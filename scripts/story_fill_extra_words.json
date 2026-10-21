@@ -663,5 +663,105 @@
     "すぎる",
     "(after a stem) too much: 使いすぎる = use too much; to pass",
     "る-verb"
+  ],
+  "ゴミ": [
+    "ごみ",
+    "rubbish, trash",
+    "noun"
+  ],
+  "京都": [
+    "きょうと",
+    "Kyoto (city)",
+    "proper noun"
+  ],
+  "アイス": [
+    "アイス",
+    "ice cream (short for アイスクリーム)",
+    "noun"
+  ],
+  "へや": [
+    "へや",
+    "room",
+    "noun"
+  ],
+  "スペイン": [
+    "スペイン",
+    "Spain",
+    "proper noun"
+  ],
+  "おべんとう": [
+    "おべんとう",
+    "packed lunch, bento",
+    "noun"
+  ],
+  "まど": [
+    "まど",
+    "window",
+    "noun"
+  ],
+  "何枚": [
+    "なんまい",
+    "how many (flat things); 何枚も: many (photos, sheets)",
+    "noun"
+  ],
+  "二日目": [
+    "ふつかめ",
+    "the second day",
+    "noun"
+  ],
+  "抹茶": [
+    "まっちゃ",
+    "matcha (powdered green tea)",
+    "noun"
+  ],
+  "もみじ": [
+    "もみじ",
+    "maple; red autumn leaves",
+    "noun"
+  ],
+  "十一時": [
+    "じゅういちじ",
+    "eleven o’clock",
+    "noun"
+  ],
+  "ペットボトル": [
+    "ペットボトル",
+    "plastic (PET) bottle",
+    "noun"
+  ],
+  "など": [
+    "など",
+    "and so on, etc.",
+    "particle"
+  ],
+  "ホームページ": [
+    "ホームページ",
+    "website, home page",
+    "noun"
+  ],
+  "シール": [
+    "シール",
+    "sticker",
+    "noun"
+  ],
+  "日本人": [
+    "にほんじん",
+    "Japanese (person)",
+    "noun"
+  ],
+  "三時間": [
+    "さんじかん",
+    "three hours",
+    "noun"
+  ],
+  "つくえ": [
+    "つくえ",
+    "desk",
+    "noun"
+  ],
+  "ゴミ袋": [
+    "ごみぶくろ",
+    "rubbish bag",
+    "noun"
   ]
 }
