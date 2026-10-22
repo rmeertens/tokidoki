@@ -3,7 +3,9 @@
 // in sound furigana markup (every kanji with a kana reading — the 🔊 buttons
 // read those). news-words.js (scripts/tokenize_news.mjs) must cover every
 // headline and sentence exactly, with every word and grammar point it names.
-// Every story has its own page, news-<id>.html (scripts/render_news_pages.mjs).
+// Every story has its own page, news-<id>.html, carrying just its own data;
+// news.html lists the last 7 days and every week has a page,
+// news-week-<monday>.html (all written by scripts/render_news_pages.mjs).
 // Also checks news.js's helpers.
 const fs = require('fs');
 global.window = global;
@@ -136,12 +138,46 @@ check(News.lineSource(NEWS_ITEMS, 'nope:N5:0') === null, 'lineSource() of an unk
 // ─── The page ────────────────────────────────────────────────────────────────
 
 const html = fs.readFileSync(`${__dirname}/news.html`, 'utf8');
-['news-data.js', 'news-words.js', 'news-audio.js', 'news.js', 'app.js'].forEach(f => check(html.includes(`src="${f}`), `news.html doesn't load ${f}`));
-['news-headlines', 'news-index-levels', 'news-toggle-furigana', 'news-saved-grammar-list', 'news-saved-grammar-count'].forEach(id => check(html.includes(`id="${id}"`), `news.html has no #${id}`));
+const renderIt = 'run node scripts/render_news_pages.mjs';
+['news.js', 'app.js'].forEach(f => check(html.includes(`src="${f}`), `news.html doesn't load ${f}`));
+['news-headlines', 'news-index-levels', 'news-toggle-furigana', 'news-saved-grammar-list', 'news-saved-grammar-count', 'news-archive'].forEach(id => check(html.includes(`id="${id}"`), `news.html has no #${id}`));
+
+// Every page carries only its own stories, inline, so no page (or download)
+// grows with the archive: the data files are build inputs, never loaded.
+const pageData = (file, text) => {
+  check(!/src="news-(data|words|audio)\.js/.test(text), `${file} loads all the news — ${renderIt}`);
+  const m = text.match(/<script id="news-page-data">([\s\S]*?)<\/script>/);
+  check(!!m, `${file}: no news-page-data — ${renderIt}`);
+  const g = {};
+  if (m) new Function('window', m[1])(g);
+  return g;
+};
+const byDate = [...new Set(NEWS_ITEMS.map(it => it.date))];
+const recentIds = NEWS_ITEMS.filter(it => byDate.slice(0, 7).includes(it.date)).map(it => it.id);
+const indexData = pageData('news.html', html);
+check(JSON.stringify((indexData.NEWS_ITEMS || []).map(it => it.id)) === JSON.stringify(recentIds), `news.html should list the last 7 days of news — ${renderIt}`);
+recentIds.forEach(id => check(html.includes(`href="${News.pageFile(id)}"`), `news.html: no link to ${id} — ${renderIt}`));
+
+// The archive: one page a week, Monday to Sunday, every story on one.
+check(News.weekOf('2026-10-19') === '2026-10-19' && News.weekOf('2026-10-25') === '2026-10-19' && News.weekOf('2026-10-18') === '2026-10-12', 'weekOf() should give the Monday');
+const weeks = [...new Set(NEWS_ITEMS.map(it => News.weekOf(it.date)))];
+const weekPages = fs.readdirSync(__dirname).filter(f => /^news-week-.+\.html$/.test(f));
+weeks.forEach(w => {
+  const file = News.weekFile(w);
+  check(weekPages.includes(file), `${file} missing — ${renderIt}`);
+  check(html.includes(`href="${file}"`), `news.html: no link to ${file} — ${renderIt}`);
+  if (!weekPages.includes(file)) return;
+  const page = fs.readFileSync(`${__dirname}/${file}`, 'utf8');
+  const want = NEWS_ITEMS.filter(it => News.weekOf(it.date) === w).map(it => it.id);
+  const data = pageData(file, page);
+  check(JSON.stringify((data.NEWS_ITEMS || []).map(it => it.id)) === JSON.stringify(want), `${file}: wrong stories — ${renderIt}`);
+  want.forEach(id => check(page.includes(`href="${News.pageFile(id)}"`), `${file}: no link to ${id} — ${renderIt}`));
+  check(fs.readFileSync(`${__dirname}/sitemap.xml`, 'utf8').includes(`/${file}`), `${file} missing from sitemap.xml — ${renderIt}`);
+});
+weekPages.forEach(f => check(weeks.some(w => News.weekFile(w) === f), `${f} is for a week with no news — ${renderIt}`));
 
 // One page per story, written by scripts/render_news_pages.mjs.
 const pages = fs.readdirSync(__dirname).filter(f => /^news-\d{4}-.+\.html$/.test(f));
-const renderIt = 'run node scripts/render_news_pages.mjs';
 NEWS_ITEMS.forEach(item => {
   const file = News.pageFile(item.id);
   check(pages.includes(file), `${file} missing — ${renderIt}`);
@@ -150,6 +186,22 @@ NEWS_ITEMS.forEach(item => {
   check(page.includes(`data-story="${item.id}"`), `${file}: wrong story — ${renderIt}`);
   ['news-text', 'news-panel', 'news-panel-body', 'news-levels', 'news-toggle-furigana', 'news-toggle-english', 'btn-news-read', 'btn-news-read-slow'].forEach(id => check(page.includes(`id="${id}"`), `${file} has no #${id} — ${renderIt}`));
   News.LEVELS.forEach(l => check(page.includes(News.plainText(item.levels[l].title)), `${file}: ${l} text out of date — ${renderIt}`));
+  // Its own text, words and recordings, exactly as in the data files.
+  const data = pageData(file, page);
+  check(JSON.stringify(data.NEWS_ITEMS) === JSON.stringify([item]), `${file}: story data out of date — ${renderIt}`);
+  const w = data.NEWS_WORDS || { lines: {}, gloss: {}, grammar: {} };
+  News.LEVELS.filter(l => item.levels[l]).forEach(l => {
+    ['t', ...item.levels[l].lines.keys()].forEach(n => {
+      const id = News.lineId(item, l, n);
+      check(JSON.stringify(w.lines[id]) === JSON.stringify(NEWS_WORDS.lines[id]), `${file}: words for ${id} out of date — ${renderIt}`);
+      (NEWS_WORDS.lines[id] || { w: [], g: [] }).w.filter(Array.isArray).forEach(([, key]) => check(!!w.gloss[key], `${file}: no gloss for ${key} — ${renderIt}`));
+      (NEWS_WORDS.lines[id] || { w: [], g: [] }).g.forEach(([gid]) => check(!!w.grammar[gid], `${file}: no grammar ${gid} — ${renderIt}`));
+    });
+    const key = News.audioKey(item, l);
+    check(JSON.stringify((data.NEWS_AUDIO || {})[key]) === JSON.stringify(AUDIO[key]), `${file}: recording times for ${l} out of date — ${renderIt}`);
+  });
+  check(Object.keys(w.lines).every(id => id.startsWith(`${item.id}:`)), `${file}: carries other stories' words — ${renderIt}`);
+  check(page.length < 120000, `${file}: ${page.length} bytes — a story page should stay small`);
   check(fs.readFileSync(`${__dirname}/sitemap.xml`, 'utf8').includes(`/${file}`), `${file} missing from sitemap.xml — ${renderIt}`);
 });
 pages.forEach(f => check(NEWS_ITEMS.some(it => News.pageFile(it.id) === f), `${f} is for a story that's gone — ${renderIt}`));

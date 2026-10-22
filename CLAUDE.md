@@ -59,10 +59,17 @@
   `npm install --no-save kuromoji` first). Re-run it after changing
   `phrases-data.js` or `phrases-stories.js`; missing words go in
   `scripts/phrase_extra_words.json`. `test_phrases.js` fails if it's stale.
-- The News story pages, `news-<id>.html`, are written by
-  `node scripts/render_news_pages.mjs` from `news.html` (head, nav, scripts)
-  and `news-data.js`; re-run it after changing either (it also updates the
-  sitemap). Their words and grammar come from `news-words.js`, built by
+- The News pages are written by `node scripts/render_news_pages.mjs` from
+  `news.html` (head, nav, scripts) and `news-data.js` / `news-words.js` /
+  `news-audio.js`; re-run it after changing any of them (it also updates the
+  sitemap). Each story page, `news-<id>.html`, carries only its own story,
+  words and recording times inline (`<script id="news-page-data">`), and the
+  browser never loads the three data files, so pages don't grow with the
+  archive. `news.html` lists the last 7 days, and each week (Monday to
+  Sunday) has a page, `news-week-<monday>.html`, which stops changing once
+  its week is over. A day's news rewrites only `news.html`, this week's
+  page, the new stories and the story before them. Their words and grammar
+  come from `news-words.js`, built by
   `node scripts/tokenize_news.mjs` (kuromoji, as above); missing words go in
   `scripts/news_extra_words.json`. `test_news.js` fails if either is stale.
 
@@ -209,11 +216,12 @@ Japan, told at N5, N4 and N3. To add them:
    差, or a grammar point that doesn't fit). Fix by adding a word, tightening
    a rule in `NEWS_RULES`, or rephrasing the sentence.
 4. **Make the pages**: `node scripts/render_news_pages.mjs` (story pages,
-   pager links, sitemap).
+   week pages, `news.html`, pager links, sitemap).
 5. **Record the audio**: set up VOICEVOX as above, then
    `.../venv/bin/python scripts/generate_news_audio.py --voicevox $VV --check`
    (every reading must match) and the same without `--check` to record. Only
-   the new stories are recorded.
+   the new stories are recorded. Then re-run `render_news_pages.mjs`, since
+   the story pages carry their recording times.
 6. **Test and push**: `node test_news.js` (and the other tests), look at
    the new pages in a browser if you can (Playwright + Chromium is
    available: serve the repo with `python3 -m http.server` and open

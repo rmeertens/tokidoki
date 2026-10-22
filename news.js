@@ -1,14 +1,21 @@
 // The News pages: short news stories from news-data.js, each told at JLPT
 // N5, N4 and N3.
 //
-//   news.html          — the headlines, newest first, in the level picked
-//                        there, plus the grammar points saved from stories.
+//   news.html          — the last week's headlines, newest first, in the
+//                        level picked there, plus the grammar points saved
+//                        from stories.
+//   news-week-<date>.html — the headlines of one week (from Monday <date>).
 //   news-<id>.html     — one story (body data-story="<id>"), read like a
 //                        story on the Stories page, with an N5 / N4 / N3
 //                        switch. These pages are written by
 //                        scripts/render_news_pages.mjs.
 //
-// The last level picked, on either, is remembered for both.
+// The last level picked, on any of them, is remembered for all.
+//
+// Every page carries only its own stories (window.NEWS_ITEMS, and on a story
+// page that story's NEWS_WORDS and NEWS_AUDIO), written into it by
+// scripts/render_news_pages.mjs from news-data.js, news-words.js and
+// news-audio.js — so no page grows as the news does.
 //
 // In a story, tapping a word shows its reading and meaning (from
 // news-words.js, built by scripts/tokenize_news.mjs) and can save it to the
@@ -98,7 +105,40 @@
     return d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
   }
 
-  const api = { LEVELS, NEWS_VOICE, NEWS_SPEED, audioKey, audioScript, scriptHash, lineId, pageFile, lineSource, deckSentence, plainText, kanaText, rubyHtml };
+  // The headline cards, by day, at `level` (`jp` turns markup into HTML).
+  // The pages are written with these already in (N5, with furigana), by
+  // scripts/render_news_pages.mjs, and news.js redraws them for the
+  // reader's level.
+  function headlinesHtml(items, level, jp = rubyHtml) {
+    const dates = [...new Set(items.map(it => it.date))];
+    return dates.length ? dates.map(date => `
+      <section class="news-day" id="day-${date}">
+        <h2 class="phrase-group-title">${esc(formatDate(date))}</h2>
+        <div class="news-headline-list">
+          ${items.filter(it => it.date === date).map(it => {
+            const v = it.levels[level] || it.levels[LEVELS.find(l => it.levels[l])];
+            return `
+          <a class="chapter-card news-headline-card" href="${pageFile(it.id)}">
+            <span class="news-headline-emoji" aria-hidden="true">${it.emoji}</span>
+            <span class="news-headline-text">
+              <span class="news-headline-jp" lang="ja">${jp(v.title)}</span>
+              <span class="news-headline-en">${esc(it.titleEn)}</span>
+            </span>
+          </a>`;
+          }).join('')}
+        </div>
+      </section>`).join('') : '<p class="phrase-empty">No news yet — check back soon.</p>';
+  }
+
+  // News is archived by week, Monday to Sunday: news-week-<monday>.html.
+  function weekOf(iso) {
+    const d = new Date(`${iso}T12:00:00Z`);
+    d.setUTCDate(d.getUTCDate() - (d.getUTCDay() + 6) % 7);
+    return d.toISOString().slice(0, 10);
+  }
+  const weekFile = monday => `news-week-${monday}.html`;
+
+  const api = { LEVELS, NEWS_VOICE, NEWS_SPEED, audioKey, audioScript, scriptHash, lineId, pageFile, weekOf, weekFile, lineSource, deckSentence, plainText, kanaText, rubyHtml, formatDate, headlinesHtml };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   if (typeof document === 'undefined') return;
 
@@ -583,30 +623,13 @@
     document.querySelectorAll('#news-index-levels [data-level]').forEach(btn => {
       btn.setAttribute('aria-pressed', btn.dataset.level === settings.level);
     });
-    const dates = [...new Set(items.map(it => it.date))];
-    $('#news-headlines').innerHTML = dates.length ? dates.map(date => `
-      <section class="news-day">
-        <h2 class="phrase-group-title">${esc(formatDate(date))}</h2>
-        <div class="news-headline-list">
-          ${items.filter(it => it.date === date).map(it => {
-            const v = it.levels[settings.level] || it.levels[LEVELS.find(l => it.levels[l])];
-            return `
-          <a class="chapter-card news-headline-card" href="${pageFile(it.id)}">
-            <span class="news-headline-emoji" aria-hidden="true">${it.emoji}</span>
-            <span class="news-headline-text">
-              <span class="news-headline-jp" lang="ja">${jpHtml(v.title)}</span>
-              <span class="news-headline-en">${esc(it.titleEn)}</span>
-            </span>
-          </a>`;
-          }).join('')}
-        </div>
-      </section>`).join('') : '<p class="phrase-empty">No news yet — check back soon.</p>';
+    $('#news-headlines').innerHTML = headlinesHtml(items, settings.level, jpHtml);
   }
 
   function initIndex() {
     // Old links to a story on the index (news.html#<id>) go to its page.
     const hash = decodeURIComponent(location.hash.slice(1));
-    if (items.some(it => it.id === hash)) { location.replace(pageFile(hash)); return; }
+    if (/^\d{4}-\d{2}-\d{2}-[a-z0-9-]+$/.test(hash)) { location.replace(pageFile(hash)); return; }
     renderHeadlines();
     renderSavedGrammar();
     $('#news-index-levels').addEventListener('click', e => {

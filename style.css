@@ -7433,6 +7433,51 @@ a.chapter-card.news-headline-card {
   color: var(--text-dim);
 }
 
+/* Older news, by week (news.html), and the links under a week page. */
+.news-archive {
+  margin-top: 28px;
+}
+
+.news-archive-list {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.news-archive-list a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-card);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.news-archive-list a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.news-archive-count {
+  color: var(--text-dim);
+  font-size: 0.85em;
+}
+
+.news-archive-latest {
+  margin: 12px 0 0;
+  text-align: center;
+}
+
+.news-archive-latest a {
+  color: var(--accent);
+}
+
 .news-saved {
   margin-top: 8px;
   scroll-margin-top: 80px;

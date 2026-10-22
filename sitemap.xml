@@ -146,6 +146,21 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://tokidoki.meertens.dev/news-week-2026-10-19.html</loc>
+    <lastmod>2026-10-22</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-week-2026-10-12.html</loc>
+    <lastmod>2026-10-18</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-week-2026-10-05.html</loc>
+    <lastmod>2026-10-11</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://tokidoki.meertens.dev/news-2026-10-22-gymnastics-worlds.html</loc>
     <lastmod>2026-10-22</lastmod>
     <priority>0.6</priority>
