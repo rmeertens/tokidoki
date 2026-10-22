@@ -65,6 +65,19 @@ ok(TA.snippetWords(sentence.words, '晴れ').length === 0 && TA.snippetWords(sen
 ok(TA.deckSentence(sentence.words) === '雨[あめ] が 降[ふ]っている>降る から 、 出[で]かけません>出かける 。', 'deck sentence');
 ok(TA.isPunct(sentence.words[4]) && !TA.isPunct(sentence.words[1]), 'punctuation');
 
+// ─── Saved texts ───────────────────────────────────────────────────────────
+ok(TA.titleOf('  今日は雨です。\n明日は晴れ。') === '今日は雨です。', 'title is the first line');
+ok(TA.titleOf('あ'.repeat(50)) === 'あ'.repeat(40) + '…', 'long titles are cut');
+let lib = TA.addToLibrary([], { text: 'A', level: 'N5', result, t: 1000 });
+lib = TA.addToLibrary(lib, { text: 'B', level: 'N5', result, t: 2000 });
+ok(lib.length === 2 && lib[0].text === 'B' && lib[0].id !== lib[1].id, 'newest first, own ids');
+const idA = lib[1].id;
+lib = TA.addToLibrary(lib, { text: 'A', level: 'N5', result, t: 3000 });
+ok(lib.length === 2 && lib[0].text === 'A' && lib[0].id === idA && lib[0].t === 3000, 'the same text again replaces it, keeping its id');
+lib = TA.addToLibrary(lib, { text: 'A', level: 'N4', result, t: 4000 });
+ok(lib.length === 3, 'another level is another entry');
+ok(!/^tokidoki[_-]/.test(TA.LIBRARY_KEY), 'saved texts stay out of the account sync');
+
 // ─── The page ──────────────────────────────────────────────────────────────
 const html = fs.readFileSync('text-analysis.html', 'utf8');
 ok(html.includes('data-mode="text-analysis"') && html.includes('text-analysis.js') && html.includes('claude-feedback.js'), 'page loads its scripts');

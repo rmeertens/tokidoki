@@ -51,7 +51,10 @@
   same key: Claude splits a pasted text into sentences and words (furigana,
   meaning, grammar per sentence), shown like a News story. It sends its own
   request through `ClaudeFeedback.stream`; without a key the page only
-  explains how to add one. `test_text_analysis.js` covers it.
+  explains how to add one. Every finished analysis is also saved, with its
+  text, in a "Saved texts" list kept only on the device
+  (`text-analysis-library`, outside the synced names: analyses are too big
+  for the one sync document). `test_text_analysis.js` covers it.
 
 ## Generated pages
 

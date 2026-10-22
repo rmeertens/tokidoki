@@ -8137,3 +8137,12 @@ body.cs-wide #app { max-width: 1200px; }
 .ta-summary { margin: 0 0 12px; padding: 12px 16px; border-radius: var(--radius); border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border)); background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 8%, var(--bg-card)), var(--bg-card)); }
 .ta-result .cs-fb-thinking, .ta-result .cs-fb-stale { margin: 0 0 12px; }
 .ta-live .story-sentence { cursor: default; }
+.ta-library { margin-bottom: 24px; }
+.ta-library-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.ta-library-item { display: flex; align-items: center; gap: 8px; padding: 4px 6px 4px 4px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.ta-library-item.current { border-color: var(--accent); background: var(--accent-dim); }
+.ta-library-open { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; padding: 8px 10px; background: none; border: none; text-align: left; cursor: pointer; color: inherit; border-radius: var(--radius-sm); }
+.ta-library-open:hover { background: var(--bg-card-hover); }
+.ta-library-title { font-family: var(--font-jp); font-size: 1rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ta-library-meta { font-size: 0.78rem; color: var(--text-muted); }
+.ta-library-del { flex-shrink: 0; }
