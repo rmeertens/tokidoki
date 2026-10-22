@@ -17,8 +17,8 @@
 // Rules: the SRS store keeps each card's most recently reviewed schedule;
 // the word and kanji decks (and saved grammar) keep every card either side has (unless the
 // other side deleted it); stats and the review log add up the reviews done
-// on each side; game stores keep the best scores and the union of "missed"
-// lists.
+// on each side, and word lookups the taps; game stores keep the best scores
+// and the union of "missed" lists.
 //
 // The bottom half is how that data is laid out in the account document
 // (`encodeAccount` / `decodeAccount`), built so a sync sends little.
@@ -157,6 +157,13 @@
     return out;
   }
 
+  // Word lookups (word-lookups.js), { [word]: [times, last tap] }: the taps
+  // on each side added up, and the later last tap.
+  const mergeLookups = (b, l, r) => mergeMap(b, l, r, (le, re, be) => {
+    const [lt, ll] = Array.isArray(le) ? le : [], [rt, rl] = Array.isArray(re) ? re : [];
+    return [addCounts(lt, rt, Array.isArray(be) ? be[0] : 0, !isObj(b)), Math.max(ll || 0, rl || 0)];
+  });
+
   // How to merge a key both sides changed: (base, local, remote) → value.
   const RULES = {
     tokidoki_srs: (b, l, r) => mergeMap(b, l, r, laterReview),
@@ -173,6 +180,7 @@
     tokidoki_listening: mergeGameStore,
     tokidoki_vocab_quiz: mergeGameStore,
     tokidoki_conversation: mergeConversation,
+    tokidoki_lookups: mergeLookups,
   };
 
   // One key, as raw strings (null = not set). Returns the merged raw string, or null.

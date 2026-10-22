@@ -20,7 +20,7 @@
   <meta name="twitter:description" content="Review the Japanese words and kanji you saved while reading, with spaced repetition: word or kanji to meaning, or meaning to word or kanji. Tap or swipe to grade; export to Anki, CSV or print.">
   <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
   <link rel="canonical" href="https://tokidoki.meertens.dev/flashcards.html">
-  <link rel="stylesheet" href="style.css?v=78">
+  <link rel="stylesheet" href="style.css?v=79">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -103,7 +103,8 @@
       <p class="tab-intro">
         The words and kanji you&rsquo;ve saved anywhere on the site &mdash; from stories,
         jokes, the mystery, Story Fill-in, the Vocabulary page, Words by Kanji or the Notepad &mdash;
-        reviewed with spaced repetition. Tap a card to see its answer, then tap or swipe
+        reviewed with spaced repetition &mdash; or in order of the words you&rsquo;ve looked
+        up most recently or most often. Tap a card to see its answer, then tap or swipe
         left if you didn&rsquo;t know it and right if you did &mdash; or tick <i>Type answers</i>
         to type the meaning, or the word, before you see it (romaji turns into hiragana as you
         type; Space or a tap on a suggestion turns it into kanji).
@@ -123,6 +124,18 @@
         </label>
         <label class="kana-script-toggle" title="Type the answer — the meaning in English, or the word in hiragana (romaji turns into kana as you type) — before seeing it">
           <input type="checkbox" class="flashcard-typing-toggle" id="deck-typing"> Type answers
+        </label>
+      </div>
+      <div class="kana-settings-row deck-direction deck-order" id="deck-order" role="radiogroup" aria-label="Review order">
+        <span class="deck-order-label">Order</span>
+        <label class="kana-script-toggle" title="Spaced repetition: the cards that are due">
+          <input type="radio" name="deck-order" value="srs" checked> SRS
+        </label>
+        <label class="kana-script-toggle" title="The words you tapped to look up most recently first">
+          <input type="radio" name="deck-order" value="recent"> Recently looked up
+        </label>
+        <label class="kana-script-toggle" title="The words you've tapped to look up most often first">
+          <input type="radio" name="deck-order" value="often"> Most looked up
         </label>
       </div>
       <div class="kana-start-card story-deck-card">
@@ -240,8 +253,9 @@
   <script src="pronounce.js?v=2"></script>
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=4"></script>
-  <script src="app.js?v=65"></script>
-  <script src="sync-merge.js?v=7"></script>
+  <script src="word-lookups.js?v=1"></script>
+  <script src="app.js?v=66"></script>
+  <script src="sync-merge.js?v=8"></script>
   <script src="progress-stats.js?v=2"></script>
   <script src="sync.js?v=10"></script>
   <script src="sushi-sprites.js"></script>

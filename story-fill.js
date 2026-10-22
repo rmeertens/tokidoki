@@ -280,6 +280,7 @@
 
   function selectWord(pi, i) {
     selected = selected && selected.p === pi && selected.i === i ? null : { p: pi, i };
+    if (selected && global.WordLookups) WordLookups.record(WORDS.passages[attempt.passage.id][pi][i][1]);
     renderText();
     renderPanel();
     // With "Speak words on click" on, read out the word's dictionary form.

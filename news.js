@@ -351,6 +351,7 @@
 
   function select(sel) {
     selection = sel;
+    if (sel && sel.type === 'word' && global.WordLookups) WordLookups.record(sentenceWords(sel.s).w[sel.t][1]);
     activeGrammar = null;
     renderSelection();
   }

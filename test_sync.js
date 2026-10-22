@@ -76,6 +76,17 @@ ok(out.lastStudyDate === '2026-10-10' && out.streak === 4 && out.todayReviews ==
 out = P(M.mergeAll({}, { tokidoki_stats: J({ totalReviews: 5 }) }, { tokidoki_stats: J({ totalReviews: 50 }) }).tokidoki_stats);
 ok(out.totalReviews === 50, 'stats: first sync takes the larger total, not the sum');
 
+// Word lookups: taps on both sides add up, the later last tap wins.
+out = P(M.mergeAll(
+  { tokidoki_lookups: J({ 猫: [3, 100], 犬: [1, 50] }) },
+  { tokidoki_lookups: J({ 猫: [5, 300], 犬: [1, 50], 鳥: [1, 400] }) },
+  { tokidoki_lookups: J({ 猫: [4, 200], 魚: [2, 500] }) },
+).tokidoki_lookups);
+ok(J(out.猫) === J([6, 300]), 'lookups: both sides’ taps added, later time');
+ok(J(out.鳥) === J([1, 400]) && J(out.魚) === J([2, 500]) && !('犬' in out), 'lookups: new words kept, a removed one stays removed');
+out = P(M.mergeAll({}, { tokidoki_lookups: J({ 猫: [2, 10] }) }, { tokidoki_lookups: J({ 猫: [7, 5] }) }).tokidoki_lookups);
+ok(J(out.猫) === J([7, 10]), 'lookups: first sync takes the larger count, not the sum');
+
 // Mystery chapters.
 out = P(M.mergeAll({},
   { tokidoki_mystery: J({ c1: { step: 0, paws: 0, solved: true, best: 3 }, c2: { step: 4, paws: 2 } }) },

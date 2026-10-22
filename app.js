@@ -4542,6 +4542,14 @@
     return settings.deckDirection === 'meaning' ? 'meaning' : 'ja';
   }
 
+  // The word deck's review order: 'srs' (the due cards), or by lookups —
+  // 'recent' (last tapped to look up first) or 'often' (most taps first).
+  // Kanji cards are always SRS.
+  function deckOrder() {
+    const o = settings.deckOrder;
+    return storyDeckTab() === 'words' && window.WordLookups && (o === 'recent' || o === 'often') ? o : 'srs';
+  }
+
   function deckCardId(c) {
     return deckDirection() === 'meaning' ? c.id + RECALL_SUFFIX : c.id;
   }
@@ -4716,13 +4724,20 @@
 
   function renderStoryDeck() {
     const tab = storyDeckTab();
-    const words = getStoryDeck();
+    const order = deckOrder();
+    const lookups = window.WordLookups ? WordLookups.load() : {};
+    const now = Date.now();
+    let words = getStoryDeck();
+    if (order !== 'srs') words = WordLookups.sortCards(words, order, lookups);
     const kanji = getKanjiDeck();
     const deck = tab === 'kanji' ? kanji : words;
     const due = deck.filter(c => isDue(getCardState(srsData, deckCardId(c)))).length;
     const noun = tab === 'kanji' ? 'kanji' : 'word';
 
     $$('input[name="deck-direction"]').forEach(el => { el.checked = el.value === deckDirection(); });
+    const orderRow = $('#deck-order');
+    if (orderRow) orderRow.classList.toggle('hidden', tab !== 'words' || !window.WordLookups);
+    $$('input[name="deck-order"]').forEach(el => { el.checked = el.value === order; });
     $$('.deck-direction-ja').forEach(el => { el.textContent = tab === 'kanji' ? 'Kanji' : 'Word'; });
 
     $$('.deck-tab').forEach(btn => {
@@ -4745,7 +4760,7 @@
     const btn = $('#btn-story-review');
     if (btn) {
       btn.disabled = deck.length === 0;
-      btn.textContent = deck.length === 0 ? (tab === 'kanji' ? 'No kanji yet' : 'No words yet') : due > 0 ? 'Review' : 'Practice all';
+      btn.textContent = deck.length === 0 ? (tab === 'kanji' ? 'No kanji yet' : 'No words yet') : due > 0 || order !== 'srs' ? 'Review' : 'Practice all';
     }
 
     const exportRow = $('#story-export');
@@ -4775,6 +4790,7 @@
             <span class="story-deck-word">${storyDisplayWord(c.key)}</span>
             <span class="story-deck-reading">${c.gloss[0] !== storyDisplayWord(c.key) ? c.gloss[0] : ''}</span>
             <span class="story-deck-meaning">${c.gloss[1]}</span>
+            ${window.WordLookups && WordLookups.get(c.key, lookups).times ? `<span class="story-deck-lookups" title="Looked up ${WordLookups.get(c.key, lookups).times} times">🔍 ${WordLookups.describe(c.key, now, lookups)}</span>` : ''}
             ${kanjiChipsHtml(storyDisplayWord(c.key), { reading: c.gloss[0], meaning: c.gloss[1] })}
             ${pronounceButtons(c.gloss[0])}
             <button class="story-deck-remove" data-word="${c.key}" aria-label="Remove ${storyDisplayWord(c.key)} from flashcards" title="Remove">✕</button>
@@ -4980,6 +4996,8 @@
 
   function selectStoryWord(si, ti) {
     storySelection = { type: 'word', s: si, t: ti };
+    const token = currentStory && parseStorySentence(currentStory.sentences[si])[ti];
+    if (token && window.WordLookups) WordLookups.record(token.key);
     storyActiveGrammar = null;
     renderStorySelection();
   }
@@ -5094,8 +5112,14 @@
     const recall = deckDirection() === 'meaning';
     const deck = (kanji ? getKanjiDeck() : getStoryDeck()).map(c => ({ ...c, id: deckCardId(c), recall }));
     if (deck.length === 0) return;
-    const due = deck.filter(c => isDue(getCardState(srsData, c.id)));
-    storyReviewCards = pickBatch(`${kanji ? 'kanji-review' : 'story-review'}${recall ? '-recall' : ''}`, due, deck, cont);
+    const order = deckOrder();
+    const batchKey = `${kanji ? 'kanji-review' : 'story-review'}${recall ? '-recall' : ''}`;
+    if (order === 'srs') {
+      const due = deck.filter(c => isDue(getCardState(srsData, c.id)));
+      storyReviewCards = pickBatch(batchKey, due, deck, cont);
+    } else {
+      storyReviewCards = pickInOrder(`${batchKey}-${order}`, WordLookups.sortCards(deck, order), cont);
+    }
     storyReviewIndex = 0;
     storyReviewCorrect = 0;
     storyReviewUndoStack = [];
@@ -5819,6 +5843,21 @@
       cards = due.length > 0 ? due : pool.slice();
     }
     cards = prioritizeDifficult(cards).slice(0, size);
+    cards.forEach(c => seen.add(c.id));
+    return cards;
+  }
+
+  // Like pickBatch, but the next `size` cards of `pool` as ordered, due or
+  // not (the word deck reviewed by lookups).
+  function pickInOrder(key, pool, cont, size = 20) {
+    if (cont !== true || !sessionSeen[key]) sessionSeen[key] = new Set();
+    const seen = sessionSeen[key];
+    let cards = pool.filter(c => !seen.has(c.id));
+    if (cards.length === 0) {
+      seen.clear();
+      cards = pool;
+    }
+    cards = cards.slice(0, size);
     cards.forEach(c => seen.add(c.id));
     return cards;
   }
@@ -7049,6 +7088,13 @@
     $$('input[name="deck-direction"]').forEach(el => {
       el.addEventListener('change', () => {
         settings.deckDirection = el.value;
+        saveSettings(settings);
+        renderStoryDeck();
+      });
+    });
+    $$('input[name="deck-order"]').forEach(el => {
+      el.addEventListener('change', () => {
+        settings.deckOrder = el.value;
         saveSettings(settings);
         renderStoryDeck();
       });

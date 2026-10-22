@@ -7026,6 +7026,24 @@ body.sf-panel-open #screen-story-fill { padding-bottom: 50dvh; }
   margin-top: 12px;
 }
 
+/* Review order (word deck): SRS, or by when / how often a word was tapped
+   to look it up (word-lookups.js). */
+.deck-order {
+  margin-top: 8px;
+  align-items: center;
+}
+
+.deck-order-label {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.story-deck-lookups {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
 .deck-direction + .story-deck-card {
   margin-top: 12px;
 }

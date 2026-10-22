@@ -742,6 +742,7 @@
 
   function openWord(sid, t) {
     selection = { type: 'word', sid, t };
+    if (global.WordLookups) WordLookups.record(sents[sid].toks[t].key);
     renderPanel();
   }
 
