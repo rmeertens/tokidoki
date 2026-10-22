@@ -5123,5 +5123,400 @@
     "にじゅうに",
     "twenty-two",
     "number"
+  ],
+  "体操": [
+    "たいそう",
+    "gymnastics",
+    "noun"
+  ],
+  "銅メダル": [
+    "どうメダル",
+    "bronze medal",
+    "noun"
+  ],
+  "大輝": [
+    "だいき",
+    "Daiki (given name)",
+    "name"
+  ],
+  "鉄棒": [
+    "てつぼう",
+    "horizontal bar (gymnastics)",
+    "noun"
+  ],
+  "60年ぶり": [
+    "ろくじゅうねんぶり",
+    "for the first time in 60 years",
+    "expression"
+  ],
+  "ロサンゼルス": [
+    "ロサンゼルス",
+    "Los Angeles",
+    "name"
+  ],
+  "オリンピック": [
+    "オリンピック",
+    "the Olympics",
+    "noun"
+  ],
+  "ロッテルダム": [
+    "ロッテルダム",
+    "Rotterdam",
+    "name"
+  ],
+  "勝利": [
+    "しょうり",
+    "victory",
+    "noun"
+  ],
+  "21日": [
+    "にじゅういちにち",
+    "the 21st",
+    "date"
+  ],
+  "1966年": [
+    "せんきゅうひゃくろくじゅうろくねん",
+    "1966",
+    "year"
+  ],
+  "五輪": [
+    "ごりん",
+    "Olympics (short form)",
+    "noun"
+  ],
+  "ロス": [
+    "ロス",
+    "Los Angeles (short form)",
+    "name"
+  ],
+  "連覇": [
+    "れんぱ",
+    "winning consecutive titles",
+    "noun"
+  ],
+  "果たす": [
+    "はたす",
+    "to achieve, to carry out",
+    "verb"
+  ],
+  "重圧": [
+    "じゅうあつ",
+    "heavy pressure",
+    "noun"
+  ],
+  "踏ん張る": [
+    "ふんばる",
+    "to hold on, to stand firm",
+    "verb"
+  ],
+  "予選": [
+    "よせん",
+    "qualifying round",
+    "noun"
+  ],
+  "5位": [
+    "ごい",
+    "fifth place",
+    "noun"
+  ],
+  "表彰台": [
+    "ひょうしょうだい",
+    "podium",
+    "noun"
+  ],
+  "3度目": [
+    "さんどめ",
+    "the third time",
+    "noun"
+  ],
+  "16.7%": [
+    "じゅうろくてんななパーセント",
+    "16.7%",
+    "number"
+  ],
+  "49.4%": [
+    "よんじゅうきゅうてんよんパーセント",
+    "49.4%",
+    "number"
+  ],
+  "43.9%": [
+    "よんじゅうさんてんきゅうパーセント",
+    "43.9%",
+    "number"
+  ],
+  "15.1%": [
+    "じゅうごてんいちパーセント",
+    "15.1%",
+    "number"
+  ],
+  "22.9%": [
+    "にじゅうにてんきゅうパーセント",
+    "22.9%",
+    "number"
+  ],
+  "8.6%": [
+    "はちてんろくパーセント",
+    "8.6%",
+    "number"
+  ],
+  "18.9%": [
+    "じゅうはちてんきゅうパーセント",
+    "18.9%",
+    "number"
+  ],
+  "51.1%": [
+    "ごじゅういちてんいちパーセント",
+    "51.1%",
+    "number"
+  ],
+  "13か月": [
+    "じゅうさんかげつ",
+    "13 months",
+    "number + counter"
+  ],
+  "5360億円": [
+    "ごせんさんびゃくろくじゅうおくえん",
+    "536 billion yen",
+    "number + counter"
+  ],
+  "好調": [
+    "こうちょう",
+    "going well, in good shape",
+    "noun"
+  ],
+  "行き先": [
+    "いきさき",
+    "destination",
+    "noun"
+  ],
+  "収支": [
+    "しゅうし",
+    "balance of income and expenditure",
+    "noun"
+  ],
+  "1兆円": [
+    "いっちょうえん",
+    "1 trillion yen",
+    "number + counter"
+  ],
+  "1兆円超": [
+    "いっちょうえんちょう",
+    "over 1 trillion yen",
+    "number + counter"
+  ],
+  "けん引": [
+    "けんいん",
+    "pulling, driving (growth)",
+    "noun"
+  ],
+  "原油": [
+    "げんゆ",
+    "crude oil",
+    "noun"
+  ],
+  "中東": [
+    "ちゅうとう",
+    "the Middle East",
+    "noun"
+  ],
+  "情勢": [
+    "じょうせい",
+    "situation, state of affairs",
+    "noun"
+  ],
+  "縮小": [
+    "しゅくしょう",
+    "shrinking, reduction",
+    "noun"
+  ],
+  "伸び": [
+    "のび",
+    "growth, increase",
+    "noun"
+  ],
+  "八潮": [
+    "やしお",
+    "Yashio (city in Saitama)",
+    "name"
+  ],
+  "74歳": [
+    "ななじゅうよんさい",
+    "74 years old",
+    "number + counter"
+  ],
+  "3人": [
+    "さんにん",
+    "three people",
+    "number + counter"
+  ],
+  "約1億2500万円": [
+    "やくいちおくにせんごひゃくまんえん",
+    "about 125 million yen",
+    "number + counter"
+  ],
+  "下水道": [
+    "げすいどう",
+    "sewer",
+    "noun"
+  ],
+  "陥没": [
+    "かんぼつ",
+    "cave-in, collapse (of ground)",
+    "noun"
+  ],
+  "遺族": [
+    "いぞく",
+    "bereaved family",
+    "noun"
+  ],
+  "提訴": [
+    "ていそ",
+    "filing a lawsuit",
+    "noun"
+  ],
+  "28日": [
+    "にじゅうはちにち",
+    "the 28th",
+    "date"
+  ],
+  "28日付け": [
+    "にじゅうはちにちづけ",
+    "dated the 28th",
+    "date"
+  ],
+  "約3か月後": [
+    "やくさんかげつご",
+    "about three months later",
+    "expression"
+  ],
+  "賠償": [
+    "ばいしょう",
+    "compensation, damages",
+    "noun"
+  ],
+  "さいたま": [
+    "さいたま",
+    "Saitama (city)",
+    "name"
+  ],
+  "地方裁判所": [
+    "ちほうさいばんしょ",
+    "district court",
+    "noun"
+  ],
+  "地裁": [
+    "ちさい",
+    "district court (short form)",
+    "noun"
+  ],
+  "訴え": [
+    "うったえ",
+    "lawsuit, complaint",
+    "noun"
+  ],
+  "硫化": [
+    "りゅうか",
+    "sulfurization",
+    "noun"
+  ],
+  "水素": [
+    "すいそ",
+    "hydrogen",
+    "noun"
+  ],
+  "本来": [
+    "ほんらい",
+    "originally, by rights",
+    "adverb"
+  ],
+  "2月": [
+    "にがつ",
+    "February",
+    "noun"
+  ],
+  "腐食": [
+    "ふしょく",
+    "corrosion",
+    "noun"
+  ],
+  "大野": [
+    "おおの",
+    "Ono (surname)",
+    "name"
+  ],
+  "転落": [
+    "てんらく",
+    "falling down",
+    "noun"
+  ],
+  "訴状": [
+    "そじょう",
+    "written complaint (in a lawsuit)",
+    "noun"
+  ],
+  "原告": [
+    "げんこく",
+    "plaintiff",
+    "noun"
+  ],
+  "通常": [
+    "つうじょう",
+    "usually, normally",
+    "noun"
+  ],
+  "救出": [
+    "きゅうしゅつ",
+    "rescue",
+    "noun"
+  ],
+  "長期間": [
+    "ちょうきかん",
+    "a long period",
+    "noun"
+  ],
+  "にわたり": [
+    "にわたり",
+    "over, throughout (a period)",
+    "expression"
+  ],
+  "究明": [
+    "きゅうめい",
+    "getting to the bottom of (a cause)",
+    "noun"
+  ],
+  "精査": [
+    "せいさ",
+    "close examination",
+    "noun"
+  ],
+  "コメント": [
+    "コメント",
+    "comment",
+    "noun"
+  ],
+  "市場": [
+    "しじょう",
+    "market",
+    "noun"
+  ],
+  "人工知能": [
+    "じんこうちのう",
+    "artificial intelligence",
+    "noun"
+  ],
+  "出場枠": [
+    "しゅつじょうわく",
+    "quota place (to compete)",
+    "noun"
+  ],
+  "とみられる": [
+    "とみられる",
+    "is thought to be (〜とみられる)",
+    "expression"
+  ],
+  "家族": [
+    "かぞく",
+    "family",
+    "noun"
   ]
 }

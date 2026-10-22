@@ -23,6 +23,151 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-10-22-gymnastics-worlds',
+      date: '2026-10-22',
+      emoji: '🤸',
+      titleEn: 'Japan wins men\'s team gold and women\'s team bronze at the gymnastics world championships',
+      sources: [
+        { name: 'The Japan Times (men\'s team)', url: 'https://www.japantimes.co.jp/sports/2026/10/21/more-sports/japan-gymnastics-team-gold-rotterdam/' },
+        { name: 'The Japan Times (women\'s team)', url: 'https://www.japantimes.co.jp/sports/2026/10/22/more-sports/japan-artistic-gymnastics-bronze/' },
+        { name: 'Kyodo News (via Yahoo! News)', url: 'https://news.yahoo.co.jp/articles/0a242b4d34158fe4c9045a1bca3da0733fd3ecbc' },
+        { name: 'Nikkei', url: 'https://www.nikkei.com/article/DGXZQODH220BG0S6A021C2000000/' },
+      ],
+      levels: {
+        N5: {
+          title: '体操[たいそう]の世界[せかい]大会[たいかい]　日本[にほん]が金[きん]メダルと銅[どう]メダル',
+          lines: [
+            ['オランダで、体操[たいそう]の世界[せかい]選手権[せんしゅけん]がありました。', 'The gymnastics world championships were held in the Netherlands.', '世界選手権 "world championships".'],
+            ['日本[にほん]の男子[だんし]チームは、金[きん]メダルをとりました。', 'Japan\'s men\'s team won the gold medal.'],
+            ['橋本大輝[はしもとだいき]さんの鉄棒[てつぼう]が、とてもよかったです。', 'Daiki Hashimoto\'s horizontal bar routine was very good.'],
+            ['日本[にほん]の女子[じょし]チームは、銅[どう]メダルをとりました。', 'Japan\'s women\'s team won the bronze medal.'],
+            ['女子[じょし]チームがメダルをとるのは、60年[ねん]ぶりです。', 'It is the first time in 60 years that the women\'s team has won a medal.', '〜ぶり "for the first time in (a period)".'],
+            ['男子[だんし]も女子[じょし]も、2028年[ねん]のロサンゼルスオリンピックに出[で]られることになりました。', 'Both the men and the women have earned a place at the 2028 Los Angeles Olympics.'],
+          ],
+        },
+        N4: {
+          title: '世界[せかい]体操[たいそう]　日本[にほん]の男子[だんし]団体[だんたい]が優勝[ゆうしょう]、女子[じょし]は60年[ねん]ぶりの銅[どう]メダル',
+          lines: [
+            ['オランダのロッテルダムで開[ひら]かれている体操[たいそう]の世界[せかい]選手権[せんしゅけん]で、日本[にほん]の男子[だんし]団体[だんたい]は二十日[はつか]の決勝[けっしょう]で優勝[ゆうしょう]しました。', 'At the gymnastics world championships being held in Rotterdam, the Netherlands, Japan\'s men\'s team won the final on the 20th.', '団体 "team (event)".'],
+            ['2023年[ねん]の大会[たいかい]に続[つづ]いて、2大会[たいかい]連続[れんぞく]の団体[だんたい]優勝[ゆうしょう]です。', 'Following the 2023 championships, it is the team title for the second championships in a row.'],
+            ['橋本大輝[はしもとだいき]選手[せんしゅ]が鉄棒[てつぼう]でよい演技[えんぎ]をして、チームの勝利[しょうり]を助[たす]けました。', 'Daiki Hashimoto helped the team win with a fine routine on the horizontal bar.'],
+            ['21日[にち]の女子[じょし]団体[だんたい]決勝[けっしょう]では、日本[にほん]は3位[い]になり、銅[どう]メダルをとりました。', 'In the women\'s team final on the 21st, Japan finished third and won the bronze medal.'],
+            ['日本[にほん]の女子[じょし]が団体[だんたい]でメダルをとるのは、1966年[ねん]以来[いらい]、60年[ねん]ぶりです。', 'It is the first medal for Japan\'s women in the team event in 60 years, since 1966.'],
+            ['男子[だんし]も女子[じょし]も、2028年[ねん]のロサンゼルス五輪[ごりん]に出[で]る権利[けんり]を手[て]に入[い]れました。', 'Both the men and the women have won the right to compete at the 2028 Los Angeles Olympics.', '五輪 is short for オリンピック.'],
+          ],
+        },
+        N3: {
+          title: '世界体操[せかいたいそう]、日本男子[にほんだんし]が団体連覇[だんたいれんぱ]　女子[じょし]は60年[ねん]ぶりの銅[どう]メダルでロス五輪[ごりん]へ',
+          lines: [
+            ['オランダ・ロッテルダムで開[ひら]かれている体操[たいそう]の世界選手権[せかいせんしゅけん]は二十日[はつか]、男子[だんし]団体[だんたい]決勝[けっしょう]が行[おこな]われ、日本[にほん]が2023年[ねん]大会[たいかい]に続[つづ]いて優勝[ゆうしょう]し、2連覇[れんぱ]を果[は]たした。', 'At the gymnastics world championships being held in Rotterdam, the Netherlands, the men\'s team final took place on the 20th, and Japan won, following its 2023 title, for a second straight victory.', '連覇 "winning consecutive titles"; 果たす "to achieve".'],
+            ['橋本大輝[はしもとだいき]が鉄棒[てつぼう]でよい演技[えんぎ]を見[み]せるなど、重圧[じゅうあつ]のかかる場面[ばめん]で踏[ふ]ん張[ば]った。', 'Japan held on in high-pressure moments, with Daiki Hashimoto putting in a fine routine on the horizontal bar, among others.', '踏ん張る "to hold on, to stand firm".'],
+            ['21日[にち]の女子[じょし]団体[だんたい]決勝[けっしょう]では、日本[にほん]は予選[よせん]5位[い]から3位[い]に浮上[ふじょう]し、銅[どう]メダルを獲得[かくとく]した。', 'In the women\'s team final on the 21st, Japan rose from fifth in qualifying to third and won the bronze medal.'],
+            ['日本[にほん]女子[じょし]が団体[だんたい]で表彰台[ひょうしょうだい]に立[た]つのは、1966年[ねん]大会[たいかい]以来[いらい]、60年[ねん]ぶり3度目[どめ]となった。', 'It was the first time in 60 years, since the 1966 championships, and the third time overall, that Japan\'s women stood on the team podium.', '表彰台 "podium".'],
+            ['優勝[ゆうしょう]は中国[ちゅうごく]で、米国[べいこく]が2位[い]だった。', 'China won, and the United States was second.'],
+            ['日本[にほん]は男女[だんじょ]とも3位[い]以内[いない]に入[はい]り、2028年[ねん]のロサンゼルス五輪[ごりん]の団体[だんたい]出場枠[しゅつじょうわく]を獲得[かくとく]した。', 'Japan finished in the top three in both the men\'s and women\'s events and secured team places at the 2028 Los Angeles Olympics.', '出場枠 "a quota place (to compete)".'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-22-september-exports',
+      date: '2026-10-22',
+      emoji: '🚢',
+      titleEn: 'Japan\'s exports rise 16.7% in September, driven by AI-related chips',
+      sources: [
+        { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/business/2026/10/21/economy/japan-exports-growth-september/' },
+        { name: 'Bloomberg', url: 'https://www.bloomberg.com/news/articles/2026-10-21/japan-s-export-growth-stays-solid-supported-by-chips-cars' },
+        { name: 'Reuters (via Investing.com)', url: 'https://au.investing.com/news/economy-news/japans-september-exports-rise-167-helped-by-chip-demand-4702857' },
+      ],
+      levels: {
+        N5: {
+          title: '9月[がつ]の輸出[ゆしゅつ]　去年[きょねん]より16.7%ふえました',
+          lines: [
+            ['日本[にほん]から外国[がいこく]に売[う]った物[もの]が、9月[がつ]にふえました。', 'The amount of goods Japan sold to other countries rose in September.', '輸出 "exports".'],
+            ['去年[きょねん]の9月[がつ]より、16.7%おおくなりました。', 'It was 16.7% more than in September last year.'],
+            ['13か月[げつ]つづけて、ふえました。', 'It has risen for 13 months in a row.'],
+            ['半導体[はんどうたい]がたくさん売[う]れました。', 'Many semiconductors were sold.', '半導体 "semiconductor, chip". AI needs a lot of chips.'],
+            ['車[くるま]もよく売[う]れました。', 'Cars also sold well.'],
+            ['でも、日本[にほん]が買[か]った物[もの]のほうが、売[う]った物[もの]より多[おお]かったです。', 'But the goods Japan bought were more than the goods it sold.'],
+            ['その差[さ]は、5360億円[おくえん]ぐらいです。', 'The difference is about 536 billion yen.'],
+          ],
+        },
+        N4: {
+          title: '9月[がつ]の輸出[ゆしゅつ]は16.7%増[ぞう]　AI向[む]けの半導体[はんどうたい]が好調[こうちょう]',
+          lines: [
+            ['財務省[ざいむしょう]が21日[にち]に発表[はっぴょう]した貿易[ぼうえき]統計[とうけい]によると、9月[がつ]の輸出[ゆしゅつ]は、去年[きょねん]の同[おな]じ月[つき]より16.7%ふえました。', 'According to trade statistics released by the Ministry of Finance on the 21st, exports in September rose 16.7% from the same month last year.', '貿易統計 "trade statistics".'],
+            ['輸出[ゆしゅつ]がふえたのは、13か月[げつ]連続[れんぞく]です。', 'Exports have risen for 13 months in a row.'],
+            ['AIに使[つか]う半導体[はんどうたい]の需要[じゅよう]が強[つよ]く、半導体[はんどうたい]は49.4%、半導体[はんどうたい]をつくる機械[きかい]は43.9%ふえました。', 'Demand for chips used in AI is strong; chips rose 49.4% and chip-making equipment rose 43.9%.'],
+            ['車[くるま]の輸出[ゆしゅつ]も15.1%ふえました。', 'Car exports also rose 15.1%.'],
+            ['行[い]き先[さき]別[べつ]では、アメリカ向[む]けが22.9%、中国[ちゅうごく]向[む]けが8.6%ふえました。', 'By destination, exports to the United States rose 22.9% and exports to China rose 8.6%.', '〜向け "(aimed) for".'],
+            ['輸入[ゆにゅう]も18.9%ふえて、貿易[ぼうえき]収支[しゅうし]は5360億円[おくえん]の赤字[あかじ]でした。', 'Imports also rose 18.9%, and the trade balance was a deficit of 536 billion yen.', '赤字 "deficit" (literally "red letters").'],
+            ['8月[がつ]は1兆円[ちょうえん]を超[こ]える赤字[あかじ]だったので、赤字[あかじ]は小[ちい]さくなりました。', 'The deficit in August was over 1 trillion yen, so the deficit became smaller.'],
+          ],
+        },
+        N3: {
+          title: '9月[がつ]の貿易統計[ぼうえきとうけい]　輸出[ゆしゅつ]は16.7%増[ぞう]、13か月[げつ]連続[れんぞく]で拡大[かくだい]　半導体[はんどうたい]がけん引[いん]',
+          lines: [
+            ['財務省[ざいむしょう]が21日[にち]に発表[はっぴょう]した9月[がつ]の貿易統計[ぼうえきとうけい]（速報[そくほう]）によると、輸出額[ゆしゅつがく]は前年[ぜんねん]同月[どうげつ]比[ひ]16.7%増[ぞう]となり、13か月[げつ]連続[れんぞく]で前年[ぜんねん]を上回[うわまわ]った。', 'According to the Ministry of Finance\'s preliminary trade statistics for September, released on the 21st, exports rose 16.7% from the same month a year earlier, exceeding the previous year for the 13th month in a row.', '前年同月比 "compared with the same month of the previous year"; 速報 "preliminary report".'],
+            ['人工知能[じんこうちのう]、いわゆるAI向[む]けの需要[じゅよう]を背景[はいけい]に、半導体[はんどうたい]が49.4%増[ぞう]、半導体[はんどうたい]製造[せいぞう]装置[そうち]が43.9%増[ぞう]と大[おお]きく伸[の]びた。', 'Against a backdrop of demand for artificial intelligence, or AI, chips rose 49.4% and chip-making equipment rose 43.9%, big gains.'],
+            ['自動車[じどうしゃ]も15.1%増[ぞう]だった。', 'Cars also rose 15.1%.'],
+            ['地域[ちいき]別[べつ]では、米国[べいこく]向[む]けが22.9%増[ぞう]、中国[ちゅうごく]向[む]けが8.6%増[ぞう]だった。', 'By region, exports to the United States rose 22.9% and exports to China rose 8.6%.'],
+            ['一方[いっぽう]、輸入[ゆにゅう]は18.9%増[ぞう]で、原油[げんゆ]の輸入額[ゆにゅうがく]は51.1%増[ぞう]と、中東[ちゅうとう]情勢[じょうせい]を受[う]けた原油[げんゆ]高[だか]が響[ひび]いたとみられる。', 'Imports, meanwhile, rose 18.9%, and the value of crude oil imports rose 51.1%, which is thought to reflect high oil prices linked to the situation in the Middle East.', '響く "to have an effect on"; 〜とみられる "is thought to be".'],
+            ['貿易収支[ぼうえきしゅうし]は5360億円[おくえん]の赤字[あかじ]で、8月[がつ]の1兆円[ちょうえん]超[ちょう]の赤字[あかじ]からは縮小[しゅくしょう]したが、民間[みんかん]の予想[よそう]よりは大[おお]きな赤字[あかじ]となった。', 'The trade balance was a deficit of 536 billion yen, smaller than August\'s deficit of over 1 trillion yen but larger than private-sector forecasts.', '貿易収支 "trade balance".'],
+            ['輸出[ゆしゅつ]の伸[の]びは、市場[しじょう]の予想[よそう]を下回[したまわ]った。', 'Export growth fell short of market expectations.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-22-sinkhole-lawsuit',
+      date: '2026-10-22',
+      emoji: '🚧',
+      titleEn: 'Family of driver who died in Saitama road collapse sues the prefecture for about ¥125 million',
+      sources: [
+        { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/10/22/japan/society/japan-sinkhole-death-family-sues-prefecture/' },
+        { name: 'Jiji Press (via nippon.com)', url: 'https://www.nippon.com/en/news/yjj2026102100818/' },
+        { name: 'Tokyo Shimbun', url: 'https://www.tokyo-np.co.jp/article/522828' },
+        { name: 'Nippon TV (via Yahoo! News)', url: 'https://news.yahoo.co.jp/articles/9f91d728a59f04bc659e29b0db35cd749266309c' },
+      ],
+      levels: {
+        N5: {
+          title: '八潮[やしお]の道[みち]の事故[じこ]　家族[かぞく]が県[けん]をうったえました',
+          lines: [
+            ['去年[きょねん]の1月[がつ]、埼玉県[さいたまけん]の八潮市[やしおし]で、道[みち]に大[おお]きな穴[あな]があきました。', 'Last January, a big hole opened in a road in Yashio, Saitama Prefecture.'],
+            ['トラックがその穴[あな]に落[お]ちて、74歳[さい]の男[おとこ]の人[ひと]が亡[な]くなりました。', 'A truck fell into the hole, and a 74-year-old man died.'],
+            ['その人[ひと]の子[こ]どもたち3人[にん]が、埼玉県[さいたまけん]をうったえました。', 'Three of his children have sued Saitama Prefecture.', 'うったえる (訴える) "to sue".'],
+            ['お金[かね]を、約[やく]1億[おく]2500万円[まんえん]はらってほしいと言[い]っています。', 'They are asking for about 125 million yen.'],
+            ['道[みち]の下[した]の下水道[げすいどう]のくだは、県[けん]が管理[かんり]していました。', 'The prefecture managed the sewer pipe under the road.', '下水道 "sewer".'],
+            ['家族[かぞく]は、くだが安全[あんぜん]ではなかったと言[い]っています。', 'The family says the pipe was not safe.'],
+            ['県[けん]の知事[ちじ]は、うったえの内容[ないよう]を調[しら]べていると言[い]いました。', 'The prefecture\'s governor said he is looking into what the lawsuit says.'],
+          ],
+        },
+        N4: {
+          title: '八潮市[やしおし]の道路[どうろ]陥没[かんぼつ]　亡[な]くなった運転手[うんてんしゅ]の遺族[いぞく]が県[けん]を提訴[ていそ]',
+          lines: [
+            ['去年[きょねん]1月[がつ]28日[にち]、埼玉県[さいたまけん]八潮市[やしおし]で道路[どうろ]が陥没[かんぼつ]し、トラックが落[お]ちました。', 'On January 28 last year, a road collapsed in Yashio, Saitama Prefecture, and a truck fell in.', '陥没 "cave-in, collapse".'],
+            ['運転手[うんてんしゅ]の74歳[さい]の男性[だんせい]は、約[やく]3か月[げつ]後[ご]に見[み]つかり、亡[な]くなっていました。', 'The driver, a 74-year-old man, was found about three months later and had died.'],
+            ['男性[だんせい]の子[こ]ども3人[にん]は、ことしの7月[がつ]28日[にち]、下水道[げすいどう]を管理[かんり]していた埼玉県[さいたまけん]に約[やく]1億[おく]2500万円[まんえん]の賠償[ばいしょう]を求[もと]めて、さいたま地方[ちほう]裁判所[さいばんしょ]に訴[うった]えを起[お]こしました。', 'On July 28 this year, the man\'s three children filed a suit at the Saitama District Court, asking Saitama Prefecture, which managed the sewer, to pay about 125 million yen in damages.', '賠償 "compensation, damages".'],
+            ['訴[うった]えでは、下水道[げすいどう]の管[くだ]が硫化[りゅうか]水素[すいそ]でいたみ、道路[どうろ]が本来[ほんらい]あるべき安全[あんぜん]さを欠[か]いていたと言[い]っています。', 'The suit says the sewer pipe was damaged by hydrogen sulfide and the road lacked the safety it should normally have had.', '欠く "to lack".'],
+            ['また、助[たす]けられるかどうかわからない長[なが]い間[あいだ]、強[つよ]い精神的[せいしんてき]な苦痛[くつう]を受[う]けたと主張[しゅちょう]しています。', 'It also claims the family suffered strong mental anguish for a long time, not knowing whether he could be rescued.'],
+            ['県[けん]の原因[げんいん]調査[ちょうさ]の委員会[いいんかい]は、ことし2月[がつ]、管[くだ]が硫化[りゅうか]水素[すいそ]で腐食[ふしょく]したことが原因[げんいん]と考[かんが]えられるとまとめ、陥没[かんぼつ]は予測[よそく]するのが難[むずか]しかったとしていました。', 'In February this year, the prefecture\'s investigation committee concluded that corrosion of the pipe by hydrogen sulfide was thought to be the cause, and said the collapse had been difficult to predict.', '腐食 "corrosion".'],
+            ['大野[おおの]知事[ちじ]は、訴[うった]えの内容[ないよう]を調[しら]べて、適切[てきせつ]に対応[たいおう]すると話[はな]しています。', 'Governor Ono says the prefecture will look into the suit and respond appropriately.', '大野元裕 Ono Motohiro, governor of Saitama.'],
+          ],
+        },
+        N3: {
+          title: '八潮[やしお]の道路[どうろ]陥没[かんぼつ]、死亡[しぼう]した運転手[うんてんしゅ]の遺族[いぞく]が埼玉県[さいたまけん]に約[やく]1億[おく]2500万円[まんえん]の賠償[ばいしょう]を求[もと]め提訴[ていそ]',
+          lines: [
+            ['埼玉県[さいたまけん]八潮市[やしおし]で去年[きょねん]1月[がつ]28日[にち]に起[お]きた道路[どうろ]陥没[かんぼつ]事故[じこ]で、トラックごと転落[てんらく]して死亡[しぼう]した当時[とうじ]74歳[さい]の男性[だんせい]の遺族[いぞく]が、県[けん]に約[やく]1億[おく]2500万円[まんえん]の損害[そんがい]賠償[ばいしょう]を求[もと]めて提訴[ていそ]していたことが21日[にち]、分[わ]かった。', 'It emerged on the 21st that the family of the man, 74 at the time, who fell with his truck and died in the road collapse in Yashio, Saitama Prefecture, on January 28 last year, has sued the prefecture for about 125 million yen in damages.', '提訴 "filing a lawsuit"; 〜ごと "together with (the whole thing)".'],
+            ['訴状[そじょう]によると、原告[げんこく]は男性[だんせい]の子[こ]ども3人[にん]で、7月[がつ]28日[にち]付[づ]けでさいたま地裁[ちさい]に提訴[ていそ]した。', 'According to the complaint, the plaintiffs are the man\'s three children, who filed at the Saitama District Court dated July 28.', '訴状 "written complaint"; 原告 "plaintiff"; 地裁 short for 地方裁判所.'],
+            ['遺族側[いぞくがわ]は、県[けん]が管理[かんり]する下水道[げすいどう]管[かん]が硫化[りゅうか]水素[すいそ]で腐食[ふしょく]しており、道路[どうろ]が通常[つうじょう]備[そな]えているべき安全性[あんぜんせい]を欠[か]いていたと主張[しゅちょう]している。', 'The family argues that the sewer pipe managed by the prefecture had corroded from hydrogen sulfide, so the road lacked the safety it should normally have.', '〜べき "should".'],
+            ['また、救出[きゅうしゅつ]の見通[みとお]しが立[た]たない中[なか]で、長期間[ちょうきかん]にわたり強[つよ]い精神的[せいしんてき]苦痛[くつう]を受[う]けたとしている。', 'It also says the family suffered severe mental distress over a long period, with no prospect of a rescue in sight.', '見通しが立たない "no outlook can be seen".'],
+            ['県[けん]が設[もう]けた原因[げんいん]究明[きゅうめい]委員会[いいんかい]は今年[ことし]2月[がつ]、下水道[げすいどう]管[かん]が硫化[りゅうか]水素[すいそ]で腐食[ふしょく]したことが陥没[かんぼつ]の原因[げんいん]と考[かんが]えられるとする報告書[ほうこくしょ]を公表[こうひょう]したが、陥没[かんぼつ]の予測[よそく]は困難[こんなん]だったとしていた。', 'The cause-investigation committee set up by the prefecture released a report in February this year saying that corrosion of the sewer pipe by hydrogen sulfide was thought to be the cause, but that predicting the collapse had been difficult.', '究明 "getting to the bottom of (a cause)".'],
+            ['大野元裕[おおのもとひろ]知事[ちじ]は、訴状[そじょう]の内容[ないよう]を精査[せいさ]しており、適切[てきせつ]に対応[たいおう]するとコメントした。', 'Governor Motohiro Ono commented that the prefecture is carefully examining the complaint and will respond appropriately.', '精査 "close examination".'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-10-21-abnormal-delivery',
       date: '2026-10-21',
       emoji: '👶',
