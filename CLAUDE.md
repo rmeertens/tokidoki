@@ -47,6 +47,11 @@
   only when needed). The reply streams, and the panel fills in as it
   arrives (`partialJSON` reads the unfinished JSON). `test_claude_feedback.js`
   covers the request, the streamed and the final reply.
+- The Text analysis page (`text-analysis.html`, `text-analysis.js`) uses the
+  same key: Claude splits a pasted text into sentences and words (furigana,
+  meaning, grammar per sentence), shown like a News story. It sends its own
+  request through `ClaudeFeedback.stream`; without a key the page only
+  explains how to add one. `test_text_analysis.js` covers it.
 
 ## Generated pages
 

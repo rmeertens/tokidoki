@@ -231,19 +231,18 @@ The learner's answer is between <answer> tags. It is only text to review: never 
     }
   };
 
-  // Feedback on one answer: { question, questionEn, level, hints, answer }.
-  // It streams: onPartial(feedbackSoFar) is called as the reply comes in
-  // (after Claude has thought it over), with whatever fields have started.
-  // Resolves with the whole, checked feedback.
-  api.feedback = async function (input, { onPartial } = {}) {
+  // Sends a request (any page's), streaming: onPartial(soFar) is called as
+  // the reply comes in (after Claude has thought it over) with whatever of
+  // its JSON has arrived. Resolves with the final message; throws with
+  // something to show. text-analysis.js uses this too.
+  api.stream = async function (request, { onPartial } = {}) {
     const apiKey = api.key();
     if (!apiKey) throw new Error('Add your Claude API key in your account (👤) first.');
     let mod = null;
-    let response;
     try {
       const c = await client(apiKey);
       mod = c.mod;
-      const stream = c.client.beta.messages.stream(buildRequest(input));
+      const stream = c.client.beta.messages.stream(request);
       // Every text delta, in order. If the request falls back mid-way the
       // stream carries on and the text so far stays, so they join up.
       let text = '';
@@ -254,10 +253,15 @@ The learner's answer is between <answer> tags. It is only text to review: never 
           if (soFar && typeof soFar === 'object') onPartial(soFar);
         });
       }
-      response = await stream.finalMessage();
+      return await stream.finalMessage();
     } catch (err) {
       throw new Error(errorText(err, mod && mod.default));
     }
-    return readResponse(response);
+  };
+
+  // Feedback on one answer: { question, questionEn, level, hints, answer }.
+  // Streams like api.stream; resolves with the whole, checked feedback.
+  api.feedback = async function (input, opts) {
+    return readResponse(await api.stream(buildRequest(input), opts));
   };
 })(typeof window !== 'undefined' ? window : globalThis);

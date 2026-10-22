@@ -542,13 +542,14 @@
     const msg = claudeMsg ? `<p class="account-msg${claudeMsg.error ? ' account-error' : ''}" role="status">${esc(claudeMsg.text)}</p>` : '';
     const dis = claudeBusy ? ' disabled' : '';
     const about = `<p class="account-sub">Requests go from your browser straight to Anthropic and are billed to your
-      Anthropic account (a few cents per feedback). The key is saved in your Tokidoki account so it works on your
+      Anthropic account (a few cents per feedback or text). The key is saved in your Tokidoki account so it works on your
       other devices, and logging out removes it from this one. A key with a spending limit is a good idea.</p>`;
     if (key) {
       return `<section class="account-claude">
         <h3>✨ Claude feedback</h3>
         <p class="account-text">Your Claude API key <code>…${esc(key.slice(-4))}</code> is saved. Get feedback on your answers on the
-          <a href="conversation.html">Conversation starters</a> page.</p>
+          <a href="conversation.html">Conversation starters</a> page, or have any text explained on the
+          <a href="text-analysis.html">Text analysis</a> page.</p>
         ${msg}
         <div class="account-actions"><button type="button" class="btn-secondary" data-account-act="claude-remove"${dis}>Remove key</button></div>
         ${about}
@@ -557,7 +558,8 @@
     return `<section class="account-claude">
       <h3>✨ Claude feedback</h3>
       <p class="account-text">Add your own <a href="https://platform.claude.com/settings/keys" target="_blank" rel="noopener">Claude API key</a>
-        and Claude can give feedback on what you write on the <a href="conversation.html">Conversation starters</a> page.</p>
+        and Claude can give feedback on what you write on the <a href="conversation.html">Conversation starters</a> page
+        and explain any Japanese text on the <a href="text-analysis.html">Text analysis</a> page.</p>
       <form class="account-claude-form" novalidate>
         <label class="account-field">
           <span>Claude API key</span>
@@ -570,7 +572,7 @@
     </section>`;
   }
 
-  // Pages that offer feedback (conversation.js) listen for this.
+  // Pages that use Claude (conversation.js, text-analysis.js) listen for this.
   const claudeChanged = () => window.dispatchEvent(new Event('tokidoki:claude-key'));
 
   // Loads claude-feedback.js (and with it the SDK) only when a key is saved.

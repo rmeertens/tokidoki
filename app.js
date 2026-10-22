@@ -6169,6 +6169,8 @@
       // misc.js wires up its own page.
     } else if (mode === 'conversation') {
       // conversation.js wires up its own page.
+    } else if (mode === 'text-analysis') {
+      // text-analysis.js wires up its own page.
     } else if (mode === 'story-fill') {
       // story-fill.js wires up its own page.
     } else if (mode === 'phrases') {

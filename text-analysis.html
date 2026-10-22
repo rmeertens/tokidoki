@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" id="viewport-meta" content="width=device-width, initial-scale=1.0">
+  <title>Japanese Text Analyser: Sentence-by-Sentence Grammar | Tokidoki</title>
+  <meta name="description" content="Paste any Japanese text and Claude breaks it into sentences: furigana, word meanings, an English translation and the grammar of each sentence, N5 to N2.">
+  <meta property="og:title" content="Japanese Text Analyser: Sentence-by-Sentence Grammar | Tokidoki">
+  <meta property="og:description" content="Paste any Japanese text and Claude breaks it into sentences: furigana, word meanings, an English translation and the grammar of each sentence, N5 to N2.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tokidoki.meertens.dev/text-analysis.html">
+  <meta property="og:site_name" content="Tokidoki">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://tokidoki.meertens.dev/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Tokidoki — free Japanese practice, one plate at a time">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Japanese Text Analyser: Sentence-by-Sentence Grammar | Tokidoki">
+  <meta name="twitter:description" content="Paste any Japanese text and Claude breaks it into sentences: furigana, word meanings, an English translation and the grammar of each sentence, N5 to N2.">
+  <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
+  <link rel="canonical" href="https://tokidoki.meertens.dev/text-analysis.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Japanese Text Analyser: Sentence-by-Sentence Grammar", "description": "Paste any Japanese text and Claude breaks it into sentences: furigana, word meanings, an English translation and the grammar of each sentence, N5 to N2.", "url": "https://tokidoki.meertens.dev/text-analysis.html", "inLanguage": "en", "learningResourceType": "reading tool", "educationalLevel": "JLPT N5–N2", "isAccessibleForFree": true, "isPartOf": {"@type": "WebSite", "name": "Tokidoki", "url": "https://tokidoki.meertens.dev/"}}</script>
+  <link rel="stylesheet" href="style.css?v=82">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="theme-color" content="#f6f0e4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#16141b" media="(prefers-color-scheme: dark)">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXWYNZC7YH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXWYNZC7YH');
+  </script>
+</head>
+<body data-mode="text-analysis">
+  <div id="app">
+
+    <!-- Header (rendered by renderSharedChrome() in app.js) -->
+    <div id="header-mount"></div>
+
+    <main id="screen-text-analysis" class="screen active">
+      <nav class="page-nav" aria-label="Exercises">
+        <div class="page-nav-group">
+          <span class="page-nav-label">Conjugation</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="verbs.html"><span class="page-nav-glyph" aria-hidden="true">食</span>Verbs</a>
+            <a class="page-nav-item" href="adjectives.html"><span class="page-nav-glyph" aria-hidden="true">高</span>Adjectives</a>
+            <a class="page-nav-item" href="custom.html"><span class="page-nav-glyph" aria-hidden="true">作</span>Build Your Own</a>
+            <a class="page-nav-item" href="bunkei.html"><span class="page-nav-glyph" aria-hidden="true">型</span>Bunkei</a>
+          </div>
+        </div>
+        <div class="page-nav-group">
+          <span class="page-nav-label">Grammar</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="sentences.html"><span class="page-nav-glyph" aria-hidden="true">文</span>Sentences</a>
+            <a class="page-nav-item" href="particles-quiz.html"><span class="page-nav-glyph" aria-hidden="true">は</span>Particles</a>
+            <a class="page-nav-item" href="word-order.html"><span class="page-nav-glyph" aria-hidden="true">★</span>Word Order</a>
+            <a class="page-nav-item" href="story-fill.html"><span class="page-nav-glyph" aria-hidden="true">章</span>Story Fill-in</a>
+            <a class="page-nav-item" href="misc.html"><span class="page-nav-glyph" aria-hidden="true">雑</span>Misc</a>
+          </div>
+        </div>
+        <div class="page-nav-group">
+          <span class="page-nav-label">Reading &amp; Listening</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="stories.html"><span class="page-nav-glyph" aria-hidden="true">話</span>Stories</a>
+            <a class="page-nav-item" href="news.html"><span class="page-nav-glyph" aria-hidden="true">報</span>News</a>
+            <a class="page-nav-item" href="mystery.html"><span class="page-nav-glyph" aria-hidden="true">謎</span>Mystery</a>
+            <a class="page-nav-item" href="listening.html"><span class="page-nav-glyph" aria-hidden="true">聴</span>Listening</a>
+            <a class="page-nav-item active" href="text-analysis.html" aria-current="page"><span class="page-nav-glyph" aria-hidden="true">析</span>Text Analysis</a>
+          </div>
+        </div>
+        <div class="page-nav-group">
+          <span class="page-nav-label">Phrases &amp; Culture</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="phrases.html"><span class="page-nav-glyph" aria-hidden="true">言</span>Phrases</a>
+            <a class="page-nav-item" href="memes.html"><span class="page-nav-glyph" aria-hidden="true">笑</span>Memes &amp; Jokes</a>
+            <a class="page-nav-item" href="conversation.html"><span class="page-nav-glyph" aria-hidden="true">談</span>Conversation</a>
+          </div>
+        </div>
+        <div class="page-nav-group">
+          <span class="page-nav-label">Kana &amp; Kanji</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="kana.html"><span class="page-nav-glyph" aria-hidden="true">あ</span>Kana</a>
+            <a class="page-nav-item" href="kanji-quiz.html"><span class="page-nav-glyph" aria-hidden="true">字</span>Kanji Quiz</a>
+            <a class="page-nav-item" href="kanji-hover.html"><span class="page-nav-glyph" aria-hidden="true">漢</span>Kanji Hover</a>
+            <a class="page-nav-item" href="words-by-kanji.html"><span class="page-nav-glyph" aria-hidden="true">詞</span>Words by Kanji</a>
+            <a class="page-nav-item" href="kanji.html"><span class="page-nav-glyph" aria-hidden="true">紙</span>Practice Sheets</a>
+          </div>
+        </div>
+        <div class="page-nav-group">
+          <span class="page-nav-label">Words &amp; Tools</span>
+          <div class="page-nav-items">
+            <a class="page-nav-item" href="vocabulary.html"><span class="page-nav-glyph" aria-hidden="true">語</span>Vocabulary</a>
+            <a class="page-nav-item" href="vocab-quiz.html"><span class="page-nav-glyph" aria-hidden="true">試</span>Vocab Quiz</a>
+            <a class="page-nav-item" href="flashcards.html"><span class="page-nav-glyph" aria-hidden="true">札</span>Flashcards</a>
+            <a class="page-nav-item" href="notepad.html"><span class="page-nav-glyph" aria-hidden="true">書</span>Notepad</a>
+          </div>
+        </div>
+      </nav>
+      <section class="lis-hero ta-hero">
+        <div class="lis-hero-face ta-hero-face" aria-hidden="true">析</div>
+        <div>
+          <p class="lis-hero-kicker" lang="ja">文章の分析 · with Claude</p>
+          <h2 class="lis-hero-title">Text analysis</h2>
+          <p class="lis-hero-sub">Paste any Japanese text — an article, a message, song lyrics, a page of your textbook — and Claude breaks it down sentence by sentence: furigana, every word's meaning, an English translation and the grammar, explained for your level.</p>
+        </div>
+      </section>
+
+      <div id="ta-setup"></div>
+
+      <div class="card ta-card">
+        <label class="cs-answer-label" for="ta-input">Japanese text</label>
+        <textarea id="ta-input" class="answer-input ta-input" lang="ja" rows="7"
+                  placeholder="ここに日本語の文章を貼ってください…"
+                  autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"></textarea>
+        <div class="cs-answer-meta">
+          <span id="ta-count"></span>
+          <button class="cs-clear" id="ta-clear" type="button">Clear</button>
+        </div>
+        <div class="ta-actions">
+          <div class="lis-levels" role="group" aria-label="Explain for" id="ta-levels">
+            <span class="lis-levels-label">Explain for</span>
+            <button type="button" data-level="N5" aria-pressed="true">N5</button>
+            <button type="button" data-level="N4" aria-pressed="false">N4</button>
+            <button type="button" data-level="N3" aria-pressed="false">N3</button>
+            <button type="button" data-level="N2" aria-pressed="false">N2</button>
+          </div>
+          <button class="btn-primary cs-ai-btn" id="ta-go" type="button" disabled>✨ Analyse</button>
+          <span class="cs-ai-note" id="ta-note"></span>
+        </div>
+        <p class="cs-ai-error hidden" id="ta-error" role="alert"></p>
+      </div>
+
+      <section class="ta-result hidden" id="ta-result" aria-live="polite">
+        <div id="ta-summary"></div>
+        <div class="kana-settings-row story-toggles hidden" id="ta-toggles">
+          <label class="kana-script-toggle"><input type="checkbox" id="ta-toggle-furigana"> Furigana</label>
+          <label class="kana-script-toggle"><input type="checkbox" id="ta-toggle-english"> English</label>
+          <button type="button" class="btn-secondary speak-toggle hidden" data-speak-toggle aria-pressed="false">&#128266; Speak words on click: Off</button>
+        </div>
+        <div class="story-layout" id="ta-layout">
+          <article class="story-text" id="ta-text"></article>
+          <aside class="story-panel" id="ta-panel" aria-live="polite">
+            <button class="icon-btn story-panel-close" id="ta-panel-close" aria-label="Close">✕</button>
+            <div id="ta-panel-body"></div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+  </div>
+
+  <script src="claude-feedback.js?v=3"></script>
+  <script src="text-analysis.js?v=1"></script>
+  <script src="pronounce.js?v=2"></script>
+  <script src="kanji-cards.js?v=2"></script>
+  <script src="word-lookups.js?v=1"></script>
+  <script src="app.js?v=67"></script>
+  <script src="sync-merge.js?v=8"></script>
+  <script src="progress-stats.js?v=2"></script>
+  <script src="sync.js?v=11"></script>
+
+  <!-- Static content for search engines -->
+  <section id="seo-content" class="page-about">
+    <h1>Japanese text analyser: any text, broken down sentence by sentence</h1>
+    <p>
+      Paste a Japanese text &mdash; a news article, a message from a friend, song lyrics, a manga
+      page or a passage from your textbook &mdash; and Claude splits it into sentences and explains
+      each one the way Tokidoki's stories and news do: furigana on every kanji, the reading,
+      dictionary form and meaning of every word, a natural English translation, and the grammar
+      of each sentence (conjugations, particles, sentence patterns) explained for your JLPT level,
+      N5 to N2. Tap a word to add it to your flashcards, or save a grammar point to review later.
+      It uses your own Claude API key, which you add in your Tokidoki account.
+    </p>
+  </section>
+</body>
+</html>
