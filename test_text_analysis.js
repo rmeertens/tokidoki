@@ -76,6 +76,13 @@ lib = TA.addToLibrary(lib, { text: 'A', level: 'N5', result, t: 3000 });
 ok(lib.length === 2 && lib[0].text === 'A' && lib[0].id === idA && lib[0].t === 3000, 'the same text again replaces it, keeping its id');
 lib = TA.addToLibrary(lib, { text: 'A', level: 'N4', result, t: 4000 });
 ok(lib.length === 3, 'another level is another entry');
+let named = TA.renameInLibrary(lib, idA, '  Weather   note ');
+ok(named.find(e => e.id === idA).title === 'Weather note' && named.find(e => e.id === idA).named, 'renamed, spaces tidied');
+ok(named.filter(e => e.id !== idA).every(e => !e.named), 'only that one is renamed');
+named = TA.addToLibrary(named, { text: 'A', level: 'N5', result, t: 5000 });
+ok(named[0].id === idA && named[0].title === 'Weather note', 'a renamed text keeps its name when analysed again');
+named = TA.renameInLibrary(named, idA, '   ');
+ok(named[0].title === 'A' && !named[0].named, 'an empty name goes back to the first line');
 ok(!/^tokidoki[_-]/.test(TA.LIBRARY_KEY), 'saved texts stay out of the account sync');
 
 // ─── The page ──────────────────────────────────────────────────────────────

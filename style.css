@@ -8145,4 +8145,8 @@ body.cs-wide #app { max-width: 1200px; }
 .ta-library-open:hover { background: var(--bg-card-hover); }
 .ta-library-title { font-family: var(--font-jp); font-size: 1rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .ta-library-meta { font-size: 0.78rem; color: var(--text-muted); }
-.ta-library-del { flex-shrink: 0; }
+.ta-library-act { flex-shrink: 0; }
+.ta-library-rename { flex: 1; display: flex; flex-wrap: wrap; gap: 8px; padding: 4px; }
+.ta-library-rename input { flex: 1 1 200px; min-width: 0; padding: 8px 10px; font: inherit; font-family: var(--font-jp); color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.ta-library-rename input:focus { outline: none; border-color: var(--accent); }
+.ta-library-rename .btn-primary, .ta-library-rename .btn-secondary { padding: 8px 14px; }
