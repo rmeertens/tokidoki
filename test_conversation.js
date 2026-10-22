@@ -182,6 +182,10 @@ ok(!usedIn2('shopping', 'N5', 'とても面白かったです').includes('買い
 ok(!usedIn2('hometown', 'N5', '両立しやすくなりました').includes('少ないです'), 'uses: すくな in やすくなりました is not 少ない');
 ok(usedIn2('family', 'N4', '父に似ているとよく言われます').includes('〜と言われます'), 'uses: a word between a pattern\'s particle and the rest');
 ok(usedIn2('hometown', 'N4', '静かだし、自然も多いし').includes('〜し、〜し'), 'uses: 〜し、〜し');
+ok(usedIn2('season', 'N4', '食べすぎた').includes('〜すぎます') && usedIn2('season', 'N4', '暑すぎる').includes('〜すぎます'), 'uses: a polite pattern in its plain past and dictionary forms (〜すぎます → すぎた, すぎる)');
+ok(usedIn2('future', 'N3', 'ずっと働いてきた').includes('〜てきました'), 'uses: 〜てきました as 〜てきた');
+ok(usedIn2('introduce', 'N5', 'わたしはアンナです').includes('私は〜です'), 'uses: 私は〜です in kana');
+ok(usedIn2('why-japanese', 'N5', 'えいごで').includes('〜語で') && !usedIn2('why-japanese', 'N5', 'でんしゃで').includes('〜語で'), 'uses: 〜語で needs a language');
 
 // Nearly every grammar point is spotted in its own example sentence.
 let spotted = 0, grammarTotal = 0;
@@ -191,7 +195,7 @@ CONVERSATION_TOPICS.forEach(t => C.LEVELS.forEach(level => {
     if (C.usedHints(C.plain(h.ex), [h]).length) spotted++;
   });
 }));
-ok(spotted / grammarTotal > 0.95, `uses: grammar spotted in its own example (${spotted}/${grammarTotal})`);
+ok(spotted === grammarTotal, `uses: every grammar point spotted in its own example (${spotted}/${grammarTotal})`);
 ok(has('友達と会うことにしました', 'verbs-1'), 'uses: 会う in its dictionary form');
 
 // ─── Writing in kanji ──────────────────────────────────────────────────────

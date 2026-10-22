@@ -173,7 +173,7 @@
     const teStem = /行$/.test(body) && last === 'き' ? 'っ' : TE_STEM[last];
     // Any ます-stem takes these (食べます → 食べません, たべたい).
     if (/^ま(す|した|せん|せんでした)$/.test(end || '') && Array.from(w).length >= 2) ['ます', 'ました', 'ません', 'たい', 'ましょう'].forEach(e => out.add(w + e));
-    if (end === 'ます') { out.add(w + 'る'); if (godan) out.add(body + U[last]); }
+    if (end === 'ます') { out.add(w + 'る'); if (godan) out.add(body + U[last]); else { out.add(w + 'た'); out.add(w + 'て'); } }  // 食べすぎます → 食べすぎた
     if (end === 'ました') { out.add(w + 'た'); if (godan) out.add(body + teStem + (teStem === 'ん' || (teStem === 'い' && last === 'ぎ') ? 'だ' : 'た')); }
     if (end === 'ません') { out.add(w + 'ない'); if (godan) out.add(body + A[last] + 'ない'); }
     if (end === 'ませんでした') out.add(w + 'なかった');

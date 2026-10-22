@@ -35,7 +35,7 @@
         words: ['名前[なまえ]|name', '国[くに]|country', '学生[がくせい]|student', '会社員[かいしゃいん]|office worker', '趣味[しゅみ]|hobby', '〜歳[さい]|… years old'],
         verbs: ['住[す]んでいます|live (in)', '好[す]きです|like', '勉強[べんきょう]しています|am studying', '来[き]ました|came'],
         grammar: [
-          'AはBです|A is B|私[わたし]はアンナです。|I am Anna.',
+          '私[わたし]は〜です|I am …|私[わたし]はアンナです。|I am Anna.',
           '〜から来[き]ました|I come from …|ドイツから来[き]ました。|I come from Germany.',
           '〜に住[す]んでいます|I live in …|東京[とうきょう]に住[す]んでいます。|I live in Tokyo.',
         ],
@@ -168,7 +168,7 @@
         verbs: ['引[ひ]っ越[こ]す|move (house)', '見[み]える|can be seen', '増[ふ]える|increase', '比[くら]べる|compare'],
         grammar: [
           '〜で有名[ゆうめい]です|famous for …|この町[まち]はお茶[ちゃ]で有名[ゆうめい]です。|This town is famous for tea.',
-          '〜し、〜し|… and also … (giving reasons)|静[しず]かだし、自然[しぜん]も多[おお]いです。|It\'s quiet, and there\'s lots of nature too.',
+          '〜し、〜し|… and also … (giving reasons)|静[しず]かだし、自然[しぜん]も多[おお]いし、住[す]みやすいです。|It\'s quiet, and there\'s lots of nature, so it\'s easy to live in.',
           '〜やすい|easy to …|とても住[す]みやすいです。|It\'s a very easy place to live.',
         ],
         start: '去年[きょねん]、〜に引[ひ]っ越[こ]しました。|Last year I moved to …',
@@ -1117,7 +1117,7 @@
         grammar: [
           '〜が好[す]きです|I like …|音楽[おんがく]が好[す]きです。|I like music.',
           'よく〜ます|often …|よく本[ほん]を読[よ]みます。|I often read books.',
-          '〜で|at, in (where you do it)|公園[こうえん]でテニスをします。|I play tennis in the park.',
+          '〜で〜をします|do … at, in (a place)|公園[こうえん]でテニスをします。|I play tennis in the park.',
         ],
         start: '私[わたし]の趣味[しゅみ]は|My hobby is …',
         answer: ['私[わたし]の趣味[しゅみ]はテニスです。毎週[まいしゅう]土曜日[どようび]に、公園[こうえん]で友達[ともだち]とテニスをします。音楽[おんがく]も好[す]きです。よく電車[でんしゃ]の中[なか]で日本[にほん]の歌[うた]を聞[き]きます。',
@@ -1129,7 +1129,7 @@
         grammar: [
           '〜ことです|(my hobby) is doing …|趣味[しゅみ]はギターを弾[ひ]くことです。|My hobby is playing guitar.',
           '〜ようになりました|have become able to …|簡単[かんたん]な曲[きょく]が弾[ひ]けるようになりました。|I can play easy pieces now.',
-          '〜し、〜し|… and also … (reasons)|楽[たの]しいし、ストレスも減[へ]ります。|It\'s fun, and it reduces stress too.',
+          '〜し、〜し|… and also … (reasons)|楽[たの]しいし、ストレスも減[へ]るし、いいことばかりです。|It\'s fun, and it reduces stress too — it\'s all good.',
         ],
         start: '私[わたし]の趣味[しゅみ]は〜ことです。|My hobby is …-ing.',
         answer: ['私[わたし]の趣味[しゅみ]はギターを弾[ひ]くことです。去年[きょねん]から近[ちか]くの音楽教室[おんがくきょうしつ]で習[なら]っています。最初[さいしょ]は指[ゆび]が痛[いた]かったですが、毎日[まいにち]練習[れんしゅう]を続[つづ]けて、簡単[かんたん]な曲[きょく]なら弾[ひ]けるようになりました。楽[たの]しいし、ストレスも減[へ]るし、始[はじ]めてよかったです。',
@@ -1208,7 +1208,7 @@
         verbs: ['過[す]ごしやすい|pleasant (weather)', '色[いろ]づく|change colour', 'つらい|be hard to bear', '楽[たの]しみだ|look forward to'],
         grammar: [
           '〜のは〜です|the one (I …) is …|一番[いちばん]好[す]きなのは秋[あき]です。|The one I like best is autumn.',
-          '〜すぎる|too …|夏[なつ]は暑[あつ]すぎます。|Summer is too hot.',
+          '〜すぎます|too …|夏[なつ]は暑[あつ]すぎます。|Summer is too hot.',
           '〜からです|it\'s because …|過[す]ごしやすいからです。|It\'s because it\'s pleasant.',
         ],
         start: '一番[いちばん]好[す]きなのは〜です。|The one I like best is …',
@@ -1637,7 +1637,7 @@
         grammar: [
           '〜からです|it\'s because …|アニメが好[す]きだからです。|It\'s because I like anime.',
           '〜たいです|want to …|日本[にほん]に行[い]きたいです。|I want to go to Japan.',
-          '〜で|in (a language)|日本語[にほんご]で話[はな]したいです。|I want to speak in Japanese.',
+          '〜語[ご]で|in (a language)|日本語[にほんご]で話[はな]したいです。|I want to speak in Japanese.',
         ],
         start: '〜が好[す]きだからです。|It\'s because I like …',
         answer: ['日本[にほん]のアニメと漫画[まんが]が好[す]きだからです。今[いま]は英語[えいご]で読[よ]みますが、日本語[にほんご]で読[よ]みたいです。来年[らいねん]、日本[にほん]へ旅行[りょこう]に行[い]きます。日本[にほん]の人[ひと]と日本語[にほんご]で話[はな]したいです。',
@@ -1821,7 +1821,7 @@
         grammar: [
           '〜うちに|while (still) …|体力[たいりょく]があるうちに挑戦[ちょうせん]したいです。|I want to try while I still have the energy.',
           '〜に限[かぎ]らず|not just …|日本[にほん]に限[かぎ]らず、世界中[せかいじゅう]で働[はたら]きたいです。|I want to work not just in Japan but around the world.',
-          '〜てきた|have been … (up to now)|ずっと銀行[ぎんこう]で働[はたら]いてきました。|I\'ve worked at a bank all along.',
+          '〜てきました|have been … (up to now)|ずっと銀行[ぎんこう]で働[はたら]いてきました。|I\'ve worked at a bank all along.',
         ],
         start: '今[いま]の目標[もくひょう]は、〜ことです。|My goal now is to …',
         answer: ['今[いま]の目標[もくひょう]は、教育[きょういく]に携[たずさ]わる仕事[しごと]をすることです。大学[だいがく]を出[で]てから十年[じゅうねん]、ずっと銀行[ぎんこう]で働[はたら]いてきましたが、後悔[こうかい]しないように、体力[たいりょく]があるうちに新[あたら]しいことに挑戦[ちょうせん]しようと決[き]めました。日本[にほん]に限[かぎ]らず、教育[きょういく]を受[う]けにくい国[くに]の子供[こども]たちを支援[しえん]したいです。それを実現[じつげん]するために、今[いま]は夜間[やかん]の大学院[だいがくいん]に通[かよ]っています。',
