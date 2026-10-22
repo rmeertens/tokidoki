@@ -31,11 +31,12 @@ const pageFile = id => `news-${id}.html`;
 
 // Structured data so search engines know each page is a dated article.
 // `<` is escaped so no text can close the script tag.
-const jsonLd = (item, url) => JSON.stringify({
+const jsonLd = (item, url) => JSON.stringify([{
   '@context': 'https://schema.org',
   '@type': 'NewsArticle',
   headline: item.titleEn,
   description: `${item.titleEn}, rewritten in easy Japanese for JLPT N5, N4 and N3 learners.`,
+  url,
   inLanguage: 'ja',
   datePublished: item.date,
   dateModified: item.date,
@@ -44,7 +45,27 @@ const jsonLd = (item, url) => JSON.stringify({
   isAccessibleForFree: true,
   author: { '@type': 'Organization', name: 'Tokidoki', url: `${SITE}/` },
   publisher: { '@type': 'Organization', name: 'Tokidoki', url: `${SITE}/` },
-}).replace(/</g, '\\u003c');
+}, {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Tokidoki', item: `${SITE}/` },
+    { '@type': 'ListItem', position: 2, name: 'News', item: `${SITE}/news.html` },
+    { '@type': 'ListItem', position: 3, name: item.titleEn, item: url },
+  ],
+}]).replace(/</g, '\\u003c');
+
+// Search results cut titles at about 60 characters and descriptions at about
+// 160, so the headline comes first and the longest tail that still fits
+// follows it (or the last, shortest one).
+const fit = (head, tails, max) => tails.map(t => head + t).find(s => s.length <= max) || head + tails[tails.length - 1];
+const newsTitle = h => fit(h, [' — Easy Japanese News | Tokidoki', ' | Easy Japanese News', ' | Tokidoki'], 65);
+const newsDesc = h => fit(`${h}.`, [
+  ' Read it in easy Japanese at JLPT N5, N4 or N3, with furigana, audio, and the words and grammar of every line.',
+  ' In easy Japanese at JLPT N5, N4 or N3, with furigana, audio, words and grammar.',
+  ' In easy Japanese (JLPT N5–N3) with furigana and audio.',
+  ' Easy Japanese news, N5–N3.',
+], 160);
 
 // The pieces of news.html every story page reuses.
 const index = read('news.html');
@@ -62,8 +83,8 @@ function page(item, i) {
   // Newest first: the previous page is the newer story.
   const newer = NEWS_ITEMS[i - 1];
   const older = NEWS_ITEMS[i + 1];
-  const title = `${item.titleEn} — easy Japanese news (N5–N3) | Tokidoki`;
-  const desc = `${item.titleEn}. Read this news story in easy Japanese at JLPT N5, N4 or N3, and tap any sentence for its words and grammar.`;
+  const title = newsTitle(item.titleEn);
+  const desc = newsDesc(item.titleEn);
   const url = `${SITE}/${pageFile(item.id)}`;
   const pagerLink = (it, dir) => it
     ? `<a class="btn-secondary phrase-pager-link" href="${pageFile(it.id)}">${dir === 'newer' ? '← ' : ''}${it.emoji} ${esc(it.titleEn)}${dir === 'older' ? ' →' : ''}</a>`

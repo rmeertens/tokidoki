@@ -40,6 +40,29 @@ const headExtras = cut('  <link rel="stylesheet"', '</head>');
 const nav = cut('      <nav class="page-nav"', '</nav>') + '</nav>';
 const scripts = cut('  <script src="conjugator.js', '  <!-- Static content');
 
+// Structured data: what the page teaches, and where it sits in the site.
+// `<` is escaped so no text can close the script tag.
+const jsonLd = (cat, title, desc, url) => JSON.stringify([{
+  '@context': 'https://schema.org',
+  '@type': 'LearningResource',
+  name: title.replace(/ \| Tokidoki$/, ''),
+  description: desc,
+  url,
+  inLanguage: 'en',
+  learningResourceType: 'phrase list',
+  isAccessibleForFree: true,
+  teaches: `Japanese phrases: ${cat.titleEn}`,
+  isPartOf: { '@type': 'WebSite', name: 'Tokidoki', url: `${SITE}/` },
+}, {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Tokidoki', item: `${SITE}/` },
+    { '@type': 'ListItem', position: 2, name: 'Phrases', item: `${SITE}/phrases.html` },
+    { '@type': 'ListItem', position: 3, name: cat.titleEn, item: url },
+  ],
+}]).replace(/</g, '\\u003c');
+
 // Categories in the order the index lists them.
 const groupOrder = id => PHRASE_GROUPS.findIndex(g => g.id === id);
 const cats = PHRASES_DATA.slice().sort((a, b) => groupOrder(a.group) - groupOrder(b.group));
@@ -81,6 +104,7 @@ function page(cat, i) {
   <meta name="twitter:description" content="${esc(desc)}">
   <meta name="twitter:image" content="${SITE}/og-image.png">
   <link rel="canonical" href="${url}">
+  <script type="application/ld+json">${jsonLd(cat, title, desc, url)}</script>
 ${headExtras}</head>
 <body data-mode="phrases" data-category="${cat.id}">
   <!-- Written by scripts/render_phrase_pages.mjs — edit that, phrases.html or the data, not this file. -->
