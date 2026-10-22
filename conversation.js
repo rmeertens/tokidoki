@@ -663,8 +663,8 @@
   // 'auto' converts finished words by itself, 'off' leaves kana alone.
   if (!['off', 'pick', 'auto'].includes(settings.kanji)) settings.kanji = settings.kanji === false ? 'off' : 'pick';
   if (!LEVELS.includes(settings.level)) settings.level = 'N5';
-  // Layout: 'side' lists every question beside the open one (below it on a
-  // narrow screen), 'off' leaves just the question.
+  // Hints: 'side' puts them in a column beside your answer (below it on a
+  // narrow screen), 'off' under it.
   if (!['side', 'off'].includes(settings.layout)) settings.layout = 'side';
   const store = Object.assign({ answers: {}, feedback: {} }, load(STORE_KEY, {}));
   if (!store.answers || typeof store.answers !== 'object') store.answers = {};
@@ -724,40 +724,14 @@
     $('cs-done').textContent = n ? ` · ${n} answered at ${settings.level}` : '';
   }
 
-  // ─── The list beside a question ────────────────────────────────────────────
+  // ─── Where the hints go ────────────────────────────────────────────────────
 
-  function renderSide() {
+  // 'side': in a column beside the question and your answer; 'off': under them.
+  function renderLayout() {
     const on = settings.layout === 'side';
     document.querySelectorAll('.cs-layout-mode button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.layout === settings.layout)));
     $('cs-layout').classList.toggle('cs-with-side', on);
     document.body.classList.toggle('cs-wide', on && !!topic);
-    $('cs-side').hidden = !on;
-    if (!on || !topic) return;
-    const list = $('cs-side-list');
-    list.innerHTML = GROUPS.map(g => {
-      const items = TOPICS.filter(t => t.group === g.id);
-      if (!items.length) return '';
-      return `<div class="cs-side-group">${esc(g.name)}</div>${items.map(t => {
-        const d = levelData(t, settings.level);
-        const cur = t === topic;
-        return `<a class="cs-side-item${cur ? ' current' : ''}${written(t, settings.level) ? ' written' : ''}" href="#${esc(t.id)}"${cur ? ' aria-current="page"' : ''}>
-          <span class="cs-side-ja" lang="ja">${esc(plain(d.q.ja))}</span>
-          <span class="cs-side-en">${esc(d.q.en)}</span>
-        </a>`;
-      }).join('')}`;
-    }).join('');
-    renderSideCount();
-    // Keep the open question in view when the list scrolls on its own.
-    const cur = list.querySelector('.current');
-    if (cur && list.scrollHeight > list.clientHeight
-      && (cur.offsetTop < list.scrollTop || cur.offsetTop + cur.offsetHeight > list.scrollTop + list.clientHeight)) {
-      list.scrollTop = cur.offsetTop - list.clientHeight / 3;
-    }
-  }
-
-  function renderSideCount() {
-    const n = TOPICS.filter(t => written(t, settings.level)).length;
-    $('cs-side-count').textContent = `${n} / ${TOPICS.length} answered at ${settings.level}`;
   }
 
   // ─── A question ────────────────────────────────────────────────────────────
@@ -780,7 +754,7 @@
     askError = '';
     renderAi();
     renderFeedback();
-    renderSide();
+    renderLayout();
   }
 
   // ─── Feedback from Claude ──────────────────────────────────────────────────
@@ -1052,8 +1026,6 @@
     else delete store.answers[key];
     save(STORE_KEY, store);
     $('cs-saved').textContent = text.trim() ? 'Saved' : '';
-    const cur = document.querySelector('.cs-side-item.current');
-    if (cur) { cur.classList.toggle('written', !!text.trim()); renderSideCount(); }
   }
 
   // Shows the list or a question, from the address: conversation.html#<id>.
@@ -1073,7 +1045,7 @@
     } else {
       document.title = TITLE;
       renderTopics();
-      renderSide();
+      renderLayout();
     }
     window.scrollTo(0, 0);
   }
@@ -1194,7 +1166,7 @@
     document.querySelectorAll('.cs-layout-mode button').forEach(b => b.addEventListener('click', () => {
       settings.layout = b.dataset.layout;
       saveSettings();
-      renderSide();
+      renderLayout();
     }));
 
     const ta = $('cs-answer');

@@ -20,7 +20,7 @@
   <meta name="twitter:description" content="Answer everyday questions in Japanese — your weekend, family, food, dreams — with step-by-step hints (words, verbs, grammar, a way to begin) and a sample answer for JLPT N5, N4 and N3.">
   <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
   <link rel="canonical" href="https://tokidoki.meertens.dev/conversation.html">
-  <link rel="stylesheet" href="style.css?v=80">
+  <link rel="stylesheet" href="style.css?v=81">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -146,16 +146,14 @@
           <button data-kanji="auto" aria-pressed="false" title="Turn finished words into kanji by themselves (どようび は → 土曜日 は)">Auto</button>
         </div>
         <label class="kana-script-toggle"><input type="checkbox" id="cs-opt-furigana" checked> Furigana</label>
-        <div class="lis-levels cs-layout-mode" role="group" aria-label="Question list">
-          <span class="lis-levels-label">List</span>
-          <button data-layout="side" aria-pressed="true" title="List every question beside this one (below it on a narrow screen)">Show</button>
-          <button data-layout="off" aria-pressed="false" title="Just this question, in one column">Hide</button>
+        <div class="lis-levels cs-layout-mode" role="group" aria-label="Where the hints go">
+          <span class="lis-levels-label">Hints</span>
+          <button data-layout="side" aria-pressed="true" title="Hints in a column beside your answer (below it on a narrow screen)">Side</button>
+          <button data-layout="off" aria-pressed="false" title="Hints under your answer, in one column">Below</button>
         </div>
       </div>
 
       <div class="cs-layout" id="cs-layout">
-      <div class="cs-body">
-
       <div class="card cs-card" id="cs-card">
         <div class="cs-head"><span class="cs-meta" id="cs-meta"></span></div>
         <div class="cs-q" id="cs-q" lang="ja"></div>
@@ -179,26 +177,21 @@
 
       <div class="cs-feedback hidden" id="cs-feedback" aria-live="polite"></div>
 
-      <div class="cs-board">
+      <aside class="cs-board" aria-label="Hints">
         <div class="cs-board-head">
           <h3>Hints <span>— tap a tile to unlock it, or use the word in your answer; tap an unlocked word to add it</span></h3>
           <span class="cs-unlocked" id="cs-unlocked"></span>
         </div>
         <div class="cs-hints" id="cs-hints"></div>
-        <div class="cs-sample" id="cs-sample" aria-live="polite"></div>
-      </div>
+      </aside>
+
+      <div class="cs-sample" id="cs-sample" aria-live="polite"></div>
 
       <div class="cs-nav">
         <button class="btn-secondary" id="cs-prev">← Previous</button>
         <button class="btn-secondary" id="cs-random">🎲 Random</button>
         <button class="btn-secondary" id="cs-next">Next →</button>
       </div>
-      </div>
-
-      <aside class="cs-side" id="cs-side" aria-label="All questions">
-        <div class="cs-side-head"><b>All questions</b> <span id="cs-side-count"></span></div>
-        <nav class="cs-side-list" id="cs-side-list"></nav>
-      </aside>
       </div>
     </main>
 
@@ -209,7 +202,7 @@
   <script src="jp-deinflect.js?v=1"></script>
   <script src="answer-diff.js?v=8"></script>
   <script src="kanji-ime.js?v=2"></script>
-  <script src="conversation.js?v=11"></script>
+  <script src="conversation.js?v=12"></script>
   <script src="claude-feedback.js?v=2"></script>
   <script src="romaji.js?v=8"></script>
   <script src="pronounce.js?v=2"></script>
