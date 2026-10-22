@@ -7705,6 +7705,48 @@ a.chapter-card.news-headline-card {
 
 .cs-no-furigana .cs-main rt { visibility: hidden; }
 
+/* Every question in a list beside the open one (List: Side) */
+body.cs-wide #app { max-width: 1200px; }
+.cs-layout.cs-with-side { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 20px; align-items: start; }
+.cs-side {
+  position: sticky;
+  top: 84px;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100dvh - 150px);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.cs-side[hidden] { display: none; }
+.cs-side-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; padding: 10px 12px 8px; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+.cs-side-head span { font-size: 0.75rem; color: var(--text-muted); }
+.cs-side-list { position: relative; overflow-y: auto; padding: 4px 6px 8px; overscroll-behavior: contain; }
+.cs-side-group { font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin: 10px 6px 4px; }
+.cs-side-item {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 8px 5px 10px;
+  border-left: 3px solid transparent;
+  border-radius: 6px;
+  color: var(--text);
+  text-decoration: none;
+  line-height: 1.35;
+}
+.cs-side-item:hover { background: var(--accent-dim); }
+.cs-side-item.written { border-left-color: var(--green); }
+.cs-side-item.current { background: color-mix(in srgb, var(--blue) 16%, var(--bg-card)); }
+.cs-side-item.current .cs-side-ja { font-weight: 700; }
+.cs-side-ja { font-family: var(--font-jp); font-size: 0.86rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cs-side-en { font-size: 0.72rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Too narrow for two columns: the list comes after the question. */
+@media (max-width: 1000px) {
+  body.cs-wide #app { max-width: 880px; }
+  .cs-layout.cs-with-side { display: block; }
+  .cs-side { position: static; max-height: 420px; margin-bottom: 20px; }
+}
+
 @media (max-width: 600px) {
   .cs-hints, .cs-compare { grid-template-columns: 1fr; }
   .cs-q { font-size: 1.2rem; }
