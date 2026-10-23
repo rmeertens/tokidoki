@@ -5497,6 +5497,7 @@
   // Whether the typed answer was right (null: nothing typed).
   let bunkeiTypedOk = null;
   let bunkeiRepeats = 0;            // cards re-queued by "Repeat until all correct"
+  let bunkeiUndoStack = [];
 
   function bunkeiVerbKey(verb) {
     return verb.disambig ? `${verb.kanji}_${verb.disambig}` : verb.kanji;
@@ -5673,6 +5674,7 @@
     bunkeiIndex = 0;
     bunkeiCorrect = 0;
     bunkeiRepeats = 0;
+    bunkeiUndoStack = [];
     showScreen('bunkei');
     $('#bunkei-session-complete').classList.add('hidden');
     $('#bunkei-card').classList.remove('hidden');
@@ -5724,7 +5726,13 @@
     $('#bunkei-reveal-hint').textContent = typing ? 'Enter = check' : 'Tap the card or press Space';
     $('#bunkei-reveal-area').classList.remove('hidden');
     $('#bunkei-answer-area').classList.add('hidden');
+    updateBunkeiUndoButton();
     if (typing) setTimeout(() => input.focus(), 0);
+  }
+
+  function updateBunkeiUndoButton() {
+    const btn = $('#btn-bunkei-undo');
+    if (btn) btn.classList.toggle('hidden', bunkeiUndoStack.length === 0);
   }
 
   function revealBunkeiAnswer() {
@@ -5792,8 +5800,17 @@
     if (!bunkeiAnswered) return;
     const card = bunkeiSessionCards[bunkeiIndex];
     const state = getCardState(srsData, card.id);
+    const undo = {
+      cardId: card.id,
+      prevSrsState: srsData[card.id] ? { ...srsData[card.id] } : null,
+      index: bunkeiIndex,
+      correct: bunkeiCorrect,
+      repeats: bunkeiRepeats,
+      cardCount: bunkeiSessionCards.length,
+    };
     srsData[card.id] = gradeCard(state, grade);
-    logReview(card.id, state, grade);
+    undo.logged = logReview(card.id, state, grade);
+    bunkeiUndoStack.push(undo);
     saveSRS(srsData);
     flashSaveIndicator();
     // Only the first try of each sentence counts towards the score.
@@ -5804,6 +5821,30 @@
     }
     bunkeiIndex++;
     showBunkeiCard();
+  }
+
+  // Takes back the last grade (a misclick, or "Got it" when it wasn't):
+  // restores the card's SRS state, the score and any repeat it queued, then
+  // shows the card again.
+  function undoLastBunkeiGrade() {
+    if (bunkeiUndoStack.length === 0) return;
+    const undo = bunkeiUndoStack.pop();
+    unlogReview(undo.logged);
+    if (undo.prevSrsState) {
+      srsData[undo.cardId] = undo.prevSrsState;
+    } else {
+      delete srsData[undo.cardId];
+      deleteSRSCard(undo.cardId);
+    }
+    saveSRS(srsData);
+    bunkeiSessionCards.length = undo.cardCount;
+    bunkeiIndex = undo.index;
+    bunkeiCorrect = undo.correct;
+    bunkeiRepeats = undo.repeats;
+    $('#bunkei-session-complete').classList.add('hidden');
+    $('#bunkei-card').classList.remove('hidden');
+    showBunkeiCard();
+    flashSaveIndicator();
   }
 
   function finishBunkeiSession() {
@@ -6919,6 +6960,7 @@
       btn.addEventListener('click', () => gradeBunkeiAndAdvance(parseInt(btn.dataset.bunkeiGrade, 10)));
     });
     on('#btn-bunkei-back', 'click', backToBunkeiSetup);
+    on('#btn-bunkei-undo', 'click', undoLastBunkeiGrade);
     on('#bunkei-auto-kanji', 'change', (e) => {
       settings.autoKanji = e.target.checked;
       saveSettings(settings);
@@ -6933,6 +6975,13 @@
     document.addEventListener('keydown', (e) => {
       if (mode !== 'bunkei') return;
       if (!(screens.bunkei && screens.bunkei.classList.contains('active'))) return;
+
+      // Z (or Ctrl/⌘+Z) undoes the last grade, except while typing an answer.
+      const typingHere = e.target && ['INPUT', 'TEXTAREA'].includes(e.target.tagName) && e.target.type !== 'checkbox';
+      if (!typingHere && !e.altKey && (e.key === 'z' || e.key === 'Z')) {
+        if (bunkeiUndoStack.length) { consumeKey(e); undoLastBunkeiGrade(); }
+        return;
+      }
 
       if (!$('#bunkei-session-complete').classList.contains('hidden')) {
         if (e.key === ' ' && !focusHasOwnSpaceAction()) { consumeKey(e); backToBunkeiSetup(); }
