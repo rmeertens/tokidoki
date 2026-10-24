@@ -111,7 +111,7 @@
 - Bunkei in the wild (`bunkei-story.html`, `bunkei-story.js`) tells one
   story, N5 to N3 chapters in `bunkei-story-data.js`, that uses every pattern
   in `PATTERNS` (`bunkei-data.js`); after each sentence you pick what its
-  pattern means from four. Adding a pattern to the drill means adding a
+  pattern (underlined in green) means from four. Adding a pattern to the drill means adding a
   sentence for it here — `test_bunkei_story.js` fails until you do, and
   checks the wrong choices (at the chapter's level, never one in `CLOSE`).
 - A typed English → Japanese Sentences answer also counts in another word

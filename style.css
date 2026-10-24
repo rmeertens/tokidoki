@@ -8189,9 +8189,8 @@ body.cs-wide #app { max-width: 1200px; }
 .bs-ja { font-family: var(--font-jp); font-size: 1.15rem; line-height: 2.2; }
 .bs-line-done .bs-ja { color: var(--text-dim); }
 .bs-en { font-size: 0.86rem; color: var(--text-muted); line-height: 1.5; }
-.bs-line-done .bs-pattern,
-body.bs-hint .bs-line-current .bs-pattern {
-  text-decoration: underline 2px var(--accent);
+.bs-pattern {
+  text-decoration: underline 2px var(--green);
   text-underline-offset: 0.3em;
   color: var(--text);
 }

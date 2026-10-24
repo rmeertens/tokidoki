@@ -72,7 +72,7 @@
 
   const CHAPTERS = (global.BUNKEI_STORY || {}).CHAPTERS || [];
   const PATTERN = (global.Bunkei || {}).PATTERN_BY_ID || {};
-  const settings = Object.assign({ furigana: true, hint: false }, load(SETTINGS_KEY, {}));
+  const settings = Object.assign({ furigana: true }, load(SETTINGS_KEY, {}));
   const store = Object.assign({ best: {}, last: {} }, load(STORE_KEY, {}));
 
   const $ = id => document.getElementById(id);
@@ -91,7 +91,6 @@
 
   function renderHome() {
     $('bs-opt-furigana').checked = settings.furigana;
-    $('bs-opt-hint').checked = settings.hint;
     applySettings();
     $('bs-list').innerHTML = CHAPTERS.map((c, k) => {
       const best = store.best[c.id];
@@ -111,7 +110,6 @@
 
   function applySettings() {
     document.body.classList.toggle('bs-no-furigana', !settings.furigana);
-    document.body.classList.toggle('bs-hint', settings.hint);
   }
 
   function start(id) {
@@ -129,8 +127,8 @@
   const answered = i => attempt.picks[i] != null;
   const finished = () => attempt.picks.every(p => p != null);
 
-  // The sentence, with its pattern marked (underlined once answered, or
-  // before then with the hint on).
+  // The sentence, with its pattern marked: underlined in green, then in
+  // red once answered wrong.
   function sentenceHtml(line) {
     const parts = splitAt(line);
     if (!parts) return rubyHtml(line.ja);
@@ -255,7 +253,6 @@
   // ─── Events ────────────────────────────────────────────────────────────────
 
   $('bs-opt-furigana').addEventListener('change', e => { settings.furigana = e.target.checked; save(SETTINGS_KEY, settings); applySettings(); });
-  $('bs-opt-hint').addEventListener('change', e => { settings.hint = e.target.checked; save(SETTINGS_KEY, settings); applySettings(); });
   $('bs-list').addEventListener('click', e => {
     const b = e.target.closest('[data-chapter]');
     if (b) start(b.dataset.chapter);
