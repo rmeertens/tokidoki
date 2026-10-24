@@ -85,6 +85,37 @@ named = TA.renameInLibrary(named, idA, '   ');
 ok(named[0].title === 'A' && !named[0].named, 'an empty name goes back to the first line');
 ok(!/^tokidoki[_-]/.test(TA.LIBRARY_KEY), 'saved texts stay out of the account sync');
 
+// ─── Sharing saved texts between devices ───────────────────────────────────
+ok(TA.SYNC_KEY.startsWith('tokidoki_sync'), 'the agreed ids are sync bookkeeping, never synced themselves');
+ok(lib[0].u === lib[0].t, 'a new analysis is changed when made');
+const renamed = TA.renameInLibrary(lib, lib[0].id, 'X', lib[0].t + 50);
+ok(renamed[0].u === lib[0].t + 50, 'renaming marks it changed');
+ok(TA.renameInLibrary(lib, lib[0].id, 'Y', 1)[0].u > lib[0].u, 'a rename always counts as newer, whatever the clock says');
+ok(JSON.stringify(TA.changeMap([{ id: 'a', t: 5 }, { id: 'b', t: 5, u: 9 }])) === '{"a":5,"b":9}', 'old entries without u use their time');
+const plan = TA.planLibrarySync(
+  { same: 1, goneThere: 2, goneHere: 3, editedHere: 4, editedThere: 5 },
+  { same: 1, goneThere: 2, editedHere: 40, newHere: 6, both: 8, olderHere: 7, editedThere: 5 },
+  { same: 1, goneHere: 3, editedThere: 50, newThere: 9, both: 7, olderHere: 8 });
+const sorted = o => JSON.stringify(Object.fromEntries(Object.entries(o).map(([k, v]) => [k, v.slice().sort()])));
+ok(sorted(plan) === JSON.stringify({ upload: ['both', 'editedHere', 'newHere'], download: ['editedThere', 'newThere', 'olderHere'], removeLocal: ['goneThere'], removeRemote: ['goneHere'] }),
+  'sync plan: new texts both ways, newer change wins, deletes carried over ' + JSON.stringify(plan));
+const p2 = TA.planLibrarySync({ a: 1, b: 1 }, { a: 2 }, { b: 2 });
+ok(p2.upload.join() === 'a' && p2.download.join() === 'b' && !p2.removeLocal.length && !p2.removeRemote.length, 'a change made after the other side deleted it keeps the text');
+ok(Object.values(TA.planLibrarySync({}, { a: 1 }, { a: 1 })).every(l => !l.length), 'nothing to do when both hold the same');
+ok(TA.planLibrarySync({}, {}, { a: 1 }).download.join() === 'a' && TA.planLibrarySync({}, { a: 1 }, {}).upload.join() === 'a', 'first sync: nothing is taken for deleted');
+const entry = Object.assign({}, named[0], { title: 'Wet', named: true, u: 7777 });
+const fields = TA.textToFields(entry);
+ok(fields.result.stringValue === JSON.stringify(result) && fields.u.integerValue === '7777' && fields.named.booleanValue === true, 'a saved text as Firestore fields');
+const back = TA.fieldsToText(entry.id, fields);
+ok(back && back.id === entry.id && back.title === 'Wet' && back.named && back.text === 'A' && back.level === entry.level && back.t === entry.t && back.u === 7777
+  && JSON.stringify(back.result) === JSON.stringify(result), 'and back');
+ok(TA.fieldsToText('x', Object.assign({}, fields, { result: { stringValue: '{' } })) === null && TA.fieldsToText('x', {}) === null, 'an unreadable document is skipped');
+ok(TA.fieldsToText('x', Object.assign({}, fields, { title: { stringValue: '' } })).title === 'A', 'no title: the first line');
+const rules = fs.readFileSync('firestore.rules', 'utf8');
+ok(/match \/users\/\{uid\} \{[\s\S]*match \/texts\/\{text\} \{\s*allow read, write: if request\.auth != null && request\.auth\.uid == uid;/.test(rules), 'firestore.rules lets each user reach their own saved texts');
+const syncJs = fs.readFileSync('sync.js', 'utf8');
+ok(syncJs.includes('window.TokidokiAccount') && syncJs.includes("new Event('tokidoki:account')"), 'sync.js lends the login to the page');
+
 // ─── The page ──────────────────────────────────────────────────────────────
 const html = fs.readFileSync('text-analysis.html', 'utf8');
 ok(html.includes('data-mode="text-analysis"') && html.includes('text-analysis.js') && html.includes('claude-feedback.js'), 'page loads its scripts');

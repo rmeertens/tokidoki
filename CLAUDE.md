@@ -52,9 +52,15 @@
   meaning, grammar per sentence), shown like a News story. It sends its own
   request through `ClaudeFeedback.stream`; without a key the page only
   explains how to add one. Every finished analysis is also saved, with its
-  text, in a "Saved texts" list (open, rename, delete) kept only on the device
-  (`text-analysis-library`, outside the synced names: analyses are too big
-  for the one sync document). `test_text_analysis.js` covers it.
+  text, in a "Saved texts" list (open, rename, delete),
+  `text-analysis-library`, outside the synced names: analyses are too big
+  for the one sync document. Logged in, each saved text is instead its own
+  Firestore document, `users/{uid}/texts/{id}` (allowed in
+  `firestore.rules`), synced by the page itself through
+  `window.TokidokiAccount` from `sync.js`: it lists only each document's `u`
+  (last change), moves just what's newer, and keeps the ids both sides
+  agreed on (`tokidoki_sync_texts`) so deletes carry over.
+  `test_text_analysis.js` covers it.
 
 ## Generated pages
 

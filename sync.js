@@ -24,6 +24,11 @@
 // of their progress, so it's in their account, and logging out removes it
 // from the device.
 //
+// Saved texts on the Text analysis page are too big for that one document:
+// text-analysis.js keeps each in its own, users/{uid}/texts/{id}, through
+// window.TokidokiAccount (the logged-in uid and an authorised Firestore
+// request), and syncs when this sends `tokidoki:account`.
+//
 // Firebase is only downloaded for people who open the login dialog or are
 // logged in. Set FIREBASE_CONFIG to null to hide the button altogether.
 (function () {
@@ -163,6 +168,7 @@
           if (get(CLAUDE_KEY)) { del(CLAUDE_KEY); claudeChanged(); }  // the key belongs to the account, not the device
         }
         render();
+        window.dispatchEvent(new Event('tokidoki:account'));
         if (first) { first = false; resolve(); }
       });
     }));
@@ -205,6 +211,16 @@
     }
     return json;
   }
+
+  // For other documents under the account (text-analysis.js): paths are
+  // relative to users/{uid}.
+  window.TokidokiAccount = {
+    uid: () => (user ? user.uid : null),
+    request(method, path, body) {
+      if (!user) return Promise.reject(new Error('Not logged in'));
+      return api(method, '/users/' + encodeURIComponent(user.uid) + path, body);
+    },
+  };
 
   // Firestore's typed values ↔ plain ones (strings, integers and maps are all we store).
   function fromValue(v) {
