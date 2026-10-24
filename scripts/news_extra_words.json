@@ -5518,5 +5518,290 @@
     "かぞく",
     "family",
     "noun"
+  ],
+  "皇室": [
+    "こうしつ",
+    "the imperial family, the Imperial House",
+    "noun"
+  ],
+  "二十四日": [
+    "にじゅうよっか",
+    "24th day of the month, 24 days",
+    "noun"
+  ],
+  "皇族": [
+    "こうぞく",
+    "member of the imperial family",
+    "noun"
+  ],
+  "養子": [
+    "ようし",
+    "adopted child, adopted son",
+    "noun"
+  ],
+  "天皇": [
+    "てんのう",
+    "emperor of Japan",
+    "noun"
+  ],
+  "改正": [
+    "かいせい",
+    "revision, amendment",
+    "noun"
+  ],
+  "典範": [
+    "てんぱん",
+    "model, rule (as in Imperial House Law)",
+    "noun"
+  ],
+  "身分": [
+    "みぶん",
+    "status, social standing",
+    "noun"
+  ],
+  "1947年": [
+    "せんきゅうひゃくよんじゅうななねん",
+    "1947",
+    "number + counter"
+  ],
+  "宮家": [
+    "みやけ",
+    "branch family of the imperial house",
+    "noun"
+  ],
+  "男系": [
+    "だんけい",
+    "male line",
+    "noun"
+  ],
+  "施行": [
+    "しこう",
+    "enforcement, coming into effect",
+    "noun"
+  ],
+  "保持": [
+    "ほじ",
+    "keeping, retaining",
+    "noun"
+  ],
+  "公布": [
+    "こうふ",
+    "promulgation (of a law)",
+    "noun"
+  ],
+  "保てる": [
+    "たもてる",
+    "to be able to keep, to be able to maintain",
+    "verb"
+  ],
+  "継承": [
+    "けいしょう",
+    "succession, inheritance",
+    "noun"
+  ],
+  "子孫": [
+    "しそん",
+    "descendants",
+    "noun"
+  ],
+  "宮内庁": [
+    "くないちょう",
+    "Imperial Household Agency",
+    "noun"
+  ],
+  "縁組": [
+    "えんぐみ",
+    "adoption, marriage alliance",
+    "noun"
+  ],
+  "手続き": [
+    "てつづき",
+    "procedure, formalities",
+    "noun"
+  ],
+  "秀喜": [
+    "ひでき",
+    "Hideki (given name)",
+    "name"
+  ],
+  "松井": [
+    "まつい",
+    "Matsui (surname)",
+    "name"
+  ],
+  "読売": [
+    "よみうり",
+    "Yomiuri",
+    "noun"
+  ],
+  "ジャイアンツ": [
+    "じゃいあんつ",
+    "the Giants (Yomiuri Giants)",
+    "noun"
+  ],
+  "23日": [
+    "にじゅうさんにち",
+    "23rd day of the month",
+    "number + counter"
+  ],
+  "52歳": [
+    "ごじゅうにさい",
+    "52 years old",
+    "number + counter"
+  ],
+  "背番号": [
+    "せばんごう",
+    "uniform number, number on the back",
+    "noun"
+  ],
+  "90": [
+    "きゅうじゅう",
+    "ninety",
+    "number"
+  ],
+  "打者": [
+    "だしゃ",
+    "batter, hitter",
+    "noun"
+  ],
+  "大リーグ": [
+    "だいりーぐ",
+    "Major League Baseball",
+    "noun"
+  ],
+  "プレー": [
+    "ぷれー",
+    "play",
+    "noun / suru verb"
+  ],
+  "507本": [
+    "ごひゃくななほん",
+    "507 (long objects, home runs)",
+    "number + counter"
+  ],
+  "ホームラン": [
+    "ほーむらん",
+    "home run",
+    "noun"
+  ],
+  "OB": [
+    "おーびー",
+    "alumnus, former member of a team",
+    "noun"
+  ],
+  "就任": [
+    "しゅうにん",
+    "taking office, assuming a post",
+    "noun / suru verb"
+  ],
+  "主砲": [
+    "しゅほう",
+    "main slugger, cleanup hitter",
+    "noun"
+  ],
+  "507": [
+    "ごひゃくなな",
+    "507",
+    "number"
+  ],
+  "本塁打": [
+    "ほんるいだ",
+    "home run",
+    "noun"
+  ],
+  "敗退": [
+    "はいたい",
+    "defeat, elimination",
+    "noun / suru verb"
+  ],
+  "東シナ海": [
+    "ひがしシナかい",
+    "East China Sea",
+    "noun"
+  ],
+  "近畿": [
+    "きんき",
+    "Kinki region (Osaka, Kyoto and nearby)",
+    "noun"
+  ],
+  "大型": [
+    "おおがた",
+    "large, large-scale",
+    "noun"
+  ],
+  "24日": [
+    "にじゅうよっか",
+    "24th day of the month",
+    "number + counter"
+  ],
+  "北部": [
+    "ほくぶ",
+    "northern part",
+    "noun"
+  ],
+  "北陸": [
+    "ほくりく",
+    "Hokuriku region",
+    "noun"
+  ],
+  "よびかける": [
+    "よびかける",
+    "to call on, to appeal to",
+    "verb"
+  ],
+  "気圧": [
+    "きあつ",
+    "atmospheric pressure",
+    "noun"
+  ],
+  "北上": [
+    "ほくじょう",
+    "going north",
+    "noun / suru verb"
+  ],
+  "26日": [
+    "にじゅうろくにち",
+    "26th day of the month",
+    "number + counter"
+  ],
+  "接近": [
+    "せっきん",
+    "approach, drawing near",
+    "noun / suru verb"
+  ],
+  "強風": [
+    "きょうふう",
+    "strong wind",
+    "noun"
+  ],
+  "25日": [
+    "にじゅうごにち",
+    "25th day of the month",
+    "number + counter"
+  ],
+  "26日ごろ": [
+    "にじゅうろくにちごろ",
+    "around the 26th",
+    "number + counter"
+  ],
+  "27日": [
+    "にじゅうしちにち",
+    "27th day of the month",
+    "number + counter"
+  ],
+  "皇室典範": [
+    "こうしつてんぱん",
+    "Imperial House Law",
+    "noun"
+  ],
+  "松井秀喜": [
+    "まついひでき",
+    "Hideki Matsui (baseball player and manager)",
+    "name"
+  ],
+  "温帯低気圧": [
+    "おんたいていきあつ",
+    "extratropical cyclone",
+    "noun"
   ]
 }

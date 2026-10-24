@@ -23,6 +23,143 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-10-24-imperial-house-law',
+      date: '2026-10-24',
+      emoji: '👑',
+      titleEn: 'Revised Imperial House Law takes effect: women of the imperial family can keep their status after marriage',
+      sources: [
+        { name: 'nippon.com (Jiji Press)', url: 'https://www.nippon.com/en/news/yjj2026102300706/' },
+        { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/10/24/japan/new-imperial-house-law/' },
+        { name: 'nippon.com (Jiji Press, July)', url: 'https://www.nippon.com/en/news/yjj2026072400252/' },
+      ],
+      levels: {
+        N5: {
+          title: '皇室[こうしつ]の新[あたら]しい法律[ほうりつ]が始[はじ]まりました',
+          lines: [
+            ['10月[がつ]二十四日[にじゅうよっか]から、皇室[こうしつ]の新[あたら]しい法律[ほうりつ]が使[つか]われています。', 'From October 24, a new law about the imperial family has been in use.', '皇室典範 (こうしつてんぱん) is the Imperial House Law, which sets the rules for the imperial family.'],
+            ['皇室[こうしつ]の人[ひと]は、だんだん少[すく]なくなっています。', 'The number of people in the imperial family has been getting smaller.'],
+            ['女性[じょせい]の皇族[こうぞく]は、結婚[けっこん]したあとも、皇族[こうぞく]のままでいられます。', 'Women of the imperial family can stay members even after they marry.', '皇族 "a member of the imperial family".'],
+            ['むかし皇室[こうしつ]を出[で]た家[いえ]の男性[だんせい]が、養子[ようし]になって皇室[こうしつ]に入[はい]ることもできます。', 'Men from families that left the imperial family long ago can also join it by being adopted.', 'These are the 11 former branch families that left in 1947.'],
+            ['でも、女性[じょせい]の皇族[こうぞく]の夫[おっと]や子[こ]どもは、皇族[こうぞく]になりません。', 'But the husbands and children of women of the imperial family do not become members.'],
+            ['女性[じょせい]が天皇[てんのう]になることは、この法律[ほうりつ]ではできません。', 'Under this law, a woman cannot become emperor.'],
+          ],
+        },
+        N4: {
+          title: '改正[かいせい]皇室典範[こうしつてんぱん]が始[はじ]まる　女性[じょせい]の皇族[こうぞく]は結婚[けっこん]しても皇族[こうぞく]のまま',
+          lines: [
+            ['皇室[こうしつ]のきまりを決[き]めた皇室典範[こうしつてんぱん]の改正[かいせい]が、10月[がつ]二十四日[にじゅうよっか]に始[はじ]まりました。', 'The revision of the Imperial House Law, which sets the rules for the imperial family, took effect on October 24.', '典範 means "a model or rule"; 皇室典範 is the Imperial House Law.'],
+            ['この法律[ほうりつ]は、7月[がつ]に国会[こっかい]で成立[せいりつ]しました。', 'The law was passed by the Diet in July.'],
+            ['皇族[こうぞく]の数[かず]が減[へ]っていることが、改正[かいせい]の大[おお]きな理由[りゆう]です。', 'The falling number of imperial family members is the main reason for the revision.'],
+            ['これからは、女性[じょせい]の皇族[こうぞく]は結婚[けっこん]したあとも、皇族[こうぞく]の身分[みぶん]を持[も]つことができます。', 'From now on, women of the imperial family can keep their status after marriage.'],
+            ['また、1947年[ねん]に皇族[こうぞく]をやめた旧[きゅう]宮家[みやけ]の男系[だんけい]の男性[だんせい]が、養子[ようし]として皇室[こうしつ]に入[はい]れるようになりました。', 'Also, men in the male line of the former branch families that left the imperial family in 1947 can now join it as adopted sons.', '男系 "the male line". 旧宮家 are the 11 former branch families.'],
+            ['女性[じょせい]の皇族[こうぞく]の夫[おっと]や子[こ]どもは、皇族[こうぞく]になりません。女性[じょせい]の天皇[てんのう]も認[みと]められていません。', 'The husbands and children of women of the imperial family do not become members, and a woman emperor is still not allowed.'],
+          ],
+        },
+        N3: {
+          title: '改正皇室典範[かいせいこうしつてんぱん]が施行[しこう]　女性皇族[じょせいこうぞく]は結婚後[けっこんご]も皇族[こうぞく]の身分[みぶん]を保持[ほじ]',
+          lines: [
+            ['皇族数[こうぞくすう]の減少[げんしょう]に対応[たいおう]するための改正皇室典範[かいせいこうしつてんぱん]が、二十四日[にじゅうよっか]に施行[しこう]された。', 'The revised Imperial House Law, meant to deal with the shrinking number of imperial family members, took effect on the 24th.', '施行 "enforcement; coming into effect".'],
+            ['法律[ほうりつ]は7月[がつ]に成立[せいりつ]し、政府[せいふ]が公布[こうふ]していた。', 'The law was passed in July and promulgated by the government.', '公布 "promulgation": announcing a law officially before it takes effect.'],
+            ['改正[かいせい]により、女性皇族[じょせいこうぞく]は結婚[けっこん]後[ご]も皇族[こうぞく]の身分[みぶん]を保[たも]てるようになった。', 'Under the revision, women of the imperial family can keep their status after marriage.'],
+            ['1947年[ねん]に皇籍[こうせき]を離[はな]れた旧[きゅう]宮家[みやけ]の男系男子[だんけいだんし]を、養子[ようし]として迎[むか]えることも可能[かのう]になる。', 'It also becomes possible to take in, as adopted sons, men in the male line of the former branch families that left the imperial register in 1947.', '皇籍を離れる "to leave the imperial register".'],
+            ['養子[ようし]本人[ほんにん]に皇位継承[こういけいしょう]の資格[しかく]はないが、その子孫[しそん]の男子[だんし]には資格[しかく]が認[みと]められる。', 'The adopted men themselves are not eligible to succeed to the throne, but their male descendants are.', '皇位継承 "succession to the throne".'],
+            ['一方[いっぽう]、女性皇族[じょせいこうぞく]の夫[おっと]や子[こ]は皇族[こうぞく]とならず、女性[じょせい]・女系天皇[じょけいてんのう]も認[みと]められていない。', 'Meanwhile, the husbands and children of women of the imperial family do not become members, and a woman or a matrilineal emperor is still not recognized.', '女系天皇 "a matrilineal emperor": one whose imperial descent comes through the mother.'],
+            ['政府[せいふ]は今後[こんご]、宮内庁[くないちょう]を中心[ちゅうしん]に、養子縁組[ようしえんぐみ]の具体的[ぐたいてき]な手続[てつづ]きを検討[けんとう]する方針[ほうしん]だ。', 'The government plans to work out the specific procedures for adoption, centering on the Imperial Household Agency.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-24-matsui-giants',
+      date: '2026-10-24',
+      emoji: '⚾',
+      titleEn: 'Hideki Matsui named new manager of the Yomiuri Giants',
+      sources: [
+        { name: 'Nikkan Sports (via Yahoo! News)', url: 'https://news.yahoo.co.jp/articles/0efaa3f57279df859d284de5c1f8997dce1cf082' },
+        { name: 'Nikkan Sports (via d Menu News)', url: 'https://topics.smt.docomo.ne.jp/amp/article/nikkansports/sports/f-bb-tp0-261023-202610230000207' },
+        { name: 'THE ANSWER (via Yahoo! News)', url: 'https://news.yahoo.co.jp/articles/f6868ffa16278b243d92e86d812a9e07bdb218f6' },
+      ],
+      levels: {
+        N5: {
+          title: '松井秀喜[まついひでき]さんが巨人[きょじん]の新[あたら]しい監督[かんとく]になります',
+          lines: [
+            ['松井秀喜[まついひでき]さんが、読売[よみうり]ジャイアンツの新[あたら]しい監督[かんとく]になります。', 'Hideki Matsui will become the new manager of the Yomiuri Giants.', 'ジャイアンツ is often called 巨人 (きょじん) in Japanese.'],
+            ['23日[にち]に、記者会見[きしゃかいけん]がありました。', 'A press conference was held on the 23rd.'],
+            ['松井[まつい]さんは52歳[さい]です。', 'Mr. Matsui is 52 years old.'],
+            ['背番号[せばんごう]は90で、契約[けいやく]は3年[ねん]です。', 'His uniform number is 90, and his contract is for three years.', '背番号 "uniform number".'],
+            ['松井[まつい]さんは、むかしジャイアンツの選手[せんしゅ]でした。アメリカでも野球[やきゅう]をしました。', 'Mr. Matsui used to be a Giants player. He also played baseball in the United States.'],
+            ['松井[まつい]さんが監督[かんとく]になるのは、はじめてです。', 'This is the first time Mr. Matsui will be a manager.'],
+          ],
+        },
+        N4: {
+          title: '巨人[きょじん]の新[あたら]しい監督[かんとく]に松井秀喜[まついひでき]さん',
+          lines: [
+            ['プロ野球[やきゅう]の読売[よみうり]ジャイアンツは、23日[にち]に記者会見[きしゃかいけん]を開[ひら]いて、松井秀喜[まついひでき]さんが新[あたら]しい監督[かんとく]になると発表[はっぴょう]しました。', 'The Yomiuri Giants of pro baseball held a press conference on the 23rd and announced that Hideki Matsui will be the new manager.'],
+            ['松井[まつい]さんは52歳[さい]で、背番号[せばんごう]は90、契約[けいやく]は3年[ねん]です。', 'Mr. Matsui is 52, and his uniform number is 90 with a three-year contract.'],
+            ['松井[まつい]さんは、ジャイアンツの強[つよ]い打者[だしゃ]として活躍[かつやく]しました。', 'Mr. Matsui was a star slugger for the Giants.', '打者 "batter, hitter".'],
+            ['そのあと、アメリカの大[だい]リーグでもプレーしました。', 'After that, he also played in Major League Baseball in the United States.'],
+            ['日本[にほん]とアメリカをあわせて、507本[ほん]のホームランを打[う]っています。', 'Counting Japan and the United States together, he hit 507 home runs.'],
+            ['プロの監督[かんとく]をするのは、これがはじめてです。', 'This is his first time as a manager in the pros.'],
+          ],
+        },
+        N3: {
+          title: '巨人[きょじん]の新監督[しんかんとく]に松井秀喜氏[まついひできし]　背番号[せばんごう]90、3年契約[ねんけいやく]',
+          lines: [
+            ['プロ野球[やきゅう]の巨人[きょじん]は23日[にち]、OBの松井秀喜氏[まついひできし]が新監督[しんかんとく]に就任[しゅうにん]すると発表[はっぴょう]し、同日[どうじつ]午後[ごご]に記者会見[きしゃかいけん]を開[ひら]いた。', 'The Giants of pro baseball announced on the 23rd that former player Hideki Matsui will become the new manager, and held a press conference that afternoon.', 'OB "an alumnus; a former player of the team".'],
+            ['松井氏[まついし]は52歳[さい]で、背番号[せばんごう]は90、契約[けいやく]期間[きかん]は3年[ねん]とされる。', 'Mr. Matsui is 52, his uniform number is 90, and his contract is said to run for three years.'],
+            ['巨人[きょじん]の主砲[しゅほう]として活躍[かつやく]したあと、米[べい]大[だい]リーグでもプレーし、日米通算[にちべいつうさん]507本塁打[ほんるいだ]を記録[きろく]した。', 'After starring as the Giants\' main slugger, he also played in Major League Baseball and recorded 507 home runs in Japan and the United States combined.', '主砲 "the main slugger".'],
+            ['監督[かんとく]としての経験[けいけん]はなく、チームを指揮[しき]するのは今回[こんかい]が初[はじ]めてとなる。', 'He has no experience as a manager, and this will be the first time he leads a team.', '指揮する "to lead, to direct".'],
+            ['巨人[きょじん]は今季[こんき]、クライマックスシリーズのファーストステージで敗退[はいたい]しており、チームの立[た]て直[なお]しが課題[かだい]となる。', 'The Giants were knocked out in the first stage of the Climax Series this season, so rebuilding the team will be the challenge.', '敗退 "to be eliminated".'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-24-typhoon-champi',
+      date: '2026-10-24',
+      emoji: '🌀',
+      titleEn: 'Large Typhoon Champi passes Okinawa and may approach Kyushu on Monday',
+      sources: [
+        { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/10/24/japan/typhoon-champi-saturday/' },
+        { name: 'nippon.com (Jiji Press)', url: 'https://www.nippon.com/en/news/yjj2026102400245/typhoon-champi-traveling-north-of-okinawa-islands.html' },
+      ],
+      levels: {
+        N5: {
+          title: '台風[たいふう]30号[ごう]が沖縄[おきなわ]の近[ちか]くを通[とお]りました',
+          lines: [
+            ['大[おお]きい台風[たいふう]30号[ごう]が、沖縄[おきなわ]の近[ちか]くを通[とお]りました。', 'Large Typhoon No. 30 passed near Okinawa.', 'This typhoon is named チャンパー (Champi).'],
+            ['沖縄[おきなわ]では、強[つよ]い風[かぜ]がふきました。', 'Strong winds blew in Okinawa.'],
+            ['台風[たいふう]は、東[ひがし]シナ海[かい]を北[きた]へ進[すす]みます。', 'The typhoon will move north over the East China Sea.', '東シナ海 "the East China Sea".'],
+            ['月曜日[げつようび]の朝[あさ]、九州[きゅうしゅう]に近[ちか]づくかもしれません。', 'On Monday morning, it may come close to Kyushu.'],
+            ['九州[きゅうしゅう]や近畿[きんき]などで、大雨[おおあめ]になるかもしれません。', 'There may be heavy rain in Kyushu, Kinki and other areas.'],
+            ['火曜日[かようび]の朝[あさ]には、台風[たいふう]ではなくなる見[み]こみです。', 'By Tuesday morning, it is expected to no longer be a typhoon.', 'It is expected to become an extratropical cyclone (温帯低気圧).'],
+          ],
+        },
+        N4: {
+          title: '大型[おおがた]の台風[たいふう]30号[ごう]　月曜日[げつようび]に九州[きゅうしゅう]へ近[ちか]づくおそれ',
+          lines: [
+            ['大型[おおがた]の台風[たいふう]30号[ごう]（チャンパー）は、二十四日[にじゅうよっか]の朝[あさ]、沖縄[おきなわ]県[けん]の先島[さきしま]諸島[しょとう]の北[きた]の海[うみ]を進[すす]んでいました。', 'On the morning of the 24th, Large Typhoon No. 30 (Champi) was moving through the sea north of the Sakishima Islands in Okinawa Prefecture.', '先島諸島 are the southwestern islands of Okinawa, such as Ishigaki and Miyako.'],
+            ['沖縄[おきなわ]では、強[つよ]い風[かぜ]がふきました。', 'Strong winds blew in Okinawa.'],
+            ['台風[たいふう]は、日曜日[にちようび]まで東[ひがし]シナ海[かい]を北[きた]へ進[すす]む見込[みこ]みです。', 'The typhoon is expected to move north over the East China Sea until Sunday.'],
+            ['月曜日[げつようび]の朝[あさ]には、九州[きゅうしゅう]地方[ちほう]に近[ちか]づくおそれがあります。', 'There is a risk that it will approach the Kyushu region on Monday morning.', '〜おそれがある "there is a risk that…".'],
+            ['気象庁[きしょうちょう]は、月曜日[げつようび]ごろまで、九州[きゅうしゅう]北部[ほくぶ]や中国[ちゅうごく]、近畿[きんき]、北陸[ほくりく]で大雨[おおあめ]になるおそれがあるとして、注意[ちゅうい]をよびかけています。', 'The Japan Meteorological Agency is urging caution, saying heavy rain is possible in northern Kyushu, Chugoku, Kinki and Hokuriku until around Monday.'],
+            ['台風[たいふう]は、火曜日[かようび]の朝[あさ]には温帯低気圧[おんたいていきあつ]に変[か]わる見込[みこ]みです。', 'The typhoon is expected to turn into an extratropical cyclone by Tuesday morning.', '温帯低気圧 "extratropical cyclone": a storm that is no longer a typhoon but can still bring wind and rain.'],
+          ],
+        },
+        N3: {
+          title: '大型[おおがた]の台風[たいふう]30号[ごう]、沖縄[おきなわ]を北上[ほくじょう]　26日[にち]朝[あさ]に九州[きゅうしゅう]へ接近[せっきん]のおそれ',
+          lines: [
+            ['大型[おおがた]の台風[たいふう]30号[ごう]（チャンパー）は二十四日[にじゅうよっか]朝[あさ]、沖縄[おきなわ]県[けん]の先島諸島[さきしましょとう]の北[きた]の海上[かいじょう]を北[きた]へ進[すす]んだ。', 'Large Typhoon No. 30 (Champi) moved north over the sea north of the Sakishima Islands in Okinawa Prefecture on the morning of the 24th.', '北上する "to move north".'],
+            ['沖縄[おきなわ]では、台風[たいふう]の接近[せっきん]に伴[ともな]い、強風[きょうふう]が吹[ふ]いた。', 'Strong winds blew in Okinawa as the typhoon approached.', '〜に伴い "along with, as…".'],
+            ['台風[たいふう]は25日[にち]にかけて東[ひがし]シナ海[かい]を北上[ほくじょう]し、26日[にち]朝[あさ]には九州[きゅうしゅう]地方[ちほう]に接近[せっきん]するおそれがある。', 'The typhoon will move north over the East China Sea through the 25th and may approach the Kyushu region on the morning of the 26th.'],
+            ['気象庁[きしょうちょう]によると、九州[きゅうしゅう]北部[ほくぶ]や中国[ちゅうごく]、近畿[きんき]、北陸[ほくりく]では、26日[にち]ごろまで大雨[おおあめ]となる可能性[かのうせい]がある。', 'According to the Japan Meteorological Agency, heavy rain is possible in northern Kyushu, Chugoku, Kinki and Hokuriku until around the 26th.'],
+            ['台風[たいふう]は27日[にち]朝[あさ]には温帯低気圧[おんたいていきあつ]に変[か]わり、日本[にほん]の東[ひがし]や西[にし]の太平洋[たいへいよう]へ進[すす]むと予想[よそう]されている。', 'The typhoon is forecast to turn into an extratropical cyclone by the morning of the 27th and move out over the Pacific to the east and west of Japan.', '温帯低気圧 "extratropical cyclone".'],
+          ],
+        },
+      },
+    },
+
+    {
       id: '2026-10-22-gymnastics-worlds',
       date: '2026-10-22',
       emoji: '🤸',
