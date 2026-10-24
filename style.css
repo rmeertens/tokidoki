@@ -8138,6 +8138,10 @@ body.cs-wide #app { max-width: 1200px; }
 .ta-result .cs-fb-thinking, .ta-result .cs-fb-stale { margin: 0 0 12px; }
 .ta-live .story-sentence { cursor: default; }
 .ta-library { margin-bottom: 24px; }
+.ta-library-sync { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; margin: 0 0 10px; }
+.ta-library-sync .btn-secondary { display: inline-flex; align-items: center; gap: 6px; }
+.ta-library-sync-when { font-size: 0.8rem; color: var(--text-muted); }
+.ta-library-sync-ok { font-size: 0.85rem; color: var(--text-muted); margin: 0 0 10px; }
 .ta-library-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
 .ta-library-item { display: flex; align-items: center; gap: 8px; padding: 4px 6px 4px 4px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); }
 .ta-library-item.current { border-color: var(--accent); background: var(--accent-dim); }

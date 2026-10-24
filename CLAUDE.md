@@ -56,7 +56,7 @@
   `text-analysis-library`, outside the synced names: analyses are too big
   for the one sync document. Logged in, each saved text is instead its own
   Firestore document, `users/{uid}/texts/{id}` (allowed in
-  `firestore.rules`), synced by the page itself through
+  `firestore.rules`), synced only when the list's Sync button is pressed, through
   `window.TokidokiAccount` from `sync.js`: it lists only each document's `u`
   (last change), moves just what's newer, and keeps the ids both sides
   agreed on (`tokidoki_sync_texts`) so deletes carry over.
