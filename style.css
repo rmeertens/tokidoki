@@ -8150,3 +8150,62 @@ body.cs-wide #app { max-width: 1200px; }
 .ta-library-rename input { flex: 1 1 200px; min-width: 0; padding: 8px 10px; font: inherit; font-family: var(--font-jp); color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); }
 .ta-library-rename input:focus { outline: none; border-color: var(--accent); }
 .ta-library-rename .btn-primary, .ta-library-rename .btn-secondary { padding: 8px 14px; }
+
+/* Bunkei in the wild: a story with a sentence-pattern question after each sentence (bunkei-story.html) */
+.bs-chapter-num {
+  display: inline-grid;
+  place-items: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--bg-input);
+  font-family: var(--font);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  vertical-align: 0.15em;
+}
+.bs-item-patterns { font-size: 0.76rem; color: var(--text-muted); line-height: 1.5; }
+.bs-card { min-height: 0; }
+.bs-story { display: flex; flex-direction: column; gap: 14px; }
+.bs-line { display: flex; gap: 12px; align-items: flex-start; }
+.bs-line-num {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  margin-top: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+.bs-line-right .bs-line-num { border-color: var(--green); color: var(--green); }
+.bs-line-wrong .bs-line-num { border-color: var(--red); color: var(--red); }
+.bs-line-current .bs-line-num { border-color: var(--accent); color: var(--accent); }
+.bs-line-body { flex: 1; min-width: 0; }
+.bs-ja { font-family: var(--font-jp); font-size: 1.15rem; line-height: 2.2; }
+.bs-line-done .bs-ja { color: var(--text-dim); }
+.bs-en { font-size: 0.86rem; color: var(--text-muted); line-height: 1.5; }
+.bs-line-done .bs-pattern,
+body.bs-hint .bs-line-current .bs-pattern {
+  text-decoration: underline 2px var(--accent);
+  text-underline-offset: 0.3em;
+  color: var(--text);
+}
+.bs-line-wrong .bs-pattern { text-decoration-color: var(--red); }
+.bs-line-right .bs-pattern { text-decoration-color: var(--green); }
+.bs-speak { margin-left: 6px; vertical-align: middle; }
+.bs-question { margin-top: 16px; scroll-margin-top: 80px; }
+.bs-choice { font-family: var(--font); font-size: 0.98rem; }
+.bs-choice-text { display: flex; flex-direction: column; gap: 2px; }
+.bs-choice-name { font-family: var(--font-jp); font-size: 0.8rem; color: var(--text-dim); }
+.bs-why-name { font-weight: 700; margin-bottom: 4px; }
+.bs-why p + p { margin-top: 6px; }
+.bs-next-area { display: flex; justify-content: flex-end; margin-top: 12px; }
+body.bs-no-furigana #screen-bunkei-story rt { visibility: hidden; }
+@media (max-width: 600px) {
+  .bs-ja { font-size: 1.05rem; }
+}

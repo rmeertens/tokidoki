@@ -6216,6 +6216,8 @@
       // text-analysis.js wires up its own page.
     } else if (mode === 'story-fill') {
       // story-fill.js wires up its own page.
+    } else if (mode === 'bunkei-story') {
+      // bunkei-story.js wires up its own page.
     } else if (mode === 'phrases') {
       // phrases.js wires up its own page.
     } else if (mode === 'news') {
