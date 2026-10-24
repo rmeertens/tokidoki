@@ -8169,7 +8169,6 @@ body.cs-wide #app { max-width: 1200px; }
   color: var(--text-dim);
   vertical-align: 0.15em;
 }
-.bs-item-patterns { font-size: 0.76rem; color: var(--text-muted); line-height: 1.5; }
 .bs-card { min-height: 0; }
 .bs-story { display: flex; flex-direction: column; gap: 14px; }
 .bs-line { display: flex; gap: 12px; align-items: flex-start; }
@@ -8212,3 +8211,30 @@ body.bs-no-furigana #screen-bunkei-story rt { visibility: hidden; }
 @media (max-width: 600px) {
   .bs-ja { font-size: 1.05rem; }
 }
+.bs-list { display: flex; flex-direction: column; gap: 12px; }
+.bs-story-group {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.bs-story-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  cursor: pointer;
+  list-style: none;
+}
+.bs-story-head::-webkit-details-marker { display: none; }
+.bs-story-head::after { content: '▸'; margin-left: auto; color: var(--text-muted); transition: transform var(--transition); }
+.bs-story-group[open] > .bs-story-head::after { transform: rotate(90deg); }
+.bs-story-head:hover { background: var(--bg-card-hover); }
+.bs-story-emoji { flex: none; font-size: 1.8rem; line-height: 1; }
+.bs-story-body { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.bs-story-title { font-family: var(--font-jp); font-weight: 700; font-size: 1.1rem; }
+.bs-story-en { font-family: var(--font); font-weight: 500; font-size: 0.85rem; color: var(--text-dim); }
+.bs-story-about { font-size: 0.85rem; color: var(--text-dim); line-height: 1.4; }
+.bs-story-meta { font-size: 0.76rem; color: var(--text-muted); }
+.bs-story-meta b { color: var(--accent); }
+.bs-chapters { border: none; border-top: 1px solid var(--border); border-radius: 0; }

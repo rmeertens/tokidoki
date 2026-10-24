@@ -114,12 +114,14 @@
   is only part of its SRS card ids (`3_いく_masu`, like the sentences'
   `tr_3_0_…`) — keep it unchanged so saved progress carries over, and give a
   new verb any unused number.
-- Bunkei in the wild (`bunkei-story.html`, `bunkei-story.js`) tells one
-  story, N5 to N3 chapters in `bunkei-story-data.js`, that uses every pattern
-  in `PATTERNS` (`bunkei-data.js`); after each sentence you pick what its
-  pattern (underlined in green) means from four. Adding a pattern to the drill means adding a
-  sentence for it here — `test_bunkei_story.js` fails until you do, and
-  checks the wrong choices (at the chapter's level, never one in `CLOSE`).
+- Bunkei in the wild (`bunkei-story.html`, `bunkei-story.js`) has six
+  stories (`STORIES` in `bunkei-story-data.js`), each in N5 to N3 chapters
+  and each using every pattern in `PATTERNS` (`bunkei-data.js`); after each
+  sentence you pick what its pattern (underlined in green) means from four.
+  Adding a pattern to the drill means adding a sentence for it to every
+  story — `test_bunkei_story.js` fails until you do, and checks the wrong
+  choices (at the chapter's level, never one in `CLOSE`, never one the
+  sentence also uses — `SIGNS` there).
 - A typed English → Japanese Sentences answer also counts in another word
   order (友達と日曜日に… for 日曜日に友達と…) and with or without 私は for an
   "I" sentence: `sentence-orders.js` builds those versions from the words in

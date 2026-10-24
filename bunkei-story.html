@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" id="viewport-meta" content="width=device-width, initial-scale=1.0">
-  <title>Bunkei in the Wild — Japanese Sentence Patterns in a Story | Tokidoki</title>
-  <meta name="description" content="Free Japanese sentence pattern (文型) practice in a story, N5 to N3: after each sentence, pick what its pattern means — 〜てしまう, 〜ておく, 〜わけにはいかない and 40 more.">
+  <title>Bunkei in the Wild — Japanese Sentence Patterns in Stories | Tokidoki</title>
+  <meta name="description" content="Free Japanese sentence pattern (文型) practice in six short stories, N5 to N3: after each sentence, pick what its pattern means — 〜てしまう, 〜ておく, 〜わけにはいかない and 40 more.">
   <meta property="og:title" content="Bunkei in the Wild | Tokidoki">
-  <meta property="og:description" content="Read a story told with every JLPT N5–N3 sentence pattern, and after each sentence pick what its pattern means. No login required.">
+  <meta property="og:description" content="Six short stories, each told with every JLPT N5–N3 sentence pattern: after each sentence, pick what its pattern means. No login required.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://tokidoki.meertens.dev/bunkei-story.html">
   <meta property="og:site_name" content="Tokidoki">
@@ -17,11 +17,11 @@
   <meta property="og:image:alt" content="Tokidoki — free Japanese practice, one plate at a time">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Bunkei in the Wild | Tokidoki">
-  <meta name="twitter:description" content="A story told with every N5–N3 sentence pattern: after each sentence, pick what its pattern means.">
+  <meta name="twitter:description" content="Six stories told with every N5–N3 sentence pattern: after each sentence, pick what its pattern means.">
   <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
   <link rel="canonical" href="https://tokidoki.meertens.dev/bunkei-story.html">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Bunkei in the Wild — Japanese Sentence Patterns in a Story", "description": "Free Japanese sentence pattern (文型) practice in a story, N5 to N3: after each sentence, pick what its pattern means — 〜てしまう, 〜ておく, 〜わけにはいかない and 40 more.", "url": "https://tokidoki.meertens.dev/bunkei-story.html", "inLanguage": "en", "learningResourceType": "exercise", "educationalLevel": "JLPT N5–N3", "isAccessibleForFree": true, "isPartOf": {"@type": "WebSite", "name": "Tokidoki", "url": "https://tokidoki.meertens.dev/"}}</script>
-  <link rel="stylesheet" href="style.css?v=86">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Bunkei in the Wild — Japanese Sentence Patterns in Stories", "description": "Free Japanese sentence pattern (文型) practice in six short stories, N5 to N3: after each sentence, pick what its pattern means — 〜てしまう, 〜ておく, 〜わけにはいかない and 40 more.", "url": "https://tokidoki.meertens.dev/bunkei-story.html", "inLanguage": "en", "learningResourceType": "exercise", "educationalLevel": "JLPT N5–N3", "isAccessibleForFree": true, "isPartOf": {"@type": "WebSite", "name": "Tokidoki", "url": "https://tokidoki.meertens.dev/"}}</script>
+  <link rel="stylesheet" href="style.css?v=87">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -108,7 +108,7 @@
         <div>
           <p class="lis-hero-kicker" lang="ja">文型の物語 · JLPT N5–N3</p>
           <h2 class="lis-hero-title">Bunkei in the wild</h2>
-          <p class="lis-hero-sub">Tom’s year in Japan, told one sentence at a time with every sentence pattern from the <a href="bunkei.html">Bunkei drill</a> — and after each sentence, you say what its pattern means.</p>
+          <p class="lis-hero-sub">Six short stories, each told one sentence at a time with every sentence pattern from the <a href="bunkei.html">Bunkei drill</a> — and after each sentence, you say what its pattern means.</p>
         </div>
       </section>
 
@@ -118,7 +118,7 @@
         <li><span class="lis-step-icon" aria-hidden="true">💡</span><b>Learn</b><span>The pattern underlined and explained, with a translation. Enter goes on.</span></li>
       </ol>
 
-      <div class="sf-list" id="bs-list"></div>
+      <div class="bs-list" id="bs-list"></div>
 
       <div class="reset-section">
         <button id="btn-bs-reset" class="btn-danger">Reset scores</button>
@@ -129,7 +129,7 @@
     <main id="screen-bunkei-story" class="screen">
       <div class="study-toolbar">
         <div class="sf-toolbar-title" id="bs-title"></div>
-        <button id="bs-quit" class="btn-undo" aria-label="Back to the chapters">✕</button>
+        <button id="bs-quit" class="btn-undo" aria-label="Back to the stories">✕</button>
       </div>
       <div class="study-progress">
         <div class="study-progress-bar"><div id="bs-bar-fill" class="study-bar-fill"></div></div>
@@ -154,7 +154,7 @@
       <div class="session-actions sf-actions hidden" id="bs-actions">
         <button id="btn-bs-next-chapter" class="btn-primary hidden">Next chapter →</button>
         <button id="btn-bs-again" class="btn-secondary">Try again</button>
-        <button id="btn-bs-home" class="btn-secondary">All chapters</button>
+        <button id="btn-bs-home" class="btn-secondary">All stories</button>
       </div>
     </main>
 
@@ -163,9 +163,9 @@
   <script src="kanji-quiz-data.js"></script>
   <script src="kanji-info-data.js"></script>
   <script src="bunkei-data.js?v=8"></script>
-  <script src="bunkei-story-data.js?v=1"></script>
+  <script src="bunkei-story-data.js?v=2"></script>
   <script src="pronounce.js"></script>
-  <script src="bunkei-story.js?v=2"></script>
+  <script src="bunkei-story.js?v=3"></script>
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=4"></script>
   <script src="app.js?v=70"></script>
@@ -175,19 +175,20 @@
 
   <!-- Static content for search engines -->
   <section id="seo-content" class="page-about">
-    <h1>Japanese sentence patterns in a story</h1>
+    <h1>Japanese sentence patterns in short stories</h1>
     <p>
       Free, no-login practice for Japanese sentence patterns (文型, bunkei) as they turn up
-      in a real text. Follow Tom, an exchange student, through his year in Japan — arriving at
-      his host family, the tea ceremony club, a summer festival, a week with a cold and a
-      part-time job at a ramen shop — in five chapters from JLPT N5 to N3. Every sentence uses
-      one of the patterns from the Bunkei drill: 〜てください, 〜てもいいですか, 〜てはいけません,
-      〜たことがある, 〜てしまう, 〜ておく, 〜てみる, 〜てくる, 〜つもりだ, 〜かもしれない,
-      〜ながら, 〜たら, 〜ばよかった, 〜ようになる, 〜てあげる / くれる / もらう, the passive
-      and causative-passive, 〜べきだ, 〜ことにする, 〜ようにする, 〜わけにはいかない,
-      〜ことはない, 〜てばかりいる, 〜ようとする, 〜ずに and more. After each sentence, choose
-      what its pattern means out of four; then see the pattern underlined, how it is built,
-      and an English translation, with optional furigana.
+      in a real text. Six short stories, each in five chapters from JLPT N5 to N3: an
+      exchange student’s year in Japan, a woman who opens a café by the sea, a boy detective
+      looking for the neighbour’s missing cat, a family climbing Mt Fuji, a household robot
+      learning to be part of the family, and a school band getting ready for the culture
+      festival. Every story uses all the patterns from the Bunkei drill: 〜てください,
+      〜てもいいですか, 〜てはいけません, 〜たことがある, 〜てしまう, 〜ておく, 〜てみる,
+      〜てくる, 〜つもりだ, 〜かもしれない, 〜ながら, 〜たら, 〜ばよかった, 〜ようになる,
+      〜てあげる / くれる / もらう, the passive and causative-passive, 〜べきだ, 〜ことにする,
+      〜ようにする, 〜わけにはいかない, 〜ことはない, 〜てばかりいる, 〜ようとする, 〜ずに and
+      more. After each sentence, with its pattern underlined, choose what the pattern means out
+      of four; then see how it is built and an English translation, with optional furigana.
     </p>
   </section>
 </body>
