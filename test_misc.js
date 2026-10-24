@@ -124,6 +124,29 @@ keigo.forEach((sec, si) => sec.items.forEach(it => {
 const itadaku = keigo[1].items.find(it => it.answer === 'いただく').card;
 check(/eat.*drink.*receive/.test(itadaku.meaning), 'いただく card lists every verb it stands for');
 
+// ─── Keigo equivalents ───────────────────────────────────────────────────────
+
+const equiv = Misc.QUIZZES.find(q => q.id === 'keigo-equivalents').sections;
+check(equiv.every(sec => sec.type === 'choice'), 'keigo equivalents are multiple choice');
+check(equiv[0].items.length === keigo[0].items.length && equiv[1].items.length === keigo[1].items.length,
+  'keigo equivalents have the same verbs as the typed keigo quiz');
+const equivFor = (si, p) => equiv[si].items.findIndex(it => it.prompt.startsWith(p + ' '));
+check(equiv[0].items[equivFor(0, '食べる')].answer === '召し上がる', 'honorific 食べる is 召し上がる');
+check(equiv[2].items[equivFor(2, 'ここ')].answer === 'こちら', 'formal ここ is こちら');
+check(equiv[2].items[equivFor(2, '今日')].answer === '本日', 'formal 今日 is 本日');
+check(equiv[3].items[equivFor(3, 'すみません')].answer === '申し訳ございません', 'polite すみません');
+// Another right answer is never offered as a wrong one.
+equiv.forEach((sec, si) => sec.items.forEach((it, i) => {
+  check(!/[[\]]/.test(it.prompt + it.answer + (it.note || '')), `keigo equivalents ${si}.${i}: markup left in ${it.prompt}`);
+  for (let k = 0; k < 20; k++) {
+    const offered = Misc.choiceOptions(sec, i).filter(j => j !== i).map(j => sec.items[j].answer);
+    check(!offered.some(a => (it.close || []).includes(a)), `keigo equivalents ${it.prompt}: offers another right answer`);
+  }
+}));
+const kuru = equiv[1].items.findIndex(it => it.prompt.startsWith('来る '));
+check(Array.from({ length: 30 }, () => Misc.choiceOptions(equiv[1], kuru)).every(o => !o.some(j => equiv[1].items[j].answer === '伺う')),
+  'humble 来る never offers 伺う as wrong');
+
 // ─── Bunkei patterns ─────────────────────────────────────────────────────────
 
 global.Conjugator = require('./conjugator.js');

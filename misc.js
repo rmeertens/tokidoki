@@ -206,7 +206,7 @@
   const KENJOUGO = [
     ['いる', 'to be, to stay', 'おる', ['居る']],
     ['行[い]く', 'to go', '参[まい]る', ['伺う', 'うかがう']],
-    ['来[く]る', 'to come', '参[まい]る'],
+    ['来[く]る', 'to come', '参[まい]る', ['伺う', 'うかがう']],
     ['言[い]う', 'to say', '申[もう]す', ['申し上げる', 'もうしあげる']],
     ['食[た]べる', 'to eat', 'いただく', ['頂く']],
     ['飲[の]む', 'to drink', 'いただく', ['頂く']],
@@ -239,6 +239,68 @@
       card: { word: rubyPlain(answer), kana: rubyKana(answer), meaning: `(${kind}) ${meanings[rubyPlain(answer)].join('; ')}` },
     }));
   }
+
+  // The same verbs as multiple choice: the plain verb with four keigo words
+  // to pick from. Other right answers (伺う for humble 来る) are never
+  // offered as a wrong option.
+  const keigoChoiceItems = rows => rows.map(([verb, meaning, answer, alt = []]) => ({
+    prompt: `${rubyPlain(verb)} (${meaning})`,
+    promptHtml: `${rubyHtml(verb)} <span class="misc-prompt-en">(${esc(meaning)})</span>`,
+    answer: rubyPlain(answer),
+    answerHtml: rubyHtml(answer),
+    close: alt,
+  }));
+
+  // Everyday words and phrases and their polite, formal equivalents (what
+  // shop staff, receptionists and business emails use): [everyday, meaning,
+  // formal, note, other formal words that would also be right].
+  const KEIGO_WORDS = [
+    ['ここ', 'here', 'こちら', 'こちらへどうぞ。 — This way, please.'],
+    ['そこ', 'there (near you)', 'そちら', 'そちらにお座[すわ]りください。 — Please sit there.'],
+    ['あそこ', 'over there', 'あちら', 'お手洗[てあら]いはあちらです。 — The restroom is over there.'],
+    ['どこ', 'where', 'どちら', 'どちらからいらっしゃいましたか。 — Where are you from?'],
+    ['だれ', 'who', 'どなた', 'どなたですか。 (or どちら様[さま]ですか。) — Who is it, please?', ['どちら様']],
+    ['この人[ひと]', 'this person', 'この方[かた]', 'こちらの方[かた]が田中[たなか]さんです。 — This is Mr/Ms Tanaka.'],
+    ['今日[きょう]', 'today', '本日[ほんじつ]', '本日[ほんじつ]は休業[きゅうぎょう]です。 — We are closed today.'],
+    ['あした', 'tomorrow', '明日[みょうにち]', 'Written 明日 like あした, but read みょうにち in formal speech.'],
+    ['きのう', 'yesterday', '昨日[さくじつ]', 'Written 昨日 like きのう, but read さくじつ in formal speech.'],
+    ['あさって', 'the day after tomorrow', '明後日[みょうごにち]', '明後日[みょうごにち]にお送[おく]りします。 — I\'ll send it the day after tomorrow.'],
+    ['去年[きょねん]', 'last year', '昨年[さくねん]', '昨年[さくねん]はお世話[せわ]になりました。 — Thank you for everything last year (New Year cards).'],
+    ['さっき', 'a moment ago', '先[さき]ほど', '先[さき]ほどお電話[でんわ]しました。 — I called a little while ago.'],
+    ['あとで', 'later', '後[のち]ほど', '後[のち]ほどご連絡[れんらく]します。 — I\'ll contact you later.'],
+    ['今[いま]', 'now', 'ただ今[いま]', 'ただ今[いま]参[まい]ります。 — I\'m coming right now.'],
+    ['ちょっと', 'a little', '少々[しょうしょう]', '少々[しょうしょう]お待[ま]ちください。 — Please wait a moment.'],
+    ['すごく', 'very', '大変[たいへん]', '大変[たいへん]お待[ま]たせしました。 — Sorry to have kept you waiting so long.'],
+    ['本当[ほんとう]に', 'truly, really', '誠[まこと]に', '誠[まこと]にありがとうございます。 — Thank you very much indeed.'],
+    ['やっぱり', 'as expected, after all', 'やはり', 'やはり is the careful form of やっぱり.'],
+    ['あなたの会社[かいしゃ]', 'your company', '御社[おんしゃ]', '御社[おんしゃ] in speech; 貴社[きしゃ] in writing.', ['貴社']],
+    ['うちの会社[かいしゃ]', 'our company', '弊社[へいしゃ]', '弊社[へいしゃ] lowers your own company: humble.'],
+    ['家[いえ]', 'someone\'s home', 'お宅[たく]', '先生[せんせい]のお宅[たく] — the teacher\'s home.'],
+  ];
+  const KEIGO_PHRASES = [
+    ['です', 'is', 'でございます', 'こちらが新[しん]商品[しょうひん]でございます。 — This is our new product.'],
+    ['あります', 'there is, have', 'ございます', 'Ｓサイズもございます。 — We have it in S as well.'],
+    ['いいですか', 'is it OK?', 'よろしいでしょうか', 'お名前[なまえ]を伺[うかが]ってもよろしいでしょうか。 — May I ask your name?'],
+    ['どうですか', 'how about it?', 'いかがですか', 'コーヒーはいかがですか。 — Would you like some coffee?'],
+    ['わかりました', 'understood', 'かしこまりました', 'What staff say to an order or request.', ['承知しました']],
+    ['すみません', 'I\'m sorry', '申[もう]し訳[わけ]ございません', 'The deepest everyday apology, to customers.'],
+    ['知[し]りません', 'I don\'t know', '存[ぞん]じません', 'Humble 存じる, in the negative.'],
+    ['できません', 'I can\'t', 'いたしかねます', '〜かねます: a polite way to refuse. ご返品[へんぴん]はいたしかねます。 — We can\'t accept returns.'],
+    ['待[ま]ってください', 'please wait', 'お待[ま]ちください', 'お + verb stem + ください: the polite request.', ['少々お待ちください']],
+    ['ちょっと待[ま]って', 'wait a moment', '少々[しょうしょう]お待[ま]ちください', 'What you hear on the phone and at counters.', ['お待ちください']],
+    ['ありがとう', 'thanks', 'ありがとうございます', 'Add ございます — or ございました for something finished.'],
+    ['じゃあ、また', 'see you', '失礼[しつれい]いたします', 'Said when leaving a room or ending a call.', ['失礼します']],
+    ['だれですか', 'who is it?', 'どちら様[さま]ですか', 'At the door or on the phone.', ['どなたですか']],
+    ['もう一度[いちど]言[い]って', 'say that again', 'もう一度[いちど]おっしゃっていただけますか', 'Honorific おっしゃる + 〜ていただけますか, "could you…?".'],
+  ];
+  const keigoWordItems = rows => rows.map(([plain, meaning, formal, note, alt = []]) => ({
+    prompt: `${rubyPlain(plain)} (${meaning})`,
+    promptHtml: `${rubyHtml(plain)} <span class="misc-prompt-en">(${esc(meaning)})</span>`,
+    answer: rubyPlain(formal),
+    answerHtml: rubyHtml(formal),
+    note: rubyHtml(note),
+    close: alt,
+  }));
 
   // The ways to say "but": [word, meaning, typical use].
   const BUT_WORDS = [
@@ -508,6 +570,39 @@
       ],
     },
     {
+      id: 'keigo-equivalents',
+      glyph: '丁',
+      title: 'Keigo equivalents',
+      ja: '敬語の言い換え',
+      desc: 'Multiple choice: what\'s the keigo for 食べる, ここ, 今日, すみません…? Pick the polite equivalent of everyday verbs, words and phrases from four.',
+      sections: [
+        {
+          type: 'choice',
+          label: 'Honorific verbs 尊敬語 — what others do',
+          columns: ['Verb', '尊敬語'],
+          items: keigoChoiceItems(SONKEIGO),
+        },
+        {
+          type: 'choice',
+          label: 'Humble verbs 謙譲語 — what you do',
+          columns: ['Verb', '謙譲語'],
+          items: keigoChoiceItems(KENJOUGO),
+        },
+        {
+          type: 'choice',
+          label: 'Words 改まった言葉',
+          columns: ['Everyday', 'Formal'],
+          items: keigoWordItems(KEIGO_WORDS),
+        },
+        {
+          type: 'choice',
+          label: 'Phrases 丁寧な言い方',
+          columns: ['Everyday', 'Polite'],
+          items: keigoWordItems(KEIGO_PHRASES),
+        },
+      ],
+    },
+    {
       id: 'dates',
       glyph: '日',
       title: 'Dates of the month',
@@ -583,9 +678,11 @@
   }
 
   // The options for multiple-choice item i: its own answer and up to n - 1
-  // others from the same section (none spelled the same), in random order.
+  // others from the same section (none spelled the same, and none of the
+  // item's other right answers, its close list), in random order.
   function choiceOptions(section, i, rand = Math.random, n = 4) {
-    const seen = new Set([section.items[i].answer]);
+    const close = (section.items[i].close || []).map(rubyPlain);
+    const seen = new Set([section.items[i].answer, ...close]);
     const others = shuffled(section.items.length, rand).filter(j => {
       if (seen.has(section.items[j].answer)) return false;
       seen.add(section.items[j].answer);
