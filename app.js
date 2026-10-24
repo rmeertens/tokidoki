@@ -3399,6 +3399,8 @@
     if (!particlesAnswered) return;
     particlesIndex++;
     showParticleCard();
+    // The explanation can push the page down; each question starts at the top.
+    window.scrollTo(0, 0);
   }
 
   function undoLastParticleGrade() {
