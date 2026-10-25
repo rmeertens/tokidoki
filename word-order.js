@@ -519,6 +519,7 @@
 
   function endDrag() {
     if (!drag) return;
+    if (drag.frame) cancelAnimationFrame(drag.frame);
     if (drag.ghost) drag.ghost.remove();
     if (drag.over) drag.over.el.classList.remove('wo-drop-over');
     drag.src.classList.remove('wo-drag-src');
@@ -545,16 +546,29 @@
       ghost.style.width = r.width + 'px';
       ghost.style.height = r.height + 'px';
       ghost.style.fontSize = getComputedStyle(drag.src).fontSize;
+      // The clone keeps the piece's transform transition, which made it trail
+      // behind the finger.
+      ghost.style.transition = 'none';
       drag.dx = drag.x0 - r.left;
       drag.dy = drag.y0 - r.top;
+      ghost.style.transform = `translate3d(${r.left}px, ${r.top}px, 0)`;
       document.body.appendChild(ghost);
       drag.ghost = ghost;
       drag.src.classList.add('wo-drag-src');
       document.body.classList.add('wo-dragging');
     }
     e.preventDefault();
-    drag.ghost.style.transform = `translate(${e.clientX - drag.dx}px, ${e.clientY - drag.dy}px)`;
-    setOver(dropTarget(e.clientX, e.clientY));
+    drag.x = e.clientX;
+    drag.y = e.clientY;
+    // Move the ghost and hit-test once per frame, not once per pointer event.
+    if (!drag.frame) drag.frame = requestAnimationFrame(moveGhost);
+  }
+
+  function moveGhost() {
+    if (!drag || !drag.ghost) return;
+    drag.frame = 0;
+    drag.ghost.style.transform = `translate3d(${drag.x - drag.dx}px, ${drag.y - drag.dy}px, 0)`;
+    setOver(dropTarget(drag.x, drag.y));
   }
 
   function onPointerUp(e) {

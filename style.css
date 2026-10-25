@@ -6629,6 +6629,7 @@ body.wo-dragging, body.wo-dragging * { cursor: grabbing !important; }
   line-height: 1.6;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
   opacity: 0.95;
+  will-change: transform;
 }
 .wo-slot.wo-drop-over { border-style: solid; border-color: var(--accent); background: color-mix(in srgb, var(--accent) 22%, var(--bg-card)); box-shadow: 0 0 0 3px var(--accent-dim); }
 .wo-bank.wo-drop-over { box-shadow: inset 0 0 0 2px var(--accent); }
