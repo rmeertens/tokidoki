@@ -9,15 +9,75 @@
     "twelve",
     "number"
   ],
+  "18": [
+    "じゅうはち",
+    "eighteen",
+    "number"
+  ],
+  "20": [
+    "にじゅう",
+    "twenty",
+    "number"
+  ],
+  "21": [
+    "にじゅういち",
+    "twenty-one",
+    "number"
+  ],
+  "22": [
+    "にじゅうに",
+    "twenty-two",
+    "number"
+  ],
+  "29": [
+    "にじゅうきゅう",
+    "twenty-nine",
+    "number"
+  ],
+  "30": [
+    "さんじゅう",
+    "30",
+    "number"
+  ],
+  "31": [
+    "さんじゅういち",
+    "thirty-one",
+    "number"
+  ],
   "33": [
     "さんじゅうさん",
     "33",
+    "number"
+  ],
+  "45": [
+    "よんじゅうご",
+    "45",
+    "number"
+  ],
+  "59": [
+    "ごじゅうきゅう",
+    "59",
+    "number"
+  ],
+  "90": [
+    "きゅうじゅう",
+    "ninety",
     "number"
   ],
   "495": [
     "よんひゃくきゅうじゅうご",
     "495",
     "number + counter"
+  ],
+  "507": [
+    "ごひゃくなな",
+    "507",
+    "number"
+  ],
+  "665": [
+    "ろっぴゃくろくじゅうご",
+    "665",
+    "number"
   ],
   "連休": [
     "れんきゅう",
@@ -3564,11 +3624,6 @@
     "Yasukuni Shrine",
     "noun (name)"
   ],
-  "30": [
-    "さんじゅう",
-    "30",
-    "number"
-  ],
   "12時半すぎ": [
     "じゅうにじはんすぎ",
     "a little after 12:30",
@@ -3989,26 +4044,6 @@
     "one week",
     "noun"
   ],
-  "20": [
-    "にじゅう",
-    "twenty",
-    "number"
-  ],
-  "21": [
-    "にじゅういち",
-    "twenty-one",
-    "number"
-  ],
-  "29": [
-    "にじゅうきゅう",
-    "twenty-nine",
-    "number"
-  ],
-  "31": [
-    "さんじゅういち",
-    "thirty-one",
-    "number"
-  ],
   "31人": [
     "さんじゅういちにん",
     "31 people",
@@ -4053,11 +4088,6 @@
     "きゅうじゅうきゅうにん",
     "99 people",
     "number + counter"
-  ],
-  "665": [
-    "ろっぴゃくろくじゅうご",
-    "665",
-    "number"
   ],
   "Android": [
     "アンドロイド",
@@ -4419,20 +4449,10 @@
     "end of March",
     "noun"
   ],
-  "45": [
-    "よんじゅうご",
-    "45",
-    "number"
-  ],
   "45人": [
     "よんじゅうごにん",
     "45 people",
     "number + counter"
-  ],
-  "59": [
-    "ごじゅうきゅう",
-    "59",
-    "number"
   ],
   "59歳": [
     "ごじゅうきゅうさい",
@@ -5119,11 +5139,6 @@
     "news gathering, interview",
     "noun"
   ],
-  "22": [
-    "にじゅうに",
-    "twenty-two",
-    "number"
-  ],
   "体操": [
     "たいそう",
     "gymnastics",
@@ -5654,11 +5669,6 @@
     "uniform number, number on the back",
     "noun"
   ],
-  "90": [
-    "きゅうじゅう",
-    "ninety",
-    "number"
-  ],
   "打者": [
     "だしゃ",
     "batter, hitter",
@@ -5698,11 +5708,6 @@
     "しゅほう",
     "main slugger, cleanup hitter",
     "noun"
-  ],
-  "507": [
-    "ごひゃくなな",
-    "507",
-    "number"
   ],
   "本塁打": [
     "ほんるいだ",
@@ -5802,6 +5807,291 @@
   "温帯低気圧": [
     "おんたいていきあつ",
     "extratropical cyclone",
+    "noun"
+  ],
+  "GMO": [
+    "ジーエムオー",
+    "GMO (Japanese internet group)",
+    "noun"
+  ],
+  "FX": [
+    "エフエックス",
+    "FX, foreign exchange trading",
+    "noun"
+  ],
+  "5000円": [
+    "ごせんえん",
+    "5,000 yen",
+    "number + counter"
+  ],
+  "能動": [
+    "のうどう",
+    "active",
+    "noun"
+  ],
+  "防御": [
+    "ぼうぎょ",
+    "defense",
+    "noun"
+  ],
+  "要請": [
+    "ようせい",
+    "request, demand",
+    "noun"
+  ],
+  "2万6739台": [
+    "にまんろくせんななひゃくさんじゅうきゅうだい",
+    "26,739 (machines)",
+    "number + counter"
+  ],
+  "知らす": [
+    "しらす",
+    "to notify, to let know",
+    "verb"
+  ],
+  "発動": [
+    "はつどう",
+    "invocation, activation",
+    "noun"
+  ],
+  "com": [
+    "ドットコム",
+    ".com",
+    "noun"
+  ],
+  "デスク": [
+    "デスク",
+    "desk",
+    "noun"
+  ],
+  "保管": [
+    "ほかん",
+    "storage, safekeeping",
+    "noun"
+  ],
+  "閲覧": [
+    "えつらん",
+    "viewing, browsing",
+    "noun"
+  ],
+  "国内外": [
+    "こくないがい",
+    "at home and abroad",
+    "noun"
+  ],
+  "証券": [
+    "しょうけん",
+    "securities",
+    "noun"
+  ],
+  "口座": [
+    "こうざ",
+    "account (bank, trading)",
+    "noun"
+  ],
+  "損失": [
+    "そんしつ",
+    "loss",
+    "noun"
+  ],
+  "手数料": [
+    "てすうりょう",
+    "fee, commission",
+    "noun"
+  ],
+  "かかわる": [
+    "かかわる",
+    "to be related to, to matter",
+    "verb"
+  ],
+  "一律": [
+    "いちりつ",
+    "uniform, flat",
+    "noun"
+  ],
+  "アジアパラ": [
+    "アジアパラ",
+    "Asian Para Games (short)",
+    "noun"
+  ],
+  "愛知": [
+    "あいち",
+    "Aichi (prefecture)",
+    "noun"
+  ],
+  "名古屋": [
+    "なごや",
+    "Nagoya",
+    "noun"
+  ],
+  "64個": [
+    "ろくじゅうよんこ",
+    "64 (items)",
+    "number + counter"
+  ],
+  "186個": [
+    "ひゃくはちじゅうろっこ",
+    "186 (items)",
+    "number + counter"
+  ],
+  "車いす": [
+    "くるまいす",
+    "wheelchair",
+    "noun"
+  ],
+  "閉幕": [
+    "へいまく",
+    "closing, end (of an event)",
+    "noun"
+  ],
+  "閉会": [
+    "へいかい",
+    "closing (of a meeting or event)",
+    "noun"
+  ],
+  "パラスポーツ": [
+    "パラスポーツ",
+    "para sports",
+    "noun"
+  ],
+  "次いで": [
+    "ついで",
+    "following, next after",
+    "adverb"
+  ],
+  "シングルス": [
+    "シングルス",
+    "singles (tennis)",
+    "noun"
+  ],
+  "目立つ": [
+    "めだつ",
+    "to stand out, to be conspicuous",
+    "verb"
+  ],
+  "開催": [
+    "かいさい",
+    "holding (an event)",
+    "noun"
+  ],
+  "総数": [
+    "そうすう",
+    "total number",
+    "noun"
+  ],
+  "空席": [
+    "くうせき",
+    "empty seat, vacancy",
+    "noun"
+  ],
+  "SNS": [
+    "エスエヌエス",
+    "social media (SNS)",
+    "noun"
+  ],
+  "画像": [
+    "がぞう",
+    "image, picture",
+    "noun"
+  ],
+  "指針案": [
+    "ししんあん",
+    "draft guidelines",
+    "noun"
+  ],
+  "二十三日": [
+    "にじゅうさんにち",
+    "the 23rd",
+    "noun"
+  ],
+  "収益": [
+    "しゅうえき",
+    "profit, revenue",
+    "noun"
+  ],
+  "投稿": [
+    "とうこう",
+    "post, submission",
+    "noun"
+  ],
+  "1か月": [
+    "いっかげつ",
+    "one month",
+    "number + counter"
+  ],
+  "促す": [
+    "うながす",
+    "to urge, to prompt",
+    "verb"
+  ],
+  "報酬": [
+    "ほうしゅう",
+    "reward, payment",
+    "noun"
+  ],
+  "拡散": [
+    "かくさん",
+    "spread, diffusion",
+    "noun"
+  ],
+  "生成": [
+    "せいせい",
+    "generation, creation",
+    "noun"
+  ],
+  "有害": [
+    "ゆうがい",
+    "harmful",
+    "na-adjective"
+  ],
+  "検知": [
+    "けんち",
+    "detection",
+    "noun"
+  ],
+  "例示": [
+    "れいじ",
+    "giving as an example",
+    "noun"
+  ],
+  "盛り込む": [
+    "もりこむ",
+    "to include, to incorporate",
+    "verb"
+  ],
+  "各社": [
+    "かくしゃ",
+    "each company",
+    "noun"
+  ],
+  "任す": [
+    "まかす",
+    "to leave to, to entrust",
+    "verb"
+  ],
+  "罰則": [
+    "ばっそく",
+    "penalty, punishment",
+    "noun"
+  ],
+  "1か月間": [
+    "いっかげつかん",
+    "for one month",
+    "number + counter"
+  ],
+  "公募": [
+    "こうぼ",
+    "public invitation (of opinions, applicants)",
+    "noun"
+  ],
+  "ドットコムデスクトップ": [
+    "ドットコムデスクトップ",
+    ".com Desktop (Cloud)",
+    "noun"
+  ],
+  "エフエックス": [
+    "エフエックス",
+    "FX, foreign exchange trading",
     "noun"
   ]
 }

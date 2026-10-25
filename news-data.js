@@ -23,6 +23,145 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-10-25-gmo-cyber-attack',
+      date: '2026-10-25',
+      emoji: '🛡️',
+      titleEn: 'GMO asks the government for "active cyber defense" after a hack; every user to get ¥5,000',
+      sources: [
+        { name: 'nippon.com (Jiji Press)', url: 'https://www.nippon.com/en/news/yjj2026102400301/' },
+        { name: 'Jiji Press (Japanese)', url: 'https://www.jiji.com/jc/article?k=2026102400301&g=eco' },
+        { name: 'Yomiuri Shimbun via Infoseek', url: 'https://news.infoseek.co.jp/article/yomiuri_20261024_gyt1t00257/' },
+      ],
+      levels: {
+        N5: {
+          title: 'GMOが　政府[せいふ]に　たすけを　たのみました',
+          lines: [
+            ['日本[にほん]の大[おお]きな会社[かいしゃ]GMOが、二十四日[にじゅうよっか]に政府[せいふ]にたすけをたのみました。', 'The big Japanese company GMO asked the government for help on the 24th.'],
+            ['悪[わる]い人[ひと]が、GMOのサービスに入[はい]りました。', 'A bad person got into a GMO service.'],
+            ['そのサービスは、FXの取引[とりひき]で使[つか]われていました。', 'That service was used for FX trading.', 'FX is foreign exchange trading: buying and selling currencies online.'],
+            ['お客[きゃく]さんのお金[かね]が、あぶなくなりました。', 'Customers\' money was put at risk.'],
+            ['GMOは、お金[かね]がなくなったお客[きゃく]さんに、お金[かね]を払[はら]います。', 'GMO will pay money to customers who lost money.'],
+            ['すべてのお客[きゃく]さんに、5000円[えん]も払[はら]います。', 'It will also pay 5,000 yen to every customer.'],
+          ],
+        },
+        N4: {
+          title: 'GMO、政府[せいふ]に「能動的[のうどうてき]サイバー防御[ぼうぎょ]」を要請[ようせい]　不正[ふせい]アクセスで被害[ひがい]',
+          lines: [
+            ['GMOインターネットグループは、二十四日[にじゅうよっか]、不正[ふせい]アクセスの被害[ひがい]が広[ひろ]がらないように、政府[せいふ]に「能動的[のうどうてき]サイバー防御[ぼうぎょ]」を求[もと]めたと発表[はっぴょう]しました。', 'GMO Internet Group announced on the 24th that it had asked the government for "active cyber defense" so the damage from unauthorized access would not spread.', '能動的サイバー防御 "active cyber defense": a system in which the government can act against attackers in advance. The related laws fully took effect on October 1.'],
+            ['被害[ひがい]にあったのは、エフエックスの取引[とりひき]などに使[つか]われるサービスで、2万[まん]6739台[だい]のサーバーに影響[えいきょう]が出[で]たかもしれません。', 'The service hit was one used for FX trading and more, and 26,739 servers may have been affected.', 'The service is "Onamae.com Desktop Cloud".'],
+            ['サーバーに入[はい]っていたログインの情報[じょうほう]が見[み]られ、いろいろな会社[かいしゃ]の取引口座[とりひきこうざ]が使[つか]われた可能性[かのうせい]があります。', 'Login information stored on the servers was viewed, and trading accounts at various companies may have been used.'],
+            ['攻撃[こうげき]したと見[み]られる人[ひと]はお金[かね]を求[もと]めましたが、GMOは払[はら]わない方針[ほうしん]です。', 'The person who seems to be the attacker demanded money, but GMO\'s policy is not to pay.'],
+            ['不正[ふせい]な取引[とりひき]で出[で]た損[そん]は、GMOが補償[ほしょう]します。', 'GMO will compensate for losses caused by the unauthorized trades.'],
+            ['さらに、お金[かね]の被害[ひがい]がなくても、すべての利用者[りようしゃ]に5000円[えん]が払[はら]われます。申[もう]し込[こ]み方[かた]は、11月[がつ]六日[むいか]までに知[し]らされる予定[よてい]です。', 'In addition, every user will be paid 5,000 yen even without any financial loss. How to apply is to be announced by November 6.'],
+          ],
+        },
+        N3: {
+          title: 'GMO、政府[せいふ]に能動的[のうどうてき]サイバー防御[ぼうぎょ]を緊急要請[きんきゅうようせい]　不正[ふせい]アクセスで情報流出[じょうほうりゅうしゅつ]',
+          lines: [
+            ['GMOインターネットグループは二十四日[にじゅうよっか]、不正[ふせい]アクセスによる被害[ひがい]拡大[かくだい]を防[ふせ]ぐため、政府[せいふ]に「能動的[のうどうてき]サイバー防御[ぼうぎょ]」の発動[はつどう]を緊急[きんきゅう]に要請[ようせい]したと明[あき]らかにした。', 'GMO Internet Group revealed on the 24th that it had urgently asked the government to invoke "active cyber defense" to keep the damage from unauthorized access from spreading.', '発動 "invocation": putting a system or power into action.'],
+            ['関連法[かんれんほう]は今月[こんげつ]一日[ついたち]に全面施行[ぜんめんしこう]されたばかりで、政府関係者[せいふかんけいしゃ]は「要請[ようせい]を受[う]けて発動[はつどう]を決[き]める制度[せいど]ではない」と説明[せつめい]している。', 'The related laws had only just come fully into force on the 1st of this month, and a government official explained that "it is not a system where it is decided to invoke it in response to a request."'],
+            ['被害[ひがい]があったのはエフエックスの取引[とりひき]などに使[つか]われる「お名前[なまえ]ドットコムデスクトップクラウド」で、最大[さいだい]2万[まん]6739台[だい]のサーバーが影響[えいきょう]を受[う]けた可能性[かのうせい]がある。', 'The service affected was "Onamae.com Desktop Cloud", used for FX trading and more, and up to 26,739 servers may have been affected.', 'Onamae.com is GMO\'s domain and hosting brand.'],
+            ['保管[ほかん]されていた認証情報[にんしょうじょうほう]が閲覧[えつらん]され、国内外[こくないがい]の証券[しょうけん]・FX会社[がいしゃ]の口座[こうざ]で不正[ふせい]な取引[とりひき]が行[おこな]われたおそれがある。', 'Stored login credentials were viewed, and there is a risk that unauthorized trades were made in accounts at securities and FX firms in Japan and abroad.', '認証情報 "authentication information": IDs, passwords and the like.'],
+            ['攻撃者[こうげきしゃ]とみられる人物[じんぶつ]から金銭[きんせん]を要求[ようきゅう]されたが、同社[どうしゃ]は応[おう]じない方針[ほうしん]だ。', 'The company was demanded money by a person believed to be the attacker, but its policy is not to comply.'],
+            ['同社[どうしゃ]は、不正[ふせい]取引[とりひき]による損失[そんしつ]や手数料[てすうりょう]を補償[ほしょう]するほか、被害[ひがい]の有無[うむ]にかかわらず全利用者[ぜんりようしゃ]に一律[いちりつ]5000円[えん]を支払[しはら]う。', 'Besides compensating for losses and fees from the unauthorized trades, the company will pay a flat 5,000 yen to all users whether or not they suffered damage.', '〜にかかわらず "regardless of ~".'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-25-asian-para-games',
+      date: '2026-10-25',
+      emoji: '🏅',
+      titleEn: 'Aichi-Nagoya Asian Para Games close with a record 64 golds for Japan',
+      sources: [
+        { name: 'nippon.com (Jiji Press)', url: 'https://www.nippon.com/ja/news/yjj2026102400343/' },
+        { name: 'Jiji Press (Japanese)', url: 'https://www.jiji.com/jc/article?k=2026102400343&g=spo' },
+        { name: 'Kyodo News via Yahoo! News Japan', url: 'https://news.yahoo.co.jp/articles/7f64713d9a83f64d504fdf75fa9c261a2ba1d60c' },
+        { name: 'nippon.com (Jiji Press, Oda)', url: 'https://www.nippon.com/en/news/yjj2026102300875/' },
+      ],
+      levels: {
+        N5: {
+          title: 'アジアパラ大会[たいかい]　日本[にほん]は金[きん]メダルが　いちばん多[おお]かった',
+          lines: [
+            ['愛知[あいち]と名古屋[なごや]のアジアパラ大会[たいかい]が、二十四日[にじゅうよっか]に終[お]わりました。', 'The Asian Para Games in Aichi and Nagoya ended on the 24th.', 'The Asian Para Games are a sports event for athletes with disabilities.'],
+            ['アジアの45の国[くに]や地域[ちいき]の選手[せんしゅ]が来[き]ました。', 'Athletes came from 45 countries and regions in Asia.'],
+            ['日本[にほん]は、金[きん]メダルを64個[こ]とりました。', 'Japan won 64 gold medals.'],
+            ['日本[にほん]のメダルの数[かず]は、ぜんぶで186個[こ]でした。', 'Japan\'s medals totaled 186.'],
+            ['金[きん]メダルの数[かず]は、今[いま]までで、いちばん多[おお]いです。', 'The number of gold medals is the most ever.'],
+            ['車[くるま]いすテニスの小田凱人[おだときと]さんも、金[きん]メダルをとりました。', 'Tokito Oda, a wheelchair tennis player, also won a gold medal.', 'Oda won the men\'s singles for the second Asian Para Games in a row.'],
+          ],
+        },
+        N4: {
+          title: 'アジアパラ大会[たいかい]が閉幕[へいまく]　日本[にほん]は過去最多[かこさいた]の金[きん]メダル64個[こ]',
+          lines: [
+            ['愛知[あいち]・名古屋[なごや]アジアパラ競技大会[きょうぎたいかい]が、二十四日[にじゅうよっか]に閉会式[へいかいしき]を行[おこな]って終[お]わりました。', 'The Aichi-Nagoya Asian Para Games ended on the 24th with a closing ceremony.', '閉幕 "the curtain closing": the end of an event.'],
+            ['アジアのパラスポーツの大会[たいかい]が日本[にっぽん]で開[ひら]かれたのは、これが初[はじ]めてです。', 'This was the first time an Asian para sports event was held in Japan.'],
+            ['45の国[くに]と地域[ちいき]の選手[せんしゅ]が、18の競技[きょうぎ]に出[で]ました。', 'Athletes from 45 countries and regions took part in 18 sports.'],
+            ['日本[にほん]は金[きん]メダルを64個[こ]とり、これまでで一番[いちばん]多[おお]くなりました。メダルは全部[ぜんぶ]で186個[こ]で、中国[ちゅうごく]に次[つ]いで2位[い]でした。', 'Japan won 64 golds, the most ever. It won 186 medals in all and came second after China.'],
+            ['車[くるま]いすテニス男子[だんし]シングルスの小田凱人[おだときと]選手[せんしゅ]は、2大会[たいかい]続[つづ]けて金[きん]メダルをとりました。', 'Wheelchair tennis player Tokito Oda won gold in the men\'s singles for the second Games in a row.'],
+            ['しかし、会場[かいじょう]に空[あ]いた席[せき]が目立[めだ]ったという声[こえ]もありました。', 'However, some people said that empty seats stood out at the venues.', '目立つ "to stand out; to be noticeable".'],
+          ],
+        },
+        N3: {
+          title: 'アジアパラ大会[たいかい]が閉幕[へいまく]　日本[にっぽん]は過去最多[かこさいた]の金[きん]64個[こ]',
+          lines: [
+            ['障害者[しょうがいしゃ]スポーツのアジア大会[たいかい]、愛知[あいち]・名古屋[なごや]アジアパラ競技大会[きょうぎたいかい]が二十四日[にじゅうよっか]に閉幕[へいまく]した。', 'The Aichi-Nagoya Asian Para Games, the Asian event in sports for people with disabilities, closed on the 24th.'],
+            ['日本[にっぽん]での開催[かいさい]は初[はじ]めてで、45の国[くに]・地域[ちいき]から選手[せんしゅ]が参加[さんか]し、18競技[きょうぎ]が行[おこな]われた。', 'It was the first time the event had been held in Japan, and athletes from 45 countries and regions took part in 18 sports.'],
+            ['日本[にっぽん]は金[きん]メダル64個[こ]を獲得[かくとく]し、過去最多[かこさいた]を更新[こうしん]した。', 'Japan won 64 gold medals, setting a new record.', '更新 "renewal; breaking a record".'],
+            ['メダルの総数[そうすう]は186個[こ]で、国[くに]・地域別[ちいきべつ]では中国[ちゅうごく]に次[つ]ぐ2位[い]だった。', 'The total number of medals was 186, second among countries and regions after China.'],
+            ['車[くるま]いすテニス男子[だんし]シングルスでは、小田凱人[おだときと]が連覇[れんぱ]を果[は]たした。', 'In the men\'s wheelchair tennis singles, Tokito Oda won a second straight title.', '連覇 "winning consecutive titles".'],
+            ['一方[いっぽう]、多[おお]くの会場[かいじょう]で空席[くうせき]が目立[めだ]ち、観客[かんきゃく]の集[あつ]め方[かた]が課題[かだい]として残[のこ]った。', 'On the other hand, empty seats stood out at many venues, leaving attracting spectators as an issue.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-25-election-disinformation',
+      date: '2026-10-25',
+      emoji: '📱',
+      titleEn: 'Ministry proposes guidelines for social media firms on election disinformation, including stopping payouts for false posts',
+      sources: [
+        { name: 'nippon.com (Jiji Press)', url: 'https://www.nippon.com/en/news/yjj2026102300419/' },
+        { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261023de64013' },
+        { name: 'Kyodo News via Yahoo! News Japan', url: 'https://news.yahoo.co.jp/articles/6f8212c918dea5e18de014d52818256622dc8f0f' },
+      ],
+      levels: {
+        N5: {
+          title: '選挙[せんきょ]の　うその　情報[じょうほう]を　へらしたい',
+          lines: [
+            ['選挙[せんきょ]のときに、SNSにうその情報[じょうほう]が出[で]ることがあります。', 'At election time, false information sometimes appears on social media.'],
+            ['それで、国[くに]の省[しょう]が、SNSの会社[かいしゃ]のために新[あたら]しいルールの案[あん]を出[だ]しました。', 'So a government ministry put out a draft of new rules for social media companies.', 'The ministry is the Ministry of Internal Affairs and Communications.'],
+            ['SNSには、見[み]られた数[かず]でお金[かね]がもらえる仕組[しく]みがあります。', 'Some social media have a system where people get money depending on how many views they get.'],
+            ['うその情報[じょうほう]では、お金[かね]がもらえないようにします。', 'The idea is that people will not get money for false information.'],
+            ['AIで作[つく]った悪[わる]い画像[がぞう]を、見[み]つける方法[ほうほう]も考[かんが]えます。', 'It also considers ways to find bad pictures made by AI.'],
+            ['このルールを守[まも]らなくても、罰[ばつ]はありません。', 'There is no punishment for not following these rules.'],
+          ],
+        },
+        N4: {
+          title: '選挙[せんきょ]の偽情報[にせじょうほう]対策[たいさく]　SNS会社[がいしゃ]への指針案[ししんあん]を公表[こうひょう]',
+          lines: [
+            ['総務省[そうむしょう]は二十三日[にじゅうさんにち]、選挙[せんきょ]のときのSNSの偽情報[にせじょうほう]について、SNS会社[がいしゃ]への指針案[ししんあん]を発表[はっぴょう]しました。', 'On the 23rd, the Ministry of Internal Affairs and Communications announced a draft of guidelines for social media companies about false information on social media at election time.', '指針 "a guideline": a policy that shows which way to act.'],
+            ['見[み]られた数[かず]に合[あ]わせてお金[かね]が払[はら]われる収益化[しゅうえきか]を、うその情報[じょうほう]の投稿[とうこう]では止[と]めることが、対策[たいさく]の例[れい]に入[はい]っています。', 'Stopping monetization, where money is paid according to views, for posts of false information is included as an example of a measure.', '収益化 "monetization": making money from posts.'],
+            ['AIで作[つく]られた悪[わる]い画像[がぞう]や動画[どうが]を見[み]つけて、利用者[りようしゃ]に注意[ちゅうい]を出[だ]すことも例[れい]です。', 'Finding harmful AI-made images and videos and showing users a warning is also an example.'],
+            ['また、政党[せいとう]や候補者[こうほしゃ]、役所[やくしょ]などの正[ただ]しい情報[じょうほう]を先[さき]に見[み]せる方法[ほうほう]も出[だ]されています。', 'A way to show correct information from parties, candidates and public offices first has also been put forward.'],
+            ['具体的[ぐたいてき]な方法[ほうほう]は会社[かいしゃ]が決[き]めるので、守[まも]らなくても罰[ばつ]はありません。', 'Because each company decides the specific methods, there is no punishment for not following them.'],
+            ['二十四日[にじゅうよっか]から1か月[げつ]、国民[こくみん]の意見[いけん]を聞[き]きます。早[はや]ければ今年[ことし]中[じゅう]に正式[せいしき]に決[き]まる予定[よてい]です。', 'The ministry will hear the public\'s opinions for a month from the 24th. It is due to be formally decided within this year at the earliest.'],
+          ],
+        },
+        N3: {
+          title: '選挙[せんきょ]の偽情報[にせじょうほう]、収益化停止[しゅうえきかていし]も　総務省[そうむしょう]がSNS事業者向[じぎょうしゃむ]け指針案[ししんあん]',
+          lines: [
+            ['総務省[そうむしょう]は二十三日[にじゅうさんにち]、選挙[せんきょ]期間中[きかんちゅう]のSNS上[じょう]の偽[にせ]・誤情報[ごじょうほう]への対応[たいおう]を促[うなが]す、事業者向[じぎょうしゃむ]けの指針案[ししんあん]を公表[こうひょう]した。', 'On the 23rd, the Ministry of Internal Affairs and Communications released a draft of guidelines for operators, urging them to deal with false and mistaken information on social media during election periods.', '偽・誤情報 "false and mistaken information": disinformation (deliberate) and misinformation (accidental).'],
+            ['閲覧数[えつらんすう]に応[おう]じて報酬[ほうしゅう]が得[え]られる仕組[しく]みが偽情報[にせじょうほう]の拡散[かくさん]を招[まね]くおそれがあるとして、収益化[しゅうえきか]の停止[ていし]を対策例[たいさくれい]に挙[あ]げた。', 'Saying that a system where rewards depend on view counts could lead to disinformation spreading, it listed stopping monetization as an example measure.', '〜に応じて "in accordance with ~".'],
+            ['このほか、AIで生成[せいせい]された有害[ゆうがい]な画像[がぞう]や動画[どうが]を検知[けんち]し、利用者[りようしゃ]に警告[けいこく]を表示[ひょうじ]することも例示[れいじ]している。', 'In addition, it gives as examples detecting harmful images and videos generated by AI and showing warnings to users.'],
+            ['政党[せいとう]や候補者[こうほしゃ]、公的機関[こうてききかん]など信頼[しんらい]できる情報[じょうほう]を優先的[ゆうせんてき]に表示[ひょうじ]する案[あん]も盛[も]り込[こ]まれた。', 'A proposal to display reliable information from parties, candidates and public bodies with priority was also included.'],
+            ['具体的[ぐたいてき]な対策[たいさく]は各社[かくしゃ]の判断[はんだん]に任[まか]され、従[したが]わなくても罰則[ばっそく]はない。', 'Specific measures are left to each company\'s judgment, and there are no penalties for not following them.', '任される "to be left to someone".'],
+            ['二十四日[にじゅうよっか]から1か月間[げつかん]、意見[いけん]を公募[こうぼ]し、早[はや]ければ年内[ねんない]にも正式[せいしき]に決[き]める見通[みとお]しだ。', 'Public comments will be invited for one month from the 24th, and the guidelines are expected to be formally decided as early as within the year.', '年内 "within the year".'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-10-24-imperial-house-law',
       date: '2026-10-24',
       emoji: '👑',
