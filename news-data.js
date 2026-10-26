@@ -23,6 +23,148 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-10-26-bangladesh-pm-visit',
+      date: '2026-10-26',
+      emoji: '🤝',
+      titleEn: 'Bangladesh\'s prime minister visits Japan for talks with Prime Minister Takaichi on October 27',
+      sources: [
+        { name: 'UNB (Bangladesh)', url: 'https://unb.com.bd/category/Bangladesh/tarique-takaichi-to-hold-bilateral-talks-in-tokyo-on-oct-27/198321' },
+        { name: 'Dhaka Tribune', url: 'https://www.dhakatribune.com/bangladesh/foreign-affairs/422538/pm-to-visit-japan-from-october-26-to-29' },
+        { name: 'Ministry of Foreign Affairs of Japan: Japan-Bangladesh Relations', url: 'https://www.mofa.go.jp/s_sa/sw/bd/pageite_000001_00003.html' },
+      ],
+      levels: {
+        N5: {
+          title: 'バングラデシュの　首相[しゅしょう]が　日本[にほん]に　来[き]ます',
+          lines: [
+            ['バングラデシュの首相[しゅしょう]が、二十六日[にじゅうろくにち]から日本[にほん]に来[き]ます。', 'The prime minister of Bangladesh will come to Japan from the 26th.'],
+            ['名前[なまえ]は、タリク・ラーマンさんです。', 'His name is Tarique Rahman.'],
+            ['二十九日[にじゅうくにち]まで、日本[にほん]にいる予定[よてい]です。', 'He plans to stay in Japan until the 29th.'],
+            ['二十七日[にじゅうしちにち]に、高市[たかいち]首相[しゅしょう]と話[はな]します。', 'On the 27th, he will talk with Prime Minister Takaichi.', 'Sanae Takaichi is Japan\'s prime minister.'],
+            ['二人[ふたり]は、仕事[しごと]やお金[かね]の話[はなし]をします。', 'The two will talk about business and money.'],
+            ['日本[にほん]で働[はたら]くバングラデシュの人[ひと]についても、話[はなし]が出[で]るかもしれません。', 'They may also talk about Bangladeshi people working in Japan.'],
+          ],
+        },
+        N4: {
+          title: 'バングラデシュのラーマン首相[しゅしょう]が来日[らいにち]　二十七日[にじゅうしちにち]に高市[たかいち]首相[しゅしょう]と会談[かいだん]',
+          lines: [
+            ['バングラデシュのタリク・ラーマン首相[しゅしょう]は、二十六日[にじゅうろくにち]から二十九日[にじゅうくにち]まで、仕事[しごと]で日本[にほん]を訪[おとず]れます。', 'Bangladesh\'s Prime Minister Tarique Rahman will visit Japan on official business from the 26th to the 29th.'],
+            ['二十七日[にじゅうしちにち]には、東京[とうきょう]で高市早苗[たかいちさなえ]首相[しゅしょう]と会談[かいだん]する予定[よてい]です。', 'On the 27th, he is scheduled to hold talks with Prime Minister Sanae Takaichi in Tokyo.'],
+            ['外務省[がいむしょう]によると、高市[たかいち]首相[しゅしょう]は昼食会[ちゅうしょくかい]も開[ひら]きます。', 'According to the Ministry of Foreign Affairs, Prime Minister Takaichi will also host a lunch.'],
+            ['二[ふた]つの国[くに]は、経済[けいざい]の関係[かんけい]を強[つよ]くして、日本[にほん]からの投資[とうし]を増[ふ]やすことを目指[めざ]しています。', 'The two countries aim to strengthen economic ties and increase investment from Japan.'],
+            ['バングラデシュのメディアによると、農業[のうぎょう]や漁業[ぎょぎょう]、貿易[ぼうえき]などについての覚書[おぼえがき]の案[あん]があります。', 'According to Bangladeshi media, there are draft memorandums on agriculture, fishing, trade and more.', '覚書 (おぼえがき) here is a "memorandum of understanding", a written agreement short of a treaty.'],
+            ['日本[にほん]で働[はたら]くバングラデシュの人[ひと]を増[ふ]やすための取[と]り決[き]めも、準備[じゅんび]されているそうです。', 'A deal to increase the number of Bangladeshis working in Japan is also reportedly being prepared.'],
+          ],
+        },
+        N3: {
+          title: 'バングラデシュ首相[しゅしょう]が二十六日[にじゅうろくにち]から公式訪日[こうしきほうにち]　二十七日[にじゅうしちにち]に首脳会談[しゅのうかいだん]',
+          lines: [
+            ['バングラデシュのタリク・ラーマン首相[しゅしょう]は、二十六日[にじゅうろくにち]から二十九日[にじゅうくにち]までの日程[にってい]で、日本[にほん]を公式訪問[こうしきほうもん]する。', 'Bangladesh\'s Prime Minister Tarique Rahman will make an official visit to Japan from the 26th to the 29th.'],
+            ['外務省[がいむしょう]によると、二十七日[にじゅうしちにち]に東京[とうきょう]で高市早苗[たかいちさなえ]首相[しゅしょう]と会談[かいだん]し、高市[たかいち]首相[しゅしょう]は昼食会[ちゅうしょくかい]も主催[しゅさい]する予定[よてい]だ。', 'According to the Ministry of Foreign Affairs, he will hold talks with Prime Minister Sanae Takaichi in Tokyo on the 27th, and she is also scheduled to host a lunch.'],
+            ['両国[りょうこく]は、経済[けいざい]関係[かんけい]の強化[きょうか]や日本企業[にほんきぎょう]による投資[とうし]の拡大[かくだい]などを話[はな]し合[あ]うとみられる。', 'The two countries are expected to discuss strengthening economic ties, expanding investment by Japanese companies, and more.'],
+            ['バングラデシュ側[がわ]の報道[ほうどう]では、農業[のうぎょう]や水産業[すいさんぎょう]、人材育成[じんざいいくせい]、貿易[ぼうえき]などに関[かん]する覚書[おぼえがき]の案[あん]が、まとめられているという。', 'Reports on the Bangladeshi side say that draft memorandums on agriculture, fisheries, human resources development, trade and more have been put together.'],
+            ['日本[にほん]で働[はたら]くバングラデシュ人労働者[じんろうどうしゃ]を増[ふ]やすための取[と]り決[き]めも、最終調整[さいしゅうちょうせい]が進[すす]められているとされる。', 'A deal to increase the number of Bangladeshi workers in Japan is also said to be in final coordination.'],
+            ['十月[じゅうがつ]初[はじ]めの報道[ほうどう]では、天皇陛下[てんのうへいか]との面会[めんかい]も見込[みこ]まれていた。', 'Reports in early October had also expected a meeting with the Emperor.'],
+            ['会談[かいだん]の結果[けっか]は、まだ明[あき]らかになっていない。', 'The results of the talks are not yet known.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-26-russia-reporter',
+      date: '2026-10-26',
+      emoji: '📰',
+      titleEn: 'Japan and journalists call for the release of a Hokkaido Shimbun reporter detained in Russia on spying suspicion',
+      sources: [
+        { name: 'nippon.com (Jiji Press): Russia Detains Japanese Journalist for Alleged Espionage', url: 'https://www.nippon.com/en/news/yjj2026101400001/' },
+        { name: 'nippon.com (Jiji Press): Japan Journalist Group Seeks Release of Reporter Held in Russia', url: 'https://www.nippon.com/en/news/yjj2026102100742/' },
+        { name: 'Committee to Protect Journalists', url: 'https://cpj.org/2026/10/russia-detains-japanese-journalist-on-suspicion-of-espionage/' },
+        { name: 'South China Morning Post', url: 'https://www.scmp.com/news/world/russia-central-asia/article/3370789/russia-detains-japanese-journalist-suspicion-spying' },
+      ],
+      levels: {
+        N5: {
+          title: 'ロシアで　日本[にほん]の　記者[きしゃ]が　つかまりました',
+          lines: [
+            ['ロシアで、日本[にほん]の新聞[しんぶん]の記者[きしゃ]が、つかまりました。', 'In Russia, a reporter for a Japanese newspaper was detained.'],
+            ['北海道新聞[ほっかいどうしんぶん]の人[ひと]です。', 'He works for the Hokkaido Shimbun.'],
+            ['ロシアは、この人[ひと]がスパイをしたと言[い]っています。', 'Russia says this person did spying.'],
+            ['日本[にほん]の政府[せいふ]は、ロシアに、くわしいことを教[おし]えてほしいとたのみました。', 'The Japanese government asked Russia to tell it the details.'],
+            ['新聞[しんぶん]の人[ひと]たちは、「早[はや]く出[だ]してください」と言[い]っています。', 'Journalists are saying, "Please release him quickly."'],
+            ['ロシアは、まだ証拠[しょうこ]を見[み]せていません。', 'Russia has not shown any evidence yet.', '証拠 (しょうこ) means "evidence" or "proof".'],
+          ],
+        },
+        N4: {
+          title: 'ロシアで北海道新聞[ほっかいどうしんぶん]の記者[きしゃ]が拘束[こうそく]　日本[にほん]の記者[きしゃ]たちが解放[かいほう]を要求[ようきゅう]',
+          lines: [
+            ['ロシアの情報機関[じょうほうきかん]FSBは、北海道新聞[ほっかいどうしんぶん]の記者[きしゃ]を、スパイの疑[うたが]いで拘束[こうそく]したと発表[はっぴょう]しました。', 'Russia\'s intelligence agency, the FSB, announced that it had detained a Hokkaido Shimbun reporter on suspicion of spying.', 'FSB is the Federal Security Service, Russia\'s main domestic security agency.'],
+            ['FSBは、記者[きしゃ]が日本[にほん]の情報機関[じょうほうきかん]のために、兵士[へいし]の情報[じょうほう]を集[あつ]めたと言[い]っています。', 'The FSB says the reporter gathered information about soldiers for a Japanese intelligence agency.'],
+            ['報道[ほうどう]によると、記者[きしゃ]は十三日[じゅうさんにち]にサハリンで捕[つか]まり、モスクワに運[はこ]ばれました。', 'According to reports, the reporter was seized in Sakhalin on the 13th and taken to Moscow.'],
+            ['裁判所[さいばんしょ]は、十二月[じゅうにがつ]まで拘束[こうそく]を続[つづ]けることを認[みと]めたと伝[つた]えられています。', 'It is reported that a court approved keeping him in custody until December.'],
+            ['茂木[もてぎ]外務大臣[がいむだいじん]は、ロシアに情報[じょうほう]を求[もと]め、公正[こうせい]にあつかうように言[い]いました。', 'Foreign Minister Motegi asked Russia for information and told it to treat him fairly.'],
+            ['日本[にほん]のジャーナリストの団体[だんたい]は、二十一日[にじゅういちにち]に、早[はや]く解放[かいほう]するようにロシアに求[もと]めました。', 'A Japanese journalists\' group called on Russia on the 21st to release him quickly.'],
+          ],
+        },
+        N3: {
+          title: 'ロシアで拘束[こうそく]の北海道新聞[ほっかいどうしんぶん]記者[きしゃ]　日本[にほん]の記者団体[きしゃだんたい]が解放[かいほう]求[もと]める',
+          lines: [
+            ['ロシアの連邦保安庁[れんぽうほあんちょう]（FSB）は、北海道新聞[ほっかいどうしんぶん]の記者[きしゃ]を、スパイ容疑[ようぎ]で拘束[こうそく]したと発表[はっぴょう]した。', 'Russia\'s Federal Security Service (FSB) announced that it had detained a Hokkaido Shimbun reporter on suspicion of espionage.'],
+            ['FSBによると、記者[きしゃ]は日本[にほん]の情報機関[じょうほうきかん]の指示[しじ]で、ロシア軍[ぐん]に動員[どういん]された兵士[へいし]に関[かん]する情報[じょうほう]を集[あつ]めていたという。', 'According to the FSB, the reporter had been gathering information on soldiers mobilized into the Russian military, on the instructions of a Japanese intelligence agency.', 'This is Russia\'s claim. It has not published evidence, and the newspaper said it was still checking the facts.'],
+            ['報道[ほうどう]によると、記者[きしゃ]は十三日[じゅうさんにち]にサハリンで身柄[みがら]を拘束[こうそく]され、モスクワに移[うつ]された。', 'According to reports, the reporter was taken into custody in Sakhalin on the 13th and moved to Moscow.'],
+            ['モスクワの裁判所[さいばんしょ]は、十二月[じゅうにがつ]十二日[じゅうににち]までの拘束[こうそく]を認[みと]めたと伝[つた]えられ、スパイ罪[ざい]は最高[さいこう]で禁錮[きんこ]二十年[にじゅうねん]とされる。', 'A Moscow court is reported to have approved detention until December 12, and the spying charge carries up to 20 years in prison.'],
+            ['茂木外相[もてぎがいしょう]は、ロシア側[がわ]に情報[じょうほう]の提供[ていきょう]を求[もと]めるとともに、公正[こうせい]な扱[あつか]いを求[もと]めたと説明[せつめい]した。', 'Foreign Minister Motegi explained that he had asked the Russian side to provide information and to treat him fairly.'],
+            ['日本[にほん]のジャーナリスト団体[だんたい]は二十一日[にじゅういちにち]、記者[きしゃ]の早期[そうき]解放[かいほう]を求[もと]める声明[せいめい]を出[だ]した。', 'A Japanese journalists\' group issued a statement on the 21st calling for the reporter\'s early release.'],
+            ['国際的[こくさいてき]な記者[きしゃ]保護[ほご]団体[だんたい]も、すぐに解放[かいほう]するよう求[もと]めている。', 'An international press-protection group is also calling for his immediate release.', 'The group is the Committee to Protect Journalists (CPJ).'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-26-mongolia-fire',
+      date: '2026-10-26',
+      emoji: '🔥',
+      titleEn: 'Mongolia weighs seeking compensation after a huge grassland fire linked to a KDDI subsidiary\'s vehicles',
+      sources: [
+        { name: 'nippon.com (Jiji Press): KDDI Unit\'s Activity Linked to Massive Wildfire in Mongolia', url: 'https://www.nippon.com/en/news/yjj2026102300643/' },
+        { name: 'nippon.com (Jiji Press): Mongolia to Consider Seeking Compensation over Grassland Fire', url: 'https://www.nippon.com/en/news/yjj2026102400322/' },
+        { name: 'Telecompaper', url: 'https://www.telecompaper.com/news/kddi-says-vehicle-fire-spread-to-mongolian-nature-reserve-during-mobicom-visit--1586729' },
+      ],
+      levels: {
+        N5: {
+          title: 'モンゴルの　草原[そうげん]の　火事[かじ]',
+          lines: [
+            ['十月[じゅうがつ]八日[ようか]に、モンゴルで大[おお]きな火事[かじ]がありました。', 'On October 8, there was a big fire in Mongolia.'],
+            ['広[ひろ]い草原[そうげん]が、たくさん燃[も]えました。', 'A lot of wide grassland burned.'],
+            ['日本[にほん]の会社[かいしゃ]KDDIの子会社[こがいしゃ]の車[くるま]から、火[ひ]が出[で]たようです。', 'The fire seems to have started from a car of a subsidiary of the Japanese company KDDI.', '子会社 (こがいしゃ) is a "subsidiary": a company owned by a bigger company.'],
+            ['KDDIは、謝[あやま]りました。', 'KDDI apologized.'],
+            ['モンゴルの政府[せいふ]は、お金[かね]をはらってもらうことを考[かんが]えています。', 'The Mongolian government is thinking about having them pay money.'],
+            ['火事[かじ]の原因[げんいん]は、今[いま]、調[しら]べています。', 'The cause of the fire is being investigated now.'],
+          ],
+        },
+        N4: {
+          title: 'モンゴルの草原火災[そうげんかさい]　KDDI子会社[こがいしゃ]の車[くるま]から出火[しゅっか]か　政府[せいふ]は補償[ほしょう]を検討[けんとう]',
+          lines: [
+            ['十月[じゅうがつ]八日[ようか]、モンゴル東部[とうぶ]の自然保護区[しぜんほごく]で、大[おお]きな火事[かじ]が起[お]きました。', 'On October 8, a big fire broke out in a nature reserve in eastern Mongolia.'],
+            ['モンゴル政府[せいふ]によると、燃[も]えた広[ひろ]さは約[やく]5300平方[へいほう]キロです。', 'According to the Mongolian government, the burned area was about 5,300 square kilometers.'],
+            ['火事[かじ]は十二日[じゅうににち]に抑[おさ]えられ、十六日[じゅうろくにち]に完全[かんぜん]に消[き]えました。', 'The fire was brought under control on the 12th and completely put out on the 16th.'],
+            ['KDDIの子会社[こがいしゃ]モビコムの車[くるま]から煙[けむり]が出[で]て、火[ひ]が広[ひろ]がったと伝[つた]えられています。', 'It is reported that smoke came from a car of KDDI\'s subsidiary Mobicom and the fire spread.'],
+            ['KDDIは謝罪[しゃざい]し、調査[ちょうさ]に協力[きょうりょく]すると言[い]っています。', 'KDDI has apologized and says it will cooperate with the investigation.'],
+            ['モンゴル政府[せいふ]は、損害[そんがい]の補償[ほしょう]を求[もと]めることを考[かんが]えています。原因[げんいん]は、まだ調[しら]べているところです。', 'The Mongolian government is considering asking for compensation for the damage. The cause is still being investigated.'],
+          ],
+        },
+        N3: {
+          title: 'モンゴル草原火災[そうげんかさい]、政府[せいふ]が補償請求[ほしょうせいきゅう]を検討[けんとう]　KDDI子会社[こがいしゃ]の車列[しゃれつ]から出火[しゅっか]か',
+          lines: [
+            ['十月[じゅうがつ]八日[ようか]、モンゴル東部[とうぶ]の特別保護区[とくべつほごく]で大規模[だいきぼ]な草原火災[そうげんかさい]が発生[はっせい]し、同国[どうこく]政府[せいふ]によると、約[やく]5300平方[へいほう]キロが焼[や]けた。', 'On October 8, a large grassland fire broke out in a special protected area in eastern Mongolia, and according to the Mongolian government about 5,300 square kilometers burned.'],
+            ['火[ひ]は十二日[じゅうににち]に鎮圧[ちんあつ]され、十六日[じゅうろくにち]に完全[かんぜん]に消[き]えた。', 'The fire was brought under control on the 12th and completely out on the 16th.', '鎮圧 (ちんあつ) means a fire is "brought under control"; it is not yet fully out.'],
+            ['KDDIによると、子会社[こがいしゃ]モビコムの幹部[かんぶ]らが保護区[ほごく]に入[はい]った際[さい]、車[くるま]の下[した]から煙[けむり]が出[で]て、火[ひ]が周囲[しゅうい]の草[くさ]に燃[も]え広[ひろ]がったという。', 'According to KDDI, when executives of its subsidiary Mobicom entered the reserve, smoke came from under a car and the fire spread to the surrounding grass.'],
+            ['モビコムは、通信網[つうしんもう]の調査[ちょうさ]が目的[もくてき]で、法令違反[ほうれいいはん]はしていないと説明[せつめい]している。', 'Mobicom explains that the purpose was a survey of its communications network and that it broke no laws.', 'Mongolian media have questioned the purpose of the trip. The cause is still under investigation.'],
+            ['KDDIは謝罪[しゃざい]したうえで、調査[ちょうさ]に全面的[ぜんめんてき]に協力[きょうりょく]する考[かんが]えを示[しめ]した。', 'KDDI apologized and showed its intention to cooperate fully with the investigation.'],
+            ['モンゴル政府[せいふ]は、損害[そんがい]の補償[ほしょう]を求[もと]めることを検討[けんとう]している。', 'The Mongolian government is considering seeking compensation for the damage.'],
+            ['警察[けいさつ]などが、出火[しゅっか]の原因[げんいん]や責任[せきにん]について調[しら]べを進[すす]めている。', 'The police and others are continuing to investigate the cause of the fire and who is responsible.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-10-25-gmo-cyber-attack',
       date: '2026-10-25',
       emoji: '🛡️',
