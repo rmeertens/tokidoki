@@ -606,6 +606,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://tokidoki.meertens.dev/blog-graded-stories.html</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://tokidoki.meertens.dev/blog-learning-japanese.html</loc>
     <lastmod>2026-10-20</lastmod>
     <changefreq>yearly</changefreq>
