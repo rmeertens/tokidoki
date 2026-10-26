@@ -5823,6 +5823,9 @@
     }
     bunkeiIndex++;
     showBunkeiCard();
+    // A long answer (diff, note, retry box) leaves the page scrolled down;
+    // start the next sentence from the top.
+    window.scrollTo(0, 0);
   }
 
   // Takes back the last grade (a misclick, or "Got it" when it wasn't):
