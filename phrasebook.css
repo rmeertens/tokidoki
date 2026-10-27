@@ -1,0 +1,32 @@
+/* The phrase cards of blog-japanese-for-tourists.html (written by
+   scripts/render_tourist_post.mjs; ▶ / 🐢 played by phrasebook.js). */
+.pb-box { margin-top: 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 16px; }
+.pb-box h2 { margin-top: 0; font-size: 1rem; }
+.post .pb-toc { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 0; padding: 0; list-style: none; }
+.post .pb-toc li + li { margin-top: 0; }
+.pb-toc a { display: inline-block; padding: 5px 11px; border: 1px solid var(--border); border-radius: 999px; background: var(--bg-card); font-size: 0.85rem; text-decoration: none; }
+.pb-list { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+.pb-row { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: var(--radius-sm); }
+.pb-row.pb-staff { border-left-color: var(--orange); }
+.pb-btns { display: flex; flex-direction: column; gap: 6px; flex: none; padding-top: 2px; }
+.pb-btns .speak-btn { width: 34px; height: 34px; font-size: 0.85rem; }
+.speak-btn.playing, .pb-chip.playing { border-color: var(--accent); background: var(--accent-dim); }
+.pb-main { min-width: 0; }
+.post .pb-main p { margin: 0; }
+.post .pb-tag { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.post .pb-staff .pb-tag { color: var(--orange); }
+.post .pb-ro { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--text); line-height: 1.35; }
+.post .pb-en { color: var(--text); }
+.post .pb-jp { margin-top: 4px; font-size: 0.9rem; color: var(--text-muted); white-space: normal; }
+.post .pb-note { margin-top: 6px; font-size: 0.88rem; line-height: 1.55; }
+.pb-ex { display: flex; flex-direction: column; }
+.pb-ex .pb-row { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.pb-answers { padding: 10px 14px 12px 60px; background: var(--bg-input); border: 1px solid var(--border); border-top: none; border-left: 4px solid var(--accent); border-radius: 0 0 var(--radius-sm) var(--radius-sm); }
+.pb-answers .pb-tag { margin-bottom: 6px; }
+.pb-chip { display: inline-flex; align-items: baseline; gap: 6px; flex-wrap: wrap; margin: 0 6px 6px 0; padding: 6px 12px; border: 1px solid var(--border); border-radius: 999px; background: var(--bg-card); color: var(--text); font: inherit; font-weight: 600; cursor: pointer; text-align: left; }
+.pb-chip:hover, .pb-chip:focus-visible { border-color: var(--accent); }
+.pb-chip-en { font-weight: 400; font-size: 0.82rem; color: var(--text-dim); }
+.pb-section { scroll-margin-top: 72px; }
+@media (max-width: 480px) {
+  .pb-answers { padding-left: 14px; }
+}

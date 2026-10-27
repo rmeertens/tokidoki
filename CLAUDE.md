@@ -146,6 +146,19 @@
   word in the wrong topic in `scripts/vocab_group_overrides.json` and re-run;
   `test_vocab_groups.js` fails if a word is missing or a set is out of range.
 
+## Japanese for tourists (blog post)
+
+- `blog-japanese-for-tourists.html` is hand-written except its phrase
+  sections, which `node scripts/render_tourist_post.mjs` writes between the
+  `phrasebook:` markers from `tourist-phrases-data.js` (romaji first, then the
+  meaning, then the Japanese; staff phrases and "they ask → you answer"
+  exchanges in a second voice). Every phrase is in one VOICEVOX recording,
+  `audio/tourist/phrases.mp3`, made by `scripts/generate_tourist_audio.py
+  --voicevox $VV` (set up as below; `--check` checks the readings), and
+  played one phrase at a time by `phrasebook.js`. After changing a phrase,
+  re-record, then re-render; `test_tourist_phrases.js` fails while either is
+  stale.
+
 ## Recorded voices (VOICEVOX)
 
 Listening questions and News stories play pre-recorded MP3s made with
