@@ -23,6 +23,146 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-10-27-chiba-tetsuya',
+      date: '2026-10-27',
+      emoji: '🥊',
+      titleEn: 'Manga artist Tetsuya Chiba, creator of "Ashita no Joe", dies at 87',
+      sources: [
+        { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261027de66136' },
+        { name: 'Yahoo! News (ENCOUNT)', url: 'https://news.yahoo.co.jp/articles/cf68d68b187e968cd16b3d86a533fb22fbc1cd38' },
+        { name: 'Livedoor News', url: 'https://news.livedoor.com/article/detail/32666250/' },
+      ],
+      levels: {
+        N5: {
+          title: '漫画家[まんがか]の　ちばてつやさんが　亡[な]くなりました',
+          lines: [
+            ['漫画家[まんがか]のちばてつやさんが、亡[な]くなりました。', 'The manga artist Tetsuya Chiba has died.'],
+            ['八十七歳[はちじゅうななさい]でした。', 'He was 87 years old.'],
+            ['亡[な]くなったのは、二十二日[にじゅうににち]です。', 'He died on the 22nd.'],
+            ['「あしたのジョー」という漫画[まんが]で、とても有名[ゆうめい]です。', 'He is very famous for the manga "Ashita no Joe".', '"Ashita no Joe" (Tomorrow\'s Joe) is a boxing manga about a young man called Joe.'],
+            ['ボクシングの話[はなし]で、たくさんの人[ひと]が読[よ]みました。', 'It is a story about boxing, and many people read it.'],
+            ['出版社[しゅっぱんしゃ]の講談社[こうだんしゃ]が、二十七日[にじゅうしちにち]に知[し]らせました。', 'The publisher Kodansha announced it on the 27th.'],
+          ],
+        },
+        N4: {
+          title: '「あしたのジョー」の漫画家[まんがか]、ちばてつやさんが八十七歳[はちじゅうななさい]で死去[しきょ]',
+          lines: [
+            ['「あしたのジョー」などで知[し]られる漫画家[まんがか]のちばてつやさんが、二十二日[にじゅうににち]に亡[な]くなりました。', 'Manga artist Tetsuya Chiba, known for "Ashita no Joe" and other works, died on the 22nd.'],
+            ['八十七歳[はちじゅうななさい]でした。', 'He was 87.'],
+            ['NHKによると、病気[びょうき]は骨髄異形成症候群[こつずいいけいせいしょうこうぐん]で、東京[とうきょう]の病院[びょういん]で亡[な]くなったそうです。', 'According to NHK, the illness was myelodysplastic syndrome, and he reportedly died at a hospital in Tokyo.', 'A blood disease in which the bone marrow does not make healthy blood cells.'],
+            ['訃報[ふほう]は、出版社[しゅっぱんしゃ]の講談社[こうだんしゃ]が、二十七日[にじゅうしちにち]に公式[こうしき]サイトで発表[はっぴょう]しました。', 'The death was announced by the publisher Kodansha on its official website on the 27th.', '訃報 (ふほう) is the word for news of someone\'s death.'],
+            ['「あしたのジョー」は、ボクシングに生[い]きる若者[わかもの]を描[えが]いた作品[さくひん]で、長[なが]い間[あいだ]、多[おお]くの人[ひと]に愛[あい]されてきました。', '"Ashita no Joe" depicts a young man living for boxing, and has been loved by many people for a long time.'],
+            ['ちばてつやさんは、漫画家[まんがか]として初[はじ]めて文化勲章[ぶんかくんしょう]をもらった人[ひと]としても知[し]られています。', 'Mr. Chiba is also known as the first manga artist to receive the Order of Culture.', 'The Order of Culture is one of Japan\'s highest honors for the arts and sciences.'],
+            ['葬儀[そうぎ]は、家族[かぞく]だけで行[おこな]われました。', 'The funeral was held with family only.'],
+          ],
+        },
+        N3: {
+          title: '漫画家[まんがか]のちばてつやさんが死去[しきょ]　「あしたのジョー」、八十七歳[はちじゅうななさい]',
+          lines: [
+            ['「あしたのジョー」などで知[し]られる漫画家[まんがか]のちばてつやさん（本名[ほんみょう]・千葉徹彌[ちばてつや]）が、二十二日[にじゅうににち]、死去[しきょ]した。', 'Manga artist Tetsuya Chiba (real name Tetsuya Chiba, written 千葉徹彌), known for "Ashita no Joe" and other works, died on the 22nd.'],
+            ['八十七歳[はちじゅうななさい]だった。', 'He was 87.'],
+            ['NHKによると、死因[しいん]は骨髄異形成症候群[こつずいいけいせいしょうこうぐん]で、都内[とない]の病院[びょういん]で亡[な]くなったという。', 'According to NHK, the cause of death was myelodysplastic syndrome, and he died at a hospital in Tokyo.'],
+            ['講談社[こうだんしゃ]が、二十七日[にじゅうしちにち]に公式[こうしき]サイトで訃報[ふほう]を発表[はっぴょう]した。', 'Kodansha announced the death on its official website on the 27th.'],
+            ['「あしたのジョー」は、原作[げんさく]・高森朝雄[たかもりあさお]、作画[さくが]・ちばてつやで、ボクシングに打[う]ち込[こ]む青年[せいねん]を描[えが]き、スポーツ漫画[まんが]の歴史[れきし]を変[か]えたと言[い]われる。', '"Ashita no Joe", with story by Asao Takamori and art by Tetsuya Chiba, depicts a young man devoted to boxing and is said to have changed the history of sports manga.', '高森朝雄 (Asao Takamori) is the pen name of the story writer, Ikki Kajiwara.'],
+            ['ちばてつやさんは、漫画家[まんがか]として初[はじ]めて文化勲章[ぶんかくんしょう]を受[う]けたことでも知[し]られ、後進[こうしん]の育成[いくせい]にも力[ちから]を注[そそ]いだ。', 'Mr. Chiba was also known as the first manga artist to receive the Order of Culture, and put effort into training younger artists.'],
+            ['葬儀[そうぎ]は家族[かぞく]で行[おこな]われ、お別[わか]れの会[かい]は検討[けんとう]されているという。', 'The funeral was held by the family, and a farewell gathering is reportedly being considered.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-27-core-cpi-september',
+      date: '2026-10-27',
+      emoji: '🛒',
+      titleEn: 'Japan\'s core consumer prices rise 2.1% in September, above 2% for the first time in nine months',
+      sources: [
+        { name: 'Kumamoto Nichinichi Shimbun', url: 'https://kumanichi.com/articles/2049663' },
+        { name: 'Monex', url: 'https://media.monex.co.jp/articles/-/30367' },
+        { name: 'Daiichi Life Research Institute', url: 'https://www.dlri.co.jp/files/macro/666835.pdf' },
+      ],
+      levels: {
+        N5: {
+          title: '日本[にほん]の　物[もの]の　値段[ねだん]が　上[あ]がっています',
+          lines: [
+            ['九月[くがつ]の物価[ぶっか]のデータが、二十三日[にじゅうさんにち]に出[で]ました。', 'The price data for September came out on the 23rd.'],
+            ['いろいろな物[もの]の値段[ねだん]は、去年[きょねん]の九月[くがつ]より、2.1パーセント高[たか]くなりました。', 'Prices were 2.1 percent higher than in September last year.', 'This figure leaves out fresh food, whose prices change a lot.'],
+            ['八月[はちがつ]は、1.7パーセントでした。', 'In August it was 1.7 percent.'],
+            ['2パーセントより高[たか]くなったのは、九[きゅう]か月[げつ]ぶりです。', 'It is the first time in nine months that it went above 2 percent.'],
+            ['外[そと]で食[た]べるご飯[はん]や、牛肉[ぎゅうにく]が、高[たか]くなりました。', 'Meals eaten out and beef became more expensive.'],
+            ['でも、お米[こめ]は安[やす]くなりました。', 'But rice became cheaper.'],
+          ],
+        },
+        N4: {
+          title: '九月[くがつ]の物価[ぶっか]、2.1％上昇[じょうしょう]　九[きゅう]か月[げつ]ぶりに2％超[こ]え',
+          lines: [
+            ['二十三日[にじゅうさんにち]に発表[はっぴょう]された九月[くがつ]の全国[ぜんこく]消費者物価指数[しょうひしゃぶっかしすう]は、生鮮食品[せいせんしょくひん]を除[のぞ]くと、前[まえ]の年[とし]の同[おな]じ月[つき]より2.1％高[たか]くなりました。', 'The nationwide consumer price index for September, released on the 23rd, rose 2.1% from a year earlier excluding fresh food.'],
+            ['八月[はちがつ]は1.7％だったので、上[あ]がる速[はや]さが強[つよ]くなっています。', 'Since it was 1.7% in August, prices are rising faster.'],
+            ['2％を超[こ]えたのは、九[きゅう]か月[げつ]ぶりです。', 'It is the first time in nine months that it has topped 2%.', '2% is the Bank of Japan\'s price target.'],
+            ['生鮮食品[せいせんしょくひん]を除[のぞ]く食料[しょくりょう]は2.9％上[あ]がり、外食[がいしょく]や輸入[ゆにゅう]の牛肉[ぎゅうにく]の値上[ねあ]がりが目立[めだ]ちました。', 'Food excluding fresh food rose 2.9%, with higher prices for eating out and imported beef standing out.'],
+            ['一方[いっぽう]、米[こめ]類[るい]は20.6％下[さ]がり、下[さ]がり方[かた]は過去[かこ]で最[もっと]も大[おお]きくなりました。', 'On the other hand, rice products fell 20.6%, the largest drop on record.'],
+            ['日本銀行[にほんぎんこう]は、今週[こんしゅう]、金融政策[きんゆうせいさく]を決[き]める会合[かいごう]を開[ひら]く予定[よてい]です。', 'The Bank of Japan is scheduled to hold a meeting this week to decide its monetary policy.', 'Reports say the meeting is on the 29th and 30th.'],
+          ],
+        },
+        N3: {
+          title: '九月[くがつ]の消費者物価[しょうひしゃぶっか]、2.1％上昇[じょうしょう]　九[きゅう]か月[げつ]ぶりに2％超[こ]え',
+          lines: [
+            ['総務省[そうむしょう]が二十三日[にじゅうさんにち]に発表[はっぴょう]した九月[くがつ]の全国[ぜんこく]消費者物価指数[しょうひしゃぶっかしすう]は、生鮮食品[せいせんしょくひん]を除[のぞ]く総合[そうごう]が前年同月[ぜんねんどうげつ]比[ひ]で2.1％上昇[じょうしょう]した。', 'The nationwide consumer price index for September, released by the Ministry of Internal Affairs and Communications on the 23rd, rose 2.1% year on year for the all-items index excluding fresh food.'],
+            ['八月[はちがつ]の1.7％から伸[の]びが拡大[かくだい]し、日銀[にちぎん]が目標[もくひょう]とする2％を上回[うわまわ]るのは、九[きゅう]か月[げつ]ぶりとなった。', 'The growth widened from 1.7% in August, and it exceeded the 2% target of the Bank of Japan for the first time in nine months.'],
+            ['生鮮食品[せいせんしょくひん]とエネルギーを除[のぞ]く指数[しすう]は、2.4％の上昇[じょうしょう]だった。', 'The index excluding fresh food and energy rose 2.4%.'],
+            ['生鮮食品[せいせんしょくひん]を除[のぞ]く食料[しょくりょう]は2.9％上昇[じょうしょう]し、外食[がいしょく]や輸入[ゆにゅう]牛肉[ぎゅうにく]の値上[ねあ]がりが全体[ぜんたい]を押[お]し上[あ]げた。', 'Food excluding fresh food rose 2.9%, with higher prices for eating out and imported beef pushing up the overall figure.'],
+            ['一方[いっぽう]、コメ類[るい]は20.6％下落[げらく]し、過去[かこ]最大[さいだい]の下落幅[げらくはば]となった。', 'Meanwhile, rice products fell 20.6%, the largest drop on record.'],
+            ['日銀[にちぎん]は今週[こんしゅう]の金融政策決定会合[きんゆうせいさくけっていかいごう]で、政策金利[せいさくきんり]を据[す]え置[お]くとの見方[みかた]が多[おお]い。', 'Many expect the Bank of Japan to keep its policy rate unchanged at its monetary policy meeting this week.', '据え置く means to leave a rate or amount as it is. Surveys cited by overseas media expect the rate to stay at 1.25%.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-27-japan-series',
+      date: '2026-10-27',
+      emoji: '⚾',
+      titleEn: 'SoftBank wins the first two Japan Series games against DeNA in extra innings; Game 3 is in Fukuoka on October 27',
+      sources: [
+        { name: 'Sports Hochi (Yahoo! News)', url: 'https://news.yahoo.co.jp/articles/b70c5305d596e3ca5c61e2511ec77341947e0d3a' },
+        { name: 'Nishinippon Sports', url: 'https://nishispo.nishinippon.co.jp/article/1052479' },
+        { name: 'Wikipedia: 2026年の日本シリーズ', url: 'https://ja.wikipedia.org/wiki/2026%E5%B9%B4%E3%81%AE%E6%97%A5%E6%9C%AC%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA' },
+      ],
+      levels: {
+        N5: {
+          title: '日本[にっぽん]シリーズ　ソフトバンクが　二[ふた]つ　勝[か]ちました',
+          lines: [
+            ['日本[にっぽん]シリーズが、はじまりました。', 'The Japan Series has started.', 'The Japan Series is the championship series of Japanese pro baseball.'],
+            ['ソフトバンクと　DeNAが　たたかっています。', 'SoftBank and DeNA are playing each other.'],
+            ['第[だい]一戦[いっせん]と　第[だい]二戦[にせん]は、横浜[よこはま]でした。', 'Games 1 and 2 were in Yokohama.'],
+            ['どちらも　試合[しあい]が　長[なが]くなりました。', 'Both games went long.'],
+            ['ソフトバンクが　二[ふた]つとも　勝[か]ちました。', 'SoftBank won both.'],
+            ['第[だい]三戦[さんせん]は、二十七日[にじゅうしちにち]に　福岡[ふくおか]であります。', 'Game 3 will be in Fukuoka on the 27th.'],
+          ],
+        },
+        N4: {
+          title: '日本[にっぽん]シリーズ　ソフトバンクが延長[えんちょう]で二連勝[にれんしょう]　二十七日[にじゅうしちにち]は福岡[ふくおか]で第[だい]三戦[さんせん]',
+          lines: [
+            ['プロ野球[やきゅう]の日本[にっぽん]シリーズは、ソフトバンクとDeNAの戦[たたか]いになりました。', 'The Japan Series of pro baseball is a contest between SoftBank and DeNA.', 'DeNA came up through the Climax Series after finishing third in the Central League.'],
+            ['横浜[よこはま]で行[おこな]われた第[だい]一戦[いっせん]と第[だい]二戦[にせん]は、どちらも延長[えんちょう]に入[はい]り、ソフトバンクが勝[か]ちました。', 'In Games 1 and 2, held in Yokohama, both went into extra innings and SoftBank won.', '延長 (えんちょう) means extra innings.'],
+            ['第[だい]二戦[にせん]では、九回[きゅうかい]に代打[だいだ]の山川穂高[やまかわほたか]選手[せんしゅ]が同点[どうてん]のホームランを打[う]ちました。', 'In Game 2, pinch hitter Hotaka Yamakawa hit a game-tying home run in the ninth inning.', '代打 (だいだ) is a pinch hitter, a player who bats in place of another.'],
+            ['そして延長[えんちょう]で、川村友斗[かわむらともと]選手[せんしゅ]のホームランで勝[か]ちました。', 'Then in extra innings, they won on a home run by Tomoto Kawamura.'],
+            ['ソフトバンクの二勝[にしょう]で、シリーズは福岡[ふくおか]に戻[もど]ります。', 'With SoftBank up two games to none, the series returns to Fukuoka.'],
+            ['第[だい]三戦[さんせん]は二十七日[にじゅうしちにち]で、ソフトバンクは松本晴[まつもとはる]投手[とうしゅ]、DeNAは東克樹[あずまかつき]投手[とうしゅ]が先発[せんぱつ]する予定[よてい]です。', 'Game 3 is on the 27th, with SoftBank\'s Haru Matsumoto and DeNA\'s Katsuki Azuma scheduled to start.', '先発 (せんぱつ) means the starting pitcher.'],
+          ],
+        },
+        N3: {
+          title: '日本[にっぽん]シリーズ、ソフトバンクが二夜連続[ふたよるれんぞく]の延長[えんちょう]制[せい]し二連勝[にれんしょう]　第[だい]三戦[さんせん]は福岡[ふくおか]',
+          lines: [
+            ['プロ野球[やきゅう]の日本[にっぽん]シリーズは、セ・リーグ三位[さんい]からクライマックスシリーズを勝[か]ち上[あ]がったDeNAと、パ・リーグを制[せい]したソフトバンクの顔合[かおあ]わせとなっている。', 'The Japan Series pits DeNA, which advanced through the Climax Series from third place in the Central League, against SoftBank, the Pacific League winner.'],
+            ['横浜[よこはま]で行[おこな]われた第[だい]一戦[いっせん]、第[だい]二戦[にせん]はいずれも延長[えんちょう]にもつれ込[こ]み、ソフトバンクが連勝[れんしょう]した。', 'Games 1 and 2, held in Yokohama, both went into extra innings, and SoftBank won them in a row.'],
+            ['報道[ほうどう]によると、第[だい]二戦[にせん]は終盤[しゅうばん]に逆転[ぎゃくてん]を許[ゆる]したものの、九回[きゅうかい]に代打[だいだ]の山川穂高[やまかわほたか]選手[せんしゅ]が同点[どうてん]本塁打[ほんるいだ]を放[はな]った。', 'According to reports, SoftBank gave up the lead late in Game 2, but pinch hitter Hotaka Yamakawa hit a game-tying home run in the ninth.'],
+            ['延長[えんちょう]では、プロ通算[つうさん]一本目[いっぽんめ]の川村友斗[かわむらともと]選手[せんしゅ]の本塁打[ほんるいだ]が決勝点[けっしょうてん]となった。', 'In extra innings, a home run by Tomoto Kawamura, his first in the pros, was the deciding run.'],
+            ['シリーズは舞台[ぶたい]を福岡[ふくおか]に移[うつ]し、二十七日[にじゅうしちにち]に第[だい]三戦[さんせん]が行[おこな]われる。', 'The series moves to Fukuoka, where Game 3 will be played on the 27th.'],
+            ['予告先発[よこくせんぱつ]は、ソフトバンクが松本晴[まつもとはる]投手[とうしゅ]、DeNAが東克樹[あずまかつき]投手[とうしゅ]だ。', 'The announced starters are Haru Matsumoto for SoftBank and Katsuki Azuma for DeNA.', '予告先発 means the starting pitcher is announced the day before.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-10-26-bangladesh-pm-visit',
       date: '2026-10-26',
       emoji: '🤝',
@@ -1124,7 +1264,7 @@
             ['そのとき、日本[にほん]はイギリスよりも小[ちい]さくなって、6番目[ばんめ]になりそうです。', 'At that time, Japan looks likely to become smaller than the United Kingdom as well, and be sixth.'],
             ['インドの経済[けいざい]は、今年[ことし]、7%ぐらいのびる見込[みこ]みです。', 'India\'s economy is expected to grow about 7% this year.', '見込み "expectation".'],
             ['日本[にほん]は、0.7%ぐらいしかのびません。', 'Japan will grow only about 0.7%.'],
-            ['エネルギーの値段[ねだん]や、ものの値段[ねだん]が上[あ]がっていて、むずかしいのです。', 'Energy prices and other prices are rising, and that makes it hard.'],
+            ['エネルギーの値段[ねだん]や、いろいろな物[もの]の値段[ねだん]が上[あ]がっていて、むずかしいのです。', 'Energy prices and other prices are rising, and that makes it hard.'],
           ],
         },
         N4: {

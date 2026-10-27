@@ -152,7 +152,7 @@
   </url>
   <url>
     <loc>https://tokidoki.meertens.dev/news-week-2026-10-26.html</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-10-27</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
@@ -169,6 +169,21 @@
     <loc>https://tokidoki.meertens.dev/news-week-2026-10-05.html</loc>
     <lastmod>2026-10-11</lastmod>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-10-27-chiba-tetsuya.html</loc>
+    <lastmod>2026-10-27</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-10-27-core-cpi-september.html</loc>
+    <lastmod>2026-10-27</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-10-27-japan-series.html</loc>
+    <lastmod>2026-10-27</lastmod>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://tokidoki.meertens.dev/news-2026-10-26-bangladesh-pm-visit.html</loc>
