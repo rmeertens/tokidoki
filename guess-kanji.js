@@ -28,9 +28,9 @@
 
   // [word, kana, meaning, level, pieces, r, m] → an item for guess-path.js.
   function toItem(row) {
-    const [word, kana, meaning, level, pieces, r, m, exJa, exEn, exId] = row;
+    const [word, kana, meaning, level, pieces, r, m, pos, exJa, exEn, exId] = row;
     return { key: `${word}|${kana}`, word, kana, meaning, level, pieces: pieces.split(' '),
-      g: r >= READING_MIN && m >= MEANING_MIN, own: Math.min(r, m),
+      g: r >= READING_MIN && m >= MEANING_MIN, own: Math.min(r, m), pos: pos || '',
       example: exJa ? { ja: exJa, en: exEn, id: exId } : null };
   }
 
@@ -123,13 +123,16 @@
   const pieceKanji = p => p.split(':')[0];
   const pieceReading = p => p.split(':')[1];
 
+  // "from 電車 (でんしゃ)": the word a kanji was met in.
+  const fromHtml = w => `from <span lang="ja">${esc(w.word)}</span> <span lang="ja">(${esc(w.kana)})</span>`;
+
   function hintsHtml(it, hints) {
     return it.pieces.map(p => {
       const from = BY_KEY.get(hints[p]);
       return `<li><span class="gk-hint-kanji" lang="ja">${esc(pieceKanji(p))}</span>
         <span class="gk-hint-reading" lang="ja">${esc(pieceReading(p))}</span>
         <span class="gk-hint-meaning">${esc(KANJI_MEANINGS[pieceKanji(p)] || '')}</span>
-        ${from ? `<span class="gk-hint-from">from <span lang="ja">${esc(from.word)}</span></span>` : ''}</li>`;
+        ${from ? `<span class="gk-hint-from">${fromHtml(from)}</span>` : ''}</li>`;
     }).join('');
   }
 
@@ -188,11 +191,23 @@
     $('gk-progress-text').textContent = `${session.pos + 1} / ${total}`;
 
     $('gk-label').textContent = card.guess ? '🎯 Guess the reading and meaning'
-      : card.isNew ? 'New word' : 'Recall the reading and meaning';
+      : card.isNew ? 'New word' : 'Review';
     $('gk-card').classList.toggle('gk-card-guess', card.guess);
     $('gk-prompt').textContent = it.word;
+    // A word that brings in kanji not met yet: the first word with them.
+    if (card.isNew && !card.guess) {
+      const known = new Set(studiedKeys().flatMap(k => BY_KEY.get(k).pieces));
+      card.newPieces = [...new Set(it.pieces.filter(p => !known.has(p)))];
+    } else {
+      card.newPieces = [];
+    }
+    const firstWith = [...new Set(card.newPieces.map(pieceKanji))];
+    $('gk-meta').innerHTML = [
+      ...(it.pos ? it.pos.split(' · ') : []).map(x => `<span class="gk-chip">${esc(x)}</span>`),
+      `<span class="gk-chip gk-chip-level">${esc(it.level)}</span>`,
+      firstWith.length ? `<span class="gk-chip gk-chip-first" title="The first word on the path with this kanji">first word with <span lang="ja">${firstWith.map(esc).join(' ')}</span></span>` : '',
+    ].join('');
     // Hints stay closed until asked for: guess first.
-    let lead = '';
     const buttons = [];
     const bodies = [];
     if (card.guess) {
@@ -201,10 +216,6 @@
       bodies.push(`<div class="gk-hint-body hidden" data-gk-hint-body="kanji">
           <p class="gk-hints-title">You may know ${one ? 'this kanji' : 'these kanji'}:</p><ul>${hintsHtml(it, card.hints)}</ul>
         </div>`);
-    } else if (card.isNew) {
-      const known = new Set(studiedKeys().flatMap(k => BY_KEY.get(k).pieces));
-      const newOnes = it.pieces.filter(p => !known.has(p));
-      if (newOnes.length) lead = `<p class="gk-hints-title">New: ${newOnes.map(p => `<span lang="ja">${esc(pieceKanji(p))}</span>`).join(' ')}</p>`;
     }
     const seen = seenWords(it);
     if (seen.length) {
@@ -215,7 +226,8 @@
         </div>`);
     }
     const hints = $('gk-hints');
-    hints.innerHTML = lead + (buttons.length ? `<div class="gk-hint-buttons">${buttons.join('')}</div>` : '') + bodies.join('');
+    hints.classList.remove('hidden');
+    hints.innerHTML = (buttons.length ? `<div class="gk-hint-buttons">${buttons.join('')}</div>` : '') + bodies.join('');
     hints.querySelectorAll('[data-gk-hint]').forEach(b => b.addEventListener('click', () => showHint(b.dataset.gkHint)));
     $('gk-reveal-area').classList.remove('hidden');
     $('gk-answer-area').classList.add('hidden');
@@ -270,16 +282,45 @@
     $('gk-answer').innerHTML = `
       <div class="story-panel-reading" lang="ja">${esc(it.kana)}</div>
       <div class="story-panel-meaning">${esc(it.meaning)}</div>
-      <ul class="gk-breakdown">${it.pieces.map(p => `
-        <li><span lang="ja">${esc(pieceKanji(p))}</span> <span lang="ja">${esc(pieceReading(p))}</span> · ${esc(KANJI_MEANINGS[pieceKanji(p)] || '')}</li>`).join('')}
+      <ul class="gk-breakdown">${it.pieces.map(p => {
+        const from = fromWord(card, p);
+        return `<li><span class="gk-hint-kanji" lang="ja">${esc(pieceKanji(p))}</span>
+          <span class="gk-hint-reading" lang="ja">${esc(pieceReading(p))}</span>
+          <span class="gk-hint-meaning">${esc(KANJI_MEANINGS[pieceKanji(p)] || '')}</span>
+          ${from ? `<span class="gk-hint-from">${fromHtml(from)}</span>` : ''}</li>`;
+      }).join('')}
       </ul>
+      ${card.newPieces.map(p => {
+        const also = alsoIn(p, it);
+        return also.length ? `<p class="gk-also"><span lang="ja">${esc(pieceKanji(p))}</span> (<span lang="ja">${esc(pieceReading(p))}</span>) is also in
+          ${also.map(w => `<span class="gk-also-word" lang="ja" title="${esc(w.kana)} · ${esc(w.meaning)}">${esc(w.word)}</span>`).join(' · ')}</p>` : '';
+      }).join('')}
       ${it.example ? `<div class="gk-example">
         <div class="gk-example-ja" lang="ja">${exampleHtml(it.example.ja, new Set(it.pieces.map(pieceKanji)))}</div>
         <div class="gk-example-en">${esc(it.example.en)}</div>
         <a class="gk-example-src" href="https://tatoeba.org/sentences/show/${Number(it.example.id)}" target="_blank" rel="noopener">Tatoeba #${Number(it.example.id)}</a>
       </div>` : ''}`;
+    // The answer lists the kanji, so the hints have done their job.
+    $('gk-hints').classList.add('hidden');
     $('gk-reveal-area').classList.add('hidden');
     $('gk-answer-area').classList.remove('hidden');
+  }
+
+  // The word a kanji (with this reading) was met in: for a 🎯 word, the one
+  // the path planned it from; otherwise the latest studied word with it.
+  function fromWord(card, p) {
+    if (card.hints && card.hints[p] && card.hints[p] !== card.item.key) return BY_KEY.get(card.hints[p]);
+    const k = studiedKeys().reverse().find(x => x !== card.item.key && BY_KEY.get(x).pieces.includes(p));
+    return k ? BY_KEY.get(k) : null;
+  }
+
+  // Other words built on a kanji with this reading, the ones not studied
+  // yet first: what makes a first word a building block.
+  function alsoIn(p, it) {
+    const studied = new Set(studiedKeys());
+    return ITEMS.filter(w => w.key !== it.key && w.pieces.includes(p))
+      .sort((a, b) => studied.has(a.key) - studied.has(b.key))
+      .slice(0, 4);
   }
 
   function grade(g) {

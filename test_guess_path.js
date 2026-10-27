@@ -49,6 +49,12 @@ ok(items.every(x => x.pieces.length && x.pieces.every(p => /^.:[ぁ-ゖー]+$/u.
 ok(new Set(items.map(x => x.key)).size === items.length, 'no word twice');
 ok(window.GUESS_WORDS.every(r => r[4].split(' ').every(p => p[0] in window.GUESS_KANJI_MEANINGS)), 'every kanji has its meaning');
 
+// Parts of speech.
+ok(items.filter(x => x.pos).length >= 0.98 * items.length, 'nearly every word has a part of speech');
+const posOf = w => (items.find(x => x.word === w) || {}).pos;
+ok(posOf('食べる') === 'verb' && posOf('高い') === 'い-adjective' && posOf('静か') === 'な-adjective'
+  && posOf('勉強') === 'noun · する verb' && posOf('顔') === 'noun', 'parts of speech: 食べる verb, 高い い-adjective, 静か な-adjective, 勉強 する verb, 顔 noun');
+
 // Example sentences.
 const withEx = items.filter(x => x.example);
 ok(withEx.length >= 0.85 * items.length, `most words have an example sentence (${withEx.length} of ${items.length})`);

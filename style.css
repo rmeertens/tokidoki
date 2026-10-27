@@ -3713,6 +3713,21 @@ a.pq-mode:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px;
 .gk-example-en { color: var(--text-dim); font-size: 0.88rem; }
 .gk-example-src { font-size: 0.72rem; color: var(--text-muted); }
 .gk-card.gk-card-guess { border-left: 4px solid var(--green); }
+.gk-meta { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px; margin: 2px 0 6px; }
+.gk-chip {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+}
+.gk-chip-level { color: var(--text-muted); }
+.gk-chip-first { border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); background: var(--accent-dim); color: var(--accent); }
+.gk-chip-first span { font-family: var(--font-jp); }
+.gk-also { margin: 8px auto 0; max-width: 460px; font-size: 0.85rem; color: var(--text-dim); text-align: left; }
+.gk-also span[lang] { font-family: var(--font-jp); }
+.gk-also-word { color: var(--text); }
 .gk-hints { margin: 10px 0 4px; text-align: left; }
 .gk-hint-buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; }
 .gk-hint-body { margin-top: 10px; }

@@ -32,6 +32,13 @@
 // check only reaches 0.6 for a two-kanji word when both kanji show in the
 // English, so 牛乳 "milk" (cow + milk) would never count).
 //
+// Each word's part of speech (noun, verb, い-adjective…) is JMdict's, from
+// OpenJLPT, in plain words (POS_LABELS); for a word spelled otherwise there,
+// the entry with its reading (and a meaning word in common, if several have
+// it); for the few OpenJLPT doesn't have (顔, 母, 私), kuromoji's (run
+// `npm install --no-save kuromoji` first; without it, a verb if the meaning
+// starts "To …", else left blank).
+//
 // The example sentences are Tatoeba's (CC BY 2.0 FR), as OpenJLPT
 // (CC BY-SA 4.0) matched them to each JLPT word through the Tanaka Corpus's
 // word index: per word (same spelling and reading), the shortest one that
@@ -170,13 +177,66 @@ for (const w of words) {
 // ─── Example sentences (OpenJLPT / Tatoeba) ──────────────────────────────────
 
 const examplesFor = new Map();
+const posFor = new Map();
+const posByReading = new Map();   // reading → [{ pos, meanings }], for words spelled differently there
 for (const level of ['n5', 'n4', 'n3', 'n2', 'n1']) {
   const file = path.join(examplesDir, `${level}.json`);
   if (!fs.existsSync(file)) continue;
   for (const e of JSON.parse(fs.readFileSync(file, 'utf8'))) {
     const key = `${e.word}|${hira(e.reading || '')}`;
     examplesFor.set(key, (examplesFor.get(key) || []).concat(e.examples || []));
+    if (!posFor.has(key) && Array.isArray(e.pos)) posFor.set(key, e.pos);
+    if (Array.isArray(e.pos)) {
+      const r = hira(e.reading || '');
+      posByReading.set(r, (posByReading.get(r) || []).concat([{ pos: e.pos, meanings: (e.meanings || []).join(' ') }]));
+    }
   }
+}
+
+// JMdict part-of-speech codes, in plain words; codes not here (vi / vt,
+// adj-f…) aren't shown.
+const POS_LABELS = {
+  n: 'noun', 'adj-no': 'noun', 'n-adv': 'noun', 'n-t': 'noun', 'n-pref': 'prefix', 'n-suf': 'suffix',
+  pn: 'pronoun', num: 'number', ctr: 'counter', pref: 'prefix', suf: 'suffix',
+  'adj-i': 'い-adjective', 'adj-ix': 'い-adjective', 'adj-na': 'な-adjective',
+  'adj-pn': 'pre-noun adjective', 'adj-t': 'たる-adjective',
+  adv: 'adverb', 'adv-to': 'adverb', conj: 'conjunction', int: 'interjection',
+  exp: 'expression', prt: 'particle', aux: 'auxiliary', 'aux-v': 'auxiliary', 'aux-adj': 'auxiliary',
+  vs: 'する verb', 'vs-i': 'する verb', 'vs-s': 'する verb',
+};
+const posLabel = code => POS_LABELS[code] || (/^v(1|5|k|z)/.test(code) ? 'verb' : null);
+
+// "noun", "verb", "noun · する verb"…: at most two, in JMdict's order.
+// kuromoji (IPAdic) for words OpenJLPT doesn't have, when it reads the word
+// as one word.
+let tokenizer = null;
+try {
+  const kuromoji = require(path.join(ROOT, 'node_modules/kuromoji'));
+  tokenizer = await new Promise((resolve, reject) =>
+    kuromoji.builder({ dicPath: path.join(ROOT, 'node_modules/kuromoji/dict') }).build((err, tk) => (err ? reject(err) : resolve(tk))));
+} catch {
+  console.warn('kuromoji not installed: words OpenJLPT lacks get a part of speech only if they\'re verbs');
+}
+function kuromojiPos(word) {
+  const toks = tokenizer ? tokenizer.tokenize(word) : [];
+  if (toks.length !== 1) return '';
+  const { pos, pos_detail_1: d } = toks[0];
+  if (pos === '名詞') {
+    return { 形容動詞語幹: 'な-adjective', 数: 'number', 代名詞: 'pronoun', 副詞可能: 'noun · adverb', サ変接続: 'noun · する verb' }[d] || 'noun';
+  }
+  return { 動詞: 'verb', 形容詞: 'い-adjective', 副詞: 'adverb', 連体詞: 'pre-noun adjective', 接頭詞: 'prefix', 感動詞: 'interjection', 接続詞: 'conjunction' }[pos] || '';
+}
+
+function partOfSpeech(w) {
+  // OpenJLPT spells some words otherwise (椅子 as いす): then the entry with
+  // the same reading, or of several, the one whose meaning shares a word with ours.
+  const byReading = posByReading.get(hira(w.kana)) || [];
+  const gloss = stems(w.meaning);
+  const alike = byReading.filter(e => [...stems(e.meanings)].some(x => gloss.has(x)));
+  const other = byReading.length === 1 ? byReading[0] : alike.length === 1 ? alike[0] : null;
+  const codes = posFor.get(`${w.word}|${hira(w.kana)}`) || (other && other.pos);
+  if (!codes) return kuromojiPos(w.word) || (/^to /i.test(w.meaning) ? 'verb' : '');
+  return [...new Set(codes.map(posLabel).filter(Boolean))].slice(0, 2).join(' · ');
 }
 
 // Furigana stays in OpenJLPT's {漢字|かんじ} groups, which say exactly which
@@ -206,6 +266,7 @@ const rows = words.map(w => {
   const units = [...new Set(w.split.map(([ch]) => ch))];
   const mLevel = units.filter(ch => [...stems((KD[ch] && KD[ch].m || []).join(' '))].some(s => gloss.has(s))).length / units.length;
   const row = [w.word, w.kana, w.meaning, w.level, w.split.map(([c, r]) => `${c}:${r}`).join(' '), round(rLevel), round(mLevel)];
+  row.push(partOfSpeech(w));
   const ex = pickExample(w);
   return ex ? row.concat(ex) : row;
 });
@@ -222,8 +283,9 @@ const js = `(function (global) {
   //
   // The JLPT N5–N3 words of vocabulary-data.js that split kanji by kanji,
   // in list order: [word, kana, meaning, level, pieces ("会:かい 社:しゃ"),
-  // reading level, meaning level, and, when there is one, an example
-  // sentence (furigana as {漢字|かんじ}), its English and its Tatoeba id].
+  // reading level, meaning level, part of speech ("noun", "verb"… or ""),
+  // and, when there is one, an example sentence (furigana as {漢字|かんじ}),
+  // its English and its Tatoeba id].
   // The pieces, levels and kanji meanings come from KANJIDIC2 and JMdict by
   // the Electronic Dictionary Research and Development Group, licensed under
   // Creative Commons Attribution-ShareAlike 4.0
@@ -241,5 +303,6 @@ ${rows.map(r => '    ' + JSON.stringify(r)).join(',\n')}
 })(typeof window !== 'undefined' ? window : globalThis);
 `;
 fs.writeFileSync(OUT, js);
-const withExample = rows.filter(r => r.length > 7).length;
-console.log(`${rows.length} of ${total} kanji words split (${guessable} guessable, ${withExample} with an example), ${Object.keys(kanjiMeanings).length} kanji → ${path.relative(ROOT, OUT)}`);
+const withExample = rows.filter(r => r.length > 8).length;
+const withPos = rows.filter(r => r[7]).length;
+console.log(`${rows.length} of ${total} kanji words split (${guessable} guessable, ${withPos} with a part of speech, ${withExample} with an example), ${Object.keys(kanjiMeanings).length} kanji → ${path.relative(ROOT, OUT)}`);
