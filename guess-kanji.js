@@ -423,7 +423,8 @@
     const onCard = $('screen-guess-kanji').classList.contains('active');
     if (!session || !(onCard || $('screen-guess-kanji-done').classList.contains('active'))) return;
     if (e.key === 'z' || e.key === 'Z') { e.preventDefault(); undoLast(); return; }
-    if (!onCard) return;
+    // On the done screen, Space starts the next set, whatever button has focus.
+    if (!onCard) { if (e.key === ' ') { e.preventDefault(); startLearn(); } return; }
     if (!session.answered && (e.key === 'h' || e.key === 'H')) { e.preventDefault(); showNextHint(); }
     else if (!session.answered && (e.key === ' ' || e.key === 'Enter')) { e.preventDefault(); reveal(); }
     else if (session.answered && e.key === '1') { e.preventDefault(); grade(1); }
