@@ -240,6 +240,7 @@ const SCRIPTS = ['app.js', 'sync-merge.js', 'progress-stats.js', 'sync.js']
 
 // The hand-written blog posts (blog.html lists them, with these guides).
 const BLOG_POSTS = [
+  ['blog-japanese-for-tourists.html', 'Japanese for Tourists', "The phrases you'll actually use · blog post"],
   ['blog-graded-stories.html', 'Learn Japanese with Graded Stories', 'How to read, and where to find stories · blog post'],
   ['blog-learning-japanese.html', "How I'm Learning Japanese", 'Tips & resources for every level · blog post'],
 ];
