@@ -3725,6 +3725,10 @@ a.pq-mode:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px;
 .gk-chip-level { color: var(--text-muted); }
 .gk-chip-first { border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); background: var(--accent-dim); color: var(--accent); }
 .gk-chip-first span { font-family: var(--font-jp); }
+.gk-chip-readings { border-color: color-mix(in srgb, var(--orange) 50%, var(--border)); background: var(--orange-dim); color: var(--orange); }
+.gk-key { display: inline-block; margin-left: 4px; padding: 0 5px; border: 1px solid var(--border); border-radius: 4px; font-size: 0.72em; color: var(--text-muted); }
+.gk-other-reading { flex-basis: 100%; padding-left: 2.1rem; font-size: 0.8rem; color: var(--orange); }
+.gk-other-reading span { font-family: var(--font-jp); font-weight: 700; }
 .gk-also { margin: 8px auto 0; max-width: 460px; font-size: 0.85rem; color: var(--text-dim); text-align: left; }
 .gk-also span[lang] { font-family: var(--font-jp); }
 .gk-also-word { color: var(--text); }

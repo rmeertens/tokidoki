@@ -86,6 +86,17 @@
 
   const ITEMS = (global.GUESS_WORDS || []).map(toItem);
   const BY_KEY = new Map(ITEMS.map(it => [it.key, it]));
+  // Kanji that are words on their own, with each reading the list has for
+  // them (中: なか and ちゅう): the list is of common words, so these are
+  // the readings worth knowing apart.
+  const STANDALONE = new Map();
+  ITEMS.filter(it => [...it.word].length === 1).forEach(it => {
+    STANDALONE.set(it.word, (STANDALONE.get(it.word) || []).concat(it));
+  });
+
+  // The other words a kanji is on its own, read otherwise than `reading`.
+  const otherStandalone = (kanji, reading, key) =>
+    (STANDALONE.get(kanji) || []).filter(w => w.key !== key && w.kana !== reading);
   const KANJI_MEANINGS = global.GUESS_KANJI_MEANINGS || {};
 
   function loadStore() {
@@ -206,20 +217,22 @@
       ...(it.pos ? it.pos.split(' · ') : []).map(x => `<span class="gk-chip">${esc(x)}</span>`),
       `<span class="gk-chip gk-chip-level">${esc(it.level)}</span>`,
       firstWith.length ? `<span class="gk-chip gk-chip-first" title="The first word on the path with this kanji">first word with <span lang="ja">${firstWith.map(esc).join(' ')}</span></span>` : '',
+      (STANDALONE.get(it.word) || []).length > 1
+        ? `<span class="gk-chip gk-chip-readings" title="As a word on its own, this kanji is read more than one way — which one is this?">${STANDALONE.get(it.word).length} readings as a word</span>` : '',
     ].join('');
     // Hints stay closed until asked for: guess first.
     const buttons = [];
     const bodies = [];
     if (card.guess) {
       const one = new Set(it.pieces.map(pieceKanji)).size === 1;
-      buttons.push('<button type="button" class="btn-hint" data-gk-hint="kanji">Show hint</button>');
+      buttons.push('<button type="button" class="btn-hint" data-gk-hint="kanji">Show hint <span class="gk-key">H</span></button>');
       bodies.push(`<div class="gk-hint-body hidden" data-gk-hint-body="kanji">
           <p class="gk-hints-title">You may know ${one ? 'this kanji' : 'these kanji'}:</p><ul>${hintsHtml(it, card.hints)}</ul>
         </div>`);
     }
     const seen = seenWords(it);
     if (seen.length) {
-      buttons.push(`<button type="button" class="btn-hint" data-gk-hint="seen">Words you've seen (${seen.length})</button>`);
+      buttons.push(`<button type="button" class="btn-hint" data-gk-hint="seen">Words you've seen (${seen.length}) <span class="gk-key">H</span></button>`);
       bodies.push(`<div class="gk-hint-body hidden" data-gk-hint-body="seen">
           <p class="gk-hints-title">Words you've seen with ${seenKanjiText(it, seen)}:</p>
           <ul class="gk-seen">${seen.map(w => seenHtml(w, it)).join('')}</ul>
@@ -231,6 +244,13 @@
     hints.querySelectorAll('[data-gk-hint]').forEach(b => b.addEventListener('click', () => showHint(b.dataset.gkHint)));
     $('gk-reveal-area').classList.remove('hidden');
     $('gk-answer-area').classList.add('hidden');
+  }
+
+  // H opens the hints in turn: the kanji a 🎯 word is built from, then the
+  // words already studied that share a kanji with it.
+  function showNextHint() {
+    const btn = document.querySelector('#gk-hints [data-gk-hint]');
+    if (btn) showHint(btn.dataset.gkHint);
   }
 
   // Opens a hint: 'kanji' (the kanji a 🎯 word is built from) or 'seen'
@@ -287,7 +307,9 @@
         return `<li><span class="gk-hint-kanji" lang="ja">${esc(pieceKanji(p))}</span>
           <span class="gk-hint-reading" lang="ja">${esc(pieceReading(p))}</span>
           <span class="gk-hint-meaning">${esc(KANJI_MEANINGS[pieceKanji(p)] || '')}</span>
-          ${from ? `<span class="gk-hint-from">${fromHtml(from)}</span>` : ''}</li>`;
+          ${from ? `<span class="gk-hint-from">${fromHtml(from)}</span>` : ''}
+          ${otherStandalone(pieceKanji(p), pieceReading(p), it.key).map(w => `<span class="gk-other-reading">on its own also
+            <span lang="ja">${esc(w.kana)}</span>: ${esc(w.meaning)}</span>`).join('')}</li>`;
       }).join('')}
       </ul>
       ${card.newPieces.map(p => {
@@ -403,8 +425,7 @@
     if (!session || !(onCard || $('screen-guess-kanji-done').classList.contains('active'))) return;
     if (e.key === 'z' || e.key === 'Z') { e.preventDefault(); undoLast(); return; }
     if (!onCard) return;
-    if (!session.answered && (e.key === 'h' || e.key === 'H')) { e.preventDefault(); showHint('kanji'); }
-    else if (!session.answered && (e.key === 'w' || e.key === 'W')) { e.preventDefault(); showHint('seen'); }
+    if (!session.answered && (e.key === 'h' || e.key === 'H')) { e.preventDefault(); showNextHint(); }
     else if (!session.answered && (e.key === ' ' || e.key === 'Enter')) { e.preventDefault(); reveal(); }
     else if (session.answered && e.key === '1') { e.preventDefault(); grade(1); }
     else if (session.answered && e.key === '2') { e.preventDefault(); grade(4); }
