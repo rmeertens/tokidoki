@@ -154,10 +154,14 @@
   browser from the words this learner has studied (`tokidoki_guess`, merged
   in `sync-merge.js`); cards are `guess:<word>|<kana>` in the SRS store,
   graded through `window.TokidokiSRS` (app.js's copy of the store). The
-  words' kanji-by-kanji split and guessability are in `guess-words-data.js`,
-  built by `node scripts/build_guess_words.mjs <GuessWithAnki>/guesswithanki/data`
-  (its KANJIDIC2 / JMdict files; clone that repo to run it) from
-  `vocabulary-data.js`. `test_guess_path.js` covers the planner and the data.
+  words' kanji-by-kanji split, guessability and one short example sentence
+  each are in `guess-words-data.js`, built by
+  `node scripts/build_guess_words.mjs <GuessWithAnki>/guesswithanki/data <OpenJLPT>/data/json/vocab`
+  from `vocabulary-data.js` (clone both repos to run it: GuessWithAnki's
+  KANJIDIC2 / JMdict files; OpenJLPT's Tatoeba sentences, CC BY 2.0 FR,
+  credited on the page with their Tatoeba ids). The page also credits and
+  embeds BlaiseLabs' GuessWithAnki video. `test_guess_path.js` covers the
+  planner and the data.
 
 ## Japanese for tourists (blog post)
 

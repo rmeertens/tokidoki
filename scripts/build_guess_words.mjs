@@ -1,9 +1,11 @@
-// Splits the JLPT vocabulary (vocabulary-data.js) into the pieces the Guess
-// the Kanji page plans with, and writes guess-words-data.js.
+// Splits the JLPT vocabulary (vocabulary-data.js) into the pieces the
+// GTK - Easy Word Order page (guess-kanji.html) plans with, gives each word
+// a short example sentence, and writes guess-words-data.js.
 //
 // Usage:
 //   git clone --depth 1 https://github.com/BlaiseLabs/GuessWithAnki /tmp/gwa
-//   node scripts/build_guess_words.mjs /tmp/gwa/guesswithanki/data
+//   git clone --depth 1 https://github.com/evanclan/OpenJLPT /tmp/openjlpt
+//   node scripts/build_guess_words.mjs /tmp/gwa/guesswithanki/data /tmp/openjlpt/data/json/vocab
 //
 // The data directory holds GuessWithAnki's kanji.json (KANJIDIC2: each
 // kanji's meanings, on'yomi and kun'yomi with okurigana) and readings.json
@@ -29,6 +31,11 @@
 // GuessWithAnki asks 0.6 of a model's meaning label, but this word-overlap
 // check only reaches 0.6 for a two-kanji word when both kanji show in the
 // English, so 牛乳 "milk" (cow + milk) would never count).
+//
+// The example sentences are Tatoeba's (CC BY 2.0 FR), as OpenJLPT
+// (CC BY-SA 4.0) matched them to each JLPT word through the Tanaka Corpus's
+// word index: per word (same spelling and reading), the shortest one that
+// has furigana and spells the word as listed, kept with its Tatoeba id.
 
 import fs from 'fs';
 import path from 'path';
@@ -39,9 +46,9 @@ const require = createRequire(import.meta.url);
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'guess-words-data.js');
 
-const dataDir = process.argv[2];
-if (!dataDir) {
-  console.error('usage: node scripts/build_guess_words.mjs <GuessWithAnki data dir>');
+const [dataDir, examplesDir] = process.argv.slice(2);
+if (!dataDir || !examplesDir) {
+  console.error('usage: node scripts/build_guess_words.mjs <GuessWithAnki data dir> <OpenJLPT data/json/vocab dir>');
   process.exit(1);
 }
 const KD = JSON.parse(fs.readFileSync(path.join(dataDir, 'kanji.json'), 'utf8')).k;
@@ -160,6 +167,37 @@ for (const w of words) {
   }
 }
 
+// ─── Example sentences (OpenJLPT / Tatoeba) ──────────────────────────────────
+
+const examplesFor = new Map();
+for (const level of ['n5', 'n4', 'n3', 'n2', 'n1']) {
+  const file = path.join(examplesDir, `${level}.json`);
+  if (!fs.existsSync(file)) continue;
+  for (const e of JSON.parse(fs.readFileSync(file, 'utf8'))) {
+    const key = `${e.word}|${hira(e.reading || '')}`;
+    examplesFor.set(key, (examplesFor.get(key) || []).concat(e.examples || []));
+  }
+}
+
+// Furigana stays in OpenJLPT's {漢字|かんじ} groups, which say exactly which
+// characters a reading covers ({お茶|おちゃ}). A few groups give a JMdict id
+// instead of a reading ({前|#1392580}): 前 is まえ in all of them, and any
+// other such group goes without furigana.
+const ID_READINGS = { 前: 'まえ' };
+const toMarkup = f => f.replace(/\{([^|}]+)\|([^}]+)\}/g, (m, k, r) =>
+  (r[0] !== '#' ? m : ID_READINGS[k] ? `{${k}|${ID_READINGS[k]}}` : k));
+// The word's spelling up to its last kanji (食べる → 食), to tell a sentence
+// that writes it as listed from one that writes it in kana.
+const stemOf = w => w.slice(0, [...w].findLastIndex(c => KANJI.test(c)) + 1);
+
+function pickExample(w) {
+  const all = (examplesFor.get(`${w.word}|${hira(w.kana)}`) || []).filter(e => e.ja && e.en);
+  const stem = stemOf(w.word);
+  const score = e => (e.furigana ? 0 : 1000) + (e.ja.includes(stem) ? 0 : 500) + [...e.ja].length;
+  const best = all.sort((a, b) => score(a) - score(b))[0];
+  return best ? [best.furigana ? toMarkup(best.furigana) : best.ja, best.en, best.tatoeba_id] : null;
+}
+
 const round = x => Math.round(x * 100) / 100;
 const rows = words.map(w => {
   const share = Math.min(...w.split.map(([ch, r]) => readingShare(ch, r, deck)));
@@ -167,7 +205,9 @@ const rows = words.map(w => {
   const gloss = stems(w.meaning);
   const units = [...new Set(w.split.map(([ch]) => ch))];
   const mLevel = units.filter(ch => [...stems((KD[ch] && KD[ch].m || []).join(' '))].some(s => gloss.has(s))).length / units.length;
-  return [w.word, w.kana, w.meaning, w.level, w.split.map(([c, r]) => `${c}:${r}`).join(' '), round(rLevel), round(mLevel)];
+  const row = [w.word, w.kana, w.meaning, w.level, w.split.map(([c, r]) => `${c}:${r}`).join(' '), round(rLevel), round(mLevel)];
+  const ex = pickExample(w);
+  return ex ? row.concat(ex) : row;
 });
 
 // Each kanji's first two meanings, for the hints.
@@ -182,11 +222,16 @@ const js = `(function (global) {
   //
   // The JLPT N5–N3 words of vocabulary-data.js that split kanji by kanji,
   // in list order: [word, kana, meaning, level, pieces ("会:かい 社:しゃ"),
-  // reading level, meaning level]. The pieces, levels and kanji meanings
-  // come from KANJIDIC2 and JMdict by the Electronic Dictionary Research and
-  // Development Group, licensed under Creative Commons Attribution-ShareAlike
-  // 4.0 (https://www.edrdg.org/edrdg/licence.html), via GuessWithAnki
-  // (https://github.com/BlaiseLabs/GuessWithAnki, MIT).
+  // reading level, meaning level, and, when there is one, an example
+  // sentence (furigana as {漢字|かんじ}), its English and its Tatoeba id].
+  // The pieces, levels and kanji meanings come from KANJIDIC2 and JMdict by
+  // the Electronic Dictionary Research and Development Group, licensed under
+  // Creative Commons Attribution-ShareAlike 4.0
+  // (https://www.edrdg.org/edrdg/licence.html), via GuessWithAnki
+  // (https://github.com/BlaiseLabs/GuessWithAnki, MIT). The example
+  // sentences are from Tatoeba (https://tatoeba.org, CC BY 2.0 FR; each id
+  // is https://tatoeba.org/sentences/show/<id>), as matched to the JLPT
+  // words by OpenJLPT (https://github.com/evanclan/OpenJLPT, CC BY-SA 4.0).
 
   global.GUESS_WORDS = [
 ${rows.map(r => '    ' + JSON.stringify(r)).join(',\n')}
@@ -196,4 +241,5 @@ ${rows.map(r => '    ' + JSON.stringify(r)).join(',\n')}
 })(typeof window !== 'undefined' ? window : globalThis);
 `;
 fs.writeFileSync(OUT, js);
-console.log(`${rows.length} of ${total} kanji words split (${guessable} guessable), ${Object.keys(kanjiMeanings).length} kanji → ${path.relative(ROOT, OUT)}`);
+const withExample = rows.filter(r => r.length > 7).length;
+console.log(`${rows.length} of ${total} kanji words split (${guessable} guessable, ${withExample} with an example), ${Object.keys(kanjiMeanings).length} kanji → ${path.relative(ROOT, OUT)}`);

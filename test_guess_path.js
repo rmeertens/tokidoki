@@ -49,6 +49,15 @@ ok(items.every(x => x.pieces.length && x.pieces.every(p => /^.:[ぁ-ゖー]+$/u.
 ok(new Set(items.map(x => x.key)).size === items.length, 'no word twice');
 ok(window.GUESS_WORDS.every(r => r[4].split(' ').every(p => p[0] in window.GUESS_KANJI_MEANINGS)), 'every kanji has its meaning');
 
+// Example sentences.
+const withEx = items.filter(x => x.example);
+ok(withEx.length >= 0.85 * items.length, `most words have an example sentence (${withEx.length} of ${items.length})`);
+ok(withEx.every(x => x.example.en && Number.isInteger(x.example.id) && !/\|#/.test(x.example.ja)), 'examples have English, a Tatoeba id and readings (no JMdict ids)');
+ok(withEx.every(x => !/[{}|]/.test(x.example.ja.replace(/\{[^|{}]+\|[^|{}]+\}/g, ''))), 'example furigana is well formed');
+ok(denki.example && denki.example.ja.includes('{電気|でんき}'), '電気 has an example that uses it');
+ok(GK.exampleHtml('{電気|でんき}をつけて<b>', new Set(['電'])) ===
+  '<mark><ruby>電気<rp>(</rp><rt>でんき</rt><rp>)</rp></ruby></mark>をつけて&lt;b&gt;', 'exampleHtml: ruby, the word highlighted, text escaped');
+
 const { studied, fresh } = GK.splitDeck(items, ['電車|でんしゃ', 'nope', '電車|でんしゃ'], id => ({ 'guess:電車|でんしゃ': { interval: 30 } })[id]);
 ok(studied.length === 1 && studied[0].mature && fresh.length === items.length - 1, 'splitDeck: studied once, mature from its card');
 

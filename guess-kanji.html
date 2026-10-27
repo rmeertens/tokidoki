@@ -21,7 +21,7 @@
   <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
   <link rel="canonical" href="https://tokidoki.meertens.dev/guess-kanji.html">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "GTK - Easy Word Order — JLPT words in a guessable order", "description": "The JLPT N5–N3 words in an order planned so you can guess each new word from kanji you've already met: 電車 and 天気 first, then 電気 reads itself.", "url": "https://tokidoki.meertens.dev/guess-kanji.html", "inLanguage": "en", "learningResourceType": "flashcards", "educationalLevel": "JLPT N5–N3", "isAccessibleForFree": true, "isPartOf": {"@type": "WebSite", "name": "Tokidoki", "url": "https://tokidoki.meertens.dev/"}}</script>
-  <link rel="stylesheet" href="style.css?v=90">
+  <link rel="stylesheet" href="style.css?v=91">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -109,17 +109,10 @@
         <div>
           <p class="lis-hero-kicker" lang="ja">電車 + 天気 → 電気 · JLPT N5–N3</p>
           <h2 class="lis-hero-title">GTK - Easy Word Order</h2>
-          <p class="lis-hero-sub">Learn the JLPT words in an order where most new words are made of kanji you&rsquo;ve just met &mdash; and guess them instead of memorising them.</p>
+          <p class="lis-hero-sub">Learn the JLPT words in an order where most new words are made of kanji you&rsquo;ve just met &mdash; so you can guess them instead of memorising them. <a class="gk-hero-link" href="#gk-about-title">How it works</a></p>
         </div>
       </section>
       <div id="deck-guess" class="gk-panel">
-        <p class="gk-intro">
-          <span lang="ja">電車</span> and <span lang="ja">天気</span> come first, so
-          <span lang="ja">電気</span> (でんき) is yours to guess. Words marked 🎯 are made of
-          kanji you know: guess them first. The order is a greedy path, after
-          <a href="https://github.com/BlaiseLabs/GuessWithAnki" rel="noopener">GuessWithAnki</a>,
-          planned again in your browser from the words you&rsquo;ve studied.
-        </p>
         <div class="session-stats gk-stats">
           <div class="stat"><span class="stat-num" id="gk-studied">0</span><span class="stat-label">Words studied</span></div>
           <div class="stat"><span class="stat-num" id="gk-guessed">0</span><span class="stat-label">Guessed on sight</span></div>
@@ -132,10 +125,82 @@
         <p class="gk-compare" id="gk-compare"></p>
         <h3 class="lis-heading">Up next <span>&mdash; 🎯 = you can guess it when it arrives</span></h3>
         <ol class="gk-next" id="gk-next"></ol>
-        <p class="gk-credit">Kanji readings and meanings: KANJIDIC2 and JMdict (EDRDG, CC BY-SA 4.0).</p>
+
+        <section class="gk-about" aria-labelledby="gk-about-title">
+          <h3 class="gk-about-title" id="gk-about-title">What this page is for</h3>
+          <p>
+            <b>The goal: more words, less memorising.</b> Most Japanese words are built from a
+            few thousand kanji, and a kanji usually keeps its reading from word to word:
+            <span lang="ja">電</span> is <span lang="ja">でん</span> in <span lang="ja">電車</span>
+            (train) and in <span lang="ja">電気</span> (electricity); <span lang="ja">気</span>
+            is <span lang="ja">き</span> in <span lang="ja">天気</span> (weather) and in
+            <span lang="ja">電気</span>. Learn <span lang="ja">電車</span> and
+            <span lang="ja">天気</span> first and you can work out <span lang="ja">電気</span> the
+            first time you see it &mdash; reading and meaning &mdash; without ever studying it. A word you
+            get right that way is a word you didn&rsquo;t have to memorise.
+          </p>
+          <p>
+            <b>The catch is the order.</b> In a normal list (by JLPT level, by frequency,
+            alphabetically) the word that would give a kanji away usually comes long after,
+            or long before, the words that use it. This page re-orders the JLPT N5&ndash;N3
+            vocabulary so they come close together:
+          </p>
+          <ol class="gk-about-steps">
+            <li><b>Meet</b> &mdash; a plain word brings in a new kanji, one new kanji at a time,
+              read the way it&rsquo;s read most often.</li>
+            <li><b>Guess</b> &mdash; soon after come the words made only of kanji you&rsquo;ve met,
+              marked 🎯. Before you show the answer, say the reading and the meaning out loud
+              or in your head. Stuck? <i>Show hint</i> gives the kanji you may know, and
+              <i>Words you&rsquo;ve seen</i> the words you met them in.</li>
+            <li><b>Grade honestly</b> &mdash; <i>Got it</i> only if you had both right. Every word,
+              guessed or not, then comes back for review with spaced repetition.</li>
+          </ol>
+          <p>
+            The order is a greedy search, worked out in your browser each time you start: of
+            the words left, it takes the one you can guess right now, or else the word that
+            sets up the most guessable words while bringing in the fewest new kanji. It plans
+            from what you&rsquo;ve actually studied: a kanji counts as known if you met it in
+            the last 40 new words, or in a word you know well. In JLPT list order, about
+            6 of the first 100 words can be guessed when they arrive; on this path, over 60.
+          </p>
+          <p class="gk-about-note">
+            Whether a word can be guessed is judged by simple rules: its kanji&rsquo;s readings
+            must be the usual ones, and at least half its kanji must show in its English meaning.
+            Some 🎯 words will still surprise you &mdash; that&rsquo;s fine, they&rsquo;re reviewed
+            like any other card.
+          </p>
+        </section>
+
+        <section class="gk-about gk-credits" aria-labelledby="gk-credits-title">
+          <h3 class="gk-about-title" id="gk-credits-title">Where the idea comes from</h3>
+          <p>
+            This page is built on <b>BlaiseLabs&rsquo;</b> work: the idea, the greedy path and the
+            way a word is split into its kanji and readings all come from
+            <a href="https://github.com/BlaiseLabs/GuessWithAnki" rel="noopener">GuessWithAnki</a>,
+            an Anki add-on that re-orders your own deck this way (and its Japanese-only
+            predecessor, <a href="https://github.com/BlaiseLabs/GuessWithKanji" rel="noopener">GuessWithKanji</a>).
+            Their video explains it, with results for Japanese, Chinese, English and medical
+            vocabulary &mdash; well worth nine minutes &mdash; and so does their
+            <a href="https://blaiselabs.github.io/GuessWithAnki/" rel="noopener">write-up</a>.
+          </p>
+          <div class="gk-video">
+            <iframe src="https://www.youtube-nocookie.com/embed/j-xJ8mhyt0E" title="GuessWithAnki, by BlaiseLabs"
+              loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <p class="gk-about-note">
+            <a href="https://www.youtube.com/watch?v=j-xJ8mhyt0E" rel="noopener">Watch on YouTube</a>.
+            Kanji readings and meanings: KANJIDIC2 and JMdict (EDRDG, CC BY-SA 4.0). Example
+            sentences: <a href="https://tatoeba.org" rel="noopener">Tatoeba</a> (CC BY 2.0 FR),
+            matched to the JLPT words by <a href="https://github.com/evanclan/OpenJLPT" rel="noopener">OpenJLPT</a>
+            (CC BY-SA 4.0).
+          </p>
+        </section>
+
         <div class="reset-section">
           <button id="btn-gk-reset" class="btn-danger">Reset progress</button>
         </div>
+      </div>
     </main>
 
     <!-- Screen: Card -->
@@ -188,7 +253,7 @@
     </main>
 
   </div>
-  <script src="guess-words-data.js?v=1"></script>
+  <script src="guess-words-data.js?v=2"></script>
   <script src="guess-path.js?v=1"></script>
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=5"></script>
@@ -196,7 +261,7 @@
   <script src="sync-merge.js?v=10"></script>
   <script src="progress-stats.js?v=4"></script>
   <script src="sync.js?v=12"></script>
-  <script src="guess-kanji.js?v=7"></script>
+  <script src="guess-kanji.js?v=8"></script>
 
   <!-- Static content for search engines -->
   <section id="seo-content" class="page-about">

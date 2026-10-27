@@ -28,9 +28,28 @@
 
   // [word, kana, meaning, level, pieces, r, m] → an item for guess-path.js.
   function toItem(row) {
-    const [word, kana, meaning, level, pieces, r, m] = row;
+    const [word, kana, meaning, level, pieces, r, m, exJa, exEn, exId] = row;
     return { key: `${word}|${kana}`, word, kana, meaning, level, pieces: pieces.split(' '),
-      g: r >= READING_MIN && m >= MEANING_MIN, own: Math.min(r, m) };
+      g: r >= READING_MIN && m >= MEANING_MIN, own: Math.min(r, m),
+      example: exJa ? { ja: exJa, en: exEn, id: exId } : null };
+  }
+
+  const escHtml = s => String(s).replace(/[&<>"']/g, c =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  // An example sentence's {漢字|かんじ} groups as ruby; the groups holding one
+  // of `kanji` (the card's own) are highlighted.
+  function exampleHtml(ja, kanji = new Set()) {
+    let out = '';
+    let last = 0;
+    ja.replace(/\{([^|}]+)\|([^}]+)\}/g, (m, base, reading, i) => {
+      out += escHtml(ja.slice(last, i));
+      const ruby = `<ruby>${escHtml(base)}<rp>(</rp><rt>${escHtml(reading)}</rt><rp>)</rp></ruby>`;
+      out += [...base].some(c => kanji.has(c)) ? `<mark>${ruby}</mark>` : ruby;
+      last = i + m.length;
+      return m;
+    });
+    return out + escHtml(ja.slice(last));
   }
 
   const cardId = key => ID_PREFIX + key;
@@ -51,7 +70,7 @@
     return { studied, fresh: items.filter(it => !done.has(it.key)) };
   }
 
-  const api = { toItem, splitDeck, cardId, STORE_KEY, READING_MIN, MEANING_MIN };
+  const api = { toItem, splitDeck, cardId, exampleHtml, STORE_KEY, READING_MIN, MEANING_MIN };
   global.GuessKanji = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   if (typeof document === 'undefined') return;
@@ -253,7 +272,12 @@
       <div class="story-panel-meaning">${esc(it.meaning)}</div>
       <ul class="gk-breakdown">${it.pieces.map(p => `
         <li><span lang="ja">${esc(pieceKanji(p))}</span> <span lang="ja">${esc(pieceReading(p))}</span> · ${esc(KANJI_MEANINGS[pieceKanji(p)] || '')}</li>`).join('')}
-      </ul>`;
+      </ul>
+      ${it.example ? `<div class="gk-example">
+        <div class="gk-example-ja" lang="ja">${exampleHtml(it.example.ja, new Set(it.pieces.map(pieceKanji)))}</div>
+        <div class="gk-example-en">${esc(it.example.en)}</div>
+        <a class="gk-example-src" href="https://tatoeba.org/sentences/show/${Number(it.example.id)}" target="_blank" rel="noopener">Tatoeba #${Number(it.example.id)}</a>
+      </div>` : ''}`;
     $('gk-reveal-area').classList.add('hidden');
     $('gk-answer-area').classList.remove('hidden');
   }
