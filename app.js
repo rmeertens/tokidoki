@@ -4400,6 +4400,10 @@
   let storyReviewCards = [];
   let storyReviewIndex = 0;
   let storyReviewCorrect = 0;
+  // Reviewing by lookups, a "Didn't know" card comes back a few cards later
+  // in the same batch; those repeats don't count towards the score.
+  let storyReviewRepeats = 0;
+  const STORY_REVIEW_REPEAT_GAP = 3;
   let storyReviewAnswered = false;
   // With "Type answers" on: whether the typed answer was right, so Enter /
   // Space grades the card that way (1 / 2 still pick either grade).
@@ -5116,14 +5120,15 @@
     if (deck.length === 0) return;
     const order = deckOrder();
     const batchKey = `${kanji ? 'kanji-review' : 'story-review'}${recall ? '-recall' : ''}`;
+    const due = deck.filter(c => isDue(getCardState(srsData, c.id)));
     if (order === 'srs') {
-      const due = deck.filter(c => isDue(getCardState(srsData, c.id)));
       storyReviewCards = pickBatch(batchKey, due, deck, cont);
     } else {
-      storyReviewCards = pickInOrder(`${batchKey}-${order}`, WordLookups.sortCards(deck, order), cont);
+      storyReviewCards = pickInOrder(`${batchKey}-${order}`, WordLookups.sortCards(due, order), WordLookups.sortCards(deck, order), cont);
     }
     storyReviewIndex = 0;
     storyReviewCorrect = 0;
+    storyReviewRepeats = 0;
     storyReviewUndoStack = [];
 
     showScreen('story-review');
@@ -5427,12 +5432,21 @@
       prevSrsState: srsData[card.id] ? { ...srsData[card.id] } : null,
       index: storyReviewIndex,
       correct: storyReviewCorrect,
+      repeats: storyReviewRepeats,
+      repeatAt: -1,
     });
     srsData[card.id] = gradeCard(state, grade);
-    storyReviewUndoStack[storyReviewUndoStack.length - 1].logged = logReview(card.id, state, grade);
+    const undo = storyReviewUndoStack[storyReviewUndoStack.length - 1];
+    undo.logged = logReview(card.id, state, grade);
     saveSRS(srsData);
     flashSaveIndicator();
-    if (grade > 1) storyReviewCorrect++;
+    // Only the first try of each card counts towards the score.
+    if (grade > 1 && !card.repeat) storyReviewCorrect++;
+    if (grade === 1 && deckOrder() !== 'srs') {
+      undo.repeatAt = Math.min(storyReviewIndex + 1 + STORY_REVIEW_REPEAT_GAP, storyReviewCards.length);
+      storyReviewCards.splice(undo.repeatAt, 0, { ...card, repeat: true });
+      storyReviewRepeats++;
+    }
     storyReviewIndex++;
     showStoryReviewCard();
   }
@@ -5459,8 +5473,10 @@
       deleteSRSCard(undo.cardId);
     }
 
+    if (undo.repeatAt >= 0) storyReviewCards.splice(undo.repeatAt, 1);
     storyReviewIndex = undo.index;
     storyReviewCorrect = undo.correct;
+    storyReviewRepeats = undo.repeats;
 
     $('#story-review-complete').classList.add('hidden');
     $('#story-review-card').classList.remove('hidden');
@@ -5474,7 +5490,7 @@
     $('#story-review-complete').classList.remove('hidden');
     $('#story-review-bar-fill').style.width = '100%';
     updateStoryReviewUndoButton();
-    const total = storyReviewCards.length;
+    const total = storyReviewCards.length - storyReviewRepeats;
     $('#story-review-total').textContent = total;
     $('#story-review-correct').textContent = storyReviewCorrect;
     $('#story-review-accuracy').textContent = total ? `${Math.round((storyReviewCorrect / total) * 100)}%` : '0%';
@@ -5893,17 +5909,22 @@
     return cards;
   }
 
-  // Like pickBatch, but the next `size` cards of `pool` as ordered, due or
-  // not (the word deck reviewed by lookups).
-  function pickInOrder(key, pool, cont, size = 20) {
+  // Like pickBatch, but keeping the order given (the word deck reviewed by
+  // lookups): due cards first, so one answered right waits for its SRS date,
+  // then the rest of the pool; within either, cards last answered "Didn't
+  // know" come first.
+  function pickInOrder(key, due, pool, cont, size = 20) {
     if (cont !== true || !sessionSeen[key]) sessionSeen[key] = new Set();
     const seen = sessionSeen[key];
-    let cards = pool.filter(c => !seen.has(c.id));
+    const fresh = list => list.filter(c => !seen.has(c.id));
+    let cards = fresh(due);
+    if (cards.length === 0) cards = fresh(pool);
     if (cards.length === 0) {
       seen.clear();
-      cards = pool;
+      cards = due.length > 0 ? due : pool;
     }
-    cards = cards.slice(0, size);
+    const failed = c => isFailedCard(getCardState(srsData, c.id), srsData[c.id]);
+    cards = [...cards.filter(failed), ...cards.filter(c => !failed(c))].slice(0, size);
     cards.forEach(c => seen.add(c.id));
     return cards;
   }
@@ -5932,6 +5953,11 @@
     btn.onclick = onClick || null;
   }
 
+  // A card reviewed before whose last grade was "again" / "Didn't know".
+  function isFailedCard(state, saved) {
+    return !!saved && state.repetitions === 0 && state.interval === 0;
+  }
+
   function prioritizeDifficult(cards) {
     const failed = [];
     const struggling = [];
@@ -5939,7 +5965,7 @@
 
     cards.forEach(c => {
       const state = getCardState(srsData, c.id);
-      if (state.repetitions === 0 && state.interval === 0 && srsData[c.id]) {
+      if (isFailedCard(state, srsData[c.id])) {
         failed.push(c);
       } else if (state.easeFactor < 2.0) {
         struggling.push(c);
