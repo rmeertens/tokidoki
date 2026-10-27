@@ -28,10 +28,10 @@
 
   // [word, kana, meaning, level, pieces, r, m] → an item for guess-path.js.
   function toItem(row) {
-    const [word, kana, meaning, level, pieces, r, m, pos, exJa, exEn, exId] = row;
+    const [word, kana, meaning, level, pieces, r, m, pos, exJa, exEn] = row;
     return { key: `${word}|${kana}`, word, kana, meaning, level, pieces: pieces.split(' '),
       g: r >= READING_MIN && m >= MEANING_MIN, own: Math.min(r, m), pos: pos || '',
-      example: exJa ? { ja: exJa, en: exEn, id: exId } : null };
+      example: exJa ? { ja: exJa, en: exEn } : null };
   }
 
   const escHtml = s => String(s).replace(/[&<>"']/g, c =>
@@ -320,7 +320,6 @@
       ${it.example ? `<div class="gk-example">
         <div class="gk-example-ja" lang="ja">${exampleHtml(it.example.ja, new Set(it.pieces.map(pieceKanji)))}</div>
         <div class="gk-example-en">${esc(it.example.en)}</div>
-        <a class="gk-example-src" href="https://tatoeba.org/sentences/show/${Number(it.example.id)}" target="_blank" rel="noopener">Tatoeba #${Number(it.example.id)}</a>
       </div>` : ''}`;
     // The answer lists the kanji, so the hints have done their job.
     $('gk-hints').classList.add('hidden');

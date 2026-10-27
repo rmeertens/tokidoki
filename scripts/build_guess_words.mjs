@@ -2,7 +2,8 @@
 // GTK - Easy Word Order page (guess-kanji.html) plans with, gives each word
 // a short example sentence, and writes guess-words-data.js.
 //
-// Usage:
+// Usage (kuromoji isn't a site dependency, so install it just for this):
+//   npm install --no-save kuromoji
 //   git clone --depth 1 https://github.com/BlaiseLabs/GuessWithAnki /tmp/gwa
 //   git clone --depth 1 https://github.com/evanclan/OpenJLPT /tmp/openjlpt
 //   node scripts/build_guess_words.mjs /tmp/gwa/guesswithanki/data /tmp/openjlpt/data/json/vocab
@@ -35,14 +36,13 @@
 // Each word's part of speech (noun, verb, い-adjective…) is JMdict's, from
 // OpenJLPT, in plain words (POS_LABELS); for a word spelled otherwise there,
 // the entry with its reading (and a meaning word in common, if several have
-// it); for the few OpenJLPT doesn't have (顔, 母, 私), kuromoji's (run
-// `npm install --no-save kuromoji` first; without it, a verb if the meaning
-// starts "To …", else left blank).
+// it); for the few OpenJLPT doesn't have (顔, 母, 私), kuromoji's.
 //
-// The example sentences are Tatoeba's (CC BY 2.0 FR), as OpenJLPT
-// (CC BY-SA 4.0) matched them to each JLPT word through the Tanaka Corpus's
-// word index: per word (same spelling and reading), the shortest one that
-// has furigana and spells the word as listed, kept with its Tatoeba id.
+// The example sentences are our own, one short easy sentence per word, in
+// scripts/guess_examples.tsv: "word|kana <tab> sentence <tab> English", the
+// word written as listed (a verb may be conjugated). Every word must have
+// one. Their furigana is added here: the word itself gets its own reading
+// from the list, the rest of the sentence kuromoji's.
 
 import fs from 'fs';
 import path from 'path';
@@ -174,9 +174,8 @@ for (const w of words) {
   }
 }
 
-// ─── Example sentences (OpenJLPT / Tatoeba) ──────────────────────────────────
+// ─── Parts of speech (OpenJLPT) ──────────────────────────────────────────────
 
-const examplesFor = new Map();
 const posFor = new Map();
 const posByReading = new Map();   // reading → [{ pos, meanings }], for words spelled differently there
 for (const level of ['n5', 'n4', 'n3', 'n2', 'n1']) {
@@ -184,7 +183,6 @@ for (const level of ['n5', 'n4', 'n3', 'n2', 'n1']) {
   if (!fs.existsSync(file)) continue;
   for (const e of JSON.parse(fs.readFileSync(file, 'utf8'))) {
     const key = `${e.word}|${hira(e.reading || '')}`;
-    examplesFor.set(key, (examplesFor.get(key) || []).concat(e.examples || []));
     if (!posFor.has(key) && Array.isArray(e.pos)) posFor.set(key, e.pos);
     if (Array.isArray(e.pos)) {
       const r = hira(e.reading || '');
@@ -209,16 +207,11 @@ const posLabel = code => POS_LABELS[code] || (/^v(1|5|k|z)/.test(code) ? 'verb' 
 // "noun", "verb", "noun · する verb"…: at most two, in JMdict's order.
 // kuromoji (IPAdic) for words OpenJLPT doesn't have, when it reads the word
 // as one word.
-let tokenizer = null;
-try {
-  const kuromoji = require(path.join(ROOT, 'node_modules/kuromoji'));
-  tokenizer = await new Promise((resolve, reject) =>
-    kuromoji.builder({ dicPath: path.join(ROOT, 'node_modules/kuromoji/dict') }).build((err, tk) => (err ? reject(err) : resolve(tk))));
-} catch {
-  console.warn('kuromoji not installed: words OpenJLPT lacks get a part of speech only if they\'re verbs');
-}
+const kuromoji = require(path.join(ROOT, 'node_modules/kuromoji'));
+const tokenizer = await new Promise((resolve, reject) =>
+  kuromoji.builder({ dicPath: path.join(ROOT, 'node_modules/kuromoji/dict') }).build((err, tk) => (err ? reject(err) : resolve(tk))));
 function kuromojiPos(word) {
-  const toks = tokenizer ? tokenizer.tokenize(word) : [];
+  const toks = tokenizer.tokenize(word);
   if (toks.length !== 1) return '';
   const { pos, pos_detail_1: d } = toks[0];
   if (pos === '名詞') {
@@ -239,23 +232,135 @@ function partOfSpeech(w) {
   return [...new Set(codes.map(posLabel).filter(Boolean))].slice(0, 2).join(' · ');
 }
 
-// Furigana stays in OpenJLPT's {漢字|かんじ} groups, which say exactly which
-// characters a reading covers ({お茶|おちゃ}). A few groups give a JMdict id
-// instead of a reading ({前|#1392580}): 前 is まえ in all of them, and any
-// other such group goes without furigana.
-const ID_READINGS = { 前: 'まえ' };
-const toMarkup = f => f.replace(/\{([^|}]+)\|([^}]+)\}/g, (m, k, r) =>
-  (r[0] !== '#' ? m : ID_READINGS[k] ? `{${k}|${ID_READINGS[k]}}` : k));
-// The word's spelling up to its last kanji (食べる → 食), to tell a sentence
-// that writes it as listed from one that writes it in kana.
-const stemOf = w => w.slice(0, [...w].findLastIndex(c => KANJI.test(c)) + 1);
+// ─── Example sentences (scripts/guess_examples.tsv) ──────────────────────────
 
-function pickExample(w) {
-  const all = (examplesFor.get(`${w.word}|${hira(w.kana)}`) || []).filter(e => e.ja && e.en);
-  const stem = stemOf(w.word);
-  const score = e => (e.furigana ? 0 : 1000) + (e.ja.includes(stem) ? 0 : 500) + [...e.ja].length;
-  const best = all.sort((a, b) => score(a) - score(b))[0];
-  return best ? [best.furigana ? toMarkup(best.furigana) : best.ja, best.en, best.tatoeba_id] : null;
+const EXAMPLES = new Map();
+for (const line of fs.readFileSync(path.join(ROOT, 'scripts/guess_examples.tsv'), 'utf8').split('\n')) {
+  if (!line.trim()) continue;
+  const [key, ja, en] = line.split('\t');
+  if (!ja || !en) throw new Error(`guess_examples.tsv: bad line: ${line}`);
+  EXAMPLES.set(key, { ja, en });
+}
+
+const isKanji = c => KANJI.test(c);
+
+// Lines up `surface` (kanji and kana) with its reading: [[text, reading or
+// null for kana], …], kanji runs matched to the kana between the kana runs
+// (取り替える / とりかえる → 取:と, り, 替:か, える), or null if they don't match.
+function align(surface, reading) {
+  const runs = [];
+  for (const c of surface) {
+    const k = isKanji(c);
+    if (runs.length && runs[runs.length - 1].k === k) runs[runs.length - 1].t += c;
+    else runs.push({ t: c, k });
+  }
+  const esc = t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const m = new RegExp('^' + runs.map(r => (r.k ? '(.+?)' : esc(hira(r.t)))).join('') + '$').exec(hira(reading));
+  if (!m) return null;
+  let g = 1;
+  return runs.map(r => [r.t, r.k ? m[g++] : null]);
+}
+
+const OWN_READING = { '堅|かたい': 'かた', '落る|おちる': 'お' };
+
+// kuromoji's misreadings in these sentences, put right.
+const FURIGANA_FIXES = [
+  ['{一日|いちにち}{中|ちゅう}', '{一日|いちにち}{中|じゅう}'],
+  ['{一|いち}{人|にん}', '{一人|ひとり}'], ['{二|に}{人|にん}', '{二人|ふたり}'],
+  ['{二|に}{十|じゅう}{歳|さい}', '{二十歳|はたち}'],
+  ['{一|いち}{回|かい}', '{一回|いっかい}'], ['{一|いち}{歩|ほ}', '{一歩|いっぽ}'],
+  ['{一|いち}{週間|しゅうかん}', '{一週間|いっしゅうかん}'], ['{一|いち}{分|ふん}', '{一分|いっぷん}'],
+  ['{一|いち}{切|き}れ', '{一切|ひとき}れ'], ['{一|いち}か{月|げつ}', '{一|いっ}か{月|げつ}'],
+  ['{一|いち}{世紀|せいき}', '{一|いっ}{世紀|せいき}'],
+  ['{三|さん}{階|かい}', '{三|さん}{階|がい}'], ['{三|さん}{日|にち}', '{三日|みっか}'],
+  ['{五|ご}{分|ぶ}{五|ご}{分|ふん}', '{五|ご}{分|ぶ}{五|ご}{分|ぶ}'],
+  ['{何|なに}です', '{何|なん}です'], ['{何|なに}{曜日|ようび}', '{何|なん}{曜日|ようび}'],
+  ['{洗濯|せんたく}{物|ぶつ}', '{洗濯物|せんたくもの}'],
+  ['{運動|うんどう}の{後|のち}', '{運動|うんどう}の{後|あと}'],
+  ['{雲|くも}の{間|ま}', '{雲|くも}の{間|あいだ}'],
+];
+
+const markup = parts => parts.map(([t, r]) => (r && r !== hira(t) ? `{${t}|${r}}` : t)).join('');
+
+// [[start, text, reading or null], …] for a run of parts starting at `at`.
+function spans(parts, at) {
+  const out = [];
+  for (const [t, r] of parts) { out.push([at, t, r && r !== hira(t) ? r : null]); at += t.length; }
+  return out;
+}
+
+// kuromoji's reading of the whole sentence, as spans.
+function kuromojiSpans(ja) {
+  const out = [];
+  let at = 0;
+  for (const t of tokenizer.tokenize(ja)) {
+    const parts = [...t.surface_form].some(isKanji) && t.reading && t.reading !== '*' ? align(t.surface_form, t.reading) : null;
+    out.push(...spans(parts || [[t.surface_form, null]], at));
+    at += t.surface_form.length;
+  }
+  return out;
+}
+
+// The word's own spans where it stands in the sentence (null if it isn't
+// there as listed), and where it starts and ends.
+function wordSpans(w, ja) {
+  // The list writes a few する nouns' readings with する (計画 けいかくする).
+  const kana = !w.word.endsWith('する') && w.kana.endsWith('する') ? w.kana.slice(0, -2) : w.kana;
+  const lastKanji = [...w.word].findLastIndex(isKanji);
+  const stem = [...w.word].slice(0, lastKanji + 1).join('');
+  const whole = ja.includes(w.word);
+  const surface = whole ? w.word : stem;
+  const at = ja.indexOf(surface);
+  let parts = align(w.word, kana);
+  if (at < 0 || !parts) return null;
+  if (!whole) {
+    // Only the part up to the last kanji (食べる → 食, conjugated in the sentence).
+    let n = 0;
+    parts = parts.filter(([t]) => { const keep = n < surface.length; n += t.length; return keep; });
+  }
+  // Words the list spells without their usual okurigana, written with it in
+  // the sentence (堅い, 落ちる): the reading of their last kanji there.
+  const own = OWN_READING[`${w.word}|${w.kana}`];
+  if (own) parts[parts.length - 1][1] = own;
+  return { at, end: at + surface.length, spans: spans(parts, at) };
+}
+
+// The sentence with furigana: the word gets its own reading from the list,
+// the rest kuromoji's (read as one sentence, so 一日中 stays いちにちじゅう).
+function exampleMarkup(w, ja) {
+  const own = wordSpans(w, ja);
+  const all = kuromojiSpans(ja);
+  if (!own) return markup(all.map(([, t, r]) => [t, r]));
+  const out = [];
+  for (const [at, t, r] of all) {
+    const end = at + t.length;
+    if (end <= own.at || at >= own.end) out.push([at, t, r]);
+    else {
+      // Overlaps the word: keep only what lies outside it, without furigana.
+      if (at < own.at) out.push([at, t.slice(0, own.at - at), null]);
+      if (end > own.end) out.push([own.end, t.slice(own.end - at), null]);
+    }
+  }
+  out.push(...own.spans);
+  out.sort((a, b) => a[0] - b[0]);
+  return FURIGANA_FIXES.reduce((m, [from, to]) => m.split(from).join(to), markup(out.map(([, t, r]) => [t, r])));
+}
+
+// Where kuromoji reads the word otherwise than the list (a sentence that
+// uses another word written the same way), for checking by hand.
+export function readingClashes(w, ja) {
+  const own = wordSpans(w, ja);
+  if (!own) return null;
+  const theirs = kuromojiSpans(ja).filter(([at, t]) => at >= own.at && at + t.length <= own.end && [...t].some(isKanji));
+  const a = own.spans.filter(([, t]) => [...t].some(isKanji)).map(([, t, r]) => t + (r || '')).join('');
+  const b = theirs.map(([, t, r]) => t + (r || '')).join('');
+  return a === b ? null : `${w.word}|${w.kana}: list ${a}, kuromoji ${b} — ${ja}`;
+}
+
+function example(w) {
+  const ex = EXAMPLES.get(`${w.word}|${w.kana}`);
+  if (!ex) throw new Error(`guess_examples.tsv: no sentence for ${w.word}|${w.kana}`);
+  return [exampleMarkup(w, ex.ja), ex.en];
 }
 
 const round = x => Math.round(x * 100) / 100;
@@ -266,9 +371,7 @@ const rows = words.map(w => {
   const units = [...new Set(w.split.map(([ch]) => ch))];
   const mLevel = units.filter(ch => [...stems((KD[ch] && KD[ch].m || []).join(' '))].some(s => gloss.has(s))).length / units.length;
   const row = [w.word, w.kana, w.meaning, w.level, w.split.map(([c, r]) => `${c}:${r}`).join(' '), round(rLevel), round(mLevel)];
-  row.push(partOfSpeech(w));
-  const ex = pickExample(w);
-  return ex ? row.concat(ex) : row;
+  return row.concat([partOfSpeech(w)], example(w));
 });
 
 // Each kanji's first two meanings, for the hints.
@@ -284,16 +387,15 @@ const js = `(function (global) {
   // The JLPT N5–N3 words of vocabulary-data.js that split kanji by kanji,
   // in list order: [word, kana, meaning, level, pieces ("会:かい 社:しゃ"),
   // reading level, meaning level, part of speech ("noun", "verb"… or ""),
-  // and, when there is one, an example sentence (furigana as {漢字|かんじ}),
-  // its English and its Tatoeba id].
+  // an example sentence (furigana as {漢字|かんじ}) and its English].
   // The pieces, levels and kanji meanings come from KANJIDIC2 and JMdict by
   // the Electronic Dictionary Research and Development Group, licensed under
   // Creative Commons Attribution-ShareAlike 4.0
   // (https://www.edrdg.org/edrdg/licence.html), via GuessWithAnki
-  // (https://github.com/BlaiseLabs/GuessWithAnki, MIT). The example
-  // sentences are from Tatoeba (https://tatoeba.org, CC BY 2.0 FR; each id
-  // is https://tatoeba.org/sentences/show/<id>), as matched to the JLPT
-  // words by OpenJLPT (https://github.com/evanclan/OpenJLPT, CC BY-SA 4.0).
+  // (https://github.com/BlaiseLabs/GuessWithAnki, MIT); the parts of speech
+  // from JMdict via OpenJLPT (https://github.com/evanclan/OpenJLPT,
+  // CC BY-SA 4.0). The example sentences are Tokidoki's own
+  // (scripts/guess_examples.tsv).
 
   global.GUESS_WORDS = [
 ${rows.map(r => '    ' + JSON.stringify(r)).join(',\n')}
@@ -303,6 +405,7 @@ ${rows.map(r => '    ' + JSON.stringify(r)).join(',\n')}
 })(typeof window !== 'undefined' ? window : globalThis);
 `;
 fs.writeFileSync(OUT, js);
-const withExample = rows.filter(r => r.length > 8).length;
 const withPos = rows.filter(r => r[7]).length;
-console.log(`${rows.length} of ${total} kanji words split (${guessable} guessable, ${withPos} with a part of speech, ${withExample} with an example), ${Object.keys(kanjiMeanings).length} kanji → ${path.relative(ROOT, OUT)}`);
+console.log(`${rows.length} of ${total} kanji words split (${guessable} guessable, ${withPos} with a part of speech), ${Object.keys(kanjiMeanings).length} kanji → ${path.relative(ROOT, OUT)}`);
+
+if (process.env.GUESS_CLASHES) words.forEach(w => { const c = readingClashes(w, EXAMPLES.get(`${w.word}|${w.kana}`).ja); if (c) console.log(c); });

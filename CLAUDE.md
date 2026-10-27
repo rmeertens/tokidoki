@@ -154,14 +154,19 @@
   browser from the words this learner has studied (`tokidoki_guess`, merged
   in `sync-merge.js`); cards are `guess:<word>|<kana>` in the SRS store,
   graded through `window.TokidokiSRS` (app.js's copy of the store). The
-  words' kanji-by-kanji split, guessability and one short example sentence
-  each are in `guess-words-data.js`, built by
+  words' kanji-by-kanji split, guessability, part of speech and example
+  sentence are in `guess-words-data.js`, built by
   `node scripts/build_guess_words.mjs <GuessWithAnki>/guesswithanki/data <OpenJLPT>/data/json/vocab`
-  from `vocabulary-data.js` (clone both repos to run it: GuessWithAnki's
-  KANJIDIC2 / JMdict files; OpenJLPT's Tatoeba sentences, CC BY 2.0 FR,
-  credited on the page with their Tatoeba ids). The page also credits and
-  embeds BlaiseLabs' GuessWithAnki video. `test_guess_path.js` covers the
-  planner and the data.
+  (kuromoji, as above; clone both repos to run it: GuessWithAnki's
+  KANJIDIC2 / JMdict files, OpenJLPT's parts of speech) from
+  `vocabulary-data.js`. The example sentences are our own, one short easy
+  sentence per word in `scripts/guess_examples.tsv` (word written as listed;
+  never take them from another source, and don't attribute them); the
+  script adds the furigana — the word's own reading from the list, kuromoji
+  for the rest, with its misreadings put right in `FURIGANA_FIXES` — and
+  `GUESS_CLASHES=1` lists sentences where kuromoji reads the word otherwise,
+  to check by hand. The page also credits and embeds BlaiseLabs'
+  GuessWithAnki video. `test_guess_path.js` covers the planner and the data.
 
 ## Japanese for tourists (blog post)
 

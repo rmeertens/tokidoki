@@ -57,8 +57,11 @@ ok(posOf('食べる') === 'verb' && posOf('高い') === 'い-adjective' && posOf
 
 // Example sentences.
 const withEx = items.filter(x => x.example);
-ok(withEx.length >= 0.85 * items.length, `most words have an example sentence (${withEx.length} of ${items.length})`);
-ok(withEx.every(x => x.example.en && Number.isInteger(x.example.id) && !/\|#/.test(x.example.ja)), 'examples have English, a Tatoeba id and readings (no JMdict ids)');
+ok(withEx.length === items.length, `every word has an example sentence (${withEx.length} of ${items.length})`);
+ok(withEx.every(x => x.example.en && !/\|#/.test(x.example.ja)), 'examples have English and readings');
+const plainJa = ja => ja.replace(/\{([^|{}]+)\|[^|{}]+\}/g, '$1');
+const stemOf = w => [...w].slice(0, [...w].findLastIndex(c => /[㐀-䶿一-鿿々]/.test(c)) + 1).join('');
+ok(withEx.every(x => plainJa(x.example.ja).includes(stemOf(x.word))), 'every example uses its word');
 ok(withEx.every(x => !/[{}|]/.test(x.example.ja.replace(/\{[^|{}]+\|[^|{}]+\}/g, ''))), 'example furigana is well formed');
 ok(denki.example && denki.example.ja.includes('{電気|でんき}'), '電気 has an example that uses it');
 ok(GK.exampleHtml('{電気|でんき}をつけて<b>', new Set(['電'])) ===
