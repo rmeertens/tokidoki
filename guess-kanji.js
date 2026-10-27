@@ -180,18 +180,31 @@
     $('gk-prompt').textContent = it.word;
     const hints = $('gk-hints');
     if (card.guess) {
-      hints.innerHTML = `<p class="gk-hints-title">You know these kanji:</p><ul>${hintsHtml(it, card.hints)}</ul>`;
+      // The kanji it's built from stay hidden until asked for: guess first.
+      const one = new Set(it.pieces.map(pieceKanji)).size === 1;
+      hints.innerHTML = `<button type="button" class="btn-hint" id="gk-hint-btn">Show hint</button>
+        <div class="hidden" id="gk-hint-body">
+          <p class="gk-hints-title">You may know ${one ? 'this kanji' : 'these kanji'}:</p><ul>${hintsHtml(it, card.hints)}</ul>
+        </div>`;
+      $('gk-hint-btn').addEventListener('click', showHint);
     } else if (card.isNew) {
       const known = new Set(loadStore().started.filter(k => cardOf(cardId(k))).flatMap(k => (BY_KEY.get(k) || { pieces: [] }).pieces));
       const newOnes = it.pieces.filter(p => !known.has(p));
       hints.innerHTML = newOnes.length
-        ? `<p class="gk-hints-title">New: ${newOnes.map(p => `<span lang="ja">${esc(pieceKanji(p))}</span>`).join(' ')} — it comes back in the words after this one.</p>`
+        ? `<p class="gk-hints-title">New: ${newOnes.map(p => `<span lang="ja">${esc(pieceKanji(p))}</span>`).join(' ')}</p>`
         : '';
     } else {
       hints.innerHTML = '';
     }
     $('gk-reveal-area').classList.remove('hidden');
     $('gk-answer-area').classList.add('hidden');
+  }
+
+  function showHint() {
+    const body = $('gk-hint-body');
+    if (!body) return;
+    body.classList.remove('hidden');
+    $('gk-hint-btn').remove();
   }
 
   function reveal() {
@@ -290,7 +303,8 @@
     if (!session || !(onCard || $('screen-guess-kanji-done').classList.contains('active'))) return;
     if (e.key === 'z' || e.key === 'Z') { e.preventDefault(); undoLast(); return; }
     if (!onCard) return;
-    if (!session.answered && (e.key === ' ' || e.key === 'Enter')) { e.preventDefault(); reveal(); }
+    if (!session.answered && (e.key === 'h' || e.key === 'H')) { e.preventDefault(); showHint(); }
+    else if (!session.answered && (e.key === ' ' || e.key === 'Enter')) { e.preventDefault(); reveal(); }
     else if (session.answered && e.key === '1') { e.preventDefault(); grade(1); }
     else if (session.answered && e.key === '2') { e.preventDefault(); grade(4); }
   });

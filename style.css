@@ -3699,6 +3699,7 @@ a.pq-mode:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px;
 .gk-credit { font-size: 0.75rem; color: var(--text-muted); }
 .gk-card.gk-card-guess { border-left: 4px solid var(--green); }
 .gk-hints { margin: 10px 0 4px; text-align: left; }
+.gk-hints > .btn-hint { display: block; margin: 0 auto; }
 .gk-hints-title { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 6px; text-align: center; }
 .gk-hints ul { list-style: none; padding: 0; margin: 0 auto; max-width: 420px; display: grid; gap: 4px; }
 .gk-hints li, .gk-breakdown li {
