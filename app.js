@@ -95,6 +95,24 @@
     return Date.now() >= state.nextReview;
   }
 
+  // For scripts with SRS cards of their own (guess-kanji.js), so they go
+  // through this page's copy of the store rather than around it.
+  window.TokidokiSRS = {
+    getCardState,
+    card: id => srsData[id],
+    grade(id, grade) {
+      const prev = getCardState(srsData, id);
+      srsData[id] = gradeCard(prev, grade);
+      logReview(id, prev, grade);
+      saveSRS(srsData);
+      flashSaveIndicator();
+    },
+    removeWhere(test) {
+      Object.keys(srsData).forEach(id => { if (test(id)) delete srsData[id]; });
+      saveSRS(srsData);
+    },
+  };
+
   // ─── State ─────────────────────────────────────────────────────────────────────
 
   const SETTINGS_KEY = 'tokidoki_settings';
@@ -4698,9 +4716,15 @@
   }
 
   // The deck screen has a tab each for word and kanji flashcards; the due
-  // count, Review button, list and export all follow the open tab.
+  // count, Review button, list and export all follow the open tab. A third
+  // tab, Guess, is guess-kanji.js's own panel; the word deck's settings
+  // apply when it's open.
   function storyDeckTab() {
     return settings.deckTab === 'kanji' ? 'kanji' : 'words';
+  }
+
+  function guessTabOpen() {
+    return settings.deckTab === 'guess' && !!window.GuessKanji && !!$('#deck-guess');
   }
 
   function setStoryDeckTab(tab) {
@@ -4729,7 +4753,13 @@
   }
 
   function renderStoryDeck() {
-    const tab = storyDeckTab();
+    const guess = guessTabOpen();
+    const saved = $('#deck-saved');
+    if (saved) saved.classList.toggle('hidden', guess);
+    const guessPanel = $('#deck-guess');
+    if (guessPanel) guessPanel.classList.toggle('hidden', !guess);
+    if (window.GuessKanji && window.GuessKanji.render) window.GuessKanji.render(guess);
+    const tab = guess ? 'guess' : storyDeckTab();
     const order = deckOrder();
     const lookups = window.WordLookups ? WordLookups.load() : {};
     const now = Date.now();
@@ -6263,6 +6293,7 @@
     } else if (mode === 'flashcards') {
       // flashcards.html#kanji opens on the Kanji tab.
       if (location.hash === '#kanji') settings.deckTab = 'kanji';
+      if (location.hash === '#guess') settings.deckTab = 'guess';
       renderStoryDeck();
     } else {
       renderHub();
@@ -7306,6 +7337,7 @@
       if (confirm('Are you sure you want to reset ALL progress? This cannot be undone.')) {
         localStorage.removeItem(SRS_KEY);
         localStorage.removeItem(STATS_KEY);
+        localStorage.removeItem('tokidoki_guess');
         srsData = {};
         statsData = loadStats();
         if (mode === 'verbs') renderChapters();

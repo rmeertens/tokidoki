@@ -3671,6 +3671,51 @@ a.pq-mode:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px;
   margin-top: 12px;
 }
 
+/* Flashcards' Guess tab (guess-kanji.js) */
+.gk-panel { margin-top: 12px; }
+.gk-intro { color: var(--text-dim); font-size: 0.9rem; line-height: 1.55; margin-bottom: 12px; }
+.gk-stats { margin: 0 0 12px; }
+.gk-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+.gk-actions button { flex: 1 1 140px; }
+.gk-compare { font-size: 0.9rem; color: var(--text-dim); line-height: 1.5; margin-bottom: 16px; }
+.gk-compare b { color: var(--text); }
+.gk-next {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 12px;
+  padding: 0;
+}
+.gk-next li {
+  font-family: var(--font-jp);
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card-bg, transparent);
+}
+.gk-next li.gk-next-guess { border-color: color-mix(in srgb, var(--green) 55%, var(--border)); background: var(--green-dim); }
+.gk-badge { margin-left: 4px; font-size: 0.8em; }
+.gk-credit { font-size: 0.75rem; color: var(--text-muted); }
+.gk-card.gk-card-guess { border-left: 4px solid var(--green); }
+.gk-hints { margin: 10px 0 4px; text-align: left; }
+.gk-hints-title { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 6px; text-align: center; }
+.gk-hints ul { list-style: none; padding: 0; margin: 0 auto; max-width: 420px; display: grid; gap: 4px; }
+.gk-hints li, .gk-breakdown li {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+}
+.gk-hint-kanji { font-family: var(--font-jp); font-size: 1.3rem; font-weight: 700; }
+.gk-hint-reading { font-family: var(--font-jp); color: var(--accent); font-weight: 700; }
+.gk-hint-meaning { color: var(--text-dim); }
+.gk-hint-from { color: var(--text-muted); font-size: 0.8rem; margin-left: auto; }
+.gk-hint-from span { font-family: var(--font-jp); }
+.gk-breakdown { list-style: none; padding: 0; margin: 10px auto 0; max-width: 420px; display: grid; gap: 4px; color: var(--text-dim); }
+.gk-breakdown span[lang] { font-family: var(--font-jp); color: var(--text); }
+
 .kanji-deck-char {
   font-size: 1.4rem;
 }

@@ -44,6 +44,7 @@
     { id: 'kanji', label: 'Kanji quiz', test: id => id.startsWith('kanjiquiz_') || id.startsWith('confusable_') },
     { id: 'words', label: 'Word flashcards', test: id => id.startsWith('story_word:') },
     { id: 'kanjiCards', label: 'Kanji flashcards', test: id => id.startsWith('kanji_card:') },
+    { id: 'guess', label: 'Guess the Kanji', test: id => id.startsWith('guess:') },
   ];
   const kindOf = id => { const k = KINDS.find(x => x.test(String(id))); return k ? k.id : 'other'; };
 

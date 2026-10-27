@@ -182,6 +182,12 @@
     tokidoki_vocab_quiz: mergeGameStore,
     tokidoki_conversation: mergeConversation,
     tokidoki_lookups: mergeLookups,
+    // Guess the Kanji (guess-kanji.js): the words studied, in order, and
+    // the ones guessed on first sight, from both sides.
+    tokidoki_guess: (b, l, r) => ({
+      started: mergeList(b && b.started, l.started, r.started),
+      guessed: mergeList(b && b.guessed, l.guessed, r.guessed),
+    }),
   };
 
   // One key, as raw strings (null = not set). Returns the merged raw string, or null.

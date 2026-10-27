@@ -87,6 +87,15 @@ ok(J(out.鳥) === J([1, 400]) && J(out.魚) === J([2, 500]) && !('犬' in out), 
 out = P(M.mergeAll({}, { tokidoki_lookups: J({ 猫: [2, 10] }) }, { tokidoki_lookups: J({ 猫: [7, 5] }) }).tokidoki_lookups);
 ok(J(out.猫) === J([7, 10]), 'lookups: first sync takes the larger count, not the sum');
 
+// Guess the Kanji: the words studied and guessed on both sides.
+out = P(M.mergeAll(
+  { tokidoki_guess: J({ started: ['日|ひ'], guessed: [] }) },
+  { tokidoki_guess: J({ started: ['日|ひ', '一日|いちにち'], guessed: ['一日|いちにち'] }) },
+  { tokidoki_guess: J({ started: ['日|ひ', '本|ほん'], guessed: [] }) },
+).tokidoki_guess);
+ok(J(out.started) === J(['日|ひ', '一日|いちにち', '本|ほん']) && J(out.guessed) === J(['一日|いちにち']),
+  'guess: words studied on either side kept, in order');
+
 // Mystery chapters.
 out = P(M.mergeAll({},
   { tokidoki_mystery: J({ c1: { step: 0, paws: 0, solved: true, best: 3 }, c2: { step: 4, paws: 2 } }) },

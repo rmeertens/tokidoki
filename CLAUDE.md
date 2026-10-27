@@ -146,6 +146,19 @@
   word in the wrong topic in `scripts/vocab_group_overrides.json` and re-run;
   `test_vocab_groups.js` fails if a word is missing or a set is out of range.
 
+- The Flashcards page's 🎯 Guess tab (`guess-kanji.js`) teaches the JLPT
+  words in an order where most new words are made of kanji just met, read
+  the same way (電車, 天気 → 電気), after
+  [GuessWithAnki](https://github.com/BlaiseLabs/GuessWithAnki). The greedy
+  path (`guess-path.js`, a port of its `core/path.py`) is planned in the
+  browser from the words this learner has studied (`tokidoki_guess`, merged
+  in `sync-merge.js`); cards are `guess:<word>|<kana>` in the SRS store,
+  graded through `window.TokidokiSRS` (app.js's copy of the store). The
+  words' kanji-by-kanji split and guessability are in `guess-words-data.js`,
+  built by `node scripts/build_guess_words.mjs <GuessWithAnki>/guesswithanki/data`
+  (its KANJIDIC2 / JMdict files; clone that repo to run it) from
+  `vocabulary-data.js`. `test_guess_path.js` covers the planner and the data.
+
 ## Japanese for tourists (blog post)
 
 - `blog-japanese-for-tourists.html` is hand-written except its phrase

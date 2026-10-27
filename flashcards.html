@@ -21,7 +21,7 @@
   <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
   <link rel="canonical" href="https://tokidoki.meertens.dev/flashcards.html">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Japanese Flashcards: Words & Kanji (SRS)", "description": "Review the Japanese words and kanji you saved while reading, with spaced repetition, in either direction. Tap or swipe to grade; export to Anki, CSV or print.", "url": "https://tokidoki.meertens.dev/flashcards.html", "inLanguage": "en", "learningResourceType": "flashcards", "educationalLevel": "JLPT N5–N3", "isAccessibleForFree": true, "isPartOf": {"@type": "WebSite", "name": "Tokidoki", "url": "https://tokidoki.meertens.dev/"}}</script>
-  <link rel="stylesheet" href="style.css?v=87">
+  <link rel="stylesheet" href="style.css?v=88">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -115,7 +115,9 @@
       <div class="deck-tabs" id="deck" role="tablist" aria-label="Your flashcards">
         <button type="button" class="deck-tab active" data-deck-tab="words" role="tab" aria-selected="true">Words <span class="deck-tab-count" id="deck-tab-count-words">0</span></button>
         <button type="button" class="deck-tab" data-deck-tab="kanji" role="tab" aria-selected="false">Kanji <span class="deck-tab-count" id="deck-tab-count-kanji">0</span></button>
+        <button type="button" class="deck-tab" data-deck-tab="guess" role="tab" aria-selected="false" title="The JLPT words in an order you can guess">🎯 Guess <span class="deck-tab-count" id="deck-tab-count-guess">0</span></button>
       </div>
+      <div id="deck-saved">
       <div class="kana-settings-row deck-direction" role="radiogroup" aria-label="Review direction">
         <label class="kana-script-toggle">
           <input type="radio" name="deck-direction" value="ja" checked>
@@ -162,9 +164,85 @@
         <button class="btn-secondary" id="btn-export-print" title="Cut-out cards on A4 — print, or save as PDF">Print / PDF</button>
         <span class="story-export-status" id="story-export-status" role="status"></span>
       </div>
+      </div>
+
+      <!-- Guess tab (guess-kanji.js): the JLPT words in a guessable order -->
+      <div id="deck-guess" class="gk-panel hidden">
+        <p class="gk-intro">
+          The JLPT N5&ndash;N3 words in an order planned so most new words are made of kanji
+          you&rsquo;ve just met, read the way you met them: <span lang="ja">電車</span> and
+          <span lang="ja">天気</span> first, then <span lang="ja">電気</span> (でんき) is yours
+          to guess. Words marked 🎯 are guessed first, instead of memorised. The order is a
+          greedy path, after <a href="https://github.com/BlaiseLabs/GuessWithAnki" rel="noopener">GuessWithAnki</a>,
+          planned again in your browser from the words you&rsquo;ve studied.
+        </p>
+        <div class="session-stats gk-stats">
+          <div class="stat"><span class="stat-num" id="gk-studied">0</span><span class="stat-label">Words studied</span></div>
+          <div class="stat"><span class="stat-num" id="gk-guessed">0</span><span class="stat-label">Guessed on sight</span></div>
+          <div class="stat"><span class="stat-num" id="gk-due">0</span><span class="stat-label">Due</span></div>
+        </div>
+        <div class="gk-actions">
+          <button id="gk-learn" class="btn-primary">Next 10 words</button>
+          <button id="gk-review" class="btn-secondary">Review</button>
+        </div>
+        <p class="gk-compare" id="gk-compare"></p>
+        <h3 class="lis-heading">Up next <span>&mdash; 🎯 = you can guess it when it arrives</span></h3>
+        <ol class="gk-next" id="gk-next"></ol>
+        <p class="gk-credit">Kanji readings and meanings: KANJIDIC2 and JMdict (EDRDG, CC BY-SA 4.0).</p>
+        <div class="reset-section">
+          <button id="btn-gk-reset" class="btn-danger">Reset Guess progress</button>
+        </div>
+      </div>
 
       <div class="reset-section">
         <button id="btn-reset" class="btn-danger">Reset All Progress</button>
+      </div>
+    </main>
+
+    <!-- Screen: Guess tab card -->
+    <main id="screen-guess-kanji" class="screen">
+      <div class="study-toolbar">
+        <div class="study-progress">
+          <div class="study-progress-bar"><div id="gk-bar-fill" class="study-bar-fill"></div></div>
+          <span id="gk-progress-text" class="study-progress-text">0 / 0</span>
+        </div>
+        <button id="gk-quit" class="btn-undo" aria-label="Back to the flashcards">✕</button>
+      </div>
+
+      <div id="gk-card" class="card kana-card gk-card">
+        <div class="kana-prompt-label" id="gk-label"></div>
+        <div id="gk-prompt" class="story-review-prompt" lang="ja"></div>
+        <div id="gk-hints" class="gk-hints"></div>
+
+        <div class="reveal-area" id="gk-reveal-area">
+          <button id="gk-reveal" class="btn-reveal">Show Answer</button>
+          <span class="reveal-hint">Tap the card or press Space</span>
+        </div>
+
+        <div class="kana-answer-area hidden" id="gk-answer-area">
+          <div id="gk-answer" class="story-review-answer"></div>
+          <div class="grade-buttons">
+            <button class="btn-grade btn-again" data-gk-grade="1"><span class="grade-key">1</span> Didn't know</button>
+            <button class="btn-grade btn-easy" data-gk-grade="4"><span class="grade-key">2</span> Got it</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Screen: Guess tab session done -->
+    <main id="screen-guess-kanji-done" class="screen">
+      <div class="session-complete">
+        <div class="complete-icon">🎯</div>
+        <h2>Session Complete!</h2>
+        <div class="session-stats">
+          <div class="stat"><span class="stat-num" id="gk-done-total">0</span><span class="stat-label">Words</span></div>
+          <div class="stat"><span class="stat-num" id="gk-done-correct">0</span><span class="stat-label">Got it</span></div>
+          <div class="stat"><span class="stat-num" id="gk-done-guessed">0</span><span class="stat-label">Guessed</span></div>
+        </div>
+        <div class="session-actions">
+          <button id="gk-again" class="btn-primary">Next 10 →</button>
+          <button id="gk-home" class="btn-secondary">Back to Flashcards</button>
+        </div>
       </div>
     </main>
 
@@ -257,9 +335,12 @@
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=4"></script>
   <script src="word-lookups.js?v=1"></script>
-  <script src="app.js?v=72"></script>
-  <script src="sync-merge.js?v=9"></script>
-  <script src="progress-stats.js?v=2"></script>
+  <script src="guess-words-data.js?v=1"></script>
+  <script src="guess-path.js?v=1"></script>
+  <script src="guess-kanji.js?v=1"></script>
+  <script src="app.js?v=73"></script>
+  <script src="sync-merge.js?v=10"></script>
+  <script src="progress-stats.js?v=3"></script>
   <script src="sync.js?v=12"></script>
   <script src="sushi-sprites.js"></script>
   <script src="sushi-belt.js"></script>
