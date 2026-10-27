@@ -172,33 +172,75 @@
       : card.isNew ? 'New word' : 'Recall the reading and meaning';
     $('gk-card').classList.toggle('gk-card-guess', card.guess);
     $('gk-prompt').textContent = it.word;
-    const hints = $('gk-hints');
+    // Hints stay closed until asked for: guess first.
+    let lead = '';
+    const buttons = [];
+    const bodies = [];
     if (card.guess) {
-      // The kanji it's built from stay hidden until asked for: guess first.
       const one = new Set(it.pieces.map(pieceKanji)).size === 1;
-      hints.innerHTML = `<button type="button" class="btn-hint" id="gk-hint-btn">Show hint</button>
-        <div class="hidden" id="gk-hint-body">
+      buttons.push('<button type="button" class="btn-hint" data-gk-hint="kanji">Show hint</button>');
+      bodies.push(`<div class="gk-hint-body hidden" data-gk-hint-body="kanji">
           <p class="gk-hints-title">You may know ${one ? 'this kanji' : 'these kanji'}:</p><ul>${hintsHtml(it, card.hints)}</ul>
-        </div>`;
-      $('gk-hint-btn').addEventListener('click', showHint);
+        </div>`);
     } else if (card.isNew) {
-      const known = new Set(loadStore().started.filter(k => cardOf(cardId(k))).flatMap(k => (BY_KEY.get(k) || { pieces: [] }).pieces));
+      const known = new Set(studiedKeys().flatMap(k => BY_KEY.get(k).pieces));
       const newOnes = it.pieces.filter(p => !known.has(p));
-      hints.innerHTML = newOnes.length
-        ? `<p class="gk-hints-title">New: ${newOnes.map(p => `<span lang="ja">${esc(pieceKanji(p))}</span>`).join(' ')}</p>`
-        : '';
-    } else {
-      hints.innerHTML = '';
+      if (newOnes.length) lead = `<p class="gk-hints-title">New: ${newOnes.map(p => `<span lang="ja">${esc(pieceKanji(p))}</span>`).join(' ')}</p>`;
     }
+    const seen = seenWords(it);
+    if (seen.length) {
+      buttons.push(`<button type="button" class="btn-hint" data-gk-hint="seen">Words you've seen (${seen.length})</button>`);
+      bodies.push(`<div class="gk-hint-body hidden" data-gk-hint-body="seen">
+          <p class="gk-hints-title">Words you've seen with ${seenKanjiText(it, seen)}:</p>
+          <ul class="gk-seen">${seen.map(w => seenHtml(w, it)).join('')}</ul>
+        </div>`);
+    }
+    const hints = $('gk-hints');
+    hints.innerHTML = lead + (buttons.length ? `<div class="gk-hint-buttons">${buttons.join('')}</div>` : '') + bodies.join('');
+    hints.querySelectorAll('[data-gk-hint]').forEach(b => b.addEventListener('click', () => showHint(b.dataset.gkHint)));
     $('gk-reveal-area').classList.remove('hidden');
     $('gk-answer-area').classList.add('hidden');
   }
 
-  function showHint() {
-    const body = $('gk-hint-body');
+  // Opens a hint: 'kanji' (the kanji a 🎯 word is built from) or 'seen'
+  // (words already studied that share a kanji with it).
+  function showHint(which) {
+    const body = document.querySelector(`[data-gk-hint-body="${which}"]`);
     if (!body) return;
     body.classList.remove('hidden');
-    $('gk-hint-btn').remove();
+    const btn = document.querySelector(`[data-gk-hint="${which}"]`);
+    if (btn) btn.remove();
+  }
+
+  // The words studied so far that are still in the list, oldest first.
+  function studiedKeys() {
+    return loadStore().started.filter(k => BY_KEY.has(k) && cardOf(cardId(k)));
+  }
+
+  const SEEN_MAX = 6;
+
+  // Words already studied that share a kanji with `it`, most recent first.
+  function seenWords(it) {
+    const kanji = new Set(it.pieces.map(pieceKanji));
+    return studiedKeys().reverse()
+      .filter(k => k !== it.key && BY_KEY.get(k).pieces.some(p => kanji.has(pieceKanji(p))))
+      .slice(0, SEEN_MAX)
+      .map(k => BY_KEY.get(k));
+  }
+
+  function seenKanjiText(it, seen) {
+    const shared = new Set(seen.flatMap(w => w.pieces.map(pieceKanji)));
+    return [...new Set(it.pieces.map(pieceKanji))].filter(ch => shared.has(ch))
+      .map(ch => `<span lang="ja">${esc(ch)}</span>`).join(' ');
+  }
+
+  // A seen word, its kanji shared with `it` highlighted.
+  function seenHtml(w, it) {
+    const kanji = new Set(it.pieces.map(pieceKanji));
+    const word = [...w.word].map(ch => (kanji.has(ch) ? `<mark>${esc(ch)}</mark>` : esc(ch))).join('');
+    return `<li><span class="gk-seen-word" lang="ja">${word}</span>
+      <span class="gk-hint-reading" lang="ja">${esc(w.kana)}</span>
+      <span class="gk-hint-meaning">${esc(w.meaning)}</span></li>`;
   }
 
   function reveal() {
@@ -275,7 +317,7 @@
   $('gk-learn').addEventListener('click', startLearn);
   $('gk-review').addEventListener('click', startReview);
   $('gk-reveal').addEventListener('click', reveal);
-  $('gk-card').addEventListener('click', e => { if (!e.target.closest('button')) reveal(); });
+  $('gk-card').addEventListener('click', e => { if (!e.target.closest('button, .gk-hints')) reveal(); });
   document.querySelectorAll('[data-gk-grade]').forEach(b => b.addEventListener('click', () => grade(Number(b.dataset.gkGrade))));
   $('gk-quit').addEventListener('click', backToDeck);
   $('gk-again').addEventListener('click', startLearn);
@@ -296,7 +338,8 @@
     if (!session || !(onCard || $('screen-guess-kanji-done').classList.contains('active'))) return;
     if (e.key === 'z' || e.key === 'Z') { e.preventDefault(); undoLast(); return; }
     if (!onCard) return;
-    if (!session.answered && (e.key === 'h' || e.key === 'H')) { e.preventDefault(); showHint(); }
+    if (!session.answered && (e.key === 'h' || e.key === 'H')) { e.preventDefault(); showHint('kanji'); }
+    else if (!session.answered && (e.key === 'w' || e.key === 'W')) { e.preventDefault(); showHint('seen'); }
     else if (!session.answered && (e.key === ' ' || e.key === 'Enter')) { e.preventDefault(); reveal(); }
     else if (session.answered && e.key === '1') { e.preventDefault(); grade(1); }
     else if (session.answered && e.key === '2') { e.preventDefault(); grade(4); }

@@ -26,7 +26,9 @@
   if (!global.document) return;
   const doc = global.document;
 
-  const IGNORE = 'button, a, input, textarea, select, label, summary, canvas, [role="button"], [contenteditable], .kana-canvas-wrap';
+  // Taps on these don't reveal or grade; [data-no-tap] marks any other part
+  // of a card meant for reading or tapping on its own (a hint that's open).
+  const IGNORE = 'button, a, input, textarea, select, label, summary, canvas, [role="button"], [contenteditable], .kana-canvas-wrap, [data-no-tap]';
   const START = 10;          // px before a drag counts as a swipe
   const FLY_MS = 180;
 
