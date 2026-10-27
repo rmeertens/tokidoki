@@ -1,4 +1,4 @@
-// Guess the Kanji (guess-kanji.html): the JLPT N5–N3 words, in an order
+// GTK - Easy Word Order (guess-kanji.html): the JLPT N5–N3 words, in an order
 // planned so you can guess each new word from kanji you've already met, as
 // GuessWithAnki does for Anki decks. 電車 and 天気 first, and 電気 arrives
 // readable: 電 read でん, 気 read き.
@@ -283,7 +283,7 @@
   $('gk-done-undo').addEventListener('click', undoLast);
   $('gk-home').addEventListener('click', backToDeck);
   $('btn-gk-reset').addEventListener('click', () => {
-    if (!confirm('Reset your Guess the Kanji progress? The path starts over.')) return;
+    if (!confirm('Reset your GTK - Easy Word Order progress? The path starts over.')) return;
     if (global.TokidokiSRS) global.TokidokiSRS.removeWhere(id => id.startsWith(ID_PREFIX));
     save(STORE_KEY, { started: [], guessed: [] });
     renderHome();

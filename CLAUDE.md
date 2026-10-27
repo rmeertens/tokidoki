@@ -146,7 +146,7 @@
   word in the wrong topic in `scripts/vocab_group_overrides.json` and re-run;
   `test_vocab_groups.js` fails if a word is missing or a set is out of range.
 
-- Guess the Kanji (`guess-kanji.html`, `guess-kanji.js`) teaches the JLPT
+- GTK - Easy Word Order (`guess-kanji.html`, `guess-kanji.js`) teaches the JLPT
   words in an order where most new words are made of kanji just met, read
   the same way (電車, 天気 → 電気), after
   [GuessWithAnki](https://github.com/BlaiseLabs/GuessWithAnki). The greedy

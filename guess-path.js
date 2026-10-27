@@ -1,4 +1,4 @@
-// The order new words come in on the Guess the Kanji page: a greedy path
+// The order new words come in on the GTK - Easy Word Order page: a greedy path
 // that makes as many words as possible guessable when they arrive. A port
 // of GuessWithAnki's core/path.py (https://github.com/BlaiseLabs/GuessWithAnki,
 // MIT), run in the browser each time the page plans, from what this learner
