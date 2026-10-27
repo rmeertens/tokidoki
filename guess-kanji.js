@@ -1,4 +1,4 @@
-// The Flashcards page's Guess tab (flashcards.html): the JLPT N5–N3 words, in an order
+// Guess the Kanji (guess-kanji.html): the JLPT N5–N3 words, in an order
 // planned so you can guess each new word from kanji you've already met, as
 // GuessWithAnki does for Anki decks. 電車 and 天気 first, and 電気 arrives
 // readable: 電 read でん, 気 read き.
@@ -114,14 +114,8 @@
     }).join('');
   }
 
-  // The Guess tab; with `open` false (another tab is open) only its count,
-  // so the path isn't planned for nothing.
-  function renderHome(open = true) {
-    if (!$('deck-guess') || !global.GuessPath) return;
+  function renderHome() {
     const store = loadStore();
-    const tabCount = $('deck-tab-count-guess');
-    if (tabCount) tabCount.textContent = store.started.filter(k => BY_KEY.has(k)).length;
-    if (!open) return;
     const { studied, fresh, path } = currentPlan(COMPARE);
     const due = dueKeys().length;
     $('gk-studied').textContent = studied.length;
@@ -275,7 +269,6 @@
 
   // ─── Wiring ────────────────────────────────────────────────────────────────
 
-  api.render = renderHome;
   if (!$('deck-guess')) return;
   const backToDeck = () => { session = null; show('screen-chapters'); renderHome(); };
 
@@ -308,4 +301,6 @@
     else if (session.answered && e.key === '1') { e.preventDefault(); grade(1); }
     else if (session.answered && e.key === '2') { e.preventDefault(); grade(4); }
   });
+
+  renderHome();
 })(typeof window !== 'undefined' ? window : globalThis);

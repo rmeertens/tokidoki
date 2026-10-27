@@ -4727,15 +4727,9 @@
   }
 
   // The deck screen has a tab each for word and kanji flashcards; the due
-  // count, Review button, list and export all follow the open tab. A third
-  // tab, Guess, is guess-kanji.js's own panel; the word deck's settings
-  // apply when it's open.
+  // count, Review button, list and export all follow the open tab.
   function storyDeckTab() {
     return settings.deckTab === 'kanji' ? 'kanji' : 'words';
-  }
-
-  function guessTabOpen() {
-    return settings.deckTab === 'guess' && !!window.GuessKanji && !!$('#deck-guess');
   }
 
   function setStoryDeckTab(tab) {
@@ -4764,13 +4758,7 @@
   }
 
   function renderStoryDeck() {
-    const guess = guessTabOpen();
-    const saved = $('#deck-saved');
-    if (saved) saved.classList.toggle('hidden', guess);
-    const guessPanel = $('#deck-guess');
-    if (guessPanel) guessPanel.classList.toggle('hidden', !guess);
-    if (window.GuessKanji && window.GuessKanji.render) window.GuessKanji.render(guess);
-    const tab = guess ? 'guess' : storyDeckTab();
+    const tab = storyDeckTab();
     const order = deckOrder();
     const lookups = window.WordLookups ? WordLookups.load() : {};
     const now = Date.now();
@@ -6278,6 +6266,8 @@
       // listening.js wires up its own page.
     } else if (mode === 'word-order') {
       // word-order.js wires up its own page.
+    } else if (mode === 'guess-kanji') {
+      // guess-kanji.js wires up its own page.
     } else if (mode === 'misc') {
       // misc.js wires up its own page.
     } else if (mode === 'conversation') {
@@ -6304,7 +6294,6 @@
     } else if (mode === 'flashcards') {
       // flashcards.html#kanji opens on the Kanji tab.
       if (location.hash === '#kanji') settings.deckTab = 'kanji';
-      if (location.hash === '#guess') settings.deckTab = 'guess';
       renderStoryDeck();
     } else {
       renderHub();
