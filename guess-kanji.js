@@ -159,7 +159,7 @@
 
   function begin(cards) {
     if (!cards.length) return;
-    session = { cards, pos: 0, answered: false, correct: 0, guessed: 0 };
+    session = { cards, pos: 0, answered: false, correct: 0, guessed: 0, undo: [] };
     show('screen-guess-kanji');
     showCard();
   }
@@ -169,6 +169,7 @@
     const card = session.cards[session.pos];
     const it = card.item;
     session.answered = false;
+    updateUndoButton();
     const total = session.cards.length;
     $('gk-bar-fill').style.width = `${(session.pos / total) * 100}%`;
     $('gk-progress-text').textContent = `${session.pos + 1} / ${total}`;
@@ -211,8 +212,12 @@
   function grade(g) {
     if (!session || !session.answered) return;
     const card = session.cards[session.pos];
-    if (global.TokidokiSRS) global.TokidokiSRS.grade(cardId(card.item.key), g);
     const store = loadStore();
+    session.undo.push({
+      srs: global.TokidokiSRS ? global.TokidokiSRS.grade(cardId(card.item.key), g) : null,
+      store: JSON.parse(JSON.stringify(store)),
+      pos: session.pos, correct: session.correct, guessed: session.guessed,
+    });
     if (!store.started.includes(card.item.key)) store.started.push(card.item.key);
     if (g > 1 && card.guess && card.isNew && !store.guessed.includes(card.item.key)) {
       store.guessed.push(card.item.key);
@@ -224,6 +229,27 @@
     showCard();
   }
 
+  function updateUndoButton() {
+    const can = !!session && session.undo.length > 0;
+    $('gk-undo').classList.toggle('hidden', !can);
+    $('gk-done-undo').classList.toggle('hidden', !can);
+  }
+
+  // Takes back the last grade (a mis-tap): the card's SRS state, the review
+  // log and the studied / guessed lists go back to before it, and the card
+  // shows again to be graded anew.
+  function undoLast() {
+    if (!session || !session.undo.length) return;
+    const u = session.undo.pop();
+    if (global.TokidokiSRS) global.TokidokiSRS.undo(u.srs);
+    save(STORE_KEY, u.store);
+    session.pos = u.pos;
+    session.correct = u.correct;
+    session.guessed = u.guessed;
+    show('screen-guess-kanji');
+    showCard();
+  }
+
   function finish() {
     $('gk-bar-fill').style.width = '100%';
     const total = session.cards.length;
@@ -231,7 +257,7 @@
     $('gk-done-correct').textContent = session.correct;
     $('gk-done-guessed').textContent = session.guessed;
     show('screen-guess-kanji-done');
-    session = null;
+    updateUndoButton();
   }
 
   // ─── Wiring ────────────────────────────────────────────────────────────────
@@ -247,6 +273,8 @@
   document.querySelectorAll('[data-gk-grade]').forEach(b => b.addEventListener('click', () => grade(Number(b.dataset.gkGrade))));
   $('gk-quit').addEventListener('click', backToDeck);
   $('gk-again').addEventListener('click', startLearn);
+  $('gk-undo').addEventListener('click', undoLast);
+  $('gk-done-undo').addEventListener('click', undoLast);
   $('gk-home').addEventListener('click', backToDeck);
   $('btn-gk-reset').addEventListener('click', () => {
     if (!confirm('Reset your Guess the Kanji progress? The path starts over.')) return;
@@ -256,9 +284,12 @@
   });
 
   document.addEventListener('keydown', e => {
-    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.altKey || ((e.metaKey || e.ctrlKey) && e.key !== 'z' && e.key !== 'Z')) return;
     if (e.target.closest && e.target.closest('input, textarea, select')) return;
-    if (!session || !$('screen-guess-kanji').classList.contains('active')) return;
+    const onCard = $('screen-guess-kanji').classList.contains('active');
+    if (!session || !(onCard || $('screen-guess-kanji-done').classList.contains('active'))) return;
+    if (e.key === 'z' || e.key === 'Z') { e.preventDefault(); undoLast(); return; }
+    if (!onCard) return;
     if (!session.answered && (e.key === ' ' || e.key === 'Enter')) { e.preventDefault(); reveal(); }
     else if (session.answered && e.key === '1') { e.preventDefault(); grade(1); }
     else if (session.answered && e.key === '2') { e.preventDefault(); grade(4); }

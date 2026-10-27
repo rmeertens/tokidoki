@@ -206,6 +206,7 @@
           <div class="study-progress-bar"><div id="gk-bar-fill" class="study-bar-fill"></div></div>
           <span id="gk-progress-text" class="study-progress-text">0 / 0</span>
         </div>
+        <button id="gk-undo" class="btn-undo hidden" aria-label="Undo last grade" title="Undo (Z)">↩ Undo</button>
         <button id="gk-quit" class="btn-undo" aria-label="Back to the flashcards">✕</button>
       </div>
 
@@ -242,6 +243,7 @@
         <div class="session-actions">
           <button id="gk-again" class="btn-primary">Next 10 →</button>
           <button id="gk-home" class="btn-secondary">Back to Flashcards</button>
+          <button id="gk-done-undo" class="btn-secondary hidden" title="Undo (Z)">↩ Undo last</button>
         </div>
       </div>
     </main>
@@ -337,8 +339,8 @@
   <script src="word-lookups.js?v=1"></script>
   <script src="guess-words-data.js?v=1"></script>
   <script src="guess-path.js?v=1"></script>
-  <script src="guess-kanji.js?v=1"></script>
-  <script src="app.js?v=73"></script>
+  <script src="guess-kanji.js?v=2"></script>
+  <script src="app.js?v=74"></script>
   <script src="sync-merge.js?v=10"></script>
   <script src="progress-stats.js?v=3"></script>
   <script src="sync.js?v=12"></script>

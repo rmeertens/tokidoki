@@ -100,10 +100,21 @@
   window.TokidokiSRS = {
     getCardState,
     card: id => srsData[id],
+    // Returns what `undo` needs to take the grade back.
     grade(id, grade) {
+      const saved = srsData[id] ? { ...srsData[id] } : null;
       const prev = getCardState(srsData, id);
       srsData[id] = gradeCard(prev, grade);
-      logReview(id, prev, grade);
+      const logged = logReview(id, prev, grade);
+      saveSRS(srsData);
+      flashSaveIndicator();
+      return { id, saved, logged };
+    },
+    undo(u) {
+      if (!u) return;
+      unlogReview(u.logged);
+      if (u.saved) srsData[u.id] = u.saved;
+      else delete srsData[u.id];
       saveSRS(srsData);
       flashSaveIndicator();
     },
