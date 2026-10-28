@@ -261,8 +261,14 @@
     attempt.at++;
     // Past the last line, the story is shown whole (at = lines.length).
     render();
-    const target = finished() && attempt.at >= attempt.chapter.lines.length ? $('bs-result') : $('bs-question');
-    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const over = finished() && attempt.at >= attempt.chapter.lines.length;
+    (over ? $('bs-result') : $('bs-question')).scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // On the score, Space / Enter go on to the next chapter (or try again after the last).
+    if (over) overviewButton().focus({ preventScroll: true });
+  }
+
+  function overviewButton() {
+    return nextChapter() ? $('btn-bs-next-chapter') : $('btn-bs-again');
   }
 
   // The next chapter of this story, or the first of the next story.
@@ -297,7 +303,14 @@
     if (!attempt || !$('screen-bunkei-story').classList.contains('active')) return;
     if (e.ctrlKey || e.metaKey || e.altKey || /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
     const i = attempt.at;
-    if (i >= attempt.chapter.lines.length) return;
+    if (i >= attempt.chapter.lines.length) {
+      // On the score: Space / Enter anywhere but on a button go on, like the focused button.
+      if ((e.key === ' ' || e.key === 'Enter') && e.target.tagName !== 'BUTTON') {
+        e.preventDefault();
+        overviewButton().click();
+      }
+      return;
+    }
     if (!answered(i) && /^[1-4]$/.test(e.key)) {
       e.preventDefault();
       pick(attempt.choices[i][Number(e.key) - 1]);
