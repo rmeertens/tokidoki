@@ -676,10 +676,18 @@
     return `<svg class="stat-chart stat-calendar" viewBox="0 0 ${weeks * (cell + gap) - gap} ${7 * (cell + gap) - gap}" role="img" aria-hidden="true">${rects}</svg>`;
   }
 
+  // The days the graph shows: up to today, and unless the whole six months
+  // were asked for, only from the first day with reviews (at least two weeks).
+  const GRAPH_MIN_DAYS = 14;
+  function graphDays(days, all) {
+    const shown = days.filter(d => d.reviews != null);
+    const first = shown.findIndex(d => d.reviews);
+    return all || first < 0 ? shown : shown.slice(Math.max(0, Math.min(first, shown.length - GRAPH_MIN_DAYS)));
+  }
+
   // The same days as a graph: a bar a day, right answers below missed ones,
   // with the months along the bottom.
-  function dailySvg(days) {
-    const shown = days.filter(d => d.reviews != null);
+  function dailySvg(shown, all) {
     const W = 440, H = 88, gap = 0.6;
     const max = Math.max(1, ...shown.map(d => d.reviews));
     const w = (W - gap * (shown.length - 1)) / shown.length;
@@ -697,7 +705,8 @@
       if (i && d.day.endsWith('-01')) months.push([barCentre(i, shown.length), new Date(d.day + 'T12:00:00').toLocaleDateString([], { month: 'short' })]);
     });
     const svg = `<svg class="stat-chart stat-daily" viewBox="0 0 ${W} ${H + 1}" role="img" aria-hidden="true"><line class="stat-axis" x1="0" x2="${W}" y1="${H + 0.5}" y2="${H + 0.5}"/>${cols}</svg>`;
-    return svg + axis(months) + `<div class="stat-legend"><i></i><span>Right</span><i class="stat-l1"></i><span>Missed</span><span class="stat-legend-max">Most in a day: ${num(max)}</span></div>`;
+    return svg + axis(months) + `<div class="stat-legend"><i></i><span>Right</span><i class="stat-l1"></i><span>Missed</span><span class="stat-legend-max">Most in a day: ${num(max)}</span>`
+      + `<button type="button" class="stat-range" data-account-act="graph-${all ? 'active' : 'all'}">${all ? 'Since first review' : 'Show 6 months'}</button></div>`;
   }
 
   // What hovering (or tapping) a day shows.
@@ -716,7 +725,7 @@
     if (!tip) return;
     const graph = target && target.closest('.stat-days');
     const d = target && (graph.classList.contains('stat-days-graph')
-      ? calendarDays.filter(x => x.reviews != null) : calendarDays)[Number(target.dataset.day)];
+      ? graphDays(calendarDays, graphAll()) : calendarDays)[Number(target.dataset.day)];
     overlay.querySelectorAll('.stat-on').forEach(el => el.classList.remove('stat-on'));
     if (!d) { tip.hidden = true; return; }
     target.classList.add('stat-on');
@@ -733,6 +742,9 @@
   // The calendar or the graph, whichever was picked last.
   const VIEW_KEY = 'tokidoki_stats_view';
   const daysView = () => (get(VIEW_KEY) === 'graph' ? 'graph' : 'calendar');
+  // The graph starts at the first review unless the whole range was picked.
+  const RANGE_KEY = 'tokidoki_stats_graph_range';
+  const graphAll = () => get(RANGE_KEY) === 'all';
 
   function statsHtml() {
     if (!window.ProgressStats) return '';
@@ -756,9 +768,9 @@
       `<button type="button" data-account-act="view-${v}" aria-pressed="${(v === 'graph') === graph}">${v === 'graph' ? 'Graph' : 'Calendar'}</button>`).join('')}</div>`;
     const calendar = `
       <div class="stat-block">
-        <div class="stat-head"><h4 class="stat-title">Reviews, last 6 months</h4>${switcher}</div>
+        <div class="stat-head"><h4 class="stat-title">Reviews${graph && !graphAll() && lg.since ? '' : ', last 6 months'}</h4>${switcher}</div>
         <div class="stat-days stat-days-${graph ? 'graph' : 'calendar'}">
-        ${graph ? dailySvg(p.calendar) : `${calendarSvg(p.calendar)}
+        ${graph ? dailySvg(graphDays(p.calendar, graphAll()), graphAll()) : `${calendarSvg(p.calendar)}
         <div class="stat-legend"><span>Less</span>${[0, 1, 2, 3, 4].map(l => `<i class="stat-l${l}"></i>`).join('')}<span>More</span></div>`}
         </div>
       </div>`;
@@ -951,6 +963,13 @@
       set(VIEW_KEY, act.slice(5));
       render();
       const b = overlay.querySelector(`[data-account-act="${act}"]`);
+      if (b) b.focus();
+      return;
+    }
+    if (act === 'graph-all' || act === 'graph-active') {
+      set(RANGE_KEY, act.slice(6));
+      render();
+      const b = overlay.querySelector('.stat-range');
       if (b) b.focus();
       return;
     }

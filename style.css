@@ -7362,6 +7362,7 @@ a.flashcards-link:hover .flashcards-link-btn {
 .stat-chart g.stat-on .stat-hit { fill: var(--text); fill-opacity: 0.08; }
 .stat-legend .stat-legend-max { margin-left: auto; }
 .stat-daily + .stat-axis-labels + .stat-legend { justify-content: flex-start; }
+.stat-legend .stat-range { margin-left: 8px; padding: 0; border: 0; background: none; font: inherit; color: var(--accent); text-decoration: underline; cursor: pointer; }
 .stat-days { display: flex; flex-direction: column; gap: 6px; }
 .stat-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 8px; }
 .stat-switch { display: inline-flex; border: 1px solid var(--border); border-radius: 999px; overflow: hidden; }
