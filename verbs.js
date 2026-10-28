@@ -229,6 +229,23 @@ const ALL_VERBS = [
   { kanji: '翻訳する', reading: 'ほんやくする', meaning: 'to translate', type: 'irregular', group: 'n4-school', chapter: 22 },
   { kanji: '受ける', reading: 'うける', meaning: 'to take (an exam)', type: 'ru', group: 'n4-school', chapter: 23 },
 
+  // n4-orders
+  { kanji: '止まる', reading: 'とまる', meaning: 'to stop', type: 'u', group: 'n4-orders', chapter: 24 },
+  { kanji: '逃げる', reading: 'にげる', meaning: 'to run away / to escape', type: 'ru', group: 'n4-orders', chapter: 24 },
+  { kanji: '黙る', reading: 'だまる', meaning: 'to be quiet / to shut up', type: 'u', group: 'n4-orders', chapter: 24 },
+  { kanji: '投げる', reading: 'なげる', meaning: 'to throw', type: 'ru', group: 'n4-orders', chapter: 24 },
+  { kanji: '引く', reading: 'ひく', meaning: 'to pull', type: 'u', group: 'n4-orders', chapter: 24 },
+  { kanji: '捨てる', reading: 'すてる', meaning: 'to throw away', type: 'ru', group: 'n4-orders', chapter: 24 },
+  { kanji: '動く', reading: 'うごく', meaning: 'to move', type: 'u', group: 'n4-orders', chapter: 24 },
+  { kanji: '隠れる', reading: 'かくれる', meaning: 'to hide', type: 'ru', group: 'n4-orders', chapter: 24 },
+  { kanji: '落ち着く', reading: 'おちつく', meaning: 'to calm down', type: 'u', group: 'n4-orders', chapter: 24 },
+  { kanji: '守る', reading: 'まもる', meaning: 'to protect', type: 'u', group: 'n4-orders', chapter: 24 },
+  { kanji: '進む', reading: 'すすむ', meaning: 'to go forward', type: 'u', group: 'n4-orders', chapter: 24 },
+  { kanji: '閉める', reading: 'しめる', meaning: 'to close / to shut', type: 'ru', group: 'n4-orders', chapter: 24 },
+  { kanji: '並ぶ', reading: 'ならぶ', meaning: 'to line up', type: 'u', group: 'n4-orders', chapter: 24 },
+  { kanji: '渡る', reading: 'わたる', meaning: 'to cross', type: 'u', group: 'n4-orders', chapter: 24 },
+  { kanji: '捕まえる', reading: 'つかまえる', meaning: 'to catch', type: 'ru', group: 'n4-orders', chapter: 24 },
+
   // n3-people
   { kanji: '似合う', reading: 'にあう', meaning: 'to suit / to look good on', type: 'u', group: 'n3-people', chapter: 14 },
   { kanji: '誘う', reading: 'さそう', meaning: 'to invite', type: 'u', group: 'n3-people', chapter: 15 },
@@ -272,8 +289,8 @@ const ALL_VERBS = [
 // The Verbs page's chunks, by JLPT level, in the order they're meant to be
 // worked through. Each one brings its own verbs (`group` above) and maybe
 // new forms (`newForms`), in the classic order: polite, polite past, て,
-// plain, plain past, たい, then potential, volitional, ば, passive and
-// causative. A chunk drills its own verbs in every form known by then, plus
+// plain, plain past, たい, then potential, volitional, ば, passive,
+// causative and the command form. A chunk drills its own verbs in every form known by then, plus
 // its new forms for the verbs of earlier chunks, so each verb + form is in
 // exactly one chunk: the first one where both are known. Keigo verbs keep
 // to the N5 forms (a passive いらっしゃる is no use to anyone).
@@ -295,6 +312,7 @@ const VERB_CHUNKS = [
   { id: 'n4-keigo', level: 'N4', title: 'Honorific & humble verbs', sub: 'いらっしゃる, 申す…', newForms: [] },
   { id: 'n4-handling', level: 'N4', title: 'Handling things', sub: 'tidy, carry, wrap, bake…', newForms: ['causative'] },
   { id: 'n4-school', level: 'N4', title: 'School, work & sport', sub: 'graduate, quit, win…', newForms: ['causative-passive'] },
+  { id: 'n4-orders', level: 'N4', title: 'Orders & warnings', sub: 'stop, run away, hide, calm down…', newForms: ['imperative'] },
   { id: 'n3-people', level: 'N3', title: 'People & relationships', sub: 'invite, date, help…', newForms: [] },
   { id: 'n3-feelings', level: 'N3', title: 'Effort & feelings', sub: 'give up, endure, be moved…', newForms: [] },
   { id: 'n3-life', level: 'N3', title: 'Life & work', sub: 'study abroad, order, save…', newForms: [] },
@@ -302,17 +320,22 @@ const VERB_CHUNKS = [
 
 // Forms that don't exist for a verb, or that nobody says: no potential or
 // volitional for things that just happen, no passive or causative for
-// states, and no N4 forms for keigo verbs.
+// states, no command for things nobody orders (転べ, 死ね, 遅刻しろ), and
+// no N4 forms for keigo verbs.
 const NOT_DONE_ON_PURPOSE = ['ある', '分かる', 'できる', '要る', '見える', '聞こえる', '足りる', 'かかる', '込む',
   '降る', '晴れる', '咲く', '始まる', '閉まる', '開く', '消える', '壊れる', '汚れる', '落ちる', '見つかる', '決まる',
   '生まれる', '疲れる', '困る', '遅くなる', '喉が渇く', '間に合う', '似合う'];
 const STATES = ['ある', '分かる', 'できる', '要る', '見える', '聞こえる', '足りる', '似合う', 'かかる', '込む'];
-const N4_FORMS = ['potential', 'volitional', 'ba', 'passive', 'causative', 'causative-passive'];
+const NO_COMMAND = ['知る', '着く', '終わる', '死ぬ', 'なくす', '心配する', '怒る', 'いじめる', '間違える', '落とす', '汚す', '盗む',
+  '朝寝坊する', '遅れる', '太る', '負ける', 'もてる', '離婚する', '捕まる', '殴る', '遅刻する', '緊張する', '感動する',
+  '落ち込む', '乗り遅れる', '転ぶ', '生活する'];
+const N4_FORMS = ['potential', 'volitional', 'ba', 'passive', 'causative', 'causative-passive', 'imperative'];
 
 function verbHasForm(verb, form) {
   if (verb.group === 'n4-keigo' && N4_FORMS.includes(form)) return false;
   if (['potential', 'volitional'].includes(form) && NOT_DONE_ON_PURPOSE.includes(verb.kanji)) return false;
   if (['passive', 'causative', 'causative-passive'].includes(form) && STATES.includes(verb.kanji)) return false;
+  if (form === 'imperative' && (NOT_DONE_ON_PURPOSE.includes(verb.kanji) || NO_COMMAND.includes(verb.kanji))) return false;
   return true;
 }
 

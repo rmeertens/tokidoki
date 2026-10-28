@@ -853,6 +853,8 @@
           steps.push(`For this form: change the ending to the <strong>あ-row</strong>, then add the suffix`);
         } else if (['potential', 'ba'].includes(form)) {
           steps.push(`For this form: change the ending to the <strong>え-row</strong>, then add the suffix`);
+        } else if (form === 'imperative') {
+          steps.push(`For the command form: change the ending to the <strong>え-row</strong> — nothing is added`);
         } else if (form === 'volitional') {
           steps.push(`For this form: change the ending to the <strong>お-row</strong>, then add う`);
         } else if (form === 'dict') {
@@ -887,7 +889,7 @@
     'masu': 'ます', 'masu-neg': 'ません', 'masu-past': 'ました', 'masu-past-neg': 'ませんでした',
     'te': 'て', 'ta': 'た', 'nai': 'ない', 'nakatta': 'なかった', 'dict': '',
     'tai': 'たい', 'potential': '', 'volitional': '', 'passive': '',
-    'causative': '', 'causative-passive': '', 'ba': '',
+    'causative': '', 'causative-passive': '', 'ba': '', 'imperative': '',
   };
 
   const U_TE_RULES = {
@@ -927,10 +929,13 @@
       'masu':'ます', 'masu-neg':'ません', 'masu-past':'ました', 'masu-past-neg':'ませんでした',
       'te':'て', 'ta':'た', 'nai':'ない', 'nakatta':'なかった', 'tai':'たい',
       'potential':'られる', 'volitional':'よう', 'passive':'られる',
-      'causative':'させる', 'causative-passive':'させられる', 'ba':'れば',
+      'causative':'させる', 'causative-passive':'させられる', 'ba':'れば', 'imperative':'ろ',
     };
 
     if (form === 'dict') return buildExplanation('<strong>Ru-verb:</strong> dictionary form is the plain form', `→ ${verb.reading} (no change)`);
+    if (form === 'imperative' && verb.reading === 'くれる') {
+      return buildExplanation(label, `→ ${hlResult(stem, '')} (くれる just drops る: no ろ)`);
+    }
     const suffix = suffixes[form];
     if (!suffix) return '';
     return buildExplanation(label, `→ ${hlResult(stem, suffix)}`);
@@ -1009,6 +1014,11 @@
         const label = `<strong>U-verb:</strong> change <span class="ex-hl">${ending}</span> to <span class="ex-hl">${eForm}</span> (え-row)`;
         return buildExplanation(label, `→ ${hlResult(base, eForm + 'ば')}`);
       }
+      case 'imperative': {
+        const eForm = E_ROW[ending];
+        const label = `<strong>U-verb:</strong> change <span class="ex-hl">${ending}</span> to <span class="ex-hl">${eForm}</span> (え-row)`;
+        return buildExplanation(label, `→ ${hlResult(base, eForm)}`);
+      }
       default: return '';
     }
   }
@@ -1026,13 +1036,13 @@
         'masu': 'し', 'masu-neg': 'し', 'masu-past': 'し', 'masu-past-neg': 'し',
         'te': 'し', 'ta': 'し', 'nai': 'し', 'nakatta': 'し',
         'tai': 'し', 'potential': 'でき', 'volitional': 'し', 'passive': 'さ',
-        'causative': 'さ', 'causative-passive': 'さ', 'ba': 'す',
+        'causative': 'さ', 'causative-passive': 'さ', 'ba': 'す', 'imperative': 'し',
       };
       const suffixes = {
         'masu': 'ます', 'masu-neg': 'ません', 'masu-past': 'ました', 'masu-past-neg': 'ませんでした',
         'te': 'て', 'ta': 'た', 'nai': 'ない', 'nakatta': 'なかった',
         'dict': '', 'tai': 'たい', 'potential': 'る', 'volitional': 'よう',
-        'passive': 'れる', 'causative': 'せる', 'causative-passive': 'せられる', 'ba': 'れば',
+        'passive': 'れる', 'causative': 'せる', 'causative-passive': 'せられる', 'ba': 'れば', 'imperative': 'ろ',
       };
 
       if (form === 'dict') return buildExplanation(label, `→ ${reading} (no change)`);
@@ -1050,13 +1060,13 @@
         'masu': 'き', 'masu-neg': 'き', 'masu-past': 'き', 'masu-past-neg': 'き',
         'te': 'き', 'ta': 'き', 'tai': 'き',
         'nai': 'こ', 'nakatta': 'こ', 'potential': 'こられ', 'volitional': 'こ',
-        'passive': 'こられ', 'causative': 'こさせ', 'causative-passive': 'こさせられ', 'ba': 'く',
+        'passive': 'こられ', 'causative': 'こさせ', 'causative-passive': 'こさせられ', 'ba': 'く', 'imperative': 'こ',
       };
       const suffixes = {
         'masu': 'ます', 'masu-neg': 'ません', 'masu-past': 'ました', 'masu-past-neg': 'ませんでした',
         'te': 'て', 'ta': 'た', 'tai': 'たい',
         'nai': 'ない', 'nakatta': 'なかった', 'potential': 'る', 'volitional': 'よう',
-        'passive': 'る', 'causative': 'る', 'causative-passive': 'る', 'ba': 'れば',
+        'passive': 'る', 'causative': 'る', 'causative-passive': 'る', 'ba': 'れば', 'imperative': 'い',
       };
 
       if (form === 'dict') return buildExplanation(label, `→ ${reading} (no change)`);
@@ -1145,6 +1155,8 @@
       if (['masu', 'masu-neg', 'masu-past', 'masu-past-neg', 'tai'].includes(form)) return base + I_ROW[ending];
       if (['nai', 'nakatta', 'passive', 'causative', 'causative-passive'].includes(form)) return base + A_ROW[ending];
       if (['potential', 'ba'].includes(form)) return base + E_ROW[ending];
+      // The command is just the え-row kana, so that kana is the ending.
+      if (form === 'imperative') return base;
       if (form === 'volitional') return base + O_ROW[ending];
       if (form === 'te' || form === 'ta') {
         if (verb.reading.endsWith('いく') || verb.reading.endsWith('ゆく')) return verb.reading.slice(0, -2) + 'い';

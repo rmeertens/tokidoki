@@ -77,7 +77,7 @@ function verbQuestions() {
 }
 
 const CHART_VERBS = [['書く', 'u-verb'], ['食べる', 'ru-verb'], ['する', 'irregular'], ['来る', 'irregular']];
-const CHART_FORMS = ['masu', 'masu-neg', 'masu-past', 'te', 'nai', 'ta', 'nakatta', 'tai', 'potential', 'volitional', 'passive', 'causative', 'ba', 'causative-passive'];
+const CHART_FORMS = ['masu', 'masu-neg', 'masu-past', 'te', 'nai', 'ta', 'nakatta', 'tai', 'potential', 'volitional', 'passive', 'causative', 'ba', 'causative-passive', 'imperative'];
 
 function chartTable() {
   const vs = CHART_VERBS.map(([k, t]) => [verb(k), t]);

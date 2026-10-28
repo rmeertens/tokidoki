@@ -311,6 +311,23 @@
     '離れる': { pre: '家[いえ]から', v: 'move away', o: 'from home' },
     '我慢する': { pre: '痛[いた]みを', v: 'put up', o: 'with the pain' },
     '優勝する': { pre: '大会[たいかい]で', v: 'win', o: 'the tournament' },
+
+    // Orders & warnings
+    '止まる': { pre: 'そこで', v: 'stop', o: 'there', skip: ['dict', 'passive'] },
+    '逃げる': { pre: '早[はや]く', v: 'run away', o: 'quickly', skip: ['dict', 'passive'] },
+    '黙る': { pre: '', v: 'be quiet', skip: ['dict', 'passive', 'causative'] },
+    '投げる': { pre: 'ボールを', v: 'throw', o: 'the ball' },
+    '引く': { pre: 'ドアを', v: 'pull', o: 'the door' },
+    '捨てる': { pre: 'ごみを', v: 'throw away', o: 'the trash' },
+    '動く': { pre: '', v: 'move', skip: ['dict', 'passive'] },
+    '隠れる': { pre: '木[き]の後[うし]ろに', v: 'hide', o: 'behind the tree', skip: ['passive'] },
+    '落ち着く': { pre: '', v: 'calm down', skip: ['dict', 'passive', 'causative', 'causative-passive'] },
+    '守る': { pre: '家族[かぞく]を', v: 'protect', o: 'my family', skip: ['passive', 'causative'] },
+    '進む': { pre: 'まっすぐ', v: 'go', o: 'straight ahead', skip: ['passive'] },
+    '閉める': { pre: '窓[まど]を', v: 'close', o: 'the window' },
+    '並ぶ': { pre: '一列[いちれつ]に', v: 'line up', o: 'in a single row', skip: ['dict', 'passive'] },
+    '渡る': { pre: '橋[はし]を', v: 'cross', o: 'the bridge', skip: ['passive'] },
+    '捕まえる': { pre: '猫[ねこ]を', v: 'catch', o: 'the cat', skip: ['passive'] },
   };
 
   // Adjectives: `s` is the English subject and `a` the adjective. Contexts
@@ -400,7 +417,7 @@
     sit: ['sat', 'sitting'], skip: ['skipped', 'skipping'], sleep: ['slept'], speak: ['spoke'], stand: ['stood'],
     steal: ['stole'], step: ['stepped', 'stepping'], stick: ['stuck'], stop: ['stopped', 'stopping'],
     submit: ['submitted', 'submitting'], swim: ['swam', 'swimming'], take: ['took'],
-    teach: ['taught'], tell: ['told'], think: ['thought'], understand: ['understood'], wake: ['woke'],
+    teach: ['taught'], tell: ['told'], think: ['thought'], throw: ['threw'], understand: ['understood'], wake: ['woke'],
     win: ['won', 'winning'], withdraw: ['withdrew'], wrap: ['wrapped', 'wrapping'], write: ['wrote'],
   };
 
@@ -527,7 +544,10 @@
   function hasExample(ctx, form, kinds) {
     const allowed = kinds[ctx.kind || 'act'];
     if (allowed && !allowed.includes(form)) return false;
-    return !(ctx.skip || []).includes(form);
+    const skip = ctx.skip || [];
+    // A command is a blunt request: none where 〜てください isn't natural.
+    if (form === 'imperative' && skip.includes('te')) return false;
+    return !skip.includes(form);
   }
 
   function verbJa(ctx, c, form) {
@@ -546,6 +566,7 @@
       case 'causative': return `子供[こども]に${stmt}。`;
       case 'ba': return kind === 'act' ? `${stmt}いいですよ。` : `${stmt}いいですね。`;
       case 'causative-passive': return `父[ちち]に${stmt}。`;
+      case 'imperative': return `${stmt}！`;
       default: return `${stmt}。`;
     }
   }
@@ -579,6 +600,7 @@
         if (kind === 'act') return `You should just ${v} ${o}.`;
         return `I hope ${clause(s, v, 'pres', pl)} ${o}.`;
       case 'causative-passive': return `I'm made to ${v} ${o} by my father.`;
+      case 'imperative': return `${v} ${o.replace(/\bmy\b/g, 'your')}!`;
       default: return `${clause(s, v, 'pres', pl)} ${o}.`;
     }
   }
@@ -648,6 +670,7 @@
       case 'causative': return `make/let someone ${base}`;
       case 'ba': return `if … ${base}`;
       case 'causative-passive': return `is made to ${base}`;
+      case 'imperative': return `${base.replace(/\bmy\b/g, 'your')}! (command)`;
       case 'adj-present': return `it is ${base}`;
       case 'adj-neg': return `it is not ${base}`;
       case 'adj-past': return `it was ${base}`;

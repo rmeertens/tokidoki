@@ -55,6 +55,7 @@ const Conjugator = (() => {
     if (MASU_FORMS.has(form) && HONORIFIC_I_STEM.some(v => reading.endsWith(v))) {
       return base + 'い' + MASU_ENDINGS[form];
     }
+    if (form === 'imperative' && HONORIFIC_I_STEM.some(v => reading.endsWith(v))) return base + 'い';
 
     switch (form) {
       case 'masu':        return base + stems.i + 'ます';
@@ -77,6 +78,7 @@ const Conjugator = (() => {
       case 'causative':   return base + stems.a + 'せる';
       case 'causative-passive': return base + stems.a + 'せられる';
       case 'ba':          return base + stems.e + 'ば';
+      case 'imperative':  return base + stems.e;
       default:            return reading;
     }
   }
@@ -101,6 +103,8 @@ const Conjugator = (() => {
       case 'causative':   return stem + 'させる';
       case 'causative-passive': return stem + 'させられる';
       case 'ba':          return stem + 'れば';
+      // くれる is the one ru-verb whose command drops ろ: くれ "give me".
+      case 'imperative':  return reading === 'くれる' ? stem : stem + 'ろ';
       default:            return reading;
     }
   }
@@ -141,6 +145,7 @@ const Conjugator = (() => {
       case 'causative':   return prefix + 'させる';
       case 'causative-passive': return prefix + 'させられる';
       case 'ba':          return prefix + 'すれば';
+      case 'imperative':  return prefix + 'しろ';
       default:            return reading;
     }
   }
@@ -165,6 +170,7 @@ const Conjugator = (() => {
       case 'causative':   return prefix + 'こさせる';
       case 'causative-passive': return prefix + 'こさせられる';
       case 'ba':          return prefix + 'くれば';
+      case 'imperative':  return prefix + 'こい';
       default:            return reading;
     }
   }
@@ -345,12 +351,24 @@ const Conjugator = (() => {
         + '</tbody></table>'
         + '<p class="conj-note"><strong>Short form (u-verbs only):</strong> In casual speech, u-verbs use a contracted form: あ-row + <b>される</b> instead of せられる.<br>書<b>く</b> → 書<b>かされる</b>、飲<b>む</b> → 飲<b>まされる</b>、行<b>く</b> → 行<b>かされる</b></p>'
         + '<p class="conj-note"><strong>Exception:</strong> U-verbs ending in <b>す</b> cannot use the short form (話す → 話させられる only, not 話さされる).</p>' },
+
+    'imperative':  { name: 'Command', nameJp: '命令形', hint: 'Do it! (blunt order)', symbol: '命令', color: '#6D4C41', level: 'N4',
+      explanation: '<p>The <strong>command form</strong> (imperative) is a blunt order: "Do it!" It is rough and direct, so you hear it from coaches and fans (頑張れ!), in emergencies (逃げろ!), on signs, in manga and anime, and from older men to their family — but you would almost never say it to a stranger or your boss. To ask nicely, use 〜てください instead.</p>'
+        + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example</th></tr></thead><tbody>'
+        + '<tr><td>Ru-verb</td><td>Drop <b>る</b>, add <b>ろ</b></td><td>食べる → 食べ<b>ろ</b><br>逃げる → 逃げ<b>ろ</b></td></tr>'
+        + '<tr><td>U-verb</td><td>Change final kana to <b>え-row</b></td><td>書<b>く</b> → 書<b>け</b><br>止ま<b>る</b> → 止ま<b>れ</b><br>待<b>つ</b> → 待<b>て</b></td></tr>'
+        + '<tr class="irr-row"><td>する</td><td>Irregular</td><td>する → <b>しろ</b></td></tr>'
+        + '<tr class="irr-row"><td>くる</td><td>Irregular (vowel こ)</td><td>くる → <b>こい</b></td></tr>'
+        + '</tbody></table>'
+        + '<p class="conj-note"><strong>Exception:</strong> くれる → <b>くれ</b> ("give me"), and the honorific verbs end in <b>い</b>: くださる → ください, いらっしゃる → いらっしゃい, なさる → なさい.</p>'
+        + '<p class="conj-note">The opposite, "don\'t!", is the dictionary form + <b>な</b>: 動く<b>な</b> (don\'t move!). Written orders and signs often use <b>せよ</b> for する (注意せよ). A softer command, used by parents and teachers, is the stem + <b>なさい</b>: 食べ<b>なさい</b>.</p>' },
   };
 
   const ALL_FORMS = Object.keys(FORM_INFO);
 
   // The forms drilled at a level: N5 has the polite, て and plain forms and
-  // たい; N4 and up add potential, volitional, ば, passive and causative.
+  // たい; N4 and up add potential, volitional, ば, passive, causative and
+  // the command form.
   function getFormsForLevel(level) {
     return level === 'N5' ? ALL_FORMS.filter(f => FORM_INFO[f].level === 'N5') : ALL_FORMS.slice();
   }

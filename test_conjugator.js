@@ -295,6 +295,23 @@ testVerb(
   { 'masu': 'めしあがります' }
 );
 
+// --- The command form (命令形) ---
+console.log('Testing the command form');
+const imp = (kanji, reading, type) => Conjugator.conjugate({ kanji, reading, type }, 'imperative');
+assert(imp('書く', 'かく', 'u'), 'かけ', '書く → かけ (え-row)');
+assert(imp('待つ', 'まつ', 'u'), 'まて', '待つ → まて');
+assert(imp('行く', 'いく', 'u'), 'いけ', '行く → いけ (no いく exception)');
+assert(imp('買う', 'かう', 'u'), 'かえ', '買う → かえ (う → え, not わ)');
+assert(imp('帰る', 'かえる', 'u'), 'かえれ', '帰る is a u-verb: かえれ');
+assert(imp('食べる', 'たべる', 'ru'), 'たべろ', '食べる → たべろ');
+assert(imp('隠れる', 'かくれる', 'ru'), 'かくれろ', '隠れる → かくれろ (ends in くれる, but isn\'t くれる)');
+assert(imp('くれる', 'くれる', 'ru'), 'くれ', 'くれる → くれ');
+assert(imp('する', 'する', 'irregular'), 'しろ', 'する → しろ');
+assert(imp('勉強する', 'べんきょうする', 'irregular'), 'べんきょうしろ', '勉強する → べんきょうしろ');
+assert(imp('来る', 'くる', 'irregular'), 'こい', '来る → こい');
+assert(imp('下さる', 'くださる', 'u'), 'ください', '下さる → ください');
+assert(Conjugator.conjugateKanji({ kanji: '持って来る', reading: 'もってくる', type: 'irregular' }, 'imperative'), '持って来い', '持って来る → 持って来い');
+
 // --- Kanji spellings of adjectives ---
 console.log('Testing adjective kanji spellings');
 assert(Conjugator.conjugateKanji({ kanji: '元気', reading: 'げんき', type: 'na-adj' }, 'adj-past'), '元気だった', '元気 → adj-past (kanji)');
@@ -345,6 +362,11 @@ assert(cardsOf('n5-study').some(([v, f]) => v.kanji === '行く' && f === 'te'),
 assert(cardsOf('n4-giving').some(([v, f]) => v.kanji === '食べる' && f === 'potential'), true, '食べる gets its potential form');
 assert(cardsOf('n4-giving').some(([v]) => v.kanji === 'ある'), false, 'no potential for ある');
 assert(cardsOf('n4-keigo').some(([, f]) => f === 'passive'), false, 'keigo verbs keep to the N5 forms');
+assert(cardsOf('n4-orders').some(([v, f]) => v.kanji === '頑張る' && f === 'imperative'), true, '頑張る gets its command form');
+assert(cardsOf('n4-orders').some(([v, f]) => v.kanji === '逃げる' && f === 'causative-passive'), true, 'the new verbs get the earlier forms too');
+assert(cardsOf('n3-life').some(([v, f]) => v.kanji === '注文する' && f === 'imperative'), true, 'later chunks drill the command form');
+['死ぬ', '転ぶ', 'ある', 'いらっしゃる'].forEach(k =>
+  assert(VERB_CHUNKS.some(c => getChunkCards(c).some(([v, f]) => v.kanji === k && f === 'imperative')), false, `no command for ${k}`));
 ALL_VERBS.filter(v => v.group !== 'n4-keigo' && v.kanji !== 'ある').forEach(v =>
   assert(pairs.has(`${v.chapter}_${v.reading}_${v.disambig || ''}_masu`), true, `${v.kanji} is drilled in ます`));
 

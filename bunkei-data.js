@@ -43,6 +43,10 @@
   // doing it together ("every day", "let's … together", "try … once").
   const ONE_OFF = ['卒業する', '結婚する', '就職する', '留学する', '離婚する', '優勝する', '引っ越す', 'なる', '別れる', '付き合う', '入学する'];
 
+  // Stopping, keeping still or hiding: a short moment, not something that
+  // comes before getting in touch or that you regret not doing.
+  const STOP_AND_STAY = ['止まる', '黙る', '動く', '落ち着く', '隠れる'];
+
   // Wrongdoing and mishaps: fine as "must not" or "was made to", but not as
   // something to plan, wish for or report on (〜たら, 〜ばよかった…).
   const NOT_ORDINARY = ['殴る', '盗む', '踏む', 'いじめる', '壊す', 'サボる', '離婚する', '別れる', '諦める', 'もてる', '心配する'];
@@ -306,6 +310,21 @@
     '離れる': ['家族[かぞく]の大切[たいせつ]さがわかりました', 'realized how important my family is'],
     '我慢する': ['病院[びょういん]に行[い]きました', 'went to the hospital'],
     '優勝する': ['有名[ゆうめい]になりました', 'became famous'],
+    '止まる': ['左右[さゆう]を見[み]ます', 'look both ways'],
+    '逃げる': ['警察[けいさつ]に電話[でんわ]します', 'call the police'],
+    '黙る': ['先生[せんせい]の話[はなし]を聞[き]きます', 'listen to the teacher'],
+    '投げる': ['走[はし]ります', 'run'],
+    '引く': ['中[なか]に入[はい]ります', 'go inside'],
+    '捨てる': ['会社[かいしゃ]に行[い]きます', 'go to work'],
+    '動く': ['少[すこ]し休[やす]みます', 'rest a little'],
+    '隠れる': ['友達[ともだち]を待[ま]ちます', 'wait for my friend'],
+    '落ち着く': ['話[はな]します', 'talk'],
+    '守る': ['安心[あんしん]しました', 'felt relieved'],
+    '進む': ['右[みぎ]に曲[ま]がります', 'turn right'],
+    '閉める': ['エアコンをつけます', 'turn on the air conditioner'],
+    '並ぶ': ['チケットを買[か]います', 'buy a ticket'],
+    '渡る': ['左[ひだり]に曲[ま]がります', 'turn left'],
+    '捕まえる': ['家[いえ]に連[つ]れて帰[かえ]ります', 'take it home'],
   };
 
   // 〜前に: this action comes first, before the drill verb
@@ -514,13 +533,13 @@
     { id: 'tara', level: 'N4', name: '〜たら', meaning: 'once, when (I\'ve done)',
       note: 'Once one thing has happened, the next follows: た-form + ら.',
       skip: ['寝る', '電話をかける', '連絡する', '待つ', '住む', '勤める', '飼う', '思う', '立つ', '持つ', '座る',
-        '気をつける', '注意する', '頑張る', '生活する', '我慢する', '続ける', '笑う', '着く', ...NOT_ORDINARY],
+        '気をつける', '注意する', '頑張る', '生活する', '我慢する', '続ける', '笑う', '着く', ...STOP_AND_STAY, ...NOT_ORDINARY],
       ja: p => `${p.pre}${p.c('ta')}ら、連絡[れんらく]します。`,
       en: p => `I'll get in touch once I've ${p.pp} ${p.o}.` },
     { id: 'ba-yokatta', level: 'N4', name: '〜ばよかったです', meaning: 'I wish I had',
       note: 'Regret about something you didn\'t do: ば-form + よかったです.',
       needs: 'ba',
-      skip: ['立つ', '座る', '持つ', '笑う', '住む', ...NOT_ORDINARY],
+      skip: ['立つ', '座る', '持つ', '笑う', '住む', ...STOP_AND_STAY, ...NOT_ORDINARY],
       ja: p => `${p.pre}${p.c('ba')}よかったです。`,
       en: p => `I wish I had ${p.pp} ${p.o}.` },
     { id: 'you-ni-naru', level: 'N4', name: '〜ようになりました', meaning: 'can now, have come to',
