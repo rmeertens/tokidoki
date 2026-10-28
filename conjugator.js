@@ -14,7 +14,7 @@ const Conjugator = (() => {
 
   // Honorific verbs whose polite stem is い, not り: いらっしゃいます, not いらっしゃります.
   const HONORIFIC_I_STEM = ['いらっしゃる', 'おっしゃる', 'くださる', 'なさる', 'ござる'];
-  const MASU_ENDINGS = { 'masu': 'ます', 'masu-neg': 'ません', 'masu-past': 'ました', 'masu-past-neg': 'ませんでした' };
+  const MASU_ENDINGS = { 'masu': 'ます', 'masu-neg': 'ません', 'masu-past': 'ました', 'masu-past-neg': 'ませんでした', 'mashou': 'ましょう' };
   const MASU_FORMS = new Set(Object.keys(MASU_ENDINGS));
 
   function getUVerbBase(reading) {
@@ -31,6 +31,12 @@ const Conjugator = (() => {
 
   function conjugate(verb, form) {
     const { reading, type } = verb;
+
+    // Forms built on another one: たら / たり on the た-form, 〜な on the
+    // dictionary form.
+    if (form === 'tara') return conjugate(verb, 'ta') + 'ら';
+    if (form === 'tari') return conjugate(verb, 'ta') + 'り';
+    if (form === 'prohibitive') return reading + 'な';
 
     if (type === 'irregular') {
       return conjugateIrregular(verb, form);
@@ -62,6 +68,7 @@ const Conjugator = (() => {
       case 'masu-neg':    return base + stems.i + 'ません';
       case 'masu-past':   return base + stems.i + 'ました';
       case 'masu-past-neg': return base + stems.i + 'ませんでした';
+      case 'mashou':      return base + stems.i + 'ましょう';
       case 'te':
         if (endsWithIku) return reading.slice(0, -2) + 'いって';
         return base + stems.te;
@@ -79,6 +86,7 @@ const Conjugator = (() => {
       case 'causative-passive': return base + stems.a + 'せられる';
       case 'ba':          return base + stems.e + 'ば';
       case 'imperative':  return base + stems.e;
+      case 'zu':          return base + stems.a + 'ず';
       default:            return reading;
     }
   }
@@ -91,6 +99,7 @@ const Conjugator = (() => {
       case 'masu-neg':    return stem + 'ません';
       case 'masu-past':   return stem + 'ました';
       case 'masu-past-neg': return stem + 'ませんでした';
+      case 'mashou':      return stem + 'ましょう';
       case 'te':          return stem + 'て';
       case 'ta':          return stem + 'た';
       case 'nai':         return stem + 'ない';
@@ -105,6 +114,7 @@ const Conjugator = (() => {
       case 'ba':          return stem + 'れば';
       // くれる is the one ru-verb whose command drops ろ: くれ "give me".
       case 'imperative':  return reading === 'くれる' ? stem : stem + 'ろ';
+      case 'zu':          return stem + 'ず';
       default:            return reading;
     }
   }
@@ -133,6 +143,7 @@ const Conjugator = (() => {
       case 'masu-neg':    return prefix + 'しません';
       case 'masu-past':   return prefix + 'しました';
       case 'masu-past-neg': return prefix + 'しませんでした';
+      case 'mashou':      return prefix + 'しましょう';
       case 'te':          return prefix + 'して';
       case 'ta':          return prefix + 'した';
       case 'nai':         return prefix + 'しない';
@@ -146,6 +157,7 @@ const Conjugator = (() => {
       case 'causative-passive': return prefix + 'させられる';
       case 'ba':          return prefix + 'すれば';
       case 'imperative':  return prefix + 'しろ';
+      case 'zu':          return prefix + 'せず';
       default:            return reading;
     }
   }
@@ -158,6 +170,7 @@ const Conjugator = (() => {
       case 'masu-neg':    return prefix + 'きません';
       case 'masu-past':   return prefix + 'きました';
       case 'masu-past-neg': return prefix + 'きませんでした';
+      case 'mashou':      return prefix + 'きましょう';
       case 'te':          return prefix + 'きて';
       case 'ta':          return prefix + 'きた';
       case 'nai':         return prefix + 'こない';
@@ -171,6 +184,7 @@ const Conjugator = (() => {
       case 'causative-passive': return prefix + 'こさせられる';
       case 'ba':          return prefix + 'くれば';
       case 'imperative':  return prefix + 'こい';
+      case 'zu':          return prefix + 'こず';
       default:            return reading;
     }
   }
@@ -288,6 +302,16 @@ const Conjugator = (() => {
         + '</tbody></table>'
         + '<p class="conj-note">Only used for the speaker\'s own desires (first person). For third person, use 〜たがっている. The object particle を can optionally become が with たい.</p>' },
 
+    'mashou':      { name: 'Polite volitional', nameJp: 'ましょう形', hint: "Let's ~ (polite)", symbol: 'ましょう', color: '#7CB342', level: 'N5',
+      explanation: '<p>The <strong>ましょう form</strong> means "let\'s do" in polite speech: 一緒に食べ<b>ましょう</b> (let\'s eat together). With か it offers or suggests: 窓を開け<b>ましょうか</b> (shall I open the window?). Its plain equivalent is the volitional form (食べよう).</p>'
+        + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example</th></tr></thead><tbody>'
+        + '<tr><td>Ru-verb</td><td>Drop <b>る</b>, add <b>ましょう</b></td><td>食べる → 食べ<b>ましょう</b></td></tr>'
+        + '<tr><td>U-verb</td><td>Change final kana to <b>い-row</b>, add <b>ましょう</b></td><td>書<b>く</b> → 書<b>きましょう</b><br>飲<b>む</b> → 飲<b>みましょう</b></td></tr>'
+        + '<tr class="irr-row"><td>する</td><td>Irregular</td><td>する → <b>しましょう</b></td></tr>'
+        + '<tr class="irr-row"><td>くる</td><td>Irregular (vowel き)</td><td>くる → <b>きましょう</b></td></tr>'
+        + '</tbody></table>'
+        + '<p class="conj-note">The stem is the same as for ます: if you know 書きます, you know 書きましょう.</p>' },
+
     'potential':   { name: 'Potential', nameJp: '可能形', hint: 'Can do ~', symbol: '可能', color: '#7B1FA2', level: 'N4',
       explanation: '<p>The <strong>potential form</strong> expresses ability — "can do" or "be able to." The result is a ru-verb, so it conjugates further like a ru-verb (e.g. 書ける → 書けない, 書けます).</p>'
         + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example</th></tr></thead><tbody>'
@@ -308,6 +332,24 @@ const Conjugator = (() => {
         + '<tr class="irr-row"><td>くる</td><td>Irregular (vowel こ)</td><td>くる → <b>こよう</b></td></tr>'
         + '</tbody></table>'
         + '<p class="conj-note">The お-row mapping: う→お, く→こ, ぐ→ご, す→そ, つ→と, ぬ→の, ぶ→ぼ, む→も, る→ろ</p>' },
+
+    'tari':        { name: 'Tari-form', nameJp: 'たり形', hint: 'Things like ~ing', symbol: 'たり', color: '#8D6E63', level: 'N4',
+      explanation: '<p>The <strong>たり form</strong> lists a few example actions, "things like": 週末は映画を見<b>たり</b>、本を読ん<b>だり</b>します (on weekends I do things like watching movies and reading). The list ends with <b>する</b>, which carries the tense: 〜たりしました. One たり on its own means "and so on".</p>'
+        + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example</th></tr></thead><tbody>'
+        + '<tr><td>All verbs</td><td>Make the <b>た-form</b>, add <b>り</b> (だ → だり)</td><td>食べた → 食べた<b>り</b><br>書いた → 書いた<b>り</b><br>飲んだ → 飲んだ<b>り</b></td></tr>'
+        + '<tr class="irr-row"><td>する</td><td>した + り</td><td>する → <b>したり</b></td></tr>'
+        + '<tr class="irr-row"><td>くる</td><td>きた + り</td><td>くる → <b>きたり</b></td></tr>'
+        + '</tbody></table>'
+        + '<p class="conj-note">So the た-form sound changes all apply: 行く → 行っ<b>たり</b>, 泳ぐ → 泳い<b>だり</b>.</p>' },
+
+    'tara':        { name: 'Tara-conditional', nameJp: 'たら形', hint: 'If / when ~', symbol: 'たら', color: '#26A69A', level: 'N4',
+      explanation: '<p>The <strong>たら conditional</strong> means "if" or "when / once": 雨が降っ<b>たら</b>、行きません (if it rains, I won\'t go); 家に帰っ<b>たら</b>、電話します (once I get home, I\'ll call). It is the most common "if" in everyday speech and works almost everywhere, even where ば or と would sound stiff.</p>'
+        + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example</th></tr></thead><tbody>'
+        + '<tr><td>All verbs</td><td>Make the <b>た-form</b>, add <b>ら</b> (だ → だら)</td><td>食べた → 食べた<b>ら</b><br>書いた → 書いた<b>ら</b><br>飲んだ → 飲んだ<b>ら</b></td></tr>'
+        + '<tr class="irr-row"><td>する</td><td>した + ら</td><td>する → <b>したら</b></td></tr>'
+        + '<tr class="irr-row"><td>くる</td><td>きた + ら</td><td>くる → <b>きたら</b></td></tr>'
+        + '</tbody></table>'
+        + '<p class="conj-note">Compare: 〜ば (general "if", advice with ばいい), 〜と (always/automatically), 〜なら (if that\'s the case). The negative is なかったら: 食べなかったら.</p>' },
 
     'passive':     { name: 'Passive', nameJp: '受身形', hint: 'Is done to ~', symbol: '受身', color: '#1565C0', level: 'N4',
       explanation: '<p>The <strong>passive form</strong> means "is done (to someone)." Japanese passive has two uses: <em>direct passive</em> (the subject receives the action) and <em>indirect/suffering passive</em> (the subject is adversely affected). The result is a ru-verb.</p>'
@@ -362,6 +404,25 @@ const Conjugator = (() => {
         + '</tbody></table>'
         + '<p class="conj-note"><strong>Exception:</strong> くれる → <b>くれ</b> ("give me"), and the honorific verbs end in <b>い</b>: くださる → ください, いらっしゃる → いらっしゃい, なさる → なさい.</p>'
         + '<p class="conj-note">The opposite, "don\'t!", is the dictionary form + <b>な</b>: 動く<b>な</b> (don\'t move!). Written orders and signs often use <b>せよ</b> for する (注意せよ). A softer command, used by parents and teachers, is the stem + <b>なさい</b>: 食べ<b>なさい</b>.</p>' },
+
+    'prohibitive': { name: 'Prohibitive', nameJp: '禁止形', hint: "Don't ~! (blunt)", symbol: 'な', color: '#5D4037', level: 'N4',
+      explanation: '<p>The <strong>prohibitive</strong> is a blunt "don\'t!", the negative of the command form: 動く<b>な</b> (don\'t move!), 忘れる<b>な</b> (don\'t forget!). Like the command form it is rough, so you see it on signs (触る<b>な</b>, 押す<b>な</b>), in notes to yourself, in manga and in emergencies. To ask nicely, use 〜ないでください.</p>'
+        + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example</th></tr></thead><tbody>'
+        + '<tr><td>All verbs</td><td><b>Dictionary form</b> + <b>な</b></td><td>食べる → 食べる<b>な</b><br>書く → 書く<b>な</b><br>騒ぐ → 騒ぐ<b>な</b></td></tr>'
+        + '<tr class="irr-row"><td>する</td><td>する + な</td><td>する → <b>するな</b></td></tr>'
+        + '<tr class="irr-row"><td>くる</td><td>くる + な</td><td>くる → <b>くるな</b></td></tr>'
+        + '</tbody></table>'
+        + '<p class="conj-note">Careful: this な is not the soft な of 〜なさい (食べなさい = "eat up"), which is a command, not a ban.</p>' },
+
+    'zu':          { name: 'Zu-form', nameJp: 'ず形', hint: 'Without ~ing', symbol: 'ず', color: '#546E7A', level: 'N3',
+      explanation: '<p>The <strong>ず form</strong> is a written, slightly formal "not". Most often it comes as <b>ずに</b>, "without doing": 朝ご飯を食べ<b>ずに</b>学校へ行った (I went to school without eating breakfast). It means the same as 〜ないで, and is common in writing, news and set phrases (思わず = "without thinking").</p>'
+        + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example</th></tr></thead><tbody>'
+        + '<tr><td>Ru-verb</td><td>Drop <b>る</b>, add <b>ず</b></td><td>食べる → 食べ<b>ず</b></td></tr>'
+        + '<tr><td>U-verb</td><td>Change final kana to <b>あ-row</b>, add <b>ず</b> (like ない)</td><td>書<b>く</b> → 書<b>かず</b><br>買<b>う</b> → 買<b>わず</b></td></tr>'
+        + '<tr class="irr-row"><td>する</td><td>Irregular</td><td>する → <b>せず</b> (not しず)</td></tr>'
+        + '<tr class="irr-row"><td>くる</td><td>Irregular (vowel こ)</td><td>くる → <b>こず</b></td></tr>'
+        + '</tbody></table>'
+        + '<p class="conj-note">An easy way to get it: take the ない form and swap ない for ず (食べない → 食べず), except that しない becomes <b>せず</b>.</p>' },
   };
 
   const ALL_FORMS = Object.keys(FORM_INFO);

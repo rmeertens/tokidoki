@@ -312,6 +312,20 @@ assert(imp('来る', 'くる', 'irregular'), 'こい', '来る → こい');
 assert(imp('下さる', 'くださる', 'u'), 'ください', '下さる → ください');
 assert(Conjugator.conjugateKanji({ kanji: '持って来る', reading: 'もってくる', type: 'irregular' }, 'imperative'), '持って来い', '持って来る → 持って来い');
 
+// --- ましょう, たり, たら, 〜な and ず ---
+console.log('Testing ましょう, たり, たら, 〜な and ず');
+const conj = (reading, type, form) => Conjugator.conjugate({ reading, type }, form);
+const forms5 = (reading, type) => ['mashou', 'tari', 'tara', 'prohibitive', 'zu'].map(f => conj(reading, type, f)).join(' ');
+assert(forms5('かく', 'u'), 'かきましょう かいたり かいたら かくな かかず', '書く');
+assert(forms5('いく', 'u'), 'いきましょう いったり いったら いくな いかず', '行く (いった, not いいた)');
+assert(forms5('のむ', 'u'), 'のみましょう のんだり のんだら のむな のまず', '飲む (んだり / んだら)');
+assert(forms5('かう', 'u'), 'かいましょう かったり かったら かうな かわず', '買う (う → わず)');
+assert(forms5('たべる', 'ru'), 'たべましょう たべたり たべたら たべるな たべず', '食べる');
+assert(forms5('する', 'irregular'), 'しましょう したり したら するな せず', 'する (せず, not しず)');
+assert(forms5('くる', 'irregular'), 'きましょう きたり きたら くるな こず', '来る');
+assert(conj('いらっしゃる', 'u', 'mashou'), 'いらっしゃいましょう', 'honorific い-stem in ましょう too');
+assert(Conjugator.conjugateKanji({ kanji: '持って来る', reading: 'もってくる', type: 'irregular' }, 'zu'), '持って来ず', '持って来る → 持って来ず');
+
 // --- Kanji spellings of adjectives ---
 console.log('Testing adjective kanji spellings');
 assert(Conjugator.conjugateKanji({ kanji: '元気', reading: 'げんき', type: 'na-adj' }, 'adj-past'), '元気だった', '元気 → adj-past (kanji)');
@@ -365,6 +379,18 @@ assert(cardsOf('n4-keigo').some(([, f]) => f === 'passive'), false, 'keigo verbs
 assert(cardsOf('n4-orders').some(([v, f]) => v.kanji === '頑張る' && f === 'imperative'), true, '頑張る gets its command form');
 assert(cardsOf('n4-orders').some(([v, f]) => v.kanji === '逃げる' && f === 'causative-passive'), true, 'the new verbs get the earlier forms too');
 assert(cardsOf('n3-life').some(([v, f]) => v.kanji === '注文する' && f === 'imperative'), true, 'later chunks drill the command form');
+const keyOfVerb = v => `${v.reading}_${v.disambig || ''}`;
+const byKey = {};
+ALL_VERBS.forEach(v => {
+  assert(byKey[keyOfVerb(v)], undefined, `${v.kanji} shares its reading with ${byKey[keyOfVerb(v)]}: give one a disambig`);
+  byKey[keyOfVerb(v)] = v.kanji;
+});
+assert([...formsOf('n5-outings')].includes('mashou'), true, 'ましょう comes with the last N5 chunk');
+assert(cardsOf('n4-health').some(([v, f]) => v.kanji === '帰る' && f === 'tara'), true, 'たら is drilled on the verbs before');
+assert(cardsOf('n4-hobbies').some(([v, f]) => v.kanji === '結婚する' && f === 'tari'), false, 'no たり for one-off events');
+assert(cardsOf('n4-manners').some(([v, f]) => v.kanji === '忘れる' && f === 'prohibitive'), true, '忘れるな');
+assert(cardsOf('n3-choices').some(([v, f]) => v.kanji === 'ある' && f === 'zu'), false, 'no あらず');
+assert(cardsOf('n4-keigo').some(([, f]) => f === 'mashou'), false, 'keigo verbs keep to the plain N5 forms');
 ['死ぬ', '転ぶ', 'ある', 'いらっしゃる'].forEach(k =>
   assert(VERB_CHUNKS.some(c => getChunkCards(c).some(([v, f]) => v.kanji === k && f === 'imperative')), false, `no command for ${k}`));
 ALL_VERBS.filter(v => v.group !== 'n4-keigo' && v.kanji !== 'ある').forEach(v =>

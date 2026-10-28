@@ -132,6 +132,19 @@ const ALL_VERBS = [
   { kanji: '申す', reading: 'もうす', meaning: 'to say (humble)', type: 'u', group: 'n4-keigo', chapter: 20 },
   { kanji: '差し上げる', reading: 'さしあげる', meaning: 'to give (humble)', type: 'ru', group: 'n4-keigo', chapter: 20 },
 
+  // n5-outings
+  { kanji: '浴びる', reading: 'あびる', meaning: 'to take (a shower)', type: 'ru', group: 'n5-outings', chapter: 24 },
+  { kanji: '頼む', reading: 'たのむ', meaning: 'to ask (a favor) / to order', type: 'u', group: 'n5-outings', chapter: 24 },
+  { kanji: '渡す', reading: 'わたす', meaning: 'to hand over', type: 'u', group: 'n5-outings', chapter: 24 },
+  { kanji: '並べる', reading: 'ならべる', meaning: 'to line up / to set out', type: 'ru', group: 'n5-outings', chapter: 24 },
+  { kanji: '止める', reading: 'とめる', meaning: 'to stop (something) / to park', type: 'ru', group: 'n5-outings', chapter: 24 },
+  { kanji: '旅行する', reading: 'りょこうする', meaning: 'to travel', type: 'irregular', group: 'n5-outings', chapter: 24 },
+  { kanji: '買い物する', reading: 'かいものする', meaning: 'to go shopping', type: 'irregular', group: 'n5-outings', chapter: 24 },
+  { kanji: '食事する', reading: 'しょくじする', meaning: 'to have a meal', type: 'irregular', group: 'n5-outings', chapter: 24 },
+  { kanji: '質問する', reading: 'しつもんする', meaning: 'to ask a question', type: 'irregular', group: 'n5-outings', chapter: 24 },
+  { kanji: '飛ぶ', reading: 'とぶ', meaning: 'to fly / to jump', type: 'u', group: 'n5-outings', chapter: 24 },
+  { kanji: '吹く', reading: 'ふく', meaning: 'to blow (a whistle)', type: 'u', group: 'n5-outings', chapter: 24 },
+
   // n4-giving
   { kanji: '手伝う', reading: 'てつだう', meaning: 'to help', type: 'u', group: 'n4-giving', chapter: 6 },
   { kanji: 'もらう', reading: 'もらう', meaning: 'to receive', type: 'u', group: 'n4-giving', chapter: 9 },
@@ -166,6 +179,18 @@ const ALL_VERBS = [
   { kanji: 'いじめる', reading: 'いじめる', meaning: 'to bully', type: 'ru', group: 'n4-feelings', chapter: 21 },
   { kanji: '反対する', reading: 'はんたいする', meaning: 'to oppose', type: 'irregular', group: 'n4-feelings', chapter: 22 },
 
+  // n4-health
+  { kanji: '怪我する', reading: 'けがする', meaning: 'to get hurt', type: 'irregular', group: 'n4-health', chapter: 24 },
+  { kanji: '治る', reading: 'なおる', meaning: 'to get better / to heal', type: 'u', group: 'n4-health', chapter: 24 },
+  { kanji: '冷やす', reading: 'ひやす', meaning: 'to cool / to chill', type: 'u', group: 'n4-health', chapter: 24 },
+  { kanji: '温める', reading: 'あたためる', meaning: 'to warm up', type: 'ru', group: 'n4-health', chapter: 24 },
+  { kanji: '入院する', reading: 'にゅういんする', meaning: 'to go into hospital', type: 'irregular', group: 'n4-health', chapter: 24 },
+  { kanji: '退院する', reading: 'たいいんする', meaning: 'to leave hospital', type: 'irregular', group: 'n4-health', chapter: 24 },
+  { kanji: '倒れる', reading: 'たおれる', meaning: 'to fall over / to collapse', type: 'ru', group: 'n4-health', chapter: 24 },
+  { kanji: 'うがいする', reading: 'うがいする', meaning: 'to gargle', type: 'irregular', group: 'n4-health', chapter: 24 },
+  { kanji: '熱を測る', reading: 'ねつをはかる', meaning: 'to take one\'s temperature', type: 'u', group: 'n4-health', chapter: 24 },
+  { kanji: '休憩する', reading: 'きゅうけいする', meaning: 'to take a break', type: 'irregular', group: 'n4-health', chapter: 24 },
+
   // n4-pairs
   { kanji: '始める', reading: 'はじめる', meaning: 'to begin', type: 'ru', group: 'n4-pairs', chapter: 8 },
   { kanji: '見える', reading: 'みえる', meaning: 'to be visible', type: 'ru', group: 'n4-pairs', chapter: 15 },
@@ -194,6 +219,18 @@ const ALL_VERBS = [
   { kanji: '焼く', reading: 'やく', meaning: 'to bake / to grill', type: 'u', group: 'n4-handling', chapter: 21 },
   { kanji: '運ぶ', reading: 'はこぶ', meaning: 'to carry / to transport', type: 'u', group: 'n4-handling', chapter: 22 },
   { kanji: '拾う', reading: 'ひろう', meaning: 'to pick up', type: 'u', group: 'n4-handling', chapter: 22 },
+
+  // n4-hobbies
+  { kanji: '釣る', reading: 'つる', meaning: 'to fish / to catch (a fish)', type: 'u', group: 'n4-hobbies', chapter: 24 },
+  { kanji: '飾る', reading: 'かざる', meaning: 'to decorate', type: 'u', group: 'n4-hobbies', chapter: 24 },
+  { kanji: '眺める', reading: 'ながめる', meaning: 'to gaze at / to look out at', type: 'ru', group: 'n4-hobbies', chapter: 24 },
+  { kanji: '楽しむ', reading: 'たのしむ', meaning: 'to enjoy', type: 'u', group: 'n4-hobbies', chapter: 24 },
+  { kanji: '植える', reading: 'うえる', meaning: 'to plant', type: 'ru', group: 'n4-hobbies', chapter: 24 },
+  { kanji: '昼寝する', reading: 'ひるねする', meaning: 'to take a nap', type: 'irregular', group: 'n4-hobbies', chapter: 24 },
+  { kanji: '登山する', reading: 'とざんする', meaning: 'to go mountain climbing', type: 'irregular', group: 'n4-hobbies', chapter: 24 },
+  { kanji: '応援する', reading: 'おうえんする', meaning: 'to cheer for / to support', type: 'irregular', group: 'n4-hobbies', chapter: 24 },
+  { kanji: 'ドライブする', reading: 'どらいぶする', meaning: 'to go for a drive', type: 'irregular', group: 'n4-hobbies', chapter: 24 },
+  { kanji: 'キャンプする', reading: 'きゃんぷする', meaning: 'to go camping', type: 'irregular', group: 'n4-hobbies', chapter: 24 },
 
   // n4-plans
   { kanji: '急ぐ', reading: 'いそぐ', meaning: 'to hurry', type: 'u', group: 'n4-plans', chapter: 6 },
@@ -230,11 +267,11 @@ const ALL_VERBS = [
   { kanji: '受ける', reading: 'うける', meaning: 'to take (an exam)', type: 'ru', group: 'n4-school', chapter: 23 },
 
   // n4-orders
-  { kanji: '止まる', reading: 'とまる', meaning: 'to stop', type: 'u', group: 'n4-orders', chapter: 24 },
+  { kanji: '止まる', reading: 'とまる', meaning: 'to stop', type: 'u', group: 'n4-orders', chapter: 24, disambig: 'stop' },
   { kanji: '逃げる', reading: 'にげる', meaning: 'to run away / to escape', type: 'ru', group: 'n4-orders', chapter: 24 },
   { kanji: '黙る', reading: 'だまる', meaning: 'to be quiet / to shut up', type: 'u', group: 'n4-orders', chapter: 24 },
   { kanji: '投げる', reading: 'なげる', meaning: 'to throw', type: 'ru', group: 'n4-orders', chapter: 24 },
-  { kanji: '引く', reading: 'ひく', meaning: 'to pull', type: 'u', group: 'n4-orders', chapter: 24 },
+  { kanji: '引く', reading: 'ひく', meaning: 'to pull', type: 'u', group: 'n4-orders', chapter: 24, disambig: 'pull' },
   { kanji: '捨てる', reading: 'すてる', meaning: 'to throw away', type: 'ru', group: 'n4-orders', chapter: 24 },
   { kanji: '動く', reading: 'うごく', meaning: 'to move', type: 'u', group: 'n4-orders', chapter: 24 },
   { kanji: '隠れる', reading: 'かくれる', meaning: 'to hide', type: 'ru', group: 'n4-orders', chapter: 24 },
@@ -245,6 +282,30 @@ const ALL_VERBS = [
   { kanji: '並ぶ', reading: 'ならぶ', meaning: 'to line up', type: 'u', group: 'n4-orders', chapter: 24 },
   { kanji: '渡る', reading: 'わたる', meaning: 'to cross', type: 'u', group: 'n4-orders', chapter: 24 },
   { kanji: '捕まえる', reading: 'つかまえる', meaning: 'to catch', type: 'ru', group: 'n4-orders', chapter: 24 },
+
+  // n4-manners
+  { kanji: '騒ぐ', reading: 'さわぐ', meaning: 'to make noise', type: 'u', group: 'n4-manners', chapter: 24 },
+  { kanji: '叫ぶ', reading: 'さけぶ', meaning: 'to shout', type: 'u', group: 'n4-manners', chapter: 24 },
+  { kanji: '割る', reading: 'わる', meaning: 'to break (glass) / to split', type: 'u', group: 'n4-manners', chapter: 24 },
+  { kanji: '破る', reading: 'やぶる', meaning: 'to tear / to break (a rule)', type: 'u', group: 'n4-manners', chapter: 24 },
+  { kanji: '嘘をつく', reading: 'うそをつく', meaning: 'to tell a lie', type: 'u', group: 'n4-manners', chapter: 24 },
+  { kanji: '覗く', reading: 'のぞく', meaning: 'to peek', type: 'u', group: 'n4-manners', chapter: 24 },
+  { kanji: '鳴らす', reading: 'ならす', meaning: 'to ring / to sound', type: 'u', group: 'n4-manners', chapter: 24 },
+  { kanji: '邪魔する', reading: 'じゃまする', meaning: 'to get in the way / to disturb', type: 'irregular', group: 'n4-manners', chapter: 24 },
+  { kanji: '喧嘩する', reading: 'けんかする', meaning: 'to fight / to quarrel', type: 'irregular', group: 'n4-manners', chapter: 24 },
+  { kanji: '落書きする', reading: 'らくがきする', meaning: 'to scribble / to do graffiti', type: 'irregular', group: 'n4-manners', chapter: 24 },
+
+  // n3-choices
+  { kanji: '迷う', reading: 'まよう', meaning: 'to hesitate / to get lost', type: 'u', group: 'n3-choices', chapter: 24 },
+  { kanji: '悩む', reading: 'なやむ', meaning: 'to worry / to agonize over', type: 'u', group: 'n3-choices', chapter: 24 },
+  { kanji: '断る', reading: 'ことわる', meaning: 'to refuse / to turn down', type: 'u', group: 'n3-choices', chapter: 24 },
+  { kanji: '比べる', reading: 'くらべる', meaning: 'to compare', type: 'ru', group: 'n3-choices', chapter: 24 },
+  { kanji: '確かめる', reading: 'たしかめる', meaning: 'to make sure / to check', type: 'ru', group: 'n3-choices', chapter: 24 },
+  { kanji: '頼る', reading: 'たよる', meaning: 'to rely on', type: 'u', group: 'n3-choices', chapter: 24 },
+  { kanji: '許す', reading: 'ゆるす', meaning: 'to forgive', type: 'u', group: 'n3-choices', chapter: 24 },
+  { kanji: '信じる', reading: 'しんじる', meaning: 'to believe', type: 'ru', group: 'n3-choices', chapter: 24 },
+  { kanji: '疑う', reading: 'うたがう', meaning: 'to doubt', type: 'u', group: 'n3-choices', chapter: 24 },
+  { kanji: '任せる', reading: 'まかせる', meaning: 'to leave (it) to someone', type: 'ru', group: 'n3-choices', chapter: 24 },
 
   // n3-people
   { kanji: '似合う', reading: 'にあう', meaning: 'to suit / to look good on', type: 'u', group: 'n3-people', chapter: 14 },
@@ -289,8 +350,8 @@ const ALL_VERBS = [
 // The Verbs page's chunks, by JLPT level, in the order they're meant to be
 // worked through. Each one brings its own verbs (`group` above) and maybe
 // new forms (`newForms`), in the classic order: polite, polite past, て,
-// plain, plain past, たい, then potential, volitional, ば, passive,
-// causative and the command form. A chunk drills its own verbs in every form known by then, plus
+// plain, plain past, たい, ましょう, then potential, volitional, たり, ば,
+// たら, passive, causative, the command form and 〜な, and ず at N3. A chunk drills its own verbs in every form known by then, plus
 // its new forms for the verbs of earlier chunks, so each verb + form is in
 // exactly one chunk: the first one where both are known. Keigo verbs keep
 // to the N5 forms (a passive いらっしゃる is no use to anyone).
@@ -305,14 +366,19 @@ const VERB_CHUNKS = [
   { id: 'n5-things', level: 'N5', title: 'Things & shopping', sub: 'buy, lend, put, use…', newForms: ['ta', 'nakatta'] },
   { id: 'n5-around', level: 'N5', title: 'Doors, lights & weather', sub: 'open, turn on, rain, begin…', newForms: ['tai'] },
   { id: 'n5-life', level: 'N5', title: 'Clothes & life events', sub: 'wear, marry, sing, be born…', newForms: [] },
+  { id: 'n5-outings', level: 'N5', title: 'Out and about', sub: 'travel, shop, ask, hand over…', newForms: ['mashou'] },
   { id: 'n4-giving', level: 'N4', title: 'Giving, helping & telling', sub: 'receive, send, explain…', newForms: ['potential'] },
   { id: 'n4-feelings', level: 'N4', title: 'Thoughts & feelings', sub: 'think, worry, laugh, decide…', newForms: ['volitional'] },
+  { id: 'n4-hobbies', level: 'N4', title: 'Hobbies & weekends', sub: 'fish, decorate, plant, go camping…', newForms: ['tari'] },
   { id: 'n4-plans', level: 'N4', title: 'Plans & errands', sub: 'hurry, book, move, pay…', newForms: ['ba'] },
+  { id: 'n4-health', level: 'N4', title: 'Health & the body', sub: 'get hurt, heal, cool, go into hospital…', newForms: ['tara'] },
   { id: 'n4-pairs', level: 'N4', title: 'Things that happen', sub: 'drop / fall, break, find…', newForms: ['passive'] },
   { id: 'n4-keigo', level: 'N4', title: 'Honorific & humble verbs', sub: 'いらっしゃる, 申す…', newForms: [] },
   { id: 'n4-handling', level: 'N4', title: 'Handling things', sub: 'tidy, carry, wrap, bake…', newForms: ['causative'] },
   { id: 'n4-school', level: 'N4', title: 'School, work & sport', sub: 'graduate, quit, win…', newForms: ['causative-passive'] },
   { id: 'n4-orders', level: 'N4', title: 'Orders & warnings', sub: 'stop, run away, hide, calm down…', newForms: ['imperative'] },
+  { id: 'n4-manners', level: 'N4', title: 'Rules & manners', sub: 'make noise, shout, lie, break…', newForms: ['prohibitive'] },
+  { id: 'n3-choices', level: 'N3', title: 'Choices & doubts', sub: 'hesitate, refuse, compare, trust…', newForms: ['zu'] },
   { id: 'n3-people', level: 'N3', title: 'People & relationships', sub: 'invite, date, help…', newForms: [] },
   { id: 'n3-feelings', level: 'N3', title: 'Effort & feelings', sub: 'give up, endure, be moved…', newForms: [] },
   { id: 'n3-life', level: 'N3', title: 'Life & work', sub: 'study abroad, order, save…', newForms: [] },
@@ -320,8 +386,9 @@ const VERB_CHUNKS = [
 
 // Forms that don't exist for a verb, or that nobody says: no potential or
 // volitional for things that just happen, no passive or causative for
-// states, no command for things nobody orders (転べ, 死ね, 遅刻しろ), and
-// no N4 forms for keigo verbs.
+// states, no command for things nobody orders (転べ, 死ね, 遅刻しろ), no
+// "don't!" for what nobody does on purpose (疲れるな), no たり for one-off
+// events, and keigo verbs keep to the plain N5 forms.
 const NOT_DONE_ON_PURPOSE = ['ある', '分かる', 'できる', '要る', '見える', '聞こえる', '足りる', 'かかる', '込む',
   '降る', '晴れる', '咲く', '始まる', '閉まる', '開く', '消える', '壊れる', '汚れる', '落ちる', '見つかる', '決まる',
   '生まれる', '疲れる', '困る', '遅くなる', '喉が渇く', '間に合う', '似合う'];
@@ -329,11 +396,16 @@ const STATES = ['ある', '分かる', 'できる', '要る', '見える', '聞�
 const NO_COMMAND = ['知る', '着く', '終わる', '死ぬ', 'なくす', '心配する', '怒る', 'いじめる', '間違える', '落とす', '汚す', '盗む',
   '朝寝坊する', '遅れる', '太る', '負ける', 'もてる', '離婚する', '捕まる', '殴る', '遅刻する', '緊張する', '感動する',
   '落ち込む', '乗り遅れる', '転ぶ', '生活する'];
-const N4_FORMS = ['potential', 'volitional', 'ba', 'passive', 'causative', 'causative-passive', 'imperative'];
+const NOT_FOR_KEIGO = ['potential', 'volitional', 'ba', 'passive', 'causative', 'causative-passive', 'imperative',
+  'mashou', 'tari', 'tara', 'prohibitive', 'zu'];
+const NO_TARI = ['結婚する', '離婚する', '卒業する', '就職する', '入学する', '生まれる', '死ぬ', '優勝する', '留学する',
+  '引っ越す', '別れる', '入院する', '退院する'];
 
 function verbHasForm(verb, form) {
-  if (verb.group === 'n4-keigo' && N4_FORMS.includes(form)) return false;
-  if (['potential', 'volitional'].includes(form) && NOT_DONE_ON_PURPOSE.includes(verb.kanji)) return false;
+  if (verb.group === 'n4-keigo' && NOT_FOR_KEIGO.includes(form)) return false;
+  if (['potential', 'volitional', 'mashou', 'prohibitive'].includes(form) && NOT_DONE_ON_PURPOSE.includes(verb.kanji)) return false;
+  if (form === 'zu' && verb.kanji === 'ある') return false;
+  if (form === 'tari' && (NOT_DONE_ON_PURPOSE.includes(verb.kanji) || NO_TARI.includes(verb.kanji))) return false;
   if (['passive', 'causative', 'causative-passive'].includes(form) && STATES.includes(verb.kanji)) return false;
   if (form === 'imperative' && (NOT_DONE_ON_PURPOSE.includes(verb.kanji) || NO_COMMAND.includes(verb.kanji))) return false;
   return true;

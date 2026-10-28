@@ -49,7 +49,8 @@
 
   // Wrongdoing and mishaps: fine as "must not" or "was made to", but not as
   // something to plan, wish for or report on (〜たら, 〜ばよかった…).
-  const NOT_ORDINARY = ['殴る', '盗む', '踏む', 'いじめる', '壊す', 'サボる', '離婚する', '別れる', '諦める', 'もてる', '心配する'];
+  const NOT_ORDINARY = ['殴る', '盗む', '踏む', 'いじめる', '壊す', 'サボる', '離婚する', '別れる', '諦める', 'もてる', '心配する',
+    '騒ぐ', '嘘をつく', '覗く', '邪魔する', '喧嘩する', '落書きする', '疑う'];
 
   // Existence verbs read oddly in almost every pattern ("please let me be in
   // the classroom"), so they're left out of the drill.
@@ -310,11 +311,11 @@
     '離れる': ['家族[かぞく]の大切[たいせつ]さがわかりました', 'realized how important my family is'],
     '我慢する': ['病院[びょういん]に行[い]きました', 'went to the hospital'],
     '優勝する': ['有名[ゆうめい]になりました', 'became famous'],
-    '止まる': ['左右[さゆう]を見[み]ます', 'look both ways'],
+    '止まる_stop': ['左右[さゆう]を見[み]ます', 'look both ways'],
     '逃げる': ['警察[けいさつ]に電話[でんわ]します', 'call the police'],
     '黙る': ['先生[せんせい]の話[はなし]を聞[き]きます', 'listen to the teacher'],
     '投げる': ['走[はし]ります', 'run'],
-    '引く': ['中[なか]に入[はい]ります', 'go inside'],
+    '引く_pull': ['中[なか]に入[はい]ります', 'go inside'],
     '捨てる': ['会社[かいしゃ]に行[い]きます', 'go to work'],
     '動く': ['少[すこ]し休[やす]みます', 'rest a little'],
     '隠れる': ['友達[ともだち]を待[ま]ちます', 'wait for my friend'],
@@ -325,6 +326,49 @@
     '並ぶ': ['チケットを買[か]います', 'buy a ticket'],
     '渡る': ['左[ひだり]に曲[ま]がります', 'turn left'],
     '捕まえる': ['家[いえ]に連[つ]れて帰[かえ]ります', 'take it home'],
+    '浴びる': ['服[ふく]を着[き]ます', 'get dressed'],
+    '頼む': ['少[すこ]し安心[あんしん]しました', 'felt a bit relieved'],
+    '渡す': ['家[いえ]に帰[かえ]ります', 'go home'],
+    '並べる': ['料理[りょうり]を運[はこ]びます', 'bring out the food'],
+    '止める': ['買[か]い物[もの]をします', 'do some shopping'],
+    '旅行する': ['写真[しゃしん]を友達[ともだち]に見[み]せます', 'show my friends the photos'],
+    '買い物する': ['カフェで休[やす]みます', 'rest at a café'],
+    '食事する': ['映画[えいが]を見[み]ます', 'watch a movie'],
+    '質問する': ['ノートに書[か]きます', 'write it in my notebook'],
+    '飛ぶ': ['プールに入[はい]ります', 'get into the pool'],
+    '吹く': ['試合[しあい]を始[はじ]めます', 'start the game'],
+    '冷やす': ['みんなで飲[の]みます', 'drink it with everyone'],
+    '温める': ['食[た]べます', 'eat it'],
+    '退院する': ['仕事[しごと]に戻[もど]ります', 'go back to work'],
+    'うがいする': ['寝[ね]ます', 'go to bed'],
+    '熱を測る': ['薬[くすり]を飲[の]みます', 'take some medicine'],
+    '休憩する': ['また歩[ある]きます', 'start walking again'],
+    '釣る': ['焼[や]いて食[た]べます', 'grill it and eat it'],
+    '飾る': ['友達[ともだち]を呼[よ]びます', 'invite my friends over'],
+    '眺める': ['寝[ね]ます', 'go to bed'],
+    '楽しむ': ['家[いえ]に帰[かえ]ります', 'go home'],
+    '植える': ['水[みず]をやります', 'water them'],
+    '昼寝する': ['宿題[しゅくだい]をします', 'do my homework'],
+    '登山する': ['温泉[おんせん]に入[はい]ります', 'go to a hot spring'],
+    '応援する': ['みんなで晩[ばん]ご飯[はん]を食[た]べます', 'have dinner with everyone'],
+    'ドライブする': ['海[うみ]で泳[およ]ぎます', 'swim in the sea'],
+    'キャンプする': ['家[いえ]でゆっくり休[やす]みます', 'have a good rest at home'],
+    '騒ぐ': ['駅員[えきいん]に注意[ちゅうい]されました', 'got told off by a station worker'],
+    '叫ぶ': ['のどが痛[いた]くなりました', 'got a sore throat'],
+    '嘘をつく': ['後悔[こうかい]しました', 'regretted it'],
+    '覗く': ['すぐに謝[あやま]りました', 'apologized right away'],
+    '鳴らす': ['ドアの前[まえ]で待[ま]ちます', 'wait at the door'],
+    '邪魔する': ['母[はは]に叱[しか]られました', 'got scolded by my mother'],
+    '喧嘩する': ['すぐに仲直[なかなお]りしました', 'made up right away'],
+    '落書きする': ['先生[せんせい]に叱[しか]られました', 'got scolded by the teacher'],
+    '断る': ['少[すこ]し後悔[こうかい]しました', 'regretted it a little'],
+    '比べる': ['安[やす]い方[ほう]を買[か]います', 'buy the cheaper one'],
+    '確かめる': ['テストを出[だ]します', 'hand in the test'],
+    '頼る': ['少[すこ]し楽[らく]になりました', 'felt a bit better'],
+    '許す': ['気持[きも]ちが軽[かる]くなりました', 'felt lighter'],
+    '信じる': ['試合[しあい]に出[で]ます', 'go into the game'],
+    '疑う': ['自分[じぶん]で調[しら]べます', 'look into it myself'],
+    '任せる': ['テーブルの準備[じゅんび]をします', 'set the table'],
   };
 
   // 〜前に: this action comes first, before the drill verb

@@ -845,11 +845,13 @@
         const ending = verb.reading.slice(-1);
         steps.push(`The dictionary form ends in <strong>${ending}</strong>`);
 
-        if (['masu', 'masu-neg', 'masu-past', 'masu-past-neg', 'tai'].includes(form)) {
+        if (['masu', 'masu-neg', 'masu-past', 'masu-past-neg', 'tai', 'mashou'].includes(form)) {
           steps.push(`For this form: change the ending to the <strong>い-row</strong> (い-column), then add the suffix`);
         } else if (['te', 'ta'].includes(form)) {
           steps.push(`For て/た-form: the rule depends on the final kana — think about the sound change group`);
-        } else if (['nai', 'nakatta', 'passive', 'causative', 'causative-passive'].includes(form)) {
+        } else if (['tara', 'tari'].includes(form)) {
+          steps.push(`Make the <strong>た-form</strong> first (its sound change depends on the final kana), then add ${form === 'tara' ? 'ら' : 'り'}`);
+        } else if (['nai', 'nakatta', 'passive', 'causative', 'causative-passive', 'zu'].includes(form)) {
           steps.push(`For this form: change the ending to the <strong>あ-row</strong>, then add the suffix`);
         } else if (['potential', 'ba'].includes(form)) {
           steps.push(`For this form: change the ending to the <strong>え-row</strong>, then add the suffix`);
@@ -859,11 +861,15 @@
           steps.push(`For this form: change the ending to the <strong>お-row</strong>, then add う`);
         } else if (form === 'dict') {
           steps.push(`The dictionary form is the word as-is — no change needed`);
+        } else if (form === 'prohibitive') {
+          steps.push(`No change to the verb: the dictionary form + <strong>な</strong>`);
         }
       } else {
         const isSuru = verb.reading === 'する' || verb.reading.endsWith('する');
         const isKuru = verb.reading === 'くる' || verb.reading.endsWith('くる');
-        if (isSuru) steps.push(`する verbs have their own conjugation pattern`);
+        if (form === 'prohibitive') steps.push(`Even irregular verbs just add <strong>な</strong> to the dictionary form`);
+        else if (form === 'zu' && isSuru) steps.push(`する is irregular here: think of せ, not し`);
+        else if (isSuru) steps.push(`する verbs have their own conjugation pattern`);
         else if (isKuru) steps.push(`くる has its own irregular conjugation pattern`);
         else steps.push(`Think about which irregular pattern this verb follows`);
       }
@@ -890,6 +896,7 @@
     'te': 'て', 'ta': 'た', 'nai': 'ない', 'nakatta': 'なかった', 'dict': '',
     'tai': 'たい', 'potential': '', 'volitional': '', 'passive': '',
     'causative': '', 'causative-passive': '', 'ba': '', 'imperative': '',
+    'mashou': 'ましょう', 'tari': 'たり', 'tara': 'たら', 'prohibitive': 'な', 'zu': 'ず',
   };
 
   const U_TE_RULES = {
@@ -930,15 +937,22 @@
       'te':'て', 'ta':'た', 'nai':'ない', 'nakatta':'なかった', 'tai':'たい',
       'potential':'られる', 'volitional':'よう', 'passive':'られる',
       'causative':'させる', 'causative-passive':'させられる', 'ba':'れば', 'imperative':'ろ',
+      'mashou':'ましょう', 'tari':'たり', 'tara':'たら', 'zu':'ず',
     };
 
     if (form === 'dict') return buildExplanation('<strong>Ru-verb:</strong> dictionary form is the plain form', `→ ${verb.reading} (no change)`);
+    if (form === 'prohibitive') return prohibitiveExplanation(verb);
     if (form === 'imperative' && verb.reading === 'くれる') {
       return buildExplanation(label, `→ ${hlResult(stem, '')} (くれる just drops る: no ろ)`);
     }
     const suffix = suffixes[form];
     if (!suffix) return '';
     return buildExplanation(label, `→ ${hlResult(stem, suffix)}`);
+  }
+
+  // 〜な is the same for every verb: the dictionary form + な.
+  function prohibitiveExplanation(verb) {
+    return buildExplanation('<strong>Any verb:</strong> keep the dictionary form, add <span class="ex-hl">な</span>', `→ ${hlResult(verb.reading, 'な')}`);
   }
 
   function hlResult(base, hl) {
@@ -955,35 +969,43 @@
       case 'masu-neg':
       case 'masu-past':
       case 'masu-past-neg':
-      case 'tai': {
+      case 'tai':
+      case 'mashou': {
         const iForm = I_ROW[ending];
-        const suffix = { 'masu':'ます', 'masu-neg':'ません', 'masu-past':'ました', 'masu-past-neg':'ませんでした', 'tai':'たい' }[form];
+        const suffix = { 'masu':'ます', 'masu-neg':'ません', 'masu-past':'ました', 'masu-past-neg':'ませんでした', 'tai':'たい', 'mashou':'ましょう' }[form];
         const label = `<strong>U-verb:</strong> change <span class="ex-hl">${ending}</span> to <span class="ex-hl">${iForm}</span> (い-row)`;
         return buildExplanation(label, `→ ${hlResult(base, iForm + suffix)}`);
       }
       case 'te':
-      case 'ta': {
+      case 'ta':
+      case 'tara':
+      case 'tari': {
+        const extra = { 'tara': 'ら', 'tari': 'り' }[form] || '';
+        const then = extra ? `, then add <span class="ex-hl">${extra}</span>` : '';
         if (isIku) {
           const prefix = reading.slice(0, -2);
-          const label = `<strong>U-verb (いく):</strong> special rule — いく uses <span class="ex-hl">いって/いった</span>`;
+          const label = `<strong>U-verb (いく):</strong> special rule — いく uses <span class="ex-hl">いって/いった</span>${then}`;
           const teForm = form === 'te' ? 'いって' : 'いった';
-          return buildExplanation(label, `→ ${hlResult(prefix, teForm)}`);
+          return buildExplanation(label, `→ ${hlResult(prefix, teForm + extra)}`);
         }
         const rule = U_TE_RULES[ending];
-        const label = `<strong>U-verb:</strong> ${form === 'te' ? 'て' : 'た'}-form rule for <span class="ex-hl">${ending}</span>: ${rule.desc.replace(ending, `<span class="ex-hl">${ending}</span>`)}`;
+        const desc = form === 'te' ? rule.desc : `${ending} → ${rule.ta}`;
+        const label = `<strong>U-verb:</strong> ${form === 'te' ? 'て' : 'た'}-form rule for <span class="ex-hl">${ending}</span>: ${desc.replace(ending, `<span class="ex-hl">${ending}</span>`)}${then}`;
         const teForm = form === 'te' ? rule.te : rule.ta;
-        return buildExplanation(label, `→ ${hlResult(base, teForm)}`);
+        return buildExplanation(label, `→ ${hlResult(base, teForm + extra)}`);
       }
       case 'nai':
-      case 'nakatta': {
+      case 'nakatta':
+      case 'zu': {
         const aForm = A_ROW[ending];
-        const suffix = form === 'nai' ? 'ない' : 'なかった';
+        const suffix = { 'nai': 'ない', 'nakatta': 'なかった', 'zu': 'ず' }[form];
         const label = `<strong>U-verb:</strong> change <span class="ex-hl">${ending}</span> to <span class="ex-hl">${aForm}</span> (あ-row)`;
         return buildExplanation(label, `→ ${hlResult(base, aForm + suffix)}`);
       }
       case 'dict': {
         return buildExplanation('<strong>U-verb:</strong> dictionary form is the plain form', `→ ${reading} (no change)`);
       }
+      case 'prohibitive': return prohibitiveExplanation(verb);
       case 'potential': {
         const eForm = E_ROW[ending];
         const label = `<strong>U-verb:</strong> change <span class="ex-hl">${ending}</span> to <span class="ex-hl">${eForm}</span> (え-row)`;
@@ -1028,6 +1050,8 @@
     const isSuru = reading === 'する' || reading.endsWith('する');
     const isKuru = reading === 'くる' || reading.endsWith('くる');
 
+    if (form === 'prohibitive') return prohibitiveExplanation(verb);
+
     if (isSuru) {
       const prefix = reading.slice(0, -2);
       const label = `<strong>Irregular (する):</strong> する has unique conjugation stems`;
@@ -1037,12 +1061,14 @@
         'te': 'し', 'ta': 'し', 'nai': 'し', 'nakatta': 'し',
         'tai': 'し', 'potential': 'でき', 'volitional': 'し', 'passive': 'さ',
         'causative': 'さ', 'causative-passive': 'さ', 'ba': 'す', 'imperative': 'し',
+        'mashou': 'し', 'tari': 'し', 'tara': 'し', 'zu': 'せ',
       };
       const suffixes = {
         'masu': 'ます', 'masu-neg': 'ません', 'masu-past': 'ました', 'masu-past-neg': 'ませんでした',
         'te': 'て', 'ta': 'た', 'nai': 'ない', 'nakatta': 'なかった',
         'dict': '', 'tai': 'たい', 'potential': 'る', 'volitional': 'よう',
         'passive': 'れる', 'causative': 'せる', 'causative-passive': 'せられる', 'ba': 'れば', 'imperative': 'ろ',
+        'mashou': 'ましょう', 'tari': 'たり', 'tara': 'たら', 'zu': 'ず',
       };
 
       if (form === 'dict') return buildExplanation(label, `→ ${reading} (no change)`);
@@ -1061,12 +1087,14 @@
         'te': 'き', 'ta': 'き', 'tai': 'き',
         'nai': 'こ', 'nakatta': 'こ', 'potential': 'こられ', 'volitional': 'こ',
         'passive': 'こられ', 'causative': 'こさせ', 'causative-passive': 'こさせられ', 'ba': 'く', 'imperative': 'こ',
+        'mashou': 'き', 'tari': 'き', 'tara': 'き', 'zu': 'こ',
       };
       const suffixes = {
         'masu': 'ます', 'masu-neg': 'ません', 'masu-past': 'ました', 'masu-past-neg': 'ませんでした',
         'te': 'て', 'ta': 'た', 'tai': 'たい',
         'nai': 'ない', 'nakatta': 'なかった', 'potential': 'る', 'volitional': 'よう',
         'passive': 'る', 'causative': 'る', 'causative-passive': 'る', 'ba': 'れば', 'imperative': 'い',
+        'mashou': 'ましょう', 'tari': 'たり', 'tara': 'たら', 'zu': 'ず',
       };
 
       if (form === 'dict') return buildExplanation(label, `→ ${reading} (no change)`);
@@ -1143,6 +1171,9 @@
       return null;
     }
 
+    // 〜な keeps the whole dictionary form; な is the ending.
+    if (form === 'prohibitive') return verb.reading;
+
     if (verb.type === 'ru') {
       if (form === 'dict') return null;
       return verb.reading.slice(0, -1);
@@ -1152,13 +1183,13 @@
       if (form === 'dict') return null;
       const ending = verb.reading.slice(-1);
       const base = verb.reading.slice(0, -1);
-      if (['masu', 'masu-neg', 'masu-past', 'masu-past-neg', 'tai'].includes(form)) return base + I_ROW[ending];
-      if (['nai', 'nakatta', 'passive', 'causative', 'causative-passive'].includes(form)) return base + A_ROW[ending];
+      if (['masu', 'masu-neg', 'masu-past', 'masu-past-neg', 'tai', 'mashou'].includes(form)) return base + I_ROW[ending];
+      if (['nai', 'nakatta', 'passive', 'causative', 'causative-passive', 'zu'].includes(form)) return base + A_ROW[ending];
       if (['potential', 'ba'].includes(form)) return base + E_ROW[ending];
       // The command is just the え-row kana, so that kana is the ending.
       if (form === 'imperative') return base;
       if (form === 'volitional') return base + O_ROW[ending];
-      if (form === 'te' || form === 'ta') {
+      if (['te', 'ta', 'tara', 'tari'].includes(form)) {
         if (verb.reading.endsWith('いく') || verb.reading.endsWith('ゆく')) return verb.reading.slice(0, -2) + 'い';
         const rule = U_TE_RULES[ending];
         if (!rule) return null;
@@ -1191,7 +1222,7 @@
     const { verb, form } = card;
     const isAdj = studyMode === 'adjectives' || (studyMode === 'custom' && isAdjCard(card));
     if (isAdj) return null;
-    if (verb.type === 'u' && form !== 'dict') {
+    if (verb.type === 'u' && form !== 'dict' && form !== 'prohibitive') {
       return verb.reading.slice(0, -1);
     }
     return null;

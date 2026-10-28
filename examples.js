@@ -21,9 +21,9 @@
 
   const KIND_FORMS = {
     act: null,
-    nv: ['masu', 'masu-neg', 'masu-past', 'masu-past-neg', 'te', 'nai', 'dict', 'ta', 'nakatta'],
-    st: ['masu', 'masu-neg', 'masu-past', 'masu-past-neg', 'nai', 'dict', 'ta', 'nakatta', 'ba'],
-    ev: ['masu', 'masu-neg', 'masu-past', 'masu-past-neg', 'te', 'nai', 'dict', 'ta', 'nakatta', 'ba'],
+    nv: ['masu', 'masu-neg', 'masu-past', 'masu-past-neg', 'te', 'nai', 'dict', 'ta', 'nakatta', 'tara', 'prohibitive', 'zu'],
+    st: ['masu', 'masu-neg', 'masu-past', 'masu-past-neg', 'nai', 'dict', 'ta', 'nakatta', 'ba', 'tara'],
+    ev: ['masu', 'masu-neg', 'masu-past', 'masu-past-neg', 'te', 'nai', 'dict', 'ta', 'nakatta', 'ba', 'tara'],
     hon: ['masu', 'masu-neg', 'masu-past', 'masu-past-neg', 'te', 'nai', 'dict', 'ta', 'nakatta'],
     hum: ['masu', 'masu-neg', 'masu-past', 'masu-past-neg', 'tai'],
   };
@@ -210,7 +210,7 @@
     '入れる': { pre: 'コーヒーに砂糖[さとう]を', v: 'put', o: 'sugar in the coffee' },
     '乗り遅れる': { kind: 'nv', pre: '電車[でんしゃ]に', v: 'miss', o: 'the train' },
     '見せる': { pre: '写真[しゃしん]を', v: 'show', o: 'the photos' },
-    '朝寝坊する': { kind: 'nv', pre: '日曜日[にちようび]に', v: 'oversleep', o: 'on Sunday' },
+    '朝寝坊する': { kind: 'nv', pre: '日曜日[にちようび]に', v: 'oversleep', o: 'on Sunday', skip: ['zu'] },
     '案内する': { pre: '友達[ともだち]に町[まち]を', v: 'show', o: 'my friend around the town' },
     '説明する': { pre: '問題[もんだい]を', v: 'explain', o: 'the problem' },
     '選ぶ': { pre: 'プレゼントを', v: 'choose', o: 'a present' },
@@ -328,6 +328,67 @@
     '並ぶ': { pre: '一列[いちれつ]に', v: 'line up', o: 'in a single row', skip: ['dict', 'passive'] },
     '渡る': { pre: '橋[はし]を', v: 'cross', o: 'the bridge', skip: ['passive'] },
     '捕まえる': { pre: '猫[ねこ]を', v: 'catch', o: 'the cat', skip: ['passive'] },
+
+    // Out and about
+    '浴びる': { pre: 'シャワーを', v: 'take', o: 'a shower', skip: ['passive'] },
+    '頼む': { pre: '友達[ともだち]に', v: 'ask', o: 'a friend for a favor', skip: ['passive', 'causative', 'causative-passive'] },
+    '渡す': { pre: '先生[せんせい]に手紙[てがみ]を', v: 'hand', o: 'the teacher a letter', skip: ['passive', 'causative', 'causative-passive'] },
+    '並べる': { pre: 'テーブルにお皿[さら]を', v: 'set out', o: 'the plates on the table', skip: ['passive'] },
+    '止める': { pre: '駅[えき]の前[まえ]に車[くるま]を', v: 'park', o: 'the car in front of the station' },
+    '旅行する': { pre: '京都[きょうと]を', v: 'travel', o: 'around Kyoto', skip: ['passive'] },
+    '買い物する': { pre: 'デパートで', v: 'shop', o: 'at the department store', skip: ['passive'] },
+    '食事する': { pre: 'レストランで', v: 'have', o: 'a meal at a restaurant', skip: ['passive'] },
+    '質問する': { pre: '先生[せんせい]に', v: 'ask', o: 'the teacher a question', skip: ['passive', 'causative', 'causative-passive'] },
+    '飛ぶ': { pre: '高[たか]く', v: 'jump', o: 'high', skip: ['passive'] },
+    '吹く': { pre: '笛[ふえ]を', v: 'blow', o: 'a whistle' },
+
+    // Hobbies & weekends
+    '釣る': { pre: '川[かわ]で魚[さかな]を', v: 'catch', o: 'fish in the river' },
+    '飾る': { pre: '部屋[へや]に花[はな]を', v: 'decorate', o: 'the room with flowers' },
+    '眺める': { pre: '窓[まど]から海[うみ]を', v: 'look', o: 'out at the sea from the window', skip: ['passive', 'causative'] },
+    '楽しむ': { pre: '旅行[りょこう]を', v: 'enjoy', o: 'the trip', skip: ['passive'] },
+    '植える': { pre: '庭[にわ]に花[はな]を', v: 'plant', o: 'flowers in the garden' },
+    '昼寝する': { pre: '公園[こうえん]で', v: 'take', o: 'a nap in the park', skip: ['passive'] },
+    '登山する': { pre: '友達[ともだち]と', v: 'go', o: 'mountain climbing with friends', skip: ['passive', 'causative'] },
+    '応援する': { pre: '好[す]きなチームを', v: 'cheer', o: 'for my favorite team', skip: ['passive'] },
+    'ドライブする': { pre: '海[うみ]まで', v: 'go', o: 'for a drive to the sea', skip: ['passive'] },
+    'キャンプする': { pre: '山[やま]で', v: 'go', o: 'camping in the mountains', skip: ['passive'] },
+
+    // Health & the body
+    '怪我する': { kind: 'nv', pre: 'サッカーで', v: 'get', o: 'hurt playing soccer' },
+    '治る': { kind: 'ev', sub: '風邪[かぜ]が', s: 'the cold', v: 'get', o: 'better', skip: ['te'] },
+    '冷やす': { pre: 'ビールを', v: 'chill', o: 'the beer' },
+    '温める': { pre: 'スープを', v: 'warm', o: 'up the soup' },
+    '入院する': { kind: 'nv', pre: '一週間[いっしゅうかん]', v: 'be', o: 'in hospital for a week', skip: ['prohibitive'] },
+    '退院する': { pre: '明日[あした]', v: 'leave', o: 'hospital tomorrow', skip: ['volitional', 'mashou', 'passive', 'tari', 'prohibitive', 'zu'] },
+    '倒れる': { kind: 'nv', pre: '暑[あつ]さで', v: 'collapse', o: 'from the heat' },
+    'うがいする': { pre: '毎朝[まいあさ]', v: 'gargle', o: 'every morning', skip: ['passive', 'zu'] },
+    '熱を測る': { pre: '', v: 'take', o: 'my temperature', skip: ['passive'] },
+    '休憩する': { pre: '少[すこ]し', v: 'take', o: 'a short break', skip: ['passive'] },
+
+    // Rules & manners
+    '騒ぐ': { pre: '電車[でんしゃ]の中[なか]で', v: 'make', o: 'noise on the train', skip: ['tai', 'volitional', 'mashou', 'dict', 'ba', 'te'] },
+    '叫ぶ': { pre: '大[おお]きな声[こえ]で', v: 'shout', o: 'at the top of my voice', skip: ['volitional', 'mashou', 'dict'] },
+    '割る': { kind: 'nv', pre: 'お皿[さら]を', v: 'break', o: 'a plate' },
+    '破る': { kind: 'nv', pre: '約束[やくそく]を', v: 'break', o: 'a promise' },
+    '嘘をつく': { pre: '', v: 'tell', o: 'a lie', skip: ['tai', 'volitional', 'mashou', 'dict', 'ba', 'te', 'potential', 'tari'] },
+    '覗く': { pre: '窓[まど]から部屋[へや]を', v: 'peek', o: 'into the room through the window', skip: ['tai', 'volitional', 'mashou', 'dict', 'ba', 'te'] },
+    '鳴らす': { pre: 'ベルを', v: 'ring', o: 'the bell' },
+    '邪魔する': { pre: '弟[おとうと]の勉強[べんきょう]を', v: 'disturb', o: "my little brother's studying", skip: ['tai', 'volitional', 'mashou', 'dict', 'ba', 'te', 'passive', 'causative', 'causative-passive'] },
+    '喧嘩する': { pre: '弟[おとうと]と', v: 'fight', o: 'with my little brother', skip: ['tai', 'volitional', 'mashou', 'dict', 'ba', 'te', 'passive', 'causative'] },
+    '落書きする': { pre: '壁[かべ]に', v: 'scribble', o: 'on the wall', skip: ['tai', 'volitional', 'mashou', 'dict', 'ba', 'te', 'tari'] },
+
+    // Choices & doubts
+    '迷う': { kind: 'nv', pre: '道[みち]に', v: 'get', o: 'lost' },
+    '悩む': { kind: 'nv', pre: '将来[しょうらい]のことで', v: 'worry', o: 'about the future' },
+    '断る': { pre: '誘[さそ]いを', v: 'turn down', o: 'the invitation', skip: ['volitional', 'mashou'] },
+    '比べる': { pre: '二[ふた]つの店[みせ]の値段[ねだん]を', v: 'compare', o: 'the prices at two shops' },
+    '確かめる': { pre: '答[こた]えを', v: 'check', o: 'the answers' },
+    '頼る': { pre: '両親[りょうしん]に', v: 'rely', o: 'on my parents', skip: ['volitional', 'mashou', 'passive', 'causative', 'causative-passive'] },
+    '許す': { pre: '友達[ともだち]を', v: 'forgive', o: 'my friend', skip: ['volitional', 'mashou'] },
+    '信じる': { pre: '自分[じぶん]を', v: 'believe', o: 'in myself' },
+    '疑う': { pre: '人[ひと]の話[はなし]を', v: 'doubt', o: 'what people say', skip: ['tai', 'volitional', 'mashou', 'te'] },
+    '任せる': { pre: '友達[ともだち]に料理[りょうり]を', v: 'leave', o: 'the cooking to my friend', skip: ['passive', 'causative', 'causative-passive'] },
   };
 
   // Adjectives: `s` is the English subject and `a` the adjective. Contexts
@@ -417,7 +478,8 @@
     sit: ['sat', 'sitting'], skip: ['skipped', 'skipping'], sleep: ['slept'], speak: ['spoke'], stand: ['stood'],
     steal: ['stole'], step: ['stepped', 'stepping'], stick: ['stuck'], stop: ['stopped', 'stopping'],
     submit: ['submitted', 'submitting'], swim: ['swam', 'swimming'], take: ['took'],
-    teach: ['taught'], tell: ['told'], think: ['thought'], throw: ['threw'], understand: ['understood'], wake: ['woke'],
+    teach: ['taught'], tell: ['told'], think: ['thought'], throw: ['threw'], blow: ['blew'], ring: ['rang'], fight: ['fought'], forgive: ['forgave'],
+    set: ['set', 'setting'], shop: ['shopped', 'shopping'], understand: ['understood'], wake: ['woke'],
     win: ['won', 'winning'], withdraw: ['withdrew'], wrap: ['wrapped', 'wrapping'], write: ['wrote'],
   };
 
@@ -547,6 +609,12 @@
     const skip = ctx.skip || [];
     // A command is a blunt request: none where 〜てください isn't natural.
     if (form === 'imperative' && skip.includes('te')) return false;
+    // "Let me know if…" fits wherever "you should just…" (〜ばいい) does.
+    if (form === 'tara' && skip.includes('ba')) return false;
+    // ましょう is the polite volitional: skipped wherever "let's" is.
+    if (form === 'mashou' && skip.includes('volitional')) return false;
+    // "Sometimes I do things like…" — not for mishaps or wrongdoing.
+    if (form === 'tari' && (skip.includes('ba') || skip.includes('volitional'))) return false;
     return !skip.includes(form);
   }
 
@@ -567,9 +635,17 @@
       case 'ba': return kind === 'act' ? `${stmt}いいですよ。` : `${stmt}いいですね。`;
       case 'causative-passive': return `父[ちち]に${stmt}。`;
       case 'imperative': return `${stmt}！`;
+      case 'mashou': return `一緒[いっしょ]に${stmt}。`;
+      case 'tari': return `時々[ときどき]${stmt}します。`;
+      case 'tara': return `${stmt}、教[おし]えてください。`;
+      case 'prohibitive': return `${stmt}！`;
+      case 'zu': return `${stmt}に一日[いちにち]を過[す]ごしました。`;
       default: return `${stmt}。`;
     }
   }
+
+  // Said to someone else: "brush my teeth" → "brush your teeth".
+  const your = o => o.replace(/\bmy(self)?\b/g, (m, self) => (self ? 'yourself' : 'your'));
 
   function verbEn(ctx, form) {
     const kind = ctx.kind || 'act';
@@ -600,7 +676,16 @@
         if (kind === 'act') return `You should just ${v} ${o}.`;
         return `I hope ${clause(s, v, 'pres', pl)} ${o}.`;
       case 'causative-passive': return `I'm made to ${v} ${o} by my father.`;
-      case 'imperative': return `${v} ${o.replace(/\bmy\b/g, 'your')}!`;
+      case 'imperative': return `${v} ${your(o)}!`;
+      case 'mashou': return `Let's ${v} ${o} together.`;
+      case 'tari': return `Sometimes I do things like ${inflect(v, gerund)} ${o}.`;
+      case 'tara': {
+        // Said to someone: "you" unless the context has its own subject.
+        const who = ctx.s || 'you';
+        return `Let me know ${kind === 'act' ? 'when' : 'if'} ${clause(who, v, 'pres', pl)} ${ctx.s ? o : your(o)}.`;
+      }
+      case 'prohibitive': return `Don't ${v} ${your(o)}!`;
+      case 'zu': return `I got through the day without ${inflect(v, gerund)} ${o}.`;
       default: return `${clause(s, v, 'pres', pl)} ${o}.`;
     }
   }
@@ -670,7 +755,12 @@
       case 'causative': return `make/let someone ${base}`;
       case 'ba': return `if … ${base}`;
       case 'causative-passive': return `is made to ${base}`;
-      case 'imperative': return `${base.replace(/\bmy\b/g, 'your')}! (command)`;
+      case 'imperative': return `${your(base)}! (command)`;
+      case 'mashou': return `let's ${base} (polite)`;
+      case 'tari': return `things like ${all(a => inflect(a, gerund))} (たり)`;
+      case 'tara': return `if / when … ${base} (たら)`;
+      case 'prohibitive': return `don't ${your(base)}! (blunt)`;
+      case 'zu': return `without ${all(a => inflect(a, gerund))} (ず)`;
       case 'adj-present': return `it is ${base}`;
       case 'adj-neg': return `it is not ${base}`;
       case 'adj-past': return `it was ${base}`;
