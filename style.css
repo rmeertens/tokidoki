@@ -6782,7 +6782,7 @@ body.wo-dragging, body.wo-dragging * { cursor: grabbing !important; }
 }
 
 .wo-check-area { display: flex; justify-content: center; gap: 10px; margin-top: 16px; }
-.wo-check-area .btn-primary:disabled { opacity: 0.45; cursor: default; transform: none; }
+.wo-check-area .btn-primary:disabled, .wo-check-area .btn-secondary:disabled { opacity: 0.45; cursor: default; transform: none; }
 
 .wo-feedback { display: flex; flex-direction: column; gap: 6px; }
 .wo-verdict-right { color: var(--green); }

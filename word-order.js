@@ -222,7 +222,7 @@
       pos: 0,
       queue: items.map(item => ({
         item, deck: shuffleOrder(item.pieces.length), placed: item.pieces.map(() => null),
-        answered: false, correct: false, picked: null,
+        answered: false, correct: false, picked: null, history: [],
       })),
     };
     show('screen-word-order');
@@ -346,6 +346,7 @@
     $('wo-check-area').classList.toggle('hidden', q.answered || session.starOnly);
     $('btn-wo-check').disabled = !full;
     $('btn-wo-clear').disabled = q.placed.every(p => p == null);
+    $('btn-wo-undo').disabled = !q.history.length;
 
     const feedback = $('wo-feedback');
     if (q.answered) {
@@ -373,23 +374,29 @@
     if (q.placed.includes(p)) return;
     const slot = q.placed.indexOf(null);
     if (slot < 0) return;
-    q.placed[slot] = p;
-    renderQuestion();
+    setPlaced(q, q.placed.map((x, i) => i === slot ? p : x));
   }
 
   function unplace(slot) {
     const q = current();
     if (!q || q.answered || q.placed[slot] == null) return;
-    q.placed[slot] = null;
+    setPlaced(q, q.placed.map((x, i) => i === slot ? null : x));
+  }
+
+  // Every change to the blanks goes through here, so Undo can step back
+  // through places, take-backs, swaps and Clear alike.
+  function setPlaced(q, placed) {
+    if (placed.every((p, i) => p === q.placed[i])) return;
+    q.history.push(q.placed);
+    q.placed = placed;
     renderQuestion();
   }
 
-  function undoLast() {
+  function undo() {
     const q = current();
-    if (!q || q.answered || session.starOnly) return;
-    for (let s = q.placed.length - 1; s >= 0; s--) {
-      if (q.placed[s] != null) { unplace(s); return; }
-    }
+    if (!q || q.answered || session.starOnly || !q.history.length) return;
+    q.placed = q.history.pop();
+    renderQuestion();
   }
 
   function answer(picked) {
@@ -584,7 +591,7 @@
     const q = current();
     if (!t || !q || q.answered) return;
     if (t.bank) unplace(from.slot);
-    else { q.placed = dropOn(q.placed, from, t.slot); renderQuestion(); }
+    else setPlaced(q, dropOn(q.placed, from, t.slot));
   }
 
   ['wo-bank', 'wo-sentence'].forEach(id => $(id).addEventListener('pointerdown', onPointerDown));
@@ -602,9 +609,9 @@
   $('btn-wo-clear').addEventListener('click', () => {
     const q = current();
     if (!q || q.answered) return;
-    q.placed = q.placed.map(() => null);
-    renderQuestion();
+    setPlaced(q, q.placed.map(() => null));
   });
+  $('btn-wo-undo').addEventListener('click', undo);
   $('btn-wo-next').addEventListener('click', next);
   window.addEventListener('resize', drawArrows);
   $('wo-quit').addEventListener('click', goHome);
@@ -635,7 +642,7 @@
     const q = current();
     const n = Number(e.key);
     if (n >= 1 && n <= q.deck.length && !q.answered) { e.preventDefault(); place(q.deck[n - 1]); }
-    else if (e.key === 'Backspace' && !q.answered) { e.preventDefault(); undoLast(); }
+    else if (e.key === 'Backspace' && !q.answered) { e.preventDefault(); undo(); }
     else if ((e.key === 'Enter' || e.key === ' ') && q.answered) { e.preventDefault(); next(); }
     else if ((e.key === 'Enter' || e.key === ' ') && !session.starOnly && q.placed.every(p => p != null)) { e.preventDefault(); answer(); }
   });
