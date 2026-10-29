@@ -69,6 +69,14 @@ ok(GK.exampleHtml('{電気|でんき}をつけて<b>', new Set(['電'])) ===
 
 const { studied, fresh } = GK.splitDeck(items, ['電車|でんしゃ', 'nope', '電車|でんしゃ'], id => ({ 'guess:電車|でんしゃ': { interval: 30 } })[id]);
 ok(studied.length === 1 && studied[0].mature && fresh.length === items.length - 1, 'splitDeck: studied once, mature from its card');
+{
+  const now = new Date(2026, 9, 29, 12).getTime();
+  const at = (d, h) => new Date(2026, 9, 29 + d, h).getTime();
+  const g = GK.reviewSchedule([{ item: 'c', due: at(1, 9) }, { item: 'a', due: at(0, 8) }, { item: 'b', due: at(0, 18) },
+    { item: 'd', due: at(3, 9) }, { item: 'e', due: at(0, 10) }], now);
+  ok(g.map(x => x.label.replace(/ \(.*/, '')).join('/') === 'Due now/Later today/Tomorrow/Sun 1 Nov'
+    && g[0].now && g[0].items.join('') === 'ae' && g[3].label.endsWith('(in 3 days)'), 'reviewSchedule: grouped by when they come back');
+}
 
 // The real path beats the list order by a wide margin.
 const real = GP.plan([], items, { ahead: 100 });

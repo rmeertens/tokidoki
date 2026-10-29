@@ -70,7 +70,26 @@
     return { studied, fresh: items.filter(it => !done.has(it.key)) };
   }
 
-  const api = { toItem, splitDeck, cardId, exampleHtml, STORE_KEY, READING_MIN, MEANING_MIN };
+  // Studied words grouped by when they're next due ({ item, due } with `due`
+  // a timestamp): due now, later today, tomorrow, then by day.
+  function reviewSchedule(entries, now = Date.now()) {
+    const day = t => { const d = new Date(t); d.setHours(0, 0, 0, 0); return d.getTime(); };
+    const today = day(now);
+    const groups = new Map();
+    entries.slice().sort((a, b) => a.due - b.due).forEach(e => {
+      const start = e.due <= now ? 'now' : day(e.due);
+      const days = start === 'now' ? -1 : Math.round((start - today) / 864e5);
+      const label = start === 'now' ? 'Due now'
+        : days === 0 ? 'Later today'
+        : days === 1 ? 'Tomorrow'
+        : new Date(start).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }) + ` (in ${days} days)`;
+      if (!groups.has(start)) groups.set(start, { label, now: start === 'now', items: [] });
+      groups.get(start).items.push(e.item);
+    });
+    return [...groups.values()];
+  }
+
+  const api = { toItem, splitDeck, cardId, exampleHtml, reviewSchedule, STORE_KEY, READING_MIN, MEANING_MIN };
   global.GuessKanji = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   if (typeof document === 'undefined') return;
@@ -157,6 +176,7 @@
     $('gk-review').disabled = due === 0;
     $('gk-review').textContent = due ? `Review ${due} due` : 'Nothing due';
     $('gk-learn').disabled = fresh.length === 0;
+    renderSchedule(store);
 
     const onPath = path.slice(0, COMPARE).filter(x => x.guess).length;
     const inList = GuessPath.countGuessable(studied, fresh, COMPARE);
@@ -168,6 +188,24 @@
     $('gk-next').innerHTML = path.slice(0, 30).map(x => `
       <li class="${x.guess ? 'gk-next-guess' : ''}" title="${esc(x.kana)} · ${esc(x.meaning)}">
         <span lang="ja">${esc(x.word)}</span>${x.guess ? '<span class="gk-badge" aria-label="guessable">🎯</span>' : ''}
+      </li>`).join('');
+  }
+
+  const SCHEDULE_CHIPS = 40;
+
+  // The "When your words come back" list under the buttons.
+  function renderSchedule(store) {
+    const entries = store.started.filter(k => BY_KEY.has(k)).map(k => {
+      const c = cardOf(cardId(k));
+      return c && c.nextReview ? { item: BY_KEY.get(k), due: c.nextReview } : null;
+    }).filter(Boolean);
+    $('gk-schedule').hidden = entries.length === 0;
+    $('gk-schedule-list').innerHTML = reviewSchedule(entries).map(g => `
+      <li class="${g.now ? 'gk-schedule-now' : ''}">
+        <span class="gk-schedule-when">${esc(g.label)} <span class="gk-schedule-count">${g.items.length}</span></span>
+        <span class="gk-schedule-words">${g.items.slice(0, SCHEDULE_CHIPS).map(it =>
+          `<span lang="ja" title="${esc(it.kana)} · ${esc(it.meaning)}">${esc(it.word)}</span>`).join('')}${
+          g.items.length > SCHEDULE_CHIPS ? `<span class="gk-schedule-more">+${g.items.length - SCHEDULE_CHIPS} more</span>` : ''}</span>
       </li>`).join('');
   }
 

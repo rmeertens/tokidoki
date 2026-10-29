@@ -3677,6 +3677,15 @@ a.pq-mode:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px;
 .gk-stats { margin: 0 0 12px; }
 .gk-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
 .gk-actions button { flex: 1 1 140px; }
+.gk-schedule { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 12px; }
+.gk-schedule summary { padding: 10px 14px; font-weight: 600; font-size: 0.9rem; cursor: pointer; }
+.gk-schedule-list { list-style: none; margin: 0; padding: 0 14px 12px; display: flex; flex-direction: column; gap: 10px; }
+.gk-schedule-when { display: block; font-size: 0.85rem; color: var(--text-dim); margin-bottom: 4px; }
+.gk-schedule-now .gk-schedule-when { color: var(--accent); font-weight: 600; }
+.gk-schedule-count { display: inline-block; min-width: 1.6em; margin-left: 4px; padding: 0 6px; border-radius: 999px; background: var(--accent-dim); font-size: 0.75rem; text-align: center; }
+.gk-schedule-words { display: flex; flex-wrap: wrap; gap: 4px; }
+.gk-schedule-words > span { font-family: var(--font-jp); padding: 2px 8px; border: 1px solid var(--border); border-radius: 999px; font-size: 0.9rem; }
+.gk-schedule-words > .gk-schedule-more { font-family: inherit; border: 0; color: var(--text-dim); font-size: 0.8rem; }
 .gk-compare { font-size: 0.9rem; color: var(--text-dim); line-height: 1.5; margin-bottom: 16px; }
 .gk-compare b { color: var(--text); }
 .gk-next {

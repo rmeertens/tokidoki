@@ -122,6 +122,10 @@
           <button id="gk-learn" class="btn-primary">Next 10 words</button>
           <button id="gk-review" class="btn-secondary">Review</button>
         </div>
+        <details class="gk-schedule" id="gk-schedule" hidden>
+          <summary>When your words come back for review</summary>
+          <ol class="gk-schedule-list" id="gk-schedule-list"></ol>
+        </details>
         <p class="gk-compare" id="gk-compare"></p>
         <h3 class="lis-heading">Up next <span>&mdash; 🎯 = you can guess it when it arrives</span></h3>
         <ol class="gk-next" id="gk-next"></ol>
@@ -260,7 +264,7 @@
   <script src="sync-merge.js?v=10"></script>
   <script src="progress-stats.js?v=4"></script>
   <script src="sync.js?v=12"></script>
-  <script src="guess-kanji.js?v=12"></script>
+  <script src="guess-kanji.js?v=13"></script>
 
   <!-- Static content for search engines -->
   <section id="seo-content" class="page-about">
