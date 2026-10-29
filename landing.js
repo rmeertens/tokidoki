@@ -128,3 +128,45 @@
 
   render();
 })();
+
+// The conjugation chart's rules: each form's button opens the row under it
+// (render_landing_pages.mjs writes them hidden), "Show all rules" opens or
+// closes every one. --lp-w keeps an open row as wide as the visible part of
+// the table when it scrolls sideways.
+(function () {
+  'use strict';
+
+  var chart = document.querySelector('.lp-chart');
+  if (!chart) return;
+  var btns = chart.querySelectorAll('.lp-rule-btn');
+  var all = document.querySelector('.lp-rules-all');
+
+  function fit() { chart.style.setProperty('--lp-w', chart.clientWidth + 'px'); }
+
+  function set(btn, open) {
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.getElementById(btn.getAttribute('aria-controls')).hidden = !open;
+  }
+
+  function sync() {
+    var open = chart.querySelectorAll('.lp-rule-btn[aria-expanded="true"]').length;
+    if (all) all.textContent = open === btns.length ? 'Hide all rules' : 'Show all rules';
+  }
+
+  Array.prototype.forEach.call(btns, function (b) {
+    b.addEventListener('click', function () {
+      set(b, b.getAttribute('aria-expanded') !== 'true');
+      sync();
+    });
+  });
+  if (all) {
+    all.hidden = false;
+    all.addEventListener('click', function () {
+      var open = all.textContent === 'Show all rules';
+      Array.prototype.forEach.call(btns, function (b) { set(b, open); });
+      sync();
+    });
+  }
+  fit();
+  window.addEventListener('resize', fit);
+})();

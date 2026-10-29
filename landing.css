@@ -84,4 +84,42 @@
 @media (max-width: 600px) {
   .lp-quiz { padding: 14px; }
   .lp-scroll th, .lp-scroll td { padding: 7px 8px; }
+  .lp-chart .lp-form-row th[scope="row"] { padding: 0; }
+  .lp-form-name .form-pill { display: none; }
+  .lp-rule-btn { padding: 7px 24px 7px 8px; font-size: 0.88rem; }
+  .lp-rule-btn::after { right: 8px; }
 }
+
+/* The conjugation chart, coloured like the drills: each form's row in its
+   own colour (FORM_INFO), the stem grey, the changed kana plain and the
+   ending in the form's colour. A form's button opens its rules below it. */
+.lp-chart-help { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin-bottom: 10px; }
+.lp-key { font-family: var(--font); font-weight: 600; }
+.lp-rules-all { margin-left: auto; background: none; border: 1px solid var(--border); border-radius: 999px;
+  padding: 3px 12px; color: var(--accent); font: 600 0.8rem var(--font); cursor: pointer; }
+.lp-rules-all:hover, .lp-rules-all:focus-visible { border-color: var(--accent); outline: none; }
+.lp-chart .lp-form-row th[scope="row"] { padding: 0; border-left: 4px solid var(--form-color);
+  background: color-mix(in srgb, var(--form-color) 8%, var(--bg-card)); }
+.lp-chart .lp-form-row td { background: color-mix(in srgb, var(--form-color) 4%, var(--bg-card)); }
+.lp-chart tbody .lp-form-row:hover td { background: color-mix(in srgb, var(--form-color) 12%, var(--bg-card)); }
+.lp-rule-btn { display: block; width: 100%; padding: 8px 30px 8px 10px; border: 0; background: none; color: var(--text);
+  font: 600 0.95rem var(--font); text-align: left; cursor: pointer; position: relative; }
+.lp-rule-btn::after { content: '▸'; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  color: var(--form-color); transition: transform var(--transition); }
+.lp-rule-btn[aria-expanded="true"]::after { transform: translateY(-50%) rotate(90deg); }
+.lp-rule-btn:focus-visible { outline: 2px solid var(--form-color); outline-offset: -2px; }
+.lp-form-name { display: flex; align-items: center; gap: 6px; }
+.lp-form-name .form-pill { background: color-mix(in srgb, var(--form-color) 14%, transparent); color: var(--form-color); }
+.lp-chart td.jp { font-weight: 600; }
+/* A touch of the text colour keeps light endings (た's yellow) readable. */
+.lp-chart .conjugation-ending { color: color-mix(in srgb, var(--form-color) 80%, var(--text)); }
+
+/* The rules row spans the table; on a phone, where the table scrolls
+   sideways, it stays put at the scroller's width (--lp-w, from landing.js). */
+.lp-chart .lp-rule > td { padding: 0; white-space: normal; border-left: 4px solid var(--form-color); }
+.lp-chart .lp-rule .ref-explanation { position: sticky; left: 0; max-width: var(--lp-w, none); box-sizing: border-box;
+  border-top-color: var(--form-color); }
+.lp-chart .lp-rule .ref-explanation th, .lp-chart .lp-rule .ref-explanation td { white-space: normal; }
+.lp-chart .lp-rule .ref-explanation b { color: var(--form-color); }
+.lp-chart .lp-rule .ref-explanation .conj-note { border-left-color: var(--form-color); }
+.lp-chart .lp-rule .ref-explanation td { border-top: 0; }

@@ -79,14 +79,51 @@ function verbQuestions() {
 const CHART_VERBS = [['書く', 'u-verb'], ['食べる', 'ru-verb'], ['する', 'irregular'], ['来る', 'irregular']];
 const CHART_FORMS = ['masu', 'masu-neg', 'masu-past', 'mashou', 'te', 'nai', 'ta', 'nakatta', 'tari', 'tara', 'tai', 'potential', 'volitional', 'passive', 'causative', 'ba', 'causative-passive', 'imperative', 'prohibitive', 'zu'];
 
+// Splits a conjugated form the way the drills colour an answer
+// (formatConjugatedWithStem in app.js): [stem, changed kana, ending]. The
+// stem stays grey, the changed kana plain, the ending in the form's colour.
+// Irregular verbs take the longest ending they share with the ru- or u-verb
+// (し + ます, こ + られる); what's left is the changed part.
+function splitForm(v, f) {
+  const out = C.conjugate(v, f) || die(`${v.kanji} ${f}`);
+  const r = v.reading;
+  if (f === 'prohibitive') return [r, '', out.slice(r.length)];
+  if (v.type === 'ru') return [r.slice(0, -1), '', out.slice(r.length - 1)];
+  if (v.type === 'u') {
+    const base = r.slice(0, -1), rest = out.slice(base.length);
+    // The command is just the え-row kana: that kana is the ending.
+    return f === 'imperative' ? [base, '', rest] : [base, rest[0], rest.slice(1)];
+  }
+  const ends = ['ru', 'u'].map(t => splitForm(CHART_VERBS.map(([k]) => verb(k)).find(x => x.type === t), f)[2])
+    .filter(e => e && out.endsWith(e) && out.length > e.length).sort((a, b) => b.length - a.length);
+  return ends.length ? ['', out.slice(0, -ends[0].length), ends[0]] : ['', out, ''];
+}
+const colored = ([stem, changed, ending]) =>
+  (stem ? `<span class="conjugation-stem">${esc(stem)}</span>` : '') +
+  (changed ? `<span class="conjugation-changed">${esc(changed)}</span>` : '') +
+  (ending ? `<span class="conjugation-ending">${esc(ending)}</span>` : '');
+
+// Each form's row is tinted in the colour the drills give it; its button
+// opens a row underneath with the form's rules (FORM_INFO's explanation,
+// the same text as the drills' reference). landing.js does the opening.
 function chartTable() {
   const vs = CHART_VERBS.map(([k, t]) => [verb(k), t]);
-  let h = '<div class="lp-scroll"><table><thead><tr><th scope="col">Form</th>' +
+  let h = '<p class="lp-chart-help">Tap a form to see how it\'s made. ' +
+    '<span class="lp-key"><span class="conjugation-stem">stays</span> · <span class="conjugation-changed">changes</span> · ' +
+    '<span class="conjugation-ending" style="--form-color:var(--accent)">ending</span></span> ' +
+    '<button type="button" class="lp-rules-all" hidden>Show all rules</button></p>' +
+    '<div class="lp-scroll lp-chart"><table><thead><tr><th scope="col">Form</th>' +
     vs.map(([v, t]) => `<th scope="col" lang="ja">${esc(v.kanji)}<small>${t}</small></th>`).join('') + '</tr></thead><tbody>';
   for (const f of CHART_FORMS) {
     const info = C.FORM_INFO[f];
-    h += `<tr><th scope="row">${esc(info.name)}<small><span lang="ja">${esc(info.nameJp)}</span> · ${info.level}</small></th>` +
-      vs.map(([v]) => `<td class="jp" lang="ja">${esc(C.conjugate(v, f) || die(`${v.kanji} ${f}`))}</td>`).join('') + '</tr>';
+    if (!info.explanation) die(`no explanation for ${f}`);
+    h += `<tr class="lp-form-row" style="--form-color:${info.color}"><th scope="row">` +
+      `<button type="button" class="lp-rule-btn" aria-expanded="false" aria-controls="rule-${f}">` +
+      `<span class="lp-form-name"><span class="form-pill" lang="ja">${esc(info.symbol)}</span>${esc(info.name)}</span>` +
+      `<small><span lang="ja">${esc(info.nameJp)}</span> · ${info.level}</small></button></th>` +
+      vs.map(([v]) => `<td class="jp" lang="ja">${colored(splitForm(v, f))}</td>`).join('') + '</tr>' +
+      `<tr class="lp-rule" id="rule-${f}" style="--form-color:${info.color}" hidden><td colspan="${vs.length + 1}">` +
+      `<div class="ref-explanation">${info.explanation}</div></td></tr>`;
   }
   return h + '</tbody></table></div>';
 }
@@ -279,7 +316,7 @@ function render(p) {
   <meta name="twitter:description" content="${esc(p.desc)}">
   <meta name="twitter:image" content="${SITE}/og-image.png">
   <link rel="canonical" href="${url}">
-${STYLE}  <link rel="stylesheet" href="landing.css?v=2">
+${STYLE}  <link rel="stylesheet" href="landing.css?v=3">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -325,7 +362,7 @@ ${NAV}
   </div>
 
   <script type="application/json" id="lp-data">${json(data)}</script>
-${SCRIPTS}  <script src="landing.js?v=2"></script>
+${SCRIPTS}  <script src="landing.js?v=3"></script>
 </body>
 </html>
 `;
