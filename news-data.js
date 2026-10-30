@@ -23,6 +23,142 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-10-29-fuel-subsidies',
+      date: '2026-10-29',
+      emoji: '⛽',
+      titleEn: 'PM Takaichi: electricity and gas subsidies to return in December, gasoline subsidy to shrink',
+      sources: [
+        { name: 'Jiji Press (via Infoseek)', url: 'https://news.infoseek.co.jp/article/jiji_2026102901064/' },
+        { name: 'Kyodo News (via Yahoo! News)', url: 'https://news.yahoo.co.jp/articles/3cc62f1c82067621e3435373640385a550e39c27' },
+        { name: 'Asahi Shimbun (via Yahoo! News)', url: 'https://news.yahoo.co.jp/articles/d95dff810d4e3bb7999ba061d72c03dcc837d63e' },
+      ],
+      levels: {
+        N5: {
+          title: '十二月[じゅうにがつ]から　電気[でんき]と　ガスが　安[やす]くなります',
+          lines: [
+            ['高市[たかいち]さんは、二十九日[にじゅうくにち]に　話[はなし]をしました。', 'Prime Minister Takaichi gave a talk on the 29th.'],
+            ['十二月[じゅうにがつ]から、電気[でんき]とガスの　お金[かね]を　安[やす]くします。', 'From December, the government will make the cost of electricity and gas cheaper.'],
+            ['ふつうの家[いえ]は、三[さん]か月[げつ]で　七千円[ななせんえん]ぐらい　安[やす]くなります。', 'A normal home will pay about 7,000 yen less over three months.'],
+            ['ガソリンの　お金[かね]は、いま　一[ひと]リットル　170円[えん]ぐらいです。', 'Gasoline now costs about 170 yen per liter.'],
+            ['国[くに]は、ガソリンを安[やす]くするために、お金[かね]を出[だ]しています。', 'The government is paying money to keep gasoline cheap.'],
+            ['でも、十二月[じゅうにがつ]から、この助[たす]けを　少[すこ]しずつ　小[ちい]さくします。', 'But from December, it will make this help smaller little by little.'],
+          ],
+        },
+        N4: {
+          title: '電気[でんき]・ガス代[だい]の支援[しえん]は十二月[じゅうにがつ]から、ガソリンの補助[ほじょ]は少[すこ]しずつ減[へ]らす',
+          lines: [
+            ['高市[たかいち]首相[しゅしょう]は二十九日[にじゅうくにち]、電気[でんき]・ガス代[だい]の支援[しえん]を十二月[じゅうにがつ]に始[はじ]めると話[はな]しました。', 'Prime Minister Takaichi said on the 29th that support for electricity and gas bills would start in December.'],
+            ['支援[しえん]は来年[らいねん]の二月[にがつ]までで、ふつうの家[いえ]では、三[さん]か月[げつ]で七千円[ななせんえん]ぐらい安[やす]くなるそうです。', 'The support runs until February next year, and a typical household is said to pay about 7,000 yen less over three months.', 'The plan had first been for January to March; it was moved earlier because the cold begins in December.'],
+            ['三月[さんがつ]は、天気[てんき]やエネルギーの値段[ねだん]を見[み]て、あとで決[き]めます。', 'For March, it will be decided later, after looking at the weather and energy prices.'],
+            ['ガソリンは、いま全国[ぜんこく]の平均[へいきん]が一[ひと]リットル170円[えん]ぐらいになるように、国[くに]がお金[かね]を出[だ]しています。', 'For gasoline, the government pays money so that the national average is now about 170 yen per liter.'],
+            ['この目標[もくひょう]の値段[ねだん]を、十二月[じゅうにがつ]から毎月[まいつき]五円[ごえん]ずつ上[あ]げる予定[よてい]です。', 'It plans to raise this target price by 5 yen every month from December.'],
+            ['首相[しゅしょう]は、今[いま]は一日[いちにち]に百億円[ひゃくおくえん]以上[いじょう]かかっているので、少[すこ]しずつ減[へ]らしたいと話[はな]しました。', 'The prime minister said that it now costs more than 10 billion yen a day, so she wants to reduce it little by little.'],
+          ],
+        },
+        N3: {
+          title: '電気[でんき]・ガス代[だい]支援[しえん]を十二月[じゅうにがつ]に再開[さいかい]　ガソリン補助[ほじょ]は段階的[だんかいてき]に縮小[しゅくしょう]、首相[しゅしょう]表明[ひょうめい]',
+          lines: [
+            ['高市[たかいち]首相[しゅしょう]は二十九日[にじゅうくにち]、電気[でんき]・ガス代[だい]への支援[しえん]を十二月[じゅうにがつ]に再開[さいかい]する方針[ほうしん]を表明[ひょうめい]した。', 'Prime Minister Takaichi announced on the 29th a policy of resuming support for electricity and gas bills in December.'],
+            ['当初[とうしょ]は一月[いちがつ]から三月[さんがつ]を想定[そうてい]していたが、寒[さむ]さが本格化[ほんかくか]する十二月[じゅうにがつ]に前倒[まえだお]しする。', 'It had originally been planned for January to March, but it will be moved up to December, when the cold sets in in earnest.'],
+            ['来年[らいねん]の二月[にがつ]までの三[さん]か月[げつ]で、標準的[ひょうじゅんてき]な家庭[かてい]の負担[ふたん]は七千円[ななせんえん]程度[ていど]減[へ]るとしている。', 'The government says the burden on a standard household will fall by about 7,000 yen over the three months to February next year.'],
+            ['三月[さんがつ]分[ぶん]については、気候[きこう]やエネルギー価格[かかく]の動[うご]きを見極[みきわ]めたうえで対応[たいおう]を検討[けんとう]する。', 'For March, it will consider a response after watching the weather and energy prices.'],
+            ['一方[いっぽう]、政府[せいふ]はレギュラーガソリンの全国[ぜんこく]平均[へいきん]価格[かかく]を一[ひと]リットル170円[えん]程度[ていど]に抑[おさ]えるため補助金[ほじょきん]を出[だ]しているが、この基準[きじゅん]を十二月[じゅうにがつ]以降[いこう]、毎月[まいつき]五円[ごえん]ずつ引[ひ]き上[あ]げる。', 'Meanwhile, the government pays subsidies to hold the national average price of regular gasoline at about 170 yen per liter, but it will raise this benchmark by 5 yen every month from December.'],
+            ['首相[しゅしょう]は、現在[げんざい]は一日[いちにち]に百億円[ひゃくおくえん]超[こ]の税金[ぜいきん]が使[つか]われていると述[の]べ、持続[じぞく]できる制度[せいど]に移[うつ]したい考[かんが]えを示[しめ]した。', 'The prime minister said more than 10 billion yen in tax money is now spent each day, and indicated she wants to move to a sustainable system.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-29-shibano-meijin',
+      date: '2026-10-29',
+      emoji: '⚫',
+      titleEn: 'Go: Toramaru Shibano wins the Meijin title from Ryo Ichiriki, becoming a three-title holder',
+      sources: [
+        { name: 'Mainichi Shimbun (via Yahoo! News)', url: 'https://news.yahoo.co.jp/articles/6f27b643a5ba90ca4e865e6a442404c360dc7d0c' },
+        { name: 'Kyodo News (via Niigata Nippo)', url: 'https://www.niigata-nippo.co.jp/articles/-/933684' },
+        { name: 'Daily Sports', url: 'https://www.daily.co.jp/society/culture/2026/10/29/0020980927.shtml' },
+      ],
+      levels: {
+        N5: {
+          title: '囲碁[いご]の　名人戦[めいじんせん]　芝野[しばの]さんが　勝[か]ちました',
+          lines: [
+            ['囲碁[いご]の名人戦[めいじんせん]で、芝野虎丸[しばのとらまる]さんが　勝[か]ちました。', 'In the Go Meijin tournament, Toramaru Shibano won.', 'Meijin is one of the biggest titles in Go.'],
+            ['相手[あいて]は、一力遼[いちりきりょう]さんでした。', 'His opponent was Ryo Ichiriki.'],
+            ['七[なな]つの勝負[しょうぶ]で、芝野[しばの]さんが　四[よっ]つ勝[か]ちました。', 'Of the seven games, Mr. Shibano won four.'],
+            ['最後[さいご]の勝負[しょうぶ]は、二十八日[にじゅうはちにち]と二十九日[にじゅうくにち]にありました。', 'The last game was on the 28th and 29th.'],
+            ['芝野[しばの]さんは、また名人[めいじん]になりました。', 'Mr. Shibano became Meijin again.'],
+            ['いま、三[みっ]つのタイトルを　持[も]っています。', 'He now holds three titles.'],
+          ],
+        },
+        N4: {
+          title: '囲碁[いご]の名人戦[めいじんせん]、芝野虎丸[しばのとらまる]さんが一力遼[いちりきりょう]さんに勝[か]って名人[めいじん]に',
+          lines: [
+            ['囲碁[いご]の名人戦[めいじんせん]七番勝負[しちばんしょうぶ]で、芝野虎丸[しばのとらまる]さんが四勝三敗[よんしょうさんぱい]で名人[めいじん]になりました。', 'In the seven-game Meijin match in Go, Toramaru Shibano became Meijin with four wins and three losses.', '七番勝負 (nanaban shōbu) is a match where the first to win four of seven games wins.'],
+            ['相手[あいて]は、前[まえ]の名人[めいじん]の一力遼[いちりきりょう]さんでした。', 'His opponent was Ryo Ichiriki, the previous Meijin.'],
+            ['最後[さいご]の第七局[だいななきょく]は、二十八日[にじゅうはちにち]と二十九日[にじゅうくにち]に、静岡県[しずおかけん]の伊豆市[いずし]で行[おこな]われました。', 'The last game, game 7, was held on the 28th and 29th in Izu City, Shizuoka.'],
+            ['芝野[しばの]さんは白[しろ]を持[も]ち、二百十二手[にひゃくじゅうにて]で勝[か]ちました。', 'Mr. Shibano played White and won in 212 moves.'],
+            ['芝野[しばの]さんが名人[めいじん]になるのは、三期[さんき]ぶり四度目[よんどめ]です。', 'This is the fourth time Mr. Shibano has become Meijin, the first in three terms.'],
+            ['芝野[しばの]さんは棋聖[きせい]と十段[じゅうだん]も持[も]っているので、三[みっ]つのタイトルになりました。一力[いちりき]さんは、二[ふた]つに減[へ]りました。', 'Mr. Shibano also holds the Kisei and Judan titles, so he now has three. Mr. Ichiriki is down to two.'],
+          ],
+        },
+        N3: {
+          title: '芝野虎丸[しばのとらまる]棋聖[きせい]が名人[めいじん]奪還[だっかん]　一力遼[いちりきりょう]名人[めいじん]破[やぶ]り三冠[さんかん]に',
+          lines: [
+            ['囲碁[いご]の第五十一期[だいごじゅういっき]名人戦[めいじんせん]七番勝負[しちばんしょうぶ]の最終[さいしゅう]第七局[だいななきょく]が二十八日[にじゅうはちにち]と二十九日[にじゅうくにち]の両日[りょうじつ]、静岡県[しずおかけん]伊豆市[いずし]で打[う]たれ、挑戦者[ちょうせんしゃ]の芝野虎丸[しばのとらまる]棋聖[きせい]・十段[じゅうだん]が勝[か]った。', 'The final game 7 of the 51st Meijin seven-game match in Go was played on the 28th and 29th in Izu, Shizuoka, and the challenger, Kisei and Judan Toramaru Shibano, won.'],
+            ['白番[しろばん]の芝野[しばの]棋聖[きせい]が二百十二手[にひゃくじゅうにて]で中押[ちゅうお]し勝[が]ちし、対戦[たいせん]成績[せいせき]を四勝三敗[よんしょうさんぱい]とした。', 'Playing White, Mr. Shibano won by resignation in 212 moves, making the match score four wins to three.', '中押し勝ち means the opponent resigned in the middle of the game, before the end.'],
+            ['芝野[しばの]新[しん]名人[めいじん]にとって、名人[めいじん]位[い]は三期[さんき]ぶり四度目[よんどめ]の獲得[かくとく]となる。', 'For the new Meijin Shibano, this is his fourth Meijin title and the first in three terms.'],
+            ['今年[ことし]は三月[さんがつ]に棋聖[きせい]を奪取[だっしゅ]し、四月[しがつ]に十段[じゅうだん]を防衛[ぼうえい]しており、棋聖[きせい]、十段[じゅうだん]と合[あ]わせて三冠[さんかん]となった。', 'This year he took the Kisei in March and defended the Judan in April, and together with the Kisei and Judan he now holds three titles.'],
+            ['一方[いっぽう]、名人[めいじん]三連覇[さんれんぱ]を逃[のが]した一力遼[いちりきりょう]前[ぜん]名人[めいじん]は、王座[おうざ]と天元[てんげん]の二冠[にかん]に後退[こうたい]した。', 'On the other hand, former Meijin Ryo Ichiriki, who missed a third straight Meijin title, fell back to two titles, the Oza and the Tengen.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-29-north-korea-missiles',
+      date: '2026-10-29',
+      emoji: '🚀',
+      titleEn: 'North Korea fires about ten short-range missiles; they appear to have landed outside Japan\'s EEZ',
+      sources: [
+        { name: 'Jiji Press', url: 'https://www.jiji.com/jc/article?k=2026102900572&g=soc&m=rss' },
+        { name: '8and (reporting the Ministry of Defense announcement)', url: 'https://8and.jp/2026/10/29/%E5%8C%97%E6%9C%9D%E9%AE%AE%E3%81%8C%E7%9F%AD%E8%B7%9D%E9%9B%A2%E5%BC%BE%E9%81%93%E3%83%9F%E3%82%B5%E3%82%A4%E3%83%AB%E5%8D%81%E6%95%B0%E7%99%BA%E3%82%92%E7%99%BA%E5%B0%84%E3%81%8B%E3%80%80%E6%97%A5/' },
+      ],
+      levels: {
+        N5: {
+          title: '北朝鮮[きたちょうせん]が　ミサイルを　うちました',
+          lines: [
+            ['北朝鮮[きたちょうせん]が、二十九日[にじゅうくにち]に　ミサイルを　うちました。', 'North Korea fired missiles on the 29th.'],
+            ['日本海[にほんかい]に　十発[じゅっぱつ]　ぐらい　うちました。', 'It fired about ten into the Sea of Japan.'],
+            ['日本[にほん]の　防衛省[ぼうえいしょう]が、午後[ごご]に　知[し]らせました。', 'Japan\'s Ministry of Defense announced it in the afternoon.'],
+            ['ミサイルは、日本[にほん]の　海[うみ]の外[そと]に　落[お]ちたようです。', 'The missiles seem to have fallen outside Japan\'s waters.', 'This means outside Japan\'s exclusive economic zone (EEZ).'],
+            ['けがをした人[ひと]や　船[ふね]の　ひがいは、ありません。', 'No one was hurt, and no ships were damaged.'],
+            ['高市[たかいち]さんは、よく調[しら]べるように　言[い]いました。', 'Prime Minister Takaichi told people to investigate carefully.'],
+          ],
+        },
+        N4: {
+          title: '北朝鮮[きたちょうせん]が短距離[たんきょり]ミサイルを十発[じゅっぱつ]ぐらい発射[はっしゃ]、日本[にほん]の海[うみ]の外[そと]に落[お]ちたもよう',
+          lines: [
+            ['北朝鮮[きたちょうせん]は二十九日[にじゅうくにち]、日本海[にほんかい]に向[む]けて、短距離[たんきょり]の弾道[だんどう]ミサイルを十発[じゅっぱつ]あまり発射[はっしゃ]しました。', 'On the 29th, North Korea fired more than ten short-range ballistic missiles toward the Sea of Japan.', 'This number comes from South Korea\'s Joint Chiefs of Staff, as reported by Jiji Press.'],
+            ['日本[にほん]の防衛省[ぼうえいしょう]は、午後[ごご]〇時[れいじ]四十分[よんじゅっぷん]ごろ、ミサイルの可能性[かのうせい]があるものが発射[はっしゃ]されたと発表[はっぴょう]しました。', 'Japan\'s Ministry of Defense announced that around 12:40 p.m. something that could be a missile was launched.'],
+            ['防衛省[ぼうえいしょう]の関係者[かんけいしゃ]によると、ミサイルは日本[にほん]の排他的[はいたてき]経済[けいざい]水域[すいいき]の外[そと]に落[お]ちたとみられます。', 'According to a Ministry of Defense source, the missiles seem to have fallen outside Japan\'s exclusive economic zone.', 'The EEZ is the sea up to 200 nautical miles from the coast, where a country has special rights over resources.'],
+            ['木原[きはら]官房長官[かんぼうちょうかん]は、今[いま]のところ被害[ひがい]の報告[ほうこく]は受[う]けていないと話[はな]しました。', 'Chief Cabinet Secretary Kihara said that no reports of damage have been received so far.'],
+            ['高市[たかいち]首相[しゅしょう]は、情報[じょうほう]を集[あつ]めて分析[ぶんせき]することを、全力[ぜんりょく]でするように指示[しじ]しました。', 'Prime Minister Takaichi ordered officials to do their utmost to gather and analyze information.'],
+            ['数[かず]やねらいについては、これから調[しら]べが進[すす]みます。', 'Investigations into the number and the aim will continue from now on.'],
+          ],
+        },
+        N3: {
+          title: '北朝鮮[きたちょうせん]、短距離[たんきょり]弾[だん]十[じゅっ]発余[ぱつあま]り発射[はっしゃ]　日本[にっぽん]のEEZ外[がい]に落下[らっか]か',
+          lines: [
+            ['韓国軍[かんこくぐん]の合同[ごうどう]参謀[さんぼう]本部[ほんぶ]によると、北朝鮮[きたちょうせん]は二十九日[にじゅうくにち]、日本海[にほんかい]に向[む]けて短距離[たんきょり]弾道[だんどう]ミサイルを十発余[じゅっぱつあま]り発射[はっしゃ]した。', 'According to South Korea\'s Joint Chiefs of Staff, North Korea on the 29th fired more than ten short-range ballistic missiles toward the Sea of Japan.'],
+            ['防衛省[ぼうえいしょう]は、午後[ごご]〇時[れいじ]四十分[よんじゅっぷん]ごろ、弾道[だんどう]ミサイルの可能性[かのうせい]があるものが発射[はっしゃ]されたと発表[はっぴょう]した。', 'The Ministry of Defense announced that around 12:40 p.m. an object that could be a ballistic missile had been launched.'],
+            ['防衛省[ぼうえいしょう]関係者[かんけいしゃ]によると、いずれも日本[にっぽん]の排他的[はいたてき]経済[けいざい]水域[すいいき]（EEZ）の外[そと]に落下[らっか]したとみられる。', 'According to a Ministry of Defense source, all of them are believed to have fallen outside Japan\'s exclusive economic zone (EEZ).'],
+            ['木原[きはら]官房長官[かんぼうちょうかん]は、現時点[げんじてん]で航空機[こうくうき]や船舶[せんぱく]などの被害[ひがい]の報告[ほうこく]は受[う]けていないと述[の]べた。', 'Chief Cabinet Secretary Kihara said that, as of now, no reports of damage to aircraft or ships had been received.'],
+            ['高市[たかいち]首相[しゅしょう]は、情報[じょうほう]の収集[しゅうしゅう]と分析[ぶんせき]に全力[ぜんりょく]を挙[あ]げるよう指示[しじ]した。', 'Prime Minister Takaichi instructed officials to devote their full effort to collecting and analyzing information.'],
+            ['発射[はっしゃ]の意図[いと]や詳[くわ]しい性能[せいのう]については、確認[かくにん]が進[すす]められている。', 'Confirmation of the intent behind the launch and of the missiles\' detailed performance is under way.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-10-27-chiba-tetsuya',
       date: '2026-10-27',
       emoji: '🥊',

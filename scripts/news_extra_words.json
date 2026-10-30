@@ -6553,5 +6553,365 @@
     "にてんよんパーセント",
     "2.4%",
     "noun"
+  ],
+  "三か月": [
+    "さんかげつ",
+    "three months",
+    "noun"
+  ],
+  "七千円": [
+    "ななせんえん",
+    "7,000 yen",
+    "number"
+  ],
+  "一リットル": [
+    "いちリットル",
+    "one liter",
+    "number"
+  ],
+  "170円": [
+    "ひゃくななじゅうえん",
+    "170 yen",
+    "number"
+  ],
+  "助け": [
+    "たすけ",
+    "help, aid",
+    "noun"
+  ],
+  "補助": [
+    "ほじょ",
+    "subsidy, assistance",
+    "noun"
+  ],
+  "五円": [
+    "ごえん",
+    "5 yen",
+    "number"
+  ],
+  "百億円": [
+    "ひゃくおくえん",
+    "10 billion yen",
+    "number"
+  ],
+  "段階": [
+    "だんかい",
+    "stage, step",
+    "noun"
+  ],
+  "表明": [
+    "ひょうめい",
+    "announcement, declaration",
+    "noun"
+  ],
+  "想定": [
+    "そうてい",
+    "assumption, planning for",
+    "noun"
+  ],
+  "本格": [
+    "ほんかく",
+    "full-scale, in earnest",
+    "noun"
+  ],
+  "前倒し": [
+    "まえだおし",
+    "moving earlier, bringing forward",
+    "noun"
+  ],
+  "標準": [
+    "ひょうじゅん",
+    "standard",
+    "noun"
+  ],
+  "七千円程度": [
+    "ななせんえんていど",
+    "about 7,000 yen",
+    "number"
+  ],
+  "見極める": [
+    "みきわめる",
+    "to ascertain, to see through",
+    "ichidan verb"
+  ],
+  "レギュラー": [
+    "レギュラー",
+    "regular",
+    "noun"
+  ],
+  "170円程度": [
+    "ひゃくななじゅうえんていど",
+    "about 170 yen",
+    "number"
+  ],
+  "百億円超": [
+    "ひゃくおくえんこえ",
+    "over 10 billion yen",
+    "number"
+  ],
+  "持続": [
+    "じぞく",
+    "continuation, sustaining",
+    "noun"
+  ],
+  "囲碁": [
+    "いご",
+    "Go (board game)",
+    "noun"
+  ],
+  "芝野": [
+    "しばの",
+    "Shibano (surname)",
+    "name"
+  ],
+  "虎丸": [
+    "とらまる",
+    "Toramaru (given name)",
+    "name"
+  ],
+  "勝負": [
+    "しょうぶ",
+    "match, game",
+    "noun"
+  ],
+  "三敗": [
+    "さんぱい",
+    "three losses",
+    "noun"
+  ],
+  "第七局": [
+    "だいななきょく",
+    "game 7",
+    "noun"
+  ],
+  "静岡": [
+    "しずおか",
+    "Shizuoka",
+    "name"
+  ],
+  "伊豆": [
+    "いず",
+    "Izu",
+    "name"
+  ],
+  "二百十二手": [
+    "にひゃくじゅうにて",
+    "212 moves",
+    "number"
+  ],
+  "三期ぶり": [
+    "さんきぶり",
+    "for the first time in three terms",
+    "noun"
+  ],
+  "四度目": [
+    "よんどめ",
+    "the fourth time",
+    "noun"
+  ],
+  "棋聖": [
+    "きせい",
+    "Kisei (Go title)",
+    "name"
+  ],
+  "十段": [
+    "じゅうだん",
+    "Judan (Go title)",
+    "name"
+  ],
+  "一力さん": [
+    "いちりきさん",
+    "Mr. Ichiriki",
+    "name"
+  ],
+  "三冠": [
+    "さんかん",
+    "three titles (triple crown)",
+    "noun"
+  ],
+  "第五十一期": [
+    "だいごじゅういっき",
+    "the 51st term",
+    "noun"
+  ],
+  "二十八": [
+    "にじゅうはち",
+    "28",
+    "number"
+  ],
+  "二十九": [
+    "にじゅうく",
+    "29",
+    "number"
+  ],
+  "両日": [
+    "りょうじつ",
+    "both days",
+    "noun"
+  ],
+  "白番": [
+    "しろばん",
+    "playing White",
+    "noun"
+  ],
+  "中押し": [
+    "ちゅうおし",
+    "win by resignation",
+    "noun"
+  ],
+  "にとって": [
+    "にとって",
+    "for, from the standpoint of",
+    "expression"
+  ],
+  "奪取": [
+    "だっしゅ",
+    "seizing, winning (a title)",
+    "noun"
+  ],
+  "天元": [
+    "てんげん",
+    "Tengen (Go title)",
+    "name"
+  ],
+  "二冠": [
+    "にかん",
+    "two titles",
+    "noun"
+  ],
+  "後退": [
+    "こうたい",
+    "falling back",
+    "noun"
+  ],
+  "北朝鮮": [
+    "きたちょうせん",
+    "North Korea",
+    "name"
+  ],
+  "ミサイル": [
+    "ミサイル",
+    "missile",
+    "noun"
+  ],
+  "日本海": [
+    "にほんかい",
+    "Sea of Japan",
+    "name"
+  ],
+  "十発": [
+    "じゅっぱつ",
+    "ten shots",
+    "number"
+  ],
+  "短距離": [
+    "たんきょり",
+    "short range",
+    "noun"
+  ],
+  "弾道": [
+    "だんどう",
+    "ballistic",
+    "noun"
+  ],
+  "十発あまり": [
+    "じゅっぱつあまり",
+    "more than ten shots",
+    "number"
+  ],
+  "〇時": [
+    "れいじ",
+    "0 o'clock (12 a.m./p.m. hour)",
+    "number"
+  ],
+  "四十分ごろ": [
+    "よんじゅっぷんごろ",
+    "around 40 minutes past",
+    "number"
+  ],
+  "排他": [
+    "はいた",
+    "exclusive",
+    "noun"
+  ],
+  "水域": [
+    "すいいき",
+    "waters, zone",
+    "noun"
+  ],
+  "木原": [
+    "きはら",
+    "Kihara (surname)",
+    "name"
+  ],
+  "長官": [
+    "ちょうかん",
+    "chief, director",
+    "noun"
+  ],
+  "全力": [
+    "ぜんりょく",
+    "full strength",
+    "noun"
+  ],
+  "ねらう": [
+    "ねらう",
+    "to aim at",
+    "godan verb"
+  ],
+  "十発余り": [
+    "じゅっぱつあまり",
+    "more than ten shots",
+    "number"
+  ],
+  "EEZ": [
+    "イーイーゼット",
+    "EEZ (exclusive economic zone)",
+    "noun"
+  ],
+  "落下": [
+    "らっか",
+    "falling, landing",
+    "noun"
+  ],
+  "合同": [
+    "ごうどう",
+    "joint",
+    "noun"
+  ],
+  "参謀": [
+    "さんぼう",
+    "staff (military)",
+    "noun"
+  ],
+  "本部": [
+    "ほんぶ",
+    "headquarters",
+    "noun"
+  ],
+  "現時点": [
+    "げんじてん",
+    "at present",
+    "noun"
+  ],
+  "航空機": [
+    "こうくうき",
+    "aircraft",
+    "noun"
+  ],
+  "船舶": [
+    "せんぱく",
+    "ships, vessels",
+    "noun"
+  ],
+  "意図": [
+    "いと",
+    "intention",
+    "noun"
+  ],
+  "性能": [
+    "せいのう",
+    "performance, capability",
+    "noun"
   ]
 }
