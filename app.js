@@ -333,7 +333,6 @@
       if (inline) {
         placeSettingsPanel(true);
         $('#settings-overlay')?.classList.add('hidden');
-        inline.open = !!settings.studySettingsOpen;
       } else {
         showCoachMark('#btn-settings', 'settings here');
       }
@@ -655,8 +654,6 @@
     $$('#card-back .btn-grade').forEach(b => b.classList.remove('grade-suggested'));
     const explain = $('#translate-explain');
     if (explain) explain.classList.add('hidden');
-    const furiLabel = $('#study-furigana-label');
-    if (furiLabel) furiLabel.classList.toggle('hidden', studyMode !== 'translate');
     $$('#study-auto-kanji-label, #study-retry-label').forEach(el => el.classList.toggle('hidden', studyMode !== 'translate' || !settings.typingMode));
     if (sessionIndex >= sessionCards.length) {
       finishSession();
@@ -1925,8 +1922,6 @@
     }
     kanjiEl.classList.toggle('translate-source-ja', !isEnToJa);
     kanjiEl.classList.toggle('translate-source-en', isEnToJa);
-    const furiToggle = $('#study-furigana');
-    if (furiToggle) furiToggle.checked = !!settings.showFurigana;
     const kanjiToggle = $('#study-auto-kanji');
     if (kanjiToggle) kanjiToggle.checked = !!settings.autoKanji;
     const retryToggle = $('#study-retry');
@@ -2235,11 +2230,12 @@
   }
 
   // Re-show the Japanese on the current sentence card with or without
-  // furigana (the toggle above the card, F, or the setting).
+  // furigana (F, or the setting above the card).
   function setStudyFurigana(on) {
     settings.showFurigana = !!on;
     saveSettings(settings);
-    $$('#study-furigana, #setting-show-furigana').forEach(el => { el.checked = settings.showFurigana; });
+    const furiSetting = $('#setting-show-furigana');
+    if (furiSetting) furiSetting.checked = settings.showFurigana;
     refreshTranslateFurigana();
   }
 
@@ -6142,7 +6138,7 @@
               </label>
               <label class="setting-row">
                 <div class="setting-info">
-                  <span class="setting-label">Show furigana</span>
+                  <span class="setting-label">Show furigana <span class="grade-key">F</span></span>
                   <span class="setting-desc">Shows readings (hiragana) above kanji in Japanese sentences</span>
                 </div>
                 <input type="checkbox" id="setting-show-furigana" class="setting-toggle">
@@ -6153,14 +6149,13 @@
     }
 
     // On the study screen the same settings sit at the top, above the card,
-    // so they can be changed mid-session; the panel moves there (see
+    // always shown as a row of boxes so they can be changed mid-session; the
+    // panel moves there (see
     // placeSettingsPanel) and the overlay is only used from the chapter list.
     const studyScreen = document.getElementById('screen-study');
     if (studyScreen && document.getElementById('settings-overlay')) {
       studyScreen.insertAdjacentHTML('afterbegin', `
-        <details id="study-settings" class="study-settings">
-          <summary class="study-settings-summary">⚙ Settings</summary>
-        </details>`);
+        <section id="study-settings" class="study-settings" aria-label="Settings"></section>`);
     }
 
     const refMount = document.getElementById('ref-mount');
@@ -6441,15 +6436,28 @@
       $('#setting-english-to-japanese').checked = settings.englishToJapanese;
       $('#setting-show-example-front').checked = settings.showExampleFront;
       $('#setting-show-furigana').checked = settings.showFurigana;
+      syncContextSetting();
+    }
+
+    // English -> Japanese mode always shows the English example, so the
+    // "Show context example" switch does nothing while it's on.
+    function syncContextSetting() {
+      const ctx = $('#setting-show-context');
+      if (!ctx) return;
+      ctx.disabled = !!settings.englishToJapanese;
+      const row = ctx.closest('.setting-row');
+      if (!row) return;
+      row.classList.toggle('setting-row-disabled', ctx.disabled);
+      row.title = ctx.disabled ? 'Always shown in English → Japanese mode' : '';
     }
 
     function openSettings() {
-      // While studying, the gear opens the settings above the card instead.
+      // While studying, the settings are already above the card; the gear
+      // just brings them into view.
       const inline = $('#study-settings');
       if (inline && screens.study && screens.study.classList.contains('active')) {
         syncSettingsControls();
-        inline.open = !inline.open;
-        if (inline.open) inline.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        inline.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
         return;
       }
       placeSettingsPanel(false);
@@ -6462,10 +6470,6 @@
     }
 
     syncSettingsControls();
-    on('#study-settings', 'toggle', (e) => {
-      settings.studySettingsOpen = e.target.open;
-      saveSettings(settings);
-    });
     on('#btn-settings', 'click', openSettings);
     on('#btn-close-settings', 'click', closeSettings);
     on('.settings-overlay-backdrop', 'click', closeSettings);
@@ -6493,6 +6497,7 @@
     on('#setting-english-to-japanese', 'change', (e) => {
       settings.englishToJapanese = e.target.checked;
       saveSettings(settings);
+      syncContextSetting();
       redrawStudyCard();
     });
 
@@ -6503,7 +6508,6 @@
     });
 
     on('#setting-show-furigana', 'change', (e) => setStudyFurigana(e.target.checked));
-    on('#study-furigana', 'change', (e) => setStudyFurigana(e.target.checked));
     on('#study-retry', 'change', (e) => {
       settings.retryTyping = e.target.checked;
       saveSettings(settings);
