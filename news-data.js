@@ -23,6 +23,144 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-10-31-jobs-september',
+      date: '2026-10-31',
+      emoji: '💼',
+      titleEn: 'September jobless rate improves to 2.4%; jobs-to-applicants ratio rises to 1.19',
+      sources: [
+        { name: 'Tokyo Shimbun (Kyodo)', url: 'https://www.tokyo-np.co.jp/article/524960' },
+        { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261030de68199' },
+        { name: 'Daily Sports', url: 'https://www.daily.co.jp/society/economics/2026/10/30/0020982743.shtml' },
+      ],
+      levels: {
+        N5: {
+          title: '九月[くがつ]の　仕事[しごと]の　データが　出[で]ました',
+          lines: [
+            ['三十日[さんじゅうにち]に、九月[くがつ]の　仕事[しごと]の　データが　出[で]ました。', 'On the 30th, the September data on jobs came out.'],
+            ['仕事[しごと]が　ない人[ひと]は、2.4パーセントでした。', 'People without a job were 2.4 percent.'],
+            ['八月[はちがつ]より、0.1ポイント　少[すく]なくなりました。', 'It went down by 0.1 point from August.'],
+            ['仕事[しごと]が　ない人[ひと]は、169万人[まんにん]でした。', 'People without a job numbered 1.69 million.'],
+            ['仕事[しごと]を　さがす人[ひと]より、仕事[しごと]の数[かず]が　少[すこ]し　多[おお]いです。', 'There are a few more jobs than people looking for work.'],
+            ['働[はたら]いている人[ひと]は、6896万人[まんにん]で、去年[きょねん]の九月[くがつ]より　33万人[まんにん]　多[おお]いです。', 'People who are working number 68.96 million, 330,000 more than last September.'],
+          ],
+        },
+        N4: {
+          title: '九月[くがつ]の失業率[しつぎょうりつ]は2.4パーセントに　求人倍率[きゅうじんばいりつ]は1.19倍[ばい]',
+          lines: [
+            ['総務省[そうむしょう]は三十日[さんじゅうにち]、九月[くがつ]の失業率[しつぎょうりつ]は2.4パーセントだったと発表[はっぴょう]しました。', 'The Ministry of Internal Affairs said on the 30th that the September unemployment rate was 2.4 percent.', 'This is the seasonally adjusted rate. It shows how many of the people who want to work have no job.'],
+            ['八月[はちがつ]より0.1ポイント下[さ]がり、二[に]か月[げつ]ぶりによくなりました。', 'It fell 0.1 point from August, improving for the first time in two months.'],
+            ['仕事[しごと]がない人[ひと]は169万人[まんにん]で、一年前[いちねんまえ]より15万人[まんにん]減[へ]りました。', 'People without a job numbered 1.69 million, 150,000 fewer than a year earlier.'],
+            ['厚生労働省[こうせいろうどうしょう]によると、有効[ゆうこう]求人倍率[きゅうじんばいりつ]は1.19倍[ばい]で、三[さん]か月[げつ]ぶりに上[あ]がりました。', 'According to the Ministry of Health, Labour and Welfare, the jobs-to-applicants ratio was 1.19, rising for the first time in three months.', 'A ratio of 1.19 means there are about 119 job openings for every 100 people looking for work.'],
+            ['働[はたら]いている人[ひと]は6896万人[まんにん]で、去年[きょねん]の九月[くがつ]より33万人[まんにん]増[ふ]え、二[に]か月[げつ]続[つづ]けて増[ふ]えました。', 'People with jobs numbered 68.96 million, 330,000 more than last September, and it has risen for two months in a row.'],
+            ['新[あたら]しい求人[きゅうじん]だけで見[み]ると、倍率[ばいりつ]は2.19倍[ばい]でした。', 'Looking only at new job openings, the ratio was 2.19.'],
+          ],
+        },
+        N3: {
+          title: '九月[くがつ]の完全失業率[かんぜんしつぎょうりつ]は2.4パーセントに改善[かいぜん]　有効求人倍率[ゆうこうきゅうじんばいりつ]は三[さん]か月[げつ]ぶり上昇[じょうしょう]',
+          lines: [
+            ['総務省[そうむしょう]が三十日[さんじゅうにち]に発表[はっぴょう]した労働力[ろうどうりょく]調査[ちょうさ]によると、九月[くがつ]の完全失業率[かんぜんしつぎょうりつ]（季節[きせつ]調整値[ちょうせいち]）は2.4パーセントで、前月[ぜんげつ]より0.1ポイント低下[ていか]した。', 'According to the labor force survey released by the Ministry of Internal Affairs on the 30th, the September jobless rate (seasonally adjusted) was 2.4 percent, down 0.1 point from the previous month.'],
+            ['改善[かいぜん]は二[に]か月[げつ]ぶりで、完全失業者数[かんぜんしつぎょうしゃすう]は169万人[まんにん]と、前年同月[ぜんねんどうげつ]に比[くら]べて15万人[まんにん]減[へ]った。', 'It was the first improvement in two months, and the number of unemployed was 1.69 million, down 150,000 from a year earlier.'],
+            ['就業者数[しゅうぎょうしゃすう]は6896万人[まんにん]で、前年同月[ぜんねんどうげつ]より33万人[まんにん]増[ふ]え、二[に]か月[げつ]連続[れんぞく]で増加[ぞうか]した。', 'The number of employed people was 68.96 million, up 330,000 from a year earlier, a rise for the second month in a row.'],
+            ['一方[いっぽう]、厚生労働省[こうせいろうどうしょう]が同日[どうじつ]発表[はっぴょう]した九月[くがつ]の有効求人倍率[ゆうこうきゅうじんばいりつ]（季節[きせつ]調整値[ちょうせいち]）は1.19倍[ばい]で、前月[ぜんげつ]を0.01ポイント上回[うわまわ]り、三[さん]か月[げつ]ぶりに上昇[じょうしょう]した。', 'Meanwhile, the September jobs-to-applicants ratio (seasonally adjusted), released the same day by the Ministry of Health, Labour and Welfare, was 1.19, 0.01 point above the previous month and the first rise in three months.'],
+            ['新規[しんき]求人倍率[きゅうじんばいりつ]は2.19倍[ばい]で、前月[ぜんげつ]から0.13ポイント上昇[じょうしょう]した。', 'The ratio for new openings was 2.19, up 0.13 point from the previous month.'],
+            ['新規[しんき]の求職[きゅうしょく]申[もう]し込[こ]み件数[けんすう]が大[おお]きく減[へ]ったことが影響[えいきょう]したとみられる。', 'A big drop in the number of new job applications is thought to have had an effect.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-31-phone-analysis-bill',
+      date: '2026-10-31',
+      emoji: '📱',
+      titleEn: 'Lower House begins debate on bill to let police analyze criminal groups\' smartphones remotely',
+      sources: [
+        { name: 'Kyodo News (via Yahoo! News)', url: 'https://news.yahoo.co.jp/articles/79964f60d6f680c86eb07ee427e01dd07fad6c9f' },
+        { name: 'TBS NEWS DIG (via Yahoo! News)', url: 'https://news.yahoo.co.jp/articles/719b749a69fb084fccc95b6516942562757ecd89' },
+        { name: 'Chunichi Shimbun (Kyodo)', url: 'https://www.chunichi.co.jp/article/1332624' },
+      ],
+      levels: {
+        N5: {
+          title: '警察[けいさつ]が　スマホを　しらべる　あたらしい　法律[ほうりつ]',
+          lines: [
+            ['三十日[さんじゅうにち]に、国会[こっかい]で　あたらしい　法律[ほうりつ]の　話[はなし]が　はじまりました。', 'On the 30th, talks about a new law began in the Diet.'],
+            ['わるい人[ひと]たちが　アプリで　話[はな]して、わるいことを　しています。', 'Bad people talk on apps and do bad things.'],
+            ['警察[けいさつ]は、その人[ひと]の　スマホを　とおくから　しらべたいです。', 'The police want to check those people\'s smartphones from far away.'],
+            ['そうすれば、わるいことを　する前[まえ]に　わかります。', 'Then they can find out before the bad thing happens.'],
+            ['でも、その前[まえ]に　裁判官[さいばんかん]の　OKが　いります。', 'But before that, they need a judge\'s OK.'],
+            ['人[ひと]の　話[はなし]を　しらべるので、気[き]をつける　ことが　大切[たいせつ]だと　言[い]う人[ひと]も　います。', 'Because it checks people\'s private talk, some people say it is important to be careful.'],
+          ],
+        },
+        N4: {
+          title: '警察[けいさつ]がスマホを遠[とお]くから調[しら]べる法案[ほうあん]、衆議院[しゅうぎいん]で話[はな]し合[あ]いが始[はじ]まる',
+          lines: [
+            ['三十日[さんじゅうにち]、衆議院[しゅうぎいん]の本会議[ほんかいぎ]で、警察官職務執行法[けいさつかんしょくむしっこうほう]を変[か]える法案[ほうあん]の話[はな]し合[あ]いが始[はじ]まりました。', 'On the 30th, the Lower House plenary session began debate on a bill to change the Police Duties Execution Act.', 'This is the law that sets what police officers may do. The Cabinet approved the bill on the 16th of this month.'],
+            ['「トクリュウ」と呼[よ]ばれる犯罪[はんざい]グループへの対策[たいさく]です。', 'It is a measure against criminal groups called "tokuryū".', 'トクリュウ (匿流) is short for 匿名・流動型犯罪グループ, anonymous and fluid criminal groups whose members change often.'],
+            ['犯人[はんにん]たちは、シグナルやテレグラムなど、他[ほか]の人[ひと]に見[み]えにくいアプリで話[はな]しています。', 'The criminals talk on apps such as Signal and Telegram, which other people can hardly see into.'],
+            ['法案[ほうあん]は、警察[けいさつ]が遠[とお]くからそのスマホにつないで、必要[ひつよう]な情報[じょうほう]をコピーして調[しら]べられるようにするものです。', 'The bill would let the police connect to those smartphones from a distance and copy and check the information they need.'],
+            ['葉梨康弘[はなしやすひろ]国家公安委員長[こっかこうあんいいんちょう]は、被害[ひがい]を防[ふせ]ぐために必要[ひつよう]な情報[じょうほう]をコピーして取[と]ると説明[せつめい]しました。', 'National Public Safety Commission Chairman Yasuhiro Hanashi explained that they would copy and obtain the information needed to prevent harm.'],
+            ['通信[つうしん]の秘密[ひみつ]との関係[かんけい]が心配[しんぱい]されているので、法案[ほうあん]は、先[さき]に裁判官[さいばんかん]の許可[きょか]を取[と]ることなどを条件[じょうけん]にしています。', 'Because of worries about the secrecy of communications, the bill makes things like getting a judge\'s permission first a condition.'],
+          ],
+        },
+        N3: {
+          title: '匿流[とくりゅう]対策[たいさく]のスマホ遠隔[えんかく]解析[かいせき]法案[ほうあん]、衆院[しゅういん]で審議入[しんぎい]り',
+          lines: [
+            ['匿名[とくめい]・流動型[りゅうどうがた]犯罪[はんざい]グループ（匿流[とくりゅう]）対策[たいさく]として、スマートフォンを遠隔[えんかく]で解析[かいせき]できるようにする警察官職務執行法[けいさつかんしょくむしっこうほう]改正案[かいせいあん]が三十日[さんじゅうにち]、衆院[しゅういん]本会議[ほんかいぎ]で審議入[しんぎい]りした。', 'A bill to amend the Police Duties Execution Act, which would make it possible to analyze smartphones remotely as a measure against anonymous and fluid criminal groups (tokuryū), went into deliberation at the Lower House plenary session on the 30th.', '審議入り means deliberation on a bill has started in the Diet.'],
+            ['「シグナル」や「テレグラム」など秘匿性[ひとくせい]の高[たか]い通信[つうしん]アプリでやり取[と]りされる犯行[はんこう]計画[けいかく]を事前[じぜん]に把握[はあく]し、新[あら]たな被害[ひがい]の防止[ぼうし]につなげるのが狙[ねら]いだ。', 'The aim is to learn in advance of crime plans exchanged on highly secret messaging apps such as Signal and Telegram, and to link this to preventing new victims.'],
+            ['葉梨康弘[はなしやすひろ]国家公安委員長[こっかこうあんいいんちょう]は本会議[ほんかいぎ]で、犯人間[はんにんかん]や被害者[ひがいしゃ]との連絡[れんらく]に使[つか]われた端末[たんまつ]に接続[せつぞく]し、被害[ひがい]防止[ぼうし]に必要[ひつよう]な情報[じょうほう]を複写[ふくしゃ]、取得[しゅとく]すると述[の]べた。', 'National Public Safety Commission Chairman Yasuhiro Hanashi told the plenary session that police would connect to devices used to contact the culprits or victims and copy and obtain the information needed to prevent harm.'],
+            ['政府[せいふ]は今月[こんげつ]十六日[じゅうろくにち]に改正案[かいせいあん]を閣議決定[かくぎけってい]しており、憲法[けんぽう]が保障[ほしょう]する通信[つうしん]の秘密[ひみつ]に配慮[はいりょ]し、事前[じぜん]に裁判官[さいばんかん]の許可状[きょかじょう]を得[え]ることなどを要件[ようけん]とした。', 'The government approved the bill in Cabinet on the 16th of this month, and, out of consideration for the secrecy of communications guaranteed by the Constitution, made things such as obtaining a judge\'s permit in advance a requirement.'],
+            ['一方[いっぽう]、通信[つうしん]の秘密[ひみつ]やプライバシーを侵害[しんがい]するおそれがあるとの指摘[してき]もあり、運用[うんよう]の厳格[げんかく]さが問[と]われそうだ。', 'On the other hand, some point out that it may infringe on the secrecy of communications and privacy, so how strictly it is run is likely to be questioned.'],
+            ['三十日[さんじゅうにち]は趣旨[しゅし]説明[せつめい]のあと、自民党[じみんとう]や国民民主党[こくみんみんしゅとう]などが質疑[しつぎ]を行[おこな]う予定[よてい]だった。', 'On the 30th, after the explanation of the bill\'s purpose, the Liberal Democratic Party, the Democratic Party for the People and others were scheduled to put questions.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-10-31-tax-free-refund',
+      date: '2026-10-31',
+      emoji: '🛍️',
+      titleEn: 'Tax-free shopping for tourists switches to "pay now, refund later" on November 1',
+      sources: [
+        { name: 'nippon.com', url: 'https://www.nippon.com/ja/japan-data/h02925/' },
+        { name: 'Japan Tourism Agency', url: 'https://www.mlit.go.jp/kankocho/tax-free/page01_000001_00021.html' },
+        { name: 'Hokkaido Shimbun (PPIH press release)', url: 'https://www.hokkaido-np.co.jp/article/1386454/' },
+      ],
+      levels: {
+        N5: {
+          title: '十一月[じゅういちがつ]から　外国[がいこく]の人[ひと]の　買[か]いものが　かわります',
+          lines: [
+            ['外国[がいこく]の人[ひと]は、日本[にほん]で　買[か]いものを　すると、税金[ぜいきん]が　かからない　ことが　あります。', 'When people from abroad shop in Japan, they sometimes do not have to pay tax.'],
+            ['十一月[じゅういちがつ]一日[ついたち]から、この　方法[ほうほう]が　かわります。', 'From November 1, this way will change.'],
+            ['店[みせ]で、税金[ぜいきん]も　入[い]れた　値段[ねだん]を　はらいます。', 'At the shop, they pay the price with tax included.'],
+            ['日本[にほん]を　出[で]る　とき、空港[くうこう]で　買[か]った　ものを　見[み]せます。', 'When they leave Japan, they show what they bought at the airport.'],
+            ['そのあとで、税金[ぜいきん]の　お金[かね]が　もどって　きます。', 'After that, the tax money comes back.'],
+            ['買[か]った　ものを　日本[にほん]で　売[う]る　人[ひと]を　へらす　ための　方法[ほうほう]です。', 'It is a way to reduce people who sell the things they bought inside Japan.'],
+          ],
+        },
+        N4: {
+          title: '免税[めんぜい]の買[か]い物[もの]、十一月[じゅういちがつ]から「あとで返金[へんきん]」の方式[ほうしき]に',
+          lines: [
+            ['十一月[じゅういちがつ]一日[ついたち]から、外国人[がいこくじん]旅行者[りょこうしゃ]の免税[めんぜい]の買[か]い物[もの]が「リファンド方式[ほうしき]」に変[か]わります。', 'From November 1, tax-free shopping for foreign tourists changes to the "refund method".', '免税 (menzei) means tax-free. Refund means the tax is paid back.'],
+            ['今[いま]までは税金[ぜいきん]がない値段[ねだん]で買[か]えましたが、これからは税金[ぜいきん]が入[はい]った値段[ねだん]を払[はら]います。', 'Until now they could buy at a price without tax, but from now they pay a price that includes tax.'],
+            ['そして、日本[にほん]を出[で]る時[とき]に、空港[くうこう]などの税関[ぜいかん]で品物[しなもの]を持[も]ち出[だ]すことが確認[かくにん]されたあとで、消費税[しょうひぜい]と同[おな]じ金額[きんがく]が返[かえ]ってきます。', 'Then, when they leave Japan and customs at the airport or elsewhere confirms they are taking the goods out, an amount equal to the consumption tax is returned.'],
+            ['免税[めんぜい]で安[やす]く買[か]った物[もの]を日本[にほん]の中[なか]で売[う]る不正[ふせい]を防[ふせ]ぐことが、一番[いちばん]の目的[もくてき]です。', 'The main purpose is to stop the wrongdoing of selling inside Japan things bought cheaply tax-free.'],
+            ['電子[でんし]化[か]していない免税店[めんぜいてん]は、十月[じゅうがつ]三十一日[さんじゅういちにち]で免税[めんぜい]の許可[きょか]がなくなります。', 'Tax-free shops that have not gone digital lose their tax-free permission on October 31.'],
+            ['ドン・キホーテなどを持[も]つPPIHグループは、十一月[じゅういちがつ]一日[ついたち]から返金[へんきん]の手数料[てすうりょう]を無料[むりょう]にすると発表[はっぴょう]しました。', 'The PPIH group, which owns Don Quijote and others, announced that from November 1 it will make the refund fee free.', 'The company\'s announcement attaches conditions to the free fee.'],
+          ],
+        },
+        N3: {
+          title: '免税[めんぜい]制度[せいど]、十一月[じゅういちがつ]一日[ついたち]から「リファンド方式[ほうしき]」に移行[いこう]　出国[しゅっこく]時[じ]に消費税[しょうひぜい]を返金[へんきん]',
+          lines: [
+            ['訪日[ほうにち]外国人[がいこくじん]向[む]けの消費税[しょうひぜい]免税[めんぜい]制度[せいど]が、十一月[じゅういちがつ]一日[ついたち]の購入分[こうにゅうぶん]から「リファンド方式[ほうしき]」に移行[いこう]する。', 'The consumption tax exemption system for foreign visitors will move to the "refund method" for purchases from November 1.'],
+            ['旅行者[りょこうしゃ]は店頭[てんとう]でいったん税込[ぜいこ]み価格[かかく]を支払[しはら]い、出国[しゅっこく]時[じ]に空港[くうこう]などの税関[ぜいかん]で物品[ぶっぴん]の国外[こくがい]持[も]ち出[だ]しが確認[かくにん]されたあと、消費税[しょうひぜい]相当額[そうとうがく]が返金[へんきん]される。', 'Travelers first pay the tax-included price at the shop, and after customs at the airport or elsewhere confirms the goods are taken out of the country when they leave, an amount equal to the consumption tax is refunded.'],
+            ['免税[めんぜい]で安[やす]く仕入[しい]れた商品[しょうひん]を国内[こくない]で転売[てんばい]する不正[ふせい]への対策[たいさく]が、制度[せいど]変更[へんこう]の主[おも]な狙[ねら]いとされる。', 'The main aim of the change is said to be to counter the wrongdoing of reselling inside the country goods bought cheaply tax-free.'],
+            ['電子[でんし]化[か]に対応[たいおう]していない免税店[めんぜいてん]は、十月[じゅうがつ]三十一日[さんじゅういちにち]付[づ]けで許可[きょか]の効力[こうりょく]を失[うしな]う。', 'Tax-free shops that have not adapted to digitization lose the effect of their permission as of October 31.'],
+            ['一方[いっぽう]、ドン・キホーテなどを展開[てんかい]するPPIHグループは、返金[へんきん]申請[しんせい]の手数料[てすうりょう]を無料[むりょう]にすると発表[はっぴょう]した。', 'Meanwhile, the PPIH group, which runs Don Quijote and others, announced that it will make the fee for refund applications free.', 'The company\'s announcement attaches conditions to the free fee.'],
+            ['旅行者[りょこうしゃ]は入国[にゅうこく]前後[ぜんご]にウェブサービスに登録[とうろく]しておくと手続[てつづ]きが円滑[えんかつ]になると案内[あんない]されている。', 'Travelers are advised that registering for a web service before or after entering the country makes the procedures smoother.', 'The service named is Visit Japan Web.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-10-29-fuel-subsidies',
       date: '2026-10-29',
       emoji: '⛽',

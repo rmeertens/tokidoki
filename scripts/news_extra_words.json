@@ -6913,5 +6913,380 @@
     "せいのう",
     "performance, capability",
     "noun"
+  ],
+  "三十日": [
+    "さんじゅうにち",
+    "the 30th",
+    "noun"
+  ],
+  "2.4パーセント": [
+    "にてんよんパーセント",
+    "2.4 percent",
+    "noun"
+  ],
+  "0.1ポイント": [
+    "れいてんいちポイント",
+    "0.1 point",
+    "noun"
+  ],
+  "0.01ポイント": [
+    "れいてんれいいちポイント",
+    "0.01 point",
+    "noun"
+  ],
+  "0.13ポイント": [
+    "れいてんいちさんポイント",
+    "0.13 point",
+    "noun"
+  ],
+  "169万人": [
+    "ひゃくろくじゅうきゅうまんにん",
+    "1.69 million people",
+    "noun"
+  ],
+  "6896万人": [
+    "ろくせんはっぴゃくきゅうじゅうろくまんにん",
+    "68.96 million people",
+    "noun"
+  ],
+  "33万人": [
+    "さんじゅうさんまんにん",
+    "330,000 people",
+    "noun"
+  ],
+  "15万人": [
+    "じゅうごまんにん",
+    "150,000 people",
+    "noun"
+  ],
+  "1.19倍": [
+    "いってんいちきゅうばい",
+    "1.19 times",
+    "noun"
+  ],
+  "2.19倍": [
+    "にてんいちきゅうばい",
+    "2.19 times",
+    "noun"
+  ],
+  "二か月ぶり": [
+    "にかげつぶり",
+    "for the first time in two months",
+    "adverb"
+  ],
+  "三か月ぶり": [
+    "さんかげつぶり",
+    "for the first time in three months",
+    "adverb"
+  ],
+  "三十一日": [
+    "さんじゅういちにち",
+    "the 31st",
+    "noun"
+  ],
+  "前月": [
+    "ぜんげつ",
+    "previous month",
+    "noun"
+  ],
+  "求人": [
+    "きゅうじん",
+    "job opening; recruitment",
+    "noun"
+  ],
+  "倍率": [
+    "ばいりつ",
+    "ratio; multiple",
+    "noun"
+  ],
+  "就業": [
+    "しゅうぎょう",
+    "being employed",
+    "noun"
+  ],
+  "求職": [
+    "きゅうしょく",
+    "job hunting",
+    "noun"
+  ],
+  "康弘": [
+    "やすひろ",
+    "Yasuhiro (given name)",
+    "noun"
+  ],
+  "匿名": [
+    "とくめい",
+    "anonymity",
+    "noun"
+  ],
+  "申し込み": [
+    "もうしこみ",
+    "application",
+    "noun"
+  ],
+  "件数": [
+    "けんすう",
+    "number of cases",
+    "noun"
+  ],
+  "裁判官": [
+    "さいばんかん",
+    "judge",
+    "noun"
+  ],
+  "OK": [
+    "オーケー",
+    "OK; permission",
+    "noun"
+  ],
+  "トク": [
+    "トク",
+    "toku (short for 匿名)",
+    "noun"
+  ],
+  "リュウ": [
+    "リュウ",
+    "ryū (short for 流動)",
+    "noun"
+  ],
+  "シグナル": [
+    "シグナル",
+    "Signal (messaging app)",
+    "noun"
+  ],
+  "テレグラム": [
+    "テレグラム",
+    "Telegram (messaging app)",
+    "noun"
+  ],
+  "遠隔": [
+    "えんかく",
+    "remote; from a distance",
+    "noun"
+  ],
+  "解析": [
+    "かいせき",
+    "analysis",
+    "noun"
+  ],
+  "やり取り": [
+    "やりとり",
+    "exchange",
+    "noun"
+  ],
+  "犯行": [
+    "はんこう",
+    "crime; the act of a crime",
+    "noun"
+  ],
+  "把握": [
+    "はあく",
+    "grasp; understanding",
+    "noun"
+  ],
+  "端末": [
+    "たんまつ",
+    "terminal; device",
+    "noun"
+  ],
+  "接続": [
+    "せつぞく",
+    "connection",
+    "noun"
+  ],
+  "複写": [
+    "ふくしゃ",
+    "copying",
+    "noun"
+  ],
+  "取得": [
+    "しゅとく",
+    "acquisition; obtaining",
+    "noun"
+  ],
+  "配慮": [
+    "はいりょ",
+    "consideration",
+    "noun"
+  ],
+  "要件": [
+    "ようけん",
+    "requirement",
+    "noun"
+  ],
+  "プライバシー": [
+    "プライバシー",
+    "privacy",
+    "noun"
+  ],
+  "運用": [
+    "うんよう",
+    "operation; use in practice",
+    "noun"
+  ],
+  "厳格": [
+    "げんかく",
+    "strict",
+    "na-adjective"
+  ],
+  "趣旨": [
+    "しゅし",
+    "purpose; point",
+    "noun"
+  ],
+  "質疑": [
+    "しつぎ",
+    "questioning; Q&A",
+    "noun"
+  ],
+  "買いもの": [
+    "かいもの",
+    "shopping",
+    "noun"
+  ],
+  "免税": [
+    "めんぜい",
+    "tax exemption; tax-free",
+    "noun"
+  ],
+  "返金": [
+    "へんきん",
+    "refund",
+    "noun"
+  ],
+  "方式": [
+    "ほうしき",
+    "method; system",
+    "noun"
+  ],
+  "リファンド": [
+    "リファンド",
+    "refund",
+    "noun"
+  ],
+  "買える": [
+    "かえる",
+    "can buy",
+    "verb"
+  ],
+  "税関": [
+    "ぜいかん",
+    "customs",
+    "noun"
+  ],
+  "持ち出す": [
+    "もちだす",
+    "to take out",
+    "verb"
+  ],
+  "返る": [
+    "かえる",
+    "to return; to come back",
+    "verb"
+  ],
+  "ドン・キホーテ": [
+    "ドン・キホーテ",
+    "Don Quijote (discount store chain)",
+    "noun"
+  ],
+  "PPIH": [
+    "ピーピーアイエイチ",
+    "PPIH (Pan Pacific International Holdings)",
+    "noun"
+  ],
+  "移行": [
+    "いこう",
+    "transition; move",
+    "noun"
+  ],
+  "購入": [
+    "こうにゅう",
+    "purchase",
+    "noun"
+  ],
+  "店頭": [
+    "てんとう",
+    "at the shop; over the counter",
+    "noun"
+  ],
+  "いったん": [
+    "いったん",
+    "once; first",
+    "adverb"
+  ],
+  "税込み": [
+    "ぜいこみ",
+    "tax included",
+    "noun"
+  ],
+  "物品": [
+    "ぶっぴん",
+    "goods",
+    "noun"
+  ],
+  "国外": [
+    "こくがい",
+    "outside the country",
+    "noun"
+  ],
+  "持ち出し": [
+    "もちだし",
+    "taking out",
+    "noun"
+  ],
+  "仕入れる": [
+    "しいれる",
+    "to stock up; to buy in",
+    "verb"
+  ],
+  "転売": [
+    "てんばい",
+    "resale",
+    "noun"
+  ],
+  "付け": [
+    "づけ",
+    "dated; as of",
+    "suffix"
+  ],
+  "効力": [
+    "こうりょく",
+    "effect; validity",
+    "noun"
+  ],
+  "展開": [
+    "てんかい",
+    "to run; to expand",
+    "noun"
+  ],
+  "申請": [
+    "しんせい",
+    "application",
+    "noun"
+  ],
+  "入国": [
+    "にゅうこく",
+    "entering a country",
+    "noun"
+  ],
+  "前後": [
+    "ぜんご",
+    "before and after",
+    "noun"
+  ],
+  "ウェブサービス": [
+    "ウェブサービス",
+    "web service",
+    "noun"
+  ],
+  "円滑": [
+    "えんかつ",
+    "smooth",
+    "na-adjective"
+  ],
+  "厚生労働省": [
+    "こうせいろうどうしょう",
+    "Ministry of Health, Labour and Welfare",
+    "noun"
   ]
 }
