@@ -433,7 +433,8 @@
   }
 
   function renderChapters() {
-    renderLevelSections($('#verb-chunks'), VERB_CHUNKS, chunk => {
+    const container = $('#verb-chunks');
+    const verbChunkCard = chunk => {
       const cards = getChunkCards(chunk);
       const [pct, due] = idsProgress(cards.map(([v, f]) => cardId(v, f)));
       const verbs = getVerbsForChunk(chunk);
@@ -445,7 +446,19 @@
         due,
         onClick: () => startStudy(chunk.id),
       });
-    });
+    };
+    renderLevelSections(container, VERB_CHUNKS.filter(c => !c.more), verbChunkCard);
+    // "More forms" comes after N3 as a category of its own.
+    const more = VERB_CHUNKS.filter(c => c.more);
+    if (more.length) {
+      const h = document.createElement('h2');
+      h.className = 'section-title';
+      h.textContent = 'More forms · ないで, なくて, なければ, ちゃう';
+      const grid = document.createElement('div');
+      grid.className = 'chapter-grid';
+      more.forEach(c => grid.appendChild(verbChunkCard(c)));
+      container.append(h, grid);
+    }
   }
 
   function adjCardId(adj, form) {
@@ -848,6 +861,10 @@
           steps.push(`For て/た-form: the rule depends on the final kana — think about the sound change group`);
         } else if (['tara', 'tari'].includes(form)) {
           steps.push(`Make the <strong>た-form</strong> first (its sound change depends on the final kana), then add ${form === 'tara' ? 'ら' : 'り'}`);
+        } else if (['naide', 'nakute', 'nakereba'].includes(form)) {
+          steps.push(`Make the <strong>ない-form</strong> first (the ending goes to the <strong>あ-row</strong>), then change ない`);
+        } else if (form === 'chau') {
+          steps.push(`Make the <strong>て-form</strong> first, then て → ちゃう (で → じゃう)`);
         } else if (['nai', 'nakatta', 'passive', 'causative', 'causative-passive', 'zu'].includes(form)) {
           steps.push(`For this form: change the ending to the <strong>あ-row</strong>, then add the suffix`);
         } else if (['potential', 'ba'].includes(form)) {
@@ -894,6 +911,7 @@
     'tai': 'たい', 'potential': '', 'volitional': '', 'passive': '',
     'causative': '', 'causative-passive': '', 'ba': '', 'imperative': '',
     'mashou': 'ましょう', 'tari': 'たり', 'tara': 'たら', 'prohibitive': 'な', 'zu': 'ず',
+    'naide': 'ないで', 'nakute': 'なくて', 'nakereba': 'なければ', 'chau': 'ちゃう',
   };
 
   const U_TE_RULES = {
@@ -917,6 +935,7 @@
     const { reading, type, kanji } = verb;
     const isIku = reading.endsWith('いく') || reading.endsWith('ゆく');
 
+    if (BUILT_ON[form]) return getBuiltOnExplanation(verb, form);
     if (type === 'irregular') {
       return getIrregularExplanation(verb, form, result);
     }
@@ -924,6 +943,23 @@
       return getRuExplanation(verb, form, result);
     }
     return getUExplanation(verb, form, result, isIku);
+  }
+
+  // Forms made from another form the learner already knows: the ない-form
+  // (ないで, なくて, なければ) or the て-form (ちゃう / じゃう).
+  const BUILT_ON = { naide: 'nai', nakute: 'nai', nakereba: 'nai', chau: 'te' };
+
+  function getBuiltOnExplanation(verb, form) {
+    const from = Conjugator.conjugate(verb, BUILT_ON[form]);
+    if (form === 'chau') {
+      const de = from.endsWith('で');
+      const label = `<strong>Start from the て-form</strong> ${from}, then ${de ? 'で → <span class="ex-hl">じゃう</span>' : 'て → <span class="ex-hl">ちゃう</span>'}`;
+      return buildExplanation(label, `→ ${hlResult(from.slice(0, -1), de ? 'じゃう' : 'ちゃう')}`);
+    }
+    const ending = { naide: 'ないで', nakute: 'なくて', nakereba: 'なければ' }[form];
+    const how = form === 'naide' ? 'add <span class="ex-hl">で</span>' : `swap い for <span class="ex-hl">${ending.slice(1)}</span>`;
+    const label = `<strong>Start from the ない-form</strong> ${from}, then ${how}`;
+    return buildExplanation(label, `→ ${hlResult(from.slice(0, -2), ending)}`);
   }
 
   function getRuExplanation(verb, form, result) {
@@ -1181,12 +1217,12 @@
       const ending = verb.reading.slice(-1);
       const base = verb.reading.slice(0, -1);
       if (['masu', 'masu-neg', 'masu-past', 'masu-past-neg', 'tai', 'mashou'].includes(form)) return base + I_ROW[ending];
-      if (['nai', 'nakatta', 'passive', 'causative', 'causative-passive', 'zu'].includes(form)) return base + A_ROW[ending];
+      if (['nai', 'nakatta', 'passive', 'causative', 'causative-passive', 'zu', 'naide', 'nakute', 'nakereba'].includes(form)) return base + A_ROW[ending];
       if (['potential', 'ba'].includes(form)) return base + E_ROW[ending];
       // The command is just the え-row kana, so that kana is the ending.
       if (form === 'imperative') return base;
       if (form === 'volitional') return base + O_ROW[ending];
-      if (['te', 'ta', 'tara', 'tari'].includes(form)) {
+      if (['te', 'ta', 'tara', 'tari', 'chau'].includes(form)) {
         if (verb.reading.endsWith('いく') || verb.reading.endsWith('ゆく')) return verb.reading.slice(0, -2) + 'い';
         const rule = U_TE_RULES[ending];
         if (!rule) return null;

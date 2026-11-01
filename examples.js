@@ -21,9 +21,10 @@
 
   const KIND_FORMS = {
     act: null,
-    nv: ['masu', 'masu-neg', 'masu-past', 'masu-past-neg', 'te', 'nai', 'dict', 'ta', 'nakatta', 'tara', 'prohibitive', 'zu'],
-    st: ['masu', 'masu-neg', 'masu-past', 'masu-past-neg', 'nai', 'dict', 'ta', 'nakatta', 'ba', 'tara'],
-    ev: ['masu', 'masu-neg', 'masu-past', 'masu-past-neg', 'te', 'nai', 'dict', 'ta', 'nakatta', 'ba', 'tara'],
+    nv: ['masu', 'masu-neg', 'masu-past', 'masu-past-neg', 'te', 'nai', 'dict', 'ta', 'nakatta', 'tara', 'prohibitive', 'zu',
+      'naide', 'chau'],
+    st: ['masu', 'masu-neg', 'masu-past', 'masu-past-neg', 'nai', 'dict', 'ta', 'nakatta', 'ba', 'tara', 'nakute'],
+    ev: ['masu', 'masu-neg', 'masu-past', 'masu-past-neg', 'te', 'nai', 'dict', 'ta', 'nakatta', 'ba', 'tara', 'nakute', 'chau'],
     hon: ['masu', 'masu-neg', 'masu-past', 'masu-past-neg', 'te', 'nai', 'dict', 'ta', 'nakatta'],
     hum: ['masu', 'masu-neg', 'masu-past', 'masu-past-neg', 'tai'],
   };
@@ -389,6 +390,46 @@
     '信じる': { pre: '自分[じぶん]を', v: 'believe', o: 'in myself' },
     '疑う': { pre: '人[ひと]の話[はなし]を', v: 'doubt', o: 'what people say', skip: ['tai', 'volitional', 'mashou', 'te'] },
     '任せる': { pre: '友達[ともだち]に料理[りょうり]を', v: 'leave', o: 'the cooking to my friend', skip: ['passive', 'causative', 'causative-passive'] },
+
+    // More forms: Careful!
+    '鍵をかける': { pre: 'ドアに', v: 'lock', o: 'the door' },
+    '散らかす': { pre: '部屋[へや]を', v: 'mess', o: 'up the room', skip: ['tai', 'volitional', 'mashou', 'dict', 'ba', 'te', 'tari'] },
+    '濡らす': { pre: '本[ほん]を', v: 'get', o: 'the book wet', skip: ['tai', 'volitional', 'mashou', 'dict', 'ba', 'te', 'tari'] },
+    '蹴る': { pre: 'ボールを', v: 'kick', o: 'the ball' },
+    '叩く': { pre: 'ドアを', v: 'knock', o: 'on the door' },
+    'こぼす': { kind: 'nv', pre: 'ジュースを', v: 'spill', o: 'the juice' },
+    '揺らす': { pre: '椅子[いす]を', v: 'rock', o: 'the chair', skip: ['passive'] },
+    '曲げる': { pre: '膝[ひざ]を', v: 'bend', o: 'my knees', skip: ['passive'] },
+
+    // More forms: Letdowns
+    '届く': { kind: 'ev', sub: '荷物[にもつ]が', s: 'the package', v: 'arrive', skip: ['te'] },
+    '止む': { kind: 'ev', sub: '雨[あめ]が', s: 'the rain', v: 'stop', skip: ['te'] },
+    '眠る': { kind: 'nv', pre: 'よく', v: 'sleep', o: 'well' },
+    '通じる': { kind: 'ev', sub: '電話[でんわ]が', s: 'the call', v: 'go', o: 'through', skip: ['te', 'chau'] },
+    '当たる': { kind: 'ev', sub: '宝[たから]くじが', s: 'my lottery ticket', v: 'win', skip: ['te', 'chau'] },
+    '売れる': { kind: 'ev', sub: 'この本[ほん]が', pre: 'よく', s: 'this book', v: 'sell', o: 'well', skip: ['te', 'chau'] },
+    '集まる': { kind: 'ev', sub: '人[ひと]が', s: 'people', pl: true, v: 'turn', o: 'up', skip: ['te', 'chau'] },
+    '乾く': { kind: 'ev', sub: '洗濯物[せんたくもの]が', s: 'the laundry', v: 'dry', skip: ['te', 'chau'] },
+
+    // More forms: Duties & chores
+    '干す': { pre: '洗濯物[せんたくもの]を', v: 'hang', o: 'out the laundry' },
+    '畳む': { pre: '服[ふく]を', v: 'fold', o: 'the clothes' },
+    '取り替える': { pre: '電池[でんち]を', v: 'change', o: 'the batteries' },
+    '提出する': { pre: 'レポートを', v: 'hand', o: 'in the report', skip: ['passive'] },
+    '申し込む': { pre: '料理[りょうり]教室[きょうしつ]に', v: 'sign', o: 'up for the cooking class', skip: ['passive', 'causative'] },
+    '届ける': { pre: '隣[となり]の人[ひと]に荷物[にもつ]を', v: 'deliver', o: 'the package to the neighbor', skip: ['passive', 'causative', 'causative-passive'] },
+    '準備する': { pre: '明日[あした]の会議[かいぎ]を', v: 'prepare', o: "for tomorrow's meeting", skip: ['passive'] },
+    '確認する': { pre: 'メールを', v: 'check', o: 'my email', skip: ['passive'] },
+
+    // More forms: Oops! (casual)
+    '食べ過ぎる': { kind: 'nv', pre: 'ケーキを', v: 'eat', o: 'too much cake' },
+    '飲み過ぎる': { kind: 'nv', pre: 'お酒[さけ]を', v: 'drink', o: 'too much' },
+    '寝過ごす': { kind: 'nv', pre: '', v: 'oversleep' },
+    '言い間違える': { kind: 'nv', pre: '名前[なまえ]を', v: 'say', o: 'the name wrong' },
+    '焦がす': { kind: 'nv', pre: 'パンを', v: 'burn', o: 'the toast' },
+    '買い過ぎる': { kind: 'nv', pre: '服[ふく]を', v: 'buy', o: 'too many clothes' },
+    '使い過ぎる': { kind: 'nv', pre: 'お金[かね]を', v: 'spend', o: 'too much money' },
+    '乗り過ごす': { kind: 'nv', pre: '駅[えき]を', v: 'miss', o: 'my stop' },
   };
 
   // Adjectives: `s` is the English subject and `a` the adjective. Contexts
@@ -479,7 +520,7 @@
     steal: ['stole'], step: ['stepped', 'stepping'], stick: ['stuck'], stop: ['stopped', 'stopping'],
     submit: ['submitted', 'submitting'], swim: ['swam', 'swimming'], take: ['took'],
     teach: ['taught'], tell: ['told'], think: ['thought'], throw: ['threw'], blow: ['blew'], ring: ['rang'], fight: ['fought'], forgive: ['forgave'],
-    set: ['set', 'setting'], shop: ['shopped', 'shopping'], understand: ['understood'], wake: ['woke'],
+    set: ['set', 'setting'], shop: ['shopped', 'shopping'], bend: ['bent'], spend: ['spent'], understand: ['understood'], wake: ['woke'],
     win: ['won', 'winning'], withdraw: ['withdrew'], wrap: ['wrapped', 'wrapping'], write: ['wrote'],
   };
 
@@ -611,6 +652,12 @@
     if (form === 'imperative' && skip.includes('te')) return false;
     // "Let me know if…" fits wherever "you should just…" (〜ばいい) does.
     if (form === 'tara' && skip.includes('ba')) return false;
+    // "I have to…" is no more natural than "you should just…".
+    if (form === 'nakereba' && skip.includes('ba')) return false;
+    // "X didn't happen, so I was stuck": not for mishaps.
+    if (form === 'nakute' && skip.includes('ba')) return false;
+    // An event only "ends up" happening when it's a mishap (落ちる, 壊れる).
+    if (form === 'chau' && ctx.kind === 'ev' && !skip.includes('ba')) return false;
     // ましょう is the polite volitional: skipped wherever "let's" is.
     if (form === 'mashou' && skip.includes('volitional')) return false;
     // "Sometimes I do things like…" — not for mishaps or wrongdoing.
@@ -640,12 +687,21 @@
       case 'tara': return `${stmt}、教[おし]えてください。`;
       case 'prohibitive': return `${stmt}！`;
       case 'zu': return `${stmt}に一日[いちにち]を過[す]ごしました。`;
+      case 'naide': return `${pre}${c}ください。`;
+      case 'nakute': return `${stmt}、困[こま]りました。`;
+      case 'nakereba': return `${stmt}なりません。`;
+      case 'chau':
+        // A mishap you might end up in; otherwise ちゃう's "get it done".
+        return mishap(ctx) ? `気[き]をつけないと、${stmt}よ。` : `先[さき]に${stmt}ね。`;
       default: return `${stmt}。`;
     }
   }
 
   // Said to someone else: "brush my teeth" → "brush your teeth".
   const your = o => o.replace(/\bmy(self)?\b/g, (m, self) => (self ? 'yourself' : 'your'));
+
+  // Things that happen to you, or wrongdoing ("you should just…" skipped).
+  const mishap = ctx => (ctx.kind || 'act') !== 'act' || (ctx.skip || []).includes('ba');
 
   function verbEn(ctx, form) {
     const kind = ctx.kind || 'act';
@@ -686,6 +742,13 @@
       }
       case 'prohibitive': return `Don't ${v} ${your(o)}!`;
       case 'zu': return `I got through the day without ${inflect(v, gerund)} ${o}.`;
+      case 'naide': return `Please don't ${v} ${your(o)}.`;
+      case 'nakute': return `${clause(s, v, 'pastNeg', pl)} ${o}, so I was in trouble.`;
+      case 'nakereba': return `I have to ${v} ${o}.`;
+      case 'chau':
+        if (kind === 'ev') return `If you're not careful, ${s} will ${v} ${o}.`;
+        if (mishap(ctx)) return `If you're not careful, you'll end up ${inflect(v, gerund)} ${your(o)}.`;
+        return `I'll go ahead and ${v} ${o} first.`;
       default: return `${clause(s, v, 'pres', pl)} ${o}.`;
     }
   }
@@ -761,6 +824,10 @@
       case 'tara': return `if / when … ${base} (たら)`;
       case 'prohibitive': return `don't ${your(base)}! (blunt)`;
       case 'zu': return `without ${all(a => inflect(a, gerund))} (ず)`;
+      case 'naide': return `please don't ${your(base)} / without ${all(a => inflect(a, gerund))}`;
+      case 'nakute': return `don't ${base}, and so… (なくて)`;
+      case 'nakereba': return `must ${base} (なければ)`;
+      case 'chau': return `end up ${all(a => inflect(a, gerund))} (casual)`;
       case 'adj-present': return `it is ${base}`;
       case 'adj-neg': return `it is not ${base}`;
       case 'adj-past': return `it was ${base}`;

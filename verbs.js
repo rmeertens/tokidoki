@@ -345,6 +345,46 @@ const ALL_VERBS = [
   { kanji: '注文する', reading: 'ちゅうもんする', meaning: 'to order', type: 'irregular', group: 'n3-life', chapter: 18 },
   { kanji: '交換する', reading: 'こうかんする', meaning: 'to exchange', type: 'irregular', group: 'n3-life', chapter: 20 },
   { kanji: 'ためる', reading: 'ためる', meaning: 'to save (money)', type: 'ru', group: 'n3-life', chapter: 21 },
+
+  // more-careful
+  { kanji: '鍵をかける', reading: 'かぎをかける', meaning: 'to lock', type: 'ru', group: 'more-careful', chapter: 25 },
+  { kanji: '散らかす', reading: 'ちらかす', meaning: 'to make a mess', type: 'u', group: 'more-careful', chapter: 25 },
+  { kanji: '濡らす', reading: 'ぬらす', meaning: 'to get (something) wet', type: 'u', group: 'more-careful', chapter: 25 },
+  { kanji: '蹴る', reading: 'ける', meaning: 'to kick', type: 'u', group: 'more-careful', chapter: 25 },
+  { kanji: '叩く', reading: 'たたく', meaning: 'to knock / to hit', type: 'u', group: 'more-careful', chapter: 25 },
+  { kanji: 'こぼす', reading: 'こぼす', meaning: 'to spill', type: 'u', group: 'more-careful', chapter: 25 },
+  { kanji: '揺らす', reading: 'ゆらす', meaning: 'to rock / to shake', type: 'u', group: 'more-careful', chapter: 25 },
+  { kanji: '曲げる', reading: 'まげる', meaning: 'to bend', type: 'ru', group: 'more-careful', chapter: 25 },
+
+  // more-letdowns
+  { kanji: '届く', reading: 'とどく', meaning: 'to arrive / to reach', type: 'u', group: 'more-letdowns', chapter: 25 },
+  { kanji: '止む', reading: 'やむ', meaning: 'to stop (rain)', type: 'u', group: 'more-letdowns', chapter: 25 },
+  { kanji: '眠る', reading: 'ねむる', meaning: 'to sleep', type: 'u', group: 'more-letdowns', chapter: 25 },
+  { kanji: '通じる', reading: 'つうじる', meaning: 'to get through / to be understood', type: 'ru', group: 'more-letdowns', chapter: 25 },
+  { kanji: '当たる', reading: 'あたる', meaning: 'to win (a prize) / to hit', type: 'u', group: 'more-letdowns', chapter: 25 },
+  { kanji: '売れる', reading: 'うれる', meaning: 'to sell (well)', type: 'ru', group: 'more-letdowns', chapter: 25 },
+  { kanji: '集まる', reading: 'あつまる', meaning: 'to gather / to turn up', type: 'u', group: 'more-letdowns', chapter: 25 },
+  { kanji: '乾く', reading: 'かわく', meaning: 'to dry', type: 'u', group: 'more-letdowns', chapter: 25 },
+
+  // more-duties
+  { kanji: '干す', reading: 'ほす', meaning: 'to hang out to dry', type: 'u', group: 'more-duties', chapter: 25 },
+  { kanji: '畳む', reading: 'たたむ', meaning: 'to fold', type: 'u', group: 'more-duties', chapter: 25 },
+  { kanji: '取り替える', reading: 'とりかえる', meaning: 'to replace / to change', type: 'ru', group: 'more-duties', chapter: 25 },
+  { kanji: '提出する', reading: 'ていしゅつする', meaning: 'to hand in', type: 'irregular', group: 'more-duties', chapter: 25 },
+  { kanji: '申し込む', reading: 'もうしこむ', meaning: 'to sign up / to apply', type: 'u', group: 'more-duties', chapter: 25 },
+  { kanji: '届ける', reading: 'とどける', meaning: 'to deliver', type: 'ru', group: 'more-duties', chapter: 25 },
+  { kanji: '準備する', reading: 'じゅんびする', meaning: 'to prepare', type: 'irregular', group: 'more-duties', chapter: 25 },
+  { kanji: '確認する', reading: 'かくにんする', meaning: 'to check / to confirm', type: 'irregular', group: 'more-duties', chapter: 25 },
+
+  // more-oops
+  { kanji: '食べ過ぎる', reading: 'たべすぎる', meaning: 'to eat too much', type: 'ru', group: 'more-oops', chapter: 25 },
+  { kanji: '飲み過ぎる', reading: 'のみすぎる', meaning: 'to drink too much', type: 'ru', group: 'more-oops', chapter: 25 },
+  { kanji: '寝過ごす', reading: 'ねすごす', meaning: 'to oversleep', type: 'u', group: 'more-oops', chapter: 25 },
+  { kanji: '言い間違える', reading: 'いいまちがえる', meaning: 'to say wrong / to misspeak', type: 'ru', group: 'more-oops', chapter: 25 },
+  { kanji: '焦がす', reading: 'こがす', meaning: 'to burn (food)', type: 'u', group: 'more-oops', chapter: 25 },
+  { kanji: '買い過ぎる', reading: 'かいすぎる', meaning: 'to buy too much', type: 'ru', group: 'more-oops', chapter: 25 },
+  { kanji: '使い過ぎる', reading: 'つかいすぎる', meaning: 'to use too much / to overspend', type: 'ru', group: 'more-oops', chapter: 25 },
+  { kanji: '乗り過ごす', reading: 'のりすごす', meaning: 'to miss (one\'s stop)', type: 'u', group: 'more-oops', chapter: 25 },
 ];
 
 // The Verbs page's chunks, by JLPT level, in the order they're meant to be
@@ -382,6 +422,13 @@ const VERB_CHUNKS = [
   { id: 'n3-people', level: 'N3', title: 'People & relationships', sub: 'invite, date, help…', newForms: [] },
   { id: 'n3-feelings', level: 'N3', title: 'Effort & feelings', sub: 'give up, endure, be moved…', newForms: [] },
   { id: 'n3-life', level: 'N3', title: 'Life & work', sub: 'study abroad, order, save…', newForms: [] },
+
+  // More forms: a category of its own after the main path, each chunk
+  // with its own words and one more form (`more: true`, see getChunkCards).
+  { id: 'more-careful', level: 'N5', more: true, title: 'Careful!', sub: 'please don\'t spill, kick, lock…', newForms: ['naide'] },
+  { id: 'more-letdowns', level: 'N4', more: true, title: 'Letdowns', sub: 'didn\'t arrive, stop, sell…', newForms: ['nakute'] },
+  { id: 'more-duties', level: 'N4', more: true, title: 'Duties & chores', sub: 'have to fold, hand in, check…', newForms: ['nakereba'] },
+  { id: 'more-oops', level: 'N3', more: true, title: 'Oops! (casual)', sub: 'end up eating too much, overspending…', newForms: ['chau'] },
 ];
 
 // Forms that don't exist for a verb, or that nobody says: no potential or
@@ -391,20 +438,24 @@ const VERB_CHUNKS = [
 // events, and keigo verbs keep to the plain N5 forms.
 const NOT_DONE_ON_PURPOSE = ['ある', '分かる', 'できる', '要る', '見える', '聞こえる', '足りる', 'かかる', '込む',
   '降る', '晴れる', '咲く', '始まる', '閉まる', '開く', '消える', '壊れる', '汚れる', '落ちる', '見つかる', '決まる',
-  '生まれる', '疲れる', '困る', '遅くなる', '喉が渇く', '間に合う', '似合う'];
-const STATES = ['ある', '分かる', 'できる', '要る', '見える', '聞こえる', '足りる', '似合う', 'かかる', '込む'];
+  '生まれる', '疲れる', '困る', '遅くなる', '喉が渇く', '間に合う', '似合う',
+  '届く', '止む', '通じる', '当たる', '売れる', '集まる', '乾く', 'こぼす',
+  '食べ過ぎる', '飲み過ぎる', '寝過ごす', '言い間違える', '焦がす', '買い過ぎる', '使い過ぎる', '乗り過ごす'];
+const STATES = ['ある', '分かる', 'できる', '要る', '見える', '聞こえる', '足りる', '似合う', 'かかる', '込む',
+  '届く', '止む', '通じる', '当たる', '売れる', '集まる', '乾く'];
 const NO_COMMAND = ['知る', '着く', '終わる', '死ぬ', 'なくす', '心配する', '怒る', 'いじめる', '間違える', '落とす', '汚す', '盗む',
   '朝寝坊する', '遅れる', '太る', '負ける', 'もてる', '離婚する', '捕まる', '殴る', '遅刻する', '緊張する', '感動する',
   '落ち込む', '乗り遅れる', '転ぶ', '生活する'];
 const NOT_FOR_KEIGO = ['potential', 'volitional', 'ba', 'passive', 'causative', 'causative-passive', 'imperative',
-  'mashou', 'tari', 'tara', 'prohibitive', 'zu'];
+  'mashou', 'tari', 'tara', 'prohibitive', 'zu', 'naide', 'nakute', 'nakereba', 'chau'];
 const NO_TARI = ['結婚する', '離婚する', '卒業する', '就職する', '入学する', '生まれる', '死ぬ', '優勝する', '留学する',
   '引っ越す', '別れる', '入院する', '退院する'];
 
 function verbHasForm(verb, form) {
   if (verb.group === 'n4-keigo' && NOT_FOR_KEIGO.includes(form)) return false;
   if (['potential', 'volitional', 'mashou', 'prohibitive'].includes(form) && NOT_DONE_ON_PURPOSE.includes(verb.kanji)) return false;
-  if (form === 'zu' && verb.kanji === 'ある') return false;
+  if (['zu', 'naide', 'nakute', 'nakereba', 'chau'].includes(form) && verb.kanji === 'ある') return false;
+  if (form === 'chau' && STATES.includes(verb.kanji) && verb.kanji !== '分かる') return false;
   if (form === 'tari' && (NOT_DONE_ON_PURPOSE.includes(verb.kanji) || NO_TARI.includes(verb.kanji))) return false;
   if (['passive', 'causative', 'causative-passive'].includes(form) && STATES.includes(verb.kanji)) return false;
   if (form === 'imperative' && (NOT_DONE_ON_PURPOSE.includes(verb.kanji) || NO_COMMAND.includes(verb.kanji))) return false;
@@ -424,11 +475,20 @@ function getVerbsForChunk(chunk) {
 }
 
 // Every [verb, form] pair a chunk drills: its own verbs in all the forms
-// known by then, then its new forms for the verbs that came before.
+// known by then, then its new forms for the verbs that came before. A
+// "more forms" chunk stands on its own after the main path: its verbs in
+// the main path's forms and its own, and its forms on the main path's verbs.
 function getChunkCards(chunk) {
+  const pairs = (verbs, forms) => verbs.flatMap(v => forms.filter(f => verbHasForm(v, f)).map(f => [v, f]));
+  if (chunk.more) {
+    const main = VERB_CHUNKS.filter(c => !c.more);
+    return [
+      ...pairs(getVerbsForChunk(chunk), [...main.flatMap(c => c.newForms), ...chunk.newForms]),
+      ...pairs(main.flatMap(getVerbsForChunk), chunk.newForms),
+    ];
+  }
   const i = VERB_CHUNKS.indexOf(chunk);
   const known = VERB_CHUNKS.slice(0, i + 1).flatMap(c => c.newForms);
-  const pairs = (verbs, forms) => verbs.flatMap(v => forms.filter(f => verbHasForm(v, f)).map(f => [v, f]));
   return [
     ...pairs(getVerbsForChunk(chunk), known),
     ...pairs(VERB_CHUNKS.slice(0, i).flatMap(getVerbsForChunk), chunk.newForms),

@@ -42,7 +42,8 @@ Misc.QUIZZES.forEach(q => {
 // ─── RU-verb lookalikes ────────────────────────────────────────────────────
 
 const ru = Misc.QUIZZES.find(q => q.id === 'ru-exceptions').sections[0];
-check(Misc.RU_EXCEPTIONS.length === 8, `expected the 8 exceptions, got ${Misc.RU_EXCEPTIONS.length}`);
+check(Misc.RU_EXCEPTIONS.length === 9, `expected the 9 exceptions, got ${Misc.RU_EXCEPTIONS.length}`);
+check(Misc.RU_EXCEPTIONS.some(v => v.kanji === '蹴る'), '蹴る (ける) is a U-verb lookalike');
 ['帰る', '入る', '知る', '要る', '切る', 'しゃべる', '参る', '走る'].forEach(v =>
   check(Misc.RU_EXCEPTIONS.some(e => e.kanji === v), `${v} missing from the exceptions`));
 check(Misc.matchItems(ru, 'kaeru').length === 1, 'romaji kaeru names 帰る');

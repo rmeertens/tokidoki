@@ -50,7 +50,7 @@
   // Wrongdoing and mishaps: fine as "must not" or "was made to", but not as
   // something to plan, wish for or report on (〜たら, 〜ばよかった…).
   const NOT_ORDINARY = ['殴る', '盗む', '踏む', 'いじめる', '壊す', 'サボる', '離婚する', '別れる', '諦める', 'もてる', '心配する',
-    '騒ぐ', '嘘をつく', '覗く', '邪魔する', '喧嘩する', '落書きする', '疑う'];
+    '騒ぐ', '嘘をつく', '覗く', '邪魔する', '喧嘩する', '落書きする', '疑う', '散らかす', '濡らす'];
 
   // Existence verbs read oddly in almost every pattern ("please let me be in
   // the classroom"), so they're left out of the drill.
@@ -369,6 +369,21 @@
     '信じる': ['試合[しあい]に出[で]ます', 'go into the game'],
     '疑う': ['自分[じぶん]で調[しら]べます', 'look into it myself'],
     '任せる': ['テーブルの準備[じゅんび]をします', 'set the table'],
+    '鍵をかける': ['出[で]かけます', 'go out'],
+    '散らかす': ['母[はは]に叱[しか]られました', 'got scolded by my mother'],
+    '濡らす': ['図書館[としょかん]に謝[あやま]りました', 'apologized to the library'],
+    '蹴る': ['走[はし]ります', 'run'],
+    '叩く': ['部屋[へや]に入[はい]ります', 'go into the room'],
+    '揺らす': ['赤[あか]ちゃんを寝[ね]かせます', 'put the baby to sleep'],
+    '曲げる': ['ゆっくり立[た]ちます', 'stand up slowly'],
+    '干す': ['買[か]い物[もの]に行[い]きます', 'go shopping'],
+    '畳む': ['たんすにしまいます', 'put them away in the drawers'],
+    '取り替える': ['リモコンを使[つか]います', 'use the remote'],
+    '提出する': ['友達[ともだち]と遊[あそ]びに行[い]きます', 'go out with my friends'],
+    '申し込む': ['お金[かね]を払[はら]います', 'pay'],
+    '届ける': ['家[いえ]に帰[かえ]ります', 'go home'],
+    '準備する': ['早[はや]く寝[ね]ます', 'go to bed early'],
+    '確認する': ['返事[へんじ]を書[か]きます', 'write a reply'],
   };
 
   // 〜前に: this action comes first, before the drill verb

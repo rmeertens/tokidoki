@@ -326,6 +326,17 @@ assert(forms5('くる', 'irregular'), 'きましょう きたり きたら く�
 assert(conj('いらっしゃる', 'u', 'mashou'), 'いらっしゃいましょう', 'honorific い-stem in ましょう too');
 assert(Conjugator.conjugateKanji({ kanji: '持って来る', reading: 'もってくる', type: 'irregular' }, 'zu'), '持って来ず', '持って来る → 持って来ず');
 
+// --- ないで, なくて, なければ and ちゃう ---
+console.log('Testing ないで, なくて, なければ and ちゃう');
+const forms4 = (reading, type) => ['naide', 'nakute', 'nakereba', 'chau'].map(f => conj(reading, type, f)).join(' ');
+assert(forms4('かく', 'u'), 'かかないで かかなくて かかなければ かいちゃう', '書く');
+assert(forms4('のむ', 'u'), 'のまないで のまなくて のまなければ のんじゃう', '飲む (で → じゃう)');
+assert(forms4('いく', 'u'), 'いかないで いかなくて いかなければ いっちゃう', '行く');
+assert(forms4('かう', 'u'), 'かわないで かわなくて かわなければ かっちゃう', '買う');
+assert(forms4('たべる', 'ru'), 'たべないで たべなくて たべなければ たべちゃう', '食べる');
+assert(forms4('する', 'irregular'), 'しないで しなくて しなければ しちゃう', 'する');
+assert(forms4('くる', 'irregular'), 'こないで こなくて こなければ きちゃう', '来る');
+
 // --- Kanji spellings of adjectives ---
 console.log('Testing adjective kanji spellings');
 assert(Conjugator.conjugateKanji({ kanji: '元気', reading: 'げんき', type: 'na-adj' }, 'adj-past'), '元気だった', '元気 → adj-past (kanji)');
@@ -391,6 +402,14 @@ assert(cardsOf('n4-hobbies').some(([v, f]) => v.kanji === '結婚する' && f ==
 assert(cardsOf('n4-manners').some(([v, f]) => v.kanji === '忘れる' && f === 'prohibitive'), true, '忘れるな');
 assert(cardsOf('n3-choices').some(([v, f]) => v.kanji === 'ある' && f === 'zu'), false, 'no あらず');
 assert(cardsOf('n4-keigo').some(([, f]) => f === 'mashou'), false, 'keigo verbs keep to the plain N5 forms');
+const main = VERB_CHUNKS.filter(c => !c.more);
+const more = VERB_CHUNKS.filter(c => c.more);
+assert(VERB_CHUNKS.indexOf(more[0]) > VERB_CHUNKS.indexOf(main[main.length - 1]), true, 'the "more forms" chunks come after the main path');
+const moreForms = new Set(more.flatMap(c => c.newForms));
+main.forEach(c => assert([...formsOf(c.id)].some(f => moreForms.has(f)), false, `${c.id} drills none of the "more forms"`));
+assert(cardsOf('more-duties').some(([v, f]) => v.kanji === '食べる' && f === 'nakereba'), true, 'なければ is drilled on the main path\'s verbs');
+assert(cardsOf('more-duties').some(([v, f]) => v.kanji === '干す' && f === 'te'), true, 'a "more forms" chunk drills its own verbs in the main forms');
+assert(cardsOf('more-duties').some(([v, f]) => v.kanji === '干す' && f === 'chau'), false, '…but not in the other "more forms"');
 ['死ぬ', '転ぶ', 'ある', 'いらっしゃる'].forEach(k =>
   assert(VERB_CHUNKS.some(c => getChunkCards(c).some(([v, f]) => v.kanji === k && f === 'imperative')), false, `no command for ${k}`));
 ALL_VERBS.filter(v => v.group !== 'n4-keigo' && v.kanji !== 'ある').forEach(v =>

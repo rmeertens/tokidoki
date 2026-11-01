@@ -33,10 +33,18 @@ const Conjugator = (() => {
     const { reading, type } = verb;
 
     // Forms built on another one: たら / たり on the た-form, 〜な on the
-    // dictionary form.
+    // dictionary form, ないで / なくて / なければ on the ない-form, and
+    // ちゃう / じゃう on the て-form.
     if (form === 'tara') return conjugate(verb, 'ta') + 'ら';
     if (form === 'tari') return conjugate(verb, 'ta') + 'り';
     if (form === 'prohibitive') return reading + 'な';
+    if (form === 'naide') return conjugate(verb, 'nai') + 'で';
+    if (form === 'nakute') return conjugate(verb, 'nai').slice(0, -1) + 'くて';
+    if (form === 'nakereba') return conjugate(verb, 'nai').slice(0, -1) + 'ければ';
+    if (form === 'chau') {
+      const te = conjugate(verb, 'te');
+      return te.slice(0, -1) + (te.endsWith('で') ? 'じゃう' : 'ちゃう');
+    }
 
     if (type === 'irregular') {
       return conjugateIrregular(verb, form);
@@ -423,6 +431,42 @@ const Conjugator = (() => {
         + '<tr class="irr-row"><td>くる</td><td>Irregular (vowel こ)</td><td>くる → <b>こず</b></td></tr>'
         + '</tbody></table>'
         + '<p class="conj-note">An easy way to get it: take the ない form and swap ない for ず (食べない → 食べず), except that しない becomes <b>せず</b>.</p>' },
+    'naide':       { name: 'Naide-form', nameJp: 'ないで形', hint: "Please don't ~ / without ~", symbol: 'ないで', color: '#E53935', level: 'N5',
+      explanation: '<p>The <strong>ないで form</strong> is the negative て-form. Its best-known use is a polite "please don\'t": 触ら<b>ないで</b>ください (please don\'t touch). On its own it is a softer "don\'t", and inside a sentence it means "without": 朝ご飯を食べ<b>ないで</b>学校に行った (I went to school without eating breakfast).</p>'
+        + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example</th></tr></thead><tbody>'
+        + '<tr><td>All verbs</td><td>Make the <b>ない-form</b>, add <b>で</b></td><td>食べない → 食べない<b>で</b><br>書かない → 書かない<b>で</b><br>こぼさない → こぼさない<b>で</b></td></tr>'
+        + '<tr class="irr-row"><td>する</td><td>しない + で</td><td>する → <b>しないで</b></td></tr>'
+        + '<tr class="irr-row"><td>くる</td><td>こない + で</td><td>くる → <b>こないで</b></td></tr>'
+        + '</tbody></table>'
+        + '<p class="conj-note">Compare 〜な (触るな), the blunt "don\'t!", and ず(に), the written "without".</p>' },
+
+    'nakute':      { name: 'Nakute-form', nameJp: 'なくて形', hint: "Not ~, and so…", symbol: 'なくて', color: '#C2185B', level: 'N4',
+      explanation: '<p>The <strong>なくて form</strong> is the other negative て-form. It gives a reason or cause: バスが来<b>なくて</b>、遅刻しました (the bus didn\'t come, so I was late). It is also the form in 〜なくてもいい (don\'t have to): 行か<b>なくて</b>もいいです.</p>'
+        + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example</th></tr></thead><tbody>'
+        + '<tr><td>All verbs</td><td>Make the <b>ない-form</b>, swap <b>い</b> for <b>くて</b></td><td>食べない → 食べな<b>くて</b><br>届かない → 届かな<b>くて</b></td></tr>'
+        + '<tr class="irr-row"><td>する</td><td>しない → しなくて</td><td>する → <b>しなくて</b></td></tr>'
+        + '<tr class="irr-row"><td>くる</td><td>こない → こなくて</td><td>くる → <b>こなくて</b></td></tr>'
+        + '</tbody></table>'
+        + '<p class="conj-note">ないで or なくて? For "without doing" or a request, ないで (食べないで出かけた, 見ないでください). For a reason, なくて (分からなくて困った).</p>' },
+
+    'nakereba':    { name: 'Nakereba-form', nameJp: 'なければ形', hint: 'If not ~ / must ~', symbol: 'なければ', color: '#6A1B9A', level: 'N4',
+      explanation: '<p>The <strong>なければ form</strong> is the negative ば: "if (I) don\'t". Its everyday use is "must": 〜なければなりません / 〜なければいけません, literally "if I don\'t, it won\'t do": 宿題を出さ<b>なければ</b>なりません (I have to hand in my homework).</p>'
+        + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example</th></tr></thead><tbody>'
+        + '<tr><td>All verbs</td><td>Make the <b>ない-form</b>, swap <b>い</b> for <b>ければ</b></td><td>食べない → 食べな<b>ければ</b><br>干さない → 干さな<b>ければ</b></td></tr>'
+        + '<tr class="irr-row"><td>する</td><td>しない → しなければ</td><td>する → <b>しなければ</b></td></tr>'
+        + '<tr class="irr-row"><td>くる</td><td>こない → こなければ</td><td>くる → <b>こなければ</b></td></tr>'
+        + '</tbody></table>'
+        + '<p class="conj-note">In speech it is often shortened: なければ → <b>なきゃ</b> (行かなきゃ), and なくては → <b>なくちゃ</b> (行かなくちゃ).</p>' },
+
+    'chau':        { name: 'Chau-form', nameJp: 'ちゃう形', hint: 'End up ~ing (casual)', symbol: 'ちゃう', color: '#F06292', level: 'N3',
+      explanation: '<p>The <strong>ちゃう form</strong> is casual speech for 〜てしまう: doing something completely, or by accident, often with regret: ケーキを全部食べ<b>ちゃった</b> (I ate the whole cake — oops). It is everywhere in conversation, anime and texts.</p>'
+        + '<table class="conj-table"><thead><tr><th>Type</th><th>Rule</th><th>Example</th></tr></thead><tbody>'
+        + '<tr><td>て-form in <b>て</b></td><td>て → <b>ちゃう</b></td><td>食べて → 食べ<b>ちゃう</b><br>行って → 行っ<b>ちゃう</b></td></tr>'
+        + '<tr><td>て-form in <b>で</b></td><td>で → <b>じゃう</b></td><td>飲んで → 飲ん<b>じゃう</b><br>脱いで → 脱い<b>じゃう</b></td></tr>'
+        + '<tr class="irr-row"><td>する</td><td>して → しちゃう</td><td>する → <b>しちゃう</b></td></tr>'
+        + '<tr class="irr-row"><td>くる</td><td>きて → きちゃう</td><td>くる → <b>きちゃう</b></td></tr>'
+        + '</tbody></table>'
+        + '<p class="conj-note">It conjugates like a u-verb: past <b>ちゃった / じゃった</b>, polite <b>ちゃいます</b>. ちゃう = てしまう, so 食べちゃう = 食べてしまう.</p>' },
   };
 
   const ALL_FORMS = Object.keys(FORM_INFO);
