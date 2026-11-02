@@ -100,12 +100,22 @@
   printable worksheets follow the same chunks: `node scripts/extract_sentence_data.mjs`
   (also rewrites the list on `kanji.html`), then `render_sentence_html.py` and
   `render_sheets_pdfs.mjs` / `stamp_sheet_belts.mjs`.
-- The kanji reading sheets (`kanji-sheets/tokidoki-kanji-reading-n5/n4/n3.pdf`,
-  JLPT-style "how is the underlined word read?", written answer, answers on
-  the last page) come from the GTK example sentences in `guess-words-data.js`:
-  `node scripts/render_reading_sheets.mjs <build-dir>`, then
-  `render_sheets_pdfs.mjs <build-dir> kanji-sheets` and
-  `stamp_sheet_belts.mjs`. `test_reading_sheets.js` covers the underlining.
+- JLPT-style vocabulary questions, N5 / N4 / N3, from the GTK example
+  sentences (`guess-words-data.js`) via `scripts/vocab_questions.mjs`:
+  kanji reading (underlined word → write the reading) and writing (word in
+  hiragana → write the kanji), both without choices; fill in the blank (four
+  words of the same kind and level, from other topics, conjugated to the
+  sentence's form); and similar meaning, hand-written in
+  `similar-meaning-data.js`. Automatic wrong choices can fit too, so only
+  the fill-in questions listed in `scripts/vocab_fill_reviewed.json` (checked
+  by hand: only the answer fits) are used; `node scripts/build_vocab_fill.mjs`
+  writes them to `vocab-fill-data.js`. The JLPT Questions page
+  (`vocab-questions.html`, `vocab-questions.js`, scores in
+  `tokidoki_vocab_questions`) practises fill-in and similar meaning on
+  screen. The PDFs (answers on the last page): `node scripts/render_vocab_sheets.mjs <build>`,
+  then `render_sheets_pdfs.mjs <build>/kanji kanji-sheets` and
+  `<build>/vocab vocab-sheets`, then `stamp_sheet_belts.mjs`.
+  `test_vocab_questions.js` covers all of it.
 
 ## Chunks, not textbook chapters
 

@@ -8345,3 +8345,23 @@ body.bs-no-furigana #screen-bunkei-story rt { visibility: hidden; }
 .bs-story-meta { font-size: 0.76rem; color: var(--text-muted); }
 .bs-story-meta b { color: var(--accent); }
 .bs-chapters { border: none; border-top: 1px solid var(--border); border-radius: 0; }
+
+/* ─── JLPT Questions (vocab-questions.html) ─────────────────────────────── */
+.vq-title-ja { font-family: var(--font-jp); font-weight: 400; font-size: 0.85em; color: var(--text-muted); margin-left: 6px; }
+.vq-question { margin-top: 16px; }
+.vq-sentence { font-family: var(--font-jp); font-size: 1.3rem; line-height: 2.3; margin: 4px 0 14px; }
+.vq-target { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; text-decoration-color: var(--accent); }
+.vq-blank { display: inline-block; min-width: 4.5em; text-align: center; border-bottom: 2px solid var(--accent); line-height: 1.6; }
+.vq-blank-filled { padding: 0 4px; border-radius: 6px; }
+.vq-blank.vq-right { background: var(--green-dim); border-color: var(--green); }
+.vq-blank.vq-wrong { background: var(--red-dim); border-color: var(--red); }
+.vq-choice { font-family: var(--font-jp); font-size: 1.08rem; line-height: 2; }
+.vq-choices-long { grid-template-columns: 1fr; }
+.vq-choice-text { text-align: left; }
+.vq-why p + p { margin-top: 6px; }
+.vq-en { color: var(--text-dim); }
+.vq-words { list-style: none; margin-top: 8px; display: flex; flex-direction: column; gap: 3px; font-size: 0.92rem; }
+.vq-words li { color: var(--text-dim); }
+.vq-words .vq-words-answer { color: var(--text); font-weight: 700; }
+.vq-words-kana { font-size: 0.85em; color: var(--text-muted); font-weight: 400; }
+body.vq-no-furigana #screen-vocab-questions rt { visibility: hidden; }

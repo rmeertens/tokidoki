@@ -180,6 +180,7 @@
     tokidoki_bunkei_story: mergeGameStore,
     tokidoki_listening: mergeGameStore,
     tokidoki_vocab_quiz: mergeGameStore,
+    tokidoki_vocab_questions: mergeGameStore,
     tokidoki_conversation: mergeConversation,
     tokidoki_lookups: mergeLookups,
     // GTK - Easy Word Order (guess-kanji.js): the words studied, in order, and
