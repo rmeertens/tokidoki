@@ -271,31 +271,34 @@ export function buildFill(level) {
 
 // ─── Reading / writing ───────────────────────────────────────────────────────
 
-// Words to underline at this level, `count` of them, in a fixed shuffled
-// order (`salt` gives the writing sheets other words than the reading ones).
-export function pickTargets(level, count, salt = "") {
+// Words to underline at this level, in a fixed shuffled order (`salt`
+// gives the writing sheets other words than the reading ones): first the
+// words written only with kanji of this level or below, as in the exam,
+// then the level's other words, which reach for harder kanji. One word per
+// set of kanji (青 and 青い: only one of them).
+export function orderedTargets(level, salt = "") {
   const known = knownKanji(level);
-  const seen = new Set();
-  const out = [];
-  const candidates = WORDS.filter((w) => w[3] === level)
+  const order = (a, b) => hash(salt + a.w[0] + a.w[1]) - hash(salt + b.w[0] + b.w[1]);
+  const all = WORDS.filter((w) => w[3] === level)
     // 来る's sentences carry its dictionary reading (来[く]ます), not the
     // conjugated one, so it can't be an answer as is.
     .filter((w) => w[0] !== "来る")
     .map((w) => ({ w, tokens: parseSentence(w[8]) }))
     .map((c) => ({ ...c, target: findTarget(c.tokens, c.w[0], c.w[1]) }))
-    .filter((c) => c.target)
-    // Exam style: the underlined word is written with this level's kanji.
-    .filter((c) => [...c.target.text].every((ch) => !isKanji(ch) || known.has(ch)))
-    .sort((a, b) => hash(salt + a.w[0] + a.w[1]) - hash(salt + b.w[0] + b.w[1]));
-  for (const c of candidates) {
+    .filter((c) => c.target);
+  const inLevel = (c) => [...c.target.text].every((ch) => !isKanji(ch) || known.has(ch));
+  const seen = new Set();
+  const out = [];
+  for (const c of [...all.filter(inLevel).sort(order), ...all.filter((c) => !inLevel(c)).sort(order)]) {
     const key = [...c.target.text].filter(isKanji).join("");
-    if (seen.has(key)) continue; // 青 and 青い: only one of them
+    if (seen.has(key)) continue;
     seen.add(key);
     out.push(c);
-    if (out.length === count) break;
   }
   return out;
 }
+
+export const pickTargets = (level, count, salt = "") => orderedTargets(level, salt).slice(0, count);
 
 // The fill-in questions checked by hand (scripts/vocab_fill_reviewed.json:
 // only one choice fits the sentence), in that order. A word listed twice

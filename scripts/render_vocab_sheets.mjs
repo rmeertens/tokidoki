@@ -2,8 +2,9 @@
 // JLPT-style vocabulary worksheets, one per kind and level (N5 / N4 / N3),
 // each with its answers on the last page:
 //
-//   kanji-sheets/tokidoki-kanji-reading-<level>   how is the underlined word
-//       read? — write the reading in hiragana (no choices)
+//   kanji-sheets/tokidoki-kanji-reading-<level>[-part2…4]   how is the
+//       underlined word read? — write the reading in hiragana (no choices);
+//       four parts per level, each with 50 other words
 //   kanji-sheets/tokidoki-kanji-writing-<level>   how is the underlined word
 //       written? — write it in kanji (no choices)
 //   vocab-sheets/tokidoki-vocab-fill-<level>      which word goes in the
@@ -24,13 +25,14 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
-import { LEVELS, hash, isKanji, knownKanji, parseSentence, pickTargets } from "./vocab_questions.mjs";
+import { LEVELS, hash, isKanji, knownKanji, orderedTargets, parseSentence } from "./vocab_questions.mjs";
 import { fillData } from "./build_vocab_fill.mjs";
 
 const require = createRequire(import.meta.url);
 const SIMILAR = require("../similar-meaning-data.js");
 
 export const PER_SHEET = 50; // reading / writing
+export const READING_PARTS = 4; // reading sheets per level, each with other words
 export const FILL_PER_SHEET = 40;
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -132,13 +134,15 @@ function targetSentenceHtml({ tokens, target }, known, asKana) {
   );
 }
 
-export function pickQuestions(level, kind = "reading") {
-  return pickTargets(level, PER_SHEET, kind === "writing" ? "writing:" : "");
+// Part n of the level's words (the reading sheets come in parts 1–4).
+export function pickQuestions(level, kind = "reading", part = 1) {
+  return orderedTargets(level, kind === "writing" ? "writing:" : "").slice((part - 1) * PER_SHEET, part * PER_SHEET);
 }
 
-export function renderSheet(level, kind = "reading") {
+export function renderSheet(level, kind = "reading", part = 1) {
   const known = knownKanji(level);
-  const qs = pickQuestions(level, kind);
+  const qs = pickQuestions(level, kind, part);
+  const harder = qs.some((q) => [...q.target.text].some((ch) => isKanji(ch) && !known.has(ch)));
   const writing = kind === "writing";
   const body = qs
     .map(
@@ -159,10 +163,12 @@ export function renderSheet(level, kind = "reading") {
         body, `${level} Kanji writing — answers`, key,
       )
     : page(
-        `${level} Kanji Readings | Tokidoki`,
-        `${level} Kanji readings — how is the underlined word read?`,
-        `Write the reading of each underlined word in hiragana in the box. Kanji above ${level} have small furigana. The answers are on the last page.`,
-        body, `${level} Kanji readings — answers`, key,
+        `${level} Kanji Readings, Part ${part} | Tokidoki`,
+        `${level} Kanji readings, Part ${part} — how is the underlined word read?`,
+        `Write the reading of each underlined word in hiragana in the box. Kanji above ${level} have small furigana` +
+          (harder ? ` — though not on the underlined words, and this part also has ${level} words written with harder kanji` : "") +
+          `. The answers are on the last page.`,
+        body, `${level} Kanji readings, Part ${part} — answers`, key,
       );
 }
 
@@ -231,10 +237,13 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   mkdirSync(vocabDir, { recursive: true });
   for (const level of LEVELS) {
     const l = level.toLowerCase();
-    writeFileSync(path.join(kanjiDir, `tokidoki-kanji-reading-${l}.html`), renderSheet(level, "reading"));
+    for (let part = 1; part <= READING_PARTS; part++) {
+      const suffix = part === 1 ? "" : `-part${part}`;
+      writeFileSync(path.join(kanjiDir, `tokidoki-kanji-reading-${l}${suffix}.html`), renderSheet(level, "reading", part));
+    }
     writeFileSync(path.join(kanjiDir, `tokidoki-kanji-writing-${l}.html`), renderSheet(level, "writing"));
     writeFileSync(path.join(vocabDir, `tokidoki-vocab-fill-${l}.html`), renderFillSheet(level));
     writeFileSync(path.join(vocabDir, `tokidoki-vocab-similar-${l}.html`), renderSimilarSheet(level));
-    console.log(`${level}: reading, writing, fill-in (${fillQuestions(level).length}), similar meaning (${SIMILAR[level].length})`);
+    console.log(`${level}: reading (${READING_PARTS} parts), writing, fill-in (${fillQuestions(level).length}), similar meaning (${SIMILAR[level].length})`);
   }
 }
