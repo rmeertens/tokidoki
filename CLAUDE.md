@@ -100,6 +100,12 @@
   printable worksheets follow the same chunks: `node scripts/extract_sentence_data.mjs`
   (also rewrites the list on `kanji.html`), then `render_sentence_html.py` and
   `render_sheets_pdfs.mjs` / `stamp_sheet_belts.mjs`.
+- The kanji reading sheets (`kanji-sheets/tokidoki-kanji-reading-n5/n4/n3.pdf`,
+  JLPT-style "how is the underlined word read?", written answer, answers on
+  the last page) come from the GTK example sentences in `guess-words-data.js`:
+  `node scripts/render_reading_sheets.mjs <build-dir>`, then
+  `render_sheets_pdfs.mjs <build-dir> kanji-sheets` and
+  `stamp_sheet_belts.mjs`. `test_reading_sheets.js` covers the underlining.
 
 ## Chunks, not textbook chapters
 
