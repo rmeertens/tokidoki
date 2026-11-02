@@ -129,7 +129,7 @@
   const SETTINGS_KEY = 'tokidoki_settings';
 
   function loadSettings() {
-    const defaults = { typingMode: false, hideForm: true, showContext: true, englishToJapanese: true, showExampleFront: false, showFurigana: true, flashcardFurigana: true, adjSentences: false };
+    const defaults = { typingMode: false, hideForm: true, englishToJapanese: true, showExampleFront: false, showFurigana: true, flashcardFurigana: true, adjSentences: false };
     let loaded;
     try { loaded = { ...defaults, ...JSON.parse(localStorage.getItem(SETTINGS_KEY)) }; }
     catch { loaded = { ...defaults }; }
@@ -717,13 +717,11 @@
       meaningEl.textContent = verb.meaning;
       $('#card-prompt').textContent = `→ ${fi.hint}`;
 
+      // The English example ("I did eat (polite, past)") is always shown;
+      // the Example setting adds a Japanese sentence.
       ctxEl.classList.remove('context-prominent');
-      if (settings.showContext) {
-        ctxEl.innerHTML = highlightKeywords(getContextExample(verb.meaning, form));
-        ctxEl.classList.remove('hidden');
-      } else {
-        ctxEl.classList.add('hidden');
-      }
+      ctxEl.innerHTML = highlightKeywords(getContextExample(verb.meaning, form));
+      ctxEl.classList.remove('hidden');
     }
 
     $('#hint-area').classList.add('hidden');
@@ -6155,14 +6153,6 @@
               </label>
               <label class="setting-row">
                 <div class="setting-info">
-                  <span class="setting-label">Show context example</span>
-                  <span class="setting-short">Context</span>
-                  <span class="setting-desc">Shows an English example below the hint, e.g. "I did eat (polite, past)"</span>
-                </div>
-                <input type="checkbox" id="setting-show-context" class="setting-toggle">
-              </label>
-              <label class="setting-row">
-                <div class="setting-info">
                   <span class="setting-label">English → Japanese mode</span>
                   <span class="setting-short">EN → JP</span>
                   <span class="setting-desc">See an English sentence (e.g. "I did take (a thing) (polite, past)") and produce the Japanese conjugation</span>
@@ -6474,23 +6464,9 @@
       if (!$('#setting-typing-mode')) return;
       $('#setting-typing-mode').checked = settings.typingMode;
       $('#setting-form-display').value = settings.formDisplay;
-      $('#setting-show-context').checked = settings.showContext;
       $('#setting-english-to-japanese').checked = settings.englishToJapanese;
       $('#setting-show-example-front').checked = settings.showExampleFront;
       $('#setting-show-furigana').checked = settings.showFurigana;
-      syncContextSetting();
-    }
-
-    // English -> Japanese mode always shows the English example, so the
-    // "Show context example" switch does nothing while it's on.
-    function syncContextSetting() {
-      const ctx = $('#setting-show-context');
-      if (!ctx) return;
-      ctx.disabled = !!settings.englishToJapanese;
-      const row = ctx.closest('.setting-row');
-      if (!row) return;
-      row.classList.toggle('setting-row-disabled', ctx.disabled);
-      row.title = ctx.disabled ? 'Always shown in English → Japanese mode' : row.dataset.tip || '';
     }
 
     function openSettings() {
@@ -6538,16 +6514,9 @@
       redrawStudyCard();
     });
 
-    on('#setting-show-context', 'change', (e) => {
-      settings.showContext = e.target.checked;
-      saveSettings(settings);
-      redrawStudyCard();
-    });
-
     on('#setting-english-to-japanese', 'change', (e) => {
       settings.englishToJapanese = e.target.checked;
       saveSettings(settings);
-      syncContextSetting();
       redrawStudyCard();
     });
 
