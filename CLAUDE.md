@@ -102,8 +102,8 @@
   `render_sheets_pdfs.mjs` / `stamp_sheet_belts.mjs`.
 - JLPT-style vocabulary questions, N5 / N4 / N3, from the GTK example
   sentences (`guess-words-data.js`) via `scripts/vocab_questions.mjs`:
-  kanji reading (underlined word → write the reading; four parts of 50
-  words per level, `-part2…4`) and writing (word in
+  kanji reading (underlined word → write the reading; six parts of 50
+  words per level, `-part2…6`) and writing (word in
   hiragana → write the kanji), both without choices; fill in the blank (four
   words of the same kind and level, from other topics, conjugated to the
   sentence's form); and similar meaning, hand-written in

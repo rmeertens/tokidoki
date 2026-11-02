@@ -50,11 +50,11 @@ const fs = require('fs');
       assert.strictEqual((html.match(/class="q"/g) || []).length, sheets.PER_SHEET);
       assert.ok(fs.existsSync(`kanji-sheets/tokidoki-kanji-${kind}-${level.toLowerCase()}.pdf`), `${level} ${kind} pdf`);
     }
-    // Reading parts 1–4: 50 words each, no word in two parts.
-    const parts = [1, 2, 3, 4].map(n => sheets.pickQuestions(level, 'reading', n));
+    // Reading parts 1–6: 50 words each, no word in two parts.
+    const parts = [1, 2, 3, 4, 5, 6].map(n => sheets.pickQuestions(level, 'reading', n));
     for (const qs of parts) assert.strictEqual(qs.length, sheets.PER_SHEET, `${level} reading part`);
-    assert.strictEqual(new Set(parts.flat().map(q => q.w[0] + q.w[1])).size, 4 * sheets.PER_SHEET, `${level}: a word in two parts`);
-    for (const n of [2, 3, 4]) {
+    assert.strictEqual(new Set(parts.flat().map(q => q.w[0] + q.w[1])).size, 6 * sheets.PER_SHEET, `${level}: a word in two parts`);
+    for (const n of [2, 3, 4, 5, 6]) {
       assert.ok(fs.existsSync(`kanji-sheets/tokidoki-kanji-reading-${level.toLowerCase()}-part${n}.pdf`), `${level} part ${n} pdf`);
       assert.ok(sheets.renderSheet(level, 'reading', n).includes(`Part ${n}`));
     }

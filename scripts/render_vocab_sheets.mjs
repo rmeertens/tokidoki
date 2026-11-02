@@ -2,9 +2,9 @@
 // JLPT-style vocabulary worksheets, one per kind and level (N5 / N4 / N3),
 // each with its answers on the last page:
 //
-//   kanji-sheets/tokidoki-kanji-reading-<level>[-part2…4]   how is the
+//   kanji-sheets/tokidoki-kanji-reading-<level>[-part2…6]   how is the
 //       underlined word read? — write the reading in hiragana (no choices);
-//       four parts per level, each with 50 other words
+//       six parts per level, each with 50 other words
 //   kanji-sheets/tokidoki-kanji-writing-<level>   how is the underlined word
 //       written? — write it in kanji (no choices)
 //   vocab-sheets/tokidoki-vocab-fill-<level>      which word goes in the
@@ -32,7 +32,7 @@ const require = createRequire(import.meta.url);
 const SIMILAR = require("../similar-meaning-data.js");
 
 export const PER_SHEET = 50; // reading / writing
-export const READING_PARTS = 4; // reading sheets per level, each with other words
+export const READING_PARTS = 6; // reading sheets per level, each with other words
 export const FILL_PER_SHEET = 40;
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
