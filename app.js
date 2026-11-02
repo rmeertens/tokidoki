@@ -6136,6 +6136,7 @@
               <label class="setting-row">
                 <div class="setting-info">
                   <span class="setting-label">Type answers in hiragana</span>
+                  <span class="setting-short">Typing</span>
                   <span class="setting-desc">When enabled, you type the conjugation before revealing the answer</span>
                 </div>
                 <input type="checkbox" id="setting-typing-mode" class="setting-toggle">
@@ -6143,6 +6144,7 @@
               <label class="setting-row">
                 <div class="setting-info">
                   <span class="setting-label">Form label on question</span>
+                  <span class="setting-short">Form</span>
                   <span class="setting-desc">Hidden, colour only, or colour with the written-out form name (e.g. "Present (だ)"). The answer side always shows it.</span>
                 </div>
                 <select id="setting-form-display" class="setting-select">
@@ -6154,6 +6156,7 @@
               <label class="setting-row">
                 <div class="setting-info">
                   <span class="setting-label">Show context example</span>
+                  <span class="setting-short">Context</span>
                   <span class="setting-desc">Shows an English example below the hint, e.g. "I did eat (polite, past)"</span>
                 </div>
                 <input type="checkbox" id="setting-show-context" class="setting-toggle">
@@ -6161,6 +6164,7 @@
               <label class="setting-row">
                 <div class="setting-info">
                   <span class="setting-label">English → Japanese mode</span>
+                  <span class="setting-short">EN → JP</span>
                   <span class="setting-desc">See an English sentence (e.g. "I did take (a thing) (polite, past)") and produce the Japanese conjugation</span>
                 </div>
                 <input type="checkbox" id="setting-english-to-japanese" class="setting-toggle">
@@ -6168,6 +6172,7 @@
               <label class="setting-row">
                 <div class="setting-info">
                   <span class="setting-label">Show example sentence on question</span>
+                  <span class="setting-short">Example</span>
                   <span class="setting-desc">Shows a Japanese example sentence (with the answer blanked out) before you reveal the answer</span>
                 </div>
                 <input type="checkbox" id="setting-show-example-front" class="setting-toggle">
@@ -6175,6 +6180,7 @@
               <label class="setting-row">
                 <div class="setting-info">
                   <span class="setting-label">Show furigana <span class="grade-key">F</span></span>
+                  <span class="setting-short">Furigana</span>
                   <span class="setting-desc">Shows readings (hiragana) above kanji in Japanese sentences</span>
                 </div>
                 <input type="checkbox" id="setting-show-furigana" class="setting-toggle">
@@ -6484,7 +6490,7 @@
       const row = ctx.closest('.setting-row');
       if (!row) return;
       row.classList.toggle('setting-row-disabled', ctx.disabled);
-      row.title = ctx.disabled ? 'Always shown in English → Japanese mode' : '';
+      row.title = ctx.disabled ? 'Always shown in English → Japanese mode' : row.dataset.tip || '';
     }
 
     function openSettings() {
@@ -6505,6 +6511,14 @@
       $('#settings-overlay').classList.add('hidden');
     }
 
+    // The boxes above the study card show only a short name; the full name
+    // and description are the tooltip.
+    $$('.settings-panel .setting-row').forEach(row => {
+      const label = row.querySelector('.setting-label')?.textContent.trim();
+      const desc = row.querySelector('.setting-desc')?.textContent.trim();
+      row.dataset.tip = [label, desc].filter(Boolean).join(' — ');
+      row.title = row.dataset.tip;
+    });
     syncSettingsControls();
     on('#btn-settings', 'click', openSettings);
     on('#btn-close-settings', 'click', closeSettings);

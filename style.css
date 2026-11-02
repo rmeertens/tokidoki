@@ -3314,16 +3314,19 @@ a.pq-mode:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px;
   transform: translateX(20px);
 }
 
-/* Settings at the top of the study screen (the overlay's panel, moved here),
-   always shown as a grid of boxes */
+/* Settings at the top of the study screen (the overlay's panel, moved here):
+   always shown, as a row of small chips like the other study toggles — a
+   short name and a plain checkbox, the full description as the tooltip. */
+.setting-short { display: none; }
+
 .study-settings {
   margin-bottom: 14px;
 }
 
 .study-settings .settings-panel {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-  gap: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
   background: none;
   border: 0;
   border-radius: 0;
@@ -3331,30 +3334,45 @@ a.pq-mode:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px;
 }
 
 .study-settings .setting-row {
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 10px 12px;
-  background: var(--bg-card);
+  gap: 6px;
+  padding: 5px 10px;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
-.study-settings .setting-row:hover { background: var(--bg-card-hover); }
-.study-settings .setting-label { font-size: 0.85rem; }
-.study-settings .setting-desc { font-size: 0.7rem; line-height: 1.35; }
-.study-settings .setting-toggle { align-self: flex-end; }
-.study-settings .setting-select { margin-left: 0; align-self: stretch; }
+.study-settings .setting-row:hover { background: var(--bg-card-hover); color: var(--text); }
+.study-settings .setting-label,
+.study-settings .setting-desc { display: none; }
+.study-settings .setting-short { display: inline; }
+
+.study-settings .setting-toggle {
+  order: -1;
+  appearance: auto;
+  -webkit-appearance: checkbox;
+  width: auto;
+  height: auto;
+  margin: 0;
+  background: none;
+  border-radius: 0;
+  accent-color: var(--accent);
+}
+
+.study-settings .setting-toggle::after { display: none; }
+
+.study-settings .setting-select {
+  margin-left: 0;
+  padding: 1px 4px;
+  font-size: 0.78rem;
+  border-radius: 6px;
+}
 
 .setting-row-disabled { opacity: 0.5; cursor: default; }
 .setting-row-disabled .setting-toggle { cursor: default; }
-
-@media (max-width: 480px) {
-  .study-settings .settings-panel { grid-template-columns: 1fr 1fr; gap: 6px; }
-  .study-settings .setting-row { padding: 8px 10px; }
-  .study-settings .setting-desc { display: none; }
-}
 
 /* Vimium compatibility: hidden input to capture focus */
 .key-capture {
