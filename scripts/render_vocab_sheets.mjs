@@ -149,15 +149,18 @@ export function renderSheet(level, kind = "reading", part = 1) {
     .map(
       (q, i) => `  <div class="q"><div class="num">${i + 1}</div>` +
         `<div class="sentence">${targetSentenceHtml(q, known, writing)}` +
-        // Reading sheets give the sentence's English (it doesn't give the reading away).
-        (writing ? "" : `<div class="en">${esc(q.w[9])}</div>`) +
         `</div><div class="answer"></div></div>`,
     )
     .join("\n");
-  const key = qs.map(
-    (q) =>
-      `<span class="key-reading">${esc(writing ? q.target.reading : q.target.text)} = ${esc(writing ? q.target.text : q.target.reading)}</span><br>` +
-      `<span class="key-word">${esc(q.w[0])}（${esc(q.w[1])}）${esc(q.w[2])}</span>`,
+  const key = qs.map((q) =>
+    writing
+      ? `<span class="key-reading">${esc(q.target.reading)} = ${esc(q.target.text)}</span><br>` +
+        `<span class="key-word">${esc(q.w[0])}（${esc(q.w[1])}）${esc(q.w[2])}</span>`
+      // Reading: the answer and the word's meaning (with its dictionary form
+      // when it's conjugated here), then the sentence's English.
+      : `<span class="key-reading">${esc(q.target.text)} = ${esc(q.target.reading)}</span>` +
+        `<span class="key-word"> — ${q.target.text === q.w[0] ? "" : `${esc(q.w[0])}（${esc(q.w[1])}）`}${esc(shortMeaning(q.w[2]))}</span><br>` +
+        `<span class="key-word key-en">${esc(q.w[9])}</span>`,
   );
   return writing
     ? page(

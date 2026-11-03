@@ -58,10 +58,14 @@ const fs = require('fs');
       assert.ok(fs.existsSync(`kanji-sheets/tokidoki-kanji-reading-${level.toLowerCase()}-part${n}.pdf`), `${level} part ${n} pdf`);
       assert.ok(sheets.renderSheet(level, 'reading', n).includes(`Part ${n}`));
     }
-    // Reading sheets give each sentence's English; writing sheets don't.
+    // Reading sheets give each sentence's English in the answers only, not
+    // under the question; writing sheets don't give it.
     const q1 = sheets.pickQuestions(level, 'reading', 1)[0];
-    assert.ok(sheets.renderSheet(level, 'reading', 1).includes(`<div class="en">${q1.w[9].replace(/&/g, '&amp;').replace(/</g, '&lt;')}</div>`), `${level}: English`);
-    assert.ok(!sheets.renderSheet(level, 'writing').includes('<div class="en">'));
+    const reading1 = sheets.renderSheet(level, 'reading', 1);
+    const en1 = q1.w[9].replace(/&/g, '&amp;').replace(/</g, '&lt;');
+    assert.ok(!reading1.includes('<div class="en">'), `${level}: English under the questions`);
+    assert.ok(reading1.split('<div class="key">')[1].includes(`<span class="key-word key-en">${en1}</span>`), `${level}: English in the answers`);
+    assert.ok(!sheets.renderSheet(level, 'writing').includes('key-en'));
     // The writing sheet shows the word in hiragana, never its kanji.
     for (const q of sheets.pickQuestions(level, 'writing')) {
       assert.ok(sheets.renderSheet(level, 'writing').includes(`<span class="target">${q.target.reading}</span>`));
