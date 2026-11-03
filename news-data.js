@@ -23,6 +23,142 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-11-03-disaster-agency',
+      date: '2026-11-03',
+      emoji: '🌊',
+      titleEn: 'Japan launches its new Disaster Management Agency and asks people to stock up for at least three days',
+      sources: [
+        { name: 'Kumamoto Nichinichi Shimbun (Kyodo)', url: 'https://kumanichi.com/articles/2039407' },
+        { name: 'tenki.jp (Japan Weather Association)', url: 'https://tenki.jp/forecaster/s_ono/2026/11/02/41180.html' },
+        { name: 'Xinhua', url: 'https://english.news.cn/20261102/ef73f9920e7f439796102b72ee2effd0/c.html' },
+      ],
+      levels: {
+        N5: {
+          title: '新[あたら]しい　防災庁[ぼうさいちょう]が　できました',
+          lines: [
+            ['二日[ふつか]に、日本[にほん]に　新[あたら]しい　防災庁[ぼうさいちょう]が　できました。', 'On the 2nd, a new Disaster Management Agency was created in Japan.', '防災庁 (bōsaichō) is the Disaster Management Agency. 防災 means preparing for disasters.'],
+            ['地震[じしん]や　大[おお]きい　雨[あめ]の　ときに、国[くに]の　中心[ちゅうしん]に　なります。', 'In an earthquake or heavy rain, it will be the center for the country.'],
+            ['はたらく　人[ひと]は　352人[にん]です。', 'The number of staff is 352.'],
+            ['細野[ほその]大臣[だいじん]は、「水[みず]と　食[た]べ物[もの]を　三日分[みっかぶん]は　用意[ようい]してください」と　言[い]いました。', 'Minister Hosono said, "Please prepare water and food for at least three days."'],
+            ['できれば　一週間分[いっしゅうかんぶん]　用意[ようい]してください。', 'If you can, please prepare for one week.'],
+            ['地震[じしん]が　くる前[まえ]に、家[いえ]で　準備[じゅんび]を　しましょう。', 'Before an earthquake comes, let us get ready at home.'],
+          ],
+        },
+        N4: {
+          title: '防災庁[ぼうさいちょう]が　発足[ほっそく]　国民[こくみん]に　備蓄[びちく]を　お願[ねが]い',
+          lines: [
+            ['政府[せいふ]は二日[ふつか]、新[あたら]しい防災庁[ぼうさいちょう]を作[つく]りました。', 'The government created the new Disaster Management Agency on the 2nd.'],
+            ['内閣[ないかく]の下[した]にあり、トップは総理大臣[そうりだいじん]です。', 'It is under the Cabinet, and the prime minister is at its head.'],
+            ['南海[なんかい]トラフの地震[じしん]や、東京[とうきょう]の真下[ました]で起[お]こる地震[じしん]に備[そな]えます。', 'It will prepare for an earthquake in the Nankai Trough and one directly under Tokyo.', 'The Nankai Trough is a deep sea area off the Pacific coast where a huge earthquake is expected.'],
+            ['内閣府[ないかくふ]の防災[ぼうさい]の部署[ぶしょ]は220人[にん]ほどでしたが、防災庁[ぼうさいちょう]は352人[にん]で始[はじ]まりました。', 'The Cabinet Office disaster section had about 220 people, but the agency started with 352.'],
+            ['細野[ほその]防災[ぼうさい]大臣[だいじん]は、国民[こくみん]や自治体[じちたい]に「緊急[きんきゅう]要請[ようせい]」を出[だ]しました。', 'Disaster Management Minister Hosono issued an "emergency request" to the public and local governments.'],
+            ['水[みず]や食[た]べ物[もの]を、最低[さいてい]三日分[みっかぶん]、できれば一週間分[いっしゅうかんぶん]、家[いえ]に用意[ようい]するように言[い]っています。', 'He is asking people to keep water and food at home for at least three days, and one week if possible.'],
+          ],
+        },
+        N3: {
+          title: '防災庁[ぼうさいちょう]が発足[ほっそく]　首相[しゅしょう]がトップ、国民[こくみん]に最低[さいてい]三日分[みっかぶん]の備蓄[びちく]を要請[ようせい]',
+          lines: [
+            ['政府[せいふ]は二日[ふつか]、災害[さいがい]対策[たいさく]の司令塔[しれいとう]となる防災庁[ぼうさいちょう]を発足[ほっそく]させた。', 'On the 2nd the government launched the Disaster Management Agency, which is to serve as the command center for disaster measures.', '司令塔 (shireitō) literally means "control tower": the body that directs everything else.'],
+            ['内閣[ないかく]に置[お]かれ、首相[しゅしょう]がトップを務[つと]める。', 'It is placed under the Cabinet, with the prime minister serving as its head.'],
+            ['内閣府[ないかくふ]の防災部門[ぼうさいぶもん]を引[ひ]き継[つ]ぎ、定員[ていいん]は現在[げんざい]の約[やく]220人[にん]から352人[にん]に増[ふ]える。', 'It takes over the Cabinet Office disaster section, and its staff quota rises from the current 220 or so to 352.'],
+            ['細野豪志[ほそのごうし]復興相[ふっこうしょう]が防災相[ぼうさいしょう]を兼務[けんむ]し、南海[なんかい]トラフ地震[じしん]や首都[しゅと]直下[ちょっか]地震[じしん]などへの備[そな]えを進[すす]める。', 'Reconstruction Minister Hosono Goshi concurrently serves as disaster management minister and will advance preparations for a Nankai Trough quake, one directly beneath the capital and others.', '兼務 (kenmu) means holding two posts at the same time.'],
+            ['発足[ほっそく]に合[あ]わせ、国民[こくみん]や自治体[じちたい]、各省庁[かくしょうちょう]に事前[じぜん]防災[ぼうさい]の徹底[てってい]を求[もと]める「緊急[きんきゅう]要請[ようせい]」を出[だ]した。', 'To mark the launch, it issued an "emergency request" asking the public, local governments and ministries to make advance disaster preparedness thorough.'],
+            ['水[みず]や食料[しょくりょう]の備蓄[びちく]は最低[さいてい]三日分[みっかぶん]、できれば一週間分[いっしゅうかんぶん]を求[もと]めている。', 'It asks for stocks of water and food for at least three days, and for one week if possible.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-03-income-benefit-5000',
+      date: '2026-11-03',
+      emoji: '💴',
+      titleEn: 'Government shows a rough figure of about 5,000 yen a year for an income-linked benefit for low earners',
+      sources: [
+        { name: 'KAB (ANN)', url: 'https://www.kab.co.jp/news/article/17010515' },
+        { name: 'KSB (ANN)', url: 'https://news.ksb.co.jp/ann/article/17010500' },
+      ],
+      levels: {
+        N5: {
+          title: 'おかねが　すくない　人[ひと]に　5000円[えん]ぐらい',
+          lines: [
+            ['国[くに]は、おかねが　すくない　人[ひと]に、おかねを　あげる　ことを　考[かんが]えています。', 'The government is thinking of giving money to people who have little money.'],
+            ['三十日[さんじゅうにち]に、国会[こっかい]で　その　かんがえを　見[み]せました。', 'On the 30th, it showed this idea in the Diet.'],
+            ['一年[いちねん]に　一人[ひとり]　5000円[えん]ぐらいです。', 'It is about 5,000 yen per person per year.'],
+            ['一年[いちねん]の　おかねが　119万円[まんえん]までの　人[ひと]が　もらえます。', 'People whose yearly income is up to 1.19 million yen can get it.'],
+            ['来年[らいねん]の　秋[あき]ごろに　はじまります。', 'It will start around autumn next year.'],
+            ['でも、まだ　きまっていません。', 'But it has not been decided yet.'],
+          ],
+        },
+        N4: {
+          title: '低所得[ていしょとく]の人[ひと]に年[ねん]5000円[えん]ほどの給付[きゅうふ]を検討[けんとう]',
+          lines: [
+            ['政府[せいふ]は三十日[さんじゅうにち]、国会[こっかい]の委員会[いいんかい]に、新[あたら]しい給付[きゅうふ]の資料[しりょう]を出[だ]しました。', 'On the 30th the government gave a Diet committee material on a new benefit.'],
+            ['収入[しゅうにゅう]が少[すく]ない人[ひと]に、お金[かね]を配[くば]る仕組[しく]みです。', 'It is a system to hand out money to people with low incomes.'],
+            ['年収[ねんしゅう]が119万円[まんえん]までの人[ひと]に、同[おな]じ金額[きんがく]を出[だ]します。', 'The same amount is paid to people whose annual income is up to 1.19 million yen.'],
+            ['金額[きんがく]は、一人[ひとり]一年[いちねん]で5000円[えん]ほどが目安[めやす]です。', 'The guide for the amount is about 5,000 yen per person per year.', 'The figure comes from dividing about 600 billion yen, the cost of a 1% food consumption tax cut, by the population.'],
+            ['食[た]べ物[もの]の消費税[しょうひぜい]を下[さ]げる法案[ほうあん]も、国会[こっかい]に出[だ]されています。', 'A bill to lower the consumption tax on food has also been submitted to the Diet.'],
+            ['給付[きゅうふ]は来年[らいねん]の秋[あき]ごろに始[はじ]まる予定[よてい]ですが、収入[しゅうにゅう]の条件[じょうけん]はまだ決[き]まっていません。', 'The benefit is planned to start around autumn next year, but the income conditions are not yet decided.'],
+          ],
+        },
+        N3: {
+          title: '低所得者[ていしょとくしゃ]への所得[しょとく]連動[れんどう]給付[きゅうふ]　政府[せいふ]が年[ねん]5000円[えん]程度[ていど]を参考値[さんこうち]に',
+          lines: [
+            ['政府[せいふ]は三十日[さんじゅうにち]、衆議院[しゅうぎいん]の財務[ざいむ]金融[きんゆう]委員会[いいんかい]に、所得[しょとく]に応[おう]じた給付[きゅうふ]の資料[しりょう]を示[しめ]した。', 'On the 30th the government presented to the House of Representatives Committee on Finance material on a benefit based on income.'],
+            ['来年[らいねん]秋[あき]ごろの開始[かいし]を目指[めざ]し、年収[ねんしゅう]119万円[まんえん]までの低所得者[ていしょとくしゃ]に定額[ていがく]を給付[きゅうふ]する。', 'Aiming to start around autumn next year, it would pay a fixed amount to low earners with annual income of up to 1.19 million yen.'],
+            ['金額[きんがく]は、一人[ひとり]に年[ねん]5000円[えん]程度[ていど]が参考[さんこう]になるという。', 'It is said that about 5,000 yen per person per year is the reference figure.'],
+            ['食料品[しょくりょうひん]の消費税[しょうひぜい]1%分[ぶん]にあたる約[やく]6000億円[おくえん]を、人口[じんこう]で割[わ]った額[がく]が根拠[こんきょ]とされる。', 'The basis is said to be the amount obtained by dividing about 600 billion yen, equal to 1% of the consumption tax on food, by the population.'],
+            ['政府[せいふ]は、食料品[しょくりょうひん]の消費税[しょうひぜい]を2027年[ねん]4月[がつ]から二年間[にねんかん]、1%下[さ]げる法案[ほうあん]を国会[こっかい]に提出[ていしゅつ]している。', 'The government has submitted to the Diet a bill to cut the consumption tax on food by 1% for two years from April 2027.'],
+            ['所得[しょとく]の基準[きじゅん]は政令[せいれい]で定[さだ]める予定[よてい]で、内容[ないよう]は今後[こんご]変[か]わる可能性[かのうせい]がある。', 'The income standard is to be set by a government ordinance, and the details may change in the future.', '政令 (seirei) is a Cabinet order, a rule made by the government under a law.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-03-miyamoto-order-of-culture',
+      date: '2026-11-03',
+      emoji: '🎮',
+      titleEn: 'Nintendo’s Miyamoto Shigeru receives the Order of Culture, a first for the video game field',
+      sources: [
+        { name: 'GameBusiness.jp', url: 'https://www.gamebusiness.jp/article/2026/10/25/28438.html' },
+        { name: 'All About News', url: 'https://news.allabout.co.jp/articles/o/19223/' },
+      ],
+      levels: {
+        N5: {
+          title: '宮本[みやもと]さんが　文化勲章[ぶんかくんしょう]を　もらいます',
+          lines: [
+            ['今日[きょう]は　文化[ぶんか]の日[ひ]です。', 'Today is Culture Day.'],
+            ['宮本茂[みやもとしげる]さんが、文化勲章[ぶんかくんしょう]を　もらいます。', 'Miyamoto Shigeru will receive the Order of Culture.', '文化勲章 (bunka kunshō) is the Order of Culture, a very high honor from the government.'],
+            ['宮本[みやもと]さんは　「スーパーマリオ」と　「ゼルダの伝説[でんせつ]」を　作[つく]りました。', 'Mr. Miyamoto made "Super Mario" and "The Legend of Zelda."'],
+            ['どちらも　世界[せかい]で　有名[ゆうめい]な　ゲームです。', 'Both are famous games around the world.'],
+            ['ゲームの　人[ひと]が　もらうのは、はじめてです。', 'It is the first time a person from games has received it.'],
+            ['国[くに]は　二十三日[にじゅうさんにち]に　この　ことを　発表[はっぴょう]しました。', 'The government announced this on the 23rd.'],
+          ],
+        },
+        N4: {
+          title: '任天堂[にんてんどう]の宮本茂[みやもとしげる]さんが　ゲーム分野[ぶんや]で初[はじ]めて文化勲章[ぶんかくんしょう]',
+          lines: [
+            ['政府[せいふ]は二十三日[にじゅうさんにち]、今年[ことし]の文化勲章[ぶんかくんしょう]を発表[はっぴょう]しました。', 'On the 23rd, the government announced this year\'s Order of Culture.'],
+            ['全部[ぜんぶ]で八人[はちにん]で、その中[なか]に、任天堂[にんてんどう]の宮本茂[みやもとしげる]さんがいます。', 'There are eight people in all, and Nintendo\'s Miyamoto Shigeru is one of them.'],
+            ['宮本[みやもと]さんは「スーパーマリオ」や「ゼルダの伝説[でんせつ]」を生[う]み出[だ]した人[ひと]です。', 'Mr. Miyamoto is the person who created "Super Mario" and "The Legend of Zelda."'],
+            ['ゲームの分野[ぶんや]で文化勲章[ぶんかくんしょう]をもらうのは、初[はじ]めてです。', 'It is the first time someone from the game field has received the Order of Culture.'],
+            ['文化勲章[ぶんかくんしょう]は、文化[ぶんか]の発展[はってん]に大[おお]きな力[ちから]があった人[ひと]におくられます。', 'The Order of Culture is given to people who greatly helped the development of culture.'],
+            ['三日[みっか]の文化[ぶんか]の日[ひ]に、皇居[こうきょ]で式[しき]が行[おこな]われる予定[よてい]です。', 'A ceremony is planned at the Imperial Palace on Culture Day, the 3rd.'],
+          ],
+        },
+        N3: {
+          title: '宮本茂[みやもとしげる]氏[し]に文化勲章[ぶんかくんしょう]　ゲーム分野[ぶんや]からは初[はじ]めて',
+          lines: [
+            ['政府[せいふ]は二十三日[にじゅうさんにち]、今年度[こんねんど]の文化勲章[ぶんかくんしょう]の受章者[じゅしょうしゃ]八人[はちにん]を発表[はっぴょう]した。', 'On the 23rd the government announced the eight recipients of this fiscal year\'s Order of Culture.'],
+            ['任天堂[にんてんどう]の代表[だいひょう]取締役[とりしまりやく]フェローを務[つと]める宮本茂[みやもとしげる]氏[し]も選[えら]ばれた。', 'Miyamoto Shigeru, who serves as a Nintendo representative director fellow, was also chosen.'],
+            ['宮本[みやもと]氏[し]は「スーパーマリオ」や「ゼルダの伝説[でんせつ]」などの生[う]みの親[おや]として知[し]られる。', 'Mr. Miyamoto is known as the creator of games such as "Super Mario" and "The Legend of Zelda."', '生みの親 (umi no oya) literally means "the parent who gave birth": the person who created something.'],
+            ['ゲームの分野[ぶんや]からの受章[じゅしょう]は初[はじ]めてだと報[ほう]じられている。', 'It is reported that this is the first recipient from the game field.'],
+            ['文化勲章[ぶんかくんしょう]は、文化[ぶんか]の発展[はってん]に特[とく]に功績[こうせき]があった人[ひと]に贈[おく]られる。', 'The Order of Culture is given to people who have made special contributions to the development of culture.'],
+            ['親授式[しんじゅしき]は、文化[ぶんか]の日[ひ]の三日[みっか]に皇居[こうきょ]で行[おこな]われる見通[みとお]しだ。', 'The conferment ceremony is expected to be held at the Imperial Palace on the 3rd, Culture Day.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-10-31-jobs-september',
       date: '2026-10-31',
       emoji: '💼',

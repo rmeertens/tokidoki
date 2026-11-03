@@ -7288,5 +7288,245 @@
     "こうせいろうどうしょう",
     "Ministry of Health, Labour and Welfare",
     "noun"
+  ],
+  "防災": [
+    "ぼうさい",
+    "disaster prevention",
+    "noun"
+  ],
+  "352人": [
+    "さんびゃくごじゅうににん",
+    "352 people",
+    "number + counter"
+  ],
+  "細野": [
+    "ほその",
+    "Hosono (surname)",
+    "name"
+  ],
+  "三日分": [
+    "みっかぶん",
+    "three days' worth",
+    "noun"
+  ],
+  "一週間分": [
+    "いっしゅうかんぶん",
+    "one week's worth",
+    "noun"
+  ],
+  "発足": [
+    "ほっそく",
+    "launch, inauguration",
+    "noun / suru-verb"
+  ],
+  "備蓄": [
+    "びちく",
+    "stockpile, reserve",
+    "noun / suru-verb"
+  ],
+  "南海": [
+    "なんかい",
+    "Nankai (south sea)",
+    "place name"
+  ],
+  "トラフ": [
+    "とらふ",
+    "trough (undersea)",
+    "noun"
+  ],
+  "真下": [
+    "ました",
+    "directly below",
+    "noun"
+  ],
+  "部署": [
+    "ぶしょ",
+    "section, department",
+    "noun"
+  ],
+  "220人": [
+    "にひゃくにじゅうにん",
+    "220 people",
+    "number + counter"
+  ],
+  "約220人": [
+    "やくにひゃくにじゅうにん",
+    "about 220 people",
+    "number + counter"
+  ],
+  "司令塔": [
+    "しれいとう",
+    "command center",
+    "noun"
+  ],
+  "務める": [
+    "つとめる",
+    "to serve as",
+    "ichidan verb"
+  ],
+  "部門": [
+    "ぶもん",
+    "division, section",
+    "noun"
+  ],
+  "引き継ぐ": [
+    "ひきつぐ",
+    "to take over",
+    "godan verb"
+  ],
+  "定員": [
+    "ていいん",
+    "staff quota, capacity",
+    "noun"
+  ],
+  "復興": [
+    "ふっこう",
+    "reconstruction",
+    "noun / suru-verb"
+  ],
+  "兼務": [
+    "けんむ",
+    "holding two posts",
+    "noun / suru-verb"
+  ],
+  "直下": [
+    "ちょっか",
+    "directly beneath",
+    "noun"
+  ],
+  "備え": [
+    "そなえ",
+    "preparation",
+    "noun"
+  ],
+  "省庁": [
+    "しょうちょう",
+    "ministries and agencies",
+    "noun"
+  ],
+  "119万円": [
+    "ひゃくじゅうきゅうまんえん",
+    "1.19 million yen",
+    "number + counter"
+  ],
+  "所得": [
+    "しょとく",
+    "income",
+    "noun"
+  ],
+  "年収": [
+    "ねんしゅう",
+    "annual income",
+    "noun"
+  ],
+  "連動": [
+    "れんどう",
+    "linkage",
+    "noun / suru-verb"
+  ],
+  "定額": [
+    "ていがく",
+    "fixed amount",
+    "noun"
+  ],
+  "約6000億円": [
+    "やくろくせんおくえん",
+    "about 600 billion yen",
+    "number + counter"
+  ],
+  "根拠": [
+    "こんきょ",
+    "basis, grounds",
+    "noun"
+  ],
+  "二年間": [
+    "にねんかん",
+    "for two years",
+    "number + counter"
+  ],
+  "政令": [
+    "せいれい",
+    "Cabinet order",
+    "noun"
+  ],
+  "定める": [
+    "さだめる",
+    "to set, to establish",
+    "ichidan verb"
+  ],
+  "宮本": [
+    "みやもと",
+    "Miyamoto (surname)",
+    "name"
+  ],
+  "マリオ": [
+    "まりお",
+    "Mario",
+    "name"
+  ],
+  "ゼルダ": [
+    "ぜるだ",
+    "Zelda",
+    "name"
+  ],
+  "伝説": [
+    "でんせつ",
+    "legend",
+    "noun"
+  ],
+  "任天堂": [
+    "にんてんどう",
+    "Nintendo",
+    "organization"
+  ],
+  "八人": [
+    "はちにん",
+    "eight people",
+    "number + counter"
+  ],
+  "生み出す": [
+    "うみだす",
+    "to create, to produce",
+    "godan verb"
+  ],
+  "皇居": [
+    "こうきょ",
+    "Imperial Palace",
+    "place name"
+  ],
+  "今年度": [
+    "こんねんど",
+    "this fiscal year",
+    "noun"
+  ],
+  "受章": [
+    "じゅしょう",
+    "receiving an order or medal",
+    "noun / suru-verb"
+  ],
+  "取締役": [
+    "とりしまりやく",
+    "director (of a company)",
+    "noun"
+  ],
+  "フェロー": [
+    "ふぇろー",
+    "fellow",
+    "noun"
+  ],
+  "生み": [
+    "うみ",
+    "giving birth, creating",
+    "noun"
+  ],
+  "功績": [
+    "こうせき",
+    "achievement, contribution",
+    "noun"
+  ],
+  "親授": [
+    "しんじゅ",
+    "conferment in person",
+    "noun / suru-verb"
   ]
 }
