@@ -129,7 +129,7 @@
   const SETTINGS_KEY = 'tokidoki_settings';
 
   function loadSettings() {
-    const defaults = { typingMode: false, hideForm: true, englishToJapanese: true, showExampleFront: false, showFurigana: true, flashcardFurigana: true, adjSentences: false };
+    const defaults = { typingMode: false, hideForm: true, englishToJapanese: true, showExampleFront: false, showFurigana: true, flashcardFurigana: true, adjSentences: false, kanjiQuizReadings: false };
     let loaded;
     try { loaded = { ...defaults, ...JSON.parse(localStorage.getItem(SETTINGS_KEY)) }; }
     catch { loaded = { ...defaults }; }
@@ -2583,7 +2583,7 @@
     getKanjiQuizLevels().forEach(level => {
       KANJI_QUIZ_DATA[level].forEach(k => {
         pool.push({
-          level, direction, kanji: k.kanji, meaning: k.meaning,
+          level, direction, kanji: k.kanji, meaning: k.meaning, on: k.on, kun: k.kun,
           id: kanjiQuizCardId(level, direction, k.kanji),
         });
       });
@@ -2700,6 +2700,47 @@
     if (btn) btn.classList.toggle('hidden', kanjiQuizUndoStack.length === 0);
   }
 
+  // The Readings toggle: on'yomi / kun'yomi shown wherever the card's kanji
+  // is — under the prompt (Kanji → Meaning) or, once revealed, under the
+  // answer (Meaning → Kanji, so they don't give the kanji away early).
+  function kanjiReadingsHtml(card) {
+    const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+    // KANJIDIC marks okurigana after a dot (み.る): show it dimmed, no dot.
+    const kun = (card.kun || '').split('・').filter(Boolean).map(r => {
+      const [stem, okuri] = r.split('.');
+      return esc(stem) + (okuri ? `<span class="kanji-quiz-okuri">${esc(okuri)}</span>` : '');
+    }).join('・');
+    const row = (label, val) => val
+      ? `<div class="kanji-quiz-reading-row"><span class="kanji-quiz-reading-label">${label}</span><span class="kanji-quiz-reading-val" lang="ja">${val}</span></div>`
+      : '';
+    return row("On'yomi", esc(card.on || '')) + row("Kun'yomi", kun) ||
+      '<div class="kanji-quiz-reading-row"><span class="kanji-quiz-reading-label">No readings listed</span></div>';
+  }
+
+  function renderKanjiQuizReadings() {
+    const card = currentKanjiQuizCard;
+    const on = !!settings.kanjiQuizReadings;
+    const box = $('#kanji-quiz-readings');
+    if (box) box.checked = on;
+    const kanjiOnPrompt = card && card.direction !== 'meaning-to-kanji';
+    const targets = [
+      ['#kanji-quiz-prompt-readings', on && kanjiOnPrompt],
+      ['#kanji-quiz-answer-readings', on && card && !kanjiOnPrompt && kanjiQuizAnswered],
+    ];
+    targets.forEach(([sel, show]) => {
+      const el = $(sel);
+      if (!el) return;
+      el.classList.toggle('hidden', !show);
+      el.innerHTML = show ? kanjiReadingsHtml(card) : '';
+    });
+  }
+
+  function setKanjiQuizReadings(on) {
+    settings.kanjiQuizReadings = on;
+    saveSettings(settings);
+    renderKanjiQuizReadings();
+  }
+
   function showKanjiQuizCard() {
     if (kanjiQuizIndex >= kanjiQuizSessionCards.length) {
       finishKanjiQuizSession();
@@ -2730,6 +2771,7 @@
     $('#kanji-quiz-reveal-area').classList.remove('hidden');
     $('#kanji-quiz-answer-area').classList.add('hidden');
 
+    renderKanjiQuizReadings();
     updateKanjiQuizUndoButton();
   }
 
@@ -2753,6 +2795,7 @@
     }
     const add = $('#kanji-quiz-add');
     if (add) add.innerHTML = window.KanjiCards ? KanjiCards.buttonHtml(currentKanjiQuizCard.kanji, null, { look: 'label' }) : '';
+    renderKanjiQuizReadings();
   }
 
   function gradeKanjiQuizAndAdvance(grade) {
@@ -6688,6 +6731,8 @@
     on('#btn-kanji-quiz-back-to-chapters', 'click', backToKanjiQuizChapters);
 
     on('#btn-kanji-quiz-undo', 'click', undoLastKanjiQuizGrade);
+    on('#kanji-quiz-readings', 'change', e => setKanjiQuizReadings(e.target.checked));
+    renderKanjiQuizReadings();
 
     document.addEventListener('keydown', (e) => {
       if (overlayOpen('settings-overlay')) return;
@@ -6709,6 +6754,12 @@
       if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
         consumeKey(e);
         undoLastKanjiQuizGrade();
+        return;
+      }
+
+      if ((e.key === 'r' || e.key === 'R') && !e.ctrlKey && !e.metaKey && !e.altKey && currentKanjiQuizCard) {
+        consumeKey(e);
+        setKanjiQuizReadings(!settings.kanjiQuizReadings);
         return;
       }
 

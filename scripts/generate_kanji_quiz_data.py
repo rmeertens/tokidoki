@@ -7,10 +7,15 @@ sheets — one source of truth. Written as a plain script assigning to
 `window`, matching kana.js's own style (no fetch/build step needed to run
 the site), rather than JSON fetched at runtime.
 
+Each kanji also carries its on'yomi (katakana) and kun'yomi (okurigana
+after a dot, as in KANJIDIC: み.る), shown by the quiz's Readings toggle,
+from the same davidluzgouveia/kanji-data file generate_kanji_data.py reads.
+
 Usage:
-    python3 scripts/generate_kanji_quiz_data.py
+    python3 scripts/generate_kanji_quiz_data.py <path-to-kanji-data.json>
 """
 import json
+import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -35,14 +40,29 @@ def js_string(s):
     return json.dumps(s, ensure_ascii=False)
 
 
+def to_katakana(s):
+    return "".join(chr(ord(c) + 0x60) if "\u3041" <= c <= "\u3096" else c for c in s)
+
+
+def entry(it, readings):
+    r = readings.get(it["kanji"]) or {}
+    on = "・".join(to_katakana(x) for x in (r.get("readings_on") or []))
+    kun = "・".join(r.get("readings_kun") or [])
+    return (f'{{ kanji: {js_string(it["kanji"])}, meaning: {js_string(it["meaning"])}, '
+            f'on: {js_string(on)}, kun: {js_string(kun)} }}')
+
+
 def main():
+    if len(sys.argv) != 2:
+        sys.exit(__doc__)
+    readings = json.loads(Path(sys.argv[1]).read_text())
     lines = [HEADER]
     for level in LEVELS:
         items = json.loads((DATA_DIR / f"n{level}.json").read_text())
-        entries = ", ".join(
-            f'{{ kanji: {js_string(it["kanji"])}, meaning: {js_string(it["meaning"])} }}'
-            for it in items
-        )
+        entries = ", ".join(entry(it, readings) for it in items)
+        missing = [it["kanji"] for it in items if it["kanji"] not in readings]
+        if missing:
+            sys.exit(f"N{level}: no readings for {''.join(missing)}")
         lines.append(f"    n{level}: [{entries}],\n")
         print(f"N{level}: {len(items)} entries")
     lines.append(FOOTER)

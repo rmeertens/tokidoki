@@ -21,7 +21,7 @@
   <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
   <link rel="canonical" href="https://tokidoki.meertens.dev/kanji-quiz.html">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "JLPT Kanji Quiz & Flashcards", "description": "Free JLPT kanji flashcard quiz (N5–N1): meaning to kanji or kanji to meaning, with spaced repetition so you review what you don't know yet.", "url": "https://tokidoki.meertens.dev/kanji-quiz.html", "inLanguage": "en", "learningResourceType": "flashcards", "educationalLevel": "JLPT N5–N1", "isAccessibleForFree": true, "isPartOf": {"@type": "WebSite", "name": "Tokidoki", "url": "https://tokidoki.meertens.dev/"}}</script>
-  <link rel="stylesheet" href="style.css?v=103">
+  <link rel="stylesheet" href="style.css?v=104">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -163,6 +163,7 @@
           <div class="study-progress-bar"><div id="kanji-quiz-bar-fill" class="study-bar-fill"></div></div>
           <span id="kanji-quiz-progress-text" class="study-progress-text">0 / 0</span>
         </div>
+        <label class="study-furigana-toggle" title="Show the kanji's on'yomi and kun'yomi readings (R)"><input type="checkbox" id="kanji-quiz-readings"> Readings</label>
         <button id="btn-kanji-quiz-undo" class="btn-undo hidden" aria-label="Undo last grade" title="Undo (Z)">↩ Undo</button>
       </div>
       <div id="save-indicator" class="save-indicator">Saved</div>
@@ -170,6 +171,7 @@
       <div id="kanji-quiz-card" class="card kana-card">
         <div class="kana-prompt-label" id="kanji-quiz-prompt-label">Recall the kanji</div>
         <div id="kanji-quiz-prompt"></div>
+        <div class="kanji-quiz-readings hidden" id="kanji-quiz-prompt-readings"></div>
         <div class="kana-script-badge" id="kanji-quiz-level-badge"></div>
 
         <div class="reveal-area" id="kanji-quiz-reveal-area">
@@ -179,6 +181,7 @@
 
         <div class="kana-answer-area hidden" id="kanji-quiz-answer-area">
           <div id="kanji-quiz-answer"></div>
+          <div class="kanji-quiz-readings hidden" id="kanji-quiz-answer-readings"></div>
           <div class="kana-answer-romaji" id="kanji-quiz-answer-recap"></div>
           <div class="kanji-quiz-add" id="kanji-quiz-add"></div>
           <div class="grade-buttons">
@@ -254,7 +257,7 @@
   <script src="conjugator.js?v=9"></script>
   <script src="verbs.js?v=8"></script>
   <script src="kana.js"></script>
-  <script src="kanji-quiz-data.js"></script>
+  <script src="kanji-quiz-data.js?v=2"></script>
   <script src="sentences-data.js?v=8"></script>
   <script src="vocabulary-data.js"></script>
   <script src="kanji-info-data.js"></script>
@@ -262,7 +265,7 @@
   <script src="examples.js"></script>
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=5"></script>
-  <script src="app.js?v=78"></script>
+  <script src="app.js?v=79"></script>
   <script src="sync-merge.js?v=11"></script>
   <script src="progress-stats.js?v=5"></script>
   <script src="sync.js?v=12"></script>
