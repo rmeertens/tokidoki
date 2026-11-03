@@ -75,6 +75,7 @@ const CSS = `
   .q { break-inside: avoid; page-break-inside: avoid; display: flex; align-items: center; gap: 4mm; padding: 1.4mm 0; border-bottom: 0.2mm solid #eee; }
   .num { flex: none; width: 8mm; height: 8mm; border-radius: 4mm; background: #f9dcc4; font-size: 10pt; font-weight: 700; display: flex; align-items: center; justify-content: center; }
   .sentence { flex: 1; font-size: 15pt; line-height: 2; }
+  .sentence .en { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 8.5pt; line-height: 1.2; color: #666; margin-top: 1.2mm; padding-bottom: 0.6mm; }
   rt { font-size: 6.5pt; color: #666; }
   .target { text-decoration: underline; text-decoration-thickness: 0.45mm; text-underline-offset: 1.6mm; }
   .blank { display: inline-block; min-width: 26mm; text-align: center; }
@@ -147,7 +148,10 @@ export function renderSheet(level, kind = "reading", part = 1) {
   const body = qs
     .map(
       (q, i) => `  <div class="q"><div class="num">${i + 1}</div>` +
-        `<div class="sentence">${targetSentenceHtml(q, known, writing)}</div><div class="answer"></div></div>`,
+        `<div class="sentence">${targetSentenceHtml(q, known, writing)}` +
+        // Reading sheets give the sentence's English (it doesn't give the reading away).
+        (writing ? "" : `<div class="en">${esc(q.w[9])}</div>`) +
+        `</div><div class="answer"></div></div>`,
     )
     .join("\n");
   const key = qs.map(

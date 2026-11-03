@@ -58,6 +58,10 @@ const fs = require('fs');
       assert.ok(fs.existsSync(`kanji-sheets/tokidoki-kanji-reading-${level.toLowerCase()}-part${n}.pdf`), `${level} part ${n} pdf`);
       assert.ok(sheets.renderSheet(level, 'reading', n).includes(`Part ${n}`));
     }
+    // Reading sheets give each sentence's English; writing sheets don't.
+    const q1 = sheets.pickQuestions(level, 'reading', 1)[0];
+    assert.ok(sheets.renderSheet(level, 'reading', 1).includes(`<div class="en">${q1.w[9].replace(/&/g, '&amp;').replace(/</g, '&lt;')}</div>`), `${level}: English`);
+    assert.ok(!sheets.renderSheet(level, 'writing').includes('<div class="en">'));
     // The writing sheet shows the word in hiragana, never its kanji.
     for (const q of sheets.pickQuestions(level, 'writing')) {
       assert.ok(sheets.renderSheet(level, 'writing').includes(`<span class="target">${q.target.reading}</span>`));
