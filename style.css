@@ -8364,7 +8364,10 @@ body.bs-no-furigana #screen-bunkei-story rt { visibility: hidden; }
    back even with the Furigana switch off. */
 .vq-sentence-answered { margin-bottom: 4px; }
 .vq-translation { color: var(--text-dim); font-size: 0.95rem; margin: 0 0 14px; }
-body.vq-no-furigana #screen-vocab-questions .vq-sentence-answered rt { visibility: visible; }
+/* Once answered, the whole card (sentence, choices, explanation) and the
+   end-of-round list show their furigana even with the switch off. */
+body.vq-no-furigana #screen-vocab-questions .vq-q-answered rt,
+body.vq-no-furigana #screen-vocab-questions .vq-missed rt { visibility: visible; }
 .vq-words { list-style: none; margin-top: 8px; display: flex; flex-direction: column; gap: 3px; font-size: 0.92rem; }
 .vq-words li { color: var(--text-dim); }
 .vq-words .vq-words-answer { color: var(--text); font-weight: 700; }

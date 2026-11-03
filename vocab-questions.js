@@ -296,7 +296,7 @@
     const verdict = !answered ? `<span>${esc(KIND[set.kind].about)}</span>`
       : q.pick === 0 ? '<b class="sf-verdict-right">✓ Correct</b>'
         : `<b class="sf-verdict-wrong">✗ It’s ${q.order.indexOf(0) + 1}: <span lang="ja">${esc(plain(question.choices[0]))}</span></b>`;
-    $('vq-question').innerHTML = `<div class="sf-q vq-q${answered ? (q.pick === 0 ? ' sf-q-right' : ' sf-q-wrong') : ''}">
+    $('vq-question').innerHTML = `<div class="sf-q vq-q${answered ? ` vq-q-answered${q.pick === 0 ? ' sf-q-right' : ' sf-q-wrong'}` : ''}">
       <div class="sf-q-head"><span class="sf-q-num">${at + 1}</span>${verdict}</div>
       <div class="vq-sentence${answered ? ' vq-sentence-answered' : ''}" lang="ja">${questionHtml(question, q)}</div>
       ${answered ? `<p class="vq-translation">${esc(question.en)}</p>` : ''}
