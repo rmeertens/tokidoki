@@ -135,8 +135,12 @@
     }
   }
 
+  // The Furigana switch is on the home screen and on the question screen;
+  // both show the same setting.
   function applySettings() {
     document.body.classList.toggle('vq-no-furigana', !settings.furigana);
+    $('vq-opt-furigana').checked = settings.furigana;
+    $('vq-opt-furigana-q').checked = settings.furigana;
   }
 
   function start(id) {
@@ -252,7 +256,9 @@
 
   // ─── Events ────────────────────────────────────────────────────────────────
 
-  $('vq-opt-furigana').addEventListener('change', e => { settings.furigana = e.target.checked; save(SETTINGS_KEY, settings); applySettings(); });
+  for (const id of ['vq-opt-furigana', 'vq-opt-furigana-q']) {
+    $(id).addEventListener('change', e => { settings.furigana = e.target.checked; save(SETTINGS_KEY, settings); applySettings(); });
+  }
   for (const kind of Object.keys(KIND)) {
     $(`vq-list-${kind}`).addEventListener('click', e => {
       const b = e.target.closest('[data-set]');
