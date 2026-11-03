@@ -8380,3 +8380,5 @@ body.vq-no-furigana #screen-vocab-questions rt { visibility: hidden; }
 .vq-grade kbd { font: inherit; font-size: 0.75em; opacity: 0.7; margin-right: 4px; }
 .vq-grade-hint { text-align: right; font-size: 0.8rem; color: var(--text-muted); margin-top: 6px; }
 .vq-due { color: var(--orange); }
+.vq-choice-body { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; }
+.vq-choice-en { font-family: var(--font); font-size: 0.82rem; line-height: 1.35; color: var(--text-dim); }

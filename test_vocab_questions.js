@@ -101,6 +101,7 @@ const fs = require('fs');
       }
       assert.strictEqual(new Set([q.ok, ...q.wrong]).size, 4, q.q);
       assert.ok(q.en && q.note, q.q);
+      assert.ok(q.okEn && Array.isArray(q.wrongEn) && q.wrongEn.length === 3 && q.wrongEn.every(Boolean), `English for each choice: ${q.q}`);
     }
     assert.ok(fs.existsSync(`vocab-sheets/tokidoki-vocab-similar-${level.toLowerCase()}.pdf`));
   }

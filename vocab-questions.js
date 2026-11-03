@@ -65,6 +65,7 @@
         kind: 'similar', key: plain(q.q),
         q: q.q, en: q.en, note: q.note,
         choices: [q.ok, ...q.wrong],
+        choicesEn: [q.okEn, ...(q.wrongEn || [])],
       })) });
     }
     return out;
@@ -297,7 +298,10 @@
       else if (answered && k === q.pick) cls += ' wrong';
       return `<button class="${cls}" data-choice="${k}" ${answered ? 'disabled' : ''}>
         <span class="sf-choice-num" aria-hidden="true">${n + 1}</span>
-        <span class="vq-choice-text" lang="ja">${rubyHtml(question.choices[k])}</span>
+        <span class="vq-choice-body">
+          <span class="vq-choice-text" lang="ja">${rubyHtml(question.choices[k])}</span>
+          ${answered && question.choicesEn && question.choicesEn[k] ? `<span class="vq-choice-en">${esc(question.choicesEn[k])}</span>` : ''}
+        </span>
       </button>`;
     }).join('');
     const verdict = !answered ? `<span>${esc(KIND[set.kind].about)}</span>`
