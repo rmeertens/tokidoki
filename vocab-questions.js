@@ -186,7 +186,8 @@
   function start(id) {
     const set = SETS.find(s => s.id === id);
     if (!set) return;
-    attempt = { set, round: makeRound(set, srsSnapshot()), at: 0 };
+    // undo: the grades given this round, last on top (see undoLast).
+    attempt = { set, round: makeRound(set, srsSnapshot()), at: 0, undo: [] };
     $('vq-title').innerHTML = `<span class="sf-item-level">${esc(set.level)}</span> ${esc(KIND[set.kind].title)} <span lang="ja" class="vq-title-ja">${esc(KIND[set.kind].ja)}</span>`;
     show('screen-vocab-questions');
     render();
@@ -274,6 +275,9 @@
     $('vq-result').classList.toggle('hidden', !over);
     $('vq-missed').classList.toggle('hidden', !over);
     $('vq-actions').classList.toggle('hidden', !over);
+    const canUndo = attempt.undo.length > 0;
+    $('vq-undo').classList.toggle('hidden', !canUndo);
+    $('btn-vq-undo').classList.toggle('hidden', !canUndo);
     if (over) {
       renderResult();
       return;
@@ -351,12 +355,36 @@
     const q = current();
     if (!q || q.pick == null || q.graded) return;
     const question = questionOf(q);
-    if (global.TokidokiSRS) global.TokidokiSRS.grade(cardId(attempt.set, question), g);
+    attempt.undo.push({
+      at: attempt.at,
+      srs: global.TokidokiSRS ? global.TokidokiSRS.grade(cardId(attempt.set, question), g) : null,
+      store: JSON.stringify(store),
+    });
     q.graded = true;
     q.grade = g;
     attempt.at++;
     if (attempt.at >= attempt.round.length) saveScore();
     render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Takes back the last grade (a mis-tap): the card's schedule and the
+  // review log go back to before it (TokidokiSRS.undo), so does the saved
+  // score if that grade ended the round, and the question shows again,
+  // answered, to be graded anew.
+  function undoLast() {
+    if (!attempt || !attempt.undo.length) return;
+    const u = attempt.undo.pop();
+    if (global.TokidokiSRS) global.TokidokiSRS.undo(u.srs);
+    Object.assign(store, JSON.parse(u.store));
+    save(STORE_KEY, store);
+    attempt.at = u.at;
+    const q = current();
+    q.graded = false;
+    delete q.grade;
+    render();
+    const suggested = $(q.pick === 0 ? 'btn-vq-grade-good' : 'btn-vq-grade-again');
+    if (suggested) suggested.focus({ preventScroll: true });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -402,7 +430,10 @@
   });
   document.addEventListener('keydown', e => {
     if (!attempt || !$('screen-vocab-questions').classList.contains('active')) return;
-    if (e.ctrlKey || e.metaKey || e.altKey || /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
+    if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
+    // Z (or Ctrl/Cmd+Z): undo the last grade.
+    if ((e.key === 'z' || e.key === 'Z') && !e.altKey && !e.shiftKey) { e.preventDefault(); undoLast(); return; }
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
     if (attempt.at >= attempt.round.length) return;
     const q = current();
     if (q.pick == null && /^[1-4]$/.test(e.key)) {
@@ -419,6 +450,8 @@
   $('btn-vq-again').addEventListener('click', () => start(attempt.set.id));
   $('btn-vq-home').addEventListener('click', goHome);
   $('vq-quit').addEventListener('click', goHome);
+  $('vq-undo').addEventListener('click', undoLast);
+  $('btn-vq-undo').addEventListener('click', undoLast);
   $('btn-vq-reset').addEventListener('click', () => {
     if (!confirm('Reset your scores and the questions’ flashcard progress?')) return;
     store.best = {};
