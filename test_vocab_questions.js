@@ -90,7 +90,8 @@ const fs = require('fs');
   // ─── Similar meaning ───
   const SIMILAR = require('./similar-meaning-data.js');
   for (const level of m.LEVELS) {
-    assert.strictEqual(SIMILAR[level].length, 20, level);
+    assert.strictEqual(SIMILAR[level].length, 60, level);
+    assert.strictEqual(new Set(SIMILAR[level].map(q => q.q)).size, 60, `${level}: a question twice`);
     for (const q of SIMILAR[level]) {
       assert.strictEqual(q.wrong.length, 3, q.q);
       assert.strictEqual((q.q.match(/_/g) || []).length, 2, `${q.q}: one underlined part`);
@@ -103,7 +104,11 @@ const fs = require('fs');
       assert.ok(q.en && q.note, q.q);
       assert.ok(q.okEn && Array.isArray(q.wrongEn) && q.wrongEn.length === 3 && q.wrongEn.every(Boolean), `English for each choice: ${q.q}`);
     }
-    assert.ok(fs.existsSync(`vocab-sheets/tokidoki-vocab-similar-${level.toLowerCase()}.pdf`));
+    assert.strictEqual(sheets.similarParts(level), 3);
+    for (const n of [1, 2, 3]) {
+      assert.ok(fs.existsSync(`vocab-sheets/tokidoki-vocab-similar-${level.toLowerCase()}${n === 1 ? '' : `-part${n}`}.pdf`), `${level} similar part ${n}`);
+      assert.strictEqual((sheets.renderSimilarSheet(level, n).match(/class="mc"/g) || []).length, 20);
+    }
   }
 
   // ─── The practice page ───
@@ -121,7 +126,7 @@ const fs = require('fs');
   assert.strictEqual(VQ.cardId(sets[0], sets[0].questions[0]), `vq:fill-N5:${global.VOCAB_FILL.N5[0].w}|${global.VOCAB_FILL.N5[0].k}`);
   // Questions 19 and 4 due, 7 not due yet, the rest new.
   const srs = { [id(19)]: { nextReview: now - 5 }, [id(4)]: { nextReview: now - 1 }, [id(7)]: { nextReview: now + 9e7 } };
-  assert.deepStrictEqual(VQ.counts(set, i => srs[i], now), { due: 2, fresh: 17 });
+  assert.deepStrictEqual(VQ.counts(set, i => srs[i], now), { due: 2, fresh: set.questions.length - 3 });
   const round = VQ.makeRound(set, i => srs[i], rand, now);
   assert.strictEqual(round.length, VQ.ROUND);
   assert.ok(round.some(q => q.i === 19) && round.some(q => q.i === 4), 'due questions come first');

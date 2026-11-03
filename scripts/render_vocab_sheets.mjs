@@ -9,8 +9,8 @@
 //       written? — write it in kanji (no choices)
 //   vocab-sheets/tokidoki-vocab-fill-<level>      which word goes in the
 //       blank? — four choices (vocab-fill-data.js's questions)
-//   vocab-sheets/tokidoki-vocab-similar-<level>   which sentence means about
-//       the same? — four choices (similar-meaning-data.js)
+//   vocab-sheets/tokidoki-vocab-similar-<level>[-part2…]   which sentence
+//       means about the same? — four choices (similar-meaning-data.js), 20 a sheet
 //
 // The reading / writing / fill-in sentences are Tokidoki's own example
 // sentences from guess-words-data.js (see scripts/vocab_questions.mjs).
@@ -207,9 +207,12 @@ export function renderFillSheet(level) {
 
 // ─── Similar meaning (four choices) ──────────────────────────────────────────
 
-export function renderSimilarSheet(level) {
+export const SIMILAR_PER_SHEET = 20;
+export const similarParts = (level) => Math.ceil(SIMILAR[level].length / SIMILAR_PER_SHEET);
+
+export function renderSimilarSheet(level, part = 1) {
   const known = knownKanji(level);
-  const qs = SIMILAR[level];
+  const qs = SIMILAR[level].slice((part - 1) * SIMILAR_PER_SHEET, part * SIMILAR_PER_SHEET);
   const key = [];
   const body = qs
     .map((q, i) => {
@@ -222,10 +225,10 @@ export function renderSimilarSheet(level) {
     })
     .join("\n");
   return page(
-    `${level} Similar Meaning | Tokidoki`,
-    `${level} Similar meaning — which sentence means about the same?`,
+    `${level} Similar Meaning, Part ${part} | Tokidoki`,
+    `${level} Similar meaning, Part ${part} — which sentence means about the same?`,
     `Choose the sentence (1–4) that means about the same as the underlined part. Kanji above ${level} have small furigana. The answers are on the last page.`,
-    body, `${level} Similar meaning — answers`, key,
+    body, `${level} Similar meaning, Part ${part} — answers`, key,
   );
 }
 
@@ -247,7 +250,10 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     }
     writeFileSync(path.join(kanjiDir, `tokidoki-kanji-writing-${l}.html`), renderSheet(level, "writing"));
     writeFileSync(path.join(vocabDir, `tokidoki-vocab-fill-${l}.html`), renderFillSheet(level));
-    writeFileSync(path.join(vocabDir, `tokidoki-vocab-similar-${l}.html`), renderSimilarSheet(level));
-    console.log(`${level}: reading (${READING_PARTS} parts), writing, fill-in (${fillQuestions(level).length}), similar meaning (${SIMILAR[level].length})`);
+    for (let part = 1; part <= similarParts(level); part++) {
+      const suffix = part === 1 ? "" : `-part${part}`;
+      writeFileSync(path.join(vocabDir, `tokidoki-vocab-similar-${l}${suffix}.html`), renderSimilarSheet(level, part));
+    }
+    console.log(`${level}: reading (${READING_PARTS} parts), writing, fill-in (${fillQuestions(level).length}), similar meaning (${SIMILAR[level].length}, ${similarParts(level)} parts)`);
   }
 }
