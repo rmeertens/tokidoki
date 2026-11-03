@@ -99,20 +99,13 @@
     return shuffle(picked, rand).map(i => ({ i, order: shuffle([0, 1, 2, 3], rand), pick: null }));
   }
 
-  // "Again": the question comes back AGAIN_GAP questions later in this
-  // round (or at its end), its choices shuffled anew. Repeats don't count
-  // towards the score.
-  const AGAIN_GAP = 3;
-  function requeue(round, at, rand = Math.random) {
-    const item = { i: round[at].i, order: shuffle([0, 1, 2, 3], rand), pick: null, repeat: true };
-    round.splice(Math.min(at + 1 + AGAIN_GAP, round.length), 0, item);
-    return round;
-  }
+  // A round never has the same question twice: "Again" makes it due, so it
+  // comes first in the next round instead.
+  const score = round => round.filter(q => q.pick === 0).length;
+  // The ones answered wrong, or marked Again: what still needs answering.
+  const toRedo = round => round.filter(q => q.pick !== 0 || q.grade === 1);
 
-  const firstTries = round => round.filter(q => !q.repeat);
-  const score = round => firstTries(round).filter(q => q.pick === 0).length;
-
-  const api = { rubyHtml, underlinedHtml, plain, sets, cardId, counts, makeRound, requeue, score, firstTries, ROUND, AGAIN_GAP };
+  const api = { rubyHtml, underlinedHtml, plain, sets, cardId, counts, makeRound, score, toRedo, ROUND };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   global.VocabQuestions = api;
   if (typeof document === 'undefined') return;
@@ -279,14 +272,10 @@
     $('vq-progress-text').textContent = `${done} / ${round.length}`;
     $('vq-question').classList.toggle('hidden', over);
     $('vq-result').classList.toggle('hidden', !over);
+    $('vq-missed').classList.toggle('hidden', !over);
     $('vq-actions').classList.toggle('hidden', !over);
     if (over) {
-      const s = score(round);
-      const n = firstTries(round).length;
-      $('vq-score').textContent = `${s} / ${n}`;
-      $('vq-score-msg').textContent = (s === n ? 'Perfect! 🎉 ' : '') +
-        'Every question is a flashcard now: the ones you marked Again are due first next time, the others come back in a few days.';
-      $('btn-vq-again').focus({ preventScroll: true });
+      renderResult();
       return;
     }
     const q = current();
@@ -317,7 +306,7 @@
         <button id="btn-vq-grade-again" class="${q.pick === 0 ? 'btn-secondary' : 'btn-primary'} vq-grade" data-grade="1"><kbd>1</kbd> Again</button>
         <button id="btn-vq-grade-good" class="${q.pick === 0 ? 'btn-primary' : 'btn-secondary'} vq-grade" data-grade="4"><kbd>2</kbd> Good</button>
       </div>
-      <p class="vq-grade-hint">${q.pick === 0 ? 'Good if you knew it — Again to see it again soon.' : 'Again brings it back in this round and first next time.'}</p>` : ''}
+      <p class="vq-grade-hint">${q.pick === 0 ? 'Good if you knew it — Again to see it again in your next round.' : 'Again brings it back first in your next round.'}</p>` : ''}
     </div>`;
   }
 
@@ -331,6 +320,32 @@
     if (suggested) suggested.focus({ preventScroll: true });
   }
 
+  // The end of a round: how many were wrong, which ones (with their
+  // answers), and how many of the set still need answering.
+  function renderResult() {
+    const { round, set } = attempt;
+    const s = score(round);
+    const n = round.length;
+    const wrong = n - s;
+    const redo = toRedo(round);
+    const { due, fresh } = counts(set, srsSnapshot());
+    $('vq-score').textContent = `${s} / ${n}`;
+    $('vq-score-msg').innerHTML = wrong === 0
+      ? `All ${n} right${redo.length ? ` — but you marked ${redo.length} Again` : ''}. 🎉`
+      : `<b class="sf-verdict-wrong">${wrong} wrong</b> out of ${n}.`;
+    const answerOf = question => (question.kind === 'similar'
+      ? `<span class="vq-missed-q" lang="ja">${underlinedHtml(question.q)}</span><span class="vq-missed-a" lang="ja">→ ${rubyHtml(question.choices[0])}</span>`
+      : `<span class="vq-missed-q" lang="ja">${rubyHtml(question.b)}（<b>${rubyHtml(question.choices[0])}</b>）${rubyHtml(question.a)}</span>`);
+    const still = due
+      ? `<b>${due} question${due === 1 ? '' : 's'}</b> in this set still need${due === 1 ? 's' : ''} answering — they come first in your next round.`
+      : `Nothing in this set is waiting to be answered again.`;
+    $('vq-missed').innerHTML = `${redo.length ? `<div class="vq-missed-title">To answer again</div>
+      <ul class="vq-missed-list">${redo.map(q => `<li class="${q.pick === 0 ? '' : 'vq-missed-wrong'}">${answerOf(questionOf(q))}${q.pick === 0 ? '<span class="vq-missed-tag">marked Again</span>' : ''}</li>`).join('')}</ul>` : ''}
+      <p class="vq-missed-still">${still}${fresh ? ` ${fresh} never seen yet.` : ''}</p>`;
+    $('btn-vq-again').textContent = due ? `Answer ${Math.min(due, ROUND)} due now` : fresh ? 'Ten more' : 'Practise ten again';
+    $('btn-vq-again').focus({ preventScroll: true });
+  }
+
   // Again (1) or Good (4), like the flashcards; then the next question.
   function grade(g) {
     const q = current();
@@ -338,7 +353,7 @@
     const question = questionOf(q);
     if (global.TokidokiSRS) global.TokidokiSRS.grade(cardId(attempt.set, question), g);
     q.graded = true;
-    if (g === 1) requeue(attempt.round, attempt.at);
+    q.grade = g;
     attempt.at++;
     if (attempt.at >= attempt.round.length) saveScore();
     render();
@@ -348,7 +363,7 @@
   function saveScore() {
     const s = score(attempt.round);
     const id = attempt.set.id;
-    const total = firstTries(attempt.round).length;
+    const total = attempt.round.length;
     const prev = store.best[id];
     if (!prev || s > prev.score) store.best[id] = { score: s, total };
     store.last[id] = { score: s, total };

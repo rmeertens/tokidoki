@@ -136,16 +136,19 @@ const fs = require('fs');
   // All seen and none due: the ones due soonest.
   const seen = Object.fromEntries(set.questions.map((q, k) => [id(k), { nextReview: now + 1000 * (k + 1) }]));
   assert.deepStrictEqual(VQ.makeRound(set, i => seen[i], rand, now).map(q => q.i).sort((a, b) => a - b), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
-  // Again: back AGAIN_GAP questions later, not counted in the score.
-  VQ.requeue(round, 0, rand);
-  assert.strictEqual(round.length, VQ.ROUND + 1);
-  assert.strictEqual(round[1 + VQ.AGAIN_GAP].i, round[0].i);
-  assert.ok(round[1 + VQ.AGAIN_GAP].repeat && round[1 + VQ.AGAIN_GAP].pick === null);
-  VQ.requeue(round, round.length - 1, rand);
-  assert.strictEqual(round[round.length - 1].i, round[round.length - 2].i, 'at the end, after the last');
-  round.forEach((q, k) => { q.pick = q.repeat ? 0 : (k < 8 ? 0 : 2); });
-  assert.strictEqual(VQ.firstTries(round).length, VQ.ROUND);
-  assert.strictEqual(VQ.score(round), round.filter(q => !q.repeat && q.pick === 0).length);
+  // Scoring, and what still needs answering: wrong, or marked Again.
+  round.forEach((q, k) => { q.pick = k < 7 ? 0 : 2; q.grade = k === 0 ? 1 : 4; });
+  assert.strictEqual(VQ.score(round), 7);
+  assert.deepStrictEqual(VQ.toRedo(round).map(q => q.i), [round[0], ...round.slice(7)].map(q => q.i));
+  // No question twice in a round, for every set, however the cards stand.
+  for (const s of sets) {
+    assert.strictEqual(new Set(s.questions.map(q => VQ.cardId(s, q))).size, s.questions.length, `${s.id}: two questions share a card`);
+    for (let t = 0; t < 20; t++) {
+      const states = Object.fromEntries(s.questions.map(q => [VQ.cardId(s, q), rand() < 0.5 ? undefined : { nextReview: now + (rand() - 0.5) * 1e9 }]));
+      const r = VQ.makeRound(s, i => states[i], rand, now);
+      assert.strictEqual(new Set(r.map(q => q.i)).size, r.length, `${s.id}: a question twice in a round`);
+    }
+  }
   assert.strictEqual(VQ.underlinedHtml('a_{駅|えき}_b'), 'a<span class="vq-target"><ruby>駅<rt>えき</rt></ruby></span>b');
 
   console.log('vocab questions: ok');

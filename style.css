@@ -8382,3 +8382,13 @@ body.vq-no-furigana #screen-vocab-questions rt { visibility: hidden; }
 .vq-due { color: var(--orange); }
 .vq-choice-body { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; }
 .vq-choice-en { font-family: var(--font); font-size: 0.82rem; line-height: 1.35; color: var(--text-dim); }
+.vq-missed { margin-top: 14px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-card); }
+.vq-missed-title { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+.vq-missed-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+.vq-missed-list li { display: flex; flex-direction: column; gap: 2px; padding-left: 10px; border-left: 3px solid var(--orange); }
+.vq-missed-list li.vq-missed-wrong { border-left-color: var(--red); }
+.vq-missed-q { font-family: var(--font-jp); font-size: 1.02rem; line-height: 2; }
+.vq-missed-q b { color: var(--green); }
+.vq-missed-a { font-family: var(--font-jp); color: var(--green); line-height: 1.9; }
+.vq-missed-tag { font-size: 0.75rem; color: var(--text-muted); }
+.vq-missed-still { font-size: 0.92rem; color: var(--text-dim); }
