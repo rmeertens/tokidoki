@@ -129,10 +129,15 @@
   const SETTINGS_KEY = 'tokidoki_settings';
 
   function loadSettings() {
-    const defaults = { typingMode: false, hideForm: true, englishToJapanese: true, showExampleFront: false, showFurigana: true, flashcardFurigana: true, adjSentences: false, kanjiQuizReadings: false };
+    const defaults = { typingMode: false, hideForm: true, englishToJapanese: true, showExampleFront: false, showFurigana: true, flashcardFurigana: true, adjSentences: false, kanjiQuizReadingsBefore: false, kanjiQuizReadingsAfter: false };
     let loaded;
     try { loaded = { ...defaults, ...JSON.parse(localStorage.getItem(SETTINGS_KEY)) }; }
     catch { loaded = { ...defaults }; }
+    // The kanji quiz's single Readings toggle became before / after.
+    if ('kanjiQuizReadings' in loaded) {
+      loaded.kanjiQuizReadingsAfter = !!loaded.kanjiQuizReadings;
+      delete loaded.kanjiQuizReadings;
+    }
     // formDisplay replaced the old hideForm checkbox: 'hidden' (no form shown),
     // 'color' (coloured badge only) or 'name' (colour + written-out form name).
     if (!FORM_DISPLAY_MODES.includes(loaded.formDisplay)) {
@@ -2700,9 +2705,10 @@
     if (btn) btn.classList.toggle('hidden', kanjiQuizUndoStack.length === 0);
   }
 
-  // The Readings toggle: on'yomi / kun'yomi shown wherever the card's kanji
-  // is — under the prompt (Kanji → Meaning) or, once revealed, under the
-  // answer (Meaning → Kanji, so they don't give the kanji away early).
+  // The Readings toggles: on'yomi / kun'yomi before the answer is revealed
+  // (a hint), after it, or both. They sit under the kanji when it's the
+  // prompt; for Meaning → Kanji under the meaning before the reveal and
+  // under the revealed kanji after it.
   function kanjiReadingsHtml(card) {
     const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
     // KANJIDIC marks okurigana after a dot (み.る): show it dimmed, no dot.
@@ -2719,24 +2725,28 @@
 
   function renderKanjiQuizReadings() {
     const card = currentKanjiQuizCard;
-    const on = !!settings.kanjiQuizReadings;
-    const box = $('#kanji-quiz-readings');
-    if (box) box.checked = on;
+    const before = !!settings.kanjiQuizReadingsBefore;
+    const after = !!settings.kanjiQuizReadingsAfter;
+    const boxB = $('#kanji-quiz-readings-before');
+    const boxA = $('#kanji-quiz-readings-after');
+    if (boxB) boxB.checked = before;
+    if (boxA) boxA.checked = after;
+    const show = !!card && (kanjiQuizAnswered ? after : before);
     const kanjiOnPrompt = card && card.direction !== 'meaning-to-kanji';
     const targets = [
-      ['#kanji-quiz-prompt-readings', on && kanjiOnPrompt],
-      ['#kanji-quiz-answer-readings', on && card && !kanjiOnPrompt && kanjiQuizAnswered],
+      ['#kanji-quiz-prompt-readings', show && (kanjiOnPrompt || !kanjiQuizAnswered)],
+      ['#kanji-quiz-answer-readings', show && !kanjiOnPrompt && kanjiQuizAnswered],
     ];
-    targets.forEach(([sel, show]) => {
+    targets.forEach(([sel, on]) => {
       const el = $(sel);
       if (!el) return;
-      el.classList.toggle('hidden', !show);
-      el.innerHTML = show ? kanjiReadingsHtml(card) : '';
+      el.classList.toggle('hidden', !on);
+      el.innerHTML = on ? kanjiReadingsHtml(card) : '';
     });
   }
 
-  function setKanjiQuizReadings(on) {
-    settings.kanjiQuizReadings = on;
+  function setKanjiQuizReadings(which, on) {
+    settings[which === 'before' ? 'kanjiQuizReadingsBefore' : 'kanjiQuizReadingsAfter'] = on;
     saveSettings(settings);
     renderKanjiQuizReadings();
   }
@@ -6731,7 +6741,8 @@
     on('#btn-kanji-quiz-back-to-chapters', 'click', backToKanjiQuizChapters);
 
     on('#btn-kanji-quiz-undo', 'click', undoLastKanjiQuizGrade);
-    on('#kanji-quiz-readings', 'change', e => setKanjiQuizReadings(e.target.checked));
+    on('#kanji-quiz-readings-before', 'change', e => setKanjiQuizReadings('before', e.target.checked));
+    on('#kanji-quiz-readings-after', 'change', e => setKanjiQuizReadings('after', e.target.checked));
     renderKanjiQuizReadings();
 
     document.addEventListener('keydown', (e) => {
@@ -6759,7 +6770,9 @@
 
       if ((e.key === 'r' || e.key === 'R') && !e.ctrlKey && !e.metaKey && !e.altKey && currentKanjiQuizCard) {
         consumeKey(e);
-        setKanjiQuizReadings(!settings.kanjiQuizReadings);
+        // R toggles the setting for the side of the card you're on.
+        if (kanjiQuizAnswered) setKanjiQuizReadings('after', !settings.kanjiQuizReadingsAfter);
+        else setKanjiQuizReadings('before', !settings.kanjiQuizReadingsBefore);
         return;
       }
 
