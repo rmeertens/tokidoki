@@ -217,11 +217,10 @@
   function whyHtml(question) {
     if (question.kind === 'similar') {
       const kanji = breakdown(question.q.split('_')[1] + question.choices[0], {}, 'Kanji in this question');
-      return `<p>${esc(question.note)}</p><p class="vq-en">${esc(question.en)}</p>${kanji}`;
+      return `<p>${esc(question.note)}</p>${kanji}`;
     }
     const [answer] = question.words;
-    return `<p class="vq-en">${esc(question.en)}</p>
-      <ul class="vq-words">${question.words.map((w, k) => `<li${k === 0 ? ' class="vq-words-answer"' : ''}>${wordButtonHtml(w, k, k === 0 ? 'label' : 'icon')} <span lang="ja">${esc(w[1])}</span> <span class="vq-words-kana" lang="ja">${esc(w[2])}</span> — ${esc(shortMeaning(w[3]))}</li>`).join('')}</ul>
+    return `      <ul class="vq-words">${question.words.map((w, k) => `<li${k === 0 ? ' class="vq-words-answer"' : ''}>${wordButtonHtml(w, k, k === 0 ? 'label' : 'icon')} <span class="vq-word-text"><span lang="ja">${esc(w[1])}</span> <span class="vq-words-kana" lang="ja">${esc(w[2])}</span> — ${esc(shortMeaning(w[3]))}</span></li>`).join('')}</ul>
       ${breakdown(answer[1], { reading: answer[2], meaning: shortMeaning(answer[3]) }, `Kanji in ${answer[1]}`)}
       ${deck()[answer[1]] ? '<p class="vq-tip">Review your flashcards on the <a href="flashcards.html">Flashcards page</a>.</p>' : ''}`;
   }
@@ -262,7 +261,8 @@
     const last = at === round.length - 1;
     $('vq-question').innerHTML = `<div class="sf-q vq-q${answered ? (q.pick === 0 ? ' sf-q-right' : ' sf-q-wrong') : ''}">
       <div class="sf-q-head"><span class="sf-q-num">${at + 1}</span>${verdict}</div>
-      <div class="vq-sentence" lang="ja">${questionHtml(question, q)}</div>
+      <div class="vq-sentence${answered ? ' vq-sentence-answered' : ''}" lang="ja">${questionHtml(question, q)}</div>
+      ${answered ? `<p class="vq-translation">${esc(question.en)}</p>` : ''}
       <div class="sf-choices vq-choices${set.kind === 'similar' ? ' vq-choices-long' : ''}">${choices}</div>
       ${answered ? `<div class="particle-explanation sf-why vq-why">${whyHtml(question)}</div>
       <div class="bs-next-area"><button id="btn-vq-next" class="btn-primary">${last ? 'See your score' : 'Next question →'}</button></div>` : ''}

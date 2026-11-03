@@ -8360,10 +8360,16 @@ body.bs-no-furigana #screen-bunkei-story rt { visibility: hidden; }
 .vq-choice-text { text-align: left; }
 .vq-why p + p { margin-top: 6px; }
 .vq-en { color: var(--text-dim); }
+/* Once answered: the sentence's English right under it, and its furigana
+   back even with the Furigana switch off. */
+.vq-sentence-answered { margin-bottom: 4px; }
+.vq-translation { color: var(--text-dim); font-size: 0.95rem; margin: 0 0 14px; }
+body.vq-no-furigana #screen-vocab-questions .vq-sentence-answered rt { visibility: visible; }
 .vq-words { list-style: none; margin-top: 8px; display: flex; flex-direction: column; gap: 3px; font-size: 0.92rem; }
 .vq-words li { color: var(--text-dim); }
 .vq-words .vq-words-answer { color: var(--text); font-weight: 700; }
-.vq-words li { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.vq-words li { display: flex; align-items: center; gap: 8px; }
+.vq-word-text { flex: 1; min-width: 0; }
 .vq-why .kanji-cards-breakdown { margin-top: 12px; }
 .vq-tip { margin-top: 10px; font-size: 0.85rem; color: var(--text-muted); }
 .vq-words-kana { font-size: 0.85em; color: var(--text-muted); font-weight: 400; }
