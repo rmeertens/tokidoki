@@ -113,7 +113,8 @@
   writes them to `vocab-fill-data.js`. The JLPT Questions page
   (`vocab-questions.html`, `vocab-questions.js`, scores in
   `tokidoki_vocab_questions`) practises fill-in and similar meaning on
-  screen. The PDFs (answers on the last page): `node scripts/render_vocab_sheets.mjs <build>`,
+  screen; every question is also an SRS card (`vq:<set>:<question>`, graded
+  Again / Good through `window.TokidokiSRS`), and rounds start with the due ones. The PDFs (answers on the last page): `node scripts/render_vocab_sheets.mjs <build>`,
   then `render_sheets_pdfs.mjs <build>/kanji kanji-sheets` and
   `<build>/vocab vocab-sheets`, then `stamp_sheet_belts.mjs`.
   `test_vocab_questions.js` covers all of it.

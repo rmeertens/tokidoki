@@ -45,6 +45,7 @@
     { id: 'words', label: 'Word flashcards', test: id => id.startsWith('story_word:') },
     { id: 'kanjiCards', label: 'Kanji flashcards', test: id => id.startsWith('kanji_card:') },
     { id: 'guess', label: 'GTK - Easy Word Order', test: id => id.startsWith('guess:') },
+    { id: 'jlptQuestions', label: 'JLPT Questions', test: id => id.startsWith('vq:') },
   ];
   const kindOf = id => { const k = KINDS.find(x => x.test(String(id))); return k ? k.id : 'other'; };
 

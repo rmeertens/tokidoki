@@ -114,13 +114,32 @@ const fs = require('fs');
   let seed = 1;
   const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
   const set = sets[3];
-  const round = VQ.makeRound(set, [19, 4], rand);
+  const now = 1_000_000_000_000;
+  const id = k => VQ.cardId(set, set.questions[k]);
+  assert.strictEqual(id(0), `vq:similar-N5:${VQ.plain(SIMILAR.N5[0].q)}`);
+  assert.strictEqual(VQ.cardId(sets[0], sets[0].questions[0]), `vq:fill-N5:${global.VOCAB_FILL.N5[0].w}|${global.VOCAB_FILL.N5[0].k}`);
+  // Questions 19 and 4 due, 7 not due yet, the rest new.
+  const srs = { [id(19)]: { nextReview: now - 5 }, [id(4)]: { nextReview: now - 1 }, [id(7)]: { nextReview: now + 9e7 } };
+  assert.deepStrictEqual(VQ.counts(set, i => srs[i], now), { due: 2, fresh: 17 });
+  const round = VQ.makeRound(set, i => srs[i], rand, now);
   assert.strictEqual(round.length, VQ.ROUND);
-  assert.ok(round.some(q => q.i === 19) && round.some(q => q.i === 4), 'missed questions come back first');
+  assert.ok(round.some(q => q.i === 19) && round.some(q => q.i === 4), 'due questions come first');
+  assert.ok(!round.some(q => q.i === 7), 'not due yet, while there are new ones');
   assert.strictEqual(new Set(round.map(q => q.i)).size, VQ.ROUND);
   for (const q of round) assert.deepStrictEqual(q.order.slice().sort(), [0, 1, 2, 3]);
-  round.forEach((q, k) => { q.pick = k < 7 ? 0 : 2; });
-  assert.strictEqual(VQ.score(round), 7);
+  // All seen and none due: the ones due soonest.
+  const seen = Object.fromEntries(set.questions.map((q, k) => [id(k), { nextReview: now + 1000 * (k + 1) }]));
+  assert.deepStrictEqual(VQ.makeRound(set, i => seen[i], rand, now).map(q => q.i).sort((a, b) => a - b), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  // Again: back AGAIN_GAP questions later, not counted in the score.
+  VQ.requeue(round, 0, rand);
+  assert.strictEqual(round.length, VQ.ROUND + 1);
+  assert.strictEqual(round[1 + VQ.AGAIN_GAP].i, round[0].i);
+  assert.ok(round[1 + VQ.AGAIN_GAP].repeat && round[1 + VQ.AGAIN_GAP].pick === null);
+  VQ.requeue(round, round.length - 1, rand);
+  assert.strictEqual(round[round.length - 1].i, round[round.length - 2].i, 'at the end, after the last');
+  round.forEach((q, k) => { q.pick = q.repeat ? 0 : (k < 8 ? 0 : 2); });
+  assert.strictEqual(VQ.firstTries(round).length, VQ.ROUND);
+  assert.strictEqual(VQ.score(round), round.filter(q => !q.repeat && q.pick === 0).length);
   assert.strictEqual(VQ.underlinedHtml('a_{駅|えき}_b'), 'a<span class="vq-target"><ruby>駅<rt>えき</rt></ruby></span>b');
 
   console.log('vocab questions: ok');

@@ -8,6 +8,10 @@
 //   Similar meaning (言い換え類義) — which sentence means about the same as
 //     the underlined part? (similar-meaning-data.js)
 //
+// Every question is also a flashcard: once answered you grade it Again or
+// Good, through the shared SRS store (app.js's window.TokidokiSRS, cards
+// vq:<set>:<question>), and rounds start with the due ones.
+//
 // The same questions are on the printable sheets (vocab-sheets/). The pure
 // parts (markup, rounds, scoring) are exported for test_vocab_questions.js.
 (function (global) {
@@ -50,7 +54,7 @@
     const out = [];
     for (const level of LEVELS) {
       out.push({ id: `fill-${level}`, kind: 'fill', level, questions: ((fill || {})[level] || []).map(q => ({
-        kind: 'fill',
+        kind: 'fill', key: `${q.w}|${q.k}`,
         b: q.b, a: q.a, en: q.en,
         choices: q.c.map(c => c[0]),
         words: q.c,
@@ -58,7 +62,7 @@
     }
     for (const level of LEVELS) {
       out.push({ id: `similar-${level}`, kind: 'similar', level, questions: ((similar || {})[level] || []).map(q => ({
-        kind: 'similar',
+        kind: 'similar', key: plain(q.q),
         q: q.q, en: q.en, note: q.note,
         choices: [q.ok, ...q.wrong],
       })) });
@@ -66,20 +70,48 @@
     return out;
   }
 
-  // A round: up to ten questions of the set, the ones missed last time
-  // first, each with its choices shuffled ([indexes into choices]; 0 is
-  // the answer).
-  function makeRound(set, missed = [], rand = Math.random) {
-    const n = set.questions.length;
-    const again = missed.filter(i => i >= 0 && i < n);
-    const rest = shuffle([...Array(n).keys()].filter(i => !again.includes(i)), rand);
-    const picked = [...again, ...rest].slice(0, Math.min(ROUND, n));
+  // Every question is a flashcard in the shared SRS store, graded Again or
+  // Good once answered: vq:<set id>:<word|reading or the sentence>.
+  const cardId = (set, question) => `vq:${set.id}:${question.key}`;
+  const isDue = (c, now) => !!c && now >= c.nextReview;
+
+  // How many of a set's questions are due, and how many never seen.
+  function counts(set, cardOf, now = Date.now()) {
+    let due = 0, fresh = 0;
+    for (const q of set.questions) {
+      const c = cardOf(cardId(set, q));
+      if (!c) fresh++;
+      else if (isDue(c, now)) due++;
+    }
+    return { due, fresh };
+  }
+
+  // A round: up to ten questions — the due ones first (longest due first),
+  // then new ones, then the ones due soonest — in a shuffled order, each
+  // with its choices shuffled ([indexes into choices]; 0 is the answer).
+  function makeRound(set, cardOf = () => undefined, rand = Math.random, now = Date.now()) {
+    const all = set.questions.map((q, i) => ({ i, c: cardOf(cardId(set, q)) }));
+    const due = all.filter(x => isDue(x.c, now)).sort((a, b) => a.c.nextReview - b.c.nextReview);
+    const fresh = shuffle(all.filter(x => !x.c), rand);
+    const later = all.filter(x => x.c && !isDue(x.c, now)).sort((a, b) => a.c.nextReview - b.c.nextReview);
+    const picked = [...due, ...fresh, ...later].slice(0, ROUND).map(x => x.i);
     return shuffle(picked, rand).map(i => ({ i, order: shuffle([0, 1, 2, 3], rand), pick: null }));
   }
 
-  const score = round => round.filter(q => q.pick === 0).length;
+  // "Again": the question comes back AGAIN_GAP questions later in this
+  // round (or at its end), its choices shuffled anew. Repeats don't count
+  // towards the score.
+  const AGAIN_GAP = 3;
+  function requeue(round, at, rand = Math.random) {
+    const item = { i: round[at].i, order: shuffle([0, 1, 2, 3], rand), pick: null, repeat: true };
+    round.splice(Math.min(at + 1 + AGAIN_GAP, round.length), 0, item);
+    return round;
+  }
 
-  const api = { rubyHtml, underlinedHtml, plain, sets, makeRound, score, ROUND };
+  const firstTries = round => round.filter(q => !q.repeat);
+  const score = round => firstTries(round).filter(q => q.pick === 0).length;
+
+  const api = { rubyHtml, underlinedHtml, plain, sets, cardId, counts, makeRound, requeue, score, firstTries, ROUND, AGAIN_GAP };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   global.VocabQuestions = api;
   if (typeof document === 'undefined') return;
@@ -95,8 +127,17 @@
 
   const SETS = sets(global.VOCAB_FILL, global.SIMILAR_MEANING);
   const settings = Object.assign({ furigana: true }, load(SETTINGS_KEY, {}));
-  const store = Object.assign({ best: {}, last: {}, missed: [] }, load(STORE_KEY, {}));
-  // missed: "<set id>:<question index>" — asked first next time.
+  const store = Object.assign({ best: {}, last: {} }, load(STORE_KEY, {}));
+  // The questions' SRS cards: app.js's copy of the store once it's running
+  // (window.TokidokiSRS, so grades go through it and count in the
+  // statistics), the saved store before that.
+  const SRS_STORE = 'tokidoki_srs';
+  const cardOf = id => (global.TokidokiSRS ? global.TokidokiSRS.card(id) : (load(SRS_STORE, {}) || {})[id]);
+  const srsSnapshot = () => {
+    if (global.TokidokiSRS) return global.TokidokiSRS.card;
+    const all = load(SRS_STORE, {}) || {};
+    return id => all[id];
+  };
   const $ = id => document.getElementById(id);
 
   // attempt: { set, round, at }
@@ -114,6 +155,11 @@
     similar: { title: 'Similar meaning', ja: '言い換え類義', about: 'Which sentence means about the same as the underlined part?' },
   };
 
+  function countsText(set) {
+    const { due, fresh } = counts(set, srsSnapshot());
+    return [due ? ` · <b class="vq-due">${due} due</b>` : '', fresh ? ` · ${fresh} new` : ''].join('');
+  }
+
   function setHtml(set) {
     const best = store.best[set.id];
     const state = !best ? '' : best.score === best.total ? ' sf-item-perfect' : ' sf-item-done';
@@ -121,7 +167,7 @@
       <span class="sf-item-level">${esc(set.level)}</span>
       <span class="sf-item-body">
         <span class="sf-item-title">${esc(KIND[set.kind].title)} · ${esc(set.level)}</span>
-        <span class="sf-item-en">${set.questions.length} questions · ${Math.min(ROUND, set.questions.length)} at a time</span>
+        <span class="sf-item-en">${set.questions.length} questions${countsText(set)}</span>
       </span>
       <span class="sf-item-score">${best ? `best <b>${best.score}/${best.total}</b>` : 'new'}</span>
     </button>`;
@@ -146,8 +192,7 @@
   function start(id) {
     const set = SETS.find(s => s.id === id);
     if (!set) return;
-    const missed = store.missed.filter(m => m.startsWith(id + ':')).map(m => Number(m.slice(id.length + 1)));
-    attempt = { set, round: makeRound(set, missed), at: 0 };
+    attempt = { set, round: makeRound(set, srsSnapshot()), at: 0 };
     $('vq-title').innerHTML = `<span class="sf-item-level">${esc(set.level)}</span> ${esc(KIND[set.kind].title)} <span lang="ja" class="vq-title-ja">${esc(KIND[set.kind].ja)}</span>`;
     show('screen-vocab-questions');
     render();
@@ -228,7 +273,7 @@
   function render() {
     const { round, at, set } = attempt;
     const over = at >= round.length;
-    const done = round.filter(q => q.pick != null).length;
+    const done = round.filter(q => q.graded).length;
     $('vq-bar-fill').style.width = `${(100 * done) / round.length}%`;
     $('vq-progress-text').textContent = `${done} / ${round.length}`;
     $('vq-question').classList.toggle('hidden', over);
@@ -236,10 +281,10 @@
     $('vq-actions').classList.toggle('hidden', !over);
     if (over) {
       const s = score(round);
-      $('vq-score').textContent = `${s} / ${round.length}`;
-      $('vq-score-msg').textContent = s === round.length ? 'Perfect! 🎉'
-        : s >= round.length / 2 ? 'Good work — the ones you missed come back first next time.'
-          : 'The ones you missed come back first next time — try again.';
+      const n = firstTries(round).length;
+      $('vq-score').textContent = `${s} / ${n}`;
+      $('vq-score-msg').textContent = (s === n ? 'Perfect! 🎉 ' : '') +
+        'Every question is a flashcard now: the ones you marked Again are due first next time, the others come back in a few days.';
       $('btn-vq-again').focus({ preventScroll: true });
       return;
     }
@@ -258,14 +303,17 @@
     const verdict = !answered ? `<span>${esc(KIND[set.kind].about)}</span>`
       : q.pick === 0 ? '<b class="sf-verdict-right">✓ Correct</b>'
         : `<b class="sf-verdict-wrong">✗ It’s ${q.order.indexOf(0) + 1}: <span lang="ja">${esc(plain(question.choices[0]))}</span></b>`;
-    const last = at === round.length - 1;
     $('vq-question').innerHTML = `<div class="sf-q vq-q${answered ? (q.pick === 0 ? ' sf-q-right' : ' sf-q-wrong') : ''}">
       <div class="sf-q-head"><span class="sf-q-num">${at + 1}</span>${verdict}</div>
       <div class="vq-sentence${answered ? ' vq-sentence-answered' : ''}" lang="ja">${questionHtml(question, q)}</div>
       ${answered ? `<p class="vq-translation">${esc(question.en)}</p>` : ''}
       <div class="sf-choices vq-choices${set.kind === 'similar' ? ' vq-choices-long' : ''}">${choices}</div>
       ${answered ? `<div class="particle-explanation sf-why vq-why">${whyHtml(question)}</div>
-      <div class="bs-next-area"><button id="btn-vq-next" class="btn-primary">${last ? 'See your score' : 'Next question →'}</button></div>` : ''}
+      <div class="vq-grade-area">
+        <button id="btn-vq-grade-again" class="${q.pick === 0 ? 'btn-secondary' : 'btn-primary'} vq-grade" data-grade="1"><kbd>1</kbd> Again</button>
+        <button id="btn-vq-grade-good" class="${q.pick === 0 ? 'btn-primary' : 'btn-secondary'} vq-grade" data-grade="4"><kbd>2</kbd> Good</button>
+      </div>
+      <p class="vq-grade-hint">${q.pick === 0 ? 'Good if you knew it — Again to see it again soon.' : 'Again brings it back in this round and first next time.'}</p>` : ''}
     </div>`;
   }
 
@@ -273,28 +321,34 @@
     const q = current();
     if (!q || q.pick != null) return;
     q.pick = k;
-    const key = `${attempt.set.id}:${q.i}`;
-    store.missed = store.missed.filter(m => m !== key);
-    if (k !== 0) store.missed.push(key);
-    if (attempt.round.every(x => x.pick != null)) {
-      const s = score(attempt.round);
-      const id = attempt.set.id;
-      const total = attempt.round.length;
-      const prev = store.best[id];
-      if (!prev || s > prev.score) store.best[id] = { score: s, total };
-      store.last[id] = { score: s, total };
-    }
-    save(STORE_KEY, store);
     render();
-    const next = $('btn-vq-next');
-    if (next) next.focus({ preventScroll: true });
+    // Enter takes the suggested grade: Good when right, Again when wrong.
+    const suggested = $(k === 0 ? 'btn-vq-grade-good' : 'btn-vq-grade-again');
+    if (suggested) suggested.focus({ preventScroll: true });
   }
 
-  function next() {
-    if (!attempt || current().pick == null) return;
+  // Again (1) or Good (4), like the flashcards; then the next question.
+  function grade(g) {
+    const q = current();
+    if (!q || q.pick == null || q.graded) return;
+    const question = questionOf(q);
+    if (global.TokidokiSRS) global.TokidokiSRS.grade(cardId(attempt.set, question), g);
+    q.graded = true;
+    if (g === 1) requeue(attempt.round, attempt.at);
     attempt.at++;
+    if (attempt.at >= attempt.round.length) saveScore();
     render();
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function saveScore() {
+    const s = score(attempt.round);
+    const id = attempt.set.id;
+    const total = firstTries(attempt.round).length;
+    const prev = store.best[id];
+    if (!prev || s > prev.score) store.best[id] = { score: s, total };
+    store.last[id] = { score: s, total };
+    save(STORE_KEY, store);
   }
 
   function goHome() {
@@ -324,7 +378,8 @@
       render();
       return;
     }
-    if (e.target.closest('#btn-vq-next')) next();
+    const gb = e.target.closest('[data-grade]');
+    if (gb) grade(Number(gb.dataset.grade));
   });
   document.addEventListener('keydown', e => {
     if (!attempt || !$('screen-vocab-questions').classList.contains('active')) return;
@@ -334,20 +389,23 @@
     if (q.pick == null && /^[1-4]$/.test(e.key)) {
       e.preventDefault();
       pick(q.order[Number(e.key) - 1]);
-    } else if (q.pick != null && e.key === 'Enter' && e.target.id !== 'btn-vq-next') {
+    } else if (q.pick != null && (e.key === '1' || e.key === '2')) {
       e.preventDefault();
-      next();
+      grade(e.key === '1' ? 1 : 4);
+    } else if (q.pick != null && e.key === 'Enter' && !e.target.closest('[data-grade]')) {
+      e.preventDefault();
+      grade(q.pick === 0 ? 4 : 1);
     }
   });
   $('btn-vq-again').addEventListener('click', () => start(attempt.set.id));
   $('btn-vq-home').addEventListener('click', goHome);
   $('vq-quit').addEventListener('click', goHome);
   $('btn-vq-reset').addEventListener('click', () => {
-    if (!confirm('Reset your scores?')) return;
+    if (!confirm('Reset your scores and the questions’ flashcard progress?')) return;
     store.best = {};
     store.last = {};
-    store.missed = [];
     save(STORE_KEY, store);
+    if (global.TokidokiSRS) global.TokidokiSRS.removeWhere(id => id.startsWith('vq:'));
     renderHome();
   });
 
