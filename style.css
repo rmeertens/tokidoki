@@ -8363,5 +8363,8 @@ body.bs-no-furigana #screen-bunkei-story rt { visibility: hidden; }
 .vq-words { list-style: none; margin-top: 8px; display: flex; flex-direction: column; gap: 3px; font-size: 0.92rem; }
 .vq-words li { color: var(--text-dim); }
 .vq-words .vq-words-answer { color: var(--text); font-weight: 700; }
+.vq-words li { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.vq-why .kanji-cards-breakdown { margin-top: 12px; }
+.vq-tip { margin-top: 10px; font-size: 0.85rem; color: var(--text-muted); }
 .vq-words-kana { font-size: 0.85em; color: var(--text-muted); font-weight: 400; }
 body.vq-no-furigana #screen-vocab-questions rt { visibility: hidden; }

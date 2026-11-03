@@ -169,12 +169,61 @@
 
   const shortMeaning = m => String(m).split(/;\s*/)[0];
 
+  // ─── Word and kanji flashcards ──────────────────────────────────────────
+
+  // Words join the word flashcard deck (tokidoki_story_words, reviewed on
+  // flashcards.html, like Story Fill-in's), kanji the kanji deck through
+  // kanji-cards.js, whose buttons look after themselves.
+  const DECK_KEY = 'tokidoki_story_words';
+  const SRS_KEY = 'tokidoki_srs';
+  const deck = () => load(DECK_KEY, {});
+  // Our {漢字|かな} markup in the decks' 漢字[かな] form.
+  const deckMarkup = markup => String(markup).replace(/\{([^|}]+)\|([^}]+)\}/g, '$1[$2]').replace(/_/g, '');
+
+  // w: [markup, word, reading, meaning] (a fill-in choice).
+  function toggleWord(question, w) {
+    const words = deck();
+    const key = w[1];
+    if (words[key]) {
+      delete words[key];
+      const srs = load(SRS_KEY, {});
+      delete srs['story_word:' + key];
+      delete srs['story_word:' + key + ':recall'];
+      save(SRS_KEY, srs);
+    } else {
+      const set = attempt.set;
+      // The answer gets the question's sentence, the answer filled in.
+      const answer = question.words[0][1] === key;
+      words[key] = Object.assign(
+        { vocab: set.level.toLowerCase(), kana: w[2], meaning: shortMeaning(w[3]), added: Date.now(), level: set.level },
+        answer ? { jp: deckMarkup(question.b + question.choices[0] + question.a), en: question.en, title: 'JLPT Questions (Fill in the blank)' } : {},
+      );
+    }
+    save(DECK_KEY, words);
+  }
+
+  function wordButtonHtml(w, k, look) {
+    const saved = !!deck()[w[1]];
+    const label = look === 'label' ? (saved ? '✓ Word card' : '＋ Word card') : (saved ? '✓' : '＋');
+    return `<button type="button" class="kanji-card-btn kanji-card-btn-${look}${saved ? ' saved' : ''} vq-word-btn" data-word-card="${k}"` +
+      ` aria-pressed="${saved}" title="${saved ? `${esc(w[1])} is in your word flashcards — click to remove` : `Add ${esc(w[1])} to your word flashcards`}">${label}</button>`;
+  }
+
+  // The kanji of a word or sentence, each with its meaning, readings and a
+  // ＋ for the kanji deck.
+  const breakdown = (text, from, title) =>
+    (global.KanjiCards ? KanjiCards.breakdownHtml(plain(text), from, title ? { title } : {}) : '');
+
   function whyHtml(question) {
     if (question.kind === 'similar') {
-      return `<p>${esc(question.note)}</p><p class="vq-en">${esc(question.en)}</p>`;
+      const kanji = breakdown(question.q.split('_')[1] + question.choices[0], {}, 'Kanji in this question');
+      return `<p>${esc(question.note)}</p><p class="vq-en">${esc(question.en)}</p>${kanji}`;
     }
+    const [answer] = question.words;
     return `<p class="vq-en">${esc(question.en)}</p>
-      <ul class="vq-words">${question.words.map((w, k) => `<li${k === 0 ? ' class="vq-words-answer"' : ''}><span lang="ja">${esc(w[1])}</span> <span class="vq-words-kana" lang="ja">${esc(w[2])}</span> — ${esc(shortMeaning(w[3]))}</li>`).join('')}</ul>`;
+      <ul class="vq-words">${question.words.map((w, k) => `<li${k === 0 ? ' class="vq-words-answer"' : ''}>${wordButtonHtml(w, k, k === 0 ? 'label' : 'icon')} <span lang="ja">${esc(w[1])}</span> <span class="vq-words-kana" lang="ja">${esc(w[2])}</span> — ${esc(shortMeaning(w[3]))}</li>`).join('')}</ul>
+      ${breakdown(answer[1], { reading: answer[2], meaning: shortMeaning(answer[3]) }, `Kanji in ${answer[1]}`)}
+      ${deck()[answer[1]] ? '<p class="vq-tip">Review your flashcards on the <a href="flashcards.html">Flashcards page</a>.</p>' : ''}`;
   }
 
   function render() {
@@ -268,6 +317,13 @@
   $('vq-question').addEventListener('click', e => {
     const b = e.target.closest('[data-choice]');
     if (b && !b.disabled) { pick(Number(b.dataset.choice)); return; }
+    const wb = e.target.closest('[data-word-card]');
+    if (wb) {
+      const question = questionOf(current());
+      toggleWord(question, question.words[Number(wb.dataset.wordCard)]);
+      render();
+      return;
+    }
     if (e.target.closest('#btn-vq-next')) next();
   });
   document.addEventListener('keydown', e => {
