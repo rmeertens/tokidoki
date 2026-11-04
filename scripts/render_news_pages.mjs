@@ -104,20 +104,24 @@ const headline = it => ({ id: it.id, date: it.date, emoji: it.emoji, titleEn: it
 
 // A story's own words, grammar and recordings.
 function storyData(item) {
-  const lines = {}, gloss = {}, grammar = {}, audio = {};
+  const lines = {}, gloss = {}, grammar = {}, names = {}, audio = {};
   LEVELS.filter(l => item.levels[l]).forEach(l => {
     ['t', ...item.levels[l].lines.keys()].forEach(n => {
       const id = News.lineId(item, l, n);
       const line = NEWS_WORDS.lines[id];
       if (!line) return;
       lines[id] = line;
-      line.w.forEach(p => { if (Array.isArray(p)) gloss[p[1]] = NEWS_WORDS.gloss[p[1]]; });
+      line.w.forEach(p => {
+        if (!Array.isArray(p)) return;
+        gloss[p[1]] = NEWS_WORDS.gloss[p[1]];
+        if (NEWS_WORDS.names[p[1]]) names[p[1]] = NEWS_WORDS.names[p[1]];
+      });
       line.g.forEach(([gid]) => { if (NEWS_WORDS.grammar[gid]) grammar[gid] = NEWS_WORDS.grammar[gid]; });
     });
     const rec = NEWS_AUDIO[News.audioKey(item, l)];
     if (rec) audio[News.audioKey(item, l)] = rec;
   });
-  return { NEWS_ITEMS: [item], NEWS_WORDS: { gloss, grammar, lines }, NEWS_AUDIO: audio };
+  return { NEWS_ITEMS: [item], NEWS_WORDS: { gloss, grammar, names, lines }, NEWS_AUDIO: audio };
 }
 
 function page(item, i) {
@@ -178,13 +182,15 @@ ${LEVELS.map(l => `            <button type="button" data-level="${l}" aria-pres
         <p class="story-title-en" id="news-title-en">${esc(item.titleEn)}</p>
       </div>
       <div class="kana-settings-row story-toggles">
-        <label class="kana-script-toggle"><input type="checkbox" id="news-toggle-furigana"> Furigana</label>
-        <label class="kana-script-toggle"><input type="checkbox" id="news-toggle-english"> English</label>
+        <label class="kana-script-toggle" title="Key: F"><input type="checkbox" id="news-toggle-furigana"> Furigana</label>
+        <label class="kana-script-toggle" title="Key: E"><input type="checkbox" id="news-toggle-english"> English</label>
+        <label class="kana-script-toggle" title="Key: N"><input type="checkbox" id="news-toggle-names"> Names</label>
         <button type="button" class="btn-secondary story-read hidden" id="btn-news-read" aria-pressed="false">▶ Read aloud</button>
         <button type="button" class="btn-secondary story-read hidden" id="btn-news-read-slow" aria-pressed="false">🐢 Slowly</button>
         <button type="button" class="btn-secondary speak-toggle hidden" data-speak-toggle aria-pressed="false">&#128266; Speak words on click: Off</button>
       </div>
 
+      <p class="news-name-key" id="news-name-key">Names: <span class="news-name news-name-person">people</span> <span class="news-name news-name-place">places</span> <span class="news-name news-name-org">companies &amp; groups</span> <span class="news-keys-hint">Keys: <kbd>F</kbd> furigana, <kbd>E</kbd> English, <kbd>N</kbd> names</span></p>
       <div class="story-layout">
         <article class="story-text" id="news-text"></article>
         <aside class="story-panel" id="news-panel" aria-live="polite">
@@ -316,7 +322,7 @@ ${nav}
           <span class="lis-levels-label">Level</span>
 ${LEVELS.map(l => `          <button type="button" data-level="${l}" aria-pressed="false">${l}</button>`).join('\n')}
         </div>
-        <label class="kana-script-toggle"><input type="checkbox" id="news-toggle-furigana"> Furigana</label>
+        <label class="kana-script-toggle" title="Key: F"><input type="checkbox" id="news-toggle-furigana"> Furigana</label>
       </div>
 
       <div id="news-headlines" class="news-headlines">${News.headlinesHtml(items, 'N5')}</div>

@@ -23,7 +23,10 @@
 // pages use, reviewed on flashcards.html) and its kanji to the kanji cards.
 // Tapping a sentence shows its English, a note and its grammar; grammar
 // points can be saved (tokidoki_saved_grammar), listed under "Saved grammar"
-// on news.html. Furigana and English can be switched off, and ▶ / 🐢 read
+// on news.html. Names are coloured like NHK News Web Easy (people, places,
+// companies and groups: NEWS_WORDS.names, from scripts/news_names.json).
+// Furigana (key F), English (E) and the name colours (N) can be switched
+// off, and ▶ / 🐢 read
 // the story aloud — from its VOICEVOX recording (news-audio.js, made by
 // scripts/generate_news_audio.py), or the browser's voice if there is none.
 (function (global) {
@@ -155,7 +158,7 @@
     try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* storage unavailable */ }
   };
 
-  const settings = { furigana: true, english: false, level: 'N5', ...loadJson(SETTINGS_KEY, {}) };
+  const settings = { furigana: true, english: false, names: true, level: 'N5', ...loadJson(SETTINGS_KEY, {}) };
   if (!LEVELS.includes(settings.level)) settings.level = 'N5';
   const saveSettings = () => saveJson(SETTINGS_KEY, settings);
   const jpHtml = text => settings.furigana ? rubyHtml(text) : esc(plainText(text));
@@ -250,6 +253,8 @@
   const sentenceId = s => lineId(item, level(), s);
   const sentenceWords = s => (words.lines[sentenceId(s)] || { w: [], g: [] });
   const pronounceHtml = (text, cls) => global.Pronounce ? Pronounce.buttonsHtml(text, cls) : '';
+  const NAME_KINDS = { person: 'Person\u2019s name', place: 'Place name', org: 'Company / group name' };
+  const nameKind = key => (words.names && NAME_KINDS[words.names[key]] ? words.names[key] : '');
 
   // The word pieces a grammar snippet covers, by index.
   function snippetPieces(s, snippet) {
@@ -279,13 +284,15 @@
     });
     $('#news-toggle-furigana').checked = settings.furigana;
     $('#news-toggle-english').checked = settings.english;
+    $('#news-toggle-names').checked = settings.names;
 
     const deck = loadJson(DECK_KEY, {});
     const text = $('#news-text');
     text.innerHTML = v.lines.map((line, s) => {
       const pieces = sentenceWords(s).w.map((p, t) => {
         if (typeof p === 'string') return `<span class="story-punct">${jpHtml(p)}</span>`;
-        return `<span class="story-word${has(deck, p[1]) ? ' saved' : ''}" data-s="${s}" data-t="${t}" role="button" tabindex="0">${jpHtml(p[0])}</span>`;
+        const kind = nameKind(p[1]);
+        return `<span class="story-word${kind ? ` news-name news-name-${kind}` : ''}${has(deck, p[1]) ? ' saved' : ''}" data-s="${s}" data-t="${t}" role="button" tabindex="0">${jpHtml(p[0])}</span>`;
       }).join('');
       return `
         <div class="story-sentence${reading === s ? ' reading' : ''}" data-s="${s}">
@@ -299,6 +306,8 @@
       ? `<p class="news-sources">Sources: ${item.sources.map(src => `<a href="${esc(src.url)}" target="_blank" rel="noopener">${esc(src.name)}</a>`).join(', ')}</p>`
       : '');
     text.classList.toggle('show-english', settings.english);
+    text.classList.toggle('show-names', settings.names);
+    $('#news-name-key').classList.toggle('show-names', settings.names);
     renderReadButtons();
     renderSelection();
   }
@@ -339,7 +348,7 @@
         <div class="story-panel-word" lang="ja">${esc(word)}</div>
         ${reading !== word ? `<div class="story-panel-reading" lang="ja">${esc(reading)}</div>` : ''}
         ${pronounceHtml(reading, 'story-panel-speak')}
-        <div class="story-panel-pos">${esc(pos)}</div>
+        <div class="story-panel-pos">${nameKind(key) ? `<span class="news-name news-name-${nameKind(key)}">${NAME_KINDS[nameKind(key)]}</span>` : esc(pos)}</div>
         <div class="story-panel-meaning">${esc(meaning)}</div>
         ${surface !== word ? `<div class="story-panel-form">In the text: <span lang="ja">${esc(surface)}</span>${pronounceHtml(kanaText(src))}</div>` : ''}
         <button class="${saved ? 'btn-secondary' : 'btn-primary'} story-panel-add" id="btn-news-add-word">
@@ -615,6 +624,12 @@
       saveSettings();
       $('#news-text').classList.toggle('show-english', settings.english);
     });
+    $('#news-toggle-names').addEventListener('change', e => {
+      settings.names = e.target.checked;
+      saveSettings();
+      $('#news-text').classList.toggle('show-names', settings.names);
+      $('#news-name-key').classList.toggle('show-names', settings.names);
+    });
   }
 
   // ─── The headlines (news.html) ─────────────────────────────────────────────
@@ -670,6 +685,19 @@
 
     if (story) initStory(story);
     else initIndex();
+
+    // Keys: F furigana, E English, N name colours (each flips its checkbox).
+    const HOTKEYS = { f: 'news-toggle-furigana', e: 'news-toggle-english', n: 'news-toggle-names' };
+    document.addEventListener('keydown', e => {
+      if (e.ctrlKey || e.metaKey || e.altKey || e.repeat || e.isComposing) return;
+      const t = e.target;
+      if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) && t.type !== 'checkbox')) return;
+      if (document.querySelector('dialog[open]')) return;
+      const box = document.getElementById(HOTKEYS[e.key.toLowerCase()]);
+      if (!box) return;
+      e.preventDefault();
+      box.click();
+    });
     window.addEventListener('pagehide', () => { if (global.Pronounce) Pronounce.stop(); if (audio) audio.pause(); });
     // A word's 🔊 (the browser's voice) cuts the recording off.
     document.addEventListener('click', e => {

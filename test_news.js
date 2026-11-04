@@ -8,6 +8,7 @@
 // news-week-<monday>.html (all written by scripts/render_news_pages.mjs).
 // Also checks news.js's helpers.
 const fs = require('fs');
+const path = require('path');
 global.window = global;
 require('./news-data.js');
 require('./news-words.js');
@@ -99,6 +100,15 @@ NEWS_ITEMS.forEach(item => News.LEVELS.forEach(level => {
 }));
 Object.keys(NEWS_WORDS.lines).forEach(id => check(lineIds.has(id), `news-words.js has a line ${id} that no longer exists — ${stale}`));
 const sentences = [...lineIds].filter(id => !id.endsWith(':t')).map(id => NEWS_WORDS.lines[id]).filter(Boolean);
+// Names (coloured on the story pages) come from scripts/news_names.json.
+const NAMES = JSON.parse(fs.readFileSync(path.join(__dirname, 'scripts', 'news_names.json'), 'utf8'));
+const namedAs = {};
+['person', 'place', 'org'].forEach(kind => NAMES[kind].forEach(k => { namedAs[k] = kind; }));
+check(NEWS_WORDS.names && Object.keys(NEWS_WORDS.names).length > 0, 'news-words.js should list names');
+Object.entries(NEWS_WORDS.names || {}).forEach(([k, kind]) => check(namedAs[k] === kind && NEWS_WORDS.gloss[k], `name ${k} (${kind}) doesn't match scripts/news_names.json — ${stale}`));
+Object.keys(namedAs).forEach(k => check(!NEWS_WORDS.gloss[k] || NEWS_WORDS.names[k] === namedAs[k], `${k} is in scripts/news_names.json but not in news-words.js names — ${stale}`));
+check(NEWS_WORDS.names['日本'] === 'place' && NEWS_WORDS.names['気象庁'] === 'org' && NEWS_WORDS.names['高市'] === 'person', 'names: 日本 is a place, 気象庁 an org, 高市 a person');
+
 check(sentences.every(l => l.g.length > 0), 'every sentence should have some grammar');
 check(sentences.every(l => l.w.filter(Array.isArray).length >= 2), 'every sentence should have tappable words');
 

@@ -286,7 +286,10 @@ Japan, told at N5, N4 and N3. To add them:
    (after `npm install --no-save kuromoji`). Add every missing word to
    `scripts/news_extra_words.json` as `[reading, meaning, part of speech]`;
    names and compounds kuromoji splits oddly also go in `NEWS_WHOLE` in
-   that script. Re-run until 0 words are missing, then look over the new
+   that script. Re-run until 0 words are missing and no possible names are
+   listed (put each in `person`, `place`, `org` or `not` in
+   `scripts/news_names.json`; story pages colour names like NHK News Web
+   Easy), then look over the new
    lines' words and grammar (a word linked to the wrong entry, like 弱さ →
    差, or a grammar point that doesn't fit). Fix by adding a word, tightening
    a rule in `NEWS_RULES`, or rephrasing the sentence.
