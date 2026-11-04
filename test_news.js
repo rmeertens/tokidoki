@@ -107,6 +107,14 @@ const namedAs = {};
 check(NEWS_WORDS.names && Object.keys(NEWS_WORDS.names).length > 0, 'news-words.js should list names');
 Object.entries(NEWS_WORDS.names || {}).forEach(([k, kind]) => check(namedAs[k] === kind && NEWS_WORDS.gloss[k], `name ${k} (${kind}) doesn't match scripts/news_names.json — ${stale}`));
 Object.keys(namedAs).forEach(k => check(!NEWS_WORDS.gloss[k] || NEWS_WORDS.names[k] === namedAs[k], `${k} is in scripts/news_names.json but not in news-words.js names — ${stale}`));
+// Every word the word list calls a name must be sorted into news_names.json
+// (person / place / org / not), so new stories get their names coloured.
+const sortedNames = new Set([...Object.keys(namedAs), ...NAMES.not]);
+Object.entries(NEWS_WORDS.gloss).forEach(([k, [, meaning, pos]]) => {
+  if (/name|organi[sz]ation/.test(pos) || /\((surname|given name|company)\b/.test(meaning)) {
+    check(sortedNames.has(k), `${k} (${meaning}) looks like a name: add it to person, place, org or not in scripts/news_names.json, then run node scripts/tokenize_news.mjs`);
+  }
+});
 check(NEWS_WORDS.names['日本'] === 'place' && NEWS_WORDS.names['気象庁'] === 'org' && NEWS_WORDS.names['高市'] === 'person', 'names: 日本 is a place, 気象庁 an org, 高市 a person');
 
 check(sentences.every(l => l.g.length > 0), 'every sentence should have some grammar');

@@ -85,7 +85,10 @@
   page, the new stories and the story before them. Their words and grammar
   come from `news-words.js`, built by
   `node scripts/tokenize_news.mjs` (kuromoji, as above); missing words go in
-  `scripts/news_extra_words.json`. `test_news.js` fails if either is stale.
+  `scripts/news_extra_words.json`. Names are coloured on story pages
+  (`NEWS_WORDS.names`: person / place / org) from the hand-checked lists in
+  `scripts/news_names.json`; F / E / N toggle furigana, English and the
+  name colours. `test_news.js` fails if either is stale.
 
 - The words and grammar shown under an answered Sentences card come from
   `sentences-words.js`, built by `node scripts/tokenize_sentences.mjs`
@@ -279,6 +282,10 @@ Japan, told at N5, N4 and N3. To add them:
      十四日[じゅうよっか]) so the voices read them right; other numbers can
      be digits with furigana on the counter only (4社[しゃ], 2022年[ねん]).
      Use the official reading for names (日本[にっぽん]シリーズ).
+   - Names are coloured on the story pages (people, places, companies and
+     groups, like NHK News Web Easy): add every new name to `person`,
+     `place` or `org` in `scripts/news_names.json` as you write the story
+     (step 3 lists any you missed).
    - A note (third element of a line) on anything the word and grammar
      lists don't explain: a news expression, a name, background. Notes are
      plain text — no furigana markup.
@@ -287,9 +294,11 @@ Japan, told at N5, N4 and N3. To add them:
    `scripts/news_extra_words.json` as `[reading, meaning, part of speech]`;
    names and compounds kuromoji splits oddly also go in `NEWS_WHOLE` in
    that script. Re-run until 0 words are missing and no possible names are
-   listed (put each in `person`, `place`, `org` or `not` in
-   `scripts/news_names.json`; story pages colour names like NHK News Web
-   Easy), then look over the new
+   listed (it exits with an error until each is in `person`, `place`,
+   `org` or `not` in `scripts/news_names.json`; give new names in
+   `news_extra_words.json` the part of speech `name`, `place name` or
+   `organization` so `test_news.js` catches any left unsorted), then look
+   over the new
    lines' words and grammar (a word linked to the wrong entry, like 弱さ →
    差, or a grammar point that doesn't fit). Fix by adding a word, tightening
    a rule in `NEWS_RULES`, or rephrasing the sentence.

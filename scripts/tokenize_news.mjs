@@ -13,7 +13,8 @@
 // story pages, like NHK News Web Easy: NEWS_WORDS.names[key] is 'person',
 // 'place' or 'org', from scripts/news_names.json, checked by hand. Every word
 // kuromoji or the word list calls a name must be in one of its lists (or in
-// 'not'); the run lists the ones that aren't.
+// 'not'); the run lists the ones that aren't and exits with an error (and
+// test_news.js fails on any word the word list calls a name).
 //
 // Usage (kuromoji isn't a site dependency, so install it just for this):
 //   npm install --no-save kuromoji
@@ -202,5 +203,6 @@ console.log(`${Object.keys(lines).length} sentences, ${Object.keys(gloss).length
 if (unnamed.length) {
   console.log(`${unnamed.length} possible names not in scripts/news_names.json (add each to person, place, org or not):`);
   unnamed.forEach(n => console.log(`  ${n}`));
+  process.exitCode = 1;
 }
 if (process.argv.includes('--misses')) [...misses].forEach(([k, ids]) => console.log(k, ids.length, ids[0]));
