@@ -7528,5 +7528,265 @@
     "しんじゅ",
     "conferment in person",
     "noun / suru-verb"
+  ],
+  "31号": [
+    "さんじゅういちごう",
+    "No. 31 (typhoon number)",
+    "number + counter"
+  ],
+  "関東": [
+    "かんとう",
+    "Kanto region (around Tokyo)",
+    "place name"
+  ],
+  "小笠原": [
+    "おがさわら",
+    "Ogasawara (islands south of Tokyo)",
+    "place name"
+  ],
+  "五日ごろ": [
+    "いつかごろ",
+    "around the 5th",
+    "expression"
+  ],
+  "伊豆諸島": [
+    "いずしょとう",
+    "Izu Islands",
+    "place name"
+  ],
+  "父島": [
+    "ちちじま",
+    "Chichijima (main island of Ogasawara)",
+    "place name"
+  ],
+  "浸水": [
+    "しんすい",
+    "flooding, inundation",
+    "noun / suru verb"
+  ],
+  "インファ": [
+    "インファ",
+    "Infa (typhoon name)",
+    "name"
+  ],
+  "その後": [
+    "そのご",
+    "after that, afterward",
+    "noun"
+  ],
+  "周辺": [
+    "しゅうへん",
+    "surroundings, vicinity",
+    "noun"
+  ],
+  "流れ込む": [
+    "ながれこむ",
+    "to flow into",
+    "verb"
+  ],
+  "警戒": [
+    "けいかい",
+    "vigilance, alert",
+    "noun / suru verb"
+  ],
+  "ですが": [
+    "ですが",
+    "but, however (polite)",
+    "expression"
+  ],
+  "採決": [
+    "さいけつ",
+    "vote (on a bill)",
+    "noun / suru verb"
+  ],
+  "答弁": [
+    "とうべん",
+    "reply, answer (in the Diet)",
+    "noun / suru verb"
+  ],
+  "減税": [
+    "げんぜい",
+    "tax cut",
+    "noun / suru verb"
+  ],
+  "限定": [
+    "げんてい",
+    "limit, restriction",
+    "noun / suru verb"
+  ],
+  "英樹": [
+    "ひでき",
+    "Hideki (given name)",
+    "name"
+  ],
+  "上程": [
+    "じょうてい",
+    "putting a bill before the floor",
+    "noun / suru verb"
+  ],
+  "祐一": [
+    "ゆういち",
+    "Yuichi (given name)",
+    "name"
+  ],
+  "保留": [
+    "ほりゅう",
+    "putting on hold, reserving",
+    "noun / suru verb"
+  ],
+  "両氏": [
+    "りょうし",
+    "both (men), the two of them",
+    "noun"
+  ],
+  "後藤": [
+    "ごとう",
+    "Goto (surname)",
+    "name"
+  ],
+  "2時間": [
+    "にじかん",
+    "two hours",
+    "number + counter"
+  ],
+  "折り合える": [
+    "おりあえる",
+    "to reach a compromise",
+    "verb"
+  ],
+  "先送り": [
+    "さきおくり",
+    "postponement",
+    "noun / suru verb"
+  ],
+  "曖昧": [
+    "あいまい",
+    "vague, ambiguous",
+    "na-adjective"
+  ],
+  "少数": [
+    "しょうすう",
+    "minority, small number",
+    "noun"
+  ],
+  "賛同": [
+    "さんどう",
+    "agreement, support",
+    "noun / suru verb"
+  ],
+  "29歳": [
+    "にじゅうきゅうさい",
+    "29 years old",
+    "number + counter"
+  ],
+  "銭湯": [
+    "せんとう",
+    "public bath",
+    "noun"
+  ],
+  "300円": [
+    "さんびゃくえん",
+    "300 yen",
+    "number + counter"
+  ],
+  "キャンペーン": [
+    "キャンペーン",
+    "campaign",
+    "noun"
+  ],
+  "クーポン": [
+    "クーポン",
+    "coupon",
+    "noun"
+  ],
+  "ポスター": [
+    "ポスター",
+    "poster",
+    "noun"
+  ],
+  "二次元": [
+    "にじげん",
+    "two-dimensional",
+    "noun"
+  ],
+  "割引": [
+    "わりびき",
+    "discount",
+    "noun / suru verb"
+  ],
+  "1回": [
+    "いっかい",
+    "one time, once",
+    "number + counter"
+  ],
+  "29割": [
+    "にじゅうきゅうわり",
+    "(part of the campaign name U29割)",
+    "name"
+  ],
+  "入浴": [
+    "にゅうよく",
+    "bathing",
+    "noun / suru verb"
+  ],
+  "浴場": [
+    "よくじょう",
+    "bathhouse",
+    "noun"
+  ],
+  "加盟": [
+    "かめい",
+    "joining, membership",
+    "noun / suru verb"
+  ],
+  "配布": [
+    "はいふ",
+    "distribution, handing out",
+    "noun / suru verb"
+  ],
+  "達す": [
+    "たっす",
+    "to reach",
+    "verb"
+  ],
+  "終了": [
+    "しゅうりょう",
+    "end, finish",
+    "noun / suru verb"
+  ],
+  "警報級": [
+    "けいほうきゅう",
+    "warning-level",
+    "noun"
+  ],
+  "最接近": [
+    "さいせっきん",
+    "closest approach",
+    "noun / suru verb"
+  ],
+  "再発達": [
+    "さいはったつ",
+    "redevelopment, growing strong again",
+    "noun / suru verb"
+  ],
+  "財務金融委員会": [
+    "ざいむきんゆういいんかい",
+    "Finance Committee (of the Lower House)",
+    "noun"
+  ],
+  "国対委員長": [
+    "こくたいいいんちょう",
+    "Diet affairs committee chair",
+    "noun"
+  ],
+  "二次元コード": [
+    "にじげんコード",
+    "QR code",
+    "noun"
+  ],
+  "浴場組合": [
+    "よくじょうくみあい",
+    "bathhouse association",
+    "noun"
   ]
 }

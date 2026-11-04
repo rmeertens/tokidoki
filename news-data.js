@@ -23,6 +23,145 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-11-04-typhoon-31-kanto-rain',
+      date: '2026-11-04',
+      emoji: '🌀',
+      titleEn: 'Typhoon No. 31 nears the Ogasawara Islands; heavy rain possible in Kanto and the Izu Islands through the 5th',
+      sources: [
+        { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261104de70112' },
+        { name: 'tenki.jp (Japan Weather Association)', url: 'https://tenki.jp/forecaster/y_nakagawa/2026/11/04/41195.html' },
+        { name: 'Weathernews', url: 'https://weathernews.jp/news/202611/040021/' },
+        { name: 'MBC (Yahoo! News Japan)', url: 'https://news.yahoo.co.jp/articles/007b5e52214ae3984cbe8e8b4f8497d72d8f96e9' },
+      ],
+      levels: {
+        N5: {
+          title: '台風[たいふう]31号[ごう]で　あした　関東[かんとう]は　大雨[おおあめ]かも',
+          lines: [
+            ['台風[たいふう]31号[ごう]が　小笠原[おがさわら]の　ほうへ　来[き]て　います。', 'Typhoon No. 31 is coming toward the Ogasawara Islands.', '小笠原諸島 (Ogasawara Shotō) are islands in the Pacific, about 1,000 km south of Tokyo, and part of Tokyo.'],
+            ['五日[いつか]ごろ、小笠原[おがさわら]に　いちばん　近[ちか]く　なります。', 'Around the 5th, it will be closest to Ogasawara.'],
+            ['台風[たいふう]は　本州[ほんしゅう]から　はなれて　すすみます。', 'The typhoon will move away from Honshu.'],
+            ['でも　関東[かんとう]と　伊豆諸島[いずしょとう]では、四日[よっか]の　夜[よる]から　五日[いつか]の　昼[ひる]ごろまで　強[つよ]い　雨[あめ]が　ふる　かも　しれません。', 'But in Kanto and the Izu Islands, strong rain may fall from the night of the 4th until around noon on the 5th.'],
+            ['千葉県[ちばけん]などでは、大雨[おおあめ]に　なる　かも　しれません。', 'In places like Chiba, there may be heavy rain.'],
+            ['山[やま]の　近[ちか]くや　低[ひく]い　ところに　気[き]を　つけて　ください。', 'Please be careful near mountains and in low places.'],
+          ],
+        },
+        N4: {
+          title: '台風[たいふう]31号[ごう]、小笠原[おがさわら]に接近[せっきん]　関東[かんとう]でも大雨[おおあめ]のおそれ',
+          lines: [
+            ['台風[たいふう]31号[ごう]は再[ふたた]び強[つよ]い勢力[せいりょく]になり、五日[いつか]にかけて小笠原諸島[おがさわらしょとう]の父島[ちちじま]に近[ちか]づきます。', 'Typhoon No. 31 has become strong again and will approach Chichijima in the Ogasawara Islands through the 5th.'],
+            ['台風[たいふう]は本州[ほんしゅう]には近[ちか]づかず、そのあと進路[しんろ]を北東[ほくとう]に変[か]えて、日本[にほん]の東[ひがし]を進[すす]む見込[みこ]みです。', 'The typhoon will not come close to Honshu; it is then expected to turn northeast and move east of Japan.'],
+            ['しかし、台風[たいふう]のまわりの湿[しめ]った空気[くうき]の影響[えいきょう]で、関東[かんとう]と伊豆諸島[いずしょとう]では四日[よっか]の夜遅[よるおそ]くから五日[いつか]の昼[ひる]ごろまで、大雨[おおあめ]になるおそれがあります。', 'However, because of the moist air around the typhoon, there is a risk of heavy rain in Kanto and the Izu Islands from late on the 4th until around noon on the 5th.'],
+            ['気象庁[きしょうちょう]の情報[じょうほう]では、五日[いつか]は千葉県[ちばけん]と神奈川県[かながわけん]の東部[とうぶ]で、警報級[けいほうきゅう]の大雨[おおあめ]になる可能性[かのうせい]があります。', 'According to Japan Meteorological Agency information, on the 5th there is a chance of warning-level heavy rain in Chiba and eastern Kanagawa.', '警報級 (keihōkyū) means rain heavy enough that an official warning (警報) may be issued.'],
+            ['土砂災害[どしゃさいがい]や、低[ひく]い土地[とち]の浸水[しんすい]に注意[ちゅうい]が必要[ひつよう]です。', 'Care is needed against landslides and flooding of low-lying land.'],
+            ['小笠原諸島[おがさわらしょとう]では、強[つよ]い風[かぜ]や高[たか]い波[なみ]にも気[き]をつけてください。', 'In the Ogasawara Islands, please also watch out for strong wind and high waves.'],
+          ],
+        },
+        N3: {
+          title: '台風[たいふう]31号[ごう]、五日[いつか]に小笠原[おがさわら]へ最接近[さいせっきん]　関東[かんとう]は警報級[けいほうきゅう]の大雨[おおあめ]のおそれ',
+          lines: [
+            ['台風[たいふう]31号[ごう]（国際[こくさい]名[めい]インファ）は再発達[さいはったつ]して強[つよ]い勢力[せいりょく]となり、五日[いつか]にかけて小笠原諸島[おがさわらしょとう]の父島[ちちじま]に接近[せっきん]する見通[みとお]しだ。', 'Typhoon No. 31 (international name Infa) has redeveloped into a strong storm and is expected to approach Chichijima in the Ogasawara Islands through the 5th.', '再発達 (saihattatsu) means a storm that had weakened has grown stronger again.'],
+            ['本州[ほんしゅう]からは離[はな]れて進[すす]み、その後[ご]は進路[しんろ]を北東[ほくとう]に変[か]えて、日本[にほん]の東[ひがし]を進[すす]むとみられる。', 'It is expected to move away from Honshu and then turn northeast and travel east of Japan.'],
+            ['一方[いっぽう]、台風[たいふう]の周辺[しゅうへん]から暖[あたた]かく湿[しめ]った空気[くうき]が流[なが]れ込[こ]む影響[えいきょう]で、関東[かんとう]や伊豆諸島[いずしょとう]では四日[よっか]夜遅[よるおそ]くから五日[いつか]昼[ひる]ごろにかけて激[はげ]しい雨[あめ]が降[ふ]り、大雨[おおあめ]となるおそれがある。', 'Meanwhile, as warm, moist air flows in from around the typhoon, intense rain is expected in Kanto and the Izu Islands from late on the night of the 4th to around noon on the 5th, with a risk of heavy rain.'],
+            ['気象庁[きしょうちょう]によると、五日[いつか]は千葉県[ちばけん]と神奈川県[かながわけん]東部[とうぶ]で警報級[けいほうきゅう]の大雨[おおあめ]となる可能性[かのうせい]がある。', 'According to the Japan Meteorological Agency, there is a chance of warning-level heavy rain in Chiba and eastern Kanagawa on the 5th.'],
+            ['気象庁[きしょうちょう]は、土砂災害[どしゃさいがい]や低[ひく]い土地[とち]の浸水[しんすい]に注意[ちゅうい]するよう呼[よ]びかけている。', 'The agency is urging people to be careful about landslides and flooding of low-lying land.'],
+            ['台風[たいふう]は六日[むいか]にかけて日本[にほん]の東[ひがし]で再[ふたた]び勢力[せいりょく]を強[つよ]めるとみられ、小笠原諸島[おがさわらしょとう]では強風[きょうふう]や高波[たかなみ]への警戒[けいかい]も必要[ひつよう]だ。', 'The typhoon is expected to strengthen again east of Japan through the 6th, and in the Ogasawara Islands vigilance against strong winds and high waves is also needed.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-04-tax-cut-vote-proposal',
+      date: '2026-11-04',
+      emoji: '🧾',
+      titleEn: 'Ruling parties propose a Nov. 6 Lower House committee vote on the bill cutting the consumption tax on food to 1%',
+      sources: [
+        { name: 'Jiji Press', url: 'https://www.jiji.com/jc/article?k=2026110400334&g=pol&m=rss' },
+        { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261104de70162' },
+        { name: 'TV Tokyo BIZ', url: 'https://txbiz.tv-tokyo.co.jp/hiru/news/post_351838' },
+        { name: 'Kumamoto Nichinichi Shimbun (Kyodo)', url: 'https://kumanichi.com/articles/2048549' },
+      ],
+      levels: {
+        N5: {
+          title: '食[た]べ物[もの]の　消費税[しょうひぜい]を　へらす　法律[ほうりつ]',
+          lines: [
+            ['国[くに]は、食[た]べ物[もの]の　消費税[しょうひぜい]を　へらす　法律[ほうりつ]を　作[つく]ろうと　しています。', 'The government is trying to make a law that lowers the consumption tax on food.', '消費税 (shōhizei) is the consumption tax, a tax paid when you buy things.'],
+            ['今[いま]は　8%ですが、1%に　する　計画[けいかく]です。', 'It is 8% now, but the plan is to make it 1%.'],
+            ['来年[らいねん]の　四月[しがつ]から　二年[にねん]だけの　予定[よてい]です。', 'The plan is for two years only, from April next year.'],
+            ['与党[よとう]は、六日[むいか]に　決[き]めたいと　言[い]っています。', 'The ruling parties say they want to decide on the 6th.', '与党 (yotō) are the parties in the government; 野党 (yatō) are the opposition parties.'],
+            ['六日[むいか]は、高市[たかいち]首相[しゅしょう]も　委員会[いいんかい]に　出[で]ます。', 'On the 6th, Prime Minister Takaichi will also attend the committee.'],
+            ['野党[やとう]は、首相[しゅしょう]の　話[はなし]を　聞[き]いてから　決[き]めると　言[い]っています。', 'The opposition says it will decide after hearing the prime minister.'],
+          ],
+        },
+        N4: {
+          title: '消費減税法案[しょうひげんぜいほうあん]、与党[よとう]が六日[むいか]の採決[さいけつ]を提案[ていあん]',
+          lines: [
+            ['飲食料品[いんしょくりょうひん]の消費税[しょうひぜい]を8%から1%に下[さ]げる法案[ほうあん]が、衆議院[しゅうぎいん]で話[はな]し合[あ]われています。', 'A bill to lower the consumption tax on food and drink from 8% to 1% is being discussed in the House of Representatives.'],
+            ['下[さ]げるのは、来年[らいねん]の四月[しがつ]から二年間[にねんかん]の予定[よてい]です。', 'The cut is planned for two years from April next year.'],
+            ['自民党[じみんとう]は四日[よっか]、六日[むいか]に財務金融委員会[ざいむきんゆういいんかい]で採決[さいけつ]し、同[おな]じ日[ひ]に本会議[ほんかいぎ]にも出[だ]したいと野党[やとう]に提案[ていあん]しました。', 'On the 4th, the LDP proposed to the opposition that the Finance Committee vote on the 6th and that the bill also go to the full session the same day.', '採決 (saiketsu) is the vote. 本会議 (honkaigi) is the full session of the House, after the committee.'],
+            ['六日[むいか]の委員会[いいんかい]には、高市[たかいち]首相[しゅしょう]が出席[しゅっせき]することで与党[よとう]と野党[やとう]が合意[ごうい]しました。', 'The ruling and opposition parties agreed that Prime Minister Takaichi will attend the committee on the 6th.'],
+            ['野党[やとう]の中道[ちゅうどう]は、首相[しゅしょう]の答弁[とうべん]を聞[き]いて採決[さいけつ]に応[おう]じるかどうか決[き]めると言[い]っています。', 'The opposition group Chūdō says it will decide whether to agree to a vote after hearing the prime minister\'s answers.', '答弁 (tōben) means answers given in the Diet to questions.'],
+            ['野党[やとう]は、お金[かね]の出[だ]し方[かた]や制度[せいど]の説明[せつめい]が足[た]りないと批判[ひはん]してきました。', 'The opposition has criticized the explanations of where the money will come from and how the system works as insufficient.'],
+          ],
+        },
+        N3: {
+          title: '消費[しょうひ]減税[げんぜい]法案[ほうあん]、与党[よとう]が六日[むいか]の衆院[しゅういん]採決[さいけつ]を提案[ていあん]　首相[しゅしょう]出席[しゅっせき]の委員会[いいんかい]で',
+          lines: [
+            ['飲食料品[いんしょくりょうひん]の消費税率[しょうひぜいりつ]を二年間[にねんかん]限定[げんてい]で8%から1%に引[ひ]き下[さ]げる関連[かんれん]法案[ほうあん]をめぐり、自民党[じみんとう]の村井英樹[むらいひでき]国対委員長[こくたいいいんちょう]は四日[よっか]、六日[むいか]に衆院[しゅういん]財務[ざいむ]金融[きんゆう]委員会[いいんかい]で採決[さいけつ]し、同日[どうじつ]中[ちゅう]に本会議[ほんかいぎ]へ緊急[きんきゅう]上程[じょうてい]する日程[にってい]を野党[やとう]に提案[ていあん]した。', 'Over the bill to cut the consumption tax on food and drink from 8% to 1% for two years only, LDP Diet affairs chief Murai Hideki proposed to the opposition on the 4th a schedule of a vote in the Lower House Finance Committee on the 6th and an urgent submission to the full session the same day.', '国対委員長 (kokutai iinchō) is the "Diet affairs committee chair," the party official who negotiates the schedule with other parties. 緊急上程 means putting a bill on the floor on short notice.'],
+            ['会談[かいだん]した中道[ちゅうどう]の後藤祐一[ごとうゆういち]国対委員長[こくたいいいんちょう]は、当日[とうじつ]の首相[しゅしょう]の答弁[とうべん]を見[み]て判断[はんだん]するとして、回答[かいとう]を保留[ほりゅう]した。', 'Chūdō\'s Diet affairs chief Gotō Yūichi, who met with him, put off a reply, saying he would judge by the prime minister\'s answers on the day.'],
+            ['両氏[りょうし]は、六日[むいか]の委員会[いいんかい]に高市早苗[たかいちさなえ]首相[しゅしょう]が出席[しゅっせき]することでは一致[いっち]した。', 'The two agreed that Prime Minister Takaichi Sanae will attend the committee on the 6th.'],
+            ['後藤氏[ごとうし]は質疑[しつぎ]を2時間[じかん]行[おこな]うよう求[もと]めたが、採決[さいけつ]については折[お]り合[あ]えなかった。', 'Mr. Gotō asked for two hours of questioning, but they could not reach agreement on the vote.', '折り合う (oriau) means to reach a compromise.'],
+            ['法案[ほうあん]は財源[ざいげん]について赤字[あかじ]国債[こくさい]に頼[たよ]らないとする一方[いっぽう]、具体[ぐたい]策[さく]の多[おお]くを先送[さきおく]りしており、野党[やとう]は財源[ざいげん]や給付[きゅうふ]の詳細[しょうさい]が曖昧[あいまい]だと批判[ひはん]している。', 'While the bill says it will not rely on deficit-financing bonds for funding, it postpones many of the specifics, and the opposition criticizes the funding and the details of the benefits as vague.'],
+            ['政府[せいふ]・与党[よとう]は会期末[かいきまつ]の十二月[じゅうにがつ]十二日[じゅうににち]までの成立[せいりつ]を目指[めざ]すが、参院[さんいん]では少数[しょうすう]のため、野党[やとう]の賛同[さんどう]が欠[か]かせない。', 'The government and ruling parties aim to pass it by the end of the session on December 12, but because they are a minority in the House of Councillors, opposition support is essential.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-04-tokyo-sento-u29',
+      date: '2026-11-04',
+      emoji: '♨️',
+      titleEn: 'Tokyo starts a campaign letting people aged 29 and under use public baths for 300 yen',
+      sources: [
+        { name: 'Tokyo Metropolitan Government press release', url: 'https://www.metro.tokyo.lg.jp/information/press/2026/10/2026102810' },
+        { name: 'Japan Web Magazine (travel news, Nov. 2)', url: 'https://japanwebmagazine.substack.com/p/japan-travel-news-november-2-2026' },
+      ],
+      levels: {
+        N5: {
+          title: '29歳[さい]までは　銭湯[せんとう]が　300円[えん]',
+          lines: [
+            ['東京都[とうきょうと]は　四日[よっか]から、わかい　人[ひと]の　ための　キャンペーンを　はじめました。', 'From the 4th, Tokyo started a campaign for young people.'],
+            ['29歳[さい]までの　人[ひと]は、銭湯[せんとう]に　300円[えん]で　入[はい]れます。', 'People aged 29 or under can enter a sento for 300 yen.', '銭湯 (sentō) is a public bath, where many people bathe together in a big hot bath.'],
+            ['クーポンが　いります。', 'You need a coupon.'],
+            ['クーポンは、ポスターの　二次元[にじげん]コードで　もらえます。', 'You can get the coupon with the QR code on the poster.', '二次元コード (nijigen kōdo) is the Japanese word for a QR code.'],
+            ['来年[らいねん]の　二月[にがつ]二十八日[にじゅうはちにち]まで　です。', 'It lasts until February 28 next year.'],
+            ['クーポンが　なくなったら、そこで　おわりです。', 'When the coupons run out, it ends there.'],
+          ],
+        },
+        N4: {
+          title: '東京都[とうきょうと]、29歳[さい]以下[いか]は銭湯[せんとう]が300円[えん]に',
+          lines: [
+            ['東京都[とうきょうと]は四日[よっか]から、29歳[さい]以下[いか]の若者[わかもの]向[む]けに、銭湯[せんとう]の割引[わりびき]キャンペーンを始[はじ]めました。', 'From the 4th, Tokyo started a sento discount campaign for young people aged 29 and under.', 'The campaign is called 湯る活U29割; it plays on 湯 (hot water) and 活動 (activities).'],
+            ['割引[わりびき]クーポンを使[つか]うと、1回[かい]300円[えん]で銭湯[せんとう]に入[はい]れます。', 'With a discount coupon, you can enter a sento for 300 yen a visit.'],
+            ['使[つか]えるのは、浴場組合[よくじょうくみあい]に入[はい]っていて、キャンペーンに参加[さんか]している銭湯[せんとう]だけです。', 'It can be used only at sento that belong to the bathhouse association and take part in the campaign.'],
+            ['期間[きかん]は、四日[よっか]から来年[らいねん]の二月[にがつ]二十八日[にじゅうはちにち]までです。', 'The period is from the 4th to February 28 next year.'],
+            ['クーポンは、今[いま]のところポスターの二次元[にじげん]コードから手[て]に入[い]れます。', 'For now, you get the coupon from the QR code on the poster.'],
+            ['予定[よてい]の数[かず]になったら、配[くば]るのも使[つか]うのも終[お]わりです。', 'When the planned number is reached, both giving out and using the coupons end.'],
+          ],
+        },
+        N3: {
+          title: '東京都[とうきょうと]、29歳[さい]以下[いか]に銭湯[せんとう]の300円[えん]クーポン　来年[らいねん]二月末[にがつまつ]まで',
+          lines: [
+            ['東京都[とうきょうと]は四日[よっか]、若者[わかもの]の銭湯[せんとう]利用[りよう]を促[うなが]す「湯[ゆ]る活[かつ]U29割[わり]」を始[はじ]めた。', 'On the 4th, Tokyo began "Yuru-katsu U29 Discount," which encourages young people to use public baths.', '促す (unagasu) means to encourage or prompt.'],
+            ['29歳[さい]以下[いか]の人[ひと]に、1回[かい]300円[えん]で入浴[にゅうよく]できる割引[わりびき]クーポンを配[くば]る。', 'It hands out discount coupons that let people aged 29 and under bathe for 300 yen a visit.'],
+            ['対象[たいしょう]は、浴場[よくじょう]組合[くみあい]に加盟[かめい]し、キャンペーンに参加[さんか]している銭湯[せんとう]に限[かぎ]られる。', 'It is limited to sento that belong to the bathhouse association and take part in the campaign.'],
+            ['配布[はいふ]と利用[りよう]の期間[きかん]は、来年[らいねん]二月[にがつ]二十八日[にじゅうはちにち]までだ。', 'The period for handing out and using the coupons runs until February 28 next year.'],
+            ['クーポンは当面[とうめん]、ポスターに載[の]っている二次元[にじげん]コードから取得[しゅとく]でき、のちにキャンペーンのサイトでも取得[しゅとく]できる予定[よてい]という。', 'For the time being the coupon can be obtained from the QR code printed on the poster, and it is said to be planned to become available on the campaign website later.'],
+            ['利用[りよう]の予定数[よていすう]に達[たっ]し次第[しだい]、配布[はいふ]も利用[りよう]も終了[しゅうりょう]する。', 'As soon as the planned number of uses is reached, both distribution and use will end.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-11-03-disaster-agency',
       date: '2026-11-03',
       emoji: '🌊',
