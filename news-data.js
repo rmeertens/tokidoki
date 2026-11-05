@@ -23,6 +23,149 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-11-05-shodo-unesco',
+      date: '2026-11-05',
+      emoji: '🖌️',
+      titleEn: 'UNESCO evaluation body recommends Japanese calligraphy (shodo) for Intangible Cultural Heritage listing',
+      sources: [
+        { name: 'Nikkei', url: 'https://www.nikkei.com/article/DGXZQOUD23AW80T21C26A0000000/' },
+        { name: 'Jiji Press', url: 'https://www.jiji.com/jc/article?k=2026110500120&g=soc' },
+        { name: 'Mainichi Shimbun (Yahoo! News Japan)', url: 'https://news.yahoo.co.jp/articles/967651db3f9678201e56da1409c2463c3fa552b4' },
+        { name: 'TV Asahi (Yahoo! News Japan)', url: 'https://news.yahoo.co.jp/articles/b7d4f99f8926bee344e779b6ffb08b91fb63e2e8' },
+      ],
+      levels: {
+        N5: {
+          title: '「書道[しょどう]」が　ユネスコの　無形文化遺産[むけいぶんかいさん]に　なるかも',
+          lines: [
+            ['日本[にほん]の「書道[しょどう]」が　ユネスコの　無形文化遺産[むけいぶんかいさん]に　なる　かも　しれません。', 'Japanese calligraphy (shodo) may become a UNESCO Intangible Cultural Heritage.', '無形文化遺産 (mukei bunka isan) means Intangible Cultural Heritage: living traditions such as festivals, crafts and skills, not buildings or objects.'],
+            ['五日[いつか]、文化庁[ぶんかちょう]が　しらせました。', 'On the 5th, the Agency for Cultural Affairs announced it.'],
+            ['ユネスコの　チームが「入[い]れて　いい」と　言[い]いました。', 'A UNESCO team said, "It can be added."', 'This is a recommendation (勧告) by UNESCO evaluation body, not the final decision.'],
+            ['書道[しょどう]は　筆[ふで]と　墨[すみ]で　字[じ]を　書[か]く　文化[ぶんか]です。', 'Shodo is the culture of writing characters with a brush and ink.'],
+            ['はんこを　ほる　「篆刻[てんこく]」も　入[はい]ります。', 'Tenkoku, carving a stamp (hanko), is also included.'],
+            ['正[ただ]しく　決[き]まるのは、11月[がつ]30日[にち]から　12月[がつ]五日[いつか]に　中国[ちゅうごく]で　ある　会議[かいぎ]です。', 'The official decision will be at a meeting in China from November 30 to December 5.'],
+            ['決[き]まれば、日本[にほん]で　24番目[ばんめ]に　なります。', 'If it is decided, it will be Japan\'s 24th.'],
+          ],
+        },
+        N4: {
+          title: '「書道[しょどう]」を無形文化遺産[むけいぶんかいさん]に　ユネスコの評価機関[ひょうかきかん]が勧告[かんこく]',
+          lines: [
+            ['文化庁[ぶんかちょう]は五日[いつか]、ユネスコの評価機関[ひょうかきかん]が日本[にほん]の「書道[しょどう]」を無形文化遺産[むけいぶんかいさん]に登録[とうろく]するよう勧告[かんこく]したと発表[はっぴょう]しました。', 'On the 5th, the Agency for Cultural Affairs announced that UNESCO\'s evaluation body had recommended registering Japan\'s shodo as an Intangible Cultural Heritage.'],
+            ['書道[しょどう]は、筆[ふで]や墨[すみ]を使[つか]って文字[もじ]を書[か]く文化[ぶんか]で、漢字[かんじ]や仮名[かな]の書[しょ]のほか、はんこに文字[もじ]を彫[ほ]る篆刻[てんこく]も含[ふく]まれます。', 'Shodo is the culture of writing with a brush and ink, and besides kanji and kana calligraphy it includes tenkoku, carving characters into seals.'],
+            ['日本[にほん]は2024年[ねん]に申請[しんせい]しましたが、審査[しんさ]の対象[たいしょう]にならなかったため、もう一度[いちど]申請[しんせい]していました。', 'Japan applied in 2024, but it was not taken up for examination, so Japan had applied again.'],
+            ['正式[せいしき]に登録[とうろく]されるかどうかは、11月[がつ]30日[にち]から12月[がつ]五日[いつか]まで中国[ちゅうごく]のアモイで開[ひら]かれる政府間[せいふかん]委員会[いいんかい]で決[き]まる見込[みこ]みです。', 'Whether it is officially registered is expected to be decided at the intergovernmental committee in Xiamen, China, from November 30 to December 5.', 'アモイ is Xiamen, a port city in China\'s Fujian province.'],
+            ['登録[とうろく]されれば、日本[にほん]の無形文化遺産[むけいぶんかいさん]は24件目[けんめ]になります。', 'If it is registered, it will be Japan\'s 24th Intangible Cultural Heritage item.'],
+            ['勧告[かんこく]の段階[だんかい]なので、まだ決[き]まったわけではありません。', 'It is only at the recommendation stage, so it has not been decided yet.'],
+          ],
+        },
+        N3: {
+          title: '「書道[しょどう]」を無形文化遺産[むけいぶんかいさん]に登録[とうろく]するようユネスコ評価機関[ひょうかきかん]が勧告[かんこく]　国内[こくない]24件目[けんめ]へ',
+          lines: [
+            ['文化庁[ぶんかちょう]は五日[いつか]、国連教育科学文化機関[こくれんきょういくかがくぶんかきかん]（ユネスコ）の評価機関[ひょうかきかん]が、日本[にほん]が提案[ていあん]した「書道[しょどう]」を無形文化遺産[むけいぶんかいさん]に登録[とうろく]するよう勧告[かんこく]したと発表[はっぴょう]した。', 'On the 5th, the Agency for Cultural Affairs announced that the evaluation body of UNESCO had recommended registering shodo, which Japan proposed, as an Intangible Cultural Heritage.'],
+            ['書道[しょどう]は、筆[ふで]や墨[すみ]などを使[つか]って文字[もじ]を表現[ひょうげん]する営[いとな]みで、漢字[かんじ]や仮名[かな]、漢字[かんじ]仮名[かな]交[ま]じりの書[しょ]のほか、印材[いんざい]に文字[もじ]を彫[ほ]る篆刻[てんこく]も含[ふく]まれる。', 'Shodo is the practice of expressing characters with a brush and ink; besides kanji, kana and mixed kanji-kana calligraphy, it includes tenkoku, carving characters into seal stock.', '漢字仮名交じり (kanji-kana majiri) is the ordinary Japanese mix of kanji and kana.'],
+            ['政府[せいふ]は2024年[ねん]3月[がつ]に申請[しんせい]したが、2025年[ねん]の審査[しんさ]の対象[たいしょう]とならなかったため、再申請[さいしんせい]していた。', 'The government applied in March 2024, but as it was not taken up for examination in 2025, it had applied again.'],
+            ['最終的[さいしゅうてき]な可否[かひ]は、11月[がつ]30日[にち]から12月[がつ]五日[いつか]に中国[ちゅうごく]のアモイで開[ひら]かれる政府間[せいふかん]委員会[いいんかい]で決[き]まる見通[みとお]しだ。', 'The final decision is expected to be made at the intergovernmental committee to be held in Xiamen, China, from November 30 to December 5.'],
+            ['登録[とうろく]されれば、国内[こくない]の無形文化遺産[むけいぶんかいさん]は24件目[けんめ]となる。', 'If registered, it will be the 24th Intangible Cultural Heritage item in Japan.'],
+            ['勧告[かんこく]は正式[せいしき]な決定[けってい]ではなく、委員会[いいんかい]の判断[はんだん]が注目[ちゅうもく]される。', 'The recommendation is not the official decision, and the committee\'s judgment is attracting attention.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-05-docomo-access',
+      date: '2026-11-05',
+      emoji: '📱',
+      titleEn: 'NTT Docomo halts My docomo and its online shop over possible unauthorized access',
+      sources: [
+        { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261105de70776' },
+        { name: 'TV Asahi (Yahoo! News Japan)', url: 'https://news.yahoo.co.jp/articles/dba2b8b66a6501211b96b8d2d3a1f75051bc122d' },
+        { name: 'ASCII (Yahoo! News Japan)', url: 'https://news.yahoo.co.jp/articles/726d1d63f828ae63fd372f29c2de8a44698b26d6' },
+        { name: 'TECHNO-EDGE', url: 'https://www.techno-edge.net/article/2026/11/05/5674.html' },
+      ],
+      levels: {
+        N5: {
+          title: 'ドコモの　サービスが　とまって　います',
+          lines: [
+            ['ドコモの　インターネットの　サービスが　一部[いちぶ]　止[と]まって　います。', 'Some of Docomo\'s internet services have stopped.'],
+            ['止[と]まって　いるのは、「My docomo」と　ドコモオンラインショップです。', 'What has stopped are My docomo and the Docomo Online Shop.', 'My docomo is the website and app where customers check and change their phone contract.'],
+            ['五日[いつか]の　午前[ごぜん]1時[じ]すぎから　つかえません。', 'They cannot be used since a little after 1 a.m. on the 5th.'],
+            ['知[し]らない　人[ひと]が　ドコモの　サーバーに　入[はい]った　かも　しれません。', 'Someone unknown may have got into Docomo\'s servers.', 'A server is a computer that holds a service\'s data.'],
+            ['ドコモは　わけを　しらべて　います。', 'Docomo is looking into the reason.'],
+            ['また　つかえる　日[ひ]は　まだ　わかりません。', 'The day they will work again is not known yet.'],
+            ['いそぐ　ときは、ドコモショップに　行[い]って　ください。', 'If you are in a hurry, please go to a Docomo shop.'],
+          ],
+        },
+        N4: {
+          title: 'ドコモ、不正[ふせい]アクセスの可能性[かのうせい]で「My docomo」などを停止[ていし]',
+          lines: [
+            ['NTTドコモは五日[いつか]、サーバーに不正[ふせい]なアクセスがあった可能性[かのうせい]があるとして、「My docomo」とドコモオンラインショップを止[と]めました。', 'On the 5th, NTT Docomo stopped My docomo and the Docomo Online Shop, saying there may have been unauthorized access to its servers.'],
+            ['サービスは五日[いつか]の午前[ごぜん]1時[じ]すぎから使[つか]えなくなっています。', 'The services have been unusable since a little after 1 a.m. on the 5th.'],
+            ['ドコモは、外部[がいぶ]から不正[ふせい]にアクセスされた可能性[かのうせい]が高[たか]いと判断[はんだん]し、原因[げんいん]と影響[えいきょう]の範囲[はんい]を調[しら]べています。', 'Docomo judged that it is likely there was unauthorized access from outside, and is investigating the cause and the extent of the impact.'],
+            ['五日[いつか]の昼[ひる]の時点[じてん]でも、いつ元[もと]どおりになるかは決[き]まっていません。', 'Even at midday on the 5th, it had not been decided when things would return to normal.'],
+            ['ドコモは、お客[きゃく]さんの情報[じょうほう]がもれたとは発表[はっぴょう]していません。', 'Docomo has not announced that customers\' information has leaked.'],
+            ['急[いそ]ぎの手続[てつづ]きは、お近[ちか]くのドコモショップで相談[そうだん]するよう案内[あんない]されています。', 'For urgent procedures, people are being advised to consult a nearby Docomo shop.'],
+          ],
+        },
+        N3: {
+          title: 'ドコモ、不正[ふせい]アクセスの可能性[かのうせい]でオンラインサービスを停止[ていし]　復旧[ふっきゅう]のめど立[た]たず',
+          lines: [
+            ['NTTドコモは五日[いつか]、サーバーが不正[ふせい]アクセスを受[う]けた可能性[かのうせい]があるとして、「My docomo」とドコモオンラインショップなどのオンラインサービスを停止[ていし]した。', 'On the 5th, NTT Docomo suspended online services such as My docomo and the Docomo Online Shop, saying its servers may have been subject to unauthorized access.'],
+            ['同社[どうしゃ]によると、サービスは五日[いつか]午前[ごぜん]1時[じ]すぎから緊急[きんきゅう]メンテナンスに入[はい]っており、外部[がいぶ]から不正[ふせい]にアクセスされた可能性[かのうせい]が高[たか]いと判断[はんだん]したという。', 'According to the company, the services have been in emergency maintenance since a little after 1 a.m. on the 5th, and it judged that unauthorized access from outside was likely.'],
+            ['原因[げんいん]や影響[えいきょう]の範囲[はんい]は調査中[ちょうさちゅう]で、昼[ひる]の時点[じてん]でも復旧[ふっきゅう]のめどは立[た]っていない。', 'The cause and extent of the impact are under investigation, and even at midday there was no prospect of recovery.', '復旧のめどが立たない (fukkyū no medo ga tatanai) means there is no clear prospect of when service will be restored.'],
+            ['顧客[こきゃく]情報[じょうほう]の流出[りゅうしゅつ]が確認[かくにん]されたとの発表[はっぴょう]は、今[いま]のところない。', 'So far there has been no announcement that a leak of customer information was confirmed.'],
+            ['ドコモは、急[いそ]ぎの手続[てつづ]きについては、店舗[てんぽ]のドコモショップで対応[たいおう]するよう案内[あんない]している。', 'Docomo is advising that urgent procedures be handled at its physical Docomo shops.'],
+            ['同社[どうしゃ]は10月[がつ]22日[にち]にも、セキュリティー対応[たいおう]のため止[と]めていた各種[かくしゅ]ウェブサイトの再開[さいかい]を発表[はっぴょう]していた。', 'On October 22, the company had also announced the reopening of various websites it had stopped for security measures.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-05-us-midterms',
+      date: '2026-11-05',
+      emoji: '🗳️',
+      titleEn: 'US midterms: Democrats win control of Congress, US media report',
+      sources: [
+        { name: 'CBS News', url: 'https://www.cbsnews.com/live-updates/house-election-results-2026/' },
+        { name: 'CNBC', url: 'https://www.cnbc.com/2026/11/03/midterm-elections-2026-live-updates.html' },
+        { name: 'CBC News', url: 'https://www.cbc.ca/news/world/livestory/us-midterm-election-results-live-updates-2026-9.7403367' },
+        { name: 'NHK', url: 'https://news.web.nhk/newsweb' },
+      ],
+      levels: {
+        N5: {
+          title: 'アメリカの　中間選挙[ちゅうかんせんきょ]　民主党[みんしゅとう]が　勝[か]つ',
+          lines: [
+            ['アメリカで　三日[みっか]に　中間選挙[ちゅうかんせんきょ]が　ありました。', 'A midterm election was held in the United States on the 3rd.', '中間選挙 (chūkan senkyo) is the election held halfway through a US president\'s four-year term.'],
+            ['民主党[みんしゅとう]が　たくさん　勝[か]ったと　つたえられて　います。', 'It is reported that the Democratic Party won many seats.', 'Here 民主党 means the US Democratic Party, not the Japanese party of the same name.'],
+            ['下院[かいん]で　民主党[みんしゅとう]が　いちばん　多[おお]く　なりました。', 'The Democrats became the biggest party in the House of Representatives.'],
+            ['上院[じょういん]でも　民主党[みんしゅとう]が　多[おお]く　なると　アメリカの　ニュースは　言[い]って　います。', 'American news says the Democrats will also be the largest in the Senate.'],
+            ['トランプ大統領[だいとうりょう]の　党[とう]、共和党[きょうわとう]は　まけました。', 'President Trump\'s party, the Republicans, lost.'],
+            ['あと　2年[ねん]、トランプ大統領[だいとうりょう]は　したい　ことが　しにくく　なる　かも　しれません。', 'For the next two years, it may be harder for President Trump to do what he wants.'],
+          ],
+        },
+        N4: {
+          title: 'アメリカ中間選挙[ちゅうかんせんきょ]、民主党[みんしゅとう]が議会[ぎかい]の多数[たすう]に　共和党[きょうわとう]は大敗[たいはい]',
+          lines: [
+            ['三日[みっか]にアメリカで行[おこな]われた中間選挙[ちゅうかんせんきょ]で、民主党[みんしゅとう]が下院[かいん]の多数[たすう]を取[と]ったと、アメリカのメディアが伝[つた]えています。', 'American media report that in the midterm election held in the US on the 3rd, the Democrats took a majority in the House of Representatives.'],
+            ['民主党[みんしゅとう]は上院[じょういん]でも多数派[たすうは]になったと伝[つた]えられています。', 'It is reported that the Democrats also became the majority in the Senate.'],
+            ['中間選挙[ちゅうかんせんきょ]は、大統領[だいとうりょう]の任期[にんき]の半分[はんぶん]が過[す]ぎたころに行[おこな]われ、大統領[だいとうりょう]への評価[ひょうか]を示[しめ]すものといわれます。', 'A midterm election is held when half of the president\'s term has passed, and is said to show how voters judge the president.'],
+            ['共和党[きょうわとう]のトランプ大統領[だいとうりょう]にとっては大[おお]きな敗北[はいぼく]で、残[のこ]り2年[ねん]の政策[せいさく]が議会[ぎかい]に止[と]められやすくなると見[み]られています。', 'It is a big defeat for Republican President Trump, and his policies for the remaining two years are seen as more likely to be blocked by Congress.'],
+            ['NHKは、イラン情勢[じょうせい]への対応[たいおう]が今後[こんご]の焦点[しょうてん]になると伝[つた]えています。', 'NHK reports that the response to the Iran situation will be a focus from now on.'],
+            ['開票[かいひょう]は、一部[いちぶ]でまだ続[つづ]いています。', 'The vote counting is still continuing in some places.'],
+          ],
+        },
+        N3: {
+          title: '米[べい]中間選挙[ちゅうかんせんきょ]、民主党[みんしゅとう]が上下両院[じょうげりょういん]で多数派[たすうは]に　トランプ氏[し]に打撃[だげき]',
+          lines: [
+            ['三日[みっか]に行[おこな]われた米国[べいこく]の中間選挙[ちゅうかんせんきょ]で、野党[やとう]・民主党[みんしゅとう]が連邦議会[れんぽうぎかい]の下院[かいん]で過半数[かはんすう]を確保[かくほ]する見通[みとお]しとなった。', 'In the US midterm election held on the 3rd, the opposition Democratic Party is projected to secure a majority in the House of Representatives of Congress.'],
+            ['米[べい]メディアによると、民主党[みんしゅとう]は上院[じょういん]でも共和党[きょうわとう]が持[も]っていた複数[ふくすう]の議席[ぎせき]を奪[うば]い、多数派[たすうは]となったとみられる。', 'According to US media, the Democrats also took several seats held by the Republicans in the Senate and appear to have become the majority.'],
+            ['中間選挙[ちゅうかんせんきょ]は大統領[だいとうりょう]の任期[にんき]の中間[ちゅうかん]に行[おこな]われ、政権[せいけん]への評価[ひょうか]を占[うらな]う場[ば]とされる。', 'A midterm election is held midway through a president\'s term and is regarded as a gauge of how the administration is judged.'],
+            ['トランプ大統領[だいとうりょう]にとっては大[おお]きな痛手[いたで]で、任期[にんき]の残[のこ]り2年[ねん]、議会[ぎかい]の抵抗[ていこう]で政策[せいさく]の実現[じつげん]が難[むずか]しくなる可能性[かのうせい]がある。', 'It is a heavy blow for President Trump, and for the remaining two years of his term it may become difficult to carry out his policies because of resistance in Congress.', '痛手 (itade) means a heavy blow or serious damage.'],
+            ['NHKは、イラン情勢[じょうせい]への対応[たいおう]が今後[こんご]の焦点[しょうてん]になると伝[つた]えている。', 'NHK reports that the response to the Iran situation will be a focus from now on.'],
+            ['一部[いちぶ]の州[しゅう]では開票[かいひょう]が続[つづ]いており、最終的[さいしゅうてき]な議席数[ぎせきすう]はまだ確定[かくてい]していない。', 'Vote counting continues in some states, and the final number of seats has not yet been fixed.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-11-04-typhoon-31-kanto-rain',
       date: '2026-11-04',
       emoji: '🌀',

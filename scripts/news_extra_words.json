@@ -1837,7 +1837,7 @@
   "12月": [
     "じゅうにがつ",
     "December",
-    "number + counter"
+    "noun"
   ],
   "3か月": [
     "さんかげつ",
@@ -7787,6 +7787,306 @@
   "浴場組合": [
     "よくじょうくみあい",
     "bathhouse association",
+    "noun"
+  ],
+  "書道": [
+    "しょどう",
+    "calligraphy (shodo)",
+    "noun"
+  ],
+  "ユネスコ": [
+    "ユネスコ",
+    "UNESCO",
+    "organization"
+  ],
+  "文化庁": [
+    "ぶんかちょう",
+    "Agency for Cultural Affairs",
+    "organization"
+  ],
+  "篆刻": [
+    "てんこく",
+    "seal carving (tenkoku)",
+    "noun"
+  ],
+  "正しく": [
+    "ただしく",
+    "correctly, properly",
+    "adverb"
+  ],
+  "30日": [
+    "さんじゅうにち",
+    "the 30th; 30 days",
+    "noun"
+  ],
+  "24番目": [
+    "にじゅうよんばんめ",
+    "24th",
+    "noun"
+  ],
+  "勧告": [
+    "かんこく",
+    "recommendation, advice",
+    "noun"
+  ],
+  "仮名": [
+    "かな",
+    "kana (Japanese syllabary)",
+    "noun"
+  ],
+  "審査": [
+    "しんさ",
+    "examination, screening",
+    "noun"
+  ],
+  "アモイ": [
+    "アモイ",
+    "Xiamen (China)",
+    "place name"
+  ],
+  "24件目": [
+    "にじゅうよんけんめ",
+    "the 24th case or item",
+    "noun"
+  ],
+  "営み": [
+    "いとなみ",
+    "activity, practice",
+    "noun"
+  ],
+  "印材": [
+    "いんざい",
+    "seal stock (material for carving a seal)",
+    "noun"
+  ],
+  "可否": [
+    "かひ",
+    "approval or rejection, pros and cons",
+    "noun"
+  ],
+  "ドコモ": [
+    "ドコモ",
+    "Docomo (NTT Docomo)",
+    "organization"
+  ],
+  "My": [
+    "マイ",
+    "My",
+    "noun"
+  ],
+  "docomo": [
+    "ドコモ",
+    "docomo",
+    "organization"
+  ],
+  "ドコモオンラインショップ": [
+    "ドコモオンラインショップ",
+    "Docomo Online Shop",
+    "noun"
+  ],
+  "1時すぎ": [
+    "いちじすぎ",
+    "a little after 1 o'clock",
+    "noun"
+  ],
+  "つかえる": [
+    "つかえる",
+    "can be used",
+    "verb"
+  ],
+  "ショップ": [
+    "ショップ",
+    "shop",
+    "noun"
+  ],
+  "NTT": [
+    "エヌティーティー",
+    "NTT",
+    "organization"
+  ],
+  "外部": [
+    "がいぶ",
+    "outside, external",
+    "noun"
+  ],
+  "もれる": [
+    "もれる",
+    "to leak out",
+    "verb"
+  ],
+  "急ぎ": [
+    "いそぎ",
+    "hurry, urgency",
+    "noun"
+  ],
+  "オンライン": [
+    "オンライン",
+    "online",
+    "noun"
+  ],
+  "復旧": [
+    "ふっきゅう",
+    "restoration, recovery",
+    "noun"
+  ],
+  "めど": [
+    "めど",
+    "prospect, outlook",
+    "noun"
+  ],
+  "メンテナンス": [
+    "メンテナンス",
+    "maintenance",
+    "noun"
+  ],
+  "22日": [
+    "にじゅうににち",
+    "the 22nd",
+    "noun"
+  ],
+  "各種": [
+    "かくしゅ",
+    "various kinds of",
+    "noun"
+  ],
+  "下院": [
+    "かいん",
+    "House of Representatives, lower house",
+    "noun"
+  ],
+  "上院": [
+    "じょういん",
+    "Senate, upper house",
+    "noun"
+  ],
+  "共和党": [
+    "きょうわとう",
+    "Republican Party",
+    "organization"
+  ],
+  "多数": [
+    "たすう",
+    "majority, many",
+    "noun"
+  ],
+  "大敗": [
+    "たいはい",
+    "crushing defeat",
+    "noun"
+  ],
+  "敗北": [
+    "はいぼく",
+    "defeat",
+    "noun"
+  ],
+  "イラン": [
+    "イラン",
+    "Iran",
+    "place name"
+  ],
+  "開票": [
+    "かいひょう",
+    "vote counting",
+    "noun"
+  ],
+  "両院": [
+    "りょういん",
+    "both houses",
+    "noun"
+  ],
+  "打撃": [
+    "だげき",
+    "blow, damage",
+    "noun"
+  ],
+  "過半数": [
+    "かはんすう",
+    "majority (over half)",
+    "noun"
+  ],
+  "複数": [
+    "ふくすう",
+    "several, plural",
+    "noun"
+  ],
+  "議席": [
+    "ぎせき",
+    "seat (in a legislature)",
+    "noun"
+  ],
+  "中間": [
+    "ちゅうかん",
+    "middle, halfway",
+    "noun"
+  ],
+  "政権": [
+    "せいけん",
+    "administration, government",
+    "noun"
+  ],
+  "占う": [
+    "うらなう",
+    "to forecast, to tell fortunes",
+    "verb"
+  ],
+  "痛手": [
+    "いたで",
+    "heavy blow, serious damage",
+    "noun"
+  ],
+  "確定": [
+    "かくてい",
+    "confirmation, being fixed",
+    "noun"
+  ],
+  "無形文化遺産": [
+    "むけいぶんかいさん",
+    "Intangible Cultural Heritage",
+    "noun"
+  ],
+  "中間選挙": [
+    "ちゅうかんせんきょ",
+    "midterm election",
+    "noun"
+  ],
+  "評価機関": [
+    "ひょうかきかん",
+    "evaluation body",
+    "noun"
+  ],
+  "政府間委員会": [
+    "せいふかんいいんかい",
+    "intergovernmental committee",
+    "noun"
+  ],
+  "11月": [
+    "じゅういちがつ",
+    "November",
+    "noun"
+  ],
+  "はんこ": [
+    "はんこ",
+    "seal, stamp",
+    "noun"
+  ],
+  "連邦議会": [
+    "れんぽうぎかい",
+    "Congress (US federal legislature)",
+    "noun"
+  ],
+  "最終的": [
+    "さいしゅうてき",
+    "final, ultimate",
+    "na-adjective"
+  ],
+  "国連教育科学文化機関": [
+    "こくれんきょういくかがくぶんかきかん",
+    "UNESCO (United Nations Educational, Scientific and Cultural Organization)",
+    "organization"
+  ],
+  "上下両院": [
+    "じょうげりょういん",
+    "both houses (upper and lower)",
     "noun"
   ]
 }
