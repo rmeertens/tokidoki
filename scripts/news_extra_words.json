@@ -8088,5 +8088,220 @@
     "じょうげりょういん",
     "both houses (upper and lower)",
     "noun"
+  ],
+  "可決": [
+    "かけつ",
+    "approval (of a bill, by vote)",
+    "noun"
+  ],
+  "引き下げ": [
+    "ひきさげ",
+    "lowering, cut",
+    "noun"
+  ],
+  "約10兆円": [
+    "やくじゅっちょうえん",
+    "about 10 trillion yen",
+    "noun"
+  ],
+  "1989年": [
+    "せんきゅうひゃくはちじゅうきゅうねん",
+    "1989",
+    "noun"
+  ],
+  "導入": [
+    "どうにゅう",
+    "introduction",
+    "noun"
+  ],
+  "田嶋幸三": [
+    "たじまこうぞう",
+    "Kozo Tashima (football official)",
+    "name"
+  ],
+  "田嶋": [
+    "たじま",
+    "Tashima (surname)",
+    "name"
+  ],
+  "FIFA": [
+    "フィファ",
+    "FIFA (international football federation)",
+    "organization"
+  ],
+  "協会": [
+    "きょうかい",
+    "association",
+    "noun"
+  ],
+  "インファンティーノ": [
+    "インファンティーノ",
+    "Infantino (FIFA president)",
+    "name"
+  ],
+  "連盟": [
+    "れんめい",
+    "federation, league",
+    "noun"
+  ],
+  "2016年": [
+    "にせんじゅうろくねん",
+    "2016",
+    "noun"
+  ],
+  "再選": [
+    "さいせん",
+    "re-election",
+    "noun"
+  ],
+  "届け出": [
+    "とどけで",
+    "notification, filing",
+    "noun"
+  ],
+  "JFA": [
+    "ジェーエフエー",
+    "JFA (Japan Football Association)",
+    "organization"
+  ],
+  "意向": [
+    "いこう",
+    "intention, wish",
+    "noun"
+  ],
+  "4期": [
+    "よんき",
+    "four terms",
+    "noun"
+  ],
+  "現職": [
+    "げんしょく",
+    "incumbent",
+    "noun"
+  ],
+  "望ましい": [
+    "のぞましい",
+    "desirable",
+    "i-adjective"
+  ],
+  "18日": [
+    "じゅうはちにち",
+    "the 18th",
+    "noun"
+  ],
+  "出馬": [
+    "しゅつば",
+    "running (in an election)",
+    "noun"
+  ],
+  "全会": [
+    "ぜんかい",
+    "all members (unanimous)",
+    "noun"
+  ],
+  "各国": [
+    "かっこく",
+    "each country",
+    "noun"
+  ],
+  "欧州": [
+    "おうしゅう",
+    "Europe",
+    "place name"
+  ],
+  "有力": [
+    "ゆうりょく",
+    "likely, influential",
+    "na-adjective"
+  ],
+  "中部電力": [
+    "ちゅうぶでんりょく",
+    "Chubu Electric Power",
+    "organization"
+  ],
+  "浜岡原発": [
+    "はまおかげんぱつ",
+    "Hamaoka nuclear power plant",
+    "place name"
+  ],
+  "チェック": [
+    "チェック",
+    "check",
+    "noun"
+  ],
+  "安井": [
+    "やすい",
+    "Yasui (surname)",
+    "name"
+  ],
+  "9月": [
+    "くがつ",
+    "September",
+    "noun"
+  ],
+  "3号機": [
+    "さんごうき",
+    "Unit 3 (of a plant)",
+    "noun"
+  ],
+  "4号機": [
+    "よんごうき",
+    "Unit 4 (of a plant)",
+    "noun"
+  ],
+  "取り下げる": [
+    "とりさげる",
+    "to withdraw",
+    "verb"
+  ],
+  "耐震": [
+    "たいしん",
+    "earthquake resistance",
+    "noun"
+  ],
+  "同省": [
+    "どうしょう",
+    "the same ministry",
+    "noun"
+  ],
+  "社内": [
+    "しゃない",
+    "inside the company",
+    "noun"
+  ],
+  "体制": [
+    "たいせい",
+    "system, structure",
+    "noun"
+  ],
+  "通報": [
+    "つうほう",
+    "report, tip-off",
+    "noun"
+  ],
+  "法令": [
+    "ほうれい",
+    "laws and regulations",
+    "noun"
+  ],
+  "順守": [
+    "じゅんしゅ",
+    "compliance",
+    "noun"
+  ],
+  "解消": [
+    "かいしょう",
+    "resolving, ending",
+    "noun"
+  ],
+  "稼働": [
+    "かどう",
+    "operation (of a plant)",
+    "noun"
+  ],
+  "失墜": [
+    "しっつい",
+    "loss (of trust), fall",
+    "noun"
   ]
 }

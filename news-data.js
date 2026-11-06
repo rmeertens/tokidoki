@@ -23,6 +23,151 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-11-06-tax-cut-lower-house',
+      date: '2026-11-06',
+      emoji: '🏛️',
+      titleEn: 'Lower House passes the bill cutting the consumption tax on food to 1%; it goes to the Upper House',
+      sources: [
+        { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261106de71359' },
+        { name: 'Mainichi Shimbun (Yahoo! News Japan)', url: 'https://news.yahoo.co.jp/articles/5f503f4f45937abaf123f58e48e31e7c814b9af9' },
+        { name: 'TV Asahi (ANN)', url: 'https://news.ksb.co.jp/ann/article/17029673' },
+        { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/11/06/japan/politics/consumption-tax-bill-passed-lower-house/' },
+      ],
+      levels: {
+        N5: {
+          title: '食[た]べ物[もの]の　消費税[しょうひぜい]を　へらす　法案[ほうあん]が　衆議院[しゅうぎいん]を　通[とお]りました',
+          lines: [
+            ['食[た]べ物[もの]の　消費税[しょうひぜい]を　へらす　法案[ほうあん]が、六日[むいか]、衆議院[しゅうぎいん]を　通[とお]りました。', 'On the 6th, the bill to lower the consumption tax on food passed the Lower House.', '法案 (hōan) is a bill: a draft law that has not been passed yet. 衆議院 is the Lower House of the Diet.'],
+            ['今[いま]は　8%ですが、1%に　なります。', 'It is 8% now, but it will become 1%.'],
+            ['来年[らいねん]の　四月[しがつ]から　二年[にねん]だけの　予定[よてい]です。', 'The plan is for two years only, from April next year.'],
+            ['自民党[じみんとう]や　維新[いしん]などが　「いい」と　言[い]いました。', 'The LDP, Ishin and others said yes.'],
+            ['ほかの　党[とう]は　みんな　「だめ」と　言[い]いました。', 'All the other parties said no.'],
+            ['これから　参議院[さんぎいん]で　話[はな]し合[あ]います。', 'From now, it will be discussed in the Upper House.'],
+            ['与党[よとう]は　十二月[じゅうにがつ]十二日[じゅうににち]までに　決[き]めたいと　考[かんが]えて　います。', 'The ruling parties want to decide by December 12.'],
+          ],
+        },
+        N4: {
+          title: '食料品[しょくりょうひん]の消費減税[しょうひげんぜい]法案[ほうあん]、衆議院[しゅうぎいん]を通過[つうか]　参議院[さんぎいん]へ',
+          lines: [
+            ['飲食料品[いんしょくりょうひん]の消費税[しょうひぜい]を8%から1%に下[さ]げる法案[ほうあん]が、六日[むいか]、衆議院[しゅうぎいん]の本会議[ほんかいぎ]で可決[かけつ]されました。', 'On the 6th, the bill to lower the consumption tax on food and drink from 8% to 1% was passed at the Lower House plenary session.', '可決 (kaketsu) means a bill is approved by a vote. 本会議 is the plenary session where all members vote.'],
+            ['自民党[じみんとう]や日本維新[にっぽんいしん]の会[かい]などが賛成[さんせい]し、野党[やとう]はすべて反対[はんたい]しました。', 'The LDP, Nippon Ishin no Kai and others voted for it, and all the opposition parties voted against.'],
+            ['下[さ]げるのは、来年[らいねん]の四月[しがつ]から二年間[にねんかん]の予定[よてい]です。', 'The cut is planned for two years from April next year.'],
+            ['法案[ほうあん]は参議院[さんぎいん]に送[おく]られ、これから話[はな]し合[あ]われます。', 'The bill has been sent to the Upper House and will be discussed from now.'],
+            ['与党[よとう]は、国会[こっかい]が終[お]わる十二月[じゅうにがつ]十二日[じゅうににち]までに成立[せいりつ]させたいと考[かんが]えています。', 'The ruling parties want it to become law by December 12, when the Diet session ends.'],
+            ['しかし、参議院[さんぎいん]では与党[よとう]の議員[ぎいん]が過半数[かはんすう]に足[た]りません。', 'However, the ruling parties do not have a majority in the Upper House.'],
+            ['野党[やとう]は、お金[かね]をどこから出[だ]すのかがはっきりしないと批判[ひはん]しています。', 'The opposition criticizes that it is not clear where the money will come from.'],
+          ],
+        },
+        N3: {
+          title: '食料品[しょくりょうひん]の消費減税[しょうひげんぜい]関連[かんれん]法案[ほうあん]、衆院[しゅういん]を通過[つうか]　与党[よとう]などの賛成[さんせい]多数[たすう]で可決[かけつ]',
+          lines: [
+            ['飲食料品[いんしょくりょうひん]の消費税率[しょうひぜいりつ]を来年[らいねん]四月[しがつ]から二年間[にねんかん]、8%から1%に引[ひ]き下[さ]げる関連[かんれん]法案[ほうあん]は六日[むいか]、衆院[しゅういん]本会議[ほんかいぎ]で自民党[じみんとう]や日本維新[にっぽんいしん]の会[かい]などの賛成[さんせい]多数[たすう]で可決[かけつ]され、参院[さんいん]に送[おく]られた。', 'The related bill to cut the consumption tax rate on food and drink from 8% to 1% for two years from April next year was passed on the 6th at the Lower House plenary session by a majority of the LDP, Nippon Ishin no Kai and others, and sent to the Upper House.'],
+            ['中道[ちゅうどう]などの野党[やとう]はすべて反対[はんたい]した。', 'All opposition parties, including Chūdō, voted against it.'],
+            ['野党[やとう]は、2年間[ねんかん]で約[やく]10兆円[ちょうえん]とされる財源[ざいげん]の具体策[ぐたいさく]や給付[きゅうふ]の対象[たいしょう]が示[しめ]されないままの採決[さいけつ]だと批判[ひはん]している。', 'The opposition criticizes that the vote was taken without concrete measures for the funding, said to be about 10 trillion yen over two years, or the recipients of the benefit being shown.', '財源 (zaigen) means the source of money for a policy.'],
+            ['政府[せいふ]・与党[よとう]は、会期末[かいきまつ]の十二月[じゅうにがつ]十二日[じゅうににち]までの成立[せいりつ]を目指[めざ]している。', 'The government and ruling parties aim for it to become law by December 12, the end of the session.'],
+            ['ただ、参院[さんいん]では与党[よとう]が過半数[かはんすう]に達[たっ]しておらず、野党[やとう]の対応[たいおう]が成立[せいりつ]の鍵[かぎ]を握[にぎ]る。', 'However, the ruling parties do not have a majority in the Upper House, so the opposition\'s response holds the key to its passage.'],
+            ['成立[せいりつ]すれば、1989年[ねん]に消費税[しょうひぜい]が導入[どうにゅう]されて以来[いらい]、税率[ぜいりつ]の引[ひ]き下[さ]げは初[はじ]めてとなる。', 'If it becomes law, it will be the first cut in the tax rate since the consumption tax was introduced in 1989.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-06-tashima-fifa',
+      date: '2026-11-06',
+      emoji: '⚽',
+      titleEn: 'Former JFA president Kozo Tashima says he will run for FIFA president',
+      sources: [
+        { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261105de71141' },
+        { name: 'Gekisaka', url: 'https://web.gekisaka.jp/news/japan/detail/?462574-462574-fl=' },
+        { name: 'Football Channel (Yahoo! News Japan)', url: 'https://news.yahoo.co.jp/articles/c4ffbaa542a79dc195587a375237fb047f4607c7' },
+        { name: 'Ultra Soccer', url: 'https://web.ultra-soccer.jp/news/all/42221/' },
+      ],
+      levels: {
+        N5: {
+          title: '田嶋幸三[たじまこうぞう]さんが　FIFAの　会長[かいちょう]に　なりたいと　言[い]いました',
+          lines: [
+            ['サッカーの　田嶋幸三[たじまこうぞう]さんが、FIFAの　会長[かいちょう]に　なりたいと　言[い]いました。', 'Kozo Tashima of football said he wants to become president of FIFA.', 'FIFA is the international football federation that runs world football, including the World Cup.'],
+            ['田嶋[たじま]さんは、日本[にっぽん]サッカー協会[きょうかい]の　名誉会長[めいよかいちょう]です。', 'Mr. Tashima is the honorary president of the Japan Football Association.', '名誉会長 (meiyo kaichō) is an honorary title given to a former president.'],
+            ['五日[いつか]に　記者会見[きしゃかいけん]を　しました。', 'He held a press conference on the 5th.'],
+            ['FIFAは、世界[せかい]の　サッカーを　まとめる　大[おお]きな　会[かい]です。', 'FIFA is a large organization that leads world football.'],
+            ['選挙[せんきょ]は　来年[らいねん]の　三月[さんがつ]です。', 'The election is in March next year.'],
+            ['今[いま]の　会長[かいちょう]、インファンティーノさんも　また　なりたいと　考[かんが]えて　います。', 'The current president, Mr. Infantino, also wants to be president again.'],
+            ['田嶋[たじま]さんは、十一月[じゅういちがつ]十八日[じゅうはちにち]までに　手続[てつづ]きを　しなければ　なりません。', 'Mr. Tashima has to finish the procedure by November 18.'],
+          ],
+        },
+        N4: {
+          title: '日本[にっぽん]サッカー協会[きょうかい]の田嶋幸三[たじまこうぞう]名誉会長[めいよかいちょう]、FIFA会長選[かいちょうせん]に立候補[りっこうほ]へ',
+          lines: [
+            ['日本[にっぽん]サッカー協会[きょうかい]の田嶋幸三[たじまこうぞう]名誉会長[めいよかいちょう]は五日[いつか]、記者会見[きしゃかいけん]を開[ひら]き、来年[らいねん]のFIFA（国際[こくさい]サッカー連盟[れんめい]）の会長選[かいちょうせん]に立候補[りっこうほ]する考[かんが]えを明[あき]らかにしました。', 'On the 5th, Honorary President Kozo Tashima of the Japan Football Association held a press conference and said he intends to run in next year\'s FIFA (international football federation) presidential election.', '立候補 (rikkōho) means to stand as a candidate in an election.'],
+            ['田嶋[たじま]さんは2016年[ねん]から日本[にっぽん]サッカー協会[きょうかい]の会長[かいちょう]を務[つと]め、今[いま]は名誉会長[めいよかいちょう]です。', 'Mr. Tashima has been president of the Japan Football Association since 2016 and is now honorary president.'],
+            ['FIFAでは、今[いま]の会長[かいちょう]のインファンティーノさんが再選[さいせん]を目指[めざ]しています。', 'At FIFA, the current president, Mr. Infantino, is seeking re-election.'],
+            ['田嶋[たじま]さんは、選挙[せんきょ]をしないで同[おな]じ人[ひと]がまた会長[かいちょう]になるのはよくないという考[かんが]えを話[はな]しました。', 'Mr. Tashima said he thinks it is not good for the same person to become president again without an election.'],
+            ['立候補[りっこうほ]するには、十一月[じゅういちがつ]十八日[じゅうはちにち]までに届[とど]け出[で]て、5つ以上[いじょう]の協会[きょうかい]から推薦[すいせん]の手紙[てがみ]をもらう必要[ひつよう]があります。', 'To run, he has to register by November 18 and get letters of support from five or more associations.'],
+            ['日本[にっぽん]サッカー協会[きょうかい]の理事会[りじかい]は、田嶋[たじま]さんを支援[しえん]することを全員[ぜんいん]一致[いっち]で決[き]めました。', 'The board of the Japan Football Association unanimously decided to support Mr. Tashima.'],
+            ['ほかの国[くに]の協会[きょうかい]から支持[しじ]が集[あつ]まるかどうかは、まだ分[わ]かりません。', 'It is not yet known whether he will gain support from the associations of other countries.'],
+          ],
+        },
+        N3: {
+          title: '日本[にっぽん]サッカー協会[きょうかい]の田嶋幸三[たじまこうぞう]名誉会長[めいよかいちょう]、FIFA会長選[かいちょうせん]への立候補[りっこうほ]を表明[ひょうめい]',
+          lines: [
+            ['日本[にっぽん]サッカー協会[きょうかい]（JFA）の田嶋幸三[たじまこうぞう]名誉会長[めいよかいちょう]は五日[いつか]に記者会見[きしゃかいけん]し、2027年[ねん]3月[がつ]に予定[よてい]されている国際[こくさい]サッカー連盟[れんめい]（FIFA）の会長選[かいちょうせん]に立候補[りっこうほ]する意向[いこう]を表明[ひょうめい]した。', 'At a press conference on the 5th, Honorary President Kozo Tashima of the Japan Football Association (JFA) announced his intention to run in the presidential election of the international football federation (FIFA) scheduled for March 2027.'],
+            ['田嶋氏[たじまし]は2016年度[ねんど]から4期[き]連続[れんぞく]でJFA会長[かいちょう]を務[つと]め、現在[げんざい]は名誉会長[めいよかいちょう]の立場[たちば]にある。', 'Mr. Tashima served four consecutive terms as JFA president from fiscal 2016 and is now honorary president.'],
+            ['会長選[かいちょうせん]では現職[げんしょく]のインファンティーノ会長[かいちょう]が再選[さいせん]を目指[めざ]しており、田嶋氏[たじまし]は、選挙[せんきょ]をせずに現職[げんしょく]が再[ふたた]び就任[しゅうにん]するのは望[のぞ]ましくないとの考[かんが]えを示[しめ]した。', 'In the election, the incumbent, President Infantino, is seeking re-election, and Mr. Tashima indicated that he thinks it is undesirable for the incumbent to take the post again without an election.', '現職 (genshoku) means the person currently holding the post.'],
+            ['立候補[りっこうほ]の届[とど]け出[で]期限[きげん]は11月[がつ]18日[にち]で、少[すく]なくとも5つの協会[きょうかい]の推薦[すいせん]が必要[ひつよう]とされる。', 'The deadline for registering as a candidate is November 18, and endorsements from at least five associations are said to be required.'],
+            ['JFAの理事会[りじかい]は、田嶋氏[たじまし]の出馬[しゅつば]を支援[しえん]することを全会[ぜんかい]一致[いっち]で決[き]めたが、各国[かっこく]の協会[きょうかい]から推薦[すいせん]が集[あつ]まるかが焦点[しょうてん]となる。', 'The JFA board unanimously decided to support Mr. Tashima\'s run, but the focus will be whether endorsements gather from associations around the world.'],
+            ['欧州[おうしゅう]などでは支持[しじ]を見込[みこ]む報道[ほうどう]もあるが、現職[げんしょく]の再選[さいせん]が有力[ゆうりょく]との見方[みかた]も出[で]ている。', 'Some reports in Europe and elsewhere expect support for him, but there is also a view that the incumbent is likely to be re-elected.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-06-chubu-electric-order',
+      date: '2026-11-06',
+      emoji: '⚡',
+      titleEn: 'Government orders Chubu Electric to improve its operations over data fraud at the Hamaoka nuclear plant',
+      sources: [
+        { name: 'Kyodo (Ryukyu Shimpo)', url: 'https://ryukyushimpo.jp/kyodo/entry-5591192.html' },
+        { name: 'TV Asahi (ANN)', url: 'https://news.ksb.co.jp/ann/article/17029039' },
+        { name: 'Nagoya TV (Yahoo! News Japan)', url: 'https://news.yahoo.co.jp/articles/e0b72d048c045f7de55318dbb0083f937a82bce7' },
+        { name: 'Shizuoka Asahi TV (Yahoo! News Japan)', url: 'https://news.yahoo.co.jp/articles/8be021a775a7c2336574e93ad99a17cd64a6b052' },
+      ],
+      levels: {
+        N5: {
+          title: '国[くに]が　中部電力[ちゅうぶでんりょく]に　「よくしなさい」と　命令[めいれい]',
+          lines: [
+            ['経済産業省[けいざいさんぎょうしょう]は　六日[むいか]、中部電力[ちゅうぶでんりょく]に　「会社[かいしゃ]を　よくしなさい」と　命令[めいれい]しました。', 'On the 6th, the Ministry of Economy, Trade and Industry ordered Chubu Electric Power to improve its company.', 'This is a 業務改善命令 (gyōmu kaizen meirei), a business improvement order given to a company that broke rules.'],
+            ['静岡県[しずおかけん]の　浜岡原発[はまおかげんぱつ]の　地震[じしん]の　データに、うその　ことが　ありました。', 'There was false information in the earthquake data of the Hamaoka nuclear power plant in Shizuoka.', '原発 (genpatsu) is short for 原子力発電所, a nuclear power plant.'],
+            ['会社[かいしゃ]の　中[なか]の　チェックも　よく　ありませんでした。', 'The checks inside the company were also not good.'],
+            ['中部電力[ちゅうぶでんりょく]は　十一月[じゅういちがつ]の　終[お]わりまでに、計画[けいかく]を　出[だ]します。', 'Chubu Electric will submit a plan by the end of November.'],
+            ['来年[らいねん]の　三月[さんがつ]までに、何[なに]を　したか　国[くに]に　話[はな]します。', 'By March next year, it will report to the government what it did.'],
+            ['安井[やすい]社長[しゃちょう]は、みなさんの　信頼[しんらい]を　なくしたと　あやまりました。', 'President Yasui apologized, saying the company lost everyone\'s trust.'],
+          ],
+        },
+        N4: {
+          title: '経産省[けいさんしょう]が中部電力[ちゅうぶでんりょく]に業務改善命令[ぎょうむかいぜんめいれい]　浜岡原発[はまおかげんぱつ]のデータ不正[ふせい]など',
+          lines: [
+            ['経済産業省[けいざいさんぎょうしょう]は六日[むいか]、中部電力[ちゅうぶでんりょく]に業務改善命令[ぎょうむかいぜんめいれい]を出[だ]しました。', 'On the 6th, the Ministry of Economy, Trade and Industry issued a business improvement order to Chubu Electric Power.', '業務改善命令 is an order based on the Electricity Business Act telling a company to fix how it operates.'],
+            ['静岡県[しずおかけん]にある浜岡原発[はまおかげんぱつ]で、地震[じしん]の揺[ゆ]れの想定[そうてい]に使[つか]うデータの不正[ふせい]が見[み]つかったためです。', 'This is because fraud was found in the data used to estimate earthquake shaking at the Hamaoka nuclear power plant in Shizuoka.'],
+            ['会社[かいしゃ]の中[なか]のチェックや、問題[もんだい]を知[し]らせる制度[せいど]がうまく働[はたら]いていなかったことも問題[もんだい]にされました。', 'It was also treated as a problem that the internal checks and the system for reporting problems were not working well.'],
+            ['中部電力[ちゅうぶでんりょく]は、11月[がつ]の終[お]わりまでに改善[かいぜん]の計画[けいかく]を出[だ]し、来年[らいねん]3月[がつ]の終[お]わりまでに実施[じっし]の様子[ようす]を報告[ほうこく]しなければなりません。', 'Chubu Electric must submit an improvement plan by the end of November and report on how it was carried out by the end of March next year.'],
+            ['中部電力[ちゅうぶでんりょく]は9月[がつ]に、浜岡原発[はまおかげんぱつ]の3号機[ごうき]と4号機[ごうき]を再[ふたた]び動[うご]かすための申請[しんせい]を取[と]り下[さ]げています。', 'In September, Chubu Electric withdrew its application to restart units 3 and 4 of the Hamaoka plant.'],
+            ['命令書[めいれいしょ]を受[う]け取[と]った安井[やすい]社長[しゃちょう]は、信頼[しんらい]を大[おお]きく失[うしな]ったと謝[あやま]りました。', 'President Yasui, who received the written order, apologized, saying the company had lost much trust.'],
+          ],
+        },
+        N3: {
+          title: '経産省[けいさんしょう]、中部電力[ちゅうぶでんりょく]に業務改善命令[ぎょうむかいぜんめいれい]　浜岡原発[はまおかげんぱつ]の耐震[たいしん]データ不正[ふせい]など受[う]け',
+          lines: [
+            ['経済産業省[けいざいさんぎょうしょう]は六日[むいか]、浜岡原発[はまおかげんぱつ]（静岡県[しずおかけん]御前崎市[おまえざきし]）の耐震[たいしん]設計[せっけい]をめぐるデータ不正[ふせい]などを受[う]け、中部電力[ちゅうぶでんりょく]に電気事業法[でんきじぎょうほう]に基[もと]づく業務改善命令[ぎょうむかいぜんめいれい]を出[だ]した。', 'On the 6th, in response to the data fraud over the earthquake-resistance design of the Hamaoka nuclear power plant (Omaezaki, Shizuoka) and other matters, the Ministry of Economy, Trade and Industry issued Chubu Electric Power a business improvement order under the Electricity Business Act.'],
+            ['同省[どうしょう]は、データ不正[ふせい]に加[くわ]え、社内[しゃない]のチェック体制[たいせい]や内部通報[ないぶつうほう]制度[せいど]が機能[きのう]していなかったことを問題視[もんだいし]した。', 'The ministry treated as a problem not only the data fraud but also that the internal check system and whistleblowing system were not functioning.', '内部通報 (naibu tsūhō) is whistleblowing: employees reporting wrongdoing inside their own company.'],
+            ['命令[めいれい]では、法令[ほうれい]順守[じゅんしゅ]の強化[きょうか]や原子力部門[げんしりょくぶもん]の閉鎖性[へいさせい]の解消[かいしょう]などを求[もと]めている。', 'The order demands, among other things, stronger legal compliance and an end to the closed nature of the nuclear division.'],
+            ['同社[どうしゃ]は11月[がつ]末[まつ]までに業務[ぎょうむ]改善[かいぜん]計画[けいかく]を提出[ていしゅつ]し、来年[らいねん]3月[がつ]末[まつ]までに実施[じっし]状況[じょうきょう]を報告[ほうこく]する必要[ひつよう]がある。', 'The company must submit a business improvement plan by the end of November and report on its implementation by the end of March next year.'],
+            ['中部電力[ちゅうぶでんりょく]は9月[がつ]、浜岡原発[はまおかげんぱつ]3、4号機[ごうき]の再稼働[さいかどう]審査[しんさ]の申請[しんせい]を取[と]り下[さ]げていた。', 'In September, Chubu Electric had withdrawn its application for the restart review of units 3 and 4 of the Hamaoka plant.'],
+            ['安井[やすい]社長[しゃちょう]は命令書[めいれいしょ]を受[う]け取[と]った後[あと]、信頼[しんらい]を大[おお]きく失墜[しっつい]したとおわびした。', 'After receiving the written order, President Yasui apologized, saying the company had greatly damaged trust.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-11-05-shodo-unesco',
       date: '2026-11-05',
       emoji: '🖌️',

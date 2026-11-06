@@ -162,7 +162,7 @@
   </url>
   <url>
     <loc>https://tokidoki.meertens.dev/news-week-2026-11-02.html</loc>
-    <lastmod>2026-11-05</lastmod>
+    <lastmod>2026-11-06</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
@@ -184,6 +184,21 @@
     <loc>https://tokidoki.meertens.dev/news-week-2026-10-05.html</loc>
     <lastmod>2026-10-11</lastmod>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-11-06-tax-cut-lower-house.html</loc>
+    <lastmod>2026-11-06</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-11-06-tashima-fifa.html</loc>
+    <lastmod>2026-11-06</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-11-06-chubu-electric-order.html</loc>
+    <lastmod>2026-11-06</lastmod>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://tokidoki.meertens.dev/news-2026-11-05-shodo-unesco.html</loc>
