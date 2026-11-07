@@ -23,6 +23,151 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-11-07-typhoon-32',
+      date: '2026-11-07',
+      emoji: '🌀',
+      titleEn: 'Typhoon No. 32 forms near the Mariana Islands, the most typhoons in a year since 1994',
+      sources: [
+        { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261107de72096' },
+        { name: 'Weathernews', url: 'https://weathernews.jp/news/202611/070131/' },
+        { name: 'Fukui Shimbun', url: 'https://www.fukuishimbun.co.jp/articles/-/2740427' },
+      ],
+      levels: {
+        N5: {
+          title: '台風[たいふう]32号[ごう]が　できました',
+          lines: [
+            ['七日[なのか]、マリアナ諸島[しょとう]の　近[ちか]くで　台風[たいふう]32号[ごう]が　できました。', 'On the 7th, Typhoon No. 32 formed near the Mariana Islands.', 'The Mariana Islands are in the Pacific, south of Japan.'],
+            ['今年[ことし]は　台風[たいふう]が　とても　多[おお]いです。', 'There have been very many typhoons this year.'],
+            ['1年[ねん]に　32個[こ]できたのは、1994年[ねん]の　あとで　はじめてです。', 'It is the first time since 1994 that 32 typhoons have formed in one year.'],
+            ['台風[たいふう]は　西[にし]へ　進[すす]む　予定[よてい]です。', 'The typhoon is expected to move west.'],
+            ['十日[とおか]から　十一日[じゅういちにち]ごろ、小笠原諸島[おがさわらしょとう]に　近[ちか]づく　かもしれません。', 'It may come close to the Ogasawara Islands around the 10th to the 11th.'],
+            ['本州[ほんしゅう]や　沖縄[おきなわ]に　近[ちか]づく　予報[よほう]は　まだ　ありません。', 'There is no forecast yet of it coming close to Honshu or Okinawa.'],
+            ['天気[てんき]の　ニュースを　見[み]て　ください。', 'Please watch the weather news.'],
+          ],
+        },
+        N4: {
+          title: '台風[たいふう]32号[ごう]が発生[はっせい]　年間[ねんかん]の発生数[はっせいすう]は1994年[ねん]以来[いらい]の多[おお]さに',
+          lines: [
+            ['七日[なのか]、マリアナ諸島[しょとう]の近[ちか]くで台風[たいふう]32号[ごう]が発生[はっせい]しました。', 'On the 7th, Typhoon No. 32 formed near the Mariana Islands.', 'The name Champaka was given to this typhoon from a list of names used across Asia.'],
+            ['今年[ことし]の台風[たいふう]の数[かず]は、1994年[ねん]以来[いらい]、32年[ねん]ぶりの多[おお]さです。', 'This year\'s number of typhoons is the highest in 32 years, since 1994.'],
+            ['今年[ことし]は1月[がつ]から11月[がつ]まで、毎月[まいつき]台風[たいふう]が発生[はっせい]しています。', 'This year, typhoons have formed every month from January to November.'],
+            ['台風[たいふう]は西北西[せいほくせい]に進[すす]み、九日[ここのか]ごろから動[うご]きがゆっくりになる予想[よそう]です。', 'The typhoon is expected to move west-northwest and slow down from around the 9th.'],
+            ['十日[とおか]から十一日[じゅういちにち]ごろには、父島[ちちじま]や母島[ははじま]など小笠原諸島[おがさわらしょとう]に近[ちか]づくおそれがあります。', 'Around the 10th to the 11th, it may come close to the Ogasawara Islands, including Chichijima and Hahajima.'],
+            ['今[いま]のところ、本州[ほんしゅう]や沖縄[おきなわ]に近[ちか]づく予報[よほう]は出[で]ていません。', 'For now, there is no forecast of it approaching Honshu or Okinawa within five days.'],
+            ['小笠原諸島[おがさわらしょとう]では、波[なみ]や風[かぜ]に気[き]をつけてください。', 'On the Ogasawara Islands, please be careful of waves and wind.'],
+          ],
+        },
+        N3: {
+          title: '台風[たいふう]32号[ごう]が発生[はっせい]、年間[ねんかん]の発生数[はっせいすう]は1994年[ねん]以来[いらい]の多[おお]さ',
+          lines: [
+            ['気象庁[きしょうちょう]によると、台風[たいふう]32号[ごう]（チャンパカ）が七日[なのか]、マリアナ諸島[しょとう]で発生[はっせい]した。', 'According to the Japan Meteorological Agency, Typhoon No. 32 (Champaka) formed in the Mariana Islands on the 7th.', '台風 are numbered in the order they form each year. Names such as Champaka come from a list of names offered by countries across Asia.'],
+            ['年間[ねんかん]の台風[たいふう]の発生数[はっせいすう]が32個[こ]に達[たっ]したのは、1994年[ねん]以来[いらい]32年[ねん]ぶりとなる。', 'It is the first time in 32 years, since 1994, that the number of typhoons in a year has reached 32.'],
+            ['今年[ことし]は1月[がつ]から11月[がつ]まで、毎月[まいつき]台風[たいふう]が発生[はっせい]している。', 'This year, typhoons have formed every month from January to November.'],
+            ['台風[たいふう]は西北西[せいほくせい]へ進[すす]んだあと、九日[ここのか]ごろから動[うご]きが遅[おそ]くなり、十一日[じゅういちにち]には強[つよ]い勢[いきお]いで東[ひがし]へ向[む]きを変[か]える見込[みこ]みだ。', 'After moving west-northwest, it is expected to slow down from around the 9th and, on the 11th, turn east as a strong typhoon.'],
+            ['進路[しんろ]によっては、十日[とおか]から十一日[じゅういちにち]ごろに父島[ちちじま]や母島[ははじま]など小笠原諸島[おがさわらしょとう]に近[ちか]づき、荒[あ]れた天気[てんき]となるおそれがある。', 'Depending on its course, it may come close to the Ogasawara Islands, including Chichijima and Hahajima, around the 10th to the 11th and bring rough weather.'],
+            ['五日[いつか]先[さき]までの予報[よほう]では、本州[ほんしゅう]や沖縄[おきなわ]に近[ちか]づくとはされていない。', 'The forecast for the next five days does not say it will approach Honshu or Okinawa.'],
+            ['気象庁[きしょうちょう]は、今後[こんご]の台風[たいふう]情報[じょうほう]に注意[ちゅうい]するよう呼[よ]びかけている。', 'The agency is calling on people to watch for further typhoon information.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-07-kanto-quake-m61',
+      date: '2026-11-07',
+      emoji: '🌐',
+      titleEn: 'Magnitude 6.1 earthquake off the Kanto coast; strongest shaking of 3, no tsunami concern',
+      sources: [
+        { name: 'tenki.jp (Japan Weather Association)', url: 'https://tenki.jp/forecaster/deskpart/2026/11/06/41230.html' },
+        { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/11/06/japan/tokyo-shallow-quake/' },
+        { name: 'Arab News Japan', url: 'https://www.arabnews.jp/japan/%E6%9D%B1%E4%BA%AC%E6%B2%96%E3%81%A7%E3%83%9E%E3%82%B0%E3%83%8B%E3%83%81%E3%83%A5%E3%83%BC%E3%83%8961%E3%81%AE%E5%9C%B0%E9%9C%87%E6%B4%A5%E6%B3%A2%E8%AD%A6%E5%A0%B1%E3%81%AF%E3%81%AA%E3%81%97%E6%B0%97%E8%B1%A1%E5%BA%81-3001315' },
+      ],
+      levels: {
+        N5: {
+          title: '関東[かんとう]の　海[うみ]で　地震[じしん]が　ありました',
+          lines: [
+            ['六日[むいか]の　夜[よる]、関東[かんとう]の　東[ひがし]の　海[うみ]で　地震[じしん]が　ありました。', 'On the night of the 6th, there was an earthquake in the sea east of the Kanto region.'],
+            ['時間[じかん]は　7時[じ]39分[ふん]ごろです。', 'The time was around 7:39 p.m.'],
+            ['地震[じしん]の　大[おお]きさは　マグニチュード6.1でした。', 'The size of the earthquake was magnitude 6.1.', 'Magnitude shows the size of an earthquake itself. Intensity (震度) shows how strongly the ground shook in each place.'],
+            ['宮城県[みやぎけん]、福島県[ふくしまけん]、茨城県[いばらきけん]で　震度[しんど]3を　はかりました。', 'Intensity 3 was recorded in Miyagi, Fukushima and Ibaraki.'],
+            ['震度[しんど]は　ゆれの　強[つよ]さです。', 'Intensity is the strength of the shaking.'],
+            ['津波[つなみ]の　心配[しんぱい]は　ありません。', 'There is no worry about a tsunami.'],
+            ['日本[にっぽん]は　地震[じしん]が　多[おお]い　国[くに]です。いつも　準備[じゅんび]を　しましょう。', 'Japan is a country with many earthquakes. Let us always be prepared.'],
+          ],
+        },
+        N4: {
+          title: '関東[かんとう]東方沖[とうほうおき]でM6.1の地震[じしん]　津波[つなみ]の心配[しんぱい]なし',
+          lines: [
+            ['六日[むいか]の夜[よる]7時[じ]39分[ふん]ごろ、関東[かんとう]の東[ひがし]の沖[おき]を震源[しんげん]とする地震[じしん]がありました。', 'Around 7:39 p.m. on the 6th, there was an earthquake centered off the east of the Kanto region.', '震源 (shingen) is the focus of an earthquake, the place where it starts.'],
+            ['地震[じしん]の規模[きぼ]を表[あらわ]すマグニチュードは6.1でした。', 'The magnitude, which shows the size of the earthquake, was 6.1.'],
+            ['宮城県[みやぎけん]、福島県[ふくしまけん]、茨城県[いばらきけん]で、最大[さいだい]震度[しんど]3を観測[かんそく]しました。', 'A maximum intensity of 3 was observed in Miyagi, Fukushima and Ibaraki.'],
+            ['福島県[ふくしまけん]の大熊町[おおくままち]や茨城県[いばらきけん]の日立市[ひたちし]などで、震度[しんど]3のゆれがありました。', 'Shaking of intensity 3 was felt in places such as Okuma Town in Fukushima and Hitachi City in Ibaraki.'],
+            ['気象庁[きしょうちょう]は、この地震[じしん]による津波[つなみ]の心配[しんぱい]はないと発表[はっぴょう]しました。', 'The Japan Meteorological Agency announced that there is no worry about a tsunami from this earthquake.'],
+            ['外国[がいこく]のニュースでは「東京沖[とうきょうおき]の地震[じしん]」と伝[つた]えられました。', 'Foreign news reported it as "an earthquake off Tokyo".'],
+            ['地震[じしん]が起[お]きたときのために、家[いえ]の中[なか]の安全[あんぜん]を確[たし]かめておきましょう。', 'Let us check the safety inside our homes in case an earthquake happens.'],
+          ],
+        },
+        N3: {
+          title: '関東[かんとう]東方沖[とうほうおき]でM6.1の地震[じしん]、宮城[みやぎ]・福島[ふくしま]・茨城[いばらき]で震度[しんど]3',
+          lines: [
+            ['六日[むいか]午後[ごご]7時[じ]39分[ふん]ごろ、関東[かんとう]東方沖[とうほうおき]を震源[しんげん]とするマグニチュード6.1の地震[じしん]があった。', 'Around 7:39 p.m. on the 6th, there was a magnitude 6.1 earthquake centered off the east of the Kanto region.', '関東東方沖 means the sea east of the Kanto region. Some foreign media called it an earthquake "off Tokyo".'],
+            ['宮城県[みやぎけん]、福島県[ふくしまけん]、茨城県[いばらきけん]で最大[さいだい]震度[しんど]3を観測[かんそく]した。', 'A maximum intensity of 3 was observed in Miyagi, Fukushima and Ibaraki prefectures.'],
+            ['震度[しんど]3は、福島県[ふくしまけん]の大熊町[おおくままち]、双葉町[ふたばまち]、浪江町[なみえまち]や、茨城県[いばらきけん]の日立市[ひたちし]、東海村[とうかいむら]などで観測[かんそく]された。', 'Intensity 3 was observed in places such as Okuma, Futaba and Namie in Fukushima, and Hitachi City and Tokai Village in Ibaraki.'],
+            ['気象庁[きしょうちょう]は、この地震[じしん]による津波[つなみ]の被害[ひがい]の心配[しんぱい]はないと発表[はっぴょう]した。', 'The Japan Meteorological Agency announced that there is no concern of tsunami damage from this earthquake.'],
+            ['海外[かいがい]の報道[ほうどう]では「東京沖[とうきょうおき]で地震[じしん]」と伝[つた]えられたが、震源[しんげん]は関東[かんとう]東方[とうほう]の海[うみ]とされている。', 'Overseas reports said "earthquake off Tokyo", but the epicenter is said to be in the sea east of the Kanto region.'],
+            ['日本[にっぽん]では、大[おお]きな揺[ゆ]れがなくても、日頃[ひごろ]から地震[じしん]への備[そな]えが欠[か]かせない。', 'In Japan, preparing for earthquakes in daily life is essential, even without a big shake.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-07-boj-ueda-inflation',
+      date: '2026-11-07',
+      emoji: '💴',
+      titleEn: 'BOJ Governor Ueda: reaching 2% is a milestone, but upside inflation risks remain',
+      sources: [
+        { name: 'Kyodo News (373news)', url: 'https://373news.com/news/national/detail/2026110701000299' },
+        { name: 'Daily Sports (Kyodo)', url: 'https://www.daily.co.jp/society/main/2026/11/07/0021009237.shtml' },
+        { name: 'Nikkei', url: 'https://www.nikkei.com/article/DGXZQOUB298FK0Z21C26A0000000/' },
+        { name: 'Jiji Press (Yahoo! News Japan)', url: 'https://news.yahoo.co.jp/articles/723aaf29d00814ab8ac9fa07cfbff03e453371f2' },
+      ],
+      levels: {
+        N5: {
+          title: '日銀[にちぎん]の　総裁[そうさい]が　物[もの]の　ねだんの　話[はなし]を　しました',
+          lines: [
+            ['日本銀行[にっぽんぎんこう]の　植田和男[うえだかずお]総裁[そうさい]が、六日[むいか]、話[はなし]を　しました。', 'Kazuo Ueda, the governor of the Bank of Japan, spoke on the 6th.', 'The Bank of Japan (日銀) is Japan\'s central bank. It looks after the value of money.'],
+            ['日本[にっぽん]は、物[もの]の　ねだんが　2%ぐらい　上[あ]がる　ことを　目[め]ざして　きました。', 'Japan has aimed for prices to rise by about 2%.'],
+            ['その　目標[もくひょう]に　着[つ]いたのは、大[おお]きな　ことだと　言[い]いました。', 'He said that reaching this goal is a big step.'],
+            ['でも、まだ　むずかしい　ことが　たくさん　あると　言[い]いました。', 'But he said there are still many difficult things.'],
+            ['ねだんが　思[おも]ったより　上[あ]がる　かもしれません。', 'Prices may rise more than expected.'],
+            ['2%の　ねだんの　上[あ]がりを　みんなが　あたりまえだと　思[おも]う　ところまでは、まだ　行[い]っていません。', 'We have not yet reached the point where everyone thinks a 2% rise in prices is normal.'],
+            ['日銀[にちぎん]は、お金[かね]の　利子[りし]を　調節[ちょうせつ]して　いきます。', 'The Bank of Japan will adjust interest rates.'],
+          ],
+        },
+        N4: {
+          title: '日銀[にちぎん]の植田[うえだ]総裁[そうさい]、物価[ぶっか]の上振[うわぶ]れに注意[ちゅうい]　2%到達[とうたつ]でも「課題[かだい]は多[おお]い」',
+          lines: [
+            ['日本銀行[にっぽんぎんこう]の植田和男[うえだかずお]総裁[そうさい]は六日[むいか]、国際[こくさい]通貨[つうか]基金[ききん]（IMF）に関[かん]する行事[ぎょうじ]で話[はな]しました。', 'Bank of Japan Governor Kazuo Ueda spoke on the 6th at an event related to the International Monetary Fund (IMF).'],
+            ['物価[ぶっか]の上[あ]がり方[かた]は、目標[もくひょう]の2%の近[ちか]くで動[うご]くと考[かんが]えているが、予想[よそう]より上[うえ]になる危険[きけん]もあると話[はな]しました。', 'He said he expects prices to rise at around the 2% target, but that there is also a risk they could go higher than expected.', '上振れ (uwabure) means turning out higher than expected.'],
+            ['また、2%の物価[ぶっか]上昇[じょうしょう]は、まだ社会[しゃかい]の当[あ]たり前[まえ]になっていないという考[かんが]えを示[しめ]しました。', 'He also showed the view that a 2% rise in prices has not yet become the social norm.'],
+            ['2%に届[とど]いたことは「大事[だいじ]な節目[ふしめ]」だが、課題[かだい]はまだ多[おお]いと話[はな]しました。', 'He said that reaching 2% is an "important milestone", but many challenges remain.'],
+            ['日銀[にちぎん]は十月[じゅうがつ]三十日[さんじゅうにち]の会合[かいごう]の後[あと]、物価[ぶっか]の基調[きちょう]が2%とほぼ合[あ]っていると説明[せつめい]しました。', 'After its meeting on October 30, the Bank of Japan explained that the underlying trend in prices is roughly in line with 2%.', '基調的な物価上昇率 means the underlying inflation rate, without short-term changes such as those caused by oil prices.'],
+            ['総裁[そうさい]は、2%の近[ちか]くを保[たも]つために、金利[きんり]を適切[てきせつ]に調整[ちょうせい]していく必要[ひつよう]があると話[はな]しました。', 'The governor said that to stay near 2%, it is necessary to adjust interest rates appropriately.'],
+          ],
+        },
+        N3: {
+          title: '日銀[にちぎん]の植田[うえだ]総裁[そうさい]、物価[ぶっか]の上振[うわぶ]れを警戒[けいかい]　2%到達[とうたつ]も「課題[かだい]は多[おお]い」',
+          lines: [
+            ['日銀[にちぎん]の植田和男[うえだかずお]総裁[そうさい]は六日[むいか]、国際[こくさい]通貨[つうか]基金[ききん]（IMF）関連[かんれん]の行事[ぎょうじ]で講演[こうえん]し、物価[ぶっか]の見通[みとお]しについて語[かた]った。', 'Bank of Japan Governor Kazuo Ueda gave a speech at an event related to the International Monetary Fund (IMF) on the 6th and spoke about the outlook for prices.'],
+            ['基調的[きちょうてき]な物価[ぶっか]上昇率[じょうしょうりつ]は目標[もくひょう]の2%前後[ぜんご]で推移[すいい]すると想定[そうてい]しているが、上振[うわぶ]れのリスクもあるとの認識[にんしき]を示[しめ]した。', 'He showed the view that the underlying inflation rate is expected to stay around the 2% target, but that there is also a risk of it overshooting.', '基調的な物価上昇率 means the underlying inflation rate, without short-term swings. 上振れ means turning out higher than expected.'],
+            ['物価[ぶっか]と賃金[ちんぎん]がともに上[あ]がる状態[じょうたい]が今後[こんご]も続[つづ]くかどうかは分[わ]からないとし、2%のインフレはまだ社会[しゃかい]の規範[きはん]になりきっていないとの見方[みかた]を示[しめ]した。', 'He said it is unclear whether prices and wages will keep rising together, and that 2% inflation has not yet fully become a social norm.'],
+            ['2%への到達[とうたつ]について、総裁[そうさい]は「重要[じゅうよう]な節目[ふしめ]だが、多[おお]くの課題[かだい]が残[のこ]されている」との考[かんが]えを示[しめ]した。', 'On reaching 2%, the governor expressed the view, "It is an important milestone, but many challenges remain."'],
+            ['日銀[にちぎん]は十月[じゅうがつ]三十日[さんじゅうにち]の金融[きんゆう]政策[せいさく]決定[けってい]会合[かいごう]の後[あと]にも、基調的[きちょうてき]な物価[ぶっか]上昇率[じょうしょうりつ]が2%とおおむね整合的[せいごうてき]な水準[すいじゅん]にあるとの認識[にんしき]を示[しめ]していた。', 'After its monetary policy meeting on October 30, the BOJ had also indicated that the underlying inflation rate is at a level broadly consistent with 2%.'],
+            ['総裁[そうさい]は、物価[ぶっか]を2%前後[ぜんご]に保[たも]つには、金利[きんり]を適切[てきせつ]に調整[ちょうせい]する必要[ひつよう]があると強調[きょうちょう]した。', 'The governor stressed that to keep prices at around 2%, interest rates need to be adjusted appropriately.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-11-06-tax-cut-lower-house',
       date: '2026-11-06',
       emoji: '🏛️',
