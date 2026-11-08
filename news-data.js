@@ -23,6 +23,148 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-11-08-aichi-quake-m57',
+      date: '2026-11-08',
+      emoji: '🌐',
+      titleEn: 'Magnitude 5.7 earthquake in western Shizuoka shakes Aichi; 21 people hurt, no tsunami',
+      sources: [
+        { name: 'Jiji Press (nippon.com)', url: 'https://www.nippon.com/en/articles/-/57086' },
+        { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/11/08/japan/earthquake-aichi-sunday/' },
+      ],
+      levels: {
+        N5: {
+          title: '愛知県[あいちけん]で　大[おお]きな　地震[じしん]が　ありました',
+          lines: [
+            ['八日[ようか]の　夜中[よなか]、午前[ごぜん]1時[じ]4分[ふん]ごろ、大[おお]きな　地震[じしん]が　ありました。', 'On the 8th, in the middle of the night at about 1:04 a.m., there was a big earthquake.'],
+            ['地震[じしん]が　はじまった　ところは、静岡県[しずおかけん]の　西[にし]の　ほうでした。', 'The place where the earthquake started was in the western part of Shizuoka.'],
+            ['愛知県[あいちけん]の　知多市[ちたし]で、とても　強[つよ]い　ゆれが　ありました。', 'In Chita City in Aichi, there was very strong shaking.'],
+            ['けがを　した　人[ひと]は、21人[にん]です。', 'The number of people who were hurt is 21.'],
+            ['けがは　軽[かる]い　人[ひと]が　多[おお]いです。', 'Most of the injuries are light.'],
+            ['電車[でんしゃ]が　おくれたり、止[と]まったり　しました。', 'Trains were late or stopped.'],
+            ['津波[つなみ]の　心配[しんぱい]は　ありません。', 'There is no worry about a tsunami.'],
+          ],
+        },
+        N4: {
+          title: '静岡県[しずおかけん]西部[せいぶ]でM5.7の地震[じしん]　愛知県[あいちけん]で震度[しんど]5強[きょう]、21人[にん]けが',
+          lines: [
+            ['八日[ようか]の午前[ごぜん]1時[じ]4分[ふん]ごろ、静岡県[しずおかけん]西部[せいぶ]を震源[しんげん]とする地震[じしん]がありました。', 'At around 1:04 a.m. on the 8th, there was an earthquake centered in western Shizuoka.', '震源 (shingen) is the focus of an earthquake, the place where it starts.'],
+            ['気象庁[きしょうちょう]によると、地震[じしん]の規模[きぼ]はマグニチュード5.7、震源[しんげん]の深[ふか]さは約[やく]41キロでした。', 'According to the Japan Meteorological Agency, the magnitude was 5.7 and the depth of the focus was about 41 km.'],
+            ['愛知県[あいちけん]の知多市[ちたし]で、震度[しんど]5強[きょう]を観測[かんそく]しました。', 'An intensity of upper 5 was observed in Chita City, Aichi.', '震度5強 (shindo go-kyō) is "upper 5" on Japan\'s intensity scale, which goes up to 7.'],
+            ['愛知県[あいちけん]の瀬戸市[せとし]や岐阜県[ぎふけん]の恵那市[えなし]、浜松市[はままつし]などでは、震度[しんど]5弱[じゃく]でした。', 'In places such as Seto City in Aichi, Ena City in Gifu and Hamamatsu City, it was lower 5.'],
+            ['愛知県[あいちけん]と静岡県[しずおかけん]で、合[あ]わせて21人[にん]がけがをしました。', 'In total, 21 people were hurt in Aichi and Shizuoka.'],
+            ['碧南市[へきなんし]では、50代[だい]の女性[じょせい]が外[そと]へ逃[に]げるときに足首[あしくび]の骨[ほね]を折[お]りました。', 'In Hekinan City, a woman in her 50s broke an ankle bone while running outside.'],
+            ['津波[つなみ]の心配[しんぱい]はありませんが、電車[でんしゃ]がおくれたり止[と]まったりしました。', 'There is no worry about a tsunami, but trains were delayed or stopped.'],
+          ],
+        },
+        N3: {
+          title: '静岡県[しずおかけん]西部[せいぶ]でM5.7の地震[じしん]、愛知県[あいちけん]で震度[しんど]5強[きょう]　21人[にん]けが',
+          lines: [
+            ['八日[ようか]午前[ごぜん]1時[じ]4分[ふん]ごろ、静岡県[しずおかけん]西部[せいぶ]を震源[しんげん]とするマグニチュード5.7の地震[じしん]があり、愛知県[あいちけん]知多市[ちたし]で震度[しんど]5強[きょう]を観測[かんそく]した。', 'At around 1:04 a.m. on the 8th, there was a magnitude 5.7 earthquake centered in western Shizuoka Prefecture, and an intensity of upper 5 was observed in Chita, Aichi.'],
+            ['気象庁[きしょうちょう]によると、震源[しんげん]の深[ふか]さは約[やく]41キロで、津波[つなみ]は発生[はっせい]しなかった。', 'According to the Japan Meteorological Agency, the focus was about 41 km deep, and no tsunami occurred.'],
+            ['愛知県[あいちけん]の瀬戸市[せとし]、岐阜県[ぎふけん]の恵那市[えなし]、静岡県[しずおかけん]の浜松市[はままつし]などでも震度[しんど]5弱[じゃく]を観測[かんそく]した。', 'An intensity of lower 5 was also observed in places such as Seto in Aichi, Ena in Gifu and Hamamatsu in Shizuoka.'],
+            ['時事[じじ]通信[つうしん]によると、愛知県[あいちけん]では18人[にん]、静岡県[しずおかけん]では3人[にん]が負傷[ふしょう]した。', 'According to Jiji Press, 18 people were injured in Aichi and 3 in Shizuoka.'],
+            ['けがの多[おお]くは軽[かる]いもので、碧南市[へきなんし]では、避難[ひなん]しようと外[そと]に出[で]た50代[だい]の女性[じょせい]が足首[あしくび]を骨折[こっせつ]した。', 'Most injuries were light, and in Hekinan a woman in her 50s who went outside to evacuate broke her ankle.'],
+            ['窓[まど]ガラスが割[わ]れたり、商品[しょうひん]が棚[たな]から落[お]ちたりしたほか、新幹線[しんかんせん]を含[ふく]む鉄道[てつどう]に遅[おく]れや運転[うんてん]の見合[みあ]わせが出[で]た。', 'Window glass broke and goods fell from shelves, and railways, including the Shinkansen, saw delays and suspensions.'],
+            ['死者[ししゃ]は報告[ほうこく]されていないが、気象庁[きしょうちょう]は今後[こんご]の地震[じしん]に注意[ちゅうい]するよう呼[よ]びかけている。', 'No deaths have been reported, but the Japan Meteorological Agency is urging people to watch out for further earthquakes.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-08-tomari-nuclear-drill',
+      date: '2026-11-08',
+      emoji: '☢️',
+      titleEn: 'Government holds a nuclear disaster drill for an accident at the Tomari plant in Hokkaido',
+      sources: [
+        { name: 'Jiji Press (nippon.com)', url: 'https://www.nippon.com/en/articles/-/57077' },
+        { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/11/08/japan/nuclear-disaster-drill-tomari-plant/' },
+      ],
+      levels: {
+        N5: {
+          title: '原発[げんぱつ]の　事故[じこ]の　練習[れんしゅう]を　しました',
+          lines: [
+            ['七日[なのか]から、北海道[ほっかいどう]で　原発[げんぱつ]の　練習[れんしゅう]が　ありました。', 'From the 7th, there was a nuclear power plant drill in Hokkaido.'],
+            ['泊原発[とまりげんぱつ]で　事故[じこ]が　あったと　考[かんが]えて、練習[れんしゅう]を　しました。', 'They practiced, pretending that there had been an accident at the Tomari nuclear plant.'],
+            ['国[くに]と　北海道[ほっかいどう]の　人[ひと]が　いっしょに　しました。', 'People from the country and from Hokkaido did it together.'],
+            ['近[ちか]くに　住[す]んでいる　人[ひと]、約[やく]8500人[にん]が　来[く]る　予定[よてい]です。', 'About 8,500 people living nearby are expected to take part.'],
+            ['泊原発[とまりげんぱつ]で　練習[れんしゅう]を　するのは、10年[ねん]ぶりです。', 'It is the first drill at the Tomari plant in 10 years.'],
+            ['二日目[ふつかめ]に、高市[たかいち]総理[そうり]が　「原子力[げんしりょく]の　緊急事態[きんきゅうじたい]」と　言[い]う　練習[れんしゅう]を　しました。', 'On the second day, Prime Minister Takaichi practiced declaring a "nuclear emergency".'],
+            ['もしもの　時[とき]の　ために、みんなで　準備[じゅんび]を　して　います。', 'Everyone is preparing for when it really matters.'],
+          ],
+        },
+        N4: {
+          title: '北海道[ほっかいどう]の泊原発[とまりげんぱつ]で事故[じこ]を想定[そうてい]　国[くに]が原子力[げんしりょく]防災[ぼうさい]訓練[くんれん]',
+          lines: [
+            ['政府[せいふ]は七日[なのか]から、北海道電力[ほっかいどうでんりょく]の泊原発[とまりげんぱつ]で事故[じこ]が起[お]きたと考[かんが]えた、原子力[げんしりょく]防災[ぼうさい]訓練[くんれん]を始[はじ]めました。', 'From the 7th, the government began a nuclear disaster drill imagining an accident at Hokkaido Electric Power\'s Tomari plant.'],
+            ['訓練[くんれん]では、北海道[ほっかいどう]の西[にし]の沖[おき]で地震[じしん]があり、3号機[ごうき]の冷[ひ]やす装置[そうち]が使[つか]えなくなったと考[かんが]えます。', 'In the drill, they imagine an earthquake off the west coast of Hokkaido that makes the cooling system of Reactor No. 3 unusable.'],
+            ['北海道[ほっかいどう]や周[まわ]りの市町村[しちょうそん]、内閣府[ないかくふ]などが参加[さんか]しています。', 'Hokkaido, the surrounding towns and cities, and the Cabinet Office are taking part.'],
+            ['泊原発[とまりげんぱつ]での訓練[くんれん]は10年[ねん]ぶりで、地元[じもと]の住民[じゅうみん]約[やく]8500人[にん]が参加[さんか]する予定[よてい]です。', 'It is the first drill at the Tomari plant in 10 years, and about 8,500 local residents are expected to take part.'],
+            ['二日目[ふつかめ]には、高市早苗[たかいちさなえ]総理[そうり]が原子力[げんしりょく]緊急事態[きんきゅうじたい]を宣言[せんげん]しました。', 'On the second day, Prime Minister Sanae Takaichi declared a nuclear emergency.', 'This was part of the drill; no real accident happened.'],
+            ['放射線[ほうしゃせん]を浴[あ]びたと考[かんが]えた人[ひと]を運[はこ]んだり、テレビ会議[かいぎ]で対策[たいさく]を話[はな]し合[あ]ったりしました。', 'People imagined to have been exposed to radiation were carried, and measures were discussed at a video meeting.'],
+            ['泊原発[とまりげんぱつ]の3号機[ごうき]は去年[きょねん]、安全[あんぜん]の基準[きじゅん]に合[あ]うと認[みと]められましたが、再[ふたた]び動[うご]く時期[じき]はまだ分[わ]かりません。', 'Reactor No. 3 of the Tomari plant was found last year to meet the safety standards, but it is still unclear when it will restart.'],
+          ],
+        },
+        N3: {
+          title: '泊原発[とまりげんぱつ]の事故[じこ]を想定[そうてい]、政府[せいふ]が原子力[げんしりょく]防災[ぼうさい]訓練[くんれん]　地元[じもと]住民[じゅうみん]約[やく]8500人[にん]が参加[さんか]へ',
+          lines: [
+            ['政府[せいふ]は七日[なのか]、北海道電力[ほっかいどうでんりょく]泊原発[とまりげんぱつ]（北海道[ほっかいどう]泊村[とまりむら]）での重大[じゅうだい]事故[じこ]を想定[そうてい]した原子力[げんしりょく]総合[そうごう]防災[ぼうさい]訓練[くんれん]を始[はじ]めた。', 'On the 7th, the government began a comprehensive nuclear disaster drill imagining a serious accident at Hokkaido Electric Power\'s Tomari plant (Tomari Village, Hokkaido).'],
+            ['北海道[ほっかいどう]西方沖[せいほうおき]で地震[じしん]が発生[はっせい]し、3号機[ごうき]の冷却[れいきゃく]機能[きのう]が失[うしな]われたとの想定[そうてい]だ。', 'The scenario is that an earthquake occurs off western Hokkaido and Reactor No. 3 loses its cooling function.'],
+            ['北海道[ほっかいどう]や関係[かんけい]する市町村[しちょうそん]、内閣府[ないかくふ]などが参加[さんか]しており、泊原発[とまりげんぱつ]での訓練[くんれん]は10年[ねん]ぶりとなる。', 'The prefecture, the municipalities concerned and the Cabinet Office are taking part, and this is the first drill held at the Tomari plant in 10 years.'],
+            ['地元[じもと]住民[じゅうみん]約[やく]8500人[にん]が参加[さんか]する見通[みとお]しで、二日目[ふつかめ]には高市早苗[たかいちさなえ]首相[しゅしょう]が原子力[げんしりょく]緊急事態[きんきゅうじたい]を宣言[せんげん]する場面[ばめん]もあった。', 'About 8,500 local residents are expected to take part, and on the second day there was a scene in which Prime Minister Sanae Takaichi declared a nuclear emergency.'],
+            ['被曝[ひばく]したと想定[そうてい]された人[ひと]の搬送[はんそう]が行[おこな]われたほか、テレビ会議[かいぎ]システムで対策[たいさく]会議[かいぎ]も開[ひら]かれた。', 'People assumed to have been exposed to radiation were transported, and a countermeasures meeting was also held by video conference.'],
+            ['泊原発[とまりげんぱつ]3号機[ごうき]は2025年[ねん]に新規制[しんきせい]基準[きじゅん]に適合[てきごう]していると認[みと]められたが、工事[こうじ]計画[けいかく]の審査[しんさ]が続[つづ]いており、再稼働[さいかどう]の時期[じき]は見通[みとお]せていない。', 'Reactor No. 3 was found in 2025 to conform to the new regulatory standards, but review of its construction plan continues and the timing of a restart is unclear.', '再稼働 (saikadō) means restarting a nuclear reactor after it has been stopped.'],
+            ['また、運転[うんてん]の差[さ]し止[と]めを求[もと]める住民[じゅうみん]の訴[うった]えでは、札幌高裁[さっぽろこうさい]が来年[らいねん]1月[がつ]に判決[はんけつ]を言[い]い渡[わた]す予定[よてい]だ。', 'In the residents\' lawsuit seeking to halt operation, the Sapporo High Court is scheduled to give its ruling in January next year.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-08-godzilla-megamullion',
+      date: '2026-11-08',
+      emoji: '🦖',
+      titleEn: 'The "Godzilla Megamullion" seafloor formation found by the Japan Coast Guard is chosen as a geological heritage site',
+      sources: [
+        { name: 'nippon.com', url: 'https://www.nippon.com/en/articles/-/57068' },
+        { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/11/08/japan/godzilla-megamullion-heritage/' },
+      ],
+      levels: {
+        N5: {
+          title: '海[うみ]の　底[そこ]の　「ゴジラ」が　えらばれました',
+          lines: [
+            ['海[うみ]の　底[そこ]に、とても　大[おお]きな　山[やま]のような　ものが　あります。', 'On the sea floor, there is something like a very big mountain.'],
+            ['海上保安庁[かいじょうほあんちょう]が　見[み]つけて、「ゴジラ・メガムリオン」と　いう　名前[なまえ]が　つきました。', 'The Japan Coast Guard found it, and it was given the name "Godzilla Megamullion".'],
+            ['とても　大[おお]きいので、ゴジラの　名前[なまえ]に　なりました。', 'It is so big that it got the name Godzilla.'],
+            ['場所[ばしょ]は、沖[おき]ノ鳥島[とりしま]の　南東[なんとう]の　海[うみ]です。', 'It is in the sea southeast of Okinotorishima.'],
+            ['大[おお]きさは、およそ　125キロ　×　55キロです。', 'Its size is about 125 km by 55 km.'],
+            ['世界[せかい]の　地質[ちしつ]の　大切[たいせつ]な　場所[ばしょ]100こに、えらばれました。', 'It was chosen as one of 100 important geological places in the world.'],
+            ['日本[にっぽん]の　海[うみ]には、まだ　知[し]らない　ものが　たくさん　あるかも　しれません。', 'There may still be many things in the seas of Japan that we do not know.'],
+          ],
+        },
+        N4: {
+          title: '海底[かいてい]の「ゴジラ・メガムリオン」　世界[せかい]の地質[ちしつ]遺産[いさん]100選[せん]に',
+          lines: [
+            ['海上[かいじょう]保安庁[ほあんちょう]が見[み]つけた海底[かいてい]の地形[ちけい]「ゴジラ・メガムリオン」が、世界[せかい]の地質[ちしつ]遺産[いさん]100選[せん]に選[えら]ばれました。', 'The seafloor feature "Godzilla Megamullion", found by the Japan Coast Guard, has been chosen as one of the world\'s 100 geological heritage sites.', 'The list is made by the International Union of Geological Sciences (IUGS). This was its third round of selections.'],
+            ['場所[ばしょ]は、沖[おき]ノ鳥島[とりしま]の南東[なんとう]の海[うみ]です。', 'It is in the sea southeast of Okinotorishima.'],
+            ['2001年[ねん]に、海上[かいじょう]保安庁[ほあんちょう]が大陸棚[たいりくだな]を調[しら]べているときに見[み]つかりました。', 'It was found in 2001 while the Japan Coast Guard was surveying the continental shelf.'],
+            ['大[おお]きさは、およそ125キロ×55キロで、ふつうのメガムリオンの約[やく]10倍[ばい]です。', 'Its size is about 125 km by 55 km, about ten times a typical megamullion.', 'A megamullion is a huge, smooth hill on the sea floor where rock from deep under the crust has come up.'],
+            ['あまりに大[おお]きいので、怪獣[かいじゅう]ゴジラにちなんで名前[なまえ]がつき、2021年[ねん]に国際的[こくさいてき]に登録[とうろく]されました。', 'Because it is so big, it was named after the monster Godzilla and registered internationally in 2021.'],
+            ['フィリピン海[かい]プレートの上[うえ]にあり、プレートができる仕組[しく]みや、地球[ちきゅう]の中[なか]の様子[ようす]を知[し]る手[て]がかりになります。', 'It lies on the Philippine Sea plate and is a clue to how plates form and what the inside of the Earth is like.'],
+          ],
+        },
+        N3: {
+          title: '海上[かいじょう]保安庁[ほあんちょう]が発見[はっけん]した海底[かいてい]地形[ちけい]「ゴジラ・メガムリオン」、世界[せかい]の地質[ちしつ]遺産[いさん]100選[せん]に',
+          lines: [
+            ['海上[かいじょう]保安庁[ほあんちょう]は、同庁[どうちょう]が発見[はっけん]した海底[かいてい]地形[ちけい]「ゴジラ・メガムリオン」が、国際[こくさい]地質[ちしつ]科学[かがく]連合[れんごう]（IUGS）の「世界[せかい]の地質[ちしつ]遺産[いさん]100選[せん]」に選[えら]ばれたと発表[はっぴょう]した。', 'The Japan Coast Guard announced that the seafloor feature "Godzilla Megamullion", which it discovered, has been chosen for the International Union of Geological Sciences\' "100 Geological Heritage Sites".', 'This was the third round of selections for the IUGS list.'],
+            ['沖[おき]ノ鳥島[とりしま]の南東[なんとう]の海底[かいてい]にあり、2001年[ねん]の大陸棚[たいりくだな]調査[ちょうさ]で見[み]つかった。', 'It lies on the seabed southeast of Okinotorishima and was found in a continental shelf survey in 2001.'],
+            ['フィリピン海[かい]プレート上[じょう]にあり、広[ひろ]さは約[やく]125キロ×55キロと、一般的[いっぱんてき]なメガムリオンの約[やく]10倍[ばい]に当[あ]たる。', 'It lies on the Philippine Sea plate and measures about 125 km by 55 km, roughly ten times a typical megamullion.', 'A megamullion is a huge, smooth dome on the sea floor where rock from deep under the crust has been exposed.'],
+            ['同種[どうしゅ]の地形[ちけい]では最大[さいだい]とみられ、その巨大[きょだい]さから怪獣[かいじゅう]ゴジラにちなんで名付[なづ]けられ、2021年[ねん]に国際的[こくさいてき]に登録[とうろく]された。', 'It is believed to be the largest of its kind, and because of its enormous size it was named after the monster Godzilla and registered internationally in 2021.'],
+            ['日本人[にほんじん]研究者[けんきゅうしゃ]を中心[ちゅうしん]とする国際[こくさい]チームの研究[けんきゅう]は、マントルの構造[こうぞう]やプレートが生[う]まれる仕組[しく]みの理解[りかい]に役立[やくだ]ってきた。', 'Research by an international team centered on Japanese scientists has helped our understanding of the structure of the mantle and how plates are born.'],
+            ['海[うみ]に囲[かこ]まれた日本[にっぽん]には、人[ひと]の目[め]に触[ふ]れていない貴重[きちょう]な自然[しぜん]がまだ眠[ねむ]っているのかもしれない。', 'Japan, surrounded by sea, may still hold precious nature that no one has seen.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-11-07-typhoon-32',
       date: '2026-11-07',
       emoji: '🌀',

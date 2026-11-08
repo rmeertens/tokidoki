@@ -8478,5 +8478,365 @@
     "せいごう",
     "consistency",
     "noun"
+  ],
+  "1時": [
+    "いちじ",
+    "one o'clock",
+    "counter"
+  ],
+  "4分ごろ": [
+    "よんぷんごろ",
+    "around 4 minutes past",
+    "adverb"
+  ],
+  "知多": [
+    "ちた",
+    "Chita (city in Aichi)",
+    "place name"
+  ],
+  "21人": [
+    "にじゅういちにん",
+    "21 people",
+    "number + counter"
+  ],
+  "18人": [
+    "じゅうはちにん",
+    "18 people",
+    "number + counter"
+  ],
+  "西部": [
+    "せいぶ",
+    "western part",
+    "noun"
+  ],
+  "5強": [
+    "ごきょう",
+    "upper 5 (on the seismic intensity scale)",
+    "noun"
+  ],
+  "5弱": [
+    "ごじゃく",
+    "lower 5 (on the seismic intensity scale)",
+    "noun"
+  ],
+  "約41キロ": [
+    "やくよんじゅういちキロ",
+    "about 41 km",
+    "noun"
+  ],
+  "瀬戸": [
+    "せと",
+    "Seto (city in Aichi)",
+    "place name"
+  ],
+  "岐阜": [
+    "ぎふ",
+    "Gifu",
+    "place name"
+  ],
+  "恵那": [
+    "えな",
+    "Ena (city in Gifu)",
+    "place name"
+  ],
+  "浜松": [
+    "はままつ",
+    "Hamamatsu (city in Shizuoka)",
+    "place name"
+  ],
+  "碧南": [
+    "へきなん",
+    "Hekinan (city in Aichi)",
+    "place name"
+  ],
+  "50代": [
+    "ごじゅうだい",
+    "in one's fifties",
+    "noun"
+  ],
+  "足首": [
+    "あしくび",
+    "ankle",
+    "noun"
+  ],
+  "負傷": [
+    "ふしょう",
+    "injury, to be injured",
+    "noun, suru-verb"
+  ],
+  "避難": [
+    "ひなん",
+    "evacuation",
+    "noun, suru-verb"
+  ],
+  "死者": [
+    "ししゃ",
+    "person killed, fatality",
+    "noun"
+  ],
+  "原発": [
+    "げんぱつ",
+    "nuclear power plant (short for 原子力発電所)",
+    "noun"
+  ],
+  "北海道": [
+    "ほっかいどう",
+    "Hokkaido",
+    "place name"
+  ],
+  "二日目": [
+    "ふつかめ",
+    "the second day",
+    "noun"
+  ],
+  "約8500人": [
+    "やくはっせんごひゃくにん",
+    "about 8,500 people",
+    "number + counter"
+  ],
+  "原子力": [
+    "げんしりょく",
+    "nuclear power",
+    "noun"
+  ],
+  "北海道電力": [
+    "ほっかいどうでんりょく",
+    "Hokkaido Electric Power",
+    "organization"
+  ],
+  "市町村": [
+    "しちょうそん",
+    "cities, towns and villages (municipalities)",
+    "noun"
+  ],
+  "地元": [
+    "じもと",
+    "local area, locals",
+    "noun"
+  ],
+  "宣言": [
+    "せんげん",
+    "declaration, to declare",
+    "noun, suru-verb"
+  ],
+  "放射線": [
+    "ほうしゃせん",
+    "radiation",
+    "noun"
+  ],
+  "冷却": [
+    "れいきゃく",
+    "cooling",
+    "noun, suru-verb"
+  ],
+  "被曝": [
+    "ひばく",
+    "exposure to radiation",
+    "noun, suru-verb"
+  ],
+  "搬送": [
+    "はんそう",
+    "transport (of a patient)",
+    "noun, suru-verb"
+  ],
+  "適合": [
+    "てきごう",
+    "conformity, to conform",
+    "noun, suru-verb"
+  ],
+  "工事": [
+    "こうじ",
+    "construction work",
+    "noun"
+  ],
+  "見通せる": [
+    "みとおせる",
+    "to be able to foresee",
+    "ichidan verb"
+  ],
+  "差し止め": [
+    "さしとめ",
+    "injunction, halt",
+    "noun"
+  ],
+  "高裁": [
+    "こうさい",
+    "high court (short for 高等裁判所)",
+    "noun"
+  ],
+  "海上保安庁": [
+    "かいじょうほあんちょう",
+    "Japan Coast Guard",
+    "organization"
+  ],
+  "ゴジラ・メガムリオン": [
+    "ゴジラ・メガムリオン",
+    "Godzilla Megamullion (a huge seafloor dome)",
+    "name"
+  ],
+  "メガムリオン": [
+    "メガムリオン",
+    "megamullion (a huge, smooth dome on the sea floor)",
+    "noun"
+  ],
+  "ゴジラ": [
+    "ゴジラ",
+    "Godzilla",
+    "name"
+  ],
+  "沖ノ鳥島": [
+    "おきのとりしま",
+    "Okinotorishima (Japan's southernmost island)",
+    "place name"
+  ],
+  "125キロ": [
+    "ひゃくにじゅうごキロ",
+    "125 km",
+    "noun"
+  ],
+  "約125キロ": [
+    "やくひゃくにじゅうごキロ",
+    "about 125 km",
+    "noun"
+  ],
+  "55キロ": [
+    "ごじゅうごキロ",
+    "55 km",
+    "noun"
+  ],
+  "100": [
+    "ひゃく",
+    "one hundred",
+    "number"
+  ],
+  "地質": [
+    "ちしつ",
+    "geology, the nature of the ground",
+    "noun"
+  ],
+  "海底": [
+    "かいてい",
+    "sea floor",
+    "noun"
+  ],
+  "遺産": [
+    "いさん",
+    "heritage, legacy",
+    "noun"
+  ],
+  "100選": [
+    "ひゃくせん",
+    "the best 100, \"100 selections\"",
+    "noun"
+  ],
+  "地形": [
+    "ちけい",
+    "terrain, landform",
+    "noun"
+  ],
+  "2001年": [
+    "にせんいちねん",
+    "2001",
+    "noun"
+  ],
+  "2021年": [
+    "にせんにじゅういちねん",
+    "2021",
+    "noun"
+  ],
+  "大陸棚": [
+    "たいりくだな",
+    "continental shelf",
+    "noun"
+  ],
+  "約10倍": [
+    "やくじゅうばい",
+    "about ten times",
+    "noun"
+  ],
+  "あまりに": [
+    "あまりに",
+    "too, excessively",
+    "adverb"
+  ],
+  "怪獣": [
+    "かいじゅう",
+    "monster",
+    "noun"
+  ],
+  "ちなむ": [
+    "ちなむ",
+    "to be named after, to be connected with",
+    "godan verb"
+  ],
+  "プレート": [
+    "プレート",
+    "plate (tectonic plate)",
+    "noun"
+  ],
+  "手がかり": [
+    "てがかり",
+    "clue",
+    "noun"
+  ],
+  "連合": [
+    "れんごう",
+    "union, alliance",
+    "noun"
+  ],
+  "IUGS": [
+    "アイユージーエス",
+    "IUGS (International Union of Geological Sciences)",
+    "organization"
+  ],
+  "同種": [
+    "どうしゅ",
+    "the same kind",
+    "noun"
+  ],
+  "名付ける": [
+    "なづける",
+    "to name",
+    "ichidan verb"
+  ],
+  "マントル": [
+    "マントル",
+    "mantle (of the Earth)",
+    "noun"
+  ],
+  "構造": [
+    "こうぞう",
+    "structure",
+    "noun"
+  ],
+  "練習": [
+    "れんしゅう",
+    "practice, drill",
+    "noun, suru-verb"
+  ],
+  "1": [
+    "いち",
+    "one",
+    "number"
+  ],
+  "泊原発": [
+    "とまりげんぱつ",
+    "Tomari nuclear power plant",
+    "place name"
+  ],
+  "泊村": [
+    "とまりむら",
+    "Tomari Village (Hokkaido)",
+    "place name"
+  ],
+  "札幌高裁": [
+    "さっぽろこうさい",
+    "Sapporo High Court",
+    "organization"
+  ],
+  "国際地質科学連合": [
+    "こくさいちしつかがくれんごう",
+    "International Union of Geological Sciences",
+    "organization"
   ]
 }
