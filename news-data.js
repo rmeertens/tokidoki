@@ -23,6 +23,147 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-11-09-cyber-package',
+      date: '2026-11-09',
+      emoji: '🛡️',
+      titleEn: 'Takaichi announces an emergency cybersecurity package after a wave of data attacks',
+      sources: [
+        { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/11/06/japan/takaichi-cybersecurity-package/' },
+        { name: 'The Associated Press (CP24)', url: 'https://www.cp24.com/news/world/2026/11/06/japan-announces-emergency-cybersecurity-package-following-a-wave-of-massive-data-attacks/' },
+      ],
+      levels: {
+        N5: {
+          title: 'サイバー攻撃[こうげき]を　ふせぐ　新[あたら]しい　計画[けいかく]',
+          lines: [
+            ['六日[むいか]、高市早苗[たかいちさなえ]首相[しゅしょう]は、サイバー攻撃[こうげき]を　ふせぐ　計画[けいかく]を　発表[はっぴょう]しました。', 'On the 6th, Prime Minister Sanae Takaichi announced a plan to stop cyberattacks.', 'サイバー攻撃 means an attack on computers and networks.'],
+            ['最近[さいきん]、日本[にっぽん]の　会社[かいしゃ]で、お客[きゃく]さんの　情報[じょうほう]が　もれる　事件[じけん]が　ありました。', 'Recently, at a Japanese company, there was a case where customers\' information leaked.'],
+            ['GMOインターネットグループの　サービスから　情報[じょうほう]が　もれました。', 'Information leaked from a service of GMO Internet Group.'],
+            ['国[くに]は、まず　100億円[おくえん]を　使[つか]います。', 'The government will first use 10 billion yen.'],
+            ['お金[かね]は、これから　もっと　ふえるかもしれません。', 'The money may increase from now on.'],
+            ['経済産業省[けいざいさんぎょうしょう]は、専門家[せんもんか]の　チームを　作[つく]ります。', 'The Ministry of Economy, Trade and Industry will make a team of experts.'],
+            ['チームは、AIを　使[つか]って、わるい　ハッカーと　たたかいます。', 'The team will use AI to fight bad hackers.'],
+          ],
+        },
+        N4: {
+          title: '高市首相[たかいちしゅしょう]、サイバー攻撃[こうげき]への緊急[きんきゅう]対策[たいさく]を発表[はっぴょう]',
+          lines: [
+            ['六日[むいか]、高市早苗[たかいちさなえ]首相[しゅしょう]は、サイバー攻撃[こうげき]の被害[ひがい]が続[つづ]いていることを受[う]けて、緊急[きんきゅう]の対策[たいさく]を発表[はっぴょう]しました。', 'On the 6th, Prime Minister Sanae Takaichi announced emergency measures in response to the continuing damage from cyberattacks.'],
+            ['最近[さいきん]、GMOインターネットグループのサービスから情報[じょうほう]がもれ、お客[きゃく]さんの取引[とりひき]に使[つか]われるログイン情報[じょうほう]が、悪[わる]い取引[とりひき]に使[つか]われる被害[ひがい]が出[で]ました。', 'Recently, information leaked from a GMO Internet Group service, and customers\' login details were used for fraudulent trades.'],
+            ['対策[たいさく]は、まず予算[よさん]の中[なか]にある100億円[おくえん]を使[つか]って始[はじ]めます。', 'The measures will start by using 10 billion yen already in the budget.'],
+            ['高市首相[たかいちしゅしょう]は、必要[ひつよう]なお金[かね]はこれから増[ふ]える見通[みとお]しで、財務[ざいむ]大臣[だいじん]に追加[ついか]の予算[よさん]を探[さが]すように頼[たの]みました。', 'Prime Minister Takaichi said the money needed is expected to grow, and asked the finance minister to look for extra funds.'],
+            ['報道[ほうどう]によると、経済産業省[けいざいさんぎょうしょう]は十一月[じゅういちがつ]の終[お]わりまでに、専門家[せんもんか]のチームを作[つく]り、AIを使[つか]ってハッカーと戦[たたか]います。', 'According to reports, the Ministry of Economy, Trade and Industry will set up a team of experts by the end of November, which will use AI to fight hackers.'],
+            ['政府[せいふ]は、ハッカーが使[つか]うサーバーに入[はい]る力[ちから]も広[ひろ]げます。', 'The government will also widen its power to enter servers used by hackers.', 'This builds on a law on "active cyber defense" that took effect in October.'],
+            ['被害[ひがい]にあった会社[かいしゃ]や人[ひと]への支援[しえん]も強[つよ]めます。', 'It will also strengthen support for the companies and people who were hit.'],
+          ],
+        },
+        N3: {
+          title: '高市首相[たかいちしゅしょう]、サイバー攻撃[こうげき]に緊急[きんきゅう]対策[たいさく]　AI活用[かつよう]で防御[ぼうぎょ]強化[きょうか]へ',
+          lines: [
+            ['高市早苗[たかいちさなえ]首相[しゅしょう]は六日[むいか]、大規模[だいきぼ]なデータ流出[りゅうしゅつ]が相次[あいつ]いでいることを受[う]け、サイバー攻撃[こうげき]への緊急[きんきゅう]対策[たいさく]を発表[はっぴょう]した。', 'On the 6th, Prime Minister Sanae Takaichi announced emergency measures against cyberattacks, following a series of large-scale data leaks.'],
+            ['GMOインターネットグループのサービスから情報[じょうほう]が流出[りゅうしゅつ]し、顧客[こきゃく]のログイン情報[じょうほう]が不正[ふせい]な取引[とりひき]に使[つか]われたとみられている。', 'Information leaked from a GMO Internet Group service, and customers\' login details are believed to have been used for unauthorized trades.', 'The company has apologized and promised compensation.'],
+            ['対策[たいさく]は、まず既存[きぞん]の予算[よさん]から100億円[おくえん]を充[あ]てて始[はじ]めるが、必要[ひつよう]な額[がく]は今後[こんご]増[ふ]える見込[みこ]みで、高市首相[たかいちしゅしょう]は財務[ざいむ]相[しょう]に追加[ついか]の財源[ざいげん]を探[さが]すよう求[もと]めた。', 'The measures start with 10 billion yen from the existing budget, but the amount needed is expected to grow, and Takaichi asked the finance minister to find extra funds.'],
+            ['報道[ほうどう]によると、経済産業省[けいざいさんぎょうしょう]は十一月[じゅういちがつ]末[まつ]までに専門家[せんもんか]のチームを設[もう]け、AIを使[つか]ってハッカーに対抗[たいこう]し、ネットワークの弱点[じゃくてん]を見[み]つけるという。', 'According to reports, the Ministry of Economy, Trade and Industry will set up a team of experts by the end of November to counter hackers with AI and find weak points in networks.'],
+            ['政府[せいふ]は、十月[じゅうがつ]に施行[しこう]された法律[ほうりつ]に基[もと]づき、ハッカーが使[つか]うサーバーに入[はい]り込[こ]む能力[のうりょく]も拡大[かくだい]する方針[ほうしん]だ。', 'The government plans to widen its ability to get into servers used by hackers, based on a law that took effect in October.'],
+            ['被害[ひがい]を受[う]けた企業[きぎょう]への支援[しえん]や捜査[そうさ]の体制[たいせい]も強[つよ]め、国[くに]の安全[あんぜん]に関[かか]わる場合[ばあい]は防衛省[ぼうえいしょう]や警察庁[けいさつちょう]などが対応[たいおう]する。', 'It will also strengthen support for affected companies and the investigation system, and the Defense Ministry, National Police Agency and others will respond when national security is involved.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-09-astellas-release',
+      date: '2026-11-09',
+      emoji: '✈️',
+      titleEn: 'Astellas employee jailed in China expected to be released on Dec. 14, Japanese media report',
+      sources: [
+        { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/11/08/japan/astellas-employee-release-december/' },
+        { name: 'Nikkei Asia', url: 'https://asia.nikkei.com/politics/international-relations/astellas-employee-jailed-in-china-on-spy-charge-set-for-december-release' },
+        { name: 'Reuters (Internazionale)', url: 'https://www.internazionale.it/ultime-notizie-reuters/2026/11/08/astellas-employee-imprisoned-in-china-to-be-released-in-december-japanese-media-report' },
+      ],
+      levels: {
+        N5: {
+          title: '中国[ちゅうごく]に　いる　日本人[にっぽんじん]の　男性[だんせい]、十二月[じゅうにがつ]に　帰[かえ]る　ようです',
+          lines: [
+            ['中国[ちゅうごく]で　つかまって　いる　日本人[にっぽんじん]の　男性[だんせい]が、十二月[じゅうにがつ]に　日本[にっぽん]へ　帰[かえ]る　ようです。', 'A Japanese man held in China seems to be coming back to Japan in December.'],
+            ['男性[だんせい]は、アステラス製薬[せいやく]の　社員[しゃいん]です。', 'The man is an employee of Astellas Pharma.'],
+            ['2023年[ねん]の　三月[さんがつ]に、北京[ぺきん]で　つかまりました。', 'He was arrested in Beijing in March 2023.'],
+            ['2025年[ねん]に、中国[ちゅうごく]の　裁判所[さいばんしょ]は、スパイの　つみで　3年半[ねんはん]の　刑[けい]を　言[い]いました。', 'In 2025, a Chinese court gave him a sentence of three and a half years for spying.', 'The court found him guilty of espionage. What he actually did is not clear.'],
+            ['日本[にっぽん]の　ニュースによると、十二月[じゅうにがつ]十四日[じゅうよっか]に　出[で]る　よていです。', 'According to Japanese news, he is expected to get out on December 14.'],
+            ['男性[だんせい]は、すぐに　日本[にっぽん]に　帰[かえ]ることに　なります。', 'The man will return to Japan soon after.'],
+            ['この　事件[じけん]は、日本[にっぽん]と　中国[ちゅうごく]の　間[あいだ]の　問題[もんだい]の　一[ひと]つでした。', 'This case was one of the problems between Japan and China.'],
+          ],
+        },
+        N4: {
+          title: '中国[ちゅうごく]で服役[ふくえき]中[ちゅう]のアステラス製薬[せいやく]社員[しゃいん]、十二月[じゅうにがつ]十四日[じゅうよっか]に釈放[しゃくほう]の見通[みとお]し',
+          lines: [
+            ['中国[ちゅうごく]でスパイの罪[つみ]で服役[ふくえき]している、アステラス製薬[せいやく]の日本人[にっぽんじん]社員[しゃいん]が、十二月[じゅうにがつ]十四日[じゅうよっか]に釈放[しゃくほう]される見通[みとお]しだと、日本[にっぽん]のメディアが七日[なのか]に伝[つた]えました。', 'Japanese media reported on the 7th that an Astellas Pharma employee serving time in China for spying is expected to be released on December 14.', '釈放 (shakuhō) means to be released from custody.'],
+            ['関係者[かんけいしゃ]によると、日本[にっぽん]に帰[かえ]る最後[さいご]の調整[ちょうせい]が進[すす]んでいます。', 'According to people involved, final arrangements for his return to Japan are under way.'],
+            ['男性[だんせい]は60代[だい]で、2023年[ねん]三月[さんがつ]、北京[ぺきん]での仕事[しごと]が終[お]わって帰国[きこく]しようとしたときに、中国[ちゅうごく]の当局[とうきょく]につかまりました。', 'The man is in his 60s. In March 2023, as he was about to leave after finishing work in Beijing, he was detained by Chinese authorities.'],
+            ['2025年[ねん]七月[しちがつ]に、北京[ぺきん]の裁判所[さいばんしょ]は、スパイの罪[つみ]で懲役[ちょうえき]3年半[ねんはん]の判決[はんけつ]を出[だ]しました。', 'In July 2025, a Beijing court handed down a sentence of three and a half years in prison for spying.'],
+            ['日本経済新聞[にほんけいざいしんぶん]は、刑[けい]が終[お]わったあと、すぐに日本[にっぽん]へ送[おく]られると伝[つた]えています。', 'The Nikkei reports that after the sentence ends he will be sent to Japan right away.'],
+            ['この事件[じけん]は、日本[にっぽん]と中国[ちゅうごく]の関係[かんけい]の大[おお]きな問題[もんだい]になっていました。', 'The case had become a big problem in relations between Japan and China.'],
+            ['アステラス製薬[せいやく]と日本[にっぽん]の外務省[がいむしょう]は、ロイターの取材[しゅざい]に答[こた]えていません。', 'Astellas Pharma and Japan\'s Foreign Ministry have not answered Reuters\' requests for comment.'],
+          ],
+        },
+        N3: {
+          title: '中国[ちゅうごく]で服役[ふくえき]のアステラス社員[しゃいん]、十二月[じゅうにがつ]十四日[じゅうよっか]に釈放[しゃくほう]へ　日本[にっぽん]メディア報道[ほうどう]',
+          lines: [
+            ['スパイ罪[ざい]で中国[ちゅうごく]で服役[ふくえき]しているアステラス製薬[せいやく]の日本人[にっぽんじん]社員[しゃいん]が、十二月[じゅうにがつ]十四日[じゅうよっか]に釈放[しゃくほう]される見通[みとお]しとなったと、日本[にっぽん]のメディアが七日[なのか]に報[ほう]じた。', 'Japanese media reported on the 7th that an Astellas Pharma employee serving a sentence in China on a spying charge is expected to be released on December 14.'],
+            ['関係者[かんけいしゃ]によると、日本[にっぽん]への帰国[きこく]に向[む]けた最終[さいしゅう]調整[ちょうせい]が進[すす]められているという。', 'According to people involved, final arrangements for his return to Japan are being made.'],
+            ['男性[だんせい]は60代[だい]で、2023年[ねん]三月[さんがつ]、北京[ぺきん]駐在[ちゅうざい]を終[お]えて帰国[きこく]しようとしていたところを、中国[ちゅうごく]当局[とうきょく]に拘束[こうそく]された。', 'The man, in his 60s, was detained by Chinese authorities in March 2023 as he was about to return home after finishing his assignment in Beijing.'],
+            ['2024年[ねん]八月[はちがつ]に起訴[きそ]され、2025年[ねん]七月[しちがつ]に北京[ぺきん]の裁判所[さいばんしょ]から懲役[ちょうえき]3年半[ねんはん]の判決[はんけつ]を受[う]けていた。', 'He was indicted in August 2024 and had been sentenced by a Beijing court to three and a half years in prison in July 2025.'],
+            ['日本経済新聞[にほんけいざいしんぶん]は、刑期[けいき]を終[お]えた後[あと]、直[ただ]ちに国外[こくがい]退去[たいきょ]になる見通[みとお]しだと伝[つた]えている。', 'The Nikkei reports that after he completes his term he is expected to be deported immediately.', 'The conduct behind the conviction has not been made clear.'],
+            ['この事件[じけん]は日中[にっちゅう]関係[かんけい]の懸案[けんあん]となってきたが、アステラスや外務省[がいむしょう]などはロイターの取材[しゅざい]に応[おう]じていない。', 'The case has been an outstanding issue in Japan-China relations, but Astellas, the Foreign Ministry and others have not responded to Reuters\' requests for comment.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-09-nikkei-plunge',
+      date: '2026-11-09',
+      emoji: '📉',
+      titleEn: 'Nikkei average falls nearly 6% on Friday as AI-related stocks are sold; worst week since March 2020',
+      sources: [
+        { name: 'The Associated Press (AJC)', url: 'https://www.ajc.com/news/2026/11/japans-stock-benchmark-nikkei-tumbles-more-than-6-after-trading-opens/' },
+        { name: 'Trading Economics', url: 'https://tradingeconomics.com/japan/stock-market' },
+      ],
+      levels: {
+        N5: {
+          title: '日本[にっぽん]の　株[かぶ]の　ねだんが　大[おお]きく　下[さ]がりました',
+          lines: [
+            ['六日[むいか]の　金曜日[きんようび]、日本[にっぽん]の　株[かぶ]の　ねだんが　大[おお]きく　下[さ]がりました。', 'On Friday the 6th, stock prices in Japan fell a lot.'],
+            ['日経平均[にっけいへいきん]は、1日[にち]で　6%ぐらい　下[さ]がりました。', 'The Nikkei average fell about 6% in one day.', '日経平均 (Nikkei heikin) is the average price of 225 big companies on the Tokyo stock market.'],
+            ['終[お]わりの　ねだんは、5万[まん]7000ぐらいでした。', 'The closing level was about 57,000.'],
+            ['AIに　関係[かんけい]する　会社[かいしゃ]の　株[かぶ]を　売[う]る　人[ひと]が　多[おお]かったです。', 'Many people sold shares of companies related to AI.'],
+            ['アメリカの　選挙[せんきょ]の　あとで、心配[しんぱい]する　人[ひと]が　ふえました。', 'After the US election, more people became worried.'],
+            ['この　1週間[しゅうかん]で、9%以上[いじょう]　下[さ]がりました。', 'Over this one week, it fell more than 9%.'],
+            ['2020年[ねん]の　三月[さんがつ]から　いちばん　悪[わる]い　1週間[しゅうかん]でした。', 'It was the worst week since March 2020.'],
+          ],
+        },
+        N4: {
+          title: '日経平均[にっけいへいきん]、一日[いちにち]で6%近[ちか]く下落[げらく]　AI関連[かんれん]株[かぶ]に売[う]り',
+          lines: [
+            ['六日[むいか]の東京[とうきょう]株式[かぶしき]市場[しじょう]で、日経平均[にっけいへいきん]株価[かぶか]が大[おお]きく下[さ]がり、終値[おわりね]は約[やく]5万[まん]7400円[えん]でした。', 'On the Tokyo stock market on the 6th, the Nikkei average fell sharply and closed at about 57,400 yen.'],
+            ['下落[げらく]は6%近[ちか]くで、四月[しがつ]以来[いらい]の低[ひく]い水準[すいじゅん]です。', 'The fall was close to 6%, the lowest level since April.'],
+            ['AIに関係[かんけい]する会社[かいしゃ]の株[かぶ]が、たくさん売[う]られました。', 'Shares of many AI-related companies were sold.'],
+            ['アメリカの中間[ちゅうかん]選挙[せんきょ]で民主党[みんしゅとう]が勝[か]ったことから、AIへの規制[きせい]が強[つよ]まるかもしれないという心配[しんぱい]が出[で]たと伝[つた]えられています。', 'It is reported that worries arose after the Democrats won the US midterm elections, because rules on AI may become stricter.'],
+            ['この一週間[いっしゅうかん]で、日経平均[にっけいへいきん]は9%以上[いじょう]下[さ]がりました。', 'Over this week, the Nikkei average fell more than 9%.'],
+            ['これは、2020年[ねん]三月[さんがつ]の新型[しんがた]コロナの時[とき]以来[いらい]、最[もっと]も悪[わる]い一週間[いっしゅうかん]です。', 'This is the worst week since March 2020, during the Covid crisis.'],
+          ],
+        },
+        N3: {
+          title: '日経平均[にっけいへいきん]、6%近[ちか]く急落[きゅうらく]　AI関連[かんれん]に売[う]り、週間[しゅうかん]下落[げらく]率[りつ]は2020年[ねん]三月[さんがつ]以来[いらい]',
+          lines: [
+            ['六日[むいか]の東京[とうきょう]株式[かぶしき]市場[しじょう]で日経平均[にっけいへいきん]株価[かぶか]は急落[きゅうらく]し、終値[おわりね]は前[ぜん]日[じつ]比[ひ]で6%近[ちか]く安[やす]い5万[まん]7400円[えん]台[だい]となった。', 'On the Tokyo market on the 6th, the Nikkei average plunged, closing in the 57,400-yen range, nearly 6% lower than the previous day.', 'Reports give slightly different closing figures (about 57,435 or 57,550), so "in the 57,400-yen range" is approximate.'],
+            ['取引[とりひき]時間[じかん]中[ちゅう]には、下落[げらく]幅[はば]が4000円[えん]を超[こ]える場面[ばめん]もあった。', 'During trading, there were moments when the fall exceeded 4,000 points.'],
+            ['AI関連[かんれん]の銘柄[めいがら]を中心[ちゅうしん]に、幅広[はばひろ]い売[う]りが出[で]たためだ。', 'This was because selling spread widely, centered on AI-related stocks.'],
+            ['米[べい]中間[ちゅうかん]選挙[せんきょ]で野党[やとう]・民主党[みんしゅとう]が大勝[たいしょう]し、AI産業[さんぎょう]への規制[きせい]強化[きょうか]やデータセンター拡大[かくだい]の鈍化[どんか]への警戒[けいかい]が強[つよ]まったと報[ほう]じられている。', 'It is reported that after the opposition Democrats won big in the US midterms, concern grew about tighter regulation of the AI industry and a slowdown in data center expansion.'],
+            ['週間[しゅうかん]では9%を超[こ]える下落[げらく]となり、新型[しんがた]コロナ禍[か]の2020年[ねん]三月[さんがつ]以来[いらい]の大[おお]きな下[さ]げ幅[はば]となった。', 'For the week, the fall exceeded 9%, the biggest drop since March 2020, during the Covid pandemic.'],
+            ['日経平均[にっけいへいきん]は、六月[ろくがつ]につけた最高値[さいこうね]から2割[わり]以上[いじょう]安[やす]い水準[すいじゅん]にあり、市場[しじょう]の動揺[どうよう]が続[つづ]くおそれがある。', 'The Nikkei average is more than 20% below the record high set in June, and market turmoil may continue.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-11-08-aichi-quake-m57',
       date: '2026-11-08',
       emoji: '🌐',

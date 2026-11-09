@@ -8838,5 +8838,215 @@
     "こくさいちしつかがくれんごう",
     "International Union of Geological Sciences",
     "organization"
+  ],
+  "ハッカー": [
+    "はっかー",
+    "hacker",
+    "noun"
+  ],
+  "100億円": [
+    "ひゃくおくえん",
+    "10 billion yen",
+    "noun"
+  ],
+  "相次ぐ": [
+    "あいつぐ",
+    "to follow one after another",
+    "verb"
+  ],
+  "既存": [
+    "きそん",
+    "existing",
+    "noun"
+  ],
+  "充てる": [
+    "あてる",
+    "to allocate, to assign to",
+    "verb"
+  ],
+  "対抗": [
+    "たいこう",
+    "opposition, counteraction",
+    "noun"
+  ],
+  "弱点": [
+    "じゃくてん",
+    "weak point",
+    "noun"
+  ],
+  "入り込む": [
+    "はいりこむ",
+    "to get into, to break into",
+    "verb"
+  ],
+  "アステラス": [
+    "あすてらす",
+    "Astellas (Pharma)",
+    "organization"
+  ],
+  "製薬": [
+    "せいやく",
+    "pharmaceuticals",
+    "noun"
+  ],
+  "アステラス製薬": [
+    "あすてらすせいやく",
+    "Astellas Pharma",
+    "organization"
+  ],
+  "北京": [
+    "ぺきん",
+    "Beijing",
+    "place name"
+  ],
+  "3年半": [
+    "さんねんはん",
+    "three and a half years",
+    "noun"
+  ],
+  "服役": [
+    "ふくえき",
+    "serving a prison sentence",
+    "noun"
+  ],
+  "釈放": [
+    "しゃくほう",
+    "release (from custody)",
+    "noun"
+  ],
+  "60代": [
+    "ろくじゅうだい",
+    "in one's 60s",
+    "noun"
+  ],
+  "帰国": [
+    "きこく",
+    "return to one's country",
+    "noun"
+  ],
+  "懲役": [
+    "ちょうえき",
+    "imprisonment with labor, prison term",
+    "noun"
+  ],
+  "日本経済新聞": [
+    "にほんけいざいしんぶん",
+    "Nikkei (Japan Economic Journal)",
+    "organization"
+  ],
+  "ロイター": [
+    "ろいたー",
+    "Reuters",
+    "organization"
+  ],
+  "駐在": [
+    "ちゅうざい",
+    "posting, assignment abroad",
+    "noun"
+  ],
+  "起訴": [
+    "きそ",
+    "indictment",
+    "noun"
+  ],
+  "刑期": [
+    "けいき",
+    "prison term",
+    "noun"
+  ],
+  "退去": [
+    "たいきょ",
+    "leaving, withdrawal, expulsion",
+    "noun"
+  ],
+  "懸案": [
+    "けんあん",
+    "pending issue",
+    "noun"
+  ],
+  "日中": [
+    "にっちゅう",
+    "Japan and China",
+    "noun"
+  ],
+  "1日": [
+    "いちにち",
+    "one day",
+    "noun"
+  ],
+  "5万7000": [
+    "ごまんななせん",
+    "57,000",
+    "number"
+  ],
+  "約5万7400円": [
+    "やくごまんななひゃくよんじゅうえん",
+    "about 57,400 yen",
+    "noun"
+  ],
+  "5万7400円台": [
+    "ごまんななひゃくよんじゅうえんだい",
+    "the 57,400-yen range",
+    "noun"
+  ],
+  "4000円": [
+    "よんせんえん",
+    "4,000 yen (points)",
+    "noun"
+  ],
+  "2020年": [
+    "にせんにじゅうねん",
+    "2020",
+    "noun"
+  ],
+  "新型": [
+    "しんがた",
+    "new type",
+    "noun"
+  ],
+  "コロナ": [
+    "ころな",
+    "coronavirus, Covid",
+    "noun"
+  ],
+  "週間": [
+    "しゅうかん",
+    "weekly; week",
+    "noun"
+  ],
+  "銘柄": [
+    "めいがら",
+    "stock (issue), brand",
+    "noun"
+  ],
+  "幅広い": [
+    "はばひろい",
+    "wide, broad",
+    "adjective"
+  ],
+  "大勝": [
+    "たいしょう",
+    "landslide victory",
+    "noun"
+  ],
+  "鈍化": [
+    "どんか",
+    "slowdown",
+    "noun"
+  ],
+  "下げ": [
+    "さげ",
+    "fall, drop",
+    "noun"
+  ],
+  "最高値": [
+    "さいこうね",
+    "record high",
+    "noun"
+  ],
+  "2割": [
+    "にわり",
+    "20 percent",
+    "noun"
   ]
 }
