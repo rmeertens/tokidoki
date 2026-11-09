@@ -1,6 +1,11 @@
 // JLPT Questions (vocab-questions.html): vocabulary questions in the style
 // of the JLPT, four choices each, ten at a time.
 //
+//   Kanji reading (漢字読み) — how is the underlined word read?
+//   Kanji writing (表記) — the underlined word is in hiragana: how is it
+//     written? Wrong choices swap a kanji for a look-alike (映画 · 央画 ·
+//     映面 · 央面). Both from vocab-kanji-data.js, built by
+//     scripts/build_vocab_kanji.mjs.
 //   Fill in the blank (文脈規定) — which word goes in the （　）? The
 //     sentences are Tokidoki's own example sentences, with wrong choices of
 //     the same kind and level (vocab-fill-data.js, built and hand-checked
@@ -48,10 +53,24 @@
     return out;
   }
 
-  // Every set: { id, kind, level, questions }, each question as
-  // { kind, html (the question), choices: [html…] (answer first), why }.
-  function sets(fill, similar) {
+  // The kana of a target: "{映画|えいが}" → えいが, "{泳|およ}いで" → およいで.
+  const kanaOf = markup => String(markup).replace(/\{[^|}]+\|([^}]+)\}/g, '$1');
+
+  // Every set: { id, kind, level, questions }, each question with its
+  // choices (the answer first).
+  function sets(fill, similar, kanji) {
     const out = [];
+    for (const [kind, field] of [['reading', 'r'], ['writing', 'x']]) {
+      for (const level of LEVELS) {
+        out.push({ id: `${kind}-${level}`, kind, level, questions: ((kanji || {})[level] || []).filter(q => q[field]).map(q => ({
+          kind, key: `${q.w}|${q.k}`,
+          b: q.b, t: q.t, a: q.a, en: q.en,
+          choices: q[field],
+          // The word, as a fill-in choice is: [markup, word, reading, meaning].
+          words: [[q.t, q.w, q.k, q.m]],
+        })) });
+      }
+    }
     for (const level of LEVELS) {
       out.push({ id: `fill-${level}`, kind: 'fill', level, questions: ((fill || {})[level] || []).map(q => ({
         kind: 'fill', key: `${q.w}|${q.k}`,
@@ -105,7 +124,7 @@
   // The ones answered wrong, or marked Again: what still needs answering.
   const toRedo = round => round.filter(q => q.pick !== 0 || q.grade === 1);
 
-  const api = { rubyHtml, underlinedHtml, plain, sets, cardId, counts, makeRound, score, toRedo, ROUND };
+  const api = { rubyHtml, underlinedHtml, plain, kanaOf, sets, cardId, counts, makeRound, score, toRedo, ROUND };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   global.VocabQuestions = api;
   if (typeof document === 'undefined') return;
@@ -119,7 +138,7 @@
     try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* storage unavailable */ }
   }
 
-  const SETS = sets(global.VOCAB_FILL, global.SIMILAR_MEANING);
+  const SETS = sets(global.VOCAB_FILL, global.SIMILAR_MEANING, global.VOCAB_KANJI);
   const settings = Object.assign({ furigana: true }, load(SETTINGS_KEY, {}));
   const store = Object.assign({ best: {}, last: {} }, load(STORE_KEY, {}));
   // The questions' SRS cards: app.js's copy of the store once it's running
@@ -145,6 +164,8 @@
   // ─── Home ──────────────────────────────────────────────────────────────────
 
   const KIND = {
+    reading: { title: 'Kanji reading', ja: '漢字読み', about: 'How is the underlined word read?' },
+    writing: { title: 'Kanji writing', ja: '表記', about: 'How is the underlined word written?' },
     fill: { title: 'Fill in the blank', ja: '文脈規定', about: 'Which word goes in the （　）?' },
     similar: { title: 'Similar meaning', ja: '言い換え類義', about: 'Which sentence means about the same as the underlined part?' },
   };
@@ -201,6 +222,12 @@
   function questionHtml(question, q) {
     if (question.kind === 'similar') return underlinedHtml(question.q);
     const done = q.pick != null;
+    if (question.kind === 'reading' || question.kind === 'writing') {
+      // Once answered, the word in kanji with its furigana; before, the
+      // kanji alone (reading) or the kana alone (writing).
+      const target = done ? rubyHtml(question.t) : esc(question.kind === 'reading' ? plain(question.t) : kanaOf(question.t));
+      return `${rubyHtml(question.b)}<span class="vq-target${done ? ` ${q.pick === 0 ? 'vq-right' : 'vq-wrong'}` : ''}">${target}</span>${rubyHtml(question.a)}`;
+    }
     const filled = done
       ? `<span class="vq-blank vq-blank-filled ${q.pick === 0 ? 'vq-right' : 'vq-wrong'}">${rubyHtml(question.choices[0])}</span>`
       : '<span class="vq-blank">　　　</span>';
@@ -236,7 +263,7 @@
       const answer = question.words[0][1] === key;
       words[key] = Object.assign(
         { vocab: set.level.toLowerCase(), kana: w[2], meaning: shortMeaning(w[3]), added: Date.now(), level: set.level },
-        answer ? { jp: deckMarkup(question.b + question.choices[0] + question.a), en: question.en, title: 'JLPT Questions (Fill in the blank)' } : {},
+        answer ? { jp: deckMarkup(question.b + (question.t || question.choices[0]) + question.a), en: question.en, title: `JLPT Questions (${KIND[set.kind].title})` } : {},
       );
     }
     save(DECK_KEY, words);
@@ -260,9 +287,36 @@
       return `<p>${esc(question.note)}</p>${kanji}`;
     }
     const [answer] = question.words;
+    if (question.kind === 'reading' || question.kind === 'writing') {
+      return `      <ul class="vq-words"><li class="vq-words-answer">${wordButtonHtml(answer, 0, 'label')} <span class="vq-word-text"><span lang="ja">${esc(answer[1])}</span> <span class="vq-words-kana" lang="ja">${esc(answer[2])}</span> — ${esc(shortMeaning(answer[3]))}</span></li></ul>
+      ${question.kind === 'writing' ? lookalikesHtml(question) : ''}
+      ${breakdown(answer[1], { reading: answer[2], meaning: shortMeaning(answer[3]) }, `Kanji in ${answer[1]}`)}
+      ${deck()[answer[1]] ? '<p class="vq-tip">Review your flashcards on the <a href="flashcards.html">Flashcards page</a>.</p>' : ''}`;
+    }
     return `      <ul class="vq-words">${question.words.map((w, k) => `<li${k === 0 ? ' class="vq-words-answer"' : ''}>${wordButtonHtml(w, k, k === 0 ? 'label' : 'icon')} <span class="vq-word-text"><span lang="ja">${esc(w[1])}</span> <span class="vq-words-kana" lang="ja">${esc(w[2])}</span> — ${esc(shortMeaning(w[3]))}</span></li>`).join('')}</ul>
       ${breakdown(answer[1], { reading: answer[2], meaning: shortMeaning(answer[3]) }, `Kanji in ${answer[1]}`)}
       ${deck()[answer[1]] ? '<p class="vq-tip">Review your flashcards on the <a href="flashcards.html">Flashcards page</a>.</p>' : ''}`;
+  }
+
+  // The look-alike kanji in the wrong choices, each with its meaning, so
+  // the difference sticks: 央 centre, 面 face.
+  function kanjiMeaning(k) {
+    const info = global.KANJI_INFO && global.KANJI_INFO[k];
+    if (info) return String(info.meaning).split(',')[0].trim();
+    const quiz = global.KANJI_QUIZ_DATA ? Object.values(global.KANJI_QUIZ_DATA).flat().find(x => x.kanji === k) : null;
+    return quiz ? String(quiz.meaning).split(',')[0].trim() : '';
+  }
+  function lookalikesHtml(question) {
+    const answer = [...question.choices[0]];
+    const swapped = [];
+    for (const choice of question.choices.slice(1)) {
+      [...choice].forEach((ch, i) => {
+        if (ch !== answer[i] && !swapped.some(s => s[0] === ch)) swapped.push([ch, answer[i]]);
+      });
+    }
+    if (!swapped.length) return '';
+    return `<p class="vq-lookalikes">${swapped.map(([ch, right], i) =>
+      `${i ? 'not' : 'Not'} <b lang="ja">${esc(ch)}</b>${kanjiMeaning(ch) ? ` <span class="vq-lookalike-en">(${esc(kanjiMeaning(ch))})</span>` : ''} but <b lang="ja">${esc(right)}</b>`).join('; ')}.</p>`;
   }
 
   function render() {
@@ -288,7 +342,7 @@
     const choices = q.order.map((k, n) => {
       // Once answered, a fill-in choice (one word) shows its meaning beside
       // it; a similar-meaning choice (a whole sentence) shows it underneath.
-      const gloss = answered && question.words ? shortMeaning(question.words[k][3]) : '';
+      const gloss = answered && question.kind === 'fill' ? shortMeaning(question.words[k][3]) : '';
       let cls = 'sf-choice vq-choice';
       if (answered && k === 0) cls += ' correct';
       else if (answered && k === q.pick) cls += ' wrong';
@@ -343,6 +397,7 @@
       : `<b class="sf-verdict-wrong">${wrong} wrong</b> out of ${n}.`;
     const answerOf = question => (question.kind === 'similar'
       ? `<span class="vq-missed-q" lang="ja">${underlinedHtml(question.q)}</span><span class="vq-missed-a" lang="ja">→ ${rubyHtml(question.choices[0])}</span>`
+      : question.t ? `<span class="vq-missed-q" lang="ja">${rubyHtml(question.b)}<b>${rubyHtml(question.t)}</b>${rubyHtml(question.a)}</span>`
       : `<span class="vq-missed-q" lang="ja">${rubyHtml(question.b)}（<b>${rubyHtml(question.choices[0])}</b>）${rubyHtml(question.a)}</span>`);
     const still = due
       ? `<b>${due} question${due === 1 ? '' : 's'}</b> in this set still need${due === 1 ? 's' : ''} answering — they come first in your next round.`

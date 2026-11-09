@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" id="viewport-meta" content="width=device-width, initial-scale=1.0">
-  <title>JLPT Vocabulary Questions — Fill in the Blank &amp; Similar Meaning | Tokidoki</title>
-  <meta name="description" content="Free JLPT-style vocabulary practice for N5, N4 and N3: choose the word that fits the blank, or the sentence that means the same as the underlined part. Four choices, with explanations.">
+  <title>JLPT Vocabulary Questions — Kanji Reading, Writing, Fill in the Blank | Tokidoki</title>
+  <meta name="description" content="Free JLPT-style vocabulary practice for N5, N4 and N3: read the underlined kanji, pick the right kanji for a word in hiragana, choose the word that fits the blank, or the sentence that means the same. Four choices, with explanations.">
   <meta property="og:title" content="JLPT Vocabulary Questions | Tokidoki">
-  <meta property="og:description" content="JLPT-style vocabulary questions, N5 to N3: fill in the blank and similar meaning, four choices each. No login required.">
+  <meta property="og:description" content="JLPT-style vocabulary questions, N5 to N3: kanji reading, kanji writing, fill in the blank and similar meaning, four choices each. No login required.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://tokidoki.meertens.dev/vocab-questions.html">
   <meta property="og:site_name" content="Tokidoki">
@@ -17,11 +17,11 @@
   <meta property="og:image:alt" content="Tokidoki — free Japanese practice, one plate at a time">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="JLPT Vocabulary Questions | Tokidoki">
-  <meta name="twitter:description" content="JLPT-style vocabulary questions, N5 to N3: fill in the blank and similar meaning.">
+  <meta name="twitter:description" content="JLPT-style vocabulary questions, N5 to N3: kanji reading and writing, fill in the blank, similar meaning.">
   <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
   <link rel="canonical" href="https://tokidoki.meertens.dev/vocab-questions.html">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "JLPT Vocabulary Questions — Fill in the Blank & Similar Meaning", "description": "Free JLPT-style vocabulary practice for N5, N4 and N3: choose the word that fits the blank, or the sentence that means the same as the underlined part. Four choices, with explanations.", "url": "https://tokidoki.meertens.dev/vocab-questions.html", "inLanguage": "en", "learningResourceType": "quiz", "educationalLevel": "JLPT N5–N3", "isAccessibleForFree": true, "isPartOf": {"@type": "WebSite", "name": "Tokidoki", "url": "https://tokidoki.meertens.dev/"}}</script>
-  <link rel="stylesheet" href="style.css?v=107">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "JLPT Vocabulary Questions — Kanji Reading, Writing, Fill in the Blank", "description": "Free JLPT-style vocabulary practice for N5, N4 and N3: read the underlined kanji, pick the right kanji for a word in hiragana, choose the word that fits the blank, or the sentence that means the same. Four choices, with explanations.", "url": "https://tokidoki.meertens.dev/vocab-questions.html", "inLanguage": "en", "learningResourceType": "quiz", "educationalLevel": "JLPT N5–N3", "isAccessibleForFree": true, "isPartOf": {"@type": "WebSite", "name": "Tokidoki", "url": "https://tokidoki.meertens.dev/"}}</script>
+  <link rel="stylesheet" href="style.css?v=108">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -118,6 +118,12 @@
         <label class="kana-script-toggle"><input type="checkbox" id="vq-opt-furigana"> Furigana</label>
       </div>
 
+      <h3 class="lis-heading">Kanji reading <span lang="ja" class="vq-title-ja">漢字読み</span></h3>
+      <p class="tab-intro">How is the underlined word read? Pick its reading in hiragana — the wrong ones differ by a sound learners mix up (こ / ご, こ / こう, small っ) or use another reading of the kanji.</p>
+      <div class="sf-list" id="vq-list-reading"></div>
+      <h3 class="lis-heading">Kanji writing <span lang="ja" class="vq-title-ja">表記</span></h3>
+      <p class="tab-intro">The other way around: the underlined word is in hiragana — pick how it’s written. The wrong choices swap a kanji for one that looks like it (映画 · 央画 · 映面 · 央面).</p>
+      <div class="sf-list" id="vq-list-writing"></div>
       <h3 class="lis-heading">Fill in the blank <span lang="ja" class="vq-title-ja">文脈規定</span></h3>
       <p class="tab-intro">Which word goes in the （　）? Our own example sentences, with three wrong words of the same kind and level.</p>
       <div class="sf-list" id="vq-list-fill"></div>
@@ -167,8 +173,9 @@
   <script src="kanji-quiz-data.js"></script>
   <script src="kanji-info-data.js"></script>
   <script src="vocab-fill-data.js?v=1"></script>
+  <script src="vocab-kanji-data.js?v=1"></script>
   <script src="similar-meaning-data.js?v=3"></script>
-  <script src="vocab-questions.js?v=11"></script>
+  <script src="vocab-questions.js?v=12"></script>
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=5"></script>
   <script src="app.js?v=80"></script>
@@ -179,15 +186,18 @@
 
   <!-- Static content for search engines -->
   <section id="seo-content" class="page-about">
-    <h1>JLPT vocabulary questions — fill in the blank and similar meaning</h1>
+    <h1>JLPT vocabulary questions — kanji reading, kanji writing, fill in the blank and similar meaning</h1>
     <p>
-      Free, no-login practice for two kinds of vocabulary question on the Japanese-Language
-      Proficiency Test, at N5, N4 and N3. In <b>fill in the blank</b> (文脈規定) you choose the
+      Free, no-login practice for four kinds of vocabulary question on the Japanese-Language
+      Proficiency Test, at N5, N4 and N3. In <b>kanji reading</b> (漢字読み) you pick how the
+      underlined word is read: がいこく, not がいごく or がいこっく. <b>Kanji writing</b> (表記) is
+      the other way around: the word is underlined in hiragana and you pick its kanji, out of
+      look-alikes — 映画, not 央画 or 映面; 泳いで, not 海いで or 注いで. In <b>fill in the blank</b> (文脈規定) you choose the
       word that fits a sentence, out of four words of the same kind and level — nouns, verbs in
       the form the sentence needs (集めて, 起きます), い- and な-adjectives. In <b>similar
       meaning</b> (言い換え類義) you choose the sentence that means about the same as the
       underlined part: おととい and ふつかまえ, 留守です and 家にいません, 延期になった and
-      後の日に変わった. Every answer comes with the meaning of all four words or a short note,
+      後の日に変わった. Every answer comes with the word's meaning, the look-alike kanji, the meaning of all four words or a short note,
       and the English of the sentence. Ten questions at a time, with optional furigana. Each
       question is also a flashcard: mark it Again or Good, and the due ones come first. The same questions are also printable as PDF worksheets
       with the answers on the last page.

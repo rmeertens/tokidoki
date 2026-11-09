@@ -2,7 +2,9 @@
 // answer (scripts/vocab_questions.mjs), the printable sheets
 // (scripts/render_vocab_sheets.mjs), the fill-in data (vocab-fill-data.js,
 // scripts/build_vocab_fill.mjs), the similar-meaning questions
-// (similar-meaning-data.js) and the practice page's rounds
+// (similar-meaning-data.js), the kanji reading / writing questions
+// (vocab-kanji-data.js, scripts/build_vocab_kanji.mjs) and the practice
+// page's rounds
 // (vocab-questions.js).
 const assert = require('assert');
 const fs = require('fs');
@@ -115,12 +117,74 @@ const fs = require('fs');
     }
   }
 
+  // ─── Kanji reading and writing ───
+  global.window = global;
+  require('./vocab-kanji-data.js');
+  const KANJI = global.VOCAB_KANJI;
+  const isKanji = ch => /[㐀-鿿々〆ヶ]/.test(ch);
+  const kanaOf = s => s.replace(/\{[^|}]+\|([^}]+)\}/g, '$1');
+  const textOf = s => s.replace(/\{([^|}]+)\|[^}]+\}/g, '$1');
+  for (const level of m.LEVELS) {
+    const qs = KANJI[level];
+    assert.ok(qs.filter(q => q.r).length >= 50, `${level}: reading questions`);
+    assert.ok(qs.filter(q => q.x).length >= 50, `${level}: writing questions`);
+    assert.strictEqual(new Set(qs.map(q => `${q.w}|${q.k}`)).size, qs.length, `${level}: a word twice`);
+    const known = m.knownKanji(level);
+    for (const q of qs) {
+      assert.ok(q.en && q.m && q.t, q.w);
+      // Only kanji of this level or below are underlined.
+      assert.ok([...textOf(q.t)].every(ch => !isKanji(ch) || known.has(ch)), `${level} ${q.w}: kanji above the level`);
+      if (q.r) {
+        assert.strictEqual(q.r.length, 4, q.w);
+        assert.strictEqual(q.r[0], kanaOf(q.t), `${q.w}: the answer is the furigana`);
+        assert.strictEqual(new Set(q.r).size, 4, `${q.w}: ${q.r}`);
+        for (const r of q.r) assert.ok(/^[ぁ-ゖー]+$/.test(r) && !/^[んっゃゅょ]/.test(r) && !/っ$/.test(r), `${q.w}: ${r}`);
+        // Never another reading the word lists give the word.
+        for (const w of m.WORDS) if (w[0] === q.w && w[1] !== q.k) assert.ok(!q.r.slice(1).some(r => q.k.startsWith(q.r[0]) && r === w[1]), `${q.w}: ${w[1]} is right too`);
+      }
+      if (q.x) {
+        const answer = [...q.x[0]];
+        assert.strictEqual(q.x.length, 4, q.w);
+        assert.strictEqual(q.x[0], textOf(q.t), `${q.w}: the answer is the word`);
+        assert.strictEqual(new Set(q.x).size, 4, `${q.w}: ${q.x}`);
+        for (const x of q.x.slice(1)) {
+          // Only kanji change; the kana around them stay.
+          const chars = [...x];
+          assert.strictEqual(chars.length, answer.length, `${q.w}: ${x}`);
+          chars.forEach((ch, i) => assert.ok(ch === answer[i] || (isKanji(ch) && isKanji(answer[i])), `${q.w}: ${x}`));
+          // Never a real spelling of the word (会う / 合う).
+          const base = [...q.w].map((ch, i) => (i < chars.length && isKanji(answer[i]) ? chars[i] : ch)).join('');
+          assert.ok(!m.WORDS.some(w => w[0] === base && w[1] === q.k), `${q.w}: ${base} is right too`);
+        }
+      }
+    }
+  }
+  // The example in the exam: two kanji, two by two.
+  const eiga = KANJI.N4.concat(KANJI.N5, KANJI.N3).find(q => q.w === '映画');
+  if (eiga && eiga.x) {
+    const [a, b, c, d] = eiga.x.map(x => [...x]);
+    assert.ok(b[1] === a[1] && c[0] === a[0] && d[0] === b[0] && d[1] === c[1], `映画: ${eiga.x}`);
+  }
+  // Up to date with its script (needs npm install --no-save kuromoji kanji).
+  if (fs.existsSync('node_modules/kuromoji') && fs.existsSync('node_modules/kanji/dist/data')) {
+    const kb = await import('./scripts/build_vocab_kanji.mjs');
+    assert.strictEqual(fs.readFileSync('vocab-kanji-data.js', 'utf8'), (await kb.kanjiFile()).text,
+      'vocab-kanji-data.js is stale: run node scripts/build_vocab_kanji.mjs');
+  } else {
+    console.log('vocab questions: skipped the vocab-kanji-data.js rebuild check (npm install --no-save kuromoji kanji)');
+  }
+
   // ─── The practice page ───
   const VQ = require('./vocab-questions.js');
-  global.window = global;
   require('./vocab-fill-data.js');
-  const sets = VQ.sets(global.VOCAB_FILL, SIMILAR);
-  assert.deepStrictEqual(sets.map(s => s.id), ['fill-N5', 'fill-N4', 'fill-N3', 'similar-N5', 'similar-N4', 'similar-N3']);
+  const allSets = VQ.sets(global.VOCAB_FILL, SIMILAR, KANJI);
+  assert.deepStrictEqual(allSets.map(s => s.id), ['reading-N5', 'reading-N4', 'reading-N3', 'writing-N5', 'writing-N4', 'writing-N3',
+    'fill-N5', 'fill-N4', 'fill-N3', 'similar-N5', 'similar-N4', 'similar-N3']);
+  const reading = allSets[0];
+  assert.strictEqual(VQ.cardId(reading, reading.questions[0]), `vq:reading-N5:${KANJI.N5.find(q => q.r).w}|${KANJI.N5.find(q => q.r).k}`);
+  assert.ok(allSets[3].questions.every(q => q.choices[0] === VQ.plain(q.t)), 'writing: the answer is the word in kanji');
+  assert.strictEqual(VQ.kanaOf('{泳|およ}いで'), 'およいで');
+  const sets = allSets.slice(6);
   let seed = 1;
   const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
   const set = sets[3];

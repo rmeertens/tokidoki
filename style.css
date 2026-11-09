@@ -8477,3 +8477,11 @@ body.vq-no-furigana #screen-vocab-questions rt { visibility: hidden; }
   background: var(--bg-card);
 }
 @media (hover: none) { .news-keys-hint { display: none; } }
+
+/* JLPT Questions: kanji reading / writing — the underlined word once answered, and the look-alike kanji */
+.vq-target.vq-right, .vq-target.vq-wrong { padding: 0 4px; border-radius: 6px; }
+.vq-target.vq-right { background: var(--green-dim); }
+.vq-target.vq-wrong { background: var(--red-dim); }
+.vq-lookalikes { margin: 4px 0 8px; }
+.vq-lookalikes b { font-family: var(--font-jp); font-size: 1.1rem; }
+.vq-lookalike-en { color: var(--text-dim); font-size: 0.88rem; }

@@ -113,7 +113,17 @@
   `similar-meaning-data.js`. Automatic wrong choices can fit too, so only
   the fill-in questions listed in `scripts/vocab_fill_reviewed.json` (checked
   by hand: only the answer fits) are used; `node scripts/build_vocab_fill.mjs`
-  writes them to `vocab-fill-data.js`. The JLPT Questions page
+  writes them to `vocab-fill-data.js`. On screen there are also kanji
+  reading (pick the underlined kanji's reading) and kanji writing (表記:
+  the word underlined in hiragana, pick its kanji out of look-alikes, the
+  exam's two-by-two 映画 · 央画 · 映面 · 央面), `vocab-kanji-data.js`, built by
+  `node scripts/build_vocab_kanji.mjs` (needs
+  `npm install --no-save kuromoji kanji`; only the `kanji` package's data
+  files are read: Kanjium look-alikes, KanjiVG parts) from the same
+  sentences. Wrong readings change a sound learners mix up (voicing, long
+  vowels and っ in on'yomi) or use another reading of the kanji; a wrong
+  choice is never a real spelling / reading of the word (word lists,
+  kuromoji). Fix a poor look-alike in `SIMPLE_LIKE` there. The JLPT Questions page
   (`vocab-questions.html`, `vocab-questions.js`, scores in
   `tokidoki_vocab_questions`) practises fill-in and similar meaning on
   screen; every question is also an SRS card (`vq:<set>:<question>`, graded
