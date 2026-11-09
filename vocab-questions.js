@@ -286,9 +286,9 @@
     const question = questionOf(q);
     const answered = q.pick != null;
     const choices = q.order.map((k, n) => {
-      // A fill-in choice is one word, so its meaning fits beside it; a
-      // similar-meaning choice is a whole sentence, translated once answered.
-      const gloss = question.words ? shortMeaning(question.words[k][3]) : '';
+      // Once answered, a fill-in choice (one word) shows its meaning beside
+      // it; a similar-meaning choice (a whole sentence) shows it underneath.
+      const gloss = answered && question.words ? shortMeaning(question.words[k][3]) : '';
       let cls = 'sf-choice vq-choice';
       if (answered && k === 0) cls += ' correct';
       else if (answered && k === q.pick) cls += ' wrong';
