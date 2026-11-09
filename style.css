@@ -8423,6 +8423,7 @@ body.vq-no-furigana #screen-vocab-questions rt { visibility: hidden; }
 .vq-due { color: var(--orange); }
 .vq-choice-body { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; }
 .vq-choice-en { font-family: var(--font); font-size: 0.82rem; line-height: 1.35; color: var(--text-dim); }
+.vq-choice-inline { flex-direction: row; flex-wrap: wrap; align-items: baseline; column-gap: 12px; }
 .vq-missed { margin-top: 14px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-card); }
 .vq-missed-title { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
 .vq-missed-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }

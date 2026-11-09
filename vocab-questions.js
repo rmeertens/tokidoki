@@ -286,13 +286,17 @@
     const question = questionOf(q);
     const answered = q.pick != null;
     const choices = q.order.map((k, n) => {
+      // A fill-in choice is one word, so its meaning fits beside it; a
+      // similar-meaning choice is a whole sentence, translated once answered.
+      const gloss = question.words ? shortMeaning(question.words[k][3]) : '';
       let cls = 'sf-choice vq-choice';
       if (answered && k === 0) cls += ' correct';
       else if (answered && k === q.pick) cls += ' wrong';
       return `<button class="${cls}" data-choice="${k}" ${answered ? 'disabled' : ''}>
         <span class="sf-choice-num" aria-hidden="true">${n + 1}</span>
-        <span class="vq-choice-body">
+        <span class="vq-choice-body${gloss ? ' vq-choice-inline' : ''}">
           <span class="vq-choice-text" lang="ja">${rubyHtml(question.choices[k])}</span>
+          ${gloss ? `<span class="vq-choice-en">${esc(gloss)}</span>` : ''}
           ${answered && question.choicesEn && question.choicesEn[k] ? `<span class="vq-choice-en">${esc(question.choicesEn[k])}</span>` : ''}
         </span>
       </button>`;
