@@ -310,6 +310,20 @@
     const quiz = global.KANJI_QUIZ_DATA ? Object.values(global.KANJI_QUIZ_DATA).flat().find(x => x.kanji === k) : null;
     return quiz ? String(quiz.meaning).split(',')[0].trim() : '';
   }
+  // What a writing choice means, beside it once answered: the word's
+  // meaning for the answer, the meaning of each look-alike kanji for a
+  // wrong one (白: white; 央画: 央 centre).
+  function writingGloss(question, k) {
+    if (k === 0) return shortMeaning(question.words[0][3]);
+    const answer = [...question.choices[0]];
+    const chars = [...question.choices[k]];
+    // The kanji is named only when the choice has more than one.
+    const named = chars.filter(ch => /[㐀-鿿々]/.test(ch)).length > 1;
+    return chars
+      .filter((ch, i) => ch !== answer[i] && kanjiMeaning(ch))
+      .map(ch => `${named ? `${ch} ` : ''}${kanjiMeaning(ch).toLowerCase()}`).join(' · ');
+  }
+
   function lookalikesHtml(question) {
     const answer = [...question.choices[0]];
     const swapped = [];
@@ -346,7 +360,9 @@
     const choices = q.order.map((k, n) => {
       // Once answered, a fill-in choice (one word) shows its meaning beside
       // it; a similar-meaning choice (a whole sentence) shows it underneath.
-      const gloss = answered && (question.kind === 'fill' || question.kind === 'readword') ? shortMeaning(question.words[k][3]) : '';
+      const gloss = !answered ? ''
+        : question.kind === 'fill' || question.kind === 'readword' ? shortMeaning(question.words[k][3])
+          : question.kind === 'writing' ? writingGloss(question, k) : '';
       let cls = 'sf-choice vq-choice';
       if (answered && k === 0) cls += ' correct';
       else if (answered && k === q.pick) cls += ' wrong';
