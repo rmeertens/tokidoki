@@ -114,7 +114,9 @@
   the fill-in questions listed in `scripts/vocab_fill_reviewed.json` (checked
   by hand: only the answer fits) are used; `node scripts/build_vocab_fill.mjs`
   writes them to `vocab-fill-data.js`. On screen there are also kanji
-  reading (pick the underlined kanji's reading) and kanji writing (表記:
+  reading (pick the underlined kanji's reading, out of other words of the
+  same kind in the same form, 楽しかった: うれしかった · いそがしかった, or,
+  harder, out of sound-alikes) and kanji writing (表記:
   the word underlined in hiragana, pick its kanji out of look-alikes, the
   exam's two-by-two 映画 · 央画 · 映面 · 央面), `vocab-kanji-data.js`, built by
   `node scripts/build_vocab_kanji.mjs` (needs

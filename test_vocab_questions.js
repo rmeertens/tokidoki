@@ -159,6 +159,32 @@ const fs = require('fs');
       }
     }
   }
+  // Reading, other words as the wrong choices: at least 300 words, each
+  // choice a word of the same kind in the target's form (習って: かよって…).
+  assert.ok(m.LEVELS.reduce((n, l) => n + KANJI[l].filter(q => q.v).length, 0) >= 300, 'reading (words): 300 questions');
+  for (const level of m.LEVELS) {
+    for (const q of KANJI[level].filter(q => q.v)) {
+      assert.strictEqual(q.v.length, 4, q.w);
+      assert.strictEqual(q.v[0][0], kanaOf(q.t), `${q.w}: the answer is the furigana`);
+      assert.strictEqual(q.v[0][1], q.w);
+      assert.strictEqual(new Set(q.v.map(c => c[0])).size, 4, `${q.w}: ${q.v.map(c => c[0])}`);
+      // The same ending as the answer (the form), from the word's own reading.
+      let common = 0;
+      while (common < q.k.length && q.k[common] === q.v[0][0][common]) common++;
+      const ending = q.v[0][0] === q.k ? '' : q.v[0][0].slice(common);
+      for (const c of q.v.slice(1)) {
+        // て / た forms stay て / た forms (で, だ too); い-adjectives keep
+        // their ending (かった, くて).
+        if (/[てで]$/.test(ending)) assert.ok(/[てで]$/.test(c[0]), `${q.w}: ${c[0]} not a て form`);
+        if (/[ただ]$/.test(ending) && !/かった$/.test(ending)) assert.ok(/[ただ]$/.test(c[0]), `${q.w}: ${c[0]} not a た form`);
+        if (/^(かった|くて|く)$/.test(ending)) assert.ok(c[0].endsWith(ending), `${q.w}: ${c[0]} not in the form ${ending}`);
+        assert.ok(!m.WORDS.some(w => w[0] === q.w && w[1] === c[2]), `${q.w}: ${c[2]} is right too`);
+      }
+    }
+  }
+  const narau = KANJI.N4.concat(KANJI.N5, KANJI.N3).find(q => q.v && /^{習\|なら}って/.test(q.t));
+  if (narau) assert.ok(narau.v.every(c => c[0].endsWith('って')), narau.v.join());
+
   // The example in the exam: two kanji, two by two.
   const eiga = KANJI.N4.concat(KANJI.N5, KANJI.N3).find(q => q.w === '映画');
   if (eiga && eiga.x) {
@@ -178,13 +204,14 @@ const fs = require('fs');
   const VQ = require('./vocab-questions.js');
   require('./vocab-fill-data.js');
   const allSets = VQ.sets(global.VOCAB_FILL, SIMILAR, KANJI);
-  assert.deepStrictEqual(allSets.map(s => s.id), ['reading-N5', 'reading-N4', 'reading-N3', 'writing-N5', 'writing-N4', 'writing-N3',
+  assert.deepStrictEqual(allSets.map(s => s.id), ['readword-N5', 'readword-N4', 'readword-N3', 'reading-N5', 'reading-N4', 'reading-N3', 'writing-N5', 'writing-N4', 'writing-N3',
     'fill-N5', 'fill-N4', 'fill-N3', 'similar-N5', 'similar-N4', 'similar-N3']);
-  const reading = allSets[0];
+  const reading = allSets[3];
+  assert.ok(allSets[0].questions.every(q => q.words.length === 4 && q.choices[0] === VQ.kanaOf(q.t)), 'reading (words): choices');
   assert.strictEqual(VQ.cardId(reading, reading.questions[0]), `vq:reading-N5:${KANJI.N5.find(q => q.r).w}|${KANJI.N5.find(q => q.r).k}`);
-  assert.ok(allSets[3].questions.every(q => q.choices[0] === VQ.plain(q.t)), 'writing: the answer is the word in kanji');
+  assert.ok(allSets[6].questions.every(q => q.choices[0] === VQ.plain(q.t)), 'writing: the answer is the word in kanji');
   assert.strictEqual(VQ.kanaOf('{泳|およ}いで'), 'およいで');
-  const sets = allSets.slice(6);
+  const sets = allSets.slice(9);
   let seed = 1;
   const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
   const set = sets[3];

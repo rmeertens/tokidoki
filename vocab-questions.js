@@ -1,7 +1,9 @@
 // JLPT Questions (vocab-questions.html): vocabulary questions in the style
 // of the JLPT, four choices each, ten at a time.
 //
-//   Kanji reading (漢字読み) — how is the underlined word read?
+//   Kanji reading (漢字読み) — how is the underlined word read? Out of
+//     other words in the same form (たのしかった · うれしかった ·
+//     いそがしかった), or out of sound-alikes (がいこく · がいごく).
 //   Kanji writing (表記) — the underlined word is in hiragana: how is it
 //     written? Wrong choices swap a kanji for a look-alike (映画 · 央画 ·
 //     映面 · 央面). Both from vocab-kanji-data.js, built by
@@ -60,14 +62,15 @@
   // choices (the answer first).
   function sets(fill, similar, kanji) {
     const out = [];
-    for (const [kind, field] of [['reading', 'r'], ['writing', 'x']]) {
+    for (const [kind, field] of [['readword', 'v'], ['reading', 'r'], ['writing', 'x']]) {
       for (const level of LEVELS) {
         out.push({ id: `${kind}-${level}`, kind, level, questions: ((kanji || {})[level] || []).filter(q => q[field]).map(q => ({
           kind, key: `${q.w}|${q.k}`,
           b: q.b, t: q.t, a: q.a, en: q.en,
-          choices: q[field],
-          // The word, as a fill-in choice is: [markup, word, reading, meaning].
-          words: [[q.t, q.w, q.k, q.m]],
+          // Other-word choices are [kana, word, reading, meaning], like a
+          // fill-in choice; the others plain text, with the word alone.
+          choices: kind === 'readword' ? q.v.map(c => c[0]) : q[field],
+          words: kind === 'readword' ? q.v : [[q.t, q.w, q.k, q.m]],
         })) });
       }
     }
@@ -164,7 +167,8 @@
   // ─── Home ──────────────────────────────────────────────────────────────────
 
   const KIND = {
-    reading: { title: 'Kanji reading', ja: '漢字読み', about: 'How is the underlined word read?' },
+    readword: { title: 'Kanji reading', ja: '漢字読み', about: 'How is the underlined word read?' },
+    reading: { title: 'Kanji reading: sound-alikes', ja: '漢字読み', about: 'How is the underlined word read?' },
     writing: { title: 'Kanji writing', ja: '表記', about: 'How is the underlined word written?' },
     fill: { title: 'Fill in the blank', ja: '文脈規定', about: 'Which word goes in the （　）?' },
     similar: { title: 'Similar meaning', ja: '言い換え類義', about: 'Which sentence means about the same as the underlined part?' },
@@ -222,10 +226,10 @@
   function questionHtml(question, q) {
     if (question.kind === 'similar') return underlinedHtml(question.q);
     const done = q.pick != null;
-    if (question.kind === 'reading' || question.kind === 'writing') {
+    if (question.t) {
       // Once answered, the word in kanji with its furigana; before, the
       // kanji alone (reading) or the kana alone (writing).
-      const target = done ? rubyHtml(question.t) : esc(question.kind === 'reading' ? plain(question.t) : kanaOf(question.t));
+      const target = done ? rubyHtml(question.t) : esc(question.kind === 'writing' ? kanaOf(question.t) : plain(question.t));
       return `${rubyHtml(question.b)}<span class="vq-target${done ? ` ${q.pick === 0 ? 'vq-right' : 'vq-wrong'}` : ''}">${target}</span>${rubyHtml(question.a)}`;
     }
     const filled = done
@@ -342,7 +346,7 @@
     const choices = q.order.map((k, n) => {
       // Once answered, a fill-in choice (one word) shows its meaning beside
       // it; a similar-meaning choice (a whole sentence) shows it underneath.
-      const gloss = answered && question.kind === 'fill' ? shortMeaning(question.words[k][3]) : '';
+      const gloss = answered && (question.kind === 'fill' || question.kind === 'readword') ? shortMeaning(question.words[k][3]) : '';
       let cls = 'sf-choice vq-choice';
       if (answered && k === 0) cls += ' correct';
       else if (answered && k === q.pick) cls += ' wrong';

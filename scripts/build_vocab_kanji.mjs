@@ -2,8 +2,10 @@
 // Writes vocab-kanji-data.js, the kanji questions of the JLPT Questions page
 // (vocab-questions.html), four choices each, as in the exam:
 //
-//   Kanji reading (漢字読み): the word underlined in kanji, pick its reading
-//     (がいこく · がいごく · がいこっく · がいごっく).
+//   Kanji reading (漢字読み): the word underlined in kanji, pick its reading,
+//     out of other words of the same kind in the same form (楽しかった:
+//     たのしかった · うれしかった · いそがしかった · はずかしかった), or
+//     out of sound-alikes (がいこく · がいごく · がいこっく · がいごっく).
 //   Kanji writing (表記): the word underlined in hiragana, pick how it's
 //     written (映画 · 央画 · 映面 · 央面; 泳いで · 海いで · 港いで · 注いで).
 //
@@ -36,7 +38,7 @@ import { createRequire } from "node:module";
 import { writeFileSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { WORDS, LEVELS, isKanji, hash, knownKanji, orderedTargets, markup, wordTokens } from "./vocab_questions.mjs";
+import { WORDS, LEVELS, isKanji, hash, knownKanji, orderedTargets, markup, wordTokens, verbType, conjugateVerb } from "./vocab_questions.mjs";
 
 const require = createRequire(import.meta.url);
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -280,6 +282,7 @@ function base(level) {
       a: markup(c.tokens.slice(c.target.end)),
       text: c.target.text,
       reading: c.target.reading,
+      full: c.target.full,
     }));
 }
 
@@ -388,15 +391,92 @@ function readingQ(q) {
   return wrong && [q.reading, ...wrong];
 }
 
+// ─── Reading, other words as the wrong choices ────────────────────────────
+
+// The kind of word, as far as the wrong choices go.
+const wordClass = (w) => {
+  const pos = w[7] || "";
+  if (/^(expression · )?verb/.test(pos) && w[0] !== "来る") return "verb";
+  if (/い-adjective/.test(pos)) return "i-adj";
+  if (/な-adjective/.test(pos)) return "na-adj";
+  if (/number|counter/.test(pos)) return "number";
+  if (/adverb/.test(pos) && !/noun/.test(pos)) return "adverb";
+  return "noun";
+};
+
+// How the target spells word w: { form } — "full" (as listed), a verb's
+// "te" / "ta" / "i" (ます stem) / "a" (ない stem), or an い-adjective's
+// ending ("かった", "くて", "く") — or null.
+function formOf(q) {
+  const w = q.w;
+  if (q.full) return { form: "full" };
+  const cls = wordClass(w);
+  if (cls === "verb") {
+    const type = verbType(w[0], w[1]);
+    if (!type) return null;
+    for (const form of ["te", "ta", "i", "a"]) if (conjugateVerb(w[0], type, form, w[0]) === q.text) return { form };
+    return null;
+  }
+  if (cls === "i-adj" && w[0].endsWith("い")) {
+    const ext = q.text.slice(w[0].length - 1);
+    return ["かった", "くて", "く"].includes(ext) ? { form: ext } : null;
+  }
+  return null;
+}
+
+// Word d's reading in that form, or null.
+function inForm(d, form) {
+  if (form === "full") return d[1];
+  if (["かった", "くて", "く"].includes(form)) return d[1].endsWith("い") && d[1] !== "いい" ? d[1].slice(0, -1) + form : null;
+  const type = verbType(d[0], d[1]);
+  return type ? conjugateVerb(d[1], type, form, d[0]) : null;
+}
+
+const LEVEL_RANK = { N5: 0, N4: 1, N3: 2 };
+// Never a wrong choice: words a learner shouldn't run into as a distractor.
+const AVOID = new Set(["自殺", "殺人", "殺す", "死亡", "死"]);
+
+// The exam's other kind of reading question: the wrong choices are other
+// words of the same kind, in the same form, that the learner knows (this
+// level or below): 楽しかった — うれしかった · いそがしかった ·
+// はずかしかった; 習って — かよって · まって · のこって. Words that end the
+// same way (しい, って) and are about as long come first.
+// Returns [[kana, word, reading, meaning]…], the answer first, or null.
+function wordsQ(q, level) {
+  const w = q.w;
+  const use = formOf(q);
+  if (!use) return null;
+  const cls = wordClass(w);
+  const taken = new Set([q.reading, w[1]]);
+  const tail = (r) => r.slice(-2);
+  const wrong = WORDS
+    .filter((d) => d !== w && d[0] !== w[0] && !AVOID.has(d[0]) && LEVEL_RANK[d[3]] <= LEVEL_RANK[level] && wordClass(d) === cls)
+    // Not another word written with the same kanji (上手 / 上).
+    .filter((d) => ![...d[0]].some((ch) => isKanji(ch) && w[0].includes(ch)))
+    .map((d) => ({ d, kana: inForm(d, use.form) }))
+    .filter((x) => x.kana && wellFormed(x.kana) && !isRealSpelling(w[0], x.d[1]) && !(LISTED.get(w[0]) || new Set()).has(x.d[1]))
+    .map((x) => ({
+      ...x,
+      score: Math.abs(x.kana.length - q.reading.length) + (tail(x.kana) === tail(q.reading) ? 0 : 2) +
+        (tail(x.d[1]) === tail(w[1]) ? 0 : 1) + (x.d[3] === level ? 0 : 1),
+    }))
+    .sort((a, b) => a.score - b.score || hash(w[0] + a.d[0]) - hash(w[0] + b.d[0]))
+    .filter((x) => !taken.has(x.kana) && !taken.has(x.d[1]) && taken.add(x.kana) && taken.add(x.d[1]))
+    .slice(0, 3);
+  if (wrong.length < 3) return null;
+  return [[q.reading, w[0], w[1], w[2]], ...wrong.map((x) => [x.kana, x.d[0], x.d[1], x.d[2]])];
+}
+
 // Per level, one entry per word with either kind of question:
-// { w, k, m, en, b, t, a, r: [reading choices] | null, x: [written choices] | null }.
+// { w, k, m, en, b, t, a, r: [reading choices] | null, x: [written choices] | null,
+//   v: [[kana, word, reading, meaning]…] (reading, other words) | null }.
 export function kanjiData() {
   const out = {};
   for (const level of LEVELS) {
     out[level] = base(level)
-      .map((q) => ({ q, r: readingQ(q), x: writing(q) }))
-      .filter(({ r, x }) => r || x)
-      .map(({ q, r, x }) => ({ w: q.w[0], k: q.w[1], m: q.w[2], en: q.w[9], b: q.b, t: q.t, a: q.a, r, x }));
+      .map((q) => ({ q, r: readingQ(q), x: writing(q), v: wordsQ(q, level) }))
+      .filter(({ r, x, v }) => r || x || v)
+      .map(({ q, r, x, v }) => ({ w: q.w[0], k: q.w[1], m: q.w[2], en: q.w[9], b: q.b, t: q.t, a: q.a, r, x, v }));
   }
   return out;
 }
@@ -413,8 +493,10 @@ function file(data) {
   // Questions page, per level: w / k / m the word, its reading and meaning,
   // en the sentence in English, b / t / a the sentence before the
   // underlined word, the word and after it (furigana as {漢字|かな}); r the
-  // reading question's choices, x the writing question's (the word written
-  // four ways), the answer first, or null. The sentences are Tokidoki's own
+  // reading question's choices (sound-alikes), v the other reading
+  // question's (other words in the same form, [kana, word, reading,
+  // meaning]), x the writing question's (the word written four ways), the
+  // answer first, or null. The sentences are Tokidoki's own
   // (scripts/guess_examples.tsv); look-alike kanji from Kanjium
   // (CC BY-SA 4.0) and KanjiVG (CC BY-SA 3.0).
 
@@ -438,7 +520,7 @@ export async function kanjiFile() {
 if (import.meta.url === `file://${process.argv[1]}`) {
   const { data, text } = await kanjiFile();
   writeFileSync(path.join(ROOT, "vocab-kanji-data.js"), text);
-  for (const [kind, f] of [["reading", "r"], ["writing", "x"]]) {
+  for (const [kind, f] of [["reading", "r"], ["writing", "x"], ["reading (words)", "v"]]) {
     console.log(`${kind}: ${LEVELS.map((l) => `${l} ${data[l].filter((q) => q[f]).length}`).join(", ")}`);
   }
 }
