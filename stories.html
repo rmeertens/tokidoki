@@ -21,7 +21,7 @@
   <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
   <link rel="canonical" href="https://tokidoki.meertens.dev/stories.html">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Graded Japanese Stories (JLPT N5–N3)", "description": "Short graded Japanese reading stories for JLPT N5, N4 and N3. Tap any word for its reading and meaning, and any sentence for the grammar it uses.", "url": "https://tokidoki.meertens.dev/stories.html", "inLanguage": "en", "learningResourceType": "reading", "educationalLevel": "JLPT N5–N3", "isAccessibleForFree": true, "isPartOf": {"@type": "WebSite", "name": "Tokidoki", "url": "https://tokidoki.meertens.dev/"}}</script>
-  <link rel="stylesheet" href="style.css?v=108">
+  <link rel="stylesheet" href="style.css?v=109">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -135,11 +135,12 @@
         <p class="story-title-en" id="story-title-en"></p>
       </div>
       <div class="kana-settings-row story-toggles">
-        <label class="kana-script-toggle"><input type="checkbox" id="story-toggle-furigana"> Furigana</label>
+        <label class="kana-script-toggle" title="Key: F"><input type="checkbox" id="story-toggle-furigana"> Furigana</label>
         <label class="kana-script-toggle"><input type="checkbox" id="story-toggle-english"> English</label>
         <button type="button" class="btn-secondary story-read hidden" id="btn-story-read" aria-pressed="false">▶ Read aloud</button>
         <button type="button" class="btn-secondary story-read hidden" id="btn-story-read-slow" aria-pressed="false">🐢 Slowly</button>
         <button type="button" class="btn-secondary speak-toggle hidden" data-speak-toggle aria-pressed="false">&#128266; Speak words on click: Off</button>
+        <span class="news-keys-hint story-keys-hint">Keys: <kbd>F</kbd> furigana</span>
       </div>
 
       <div class="story-layout">
@@ -173,7 +174,7 @@
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=5"></script>
   <script src="word-lookups.js?v=1"></script>
-  <script src="app.js?v=80"></script>
+  <script src="app.js?v=81"></script>
   <script src="sync-merge.js?v=11"></script>
   <script src="progress-stats.js?v=5"></script>
   <script src="sync.js?v=12"></script>

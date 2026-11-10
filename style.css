@@ -8517,6 +8517,7 @@ body.vq-no-furigana #screen-vocab-questions rt { visibility: hidden; }
   background: var(--bg-card);
 }
 @media (hover: none) { .news-keys-hint { display: none; } }
+.story-keys-hint { align-self: center; font-size: 0.85rem; }
 
 /* JLPT Questions: kanji reading / writing — the underlined word once answered, and the look-alike kanji */
 .vq-target.vq-right, .vq-target.vq-wrong { padding: 0 4px; border-radius: 6px; }

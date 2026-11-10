@@ -7398,6 +7398,14 @@
 
       if (screens.story && screens.story.classList.contains('active')) {
         if (e.key === 'Escape' && storySelection) { consumeKey(e); clearStorySelection(); }
+        // F shows / hides the furigana (its checkbox, so the setting saves).
+        const t = e.target;
+        const typing = t && (t.isContentEditable || (/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) && t.type !== 'checkbox'));
+        if ((e.key === 'f' || e.key === 'F') && !e.ctrlKey && !e.metaKey && !e.altKey && !e.repeat && !e.isComposing && !typing
+          && !document.querySelector('dialog[open]') && $('#story-toggle-furigana')) {
+          consumeKey(e);
+          $('#story-toggle-furigana').click();
+        }
         return;
       }
 
