@@ -301,7 +301,16 @@
   });
   document.addEventListener('keydown', e => {
     if (!attempt || !$('screen-bunkei-story').classList.contains('active')) return;
-    if (e.ctrlKey || e.metaKey || e.altKey || /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    // F shows / hides furigana (through the checkbox, so it's saved), also
+    // right after clicking that checkbox.
+    const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName) && e.target.type !== 'checkbox';
+    if (e.key.toLowerCase() === 'f' && !typing && !e.repeat && !e.isComposing && !document.querySelector('dialog[open]')) {
+      e.preventDefault();
+      $('bs-opt-furigana').click();
+      return;
+    }
+    if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
     const i = attempt.at;
     if (i >= attempt.chapter.lines.length) {
       // On the score: Space / Enter anywhere but on a button go on, like the focused button.
