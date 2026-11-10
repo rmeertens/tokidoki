@@ -199,6 +199,12 @@ ${LEVELS.map(l => `            <button type="button" data-level="${l}" aria-pres
         </aside>
       </div>
 
+      <section class="news-quiz hidden" id="news-quiz" aria-labelledby="news-quiz-title">
+        <h2 class="phrase-group-title" id="news-quiz-title">Quiz</h2>
+        <p class="news-quiz-intro">How much did you understand? Three questions about the story.</p>
+        <div id="news-quiz-body"></div>
+      </section>
+
       <nav class="phrase-pager story-pager" aria-label="More news">
         ${pagerLink(newer, 'newer')}
         ${pagerLink(older, 'older')}
@@ -218,7 +224,11 @@ ${LEVELS.filter(l => item.levels[l]).map(l => {
     <p>
 ${v.lines.map(([jp, en]) => `      ${esc(plain(jp))} (${esc(en)})`).join('\n')}
     </p>`;
-  }).join('\n')}
+  }).join('\n')}${item.quiz && item.quiz.length ? `
+    <h2>Quiz</h2>
+    <ol>
+${item.quiz.map(([q]) => `      <li>${esc(q)}</li>`).join('\n')}
+    </ol>` : ''}
   </section>
 </body>
 </html>

@@ -7578,6 +7578,46 @@ a.chapter-card.news-headline-card {
   color: var(--text-dim);
 }
 
+/* The quiz after a story (news.js renderQuiz). */
+.news-quiz {
+  margin-top: 28px;
+}
+
+.news-quiz-intro {
+  margin: 4px 0 12px;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+
+.news-quiz-q {
+  margin-bottom: 12px;
+}
+
+.news-quiz-question {
+  flex: 1;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.news-quiz-choice {
+  font-family: var(--font);
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+.news-quiz-result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 4px 2px;
+}
+
+@media (max-width: 560px) {
+  .news-quiz-choices { grid-template-columns: 1fr; }
+}
+
 /* Older news, by week (news.html), and the links under a week page. */
 .news-archive {
   margin-top: 28px;

@@ -10,6 +10,10 @@
   //   emoji    — shown on the story's card
   //   titleEn  — the headline in English
   //   sources  — where the facts come from: [{ name, url }]
+  //   quiz     — three questions shown after the story, in English, each
+  //              [question, right answer, wrong, wrong, wrong] (the page
+  //              shuffles the choices). One set for all three levels, so
+  //              ask only what the N5 version says too.
   //   levels   — { N5, N4, N3 }, each { title, lines }, where every line is
   //              [Japanese, English] or [Japanese, English, note]. The note
   //              explains anything about the sentence the words and grammar
@@ -30,6 +34,11 @@
       sources: [
         { name: 'nippon.com', url: 'https://www.nippon.com/en/articles/-/57113' },
         { name: 'TechNode', url: 'https://technode.global/2026/11/09/mitsui-chemicals-jsr-acquisition/' },
+      ],
+      quiz: [
+        ['What does JSR make?', 'Materials for semiconductors', 'Smartphones', 'Medicine', 'Car parts'],
+        ['How much will the purchase cost in all?', 'About 1.84 trillion yen', 'About 20 billion yen', 'About 184 billion yen', 'About 18 trillion yen'],
+        ['Why will the purchase take some time yet?', 'It needs permission from governments', 'JSR has not said yes', 'The bank has no money', 'The factory must be built first'],
       ],
       levels: {
         N5: {
@@ -79,6 +88,11 @@
         { name: 'nippon.com', url: 'https://www.nippon.com/en/articles/-/57146' },
         { name: 'The Star (Malaysia)', url: 'https://www.thestar.com.my/aseanplus/aseanplus-news/2026/11/09/japan-works-to-shield-takaichi-from-any-xi-snub-at-china039s-apec-summit' },
       ],
+      quiz: [
+        ['Where will Takaichi go first?', 'The Philippines, for an ASEAN meeting', 'China, for the APEC meeting', 'The United States', 'Vietnam'],
+        ['What will she talk about with Asian countries in the Philippines?', 'Reducing carbon dioxide', 'Tourism', 'Football', 'Earthquakes'],
+        ['Why may a talk with Xi Jinping be difficult?', 'Japan and China are not getting along well', 'Xi Jinping is ill', 'The meeting is too short', 'Takaichi does not speak Chinese'],
+      ],
       levels: {
         N5: {
           title: '高市首相[たかいちしゅしょう]、来週[らいしゅう]　外国[がいこく]の　会議[かいぎ]に　行[い]きます',
@@ -126,6 +140,11 @@
       sources: [
         { name: 'Aviacionline', url: 'https://www.aviacionline.com/english/commercial-aviation/asia-pacific/ana-and-vietnam-airlines-sign-framework-agreement-to-create-japan-vietnam-joint-venture_a6af1c0a84622b038fcc07a1f' },
         { name: 'TRAICY Global', url: 'https://en.traicy.com/posts/2026110942114/' },
+      ],
+      quiz: [
+        ['What will ANA and Vietnam Airlines do together?', 'Run the flights between Japan and Vietnam', 'Build a new airport', 'Make a new plane', 'Open hotels in Tokyo'],
+        ['How long have the two companies been partners?', 'Ten years', 'Two years', 'Twenty years', 'Fifty years'],
+        ['When will the plan start?', 'It has not been decided yet', 'Next month', 'Next April', 'It has already started'],
       ],
       levels: {
         N5: {
@@ -175,6 +194,11 @@
         { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/11/06/japan/takaichi-cybersecurity-package/' },
         { name: 'The Associated Press (CP24)', url: 'https://www.cp24.com/news/world/2026/11/06/japan-announces-emergency-cybersecurity-package-following-a-wave-of-massive-data-attacks/' },
       ],
+      quiz: [
+        ['What is the government\'s plan for?', 'Stopping cyberattacks', 'Lowering taxes', 'Building roads', 'Helping farmers'],
+        ['How much money will the government use first?', '10 billion yen', '1 billion yen', '100 billion yen', '1 trillion yen'],
+        ['What will the team of experts use against hackers?', 'AI', 'New laws only', 'Robots', 'Police dogs'],
+      ],
       levels: {
         N5: {
           title: 'サイバー攻撃[こうげき]を　ふせぐ　新[あたら]しい　計画[けいかく]',
@@ -223,6 +247,11 @@
         { name: 'Nikkei Asia', url: 'https://asia.nikkei.com/politics/international-relations/astellas-employee-jailed-in-china-on-spy-charge-set-for-december-release' },
         { name: 'Reuters (Internazionale)', url: 'https://www.internazionale.it/ultime-notizie-reuters/2026/11/08/astellas-employee-imprisoned-in-china-to-be-released-in-december-japanese-media-report' },
       ],
+      quiz: [
+        ['Where was the man held?', 'In China', 'In Japan', 'In the United States', 'In Russia'],
+        ['How long was his sentence?', 'Three and a half years', 'One year', 'Ten years', 'Six months'],
+        ['When is he expected to be released?', 'December 14', 'November 14', 'In March', 'Next year'],
+      ],
       levels: {
         N5: {
           title: '中国[ちゅうごく]に　いる　日本人[にっぽんじん]の　男性[だんせい]、十二月[じゅうにがつ]に　帰[かえ]る　ようです',
@@ -270,6 +299,11 @@
         { name: 'The Associated Press (AJC)', url: 'https://www.ajc.com/news/2026/11/japans-stock-benchmark-nikkei-tumbles-more-than-6-after-trading-opens/' },
         { name: 'Trading Economics', url: 'https://tradingeconomics.com/japan/stock-market' },
       ],
+      quiz: [
+        ['How much did the Nikkei average fall on the 6th?', 'About 6%', 'About 1%', 'About 20%', 'About 60%'],
+        ['Shares of what kind of companies were sold a lot?', 'Companies related to AI', 'Food companies', 'Car makers', 'Banks'],
+        ['What was this week like?', 'The worst week since March 2020', 'The best week of the year', 'A quiet week', 'The worst week ever'],
+      ],
       levels: {
         N5: {
           title: '日本[にっぽん]の　株[かぶ]の　ねだんが　大[おお]きく　下[さ]がりました',
@@ -315,6 +349,11 @@
       sources: [
         { name: 'Jiji Press (nippon.com)', url: 'https://www.nippon.com/en/articles/-/57086' },
         { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/11/08/japan/earthquake-aichi-sunday/' },
+      ],
+      quiz: [
+        ['When did the earthquake happen?', 'At about 1 a.m., in the middle of the night', 'At noon', 'In the afternoon', 'In the evening'],
+        ['How bad were most of the injuries?', 'Light', 'Very serious', 'Nobody was hurt', 'It is not known'],
+        ['Was there a tsunami worry?', 'No', 'Yes, a big one', 'Yes, a small one', 'It is not known yet'],
       ],
       levels: {
         N5: {
@@ -364,6 +403,11 @@
         { name: 'Jiji Press (nippon.com)', url: 'https://www.nippon.com/en/articles/-/57077' },
         { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/11/08/japan/nuclear-disaster-drill-tomari-plant/' },
       ],
+      quiz: [
+        ['What was the drill about?', 'An accident at a nuclear power plant', 'A big fire in a city', 'A typhoon', 'A train accident'],
+        ['When was the last drill at the Tomari plant?', '10 years ago', 'Last year', '5 years ago', 'There has never been one'],
+        ['What did Prime Minister Takaichi practise?', 'Declaring a nuclear emergency', 'Leaving Hokkaido by plane', 'Turning off the reactor', 'Talking to the residents on TV'],
+      ],
       levels: {
         N5: {
           title: '原発[げんぱつ]の　事故[じこ]の　練習[れんしゅう]を　しました',
@@ -412,6 +456,11 @@
         { name: 'nippon.com', url: 'https://www.nippon.com/en/articles/-/57068' },
         { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/11/08/japan/godzilla-megamullion-heritage/' },
       ],
+      quiz: [
+        ['What is the Godzilla Megamullion?', 'A huge mountain-like shape on the sea floor', 'A new island', 'A big fish', 'A new ship'],
+        ['Why did it get the name Godzilla?', 'Because it is so big', 'Because it looks like a monster', 'Because it was found by a film company', 'Because it is dangerous'],
+        ['What was it chosen as?', 'One of 100 important geological places in the world', 'A national park', 'A World Heritage town', 'The deepest place in the sea'],
+      ],
       levels: {
         N5: {
           title: '海[うみ]の　底[そこ]の　「ゴジラ」が　えらばれました',
@@ -458,6 +507,11 @@
         { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261107de72096' },
         { name: 'Weathernews', url: 'https://weathernews.jp/news/202611/070131/' },
         { name: 'Fukui Shimbun', url: 'https://www.fukuishimbun.co.jp/articles/-/2740427' },
+      ],
+      quiz: [
+        ['Where did Typhoon No. 32 form?', 'Near the Mariana Islands', 'Near Okinawa', 'Near Hokkaido', 'Near the Philippines'],
+        ['Why is this year special?', '32 typhoons formed, the first time since 1994', 'No typhoons hit Japan', 'It is the strongest typhoon ever', 'Typhoons came only in summer'],
+        ['Which islands may it come close to?', 'The Ogasawara Islands', 'Honshu', 'Okinawa', 'Hokkaido'],
       ],
       levels: {
         N5: {
@@ -508,6 +562,11 @@
         { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/11/06/japan/tokyo-shallow-quake/' },
         { name: 'Arab News Japan', url: 'https://www.arabnews.jp/japan/%E6%9D%B1%E4%BA%AC%E6%B2%96%E3%81%A7%E3%83%9E%E3%82%B0%E3%83%8B%E3%83%81%E3%83%A5%E3%83%BC%E3%83%8961%E3%81%AE%E5%9C%B0%E9%9C%87%E6%B4%A5%E6%B3%A2%E8%AD%A6%E5%A0%B1%E3%81%AF%E3%81%AA%E3%81%97%E6%B0%97%E8%B1%A1%E5%BA%81-3001315' },
       ],
+      quiz: [
+        ['Where was the earthquake?', 'In the sea east of the Kanto region', 'Under Tokyo', 'In Hokkaido', 'In Kyushu'],
+        ['What was the strongest shaking (intensity)?', '3', '1', '5', '7'],
+        ['Was there a tsunami worry?', 'No', 'Yes', 'Only in Miyagi', 'Only in Ibaraki'],
+      ],
       levels: {
         N5: {
           title: '関東[かんとう]の　海[うみ]で　地震[じしん]が　ありました',
@@ -557,6 +616,11 @@
         { name: 'Nikkei', url: 'https://www.nikkei.com/article/DGXZQOUB298FK0Z21C26A0000000/' },
         { name: 'Jiji Press (Yahoo! News Japan)', url: 'https://news.yahoo.co.jp/articles/723aaf29d00814ab8ac9fa07cfbff03e453371f2' },
       ],
+      quiz: [
+        ['Who is Kazuo Ueda?', 'The governor of the Bank of Japan', 'The prime minister', 'The finance minister', 'The head of the IMF'],
+        ['What rise in prices has Japan aimed for?', 'About 2%', 'About 0%', 'About 5%', 'About 10%'],
+        ['What did he say about reaching the goal?', 'It is a big step, but many difficult things remain', 'The work is now finished', 'It was a mistake', 'Prices will now fall'],
+      ],
       levels: {
         N5: {
           title: '日銀[にちぎん]の　総裁[そうさい]が　物[もの]の　ねだんの　話[はなし]を　しました',
@@ -604,6 +668,11 @@
         { name: 'Mainichi Shimbun (Yahoo! News Japan)', url: 'https://news.yahoo.co.jp/articles/5f503f4f45937abaf123f58e48e31e7c814b9af9' },
         { name: 'TV Asahi (ANN)', url: 'https://news.ksb.co.jp/ann/article/17029673' },
         { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/11/06/japan/politics/consumption-tax-bill-passed-lower-house/' },
+      ],
+      quiz: [
+        ['What will the consumption tax on food become?', '1%', '0%', '5%', '10%'],
+        ['For how long?', 'Two years, from April next year', 'One year, from January', 'Forever', 'Six months, from December'],
+        ['Where will the bill be discussed next?', 'In the Upper House', 'In the Lower House again', 'In the courts', 'In each city'],
       ],
       levels: {
         N5: {
@@ -654,6 +723,11 @@
         { name: 'Football Channel (Yahoo! News Japan)', url: 'https://news.yahoo.co.jp/articles/c4ffbaa542a79dc195587a375237fb047f4607c7' },
         { name: 'Ultra Soccer', url: 'https://web.ultra-soccer.jp/news/all/42221/' },
       ],
+      quiz: [
+        ['What does Kozo Tashima want to become?', 'President of FIFA', 'Coach of Japan\'s team', 'President of the JFA again', 'A player'],
+        ['When is the election?', 'In March next year', 'On November 18', 'This December', 'In two years'],
+        ['Who else wants to be president?', 'The current president, Mr. Infantino', 'Nobody', 'A Japanese player', 'The prime minister'],
+      ],
       levels: {
         N5: {
           title: '田嶋幸三[たじまこうぞう]さんが　FIFAの　会長[かいちょう]に　なりたいと　言[い]いました',
@@ -703,6 +777,11 @@
         { name: 'Nagoya TV (Yahoo! News Japan)', url: 'https://news.yahoo.co.jp/articles/e0b72d048c045f7de55318dbb0083f937a82bce7' },
         { name: 'Shizuoka Asahi TV (Yahoo! News Japan)', url: 'https://news.yahoo.co.jp/articles/8be021a775a7c2336574e93ad99a17cd64a6b052' },
       ],
+      quiz: [
+        ['What was wrong at the Hamaoka nuclear plant?', 'There was false earthquake data', 'There was a fire', 'Water leaked out', 'It was too old'],
+        ['Who gave the order to Chubu Electric?', 'The Ministry of Economy, Trade and Industry', 'The police', 'Shizuoka Prefecture', 'A court'],
+        ['By when must Chubu Electric submit a plan?', 'The end of November', 'Tomorrow', 'The end of March', 'Next year\'s summer'],
+      ],
       levels: {
         N5: {
           title: '国[くに]が　中部電力[ちゅうぶでんりょく]に　「よくしなさい」と　命令[めいれい]',
@@ -749,6 +828,11 @@
         { name: 'Jiji Press', url: 'https://www.jiji.com/jc/article?k=2026110500120&g=soc' },
         { name: 'Mainichi Shimbun (Yahoo! News Japan)', url: 'https://news.yahoo.co.jp/articles/967651db3f9678201e56da1409c2463c3fa552b4' },
         { name: 'TV Asahi (Yahoo! News Japan)', url: 'https://news.yahoo.co.jp/articles/b7d4f99f8926bee344e779b6ffb08b91fb63e2e8' },
+      ],
+      quiz: [
+        ['What is shodo?', 'Writing characters with a brush and ink', 'A kind of dance', 'Making tea', 'A martial art'],
+        ['What else is included with it?', 'Tenkoku, carving stamps (hanko)', 'Origami', 'Flower arranging', 'Pottery'],
+        ['If it is decided, which number will it be for Japan?', 'The 24th', 'The 1st', 'The 10th', 'The 100th'],
       ],
       levels: {
         N5: {
@@ -798,6 +882,11 @@
         { name: 'ASCII (Yahoo! News Japan)', url: 'https://news.yahoo.co.jp/articles/726d1d63f828ae63fd372f29c2de8a44698b26d6' },
         { name: 'TECHNO-EDGE', url: 'https://www.techno-edge.net/article/2026/11/05/5674.html' },
       ],
+      quiz: [
+        ['Which Docomo services stopped?', 'My docomo and the Docomo Online Shop', 'All phone calls', 'Docomo shops', 'Text messages'],
+        ['Why did they stop?', 'Someone may have got into Docomo\'s servers', 'There was an earthquake', 'The power went out', 'They are being made new'],
+        ['What should people in a hurry do?', 'Go to a Docomo shop', 'Call the police', 'Wait at home', 'Use another company\'s website'],
+      ],
       levels: {
         N5: {
           title: 'ドコモの　サービスが　とまって　います',
@@ -846,6 +935,11 @@
         { name: 'CBC News', url: 'https://www.cbc.ca/news/world/livestory/us-midterm-election-results-live-updates-2026-9.7403367' },
         { name: 'NHK', url: 'https://news.web.nhk/newsweb' },
       ],
+      quiz: [
+        ['Which party won many seats?', 'The Democratic Party', 'The Republican Party', 'A new party', 'No party'],
+        ['Whose party lost?', 'President Trump\'s', 'The Democrats\'', 'Japan\'s', 'Nobody\'s'],
+        ['What may happen for the next two years?', 'It may be harder for Trump to do what he wants', 'Trump will leave office', 'There will be another election', 'Congress will close'],
+      ],
       levels: {
         N5: {
           title: 'アメリカの　中間選挙[ちゅうかんせんきょ]　民主党[みんしゅとう]が　勝[か]つ',
@@ -892,6 +986,11 @@
         { name: 'tenki.jp (Japan Weather Association)', url: 'https://tenki.jp/forecaster/y_nakagawa/2026/11/04/41195.html' },
         { name: 'Weathernews', url: 'https://weathernews.jp/news/202611/040021/' },
         { name: 'MBC (Yahoo! News Japan)', url: 'https://news.yahoo.co.jp/articles/007b5e52214ae3984cbe8e8b4f8497d72d8f96e9' },
+      ],
+      quiz: [
+        ['Where is Typhoon No. 31 going?', 'Toward the Ogasawara Islands', 'Toward Tokyo', 'Toward Okinawa', 'Toward China'],
+        ['Where may strong rain fall?', 'In Kanto and the Izu Islands', 'In Hokkaido', 'In Kyushu', 'Nowhere'],
+        ['Where should people be careful?', 'Near mountains and in low places', 'On high floors of buildings', 'In trains', 'At the airport'],
       ],
       levels: {
         N5: {
@@ -940,6 +1039,11 @@
         { name: 'TV Tokyo BIZ', url: 'https://txbiz.tv-tokyo.co.jp/hiru/news/post_351838' },
         { name: 'Kumamoto Nichinichi Shimbun (Kyodo)', url: 'https://kumanichi.com/articles/2048549' },
       ],
+      quiz: [
+        ['What tax is the law about?', 'The consumption tax on food', 'Income tax', 'Car tax', 'Tax for tourists'],
+        ['When do the ruling parties want to decide?', 'On the 6th', 'Next April', 'In two years', 'Tomorrow'],
+        ['What does the opposition want first?', 'To hear the prime minister', 'A new election', 'A bigger tax cut', 'To wait until next year'],
+      ],
       levels: {
         N5: {
           title: '食[た]べ物[もの]の　消費税[しょうひぜい]を　へらす　法律[ほうりつ]',
@@ -984,6 +1088,11 @@
       sources: [
         { name: 'Tokyo Metropolitan Government press release', url: 'https://www.metro.tokyo.lg.jp/information/press/2026/10/2026102810' },
         { name: 'Japan Web Magazine (travel news, Nov. 2)', url: 'https://japanwebmagazine.substack.com/p/japan-travel-news-november-2-2026' },
+      ],
+      quiz: [
+        ['Who is the campaign for?', 'People aged 29 or under', 'Children under 12', 'Older people', 'Tourists'],
+        ['How much does a visit to the sento cost with the coupon?', '300 yen', 'Free', '500 yen', '1,000 yen'],
+        ['How can you get the coupon?', 'With the QR code on the poster', 'At the station', 'By post', 'At city hall'],
       ],
       levels: {
         N5: {
@@ -1031,6 +1140,11 @@
         { name: 'tenki.jp (Japan Weather Association)', url: 'https://tenki.jp/forecaster/s_ono/2026/11/02/41180.html' },
         { name: 'Xinhua', url: 'https://english.news.cn/20261102/ef73f9920e7f439796102b72ee2effd0/c.html' },
       ],
+      quiz: [
+        ['What was created on the 2nd?', 'A Disaster Management Agency', 'A new railway', 'A weather satellite', 'A new city'],
+        ['How many staff does it have?', '352', '35', '3,520', '52'],
+        ['How much water and food should people prepare?', 'For at least three days', 'For one day', 'For one month', 'None'],
+      ],
       levels: {
         N5: {
           title: '新[あたら]しい　防災庁[ぼうさいちょう]が　できました',
@@ -1076,6 +1190,11 @@
         { name: 'KAB (ANN)', url: 'https://www.kab.co.jp/news/article/17010515' },
         { name: 'KSB (ANN)', url: 'https://news.ksb.co.jp/ann/article/17010500' },
       ],
+      quiz: [
+        ['Who may get the money?', 'People with little money', 'Everyone', 'Companies', 'Students only'],
+        ['About how much is it per person?', 'About 5,000 yen a year', 'About 5,000 yen a month', 'About 50,000 yen a year', 'About 500 yen a year'],
+        ['When will it start?', 'Around autumn next year', 'Next month', 'This year', 'In ten years'],
+      ],
       levels: {
         N5: {
           title: 'おかねが　すくない　人[ひと]に　5000円[えん]ぐらい',
@@ -1120,6 +1239,11 @@
       sources: [
         { name: 'GameBusiness.jp', url: 'https://www.gamebusiness.jp/article/2026/10/25/28438.html' },
         { name: 'All About News', url: 'https://news.allabout.co.jp/articles/o/19223/' },
+      ],
+      quiz: [
+        ['Which games did Miyamoto Shigeru make?', 'Super Mario and The Legend of Zelda', 'Pokémon and Tetris', 'Final Fantasy and Dragon Quest', 'Pac-Man and Space Invaders'],
+        ['What will he receive?', 'The Order of Culture', 'A Nobel Prize', 'An Academy Award', 'An Olympic medal'],
+        ['Why is it special?', 'It is the first time for a person from games', 'He is the youngest ever', 'He got it twice', 'It was given abroad'],
       ],
       levels: {
         N5: {
@@ -1167,6 +1291,11 @@
         { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261030de68199' },
         { name: 'Daily Sports', url: 'https://www.daily.co.jp/society/economics/2026/10/30/0020982743.shtml' },
       ],
+      quiz: [
+        ['What was the share of people without a job?', '2.4 percent', '24 percent', '0.1 percent', '4.2 percent'],
+        ['Did it go up or down from August?', 'Down by 0.1 point', 'Up by 0.1 point', 'Up by 1 point', 'It did not change'],
+        ['Are there more jobs or more people looking for work?', 'A few more jobs', 'Many more people looking for work', 'Exactly the same', 'There are no jobs'],
+      ],
       levels: {
         N5: {
           title: '九月[くがつ]の　仕事[しごと]の　データが　出[で]ました',
@@ -1212,6 +1341,11 @@
         { name: 'Kyodo News (via Yahoo! News)', url: 'https://news.yahoo.co.jp/articles/79964f60d6f680c86eb07ee427e01dd07fad6c9f' },
         { name: 'TBS NEWS DIG (via Yahoo! News)', url: 'https://news.yahoo.co.jp/articles/719b749a69fb084fccc95b6516942562757ecd89' },
         { name: 'Chunichi Shimbun (Kyodo)', url: 'https://www.chunichi.co.jp/article/1332624' },
+      ],
+      quiz: [
+        ['What do the police want to do?', 'Check criminals\' smartphones from far away', 'Ban smartphones', 'Read everyone\'s email', 'Close messaging apps'],
+        ['What do they need first?', 'A judge\'s OK', 'The phone company\'s OK', 'The criminal\'s password', 'A new phone'],
+        ['Why do some people say to be careful?', 'It checks people\'s private talk', 'It costs too much', 'Smartphones may break', 'It is too slow'],
       ],
       levels: {
         N5: {
@@ -1259,6 +1393,11 @@
         { name: 'Japan Tourism Agency', url: 'https://www.mlit.go.jp/kankocho/tax-free/page01_000001_00021.html' },
         { name: 'Hokkaido Shimbun (PPIH press release)', url: 'https://www.hokkaido-np.co.jp/article/1386454/' },
       ],
+      quiz: [
+        ['From when does tax-free shopping change?', 'November 1', 'January 1', 'April 1', 'October 1'],
+        ['How do travellers get the tax back?', 'They show what they bought at the airport when they leave', 'The shop gives it back at once', 'They write a letter', 'They cannot get it back'],
+        ['Why is the way changing?', 'To reduce people who sell the goods inside Japan', 'To get more tourists', 'To make shopping faster', 'Because shops asked for it'],
+      ],
       levels: {
         N5: {
           title: '十一月[じゅういちがつ]から　外国[がいこく]の人[ひと]の　買[か]いものが　かわります',
@@ -1304,6 +1443,11 @@
         { name: 'Jiji Press (via Infoseek)', url: 'https://news.infoseek.co.jp/article/jiji_2026102901064/' },
         { name: 'Kyodo News (via Yahoo! News)', url: 'https://news.yahoo.co.jp/articles/3cc62f1c82067621e3435373640385a550e39c27' },
         { name: 'Asahi Shimbun (via Yahoo! News)', url: 'https://news.yahoo.co.jp/articles/d95dff810d4e3bb7999ba061d72c03dcc837d63e' },
+      ],
+      quiz: [
+        ['What will become cheaper from December?', 'Electricity and gas', 'Train tickets', 'Rice', 'Phone bills'],
+        ['How much less will a normal home pay over three months?', 'About 7,000 yen', 'About 700 yen', 'About 70,000 yen', 'About 170 yen'],
+        ['What will happen to the help for gasoline?', 'It will get smaller little by little', 'It will get bigger', 'It will stop at once', 'It will not change'],
       ],
       levels: {
         N5: {
@@ -1351,6 +1495,11 @@
         { name: 'Kyodo News (via Niigata Nippo)', url: 'https://www.niigata-nippo.co.jp/articles/-/933684' },
         { name: 'Daily Sports', url: 'https://www.daily.co.jp/society/culture/2026/10/29/0020980927.shtml' },
       ],
+      quiz: [
+        ['What game is the Meijin tournament for?', 'Go', 'Shogi', 'Chess', 'Tennis'],
+        ['How many of the seven games did Shibano win?', 'Four', 'Seven', 'Three', 'Five'],
+        ['How many titles does Shibano hold now?', 'Three', 'One', 'Two', 'Seven'],
+      ],
       levels: {
         N5: {
           title: '囲碁[いご]の　名人戦[めいじんせん]　芝野[しばの]さんが　勝[か]ちました',
@@ -1394,6 +1543,11 @@
       sources: [
         { name: 'Jiji Press', url: 'https://www.jiji.com/jc/article?k=2026102900572&g=soc&m=rss' },
         { name: '8and (reporting the Ministry of Defense announcement)', url: 'https://8and.jp/2026/10/29/%E5%8C%97%E6%9C%9D%E9%AE%AE%E3%81%8C%E7%9F%AD%E8%B7%9D%E9%9B%A2%E5%BC%BE%E9%81%93%E3%83%9F%E3%82%B5%E3%82%A4%E3%83%AB%E5%8D%81%E6%95%B0%E7%99%BA%E3%82%92%E7%99%BA%E5%B0%84%E3%81%8B%E3%80%80%E6%97%A5/' },
+      ],
+      quiz: [
+        ['How many missiles did North Korea fire?', 'About ten', 'One', 'About a hundred', 'Two'],
+        ['Where did the missiles seem to fall?', 'Outside Japan\'s waters', 'On Japanese land', 'In Japan\'s waters', 'In China'],
+        ['Was anyone hurt?', 'No, and no ships were damaged', 'Yes, some fishermen', 'Yes, many people', 'It is not known'],
       ],
       levels: {
         N5: {
@@ -1440,6 +1594,11 @@
         { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261027de66136' },
         { name: 'Yahoo! News (ENCOUNT)', url: 'https://news.yahoo.co.jp/articles/cf68d68b187e968cd16b3d86a533fb22fbc1cd38' },
         { name: 'Livedoor News', url: 'https://news.livedoor.com/article/detail/32666250/' },
+      ],
+      quiz: [
+        ['Who was Tetsuya Chiba?', 'A manga artist', 'A boxer', 'A film director', 'A singer'],
+        ['What is his famous manga "Ashita no Joe" about?', 'Boxing', 'Baseball', 'Football', 'Cooking'],
+        ['How old was he?', '87', '78', '67', '97'],
       ],
       levels: {
         N5: {
@@ -1489,6 +1648,11 @@
         { name: 'Monex', url: 'https://media.monex.co.jp/articles/-/30367' },
         { name: 'Daiichi Life Research Institute', url: 'https://www.dlri.co.jp/files/macro/666835.pdf' },
       ],
+      quiz: [
+        ['How much higher were prices than in September last year?', '2.1 percent', '1.7 percent', '21 percent', '0.9 percent'],
+        ['What became more expensive?', 'Meals eaten out and beef', 'Rice', 'Gasoline only', 'Clothes'],
+        ['What became cheaper?', 'Rice', 'Beef', 'Meals eaten out', 'Electricity'],
+      ],
       levels: {
         N5: {
           title: '日本[にほん]の　物[もの]の　値段[ねだん]が　上[あ]がっています',
@@ -1535,6 +1699,11 @@
         { name: 'Nishinippon Sports', url: 'https://nishispo.nishinippon.co.jp/article/1052479' },
         { name: 'Wikipedia: 2026年の日本シリーズ', url: 'https://ja.wikipedia.org/wiki/2026%E5%B9%B4%E3%81%AE%E6%97%A5%E6%9C%AC%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA' },
       ],
+      quiz: [
+        ['Which teams are playing in the Japan Series?', 'SoftBank and DeNA', 'The Giants and the Tigers', 'SoftBank and the Giants', 'DeNA and the Tigers'],
+        ['Who won Games 1 and 2?', 'SoftBank', 'DeNA', 'They won one each', 'Neither; both were draws'],
+        ['Where will Game 3 be played?', 'In Fukuoka', 'In Yokohama', 'In Tokyo', 'In Osaka'],
+      ],
       levels: {
         N5: {
           title: '日本[にっぽん]シリーズ　ソフトバンクが　二[ふた]つ　勝[か]ちました',
@@ -1580,6 +1749,11 @@
         { name: 'UNB (Bangladesh)', url: 'https://unb.com.bd/category/Bangladesh/tarique-takaichi-to-hold-bilateral-talks-in-tokyo-on-oct-27/198321' },
         { name: 'Dhaka Tribune', url: 'https://www.dhakatribune.com/bangladesh/foreign-affairs/422538/pm-to-visit-japan-from-october-26-to-29' },
         { name: 'Ministry of Foreign Affairs of Japan: Japan-Bangladesh Relations', url: 'https://www.mofa.go.jp/s_sa/sw/bd/pageite_000001_00003.html' },
+      ],
+      quiz: [
+        ['Who is coming to Japan?', 'The prime minister of Bangladesh', 'The king of Thailand', 'The president of India', 'The prime minister of Vietnam'],
+        ['When will he talk with Prime Minister Takaichi?', 'On the 27th', 'On the 26th', 'On the 29th', 'Next month'],
+        ['What may they also talk about?', 'Bangladeshi people working in Japan', 'The Olympics', 'Earthquakes', 'Space travel'],
       ],
       levels: {
         N5: {
@@ -1629,6 +1803,11 @@
         { name: 'Committee to Protect Journalists', url: 'https://cpj.org/2026/10/russia-detains-japanese-journalist-on-suspicion-of-espionage/' },
         { name: 'South China Morning Post', url: 'https://www.scmp.com/news/world/russia-central-asia/article/3370789/russia-detains-japanese-journalist-suspicion-spying' },
       ],
+      quiz: [
+        ['Where was the reporter detained?', 'In Russia', 'In China', 'In North Korea', 'In Japan'],
+        ['What does Russia say he did?', 'Spying', 'Stealing', 'Driving too fast', 'Entering without a visa'],
+        ['What are journalists asking for?', 'His quick release', 'A new newspaper', 'Money from Russia', 'A trial in Japan'],
+      ],
       levels: {
         N5: {
           title: 'ロシアで　日本[にほん]の　記者[きしゃ]が　つかまりました',
@@ -1675,6 +1854,11 @@
         { name: 'nippon.com (Jiji Press): KDDI Unit\'s Activity Linked to Massive Wildfire in Mongolia', url: 'https://www.nippon.com/en/news/yjj2026102300643/' },
         { name: 'nippon.com (Jiji Press): Mongolia to Consider Seeking Compensation over Grassland Fire', url: 'https://www.nippon.com/en/news/yjj2026102400322/' },
         { name: 'Telecompaper', url: 'https://www.telecompaper.com/news/kddi-says-vehicle-fire-spread-to-mongolian-nature-reserve-during-mobicom-visit--1586729' },
+      ],
+      quiz: [
+        ['What burned in Mongolia?', 'A lot of wide grassland', 'A city', 'A forest in the mountains', 'A factory'],
+        ['How does the fire seem to have started?', 'From a car of a KDDI subsidiary', 'From lightning', 'From a cooking fire', 'From a cigarette'],
+        ['What is the Mongolian government thinking about?', 'Having them pay money', 'Closing all Japanese companies', 'Banning cars', 'Nothing'],
       ],
       levels: {
         N5: {
@@ -1723,6 +1907,11 @@
         { name: 'Jiji Press (Japanese)', url: 'https://www.jiji.com/jc/article?k=2026102400301&g=eco' },
         { name: 'Yomiuri Shimbun via Infoseek', url: 'https://news.infoseek.co.jp/article/yomiuri_20261024_gyt1t00257/' },
       ],
+      quiz: [
+        ['What was GMO\'s service used for?', 'FX trading', 'Online shopping', 'Video games', 'Booking hotels'],
+        ['Who did GMO ask for help?', 'The government', 'The police in the US', 'Another company', 'Its customers'],
+        ['How much will GMO pay to every customer?', '5,000 yen', '500 yen', '50,000 yen', 'Nothing'],
+      ],
       levels: {
         N5: {
           title: 'GMOが　政府[せいふ]に　たすけを　たのみました',
@@ -1770,6 +1959,11 @@
         { name: 'Kyodo News via Yahoo! News Japan', url: 'https://news.yahoo.co.jp/articles/7f64713d9a83f64d504fdf75fa9c261a2ba1d60c' },
         { name: 'nippon.com (Jiji Press, Oda)', url: 'https://www.nippon.com/en/news/yjj2026102300875/' },
       ],
+      quiz: [
+        ['Where were the Asian Para Games held?', 'In Aichi and Nagoya', 'In Tokyo', 'In Seoul', 'In Beijing'],
+        ['How many gold medals did Japan win?', '64', '186', '45', '18'],
+        ['What was special about the number of gold medals?', 'It was the most ever', 'It was the first gold ever', 'It was fewer than last time', 'It was the same as China'],
+      ],
       levels: {
         N5: {
           title: 'アジアパラ大会[たいかい]　日本[にほん]は金[きん]メダルが　いちばん多[おお]かった',
@@ -1816,6 +2010,11 @@
         { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261023de64013' },
         { name: 'Kyodo News via Yahoo! News Japan', url: 'https://news.yahoo.co.jp/articles/6f8212c918dea5e18de014d52818256622dc8f0f' },
       ],
+      quiz: [
+        ['Who are the new rules for?', 'Social media companies', 'Voters', 'Newspapers', 'Election candidates only'],
+        ['What should not get money?', 'False information', 'News articles', 'Funny videos', 'Ads'],
+        ['What happens if a company does not follow the rules?', 'There is no punishment', 'It must pay a fine', 'It must close', 'Its boss goes to prison'],
+      ],
       levels: {
         N5: {
           title: '選挙[せんきょ]の　うその　情報[じょうほう]を　へらしたい',
@@ -1861,6 +2060,11 @@
         { name: 'nippon.com (Jiji Press)', url: 'https://www.nippon.com/en/news/yjj2026102300706/' },
         { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/10/24/japan/new-imperial-house-law/' },
         { name: 'nippon.com (Jiji Press, July)', url: 'https://www.nippon.com/en/news/yjj2026072400252/' },
+      ],
+      quiz: [
+        ['What can women of the imperial family do now?', 'Stay members after they marry', 'Become emperor', 'Leave Japan', 'Vote in elections'],
+        ['Who can join the imperial family by being adopted?', 'Men from families that left it long ago', 'Anyone who wants to', 'Children from abroad', 'Husbands of imperial women'],
+        ['Can a woman become emperor under this law?', 'No', 'Yes', 'Only if there is no man', 'Only after 2030'],
       ],
       levels: {
         N5: {
@@ -1909,6 +2113,11 @@
         { name: 'Nikkan Sports (via d Menu News)', url: 'https://topics.smt.docomo.ne.jp/amp/article/nikkansports/sports/f-bb-tp0-261023-202610230000207' },
         { name: 'THE ANSWER (via Yahoo! News)', url: 'https://news.yahoo.co.jp/articles/f6868ffa16278b243d92e86d812a9e07bdb218f6' },
       ],
+      quiz: [
+        ['What will Hideki Matsui become?', 'Manager of the Yomiuri Giants', 'A player again', 'President of the Giants', 'A TV announcer'],
+        ['How long is his contract?', 'Three years', 'One year', 'Five years', 'Ninety years'],
+        ['Has he been a manager before?', 'No, this is the first time', 'Yes, in the United States', 'Yes, for another Japanese team', 'Yes, for the Giants'],
+      ],
       levels: {
         N5: {
           title: '松井秀喜[まついひでき]さんが巨人[きょじん]の新[あたら]しい監督[かんとく]になります',
@@ -1952,6 +2161,11 @@
       sources: [
         { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/10/24/japan/typhoon-champi-saturday/' },
         { name: 'nippon.com (Jiji Press)', url: 'https://www.nippon.com/en/news/yjj2026102400245/typhoon-champi-traveling-north-of-okinawa-islands.html' },
+      ],
+      quiz: [
+        ['Which number was this typhoon?', 'No. 30', 'No. 3', 'No. 13', 'No. 31'],
+        ['Where did strong winds blow?', 'In Okinawa', 'In Hokkaido', 'In Tokyo', 'In Kyushu only'],
+        ['What may happen on Monday morning?', 'It may come close to Kyushu', 'It may hit Tokyo', 'It will end', 'It will turn back to Okinawa'],
       ],
       levels: {
         N5: {
@@ -2000,6 +2214,11 @@
         { name: 'Kyodo News (via Yahoo! News)', url: 'https://news.yahoo.co.jp/articles/0a242b4d34158fe4c9045a1bca3da0733fd3ecbc' },
         { name: 'Nikkei', url: 'https://www.nikkei.com/article/DGXZQODH220BG0S6A021C2000000/' },
       ],
+      quiz: [
+        ['Where were the world championships held?', 'In the Netherlands', 'In Japan', 'In the United States', 'In China'],
+        ['Which medal did Japan\'s women\'s team win?', 'Bronze', 'Gold', 'Silver', 'None'],
+        ['What is special about the women\'s medal?', 'It is the first in 60 years', 'It is the first ever', 'It is their tenth in a row', 'It is the first in 6 years'],
+      ],
       levels: {
         N5: {
           title: '体操[たいそう]の世界[せかい]大会[たいかい]　日本[にほん]が金[きん]メダルと銅[どう]メダル',
@@ -2045,6 +2264,11 @@
         { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/business/2026/10/21/economy/japan-exports-growth-september/' },
         { name: 'Bloomberg', url: 'https://www.bloomberg.com/news/articles/2026-10-21/japan-s-export-growth-stays-solid-supported-by-chips-cars' },
         { name: 'Reuters (via Investing.com)', url: 'https://au.investing.com/news/economy-news/japans-september-exports-rise-167-helped-by-chip-demand-4702857' },
+      ],
+      quiz: [
+        ['How much did exports rise compared with last September?', '16.7%', '1.67%', '13%', '50%'],
+        ['What sold a lot?', 'Semiconductors and cars', 'Rice and fish', 'Clothes', 'Oil'],
+        ['Did Japan sell more or buy more than it sold?', 'It bought more than it sold', 'It sold more than it bought', 'Exactly the same', 'It bought nothing'],
       ],
       levels: {
         N5: {
@@ -2096,6 +2320,11 @@
         { name: 'Tokyo Shimbun', url: 'https://www.tokyo-np.co.jp/article/522828' },
         { name: 'Nippon TV (via Yahoo! News)', url: 'https://news.yahoo.co.jp/articles/9f91d728a59f04bc659e29b0db35cd749266309c' },
       ],
+      quiz: [
+        ['What happened in Yashio last January?', 'A big hole opened in a road and a truck fell in', 'A bridge fell down', 'A fire burned a house', 'A train left the tracks'],
+        ['Who is being sued?', 'Saitama Prefecture', 'The truck company', 'Yashio\'s mayor', 'The national government'],
+        ['What was under the road?', 'A sewer pipe', 'A subway line', 'A river', 'A gas tank'],
+      ],
       levels: {
         N5: {
           title: '八潮[やしお]の道[みち]の事故[じこ]　家族[かぞく]が県[けん]をうったえました',
@@ -2144,6 +2373,11 @@
         { name: 'Niigata Nippo (Kyodo)', url: 'https://www.niigata-nippo.co.jp/articles/-/927522' },
         { name: 'Mainichi Shimbun (via Infoseek)', url: 'https://news.infoseek.co.jp/article/mainichi_20261020k0000m100151000c/' },
       ],
+      quiz: [
+        ['Which word will doctors stop using?', '"Abnormal delivery"', '"Baby"', '"Hospital"', '"Mother"'],
+        ['Why?', 'Some mothers feel sad when they hear it', 'It is too long', 'It is an old word', 'Foreign doctors do not understand it'],
+        ['What will doctors say instead?', 'The name of what was done, like "vacuum delivery"', 'Nothing at all', '"Normal delivery"', 'A number'],
+      ],
       levels: {
         N5: {
           title: '「異常分娩[いじょうぶんべん]」という言葉[ことば]を、使[つか]わないことにしました',
@@ -2190,6 +2424,11 @@
         { name: 'Jiji Press', url: 'https://www.jiji.com/jc/article?k=2026102100348&g=soc' },
         { name: 'Kyodo News (via Yahoo! News)', url: 'https://news.yahoo.co.jp/articles/77e5aca2d935755a9b774381cc61dd3e612930a6' },
         { name: 'Jiji Press (via Yahoo! News)', url: 'https://news.yahoo.co.jp/articles/1c439925741aba4f428fe94f233cde18a88f75c6' },
+      ],
+      quiz: [
+        ['Whose information may have got out?', 'Police officers and staff', 'Doctors', 'Students', 'Bank customers'],
+        ['About how many people?', 'About 125,000', 'About 1,250', 'About 12 million', 'About 125'],
+        ['What might the names be used for?', 'Phone calls by fake police officers', 'Sending presents', 'Making new police cards', 'Elections'],
       ],
       levels: {
         N5: {
@@ -2239,6 +2478,11 @@
         { name: 'Jiji Press', url: 'https://www.jiji.com/jc/article?k=2026102001045&g=pol&m=rss' },
         { name: 'Nikkei', url: 'https://www.nikkei.com/article/DGXZQOUA194QU0Z11C26A0000000/' },
       ],
+      quiz: [
+        ['What will Japan give Malaysia?', 'Equipment to defend against drones', 'Fighter planes', 'Ships', 'Money for schools'],
+        ['How does the equipment first find drones?', 'With radar', 'With dogs', 'With satellites', 'With people watching'],
+        ['How is a dangerous drone stopped?', 'By a drone carrying a net', 'By shooting it', 'By turning off its power', 'By a strong wind'],
+      ],
       levels: {
         N5: {
           title: '日本[にほん]がマレーシアに、ドローンをふせぐ機械[きかい]をあげます',
@@ -2285,6 +2529,11 @@
         { name: 'KSB (ANN)', url: 'https://news.ksb.co.jp/ann/article/16978222' },
         { name: 'Mynavi News', url: 'https://news.mynavi.jp/techplus/article/20261020-5156160/' },
         { name: 'sorae', url: 'https://sorae.info/ssn/20261020-h3f10-mmx.html' },
+      ],
+      quiz: [
+        ['Where did the rocket take off from?', 'Tanegashima', 'Tokyo', 'Hokkaido', 'The United States'],
+        ['Where is MMX going?', 'To Phobos, a moon of Mars', 'To the Moon', 'To Mars itself', 'To the Sun'],
+        ['When will it bring back sand and rocks?', 'In 2031', 'Next year', 'In 2027', 'Never'],
       ],
       levels: {
         N5: {
@@ -2333,6 +2582,11 @@
         { name: 'Nikkei', url: 'https://www.nikkei.com/article/DGXZQOCC02AQM0S6A001C2000000/' },
         { name: 'Kanaloco (Kanagawa Shimbun)', url: 'https://www.kanaloco.jp/news/government/electiondata/article-1313459.html' },
       ],
+      quiz: [
+        ['What is the new mayor\'s job?', 'Lawyer', 'Doctor', 'Teacher', 'TV announcer'],
+        ['Why was there an election?', 'The previous mayor quit after saying cruel things to staff', 'The previous mayor became ill', 'It was every four years', 'The city became bigger'],
+        ['About how many out of 100 people voted?', 'About 45', 'About 15', 'About 75', 'About 95'],
+      ],
       levels: {
         N5: {
           title: '横浜[よこはま]に新[あたら]しい市長[しちょう]が決[き]まりました',
@@ -2380,6 +2634,11 @@
         { name: 'Nikkei', url: 'https://www.nikkei.com/article/DGXZQOUA1909G0Z11C26A0000000/' },
         { name: 'nippon.com (Jiji)', url: 'https://www.nippon.com/ja/news/yjj2026101900749/' },
       ],
+      quiz: [
+        ['Which places do not have enough people to cook meals?', 'Hospitals and facilities for older people', 'Schools', 'Hotels', 'Restaurants in Tokyo'],
+        ['What is the plan?', 'Put this work in a different field and accept foreign workers again', 'Stop cooking meals', 'Pay Japanese workers more', 'Use robots'],
+        ['When is it planned to start?', 'April next year', 'Next week', 'This December', 'In ten years'],
+      ],
       levels: {
         N5: {
           title: '病院[びょういん]のごはんを作[つく]る外国人[がいこくじん]を、また受[う]け入[い]れます',
@@ -2426,6 +2685,11 @@
         { name: 'Resemom (Ministry of Health data)', url: 'https://resemom.jp/article/2026/10/16/87922.html' },
         { name: 'Nippon TV News (via Yahoo! News Japan)', url: 'https://news.yahoo.co.jp/articles/098d448fe431dbd1015d59e4daf57a8ec257d332' },
         { name: 'Nikkei (flu season began)', url: 'https://www.nikkei.com/article/DGXZQOUD285AJ0Y6A820C2000000/' },
+      ],
+      quiz: [
+        ['How many flu patients were there on average per clinic?', '12.81', '1.28', '128', '31'],
+        ['Compared with this time last year, how many is that?', 'About five times as many', 'About the same', 'About half', 'About twice as many'],
+        ['Which prefecture had the most?', 'Okinawa', 'Tokyo', 'Hokkaido', 'Osaka'],
       ],
       levels: {
         N5: {
@@ -2475,6 +2739,11 @@
         { name: 'Kyodo News (via Yahoo! News Japan)', url: 'https://news.yahoo.co.jp/articles/41b4f60274cbdc239c56bcfc999af8db7269ed3f' },
         { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261016de60357' },
       ],
+      quiz: [
+        ['What is the law about?', 'Lowering the consumption tax', 'Raising the consumption tax', 'A new tax for tourists', 'Food safety'],
+        ['Who will attend the House of Representatives?', 'Prime Minister Takaichi', 'The Emperor', 'The governor of Tokyo', 'The head of the Bank of Japan'],
+        ['What is still not clear?', 'How to get the money to pay for the cut', 'Which foods are included', 'When the Diet meets', 'Who the prime minister is'],
+      ],
       levels: {
         N5: {
           title: '税金[ぜいきん]を安[やす]くする法律[ほうりつ]の話[はなし]が始[はじ]まります',
@@ -2519,6 +2788,11 @@
       sources: [
         { name: 'PC Watch (Impress)', url: 'https://www.watch.impress.co.jp/docs/news/2145179.html' },
         { name: 'Infoseek News (ITmedia Mobile)', url: 'https://news.infoseek.co.jp/article/itmedia_mobile_20261019071' },
+      ],
+      quiz: [
+        ['From when can the My Number Card be used on Android?', 'The 20th', 'The 2nd', 'Next year', 'It already could'],
+        ['What can you show with it?', 'Who you are, your age and where you live', 'Your bank balance', 'Your school grades', 'Your health'],
+        ['Can every Android smartphone use it?', 'No, only some', 'Yes, all of them', 'Only new iPhones', 'Only tablets'],
       ],
       levels: {
         N5: {
@@ -2568,6 +2842,11 @@
         { name: 'Malay Mail (on the apology)', url: 'https://malaymail.com/news/world/2026/10/17/japan-apologises-after-erroneous-99-magnitude-earthquake-alert-disrupts-transport/239432' },
         { name: 'Jiji Press (interim measure)', url: 'https://www.jiji.com/jc/archives?g=soc_archive_0' },
       ],
+      quiz: [
+        ['How big did the mistaken alert say the earthquake was?', 'Magnitude 9.9', 'Magnitude 6.9', 'Magnitude 5.0', 'Magnitude 12'],
+        ['Where did the real earthquake happen?', 'Near Russia', 'Under Tokyo', 'Near Okinawa', 'In Hokkaido'],
+        ['How long until the JMA withdrew the alert?', 'About 12 minutes', 'About 1 minute', 'About 2 hours', 'The next day'],
+      ],
       levels: {
         N5: {
           title: 'まちがった地震[じしん]の知[し]らせ',
@@ -2616,6 +2895,11 @@
         { name: 'VOV (Immigration Services Agency data)', url: 'https://english.vov.vn/en/society/vietnamese-community-remains-japans-second-largest-foreign-group-post1341896.vov' },
         { name: 'Jiji Press / Nippon.com (end-2025 figure)', url: 'https://www.nippon.com/en/news/yjj2026032700900' },
       ],
+      quiz: [
+        ['About how many foreign people were living in Japan at the end of June?', 'About 4.28 million', 'About 428,000', 'About 42.8 million', 'About 940,000'],
+        ['Which group is the largest?', 'People from China', 'People from Vietnam', 'People from Korea', 'People from the Philippines'],
+        ['Are people on a short trip counted?', 'No', 'Yes', 'Only tourists from Asia', 'Only students'],
+      ],
       levels: {
         N5: {
           title: '日本[にほん]に住[す]む外国人[がいこくじん]がふえました',
@@ -2662,6 +2946,11 @@
       sources: [
         { name: 'The Star (AFP)', url: 'https://www.thestar.com.my/aseanplus/aseanplus-news/2026/10/15/india-expected-to-overtake-japan-as-world039s-4th-largest-economy-in-2027-imf' },
         { name: 'Cambodianess (AFP)', url: 'https://cambodianess.com/article/india-expected-to-overtake-japan-as-worlds-4th-largest-economy-in-2027-imf' },
+      ],
+      quiz: [
+        ['Which country looks likely to become bigger than Japan next year?', 'India', 'China', 'France', 'Brazil'],
+        ['Where would Japan be then?', 'Sixth', 'Fourth', 'Fifth', 'Second'],
+        ['How much will Japan\'s economy grow this year?', 'About 0.7%', 'About 7%', 'About 4%', 'It will shrink'],
       ],
       levels: {
         N5: {
@@ -2710,6 +2999,11 @@
         { name: 'Weathernews', url: 'https://weathernews.jp/news/202610/150201/' },
         { name: 'Weathernews (forecast)', url: 'https://weathernews.jp/news/202610/160021/' },
       ],
+      quiz: [
+        ['What is the typhoon\'s name?', 'Champi', 'Infa', 'Champaka', 'Godzilla'],
+        ['Why is it special?', '30 typhoons formed in one year for the first time in 13 years', 'It is the strongest typhoon ever', 'It formed in winter', 'It hit Tokyo'],
+        ['Where will it go next?', 'It is not yet clear', 'Straight to Tokyo', 'To Hokkaido', 'To Europe'],
+      ],
       levels: {
         N5: {
           title: '台風[たいふう]30号[ごう]ができました',
@@ -2757,6 +3051,11 @@
         { name: 'The Korea Herald', url: 'https://biz.heraldcorp.com/article/10904115' },
         { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/latest-news/' },
       ],
+      quiz: [
+        ['Which two countries made the agreement?', 'Japan and South Korea', 'Japan and China', 'Japan and Thailand', 'Japan and the United States'],
+        ['How much longer will the agreement continue?', 'Three more years', 'One more year', 'Ten more years', 'It will end this year'],
+        ['What is the amount?', '10 billion dollars', '10 million dollars', '1 billion dollars', '100 billion dollars'],
+      ],
       levels: {
         N5: {
           title: '日本[にっぽん]と韓国[かんこく]が、お金[かね]の約束[やくそく]を続[つづ]けます',
@@ -2803,6 +3102,11 @@
         { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/10/17/japan/politics/takaichi-yasukuni-shrine-offering/' },
         { name: 'Sakigake (Kyodo), spring festival', url: 'https://www.sakigake.jp/news/article/20260421CO0015/' },
       ],
+      quiz: [
+        ['What did Prime Minister Takaichi send to Yasukuni Shrine?', 'A "masakaki" tree branch', 'Flowers', 'Money', 'A letter'],
+        ['Is she thought to go to the shrine during the festival?', 'No', 'Yes, on the first day', 'Yes, every day', 'Yes, on the last day'],
+        ['Which countries sometimes get angry when a prime minister goes there?', 'China and South Korea', 'The United States and Britain', 'Russia and India', 'France and Germany'],
+      ],
       levels: {
         N5: {
           title: '高市[たかいち]首相[しゅしょう]が、靖国[やすくに]神社[じんじゃ]にお供[そな]えをしました',
@@ -2847,6 +3151,11 @@
         { name: 'News On Japan', url: 'https://newsonjapan.com/article/151072.php' },
         { name: 'JapanNews24', url: 'https://japannews24.com/nikkei-plunges-3318-points-as-ai-selloff-shakes-tokyo/' },
         { name: 'Bloomberg', url: 'https://www.bloomberg.com/news/newsletters/2026-10-15/ai-selloff-deepens-in-asia-as-funding-fears-mount' },
+      ],
+      quiz: [
+        ['About how much did the Nikkei average fall on the 15th?', 'About 5 percent', 'About 0.5 percent', 'About 15 percent', 'About 50 percent'],
+        ['Shares of what companies did many people sell?', 'Companies related to AI', 'Food companies', 'Railway companies', 'Banks'],
+        ['What does a Finance Ministry official say?', 'There is no big danger to the financial world', 'Everyone should sell their shares', 'The market will close', 'Prices will fall'],
       ],
       levels: {
         N5: {
@@ -2896,6 +3205,11 @@
         { name: 'ECnomikata', url: 'https://ecnomikata.com/ecnews/51854/' },
         { name: 'Rocket Boys', url: 'https://rocket-boys.co.jp/?p=43156' },
       ],
+      quiz: [
+        ['About how many items of customer information leaked?', 'About 5.31 million', 'About 531', 'About 53,100', 'About 53 million'],
+        ['What is "Kuroneko Deferred Payment"?', 'A service where you pay after you receive your package', 'A credit card', 'A delivery robot', 'A cat café'],
+        ['What was NOT included in the leak?', 'Credit card numbers and passwords', 'Names', 'Addresses', 'Phone numbers'],
+      ],
       levels: {
         N5: {
           title: 'ヤマト運輸[うんゆ]から、お客[きゃく]さんの情報[じょうほう]が出[で]ました',
@@ -2944,6 +3258,11 @@
         { name: 'Univ-Journal Online', url: 'https://univ-journal.jp/1002370/' },
         { name: 'Sankei Shimbun via Yahoo! News Japan', url: 'https://news.yahoo.co.jp/articles/26c5f85885ed98d6487a5861f04504420eaa602a' },
       ],
+      quiz: [
+        ['What did the scientists learn in great detail?', 'The genome of the cyclamen', 'How to grow rice faster', 'The age of a tree', 'Why leaves turn red'],
+        ['What is a genome like?', 'A blueprint of a living thing\'s body', 'A kind of flower', 'A medicine', 'A seed'],
+        ['What colour of cyclamen does the team hope to make?', 'Blue', 'Red', 'White', 'Black'],
+      ],
       levels: {
         N5: {
           title: 'シクラメンの「ゲノム」が、くわしくわかりました',
@@ -2989,6 +3308,11 @@
         { name: 'nippon.com (Jiji)', url: 'https://www.nippon.com/en/news/yjj2026101400736/' },
         { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/10/14/japan/politics/takaichi-cabinet-yana-parliament-resigns/' },
         { name: 'nippon.com (Jiji)', url: 'https://www.nippon.com/en/news/yjj2026101500352/' },
+      ],
+      quiz: [
+        ['What did Agriculture Minister Kazuo Yana do on the 14th?', 'He resigned', 'He became prime minister', 'He visited a farm', 'He made a new law'],
+        ['What was the problem?', 'He said something inappropriate about money for roads', 'He was ill', 'He lost an election', 'He broke a traffic law'],
+        ['Who seems likely to be the next minister?', 'Arata Takebe', 'Sanae Takaichi', 'Toshimitsu Motegi', 'Kazuo Ueda'],
       ],
       levels: {
         N5: {
@@ -3038,6 +3362,11 @@
         { name: 'nippon.com (Jiji)', url: 'https://www.nippon.com/en/news/yjj2026101400412/' },
         { name: 'Meduza', url: 'https://meduza.io/en/news/2026/10/13/russian-court-orders-japanese-journalist-held-on-espionage-charges' },
       ],
+      quiz: [
+        ['Which newspaper does the reporter work for?', 'The Hokkaido Shimbun', 'The Asahi Shimbun', 'The Yomiuri Shimbun', 'The Japan Times'],
+        ['Where was he?', 'In Sakhalin', 'In Tokyo', 'In Beijing', 'In Seoul'],
+        ['How long did the court decide to keep him locked up?', 'Nearly two months', 'Two days', 'Two years', 'Twenty years'],
+      ],
       levels: {
         N5: {
           title: 'ロシアで、日本[にっぽん]の記者[きしゃ]がつかまりました',
@@ -3085,6 +3414,11 @@
         { name: 'nippon.com (Jiji)', url: 'https://www.nippon.com/en/news/yjj2026101400388/' },
         { name: 'Disney Parks Blog', url: 'https://disneyparksblog.com/dcl/disney-and-oriental-land-co-ltd-embark-on-expanded-relationship-to-launch-disney-cruise-vacations-in-japan/' },
       ],
+      quiz: [
+        ['What is "Disney Imagination"?', 'A Disney passenger ship', 'A new theme park', 'A film', 'A hotel'],
+        ['When are the trips scheduled to start?', 'In the spring of 2029', 'Next month', 'In the autumn of 2026', 'In 2039'],
+        ['Which company does it belong to?', 'The company that runs Tokyo Disney Resort', 'A German shipyard', 'An airline', 'A railway company'],
+      ],
       levels: {
         N5: {
           title: '日本[にっぽん]のディズニーの船[ふね]の名前[なまえ]が決[き]まりました',
@@ -3130,6 +3464,11 @@
         { name: 'nippon.com (Jiji)', url: 'https://www.nippon.com/en/news/yjj2026101200164/' },
         { name: 'Euronews', url: 'https://www.euronews.com/2026/10/11/judo-japan-reclaim-mixed-team-world-title-with-eighth-gold-in-baku' },
       ],
+      quiz: [
+        ['Where were the judo World Championships held?', 'In Baku, Azerbaijan', 'In Tokyo', 'In Paris', 'In Moscow'],
+        ['Who did Japan beat in the final?', 'Russia', 'China', 'France', 'Korea'],
+        ['How many times has Japan won this event now?', 'Eight', 'One', 'Four', 'Eleven'],
+      ],
       levels: {
         N5: {
           title: '柔道[じゅうどう]の世界[せかい]大会[たいかい]で、日本[にっぽん]が金[きん]メダルを取[と]りました',
@@ -3173,6 +3512,11 @@
       sources: [
         { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/10/14/japan/japan-soft-power-diplomacy/' },
         { name: 'Honolulu Star-Advertiser (Jiji)', url: 'https://www.staradvertiser.com/2026/09/24/news/ministry-to-promote-anime-manga-in-southern-countries/' },
+      ],
+      quiz: [
+        ['What does Japan\'s Foreign Ministry want to spread?', 'Manga and anime', 'Sushi', 'Baseball', 'Japanese cars'],
+        ['Where does it especially want more fans?', 'In South America and Africa', 'In Europe', 'In the United States', 'In China'],
+        ['What app will it make?', 'An app for studying Japanese', 'A game app', 'A shopping app', 'A map app'],
       ],
       levels: {
         N5: {
@@ -3219,6 +3563,11 @@
         { name: 'Kyodo News (via Infoseek)', url: 'https://news.infoseek.co.jp/topics/kyodo_1481985329809883691/' },
         { name: 'Japan Today (Kyodo)', url: 'https://japantoday.com/category/national/update1-80-underpasses-in-japan-saw-vehicles-submerged-over-past-decade-survey' },
       ],
+      quiz: [
+        ['Which roads are especially dangerous in heavy rain?', 'Low roads that go under railways', 'Mountain roads', 'Highways', 'Bridges'],
+        ['How many cars were caught in the water in all?', '134', '80', '13', '1,340'],
+        ['What should you do when the rain is heavy?', 'Not enter low roads', 'Drive faster', 'Park under a railway', 'Open the car windows'],
+      ],
       levels: {
         N5: {
           title: '大雨[おおあめ]で、車[くるま]が水[みず]に入[はい]った道[みち]が80か所[しょ]ありました',
@@ -3261,6 +3610,11 @@
       titleEn: 'Newspaper subscriptions in Japan fall below 50% for the first time',
       sources: [
         { name: 'nippon.com (Jiji)', url: 'https://www.nippon.com/en/news/yjj2026101100107/' },
+      ],
+      quiz: [
+        ['What share of people buy a newspaper every month?', '49.8 percent', '88.6 percent', '84.2 percent', '98 percent'],
+        ['What is special about this?', 'It is below half for the first time', 'It is the highest ever', 'It has not changed', 'It is the first survey'],
+        ['What is the most common way to follow the news?', 'TV', 'Newspapers', 'Radio', 'Friends'],
       ],
       levels: {
         N5: {
@@ -3309,6 +3663,11 @@
         { name: 'Weathernews (JMA El Niño bulletin)', url: 'https://weathernews.jp/news/202610/090161/' },
         { name: 'Weathernews (JMA 3-month forecast)', url: 'https://weathernews.jp/news/202609/180161/' },
       ],
+      quiz: [
+        ['What is El Niño?', 'When the water of the Pacific Ocean is warmer than usual', 'A big typhoon', 'A cold wind from the north', 'An earthquake under the sea'],
+        ['How much warmer than normal was the sea in September?', '4 degrees', '1 degree', '10 degrees', '0.4 degrees'],
+        ['What may happen in Japan this year?', 'Winter may come late', 'Winter may come early', 'There may be no summer', 'It may snow in October'],
+      ],
       levels: {
         N5: {
           title: 'エルニーニョが、とても強[つよ]くなっています',
@@ -3355,6 +3714,11 @@
       sources: [
         { name: 'Business Today Malaysia', url: 'https://www.businesstoday.com.my/2026/10/09/japan-household-spending-falls-for-ninth-straight-month/' },
         { name: 'investingLive', url: 'https://investinglive.com/news/japan-household-spending-falls-for-ninth-straight-month-but-drop-smaller-than-expected/' },
+      ],
+      quiz: [
+        ['How much less did homes spend than last August?', '3.1 percent', '31 percent', '0.1 percent', '5.2 percent'],
+        ['For how many months in a row has it been less than the year before?', 'Nine', 'Three', 'One', 'Twelve'],
+        ['Was the drop bigger or smaller than experts predicted?', 'Smaller', 'Bigger', 'Exactly as predicted', 'Experts did not predict it'],
       ],
       levels: {
         N5: {
@@ -3404,6 +3768,11 @@
         { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/business/2026/10/09/companies/prudential-business-suspension-order/' },
         { name: 'Prudential Financial', url: 'https://news.prudential.com/us-en/latest-news/prudential-news/2026/q1/PRUDENTIAL-OF-JAPAN-IMPLEMENTS-VOLUNTARY-90-DAY-SUSPENSION-OF-NEW-SALES-TO-ADDRESS-PREVIOUSLY-DISCLOSED-EMPLOYEE-MISCONDUCT' },
       ],
+      quiz: [
+        ['What were the two insurance companies told?', 'They must not sell new insurance', 'They must close', 'They must lower prices', 'They must hire more people'],
+        ['Why?', 'People who worked there tricked customers and took their money', 'They lost money on shares', 'Their computers were attacked', 'They sold too much'],
+        ['Can people who already have insurance still receive payments?', 'Yes', 'No', 'Only after January', 'Only half'],
+      ],
       levels: {
         N5: {
           title: '保険[ほけん]の会社[かいしゃ]が、新[あたら]しい保険[ほけん]を売[う]れなくなります',
@@ -3450,6 +3819,11 @@
         { name: 'JAXA', url: 'https://www.jaxa.jp/press/2026/08/20260820-1_j.html' },
         { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/08/20/japan/science-health/mars-mission-october-launch/' },
         { name: 'sorae', url: 'https://sorae.info/space/20260821-mmx.html' },
+      ],
+      quiz: [
+        ['What will the H3 rocket carry?', 'A probe called MMX', 'People', 'A satellite for TV', 'A space station'],
+        ['Where will MMX go?', 'To Phobos, a moon of Mars', 'To Earth\'s Moon', 'To Jupiter', 'To the Sun'],
+        ['When is it due to return to Earth?', 'In 2031', 'In 2027', 'Next year', 'It will not return'],
       ],
       levels: {
         N5: {
@@ -3498,6 +3872,11 @@
         { name: 'nippon.com (Jiji)', url: 'https://www.nippon.com/en/news/yjj2026100300232/komeito-launches-new-leadership-team-under-okamoto.html' },
         { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/10/04/japan/politics/komeito-new-leadership-team/' },
       ],
+      quiz: [
+        ['Who is Komeito\'s new leader?', 'Mitsunari Okamoto', 'Toshiko Takeya', 'Sanae Takaichi', 'Makoto Nishida'],
+        ['How long is the term as leader?', 'Two years', 'One year', 'Four years', 'Six years'],
+        ['What will happen next spring?', 'Elections for towns and prefectures', 'A new prime minister', 'A party festival', 'The Olympics'],
+      ],
       levels: {
         N5: {
           title: '公明党[こうめいとう]の新[あたら]しい代表[だいひょう]は岡本[おかもと]さん',
@@ -3543,6 +3922,11 @@
         { name: 'Tokyo University of Science', url: 'https://www.tus.ac.jp/about/nobelprize2026/index.html' },
         { name: 'JST Science Portal', url: 'https://scienceportal.jst.go.jp/newsflash/20261007_n01/' },
         { name: 'nippon.com', url: 'https://www.nippon.com/ja/japan-data/h02923/' },
+      ],
+      quiz: [
+        ['Which Nobel Prize will Kensō Soai get?', 'Chemistry', 'Physics', 'Medicine', 'Peace'],
+        ['What did he discover?', 'A reaction in which very tiny things multiply by themselves', 'A new planet', 'A cure for colds', 'A new kind of flower'],
+        ['Where will he receive the prize?', 'In Sweden', 'In Tokyo', 'In France', 'In the United States'],
       ],
       levels: {
         N5: {
@@ -3593,6 +3977,11 @@
         { name: 'nippon.com (Jiji)', url: 'https://www.nippon.com/en/news/yjj2026100700867/' },
         { name: 'Cybernews', url: 'https://cybernews.com/security/japanese-cloud-cyberattack-railways-police-495-organizations-idcf/' },
       ],
+      quiz: [
+        ['What kind of company was attacked?', 'An internet service company that keeps data', 'A railway company\'s trains', 'A bank', 'A TV station'],
+        ['About how many companies and offices are in trouble?', 'About 500', 'About 50', 'About 5,000', 'About 1.3 million'],
+        ['What may have got out at JR Kyushu?', 'Customers\' email addresses', 'Train tickets', 'Credit card numbers', 'Passwords'],
+      ],
       levels: {
         N5: {
           title: 'インターネットの会社[かいしゃ]が攻撃[こうげき]されました',
@@ -3640,6 +4029,11 @@
         { name: 'Baseball Channel', url: 'https://www.baseballchannel.jp/npb/294388/' },
         { name: 'NPB', url: 'https://npb.jp/news/detail/20260908_03.html' },
       ],
+      quiz: [
+        ['What does the Climax Series decide?', 'Which teams play in the Japan Series', 'The best player', 'Next year\'s schedule', 'The new managers'],
+        ['Which team came first in the Central League?', 'Hanshin', 'SoftBank', 'The Giants', 'DeNA'],
+        ['Which team goes on to the next round?', 'The team that wins twice first', 'The team that scores most runs', 'The team that wins once', 'Both teams'],
+      ],
       levels: {
         N5: {
           title: '野球[やきゅう]の「クライマックスシリーズ」が始[はじ]まりました',
@@ -3685,6 +4079,11 @@
       sources: [
         { name: 'Weathernews', url: 'https://sea.weathernews.com/resources/202610/263' },
         { name: 'Japan Weather Association', url: 'https://weather-jwa.jp/en/news/articles/post13375' },
+      ],
+      quiz: [
+        ['Will the typhoons come to Tokyo or Osaka?', 'No', 'Yes, both', 'Only to Tokyo', 'Only to Osaka'],
+        ['What will happen at sea?', 'The waves will get high', 'The sea will freeze', 'The sea will be very calm', 'The water will become warm'],
+        ['What is Monday?', 'Sports Day, a holiday', 'A school day', 'Culture Day', 'New Year\'s Day'],
       ],
       levels: {
         N5: {
@@ -3734,6 +4133,11 @@
         { name: 'Malay Mail', url: 'https://www.malaymail.com/news/money/2026/10/07/four-brewers-controlling-90pc-of-japans-beer-market-raided-in-cartel-probe/238036' },
         { name: 'The Star (shares)', url: 'https://www.thestar.com.my/business/business-news/2026/10/08/beer-shares-fall-as-japan-probes-price-fixing' },
       ],
+      quiz: [
+        ['About how much of the beer people drink in Japan comes from the four companies?', 'About 90 percent', 'About 40 percent', 'About half', 'All of it'],
+        ['What is the government looking into?', 'Whether they made beer more expensive together', 'Whether the beer is safe', 'Whether they paid their taxes', 'Whether they sell to children'],
+        ['What did the companies say?', '"We will help."', '"We did nothing wrong."', '"We will stop making beer."', 'Nothing'],
+      ],
       levels: {
         N5: {
           title: 'ビールの会社[かいしゃ]を調[しら]べています',
@@ -3781,6 +4185,11 @@
       sources: [
         { name: 'Bernama', url: 'https://bernama.com/en/world/news.php?id=2615698' },
         { name: 'Asia News Network', url: 'https://asianews.network/japanese-prime-minister-takaichi-moves-toward-goal-of-0-tax-on-food/' },
+      ],
+      quiz: [
+        ['What is the tax on food now?', '8 percent', '1 percent', '10 percent', '0 percent'],
+        ['What does Takaichi want to make it?', '1 percent', '0 percent', '5 percent', '10 percent'],
+        ['Has it been decided?', 'Not yet', 'Yes', 'Yes, it started last April', 'No, it was rejected'],
       ],
       levels: {
         N5: {

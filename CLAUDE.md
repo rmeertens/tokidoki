@@ -88,7 +88,9 @@
   `scripts/news_extra_words.json`. Names are coloured on story pages
   (`NEWS_WORDS.names`: person / place / org) from the hand-checked lists in
   `scripts/news_names.json`; F / E / N toggle furigana, English and the
-  name colours. `test_news.js` fails if either is stale.
+  name colours. After the story come three comprehension questions
+  (`quiz` in `news-data.js`, rendered by `news.js`), which every story
+  must have. `test_news.js` fails if either is stale.
 
 - The words and grammar shown under an answered Sentences card come from
   `sentences-words.js`, built by `node scripts/tokenize_sentences.mjs`
@@ -301,6 +303,10 @@ Japan, told at N5, N4 and N3. To add them:
    - A note (third element of a line) on anything the word and grammar
      lists don't explain: a news expression, a name, background. Notes are
      plain text — no furigana markup.
+   - Three quiz questions (`quiz`), shown after the story: in English,
+     each `[question, right answer, wrong, wrong, wrong]`, about what the
+     story says (one set for all levels, so only facts the N5 version has
+     too), with wrong answers that are plausible but clearly wrong.
 3. **Build the word lists**: `node scripts/tokenize_news.mjs --misses`
    (after `npm install --no-save kuromoji`). Add every missing word to
    `scripts/news_extra_words.json` as `[reading, meaning, part of speech]`;

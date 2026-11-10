@@ -1,6 +1,7 @@
 // Checks for the News page: every story in news-data.js has a unique id, a
-// date, sources, and an N5, N4 and N3 version with a headline and sentences
-// in sound furigana markup (every kanji with a kana reading — the 🔊 buttons
+// date, sources, three quiz questions, and an N5, N4 and N3 version with a
+// headline and sentences in sound furigana markup (every kanji with a kana
+// reading — the 🔊 buttons
 // read those). news-words.js (scripts/tokenize_news.mjs) must cover every
 // headline and sentence exactly, with every word and grammar point it names.
 // Every story has its own page, news-<id>.html, carrying just its own data;
@@ -45,6 +46,16 @@ NEWS_ITEMS.forEach((item, k) => {
   check(k === 0 || item.date <= NEWS_ITEMS[k - 1].date, `${name}: newest stories go first`);
   ['emoji', 'titleEn'].forEach(f => check(typeof item[f] === 'string' && item[f].length > 0, `${name}: missing ${f}`));
   check(Array.isArray(item.sources) && item.sources.length > 0 && item.sources.every(s => s.name && /^https:\/\//.test(s.url)), `${name}: needs sources with a name and https url`);
+  // Three quiz questions after the story: [question, right, wrong, wrong, wrong].
+  const quiz = Array.isArray(item.quiz) ? item.quiz : [];
+  check(quiz.length === 3, `${name}: needs 3 quiz questions (quiz in news-data.js)`);
+  quiz.forEach((q, i) => {
+    check(Array.isArray(q) && q.length === 5 && q.every(x => typeof x === 'string' && x.trim() === x && x.length > 0), `${name}: quiz ${i + 1} should be [question, right, wrong, wrong, wrong]`);
+    check(/\?$/.test(q[0] || ''), `${name}: quiz ${i + 1} should be a question (end in ?)`);
+    check(new Set(q.slice(1).map(x => String(x).toLowerCase())).size === 4, `${name}: quiz ${i + 1} has the same choice twice`);
+    check(!/[一-鿿ぁ-んァ-ン]/.test(q.join('')), `${name}: quiz ${i + 1} should be in English`);
+  });
+  check(new Set(quiz.map(q => q[0])).size === quiz.length, `${name}: the same quiz question twice`);
   News.LEVELS.forEach(level => {
     const v = item.levels && item.levels[level];
     check(!!v, `${name}: no ${level} version`);
@@ -202,7 +213,7 @@ NEWS_ITEMS.forEach(item => {
   if (!pages.includes(file)) return;
   const page = fs.readFileSync(`${__dirname}/${file}`, 'utf8');
   check(page.includes(`data-story="${item.id}"`), `${file}: wrong story — ${renderIt}`);
-  ['news-text', 'news-panel', 'news-panel-body', 'news-levels', 'news-toggle-furigana', 'news-toggle-english', 'btn-news-read', 'btn-news-read-slow'].forEach(id => check(page.includes(`id="${id}"`), `${file} has no #${id} — ${renderIt}`));
+  ['news-text', 'news-panel', 'news-panel-body', 'news-levels', 'news-toggle-furigana', 'news-toggle-english', 'btn-news-read', 'btn-news-read-slow', 'news-quiz', 'news-quiz-body'].forEach(id => check(page.includes(`id="${id}"`), `${file} has no #${id} — ${renderIt}`));
   News.LEVELS.forEach(l => check(page.includes(News.plainText(item.levels[l].title)), `${file}: ${l} text out of date — ${renderIt}`));
   // Its own text, words and recordings, exactly as in the data files.
   const data = pageData(file, page);

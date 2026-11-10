@@ -29,6 +29,7 @@
 // off, and ▶ / 🐢 read
 // the story aloud — from its VOICEVOX recording (news-audio.js, made by
 // scripts/generate_news_audio.py), or the browser's voice if there is none.
+// After the story come three quiz questions about it (item.quiz).
 (function (global) {
   'use strict';
 
@@ -518,6 +519,68 @@
     });
   }
 
+  // ─── Quiz ──────────────────────────────────────────────────────────────────
+  //
+  // After the story, its three questions (item.quiz: [question, right,
+  // wrong, wrong, wrong]), the same at every level. Each choice is kept as
+  // its index in the question (1 is right), shuffled each round; a pick
+  // shows right or wrong at once, and the last one the score.
+
+  let quiz = null;  // { order: [[choice index]], picks: [choice index or null] }
+
+  function newQuiz() {
+    const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+    quiz = { order: item.quiz.map(q => shuffle(q.slice(1).map((_, k) => k + 1))), picks: item.quiz.map(() => null) };
+  }
+
+  function renderQuiz() {
+    const box = $('#news-quiz');
+    if (!box) return;
+    if (!item.quiz || !item.quiz.length) { box.classList.add('hidden'); return; }
+    if (!quiz) newQuiz();
+    box.classList.remove('hidden');
+    const done = quiz.picks.filter(p => p !== null).length;
+    const right = quiz.picks.filter(p => p === 1).length;
+    $('#news-quiz-body').innerHTML = item.quiz.map((q, i) => {
+      const pick = quiz.picks[i];
+      const answered = pick !== null;
+      const choices = quiz.order[i].map((c, k) => {
+        let cls = 'sf-choice news-quiz-choice';
+        if (answered && c === 1) cls += ' correct';
+        else if (answered && c === pick) cls += ' wrong';
+        return `<button type="button" class="${cls}" data-quiz-q="${i}" data-quiz-c="${c}"${answered ? ' disabled' : ''}>
+          <span class="sf-choice-num" aria-hidden="true">${'ABCD'[k]}</span>
+          <span>${esc(q[c])}</span>
+        </button>`;
+      }).join('');
+      const verdict = !answered ? '' : pick === 1
+        ? '<b class="sf-verdict-right">✓ Right</b>'
+        : '<b class="sf-verdict-wrong">✗ Not quite</b>';
+      return `
+        <div class="sf-q news-quiz-q${answered ? (pick === 1 ? ' sf-q-right' : ' sf-q-wrong') : ''}">
+          <div class="sf-q-head"><span class="sf-q-num">${i + 1}</span><span class="news-quiz-question">${esc(q[0])}</span>${verdict}</div>
+          <div class="sf-choices news-quiz-choices">${choices}</div>
+        </div>`;
+    }).join('') + (done === item.quiz.length ? `
+        <div class="news-quiz-result">
+          <span><b>${right} / ${item.quiz.length}</b> ${right === item.quiz.length ? '— all right! 🎉' : 'right'}</span>
+          <button type="button" class="btn-secondary" id="btn-news-quiz-again">Try again</button>
+        </div>` : '');
+  }
+
+  function initQuiz() {
+    const box = $('#news-quiz');
+    if (!box) return;
+    renderQuiz();
+    box.addEventListener('click', e => {
+      if (e.target.closest('#btn-news-quiz-again')) { newQuiz(); renderQuiz(); return; }
+      const b = e.target.closest('[data-quiz-q]');
+      if (!b || b.disabled) return;
+      quiz.picks[Number(b.dataset.quizQ)] = Number(b.dataset.quizC);
+      renderQuiz();
+    });
+  }
+
   // ─── Events ────────────────────────────────────────────────────────────────
 
   function initStory(id) {
@@ -527,6 +590,7 @@
       return;
     }
     renderReader();
+    initQuiz();
 
     $('#news-levels').addEventListener('click', e => {
       const btn = e.target.closest('[data-level]');
