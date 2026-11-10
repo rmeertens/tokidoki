@@ -23,6 +23,150 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-11-10-mitsui-jsr',
+      date: '2026-11-10',
+      emoji: '🧪',
+      titleEn: 'Mitsui Chemicals agrees to buy chip-materials maker JSR for about 1.84 trillion yen',
+      sources: [
+        { name: 'nippon.com', url: 'https://www.nippon.com/en/articles/-/57113' },
+        { name: 'TechNode', url: 'https://technode.global/2026/11/09/mitsui-chemicals-jsr-acquisition/' },
+      ],
+      levels: {
+        N5: {
+          title: '三井化学[みついかがく]が　JSRを　買[か]います',
+          lines: [
+            ['九日[ここのか]、三井化学[みついかがく]は　JSRという　会社[かいしゃ]を　買[か]うと　発表[はっぴょう]しました。', 'On the 9th, Mitsui Chemicals announced that it will buy a company called JSR.'],
+            ['JSRは、パソコンや　スマホに　使[つか]う　半導体[はんどうたい]の　材料[ざいりょう]を　作[つく]って　います。', 'JSR makes materials for the semiconductors used in computers and smartphones.', '半導体 (semiconductor) is the chip inside electronic devices.'],
+            ['この　材料[ざいりょう]は、小[ちい]さな　回路[かいろ]を　作[つく]る　ときに　必要[ひつよう]です。', 'This material is needed when making tiny circuits.'],
+            ['お金[かね]は、全部[ぜんぶ]で　約[やく]1兆[ちょう]8400億円[おくえん]です。', 'The money is about 1.84 trillion yen in all.'],
+            ['日本政策投資銀行[にほんせいさくとうしぎんこう]も、200億円[おくえん]を　出[だ]します。', 'The Development Bank of Japan will also put in 20 billion yen.', 'The Development Bank of Japan is a government-owned bank.'],
+            ['日本[にっぽん]の　化学[かがく]の　会社[かいしゃ]の　買[か]い物[もの]では、一番[いちばん]　大[おお]きいです。', 'It is the biggest purchase ever by a Japanese chemical company.'],
+            ['国[くに]の　許可[きょか]が　必要[ひつよう]なので、まだ　先[さき]に　なります。', 'It needs permission from governments, so it will be some time yet.'],
+          ],
+        },
+        N4: {
+          title: '三井化学[みついかがく]、半導体[はんどうたい]材料[ざいりょう]のJSRを買収[ばいしゅう]へ',
+          lines: [
+            ['三井化学[みついかがく]は九日[ここのか]、半導体[はんどうたい]の材料[ざいりょう]を作[つく]るJSRを買収[ばいしゅう]することで合意[ごうい]したと発表[はっぴょう]しました。', 'On the 9th, Mitsui Chemicals announced it had agreed to acquire JSR, a maker of semiconductor materials.'],
+            ['日本政策投資銀行[にほんせいさくとうしぎんこう]も一緒[いっしょ]にお金[かね]を出[だ]し、JSRを持[も]っている投資[とうし]ファンドから買[か]います。', 'The Development Bank of Japan will also put up money, and they will buy it from the investment fund that owns JSR.'],
+            ['全部[ぜんぶ]で約[やく]1兆[ちょう]8400億円[おくえん]になり、日本[にっぽん]の化学[かがく]業界[ぎょうかい]では最[もっと]も大[おお]きい買収[ばいしゅう]です。', 'The total is about 1.84 trillion yen, the largest acquisition in Japan\'s chemical industry.'],
+            ['政策投資銀行[せいさくとうしぎんこう]は200億円[おくえん]を出[だ]しますが、議決権[ぎけつけん]は三井化学[みついかがく]だけが持[も]ちます。', 'The Development Bank of Japan will put in 20 billion yen, but only Mitsui Chemicals will hold the voting rights.', '議決権 means the right to vote at a shareholders\' meeting.'],
+            ['JSRは、半導体[はんどうたい]の細[こま]かい回路[かいろ]を作[つく]るときに使[つか]う「フォトレジスト」で、世界[せかい]でも大[おお]きな力[ちから]を持[も]っています。', 'JSR is a major player worldwide in "photoresist," used when making the fine circuits of semiconductors.'],
+            ['三井化学[みついかがく]は、会社[かいしゃ]が一緒[いっしょ]になることで、大[おお]きな利益[りえき]が出[で]ると考[かんが]えています。', 'Mitsui Chemicals believes that joining the companies will bring large benefits.'],
+            ['買収[ばいしゅう]は、日本[にっぽん]と外国[がいこく]の許可[きょか]をもらってから、2027年度[ねんど]の後半[こうはん]に終[お]わる予定[よてい]です。', 'The acquisition is expected to finish in the second half of fiscal 2027, after approval in Japan and abroad.'],
+          ],
+        },
+        N3: {
+          title: '三井化学[みついかがく]、JSR買収[ばいしゅう]で合意[ごうい]　約[やく]1兆[ちょう]8400億円[おくえん]、化学[かがく]業界[ぎょうかい]で最大[さいだい]',
+          lines: [
+            ['三井化学[みついかがく]は九日[ここのか]、半導体[はんどうたい]材料[ざいりょう]大手[おおて]のJSRを買収[ばいしゅう]することで合意[ごうい]したと発表[はっぴょう]した。', 'Mitsui Chemicals announced on the 9th that it had agreed to acquire JSR, a major semiconductor materials maker.'],
+            ['日本政策投資銀行[にほんせいさくとうしぎんこう]と共同[きょうどう]で、JSRの株[かぶ]を保有[ほゆう]する投資[とうし]ファンドから取得[しゅとく]する。', 'Together with the Development Bank of Japan, it will acquire the shares from the investment fund that holds JSR.'],
+            ['買収[ばいしゅう]額[がく]は債務[さいむ]を含[ふく]めて約[やく]1兆[ちょう]8400億円[おくえん]で、化学[かがく]業界[ぎょうかい]では国内[こくない]最大[さいだい]の買収[ばいしゅう]になるとみられる。', 'The price is about 1.84 trillion yen including debt, and it is expected to be the largest acquisition in the domestic chemical industry.'],
+            ['政策投資銀行[せいさくとうしぎんこう]は議決権[ぎけつけん]のない優先[ゆうせん]株[かぶ]で200億円[おくえん]を出資[しゅっし]し、議決権[ぎけつけん]はすべて三井化学[みついかがく]が持[も]つ。', 'The Development Bank of Japan will invest 20 billion yen in non-voting preferred shares, and Mitsui Chemicals will hold all the voting rights.'],
+            ['JSRは、半導体[はんどうたい]の微細[びさい]な回路[かいろ]づくりに欠[か]かせない感光[かんこう]材料[ざいりょう]で、世界[せかい]有数[ゆうすう]のシェアを持[も]っている。', 'JSR holds one of the world\'s largest shares in the photosensitive material essential for making fine semiconductor circuits.', 'The material is called photoresist (フォトレジスト).'],
+            ['三井化学[みついかがく]は、両社[りょうしゃ]の事業[じぎょう]を組[く]み合[あ]わせることで、大[おお]きな効果[こうか]が見込[みこ]めるとしている。', 'Mitsui Chemicals says that combining the two companies\' businesses can be expected to bring large benefits.'],
+            ['買収[ばいしゅう]は国内外[こくないがい]の当局[とうきょく]の承認[しょうにん]を得[え]たうえで、2027年度[ねんど]の後半[こうはん]に完了[かんりょう]する予定[よてい]だ。', 'The acquisition is scheduled to be completed in the second half of fiscal 2027 after approval by authorities in Japan and abroad.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-10-takaichi-summits',
+      date: '2026-11-10',
+      emoji: '✈️',
+      titleEn: 'Takaichi plans to attend the ASEAN-related summit in the Philippines and the APEC summit in China next week',
+      sources: [
+        { name: 'nippon.com', url: 'https://www.nippon.com/en/articles/-/57146' },
+        { name: 'The Star (Malaysia)', url: 'https://www.thestar.com.my/aseanplus/aseanplus-news/2026/11/09/japan-works-to-shield-takaichi-from-any-xi-snub-at-china039s-apec-summit' },
+      ],
+      levels: {
+        N5: {
+          title: '高市首相[たかいちしゅしょう]、来週[らいしゅう]　外国[がいこく]の　会議[かいぎ]に　行[い]きます',
+          lines: [
+            ['九日[ここのか]、高市早苗[たかいちさなえ]首相[しゅしょう]は、来週[らいしゅう]　外国[がいこく]へ　行[い]くと　言[い]いました。', 'On the 9th, Prime Minister Sanae Takaichi said she will go abroad next week.'],
+            ['はじめに、フィリピンで　ASEANの　会議[かいぎ]に　出[で]ます。', 'First, she will take part in an ASEAN meeting in the Philippines.', 'ASEAN is a group of ten Southeast Asian countries.'],
+            ['そのあとで、中国[ちゅうごく]の　APECの　会議[かいぎ]にも　出[で]ます。', 'After that, she will also take part in the APEC meeting in China.', 'APEC is a meeting of countries and regions around the Pacific Ocean about trade and the economy.'],
+            ['フィリピンでは、アジアの　国[くに]と　二酸化炭素[にさんかたんそ]を　へらす　話[はなし]を　します。', 'In the Philippines, she will talk with Asian countries about reducing carbon dioxide.'],
+            ['日本[にっぽん]と　中国[ちゅうごく]は、今[いま]、あまり　仲[なか]が　よく　ありません。', 'Japan and China do not get along very well right now.'],
+            ['習近平[しゅうきんぺい]主席[しゅせき]と　話[はな]す　ことは、むずかしそうです。', 'It seems difficult for her to talk with President Xi Jinping.'],
+            ['日本[にっぽん]の　政府[せいふ]は、会議[かいぎ]の　準備[じゅんび]を　して　います。', 'The Japanese government is making preparations for the meetings.'],
+          ],
+        },
+        N4: {
+          title: '高市首相[たかいちしゅしょう]、来週[らいしゅう]ASEAN関連[かんれん]首脳[しゅのう]会議[かいぎ]とAPEC首脳[しゅのう]会議[かいぎ]に出席[しゅっせき]へ',
+          lines: [
+            ['高市早苗[たかいちさなえ]首相[しゅしょう]は九日[ここのか]、来週[らいしゅう]フィリピンで開[ひら]かれるASEAN関連[かんれん]の首脳[しゅのう]会議[かいぎ]と、中国[ちゅうごく]で開[ひら]かれるAPECの首脳[しゅのう]会議[かいぎ]に出席[しゅっせき]する考[かんが]えを示[しめ]しました。', 'On the 9th, Prime Minister Sanae Takaichi said she intends to attend next week\'s ASEAN-related summit in the Philippines and the APEC summit in China.'],
+            ['フィリピンでは、日本[にっぽん]が進[すす]める「アジア・ゼロエミッション共同体[きょうどうたい]」の首脳[しゅのう]会議[かいぎ]に出[で]ます。', 'In the Philippines, she will attend a summit of the "Asia Zero Emission Community" that Japan is promoting.', 'Zero emission means producing no greenhouse gases such as carbon dioxide.'],
+            ['この共同体[きょうどうたい]は、アジアの国々[くにぐに]が協力[きょうりょく]して二酸化炭素[にさんかたんそ]を減[へ]らすための計画[けいかく]です。', 'This community is a plan for Asian countries to work together to reduce carbon dioxide.'],
+            ['日本[にっぽん]と中国[ちゅうごく]の関係[かんけい]は、去年[きょねん]から難[むずか]しい状態[じょうたい]が続[つづ]いています。', 'Relations between Japan and China have been difficult since last year.'],
+            ['報道[ほうどう]によると、APECで習近平[しゅうきんぺい]国家[こっか]主席[しゅせき]との会談[かいだん]が開[ひら]かれる可能性[かのうせい]は低[ひく]いようです。', 'According to reports, the chance of a meeting with President Xi Jinping at APEC appears low.'],
+            ['日本[にっぽん]の政府[せいふ]は、高市首相[たかいちしゅしょう]が中国[ちゅうごく]で失礼[しつれい]な扱[あつか]いを受[う]けないように、準備[じゅんび]を進[すす]めているそうです。', 'The Japanese government is reportedly preparing so that Prime Minister Takaichi is not treated rudely in China.'],
+            ['フィリピンでは、各国[かっこく]の首脳[しゅのう]との話[はな]し合[あ]いも、行[おこな]われる見通[みとお]しです。', 'Talks with leaders of other countries are also expected in the Philippines.'],
+          ],
+        },
+        N3: {
+          title: '高市首相[たかいちしゅしょう]、来週[らいしゅう]ASEAN関連[かんれん]首脳[しゅのう]会議[かいぎ]とAPEC首脳[しゅのう]会議[かいぎ]に出席[しゅっせき]する意向[いこう]',
+          lines: [
+            ['高市早苗[たかいちさなえ]首相[しゅしょう]は九日[ここのか]、来週[らいしゅう]フィリピンで開[ひら]かれるASEAN関連[かんれん]の首脳[しゅのう]会議[かいぎ]と、中国[ちゅうごく]で開[ひら]かれるAPEC首脳[しゅのう]会議[かいぎ]に出席[しゅっせき]する意向[いこう]を明[あき]らかにした。', 'Prime Minister Sanae Takaichi revealed on the 9th that she intends to attend next week\'s ASEAN-related summit in the Philippines and the APEC summit in China.'],
+            ['フィリピンでは、日本[にっぽん]が主導[しゅどう]する「アジア・ゼロエミッション共同体[きょうどうたい]」の首脳[しゅのう]会議[かいぎ]に出席[しゅっせき]する。', 'In the Philippines, she will attend the summit of the "Asia Zero Emission Community," which Japan leads.'],
+            ['この枠組[わくぐ]みは、アジア各国[かっこく]が協力[きょうりょく]して脱炭素[だつたんそ]を進[すす]めることを目的[もくてき]としている。', 'The framework aims for Asian countries to cooperate in advancing decarbonization.'],
+            ['一方[いっぽう]、日中[にっちゅう]関係[かんけい]は昨年[さくねん]から冷[ひ]え込[こ]んだ状態[じょうたい]が続[つづ]いており、APECの場[ば]での習近平[しゅうきんぺい]国家[こっか]主席[しゅせき]との会談[かいだん]は難[むずか]しいとの見方[みかた]が出[で]ている。', 'Meanwhile, relations between Japan and China have been chilled since last year, and some see a meeting with President Xi Jinping at APEC as difficult.', '日中 means Japan and China.'],
+            ['報道[ほうどう]によると、日本[にっぽん]政府[せいふ]は、高市首相[たかいちしゅしょう]が冷遇[れいぐう]されることがないよう、中国[ちゅうごく]側[がわ]に対等[たいとう]な扱[あつか]いを求[もと]めているという。', 'According to reports, the Japanese government is asking China for equal treatment so that Prime Minister Takaichi is not snubbed.'],
+            ['また、フィリピンでは、アメリカなど各国[かっこく]の首脳[しゅのう]との会談[かいだん]も調整[ちょうせい]される見通[みとお]しだ。', 'In addition, meetings with leaders of other countries, including the United States, are expected to be arranged in the Philippines.'],
+            ['APEC首脳[しゅのう]会議[かいぎ]の日程[にってい]については、報道[ほうどう]によって異[こと]なっており、正式[せいしき]な発表[はっぴょう]が待[ま]たれる。', 'The dates of the APEC summit differ between reports, and an official announcement is awaited.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-10-ana-vietnam',
+      date: '2026-11-10',
+      emoji: '🛫',
+      titleEn: 'ANA and Vietnam Airlines sign a framework agreement to pursue a joint venture on Japan–Vietnam routes',
+      sources: [
+        { name: 'Aviacionline', url: 'https://www.aviacionline.com/english/commercial-aviation/asia-pacific/ana-and-vietnam-airlines-sign-framework-agreement-to-create-japan-vietnam-joint-venture_a6af1c0a84622b038fcc07a1f' },
+        { name: 'TRAICY Global', url: 'https://en.traicy.com/posts/2026110942114/' },
+      ],
+      levels: {
+        N5: {
+          title: 'ANAと　ベトナム航空[こうくう]、いっしょに　飛行機[ひこうき]を　飛[と]ばします',
+          lines: [
+            ['九日[ここのか]、ANAと　ベトナム航空[こうくう]は、東京[とうきょう]で　大切[たいせつ]な　約束[やくそく]を　しました。', 'On the 9th, ANA and Vietnam Airlines made an important agreement in Tokyo.'],
+            ['日本[にっぽん]と　ベトナムの　間[あいだ]の　飛行機[ひこうき]を、2つの　会社[かいしゃ]で　いっしょに　運[はこ]びます。', 'The two companies will run the flights between Japan and Vietnam together.', 'This kind of partnership is called a joint venture.'],
+            ['2つの　会社[かいしゃ]は、飛行機[ひこうき]の　時間[じかん]や　ねだんを　いっしょに　決[き]めます。', 'The two companies will decide flight times and prices together.'],
+            ['2つの　会社[かいしゃ]は、10年[ねん]前[まえ]から　仲[なか]よく　して　います。', 'The two companies have been on good terms for ten years.'],
+            ['ベトナムの　トー・ラム書記長[しょきちょう]も、式[しき]に　来[き]ました。', 'Vietnam\'s leader, To Lam, also came to the ceremony.', 'To Lam is the General Secretary of the Communist Party of Vietnam and also the president.'],
+            ['いつ　始[はじ]まるか、まだ　決[き]まって　いません。', 'When it will start has not been decided yet.'],
+            ['日本[にっぽん]と　ベトナムの　国[くに]の　許可[きょか]が　必要[ひつよう]です。', 'Permission from the governments of Japan and Vietnam is needed.'],
+          ],
+        },
+        N4: {
+          title: 'ANAとベトナム航空[こうくう]、日本[にっぽん]・ベトナム路線[ろせん]の共同[きょうどう]事業[じぎょう]で基本[きほん]合意[ごうい]',
+          lines: [
+            ['ANAホールディングスとベトナム航空[こうくう]は九日[ここのか]、東京[とうきょう]で、日本[にっぽん]とベトナムの間[あいだ]の路線[ろせん]で共同[きょうどう]事業[じぎょう]を行[おこな]うための基本[きほん]合意[ごうい]に署名[しょめい]しました。', 'On the 9th in Tokyo, ANA Holdings and Vietnam Airlines signed a basic agreement to run a joint venture on routes between Japan and Vietnam.'],
+            ['2つの会社[かいしゃ]は、運賃[うんちん]や便[びん]の時間[じかん]、売[う]り上[あ]げなどを一緒[いっしょ]に考[かんが]えて、もっと便利[べんり]なサービスを目指[めざ]します。', 'The two companies will plan fares, flight times, revenue and so on together, aiming for more convenient service.'],
+            ['2社[しゃ]は10年[ねん]前[まえ]から協力[きょうりょく]しており、この日[ひ]は記念[きねん]の式[しき]も開[ひら]かれました。', 'The two companies have cooperated for ten years, and a commemorative ceremony was also held that day.'],
+            ['ベトナムのトー・ラム共産党[きょうさんとう]書記長[しょきちょう]も式[しき]に出席[しゅっせき]しました。', 'Vietnam\'s Communist Party General Secretary To Lam also attended the ceremony.'],
+            ['ANAが違[ちが]うグループの航空[こうくう]会社[がいしゃ]と共同[きょうどう]事業[じぎょう]をするのは、今回[こんかい]が初[はじ]めてだそうです。', 'It is reportedly the first time ANA has done a joint venture with an airline in a different alliance.', 'Airline alliances are groups such as Star Alliance and SkyTeam.'],
+            ['始[はじ]まる時期[じき]や、対象[たいしょう]になる路線[ろせん]は、まだ決[き]まっていません。', 'The start date and the routes covered have not been decided yet.'],
+            ['日本[にっぽん]とベトナムの政府[せいふ]から、独占[どくせん]禁止[きんし]の法律[ほうりつ]の例外[れいがい]として認[みと]めてもらう必要[ひつよう]があります。', 'They need the Japanese and Vietnamese governments to allow it as an exception to the antitrust laws.'],
+          ],
+        },
+        N3: {
+          title: 'ANAとベトナム航空[こうくう]、日越[にちえつ]路線[ろせん]の共同[きょうどう]事業[じぎょう]へ基本[きほん]合意[ごうい]　異[こと]なる連合[れんごう]で初[はじ]めて',
+          lines: [
+            ['ANAホールディングスとベトナム航空[こうくう]は九日[ここのか]、東京[とうきょう]で、日本[にっぽん]とベトナムを結[むす]ぶ路線[ろせん]での共同[きょうどう]事業[じぎょう]に向[む]けた基本[きほん]合意[ごうい]書[しょ]に署名[しょめい]した。', 'On the 9th in Tokyo, ANA Holdings and Vietnam Airlines signed a framework agreement toward a joint venture on routes linking Japan and Vietnam.'],
+            ['両社[りょうしゃ]は、収入[しゅうにゅう]を分[わ]け合[あ]うとともに、運賃[うんちん]やダイヤ、座席[ざせき]の管理[かんり]、販売[はんばい]などを一体[いったい]で進[すす]める方針[ほうしん]だ。', 'The two companies plan to share revenue and to handle fares, schedules, seat management and sales as one.'],
+            ['2社[しゃ]は10年[ねん]前[まえ]に戦略[せんりゃく]的[てき]な提携[ていけい]を結[むす]んでおり、この日[ひ]は10周年[しゅうねん]を祝[いわ]う式典[しきてん]も開[ひら]かれた。', 'The two companies formed a strategic partnership ten years ago, and a ceremony marking the 10th anniversary was also held that day.'],
+            ['式典[しきてん]には、ベトナムのトー・ラム共産党[きょうさんとう]書記長[しょきちょう]が出席[しゅっせき]した。', 'Vietnam\'s Communist Party General Secretary To Lam attended the ceremony.'],
+            ['ANAが別[べつ]の航空[こうくう]連合[れんごう]に属[ぞく]する会社[かいしゃ]と共同[きょうどう]事業[じぎょう]を結[むす]ぶのは初[はじ]めてとされる。', 'It is said to be the first time ANA has formed a joint venture with a company belonging to a different airline alliance.'],
+            ['開始[かいし]時期[じき]や対象[たいしょう]路線[ろせん]、便数[びんすう]は今後[こんご]決[き]める。', 'The start date, the routes covered and the number of flights will be decided later.'],
+            ['実現[じつげん]には、日越[にちえつ]両国[りょうこく]の当局[とうきょく]の承認[しょうにん]に加[くわ]え、独占[どくせん]禁止[きんし]法[ほう]の適用[てきよう]除外[じょがい]を受[う]ける必要[ひつよう]がある。', 'To make it happen, besides approval from the authorities of both Japan and Vietnam, it must receive an exemption from the antitrust law.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-11-09-cyber-package',
       date: '2026-11-09',
       emoji: '🛡️',

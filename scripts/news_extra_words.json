@@ -9048,5 +9048,260 @@
     "にわり",
     "20 percent",
     "noun"
+  ],
+  "三井化学": [
+    "みついかがく",
+    "Mitsui Chemicals",
+    "organization"
+  ],
+  "JSR": [
+    "ジェイエスアール",
+    "JSR (semiconductor materials maker)",
+    "organization"
+  ],
+  "回路": [
+    "かいろ",
+    "circuit",
+    "noun"
+  ],
+  "約1兆8400億円": [
+    "やくいっちょうはっぴゃくよんじゅうおくえん",
+    "about 1.84 trillion yen",
+    "number"
+  ],
+  "日本政策投資銀行": [
+    "にほんせいさくとうしぎんこう",
+    "Development Bank of Japan",
+    "organization"
+  ],
+  "200億円": [
+    "にひゃくおくえん",
+    "20 billion yen",
+    "number"
+  ],
+  "買収": [
+    "ばいしゅう",
+    "acquisition, buyout",
+    "noun"
+  ],
+  "ファンド": [
+    "ファンド",
+    "(investment) fund",
+    "noun"
+  ],
+  "議決権": [
+    "ぎけつけん",
+    "voting right",
+    "noun"
+  ],
+  "フォトレジスト": [
+    "フォトレジスト",
+    "photoresist (light-sensitive chip material)",
+    "noun"
+  ],
+  "後半": [
+    "こうはん",
+    "second half",
+    "noun"
+  ],
+  "保有": [
+    "ほゆう",
+    "holding, owning",
+    "noun"
+  ],
+  "優先株": [
+    "ゆうせんかぶ",
+    "preferred shares",
+    "noun"
+  ],
+  "出資": [
+    "しゅっし",
+    "investment, contribution of funds",
+    "noun"
+  ],
+  "微細": [
+    "びさい",
+    "minute, fine",
+    "na-adjective"
+  ],
+  "感光": [
+    "かんこう",
+    "light-sensitive",
+    "noun"
+  ],
+  "有数": [
+    "ゆうすう",
+    "leading, prominent",
+    "noun"
+  ],
+  "シェア": [
+    "シェア",
+    "(market) share",
+    "noun"
+  ],
+  "両社": [
+    "りょうしゃ",
+    "both companies",
+    "noun"
+  ],
+  "見込める": [
+    "みこめる",
+    "can be expected",
+    "verb"
+  ],
+  "ASEAN": [
+    "アセアン",
+    "ASEAN (Association of Southeast Asian Nations)",
+    "organization"
+  ],
+  "APEC": [
+    "エイペック",
+    "APEC (Asia-Pacific Economic Cooperation)",
+    "organization"
+  ],
+  "二酸化炭素": [
+    "にさんかたんそ",
+    "carbon dioxide",
+    "noun"
+  ],
+  "習近平": [
+    "しゅうきんぺい",
+    "Xi Jinping",
+    "name"
+  ],
+  "主席": [
+    "しゅせき",
+    "chairman, president (of a state)",
+    "noun"
+  ],
+  "首脳": [
+    "しゅのう",
+    "leader, head (of government)",
+    "noun"
+  ],
+  "ゼロエミッション": [
+    "ゼロエミッション",
+    "zero emission",
+    "noun"
+  ],
+  "主導": [
+    "しゅどう",
+    "leading, taking the initiative",
+    "noun"
+  ],
+  "脱炭素": [
+    "だつたんそ",
+    "decarbonization",
+    "noun"
+  ],
+  "冷え込む": [
+    "ひえこむ",
+    "to turn cold, to chill (relations)",
+    "verb"
+  ],
+  "冷遇": [
+    "れいぐう",
+    "cold treatment, snub",
+    "noun"
+  ],
+  "対等": [
+    "たいとう",
+    "equal, on equal terms",
+    "na-adjective"
+  ],
+  "ANA": [
+    "エーエヌエー",
+    "ANA (All Nippon Airways)",
+    "organization"
+  ],
+  "ベトナム航空": [
+    "ベトナムこうくう",
+    "Vietnam Airlines",
+    "organization"
+  ],
+  "仲よく": [
+    "なかよく",
+    "on good terms, in friendship",
+    "adverb"
+  ],
+  "トー・ラム": [
+    "トー・ラム",
+    "To Lam",
+    "name"
+  ],
+  "書記長": [
+    "しょきちょう",
+    "general secretary",
+    "noun"
+  ],
+  "路線": [
+    "ろせん",
+    "(air/rail) route",
+    "noun"
+  ],
+  "ホールディングス": [
+    "ホールディングス",
+    "holdings (holding company)",
+    "noun"
+  ],
+  "運賃": [
+    "うんちん",
+    "fare",
+    "noun"
+  ],
+  "2社": [
+    "にしゃ",
+    "two companies",
+    "noun"
+  ],
+  "共産党": [
+    "きょうさんとう",
+    "Communist Party",
+    "organization"
+  ],
+  "独占": [
+    "どくせん",
+    "monopoly",
+    "noun"
+  ],
+  "日越": [
+    "にちえつ",
+    "Japan-Vietnam",
+    "noun"
+  ],
+  "戦略": [
+    "せんりゃく",
+    "strategy",
+    "noun"
+  ],
+  "提携": [
+    "ていけい",
+    "partnership, tie-up",
+    "noun"
+  ],
+  "10周年": [
+    "じゅっしゅうねん",
+    "10th anniversary",
+    "noun"
+  ],
+  "式典": [
+    "しきてん",
+    "ceremony",
+    "noun"
+  ],
+  "属する": [
+    "ぞくする",
+    "to belong to",
+    "verb"
+  ],
+  "便数": [
+    "びんすう",
+    "number of flights",
+    "noun"
+  ],
+  "除外": [
+    "じょがい",
+    "exclusion, exemption",
+    "noun"
   ]
 }
