@@ -8393,6 +8393,7 @@ body.cs-wide #app { max-width: 1200px; }
 .bs-why p + p { margin-top: 6px; }
 .bs-next-area { display: flex; justify-content: flex-end; margin-top: 12px; }
 body.bs-no-furigana #screen-bunkei-story rt { visibility: hidden; }
+body.gk-no-furigana #screen-guess-kanji .gk-example-ja rt { visibility: hidden; }
 @media (max-width: 600px) {
   .bs-ja { font-size: 1.05rem; }
 }

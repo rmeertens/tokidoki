@@ -21,7 +21,7 @@
   <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
   <link rel="canonical" href="https://tokidoki.meertens.dev/guess-kanji.html">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "GTK - Easy Word Order — JLPT words in a guessable order", "description": "The JLPT N5–N3 words in an order planned so you can guess each new word from kanji you've already met: 電車 and 天気 first, then 電気 reads itself.", "url": "https://tokidoki.meertens.dev/guess-kanji.html", "inLanguage": "en", "learningResourceType": "flashcards", "educationalLevel": "JLPT N5–N3", "isAccessibleForFree": true, "isPartOf": {"@type": "WebSite", "name": "Tokidoki", "url": "https://tokidoki.meertens.dev/"}}</script>
-  <link rel="stylesheet" href="style.css?v=109">
+  <link rel="stylesheet" href="style.css?v=110">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -217,6 +217,11 @@
         <button id="gk-quit" class="btn-undo" aria-label="Back to the start">✕</button>
       </div>
 
+      <div class="wo-settings">
+        <label class="kana-script-toggle" title="Key: F"><input type="checkbox" id="gk-opt-furigana"> Furigana</label>
+        <span class="news-keys-hint story-keys-hint">Keys: <kbd>F</kbd> furigana</span>
+      </div>
+
       <div id="gk-card" class="card kana-card gk-card">
         <div class="kana-prompt-label" id="gk-label"></div>
         <div id="gk-prompt" class="story-review-prompt" lang="ja"></div>
@@ -265,7 +270,7 @@
   <script src="sync-merge.js?v=11"></script>
   <script src="progress-stats.js?v=5"></script>
   <script src="sync.js?v=12"></script>
-  <script src="guess-kanji.js?v=13"></script>
+  <script src="guess-kanji.js?v=14"></script>
 
   <!-- Static content for search engines -->
   <section id="seo-content" class="page-about">

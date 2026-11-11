@@ -455,7 +455,29 @@
     renderHome();
   });
 
+  // Furigana on the example sentence: the checkbox, or F on a card.
+  const SETTINGS_KEY = 'tokidoki_guess_settings';
+  const settings = Object.assign({ furigana: true }, load(SETTINGS_KEY, {}));
+  const applyFurigana = () => {
+    $('gk-opt-furigana').checked = settings.furigana;
+    document.body.classList.toggle('gk-no-furigana', !settings.furigana);
+  };
+  $('gk-opt-furigana').addEventListener('change', e => {
+    settings.furigana = e.target.checked;
+    save(SETTINGS_KEY, settings);
+    applyFurigana();
+  });
+  applyFurigana();
+
   document.addEventListener('keydown', e => {
+    // F flips the Furigana checkbox (also right after clicking it).
+    if ((e.key === 'f' || e.key === 'F') && !e.altKey && !e.metaKey && !e.ctrlKey && !e.repeat && !e.isComposing
+        && $('screen-guess-kanji').classList.contains('active') && !document.querySelector('dialog[open]')
+        && !(e.target.closest && e.target.closest('input:not([type=checkbox]), textarea, select'))) {
+      e.preventDefault();
+      $('gk-opt-furigana').click();
+      return;
+    }
     if (e.altKey || ((e.metaKey || e.ctrlKey) && e.key !== 'z' && e.key !== 'Z')) return;
     if (e.target.closest && e.target.closest('input, textarea, select')) return;
     const onCard = $('screen-guess-kanji').classList.contains('active');
