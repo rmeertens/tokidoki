@@ -9303,5 +9303,365 @@
     "じょがい",
     "exclusion, exemption",
     "noun"
+  ],
+  "つながり": [
+    "つながり",
+    "connecting (from つながる, to connect)",
+    "verb"
+  ],
+  "10時": [
+    "じゅうじ",
+    "10 o'clock",
+    "number + counter"
+  ],
+  "34分": [
+    "さんじゅうよんぷん",
+    "34 minutes",
+    "number + counter"
+  ],
+  "SA": [
+    "エスエー",
+    "standalone (in \"5G SA\", a newer kind of 5G)",
+    "noun"
+  ],
+  "SMS": [
+    "エスエムエス",
+    "SMS, short text messages",
+    "noun"
+  ],
+  "データ通信": [
+    "データつうしん",
+    "data communication",
+    "noun"
+  ],
+  "設定": [
+    "せってい",
+    "settings",
+    "noun"
+  ],
+  "再起動": [
+    "さいきどう",
+    "restart (a device)",
+    "noun"
+  ],
+  "約14時間": [
+    "やくじゅうよじかん",
+    "about 14 hours",
+    "number + counter"
+  ],
+  "一週間足らず": [
+    "いっしゅうかんたらず",
+    "less than a week",
+    "expression"
+  ],
+  "づらい": [
+    "づらい",
+    "hard to ~ (after a verb stem)",
+    "suffix"
+  ],
+  "絞り込む": [
+    "しぼりこむ",
+    "to narrow down",
+    "verb"
+  ],
+  "形跡": [
+    "けいせき",
+    "trace, sign",
+    "noun"
+  ],
+  "十か月": [
+    "じゅっかげつ",
+    "ten months",
+    "number + counter"
+  ],
+  "十カ月": [
+    "じゅっかげつ",
+    "ten months",
+    "number + counter"
+  ],
+  "約29万円": [
+    "やくにじゅうきゅうまんえん",
+    "about 290,000 yen",
+    "number + counter"
+  ],
+  "28万9536円": [
+    "にじゅうはちまんきゅうせんごひゃくさんじゅうろくえん",
+    "289,536 yen",
+    "number + counter"
+  ],
+  "6.8パーセント": [
+    "ろくてんはちパーセント",
+    "6.8 percent",
+    "number + counter"
+  ],
+  "23.7パーセント": [
+    "にじゅうさんてんななパーセント",
+    "23.7 percent",
+    "number + counter"
+  ],
+  "37.3パーセント": [
+    "さんじゅうななてんさんパーセント",
+    "37.3 percent",
+    "number + counter"
+  ],
+  "10パーセント": [
+    "じゅっパーセント",
+    "10 percent",
+    "number + counter"
+  ],
+  "0.9パーセント": [
+    "れいてんきゅうパーセント",
+    "0.9 percent",
+    "number + counter"
+  ],
+  "10.0パーセント": [
+    "じゅってんれいパーセント",
+    "10.0 percent",
+    "number + counter"
+  ],
+  "6.8パーセント減": [
+    "ろくてんはちパーセントげん",
+    "down 6.8 percent",
+    "number + counter"
+  ],
+  "23.7パーセント減": [
+    "にじゅうさんてんななパーセントげん",
+    "down 23.7 percent",
+    "number + counter"
+  ],
+  "37.3パーセント減": [
+    "さんじゅうななてんさんパーセントげん",
+    "down 37.3 percent",
+    "number + counter"
+  ],
+  "3.1パーセント減": [
+    "さんてんいちパーセントげん",
+    "down 3.1 percent",
+    "number + counter"
+  ],
+  "パック旅行": [
+    "パックりょこう",
+    "package tour",
+    "noun"
+  ],
+  "6年ぶり": [
+    "ろくねんぶり",
+    "for the first time in six years",
+    "expression"
+  ],
+  "品目": [
+    "ひんもく",
+    "item (of goods)",
+    "noun"
+  ],
+  "多雨": [
+    "たう",
+    "heavy rain, much rain",
+    "noun"
+  ],
+  "不順": [
+    "ふじゅん",
+    "unseasonable, irregular",
+    "noun"
+  ],
+  "天候不順": [
+    "てんこうふじゅん",
+    "unseasonable weather",
+    "noun"
+  ],
+  "勤労者": [
+    "きんろうしゃ",
+    "worker, employee",
+    "noun"
+  ],
+  "裏付ける": [
+    "うらづける",
+    "to back up, confirm",
+    "verb"
+  ],
+  "至宝": [
+    "しほう",
+    "greatest treasure",
+    "noun"
+  ],
+  "8人": [
+    "はちにん",
+    "eight people",
+    "number + counter"
+  ],
+  "和食": [
+    "わしょく",
+    "Japanese food",
+    "noun"
+  ],
+  "野崎洋光": [
+    "のざきひろみつ",
+    "Hiromitsu Nozaki (Japanese-cuisine chef)",
+    "name"
+  ],
+  "脇屋友詞": [
+    "わきやゆうじ",
+    "Yuji Wakiya (Chinese-cuisine chef)",
+    "name"
+  ],
+  "中華": [
+    "ちゅうか",
+    "Chinese (food)",
+    "noun"
+  ],
+  "一皿": [
+    "ひとさら",
+    "one plate",
+    "number + counter"
+  ],
+  "ブレンダー": [
+    "ブレンダー",
+    "blender (of whisky)",
+    "noun"
+  ],
+  "ソムリエ": [
+    "ソムリエ",
+    "sommelier",
+    "noun"
+  ],
+  "鰹節": [
+    "かつおぶし",
+    "dried bonito (katsuobushi)",
+    "noun"
+  ],
+  "職人": [
+    "しょくにん",
+    "craftsman, artisan",
+    "noun"
+  ],
+  "賞状": [
+    "しょうじょう",
+    "certificate of merit",
+    "noun"
+  ],
+  "創設": [
+    "そうせつ",
+    "establishment, founding",
+    "noun"
+  ],
+  "たたえる": [
+    "たたえる",
+    "to praise, honor",
+    "verb"
+  ],
+  "名店": [
+    "めいてん",
+    "famous restaurant or shop",
+    "noun"
+  ],
+  "普及": [
+    "ふきゅう",
+    "spread, popularization",
+    "noun"
+  ],
+  "大皿": [
+    "おおざら",
+    "large (shared) plate",
+    "noun"
+  ],
+  "主流": [
+    "しゅりゅう",
+    "mainstream, the norm",
+    "noun"
+  ],
+  "担い手": [
+    "にないて",
+    "person who carries on (a tradition or work)",
+    "noun"
+  ],
+  "危ぶむ": [
+    "あやぶむ",
+    "to fear for, be anxious about",
+    "verb"
+  ],
+  "向上": [
+    "こうじょう",
+    "improvement, rise",
+    "noun"
+  ],
+  "狙う": [
+    "ねらう",
+    "to aim at",
+    "verb"
+  ],
+  "経歴": [
+    "けいれき",
+    "career, record",
+    "noun"
+  ],
+  "国宝": [
+    "こくほう",
+    "national treasure",
+    "noun"
+  ],
+  "人間国宝": [
+    "にんげんこくほう",
+    "Living National Treasure",
+    "noun"
+  ],
+  "認定": [
+    "にんてい",
+    "recognition, certification",
+    "noun"
+  ],
+  "総料理長": [
+    "そうりょうりちょう",
+    "head chef",
+    "noun"
+  ],
+  "大きさ": [
+    "おおきさ",
+    "size",
+    "noun"
+  ],
+  "料理人": [
+    "りょうりにん",
+    "cook, chef",
+    "noun"
+  ],
+  "受賞者": [
+    "じゅしょうしゃ",
+    "prize winner",
+    "noun"
+  ],
+  "文部科学大臣": [
+    "もんぶかがくだいじん",
+    "Minister of Education, Culture, Sports, Science and Technology",
+    "noun"
+  ],
+  "日本茶": [
+    "にほんちゃ",
+    "Japanese tea",
+    "noun"
+  ],
+  "食文化": [
+    "しょくぶんか",
+    "food culture",
+    "noun"
+  ],
+  "契約者": [
+    "けいやくしゃ",
+    "subscriber, contract holder",
+    "noun"
+  ],
+  "利用者": [
+    "りようしゃ",
+    "user",
+    "noun"
+  ],
+  "専門家": [
+    "せんもんか",
+    "expert, specialist",
+    "noun"
+  ],
+  "実収入": [
+    "じつしゅうにゅう",
+    "actual income",
+    "noun"
   ]
 }

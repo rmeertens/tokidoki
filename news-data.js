@@ -27,6 +27,170 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-11-11-docomo-outage-again',
+      date: '2026-11-11',
+      emoji: '📶',
+      titleEn: 'NTT Docomo hit by a second nationwide outage in a week, for its "5G SA" users',
+      sources: [
+        { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261111de73934' },
+        { name: 'ITmedia NEWS', url: 'https://www.itmedia.co.jp/news/article/2611/11/2000003095/' },
+        { name: 'TECHNO-EDGE', url: 'https://www.techno-edge.net/article/2026/11/11/5700.html' },
+        { name: 'ITmedia Mobile (Nov. 6 outage)', url: 'https://www.itmedia.co.jp/mobile/articles/2611/06/news045.html' },
+      ],
+      quiz: [
+        ['When did the trouble start?', 'At 10:34 a.m. on the 11th', 'At 10:34 p.m. on the 10th', 'Early in the morning on the 5th', 'At noon on the 12th'],
+        ['Who had trouble using their phones?', 'People using the "5G SA" service', 'Only people in Tokyo', 'Only people using 4G', 'People with other phone companies'],
+        ['What may help people use their phones?', 'Changing the phone to 4G', 'Buying a new phone', 'Turning off Wi-Fi', 'Going to a Docomo shop'],
+      ],
+      levels: {
+        N5: {
+          title: 'ドコモの　電話[でんわ]が　また　つながりにくく　なりました',
+          lines: [
+            ['十一日[じゅういちにち]、ドコモの　電話[でんわ]が　全国[ぜんこく]で　つながりにくく　なりました。', 'On the 11th, Docomo phones became hard to connect all over Japan.'],
+            ['午前[ごぜん]10時[じ]34分[ぷん]からです。', 'It was from 10:34 in the morning.'],
+            ['「5G SA」という　サービスを　使[つか]って　いる　人[ひと]が　困[こま]って　います。', 'People using a service called "5G SA" are having trouble.', '5G SA (standalone) is a newer kind of 5G that works without 4G equipment.'],
+            ['電話[でんわ]や　インターネット、SMSが　使[つか]いにくいです。', 'Phone calls, the internet and SMS are hard to use.', 'SMS are short text messages sent to a phone number.'],
+            ['電話[でんわ]を　4Gに　変[か]えると、使[つか]える　ことが　あります。', 'If you change the phone to 4G, it may work.'],
+            ['五日[いつか]にも　同[おな]じような　問題[もんだい]が　ありました。', 'There was a similar problem on the 5th too.'],
+            ['ドコモは　理由[りゆう]を　調[しら]べて　います。', 'Docomo is looking into the reason.'],
+          ],
+        },
+        N4: {
+          title: 'ドコモ、全国[ぜんこく]でまた通信[つうしん]障害[しょうがい]　「5G SA」の利用者[りようしゃ]に影響[えいきょう]',
+          lines: [
+            ['NTTドコモは十一日[じゅういちにち]、全国[ぜんこく]で携帯[けいたい]電話[でんわ]が使[つか]いにくくなる障害[しょうがい]が起[お]きていると発表[はっぴょう]しました。', 'On the 11th, NTT Docomo announced that a fault was making mobile phones hard to use across the country.', '障害 here means a breakdown or outage in a system.'],
+            ['障害[しょうがい]は午前[ごぜん]10時[じ]34分[ぷん]に始[はじ]まり、「5G SA」というサービスの契約[けいやく]をしている人[ひと]に影響[えいきょう]が出[で]ています。', 'The fault began at 10:34 a.m. and is affecting people with a contract for a service called "5G SA".', '5G SA (standalone) is a newer kind of 5G that works without 4G equipment.'],
+            ['電話[でんわ]やデータ通信[つうしん]、SMSが使[つか]いにくくなりましたが、ほかの5Gや4Gの利用者[りようしゃ]には影響[えいきょう]がないということです。', 'Calls, data and SMS have become hard to use, but users of other 5G and of 4G are said not to be affected.'],
+            ['ドコモは、設定[せってい]で4Gを選[えら]んでからスマホを再起動[さいきどう]すると、使[つか]える場合[ばあい]があると案内[あんない]しています。', 'Docomo is advising that choosing 4G in the settings and then restarting the smartphone may make it usable.'],
+            ['五日[いつか]にも同[おな]じ「5G SA」で障害[しょうがい]があり、元[もと]に戻[もど]るまでに約[やく]14時間[じかん]かかりました。', 'There was also a fault with the same "5G SA" on the 5th, and it took about 14 hours to return to normal.'],
+            ['原因[げんいん]はまだ調[しら]べていますが、不正[ふせい]アクセスやサイバー攻撃[こうげき]のあとは見[み]つかっていないということです。', 'The cause is still being investigated, but no signs of unauthorized access or a cyberattack have been found.'],
+            ['午後[ごご]になっても、いつ直[なお]るかはわかっていません。', 'Even in the afternoon, it was not known when it would be fixed.'],
+          ],
+        },
+        N3: {
+          title: 'ドコモ、一週間[いっしゅうかん]足[た]らずで再[ふたた]び全国[ぜんこく]規模[きぼ]の通信[つうしん]障害[しょうがい]　「5G SA」契約者[けいやくしゃ]に影響[えいきょう]',
+          lines: [
+            ['NTTドコモは十一日[じゅういちにち]、全国[ぜんこく]で通話[つうわ]やデータ通信[つうしん]が利用[りよう]しづらい通信[つうしん]障害[しょうがい]が発生[はっせい]していると発表[はっぴょう]した。', 'NTT Docomo announced on the 11th that a network fault was making calls and data hard to use across the country.'],
+            ['同社[どうしゃ]によると、障害[しょうがい]は午前[ごぜん]10時[じ]34分[ぷん]に始[はじ]まり、影響[えいきょう]は「5G SA」の契約者[けいやくしゃ]に限[かぎ]られるという。', 'According to the company, the fault began at 10:34 a.m., and the impact is limited to subscribers to "5G SA".', '5G SA (standalone) is a newer kind of 5G that works without 4G equipment.'],
+            ['当初[とうしょ]はドコモの携帯[けいたい]サービス全体[ぜんたい]に影響[えいきょう]が出[で]ているとしていたが、その後[ご]、対象[たいしょう]を絞[しぼ]り込[こ]んだ。', 'At first it said all of Docomo\'s mobile services were affected, but it later narrowed down who was affected.'],
+            ['ドコモは、端末[たんまつ]の設定[せってい]で4Gを選[えら]んだうえで再起動[さいきどう]すれば、利用[りよう]できる場合[ばあい]があると案内[あんない]している。', 'Docomo is advising that choosing 4G in the device settings and then restarting it may make it usable.'],
+            ['五日[いつか]にも5G SAで全国[ぜんこく]規模[きぼ]の障害[しょうがい]が起[お]き、復旧[ふっきゅう]まで約[やく]14時間[じかん]かかったばかりだった。', 'A nationwide 5G SA fault had happened only on the 5th, and it took about 14 hours to restore service.', 'Docomo said that fault was caused by congestion at a switching system that serves 5G SA users.'],
+            ['原因[げんいん]は調査中[ちょうさちゅう]だが、不正[ふせい]アクセスやサイバー攻撃[こうげき]を示[しめ]す形跡[けいせき]は確認[かくにん]されていないという。', 'The cause is under investigation, but no traces pointing to unauthorized access or a cyberattack have been confirmed.'],
+            ['午後[ごご]の時点[じてん]でも、復旧[ふっきゅう]のめどは立[た]っていない。', 'Even as of the afternoon, there was no prospect of when service would be restored.', '復旧のめどが立たない means there is no clear prospect of when service will be restored.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-11-household-spending-sept',
+      date: '2026-11-11',
+      emoji: '🛒',
+      titleEn: 'Household spending falls 6.8% in September, the 10th monthly drop in a row',
+      sources: [
+        { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261110de73268' },
+        { name: 'Reuters (Yahoo! Finance Japan)', url: 'https://finance.yahoo.co.jp/news/detail/800c1f9b31ede8ae1533b2802e6f3b2690e133f5' },
+        { name: 'Chunichi Shimbun (Kyodo)', url: 'https://www.chunichi.co.jp/article/1337143' },
+        { name: 'TV Tokyo', url: 'https://txbiz.tv-tokyo.co.jp/hiru/news/post_352210' },
+      ],
+      quiz: [
+        ['How much less did households spend than a year before?', 'About 6.8 percent', 'About 3.1 percent', 'About 23.7 percent', 'About 29 percent'],
+        ['For how many months in a row has spending been lower than a year before?', 'Ten', 'Six', 'Two', 'Twelve'],
+        ['What is one reason given for the drop?', 'Bad weather, such as typhoons and rain', 'A big earthquake', 'A new tax', 'Many people were ill'],
+      ],
+      levels: {
+        N5: {
+          title: '家[いえ]の人[ひと]が使[つか]ったお金[かね]が、十[じゅっ]か月[げつ]少[すく]なくなっています',
+          lines: [
+            ['十日[とおか]、国[くに]が　九月[くがつ]の、家[いえ]の　お金[かね]の　使[つか]い方[かた]を　発表[はっぴょう]しました。', 'On the 10th, the government announced how households used money in September.', 'The Ministry of Internal Affairs and Communications (総務省) makes this report every month.'],
+            ['二人[ふたり]以上[いじょう]で　住[す]んで　いる　家[いえ]は、一[ひと]か月[げつ]で　約[やく]29万円[まんえん]　使[つか]いました。', 'Homes with two or more people used about 290,000 yen in the month.'],
+            ['去年[きょねん]の　九月[くがつ]より　6.8パーセント　少[すく]なかったです。', 'It was 6.8 percent less than last September.', 'The numbers are adjusted for price changes.'],
+            ['去年[きょねん]より　少[すく]ないのは、十[じゅっ]か月[げつ]　続[つづ]いて　います。', 'It has been less than the year before for ten months in a row.'],
+            ['お米[こめ]に　使[つか]った　お金[かね]は、23.7パーセント　少[すく]なかったです。', 'The money spent on rice was 23.7 percent less.'],
+            ['物[もの]の　値段[ねだん]が　高[たか]い　ことと、台風[たいふう]や　雨[あめ]が　多[おお]かった　ことが　理由[りゆう]だと　考[かんが]えられて　います。', 'High prices and the many typhoons and rainy days are thought to be the reasons.'],
+            ['こんなに　大[おお]きく　減[へ]ったのは、2020年[ねん]の　九月[くがつ]から　初[はじ]めてです。', 'It is the first time since September 2020 that it has fallen this much.'],
+          ],
+        },
+        N4: {
+          title: '9月[がつ]の家計[かけい]支出[ししゅつ]、6.8パーセント減[げん]　十[じゅっ]か月[げつ]連続[れんぞく]で減少[げんしょう]',
+          lines: [
+            ['総務省[そうむしょう]は十日[とおか]、9月[がつ]の家計調査[かけいちょうさ]の結果[けっか]を発表[はっぴょう]しました。', 'On the 10th, the Ministry of Internal Affairs and Communications announced the results of its September household survey.', '家計調査 is a monthly survey of what households earn and spend.'],
+            ['二人[ふたり]以上[いじょう]の世帯[せたい]の消費[しょうひ]支出[ししゅつ]は28万[まん]9536円[えん]で、物価[ぶっか]の変動[へんどう]を除[のぞ]いた実質[じっしつ]で、去年[きょねん]の9月[がつ]より6.8パーセント減[へ]りました。', 'Consumer spending by households of two or more people was 289,536 yen, down 6.8 percent from last September in real terms, excluding price changes.', '実質 "real terms" means the effect of rising prices has been taken out.'],
+            ['前[まえ]の年[とし]を下回[したまわ]るのは十[じゅっ]か月[げつ]連続[れんぞく]で、減[へ]り方[かた]は2020年[ねん]9月[がつ]以来[いらい]の大[おお]きさです。', 'It is the tenth month in a row below the previous year, and the biggest fall since September 2020.'],
+            ['8月[がつ]は3.1パーセントの減少[げんしょう]だったので、減[へ]り方[かた]が大[おお]きくなりました。', 'August was a fall of 3.1 percent, so the fall has grown bigger.'],
+            ['米[こめ]は23.7パーセント、パック旅行[りょこう]は37.3パーセント減[へ]りました。', 'Rice fell 23.7 percent, and package tours 37.3 percent.'],
+            ['物価[ぶっか]が高[たか]いことに加[くわ]えて、台風[たいふう]や雨[あめ]が多[おお]かったことも影響[えいきょう]したと考[かんが]えられています。', 'Besides high prices, the many typhoons and rainy days are also thought to have had an effect.'],
+            ['会社員[かいしゃいん]などの世帯[せたい]では、収入[しゅうにゅう]は少[すこ]し増[ふ]えましたが、使[つか]ったお金[かね]は10パーセント減[へ]りました。', 'In households of company employees and other workers, income rose a little, but the money spent fell 10 percent.'],
+          ],
+        },
+        N3: {
+          title: '9月[がつ]の家計[かけい]支出[ししゅつ]、実質[じっしつ]6.8パーセント減[げん]　十[じゅっ]カ月[げつ]連続[れんぞく]、6年[ねん]ぶりの減少[げんしょう]幅[はば]',
+          lines: [
+            ['総務省[そうむしょう]が十日[とおか]発表[はっぴょう]した9月[がつ]の家計調査[かけいちょうさ]によると、二人[ふたり]以上[いじょう]の世帯[せたい]の消費[しょうひ]支出[ししゅつ]は28万[まん]9536円[えん]で、物価[ぶっか]変動[へんどう]を除[のぞ]いた実質[じっしつ]で前年[ぜんねん]同月[どうげつ]比[ひ]6.8パーセント減[げん]となった。', 'According to the September household survey released by the Ministry of Internal Affairs and Communications on the 10th, consumer spending by households of two or more people was 289,536 yen, down 6.8 percent from a year earlier in real terms.', '前年同月比 "compared with the same month a year earlier".'],
+            ['前年[ぜんねん]を下回[したまわ]るのは十[じゅっ]カ月[げつ]連続[れんぞく]で、減少[げんしょう]幅[はば]は2020年[ねん]9月[がつ]以来[いらい]、6年[ねん]ぶりの大[おお]きさとなった。', 'It was below the previous year for the tenth month in a row, and the fall was the largest in six years, since September 2020.', '〜ぶり "for the first time in (a period)".'],
+            ['8月[がつ]の3.1パーセント減[げん]から、減少[げんしょう]幅[はば]が大[おお]きく広[ひろ]がった形[かたち]だ。', 'The decline has widened sharply from the 3.1 percent drop in August.'],
+            ['品目[ひんもく]別[べつ]では、コメが23.7パーセント減[げん]、パック旅行[りょこう]費[ひ]が37.3パーセント減[げん]と大[おお]きく落[お]ち込[こ]んだ。', 'By item, rice fell sharply by 23.7 percent and package tours by 37.3 percent.', 'Newspapers often write rice, the crop and product, in katakana: コメ.'],
+            ['物価[ぶっか]高[だか]に加[くわ]え、台風[たいふう]や多雨[たう]などの天候[てんこう]不順[ふじゅん]も消費[しょうひ]を押[お]し下[さ]げたとみられる。', 'Besides high prices, unseasonable weather such as typhoons and heavy rain is thought to have pushed spending down.', '天候不順 "unseasonable, unsettled weather".'],
+            ['勤労者[きんろうしゃ]世帯[せたい]では実収入[じつしゅうにゅう]が0.9パーセント増[ふ]えた一方[いっぽう]、消費[しょうひ]支出[ししゅつ]は10.0パーセント減[へ]った。', 'In working households, actual income rose 0.9 percent, while consumer spending fell 10.0 percent.', '勤労者世帯 are households headed by an employee (not self-employed).'],
+            ['専門家[せんもんか]からは「消費[しょうひ]が弱[よわ]いことを裏付[うらづ]ける結果[けっか]だった」との声[こえ]が出[で]ている。', 'An expert said, "It was a result that confirms consumption is weak."', 'The comment is from Takeshi Minami of the Norinchukin Research Institute.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-11-food-treasure-award',
+      date: '2026-11-11',
+      emoji: '🍱',
+      titleEn: 'Agency for Cultural Affairs names the first eight winners of its new food culture award, "Shoku no Shiho"',
+      sources: [
+        { name: 'Tokyo Shimbun (Kyodo)', url: 'https://www.tokyo-np.co.jp/article/527211' },
+        { name: 'nippon.com (Jiji)', url: 'https://www.nippon.com/en/articles/-/57213' },
+        { name: 'Project Design', url: 'https://www.projectdesign.jp/articles/news/c7ed148e-3036-47b2-bbdc-f935181bc966' },
+      ],
+      quiz: [
+        ['What is the new award called?', '"Shoku no Shiho"', '"Order of Culture"', '"Living National Treasure"', '"Best Chef of Japan"'],
+        ['How many people won it this first time?', 'Eight', 'Three', 'Twelve', 'One hundred'],
+        ['Besides cooks, who else won?', 'Whisky and tea experts', 'Baseball players', 'Singers', 'Farmers from abroad'],
+      ],
+      levels: {
+        N5: {
+          title: '「食[しょく]の至宝[しほう]」　はじめての　8人[にん]',
+          lines: [
+            ['十日[とおか]、文化庁[ぶんかちょう]が　新[あたら]しい　賞[しょう]を　もらう　8人[にん]を　発表[はっぴょう]しました。', 'On the 10th, the Agency for Cultural Affairs announced eight people who will receive a new award.', '文化庁 (Bunkachō) is the Agency for Cultural Affairs.'],
+            ['賞[しょう]の　名前[なまえ]は　「食[しょく]の至宝[しほう]」です。', 'The award is called "Shoku no Shiho".', '至宝 means "greatest treasure". The award was made this year, so this is the first time.'],
+            ['日本[にほん]の　食[た]べ物[もの]の　文化[ぶんか]で、すばらしい　仕事[しごと]を　した　人[ひと]に　あげます。', 'It is given to people who have done great work in Japanese food culture.'],
+            ['料理[りょうり]を　作[つく]る　人[ひと]の　ほかに、ウイスキーや　お茶[ちゃ]の　専門家[せんもんか]も　います。', 'Besides cooks, there are also whisky and tea experts.'],
+            ['和食[わしょく]の　野崎洋光[のざきひろみつ]さんや、中華[ちゅうか]料理[りょうり]の　脇屋友詞[わきやゆうじ]さんも　もらいます。', 'Hiromitsu Nozaki of Japanese cuisine and Yuji Wakiya of Chinese cuisine will also receive it.'],
+            ['料理[りょうり]の　仕事[しごと]を　する　人[ひと]が　少[すく]なく　なって、文化[ぶんか]が　なくなる　ことが　心配[しんぱい]されて　います。', 'Fewer people are doing food work, and there are worries that the culture will be lost.'],
+            ['国[くに]は、料理[りょうり]を　作[つく]る　人[ひと]の　仕事[しごと]を　もっと　大切[たいせつ]に　したいと　考[かんが]えて　います。', 'The government wants cooks\' work to be valued more.'],
+          ],
+        },
+        N4: {
+          title: '文化庁[ぶんかちょう]の新[あたら]しい賞[しょう]「食[しょく]の至宝[しほう]」、初[はじ]めての受賞者[じゅしょうしゃ]は8人[にん]',
+          lines: [
+            ['文化庁[ぶんかちょう]は十日[とおか]、食[しょく]の文化[ぶんか]の分野[ぶんや]ですばらしい仕事[しごと]をした人[ひと]に贈[おく]る新[あたら]しい賞[しょう]、「食[しょく]の至宝[しほう]」の受賞者[じゅしょうしゃ]8人[にん]を発表[はっぴょう]しました。', 'On the 10th, the Agency for Cultural Affairs announced the eight winners of "Shoku no Shiho", a new award for people who have done excellent work in food culture.', '至宝 means "greatest treasure".'],
+            ['賞[しょう]は今年[ことし]作[つく]られたばかりで、今回[こんかい]が初[はじ]めてです。', 'The award was only created this year, and this is the first time.'],
+            ['和食[わしょく]の料理人[りょうりにん]の野崎洋光[のざきひろみつ]さんは、だしの文化[ぶんか]を広[ひろ]めたことが評価[ひょうか]されました。', 'Japanese-cuisine chef Hiromitsu Nozaki was recognized for spreading the culture of dashi.', 'だし is the stock at the heart of Japanese cooking, often made from kombu and dried bonito.'],
+            ['中華[ちゅうか]料理[りょうり]の脇屋友詞[わきやゆうじ]さんは、大[おお]きな皿[さら]で出[だ]すことが多[おお]かった料理[りょうり]を、一人[ひとり]一皿[ひとさら]ずつ出[だ]す形[かたち]に変[か]えました。', 'Chinese-cuisine chef Yuji Wakiya changed food that was mostly served on big shared plates into one plate per person.'],
+            ['ほかにも、ウイスキーのブレンダーやソムリエ、日本茶[にほんちゃ]や鰹節[かつおぶし]の職人[しょくにん]が選[えら]ばれました。', 'Also chosen were a whisky blender, a sommelier, and craftsmen of Japanese tea and dried bonito.', '鰹節 (katsuobushi) is dried, smoked bonito, shaved to make dashi.'],
+            ['受賞者[じゅしょうしゃ]には、文部科学[もんぶかがく]大臣[だいじん]から賞状[しょうじょう]が贈[おく]られます。', 'The winners will be given a certificate from the education minister.'],
+            ['文化庁[ぶんかちょう]は、料理人[りょうりにん]などの社会[しゃかい]での地位[ちい]を上[あ]げて、食[しょく]の文化[ぶんか]を守[まも]りたいと考[かんが]えています。', 'The agency wants to raise the standing of cooks and others in society and protect food culture.'],
+          ],
+        },
+        N3: {
+          title: '文化庁[ぶんかちょう]、「食[しょく]の至宝[しほう]」を創設[そうせつ]　第[だい]1回[かい]は料理人[りょうりにん]ら8人[にん]',
+          lines: [
+            ['文化庁[ぶんかちょう]は十日[とおか]、食文化[しょくぶんか]の分野[ぶんや]で優[すぐ]れた功績[こうせき]を挙[あ]げた個人[こじん]をたたえる新[あたら]しい賞[しょう]「食[しょく]の至宝[しほう]」の、第[だい]1回[かい]の受賞者[じゅしょうしゃ]8人[にん]を発表[はっぴょう]した。', 'On the 10th, the Agency for Cultural Affairs announced the eight first winners of "Shoku no Shiho", a new award honoring individuals with outstanding achievements in food culture.', '至宝 means "greatest treasure".'],
+            ['受賞者[じゅしょうしゃ]には料理人[りょうりにん]のほか、ソムリエやウイスキーのブレンダー、日本茶[にほんちゃ]や鰹節[かつおぶし]づくりの職人[しょくにん]も含[ふく]まれている。', 'Besides cooks, the winners include a sommelier, a whisky blender, and craftsmen who make Japanese tea and dried bonito.'],
+            ['日本[にほん]料理[りょうり]の野崎洋光[のざきひろみつ]氏[し]は、東京[とうきょう]の名店[めいてん]の総料理長[そうりょうりちょう]を長[なが]く務[つと]め、だし文化[ぶんか]の普及[ふきゅう]に貢献[こうけん]したことが評価[ひょうか]された。', 'Japanese-cuisine chef Hiromitsu Nozaki was recognized for spreading dashi culture, having long served as head chef of a famous Tokyo restaurant.', 'The restaurant is Waketokuyama (分とく山).'],
+            ['中国[ちゅうごく]料理[りょうり]の脇屋友詞[わきやゆうじ]氏[し]は、大皿[おおざら]が主流[しゅりゅう]だった料理[りょうり]を、一人[ひとり]一皿[ひとさら]ずつ出[だ]す形[かたち]に変[か]えた点[てん]が認[みと]められた。', 'Chinese-cuisine chef Yuji Wakiya was recognized for changing a cuisine where big shared plates were the norm to one plate per person.', 'He is the owner-chef of Ginza Wakiya in Tokyo.'],
+            ['担[にな]い手[て]不足[ぶそく]などで食文化[しょくぶんか]の継承[けいしょう]が危[あや]ぶまれる中[なか]、文化庁[ぶんかちょう]は料理人[りょうりにん]の社会[しゃかい]的[てき]地位[ちい]の向上[こうじょう]を狙[ねら]う。', 'With the passing-on of food culture at risk from a lack of people to carry it on, the agency aims to raise the social standing of cooks.', '担い手 "the people who carry on (a tradition or work)".'],
+            ['受賞者[じゅしょうしゃ]には、文部科学[もんぶかがく]大臣[だいじん]の賞状[しょうじょう]が贈[おく]られる。', 'The winners will receive a certificate from the education minister.'],
+            ['受賞[じゅしょう]の経歴[けいれき]は今後[こんご]、食[しょく]の分野[ぶんや]で人間[にんげん]国宝[こくほう]を認定[にんてい]する際[さい]の判断[はんだん]材料[ざいりょう]にもなるという。', 'Winning the award will also reportedly be taken into account in future when naming Living National Treasures in the field of food.', '人間国宝 (Living National Treasure) is the popular name for people officially recognized as holding an important traditional skill.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-11-10-mitsui-jsr',
       date: '2026-11-10',
       emoji: '🧪',

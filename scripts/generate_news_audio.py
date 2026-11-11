@@ -122,10 +122,17 @@ def distance(a, b):
     return prev[-1]
 
 
+# Latin the voice misreads (5G as ゴジー), said as written here instead.
+SAY_LATIN = {"5G": "ファイブジー", "4G": "フォージー"}
+
+
 def speech(markup, kana):
     """The text given to the voice: kanji, except the groups in `kana`, which
-    are spoken from their furigana. Spaces in headlines become pauses."""
+    are spoken from their furigana, and SAY_LATIN spelled out. Spaces in
+    headlines become pauses."""
     text = "".join(r if i in kana else t for i, (t, r) in enumerate(pieces(markup)))
+    for latin, kana_text in SAY_LATIN.items():
+        text = text.replace(latin, kana_text)
     return re.sub(r"[ 　]+", "、", text.strip())
 
 
