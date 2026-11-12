@@ -1147,6 +1147,17 @@
     if (synth.addEventListener) synth.addEventListener('voiceschanged', refresh);
     else synth.onvoiceschanged = refresh;
   }
-  window.addEventListener('pagehide', stopAudio);
+  // Clicking away from the exercise — another window, tab or app, the
+  // screen locking, another page — stops the sound. A question cut short
+  // this way gives its play back (exam mode allows only one).
+  function stopOnLeave() {
+    if (!player) return;
+    const { onDone } = player;
+    stopAudio();
+    if (onDone) onDone(false);
+  }
+  window.addEventListener('pagehide', stopOnLeave);
+  window.addEventListener('blur', stopOnLeave);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) stopOnLeave(); });
   renderHome();
 })(typeof window !== 'undefined' ? window : globalThis);
