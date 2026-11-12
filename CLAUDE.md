@@ -98,6 +98,16 @@
   sentence; missing words go in `scripts/sentence_extra_words.json`, and
   grammar the shared rules miss goes in `SENTENCE_RULES` there.
   `test_sentences.js` fails if it's stale.
+- Words in the Listening script can be tapped for their meaning (a panel
+  like Story Fill-in's, with ＋ flashcards). They come from
+  `listening-words.js`, built by `node scripts/tokenize_listening.mjs`
+  (kuromoji, as above) from `listening-data*.js`; `listening.js` loads it
+  only once a script is shown. Each line is keyed by the hash of its
+  markup (`Listening.lineKey`). Re-run it after changing a question; missing
+  words go in `scripts/listening_extra_words.json`, numbers with a counter
+  (四十五分, 千五百円, 何番線) are glossed by the script, and words kuromoji
+  links to the wrong entry (行った → 行う) go in `FIXES` there.
+  `test_listening.js` fails if it's stale.
 - The Sentences page shows its sentences in chunks by JLPT level and grammar
   point, `sentence-chunks.js`, built by `node scripts/build_sentence_chunks.mjs`
   from the grammar in `sentences-words.js` (each sentence goes with the

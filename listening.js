@@ -202,6 +202,26 @@
   }
 
   const audioKey = (section, item) => section.id + '/' + item.id;
+
+  // Tappable words (listening-words.js, by scripts/tokenize_listening.mjs).
+  // A script line is found by the hash of its markup, so it doesn't matter
+  // which question it's in or where prepare() has moved a choice.
+  const lineKey = markup => hashString(markup).toString(36);
+  // A line as [{ src, word }]: src is a slice of the markup, word its
+  // [key, reading, meaning, part of speech] (null for text between words).
+  // null if the line isn't in the list.
+  function wordsOf(markup, words) {
+    const nums = words && words.lines[lineKey(markup)];
+    if (!nums) return null;
+    const out = [];
+    let at = 0;
+    for (let i = 0; i < nums.length; i++) {
+      const len = Math.abs(nums[i]);
+      out.push({ src: markup.slice(at, at + len), word: nums[i] > 0 ? words.gloss[nums[++i]] : null });
+      at += len;
+    }
+    return at === markup.length ? out : null;
+  }
   const NUMBERS_KEY = '_numbers'; // the recording of 1番, 2番, … in listening-audio.js
 
   // Called once on the loaded questions: rotates each question's choices so
@@ -249,7 +269,7 @@
     return tests;
   }
 
-  const api = { pieces, plain, reading, speech, rubyHtml, questionOf, buildScript, scriptHash, recorded, audioKey, NUMBERS_KEY, castFor, prepare, mockTests, TEST_LAYOUT, LEVELS, partNum, isPhrases, VOICES, NARRATOR, POOLS };
+  const api = { lineKey, wordsOf, pieces, plain, reading, speech, rubyHtml, questionOf, buildScript, scriptHash, recorded, audioKey, NUMBERS_KEY, castFor, prepare, mockTests, TEST_LAYOUT, LEVELS, partNum, isPhrases, VOICES, NARRATOR, POOLS };
   if (global.LISTENING_SECTIONS) prepare(global.LISTENING_SECTIONS);
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   global.Listening = api;
@@ -694,6 +714,7 @@
     stopAudio();
     stopTimer();
     scriptForced = false;
+    closePanel();
     const q = current();
     const { section, item } = q;
     playsLeft = settings.exam ? (resumed && q.played ? 0 : 1) : Infinity;
@@ -753,10 +774,11 @@
     if (!visible) { $('lis-script-body').innerHTML = ''; return; }
     const who = { N: '', M: '男', F: '女' };
     const cast = castFor(section, item);
-    const row = (key, voice, ja, en, extra = '') =>
+    const words = loadWords();
+    const row = (key, voice, ja, en, extra = '', prefix = '') =>
       `<div class="lis-line${extra}" data-line="${key}" data-voice="${voice}" role="button" tabindex="0" title="Play this line">
         <span class="lis-who" lang="ja">${who[voice]}${voice !== 'N' && RECORDINGS[audioKey(section, item)] ? `<span class="lis-voice-name">${esc(cast[voice].name)}</span>` : ''}</span>
-        <span class="lis-ja" lang="ja">${rubyHtml(ja)}</span>
+        <span class="lis-ja" lang="ja">${prefix}${wordsHtml(ja, words, key)}</span>
         ${en ? `<span class="lis-en">${esc(en)}</span>` : ''}
       </div>`;
     const rows = [];
@@ -768,10 +790,152 @@
       if (section.kind === 'summary') rows.push(row('question', 'N', item.question, '', ' lis-line-narr'));
       item.choices.forEach((c, i) => {
         const mark = q.answered ? (i === item.answer ? ' lis-line-right' : i === q.picked ? ' lis-line-wrong' : '') : '';
-        rows.push(row('choice' + i, section.kind === 'summary' ? 'N' : item.replyBy || 'M', `${i + 1}. ${c.ja}`, q.answered ? c.en : '', ' lis-line-choice' + mark));
+        rows.push(row('choice' + i, section.kind === 'summary' ? 'N' : item.replyBy || 'M', c.ja, q.answered ? c.en : '', ' lis-line-choice' + mark, `${i + 1}. `));
       });
     }
     $('lis-script-body').innerHTML = rows.join('');
+    markSelected();
+  }
+
+  // ─── Words: tap one in the script to see its meaning ───────────────────────
+
+  // listening-words.js is big, so it's only fetched the first time a script
+  // is shown; until it arrives the script is plain text. The kanji lists for
+  // the panel's kanji breakdown (kanji-cards.js) come with it.
+  let wordsLoading = false;
+  function loadScript(src, onload) {
+    const el = document.createElement('script');
+    el.src = src;
+    el.onload = onload;
+    document.head.appendChild(el);
+  }
+  function loadWords() {
+    if (global.LISTENING_WORDS) return global.LISTENING_WORDS;
+    if (!wordsLoading) {
+      wordsLoading = true;
+      loadScript('listening-words.js?v=1', () => { if (current()) renderScript(); });
+      const panelAgain = () => { if (selected) renderPanel(); };
+      if (!global.KANJI_INFO) loadScript('kanji-info-data.js', panelAgain);
+      if (!global.KANJI_QUIZ_DATA) loadScript('kanji-quiz-data.js', panelAgain);
+    }
+    return null;
+  }
+
+  // A line with each word in a tappable span (data-w: line key + piece).
+  function wordsHtml(markup, words, line) {
+    const parts = wordsOf(markup, words);
+    if (!parts) return rubyHtml(markup);
+    const deck = load(DECK_KEY, {});
+    return parts.map((p, i) => (p.word
+      ? `<span class="story-word lis-word${deck[p.word[0]] ? ' saved' : ''}" data-w="${line}:${i}">${rubyHtml(p.src)}</span>`
+      : rubyHtml(p.src))).join('');
+  }
+
+  // Saved words join the word flashcard deck, reviewed on flashcards.html.
+  const DECK_KEY = 'tokidoki_story_words';
+  const SRS_KEY = 'tokidoki_srs';
+  let selected = null; // { line, i } of the tapped word
+
+  // The markup and English of a script row (data-line) of this question.
+  function lineText(q, key) {
+    const { section, item } = q;
+    if (key === 'intro') return { ja: item.intro, en: '' };
+    if (key === 'question') return { ja: section.kind === 'pictures' ? questionOf(item) : item.question, en: '' };
+    const m = /^(line|choice)(\d+)$/.exec(key);
+    const l = m && (m[1] === 'line' ? item.lines : item.choices)[Number(m[2])];
+    return l ? { ja: l.ja, en: l.en || '' } : null;
+  }
+
+  function selectedWord() {
+    const q = current();
+    const line = selected && q && lineText(q, selected.line);
+    const parts = line && wordsOf(line.ja, global.LISTENING_WORDS);
+    const part = parts && parts[selected.i];
+    return part && part.word ? { q, line, parts, part } : null;
+  }
+
+  function markSelected() {
+    document.querySelectorAll('.lis-word.selected').forEach(el => el.classList.remove('selected'));
+    if (!selected) return;
+    const el = document.querySelector(`.lis-word[data-w="${selected.line}:${selected.i}"]`);
+    if (el) el.classList.add('selected');
+  }
+
+  function selectWord(id) {
+    const [line, i] = id.split(':');
+    selected = selected && selected.line === line && selected.i === Number(i) ? null : { line, i: Number(i) };
+    const sel = selectedWord();
+    if (!sel) selected = null;
+    markSelected();
+    renderPanel();
+    if (!sel) return;
+    if (global.WordLookups) WordLookups.record(sel.part.word[0]);
+    // With "Speak words on click" on, read out the word's dictionary form.
+    if (global.Pronounce) Pronounce.onClick(sel.part.word[1]);
+  }
+
+  function closePanel() {
+    if (!selected) return;
+    selected = null;
+    markSelected();
+    renderPanel();
+  }
+
+  function toggleSaved(sel) {
+    const [key, kana, meaning] = sel.part.word;
+    const deck = load(DECK_KEY, {});
+    if (deck[key]) {
+      delete deck[key];
+      const srs = load(SRS_KEY, {});
+      delete srs['story_word:' + key];
+      delete srs['story_word:' + key + ':recall'];
+      save(SRS_KEY, srs);
+    } else {
+      const { item, section } = sel.q;
+      deck[key] = {
+        vocab: item.level.toLowerCase(), kana, meaning, added: Date.now(),
+        // The line in the Stories token format: words separated by spaces.
+        jp: sel.parts.map(p => p.src.replace(/\s+/g, '')).filter(Boolean).join(' '),
+        en: sel.line.en, title: `${section.en} (Listening)`, level: item.level,
+      };
+    }
+    save(DECK_KEY, deck);
+  }
+
+  function renderPanel() {
+    const sel = selectedWord();
+    $('lis-panel').classList.toggle('open', !!sel);
+    document.body.classList.toggle('lis-panel-open', !!sel);
+    if (!sel) return;
+    const [key, reading, meaning, pos] = sel.part.word;
+    const word = key.replace(/\(.*\)$/, '');
+    const form = plain(sel.part.src);
+    const saved = !!load(DECK_KEY, {})[key];
+    const speak = kana => (global.Pronounce ? Pronounce.buttonsHtml(kana, 'story-panel-speak') : '');
+    $('lis-panel-body').innerHTML = `
+      <div class="story-panel-kicker">Word</div>
+      <div class="story-panel-word" lang="ja">${esc(word)}</div>
+      ${reading !== word ? `<div class="story-panel-reading" lang="ja">${esc(reading)}</div>` : ''}
+      ${speak(reading)}
+      <div class="story-panel-pos">${esc(pos)}</div>
+      <div class="story-panel-meaning">${esc(meaning)}</div>
+      ${form !== word ? `<div class="story-panel-form">In the script: <span lang="ja">${esc(form)}</span></div>` : ''}
+      <div class="mys-panel-actions">
+        <button class="${saved ? 'btn-secondary' : 'btn-primary'} story-panel-add" id="lis-add-word">${saved ? '✓ In word flashcards — remove' : '＋ Add word to flashcards'}</button>
+      </div>
+      ${global.KanjiCards ? KanjiCards.breakdownHtml(word, { reading, meaning }) : ''}
+      ${saved ? '<div class="mys-panel-tip">Review your flashcards on the <a href="flashcards.html">Flashcards page</a>.</div>' : ''}`;
+    $('lis-add-word').addEventListener('click', () => {
+      toggleSaved(sel);
+      renderScript();
+      renderPanel();
+    });
+  }
+
+  // F shows / hides furigana (through the checkbox, so it's saved).
+  function toggleFurigana() {
+    $('lis-opt-furigana').checked = !settings.furigana;
+    $('lis-opt-furigana').dispatchEvent(new Event('change'));
   }
 
   function pick(i) {
@@ -885,6 +1049,7 @@
   function goHome() {
     stopAudio();
     stopTimer();
+    closePanel();
     session = null;
     renderHome();
     show('screen-chapters');
@@ -924,6 +1089,8 @@
     if (btn) pick(Number(btn.dataset.choice));
   });
   $('lis-script-body').addEventListener('click', e => {
+    const word = e.target.closest('.lis-word');
+    if (word) { selectWord(word.dataset.w); return; }
     const row = e.target.closest('.lis-line');
     if (row) playLine(row.dataset.line);
   });
@@ -931,6 +1098,7 @@
     const row = e.target.closest('.lis-line');
     if (row && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); playLine(row.dataset.line); }
   });
+  $('lis-panel-close').addEventListener('click', closePanel);
   $('btn-lis-next').addEventListener('click', next);
   $('lis-quit').addEventListener('click', goHome);
   $('btn-lis-again').addEventListener('click', () => start(session.id, session.queue));
@@ -958,6 +1126,14 @@
       return;
     }
     if (!$('screen-listening').classList.contains('active')) return;
+    if (e.key === 'Escape' && selected) { closePanel(); return; }
+    // F: furigana on / off — also right after clicking a checkbox.
+    const typing = e.target.closest && e.target.closest('input, textarea, select') && e.target.type !== 'checkbox';
+    if ((e.key === 'f' || e.key === 'F') && !typing && !e.ctrlKey && !e.metaKey && !e.altKey && !e.repeat && !e.isComposing) {
+      e.preventDefault();
+      toggleFurigana();
+      return;
+    }
     if (e.target.closest && e.target.closest('input, textarea, select, .lis-line, summary')) return;
     const q = current();
     const n = Number(e.key);

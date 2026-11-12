@@ -21,7 +21,7 @@
   <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
   <link rel="canonical" href="https://tokidoki.meertens.dev/listening.html">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "JLPT Listening Practice — 聴解 with Pictures", "description": "Free JLPT N5–N2 listening (聴解) practice: hear a conversation, then pick the right picture or reply. With natural voices, scripts, furigana and English.", "url": "https://tokidoki.meertens.dev/listening.html", "inLanguage": "en", "learningResourceType": "listening exercise", "educationalLevel": "JLPT N5–N3", "isAccessibleForFree": true, "isPartOf": {"@type": "WebSite", "name": "Tokidoki", "url": "https://tokidoki.meertens.dev/"}}</script>
-  <link rel="stylesheet" href="style.css?v=110">
+  <link rel="stylesheet" href="style.css?v=111">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -159,7 +159,7 @@
           </div>
           <label><input type="checkbox" id="lis-opt-exam"> Exam mode — the audio plays once and you have 12 seconds to answer</label>
           <label><input type="checkbox" id="lis-opt-script"> Show the script while listening (easier)</label>
-          <label><input type="checkbox" id="lis-opt-furigana"> Furigana in the script</label>
+          <label title="Key: F"><input type="checkbox" id="lis-opt-furigana"> Furigana in the script (key: F)</label>
         </div>
       </details>
 
@@ -202,11 +202,16 @@
         </div>
 
         <details class="lis-script hidden" id="lis-script" open>
-          <summary>Script &amp; translation <span class="lis-script-hint">tap a line to hear it</span></summary>
+          <summary>Script &amp; translation <span class="lis-script-hint">tap a line to hear it, a word for its meaning</span></summary>
           <div id="lis-script-body"></div>
         </details>
 
-        <p class="lis-keys">Keys: 1–4 answer · P play · Space next · Z undo</p>
+        <p class="lis-keys">Keys: 1–4 answer · P play · Space next · Z undo · F furigana</p>
+
+        <aside class="story-panel sf-panel lis-panel" id="lis-panel" aria-live="polite">
+          <button class="icon-btn story-panel-close" id="lis-panel-close" aria-label="Close">✕</button>
+          <div id="lis-panel-body"></div>
+        </aside>
       </div>
     </main>
 
@@ -243,8 +248,10 @@
   <script src="listening-data-9.js?v=1"></script>
   <script src="listening-art.js?v=8"></script>
   <script src="listening-audio.js?v=4"></script>
-  <script src="listening.js?v=10"></script>
+  <script src="pronounce.js?v=2"></script>
+  <script src="listening.js?v=11"></script>
   <script src="kanji-cards.js?v=2"></script>
+  <script src="word-lookups.js?v=1"></script>
   <script src="swipe-cards.js?v=5"></script>
   <script src="app.js?v=81"></script>
   <script src="sync-merge.js?v=11"></script>
