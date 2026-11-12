@@ -173,6 +173,7 @@
           <button class="icon-btn" id="lis-quit" aria-label="Back to the parts" title="Back">✕</button>
           <div class="study-progress-bar lis-topbar-bar"><div id="lis-bar-fill" class="study-bar-fill"></div></div>
           <span id="lis-progress-text" class="lis-topbar-count">0 / 0</span>
+          <button class="btn-undo hidden" id="lis-undo" aria-label="Undo last answer" title="Undo (Z)">↩ Undo</button>
         </div>
 
         <div class="lis-qhead">
@@ -205,7 +206,7 @@
           <div id="lis-script-body"></div>
         </details>
 
-        <p class="lis-keys">Keys: 1–4 answer · P play · Space next</p>
+        <p class="lis-keys">Keys: 1–4 answer · P play · Space next · Z undo</p>
       </div>
     </main>
 
@@ -223,6 +224,7 @@
           <button id="btn-lis-next-set" class="btn-primary hidden">Next set →</button>
           <button id="btn-lis-again" class="btn-secondary">Try again</button>
           <button id="btn-lis-review-missed" class="btn-secondary hidden">Review mistakes</button>
+          <button id="btn-lis-undo" class="btn-secondary hidden" title="Undo (Z)">↩ Undo last</button>
           <button id="btn-lis-home" class="btn-primary">Back to the parts</button>
         </div>
       </div>
@@ -241,7 +243,7 @@
   <script src="listening-data-9.js?v=1"></script>
   <script src="listening-art.js?v=8"></script>
   <script src="listening-audio.js?v=4"></script>
-  <script src="listening.js?v=9"></script>
+  <script src="listening.js?v=10"></script>
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=5"></script>
   <script src="app.js?v=81"></script>

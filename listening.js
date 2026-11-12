@@ -273,7 +273,7 @@
   if (!Array.isArray(store.missed)) store.missed = [];
 
   const $ = id => document.getElementById(id);
-  let session = null;   // { id, queue: [{ section, item, number, answered, picked, played }], pos }
+  let session = null;   // { id, queue: [{ section, item, number, answered, picked, played }], pos, undo: [...] }
   let playsLeft = Infinity;
 
   // ─── Playback: recordings ──────────────────────────────────────────────────
@@ -677,18 +677,27 @@
     const queue = again ? again.map(q => Object.assign({}, q, { answered: false, picked: null, played: false })) : queueFor(id);
     if (!queue.length) return;
     const test = TESTS.find(t => t.id === id);
-    session = { id, queue, pos: 0, title: test ? `${test.level} 模擬試験 ${test.number}` : '' };
+    // undo: the answers given this round, last on top (see undoLast).
+    session = { id, queue, pos: 0, undo: [], title: test ? `${test.level} 模擬試験 ${test.number}` : '' };
     show('screen-listening');
     renderQuestion();
   }
 
-  function renderQuestion() {
+  function updateUndo() {
+    const can = !!(session && session.undo.length);
+    $('lis-undo').classList.toggle('hidden', !can);
+    $('btn-lis-undo').classList.toggle('hidden', !can);
+  }
+
+  // resumed: brought back by Undo, so it doesn't play again by itself.
+  function renderQuestion(resumed) {
     stopAudio();
     stopTimer();
     scriptForced = false;
     const q = current();
     const { section, item } = q;
-    playsLeft = settings.exam ? 1 : Infinity;
+    playsLeft = settings.exam ? (resumed && q.played ? 0 : 1) : Infinity;
+    updateUndo();
     $('lis-part').innerHTML = `<span class="lis-part-badge" lang="ja">問題${partNum(section, item.level)}</span> ${esc(section.en)} <span class="lis-level">${session.title ? esc(session.title) : item.level}</span>`;
     $('lis-number').textContent = `${q.number}番`;
     $('lis-progress-text').textContent = `${session.pos + 1} / ${session.queue.length}`;
@@ -720,6 +729,10 @@
     renderScript();
     $('lis-result').classList.add('hidden');
     updatePlayer();
+    if (resumed) {
+      if (q.played && settings.exam) startTimer();
+      return;
+    }
     // Start straight away, like the test. This runs inside the tap or key
     // press that opened the question, which browsers require before audio.
     playCurrent();
@@ -766,6 +779,7 @@
     if (!q || q.answered) return;
     stopAudio();
     stopTimer();
+    session.undo.push({ pos: session.pos, missed: store.missed.slice() });
     q.answered = true;
     q.picked = i;
     const right = i === q.item.answer;
@@ -794,6 +808,7 @@
     renderScript();
     $('lis-script').open = true;
     updatePlayer();
+    updateUndo();
     res.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     $('btn-lis-next').focus({ preventScroll: true });
   }
@@ -809,14 +824,38 @@
     }
   }
 
+  // Takes back the last answer: the question comes back unanswered (without
+  // playing again), and the list of missed questions — and, from the
+  // results, the best score — go back to how they were before it.
+  function undoLast() {
+    if (!session || !session.undo.length) return;
+    const u = session.undo.pop();
+    if (session.best) {
+      if (session.best.prev) store.best[session.best.key] = session.best.prev;
+      else delete store.best[session.best.key];
+      session.best = null;
+    }
+    store.missed = u.missed;
+    save(STORE_KEY, store);
+    session.pos = u.pos;
+    const q = current();
+    q.answered = false;
+    q.picked = null;
+    show('screen-listening');
+    window.scrollTo(0, 0);
+    renderQuestion(true);
+  }
+
   function finish() {
     stopAudio();
     stopTimer();
     const score = session.queue.filter(q => q.picked === q.item.answer).length;
     const total = session.queue.length;
+    session.best = null;
     if (session.id !== 'missed' && session.id !== 'quick') {
       const key = bestKey(session.id);
       const prev = store.best[key];
+      session.best = { key, prev };
       if (!prev || score > prev.score) store.best[key] = { score, total };
       save(STORE_KEY, store);
     }
@@ -839,6 +878,7 @@
     const missed = missedCount();
     $('btn-lis-review-missed').classList.toggle('hidden', !missed);
     $('btn-lis-review-missed').textContent = `Review mistakes (${missed})`;
+    updateUndo();
     show('screen-listening-done');
   }
 
@@ -896,6 +936,8 @@
   $('btn-lis-again').addEventListener('click', () => start(session.id, session.queue));
   $('btn-lis-review-missed').addEventListener('click', () => start('missed'));
   $('btn-lis-home').addEventListener('click', goHome);
+  $('lis-undo').addEventListener('click', undoLast);
+  $('btn-lis-undo').addEventListener('click', undoLast);
 
   document.addEventListener('keydown', e => {
     // Finished a set: Space goes on to the next set, whatever has focus.
@@ -906,7 +948,16 @@
       $('btn-lis-next-set').click();
       return;
     }
-    if (!session || !$('screen-listening').classList.contains('active')) return;
+    if (!session) return;
+    // Z (or Ctrl/Cmd+Z): take back the last answer, here or on the results.
+    if ((e.key === 'z' || e.key === 'Z') && !e.altKey && !e.shiftKey
+        && !(e.target.closest && e.target.closest('input, textarea, select'))
+        && ($('screen-listening').classList.contains('active') || $('screen-listening-done').classList.contains('active'))) {
+      e.preventDefault();
+      undoLast();
+      return;
+    }
+    if (!$('screen-listening').classList.contains('active')) return;
     if (e.target.closest && e.target.closest('input, textarea, select, .lis-line, summary')) return;
     const q = current();
     const n = Number(e.key);
