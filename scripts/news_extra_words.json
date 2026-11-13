@@ -9663,5 +9663,545 @@
     "じつしゅうにゅう",
     "actual income",
     "noun"
+  ],
+  "ウイルス": [
+    "ういるす",
+    "virus",
+    "noun"
+  ],
+  "約4万羽": [
+    "やくよんまんわ",
+    "about 40,000 (birds)",
+    "number + counter"
+  ],
+  "4万羽": [
+    "よんまんわ",
+    "40,000 (birds)",
+    "number + counter"
+  ],
+  "養鶏場": [
+    "ようけいじょう",
+    "poultry farm, chicken farm",
+    "noun"
+  ],
+  "養鶏": [
+    "ようけい",
+    "poultry farming",
+    "noun"
+  ],
+  "シーズン": [
+    "しーずん",
+    "season",
+    "noun"
+  ],
+  "今シーズン": [
+    "こんしーずん",
+    "this season",
+    "noun"
+  ],
+  "2例目": [
+    "にれいめ",
+    "the second case",
+    "number + counter"
+  ],
+  "1例目": [
+    "いちれいめ",
+    "the first case",
+    "number + counter"
+  ],
+  "毒性": [
+    "どくせい",
+    "toxicity, virulence",
+    "noun"
+  ],
+  "H5型": [
+    "えいちごがた",
+    "H5 type (of bird flu virus)",
+    "noun"
+  ],
+  "殺処分": [
+    "さつしょぶん",
+    "culling, killing (animals to stop a disease)",
+    "noun"
+  ],
+  "半径": [
+    "はんけい",
+    "radius",
+    "noun"
+  ],
+  "10キロ": [
+    "じゅっきろ",
+    "10 kilometres",
+    "number + counter"
+  ],
+  "49": [
+    "よんじゅうきゅう",
+    "49",
+    "number"
+  ],
+  "49農場": [
+    "よんじゅうきゅうのうじょう",
+    "49 farms",
+    "number + counter"
+  ],
+  "農場": [
+    "のうじょう",
+    "farm",
+    "noun"
+  ],
+  "約562万羽": [
+    "やくごひゃくろくじゅうにまんわ",
+    "about 5.62 million (birds)",
+    "number + counter"
+  ],
+  "562万羽": [
+    "ごひゃくろくじゅうにまんわ",
+    "5.62 million (birds)",
+    "number + counter"
+  ],
+  "渡り鳥": [
+    "わたりどり",
+    "migratory bird",
+    "noun"
+  ],
+  "鳥インフル": [
+    "とりいんふる",
+    "bird flu (short for 鳥インフルエンザ)",
+    "noun"
+  ],
+  "インフル": [
+    "いんふる",
+    "flu (short for インフルエンザ)",
+    "noun"
+  ],
+  "高病原性": [
+    "こうびょうげんせい",
+    "highly pathogenic",
+    "noun"
+  ],
+  "病原": [
+    "びょうげん",
+    "cause of a disease, pathogen",
+    "noun"
+  ],
+  "感染": [
+    "かんせん",
+    "infection",
+    "noun"
+  ],
+  "検出": [
+    "けんしゅつ",
+    "detection",
+    "noun"
+  ],
+  "飼育": [
+    "しいく",
+    "raising, keeping (animals)",
+    "noun"
+  ],
+  "飛来": [
+    "ひらい",
+    "coming flying in (birds)",
+    "noun"
+  ],
+  "衛生": [
+    "えいせい",
+    "hygiene, sanitation",
+    "noun"
+  ],
+  "採卵鶏": [
+    "さいらんけい",
+    "egg-laying hen",
+    "noun"
+  ],
+  "搬出": [
+    "はんしゅつ",
+    "carrying out, shipping out",
+    "noun"
+  ],
+  "3.13倍": [
+    "さんてんいちさんばい",
+    "3.13 times",
+    "number + counter"
+  ],
+  "4.77倍": [
+    "よんてんななななばい",
+    "4.77 times",
+    "number + counter"
+  ],
+  "3倍台": [
+    "さんばいだい",
+    "in the 3-times range",
+    "number + counter"
+  ],
+  "やり直す": [
+    "やりなおす",
+    "to do over again",
+    "verb"
+  ],
+  "違憲": [
+    "いけん",
+    "unconstitutional",
+    "noun"
+  ],
+  "違憲状態": [
+    "いけんじょうたい",
+    "state of unconstitutionality",
+    "noun"
+  ],
+  "最高裁": [
+    "さいこうさい",
+    "the Supreme Court (short for 最高裁判所)",
+    "organization"
+  ],
+  "最高裁判所": [
+    "さいこうさいばんしょ",
+    "the Supreme Court",
+    "organization"
+  ],
+  "大法廷": [
+    "だいほうてい",
+    "Grand Bench (the full Supreme Court)",
+    "noun"
+  ],
+  "法廷": [
+    "ほうてい",
+    "court (of law)",
+    "noun"
+  ],
+  "1票": [
+    "いっぴょう",
+    "one vote",
+    "number + counter"
+  ],
+  "格差": [
+    "かくさ",
+    "gap, disparity",
+    "noun"
+  ],
+  "無効": [
+    "むこう",
+    "invalid, void",
+    "noun"
+  ],
+  "15人": [
+    "じゅうごにん",
+    "15 people",
+    "number + counter"
+  ],
+  "5人": [
+    "ごにん",
+    "five people",
+    "number + counter"
+  ],
+  "合憲": [
+    "ごうけん",
+    "constitutional",
+    "noun"
+  ],
+  "退ける": [
+    "しりぞける",
+    "to reject, to turn down",
+    "verb"
+  ],
+  "是正": [
+    "ぜせい",
+    "correction, putting right",
+    "noun"
+  ],
+  "取り組み": [
+    "とりくみ",
+    "effort, steps taken",
+    "noun"
+  ],
+  "迫る": [
+    "せまる",
+    "to press, to urge",
+    "verb"
+  ],
+  "合区": [
+    "ごうく",
+    "merged (election) district",
+    "noun"
+  ],
+  "台湾": [
+    "たいわん",
+    "Taiwan",
+    "place name"
+  ],
+  "オーストラリア": [
+    "おーすとらりあ",
+    "Australia",
+    "place name"
+  ],
+  "京都": [
+    "きょうと",
+    "Kyoto",
+    "place name"
+  ],
+  "京都府": [
+    "きょうとふ",
+    "Kyoto Prefecture",
+    "place name"
+  ],
+  "旭市": [
+    "あさひし",
+    "Asahi City (Chiba)",
+    "place name"
+  ],
+  "旭": [
+    "あさひ",
+    "Asahi (city in Chiba)",
+    "place name"
+  ],
+  "三本": [
+    "さんぼん",
+    "three (long things; here, home runs)",
+    "number + counter"
+  ],
+  "3本": [
+    "さんぼん",
+    "three (hits)",
+    "number + counter"
+  ],
+  "チャンピオンシップ": [
+    "ちゃんぴおんしっぷ",
+    "championship",
+    "noun"
+  ],
+  "アジアプロ野球チャンピオンシップ": [
+    "あじあぷろやきゅうちゃんぴおんしっぷ",
+    "Asia Professional Baseball Championship",
+    "organization"
+  ],
+  "アジアプロ野球": [
+    "あじあぷろやきゅう",
+    "Asia Professional Baseball (Championship)",
+    "organization"
+  ],
+  "正木智也": [
+    "まさきともや",
+    "Tomoya Masaki (SoftBank player)",
+    "name"
+  ],
+  "正木": [
+    "まさき",
+    "Masaki (Tomoya Masaki)",
+    "name"
+  ],
+  "金丸夢斗": [
+    "かねまるゆめと",
+    "Yumeto Kanemaru (Chunichi pitcher)",
+    "name"
+  ],
+  "金丸": [
+    "かねまる",
+    "Kanemaru (Yumeto Kanemaru)",
+    "name"
+  ],
+  "宗山塁": [
+    "むねやまるい",
+    "Rui Muneyama (Rakuten player)",
+    "name"
+  ],
+  "井口": [
+    "いぐち",
+    "Iguchi (Japan team manager)",
+    "name"
+  ],
+  "智也": [
+    "ともや",
+    "Tomoya (given name)",
+    "name"
+  ],
+  "ヒット": [
+    "ひっと",
+    "hit (baseball)",
+    "noun"
+  ],
+  "3点": [
+    "さんてん",
+    "three points, three runs",
+    "number + counter"
+  ],
+  "1点": [
+    "いってん",
+    "one point, one run",
+    "number + counter"
+  ],
+  "ピッチャー": [
+    "ぴっちゃー",
+    "pitcher",
+    "noun"
+  ],
+  "七回": [
+    "ななかい",
+    "the seventh inning",
+    "number + counter"
+  ],
+  "7回": [
+    "ななかい",
+    "seven innings",
+    "number + counter"
+  ],
+  "一回": [
+    "いっかい",
+    "the first inning",
+    "number + counter"
+  ],
+  "三回": [
+    "さんかい",
+    "the third inning",
+    "number + counter"
+  ],
+  "ジャパン": [
+    "じゃぱん",
+    "Japan (team name)",
+    "noun"
+  ],
+  "井口ジャパン": [
+    "いぐちじゃぱん",
+    "\"Iguchi Japan\", the Japan team under manager Iguchi",
+    "organization"
+  ],
+  "快勝": [
+    "かいしょう",
+    "easy win, convincing win",
+    "noun"
+  ],
+  "24歳": [
+    "にじゅうよんさい",
+    "24 years old",
+    "number + counter"
+  ],
+  "3年目": [
+    "さんねんめ",
+    "third year",
+    "number + counter"
+  ],
+  "若手": [
+    "わかて",
+    "young players, young people",
+    "noun"
+  ],
+  "初戦": [
+    "しょせん",
+    "first game",
+    "noun"
+  ],
+  "初陣": [
+    "はつじん",
+    "first battle; first game",
+    "noun"
+  ],
+  "白星": [
+    "しろぼし",
+    "win (in sport; lit. \"white star\")",
+    "noun"
+  ],
+  "先頭打者": [
+    "せんとうだしゃ",
+    "leadoff batter",
+    "noun"
+  ],
+  "先頭": [
+    "せんとう",
+    "front, head",
+    "noun"
+  ],
+  "先制": [
+    "せんせい",
+    "taking the lead",
+    "noun"
+  ],
+  "ソロ": [
+    "そろ",
+    "solo (home run with no runners on base)",
+    "noun"
+  ],
+  "適時打": [
+    "てきじだ",
+    "run-scoring hit",
+    "noun"
+  ],
+  "適時": [
+    "てきじ",
+    "timely",
+    "noun"
+  ],
+  "安打": [
+    "あんだ",
+    "hit (baseball)",
+    "noun"
+  ],
+  "3安打": [
+    "さんあんだ",
+    "three hits",
+    "number + counter"
+  ],
+  "2安打": [
+    "にあんだ",
+    "two hits",
+    "number + counter"
+  ],
+  "打点": [
+    "だてん",
+    "run batted in, RBI",
+    "noun"
+  ],
+  "3打点": [
+    "さんだてん",
+    "three runs batted in",
+    "number + counter"
+  ],
+  "失点": [
+    "しってん",
+    "runs allowed",
+    "noun"
+  ],
+  "無失点": [
+    "むしってん",
+    "no runs allowed",
+    "noun"
+  ],
+  "1次リーグ": [
+    "いちじりーぐ",
+    "first round (of a tournament)",
+    "noun"
+  ],
+  "1次": [
+    "いちじ",
+    "first (round)",
+    "number + counter"
+  ],
+  "上位": [
+    "じょうい",
+    "top places, higher rank",
+    "noun"
+  ],
+  "3連覇": [
+    "さんれんぱ",
+    "third straight title",
+    "number + counter"
+  ],
+  "2チーム": [
+    "にちーむ",
+    "two teams",
+    "number + counter"
+  ],
+  "4チーム": [
+    "よんちーむ",
+    "four teams",
+    "number + counter"
+  ],
+  "鳥インフルエンザ": [
+    "とりいんふるえんざ",
+    "bird flu",
+    "noun"
+  ],
+  "重さ": [
+    "おもさ",
+    "weight",
+    "noun"
   ]
 }

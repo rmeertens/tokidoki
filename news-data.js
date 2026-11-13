@@ -27,6 +27,171 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-11-13-chiba-bird-flu',
+      date: '2026-11-13',
+      emoji: '🐔',
+      titleEn: 'Bird flu confirmed at a poultry farm in Asahi, Chiba, the second case this season; about 40,000 hens to be culled',
+      sources: [
+        { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261113de75138' },
+        { name: 'NHK (culling)', url: 'https://news.web.nhk/newsweb/na/nd-20261113de75143' },
+        { name: 'Jiji Press via Infoseek', url: 'https://news.infoseek.co.jp/article/jiji_2026111300440/' },
+        { name: 'NTV via Infoseek', url: 'https://news.infoseek.co.jp/article/ntv_2026111307646233/' },
+      ],
+      quiz: [
+        ['Where was the bird flu found?', 'At a chicken farm in Asahi, Chiba', 'At a zoo in Tokyo', 'At a duck farm in Hokkaido', 'At a fish market in Osaka'],
+        ['About how many chickens will be killed?', 'About 40,000', 'About 400', 'About 4 million', 'About 5.6 million'],
+        ['Where was the first case this season?', 'Kyoto', 'Chiba', 'Okinawa', 'Hokkaido'],
+      ],
+      levels: {
+        N5: {
+          title: '千葉[ちば]県[けん]で　鳥[とり]インフルエンザ',
+          lines: [
+            ['千葉[ちば]県[けん]の　旭[あさひ]市[し]で、鳥[とり]インフルエンザが　見[み]つかりました。', 'Bird flu was found in Asahi City, Chiba Prefecture.', 'Asahi is a city on the Pacific coast in the northeast of Chiba, with many poultry farms.'],
+            ['鶏[にわとり]を　育[そだ]てる　場所[ばしょ]で、死[し]んだ　鶏[にわとり]を　調[しら]べました。', 'At a place that raises chickens, they examined chickens that had died.'],
+            ['強[つよ]い　ウイルスが　見[み]つかりました。', 'A strong virus was found.', 'It is a highly pathogenic H5 bird flu virus.'],
+            ['今年[ことし]の　冬[ふゆ]、日本[にほん]で　二[ふた]つ目[め]です。', 'It is the second case in Japan this winter.'],
+            ['一[ひと]つ目[め]は　十二日[じゅうににち]に　京都[きょうと]府[ふ]で　見[み]つかりました。', 'The first was found in Kyoto Prefecture on the 12th.'],
+            ['千葉[ちば]県[けん]は　この　場所[ばしょ]の　鶏[にわとり]、約[やく]4万[まん]羽[わ]を　殺[ころ]します。', 'Chiba Prefecture will kill about 40,000 chickens at this place.', '羽 (わ) is the counter for birds.'],
+            ['近[ちか]くの　場所[ばしょ]も　鶏[にわとり]や　卵[たまご]を　外[そと]に　出[だ]せません。', 'Places nearby cannot send chickens or eggs out either.'],
+          ],
+        },
+        N4: {
+          title: '千葉[ちば]・旭[あさひ]市[し]の養鶏場[ようけいじょう]で鳥[とり]インフルエンザ　今[こん]シーズン2例[れい]目[め]',
+          lines: [
+            ['千葉[ちば]県[けん]は十三日[じゅうさんにち]、旭[あさひ]市[し]の養鶏場[ようけいじょう]で鳥[とり]インフルエンザが見[み]つかったと発表[はっぴょう]しました。', 'On the 13th, Chiba Prefecture announced that bird flu had been found at a poultry farm in Asahi City.', '養鶏場 is a farm that raises chickens.'],
+            ['死[し]んだ鶏[にわとり]の遺伝子[いでんし]を調[しら]べたところ、毒性[どくせい]が強[つよ]い「H5型[がた]」のウイルスが出[で]たということです。', 'When the genes of chickens that had died were checked, a highly pathogenic "H5" virus was found.'],
+            ['国内[こくない]の養鶏場[ようけいじょう]で見[み]つかったのは今[こん]シーズン2例[れい]目[め]で、1例[れい]目[め]は十二日[じゅうににち]に京都[きょうと]府[ふ]で確認[かくにん]されました。', 'It is the second case at a poultry farm in Japan this season; the first was confirmed in Kyoto Prefecture on the 12th.', '例 counts cases; 2例目 means "the second case".'],
+            ['県[けん]は、この養鶏場[ようけいじょう]で卵[たまご]を産[う]ませるために育[そだ]てている鶏[にわとり]、約[やく]4万[まん]羽[わ]の殺処分[さつしょぶん]を始[はじ]めました。', 'The prefecture began culling about 40,000 hens kept at this farm for laying eggs.', '殺処分 means killing animals to stop a disease from spreading.'],
+            ['また、半径[はんけい]10キロ以内[いない]の49の農場[のうじょう]、約[やく]562万[まん]羽[わ]について、鶏[にわとり]や卵[たまご]を動[うご]かすことを禁止[きんし]しました。', 'It also banned moving chickens or eggs from 49 farms within a 10-kilometre radius, with about 5.62 million birds.'],
+            ['ウイルスは渡[わた]り鳥[どり]が運[はこ]ぶと考[かんが]えられていて、これからの季節[きせつ]は特[とく]に注意[ちゅうい]が必要[ひつよう]です。', 'The virus is thought to be carried by migratory birds, so special care is needed in the coming season.', 'Bird flu outbreaks in Japan usually come in autumn and winter, when migratory birds arrive from the north.'],
+            ['農林水産省[のうりんすいさんしょう]は、全国[ぜんこく]の農場[のうじょう]に対策[たいさく]を徹底[てってい]するよう求[もと]めています。', 'The agriculture ministry is asking farms across the country to take thorough measures.'],
+          ],
+        },
+        N3: {
+          title: '千葉[ちば]・旭[あさひ]市[し]で鳥[とり]インフル確認[かくにん]　今季[こんき]国内[こくない]2例[れい]目[め]、約[やく]4万[まん]羽[わ]を殺処分[さつしょぶん]',
+          lines: [
+            ['千葉[ちば]県[けん]は十三日[じゅうさんにち]、旭[あさひ]市[し]の養鶏場[ようけいじょう]で高病原性[こうびょうげんせい]鳥[とり]インフルエンザの感染[かんせん]が確認[かくにん]されたと発表[はっぴょう]した。', 'Chiba Prefecture announced on the 13th that an infection with highly pathogenic bird flu had been confirmed at a poultry farm in Asahi City.', '高病原性 means "highly pathogenic": a type that kills many birds.'],
+            ['死[し]んだ鶏[にわとり]を遺伝子[いでんし]検査[けんさ]したところ、H5型[がた]のウイルスが検出[けんしゅつ]されたという。', 'Genetic tests on chickens that had died detected an H5 virus.'],
+            ['国内[こくない]の養鶏場[ようけいじょう]での発生[はっせい]は今季[こんき]2例[れい]目[め]で、十二日[じゅうににち]の京都[きょうと]府[ふ]に続[つづ]くものだ。', 'It is the second outbreak at a poultry farm in Japan this season, following Kyoto Prefecture on the 12th.'],
+            ['県[けん]はこの養鶏場[ようけいじょう]で飼育[しいく]している採卵鶏[さいらんけい]約[やく]4万[まん]羽[わ]の殺処分[さつしょぶん]を始[はじ]めた。', 'The prefecture began culling about 40,000 egg-laying hens raised at the farm.', '採卵鶏 are hens kept for their eggs, not for meat.'],
+            ['半径[はんけい]10キロ以内[いない]の49農場[のうじょう]、計[けい]約[やく]562万[まん]羽[わ]を対象[たいしょう]に、鶏[にわとり]や卵[たまご]の移動[いどう]や搬出[はんしゅつ]も禁止[きんし]した。', 'It also banned the moving and shipping out of chickens and eggs from 49 farms within a 10-kilometre radius, about 5.62 million birds in all.'],
+            ['渡[わた]り鳥[どり]が飛来[ひらい]するこれからの時期[じき]は、各地[かくち]で感染[かんせん]が広[ひろ]がるおそれがある。', 'With migratory birds arriving from now on, the infection may spread in many places.'],
+            ['農林水産相[のうりんすいさんしょう]は「全国[ぜんこく]どこで発生[はっせい]してもおかしくない」として、農場[のうじょう]での衛生[えいせい]管理[かんり]の徹底[てってい]を求[もと]めている。', 'Saying "an outbreak could happen anywhere in the country", the agriculture minister is calling for thorough hygiene at farms.', 'The minister is Takebe Arata.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-13-upper-house-vote-gap',
+      date: '2026-11-13',
+      emoji: '⚖️',
+      titleEn: 'Supreme Court rules the 2025 Upper House election, with a vote-weight gap of 3.13 times, was held in an "unconstitutional state"',
+      sources: [
+        { name: 'Jiji Press', url: 'https://www.jiji.com/jc/article?k=2026111100661&g=pol' },
+        { name: 'nippon.com (Jiji)', url: 'https://www.nippon.com/ja/articles/-/57269' },
+        { name: 'Mainichi via Infoseek', url: 'https://news.infoseek.co.jp/article/mainichi_20261110k0000m040363000c/' },
+        { name: 'Nikkei (editorial)', url: 'https://www.nikkei.com/article/DGXZQODK117CT0R11C26A1000000/' },
+      ],
+      quiz: [
+        ['Which election was the case about?', 'The Upper House election in July 2025', 'The Lower House election in 2024', 'The Tokyo governor election', 'The US midterm elections'],
+        ['What was the largest gap in the value of one vote?', 'About 3.13 times', 'About 1.5 times', 'About 10 times', 'About 4.77 times'],
+        ['Did the court cancel the election?', 'No, the election still stands', 'Yes, there will be a new election', 'Yes, but only in Tokyo', 'The court has not decided yet'],
+      ],
+      levels: {
+        N5: {
+          title: '最高裁判所[さいこうさいばんしょ]「参議院[さんぎいん]の　選挙[せんきょ]に　問題[もんだい]が　あった」',
+          lines: [
+            ['十一日[じゅういちにち]、最高裁判所[さいこうさいばんしょ]が　去年[きょねん]の　選挙[せんきょ]に　ついて　考[かんが]えを　言[い]いました。', 'On the 11th, the Supreme Court gave its view on last year\'s election.', 'The Supreme Court is the highest court in Japan.'],
+            ['去年[きょねん]　7月[がつ]の　参議院[さんぎいん]の　選挙[せんきょ]です。', 'It is last July\'s House of Councillors (Upper House) election.'],
+            ['住[す]んで　いる　場所[ばしょ]で、一[ひと]つの　票[ひょう]の　重[おも]さが　違[ちが]いました。', 'The weight of one vote was different depending on where you live.', 'In places with many voters per seat, each vote counts for less.'],
+            ['いちばん　大[おお]きい　ところで　3.13倍[ばい]　違[ちが]いました。', 'At the largest, it was 3.13 times different.'],
+            ['最高裁判所[さいこうさいばんしょ]は「憲法[けんぽう]に　合[あ]わない　状態[じょうたい]だった」と　言[い]いました。', 'The Supreme Court said, "It was in a state that does not fit the Constitution."', 'This is called 違憲状態, "a state of unconstitutionality".'],
+            ['でも、選挙[せんきょ]を　やり直[なお]す　ことは　ありません。', 'But the election will not be held again.'],
+            ['国会[こっかい]は　早[はや]く　直[なお]さなければ　なりません。', 'The Diet has to fix it soon.', 'The Diet is Japan\'s parliament.'],
+          ],
+        },
+        N4: {
+          title: '去年[きょねん]の参院[さんいん]選[せん]は「違憲[いけん]状態[じょうたい]」　最高裁[さいこうさい]が判決[はんけつ]',
+          lines: [
+            ['去年[きょねん]7月[がつ]の参議院[さんぎいん]選挙[せんきょ]で「1票[ぴょう]の格差[かくさ]」が大[おお]きすぎたとして、選挙[せんきょ]を無効[むこう]にするよう求[もと]める裁判[さいばん]がありました。', 'There was a lawsuit asking for last July\'s Upper House election to be declared void, because the "gap in the value of one vote" was too large.', '1票の格差 is the difference in how much one vote counts between districts with many or few voters per seat.'],
+            ['最高裁判所[さいこうさいばんしょ]は十一日[じゅういちにち]、選挙[せんきょ]は「違憲[いけん]状態[じょうたい]」だったという判決[はんけつ]を出[だ]しました。', 'On the 11th, the Supreme Court ruled that the election had been in an "unconstitutional state".', '違憲状態 means the gap was unconstitutional, but the Diet has not yet had too long to fix it, so the election is not ruled unconstitutional itself.'],
+            ['この選挙[せんきょ]では、1票[ぴょう]の重[おも]さにいちばん大[おお]きいところで3.13倍[ばい]の差[さ]がありました。', 'In this election, the weight of one vote differed by up to 3.13 times.'],
+            ['15人[にん]の裁判官[さいばんかん]のうち10人[にん]が違憲[いけん]状態[じょうたい]だと考[かんが]え、5人[にん]は憲法[けんぽう]に合[あ]っていると考[かんが]えました。', 'Ten of the 15 judges thought it was an unconstitutional state, and five thought it fit the Constitution.'],
+            ['最高裁[さいこうさい]は、前[まえ]の判決[はんけつ]で格差[かくさ]を直[なお]すように言[い]ったのに、国会[こっかい]があまり変[か]えなかったことを重[おも]く見[み]ました。', 'The Supreme Court took issue with the Diet hardly changing anything, even though an earlier ruling had told it to fix the gap.', 'In 2023 the court ruled the 2022 election constitutional but called fixing the gap an urgent task.'],
+            ['参院[さんいん]選[せん]が違憲[いけん]状態[じょうたい]とされたのは、2013年[ねん]の選挙[せんきょ]以来[いらい]です。', 'It is the first time since the 2013 election that an Upper House election has been called an unconstitutional state.'],
+            ['ただ、選挙[せんきょ]を無効[むこう]にしてほしいという訴[うった]えは認[みと]めませんでした。', 'However, the court did not accept the claim that the election should be made void.'],
+          ],
+        },
+        N3: {
+          title: '昨年[さくねん]参院[さんいん]選[せん]は「違憲[いけん]状態[じょうたい]」　格差[かくさ]3.13倍[ばい]、合区[ごうく]導入[どうにゅう]後[ご]初[はつ]　最高裁[さいこうさい]大法廷[だいほうてい]',
+          lines: [
+            ['「1票[ぴょう]の格差[かくさ]」が最大[さいだい]3.13倍[ばい]だった昨年[さくねん]7月[がつ]の参院[さんいん]選[せん]をめぐり、最高裁[さいこうさい]大法廷[だいほうてい]は十一日[じゅういちにち]、「違憲[いけん]状態[じょうたい]」とする判決[はんけつ]を言[い]い渡[わた]した。', 'On the 11th, the Supreme Court\'s Grand Bench ruled that last July\'s Upper House election, where the "gap in the value of one vote" was up to 3.13 times, had been in an "unconstitutional state".', 'The Grand Bench (大法廷) is the full Supreme Court of 15 judges, which decides important cases.'],
+            ['裁判官[さいばんかん]15人[にん]のうち10人[にん]の多数[たすう]意見[いけん]で、残[のこ]る5人[にん]は合憲[ごうけん]と判断[はんだん]した。', 'This was the majority opinion of 10 of the 15 judges; the remaining five judged it constitutional.'],
+            ['選挙[せんきょ]の無効[むこう]を求[もと]めた訴[うった]えは退[しりぞ]けた。', 'It rejected the claim seeking to void the election.'],
+            ['最高裁[さいこうさい]が参院[さんいん]選[せん]を違憲[いけん]状態[じょうたい]としたのは格差[かくさ]が4.77倍[ばい]だった2013年[ねん]の選挙[せんきょ]以来[いらい]で、合区[ごうく]が導入[どうにゅう]されてからは初[はじ]めてだ。', 'It is the first time the Supreme Court has called an Upper House election an unconstitutional state since the 2013 election, when the gap was 4.77 times, and the first since merged districts were introduced.', '合区: since 2016, two pairs of small prefectures, Tottori–Shimane and Tokushima–Kochi, have each been one district.'],
+            ['格差[かくさ]が3倍[ばい]台[だい]で違憲[いけん]状態[じょうたい]とされたのも初[はじ]めてとみられる。', 'It also appears to be the first time a gap in the 3-times range has been called an unconstitutional state.'],
+            ['判決[はんけつ]は、前回[ぜんかい]の判決[はんけつ]が格差[かくさ]の是正[ぜせい]を強[つよ]く促[うなが]していたにもかかわらず、国会[こっかい]の取[と]り組[く]みが進[すす]まなかった点[てん]を重[おも]く見[み]た。', 'The ruling gave weight to the fact that the Diet had made no progress, even though the previous ruling had strongly urged it to correct the gap.'],
+            ['国会[こっかい]は、選挙[せんきょ]制度[せいど]の見直[みなお]しを急[いそ]ぐよう迫[せま]られることになる。', 'The Diet will now be pressed to hurry and review the electoral system.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-13-asia-baseball-japan-win',
+      date: '2026-11-13',
+      emoji: '⚾',
+      titleEn: 'Asia Professional Baseball Championship opens at Tokyo Dome; Japan beats Chinese Taipei 5–0',
+      sources: [
+        { name: 'Tokyo Shimbun (Kyodo)', url: 'https://www.tokyo-np.co.jp/article/527755' },
+        { name: 'Chunichi Shimbun', url: 'https://www.chunichi.co.jp/article/1338587' },
+        { name: 'Daily Sports', url: 'https://www.daily.co.jp/baseball/2026/11/12/0021028090.shtml' },
+        { name: 'Olympics.com (schedule)', url: 'https://www.olympics.com/ja/news/baseball-asia-championship-2026-results-standings' },
+      ],
+      quiz: [
+        ['What was the score of Japan\'s first game?', 'Japan won 5–0', 'Japan lost 0–5', 'It was a 2–2 draw', 'Japan won 10–1'],
+        ['Where are the games played?', 'At Tokyo Dome', 'In Seoul', 'In Taipei', 'In Sydney'],
+        ['What kind of players are on the teams?', 'Mostly young players', 'Only players over 35', 'Only Major League players', 'Only high school students'],
+      ],
+      levels: {
+        N5: {
+          title: '野球[やきゅう]の　日本[にほん]チームが　5対[たい]0で　勝[か]ちました',
+          lines: [
+            ['十二日[じゅうににち]、アジアの　野球[やきゅう]の　大会[たいかい]が　始[はじ]まりました。', 'On the 12th, an Asian baseball tournament began.', 'It is the Asia Professional Baseball Championship.'],
+            ['場所[ばしょ]は　東京[とうきょう]ドームです。', 'The place is Tokyo Dome.'],
+            ['日本[にほん]、韓国[かんこく]、台湾[たいわん]、オーストラリアの　四[よっ]つの　チームが　出[で]ます。', 'Four teams take part: Japan, South Korea, Taiwan and Australia.'],
+            ['若[わか]い　選手[せんしゅ]の　チームです。', 'They are teams of young players.', 'Players must be 24 or younger, or in their first three years as professionals.'],
+            ['日本[にほん]は　初[はじ]めの　試合[しあい]で　台湾[たいわん]と　試合[しあい]を　しました。', 'Japan played Taiwan in its first game.'],
+            ['日本[にほん]は　ホームランを　三本[さんぼん]　打[う]って、5対[たい]0で　勝[か]ちました。', 'Japan hit three home runs and won 5–0.'],
+            ['十五日[じゅうごにち]に　決勝[けっしょう]が　あります。', 'The final is on the 15th.'],
+          ],
+        },
+        N4: {
+          title: 'アジアプロ野球[やきゅう]が開幕[かいまく]　日本[にほん]は台湾[たいわん]に5対[たい]0で勝[か]つ',
+          lines: [
+            ['若[わか]い選手[せんしゅ]が中心[ちゅうしん]の「アジアプロ野球[やきゅう]チャンピオンシップ」が十二日[じゅうににち]、東京[とうきょう]ドームで始[はじ]まりました。', 'The "Asia Professional Baseball Championship", centred on young players, began at Tokyo Dome on the 12th.', 'Players must be 24 or younger, or in their first three years as professionals.'],
+            ['日本[にほん]、韓国[かんこく]、台湾[たいわん]、オーストラリアの4チームが出場[しゅつじょう]して、十五日[じゅうごにち]に決勝[けっしょう]があります。', 'Four teams, Japan, South Korea, Taiwan and Australia, take part, and the final is on the 15th.', 'Taiwan plays under the name Chinese Taipei.'],
+            ['日本[にほん]は最初[さいしょ]の試合[しあい]で台湾[たいわん]に5対[たい]0で勝[か]ちました。', 'Japan played Taiwan in its first game and won 5–0.'],
+            ['一回[いっかい]に正木[まさき]智也[ともや]選手[せんしゅ]がホームランを打[う]って、点[てん]を取[と]りました。', 'In the first inning, Masaki Tomoya hit a home run and scored.', 'Masaki plays for the SoftBank Hawks. He led off the game with the home run.'],
+            ['正木[まさき]選手[せんしゅ]は三回[さんかい]にもホームランを打[う]ち、3本[ぼん]のヒットで3点[てん]を入[い]れました。', 'Masaki hit another home run in the third inning, and drove in three runs with three hits.'],
+            ['ピッチャーの金丸[かねまる]夢斗[ゆめと]選手[せんしゅ]は、七回[ななかい]まで1点[てん]も取[と]られませんでした。', 'Pitcher Kanemaru Yumeto did not give up a single run through seven innings.', 'Kanemaru plays for the Chunichi Dragons.'],
+            ['日本[にほん]は十三日[じゅうさんにち]に韓国[かんこく]、十四日[じゅうよっか]にオーストラリアと戦[たたか]います。', 'Japan plays South Korea on the 13th and Australia on the 14th.'],
+          ],
+        },
+        N3: {
+          title: 'アジアプロ野球[やきゅう]開幕[かいまく]　井口[いぐち]ジャパン、台湾[たいわん]に5－0で快勝[かいしょう]',
+          lines: [
+            ['24歳[さい]以下[いか]やプロ入[い]り3年[ねん]目[め]以内[いない]の若手[わかて]が中心[ちゅうしん]となる「アジアプロ野球[やきゅう]チャンピオンシップ」が十二日[じゅうににち]、東京[とうきょう]ドームで開幕[かいまく]した。', 'The "Asia Professional Baseball Championship", centred on young players aged 24 or under or in their first three years as professionals, opened at Tokyo Dome on the 12th.'],
+            ['日本[にほん]は初戦[しょせん]で台湾[たいわん]に5－0で快勝[かいしょう]し、井口[いぐち]監督[かんとく]の初[はつ]陣[じん]を白星[しろぼし]で飾[かざ]った。', 'Japan won its first game easily, 5–0 against Taiwan, marking manager Iguchi\'s debut with a win.', '初陣を白星で飾る: to mark one\'s first game (初陣, "first battle") with a win (白星, "white star").'],
+            ['一回[いっかい]に正木[まさき]智也[ともや]の先頭[せんとう]打者[だしゃ]本塁打[ほんるいだ]で先制[せんせい]すると、正木[まさき]は三回[さんかい]にもソロ本塁打[ほんるいだ]を放[はな]った。', 'Japan took the lead in the first inning with a leadoff home run by Masaki Tomoya, who hit another solo home run in the third.', '先頭打者本塁打 is a home run by the first batter of the game.'],
+            ['正木[まさき]は七回[ななかい]にも適時[てきじ]打[だ]を打[う]ち、3安打[あんだ]3打点[だてん]の活躍[かつやく]だった。', 'Masaki also hit a run-scoring single in the seventh, for three hits and three runs batted in.'],
+            ['先発[せんぱつ]の金丸[かねまる]夢斗[ゆめと]は7回[かい]を2安打[あんだ]無失点[むしってん]に抑[おさ]え、九回[きゅうかい]には宗山[むねやま]塁[るい]もソロ本塁打[ほんるいだ]を加[くわ]えた。', 'Starter Kanemaru Yumeto held Taiwan to two hits and no runs over seven innings, and Muneyama Rui added a solo home run in the ninth.'],
+            ['大会[たいかい]には日本[にほん]、韓国[かんこく]、台湾[たいわん]、オーストラリアの4チームが出場[しゅつじょう]し、1次[じ]リーグの上位[じょうい]2チームが十五日[じゅうごにち]の決勝[けっしょう]に進[すす]む。', 'Four teams, Japan, South Korea, Taiwan and Australia, take part, and the top two of the first round go on to the final on the 15th.'],
+            ['大会[たいかい]3連覇[れんぱ]を目指[めざ]す日本[にほん]は、十三日[じゅうさんにち]に韓国[かんこく]と対戦[たいせん]する。', 'Japan, aiming for a third straight title, plays South Korea on the 13th.', 'Japan won the first two tournaments, in 2017 and 2023.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-11-11-docomo-outage-again',
       date: '2026-11-11',
       emoji: '📶',
