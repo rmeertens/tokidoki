@@ -438,9 +438,9 @@
     { id: 'kiku2', particle: 'に', before: '先生[せんせい]', after: '聞[き]く', en: 'to ask the teacher', wrong: ['を', 'で', 'が'],
       why: 'With 聞く meaning “ask”, the person asked takes に.',
       not: { 'を': '先生を聞く would mean “listen to the teacher” as if the teacher were a sound.', 'で': 'で would be the place or means.', 'が': '先生が聞く means “the teacher asks”.' } },
-    { id: 'oshieru1', particle: 'に', before: '友達[ともだち]', after: '教[おし]える', en: 'to teach a friend', wrong: ['を', 'で', 'が'],
+    { id: 'oshieru1', particle: 'に', before: '友達[ともだち]', after: '教[おし]える', en: 'to teach / tell a friend (something)', wrong: ['と', 'で', 'が'],
       why: 'The person taught is the recipient: に. What you teach takes を (友達に日本語を教える).',
-      not: { 'を': 'を marks the subject taught, not the person.', 'で': 'で would be the place or means.', 'が': '友達が教える means “my friend teaches”.' } },
+      not: { 'と': '友達と教える would mean teaching together with a friend.', 'で': 'で would be the place or means.', 'が': '友達が教える means “my friend teaches”.' } },
     { id: 'ageru1', particle: 'に', before: '妹[いもうと]', after: 'あげる', en: 'to give to my little sister', wrong: ['を', 'で', 'が'],
       why: 'The receiver of あげる takes に; the gift takes を.',
       not: { 'を': '妹をあげる would mean “give away my sister”.', 'で': 'で would be the place or means.', 'が': '妹があげる means “my sister gives”.' } },
@@ -465,9 +465,9 @@
     { id: 'sanka1', particle: 'に', before: 'パーティー', after: '参加[さんか]する', en: 'to take part in the party', wrong: ['を', 'で', 'が'],
       why: '参加する takes に for the event you join.',
       not: { 'を': 'パーティーを参加する is a common mistake.', 'で': 'で would be where something else happens.', 'が': 'パーティーが参加する would mean “the party participates”.' } },
-    { id: 'katsu1', particle: 'に', before: '試合[しあい]', after: '勝[か]つ', en: 'to win the match', wrong: ['を', 'で', 'が'],
+    { id: 'katsu1', particle: 'に', before: '試合[しあい]', after: '勝[か]つ', en: 'to win the match', wrong: ['を', 'へ', 'が'],
       why: '勝つ (and 負ける) take に for the match or opponent.',
-      not: { 'を': '試合を勝つ is a common mistake from English “win the match”.', 'で': 'で would be the place or means.', 'が': '試合が勝つ would mean “the match wins”.' } },
+      not: { 'を': '試合を勝つ is a common mistake from English “win the match”.', 'へ': 'へ is only for the direction of a movement.', 'が': '試合が勝つ would mean “the match wins”.' } },
 
     // に — existence / static location / time
     { id: 'sumu1', particle: 'に', before: '東京[とうきょう]', after: '住[す]む', en: 'to live in Tokyo', wrong: ['で', 'を', 'へ'],

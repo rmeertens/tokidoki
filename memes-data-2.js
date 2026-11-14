@@ -836,7 +836,7 @@
           grammar: ['to-and:三つと', 'mo-also:お金も'] },
         { jp: '桃太郎[ももたろう] は 困[こま]りました>困る 。 きびだんご は もう ありません>ある 。', en: 'Momotarō was stuck. He had no dumplings left.',
           grammar: ['masu-past:困りました', 'masen:ありません'] },
-        { jp: '鬼が島[おにがしま] に 着[つ]く と 、 鬼[おに] が 言[い]いました>言う 。', en: 'When they reached Ogre Island, an ogre said:',
+        { jp: '鬼[おに]が島[しま] に 着[つ]く と 、 鬼[おに] が 言[い]いました>言う 。', en: 'When they reached Ogre Island, an ogre said:',
           grammar: ['to-conditional:着くと'] },
         { jp: '「 うち で は 、 きびだんご は 毎日[まいにち] 食[た]べ放題[ほうだい] です よ 。 」', en: '"At our place, it\'s all-you-can-eat dumplings every day!"',
           grammar: ['yo:ですよ', 'de-place:うちでは'] },

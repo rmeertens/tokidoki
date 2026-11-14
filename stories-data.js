@@ -4137,7 +4137,7 @@
           grammar: ['te-shimau:してしまいました', 'sou-looks:照れくさそう'] },
         { jp: '「 スマホ を 落[お]とした>落とす おかげ で 、 一番[いちばん] いい スピーチ が できました>できる 」', en: '"Thanks to dropping my phone, I gave the best speech of my life."',
           grammar: ['okage-de:落としたおかげで'] },
-        { jp: '一か月[いっかげつ] 後[ご] 、 私[わたし] の 家[いえ] に 一枚[いちまい] の 写真[しゃしん] が 届[とど]いた>届く 。', en: 'A month later, a photo arrived at my home.',
+        { jp: '一[いっ]か月[げつ] 後[ご] 、 私[わたし] の 家[いえ] に 一枚[いちまい] の 写真[しゃしん] が 届[とど]いた>届く 。', en: 'A month later, a photo arrived at my home.',
           grammar: ['counters:一枚'] },
         { jp: '白[しろ]い ドレス の ハルカ さん の 隣[となり] で 、 木村[きむら] さん が スマホ を 片手[かたて] に スピーチ を して>する いた>いる 。', en: 'It showed Kimura beside Haruka in her white dress, giving his speech with his phone in one hand.',
           grammar: ['te-iru:していた'] },

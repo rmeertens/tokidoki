@@ -82,7 +82,7 @@
     'かぶる': { pre: '帽子[ぼうし]を', v: 'put on', o: 'a hat' },
     '知る': {
       pre: '彼[かれ]の名前[なまえ]を', v: 'find out', o: 'his name',
-      skip: ['masu', 'te', 'dict', 'potential', 'volitional', 'causative', 'ba', 'causative-passive'],
+      skip: ['masu', 'te', 'dict', 'potential', 'volitional', 'causative', 'ba', 'causative-passive', 'chau'],
       en: {
         'masu-neg': "I don't know his name.", 'nai': "I don't know his name.",
         'masu-past-neg': "I didn't know his name.", 'nakatta': "I didn't know his name.",
@@ -104,7 +104,7 @@
     '遅くなる': { kind: 'nv', pre: '帰[かえ]りが', v: 'get home', o: 'late' },
     '思う': {
       pre: 'そうだと', v: 'think', o: 'so',
-      skip: ['dict', 'volitional', 'causative', 'ba', 'causative-passive'],
+      skip: ['dict', 'volitional', 'causative', 'ba', 'causative-passive', 'chau'],
     },
     '切る': { pre: '紙[かみ]を', v: 'cut', o: 'the paper' },
     '作る': { pre: 'カレーを', v: 'make', o: 'curry' },
@@ -160,7 +160,7 @@
     '頑張る': { pre: '試験[しけん]のために', v: 'work hard', o: 'for the exam' },
     '泣く': { kind: 'nv', pre: '映画[えいが]を見[み]て', v: 'cry', o: 'watching a movie' },
     '磨く': {
-      pre: '歯[は]を', v: 'brush', o: 'my teeth', skip: ['volitional', 'passive', 'causative', 'ba'],
+      pre: '歯[は]を', v: 'brush', o: 'my teeth', skip: ['volitional', 'passive', 'causative', 'ba'], chau: 'first',
       en: { 'te': 'Please brush your teeth.' },
     },
     '約束を守る': {
@@ -190,7 +190,7 @@
     },
     '着く': {
       pre: '駅[えき]に', v: 'arrive', o: 'at the station',
-      skip: ['te', 'dict', 'volitional', 'causative', 'ba', 'causative-passive'],
+      skip: ['te', 'dict', 'volitional', 'causative', 'ba', 'causative-passive', 'chau'],
     },
     '気をつける': { pre: '車[くるま]に', v: 'watch out', o: 'for cars', skip: ['dict', 'passive'] },
     '調べる': { pre: 'インターネットで', v: 'look it up', o: 'on the internet' },
@@ -217,7 +217,7 @@
     '選ぶ': { pre: 'プレゼントを', v: 'choose', o: 'a present' },
     '込む': { kind: 'ev', sub: '電車[でんしゃ]が', s: 'the train', v: 'get crowded', skip: ['ba'] },
     '脱ぐ': {
-      pre: '靴[くつ]を', v: 'take off', o: 'my shoes', skip: ['passive', 'causative', 'ba'],
+      pre: '靴[くつ]を', v: 'take off', o: 'my shoes', skip: ['passive', 'causative', 'ba'], chau: 'first',
       en: { 'te': 'Please take off your shoes.', 'volitional': "Let's take off our shoes." },
     },
     '生まれる': { kind: 'ev', sub: '姉[あね]の赤[あか]ちゃんが', s: "my sister's baby", v: 'be born', skip: ['te'] },
@@ -259,7 +259,7 @@
     '晴れる': { kind: 'ev', sub: '午後[ごご]は', s: 'it', v: 'clear up', o: 'in the afternoon', skip: ['te'] },
     'もてる': {
       pre: '学校[がっこう]で', v: 'be popular', o: 'at school',
-      skip: ['te', 'dict', 'potential', 'volitional', 'passive', 'causative', 'ba', 'causative-passive'],
+      skip: ['te', 'dict', 'potential', 'volitional', 'passive', 'causative', 'ba', 'causative-passive', 'chau'],
     },
     '招待する': { pre: '先生[せんせい]を結婚式[けっこんしき]に', v: 'invite', o: 'the teacher to the wedding' },
     '注意する': { pre: '車[くるま]に', v: 'watch out', o: 'for cars' },
@@ -293,7 +293,7 @@
     '間違える': { kind: 'nv', pre: '答[こた]えを', v: 'get', o: 'the answer wrong' },
     '見つける': {
       pre: '財布[さいふ]を', v: 'find', o: 'my wallet',
-      skip: ['dict', 'volitional', 'causative', 'ba', 'causative-passive'],
+      skip: ['dict', 'volitional', 'causative', 'ba', 'causative-passive', 'chau'],
     },
     '連絡する': { pre: '友達[ともだち]に', v: 'contact', o: 'a friend' },
     '勝つ': { pre: '試合[しあい]に', v: 'win', o: 'the game' },
@@ -692,7 +692,7 @@
       case 'nakereba': return `${stmt}なりません。`;
       case 'chau':
         // A mishap you might end up in; otherwise ちゃう's "get it done".
-        return mishap(ctx) ? `気[き]をつけないと、${stmt}よ。` : `先[さき]に${stmt}ね。`;
+        return oops(ctx) ? `気[き]をつけないと、${stmt}よ。` : `先[さき]に${stmt}ね。`;
       default: return `${stmt}。`;
     }
   }
@@ -702,6 +702,9 @@
 
   // Things that happen to you, or wrongdoing ("you should just…" skipped).
   const mishap = ctx => (ctx.kind || 'act') !== 'act' || (ctx.skip || []).includes('ba');
+  // 〜ちゃう as a slip-up (“if you’re not careful…”), unless the verb is an
+  // ordinary thing to get done (歯を磨いちゃう, `chau: 'first'`).
+  const oops = ctx => ctx.chau !== 'first' && mishap(ctx);
 
   function verbEn(ctx, form) {
     const kind = ctx.kind || 'act';
@@ -747,7 +750,7 @@
       case 'nakereba': return `I have to ${v} ${o}.`;
       case 'chau':
         if (kind === 'ev') return `If you're not careful, ${s} will ${v} ${o}.`;
-        if (mishap(ctx)) return `If you're not careful, you'll end up ${inflect(v, gerund)} ${your(o)}.`;
+        if (oops(ctx)) return `If you're not careful, you'll end up ${inflect(v, gerund)} ${your(o)}.`;
         return `I'll go ahead and ${v} ${o} first.`;
       default: return `${clause(s, v, 'pres', pl)} ${o}.`;
     }

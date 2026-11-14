@@ -463,11 +463,11 @@
     { id: 'te-kudasai', level: 'N5', name: '〜てください', meaning: 'please do',
       note: 'A polite request: て-form + ください.',
       ja: p => `${p.pre}${p.c('te')}ください。`,
-      en: p => `Please ${p.v} ${p.o}.` },
+      en: p => `Please ${p.v} ${p.yo}.` },
     { id: 'naide-kudasai', level: 'N5', name: '〜ないでください', meaning: 'please don\'t',
       note: 'A polite request not to do something: ない-form + でください.',
       ja: p => `${p.pre}${p.c('nai')}でください。`,
-      en: p => `Please don't ${p.v} ${p.o}.` },
+      en: p => `Please don't ${p.v} ${p.yo}.` },
     { id: 'tai', level: 'N5', name: '〜たいです', meaning: 'want to',
       note: 'Your own wish: ます-stem + たい. It conjugates like an い-adjective.',
       ja: p => `${p.pre}${p.c('tai')}です。`,
@@ -476,12 +476,12 @@
       note: 'A polite invitation: ます-stem + ませんか.',
       repeated: true,
       ja: p => `一緒[いっしょ]に${p.pre}${p.stem}ませんか。`,
-      en: p => `Would you like to ${p.v} ${p.o} together?` },
+      en: p => `Would you like to ${p.v} ${p.uo} together?` },
     { id: 'mashou', level: 'N5', name: '〜ましょう', meaning: 'let\'s',
       note: 'A suggestion to do something together: ます-stem + ましょう.',
       repeated: true,
       ja: p => `一緒[いっしょ]に${p.pre}${p.stem}ましょう。`,
-      en: p => `Let's ${p.v} ${p.o} together.` },
+      en: p => `Let's ${p.v} ${p.uo} together.` },
     { id: 'te-iru', level: 'N5', name: '〜ています', meaning: 'am doing (now)',
       note: 'An action in progress: て-form + います.',
       repeated: true,
@@ -495,7 +495,7 @@
     { id: 'te-wa-ikenai', level: 'N5', name: '〜てはいけません', meaning: 'must not',
       note: 'Prohibition: て-form + はいけません.',
       ja: p => `${p.pre}${p.c('te')}はいけません。`,
-      en: p => `You must not ${p.v} ${p.o}.` },
+      en: p => `You must not ${p.v} ${p.yo}.` },
     { id: 'te-kara', level: 'N5', name: '〜てから', meaning: 'after doing',
       note: 'One action, then the next: て-form + から, then what comes after.',
       only: TE_KARA,
@@ -526,7 +526,7 @@
     { id: 'nakute-mo-ii', level: 'N4', name: '〜なくてもいいです', meaning: 'don\'t have to',
       note: 'No obligation: ない-form, drop い, add くてもいいです.',
       ja: p => `${p.pre}${naiTo(p.c('nai'), 'くてもいいです')}。`,
-      en: p => `You don't have to ${p.v} ${p.o}.` },
+      en: p => `You don't have to ${p.v} ${p.yo}.` },
     { id: 'sasete-kudasai', level: 'N4', name: '〜させてください', meaning: 'please let me',
       note: 'Asking permission to do something yourself: causative て-form + ください.',
       needs: 'causative',
@@ -574,16 +574,16 @@
     { id: 'hou-ga-ii', level: 'N4', name: '〜た方がいいです', meaning: 'you\'d better',
       note: 'Advice: た-form + 方がいいです.',
       ja: p => `${p.pre}${p.c('ta')}方[ほう]がいいですよ。`,
-      en: p => `You'd better ${p.v} ${p.o}.` },
+      en: p => `You'd better ${p.v} ${p.yo}.` },
     { id: 'kamoshirenai', level: 'N4', name: '〜かもしれません', meaning: 'might',
       note: 'Possibility: plain form + かもしれません.',
       ja: p => `明日[あした]、${p.pre}${p.c('dict')}かもしれません。`,
       en: p => `I might ${p.v} ${p.o} tomorrow.` },
     { id: 'te-hoshii', level: 'N4', name: '〜てほしいです', meaning: 'want someone to',
       note: 'Wanting someone else to act: person に + て-form + ほしいです.',
-      skip: ['会う', '手伝う'],
+      skip: ['会う', '手伝う', '離婚する', '邪魔する', '喧嘩する'],
       ja: p => `弟[おとうと]に${p.pre}${p.c('te')}ほしいです。`,
-      en: p => `I want my little brother to ${p.v} ${p.o}.` },
+      en: p => `I want my little brother to ${p.v} ${p.ho}.` },
     { id: 'nagara', level: 'N4', name: '〜ながら', meaning: 'while doing',
       note: 'Two actions at once by the same person: ます-stem + ながら, then the main action.',
       only: NAGARA,
@@ -649,7 +649,7 @@
       note: 'What is right or proper: dictionary form + べきです (する → するべき or すべき).',
       repeated: true,
       ja: p => `${p.pre}${p.c('dict')}べきです。`,
-      en: p => `You really ought to ${p.v} ${p.o}.` },
+      en: p => `You really ought to ${p.v} ${p.yo}.` },
     { id: 'koto-ni-suru', level: 'N3', name: '〜ことにしました', meaning: 'decided to',
       note: 'A decision you made yourself: dictionary form + ことにしました.',
       ja: p => `${p.pre}${p.c('dict')}ことにしました。`,
@@ -666,7 +666,7 @@
     { id: 'koto-wa-nai', level: 'N3', name: '〜ことはありません', meaning: 'there\'s no need to',
       note: 'Reassurance that something is unnecessary: dictionary form + ことはありません.',
       ja: p => `無理[むり]に${p.pre}${p.c('dict')}ことはありません。`,
-      en: p => `There's no need to force yourself to ${p.v} ${p.o}.` },
+      en: p => `There's no need to force yourself to ${p.v} ${p.yo}.` },
     { id: 'te-bakari', level: 'N3', name: '〜てばかりいます', meaning: 'do nothing but',
       note: 'Doing one thing all the time, usually as a complaint: て-form + ばかりいます.',
       repeated: true,
@@ -699,6 +699,12 @@
 
   // The verb's pieces that patterns build sentences from, or null when the
   // verb has no ordinary-action context.
+  // “brush my teeth” said to or about someone else: “brush your teeth”, “his
+  // teeth”. Only for what is always the doer’s own (妹を起こしてください stays
+  // “wake up my little sister”).
+  const OWN = /\bmy (?=teeth|shoes|promises|voice|knees|favorite|parents|husband|email)/g;
+  const whose = (o, poss, self) => o.replace(OWN, poss + ' ').replace(/\bmyself\b/g, self);
+
   function pieces(verb) {
     const ctx = global.Examples.contextFor(verb);
     if (!ctx || (ctx.kind && ctx.kind !== 'act') || EXCLUDED_VERBS.includes(verb.kanji)) return null;
@@ -715,6 +721,9 @@
       zuni: zuniForm(verb, c('nai')),
       v: ctx.v,
       o: ctx.o || '',
+      yo: whose(ctx.o || '', 'your', 'yourself'),
+      ho: whose(ctx.o || '', 'his', 'himself'),
+      uo: whose(ctx.o || '', 'our', 'ourselves').replace('our voice', 'our voices'),
       ing: inflect(ctx.v, gerund),
       past: inflect(ctx.v, pastTense),
       // "have been to Japan", not "have gone to Japan"

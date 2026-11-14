@@ -28,7 +28,7 @@
       "田": "Rice Field, Rice Paddy",
       "回": "-times, Round",
       "因": "Cause, Factor",
-      "困": "Quandary, Become…",
+      "困": "Be Troubled",
       "園": "Park, Garden",
       "団": "Group, Association",
       "囲": "Surround, Besiege",
@@ -162,8 +162,8 @@
     "meanings": {
       "山": "Mountain",
       "市": "Market, City",
-      "由": "Wherefore, A Reason",
-      "申": "Have The Honor To",
+      "由": "Reason",
+      "申": "Say (humble)",
       "弔": "Condolences, Mourning",
       "甲": "Armor, High (voice)"
     },
@@ -209,7 +209,7 @@
     "meanings": {
       "雨": "Rain",
       "画": "Brush-stroke, Picture",
-      "両": "Both, Old Japanese Coin",
+      "両": "Both",
       "丙": "Third Class, 3rd"
     },
     "levels": {
@@ -257,7 +257,7 @@
     ],
     "meanings": {
       "百": "Hundred",
-      "目": "Eye, Class"
+      "目": "Eye"
     },
     "levels": {
       "百": "N5",
@@ -591,7 +591,7 @@
       "泰"
     ],
     "meanings": {
-      "春": "Springtime, Spring…",
+      "春": "Spring",
       "奉": "Observance, Offer",
       "泰": "Peaceful, Calm"
     },
@@ -680,7 +680,7 @@
       "宗"
     ],
     "meanings": {
-      "京": "Capital, 10**16",
+      "京": "Capital",
       "宗": "Religion, Sect"
     },
     "levels": {
@@ -709,7 +709,7 @@
     ],
     "meanings": {
       "音": "Sound, Noise",
-      "昔": "Once Upon A Time…"
+      "昔": "Long Ago"
     },
     "levels": {
       "音": "N4",
@@ -806,7 +806,7 @@
       "第"
     ],
     "meanings": {
-      "弟": "Younger Brother, Faithful…",
+      "弟": "Younger Brother",
       "第": "No., Residence"
     },
     "levels": {
@@ -834,7 +834,7 @@
       "肥"
     ],
     "meanings": {
-      "服": "Clothing, Admit",
+      "服": "Clothing",
       "肥": "Fertilizer, Get Fat"
     },
     "levels": {
@@ -904,7 +904,7 @@
       "島"
     ],
     "meanings": {
-      "鳥": "Bird, Chicken",
+      "鳥": "Bird",
       "島": "Island"
     },
     "levels": {
@@ -1098,7 +1098,7 @@
     "meanings": {
       "未": "Un-, Not Yet",
       "末": "End, Close",
-      "米": "Rice, Usa",
+      "米": "Rice, America",
       "朱": "Vermilion, Cinnabar"
     },
     "levels": {
@@ -1215,7 +1215,7 @@
       "頒"
     ],
     "meanings": {
-      "頭": "Head, Counter For Large…",
+      "頭": "Head",
       "頌": "Eulogy",
       "頒": "Distribute, Disseminate"
     },
@@ -1250,7 +1250,7 @@
     ],
     "meanings": {
       "育": "Bring Up, Grow Up",
-      "背": "Stature, Height",
+      "背": "Back, Height",
       "盲": "Blind, Blind Man"
     },
     "levels": {
@@ -1300,7 +1300,7 @@
       "朴"
     ],
     "meanings": {
-      "礼": "Salute, Bow",
+      "礼": "Thanks, Bow",
       "札": "Tag, Paper Money",
       "朴": "Crude, Simple"
     },
@@ -1535,7 +1535,7 @@
     ],
     "meanings": {
       "内": "Inside, Within",
-      "向": "Yonder, Facing"
+      "向": "Face, Toward"
     },
     "levels": {
       "内": "N3",
@@ -1716,7 +1716,7 @@
       "菌"
     ],
     "meanings": {
-      "歯": "Tooth, Cog",
+      "歯": "Tooth",
       "菌": "Germ, Fungus"
     },
     "levels": {
@@ -1744,7 +1744,7 @@
       "冶"
     ],
     "meanings": {
-      "治": "Reign, Be At Peace",
+      "治": "Govern, Cure",
       "冶": "Melting, Smelting"
     },
     "levels": {
@@ -1758,7 +1758,7 @@
       "磯"
     ],
     "meanings": {
-      "機": "Loom, Mechanism",
+      "機": "Machine, Opportunity",
       "磯": "Seashore, Beach"
     },
     "levels": {
@@ -1968,7 +1968,7 @@
       "靖"
     ],
     "meanings": {
-      "精": "Refined, Ghost",
+      "精": "Spirit, Refined",
       "靖": "Peaceful"
     },
     "levels": {
