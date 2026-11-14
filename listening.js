@@ -16,7 +16,7 @@
 (function (global) {
   'use strict';
 
-  const KANJI = '㐀-䶿一-鿿々〆ヶ';
+  const KANJI = '㐀-䶿一-鿿々〆ヶ〇';
   const RUBY_RE = new RegExp('([' + KANJI + ']+)\\[([^\\]]+)\\]', 'g');
   const STORE_KEY = 'tokidoki_listening';
   const SETTINGS_KEY = 'tokidoki_listening_settings';

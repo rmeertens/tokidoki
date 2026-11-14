@@ -61,8 +61,8 @@
         l(M, 'はい、十枚[じゅうまい]ですね。', 'Sure, ten copies then.'),
         l(F, 'あ、部長[ぶちょう]の 分[ぶん]も お願[ねが]いします。わたしは 自分[じぶん]のが あるので いりません。', 'Oh, one for the manager too, please. I have my own, so I don’t need one.'),
       ],
-      choices: [{ type: 'text', text: '9枚' }, { type: 'text', text: '10枚' }, { type: 'text', text: '11枚' }, { type: 'text', text: '12枚' }],
-      answer: 2, why: 'Ten attendees plus the manager makes eleven; she doesn’t need one.' },
+      choices: [{ type: 'text', text: '8枚' }, { type: 'text', text: '9枚' }, { type: 'text', text: '11枚' }, { type: 'text', text: '12枚' }],
+      answer: 2, why: 'Ten copies for the ten people attending, plus one for the manager: eleven. She only adds that she needs none for herself.' },
     { id: 'train-transfer', level: 'N4',
       intro: '駅[えき]で 女[おんな]の人[ひと]と 駅員[えきいん]が 話[はな]しています。女[おんな]の人[ひと]は 何番線[なんばんせん]の 電車[でんしゃ]に 乗[の]りますか。',
       lines: [

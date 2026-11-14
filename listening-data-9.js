@@ -71,7 +71,7 @@
     { id: 'n2-k-client-visit', level: 'N2',
       intro: '会社[かいしゃ]で 課長[かちょう]と 男[おとこ]の人[ひと]が 話[はな]しています。男[おとこ]の人[ひと]は この 後[あと] まず 何[なに]を しなければ なりませんか。',
       lines: [
-        l(F, '明日[あした]の A社[えーしゃ]への 訪問[ほうもん]だけど、資料[しりょう]は できてる？', 'About tomorrow’s visit to Company A — are the materials ready?', '明日の、えーしゃへの訪問だけど、資料はできてる？'),
+        l(F, '明日[あした]の A社[しゃ]への 訪問[ほうもん]だけど、資料[しりょう]は できてる？', 'About tomorrow’s visit to Company A — are the materials ready?', '明日の、えーしゃへの訪問だけど、資料はできてる？'),
         l(M, 'はい、昨日[きのう] 完成[かんせい]しました。人数分[にんずうぶん] 印刷[いんさつ]も 済[す]んで います。', 'Yes, I finished them yesterday. I’ve printed one for everyone too.'),
         l(F, 'そう。先方[せんぽう]の 担当者[たんとうしゃ]が 替[か]わったって 聞[き]いたけど、時間[じかん]の 確認[かくにん]は した？', 'Good. I heard their contact person changed — did you confirm the time?'),
         l(M, 'あ、まだです。前[まえ]の 方[かた]と 決[き]めた ままでした。', 'Ah, not yet. It’s still what I arranged with the previous person.'),

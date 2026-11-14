@@ -37,7 +37,7 @@ const { LEVELS, weekOf, weekFile, formatDate } = News;
 // How many days of news the index shows.
 const INDEX_DAYS = 7;
 
-const RUBY_RE = /([一-鿿々]+)\[([^\]]+)\]/g;
+const RUBY_RE = /([一-鿿々〇]+)\[([^\]]+)\]/g;
 const plain = s => s.replace(RUBY_RE, '$1');
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const pageFile = News.pageFile;

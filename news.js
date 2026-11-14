@@ -38,7 +38,7 @@
   const DECK_KEY = 'tokidoki_story_words';
   const SRS_KEY = 'tokidoki_srs';
   const GRAMMAR_KEY = 'tokidoki_saved_grammar';
-  const RUBY_RE = /([一-鿿々]+)\[([^\]]+)\]/g;
+  const RUBY_RE = /([一-鿿々〇]+)\[([^\]]+)\]/g;
 
   const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   const rubyHtml = text => esc(text).replace(RUBY_RE, '<ruby>$1<rp>(</rp><rt>$2</rt><rp>)</rp></ruby>');
