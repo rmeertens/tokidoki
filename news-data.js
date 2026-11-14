@@ -27,6 +27,168 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-11-14-sdf-pay-raise',
+      date: '2026-11-14',
+      emoji: '🪖',
+      titleEn: 'Law raising Self-Defense Force pay is passed; new recruits from high school will get 250,300 yen a month',
+      sources: [
+        { name: 'Nikkei', url: 'https://www.nikkei.com/article/DGXZQOUA1354C0T11C26A1000000/' },
+        { name: 'Yomiuri via Yahoo! News', url: 'https://news.yahoo.co.jp/articles/e265cb5f705fab2a797eeb30de94b40fe093615e' },
+        { name: 'NTV via Infoseek', url: 'https://news.infoseek.co.jp/article/ntv_2026111301128538/' },
+      ],
+      quiz: [
+        ['What will go up for Self-Defense Force members?', 'Their pay', 'Their working hours', 'Their retirement age', 'The number of their holidays'],
+        ['What will the monthly pay be for new members who joined after high school?', '250,300 yen', '200,000 yen', '300,000 yen', '108,000 yen'],
+        ['What new money will members be able to get?', 'Money for moving house', 'Money for meals', 'Money for studying abroad', 'Money for buying a car'],
+      ],
+      levels: {
+        N5: {
+          title: '自衛官[じえいかん]の　給料[きゅうりょう]が　上[あ]がります',
+          lines: [
+            ['自衛官[じえいかん]の　給料[きゅうりょう]が　上[あ]がります。', 'The pay of Self-Defense Force members will go up.', '自衛官 are the members of Japan\'s Self-Defense Forces (自衛隊).'],
+            ['十三日[じゅうさんにち]、国会[こっかい]で　新[あたら]しい　法律[ほうりつ]が　できました。', 'On the 13th, a new law was made in the Diet.', 'The Diet (国会) is Japan\'s parliament.'],
+            ['高校[こうこう]を　出[で]て　入[はい]った　人[ひと]の　給料[きゅうりょう]は、1か月[げつ]　25万[まん]300円[えん]に　なります。', 'For people who joined after high school, the pay will be 250,300 yen a month.', 'This is the basic pay of the lowest rank, 二士 (にし), which new members from high school start at.'],
+            ['前[まえ]より　1万[まん]800円[えん]　多[おお]いです。', 'That is 10,800 yen more than before.'],
+            ['30歳[さい]から　40歳[さい]ぐらいの　人[ひと]も、1年[ねん]で　20万[まん]円[えん]ぐらい　多[おお]く　もらいます。', 'People in their 30s and 40s will also get about 200,000 yen more a year.'],
+            ['仕事[しごと]で　引[ひ]っ越[こ]す　とき、新[あたら]しく　お金[かね]も　もらえます。', 'When they move house for work, they can also get new money.', 'This is a new relocation allowance (転居手当) for members who are transferred.'],
+            ['小泉[こいずみ]　防衛[ぼうえい]大臣[だいじん]の　話[はなし]では、今[いま]までで　一番[いちばん]　高[たか]い　給料[きゅうりょう]です。', 'According to Defense Minister Koizumi, it is the highest pay ever.', 'Koizumi Shinjirō is the defense minister.'],
+          ],
+        },
+        N4: {
+          title: '自衛官[じえいかん]の給料[きゅうりょう]を上[あ]げる法律[ほうりつ]が成立[せいりつ]',
+          lines: [
+            ['自衛官[じえいかん]の給料[きゅうりょう]を上[あ]げる法律[ほうりつ]が、十三日[じゅうさんにち]の参議院[さんぎいん]の本会議[ほんかいぎ]で成立[せいりつ]しました。', 'A law raising the pay of Self-Defense Force members was passed at a plenary session of the House of Councillors on the 13th.', '自衛官 are the members of Japan\'s Self-Defense Forces. 本会議 is a meeting of the whole house.'],
+            ['民間[みんかん]の会社[かいしゃ]との給料[きゅうりょう]の差[さ]を小[ちい]さくするための改正[かいせい]で、基本給[きほんきゅう]は平均[へいきん]で約[やく]3.4%上[あ]がります。', 'The change is meant to narrow the pay gap with private companies, and basic pay will rise by about 3.4% on average.'],
+            ['高校[こうこう]を卒業[そつぎょう]して入隊[にゅうたい]する「二士[にし]」の基本給[きほんきゅう]は、1万[まん]800円[えん]増[ふ]えて、月[つき]25万[まん]300円[えん]になります。', 'The basic pay of a "2nd class private" who joins after finishing high school will rise by 10,800 yen to 250,300 yen a month.', '二士 is the lowest rank, where new members from high school start.'],
+            ['30代[だい]から40代[だい]の自衛官[じえいかん]も、年収[ねんしゅう]が20万[まん]円[えん]ぐらい増[ふ]えるということです。', 'Members in their 30s and 40s will also earn about 200,000 yen more a year.'],
+            ['防衛省[ぼうえいしょう]によると、高校[こうこう]を出[で]て入隊[にゅうたい]した人[ひと]が一生[いっしょう]でもらう給料[きゅうりょう]は、初[はじ]めて3億[おく]円[えん]を超[こ]える見込[みこ]みです。', 'According to the Defense Ministry, the total pay over a lifetime for someone who joined after high school is expected to top 300 million yen for the first time.'],
+            ['仕事[しごと]で引[ひ]っ越[こ]すときにもらえる「転居[てんきょ]手当[てあて]」も新[あたら]しく作[つく]られました。', 'A new "relocation allowance", paid when members move house for work, was also created.'],
+            ['小泉[こいずみ]防衛[ぼうえい]大臣[だいじん]は、すべての自衛官[じえいかん]の給料[きゅうりょう]が今[いま]までで一番[いちばん]高[たか]くなると説明[せつめい]しました。', 'Defense Minister Koizumi explained that the pay of every member will be the highest ever.', 'Koizumi Shinjirō is the defense minister. The Self-Defense Forces have long had trouble finding enough recruits.'],
+          ],
+        },
+        N3: {
+          title: '自衛官[じえいかん]給与[きゅうよ]引[ひ]き上[あ]げ法[ほう]が成立[せいりつ]　高卒[こうそつ]二士[にし]は月[つき]25万[まん]円[えん]超[ちょう]に',
+          lines: [
+            ['自衛官[じえいかん]の給与[きゅうよ]を引[ひ]き上[あ]げる改正[かいせい]防衛省[ぼうえいしょう]職員[しょくいん]給与[きゅうよ]法[ほう]が十三日[じゅうさんにち]、参院[さんいん]本会議[ほんかいぎ]で可決[かけつ]、成立[せいりつ]した。', 'The revised Defense Ministry Personnel Pay Act, which raises the pay of Self-Defense Force members, was approved and enacted at a plenary session of the House of Councillors on the 13th.', '参院 is short for 参議院, the upper house of the Diet.'],
+            ['人事院[じんじいん]勧告[かんこく]を踏[ふ]まえ、民間[みんかん]企業[きぎょう]との給与[きゅうよ]差[さ]を縮[ちぢ]めるのが狙[ねら]いで、基本給[きほんきゅう]は月額[げつがく]で平均[へいきん]約[やく]3.4%引[ひ]き上[あ]げられる。', 'Based on the National Personnel Authority\'s recommendation, it aims to narrow the pay gap with private companies, and monthly basic pay will be raised by about 3.4% on average.', 'The National Personnel Authority (人事院) recommends the pay of public servants each year.'],
+            ['高卒[こうそつ]で入隊[にゅうたい]する二士[にし]の基本給[きほんきゅう]は、月額[げつがく]1万[まん]800円[えん]増[ぞう]の25万[まん]300円[えん]となる。', 'The basic pay of a 2nd class private who joins after high school will rise by 10,800 yen a month to 250,300 yen.', '二士 is the lowest rank. 高卒 means "high-school graduate".'],
+            ['30代[だい]から40代[だい]の隊員[たいいん]も、年収[ねんしゅう]が約[やく]20万[まん]円[えん]増[ふ]える見通[みとお]しだ。', 'Members in their 30s and 40s are also expected to earn about 200,000 yen more a year.'],
+            ['防衛省[ぼうえいしょう]の試算[しさん]では、高卒[こうそつ]の二士[にし]で入隊[にゅうたい]した場合[ばあい]の生涯[しょうがい]賃金[ちんぎん]が初[はじ]めて3億[おく]円[えん]を超[こ]えるという。', 'By the Defense Ministry\'s estimate, lifetime earnings for someone who joins as a 2nd class private after high school will top 300 million yen for the first time.'],
+            ['転勤[てんきん]に伴[ともな]う引[ひ]っ越[こ]しを対象[たいしょう]とした「転居[てんきょ]手当[てあて]」も新設[しんせつ]された。', 'A "relocation allowance" for moves that come with a transfer was also created.'],
+            ['小泉[こいずみ]防衛相[ぼうえいしょう]は、全[ぜん]自衛官[じえいかん]の給与[きゅうよ]が過去[かこ]最高[さいこう]の水準[すいじゅん]になると説明[せつめい]した。', 'Defense Minister Koizumi explained that the pay of all Self-Defense Force members will reach its highest level ever.', 'Koizumi Shinjirō is the defense minister. The Self-Defense Forces have long had trouble finding enough recruits.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-14-watami-mbo',
+      date: '2026-11-14',
+      emoji: '🍻',
+      titleEn: 'Izakaya chain Watami announces a management buyout of about 32 billion yen and plans to leave the stock market',
+      sources: [
+        { name: 'Jiji Press', url: 'https://www.jiji.com/jc/article?k=2026111301191&g=eco' },
+        { name: 'Kyodo via Yahoo! News', url: 'https://news.yahoo.co.jp/articles/77d8750696264490267cbc8565c229114d10a1fc' },
+        { name: 'TV Tokyo BIZ', url: 'https://txbiz.tv-tokyo.co.jp/wbs/newsl/post_352505' },
+      ],
+      quiz: [
+        ['Who will buy Watami\'s shares?', 'A company of Watami\'s president', 'A foreign bank', 'The government', 'A rival izakaya chain'],
+        ['About how much will it cost in all?', 'About 32 billion yen', 'About 3.2 billion yen', 'About 320 billion yen', 'About 1.28 billion yen'],
+        ['What kind of restaurant is Watami best known for?', 'Izakaya (Japanese-style pubs)', 'Sushi restaurants', 'Ramen shops', 'Hamburger shops'],
+      ],
+      levels: {
+        N5: {
+          title: 'ワタミの　株[かぶ]を　社長[しゃちょう]の　会社[かいしゃ]が　買[か]います',
+          lines: [
+            ['ワタミは　居酒屋[いざかや]などの　店[みせ]を　して　いる　会社[かいしゃ]です。', 'Watami is a company that runs izakaya and other restaurants.', 'An izakaya is a Japanese-style pub that serves food and drinks. Watami also delivers meals to people\'s homes.'],
+            ['十三日[じゅうさんにち]、ワタミは　大[おお]きな　ことを　発表[はっぴょう]しました。', 'On the 13th, Watami made a big announcement.'],
+            ['社長[しゃちょう]の　会社[かいしゃ]が、ワタミの　株[かぶ]を　全部[ぜんぶ]　買[か]います。', 'A company of the president will buy all of Watami\'s shares.', 'The buyer is the asset management company of founder Watanabe Miki, who is chairman and president. This is called an MBO (management buyout).'],
+            ['1株[かぶ]　1284円[えん]で　買[か]います。', 'It will buy them at 1,284 yen a share.'],
+            ['全部[ぜんぶ]で　約[やく]320億[おく]円[えん]です。', 'In all, it is about 32 billion yen.'],
+            ['うまく　いくと、ワタミの　株[かぶ]は　市場[しじょう]で　買[か]えなく　なります。', 'If it works, Watami\'s shares can no longer be bought on the market.', 'Watami will leave the Prime market of the Tokyo Stock Exchange.'],
+            ['ワタミは　居酒屋[いざかや]だけで　なく、いろいろな　食[た]べ物[もの]の　店[みせ]を　したいと　考[かんが]えて　います。', 'Watami wants to run many kinds of food businesses, not only izakaya.', 'In 2024 Watami bought the Japanese business of the sandwich chain Subway.'],
+          ],
+        },
+        N4: {
+          title: 'ワタミがMBOを発表[はっぴょう]　上場[じょうじょう]をやめる予定[よてい]',
+          lines: [
+            ['居酒屋[いざかや]チェーンのワタミは十三日[じゅうさんにち]、経営者[けいえいしゃ]が自分[じぶん]の会社[かいしゃ]を買[か]う「MBO」を行[おこな]うと発表[はっぴょう]しました。', 'On the 13th, the izakaya chain Watami announced that it will carry out an "MBO", in which the managers buy their own company.', 'MBO stands for "management buyout".'],
+            ['会長[かいちょう]と社長[しゃちょう]をしている創業者[そうぎょうしゃ]の渡辺[わたなべ]美樹[みき]さんの会社[かいしゃ]が、ワタミのすべての株[かぶ]を買[か]うことを目指[めざ]します。', 'A company of founder Watanabe Miki, who is both chairman and president, will aim to buy all of Watami\'s shares.', 'It is Watanabe\'s asset management company.'],
+            ['十六日[じゅうろくにち]から十二月[じゅうにがつ]二十八日[にじゅうはちにち]まで、1株[かぶ]1284円[えん]で株[かぶ]を買[か]い、金額[きんがく]は全部[ぜんぶ]で約[やく]320億[おく]円[えん]になる見込[みこ]みです。', 'It will buy shares at 1,284 yen each from the 16th to December 28th, and the total is expected to be about 32 billion yen.', 'An offer like this to buy shares from all shareholders at a set price is called a TOB (takeover bid).'],
+            ['この会社[かいしゃ]は、今[いま]もワタミの株[かぶ]の約[やく]24%を持[も]っています。', 'This company already owns about 24% of Watami\'s shares.'],
+            ['うまくいくと、ワタミは東京[とうきょう]証券[しょうけん]取引所[とりひきじょ]の上場[じょうじょう]をやめることになります。', 'If it succeeds, Watami will leave the Tokyo Stock Exchange.', '上場 means being listed, so that anyone can buy the shares on the stock exchange.'],
+            ['株主[かぶぬし]がもらう配当[はいとう]や株主[かぶぬし]優待[ゆうたい]もなくなります。', 'The dividends and shareholder perks that shareholders get will also end.', '株主優待 are gifts such as meal vouchers that many Japanese companies give their shareholders.'],
+            ['ワタミは2024年[ねん]にサブウェイの日本[にほん]の事業[じぎょう]を買[か]っていて、居酒屋[いざかや]だけに頼[たよ]らない会社[かいしゃ]に早[はや]く変[か]わりたい考[かんが]えです。', 'Watami bought Subway\'s business in Japan in 2024, and wants to change quickly into a company that does not depend only on izakaya.'],
+          ],
+        },
+        N3: {
+          title: 'ワタミ、約[やく]320億[おく]円[えん]でMBO　上場[じょうじょう]廃止[はいし]へ',
+          lines: [
+            ['居酒屋[いざかや]チェーン大手[おおて]のワタミは十三日[じゅうさんにち]、経営陣[けいえいじん]による自社[じしゃ]買収[ばいしゅう]を実施[じっし]すると発表[はっぴょう]した。', 'On the 13th, major izakaya chain Watami announced that it will carry out a management buyout.', 'A management buyout (MBO) is when a company\'s managers buy the company.'],
+            ['創業者[そうぎょうしゃ]の渡辺[わたなべ]美樹[みき]会長[かいちょう]兼[けん]社長[しゃちょう]の資産[しさん]管理[かんり]会社[がいしゃ]が、十六日[じゅうろくにち]から1株[かぶ]1284円[えん]で株式[かぶしき]公開[こうかい]買[か]い付[つ]けを行[おこな]い、全株[ぜんかぶ]の取得[しゅとく]を目指[めざ]す。', 'The asset management company of founder Watanabe Miki, the chairman and president, will make a tender offer at 1,284 yen a share from the 16th, aiming to acquire all the shares.', '株式公開買い付け (TOB) is an offer to buy shares from all shareholders at a set price.'],
+            ['買[か]い付[つ]け期間[きかん]は十二月[じゅうにがつ]二十八日[にじゅうはちにち]までで、総額[そうがく]は約[やく]320億[おく]円[えん]に上[のぼ]る見通[みとお]しだ。', 'The offer runs until December 28th, and the total is expected to come to about 32 billion yen.'],
+            ['成立[せいりつ]すれば、ワタミは東証[とうしょう]プライム市場[しじょう]から上場[じょうじょう]廃止[はいし]となる。', 'If it succeeds, Watami will be delisted from the Prime market of the Tokyo Stock Exchange.', '東証 is short for 東京証券取引所, the Tokyo Stock Exchange.'],
+            ['2027年[ねん]3月期[がつき]の配当[はいとう]は見送[みおく]り、株主[かぶぬし]優待[ゆうたい]も廃止[はいし]するという。', 'It will pay no dividend for the business year ending March 2027 and will also end its shareholder perks.', '3月期 is a business year that ends in March.'],
+            ['ワタミは2024年[ねん]にサンドイッチチェーンの日本[にほん]サブウェイを買収[ばいしゅう]するなど、居酒屋[いざかや]に依存[いぞん]しない事業[じぎょう]構造[こうぞう]への転換[てんかん]を進[すす]めてきた。', 'Watami has been shifting to a business that does not depend on izakaya, for example by buying the sandwich chain Subway Japan in 2024.'],
+            ['非上場[ひじょうじょう]化[か]で経営[けいえい]の自由度[じゆうど]を高[たか]め、総合[そうごう]外食[がいしょく]企業[きぎょう]への転換[てんかん]を加速[かそく]させる狙[ねら]いとみられる。', 'By going private it is thought to aim to gain more freedom in management and speed up its change into an all-round restaurant company.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-14-planimal-cells',
+      date: '2026-11-14',
+      emoji: '🧫',
+      titleEn: 'University of Tokyo team makes "planimal" cells by fusing algae with animal cells, a world first',
+      sources: [
+        { name: 'University of Tokyo (press release)', url: 'https://www.k.u-tokyo.ac.jp/information/category/press/0030784.html' },
+        { name: 'Jiji Press', url: 'https://www.jiji.com/jc/article?k=2026111200953&g=soc' },
+        { name: 'Asahi via Yahoo! News', url: 'https://news.yahoo.co.jp/articles/b53eeadb0c0f878457a290652edc65a75ff1103f' },
+      ],
+      quiz: [
+        ['What did the team join together to make the new cell?', 'Algae and hamster cells', 'Rice and mouse cells', 'Mushrooms and human skin cells', 'Moss and frog cells'],
+        ['What is the new cell called?', 'A "planimal" cell', 'An "algamal" cell', 'A "hamplant" cell', 'A "greenimal" cell'],
+        ['What can the new cell not do yet?', 'Make food from light', 'Divide and grow', 'Live for more than a day', 'Keep the algae\'s DNA'],
+      ],
+      levels: {
+        N5: {
+          title: '植物[しょくぶつ]と　動物[どうぶつ]の　細胞[さいぼう]を　一[ひと]つに',
+          lines: [
+            ['東京[とうきょう]大学[だいがく]などの　チームが、新[あたら]しい　細胞[さいぼう]を　作[つく]りました。', 'A team from the University of Tokyo and others made a new cell.', '細胞 (さいぼう) means "cell", the tiny unit that living things are made of.'],
+            ['植物[しょくぶつ]の　ような　藻類[そうるい]と、動物[どうぶつ]の　細胞[さいぼう]を　一[ひと]つに　しました。', 'They joined algae, which are like plants, and an animal cell into one.', 'The algae is called シゾン (Cyanidioschyzon). This one was collected at a volcano in Italy.'],
+            ['動物[どうぶつ]の　細胞[さいぼう]は　ハムスターの　細胞[さいぼう]です。', 'The animal cells are hamster cells.', 'They come from a Chinese hamster and are used to make medicines.'],
+            ['名前[なまえ]は　「プラニマル細胞[さいぼう]」です。', 'Their name is "planimal cells".', 'The name comes from "plant" + "animal".'],
+            ['世界[せかい]で　初[はじ]めてです。', 'It is a world first.'],
+            ['この　細胞[さいぼう]は　150回[かい]　以上[いじょう]　分[わ]かれて、増[ふ]えました。', 'These cells split and grew more than 150 times.', 'The cells went through more than 150 generations, as long as ordinary cultured cells.'],
+            ['でも、まだ　光[ひかり]から　栄養[えいよう]を　作[つく]る　ことは　できません。', 'But they cannot make food from light yet.', 'Making food from light is photosynthesis (光合成). The algae\'s chloroplasts broke down when the cells were joined.'],
+          ],
+        },
+        N4: {
+          title: '藻類[そうるい]と動物[どうぶつ]の細胞[さいぼう]を合[あ]わせた「プラニマル細胞[さいぼう]」',
+          lines: [
+            ['東京[とうきょう]大学[だいがく]などの研究[けんきゅう]チームは十二日[じゅうににち]、植物[しょくぶつ]と動物[どうぶつ]を合[あ]わせた「プラニマル細胞[さいぼう]」を世界[せかい]で初[はじ]めて作[つく]ったと発表[はっぴょう]しました。', 'On the 12th, a research team from the University of Tokyo and others announced that it had made "planimal cells", a mix of plant and animal, for the first time in the world.', 'The name comes from "plant" + "animal".'],
+            ['チームは、光合成[こうごうせい]をするシゾンという原始的[げんしてき]な藻類[そうるい]と、ハムスターの細胞[さいぼう]を融合[ゆうごう]させました。', 'The team fused a primitive alga that does photosynthesis, called Cyanidioschyzon, with hamster cells.', 'The algae was collected at a volcano in Italy. The hamster cells are Chinese hamster cells used to make medicines.'],
+            ['一日[いちにち]か二日[ふつか]で、藻類[そうるい]のほとんどすべてのDNAが動物[どうぶつ]の細胞[さいぼう]の染色体[せんしょくたい]に入[はい]りました。', 'Within a day or two, almost all of the algae\'s DNA had gone into the chromosomes of the animal cells.'],
+            ['この細胞[さいぼう]は150世代[せだい]以上[いじょう]、問題[もんだい]なく分裂[ぶんれつ]を続[つづ]けたということです。', 'These cells kept dividing without problems for more than 150 generations.'],
+            ['ただ、融合[ゆうごう]するときに葉緑体[ようりょくたい]が壊[こわ]れてしまうため、まだ光合成[こうごうせい]はできません。', 'However, the chloroplasts break down during the fusion, so the cells cannot do photosynthesis yet.', '葉緑体 (chloroplasts) are the parts of a plant cell that do photosynthesis.'],
+            ['チームはこれから、葉緑体[ようりょくたい]を入[い]れたり、藻類[そうるい]の遺伝子[いでんし]を働[はたら]かせたりすることを目指[めざ]しています。', 'From now on, the team aims to put chloroplasts in and to make the algae\'s genes work.'],
+            ['将来[しょうらい]は、役[やく]に立[た]つ物質[ぶっしつ]を作[つく]ることや、二酸化炭素[にさんかたんそ]を減[へ]らすことにつながると期待[きたい]されています。', 'In the future, it is hoped this will lead to making useful substances and to cutting carbon dioxide.'],
+          ],
+        },
+        N3: {
+          title: '藻類[そうるい]と動物[どうぶつ]細胞[さいぼう]を融合[ゆうごう]　「プラニマル細胞[さいぼう]」を世界[せかい]初[はつ]作製[さくせい]',
+          lines: [
+            ['東京[とうきょう]大学[だいがく]などの研究[けんきゅう]チームは十二日[じゅうににち]、藻類[そうるい]と動物[どうぶつ]の培養[ばいよう]細胞[さいぼう]を融合[ゆうごう]させた動植物[どうしょくぶつ]ハイブリッド細胞[さいぼう]「プラニマル細胞[さいぼう]」を、世界[せかい]で初[はじ]めて作製[さくせい]したと発表[はっぴょう]した。', 'On the 12th, a research team from the University of Tokyo and others announced that it had made, for the first time in the world, a plant-animal hybrid cell, the "planimal cell", by fusing algae with cultured animal cells.', 'The results were published in the journal Nature Communications.'],
+            ['使[つか]われたのは、イタリアの火山[かざん]で採取[さいしゅ]されたシゾンという原始的[げんしてき]な藻類[そうるい]と、医薬品[いやくひん]の生産[せいさん]に使[つか]われるチャイニーズハムスターの卵巣[らんそう]由来[ゆらい]の細胞[さいぼう]だ。', 'They used a primitive alga called Cyanidioschyzon, collected at a volcano in Italy, and cells from Chinese hamster ovaries that are used to produce medicines.'],
+            ['融合[ゆうごう]の一日[いちにち]から二日[ふつか]後[ご]には、シゾンのほぼすべてのDNAが動物[どうぶつ]細胞[さいぼう]の染色体[せんしょくたい]に組[く]み込[こ]まれていた。', 'One to two days after the fusion, almost all of the alga\'s DNA had been built into the animal cells\' chromosomes.'],
+            ['プラニマル細胞[さいぼう]は150世代[せだい]以上[いじょう]にわたって分裂[ぶんれつ]を繰[く]り返[かえ]し、藻類[そうるい]のDNAも安定[あんてい]して保[たも]たれたという。', 'The planimal cells divided again and again over more than 150 generations, and the algal DNA was kept stably too.'],
+            ['一方[いっぽう]、融合[ゆうごう]の際[さい]に葉緑体[ようりょくたい]は分解[ぶんかい]されるため、現段階[げんだんかい]では光合成[こうごうせい]はできない。', 'On the other hand, the chloroplasts are broken down during fusion, so at this stage the cells cannot photosynthesize.'],
+            ['研究[けんきゅう]チームは今後[こんご]、葉緑体[ようりょくたい]の導入[どうにゅう]や、シゾンの遺伝子[いでんし]を働[はたら]かせることを目指[めざ]す。', 'The team now aims to introduce chloroplasts and to make the alga\'s genes work.'],
+            ['実現[じつげん]すれば、有用[ゆうよう]物質[ぶっしつ]の生産[せいさん]や細胞[さいぼう]培養[ばいよう]のコスト削減[さくげん]、二酸化炭素[にさんかたんそ]の排出[はいしゅつ]削減[さくげん]につながる可能性[かのうせい]があるとされる。', 'If that is achieved, it could lead to producing useful substances, cutting the cost of growing cells, and reducing carbon dioxide emissions.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-11-13-chiba-bird-flu',
       date: '2026-11-13',
       emoji: '🐔',

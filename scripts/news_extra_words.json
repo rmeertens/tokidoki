@@ -10203,5 +10203,560 @@
     "おもさ",
     "weight",
     "noun"
+  ],
+  "自衛官": [
+    "じえいかん",
+    "Self-Defense Force member",
+    "noun"
+  ],
+  "25万": [
+    "にじゅうごまん",
+    "250,000",
+    "number"
+  ],
+  "25万300円": [
+    "にじゅうごまんさんびゃくえん",
+    "250,300 yen",
+    "number + counter"
+  ],
+  "1万800円": [
+    "いちまんはっぴゃくえん",
+    "10,800 yen",
+    "number + counter"
+  ],
+  "1万800円増": [
+    "いちまんはっぴゃくえんぞう",
+    "an increase of 10,800 yen",
+    "number + counter"
+  ],
+  "30歳": [
+    "さんじゅっさい",
+    "30 years old",
+    "number + counter"
+  ],
+  "40歳": [
+    "よんじゅっさい",
+    "40 years old",
+    "number + counter"
+  ],
+  "20万円": [
+    "にじゅうまんえん",
+    "200,000 yen",
+    "number + counter"
+  ],
+  "約20万円": [
+    "やくにじゅうまんえん",
+    "about 200,000 yen",
+    "number + counter"
+  ],
+  "小泉": [
+    "こいずみ",
+    "Koizumi (Shinjirō, defense minister)",
+    "name"
+  ],
+  "基本給": [
+    "きほんきゅう",
+    "basic pay, base salary",
+    "noun"
+  ],
+  "入隊": [
+    "にゅうたい",
+    "joining (the forces)",
+    "noun, suru verb"
+  ],
+  "30代": [
+    "さんじゅうだい",
+    "one's thirties",
+    "number + counter"
+  ],
+  "40代": [
+    "よんじゅうだい",
+    "one's forties",
+    "number + counter"
+  ],
+  "3億円": [
+    "さんおくえん",
+    "300 million yen",
+    "number + counter"
+  ],
+  "転居": [
+    "てんきょ",
+    "moving house",
+    "noun, suru verb"
+  ],
+  "手当": [
+    "てあて",
+    "allowance (money paid on top of pay)",
+    "noun"
+  ],
+  "転居手当": [
+    "てんきょてあて",
+    "relocation allowance",
+    "noun"
+  ],
+  "給与": [
+    "きゅうよ",
+    "pay, salary",
+    "noun"
+  ],
+  "引き上げ": [
+    "ひきあげ",
+    "raising (prices, pay)",
+    "noun"
+  ],
+  "高卒": [
+    "こうそつ",
+    "high-school graduate",
+    "noun"
+  ],
+  "25万円超": [
+    "にじゅうごまんえんちょう",
+    "over 250,000 yen",
+    "number + counter"
+  ],
+  "給与法": [
+    "きゅうよほう",
+    "pay act (law on salaries)",
+    "noun"
+  ],
+  "人事院": [
+    "じんじいん",
+    "National Personnel Authority",
+    "organization"
+  ],
+  "人事院勧告": [
+    "じんじいんかんこく",
+    "National Personnel Authority recommendation (on public servants' pay)",
+    "noun"
+  ],
+  "踏まえる": [
+    "ふまえる",
+    "to be based on, to take into account",
+    "verb"
+  ],
+  "縮める": [
+    "ちぢめる",
+    "to shorten, to narrow",
+    "verb"
+  ],
+  "月額": [
+    "げつがく",
+    "monthly amount",
+    "noun"
+  ],
+  "隊員": [
+    "たいいん",
+    "member (of a force or unit)",
+    "noun"
+  ],
+  "試算": [
+    "しさん",
+    "estimate, trial calculation",
+    "noun, suru verb"
+  ],
+  "転勤": [
+    "てんきん",
+    "transfer (to another post)",
+    "noun, suru verb"
+  ],
+  "新設": [
+    "しんせつ",
+    "newly setting up",
+    "noun, suru verb"
+  ],
+  "ワタミ": [
+    "わたみ",
+    "Watami (restaurant company)",
+    "organization"
+  ],
+  "1株": [
+    "ひとかぶ",
+    "one share",
+    "number + counter"
+  ],
+  "1284円": [
+    "せんにひゃくはちじゅうよえん",
+    "1,284 yen",
+    "number + counter"
+  ],
+  "約320億円": [
+    "やくさんびゃくにじゅうおくえん",
+    "about 32 billion yen",
+    "number + counter"
+  ],
+  "320億円": [
+    "さんびゃくにじゅうおくえん",
+    "32 billion yen",
+    "number + counter"
+  ],
+  "MBO": [
+    "エムビーオー",
+    "management buyout",
+    "noun"
+  ],
+  "上場": [
+    "じょうじょう",
+    "listing (on a stock exchange)",
+    "noun, suru verb"
+  ],
+  "上場廃止": [
+    "じょうじょうはいし",
+    "delisting (from a stock exchange)",
+    "noun"
+  ],
+  "非上場化": [
+    "ひじょうじょうか",
+    "going private (leaving the stock market)",
+    "noun"
+  ],
+  "チェーン": [
+    "チェーン",
+    "chain (of shops)",
+    "noun"
+  ],
+  "創業者": [
+    "そうぎょうしゃ",
+    "founder (of a company)",
+    "noun"
+  ],
+  "渡辺美樹": [
+    "わたなべみき",
+    "Watanabe Miki (founder of Watami)",
+    "name"
+  ],
+  "渡辺": [
+    "わたなべ",
+    "Watanabe (family name)",
+    "name"
+  ],
+  "美樹": [
+    "みき",
+    "Miki (given name)",
+    "name"
+  ],
+  "24%": [
+    "にじゅうよんパーセント",
+    "24%",
+    "number + counter"
+  ],
+  "約24%": [
+    "やくにじゅうよんパーセント",
+    "about 24%",
+    "number + counter"
+  ],
+  "3.4%": [
+    "さんてんよんパーセント",
+    "3.4%",
+    "number + counter"
+  ],
+  "約3.4%": [
+    "やくさんてんよんパーセント",
+    "about 3.4%",
+    "number + counter"
+  ],
+  "株主": [
+    "かぶぬし",
+    "shareholder",
+    "noun"
+  ],
+  "配当": [
+    "はいとう",
+    "dividend",
+    "noun"
+  ],
+  "優待": [
+    "ゆうたい",
+    "special treatment, perks",
+    "noun"
+  ],
+  "株主優待": [
+    "かぶぬしゆうたい",
+    "shareholder perks (gifts, vouchers)",
+    "noun"
+  ],
+  "サブウェイ": [
+    "サブウェイ",
+    "Subway (sandwich chain)",
+    "organization"
+  ],
+  "日本サブウェイ": [
+    "にほんサブウェイ",
+    "Subway Japan",
+    "organization"
+  ],
+  "廃止": [
+    "はいし",
+    "abolition, ending",
+    "noun, suru verb"
+  ],
+  "自社": [
+    "じしゃ",
+    "one's own company",
+    "noun"
+  ],
+  "自社買収": [
+    "じしゃばいしゅう",
+    "buyout of one's own company",
+    "noun"
+  ],
+  "資産": [
+    "しさん",
+    "assets",
+    "noun"
+  ],
+  "資産管理会社": [
+    "しさんかんりがいしゃ",
+    "asset management company",
+    "noun"
+  ],
+  "買い付け": [
+    "かいつけ",
+    "purchase, buying up",
+    "noun"
+  ],
+  "公開買い付け": [
+    "こうかいかいつけ",
+    "tender offer, takeover bid",
+    "noun"
+  ],
+  "株式公開買い付け": [
+    "かぶしきこうかいかいつけ",
+    "tender offer for shares (TOB)",
+    "noun"
+  ],
+  "東証": [
+    "とうしょう",
+    "Tokyo Stock Exchange",
+    "organization"
+  ],
+  "プライム": [
+    "プライム",
+    "Prime (top market of the Tokyo Stock Exchange)",
+    "noun"
+  ],
+  "プライム市場": [
+    "プライムしじょう",
+    "Prime market (of the Tokyo Stock Exchange)",
+    "noun"
+  ],
+  "依存": [
+    "いぞん",
+    "dependence",
+    "noun, suru verb"
+  ],
+  "転換": [
+    "てんかん",
+    "change, shift",
+    "noun, suru verb"
+  ],
+  "加速": [
+    "かそく",
+    "acceleration, speeding up",
+    "noun, suru verb"
+  ],
+  "3月期": [
+    "さんがつき",
+    "business year ending in March",
+    "noun"
+  ],
+  "細胞": [
+    "さいぼう",
+    "cell (of a living thing)",
+    "noun"
+  ],
+  "東京大学": [
+    "とうきょうだいがく",
+    "University of Tokyo",
+    "organization"
+  ],
+  "藻類": [
+    "そうるい",
+    "algae",
+    "noun"
+  ],
+  "ハムスター": [
+    "ハムスター",
+    "hamster",
+    "noun"
+  ],
+  "プラニマル": [
+    "プラニマル",
+    "planimal (plant + animal)",
+    "noun"
+  ],
+  "プラニマル細胞": [
+    "プラニマルさいぼう",
+    "planimal cell (plant-animal hybrid cell)",
+    "noun"
+  ],
+  "150回": [
+    "ひゃくごじゅっかい",
+    "150 times",
+    "number + counter"
+  ],
+  "150": [
+    "ひゃくごじゅう",
+    "150",
+    "number"
+  ],
+  "150世代": [
+    "ひゃくごじゅうせだい",
+    "150 generations",
+    "number + counter"
+  ],
+  "光合成": [
+    "こうごうせい",
+    "photosynthesis",
+    "noun"
+  ],
+  "原始的": [
+    "げんしてき",
+    "primitive",
+    "na-adjective"
+  ],
+  "シゾン": [
+    "シゾン",
+    "Cyanidioschyzon (a primitive red alga)",
+    "noun"
+  ],
+  "融合": [
+    "ゆうごう",
+    "fusion",
+    "noun, suru verb"
+  ],
+  "染色体": [
+    "せんしょくたい",
+    "chromosome",
+    "noun"
+  ],
+  "世代": [
+    "せだい",
+    "generation",
+    "noun"
+  ],
+  "分裂": [
+    "ぶんれつ",
+    "division, splitting",
+    "noun, suru verb"
+  ],
+  "働かせる": [
+    "はたらかせる",
+    "to make (something) work",
+    "verb"
+  ],
+  "作製": [
+    "さくせい",
+    "making, producing",
+    "noun, suru verb"
+  ],
+  "培養": [
+    "ばいよう",
+    "culture (growing cells)",
+    "noun, suru verb"
+  ],
+  "動植物": [
+    "どうしょくぶつ",
+    "plants and animals",
+    "noun"
+  ],
+  "ハイブリッド": [
+    "ハイブリッド",
+    "hybrid",
+    "noun"
+  ],
+  "イタリア": [
+    "イタリア",
+    "Italy",
+    "place name"
+  ],
+  "火山": [
+    "かざん",
+    "volcano",
+    "noun"
+  ],
+  "医薬品": [
+    "いやくひん",
+    "medicine, pharmaceuticals",
+    "noun"
+  ],
+  "チャイニーズハムスター": [
+    "チャイニーズハムスター",
+    "Chinese hamster",
+    "noun"
+  ],
+  "チャイニーズ": [
+    "チャイニーズ",
+    "Chinese",
+    "noun"
+  ],
+  "卵巣": [
+    "らんそう",
+    "ovary",
+    "noun"
+  ],
+  "由来": [
+    "ゆらい",
+    "origin, derived from",
+    "noun"
+  ],
+  "二日後": [
+    "ふつかご",
+    "two days later",
+    "noun"
+  ],
+  "組み込む": [
+    "くみこむ",
+    "to build in, to incorporate",
+    "verb"
+  ],
+  "分解": [
+    "ぶんかい",
+    "breaking down, decomposition",
+    "noun, suru verb"
+  ],
+  "有用": [
+    "ゆうよう",
+    "useful",
+    "na-adjective"
+  ],
+  "有用物質": [
+    "ゆうようぶっしつ",
+    "useful substance",
+    "noun"
+  ],
+  "コスト": [
+    "コスト",
+    "cost",
+    "noun"
+  ],
+  "削減": [
+    "さくげん",
+    "cut, reduction",
+    "noun, suru verb"
+  ],
+  "排出": [
+    "はいしゅつ",
+    "emission, discharge",
+    "noun, suru verb"
+  ],
+  "葉緑体": [
+    "ようりょくたい",
+    "chloroplast",
+    "noun"
+  ],
+  "にわたって": [
+    "にわたって",
+    "over, throughout (a period or range)",
+    "expression"
+  ],
+  "原始": [
+    "げんし",
+    "primitive, original",
+    "noun"
+  ],
+  "二士": [
+    "にし",
+    "2nd class private (lowest SDF rank)",
+    "noun"
   ]
 }
