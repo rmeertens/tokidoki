@@ -3610,7 +3610,7 @@
       ],
       levels: {
         N5: {
-          title: '日本[にほん]の経済[けいざい]、2027年[ねん]に5番目[ばんめ]になりそうです',
+          title: '日本[にほん]の経済[けいざい]、2027年[ねん]に6番目[ばんめ]になりそうです',
           lines: [
             ['十五日[じゅうごにち]に、IMF（国際[こくさい]通貨[つうか]基金[ききん]）が、アジアの経済[けいざい]について話[はな]しました。', 'On the 15th, the IMF (International Monetary Fund) spoke about Asia\'s economy.'],
             ['今年[ことし]、日本[にほん]の経済[けいざい]は、世界[せかい]で4番目[ばんめ]に大[おお]きいままです。', 'This year, Japan\'s economy remains the fourth biggest in the world.'],
