@@ -27,6 +27,171 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-11-15-host-nation-support',
+      date: '2026-11-15',
+      emoji: '💴',
+      titleEn: 'U.S. reportedly asks Japan to pay about three times more for hosting American troops, over 3 trillion yen in five years; Japan is reluctant',
+      sources: [
+        { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/11/14/japan/politics/japan-triple-host-nation-support-us/' },
+        { name: 'Nikkei Asia', url: 'https://asia.nikkei.com/politics/international-relations/us-wants-japan-to-nearly-triple-budget-for-hosting-american-troops' },
+        { name: 'Anadolu Agency (Kyodo)', url: 'https://www.aa.com.tr/en/americas/us-demands-japan-triple-spending-on-american-troops-to-19b-starting-next-year-report/4123832' },
+        { name: 'Yomiuri via Yahoo! News', url: 'https://news.yahoo.co.jp/articles/3b9f963f6b07234122d28e6352a0671255fc24df' },
+      ],
+      quiz: [
+        ['What does the United States want Japan to pay more for?', 'The U.S. forces stationed in Japan', 'New airports in Japan', 'American cars for the government', 'An international sports event'],
+        ['How much does the U.S. want, compared with now?', 'About three times as much', 'About twice as much', 'About half as much', 'About ten times as much'],
+        ['By when do the two countries want to decide?', 'By the end of this year', 'By next summer', 'By the end of this month', 'In five years'],
+      ],
+      levels: {
+        N5: {
+          title: 'アメリカ「日本[にほん]は　もっと　お金[かね]を　払[はら]って」',
+          lines: [
+            ['日本[にほん]には　アメリカの　軍隊[ぐんたい]が　います。', 'There are American armed forces in Japan.', 'These are the U.S. forces in Japan (在日米軍), there under the Japan–U.S. security treaty.'],
+            ['日本[にほん]は　この　軍隊[ぐんたい]の　お金[かね]を　少[すこ]し　払[はら]って　います。', 'Japan pays some of the money for these forces.', 'This money is often called 思いやり予算 (おもいやりよさん), "the sympathy budget".'],
+            ['今[いま]は　5年[ねん]で　1兆[ちょう]円[えん]ぐらいです。', 'Now it is about 1 trillion yen for five years.', '1兆 is one trillion. The current deal, for the years 2022 to 2026, is about 1.06 trillion yen.'],
+            ['アメリカは、2027年[ねん]から　5年[ねん]で　3兆[ちょう]円[えん]より　多[おお]く　払[はら]って　ほしいと　言[い]って　いる　そうです。', 'Reportedly, America says it wants Japan to pay more than 3 trillion yen over five years from 2027.', 'Japanese newspapers reported this, citing unnamed sources. Neither government has announced the figure.'],
+            ['今[いま]の　3倍[ばい]ぐらいです。', 'That is about three times as much as now.'],
+            ['日本[にほん]の　政府[せいふ]は、こんなに　たくさん　払[はら]うのは　難[むずか]しいと　考[かんが]えて　います。', 'The Japanese government thinks it is difficult to pay this much.'],
+            ['二[ふた]つの　国[くに]は、今年[ことし]の　終[お]わりまでに　決[き]めたいです。', 'The two countries want to decide by the end of this year.'],
+          ],
+        },
+        N4: {
+          title: 'アメリカ、在日[ざいにち]米軍[べいぐん]のお金[かね]を3倍[ばい]にするよう求[もと]める',
+          lines: [
+            ['日本[にほん]にいるアメリカ軍[ぐん]のためのお金[かね]について、アメリカが今[いま]の約[やく]3倍[ばい]を払[はら]うよう日本[にほん]に求[もと]めていることがわかりました。', 'It has emerged that the United States is asking Japan to pay about three times as much as now for the U.S. forces in Japan.'],
+            ['このお金[かね]は「在日[ざいにち]米軍[べいぐん]駐留[ちゅうりゅう]経費[けいひ]」で、「思[おも]いやり予算[よさん]」とも呼[よ]ばれています。', 'This money is "the cost of stationing U.S. forces in Japan", also called "the sympathy budget".', '在日米軍 means "U.S. forces in Japan"; 駐留 means "being stationed".'],
+            ['今[いま]の約束[やくそく]では、2022年度[ねんど]から2026年度[ねんど]までの5年間[ねんかん]で、約[やく]1兆[ちょう]550億[おく]円[えん]です。', 'Under the current agreement, it is about 1.055 trillion yen for the five years from fiscal 2022 to fiscal 2026.', '年度 is the fiscal year, from April to March.'],
+            ['報道[ほうどう]によると、アメリカは2027年度[ねんど]からの5年間[ねんかん]で、3兆[ちょう]円[えん]を超[こ]えるお金[かね]を求[もと]めています。', 'According to reports, the U.S. is asking for more than 3 trillion yen over the five years from fiscal 2027.'],
+            ['攻撃[こうげき]から基地[きち]を守[まも]るための工事[こうじ]のお金[かね]なども、入[はい]るかもしれません。', 'It may also include money for work to protect the bases from attacks.'],
+            ['日本[にほん]の政府[せいふ]は、少[すこ]し増[ふ]やすことは考[かんが]えていますが、大[おお]きく増[ふ]やすのは難[むずか]しいという考[かんが]えです。', 'The Japanese government is thinking about a small increase, but its view is that a big increase would be difficult.'],
+            ['今[いま]の約束[やくそく]は2027年[ねん]3月[がつ]で終[お]わるため、両方[りょうほう]の政府[せいふ]は今年[ことし]の終[お]わりまでに決[き]めたいと考[かんが]えています。', 'The current agreement ends in March 2027, so both governments want to decide by the end of this year.'],
+          ],
+        },
+        N3: {
+          title: '在日[ざいにち]米軍[べいぐん]駐留[ちゅうりゅう]経費[けいひ]　米国[べいこく]が3倍[ばい]の負担[ふたん]を要求[ようきゅう]　日本[にほん]は難色[なんしょく]',
+          lines: [
+            ['在日[ざいにち]米軍[べいぐん]駐留[ちゅうりゅう]経費[けいひ]の日本[にほん]側[がわ]の負担[ふたん]をめぐり、米[べい]政府[せいふ]が現在[げんざい]の約[やく]3倍[ばい]に当[あ]たる金額[きんがく]を要求[ようきゅう]していることが分[わ]かった。', 'It has emerged that, over Japan\'s share of the cost of stationing U.S. forces in Japan, the U.S. government is demanding an amount about three times the current one.', 'This money is often called 思いやり予算, "the sympathy budget".'],
+            ['複数[ふくすう]の報道[ほうどう]によると、要求[ようきゅう]は2027年度[ねんど]からの5年間[ねんかん]で総額[そうがく]3兆[ちょう]円[えん]を超[こ]えるとみられる。', 'According to several reports, the demand is thought to total more than 3 trillion yen over the five years from fiscal 2027.', 'The reports cite unnamed sources; neither government has announced the figure.'],
+            ['2022年度[ねんど]から2026年度[ねんど]までの現行[げんこう]の負担[ふたん]は、総額[そうがく]約[やく]1兆[ちょう]550億[おく]円[えん]だ。', 'Japan\'s current share, for fiscal 2022 to 2026, totals about 1.055 trillion yen.'],
+            ['米軍[べいぐん]の施設[しせつ]を攻撃[こうげき]から守[まも]るための強化[きょうか]費用[ひよう]なども含[ふく]まれる可能性[かのうせい]があるという。', 'It may also include the cost of strengthening U.S. military facilities against attack.'],
+            ['日本[にほん]政府[せいふ]は増額[ぞうがく]を検討[けんとう]しているものの、過度[かど]な負担[ふたん]増[ぞう]には難色[なんしょく]を示[しめ]している。', 'The Japanese government is considering an increase, but is reluctant to accept an excessive rise in its burden.', '難色を示す means "to show reluctance".'],
+            ['共同通信[きょうどうつうしん]によると、日本[にほん]側[がわ]は5年間[ねんかん]で約[やく]1兆[ちょう]5000億[おく]円[えん]程度[ていど]を軸[じく]に検討[けんとう]しているという。', 'According to Kyodo News, the Japanese side is considering around 1.5 trillion yen over five years as the basis.', '〜を軸に means "centred on", "taking ... as the basis".'],
+            ['現行[げんこう]の特別[とくべつ]協定[きょうてい]は2027年[ねん]3月[がつ]に期限[きげん]を迎[むか]えるため、両[りょう]政府[せいふ]は年末[ねんまつ]までの合意[ごうい]を目指[めざ]すが、交渉[こうしょう]は難航[なんこう]するおそれがある。', 'The current special agreement expires in March 2027, so the two governments aim to agree by the end of the year, but the talks may run into difficulty.', '特別協定 is the special agreement that sets Japan\'s share of the costs.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-15-nakai-skate-america',
+      date: '2026-11-15',
+      emoji: '⛸️',
+      titleEn: 'Ami Nakai leads Skate America after the short program with 82.20 points, the season\'s best score',
+      sources: [
+        { name: 'NBC Sports', url: 'https://www.nbcsports.com/olympics/news/skate-america-womens-short-program-2026' },
+        { name: 'AP via Fox Sports', url: 'https://www.foxsports.com/articles/summer/olympic-bronze-medalist-ami-nakai-of-japan-leads-after-short-program-at-skate-america' },
+        { name: 'Kyodo via Chunichi', url: 'https://www.chunichi.co.jp/article/1339657' },
+        { name: 'Chunichi Sports', url: 'https://www.chunichi.co.jp/article/1338462' },
+      ],
+      quiz: [
+        ['In which country is the competition being held?', 'The United States', 'Japan', 'Canada', 'France'],
+        ['What jump did Nakai do first?', 'A triple Axel', 'A quadruple Lutz', 'A double Axel', 'A single loop'],
+        ['What was special about her score of 82.20?', 'It was her best ever', 'It was her lowest this season', 'It was the same as her last event', 'It was a new Olympic record'],
+      ],
+      levels: {
+        N5: {
+          title: '中井[なかい]亜美[あみ]選手[せんしゅ]が　1位[い]',
+          lines: [
+            ['アメリカで　フィギュアスケートの　大会[たいかい]が　あります。', 'A figure skating competition is being held in America.', 'Skate America, the fourth event of this season\'s Grand Prix series, in Everett, Washington.'],
+            ['十四日[じゅうよっか]、女子[じょし]の　ショートプログラムが　ありました。', 'On the 14th, the women\'s short program took place.'],
+            ['日本[にほん]の　中井[なかい]亜美[あみ]選手[せんしゅ]が　1位[い]に　なりました。', 'Japan\'s Ami Nakai came first.', 'Nakai, 18, is from Niigata City. She won bronze at the Winter Olympics in February.'],
+            ['中井[なかい]選手[せんしゅ]は　最初[さいしょ]に　トリプルアクセルを　跳[と]びました。', 'Nakai did a triple Axel first.', 'A triple Axel is a jump with three and a half turns, which few women can do.'],
+            ['点数[てんすう]は　82.20点[てん]で、今[いま]までで　一番[いちばん]　いい　点数[てんすう]でした。', 'Her score was 82.20 points, her best ever.'],
+            ['今[いま]の　シーズンで、世界[せかい]で　一番[いちばん]　高[たか]い　点数[てんすう]です。', 'It is the highest score in the world this season.'],
+            ['フリーは　日本[にほん]の　時間[じかん]で　十六日[じゅうろくにち]の　朝[あさ]です。', 'The free skate is on the morning of the 16th, Japan time.'],
+          ],
+        },
+        N4: {
+          title: '中井[なかい]亜美[あみ]選手[せんしゅ]、スケートアメリカで1位[い]に',
+          lines: [
+            ['フィギュアスケートのグランプリシリーズ第[だい]4戦[せん]、スケートアメリカが、アメリカのワシントン州[しゅう]で行[おこな]われています。', 'Skate America, the fourth event of the figure skating Grand Prix series, is being held in the state of Washington in America.'],
+            ['十四日[じゅうよっか]の女子[じょし]ショートプログラムで、中井[なかい]亜美[あみ]選手[せんしゅ]が82.20点[てん]で1位[い]になりました。', 'In the women\'s short program on the 14th, Ami Nakai came first with 82.20 points.', 'Nakai, 18, is from Niigata City. She won bronze at the Winter Olympics in February.'],
+            ['中井[なかい]選手[せんしゅ]は最初[さいしょ]のトリプルアクセルを成功[せいこう]させ、そのあとのジャンプもきれいに跳[と]びました。', 'Nakai landed her opening triple Axel and also did the jumps after it cleanly.'],
+            ['スピンとステップも、すべて一番[いちばん]高[たか]いレベル4でした。', 'Her spins and steps were all at level 4, the highest.'],
+            ['82.20点[てん]は自己[じこ]ベストで、今[いま]のシーズンのショートプログラムでは世界[せかい]で一番[いちばん]高[たか]い点数[てんすう]です。', '82.20 is her personal best, and the highest short program score in the world this season.', '自己ベスト means "personal best".'],
+            ['2位[い]の選手[せんしゅ]とは7.96点[てん]の差[さ]があります。', 'She is 7.96 points ahead of the skater in second place.'],
+            ['中井[なかい]選手[せんしゅ]は、グランプリシリーズで二[ふた]つ続[つづ]けて優勝[ゆうしょう]することを目指[めざ]しています。', 'Nakai is aiming to win two Grand Prix events in a row.', 'She won her first Grand Prix event of this season. The free skate is on the morning of the 16th, Japan time.'],
+          ],
+        },
+        N3: {
+          title: '中井[なかい]亜美[あみ]が首位[しゅい]発進[はっしん]　ショートプログラムで今季[こんき]世界[せかい]最高[さいこう]',
+          lines: [
+            ['フィギュアスケートのグランプリシリーズ第[だい]4戦[せん]、スケートアメリカは十四日[じゅうよっか]、米国[べいこく]ワシントン州[しゅう]エバレットで女子[じょし]ショートプログラムが行[おこな]われた。', 'At Skate America, the fourth event of the figure skating Grand Prix series, the women\'s short program was held in Everett, Washington, on the 14th.'],
+            ['グランプリシリーズ2連勝[れんしょう]を目指[めざ]す18歳[さい]の中井[なかい]亜美[あみ]が82.20点[てん]をマークし、首位[しゅい]に立[た]った。', 'Ami Nakai, 18, who is aiming for her second Grand Prix win in a row, scored 82.20 points and took the lead.', 'Nakai, from Niigata City, won bronze at the Winter Olympics in February. 首位発進 in the title means "starting in first place".'],
+            ['冒頭[ぼうとう]のトリプルアクセルを決[き]めると、続[つづ]く3回転[かいてん]ルッツと3回転[かいてん]トーループの連続[れんぞく]ジャンプや、3回転[かいてん]ループも成功[せいこう]させた。', 'She landed her opening triple Axel, then also landed the triple Lutz–triple toe loop combination and a triple loop that followed.'],
+            ['スピンとステップもすべて最高[さいこう]のレベル4をそろえた。', 'Her spins and steps were also all at the top level, level 4.'],
+            ['得点[とくてん]は自己[じこ]ベストで、今季[こんき]の女子[じょし]ショートプログラムでは世界[せかい]最高[さいこう]となった。', 'The score was her personal best and the highest women\'s short program score in the world this season.', '今季 means "this season".'],
+            ['2位[い]との差[さ]は7.96点[てん]で、日本[にほん]の松生[まついけ]理乃[りの]は5位[い]だった。', 'She leads second place by 7.96 points; Japan\'s Rino Matsuike was fifth.'],
+            ['フリーは日本[にほん]時間[じかん]十六日[じゅうろくにち]朝[あさ]に行[おこな]われ、2位[い]以内[いない]に入[はい]れば12月[がつ]のグランプリファイナル進出[しんしゅつ]が決[き]まる。', 'The free skate is on the morning of the 16th, Japan time; if she finishes in the top two, her place in December\'s Grand Prix Final will be decided.', 'The Grand Prix Final is for the six best skaters of the series.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-15-sea-festival-osaka',
+      date: '2026-11-15',
+      emoji: '🐟',
+      titleEn: 'The Emperor and Empress attend the National Convention for an Abundant Sea, held in Osaka Prefecture for the first time',
+      sources: [
+        { name: 'ANN via KSB', url: 'https://news.ksb.co.jp/ann/article/17052032' },
+        { name: 'ANN via KSB (Nov. 14)', url: 'https://news.ksb.co.jp/ann/article/17051730' },
+        { name: 'Mainichi via Yahoo! News', url: 'https://news.yahoo.co.jp/articles/6701c6f41a658662a7cd38019f21def7dd1ea993' },
+        { name: 'Osaka Prefecture', url: 'https://www.pref.osaka.lg.jp/hodo/fumin/o120130/prs_50986.html' },
+      ],
+      quiz: [
+        ['Where were the Emperor and Empress?', 'In Osaka Prefecture', 'In Hokkaido', 'In Okinawa', 'Abroad'],
+        ['What did the Emperor give to people from the fishing industry?', 'Young fish', 'Medals', 'Letters', 'Fishing nets'],
+        ['Has this event been held in Osaka Prefecture before?', 'No, this is the first time', 'Yes, every year', 'Yes, last year', 'Yes, many times'],
+      ],
+      levels: {
+        N5: {
+          title: '天皇[てんのう]　皇后[こうごう]　両陛下[りょうへいか]が　大阪[おおさか]へ',
+          lines: [
+            ['天皇[てんのう]　皇后[こうごう]　両陛下[りょうへいか]が　大阪[おおさか]へ　行[い]きました。', 'The Emperor and Empress went to Osaka.', '両陛下 means "Their Majesties", the Emperor and the Empress together.'],
+            ['十五日[じゅうごにち]、岸和田市[きしわだし]で　「全国[ぜんこく]豊[ゆた]かな　海[うみ]づくり　大会[たいかい]」が　ありました。', 'On the 15th, the "National Convention for an Abundant Sea" was held in Kishiwada City.', '豊か means "rich, abundant", and 海づくり is "making the sea (rich)".'],
+            ['海[うみ]と　魚[さかな]を　大切[たいせつ]に　する　ための　大会[たいかい]です。', 'It is an event for taking good care of the sea and fish.'],
+            ['大阪府[おおさかふ]で　この　大会[たいかい]が　あるのは　初[はじ]めてです。', 'It is the first time this event has been held in Osaka Prefecture.'],
+            ['天皇[てんのう]陛下[へいか]は　大会[たいかい]で　話[はなし]を　しました。', 'The Emperor gave a speech at the event.'],
+            ['それから、小[ちい]さい　魚[さかな]を　漁業[ぎょぎょう]の　人[ひと]たちに　渡[わた]しました。', 'Then he handed young fish to people from the fishing industry.', 'They were young キジハタ (red-spotted grouper), a prized fish in Osaka Bay. They are let go into the sea later.'],
+            ['午後[ごご]は　泉佐野市[いずみさのし]で、魚[さかな]を　海[うみ]に　放[はな]す　予定[よてい]です。', 'In the afternoon, they were to release fish into the sea in Izumisano City.', 'At Rinku Park; the fish are キジハタ and ヒラメ (flounder).'],
+          ],
+        },
+        N4: {
+          title: '両陛下[りょうへいか]、大阪[おおさか]で「海[うみ]づくり大会[たいかい]」に出席[しゅっせき]',
+          lines: [
+            ['天皇[てんのう]皇后[こうごう]両陛下[りょうへいか]は十五日[じゅうごにち]、大阪府[おおさかふ]岸和田市[きしわだし]で開[ひら]かれた「全国[ぜんこく]豊[ゆた]かな海[うみ]づくり大会[たいかい]」の式典[しきてん]に出席[しゅっせき]されました。', 'On the 15th, the Emperor and Empress attended the ceremony of the "National Convention for an Abundant Sea" held in Kishiwada City, Osaka Prefecture.', 'された is the respectful form used for the imperial family.'],
+            ['この大会[たいかい]は、魚[さかな]や海[うみ]の環境[かんきょう]を守[まも]ることを考[かんが]える大会[たいかい]で、1981年[ねん]から毎年[まいとし]、場所[ばしょ]を変[か]えて開[ひら]かれています。', 'This event is about protecting fish and the sea environment, and has been held every year since 1981, in a different place each time.'],
+            ['45回目[かいめ]の今年[ことし]は、初[はじ]めて大阪府[おおさかふ]で開[ひら]かれました。', 'This year, the 45th time, it was held in Osaka Prefecture for the first time.'],
+            ['両陛下[りょうへいか]は十四日[じゅうよっか]に大阪[おおさか]に着[つ]き、夜[よる]は漁業[ぎょぎょう]で働[はたら]く人[ひと]たちと話[はなし]をされました。', 'The Emperor and Empress arrived in Osaka on the 14th and in the evening talked with people who work in fishing.'],
+            ['式典[しきてん]で天皇[てんのう]陛下[へいか]はおことばを述[の]べ、そのあと、キジハタという魚[さかな]の稚魚[ちぎょ]を漁業[ぎょぎょう]の関係者[かんけいしゃ]に手渡[てわた]されました。', 'At the ceremony, the Emperor gave a speech, and then handed young キジハタ fish to people from the fishing industry.', 'おことば is the word for a speech by the Emperor. 稚魚 are very young fish. キジハタ is the red-spotted grouper.'],
+            ['午後[ごご]は泉佐野市[いずみさのし]のりんくう公園[こうえん]で、キジハタやヒラメを海[うみ]に放[はな]す行事[ぎょうじ]に出[で]られる予定[よてい]です。', 'In the afternoon, they were to take part in an event releasing キジハタ and flounder into the sea at Rinku Park in Izumisano City.'],
+            ['大阪[おおさか]公立[こうりつ]大学[だいがく]を見[み]に行[い]く予定[よてい]もありましたが、サイバー攻撃[こうげき]の影響[えいきょう]でなくなりました。', 'There had also been a plan to visit Osaka Metropolitan University, but it was dropped because of a cyberattack.', 'The university\'s systems were hit by a cyberattack in October, and the prefecture declined the visit for safety reasons.'],
+          ],
+        },
+        N3: {
+          title: '両陛下[りょうへいか]、全国[ぜんこく]豊[ゆた]かな海[うみ]づくり大会[たいかい]に出席[しゅっせき]　大阪府[おおさかふ]で初[はつ]開催[かいさい]',
+          lines: [
+            ['天皇[てんのう]皇后[こうごう]両陛下[りょうへいか]は十五日[じゅうごにち]、大阪府[おおさかふ]岸和田市[きしわだし]で開[ひら]かれた第[だい]45回[かい]全国[ぜんこく]豊[ゆた]かな海[うみ]づくり大会[たいかい]の式典[しきてん]に出席[しゅっせき]された。', 'On the 15th, the Emperor and Empress attended the ceremony of the 45th National Convention for an Abundant Sea, held in Kishiwada City, Osaka Prefecture.', 'された is the respectful form used for the imperial family.'],
+            ['大会[たいかい]は水産[すいさん]資源[しげん]の保護[ほご]や海[うみ]の環境[かんきょう]保全[ほぜん]を目的[もくてき]に、1981年[ねん]から各地[かくち]の持[も]ち回[まわ]りで開[ひら]かれており、大阪府[おおさかふ]での開催[かいさい]は初[はじ]めてだ。', 'Aimed at protecting fish stocks and the sea environment, the event has been held in turn around the country since 1981, and this is the first time it has been held in Osaka Prefecture.', '持ち回り means "taking turns", here the prefectures hosting in turn.'],
+            ['両陛下[りょうへいか]は十四日[じゅうよっか]に伊丹[いたみ]空港[くうこう]に到着[とうちゃく]し、吉村[よしむら]知事[ちじ]らの出迎[でむか]えを受[う]けた。', 'The Emperor and Empress arrived at Itami Airport on the 14th and were met by Governor Yoshimura and others.', 'Yoshimura Hirofumi is the governor of Osaka Prefecture.'],
+            ['同日[どうじつ]夜[よる]には、大阪市内[おおさかしない]のホテルで漁業[ぎょぎょう]関係者[かんけいしゃ]と懇談[こんだん]した。', 'That evening, they had a friendly talk with people from the fishing industry at a hotel in Osaka City.'],
+            ['式典[しきてん]で天皇[てんのう]陛下[へいか]はおことばを述[の]べた後[あと]、キジハタの稚魚[ちぎょ]を漁業[ぎょぎょう]関係者[かんけいしゃ]に手渡[てわた]した。', 'At the ceremony, the Emperor gave a speech and then handed young キジハタ fish to people from the fishing industry.', 'キジハタ is the red-spotted grouper, a prized fish in Osaka Bay.'],
+            ['午後[ごご]は泉佐野市[いずみさのし]のりんくう公園[こうえん]で、漁船[ぎょせん]による歓迎[かんげい]行事[ぎょうじ]や、キジハタとヒラメの放流[ほうりゅう]に臨[のぞ]む予定[よてい]だ。', 'In the afternoon, they were to attend a welcome by fishing boats and the release of キジハタ and flounder at Rinku Park in Izumisano City.', '放流 means "releasing (fish) into the water".'],
+            ['当初[とうしょ]は大阪[おおさか]公立[こうりつ]大学[だいがく]の視察[しさつ]も予定[よてい]されていたが、10月[がつ]のサイバー攻撃[こうげき]によるシステム障害[しょうがい]を受[う]け、府[ふ]側[がわ]が安全上[あんぜんじょう]の理由[りゆう]で辞退[じたい]したという。', 'A visit to Osaka Metropolitan University had first been planned, but after a system failure caused by a cyberattack in October, the prefecture reportedly declined it for safety reasons.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-11-14-sdf-pay-raise',
       date: '2026-11-14',
       emoji: '🪖',
