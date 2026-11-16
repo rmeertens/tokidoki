@@ -3227,19 +3227,32 @@
     const furi = t => window.VERB_PARTICLE_FURIGANA(t)[settings.showFurigana ? 'html' : 'plain'];
     const esc = t => t.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
     const particleTags = text => esc(text).replace(/([〕／(])(から|[をにでがとへ])/g, '$1<span class="vp-p" lang="ja">$2</span>');
+    const romaji = t => `<span class="vp-romaji">${esc(window.VERB_PARTICLE_ROMAJI(t))}</span>`;
     const rules = window.VERB_PARTICLE_RULES.map(r => `
       <div class="vp-rule">
         <span class="particle-tag particle-tag-ok" lang="ja">${r.particle}</span>
         <div>
           <div class="vp-rule-title">${esc(r.title)}</div>
           <p>${esc(r.rule)}</p>
-          <div class="vp-rule-examples" lang="ja">${r.examples.map(furi).join('　·　')}</div>
+          ${r.verbs ? `
+          <details class="vp-rule-more">
+            <summary>
+              <span class="vp-rule-examples" lang="ja">${r.examples.map(furi).join('　·　')}</span>
+              <span class="vp-rule-more-hint">${r.verbs.length} verbs with example sentences<span class="vt-row-chevron" aria-hidden="true"></span></span>
+            </summary>
+            <ul class="vp-rule-verbs">${r.verbs.map(([verb, jp, en]) => `
+              <li>
+                <div class="vp-rule-verb"><span lang="ja">${furi(verb)}</span>${romaji(verb)}</div>
+                <div class="vp-rule-sentence" lang="ja">${furi(jp).replace(/\{([^}]+)\}/g, '<span class="vp-p">$1</span>')}</div>
+                <div class="vt-ex-en">${esc(en)}</div>
+              </li>`).join('')}
+            </ul>
+          </details>` : `<div class="vp-rule-examples" lang="ja">${r.examples.map(furi).join('　·　')}</div>`}
         </div>
       </div>`).join('');
     const typeTag = type => type === 'pair'
       ? `${typeTag('vi')}${typeTag('vt')}`
       : `<span class="vp-type vp-type-${type}" tabindex="0" role="button" aria-label="${VP_TYPE_TIPS[type]}" data-tip="${type}"><span lang="ja">${type === 'vt' ? '他' : '自'}</span> ${type}</span>`;
-    const romaji = t => `<span class="vp-romaji">${esc(window.VERB_PARTICLE_ROMAJI(t))}</span>`;
     // data-verbs: the plain verb(s) of a row, for jumping to the verb of the
     // current card from the ? overlay.
     const plainVerbs = (...vs) => esc(vs.map(v => window.VERB_PARTICLE_FURIGANA(v).plain).join('／'));

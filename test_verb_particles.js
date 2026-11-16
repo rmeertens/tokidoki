@@ -3,7 +3,7 @@
 // quiz item has one right answer with an explanation for each wrong one.
 global.window = global;
 require('./verb-particles-data.js');
-const { VERB_PARTICLE_VERBS, VERB_TRANSITIVITY, VERB_PARTICLE_ITEMS } = global;
+const { VERB_PARTICLE_VERBS, VERB_TRANSITIVITY, VERB_PARTICLE_ITEMS, VERB_PARTICLE_RULES } = global;
 
 let failed = 0;
 const check = (ok, msg) => { if (!ok) { failed++; console.error('FAIL:', msg); } };
@@ -13,6 +13,22 @@ for (const v of VERB_PARTICLE_VERBS) {
   // An object marked with を means transitive, unless it's a motion verb's route.
   if (v.type === 'vi' && v.frames.some(f => /〕を/.test(f))) {
     check(/place|route|bridge|vehicle|school/.test(v.frames.join()), `${v.verb}: vi with a を object`);
+  }
+}
+
+// Each rule's fold-out: every verb with a sentence that marks the rule's
+// particle in {braces}, furigana on every kanji, and an English line.
+for (const r of VERB_PARTICLE_RULES) {
+  check(Array.isArray(r.verbs) && r.verbs.length >= 3, `${r.title}: needs verbs`);
+  for (const [verb, jp, en] of r.verbs || []) {
+    check(verb && jp && en, `${r.title}: incomplete verb ${verb}`);
+    check(jp.includes(`{${r.particle}}`), `${jp}: must mark {${r.particle}}`);
+    for (const t of [verb, jp]) {
+      check(!/[一-鿿々](?![一-鿿々]*\[)/.test(t), `${t}: kanji without furigana`);
+    }
+    // The sentence uses the verb (its kanji stem, or the whole kana verb).
+    const stem = verb.replace(/\[[^\]]*\]/g, '').replace(/(する|[るうくぐすつぬぶむ])$/, '');
+    check(jp.replace(/\[[^\]]*\]/g, '').includes(stem.slice(0, 1)), `${jp}: doesn't use ${verb}`);
   }
 }
 

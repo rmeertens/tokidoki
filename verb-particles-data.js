@@ -17,61 +17,143 @@
   }
 
   // The rules shown above the overview table, one per kind of slot a verb
-  // can open. `verbs` are examples written out in the rule card.
+  // can open. `examples` are the short phrases on the rule card; `verbs`
+  // fold out under them: each verb the rule names, as [verb, sentence with
+  // the particle in {braces}, English].
   global.VERB_PARTICLE_RULES = [
     {
       particle: 'を',
       title: 'What the action is done to (transitive verbs)',
       rule: 'Transitive verbs (他動詞) — someone does the action to something — mark that thing, the direct object, with を: 食べる, 飲む, 読む, 買う, 開ける, 消す.',
       examples: ['パンを食[た]べる', '水[みず]を飲[の]む', 'ドアを開[あ]ける'],
+      verbs: [
+        ['食[た]べる', '朝[あさ]ご飯[はん]{を}食[た]べます。', 'I eat breakfast.'],
+        ['飲[の]む', '毎朝[まいあさ]コーヒー{を}飲[の]みます。', 'I drink coffee every morning.'],
+        ['読[よ]む', '電車[でんしゃ]で本[ほん]{を}読[よ]みます。', 'I read a book on the train.'],
+        ['買[か]う', 'スーパーで野菜[やさい]{を}買[か]いました。', 'I bought vegetables at the supermarket.'],
+        ['開[あ]ける', '窓[まど]{を}開[あ]けてください。', 'Please open the window.'],
+        ['消[け]す', '寝[ね]る前[まえ]に電気[でんき]{を}消[け]します。', 'I turn off the light before I go to bed.'],
+      ],
     },
     {
       particle: 'を',
       title: 'The place you leave or move through',
       rule: 'Motion verbs take を for the place you go out of, get off, or travel across/along — 出る, 降りる, 卒業する, 渡る, 歩く. It is not an object; it is the route or starting point, and these verbs are still intransitive.',
       examples: ['部屋[へや]を出[で]る', 'バスを降[お]りる', '橋[はし]を渡[わた]る'],
+      verbs: [
+        ['出[で]る', '八時[はちじ]に家[いえ]{を}出[で]ます。', 'I leave home at eight.'],
+        ['降[お]りる', '次[つぎ]の駅[えき]で電車[でんしゃ]{を}降[お]ります。', 'I get off the train at the next station.'],
+        ['卒業[そつぎょう]する', '去年[きょねん]、大学[だいがく]{を}卒業[そつぎょう]しました。', 'I graduated from university last year.'],
+        ['渡[わた]る', 'この橋[はし]{を}渡[わた]ってください。', 'Please cross this bridge.'],
+        ['歩[ある]く', '毎朝[まいあさ]、公園[こうえん]{を}歩[ある]きます。', 'I walk through the park every morning.'],
+      ],
     },
     {
       particle: 'に',
       title: 'Destination or point of contact',
       rule: 'Where you arrive, enter or get onto takes に: 行く, 来る, 帰る, 着く, 入る, 乗る, 座る. (行く / 来る / 帰る also take へ, which stresses the direction.)',
       examples: ['駅[えき]に着[つ]く', '電車[でんしゃ]に乗[の]る', '部屋[へや]に入[はい]る'],
+      verbs: [
+        ['行[い]く', '来週[らいしゅう]、京都[きょうと]{に}行[い]きます。', 'I am going to Kyoto next week.'],
+        ['来[く]る', '昨日[きのう]、友達[ともだち]が家[いえ]{に}来[き]ました。', 'A friend came to my house yesterday.'],
+        ['帰[かえ]る', '六時[ろくじ]に家[いえ]{に}帰[かえ]ります。', 'I go home at six.'],
+        ['着[つ]く', '九時[くじ]に駅[えき]{に}着[つ]きました。', 'I arrived at the station at nine.'],
+        ['入[はい]る', '毎晩[まいばん]お風呂[ふろ]{に}入[はい]ります。', 'I take a bath every night.'],
+        ['乗[の]る', '駅[えき]でタクシー{に}乗[の]りました。', 'I got in a taxi at the station.'],
+        ['座[すわ]る', 'どうぞ、いす{に}座[すわ]ってください。', 'Please sit down on the chair.'],
+      ],
     },
     {
       particle: 'に',
       title: 'The person or thing the action is aimed at',
       rule: 'Verbs directed at someone/something take に for that target: 会う, 電話する, 聞く (ask), 教える, あげる, 答える, 似る, 慣れる, 参加する, 勝つ, なる.',
       examples: ['友達[ともだち]に会[あ]う', '母[はは]に電話[でんわ]する', '医者[いしゃ]になる'],
+      verbs: [
+        ['会[あ]う', '駅[えき]で先生[せんせい]{に}会[あ]いました。', 'I ran into my teacher at the station.'],
+        ['電話[でんわ]する', '今晩[こんばん]、母[はは]{に}電話[でんわ]します。', 'I will call my mother tonight.'],
+        ['聞[き]く', 'わからない時[とき]は先生[せんせい]{に}聞[き]いてください。', 'When you don’t understand, ask the teacher.'],
+        ['教[おし]える', '子[こ]ども{に}英語[えいご]を教[おし]えています。', 'I teach English to children.'],
+        ['あげる', '妹[いもうと]{に}本[ほん]をあげました。', 'I gave my younger sister a book.'],
+        ['答[こた]える', '質問[しつもん]{に}答[こた]えてください。', 'Please answer the question.'],
+        ['似[に]る', '私[わたし]は父[ちち]{に}似[に]ています。', 'I look like my father.'],
+        ['慣[な]れる', '日本[にほん]の生活[せいかつ]{に}慣[な]れました。', 'I have got used to life in Japan.'],
+        ['参加[さんか]する', '明日[あした]の会議[かいぎ]{に}参加[さんか]します。', 'I will take part in tomorrow’s meeting.'],
+        ['勝[か]つ', '日本[にほん]のチームが試合[しあい]{に}勝[か]ちました。', 'The Japanese team won the match.'],
+        ['なる', '弟[おとうと]は医者[いしゃ]{に}なりました。', 'My younger brother became a doctor.'],
+      ],
     },
     {
       particle: 'に',
       title: 'Where something exists or stays',
       rule: 'Static location verbs — いる, ある, 住む, 泊まる, 勤める — take に, never で. A point in time (7時に, 月曜日に) also takes に.',
       examples: ['東京[とうきょう]に住[す]む', 'ホテルに泊[と]まる', '七時[しちじ]に起[お]きる'],
+      verbs: [
+        ['いる', '公園[こうえん]{に}子[こ]どもがいます。', 'There are children in the park.'],
+        ['ある', '机[つくえ]の上[うえ]{に}本[ほん]があります。', 'There is a book on the desk.'],
+        ['住[す]む', '姉[あね]は大阪[おおさか]{に}住[す]んでいます。', 'My older sister lives in Osaka.'],
+        ['泊[と]まる', '駅[えき]の近[ちか]くのホテル{に}泊[と]まりました。', 'I stayed at a hotel near the station.'],
+        ['勤[つと]める', '父[ちち]は銀行[ぎんこう]{に}勤[つと]めています。', 'My father works for a bank.'],
+        ['起[お]きる', '毎朝[まいあさ]六時[ろくじ]{に}起[お]きます。', 'I get up at six every morning.'],
+      ],
     },
     {
       particle: 'で',
       title: 'Where an action happens, and with what',
       rule: 'Action verbs take で for the place the action happens (働く, 食べる, 買う, 泳ぐ) and for the means or tool (バスで行く, ペンで書く, 日本語で話す).',
       examples: ['銀行[ぎんこう]で働[はたら]く', 'バスで来[く]る', 'ペンで書[か]く'],
+      verbs: [
+        ['働[はたら]く', '兄[あに]は病院[びょういん]{で}働[はたら]いています。', 'My older brother works at a hospital.'],
+        ['食[た]べる', '昼[ひる]ご飯[はん]は食堂[しょくどう]{で}食[た]べます。', 'I eat lunch in the cafeteria.'],
+        ['買[か]う', 'このかばんはデパート{で}買[か]いました。', 'I bought this bag at a department store.'],
+        ['泳[およ]ぐ', '夏[なつ]は海[うみ]{で}泳[およ]ぎます。', 'In summer I swim in the sea.'],
+        ['行[い]く', '毎日[まいにち]バス{で}会社[かいしゃ]に行[い]きます。', 'I go to work by bus every day.'],
+        ['書[か]く', '名前[なまえ]はペン{で}書[か]いてください。', 'Please write your name in pen.'],
+        ['話[はな]す', '店[みせ]の人[ひと]と日本語[にほんご]{で}話[はな]しました。', 'I talked with the shop assistant in Japanese.'],
+      ],
     },
     {
       particle: 'が',
       title: 'Verbs that take が, not を (intransitive verbs)',
       rule: 'Intransitive verbs (自動詞) — something happens by itself — have no object, so the thing is their subject, marked が: 始まる, 開く, 消える, 降る. Ability, need, perception and existence verbs work the same way: わかる, できる, 要る, ある, いる, 見える, 聞こえる. Compare ドアが開く (the door opens) with ドアを開ける (someone opens the door).',
       examples: ['日本語[にほんご]がわかる', 'お金[かね]が要[い]る', '授業[じゅぎょう]が始[はじ]まる'],
+      verbs: [
+        ['始[はじ]まる', '九時[くじ]に授業[じゅぎょう]{が}始[はじ]まります。', 'Class starts at nine.'],
+        ['開[あ]く', '風[かぜ]でドア{が}開[あ]きました。', 'The door opened in the wind.'],
+        ['消[き]える', '急[きゅう]に電気[でんき]{が}消[き]えました。', 'The lights suddenly went out.'],
+        ['降[ふ]る', '今日[きょう]は雨[あめ]{が}降[ふ]っています。', 'It is raining today.'],
+        ['わかる', '日本語[にほんご]{が}少[すこ]しわかります。', 'I understand a little Japanese.'],
+        ['できる', '妹[いもうと]はピアノ{が}できます。', 'My younger sister can play the piano.'],
+        ['要[い]る', '旅行[りょこう]にはお金[かね]{が}要[い]ります。', 'You need money for a trip.'],
+        ['ある', '今日[きょう]は時間[じかん]{が}あります。', 'I have time today.'],
+        ['いる', '私[わたし]は兄弟[きょうだい]{が}二人[ふたり]います。', 'I have two brothers and sisters.'],
+        ['見[み]える', '窓[まど]から富士山[ふじさん]{が}見[み]えます。', 'You can see Mt Fuji from the window.'],
+        ['聞[き]こえる', '隣[となり]の部屋[へや]から音楽[おんがく]{が}聞[き]こえます。', 'I can hear music from the next room.'],
+      ],
     },
     {
       particle: 'と',
       title: 'Together with someone, or quoting',
       rule: 'Verbs that need a partner take と: 結婚する, 遊ぶ, 話す (with), 違う. と also quotes what is said or thought: 〜と言う, 〜と思う.',
       examples: ['田中[たなか]さんと結婚[けっこん]する', '友達[ともだち]と遊[あそ]ぶ', 'いいと思[おも]う'],
+      verbs: [
+        ['結婚[けっこん]する', '姉[あね]は来年[らいねん]、田中[たなか]さん{と}結婚[けっこん]します。', 'My older sister is marrying Mr Tanaka next year.'],
+        ['遊[あそ]ぶ', '日曜日[にちようび]は友達[ともだち]{と}遊[あそ]びました。', 'On Sunday I hung out with my friends.'],
+        ['話[はな]す', '昨日[きのう]、先生[せんせい]{と}話[はな]しました。', 'I talked with my teacher yesterday.'],
+        ['違[ちが]う', 'この答[こた]えは私[わたし]の答[こた]え{と}違[ちが]います。', 'This answer is different from mine.'],
+        ['言[い]う', '母[はは]は「早[はや]く寝[ね]なさい」{と}言[い]いました。', 'My mother said, “Go to bed early.”'],
+        ['思[おも]う', '明日[あした]は雨[あめ]が降[ふ]る{と}思[おも]います。', 'I think it will rain tomorrow.'],
+      ],
     },
     {
       particle: 'から',
       title: 'The starting point or source',
       rule: 'から marks where someone or something comes from: 来る, もらう, 借りる (もらう and 借りる also take に for the person).',
       examples: ['アメリカから来[く]る', '先生[せんせい]からもらう'],
+      verbs: [
+        ['来[く]る', 'マリアさんはブラジル{から}来[き]ました。', 'Maria came from Brazil.'],
+        ['もらう', '誕生日[たんじょうび]に父[ちち]{から}時計[とけい]をもらいました。', 'I got a watch from my father for my birthday.'],
+        ['借[か]りる', '図書館[としょかん]{から}本[ほん]を借[か]りました。', 'I borrowed a book from the library.'],
+      ],
     },
   ];
 
