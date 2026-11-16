@@ -158,8 +158,22 @@
   150–200 / ~200 characters, information ~250 / 400 / 600 / 700); N5 texts
   are spaced between phrases, as on the N5 paper. Every question has four
   choices (answer first), English, and an explanation of why the others
-  are wrong. `test_jlpt_reading.js` checks the furigana, lengths, marks and
-  the page.
+  are wrong. Once a text's questions are answered, every word can be tapped
+  (a bottom-sheet panel like Story Fill-in's, with ＋ flashcards) and the text
+  read "sentence by sentence": each sentence numbered, with its English and
+  grammar (hover a grammar point to light up its words). The sentences are
+  cut by `splitSentences` (at 。！？) and each English line by `enSentences`,
+  so every line of `en` must have as many sentences as its Japanese line
+  (the test checks). The words and grammar are in `jlpt-reading-words.js`
+  (loaded only once a text is answered), built by
+  `node scripts/tokenize_jlpt_reading.mjs` (kuromoji, as above) from the
+  pieces `segments()` cuts each text into, keyed by `segKey`; re-run it after
+  changing a text. Missing words go in `scripts/jlpt_reading_extra_words.json`
+  (`--misses` lists them); numbers with a counter (500円, 9時, 第2) are
+  glossed by the script, a lone weekday kanji （金） / {土|ど} by its furigana
+  (`READING_FIXES`), and notice grammar (ただし, なお, 〜場合は, お〜ください,
+  つきましては…) comes from `READING_RULES` there. `test_jlpt_reading.js`
+  checks the furigana, lengths, marks, the words file and the page.
 
 ## Chunks, not textbook chapters
 

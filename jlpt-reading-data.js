@@ -36,7 +36,7 @@
 お{母|かあ}さんは きょう、しごとの あとで ともだちと ばんごはんを {食|た}べます。{夜|よる} 9{時|じ}ごろ かえります。はなこの ばんごはんは れいぞうこの {中|なか}に あります。それから、«1|{雨|あめ}が ふったら、にわの せんたくものを {中|なか}に {入|い}れて ください»。
 > {母|はは}より`,
       en: `Hanako,
-I'm having dinner with a friend after work today. I'll be home around 9 p.m. Your dinner is in the fridge. And if it rains, please bring the washing in from the garden.
+I'm having dinner with a friend after work today. I'll be home at around nine in the evening. Your dinner is in the fridge. And if it rains, please bring the washing in from the garden.
 Mum`,
       questions: [{
         q: 'はなこさんは きょう {何|なに}を しなければ なりませんか。',
@@ -86,7 +86,7 @@ Sakura Japanese Language School`,
 あしたの えいがですが、ごめんなさい。{午前|ごぜん}は しゅくだいが あるので、{行|い}けません。«1|{午後|ごご}の 3{時|じ}の えいがでも いいですか»。いいなら、2{時|じ}45{分|ふん}に えきの {前|まえ}で あいましょう。
 > リン`,
       en: `Maria,
-About tomorrow's film — sorry, I have homework in the morning, so I can't go then. Would the 3 p.m. showing be OK? If it is, let's meet in front of the station at 2:45.
+About tomorrow's film — sorry. I have homework in the morning, so I can't go then. Would the 3 p.m. showing be OK? If it is, let's meet in front of the station at 2:45.
 Lin`,
       questions: [{
         q: 'リンさんが いちばん いいたい ことは {何|なん}ですか。',
@@ -176,6 +176,7 @@ D | 9–12 | Sat | 1:00–2:30 p.m.
 ・みせは {月|げつ}ようびは やすみです。`,
       en: `Café Mori — lunch menu
 Lunch is served 11 a.m.–2 p.m.
+ | Lunch | Price
 A | Curry and rice (chicken) | 800 yen
 B | Fish set meal | 900 yen
 C | Vegetable spaghetti | 700 yen
@@ -352,6 +353,7 @@ Bus | Leaves Sakura Station | Arrives at the airport
 ・ふくろは 1まい 5{円|えん}です。
 ・みせは {駅|えき}から あるいて 5ふんです。くるまは 30だい とめられます。`,
       en: `Midori Supermarket — cheap days
+Day | Cheap items
 Monday | Vegetables
 Wednesday | Fish and meat
 Friday | Bread and milk
@@ -416,7 +418,7 @@ Sakura Japanese Language School`,
 From: Tanaka
 To everyone in Sales,
 Thanks for your hard work. This is Tanaka.
-About tomorrow's meeting: Mr Yamada, our manager, now has to visit a client's office in the morning. So I'm moving the meeting from 10 a.m. to 2 p.m. It's in the same place, the meeting room on the third floor.
+About tomorrow's meeting: Mr Yamada, our manager, now has to visit a client's office in the morning. So I'm moving the meeting from ten in the morning to two in the afternoon. It's in the same place, the meeting room on the third floor.
 Please send me the materials for the meeting by 5 o'clock today. I'll copy them all together.
 Thank you.`,
       questions: [{
@@ -497,6 +499,7 @@ Nakamura, 12:40`,
 ・④は、{小学生|しょうがくせい}とその{親|おや}が{申|もう}し{込|こ}めます。
 ・«2|{申|もう}し{込|こ}み：9{月|がつ}{20日|はつか}（{土|ど}）の{朝|あさ}9{時|じ}から、{電話|でんわ}か{市民|しみん}センターの{受付|うけつけ}で»。{先|さき}に{申|もう}し{込|こ}んだ{人|ひと}から、それぞれ20{人|にん}までです。`,
       en: `Midori Community Centre — Autumn cooking classes
+Class | Dates | Time | Fee
 ① Japanese home cooking | 4, 11, 18 Oct (Sat) | 10:00–12:00 | 4,500 yen for 3 sessions
 ② Easy sweets | 5 Oct (Sun) | 14:00–16:00 | 1,800 yen
 ③ Dinner for one | 8, 15, 22 Oct (Wed) | 18:30–20:30 | 4,200 yen for 3 sessions
@@ -745,7 +748,7 @@ D Hot springs and a good lunch | Every Wednesday | 9:00–18:00 | 7,000 yen | �
 • The children's price is for primary-school children. Children younger than primary-school age go free.
 • D is only for people of junior-high age and over.
 • Lunch is included in the price (except C, which has no lunch: please bring a packed lunch).
-• Departure: Sakura Station north exit. Applications: up to 3 days before departure.`,
+• Departure: Sakura Station north exit; applications up to 3 days before departure.`,
       questions: [{
         q: '{山本|やまもと}さんは、11{月|がつ}の{日曜日|にちようび}に、{妻|つま}と{小学生|しょうがくせい}の{息子|むすこ}と3{人|にん}で{行|い}きたいと{思|おも}っています。{昼|ひる}ご{飯|はん}が{料金|りょうきん}に{入|はい}っているコースがいいです。どのコースにしますか。',
         en: 'Mr Yamamoto wants to go on a Sunday in November with his wife and his son, who is at primary school. He wants a course with lunch included. Which course does he choose?',
@@ -960,6 +963,7 @@ How to put it out
 ③ Write your name on the ticket and stick it on the item (one ticket per item)
 ④ Put it out at the set place by 8 a.m. on the collection day
 Ticket prices
+Item | Price
 Chair, bicycle, small shelf | 400 yen
 Desk, bookcase, futon | 800 yen
 Sofa, bed | 1,600 yen
@@ -1001,7 +1005,7 @@ From: Mori, Human Resources, Sakura Foods
 Dear Ms Li Na,
 Thank you for applying for our vacancy. Following the screening of your documents, we would like to invite you to an interview. The possible dates are the following three:
 ① Wed 10 June from 14:00 ② Thu 11 June from 10:00 ③ Fri 12 June from 16:00
-Please let us know which date suits you by replying to this email by Friday 5 June. If none of the dates is possible, please say so, and we will arrange another day.
+Please let us know which date suits you by replying to this email by Friday 5 June. If none of the dates is possible, please say so. We will arrange another day.
 On the day, please bring a copy of your CV.`,
       questions: [{
         q: 'リさんが、まずしなければならないことは{何|なに}か。',

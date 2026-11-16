@@ -122,15 +122,84 @@ ok(R.nextPassage(DATA, n5[n5.length - 1].id, {}).id === n5[0].id, 'next: wraps r
 const best = { [n5[1].id]: { score: 1, total: 1 } };
 ok(R.nextPassage(DATA, n5[0].id, best).id === n5[2].id, 'next: skips texts already done perfectly');
 
+// ─── Words and sentences ───────────────────────────────────────────────────
+
+ok(JSON.stringify(R.splitSentences('あ。い？「う。え」お。')) === '["あ。","い？","「う。え」お。"]', 'splitSentences: at 。？, not inside 「」');
+ok(JSON.stringify(R.splitSentences('{日本|にほん}。」 次')) === '["{日本|にほん}。」 ","次"]', 'splitSentences: a closing bracket or space stays with its sentence');
+ok(JSON.stringify(R.enSentences('Open 9 a.m.–5 p.m. (last entry 4 p.m.) Closed Mondays. Ask Mr. Sato.')) === '["Open 9 a.m.–5 p.m. (last entry 4 p.m.) Closed Mondays.","Ask Mr. Sato."]', 'enSentences: not after a.m. / p.m. / Mr.');
+ok(R.segKey('«1|{雨|あめ}»') === R.segKey('{雨|あめ}') && R.segKey('a') !== R.segKey('b'), 'segKey ignores the answer marks');
+ok(JSON.stringify(R.markRanges('{雨|あめ}が«1|ふったら»。')) === '[{"n":1,"from":2,"to":6}]', 'markRanges: plain-text offsets');
+ok(JSON.stringify(R.snippetPieces(['{雨|あめ}', ['が', 'が'], ['ふったら', '降る']], 'がふった')) === '[1,2]', 'snippetPieces: the words a snippet covers');
+
+// Every sentence of every text has its own English.
+for (const p of DATA) {
+  ok(p.text.split('\n').length === p.en.split('\n').length, `${p.id}: one English line per line of the text`);
+  p.text.split('\n').forEach((line, i) => {
+    const k = R.lineKind(line);
+    if (!['title', 'right', 'p'].includes(k.kind)) return;
+    const ja = R.splitSentences(R.stripMarks(k.body)).length, en = R.enSentences(p.en.split('\n')[i]).length;
+    ok(ja === en, `${p.id} line ${i + 1}: ${ja} Japanese sentences but ${en} English ones`);
+  });
+}
+
+// jlpt-reading-words.js matches the texts (scripts/tokenize_jlpt_reading.mjs).
+const rerun = 'run node scripts/tokenize_jlpt_reading.mjs';
+require('./jlpt-reading-words.js');
+const W = globalThis.JLPT_READING_WORDS;
+const wanted = new Map();
+for (const p of DATA) for (const s of R.segments(p)) {
+  const key = R.segKey(s.ja);
+  wanted.set(key, (wanted.get(key) || false) || s.sentence);
+  const e = W.lines[key];
+  ok(!!e, `${p.id}: no words for “${R.plain(s.ja)}” — ${rerun}`);
+  if (!e) continue;
+  ok(e.w.map(x => R.plain(typeof x === 'string' ? x : x[0])).join('') === R.plain(s.ja), `${p.id}: words of “${R.plain(s.ja)}” out of date — ${rerun}`);
+  e.w.filter(Array.isArray).forEach(([, k]) => ok(!!W.gloss[k], `${p.id}: no gloss for ${k}`));
+  if (s.sentence) {
+    ok(Array.isArray(e.g), `${p.id}: no grammar for “${R.plain(s.ja)}” — ${rerun}`);
+    (e.g || []).forEach(([gid, snip]) => ok(!!W.grammar[gid] && R.plain(s.ja).includes(snip), `${p.id}: grammar ${gid} “${snip}”`));
+  }
+}
+ok(Object.keys(W.lines).every(k => wanted.has(k)), `words for text that's gone — ${rerun}`);
+const allWords = Object.values(W.lines).flatMap(e => e.w.filter(Array.isArray));
+ok(allWords.length > 3000, `${allWords.length} tappable words`);
+// Grammar of notices is explained where it's used.
+const used = new Set(Object.values(W.lines).flatMap(e => (e.g || []).map(([g]) => g)));
+for (const g of ['tadashi', 'nao', 'baai', 'o-kudasai', 'tsukimashite', 'sasete-itadaku', 'te-itadaku', 'ni-kagiri', 'sou-hearsay', 'made-ni']) ok(used.has(g), `grammar ${g} found somewhere`);
+const sentenceG = (id, n) => W.lines[R.segKey(R.sentences(DATA.find(p => p.id === id))[n].ja)].g.map(([g]) => g);
+ok(!sentenceG('n3-notice-water', 5).includes('o-kudasai'), 'ためておいてください is not お〜ください');
+ok(sentenceG('n2-email-shipping', 4).includes('tsukimashite') && sentenceG('n2-email-shipping', 4).includes('sasete-itadaku'), 'つきましては … 改定させていただく');
+// Numbers with a counter are one word, glossed from the counter.
+ok(W.gloss['1,000円(1,000えん)'] && W.gloss['1,000円(1,000えん)'][1] === '1,000 yen', '1,000円 is one word');
+ok(W.gloss['金(きん)'] && /Friday/.test(W.gloss['金(きん)'][1]), '（金） is Friday');
+
+// Rendering: the words and the highlights cover the text exactly.
+const strip = h => h.replace(/<rt>[^<]*<\/rt>/g, '').replace(/<[^>]+>/g, '').replace(/&#39;/g, "'").replace(/&amp;/g, '&');
+for (const p of DATA) {
+  p.text.split('\n').forEach((line, i) => {
+    const k = R.lineKind(line);
+    const parts = k.cells || [k.body];
+    for (const m of parts) {
+      if (!R.stripMarks(m || '').trim()) continue;
+      const html = R.wordsHtml(m, { words: W, shown: new Set([1, 2]), split: !k.cells, line: i });
+      ok(strip(html) === R.plain(m), `${p.id} line ${i + 1}: rendered words differ from the text`);
+      if (/«\d\|/.test(m)) ok(html.includes('jr-key-on'), `${p.id} line ${i + 1}: answer highlight lost`);
+    }
+  });
+}
+const wh = R.wordsHtml('{雨|あめ}がふったら。', { words: W, split: true, line: 3 });
+ok(/class="jr-sent" data-sid="3:0"/.test(wh) || !W.lines[R.segKey('{雨|あめ}がふったら。')], 'wordsHtml: sentences carry their sid');
+
 // ─── The page ──────────────────────────────────────────────────────────────
 
 const html = fs.readFileSync('jlpt-reading.html', 'utf8');
 ok(html.includes('data-mode="jlpt-reading"') && html.includes('jlpt-reading.js') && html.includes('jlpt-reading-data.js'), 'page loads its scripts');
 ok(html.includes('<link rel="canonical" href="https://tokidoki.meertens.dev/jlpt-reading.html">') && html.includes('og:url" content="https://tokidoki.meertens.dev/jlpt-reading.html"') && html.includes('G-XXWYNZC7YH') && html.includes('og-image.png') && html.includes('favicon.svg'), 'page head');
 ok((html.match(/<h1[ >]/g) || []).length === 1 && /<section id="seo-content"[^>]*>\s*<h1>/.test(html), 'one h1, first in #seo-content');
-for (const id of ['jr-levels', 'jr-list-short', 'jr-list-info', 'jr-level-progress', 'jr-opt-furigana', 'jr-opt-furigana-q', 'screen-jlpt-reading', 'jr-title', 'jr-quit', 'jr-instructions', 'jr-paper', 'jr-questions', 'jr-after', 'jr-score', 'jr-score-msg', 'jr-translation', 'jr-words', 'btn-jr-next', 'btn-jr-retry', 'btn-jr-home', 'btn-jr-reset']) {
+for (const id of ['jr-panel', 'jr-panel-body', 'jr-panel-close', 'jr-tools', 'jr-view-text', 'jr-view-sentences', 'jr-opt-english', 'jr-english-wrap', 'jr-tools-hint', 'jr-levels', 'jr-list-short', 'jr-list-info', 'jr-level-progress', 'jr-opt-furigana', 'jr-opt-furigana-q', 'screen-jlpt-reading', 'jr-title', 'jr-quit', 'jr-instructions', 'jr-paper', 'jr-questions', 'jr-after', 'jr-score', 'jr-score-msg', 'jr-translation', 'jr-words', 'btn-jr-next', 'btn-jr-retry', 'btn-jr-home', 'btn-jr-reset']) {
   ok(html.includes(`id="${id}"`), `page has #${id}`);
 }
+ok(html.includes('pronounce.js') && html.includes('word-lookups.js') && fs.readFileSync('jlpt-reading.js', 'utf8').includes("'jlpt-reading-words.js?v="), 'page loads the word panel\'s scripts (and the words once needed)');
 ok(fs.readFileSync('sitemap.xml', 'utf8').includes('/jlpt-reading.html</loc>'), 'in sitemap.xml');
 ok(fs.readFileSync('app.js', 'utf8').includes("mode === 'jlpt-reading'"), 'app.js leaves the page to jlpt-reading.js');
 ok(/tokidoki_jlpt_reading: mergeGameStore/.test(fs.readFileSync('sync-merge.js', 'utf8')), 'sync-merge.js merges the scores');

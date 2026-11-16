@@ -8654,3 +8654,21 @@ body.jr-no-furigana #screen-jlpt-reading rt { visibility: hidden; }
   .jr-table th, .jr-table td { white-space: nowrap; }
   .jr-guide-table { font-size: 0.8rem; }
 }
+
+/* JLPT Reading, once answered: tappable words, the sentence-by-sentence
+   view, and the word / sentence panel (a bottom sheet, as in Story Fill-in). */
+.jr-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 0 0 10px; }
+.jr-view { display: inline-flex; border: 1px solid var(--border); border-radius: 999px; overflow: hidden; background: var(--bg-card); }
+.jr-view button { font: inherit; font-size: 0.85rem; font-weight: 600; padding: 6px 14px; border: 0; background: none; color: var(--text-dim); cursor: pointer; }
+.jr-view button[aria-pressed="true"] { background: var(--accent); color: var(--bg); }
+.jr-tools-hint { font-size: 0.82rem; color: var(--text-muted); }
+.jr-paper .jr-word { padding: 0; }
+.jr-paper .jr-key-on, .jr-question .jr-key-on { background: var(--orange-dim); box-shadow: inset 0 -2px 0 var(--orange); border-radius: 3px; }
+.jr-word.selected rt { visibility: visible !important; }
+.jr-sent.selected { background: var(--accent-dim); border-radius: 4px; }
+.jr-paper.jr-sentences { padding: 8px 6px; }
+.jr-paper.jr-sentences .story-jp { font-size: 1.12rem; line-height: 2.2; }
+.jr-paper.jr-sentences .story-sentence-num { margin-top: 0.6rem; }
+.jr-paper.jr-sentences.show-english .story-en { display: block; }
+.jr-question .jr-word { padding: 0; }
+body.jr-panel-open #screen-jlpt-reading { padding-bottom: 50dvh; }

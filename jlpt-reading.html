@@ -174,6 +174,14 @@
       </div>
 
       <p class="jr-instructions" id="jr-instructions" lang="ja"></p>
+      <div class="jr-tools hidden" id="jr-tools">
+        <div class="jr-view" role="group" aria-label="How to show the text">
+          <button type="button" id="jr-view-text" aria-pressed="true">As printed</button>
+          <button type="button" id="jr-view-sentences" aria-pressed="false" title="Sentence by sentence (S)">Sentence by sentence</button>
+        </div>
+        <label class="kana-script-toggle hidden" id="jr-english-wrap"><input type="checkbox" id="jr-opt-english"> English <kbd class="jr-kbd">E</kbd></label>
+        <span class="jr-tools-hint" id="jr-tools-hint"></span>
+      </div>
       <article class="jr-paper" id="jr-paper" lang="ja"></article>
       <div class="jr-questions" id="jr-questions" aria-live="polite"></div>
 
@@ -195,11 +203,19 @@
       </div>
     </main>
 
+    <!-- Tap a word or a sentence once the questions are answered -->
+    <aside class="story-panel sf-panel" id="jr-panel" aria-live="polite">
+      <button class="icon-btn story-panel-close" id="jr-panel-close" aria-label="Close">✕</button>
+      <div id="jr-panel-body"></div>
+    </aside>
+
   </div>
 
-  <script src="jlpt-reading-data.js?v=2"></script>
-  <script src="jlpt-reading.js?v=2"></script>
+  <script src="jlpt-reading-data.js?v=3"></script>
+  <script src="pronounce.js"></script>
+  <script src="jlpt-reading.js?v=3"></script>
   <script src="kanji-cards.js?v=2"></script>
+  <script src="word-lookups.js?v=1"></script>
   <script src="app.js?v=86"></script>
   <script src="sync-merge.js?v=12"></script>
   <script src="progress-stats.js?v=5"></script>
@@ -229,7 +245,11 @@
       each answer the part of the text it rests on is highlighted and the answer explained —
       who does what, which sentence after しかし or そこで holds the point, which ただし or ※ line
       holds the exception — and the whole text can be read in English with its harder words.
-      Optional furigana; keys 1–4 answer, F toggles furigana.
+      Once the questions are answered, every word can be tapped for its reading and meaning (and
+      added to your flashcards), and the text can be read sentence by sentence: each sentence with
+      its English and the grammar it uses — お〜ください, ただし, 〜場合は, 〜させていただく,
+      つきましては — with the words of each grammar point lit up.
+      Optional furigana; keys 1–4 answer, F toggles furigana, S switches to sentence by sentence.
     </p>
   </section>
 </body>
