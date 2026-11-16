@@ -8597,3 +8597,59 @@ body.vq-no-furigana #screen-vocab-questions rt { visibility: hidden; }
 .pq-level-count { color: var(--text-muted); font-weight: 400; }
 .pq-toggle-more { flex-basis: 100%; font-size: 0.8rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 4px; }
 .particle-retry-note { margin: 8px 0 0; font-size: 0.85rem; font-weight: 600; color: var(--accent); }
+
+/* JLPT Reading: the level switch, the text as a sheet of paper (notice,
+   email, memo …), its tables, and the part an answer rests on. */
+.jr-levels { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 4px 0 10px; }
+.jr-levels button {
+  font: inherit; font-weight: 700; font-size: 0.9rem; padding: 6px 16px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--bg-card); color: var(--text-dim); cursor: pointer;
+}
+.jr-levels button:hover { background: var(--bg-card-hover); }
+.jr-levels button.active { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.jr-level-progress { margin-left: auto; font-size: 0.82rem; color: var(--text-muted); }
+.jr-form { font-weight: 400; font-size: 0.8em; color: var(--text-muted); margin-right: 4px; }
+.jr-instructions { font-family: var(--font-jp); font-size: 0.9rem; color: var(--text-dim); line-height: 2; margin: 6px 0 10px; }
+.jr-paper {
+  font-family: var(--font-jp); font-size: 1.12rem; line-height: 2.15; color: var(--text);
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: 18px 22px; box-shadow: var(--shadow); margin-bottom: 18px;
+}
+.jr-paper p + p { margin-top: 2px; }
+.jr-paper.jr-spaced { word-spacing: 0.15em; }
+.jr-title { text-align: center; font-weight: 700; font-size: 1.08em; margin-bottom: 6px; }
+.jr-right { text-align: right; }
+.jr-form-memo, .jr-form-message { border-left: 4px solid var(--orange); }
+.jr-form-invite { border: 2px double color-mix(in srgb, var(--salmon) 60%, var(--border)); }
+.jr-form-flyer { border-top: 4px solid var(--accent); }
+.jr-mail-head { font-size: 0.92rem; line-height: 1.9; border-bottom: 1px dashed var(--border); padding-bottom: 6px; margin-bottom: 10px; }
+.jr-mail-head div { display: flex; gap: 10px; }
+.jr-mail-head dt { color: var(--text-muted); min-width: 4.5em; }
+.jr-table-wrap { overflow-x: auto; margin: 6px 0 8px; }
+.jr-table, .jr-guide-table { border-collapse: collapse; width: 100%; font-size: 0.92em; line-height: 1.8; }
+.jr-table th, .jr-table td, .jr-guide-table th, .jr-guide-table td { border: 1px solid var(--border); padding: 4px 8px; text-align: left; vertical-align: top; }
+.jr-table th, .jr-guide-table thead th { background: var(--bg-input); font-weight: 700; }
+.jr-paper mark.jr-key { background: none; color: inherit; }
+.jr-paper mark.jr-key-on { background: var(--orange-dim); box-shadow: inset 0 -2px 0 var(--orange); border-radius: 3px; }
+.jr-questions { display: flex; flex-direction: column; gap: 14px; }
+.jr-question { font-family: var(--font-jp); font-size: 1.08rem; line-height: 2.1; margin: 4px 0 10px; }
+.jr-why-hint { font-size: 0.85rem; color: var(--text-muted); margin-top: 6px; }
+.jr-after { margin-top: 18px; }
+.jr-translation-box { margin-top: 14px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-card); }
+.jr-translation-box summary { cursor: pointer; font-weight: 700; color: var(--text-dim); }
+.jr-translation { margin-top: 10px; color: var(--text-dim); line-height: 1.6; }
+.jr-translation p + p { margin-top: 4px; }
+.jr-words { margin-top: 14px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-card); }
+.jr-kbd { font: inherit; font-size: 0.75em; padding: 0 5px; border: 1px solid var(--border); border-radius: 4px; color: var(--text-muted); }
+body.jr-no-furigana #screen-jlpt-reading rt { visibility: hidden; }
+.jr-guide { margin-top: 26px; }
+.jr-guide-table { font-size: 0.85rem; line-height: 1.5; background: var(--bg-card); }
+.jr-guide-table tbody th { white-space: nowrap; color: var(--accent); }
+.jr-tips { margin: 12px 0 0 18px; font-size: 0.88rem; color: var(--text-dim); line-height: 1.6; }
+.jr-tips li + li { margin-top: 3px; }
+@media (max-width: 600px) {
+  .jr-paper { padding: 14px 14px; font-size: 1.05rem; }
+  .jr-table { font-size: 0.85em; }
+  .jr-table th, .jr-table td { white-space: nowrap; }
+  .jr-guide-table { font-size: 0.8rem; }
+}

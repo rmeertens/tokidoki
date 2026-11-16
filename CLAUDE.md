@@ -146,6 +146,21 @@
   `<build>/vocab vocab-sheets`, then `stamp_sheet_belts.mjs`.
   `test_vocab_questions.js` covers all of it.
 
+- JLPT Reading (`jlpt-reading.html`, `jlpt-reading.js`, scores in
+  `tokidoki_jlpt_reading`) practises the reading section's practical texts,
+  N5 to N2: 内容理解（短文） — a notice, email, memo or invitation with one
+  question (what must someone do, what is the writer's point) — and
+  情報検索 — a flyer, price list or rules with one or two questions (which
+  option fits this person). The texts are our own, in
+  `jlpt-reading-data.js` (markup at its top: `{漢字|かな}` furigana on every
+  kanji, `«n|…»` around what question n's answer rests on, highlighted
+  once answered), at the official lengths per level (short ~80 / 100–200 /
+  150–200 / ~200 characters, information ~250 / 400 / 600 / 700); N5 texts
+  are spaced between phrases, as on the N5 paper. Every question has four
+  choices (answer first), English, and an explanation of why the others
+  are wrong. `test_jlpt_reading.js` checks the furigana, lengths, marks and
+  the page.
+
 ## Chunks, not textbook chapters
 
 - Verbs, adjectives, sentences, Build Your Own and Bunkei are grouped in

@@ -6520,6 +6520,8 @@
       // bunkei-story.js wires up its own page.
     } else if (mode === 'vocab-questions') {
       // vocab-questions.js wires up its own page.
+    } else if (mode === 'jlpt-reading') {
+      // jlpt-reading.js wires up its own page.
     } else if (mode === 'phrases') {
       // phrases.js wires up its own page.
     } else if (mode === 'news') {
