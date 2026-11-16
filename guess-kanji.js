@@ -118,9 +118,26 @@
     (STANDALONE.get(kanji) || []).filter(w => w.key !== key && w.kana !== reading);
   const KANJI_MEANINGS = global.GUESS_KANJI_MEANINGS || {};
 
+  // Words whose spelling or reading in the list was put right: their old
+  // keys, saved before, are carried over to the new ones.
+  const RENAMED = {
+    '落る|おちる': '落ちる|おちる', '堅|かたい': '堅い|かたい',
+    '下る|さがる': '下がる|さがる', '計画|けいかくする': '計画|けいかく',
+  };
+  const renamed = keys => [...new Set(keys.map(k => RENAMED[k] || k))];
+
   function loadStore() {
     const s = load(STORE_KEY, {});
-    return { started: Array.isArray(s.started) ? s.started : [], guessed: Array.isArray(s.guessed) ? s.guessed : [] };
+    const store = { started: Array.isArray(s.started) ? s.started : [], guessed: Array.isArray(s.guessed) ? s.guessed : [] };
+    if ([...store.started, ...store.guessed].some(k => RENAMED[k])) {
+      store.started = renamed(store.started);
+      store.guessed = renamed(store.guessed);
+      save(STORE_KEY, { ...s, ...store });
+    }
+    if (global.TokidokiSRS && global.TokidokiSRS.rename) {
+      Object.entries(RENAMED).forEach(([from, to]) => global.TokidokiSRS.rename(cardId(from), cardId(to)));
+    }
+    return store;
   }
 
   const cardOf = id => (global.TokidokiSRS ? global.TokidokiSRS.card(id) : undefined);

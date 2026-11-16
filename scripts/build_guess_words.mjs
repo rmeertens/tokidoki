@@ -261,7 +261,7 @@ function align(surface, reading) {
   return runs.map(r => [r.t, r.k ? m[g++] : null]);
 }
 
-const OWN_READING = { '堅|かたい': 'かた', '落る|おちる': 'お' };
+const OWN_READING = {};
 
 // kuromoji's misreadings in these sentences, put right.
 const FURIGANA_FIXES = [
@@ -278,6 +278,8 @@ const FURIGANA_FIXES = [
   ['{洗濯|せんたく}{物|ぶつ}', '{洗濯物|せんたくもの}'],
   ['{運動|うんどう}の{後|のち}', '{運動|うんどう}の{後|あと}'],
   ['{雲|くも}の{間|ま}', '{雲|くも}の{間|あいだ}'],
+  ['{日本|にっぽん}', '{日本|にほん}'], ['{九|きゅう}{時|じ}', '{九時|くじ}'],
+  ['{三|さん}{千|せん}', '{三千|さんぜん}'],
 ];
 
 const markup = parts => parts.map(([t, r]) => (r && r !== hira(t) ? `{${t}|${r}}` : t)).join('');
@@ -301,16 +303,34 @@ function kuromojiSpans(ja) {
   return out;
 }
 
+// Where the word stands in the sentence: the first place it is a word of its
+// own (a kuromoji token that is the word, or the word conjugated), not part of
+// a longer one (学ぶ in 大学で…学びます, 都 in 京都は…都です); failing that, a
+// token that starts with it, then the first place it occurs at all.
+function wordAt(w, ja, surface) {
+  const starts = new Map();
+  let pos = 0;
+  for (const t of tokenizer.tokenize(ja)) { starts.set(pos, t); pos += t.surface_form.length; }
+  let best = -1, bestScore = -1;
+  for (let i = ja.indexOf(surface); i >= 0; i = ja.indexOf(surface, i + 1)) {
+    const t = starts.get(i);
+    const rest = t ? t.surface_form.slice(surface.length) : '';
+    const score = !t ? 0 : t.basic_form === w.word || t.surface_form === w.word
+      || (t.surface_form.startsWith(surface) && ![...rest].some(isKanji)) ? 2 : 1;
+    if (score > bestScore) { best = i; bestScore = score; }
+  }
+  return best;
+}
+
 // The word's own spans where it stands in the sentence (null if it isn't
 // there as listed), and where it starts and ends.
 function wordSpans(w, ja) {
-  // The list writes a few する nouns' readings with する (計画 けいかくする).
-  const kana = !w.word.endsWith('する') && w.kana.endsWith('する') ? w.kana.slice(0, -2) : w.kana;
+  const kana = w.kana;
   const lastKanji = [...w.word].findLastIndex(isKanji);
   const stem = [...w.word].slice(0, lastKanji + 1).join('');
   const whole = ja.includes(w.word);
   const surface = whole ? w.word : stem;
-  const at = ja.indexOf(surface);
+  const at = wordAt(w, ja, surface);
   let parts = align(w.word, kana);
   if (at < 0 || !parts) return null;
   if (!whole) {
@@ -332,13 +352,26 @@ function exampleMarkup(w, ja) {
   const all = kuromojiSpans(ja);
   if (!own) return markup(all.map(([, t, r]) => [t, r]));
   const out = [];
+  // The word's reading over [from, to), from its own spans.
+  const ownKana = (from, to) => own.spans.filter(([a]) => a >= from && a < to).map(([, t, r]) => r || hira(t)).join('');
   for (const [at, t, r] of all) {
     const end = at + t.length;
     if (end <= own.at || at >= own.end) out.push([at, t, r]);
     else {
-      // Overlaps the word: keep only what lies outside it, without furigana.
-      if (at < own.at) out.push([at, t.slice(0, own.at - at), null]);
-      if (end > own.end) out.push([own.end, t.slice(own.end - at), null]);
+      // Overlaps the word (九 in 九月): what lies outside it keeps the part of
+      // kuromoji's reading that's left once the word's own is taken off.
+      const reading = r || hira(t);
+      const mid = ownKana(Math.max(at, own.at), Math.min(end, own.end));
+      if (at < own.at) {
+        const left = t.slice(0, own.at - at);
+        const lr = end <= own.end && reading.endsWith(mid) ? reading.slice(0, reading.length - mid.length) : null;
+        out.push([at, left, lr && lr !== hira(left) ? lr : null]);
+      }
+      if (end > own.end) {
+        const right = t.slice(own.end - at);
+        const rr = at >= own.at && reading.startsWith(mid) ? reading.slice(mid.length) : null;
+        out.push([own.end, right, rr && rr !== hira(right) ? rr : null]);
+      }
     }
   }
   out.push(...own.spans);
