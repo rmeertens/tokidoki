@@ -3488,8 +3488,7 @@
     $('#particles-bar-fill').style.width = pct + '%';
     $('#particles-progress-text').textContent = `${particlesIndex + 1} / ${particlesTotal}`;
 
-    $('#particles-before').innerHTML = settings.showFurigana ? currentParticleCard.beforeHtml : currentParticleCard.beforePlain;
-    $('#particles-after').innerHTML = settings.showFurigana ? currentParticleCard.afterHtml : currentParticleCard.afterPlain;
+    renderParticleSentence();
     $('#particles-en').textContent = currentParticleCard.en;
 
     currentParticleChoices = pickParticleChoices(currentParticleCard);
@@ -3502,6 +3501,25 @@
     $('#particles-next-area').classList.add('hidden');
     $('#particles-explanation').classList.add('hidden');
     updateParticlesUndoButton();
+  }
+
+  // The current question's Japanese, with or without furigana.
+  function renderParticleSentence() {
+    const furiBox = $('#particles-furigana');
+    if (furiBox) furiBox.checked = settings.showFurigana;
+    if (!currentParticleCard) return;
+    $('#particles-before').innerHTML = settings.showFurigana ? currentParticleCard.beforeHtml : currentParticleCard.beforePlain;
+    $('#particles-after').innerHTML = settings.showFurigana ? currentParticleCard.afterHtml : currentParticleCard.afterPlain;
+  }
+
+  // Furigana on / off during the quiz (checkbox or F); saved, like the
+  // setting in Options.
+  function setParticlesFurigana(on) {
+    settings.showFurigana = !!on;
+    saveSettings(settings);
+    const furiSetting = $('#setting-show-furigana');
+    if (furiSetting) furiSetting.checked = settings.showFurigana;
+    renderParticleSentence();
   }
 
   function chooseParticleAnswer(choiceIndex) {
@@ -6905,6 +6923,8 @@
 
     on('#btn-particles-back-to-chapters', 'click', backToParticlesChapters);
 
+    on('#particles-furigana', 'change', e => setParticlesFurigana(e.target.checked));
+
     document.addEventListener('keydown', (e) => {
       if (overlayOpen('settings-overlay')) return;
       if (overlayOpen('ref-overlay')) return;
@@ -6915,6 +6935,13 @@
       }
 
       if (!(screens.particles && screens.particles.classList.contains('active'))) return;
+
+      // F: furigana on / off, before or after answering.
+      if ((e.key === 'f' || e.key === 'F') && !e.ctrlKey && !e.metaKey && !e.altKey && !e.repeat) {
+        consumeKey(e);
+        setParticlesFurigana(!settings.showFurigana);
+        return;
+      }
 
       if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
         consumeKey(e);
