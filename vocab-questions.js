@@ -425,7 +425,6 @@
     $('vq-missed').innerHTML = `${redo.length ? `<div class="vq-missed-title">To answer again</div>
       <ul class="vq-missed-list">${redo.map(q => `<li class="${q.pick === 0 ? '' : 'vq-missed-wrong'}">${answerOf(questionOf(q))}${q.pick === 0 ? '<span class="vq-missed-tag">marked Again</span>' : ''}</li>`).join('')}</ul>` : ''}
       <p class="vq-missed-still">${still}${fresh ? ` ${fresh} never seen yet.` : ''}</p>`;
-    $('btn-vq-again').textContent = due ? `Answer ${Math.min(due, ROUND)} due now` : fresh ? 'Ten more' : 'Practise ten again';
     $('btn-vq-again').focus({ preventScroll: true });
   }
 
@@ -513,7 +512,14 @@
     // Z (or Ctrl/Cmd+Z): undo the last grade.
     if ((e.key === 'z' || e.key === 'Z') && !e.altKey && !e.shiftKey) { e.preventDefault(); undoLast(); return; }
     if (e.ctrlKey || e.metaKey || e.altKey) return;
-    if (attempt.at >= attempt.round.length) return;
+    if (attempt.at >= attempt.round.length) {
+      // Space: Next 10 (unless another button has focus, e.g. All sets).
+      if (e.key === ' ' && !e.repeat && (e.target === $('btn-vq-again') || !e.target.closest('button, a'))) {
+        e.preventDefault();
+        start(attempt.set.id);
+      }
+      return;
+    }
     const q = current();
     if (q.pick == null && /^[1-4]$/.test(e.key)) {
       e.preventDefault();
