@@ -8595,3 +8595,5 @@ body.vq-no-furigana #screen-vocab-questions rt { visibility: hidden; }
 .pq-level-row { align-items: center; }
 .pq-level-label { font-size: 0.8rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.04em; }
 .pq-level-count { color: var(--text-muted); font-weight: 400; }
+.pq-toggle-more { flex-basis: 100%; font-size: 0.8rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 4px; }
+.particle-retry-note { margin: 8px 0 0; font-size: 0.85rem; font-weight: 600; color: var(--accent); }

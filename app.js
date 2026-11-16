@@ -3146,9 +3146,14 @@
     return `particle_${item.id}`;
   }
 
+  // Checkbox id for a particle (its romaji, with - for spaces: ni-tsuite).
+  function particleToggleId(p) {
+    return `particles-toggle-${window.PARTICLE_ROMAJI[p].replace(/ /g, '-')}`;
+  }
+
   function getSelectedParticles() {
     return (window.PARTICLE_LIST || []).filter(p => {
-      const el = $(`#particles-toggle-${window.PARTICLE_ROMAJI[p]}`);
+      const el = $(`#${particleToggleId(p)}`);
       return el && el.checked;
     });
   }
@@ -3209,9 +3214,16 @@
     if (!row || row.children.length > 0) return;
     (window.PARTICLE_LIST || []).forEach(p => {
       const romaji = window.PARTICLE_ROMAJI[p];
+      // The ten basic particles, then the N4–N3 ones (から … によって).
+      if (p === 'から') {
+        const more = document.createElement('span');
+        more.className = 'pq-toggle-more';
+        more.textContent = 'N4–N3 particles';
+        row.appendChild(more);
+      }
       const label = document.createElement('label');
       label.className = 'kana-script-toggle';
-      label.innerHTML = `<input type="checkbox" id="particles-toggle-${romaji}" checked> ${p} (${romaji})`;
+      label.innerHTML = `<input type="checkbox" id="${particleToggleId(p)}" checked> <span lang="ja">${p}</span> (${romaji})`;
       row.appendChild(label);
     });
   }
@@ -3570,6 +3582,9 @@
     renderParticleSentence();
   }
 
+  // How many other questions come between a wrong answer and its retry.
+  const PARTICLE_RETRY_GAP = 4;
+
   function chooseParticleAnswer(choiceIndex) {
     if (particlesAnswered || !currentParticleCard) return;
     if (choiceIndex < 0 || choiceIndex >= currentParticleChoices.length) return;
@@ -3608,6 +3623,16 @@
     srsData[id] = gradeCard(state, correct ? 4 : 1);
     particlesUndoStack[particlesUndoStack.length - 1].logged = logReview(id, state, correct ? 4 : 1);
     saveSRS(srsData);
+
+    // A wrong answer comes back a few questions later in this session (and
+    // again after that until it's answered right); the SRS also keeps it due.
+    if (!correct) {
+      const at = Math.min(particlesIndex + 1 + PARTICLE_RETRY_GAP, particlesSessionCards.length);
+      particlesSessionCards.splice(at, 0, currentParticleCard);
+      particlesTotal++;
+      particlesUndoStack[particlesUndoStack.length - 1].requeuedAt = at;
+      if (explanationEl) explanationEl.insertAdjacentHTML('beforeend', '<p class="particle-retry-note">↻ This one comes back in a few questions.</p>');
+    }
 
     updateStreak();
     statsData.todayReviews = (statsData.todayReviews || 0) + 1;
@@ -3662,6 +3687,10 @@
     statsData = { ...undo.prevStats };
     saveStats(statsData);
 
+    if (undo.requeuedAt != null) {
+      particlesSessionCards.splice(undo.requeuedAt, 1);
+      particlesTotal--;
+    }
     particlesIndex = undo.index;
     particlesCorrect = undo.correct;
 
@@ -6931,7 +6960,7 @@
     // ─── Particle quiz ───────────────────────────────────────────────────────────
 
     function toggleParticlesLevel(e) {
-      const anyChecked = (window.PARTICLE_LIST || []).some(p => $(`#particles-toggle-${window.PARTICLE_ROMAJI[p]}`).checked);
+      const anyChecked = (window.PARTICLE_LIST || []).some(p => $(`#${particleToggleId(p)}`).checked);
       if (!anyChecked) {
         e.target.checked = true;
         return;
@@ -6940,7 +6969,7 @@
     }
 
     (window.PARTICLE_LIST || []).forEach(p => {
-      on(`#particles-toggle-${window.PARTICLE_ROMAJI[p]}`, 'change', toggleParticlesLevel);
+      on(`#${particleToggleId(p)}`, 'change', toggleParticlesLevel);
     });
 
     // particles-quiz.html#verbs opens straight on the Verb + Particle quiz.

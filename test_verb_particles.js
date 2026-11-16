@@ -39,6 +39,24 @@ for (const item of [...global.PARTICLE_QUIZ_ITEMS, ...VERB_PARTICLE_ITEMS]) {
   check(['N5', 'N4', 'N3'].includes(item.level), `${item.id}: level must be N5, N4 or N3`);
 }
 
+// Sentences questions: unique ids, a known particle, and the harder ones
+// (own wrong choices) explain the answer and every wrong choice.
+const questionIds = new Set();
+for (const item of global.PARTICLE_QUIZ_ITEMS) {
+  check(!questionIds.has(item.id), `duplicate particle question ${item.id}`);
+  questionIds.add(item.id);
+  check(global.PARTICLE_LIST.includes(item.particle), `${item.id}: ${item.particle} not in PARTICLE_LIST`);
+  check(global.PARTICLE_ROMAJI[item.particle], `${item.id}: no romaji for ${item.particle}`);
+  if (item.wrong) {
+    check(item.wrong.length === 3 && !item.wrong.includes(item.particle) && new Set(item.wrong).size === 3, `${item.id}: needs 3 different wrong choices`);
+    check(item.note && item.note.why, `${item.id}: needs a why`);
+    for (const w of item.wrong) check(item.note && item.note.not[w], `${item.id}: no note for ${w}`);
+    for (const t of [item.beforeHtml, item.afterHtml]) check(!/[一-鿿々](?![一-鿿々]*<rp>)/.test(t), `${item.id}: kanji without furigana`);
+  }
+}
+const hard = global.PARTICLE_QUIZ_ITEMS.filter(i => i.wrong);
+check(hard.filter(i => i.level === 'N3').length >= 15, 'want at least 15 hard N3 particle questions');
+
 const seen = new Set();
 for (const g of VERB_TRANSITIVITY.groups) {
   check(g.vi && g.vt && g.pairs.length, 'group needs endings and pairs');
