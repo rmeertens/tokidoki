@@ -75,7 +75,7 @@
         { jp: 'お母[かあ]さん、いつもありがとう。', en: 'Mum, thanks for everything.', note: 'The standard Mother\'s Day card, with a red carnation.' },
         { jp: 'いつまでも長生[ながい]きしてね。', en: 'Please live a long, long life.', note: 'For grandparents on Respect for the Aged Day (敬老の日) in September.' },
         { jp: 'お大事[だいじ]に。', en: 'Take care (of yourself).', note: 'To someone who\'s ill — doctors and pharmacists say it as you leave.' },
-        { jp: '暑中[しょちゅう]お見舞[みま]い申[もう]し上[あ]げます。', en: 'Wishing you well in the summer heat.', note: 'The opening of a summer greeting card, sent in July and August.' },
+        { jp: '暑中[しょちゅう]お見舞[みま]い申[もう]し上[あ]げます。', en: 'Wishing you well in the summer heat.', note: 'The opening of a summer greeting card, sent in July up to early August. After that (from 立秋, around 7 August) it becomes 残暑お見舞い申し上げます.' },
         { jp: 'お年玉[としだま]ちょうだい！', en: 'Give me my New Year money!', note: 'Kids get お年玉 — cash in little envelopes — from relatives at New Year.' },
         { jp: '背[せ]が高[たか]くなりますように。', en: 'I hope I get taller.', note: 'A Tanabata wish (7 July), written on a paper strip and tied to bamboo. 〜ますように = "may…".' },
       ],
@@ -734,7 +734,7 @@
       phrases: [
         { jp: '暑[あつ]いですねえ。', en: 'Hot, isn\'t it?', note: 'Summer\'s number-one conversation starter. Winter: 寒いですねえ。' },
         { jp: 'お花見[はなみ]しよう！', en: 'Let\'s go cherry-blossom viewing!', note: 'Late March to early April: picnics under the trees, often all day.' },
-        { jp: '花粉症[かふんしょう]がつらい。', en: 'My hay fever is awful.', note: 'Cedar pollen hits roughly a third of Japan every spring. Masks everywhere.' },
+        { jp: '花粉症[かふんしょう]がつらい。', en: 'My hay fever is awful.', note: 'Cedar pollen allergy affects nearly 40% of people in Japan. Masks everywhere.' },
         { jp: '梅雨[つゆ]入[い]りしましたね。', en: 'The rainy season has started.', note: 'June to mid-July. 梅雨 = "plum rain", the season the plums ripen.' },
         { jp: '夏[なつ]バテしちゃった。', en: 'The summer heat has worn me out.', note: 'The cure: eel (うなぎ) on the Day of the Ox in late July.' },
         { jp: '紅葉[こうよう]がきれいですね。', en: 'The autumn leaves are beautiful.', note: 'Going out to see them is 紅葉狩り — "autumn-leaf hunting".' },
