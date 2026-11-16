@@ -8620,6 +8620,7 @@ body.vq-no-furigana #screen-vocab-questions rt { visibility: hidden; }
 .jr-title { text-align: center; font-weight: 700; font-size: 1.08em; margin-bottom: 6px; }
 .jr-right { text-align: right; }
 .jr-form-memo, .jr-form-message { border-left: 4px solid var(--orange); }
+.jr-form-letter { border-left: 4px solid color-mix(in srgb, var(--salmon) 60%, var(--border)); }
 .jr-form-invite { border: 2px double color-mix(in srgb, var(--salmon) 60%, var(--border)); }
 .jr-form-flyer { border-top: 4px solid var(--accent); }
 .jr-mail-head { font-size: 0.92rem; line-height: 1.9; border-bottom: 1px dashed var(--border); padding-bottom: 6px; margin-bottom: 10px; }

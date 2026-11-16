@@ -25,7 +25,7 @@
     info: { title: 'Information retrieval', ja: '情報検索', about: 'Scan a flyer, price list or timetable for the one option that fits someone’s situation.' },
   };
   const FORMS = {
-    notice: 'お知らせ', email: 'メール', memo: 'メモ', message: 'メッセージ', invite: '招待', flyer: '案内',
+    notice: 'お知らせ', email: 'メール', memo: 'メモ', message: 'メッセージ', invite: '招待', letter: '手紙', flyer: '案内',
   };
 
   // ─── Markup ────────────────────────────────────────────────────────────────
