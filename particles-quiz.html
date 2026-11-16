@@ -21,7 +21,7 @@
   <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
   <link rel="canonical" href="https://tokidoki.meertens.dev/particles-quiz.html">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Japanese Particle Quiz — は, が, を, に, で", "description": "Free quiz on the Japanese particles は, が, を, に, で, へ, と, も, の and や: pick the particle that fits each sentence, with spaced repetition.", "url": "https://tokidoki.meertens.dev/particles-quiz.html", "inLanguage": "en", "learningResourceType": "quiz", "educationalLevel": "JLPT N5–N3", "isAccessibleForFree": true, "isPartOf": {"@type": "WebSite", "name": "Tokidoki", "url": "https://tokidoki.meertens.dev/"}}</script>
-  <link rel="stylesheet" href="style.css?v=112">
+  <link rel="stylesheet" href="style.css?v=113">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -147,6 +147,7 @@
         of every choice. The rules, transitive and intransitive verb pairs, and an
         overview of common verbs are below.
       </p>
+      <div class="kana-settings-row pq-level-row" id="particles-level-row"></div>
       <div class="kana-settings-row" id="particles-toggle-row"></div>
       <div class="kana-start-card">
         <div class="kana-start-info">
@@ -169,6 +170,7 @@
           <span id="particles-progress-text" class="study-progress-text">0 / 0</span>
         </div>
         <label class="study-furigana-toggle" title="Show readings above the kanji (F)"><input type="checkbox" id="particles-furigana"> Furigana</label>
+        <label class="study-furigana-toggle" title="Show the English translation before you answer (E)"><input type="checkbox" id="particles-english"> English</label>
         <button id="btn-particles-undo" class="btn-undo hidden" aria-label="Undo last grade" title="Undo (Z)">↩ Undo</button>
       </div>
       <div id="save-indicator-particles" class="save-indicator">Saved</div>
@@ -193,7 +195,7 @@
 
         <div class="reveal-area hidden" id="particles-next-area">
           <button id="btn-particles-next" class="btn-reveal">Next</button>
-          <span class="reveal-hint">Space = next · F = furigana</span>
+          <span class="reveal-hint">Space = next · F = furigana · E = English</span>
         </div>
       </div>
 
@@ -223,13 +225,13 @@
   <script src="sentences-data.js?v=8"></script>
   <script src="vocabulary-data.js"></script>
   <script src="kanji-info-data.js"></script>
-  <script src="particles-data.js"></script>
+  <script src="particles-data.js?v=2"></script>
   <script src="particles-notes.js"></script>
-  <script src="verb-particles-data.js?v=4"></script>
+  <script src="verb-particles-data.js?v=5"></script>
   <script src="examples.js"></script>
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=5"></script>
-  <script src="app.js?v=83"></script>
+  <script src="app.js?v=84"></script>
   <script src="sync-merge.js?v=11"></script>
   <script src="progress-stats.js?v=5"></script>
   <script src="sync.js?v=12"></script>

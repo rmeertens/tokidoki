@@ -8590,3 +8590,8 @@ body.vq-no-furigana #screen-vocab-questions rt { visibility: hidden; }
 .vq-lookalikes { margin: 4px 0 8px; }
 .vq-lookalikes b { font-family: var(--font-jp); font-size: 1.1rem; }
 .vq-lookalike-en { color: var(--text-dim); font-size: 0.88rem; }
+
+/* Particle quiz: JLPT level filter on the setup screen */
+.pq-level-row { align-items: center; }
+.pq-level-label { font-size: 0.8rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.04em; }
+.pq-level-count { color: var(--text-muted); font-weight: 400; }

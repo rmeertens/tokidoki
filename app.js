@@ -137,7 +137,7 @@
   const SETTINGS_KEY = 'tokidoki_settings';
 
   function loadSettings() {
-    const defaults = { typingMode: false, hideForm: true, englishToJapanese: true, showExampleFront: false, showFurigana: true, flashcardFurigana: true, adjSentences: false, kanjiQuizReadingsBefore: false, kanjiQuizReadingsAfter: false };
+    const defaults = { typingMode: false, hideForm: true, englishToJapanese: true, showExampleFront: false, showFurigana: true, particlesEnglish: true, flashcardFurigana: true, adjSentences: false, kanjiQuizReadingsBefore: false, kanjiQuizReadingsAfter: false };
     let loaded;
     try { loaded = { ...defaults, ...JSON.parse(localStorage.getItem(SETTINGS_KEY)) }; }
     catch { loaded = { ...defaults }; }
@@ -3160,21 +3160,51 @@
     return checked ? checked.value : 'sentences';
   }
 
+  // JLPT levels a question can have (`level` in the data: its hardest word).
+  const PARTICLE_LEVELS = ['N5', 'N4', 'N3'];
+
+  function getSelectedParticleLevels() {
+    return PARTICLE_LEVELS.filter(l => {
+      const el = $(`#particles-level-${l}`);
+      return !el || el.checked;
+    });
+  }
+
   function getParticlesPool() {
+    const levels = getSelectedParticleLevels();
     if (getParticlesQuizType() === 'verbs') {
       return (window.VERB_PARTICLE_ITEMS || [])
+        .filter(item => levels.includes(item.level))
         .map(item => ({ ...item, itemId: item.id, id: `vparticle_${item.id}` }));
     }
     const selected = getSelectedParticles();
     return (window.PARTICLE_QUIZ_ITEMS || [])
-      .filter(item => selected.includes(item.particle))
+      .filter(item => selected.includes(item.particle) && levels.includes(item.level))
       .map(item => ({ ...item, itemId: item.id, id: particleCardId(item) }));
   }
 
   // Builds the particle toggle checkboxes once from PARTICLE_LIST — the
   // page itself only carries an empty container, since the particle set
   // lives in particles-data.js rather than being hand-written per particle.
+  // JLPT level checkboxes, each with how many questions of this quiz type
+  // it has (the counts change with the type; the boxes are built once).
+  function renderParticleLevelToggles() {
+    const row = $('#particles-level-row');
+    if (!row) return;
+    const items = getParticlesQuizType() === 'verbs' ? (window.VERB_PARTICLE_ITEMS || []) : (window.PARTICLE_QUIZ_ITEMS || []);
+    if (!row.children.length) {
+      row.innerHTML = `<span class="pq-level-label">JLPT level</span>` + PARTICLE_LEVELS.map(l => `
+        <label class="kana-script-toggle"><input type="checkbox" id="particles-level-${l}" checked> ${l} <span class="pq-level-count" data-level="${l}"></span></label>`).join('');
+    }
+    PARTICLE_LEVELS.forEach(l => {
+      const n = items.filter(item => item.level === l).length;
+      const count = row.querySelector(`.pq-level-count[data-level="${l}"]`);
+      if (count) count.textContent = `(${n})`;
+    });
+  }
+
   function renderParticleToggles() {
+    renderParticleLevelToggles();
     const row = $('#particles-toggle-row');
     if (!row || row.children.length > 0) return;
     (window.PARTICLE_LIST || []).forEach(p => {
@@ -3433,9 +3463,12 @@
     }
     const refBtn = $('#btn-ref');
     if (refBtn && $('#ref-overlay[data-kind="verb-particles"]')) refBtn.classList.toggle('hidden', !verbs);
-    const startBtn = $('#btn-start-particles');
-    if (startBtn) startBtn.textContent = verbs ? 'Start Verb + Particle quiz' : 'Start Sentences quiz';
     const pool = getParticlesPool();
+    const startBtn = $('#btn-start-particles');
+    if (startBtn) {
+      startBtn.textContent = verbs ? 'Start Verb + Particle quiz' : 'Start Sentences quiz';
+      startBtn.disabled = pool.length === 0;
+    }
     const due = pool.filter(item => isDue(getCardState(srsData, item.id))).length;
     const el = $('#particles-due-count');
     if (el) el.textContent = due;
@@ -3490,6 +3523,7 @@
 
     renderParticleSentence();
     $('#particles-en').textContent = currentParticleCard.en;
+    renderParticleEnglish();
 
     currentParticleChoices = pickParticleChoices(currentParticleCard);
     $$('.particle-choice').forEach((btn, i) => {
@@ -3510,6 +3544,20 @@
     if (!currentParticleCard) return;
     $('#particles-before').innerHTML = settings.showFurigana ? currentParticleCard.beforeHtml : currentParticleCard.beforePlain;
     $('#particles-after').innerHTML = settings.showFurigana ? currentParticleCard.afterHtml : currentParticleCard.afterPlain;
+  }
+
+  // The English line: always shown, or (box off) only once answered.
+  function renderParticleEnglish() {
+    const box = $('#particles-english');
+    if (box) box.checked = settings.particlesEnglish;
+    const en = $('#particles-en');
+    if (en) en.classList.toggle('hidden', !settings.particlesEnglish && !particlesAnswered);
+  }
+
+  function setParticlesEnglish(on) {
+    settings.particlesEnglish = !!on;
+    saveSettings(settings);
+    renderParticleEnglish();
   }
 
   // Furigana on / off during the quiz (checkbox or F); saved, like the
@@ -3571,6 +3619,7 @@
     flashSaveIndicator();
 
     $('#particles-next-area').classList.remove('hidden');
+    renderParticleEnglish();
     updateParticlesUndoButton();
   }
 
@@ -6924,6 +6973,9 @@
     on('#btn-particles-back-to-chapters', 'click', backToParticlesChapters);
 
     on('#particles-furigana', 'change', e => setParticlesFurigana(e.target.checked));
+    on('#particles-english', 'change', e => setParticlesEnglish(e.target.checked));
+    // Level and particle boxes: update the due count and the Start button.
+    ['#particles-level-row', '#particles-toggle-row'].forEach(sel => on(sel, 'change', renderParticlesPanel));
 
     document.addEventListener('keydown', (e) => {
       if (overlayOpen('settings-overlay')) return;
@@ -6940,6 +6992,12 @@
       if ((e.key === 'f' || e.key === 'F') && !e.ctrlKey && !e.metaKey && !e.altKey && !e.repeat) {
         consumeKey(e);
         setParticlesFurigana(!settings.showFurigana);
+        return;
+      }
+      // E: English translation on / off.
+      if ((e.key === 'e' || e.key === 'E') && !e.ctrlKey && !e.metaKey && !e.altKey && !e.repeat) {
+        consumeKey(e);
+        setParticlesEnglish(!settings.particlesEnglish);
         return;
       }
 

@@ -32,6 +32,13 @@ for (const r of VERB_PARTICLE_RULES) {
   }
 }
 
+// Every quiz question (Sentences and Verb + Particle) has a JLPT level for
+// the setup screen's level filter.
+require('./particles-data.js');
+for (const item of [...global.PARTICLE_QUIZ_ITEMS, ...VERB_PARTICLE_ITEMS]) {
+  check(['N5', 'N4', 'N3'].includes(item.level), `${item.id}: level must be N5, N4 or N3`);
+}
+
 const seen = new Set();
 for (const g of VERB_TRANSITIVITY.groups) {
   check(g.vi && g.vt && g.pairs.length, 'group needs endings and pairs');
