@@ -563,7 +563,7 @@
 深い|ふかい	この川は深いです。	This river is deep.
 壊れる|こわれる	時計が壊れました。	The clock broke.
 揺れる|ゆれる	地震で家が揺れました。	The house shook in the earthquake.
-落る|おちる	木から葉が落ちます。	Leaves fall from the tree.
+落ちる|おちる	木から葉が落ちます。	Leaves fall from the tree.
 悲しい|かなしい	悲しい映画を見ました。	I watched a sad movie.
 中学校|ちゅうがっこう	弟は中学校に通っています。	My younger brother goes to junior high school.
 祈る|いのる	家族の幸せを祈ります。	I pray for my family's happiness.
@@ -792,7 +792,7 @@
 沸かす|わかす	お湯を沸かします。	I boil some water.
 特に|とくに	特に問題はありません。	There's no problem in particular.
 空く|あく	席が空いています。	The seat is free.
-計画|けいかくする	夏休みの計画を立てます。	I make plans for the summer holidays.
+計画|けいかく	夏休みの計画を立てます。	I make plans for the summer holidays.
 通り|とおり	この通りは店が多いです。	There are many shops on this street.
 下着|したぎ	下着を洗います。	I wash my underwear.
 経済|けいざい	大学で経済を勉強しています。	I study economics at university.
@@ -826,7 +826,7 @@
 妻|つま	妻は料理が上手です。	My wife is a good cook.
 帰り|かえり	帰りに牛乳を買います。	I buy milk on the way home.
 具合|ぐあい	体の具合はどうですか。	How are you feeling?
-堅|かたい	このパンは堅いです。	This bread is hard.
+堅い|かたい	このパンは堅いです。	This bread is hard.
 駐車場|ちゅうしゃじょう	駐車場はどこですか。	Where is the parking lot?
 危険|きけん	ここで泳ぐのは危険です。	It's dangerous to swim here.
 髪|かみ	髪を切りました。	I got my hair cut.
@@ -870,7 +870,7 @@
 お見舞い|おみまい	友達のお見舞いに行きます。	I'm going to visit a sick friend.
 席|せき	この席は空いていますか。	Is this seat free?
 ご存じ|ごぞんじ	この店をご存じですか。	Do you know this shop?
-下る|さがる	熱が下りました。	My fever has gone down.
+下がる|さがる	熱が下がりました。	My fever has gone down.
 字|じ	きれいな字ですね。	What neat handwriting.
 褒める|ほめる	先生に褒められました。	I was praised by my teacher.
 空く|すく	お腹が空きました。	I'm hungry.
@@ -1159,7 +1159,7 @@
 尻|しり	長く座ってお尻が痛いです。	My bottom hurts from sitting so long.
 知合い|しりあい	彼は私の知合いです。	He's an acquaintance of mine.
 印|しるし	地図に印をつけます。	I mark it on the map.
-城|しろ	大阪城を見に行きました。	I went to see Osaka Castle.
+城|しろ	山の上に古い城があります。	There is an old castle on top of the hill.
 進学|しんがく	大学に進学します。	I'm going on to university.
 神経|しんけい	神経が疲れました。	My nerves are worn out.
 真剣|しんけん	真剣に考えてください。	Please think about it seriously.
@@ -1829,7 +1829,7 @@
 異なる|ことなる	国によって習慣が異なります。	Customs differ from country to country.
 諺|ことわざ	日本の諺を覚えました。	I learned a Japanese proverb.
 断る|ことわる	誘いを断りました。	I turned down the invitation.
-粉|こな	小麦粉でパンを作ります。	I make bread from flour.
+粉|こな	粉と水をよく混ぜます。	I mix the flour and water well.
 好み|このみ	甘いものが好みです。	I prefer sweet things.
 好む|このむ	兄は静かな場所を好みます。	My older brother prefers quiet places.
 塵|ごみ	塵を捨ててください。	Please throw away the garbage.
@@ -2854,3 +2854,29 @@
 弱まる|よわまる	雨が弱まりました。	The rain has eased off.
 弱める|よわめる	火を弱めてください。	Please turn down the heat.
 枠|わく	窓の枠を白く塗ります。	I paint the window frame white.
+運動|うんどう	毎朝、公園で運動します。	I exercise in the park every morning.
+心配|しんぱい	母は私のことをいつも心配しています。	My mother always worries about me.
+出席|しゅっせき	明日の会議に出席します。	I'll attend tomorrow's meeting.
+故障|こしょう	エレベーターが故障しています。	The lift is out of order.
+準備|じゅんび	旅行の準備をしました。	I got ready for the trip.
+挨拶|あいさつ	朝、近所の人に挨拶をします。	In the morning I greet my neighbours.
+案内|あんない	駅まで案内しましょうか。	Shall I show you the way to the station?
+招待|しょうたい	友達を誕生日のパーティーに招待しました。	I invited my friends to my birthday party.
+楽しむ|たのしむ	週末は家族と旅行を楽しみました。	I enjoyed a trip with my family at the weekend.
+遠慮|えんりょ	遠慮しないで、たくさん食べてください。	Don't hold back — please eat plenty.
+入学|にゅうがく	弟は四月に小学校に入学します。	My little brother starts primary school in April.
+生産|せいさん	この工場では車を生産しています。	This factory produces cars.
+支度|したく	早く出かける支度をしてください。	Please hurry up and get ready to go out.
+お金持ち|おかねもち	あの人はお金持ちです。	That person is rich.
+放送|ほうそう	この番組は毎週日曜日に放送されます。	This programme is broadcast every Sunday.
+承知|しょうち	はい、承知しました。	Yes, certainly. (I understand.)
+退院|たいいん	祖父は昨日退院しました。	My grandfather left hospital yesterday.
+世話|せわ	毎日、犬の世話をしています。	I look after the dog every day.
+出発|しゅっぱつ	バスは九時に出発します。	The bus leaves at nine.
+拝見|はいけん	切符を拝見します。	May I see your ticket?
+経験|けいけん	外国で働いた経験があります。	I have experience of working abroad.
+入院|にゅういん	父は一週間入院しました。	My father was in hospital for a week.
+相談|そうだん	先生に進学のことを相談しました。	I talked to my teacher about going on to further education.
+食事|しょくじ	家族と一緒に食事をします。	I have meals with my family.
+生活|せいかつ	日本の生活にもう慣れました。	I've already got used to life in Japan.
+輸出|ゆしゅつ	日本は車をたくさん輸出しています。	Japan exports a lot of cars.

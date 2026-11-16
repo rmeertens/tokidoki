@@ -122,6 +122,14 @@
       Object.keys(srsData).forEach(id => { if (test(id)) delete srsData[id]; });
       saveSRS(srsData);
     },
+    // A card whose id changed (a word's spelling put right): its progress
+    // moves to the new id, unless that one has progress of its own.
+    rename(from, to) {
+      if (!srsData[from]) return;
+      if (!srsData[to]) srsData[to] = srsData[from];
+      delete srsData[from];
+      saveSRS(srsData);
+    },
   };
 
   // ─── State ─────────────────────────────────────────────────────────────────────
