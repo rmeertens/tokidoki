@@ -1409,10 +1409,10 @@
         grammar: [
           '〜ながら|while …|友達[ともだち]と話[はな]しながら、オンラインで遊[あそ]びます。|I play online while chatting with friends.',
           '〜ないと|unless …|クリアしないと、寝[ね]られません。|I can\'t sleep until I\'ve cleared it.',
-          '〜ことにしている|make it a rule to …|一日[いちにち]一時間[いちじかん]までと決[き]めることにしています。|I make it a rule to set a one-hour limit a day.',
+          '〜ことにしている|make it a rule to …|平日[へいじつ]は一時間[いちじかん]までにすることにしています。|On weekdays I make it a rule to stop after an hour.',
         ],
         start: '昔[むかし]ほどではありませんが、|Not as much as I used to, but …',
-        answer: ['昔[むかし]ほどではありませんが、今[いま]でもゲームはよくします。最近[さいきん]は、国[くに]の友達[ともだち]とオンラインで協力[きょうりょく]するゲームにはまっています。電話[でんわ]で話[はな]しながら遊[あそ]べるので、遠[とお]くに住[す]んでいても、いつも一緒[いっしょ]にいるみたいです。ストーリーがいいゲームだと夢中[むちゅう]になって、クリアするまでやめられないので、平日[へいじつ]は一時間[いちじかん]までと決[き]めています。',
+        answer: ['昔[むかし]ほどではありませんが、今[いま]でもゲームはよくします。最近[さいきん]は、国[くに]の友達[ともだち]とオンラインで協力[きょうりょく]するゲームにはまっています。電話[でんわ]で話[はな]しながら遊[あそ]べるので、遠[とお]くに住[す]んでいても、いつも一緒[いっしょ]にいるみたいです。ストーリーがいいゲームだと夢中[むちゅう]になって、クリアするまでやめられないので、平日[へいじつ]は一時間[いちじかん]までにすることにしています。',
           'Not as much as I used to, but I still play games a lot. Lately I\'m hooked on a co-op game I play online with friends back home. We can play while talking on the phone, so even though we live far apart, it feels like we\'re always together. With a game that has a good story I get so absorbed that I can\'t stop until I\'ve finished it, so on weekdays I limit myself to an hour.'],
       },
       N3: {
@@ -2080,8 +2080,8 @@
           '〜つ目[め]は|the …th one is|二[ふた]つ目[め]は旅行[りょこう]です。|The second one is a trip.',
         ],
         start: '今年[ことし]の目標[もくひょう]は〜つあります。|I have … goals this year.',
-        answer: ['今年[ことし]の目標[もくひょう]は二[ふた]つあります。一[ひと]つ目[め]は日本語[にほんご]の試験[しけん]に合格[ごうかく]したいです。毎日[まいにち]漢字[かんじ]を五[いつ]つ覚[おぼ]えます。二[ふた]つ目[め]は、秋[あき]に日本[にほん]へ旅行[りょこう]に行[い]きたいです。京都[きょうと]でお寺[てら]を見[み]たいです。',
-          'I have two goals this year. The first is that I want to pass my Japanese exam. I learn five kanji every day. The second is that I want to travel to Japan in the autumn. I want to see the temples in Kyoto.'],
+        answer: ['今年[ことし]の目標[もくひょう]は二[ふた]つあります。一[ひと]つ目[め]は日本語[にほんご]の試験[しけん]です。N4に合格[ごうかく]したいです。毎日[まいにち]漢字[かんじ]を五[いつ]つ覚[おぼ]えます。二[ふた]つ目[め]は旅行[りょこう]です。秋[あき]に日本[にほん]へ行[い]きたいです。京都[きょうと]でお寺[てら]を見[み]たいです。',
+          'I have two goals this year. The first is my Japanese exam. I want to pass N4. I learn five kanji every day. The second is a trip. I want to go to Japan in the autumn. I want to see the temples in Kyoto.'],
       },
       N4: {
         words: ['資格[しかく]|qualification', '貯金[ちょきん]|savings', '三日坊主[みっかぼうず]|someone who gives up after three days', '習慣[しゅうかん]|habit', '計画[けいかく]|plan'],
@@ -2436,12 +2436,12 @@
         verbs: ['使[つか]います|use', '聞[き]きます|ask', '分[わ]かります|understand', '怖[こわ]いです|is scary'],
         grammar: [
           '〜と思[おも]います|I think …|AIは便利[べんり]だと思[おも]います。|I think AI is convenient.',
-          '〜に〜を聞[き]きます|ask … about …|AIに日本語[にほんご]の質問[しつもん]を聞[き]きます。|I ask AI questions about Japanese.',
+          '〜に〜について聞[き]きます|ask … about …|AIに日本語[にほんご]について聞[き]きます。|I ask AI about Japanese.',
           'でも、〜|but …|でも、ちょっと怖[こわ]いです。|But it\'s a bit scary.',
         ],
         start: 'AIはとても〜と思[おも]います。|I think AI is very …',
-        answer: ['AIはとても便利[べんり]だと思[おも]います。私[わたし]はよくAIに日本語[にほんご]の文法[ぶんぽう]の質問[しつもん]を聞[き]きます。翻訳[ほんやく]も使[つか]います。すぐ分[わ]かりますから、いいです。でも、ちょっと怖[こわ]いです。宿題[しゅくだい]は自分[じぶん]でしたいです。',
-          'I think AI is really convenient. I often ask AI questions about Japanese grammar. I use it for translation too. I understand straight away, which is great. But it\'s a bit scary. I want to do my homework myself.'],
+        answer: ['AIはとても便利[べんり]だと思[おも]います。私[わたし]はよくAIに日本語[にほんご]の文法[ぶんぽう]について聞[き]きます。翻訳[ほんやく]も使[つか]います。すぐ分[わ]かりますから、いいです。でも、ちょっと怖[こわ]いです。宿題[しゅくだい]は自分[じぶん]でしたいです。',
+          'I think AI is really convenient. I often ask AI about Japanese grammar. I use it for translation too. I understand straight away, which is great. But it\'s a bit scary. I want to do my homework myself.'],
       },
       N4: {
         words: ['人工知能[じんこうちのう]|artificial intelligence', '仕事[しごと]がなくなる|jobs disappear', '情報[じょうほう]|information', '間違[まちが]い|mistake', '正[ただ]しい|correct'],
