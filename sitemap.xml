@@ -161,6 +161,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://tokidoki.meertens.dev/news-week-2026-11-16.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://tokidoki.meertens.dev/news-week-2026-11-09.html</loc>
     <lastmod>2026-11-15</lastmod>
     <priority>0.5</priority>
@@ -189,6 +194,21 @@
     <loc>https://tokidoki.meertens.dev/news-week-2026-10-05.html</loc>
     <lastmod>2026-10-11</lastmod>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-11-16-gdp-q3-contraction.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-11-16-shuri-castle-reopens.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-11-16-japan-beats-brazil.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://tokidoki.meertens.dev/news-2026-11-15-host-nation-support.html</loc>

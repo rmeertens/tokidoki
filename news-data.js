@@ -27,6 +27,171 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-11-16-gdp-q3-contraction',
+      date: '2026-11-16',
+      emoji: '📉',
+      titleEn: 'Japan\'s economy shrinks slightly in July–September, its first contraction in a year, as household spending falls',
+      sources: [
+        { name: 'Nikkei', url: 'https://www.nikkei.com/article/DGXZQOUA138F50T11C26A1000000/' },
+        { name: 'AP via The Washington Post', url: 'https://www.washingtonpost.com/business/2026/11/15/japan-economy-growth-oil-energy-inflation/66a7ff06-e162-11f1-a99e-b3e3805c6b8b_story.html' },
+        { name: 'TV Asahi via d menu news', url: 'https://topics.smt.docomo.ne.jp/article/tvasahinews/business/tvasahinews-000548095' },
+        { name: 'BigGo Finance', url: 'https://finance.biggo.com/news/4a06c79e-a90f-4681-9939-d5e7a80e19ff' },
+      ],
+      quiz: [
+        ['Which months do the new figures cover?', 'July to September', 'April to June', 'October to December', 'January to March'],
+        ['What happened to Japan\'s GDP in that period?', 'It went down a little', 'It went up a lot', 'It went down by half', 'It went up a little'],
+        ['What did companies spend more money on?', 'Machines and buildings', 'Advertising on TV', 'Higher wages for workers', 'Buying land abroad'],
+      ],
+      levels: {
+        N5: {
+          title: '日本[にほん]の　経済[けいざい]が　少[すこ]し　小[ちい]さく　なりました',
+          lines: [
+            ['国[くに]が　十六日[じゅうろくにち]に　日本[にほん]の　経済[けいざい]の　数字[すうじ]を　出[だ]しました。', 'On the 16th, the government released figures on Japan\'s economy.', 'The Cabinet Office (内閣府) released its first estimate of GDP for July to September.'],
+            ['7月[がつ]から　9月[がつ]までの　GDPは、少[すこ]し　下[さ]がりました。', 'GDP for July to September went down a little.', 'GDP (国内総生産) is the total value of everything a country makes. Real GDP fell at an annual rate of 0.1%.'],
+            ['GDPが　下[さ]がったのは　1年[ねん]ぶりです。', 'It is the first time in a year that GDP has gone down.', '〜ぶり means "for the first time in (a period)".'],
+            ['物[もの]の　値段[ねだん]が　高[たか]く　なって、みんな　あまり　買[か]い物[もの]を　しませんでした。', 'Prices went up, and people did not shop very much.'],
+            ['天気[てんき]も　よく　ありませんでした。', 'The weather was not good either.', 'Unseasonable weather is also thought to have kept people from spending.'],
+            ['外国[がいこく]から　買[か]う　石油[せきゆ]も　高[たか]いです。', 'The oil Japan buys from other countries is also expensive.'],
+            ['でも、会社[かいしゃ]が　機械[きかい]や　建物[たてもの]に　使[つか]う　お金[かね]は　増[ふ]えました。', 'But the money companies spend on machines and buildings went up.'],
+          ],
+        },
+        N4: {
+          title: '7月[がつ]から9月[がつ]のGDP、1年[ねん]ぶりにマイナス',
+          lines: [
+            ['内閣府[ないかくふ]は十六日[じゅうろくにち]、7月[がつ]から9月[がつ]までのGDPの速報[そくほう]を発表[はっぴょう]しました。', 'On the 16th, the Cabinet Office announced its first estimate of GDP for July to September.', '速報 here means the preliminary figures; a revised estimate follows.'],
+            ['物価[ぶっか]の影響[えいきょう]を除[のぞ]いた実質[じっしつ]GDPは前[まえ]の3か月[げつ]より少[すこ]し減[へ]り、1年間[ねんかん]の数字[すうじ]にすると0.1%のマイナスでした。', 'Real GDP, which takes out the effect of prices, fell slightly from the previous three months; turned into a figure for a whole year, it was minus 0.1%.', '実質 means "real", adjusted for price changes. The yearly figure is called the annualized rate (年率).'],
+            ['マイナスになったのは、1年[ねん]ぶりです。', 'It is the first fall in a year.'],
+            ['物[もの]の値段[ねだん]が上[あ]がったことや天気[てんき]の影響[えいきょう]で、人々[ひとびと]の消費[しょうひ]が0.3%減[へ]りました。', 'Because of rising prices and the weather, consumer spending fell 0.3%.', '消費 is spending by households. It fell for the second quarter in a row.'],
+            ['石油[せきゆ]の値段[ねだん]が高[たか]いことも、経済[けいざい]に影響[えいきょう]しています。', 'High oil prices are also affecting the economy.'],
+            ['一方[いっぽう]、会社[かいしゃ]が機械[きかい]や建物[たてもの]などに使[つか]うお金[かね]は1.6%増[ふ]えました。', 'On the other hand, the money companies spend on things like machines and buildings rose 1.6%.'],
+            ['専門家[せんもんか]は少[すこ]しプラスになると予想[よそう]していたので、予想[よそう]より悪[わる]い結果[けっか]でした。', 'Experts had expected a small rise, so the result was worse than expected.', 'The average of private forecasts was growth of 0.2% at an annual rate.'],
+          ],
+        },
+        N3: {
+          title: '7～9月期[がつき]GDP、年率[ねんりつ]0.1%減[げん]　4四半期[しはんき]ぶりマイナス成長[せいちょう]',
+          lines: [
+            ['内閣府[ないかくふ]が十六日[じゅうろくにち]発表[はっぴょう]した7～9月期[がつき]の国内[こくない]総生産[そうせいさん]（GDP）速報[そくほう]値[ち]は、物価[ぶっか]変動[へんどう]の影響[えいきょう]を除[のぞ]いた実質[じっしつ]で前期[ぜんき]比[ひ]0.02%減[げん]、年率[ねんりつ]換算[かんさん]で0.1%減[げん]だった。', 'The preliminary figures for July–September gross domestic product (GDP) announced by the Cabinet Office on the 16th showed real GDP, excluding the effect of price changes, down 0.02% from the previous quarter, or 0.1% at an annualized rate.', '前期比 means "compared with the previous quarter"; 年率換算 means "converted to an annual rate".'],
+            ['マイナス成長[せいちょう]は4四半期[しはんき]ぶりで、民間[みんかん]予測[よそく]の中心[ちゅうしん]だった年率[ねんりつ]0.2%増[ぞう]を下回[したまわ]った。', 'It was the first contraction in four quarters, and fell short of the central private forecast of 0.2% annualized growth.', '四半期 is a quarter of a year, three months.'],
+            ['GDPの半分[はんぶん]以上[いじょう]を占[し]める個人[こじん]消費[しょうひ]は前期[ぜんき]比[ひ]0.3%減[げん]と、2四半期[しはんき]連続[れんぞく]で減少[げんしょう]した。', 'Private consumption, which makes up more than half of GDP, fell 0.3% from the previous quarter, declining for a second straight quarter.'],
+            ['物価[ぶっか]高[だか]が続[つづ]いていることに加[くわ]え、天候[てんこう]不順[ふじゅん]も消費[しょうひ]を押[お]し下[さ]げたとみられる。', 'In addition to continuing high prices, unseasonable weather is thought to have held down spending.', '天候不順 means weather that is unusual for the season.'],
+            ['一方[いっぽう]、企業[きぎょう]の設備[せつび]投資[とうし]は1.6%増[ぞう]と、3四半期[しはんき]ぶりにプラスに転[てん]じた。', 'Meanwhile, business investment in plant and equipment rose 1.6%, turning positive for the first time in three quarters.', '設備投資 is money companies spend on equipment, factories and buildings.'],
+            ['内需[ないじゅ]はGDPを0.6ポイント押[お]し上[あ]げたが、外需[がいじゅ]が0.6ポイント押[お]し下[さ]げ、両者[りょうしゃ]が打[う]ち消[け]し合[あ]った。', 'Domestic demand pushed GDP up by 0.6 points, but external demand pulled it down by 0.6 points, so the two cancelled each other out.', '内需 is demand at home; 外需 is exports minus imports. High oil import costs weighed on the economy.'],
+            ['同[おな]じ期間[きかん]の2次[じ]速報[そくほう]は12月[がつ]八日[ようか]に公表[こうひょう]される予定[よてい]で、数値[すうち]が改定[かいてい]される可能性[かのうせい]もある。', 'The second preliminary estimate for the same period is due on December 8, and the figures may be revised.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-16-shuri-castle-reopens',
+      date: '2026-11-16',
+      emoji: '🏯',
+      titleEn: 'Shuri Castle\'s main hall, destroyed by fire in 2019, is rebuilt; the interior is shown to the press ahead of public opening on November 23',
+      sources: [
+        { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261116de76402' },
+        { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/10/31/japan/shuri-castle-reopen-november/' },
+        { name: 'Jiji via nippon.com', url: 'https://www.nippon.com/en/news/yjj2026060400455/' },
+        { name: 'Travel Watch', url: 'https://travel.watch.impress.co.jp/docs/news/2133105.html' },
+      ],
+      quiz: [
+        ['Where is Shuri Castle?', 'In Naha, Okinawa', 'In Kyoto', 'In Sapporo, Hokkaido', 'In Osaka'],
+        ['Why did the building have to be made again?', 'It burned in a fire in 2019', 'An earthquake knocked it down in 2016', 'A typhoon destroyed it last year', 'It was too old to be safe'],
+        ['From when can everyone go inside?', 'From the 23rd', 'From the 16th', 'From next spring', 'From December 8'],
+      ],
+      levels: {
+        N5: {
+          title: '首里城[しゅりじょう]の　新[あたら]しい　建物[たてもの]が　できました',
+          lines: [
+            ['沖縄[おきなわ]の　那覇[なは]に、首里城[しゅりじょう]と　いう　古[ふる]い　城[しろ]が　あります。', 'In Naha, Okinawa, there is an old castle called Shuri Castle.', 'Shuri Castle was the royal palace of the Ryukyu Kingdom, which ruled Okinawa until the 19th century.'],
+            ['2019年[ねん]に、火事[かじ]で　大[おお]きな　建物[たてもの]が　焼[や]けて　しまいました。', 'In 2019, its big buildings burned down in a fire.', 'The fire was on 31 October 2019. The main hall (正殿, せいでん) and other buildings were lost.'],
+            ['2022年[ねん]から、この　建物[たてもの]を　もう　一度[いちど]　作[つく]って　いました。', 'Since 2022, the building has been made again.'],
+            ['十六日[じゅうろくにち]、新[あたら]しい　建物[たてもの]の　中[なか]を　テレビや　新聞[しんぶん]の　人[ひと]に　見[み]せました。', 'On the 16th, the inside of the new building was shown to TV and newspaper reporters.'],
+            ['中[なか]は　赤[あか]や　金[きん]の　色[いろ]で、とても　きれいです。', 'Inside, it is very beautiful, in red and gold.', 'The hall is decorated with red lacquer and gold leaf.'],
+            ['二十三日[にじゅうさんにち]から、みんなが　中[なか]に　入[はい]る　ことが　できます。', 'From the 23rd, everyone can go inside.', 'To see inside the main hall, visitors need to book in advance.'],
+            ['作[つく]る　お金[かね]は　120億[おく]円[えん]ぐらいです。', 'The cost of making it is about 12 billion yen.', '億 is a hundred million, so 120億 is 12 billion.'],
+          ],
+        },
+        N4: {
+          title: '火事[かじ]で焼[や]けた首里城[しゅりじょう]正殿[せいでん]、23日[にち]から公開[こうかい]',
+          lines: [
+            ['2019年[ねん]の火事[かじ]で焼[や]けた沖縄[おきなわ]県[けん]那覇[なは]市[し]の首里城[しゅりじょう]の正殿[せいでん]が、もう一度[いちど]作[つく]られました。', 'The main hall of Shuri Castle in Naha, Okinawa Prefecture, which burned in a fire in 2019, has been built again.', '正殿 is the main hall, the castle\'s central building.'],
+            ['十六日[じゅうろくにち]、一般[いっぱん]の人[ひと]に見[み]せる前[まえ]に、建物[たてもの]の中[なか]が報道[ほうどう]の人[ひと]たちに公開[こうかい]されました。', 'On the 16th, before it is shown to the public, the inside of the building was opened to the press.'],
+            ['中[なか]は漆[うるし]や金箔[きんぱく]を使[つか]って、豪華[ごうか]に作[つく]られています。', 'Inside, it is made in a rich style, using lacquer and gold leaf.', '漆 is lacquer; 金箔 is gold leaf.'],
+            ['工事[こうじ]は2022年[ねん]11月[がつ]に始[はじ]まり、今年[ことし]9月[がつ]に終[お]わりました。', 'The work started in November 2022 and finished in September this year.'],
+            ['全部[ぜんぶ]で約[やく]120億[おく]円[えん]が必要[ひつよう]になる見込[みこ]みで、日本[にほん]や外国[がいこく]から約[やく]62億[おく]円[えん]の寄付[きふ]が集[あつ]まりました。', 'It is expected to cost about 12 billion yen in all, and about 6.2 billion yen in donations came from Japan and abroad.', 'The donation total is as of the end of September.'],
+            ['22日[にち]に完成[かんせい]を祝[いわ]う式[しき]があり、23日[にち]からは一般[いっぱん]の人[ひと]も見[み]ることができます。', 'There will be a ceremony to celebrate its completion on the 22nd, and from the 23rd the public can see it too.'],
+            ['正殿[せいでん]の中[なか]を見[み]るには予約[よやく]が必要[ひつよう]で、大人[おとな]の入場[にゅうじょう]料[りょう]は400円[えん]から1000円[えん]に上[あ]がります。', 'You need a reservation to see inside the main hall, and the adult entrance fee goes up from 400 yen to 1,000 yen.'],
+          ],
+        },
+        N3: {
+          title: '首里城[しゅりじょう]正殿[せいでん]、焼失[しょうしつ]から7年[ねん]で復元[ふくげん]　23日[にち]から一般[いっぱん]公開[こうかい]',
+          lines: [
+            ['2019年[ねん]10月[がつ]の火災[かさい]で焼失[しょうしつ]した那覇[なは]市[し]の首里城[しゅりじょう]正殿[せいでん]が復元[ふくげん]され、十六日[じゅうろくにち]、一般[いっぱん]公開[こうかい]を前[まえ]に内部[ないぶ]が報道[ほうどう]陣[じん]に公開[こうかい]された。', 'The main hall of Shuri Castle in Naha, destroyed by fire in October 2019, has been restored, and on the 16th its interior was shown to the press ahead of its opening to the public.', '報道陣 means "the press", the reporters and camera crews.'],
+            ['首里城[しゅりじょう]はかつて琉球[りゅうきゅう]王国[おうこく]の王[おう]が暮[く]らした城[しろ]で、正殿[せいでん]はその中心[ちゅうしん]となる建物[たてもの]だ。', 'Shuri Castle is where the kings of the Ryukyu Kingdom once lived, and the main hall is its central building.', 'The Ryukyu Kingdom ruled Okinawa and nearby islands until it was made part of Japan in 1879.'],
+            ['内部[ないぶ]は漆[うるし]や金箔[きんぱく]で豪華[ごうか]に装飾[そうしょく]されている。', 'The interior is richly decorated with lacquer and gold leaf.'],
+            ['復元[ふくげん]工事[こうじ]は2022年[ねん]11月[がつ]に始[はじ]まり、総[そう]事業[じぎょう]費[ひ]は約[やく]120億[おく]円[えん]と見込[みこ]まれている。', 'The restoration work began in November 2022, and the total cost is expected to be about 12 billion yen.'],
+            ['国内外[こくないがい]から寄[よ]せられた寄付[きふ]は、9月末[がつまつ]までに約[やく]62億[おく]円[えん]に上[のぼ]った。', 'Donations from Japan and abroad had reached about 6.2 billion yen by the end of September.', '〜に上る means "to reach (a large amount)".'],
+            ['22日[にち]に完成[かんせい]式[しき]が開[ひら]かれ、23日[にち]から一般[いっぱん]公開[こうかい]される。', 'A completion ceremony will be held on the 22nd, and the hall opens to the public from the 23rd.'],
+            ['混雑[こんざつ]を避[さ]けるため、正殿[せいでん]内部[ないぶ]の見学[けんがく]には事前[じぜん]の予約[よやく]が必要[ひつよう]になり、大人[おとな]の入場[にゅうじょう]料[りょう]も400円[えん]から1000円[えん]に引[ひ]き上[あ]げられるという。', 'To avoid crowding, visits to the inside of the main hall will need an advance reservation, and the adult entrance fee will reportedly be raised from 400 yen to 1,000 yen.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-16-japan-beats-brazil',
+      date: '2026-11-16',
+      emoji: '⚽',
+      titleEn: 'Japan beat Brazil 3–2 in a friendly in Singapore with a stoppage-time goal by Tatsuhiro Sakamoto, their second win over Brazil',
+      sources: [
+        { name: 'Jiji via nippon.com', url: 'https://www.nippon.com/en/articles/-/57449' },
+        { name: 'Malay Mail', url: 'https://www.malaymail.com/news/sports/2026/11/15/japan-stun-brazil-3-2-in-singapore-with-stoppage-time-winner/243310' },
+        { name: 'Sports Hochi via Yahoo! News', url: 'https://news.yahoo.co.jp/articles/287c4b9c1172745b2b34138e342229fcc8054720' },
+        { name: 'FIFA', url: 'https://www.fifa.com/ja/tournaments/mens/worldcup/2030/articles/japan-brazil-international-friendly-141126-ja' },
+      ],
+      quiz: [
+        ['Where was the match played?', 'In Singapore', 'In Tokyo', 'In Brazil', 'In Qatar'],
+        ['What was the final score?', 'Japan won 3–2', 'Brazil won 3–2', 'It was a 2–2 draw', 'Japan won 2–0'],
+        ['When did Japan score the winning goal?', 'At the very end of the match', 'In the first minute', 'Just before half-time', 'In a penalty shoot-out'],
+      ],
+      levels: {
+        N5: {
+          title: 'サッカー　日本[にほん]が　ブラジルに　勝[か]ちました',
+          lines: [
+            ['十四日[じゅうよっか]、シンガポールで　サッカーの　試合[しあい]が　ありました。', 'On the 14th, there was a soccer match in Singapore.'],
+            ['日本[にほん]の　男子[だんし]の　チームが　ブラジルと　試合[しあい]を　しました。', 'Japan\'s men\'s team played against Brazil.', 'It was a friendly (親善試合, しんぜんじあい), a match that is not part of a tournament.'],
+            ['日本[にほん]は　初[はじ]めに　2点[てん]を　取[と]りました。', 'Japan scored two goals first.', 'Takefusa Kubo and Keito Nakamura scored in the 15th and 19th minutes.'],
+            ['でも、ブラジルも　2点[てん]を　取[と]って、2対[たい]2に　なりました。', 'But Brazil also scored two goals, and it became 2–2.', 'Both of Brazil\'s goals were scored by Vinícius Júnior. 2対2 is how scores are said.'],
+            ['試合[しあい]の　最後[さいご]に、坂元[さかもと]達裕[たつひろ]選手[せんしゅ]が　ゴールを　決[き]めました。', 'At the end of the match, Tatsuhiro Sakamoto scored a goal.', 'It came in stoppage time, and was his first goal for Japan.'],
+            ['日本[にほん]は　3対[たい]2で　勝[か]ちました。', 'Japan won 3–2.'],
+            ['日本[にほん]が　ブラジルに　勝[か]ったのは　2回目[かいめ]です。', 'This is the second time Japan has beaten Brazil.', 'The first win was in October 2025 in Tokyo, also 3–2.'],
+          ],
+        },
+        N4: {
+          title: 'サッカー日本[にほん]代表[だいひょう]、ブラジルに3対[たい]2で勝[か]つ',
+          lines: [
+            ['サッカーの日本[にほん]代表[だいひょう]は十四日[じゅうよっか]、シンガポールでブラジルと親善[しんぜん]試合[しあい]をしました。', 'On the 14th, Japan\'s national soccer team played a friendly against Brazil in Singapore.', '代表 here is the national team; 親善試合 is a friendly match.'],
+            ['日本[にほん]は前半[ぜんはん]15分[ふん]に久保[くぼ]建英[たけふさ]選手[せんしゅ]がゴールを決[き]め、その4分[ぷん]後[ご]に中村[なかむら]敬斗[けいと]選手[せんしゅ]も点[てん]を取[と]りました。', 'Takefusa Kubo scored for Japan in the 15th minute of the first half, and four minutes later Keito Nakamura also scored.'],
+            ['しかし、ブラジルはヴィニシウス選手[せんしゅ]が2点[てん]を取[と]って、同点[どうてん]に追[お]いつきました。', 'However, Vinícius scored two goals for Brazil, bringing them level.', '同点に追いつく means "to come back to a tie".'],
+            ['試合[しあい]が終[お]わる直前[ちょくぜん]、途中[とちゅう]から出[で]た坂元[さかもと]達裕[たつひろ]選手[せんしゅ]が決勝[けっしょう]ゴールを決[き]めました。', 'Just before the end of the match, Tatsuhiro Sakamoto, who had come on as a substitute, scored the winning goal.', 'The goal came in the 91st minute, in stoppage time.'],
+            ['坂元[さかもと]選手[せんしゅ]にとって、日本[にほん]代表[だいひょう]で初[はじ]めてのゴールでした。', 'It was Sakamoto\'s first goal for the national team.'],
+            ['ブラジルの選手[せんしゅ]たちは、このゴールの前[まえ]に反則[はんそく]があったと強[つよ]く抗議[こうぎ]しましたが、ゴールは認[みと]められました。', 'Brazil\'s players protested strongly that there had been a foul before the goal, but the goal was allowed.', 'The goal stood after a video (VAR) check.'],
+            ['日本[にほん]がブラジルに勝[か]ったのは、去年[きょねん]10月[がつ]に続[つづ]いて2回目[かいめ]です。', 'Following last October, this is the second time Japan has beaten Brazil.'],
+          ],
+        },
+        N3: {
+          title: '日本[にほん]代表[だいひょう]、終了[しゅうりょう]間際[まぎわ]の決勝[けっしょう]点[てん]でブラジルに競[せ]り勝[か]つ',
+          lines: [
+            ['サッカー日本[にほん]代表[だいひょう]は十四日[じゅうよっか]、シンガポールでブラジル代表[だいひょう]と国際[こくさい]親善[しんぜん]試合[しあい]を行[おこな]い、3対[たい]2で勝利[しょうり]した。', 'On the 14th, Japan\'s national soccer team played an international friendly against Brazil in Singapore and won 3–2.'],
+            ['日本[にほん]は前半[ぜんはん]15分[ふん]に久保[くぼ]建英[たけふさ]が先制[せんせい]し、その4分[ぷん]後[ご]に中村[なかむら]敬斗[けいと]が追加[ついか]点[てん]を挙[あ]げた。', 'Takefusa Kubo gave Japan the lead in the 15th minute of the first half, and Keito Nakamura added a second goal four minutes later.', '先制する means "to score first"; 追加点 is "an additional goal". News reports leave off 選手 after players\' names.'],
+            ['その後[ご]、ブラジルはエースのヴィニシウスが2得点[とくてん]を決[き]め、試合[しあい]を振[ふ]り出[だ]しに戻[もど]した。', 'After that, Brazil\'s star Vinícius scored twice, taking the match back to where it started.', '振り出しに戻す means "to go back to square one" — here, to level the score.'],
+            ['試合[しあい]が動[うご]いたのは後半[こうはん]のアディショナルタイムで、佐野[さの]航大[こうだい]のシュートが相手[あいて]に当[あ]たってこぼれたところを、途中[とちゅう]出場[しゅつじょう]の坂元[さかもと]達裕[たつひろ]が決[き]めた。', 'The match changed in stoppage time of the second half: Kodai Sano\'s shot hit a defender and ran loose, and substitute Tatsuhiro Sakamoto put it away.', 'アディショナルタイム is stoppage (added) time; 途中出場 means "coming on during the match".'],
+            ['30歳[さい]の坂元[さかもと]にとっては、これが代表[だいひょう]での初[はつ]ゴールだった。', 'For the 30-year-old Sakamoto, this was his first goal for the national team.'],
+            ['ブラジル側[がわ]はゴール直前[ちょくぜん]の反則[はんそく]を訴[うった]えて激[はげ]しく抗議[こうぎ]したが、ビデオ判定[はんてい]の結果[けっか]、得点[とくてん]は認[みと]められ、抗議[こうぎ]したラフィーニャとアンチェロッティ監督[かんとく]が退場[たいじょう]処分[しょぶん]を受[う]けた。', 'Brazil protested fiercely, claiming a foul just before the goal, but after a video review the goal stood, and Raphinha and coach Carlo Ancelotti, who had protested, were sent off.', '退場処分 means being sent off (shown a red card).'],
+            ['日本[にほん]がブラジルに勝[か]つのは、昨年[さくねん]10月[がつ]の初[はつ]勝利[しょうり]以来[いらい]2度目[どめ]だ。', 'This is Japan\'s second win over Brazil, after its first-ever victory in October last year.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-11-15-host-nation-support',
       date: '2026-11-15',
       emoji: '💴',

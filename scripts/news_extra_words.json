@@ -11263,5 +11263,460 @@
     "べいせいふ",
     "the U.S. government",
     "noun"
+  ],
+  "1年ぶり": [
+    "いちねんぶり",
+    "for the first time in a year",
+    "number + counter"
+  ],
+  "1年間": [
+    "いちねんかん",
+    "one year, for a year",
+    "number + counter"
+  ],
+  "年率": [
+    "ねんりつ",
+    "annual rate",
+    "noun"
+  ],
+  "四半期": [
+    "しはんき",
+    "quarter (of a year)",
+    "noun"
+  ],
+  "4四半期": [
+    "よんしはんき",
+    "four quarters",
+    "number + counter"
+  ],
+  "2四半期": [
+    "にしはんき",
+    "two quarters",
+    "number + counter"
+  ],
+  "3四半期": [
+    "さんしはんき",
+    "three quarters",
+    "number + counter"
+  ],
+  "前期": [
+    "ぜんき",
+    "the previous period (quarter)",
+    "noun"
+  ],
+  "前期比": [
+    "ぜんきひ",
+    "compared with the previous quarter",
+    "noun"
+  ],
+  "0.02%": [
+    "れいてんれいにパーセント",
+    "0.02 percent",
+    "number + counter"
+  ],
+  "換算": [
+    "かんさん",
+    "conversion (to another unit)",
+    "noun"
+  ],
+  "年率換算": [
+    "ねんりつかんさん",
+    "converted to an annual rate, annualized",
+    "noun"
+  ],
+  "転じる": [
+    "てんじる",
+    "to turn (to), to change (to)",
+    "verb"
+  ],
+  "内需": [
+    "ないじゅ",
+    "domestic demand",
+    "noun"
+  ],
+  "外需": [
+    "がいじゅ",
+    "external demand (exports minus imports)",
+    "noun"
+  ],
+  "0.6ポイント": [
+    "れいてんろくポイント",
+    "0.6 points",
+    "number + counter"
+  ],
+  "打ち消す": [
+    "うちけす",
+    "to cancel out",
+    "verb"
+  ],
+  "打ち消し合う": [
+    "うちけしあう",
+    "to cancel each other out",
+    "verb"
+  ],
+  "2次": [
+    "にじ",
+    "second (round, estimate)",
+    "number + counter"
+  ],
+  "数値": [
+    "すうち",
+    "figure, numerical value",
+    "noun"
+  ],
+  "改定": [
+    "かいてい",
+    "revision",
+    "noun"
+  ],
+  "那覇": [
+    "なは",
+    "Naha (capital of Okinawa)",
+    "place name"
+  ],
+  "2019年": [
+    "にせんじゅうきゅうねん",
+    "the year 2019",
+    "number + counter"
+  ],
+  "120億円": [
+    "ひゃくにじゅうおくえん",
+    "12 billion yen",
+    "number + counter"
+  ],
+  "約120億円": [
+    "やくひゃくにじゅうおくえん",
+    "about 12 billion yen",
+    "number + counter"
+  ],
+  "約62億円": [
+    "やくろくじゅうにおくえん",
+    "about 6.2 billion yen",
+    "number + counter"
+  ],
+  "400円": [
+    "よんひゃくえん",
+    "400 yen",
+    "number + counter"
+  ],
+  "1000円": [
+    "せんえん",
+    "1,000 yen",
+    "number + counter"
+  ],
+  "正殿": [
+    "せいでん",
+    "main hall (of a palace or shrine)",
+    "noun"
+  ],
+  "金箔": [
+    "きんぱく",
+    "gold leaf",
+    "noun"
+  ],
+  "焼失": [
+    "しょうしつ",
+    "destruction by fire",
+    "noun"
+  ],
+  "7年": [
+    "ななねん",
+    "seven years",
+    "number + counter"
+  ],
+  "復元": [
+    "ふくげん",
+    "restoration, rebuilding as it was",
+    "noun"
+  ],
+  "内部": [
+    "ないぶ",
+    "the inside, interior",
+    "noun"
+  ],
+  "報道陣": [
+    "ほうどうじん",
+    "the press, reporters",
+    "noun"
+  ],
+  "かつて": [
+    "かつて",
+    "once, in the past",
+    "adverb"
+  ],
+  "琉球": [
+    "りゅうきゅう",
+    "Ryukyu (old name of Okinawa)",
+    "place name"
+  ],
+  "琉球王国": [
+    "りゅうきゅうおうこく",
+    "the Ryukyu Kingdom",
+    "place name"
+  ],
+  "王国": [
+    "おうこく",
+    "kingdom",
+    "noun"
+  ],
+  "装飾": [
+    "そうしょく",
+    "decoration",
+    "noun"
+  ],
+  "見学": [
+    "けんがく",
+    "visit (to see and learn)",
+    "noun"
+  ],
+  "ブラジル": [
+    "ブラジル",
+    "Brazil",
+    "place name"
+  ],
+  "シンガポール": [
+    "シンガポール",
+    "Singapore",
+    "place name"
+  ],
+  "2点": [
+    "にてん",
+    "two points, two goals",
+    "number + counter"
+  ],
+  "坂元": [
+    "さかもと",
+    "Sakamoto (surname)",
+    "name"
+  ],
+  "坂元達裕": [
+    "さかもとたつひろ",
+    "Tatsuhiro Sakamoto (soccer player)",
+    "name"
+  ],
+  "久保建英": [
+    "くぼたけふさ",
+    "Takefusa Kubo (soccer player)",
+    "name"
+  ],
+  "中村敬斗": [
+    "なかむらけいと",
+    "Keito Nakamura (soccer player)",
+    "name"
+  ],
+  "佐野航大": [
+    "さのこうだい",
+    "Kodai Sano (soccer player)",
+    "name"
+  ],
+  "2回目": [
+    "にかいめ",
+    "the second time",
+    "number + counter"
+  ],
+  "2度目": [
+    "にどめ",
+    "the second time",
+    "number + counter"
+  ],
+  "親善": [
+    "しんぜん",
+    "friendship, goodwill",
+    "noun"
+  ],
+  "親善試合": [
+    "しんぜんじあい",
+    "friendly match",
+    "noun"
+  ],
+  "15分": [
+    "じゅうごふん",
+    "15 minutes, the 15th minute",
+    "number + counter"
+  ],
+  "4分後": [
+    "よんぷんご",
+    "four minutes later",
+    "number + counter"
+  ],
+  "ヴィニシウス": [
+    "ヴィニシウス",
+    "Vinícius (Brazilian soccer player)",
+    "name"
+  ],
+  "追いつく": [
+    "おいつく",
+    "to catch up",
+    "verb"
+  ],
+  "直前": [
+    "ちょくぜん",
+    "just before",
+    "noun"
+  ],
+  "反則": [
+    "はんそく",
+    "foul, breaking the rules",
+    "noun"
+  ],
+  "抗議": [
+    "こうぎ",
+    "protest",
+    "noun"
+  ],
+  "間際": [
+    "まぎわ",
+    "just before (the end)",
+    "noun"
+  ],
+  "終了間際": [
+    "しゅうりょうまぎわ",
+    "just before the end",
+    "noun"
+  ],
+  "競り勝つ": [
+    "せりかつ",
+    "to win a close contest",
+    "verb"
+  ],
+  "エース": [
+    "エース",
+    "ace, star player",
+    "noun"
+  ],
+  "振り出し": [
+    "ふりだし",
+    "the starting point",
+    "noun"
+  ],
+  "アディショナルタイム": [
+    "アディショナルタイム",
+    "added time, stoppage time",
+    "noun"
+  ],
+  "シュート": [
+    "シュート",
+    "shot (at goal)",
+    "noun"
+  ],
+  "押し込む": [
+    "おしこむ",
+    "to push in",
+    "verb"
+  ],
+  "判定": [
+    "はんてい",
+    "decision, judgement",
+    "noun"
+  ],
+  "ビデオ判定": [
+    "ビデオはんてい",
+    "video review",
+    "noun"
+  ],
+  "ラフィーニャ": [
+    "ラフィーニャ",
+    "Raphinha (Brazilian soccer player)",
+    "name"
+  ],
+  "アンチェロッティ": [
+    "アンチェロッティ",
+    "Carlo Ancelotti (Brazil's coach)",
+    "name"
+  ],
+  "退場": [
+    "たいじょう",
+    "leaving; being sent off",
+    "noun"
+  ],
+  "処分": [
+    "しょぶん",
+    "penalty, punishment",
+    "noun"
+  ],
+  "退場処分": [
+    "たいじょうしょぶん",
+    "being sent off (red card)",
+    "noun"
+  ],
+  "首里城": [
+    "しゅりじょう",
+    "Shuri Castle (in Naha, Okinawa)",
+    "place name"
+  ],
+  "2対2": [
+    "にたいに",
+    "2 to 2 (score)",
+    "number + counter"
+  ],
+  "3対2": [
+    "さんたいに",
+    "3 to 2 (score)",
+    "number + counter"
+  ],
+  "7月": [
+    "しちがつ",
+    "July",
+    "number + counter"
+  ],
+  "7～9月期": [
+    "しちがつからくがつき",
+    "the July–September quarter",
+    "number + counter"
+  ],
+  "9月末": [
+    "くがつまつ",
+    "the end of September",
+    "number + counter"
+  ],
+  "0.1%": [
+    "れいてんいちパーセント",
+    "0.1 percent",
+    "number + counter"
+  ],
+  "0.2%": [
+    "れいてんにパーセント",
+    "0.2 percent",
+    "number + counter"
+  ],
+  "0.3%": [
+    "れいてんさんパーセント",
+    "0.3 percent",
+    "number + counter"
+  ],
+  "1.6%": [
+    "いってんろくパーセント",
+    "1.6 percent",
+    "number + counter"
+  ],
+  "決勝点": [
+    "けっしょうてん",
+    "winning goal, winning point",
+    "noun"
+  ],
+  "決勝ゴール": [
+    "けっしょうゴール",
+    "winning goal",
+    "noun"
+  ],
+  "初ゴール": [
+    "はつゴール",
+    "first goal",
+    "noun"
+  ],
+  "完成式": [
+    "かんせいしき",
+    "completion ceremony",
+    "noun"
+  ],
+  "総事業費": [
+    "そうじぎょうひ",
+    "total project cost",
+    "noun"
+  ],
+  "両者": [
+    "りょうしゃ",
+    "both (sides)",
+    "noun"
   ]
 }
