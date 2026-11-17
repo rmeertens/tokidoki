@@ -3,6 +3,10 @@
 // in it mean? — with four choices. Once answered, the pattern is underlined
 // and explained, with the sentence's translation.
 //
+// In the combined stories (`combo` in bunkei-story-data.js) a sentence uses
+// two or three patterns at once: its answer is their ids joined by '+'
+// ('te-miru+tai'), each underlined, and the choices are such combinations.
+//
 // The stories are in bunkei-story-data.js; the patterns' names, meanings and
 // notes come from the Bunkei drill (bunkei-data.js). The pure parts
 // (markup, splitting at the pattern, the choices, scoring) are exported for
@@ -34,12 +38,24 @@
   // The sentence read out: kanji swapped for their furigana, spaces dropped.
   const kana = markup => String(markup).replace(RUBY_RE, '$2').replace(/\s+/g, '');
 
-  // A line split around its pattern: [before, pattern, after], or null when
-  // `hl` isn't in the sentence.
+  // The pattern ids in an answer or choice: 'te-miru+tai' → ['te-miru', 'tai'].
+  const partsOf = id => String(id).split('+');
+
+  // A line split around its pattern(s): [before, pattern, after] — or, with
+  // several patterns, [before, 1st, between, 2nd, after…], the patterns at
+  // the odd places — or null when a part of `hl` isn't in the sentence.
   function splitAt(line) {
-    const at = line.ja.indexOf(line.hl);
-    if (!line.hl || at === -1) return null;
-    return [line.ja.slice(0, at), line.hl, line.ja.slice(at + line.hl.length)];
+    const hls = [].concat(line.hl);
+    const out = [];
+    let from = 0;
+    for (const hl of hls) {
+      const at = hl ? line.ja.indexOf(hl, from) : -1;
+      if (at === -1) return null;
+      out.push(line.ja.slice(from, at), hl);
+      from = at + hl.length;
+    }
+    out.push(line.ja.slice(from));
+    return out;
   }
 
   function shuffle(list, rand = Math.random) {
@@ -56,7 +72,7 @@
 
   const score = (chapter, picks) => chapter.lines.filter((l, i) => picks[i] === l.b).length;
 
-  const api = { rubyHtml, kana, splitAt, choicesFor, score };
+  const api = { rubyHtml, kana, splitAt, partsOf, choicesFor, score };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   global.BunkeiStory = api;
   if (typeof document === 'undefined') return;
@@ -88,8 +104,10 @@
     window.scrollTo(0, 0);
   }
 
-  const meaning = id => (PATTERN[id] ? PATTERN[id].meaning : id);
-  const patternName = id => (PATTERN[id] ? PATTERN[id].name : id);
+  const meaning1 = id => (PATTERN[id] ? PATTERN[id].meaning : id);
+  const name1 = id => (PATTERN[id] ? PATTERN[id].name : id);
+  const meaning = id => partsOf(id).map(meaning1).join(' + ');
+  const patternName = id => partsOf(id).map(name1).join(' + ');
 
   // ─── Home ──────────────────────────────────────────────────────────────────
 
@@ -113,10 +131,13 @@
     applySettings();
     // Open the story last played, or else the first one not yet perfect.
     if (!openStory) openStory = (STORIES.find(st => !st.chapters.every(perfect)) || STORIES[0] || {}).id;
+    const firstCombo = STORIES.find(st => st.combo);
     $('bs-list').innerHTML = STORIES.map(st => {
       const done = st.chapters.filter(c => store.best[c.id]).length;
       const lines = st.chapters.reduce((n, c) => n + c.lines.length, 0);
-      return `<details class="bs-story-group" data-story="${esc(st.id)}"${st.id === openStory ? ' open' : ''}>
+      const head = st !== firstCombo ? '' : `<h3 class="bs-section-head">Patterns combined</h3>
+        <p class="bs-section-sub">Stories where each sentence uses two or three patterns at once (〜てみたい, 〜すぎてしまった, 〜なければならないかもしれない…): pick what they all mean, in order.</p>`;
+      return `${head}<details class="bs-story-group" data-story="${esc(st.id)}"${st.id === openStory ? ' open' : ''}>
         <summary class="bs-story-head">
           <span class="bs-story-emoji" aria-hidden="true">${st.emoji}</span>
           <span class="bs-story-body">
@@ -152,11 +173,14 @@
   const finished = () => attempt.picks.every(p => p != null);
 
   // The sentence, with its pattern marked: underlined in green, then in
-  // red once answered wrong.
+  // red once answered wrong. Several patterns are underlined each in its own
+  // style (solid, double, dashed), so ones that touch can be told apart.
   function sentenceHtml(line) {
     const parts = splitAt(line);
     if (!parts) return rubyHtml(line.ja);
-    return `${rubyHtml(parts[0])}<span class="bs-pattern">${rubyHtml(parts[1])}</span>${rubyHtml(parts[2])}`;
+    const many = parts.length > 3;
+    return parts.map((part, k) => (k % 2 === 0 ? rubyHtml(part)
+      : `<span class="bs-pattern${many ? ` bs-pattern-${(k + 1) / 2}` : ''}">${rubyHtml(part)}</span>`)).join('');
   }
 
   function lineHtml(line, i) {
@@ -191,17 +215,23 @@
         <span class="bs-choice-text"><span class="bs-choice-meaning">${esc(meaning(id))}</span>${done ? `<span class="bs-choice-name" lang="ja">${esc(patternName(id))}</span>` : ''}</span>
       </button>`;
     }).join('');
-    const p = PATTERN[line.b];
+    const ids = partsOf(line.b);
+    const hls = [].concat(line.hl);
+    const many = ids.length > 1;
+    const why = ids.map((id, k) => {
+      const p = PATTERN[id];
+      return `<div class="bs-why-name">${many ? `<span lang="ja" class="bs-why-hl">${rubyHtml(hls[k] || '')}</span> ` : ''}<span lang="ja">${esc(name1(id))}</span> — ${esc(meaning1(id))}</div>
+        ${p && p.note ? `<p>${esc(p.note)}</p>` : ''}`;
+    }).join('');
     const verdict = !done ? '' : pick === line.b
       ? '<b class="sf-verdict-right">✓ Correct</b>'
       : `<b class="sf-verdict-wrong">✗ It’s “${esc(meaning(line.b))}”</b>`;
     const last = i === attempt.chapter.lines.length - 1;
     $('bs-question').innerHTML = `<div class="sf-q bs-q${done ? (pick === line.b ? ' sf-q-right' : ' sf-q-wrong') : ''}">
-      <div class="sf-q-head"><span class="sf-q-num">${i + 1}</span>${done ? verdict : '<span>What does the sentence pattern in this sentence mean?</span>'}</div>
+      <div class="sf-q-head"><span class="sf-q-num">${i + 1}</span>${done ? verdict : `<span>${many ? `What do the ${ids.length} patterns in this sentence mean, in order?` : 'What does the sentence pattern in this sentence mean?'}</span>`}</div>
       <div class="sf-choices">${choices}</div>
       ${done ? `<div class="particle-explanation sf-why bs-why">
-        <div class="bs-why-name"><span lang="ja">${esc(patternName(line.b))}</span> — ${esc(meaning(line.b))}</div>
-        ${p && p.note ? `<p>${esc(p.note)}</p>` : ''}
+        ${why}
         ${line.note ? `<p>${esc(line.note)}</p>` : ''}
       </div>
       <div class="bs-next-area"><button id="btn-bs-next" class="btn-primary">${last ? 'See your score' : 'Next sentence →'}</button></div>` : ''}

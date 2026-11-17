@@ -8445,6 +8445,9 @@ body.cs-wide #app { max-width: 1200px; }
   text-underline-offset: 0.3em;
   color: var(--text);
 }
+.bs-pattern-2 { text-decoration-style: double; text-decoration-thickness: 3px; }
+.bs-pattern-3 { text-decoration-style: dashed; }
+.bs-pattern + .bs-pattern { margin-left: 3px; }
 .bs-line-wrong .bs-pattern { text-decoration-color: var(--red); }
 .bs-line-right .bs-pattern { text-decoration-color: var(--green); }
 .bs-speak { margin-left: 6px; vertical-align: middle; }
@@ -8454,6 +8457,10 @@ body.cs-wide #app { max-width: 1200px; }
 .bs-choice-name { font-family: var(--font-jp); font-size: 0.8rem; color: var(--text-dim); }
 .bs-why-name { font-weight: 700; margin-bottom: 4px; }
 .bs-why p + p { margin-top: 6px; }
+.bs-why p + .bs-why-name { margin-top: 10px; }
+.bs-why-hl { font-weight: 400; text-decoration: underline 2px var(--green); text-underline-offset: 0.3em; margin-right: 4px; }
+.bs-section-head { margin: 18px 0 0; font-size: 1.05rem; }
+.bs-section-sub { margin: -6px 0 0; font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
 .bs-next-area { display: flex; justify-content: flex-end; margin-top: 12px; }
 body.bs-no-furigana #screen-bunkei-story rt { visibility: hidden; }
 body.gk-no-furigana #screen-guess-kanji .gk-example-ja rt { visibility: hidden; }

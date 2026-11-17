@@ -188,10 +188,14 @@
   is only part of its SRS card ids (`3_いく_masu`, like the sentences'
   `tr_3_0_…`) — keep it unchanged so saved progress carries over, and give a
   new verb any unused number.
-- Bunkei in the wild (`bunkei-story.html`, `bunkei-story.js`) has sixteen
+- Bunkei in the wild (`bunkei-story.html`, `bunkei-story.js`) has twenty
   stories (`STORIES` in `bunkei-story-data.js`), each in N5 to N3 chapters
   and each using every pattern in `PATTERNS` (`bunkei-data.js`); after each
   sentence you pick what its pattern (underlined in green) means from four.
+  The last four (`combo: true`, under "Patterns combined") use two or three
+  patterns in every sentence: the answer is their ids joined by `+`
+  (`te-miru+tai`), `hl` lists each one's underlined part, and the choices
+  are such combinations with parts swapped.
   Adding a pattern to the drill means adding a sentence for it to every
   story — `test_bunkei_story.js` fails until you do, and checks the wrong
   choices (at the chapter's level, never one in `CLOSE`, never one the
