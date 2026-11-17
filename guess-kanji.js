@@ -193,6 +193,9 @@
     $('gk-review').disabled = due === 0;
     $('gk-review').textContent = due ? `Review ${due} due` : 'Nothing due';
     $('gk-learn').disabled = fresh.length === 0;
+    // Reviews first: while any are due, Review is the main button.
+    $('gk-review').className = due ? 'btn-primary' : 'btn-secondary';
+    $('gk-learn').className = due ? 'btn-secondary' : 'btn-primary';
     renderSchedule(store);
 
     const onPath = path.slice(0, COMPARE).filter(x => x.guess).length;
@@ -237,6 +240,13 @@
   function startReview() {
     const keys = dueKeys().slice(0, 20);
     begin(keys.map(k => ({ item: BY_KEY.get(k), isNew: false, guess: false, hints: {} })));
+  }
+
+  // What the done screen (and Space there) goes on to: the due reviews while
+  // any are left (a "Didn't know" is due again at once), new words after.
+  function startNext() {
+    if (dueKeys().length) startReview();
+    else startLearn();
   }
 
   function begin(cards) {
@@ -446,6 +456,10 @@
     $('gk-done-total').textContent = total;
     $('gk-done-correct').textContent = session.correct;
     $('gk-done-guessed').textContent = session.guessed;
+    const due = dueKeys().length;
+    const fresh = currentPlan(NEW_PER_SESSION).fresh.length;
+    $('gk-again').textContent = due ? `Review ${due} due →` : `Next ${NEW_PER_SESSION} words →`;
+    $('gk-again').hidden = !due && !fresh;
     show('screen-guess-kanji-done');
     updateUndoButton();
   }
@@ -461,7 +475,7 @@
   $('gk-card').addEventListener('click', e => { if (!e.target.closest('button, .gk-hints')) reveal(); });
   document.querySelectorAll('[data-gk-grade]').forEach(b => b.addEventListener('click', () => grade(Number(b.dataset.gkGrade))));
   $('gk-quit').addEventListener('click', backToDeck);
-  $('gk-again').addEventListener('click', startLearn);
+  $('gk-again').addEventListener('click', startNext);
   $('gk-undo').addEventListener('click', undoLast);
   $('gk-done-undo').addEventListener('click', undoLast);
   $('gk-home').addEventListener('click', backToDeck);
@@ -500,8 +514,8 @@
     const onCard = $('screen-guess-kanji').classList.contains('active');
     if (!session || !(onCard || $('screen-guess-kanji-done').classList.contains('active'))) return;
     if (e.key === 'z' || e.key === 'Z') { e.preventDefault(); undoLast(); return; }
-    // On the done screen, Space starts the next set, whatever button has focus.
-    if (!onCard) { if (e.key === ' ') { e.preventDefault(); startLearn(); } return; }
+    // On the done screen, Space starts the next set (reviews first), whatever button has focus.
+    if (!onCard) { if (e.key === ' ') { e.preventDefault(); startNext(); } return; }
     if (!session.answered && (e.key === 'h' || e.key === 'H')) { e.preventDefault(); showNextHint(); }
     else if (!session.answered && (e.key === ' ' || e.key === 'Enter')) { e.preventDefault(); reveal(); }
     else if (session.answered && e.key === '1') { e.preventDefault(); grade(1); }
