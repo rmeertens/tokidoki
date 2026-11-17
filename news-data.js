@@ -27,6 +27,171 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-11-17-russia-airspace-fukuoka',
+      date: '2026-11-17',
+      emoji: '✈️',
+      titleEn: 'Two suspected Russian military planes enter Japan\'s airspace near Okinoshima, Fukuoka; fighters scramble and Japan protests',
+      sources: [
+        { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/11/17/japan/russia-japan-airspace-violation-defense/' },
+        { name: 'FBS via Yahoo! News', url: 'https://news.yahoo.co.jp/articles/7abf85b7de916a04decdef1c3ddcb3713a3b3f54' },
+        { name: 'Xinhua', url: 'https://english.news.cn/20261117/65042555d1d441f6adbb2718682e1776/c.html' },
+        { name: 'Kuwait Times', url: 'https://kuwaittimes.com/article/53800/world/japan-scrambles-jets-after-suspected-russian-planes-violate-airspace/' },
+      ],
+      quiz: [
+        ['Where did the planes enter Japan\'s airspace?', 'Near an island in Fukuoka Prefecture', 'Over Tokyo Bay', 'Near Mount Fuji', 'Over Osaka Castle'],
+        ['How long were they in Japan\'s airspace?', 'About three minutes', 'About three hours', 'About thirty minutes', 'About three days'],
+        ['What did Japan do?', 'It protested strongly to Russia', 'It thanked Russia', 'It closed all its airports', 'It said nothing'],
+      ],
+      levels: {
+        N5: {
+          title: 'ロシアの　飛行機[ひこうき]が　日本[にほん]の　空[そら]に',
+          lines: [
+            ['十七日[じゅうしちにち]の　朝[あさ]　4時[じ]ごろ、飛行機[ひこうき]が　2機[き]、日本[にほん]の　空[そら]に　入[はい]りました。', 'At about 4 a.m. on the 17th, two planes entered Japan\'s sky.', '機 is the counter for aircraft. A country\'s airspace (領空) is the sky over its land and over its sea up to 12 nautical miles from the coast.'],
+            ['ロシアの　軍[ぐん]の　飛行機[ひこうき]だと　思[おも]われます。', 'They are thought to be Russian military planes.', 'The Defense Ministry says they were "presumed" to be Russian.'],
+            ['場所[ばしょ]は　福岡県[ふくおかけん]の　沖[おき]ノ島[しま]の　近[ちか]くの　海[うみ]の　上[うえ]です。', 'The place was over the sea near Okinoshima in Fukuoka Prefecture.', 'Okinoshima is a small sacred island in the Genkai Sea, part of Munakata City and a World Heritage site.'],
+            ['日本[にほん]の　空[そら]に　いたのは　3分[ぷん]ぐらいでした。', 'They were in Japan\'s airspace for about three minutes.'],
+            ['自衛隊[じえいたい]の　戦闘機[せんとうき]が　すぐ　飛[と]んで、警告[けいこく]しました。', 'Self-Defense Force fighter jets took off at once and gave a warning.', '戦闘機 means fighter plane; 警告 means warning. The jets flew from Tsuiki Air Base in Fukuoka.'],
+            ['日本[にほん]は　ロシアに　強[つよ]く　抗議[こうぎ]しました。', 'Japan protested strongly to Russia.', '抗議 means protest.'],
+            ['ロシアの　飛行機[ひこうき]が　日本[にほん]の　空[そら]に　入[はい]ったのは　2年[ねん]ぶりです。', 'It is the first time in about two years that a Russian plane has entered Japan\'s airspace.', 'The last case was near Rebun Island, Hokkaido, in September 2024.'],
+          ],
+        },
+        N4: {
+          title: 'ロシアの軍用機[ぐんようき]か　福岡[ふくおか]の沖[おき]ノ島[しま]の近[ちか]くで領空[りょうくう]に',
+          lines: [
+            ['防衛省[ぼうえいしょう]によると、十七日[じゅうしちにち]の午前[ごぜん]4時[じ]7分[ふん]から12分[ふん]ごろ、ロシアの軍[ぐん]の飛行機[ひこうき]だと考[かんが]えられる2機[き]が、日本[にほん]の領空[りょうくう]に入[はい]りました。', 'According to the Defense Ministry, between about 4:07 and 4:12 a.m. on the 17th, two planes thought to be Russian military aircraft entered Japan\'s airspace.', '領空 is a country\'s airspace.'],
+            ['場所[ばしょ]は福岡県[ふくおかけん]宗像市[むなかたし]の沖[おき]ノ島[しま]の北西[ほくせい]で、2機[き]はそれぞれ3分[ぷん]ぐらい領空[りょうくう]にいました。', 'It happened northwest of Okinoshima, in Munakata City, Fukuoka Prefecture, and each plane was in the airspace for about three minutes.'],
+            ['航空[こうくう]自衛隊[じえいたい]の戦闘機[せんとうき]が緊急[きんきゅう]発進[はっしん]して、無線[むせん]で警告[けいこく]しました。', 'Air Self-Defense Force fighters scrambled and gave a warning by radio.', '緊急発進 is a scramble, an emergency take-off.'],
+            ['2機[き]はそれから対馬[つしま]海峡[かいきょう]を通[とお]り、沖縄県[おきなわけん]の与那国島[よなぐにじま]と台湾[たいわん]の間[あいだ]を飛[と]んで、太平洋[たいへいよう]へ向[む]かいました。', 'The two planes then passed through the Tsushima Strait, flew between Yonaguni Island in Okinawa Prefecture and Taiwan, and headed into the Pacific.'],
+            ['小泉[こいずみ]防衛[ぼうえい]大臣[だいじん]は、ロシアに強[つよ]く抗議[こうぎ]して、二度[にど]としないように求[もと]めたと話[はな]しました。', 'Defense Minister Koizumi said Japan had protested strongly to Russia and demanded that it never happen again.'],
+            ['政府[せいふ]は、日本[にほん]の主権[しゅけん]をひどく侵[おか]すもので、安全[あんぜん]にとっても危[あぶ]ないことだと批判[ひはん]しています。', 'The government has criticized it as a grave violation of Japan\'s sovereignty and a danger to its security.', '主権 means sovereignty, a country\'s right to rule itself.'],
+            ['ロシアの飛行機[ひこうき]が日本[にほん]の領空[りょうくう]に入[はい]ったのは、2024年[ねん]9月[がつ]に北海道[ほっかいどう]の礼文島[れぶんとう]の近[ちか]くで入[はい]ってから初[はじ]めてです。', 'It is the first time a Russian plane has entered Japan\'s airspace since September 2024, near Rebun Island in Hokkaido.'],
+          ],
+        },
+        N3: {
+          title: 'ロシア軍[ぐん]機[き]とみられる2機[き]が領空[りょうくう]侵犯[しんぱん]　福岡[ふくおか]・沖[おき]ノ島[しま]沖[おき]',
+          lines: [
+            ['防衛省[ぼうえいしょう]によると、十七日[じゅうしちにち]午前[ごぜん]4時[じ]7分[ふん]から12分[ふん]ごろにかけて、ロシア軍[ぐん]機[き]とみられる2機[き]が福岡県[ふくおかけん]宗像市[むなかたし]の沖[おき]ノ島[しま]北西[ほくせい]で日本[にほん]の領空[りょうくう]を侵犯[しんぱん]した。', 'According to the Defense Ministry, between about 4:07 and 4:12 a.m. on the 17th, two aircraft believed to be Russian military planes violated Japan\'s airspace northwest of Okinoshima, in Munakata City, Fukuoka Prefecture.', '領空侵犯 means violating a country\'s airspace.'],
+            ['2機[き]はそれぞれ約[やく]3分間[ぷんかん]領空[りょうくう]内[ない]を飛行[ひこう]し、航空[こうくう]自衛隊[じえいたい]の築城[ついき]基地[きち]から戦闘機[せんとうき]が緊急[きんきゅう]発進[はっしん]して無線[むせん]で警告[けいこく]した。', 'Each plane flew inside the airspace for about three minutes, and fighters scrambled from the Air Self-Defense Force\'s Tsuiki Air Base and warned them by radio.'],
+            ['2機[き]はその後[ご]、対馬[つしま]海峡[かいきょう]を抜[ぬ]け、沖縄県[おきなわけん]の与那国島[よなぐにじま]と台湾[たいわん]の間[あいだ]を通過[つうか]して太平洋[たいへいよう]へ向[む]かった。', 'The planes then went through the Tsushima Strait, passed between Yonaguni Island in Okinawa Prefecture and Taiwan, and headed into the Pacific.'],
+            ['小泉[こいずみ]進次郎[しんじろう]防衛相[ぼうえいしょう]は、外交[がいこう]ルートを通[つう]じてロシア側[がわ]に厳重[げんじゅう]に抗議[こうぎ]し、再発[さいはつ]防止[ぼうし]を求[もと]めたと明[あき]らかにした。', 'Defense Minister Shinjiro Koizumi said Japan had lodged a strong protest with Russia through diplomatic channels and demanded that it not happen again.', '再発防止 means preventing something from happening again.'],
+            ['木原[きはら]稔[みのる]官房[かんぼう]長官[ちょうかん]は、日本[にほん]の主権[しゅけん]の重大[じゅうだい]な侵害[しんがい]であるだけでなく、安全[あんぜん]を脅[おびや]かすものだと非難[ひなん]した。', 'Chief Cabinet Secretary Minoru Kihara condemned it as not only a grave infringement of Japan\'s sovereignty but also a threat to its security.'],
+            ['ロシア機[き]による領空[りょうくう]侵犯[しんぱん]が確認[かくにん]されたのは、2024年[ねん]9月[がつ]の北海道[ほっかいどう]・礼文島[れぶんとう]付近[ふきん]での例[れい]以来[いらい]だ。', 'It is the first confirmed violation of Japan\'s airspace by a Russian aircraft since September 2024, near Rebun Island in Hokkaido.'],
+            ['防衛省[ぼうえいしょう]は飛行[ひこう]の目的[もくてき]を分析[ぶんせき]するとともに、警戒[けいかい]と監視[かんし]を続[つづ]けている。', 'The Defense Ministry is analyzing the purpose of the flight while continuing to keep watch.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-17-fugaku-unauthorized-access',
+      date: '2026-11-17',
+      emoji: '💻',
+      titleEn: 'RIKEN says someone broke into the Fugaku supercomputer\'s systems; data on up to 4,597 users may have been taken',
+      sources: [
+        { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/news/2026/11/17/japan/fugaku-unauthorized-access/' },
+        { name: 'Yomiuri via Yahoo! News', url: 'https://news.yahoo.co.jp/articles/50621047d216a49fa5d598756c80ec49268106a1' },
+        { name: 'coki', url: 'https://coki.jp/article/column/97714/' },
+        { name: 'Kyodo via Qazinform', url: 'https://qazinform.com/news/japan-suspends-fugaku-supercomputer-after-unauthorized-access-data-leak-feared-6410e5' },
+      ],
+      quiz: [
+        ['What is Fugaku?', 'A very fast computer', 'A new bullet train', 'A hotel on a mountain', 'A space rocket'],
+        ['What may have been taken?', 'Users\' names and email addresses', 'Fugaku\'s machines', 'Money from a bank', 'Photos of the Moon'],
+        ['What has RIKEN done with Fugaku?', 'It has stopped it', 'It has sold it', 'It has made it faster', 'It has moved it to Tokyo'],
+      ],
+      levels: {
+        N5: {
+          title: 'コンピューター「富岳[ふがく]」に　だれかが　入[はい]りました',
+          lines: [
+            ['「富岳[ふがく]」は　日本[にほん]の　とても　速[はや]い　コンピューターです。', 'Fugaku is a very fast computer in Japan.', 'Fugaku is a supercomputer run by RIKEN (理研), a national research institute, in Kobe.'],
+            ['理研[りけん]は　十六日[じゅうろくにち]、富岳[ふがく]の　システムに　だれかが　勝手[かって]に　入[はい]ったと　言[い]いました。', 'On the 16th, RIKEN said someone had got into Fugaku\'s systems without permission.', '勝手に means "without permission".'],
+            ['入[はい]ったのは　十日[とおか]から　十三日[じゅうさんにち]までです。', 'The break-in was from the 10th to the 13th.'],
+            ['使[つか]う　人[ひと]の　名前[なまえ]や　メールアドレスが　取[と]られたかもしれません。', 'The names and email addresses of its users may have been taken.'],
+            ['一番[いちばん]　多[おお]くて　4597人[にん]です。', 'That is up to 4,597 people.'],
+            ['理研[りけん]は　十四日[じゅうよっか]から　富岳[ふがく]を　止[と]めています。', 'RIKEN has stopped Fugaku since the 14th.'],
+            ['今[いま]、何[なに]が　あったか　調[しら]べています。', 'It is now looking into what happened.'],
+          ],
+        },
+        N4: {
+          title: 'スーパーコンピューター「富岳[ふがく]」に不正[ふせい]アクセス',
+          lines: [
+            ['スーパーコンピューター「富岳[ふがく]」を運用[うんよう]している理化学[りかがく]研究所[けんきゅうしょ]（理研[りけん]）は十六日[じゅうろくにち]、富岳[ふがく]のシステムに外[そと]から不正[ふせい]アクセスがあったと発表[はっぴょう]しました。', 'On the 16th, RIKEN, which runs the Fugaku supercomputer, announced that there had been unauthorized access to Fugaku\'s systems from outside.', '不正アクセス means unauthorized access, breaking into a computer system.'],
+            ['理研[りけん]によると、十日[とおか]から十三日[じゅうさんにち]にかけて、だれかが勝手[かって]にシステムに入[はい]りました。', 'According to RIKEN, someone got into the systems without permission between the 10th and the 13th.'],
+            ['インターネットに公開[こうかい]されていた、富岳[ふがく]が動[うご]いている様子[ようす]を見[み]せるページが、入[い]り口[ぐち]になったと考[かんが]えられています。', 'A page on the internet that showed how Fugaku was running is thought to have been the way in.'],
+            ['利用者[りようしゃ]最大[さいだい]4597人[にん]の名前[なまえ]やメールアドレスなどが、持[も]ち出[だ]されたかもしれません。', 'The names, email addresses and other details of up to 4,597 users may have been taken.'],
+            ['理研[りけん]は十四日[じゅうよっか]にアクセスを止[と]めて、富岳[ふがく]を使[つか]えないようにしました。', 'On the 14th, RIKEN blocked the access and shut Fugaku down.'],
+            ['文部科学省[もんぶかがくしょう]は理研[りけん]に、何[なに]があったか詳[くわ]しく調[しら]べるように求[もと]めています。', 'The education and science ministry has asked RIKEN to look closely into what happened.'],
+            ['富岳[ふがく]は、薬[くすり]や天気[てんき]などの研究[けんきゅう]に、大学[だいがく]や会社[かいしゃ]の人[ひと]が使[つか]っています。', 'Fugaku is used by people at universities and companies for research on things like medicine and the weather.'],
+          ],
+        },
+        N3: {
+          title: 'スパコン「富岳[ふがく]」に不正[ふせい]アクセス　利用者[りようしゃ]最大[さいだい]4597人[にん]の情報[じょうほう]流出[りゅうしゅつ]のおそれ',
+          lines: [
+            ['理化学[りかがく]研究所[けんきゅうしょ]（理研[りけん]）は十六日[じゅうろくにち]、神戸市[こうべし]で運用[うんよう]するスーパーコンピューター「富岳[ふがく]」の運用[うんよう]システムが、外部[がいぶ]から不正[ふせい]アクセスを受[う]けたと発表[はっぴょう]した。', 'On the 16th, RIKEN announced that the operating systems of the Fugaku supercomputer, which it runs in Kobe, had suffered unauthorized access from outside.'],
+            ['侵入[しんにゅう]は十日[とおか]から十三日[じゅうさんにち]にかけて行[おこな]われ、インターネット上[じょう]に公開[こうかい]されていた稼働[かどう]状況[じょうきょう]を示[しめ]すページが足[あし]がかりにされたとみられる。', 'The break-in took place between the 10th and the 13th, and a page on the internet showing Fugaku\'s operating status is thought to have been used as a foothold.', '足がかり is a foothold, a first step in.'],
+            ['富岳[ふがく]などの利用者[りようしゃ]最大[さいだい]4597人[にん]の氏名[しめい]やメールアドレス、IDなどが持[も]ち出[だ]されたおそれがある。', 'The names, email addresses, IDs and other details of up to 4,597 users of Fugaku and a related system may have been taken.'],
+            ['理研[りけん]は十四日[じゅうよっか]に不正[ふせい]アクセスを遮断[しゃだん]し、富岳[ふがく]の運用[うんよう]を停止[ていし]した。', 'On the 14th, RIKEN cut off the unauthorized access and stopped running Fugaku.'],
+            ['取得[しゅとく]された情報[じょうほう]を使[つか]って、理研[りけん]の外[そと]のシステムに接続[せつぞく]しようとした形跡[けいせき]もあるという。', 'There are also reportedly signs that someone tried to connect to systems outside RIKEN using the information obtained.', '形跡 means traces or signs that something happened.'],
+            ['具体的[ぐたいてき]な手口[てぐち]は調査[ちょうさ]中[ちゅう]で、文部科学省[もんぶかがくしょう]は理研[りけん]に対[たい]し、被害[ひがい]の範囲[はんい]の確認[かくにん]と早期[そうき]の復旧[ふっきゅう]を求[もと]めている。', 'The exact method is still under investigation, and the education and science ministry has asked RIKEN to confirm the extent of the damage and restore the system quickly.', '手口 is the method used, usually in a crime.'],
+            ['富岳[ふがく]は2020年[ねん]から2021年[ねん]にかけて計算[けいさん]速度[そくど]で世界[せかい]一[いち]となったスパコンで、創薬[そうやく]や気象[きしょう]などの研究[けんきゅう]に広[ひろ]く使[つか]われている。', 'Fugaku was the world\'s fastest supercomputer from 2020 to 2021, and is widely used for research such as drug discovery and weather.', 'スパコン is short for スーパーコンピューター. 創薬 means developing new medicines.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-17-nakai-wins-skate-america',
+      date: '2026-11-17',
+      emoji: '⛸️',
+      titleEn: 'Ami Nakai wins Skate America with a season-best 236.81 points, her second Grand Prix win in a row; Rino Matsuike third',
+      sources: [
+        { name: 'The Japan Times', url: 'https://www.japantimes.co.jp/sports/2026/11/16/more-sports/ami-nakai-skate-america/' },
+        { name: 'Olympics.com', url: 'https://www.olympics.com/en/news/skate-america-2026-nakai-ami-wins-women-s-title-books-grand-prix-final-spot' },
+        { name: 'NBC Sports', url: 'https://www.nbcsports.com/olympics/news/ami-nakai-skate-america-figure-skating-2026' },
+        { name: 'THE DIGEST via Yahoo! News', url: 'https://news.yahoo.co.jp/articles/401e2eebeab75a88a456d0658c26713dc53d78b1' },
+      ],
+      quiz: [
+        ['What place did Ami Nakai finish?', 'First', 'Second', 'Third', 'Fifth'],
+        ['What place did Rino Matsuike finish?', 'Third', 'First', 'Second', 'Tenth'],
+        ['Which competition will Nakai skate in in December?', 'The Grand Prix Final', 'The Winter Olympics', 'Skate America', 'A high school championship'],
+      ],
+      levels: {
+        N5: {
+          title: '中井[なかい]亜美[あみ]選手[せんしゅ]が　優勝[ゆうしょう]',
+          lines: [
+            ['アメリカで　フィギュアスケートの　大会[たいかい]、スケートアメリカが　ありました。', 'Skate America, a figure skating competition, took place in America.', 'It was the fourth event of this season\'s Grand Prix series, in Everett, Washington.'],
+            ['女子[じょし]は　日本[にほん]の　中井[なかい]亜美[あみ]選手[せんしゅ]が　優勝[ゆうしょう]しました。', 'In the women\'s event, Japan\'s Ami Nakai won.', '優勝 means winning a competition. Nakai, 18, won bronze at the Winter Olympics in February.'],
+            ['中井[なかい]選手[せんしゅ]は　ショートプログラムも　フリーも　1位[い]でした。', 'Nakai came first in both the short program and the free skate.'],
+            ['点数[てんすう]は　全部[ぜんぶ]で　236.81点[てん]でした。', 'Her total score was 236.81 points.'],
+            ['今[いま]までで　一番[いちばん]　いい　点数[てんすう]です。', 'It is her best score ever.'],
+            ['松生[まついけ]理乃[りの]選手[せんしゅ]も　3位[い]に　なりました。', 'Rino Matsuike also came third.'],
+            ['中井[なかい]選手[せんしゅ]は　12月[がつ]の　グランプリファイナルに　出[で]ます。', 'Nakai will skate in the Grand Prix Final in December.', 'The Grand Prix Final is for the six best skaters of the series.'],
+          ],
+        },
+        N4: {
+          title: '中井[なかい]亜美[あみ]選手[せんしゅ]がスケートアメリカで優勝[ゆうしょう]',
+          lines: [
+            ['フィギュアスケートのグランプリシリーズ第[だい]4戦[せん]、スケートアメリカで、日本[にほん]時間[じかん]の十六日[じゅうろくにち]、女子[じょし]のフリーが行[おこな]われました。', 'At Skate America, the fourth event of the figure skating Grand Prix series, the women\'s free skate was held on the 16th, Japan time.'],
+            ['ショートプログラムで1位[い]だった中井[なかい]亜美[あみ]選手[せんしゅ]は、フリーでも154.61点[てん]で1位[い]になりました。', 'Ami Nakai, who was first after the short program, also came first in the free skate with 154.61 points.'],
+            ['合計[ごうけい]は236.81点[てん]で、2位[い]の選手[せんしゅ]より20点[てん]以上[いじょう]高[たか]い点数[てんすう]で優勝[ゆうしょう]しました。', 'Her total was 236.81 points, and she won by more than 20 points over the skater in second place.'],
+            ['フリーも合計[ごうけい]も自己[じこ]ベストで、今[いま]のシーズンの女子[じょし]では世界[せかい]で一番[いちばん]高[たか]い点数[てんすう]です。', 'Both her free skate and her total were personal bests, and the highest women\'s scores in the world this season.', '自己ベスト means "personal best".'],
+            ['中井[なかい]選手[せんしゅ]は、フランスの大会[たいかい]に続[つづ]いて、グランプリシリーズで2回[かい]続[つづ]けて優勝[ゆうしょう]しました。', 'After the event in France, Nakai has now won two Grand Prix events in a row.'],
+            ['ショートプログラムで5位[い]だった松生[まついけ]理乃[りの]選手[せんしゅ]は、3位[い]に上[あ]がりました。', 'Rino Matsuike, who was fifth after the short program, moved up to third.'],
+            ['中井[なかい]選手[せんしゅ]は、12月[がつ]のグランプリファイナルに出[で]ることが決[き]まりました。', 'It has been decided that Nakai will skate in the Grand Prix Final in December.'],
+          ],
+        },
+        N3: {
+          title: '中井[なかい]亜美[あみ]がGP2連勝[れんしょう]　今季[こんき]世界[せかい]最高[さいこう]236.81点[てん]',
+          lines: [
+            ['フィギュアスケートのグランプリシリーズ第[だい]4戦[せん]、スケートアメリカは十五日[じゅうごにち]（日本[にほん]時間[じかん]十六日[じゅうろくにち]）、米国[べいこく]ワシントン州[しゅう]エバレットで女子[じょし]フリーが行[おこな]われた。', 'At Skate America, the fourth event of the figure skating Grand Prix series, the women\'s free skate was held in Everett, Washington, on the 15th (the 16th, Japan time).'],
+            ['ショートプログラム首位[しゅい]の中井[なかい]亜美[あみ]がフリーでも154.61点[てん]で1位[い]となり、合計[ごうけい]236.81点[てん]で優勝[ゆうしょう]した。', 'Ami Nakai, who led after the short program, also came first in the free skate with 154.61 points and won with a total of 236.81.'],
+            ['フリーの得点[とくてん]も合計[ごうけい]も自己[じこ]ベストで、ショートプログラムに続[つづ]いて今季[こんき]の世界[せかい]最高[さいこう]得点[とくてん]を更新[こうしん]した。', 'Both the free skate and the total were personal bests, and, as in the short program, set new season\'s best scores in the world.', '更新 here means setting a new (higher) record.'],
+            ['冒頭[ぼうとう]のトリプルアクセルを決[き]めると、その後[ご]のジャンプも大[おお]きなミスなくまとめた。', 'She landed her opening triple Axel and got through the jumps after it without any big mistakes.'],
+            ['2位[い]との差[さ]は22.91点[てん]で、中井[なかい]は今季[こんき]のフランス大会[たいかい]に続[つづ]くグランプリシリーズ2連勝[れんしょう]を飾[かざ]った。', 'Her margin over second place was 22.91 points, and Nakai made it two Grand Prix wins in a row, after this season\'s event in France.', '飾る here means to achieve something with honor.'],
+            ['ショートプログラム5位[い]の松生[まついけ]理乃[りの]も、自己[じこ]ベストの合計[ごうけい]211.63点[てん]で3位[い]に入[はい]り、日本[にほん]女子[じょし]二人[ふたり]が表彰台[ひょうしょうだい]に上[あ]がった。', 'Rino Matsuike, fifth after the short program, also came third with a personal-best total of 211.63, putting two Japanese women on the podium.', '表彰台 is the podium.'],
+            ['中井[なかい]は2年[ねん]連続[れんぞく]となる12月[がつ]のグランプリファイナル進出[しんしゅつ]を決[き]めた。', 'Nakai secured her place in December\'s Grand Prix Final for the second year in a row.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-11-16-gdp-q3-contraction',
       date: '2026-11-16',
       emoji: '📉',
