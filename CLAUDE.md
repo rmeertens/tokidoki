@@ -188,7 +188,7 @@
   is only part of its SRS card ids (`3_いく_masu`, like the sentences'
   `tr_3_0_…`) — keep it unchanged so saved progress carries over, and give a
   new verb any unused number.
-- Bunkei in the wild (`bunkei-story.html`, `bunkei-story.js`) has six
+- Bunkei in the wild (`bunkei-story.html`, `bunkei-story.js`) has sixteen
   stories (`STORIES` in `bunkei-story-data.js`), each in N5 to N3 chapters
   and each using every pattern in `PATTERNS` (`bunkei-data.js`); after each
   sentence you pick what its pattern (underlined in green) means from four.
