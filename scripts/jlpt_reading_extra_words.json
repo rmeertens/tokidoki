@@ -1568,5 +1568,915 @@
 "なんさい",
 "how old",
 "question word"
+],
+"でんしゃ": [
+"でんしゃ",
+"train",
+"noun"
+],
+"こんしゅう": [
+"こんしゅう",
+"this week",
+"noun"
+],
+"まいしゅう": [
+"まいしゅう",
+"every week",
+"noun"
+],
+"りょこう": [
+"りょこう",
+"trip, travel",
+"noun"
+],
+"だいどころ": [
+"だいどころ",
+"kitchen",
+"noun"
+],
+"やくそく": [
+"やくそく",
+"promise; arrangement (to meet)",
+"noun"
+],
+"そうじ": [
+"そうじ",
+"cleaning",
+"noun, する verb"
+],
+"いりぐち": [
+"いりぐち",
+"entrance",
+"noun"
+],
+"とちゅう": [
+"とちゅう",
+"on the way",
+"noun"
+],
+"ひらがな": [
+"ひらがな",
+"hiragana",
+"noun"
+],
+"かいわ": [
+"かいわ",
+"conversation",
+"noun"
+],
+"よめる": [
+"よめる",
+"can read",
+"verb (potential)"
+],
+"はなせる": [
+"はなせる",
+"can speak",
+"verb (potential)"
+],
+"つく": [
+"つく",
+"to arrive",
+"verb"
+],
+"おやつ": [
+"おやつ",
+"snack (for children)",
+"noun"
+],
+"さんぽ": [
+"さんぽ",
+"walk, stroll",
+"noun, する verb"
+],
+"1かい": [
+"いっかい",
+"once, one time",
+"number"
+],
+"ならう": [
+"ならう",
+"to learn",
+"verb"
+],
+"きゅうこう": [
+"きゅうこう",
+"express (train)",
+"noun"
+],
+"どうぶつえん": [
+"どうぶつえん",
+"zoo",
+"noun"
+],
+"ミカ": [
+"ミカ",
+"Mika (a name)",
+"name"
+],
+"ナナ": [
+"ナナ",
+"Nana (a name)",
+"name"
+],
+"タン": [
+"タン",
+"Tan (a name)",
+"name"
+],
+"ホア": [
+"ホア",
+"Hoa (a name)",
+"name"
+],
+"ジェイソン": [
+"ジェイソン",
+"Jason (a name)",
+"name"
+],
+"カルロス": [
+"カルロス",
+"Carlos (a name)",
+"name"
+],
+"アン": [
+"アン",
+"An (a name)",
+"name"
+],
+"高田": [
+"たかだ",
+"Takada (a surname)",
+"name"
+],
+"松田": [
+"まつだ",
+"Matsuda (a surname)",
+"name"
+],
+"佐々木": [
+"ささき",
+"Sasaki (a surname)",
+"name"
+],
+"木下": [
+"きのした",
+"Kinoshita (a surname)",
+"name"
+],
+"高木": [
+"たかぎ",
+"Takagi (a surname)",
+"name"
+],
+"村上": [
+"むらかみ",
+"Murakami (a surname)",
+"name"
+],
+"原田": [
+"はらだ",
+"Harada (a surname)",
+"name"
+],
+"健": [
+"けん",
+"Ken (a given name)",
+"name"
+],
+"シネマ": [
+"シネマ",
+"cinema",
+"noun"
+],
+"コーポ": [
+"コーポ",
+"co-op flats (in building names)",
+"noun"
+],
+"メゾン": [
+"メゾン",
+"maison (in building names)",
+"noun"
+],
+"サンハウス": [
+"サンハウス",
+"Sun House (a building's name)",
+"name"
+],
+"青葉": [
+"あおば",
+"green leaves (here a name: Aoba)",
+"name"
+],
+"体育館": [
+"たいいくかん",
+"gym, sports hall",
+"noun"
+],
+"チェックイン": [
+"チェックイン",
+"check-in",
+"noun"
+],
+"チェックアウト": [
+"チェックアウト",
+"check-out",
+"noun"
+],
+"小学": [
+"しょうがく",
+"primary school (小学2年生: 2nd year of primary school)",
+"noun"
+],
+"手ぶくろ": [
+"てぶくろ",
+"gloves",
+"noun"
+],
+"薬局": [
+"やっきょく",
+"pharmacy",
+"noun"
+],
+"レンタサイクル": [
+"レンタサイクル",
+"bicycle hire",
+"noun"
+],
+"電動": [
+"でんどう",
+"electric, power-assisted",
+"noun"
+],
+"オーケストラ": [
+"オーケストラ",
+"orchestra",
+"noun"
+],
+"受講": [
+"じゅこう",
+"taking a course",
+"noun, する verb"
+],
+"講座": [
+"こうざ",
+"course (of lectures)",
+"noun"
+],
+"サイクル": [
+"サイクル",
+"cycle, bicycle",
+"noun"
+],
+"礼金": [
+"れいきん",
+"key money (a gift to the landlord)",
+"noun"
+],
+"敷金": [
+"しききん",
+"deposit (on a flat)",
+"noun"
+],
+"手元": [
+"てもと",
+"(in) one's hands",
+"noun"
+],
+"送料": [
+"そうりょう",
+"postage",
+"noun"
+],
+"コインパーキング": [
+"コインパーキング",
+"coin car park",
+"noun"
+],
+"領収書": [
+"りょうしゅうしょ",
+"receipt",
+"noun"
+],
+"フォルダ": [
+"フォルダ",
+"folder",
+"noun"
+],
+"集合": [
+"しゅうごう",
+"meeting, gathering",
+"noun, する verb"
+],
+"名字": [
+"みょうじ",
+"surname",
+"noun"
+],
+"半額": [
+"はんがく",
+"half price",
+"noun"
+],
+"お子様": [
+"おこさま",
+"child (polite)",
+"noun"
+],
+"夕食": [
+"ゆうしょく",
+"dinner",
+"noun"
+],
+"当店": [
+"とうてん",
+"this shop",
+"noun"
+],
+"納品書": [
+"のうひんしょ",
+"delivery note",
+"noun"
+],
+"西公園": [
+"にしこうえん",
+"West Park",
+"place name"
+],
+"東公園": [
+"ひがしこうえん",
+"East Park",
+"place name"
+],
+"軍手": [
+"ぐんて",
+"work gloves",
+"noun"
+],
+"各自": [
+"かくじ",
+"each person",
+"noun"
+],
+"小型": [
+"こがた",
+"small (size)",
+"noun"
+],
+"抽選": [
+"ちゅうせん",
+"drawing lots",
+"noun, する verb"
+],
+"ヨガ": [
+"ヨガ",
+"yoga",
+"noun"
+],
+"土曜": [
+"どよう",
+"Saturday",
+"noun"
+],
+"祝前日": [
+"しゅくぜんじつ",
+"the day before a public holiday",
+"noun"
+],
+"素泊まり": [
+"すどまり",
+"room only (no meals)",
+"noun"
+],
+"二食付き": [
+"にしょくつき",
+"with two meals (breakfast and dinner)",
+"noun"
+],
+"早割": [
+"はやわり",
+"early-booking discount",
+"noun"
+],
+"とっても": [
+"とっても",
+"(〜をとってもかまいません) you may have …",
+"expression"
+],
+"問診票": [
+"もんしんひょう",
+"medical questionnaire",
+"noun"
+],
+"本社": [
+"ほんしゃ",
+"head office",
+"noun"
+],
+"渡す": [
+"わたす",
+"to hand over",
+"verb"
+],
+"省エネ": [
+"しょうエネ",
+"energy-saving",
+"noun"
+],
+"達成率": [
+"たっせいりつ",
+"rate of achievement",
+"noun"
+],
+"模擬面接": [
+"もぎめんせつ",
+"mock interview",
+"noun"
+],
+"おかけいたす": [
+"おかけいたす",
+"to cause (trouble; humble: ご迷惑をおかけいたします)",
+"verb"
+],
+"家電": [
+"かでん",
+"home appliances",
+"noun"
+],
+"設置": [
+"せっち",
+"installing, fitting",
+"noun, する verb"
+],
+"指定": [
+"してい",
+"choosing, specifying",
+"noun, する verb"
+],
+"放課後": [
+"ほうかご",
+"after school",
+"noun"
+],
+"商談": [
+"しょうだん",
+"business talks, deal",
+"noun"
+],
+"解体": [
+"かいたい",
+"demolition",
+"noun, する verb"
+],
+"創立": [
+"そうりつ",
+"founding",
+"noun, する verb"
+],
+"二十周年": [
+"にじゅっしゅうねん",
+"20th anniversary",
+"noun"
+],
+"扇風機": [
+"せんぷうき",
+"electric fan",
+"noun"
+],
+"郵送": [
+"ゆうそう",
+"sending by post",
+"noun, する verb"
+],
+"容量": [
+"ようりょう",
+"capacity",
+"noun"
+],
+"小児": [
+"しょうに",
+"child (fares)",
+"noun"
+],
+"全線": [
+"ぜんせん",
+"all lines",
+"noun"
+],
+"子育て": [
+"こそだて",
+"raising children",
+"noun"
+],
+"持ち物": [
+"もちもの",
+"things to bring, belongings",
+"noun"
+],
+"お迎え": [
+"おむかえ",
+"picking (someone) up",
+"noun"
+],
+"サポート": [
+"サポート",
+"support",
+"noun"
+],
+"ステーション": [
+"ステーション",
+"station",
+"noun"
+],
+"ケトル": [
+"ケトル",
+"kettle",
+"noun"
+],
+"不具合": [
+"ふぐあい",
+"fault, defect",
+"noun"
+],
+"着払い": [
+"ちゃくばらい",
+"cash on delivery (the receiver pays)",
+"noun"
+],
+"伝票": [
+"でんぴょう",
+"slip, (shipping) label",
+"noun"
+],
+"検品": [
+"けんぴん",
+"inspecting goods",
+"noun, する verb"
+],
+"発送": [
+"はっそう",
+"sending, dispatch",
+"noun, する verb"
+],
+"近年": [
+"きんねん",
+"recent years",
+"noun"
+],
+"課員": [
+"かいん",
+"section staff",
+"noun"
+],
+"週報": [
+"しゅうほう",
+"weekly report",
+"noun"
+],
+"絞る": [
+"しぼる",
+"to narrow down (〜に絞る)",
+"verb"
+],
+"構う": [
+"かまう",
+"to mind (〜で構いません: … is fine)",
+"verb"
+],
+"書式": [
+"しょしき",
+"form, format",
+"noun"
+],
+"近隣": [
+"きんりん",
+"neighbourhood",
+"noun"
+],
+"振動": [
+"しんどう",
+"vibration",
+"noun"
+],
+"日曜": [
+"にちよう",
+"Sunday",
+"noun"
+],
+"休工": [
+"きゅうこう",
+"no work (on a building site)",
+"noun"
+],
+"および": [
+"および",
+"and (formal)",
+"conjunction"
+],
+"出入り": [
+"でいり",
+"coming and going",
+"noun, する verb"
+],
+"誘導員": [
+"ゆうどういん",
+"traffic guide",
+"noun"
+],
+"配置": [
+"はいち",
+"posting, placing",
+"noun, する verb"
+],
+"歩行者": [
+"ほこうしゃ",
+"pedestrian",
+"noun"
+],
+"施工": [
+"しこう",
+"construction (work), contractor",
+"noun"
+],
+"拝啓": [
+"はいけい",
+"Dear … (formal letter opening)",
+"expression"
+],
+"晩秋": [
+"ばんしゅう",
+"late autumn",
+"noun"
+],
+"候": [
+"こう",
+"season (in letters: 晩秋の候, in this late autumn)",
+"noun"
+],
+"貴社": [
+"きしゃ",
+"your company (polite)",
+"noun"
+],
+"清栄": [
+"せいえい",
+"prosperity (in letter greetings)",
+"noun"
+],
+"ご高配": [
+"ごこうはい",
+"your kind consideration",
+"noun"
+],
+"御礼": [
+"おれい",
+"thanks",
+"noun"
+],
+"込める": [
+"こめる",
+"to put into (感謝を込めて: with gratitude)",
+"verb"
+],
+"ご多用中": [
+"ごたようちゅう",
+"while you are busy",
+"noun"
+],
+"敬具": [
+"けいぐ",
+"Yours sincerely (formal letter closing)",
+"expression"
+],
+"バッテリー": [
+"バッテリー",
+"battery",
+"noun"
+],
+"発熱": [
+"はつねつ",
+"heating up; fever",
+"noun, する verb"
+],
+"判明": [
+"はんめい",
+"becoming clear, being found",
+"noun, する verb"
+],
+"裏面": [
+"りめん",
+"back, reverse side",
+"noun"
+],
+"記載": [
+"きさい",
+"stating (in writing)",
+"noun, する verb"
+],
+"無償": [
+"むしょう",
+"free of charge",
+"noun"
+],
+"ダイヤル": [
+"ダイヤル",
+"(phone) line, dial",
+"noun"
+],
+"電機": [
+"でんき",
+"electrical machinery (in company names)",
+"noun"
+],
+"買い替え": [
+"かいかえ",
+"replacing (by buying a new one)",
+"noun"
+],
+"買い替える": [
+"かいかえる",
+"to buy a replacement",
+"verb"
+],
+"滞納": [
+"たいのう",
+"being behind with payments",
+"noun, する verb"
+],
+"原本": [
+"げんぽん",
+"original (document)",
+"noun"
+],
+"保証書": [
+"ほしょうしょ",
+"guarantee, warranty",
+"noun"
+],
+"写し": [
+"うつし",
+"copy",
+"noun"
+],
+"持参": [
+"じさん",
+"bringing (in person)",
+"noun, する verb"
+],
+"通販": [
+"つうはん",
+"mail order, online shopping",
+"noun"
+],
+"リース": [
+"リース",
+"lease",
+"noun"
+],
+"不備": [
+"ふび",
+"something missing or wrong (in documents)",
+"noun"
+],
+"券売機": [
+"けんばいき",
+"ticket machine",
+"noun"
+],
+"前売り": [
+"まえうり",
+"advance sale",
+"noun"
+],
+"払い戻し": [
+"はらいもどし",
+"refund",
+"noun"
+],
+"沿線": [
+"えんせん",
+"along the (railway) line",
+"noun"
+],
+"つづり": [
+"つづり",
+"book, bound set (11枚つづり: a book of 11)",
+"noun"
+],
+"開所": [
+"かいしょ",
+"opening (of a facility)",
+"noun"
+],
+"休業": [
+"きゅうぎょう",
+"closure, holiday",
+"noun"
+],
+"同額": [
+"どうがく",
+"the same amount",
+"noun"
+],
+"非課税": [
+"ひかぜい",
+"not taxed",
+"noun"
+],
+"免除": [
+"めんじょ",
+"exemption",
+"noun, する verb"
+],
+"就労": [
+"しゅうろう",
+"work, employment",
+"noun"
+],
+"年度": [
+"ねんど",
+"(school / business) year",
+"noun"
+],
+"水筒": [
+"すいとう",
+"water bottle",
+"noun"
+],
+"着替え": [
+"きがえ",
+"change of clothes",
+"noun"
+],
+"フォーム": [
+"フォーム",
+"form",
+"noun"
+],
+"次回": [
+"じかい",
+"next time",
+"noun"
+],
+"お断り": [
+"おことわり",
+"turning down, refusal (polite)",
+"noun"
+],
+"形式": [
+"けいしき",
+"format, form",
+"noun"
+],
+"おかけいたしますが": [
+"おかけいたしますが",
+"(sorry to) trouble you, but",
+"expression"
+],
+"1割引き": [
+"いちわりびき",
+"10% off",
+"number"
+],
+"二食": [
+"にしょく",
+"two meals",
+"noun"
+],
+"代": [
+"だい",
+"charge, money for (おやつ代: snack money)",
+"suffix"
+],
+"あした": [
+"あした",
+"tomorrow",
+"noun"
+],
+"まい月": [
+"まいつき",
+"every month",
+"noun"
+],
+"お渡し": [
+"おわたし",
+"handing over (polite: お渡しします, we will hand it to you)",
+"noun"
+],
+"において": [
+"において",
+"in, at (formal)",
+"expression"
+],
+"そよかぜ": [
+"そよかぜ",
+"gentle breeze (here a product name)",
+"name"
+],
+"約2か月後": [
+"やくにかげつご",
+"about 2 months later",
+"expression"
 ]
 }

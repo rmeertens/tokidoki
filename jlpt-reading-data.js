@@ -377,6 +377,308 @@ Saturday and Sunday | Sweets and juice
       words: [['やすい', '', 'cheap'], ['やさい', '', 'vegetables'], ['さかな', '', 'fish'], ['にく', '', 'meat'], ['おかし', '', 'sweets, snacks'], ['やすみ', '', 'closed, day off']],
     },
 
+    {
+      id: 'n5-memo-dog', level: 'N5', type: 'short', form: 'memo',
+      title: 'Looking after the dog',
+      text: `ケンへ
+お{父|とう}さんと お{母|かあ}さんは あした {朝|あさ}から りょこうに {行|い}きます。かえるのは あさっての {夜|よる}です。
+«1|ポチの ごはんは {朝|あさ}と {夜|よる}に あげて ください»。ごはんは だいどころの {右|みぎ}の たなに あります。
+«1|さんぽは {夕方|ゆうがた} 1かいで いいです»。
+> {母|はは}より`,
+      en: `Ken,
+Dad and I are going on a trip from tomorrow morning. We'll be back the night after tomorrow.
+Please feed Pochi in the morning and at night. The food is on the shelf on the right in the kitchen.
+One walk in the evening is enough.
+Mum`,
+      questions: [{
+        q: 'ケンさんは あした {何|なに}を しなければ なりませんか。',
+        en: 'What does Ken have to do tomorrow?',
+        choices: [
+          ['{朝|あさ}と {夜|よる}に ポチに ごはんを あげて、{夕方|ゆうがた} さんぽに {行|い}く。', 'Feed Pochi in the morning and at night, and walk him in the evening.'],
+          ['{朝|あさ}だけ ポチに ごはんを あげて、{夕方|ゆうがた} さんぽに {行|い}く。', 'Feed Pochi only in the morning, and walk him in the evening.'],
+          ['{朝|あさ}と {夜|よる}に ポチに ごはんを あげて、{朝|あさ}と {夕方|ゆうがた} さんぽに {行|い}く。', 'Feed Pochi morning and night, and walk him morning and evening.'],
+          ['お{父|とう}さんと お{母|かあ}さんと りょこうに {行|い}く。', 'Go on the trip with Mum and Dad.'],
+        ],
+        why: 'Two halves again: food in the morning and at night (朝と 夜に あげて ください), and one walk, in the evening (夕方 1かいで いいです — “one time is fine”). It’s Mum and Dad who go on the trip.',
+      }],
+      words: [['りょこう', '', 'trip, travel'], ['あさって', '', 'the day after tomorrow'], ['だいどころ', '', 'kitchen'], ['たな', '', 'shelf'], ['さんぽ', '', 'walk'], ['〜で いいです', '', '… is fine, … is enough']],
+    },
+
+    {
+      id: 'n5-message-late', level: 'N5', type: 'short', form: 'message',
+      title: 'Running late',
+      text: `アリさん
+ごめんなさい。でんしゃが おくれて います。やくそくの 3{時|じ}には {行|い}けません。«1|3{時|じ}{半|はん}ごろに つきます»。
+«1|{駅|えき}の {前|まえ}の きっさてんで まって いて ください»。
+> ミカ`,
+      en: `Ali,
+Sorry. The train is late. I can't make it by three, the time we agreed. I'll get there at about half past three.
+Please wait for me at the café in front of the station.
+Mika`,
+      questions: [{
+        q: 'アリさんは どう しますか。',
+        en: 'What does Ali do?',
+        choices: [
+          ['{駅|えき}の {前|まえ}の きっさてんで ミカさんを まつ。', 'Wait for Mika at the café in front of the station.'],
+          ['{駅|えき}の {前|まえ}で 3{時|じ}まで まって、かえる。', 'Wait in front of the station until three, then go home.'],
+          ['でんしゃに のって、ミカさんを むかえに {行|い}く。', 'Take the train and go to meet Mika.'],
+          ['3{時|じ}{半|はん}に ミカさんに でんわを する。', 'Phone Mika at half past three.'],
+        ],
+        why: 'Mika will be about half an hour late (3時半ごろに つきます) and asks Ali to wait at the café: きっさてんで まって いて ください — “please be waiting”.',
+      }],
+      words: [['おくれる', '', 'to be late'], ['やくそく', '', 'promise; arrangement to meet'], ['つく', '', 'to arrive'], ['きっさてん', '', 'café'], ['まって いて ください', '', 'please wait (and be there)']],
+    },
+
+    {
+      id: 'n5-notice-pool', level: 'N5', type: 'short', form: 'notice',
+      title: 'The pool is closed',
+      text: `# プールの お{知|し}らせ
+«1|7{月|がつ}{10日|とおか}から 12{日|にち}まで、プールの そうじを します»。この {3日|みっか}は プールに {入|はい}れません。
+«1|13{日|にち}から また {入|はい}れます»。
+シャワーと トイレは つかえます。
+> さくら{市|し} スポーツセンター`,
+      en: `Notice about the pool
+From 10 to 12 July we will clean the pool. You can't use the pool on these three days.
+You can swim again from the 13th.
+The showers and toilets can be used.
+Sakura City Sports Centre`,
+      questions: [{
+        q: 'プールに {入|はい}れるのは いつですか。',
+        en: 'On which day can you use the pool?',
+        choices: [
+          ['7{月|がつ}13{日|にち}', '13 July'],
+          ['7{月|がつ}{10日|とおか}', '10 July'],
+          ['7{月|がつ}11{日|にち}', '11 July'],
+          ['7{月|がつ}12{日|にち}', '12 July'],
+        ],
+        why: 'The pool is cleaned from the 10th to the 12th (10日から 12日まで — both days included), and opens again from the 13th (13日から また 入れます). The showers stay open, but not the pool.',
+      }],
+      words: [['お{知|し}らせ', 'おしらせ', 'notice'], ['そうじ', '', 'cleaning'], ['{入|はい}れる', 'はいれる', 'can go in'], ['また', '', 'again'], ['つかえる', '', 'can be used']],
+    },
+
+    {
+      id: 'n5-memo-key', level: 'N5', type: 'short', form: 'memo',
+      title: 'Where the key is',
+      text: `リーさんへ
+わたしは {今日|きょう} {学校|がっこう}の あとで アルバイトに {行|い}きます。かえるのは {夜|よる} 10{時|じ}ごろです。
+へやの かぎは ドアの {前|まえ}の {花|はな}の {下|した}に あります。
+«1|へやを でる ときは、かぎを かけて、また {花|はな}の {下|した}に おいて ください»。
+> ナナ`,
+      en: `Lee,
+I'm going to my part-time job after school today. I'll be home at around ten at night.
+The key to the room is under the flowers in front of the door.
+When you leave the room, please lock it and put the key back under the flowers.
+Nana`,
+      questions: [{
+        q: 'リーさんは へやを でる とき、かぎを どう しますか。',
+        en: 'What does Lee do with the key when leaving the room?',
+        choices: [
+          ['かぎを かけて、{花|はな}の {下|した}に おく。', 'Lock the door and put the key under the flowers.'],
+          ['かぎを かけて、ナナさんに わたす。', 'Lock the door and give the key to Nana.'],
+          ['かぎを かけないで、{花|はな}の {下|した}に おく。', 'Put the key under the flowers without locking up.'],
+          ['かぎを もって アルバイトに {行|い}く。', 'Take the key to the part-time job.'],
+        ],
+        why: 'The last line is the request: lock up (かぎを かけて) and put the key back under the flowers (また 花の 下に おいて). Nana is at work until ten, so there is no one to hand it to.',
+      }],
+      words: [['アルバイト', '', 'part-time job'], ['かぎ', '', 'key'], ['かぎを かける', '', 'to lock'], ['でる', '', 'to leave, go out'], ['おく', '', 'to put, leave (something somewhere)']],
+    },
+
+    {
+      id: 'n5-message-restaurant', level: 'N5', type: 'short', form: 'message',
+      title: 'A new restaurant for tomorrow',
+      text: `みなさん
+あしたの ばんごはんの みせが かわりました。«1|「さくら」は やすみですから、となりの「もみじ」に します»。{時間|じかん}は おなじ {夜|よる} 7{時|じ}です。
+「もみじ」は カレーの みせです。おかねは ひとり 1,500{円|えん}ぐらいです。
+> タン`,
+      en: `Everyone,
+The restaurant for tomorrow's dinner has changed. "Sakura" is closed, so we'll go to "Momiji" next door. The time is the same, seven in the evening.
+"Momiji" is a curry restaurant. It's about 1,500 yen per person.
+Tan`,
+      questions: [{
+        q: 'タンさんが いちばん いいたい ことは {何|なん}ですか。',
+        en: 'What does Tan most want to say?',
+        choices: [
+          ['あしたの みせが「もみじ」に かわった こと。', 'That tomorrow’s restaurant has changed to Momiji.'],
+          ['あしたの {時間|じかん}が かわった こと。', 'That tomorrow’s time has changed.'],
+          ['「さくら」は カレーの みせだ と いう こと。', 'That Sakura is a curry restaurant.'],
+          ['ばんごはんの おかねが たかい こと。', 'That dinner is expensive.'],
+        ],
+        why: 'The first line says what changed — the restaurant (みせが かわりました) — and the next says to what: Momiji, because Sakura is closed. The time stays the same (おなじ 夜 7時), and it’s Momiji that serves curry.',
+      }],
+      words: [['ばんごはん', '', 'dinner'], ['みせ', '', 'shop, restaurant'], ['かわる', '', 'to change'], ['となり', '', 'next door'], ['〜に します', '', 'to decide on …'], ['ぐらい', '', 'about']],
+    },
+
+    {
+      id: 'n5-notice-library-days', level: 'N5', type: 'short', form: 'notice',
+      title: 'Library closing days',
+      text: `# としょかんの やすみ
+としょかんは まいしゅう {月|げつ}ようびが やすみです。
+でも、«1|こんしゅうは {水|すい}ようびも やすみです»。{本|ほん}の せいりを します。
+«1|{本|ほん}を かえしたい {人|ひと}は、いりぐちの {右|みぎ}の ポストに {入|い}れて ください»。
+> みどり{図書館|としょかん}`,
+      en: `Library closing days
+The library is closed every Monday.
+But this week it's also closed on Wednesday. We'll be sorting the books.
+If you want to return books, please put them in the box to the right of the entrance.
+Midori Library`,
+      questions: [{
+        q: 'ジョンさんは こんしゅうの {水|すい}ようびに {本|ほん}を かえしたいです。どう しますか。',
+        en: 'John wants to return a book on Wednesday this week. What does he do?',
+        choices: [
+          ['いりぐちの {右|みぎ}の ポストに {入|い}れる。', 'Put it in the box to the right of the entrance.'],
+          ['{月|げつ}ようびに かえしに {行|い}く。', 'Go and return it on Monday.'],
+          ['としょかんの {人|ひと}に わたす。', 'Give it to someone at the library.'],
+          ['{木|もく}ようびまで かえせない。', 'He can’t return it until Thursday.'],
+        ],
+        why: 'This week the library is closed on Wednesday too (こんしゅうは 水ようびも やすみ), so there’s nobody inside — but books can go in the box by the entrance any time (ポストに 入れて ください). Monday is the regular closing day.',
+      }],
+      words: [['としょかん', '', 'library'], ['まいしゅう', '', 'every week'], ['こんしゅう', '', 'this week'], ['せいり', '', 'sorting, tidying'], ['かえす', '', 'to return, give back'], ['いりぐち', '', 'entrance']],
+    },
+
+    {
+      id: 'n5-info-cinema', level: 'N5', type: 'info', form: 'flyer',
+      title: 'This week’s films',
+      text: `# さくらシネマ　こんしゅうの えいが
+|! えいが | {時間|じかん} | だれの えいが
+| «1|A　ねこの たび» | «1|10:00 / 13:30» | «1|こどもと おとな»
+| B　{山|やま}の {上|うえ}で | 11:00 / 15:00 | おとな
+| C　ロボットくん | 12:30 / 16:00 | こども
+| D　とうきょうの {夜|よる} | 18:00 / 20:30 | おとな
+・おかね：おとな 1,800{円|えん}、こども（12さいまで）1,000{円|えん}
+・«1|{水|すい}ようびは おとなも こどもも 1,000{円|えん}です»。
+・{月|げつ}ようびは やすみです。
+・えいがの {中|なか}で ものを {食|た}べないで ください。`,
+      en: `Sakura Cinema — this week's films
+Film | Times | For
+A A Cat's Journey | 10:00 / 13:30 | Children and adults
+B On the Mountain | 11:00 / 15:00 | Adults
+C Robot-kun | 12:30 / 16:00 | Children
+D Tokyo Night | 18:00 / 20:30 | Adults
+• Prices: adults 1,800 yen, children (up to 12) 1,000 yen
+• On Wednesdays it's 1,000 yen for adults and children alike.
+• We're closed on Mondays.
+• Please don't eat during the film.`,
+      questions: [{
+        q: 'ゆいさんは {水|すい}ようびの ごぜんに、7さいの むすめと えいがを みたいです。どの えいがを みて、ふたりで いくら はらいますか。',
+        en: 'Yui wants to see a film on Wednesday morning with her seven-year-old daughter. Which film do they see, and how much do the two of them pay?',
+        choices: [
+          ['Aを みて、2,000{円|えん} はらう。', 'They see A and pay 2,000 yen.'],
+          ['Aを みて、2,800{円|えん} はらう。', 'They see A and pay 2,800 yen.'],
+          ['Cを みて、2,000{円|えん} はらう。', 'They see C and pay 2,000 yen.'],
+          ['Bを みて、2,800{円|えん} はらう。', 'They see B and pay 2,800 yen.'],
+        ],
+        why: 'In the morning only A (10:00) and B (11:00) are on, and B is for adults, so A. On Wednesdays everyone pays 1,000 yen: 1,000 × 2 = 2,000 yen. C is a children’s film, but it starts at 12:30 — not the morning.',
+      }],
+      words: [['えいが', '', 'film, movie'], ['おとな', '', 'adult'], ['こども', '', 'child'], ['ごぜん', '', 'morning, a.m.'], ['むすめ', '', '(my) daughter'], ['はらう', '', 'to pay']],
+    },
+
+    {
+      id: 'n5-info-train', level: 'N5', type: 'info', form: 'flyer',
+      title: 'Morning trains',
+      text: `# さくら{駅|えき}から みどり{駅|えき}まで（あさ）
+|! でんしゃ | さくら{駅|えき}を でる | みどり{駅|えき}に つく
+| ふつう | 7:05 | 7:50
+| «1|きゅうこう» | «1|7:15» | «1|7:40»
+| ふつう | 7:25 | 8:10
+| きゅうこう | 7:45 | 8:10
+・きゅうこうは とちゅうの {駅|えき}に とまりません。
+・きっぷは きゅうこうも ふつうと おなじ 300{円|えん}です。
+・あさ 7{時|じ}から 9{時|じ}までは とても こみます。
+・でんしゃの {中|なか}で でんわを しないで ください。`,
+      en: `Sakura Station to Midori Station (mornings)
+Train | Leaves Sakura | Arrives at Midori
+Local | 7:05 | 7:50
+Express | 7:15 | 7:40
+Local | 7:25 | 8:10
+Express | 7:45 | 8:10
+• The express doesn't stop at the stations on the way.
+• The express costs the same as the local train: 300 yen.
+• Trains are very crowded from 7 to 9 in the morning.
+• Please don't talk on the phone on the train.`,
+      questions: [{
+        q: 'マイクさんは 8{時|じ}に みどり{駅|えき}の {前|まえ}で ともだちと あいます。いちばん おそい でんしゃで {行|い}きたいです。どの でんしゃに のりますか。',
+        en: 'Mike is meeting a friend in front of Midori Station at 8. He wants to take the latest train he can. Which train does he take?',
+        choices: [
+          ['7:15の きゅうこう', 'The 7:15 express'],
+          ['7:05の ふつう', 'The 7:05 local'],
+          ['7:25の ふつう', 'The 7:25 local'],
+          ['7:45の きゅうこう', 'The 7:45 express'],
+        ],
+        why: 'Look at the arrival column. The 7:25 local and the 7:45 express both arrive at 8:10 — too late. The 7:15 express leaves after the 7:05 local but arrives first, at 7:40: that’s the latest train that’s in time.',
+      }],
+      words: [['ふつう', '', 'local (train); ordinary'], ['きゅうこう', '', 'express'], ['とちゅう', '', 'on the way'], ['とまる', '', 'to stop'], ['こむ', '', 'to be crowded'], ['おそい', '', 'late; slow']],
+    },
+
+    {
+      id: 'n5-info-zoo', level: 'N5', type: 'info', form: 'flyer',
+      title: 'Zoo tickets',
+      text: `# みどり どうぶつえん
+あいて いる {時間|じかん}：{午前|ごぜん} 9{時|じ}〜{午後|ごご} 5{時|じ}
+|! | おとな | こども（6さい〜15さい）
+| {一人|ひとり} | 800{円|えん} | «1|300{円|えん}»
+| 10{人|にん}より {多|おお}い グループ（{一人|ひとり}） | 600{円|えん} | 200{円|えん}
+・«1|5さいまでの こどもは おかねが いりません»。
+・まい{月|つき} {1日|ついたち}は、«1|おとなも 600{円|えん}です»。
+・パンダの へやは {午後|ごご} 3{時|じ}までです。
+・どうぶつに {食|た}べものを あげないで ください。`,
+      en: `Midori Zoo
+Open: 9 in the morning to 5 in the afternoon
+ | Adults | Children (6–15)
+One person | 800 yen | 300 yen
+Groups of more than 10 (per person) | 600 yen | 200 yen
+• Children up to 5 go free.
+• On the 1st of every month, adults pay 600 yen too.
+• The panda house closes at 3 in the afternoon.
+• Please don't feed the animals.`,
+      questions: [{
+        q: 'やまださんは 5{月|がつ}{1日|ついたち}に、おくさんと 10さいの むすこと 4さいの むすめと 4{人|にん}で {行|い}きます。ぜんぶで いくらですか。',
+        en: 'Mr Yamada goes on 1 May with his wife, his ten-year-old son and his four-year-old daughter — four of them. How much is it in total?',
+        choices: [
+          ['1,500{円|えん}', '1,500 yen'],
+          ['1,900{円|えん}', '1,900 yen'],
+          ['1,800{円|えん}', '1,800 yen'],
+          ['1,200{円|えん}', '1,200 yen'],
+        ],
+        why: 'It’s the 1st of the month, so the two adults pay 600 each: 1,200. The ten-year-old pays the children’s price, 300. The four-year-old is free (5さいまで … いりません). 1,200 + 300 = 1,500 yen.',
+      }],
+      words: [['どうぶつえん', '', 'zoo'], ['あいて いる', '', 'open'], ['グループ', '', 'group'], ['いりません', '', 'not needed'], ['おくさん', '', '(someone’s) wife'], ['むすこ', '', '(my) son']],
+    },
+
+    {
+      id: 'n5-info-japanese-class', level: 'N5', type: 'info', form: 'flyer',
+      title: 'Free Japanese classes',
+      text: `# さくら{市|し} {日本語|にほんご} きょうしつ
+|! クラス | ようび | {時間|じかん} | どんな {人|ひと}
+| はじめて | {火|か} | 10:00〜11:30 | ひらがなを ならいたい {人|ひと}
+| «1|やさしい» | «1|{木|もく}» | «1|19:00〜20:30» | «1|ひらがなが よめる {人|ひと}»
+| ふつう | {土|ど} | 10:00〜12:00 | かんたんな かいわが できる {人|ひと}
+| はなそう | {日|にち} | 14:00〜16:00 | {日本語|にほんご}で すこし はなせる {人|ひと}
+・おかねは いりません。
+・{本|ほん}は きょうしつで かします。
+・はじめての {人|ひと}は、じゅぎょうの 10ぷん {前|まえ}に きて ください。`,
+      en: `Sakura City Japanese classes
+Class | Day | Time | For
+Beginners | Tue | 10:00–11:30 | People who want to learn hiragana
+Easy | Thu | 19:00–20:30 | People who can read hiragana
+Standard | Sat | 10:00–12:00 | People who can hold a simple conversation
+Let's talk | Sun | 14:00–16:00 | People who can speak a little Japanese
+• Classes are free.
+• Books are lent in class.
+• If it's your first time, please come 10 minutes before the class.`,
+      questions: [{
+        q: 'ホアさんは ひらがなが よめますが、かいわは まだ できません。{月|げつ}ようびから {金|きん}ようびまで、あさから {夕方|ゆうがた} 6{時|じ}まで しごとです。どの クラスが いいですか。',
+        en: 'Hoa can read hiragana but can’t hold a conversation yet. She works from morning to 6 in the evening, Monday to Friday. Which class suits her?',
+        choices: [
+          ['やさしい', 'Easy'],
+          ['はじめて', 'Beginners'],
+          ['ふつう', 'Standard'],
+          ['はなそう', 'Let’s talk'],
+        ],
+        why: 'Standard and Let’s talk need some conversation, which Hoa doesn’t have yet. Beginners is for learning hiragana — she can already read it — and it’s on a weekday morning, when she works. Easy, on Thursday evening at 7, fits both her level and her hours.',
+      }],
+      words: [['きょうしつ', '', 'class, classroom'], ['ならう', '', 'to learn'], ['かいわ', '', 'conversation'], ['かんたん', '', 'simple, easy'], ['かす', '', 'to lend'], ['じゅぎょう', '', 'lesson, class']],
+    },
+
     // ─── N4 ──────────────────────────────────────────────────────────────
 
     {
@@ -761,6 +1063,356 @@ D Hot springs and a good lunch | Every Wednesday | 9:00–18:00 | 7,000 yen | �
         why: 'A university student pays the adult price, so that’s 6,500 × 2 = 13,000. The four-year-old is younger than primary-school age, so free. The children’s price (4,000) is only for primary-school children.',
       }],
       words: [['{日帰|ひがえ}り', 'ひがえり', 'day trip'], ['みかんがり', '', 'mandarin picking'], ['{温泉|おんせん}', 'おんせん', 'hot spring'], ['{小学生|しょうがくせい}', 'しょうがくせい', 'primary-school child'], ['{無料|むりょう}', 'むりょう', 'free (of charge)'], ['{出発|しゅっぱつ}', 'しゅっぱつ', 'departure']],
+    },
+
+    {
+      id: 'n4-email-club', level: 'N4', type: 'short', form: 'email',
+      title: 'Saturday’s tennis practice',
+      text: `@{件名|けんめい}|{土曜日|どようび}の{練習|れんしゅう}について
+@{送信|そうしん}{者|しゃ}|テニス{部|ぶ}　{高田|たかだ}
+テニス{部|ぶ}のみなさん
+{今週|こんしゅう}の{土曜日|どようび}は{雨|あめ}の{予報|よほう}なので、«1|{練習|れんしゅう}は{外|そと}のコートではなく、{体育館|たいいくかん}でします»。{時間|じかん}は{同|おな}じ9{時|じ}からです。
+«1|{体育館|たいいくかん}に{入|はい}るときは、{中|なか}で{使|つか}う{靴|くつ}が{必要|ひつよう}です»。ラケットは{部|ぶ}のものを{貸|か}すので、{持|も}ってこなくてもいいです。
+{練習|れんしゅう}の{後|あと}、みんなで{昼|ひる}ご{飯|はん}を{食|た}べに{行|い}きましょう。`,
+      en: `Subject: About Saturday's practice
+From: Takada, tennis club
+To everyone in the tennis club,
+Rain is forecast for this Saturday, so practice will be in the gym, not on the outdoor courts. It starts at the same time, 9 o'clock.
+You need indoor shoes to go into the gym. You don't need to bring a racket, because the club will lend you one.
+After practice, let's all go and have lunch.`,
+      questions: [{
+        q: '{土曜日|どようび}の{練習|れんしゅう}に{行|い}く{人|ひと}は、どうしなければなりませんか。',
+        en: 'What must people going to Saturday’s practice do?',
+        choices: [
+          ['9{時|じ}に{体育館|たいいくかん}へ{行|い}く。{体育館|たいいくかん}で{使|つか}う{靴|くつ}を{持|も}っていく。', 'Go to the gym at 9, with indoor shoes.'],
+          ['9{時|じ}に{外|そと}のコートへ{行|い}く。ラケットを{持|も}っていく。', 'Go to the outdoor courts at 9, with a racket.'],
+          ['9{時|じ}に{体育館|たいいくかん}へ{行|い}く。ラケットを{持|も}っていく。', 'Go to the gym at 9, with a racket.'],
+          ['9{時|じ}に{外|そと}のコートへ{行|い}く。{体育館|たいいくかん}で{使|つか}う{靴|くつ}を{持|も}っていく。', 'Go to the outdoor courts at 9, with indoor shoes.'],
+        ],
+        why: 'Two halves: the place moves to the gym (外のコートではなく、体育館で), and what to bring is indoor shoes (中で使う靴が必要です). Rackets are lent by the club — 持ってこなくてもいい, “you don’t have to bring one”.',
+      }],
+      words: [['{練習|れんしゅう}', 'れんしゅう', 'practice'], ['{予報|よほう}', 'よほう', 'forecast'], ['{体育館|たいいくかん}', 'たいいくかん', 'gym, sports hall'], ['〜ではなく', '', 'not …, but'], ['{貸|か}す', 'かす', 'to lend'], ['〜なくてもいい', '', 'don’t have to …']],
+    },
+
+    {
+      id: 'n4-notice-elevator', level: 'N4', type: 'short', form: 'notice',
+      title: 'Lift inspection',
+      text: `# エレベーター{点検|てんけん}のお{知|し}らせ
+{住|す}んでいるみなさんへ
+«1|10{月|がつ}{20日|はつか}（{火|か}）の{午後|ごご}1{時|じ}から4{時|じ}まで、エレベーターの{点検|てんけん}をします»。«1|この{間|あいだ}、エレベーターは{使|つか}えません»ので、{階段|かいだん}を{使|つか}ってください。
+{車|くるま}いすを{使|つか}っている{方|かた}や、{重|おも}い{荷物|にもつ}がある{方|かた}は、{前|まえ}の{日|ひ}までに{管理人|かんりにん}にご{連絡|れんらく}ください。
+> さくらマンション　{管理人|かんりにん}`,
+      en: `Notice of lift inspection
+To all residents
+The lift will be inspected on Tuesday 20 October from 1 to 4 in the afternoon. During this time the lift can't be used, so please use the stairs.
+If you use a wheelchair or have heavy luggage, please contact the manager by the day before.
+Sakura Mansion, manager`,
+      questions: [{
+        q: 'このお{知|し}らせで{一番|いちばん}{伝|つた}えたいことは{何|なん}ですか。',
+        en: 'What does this notice most want to say?',
+        choices: [
+          ['{20日|はつか}の{午後|ごご}、エレベーターが{使|つか}えないこと', 'That the lift can’t be used on the afternoon of the 20th'],
+          ['{20日|はつか}の{午後|ごご}、{階段|かいだん}の{点検|てんけん}をすること', 'That the stairs are being inspected on the afternoon of the 20th'],
+          ['{重|おも}い{荷物|にもつ}は、{管理人|かんりにん}が{運|はこ}ぶこと', 'That the manager will carry heavy luggage'],
+          ['{車|くるま}いすを{貸|か}すこと', 'That wheelchairs can be borrowed'],
+        ],
+        why: 'The notice exists to say the lift is out of action from 1 to 4 on the 20th — so use the stairs. The last line only asks people who would have trouble with the stairs to get in touch; it doesn’t say the manager will carry anything.',
+      }],
+      words: [['{点検|てんけん}', 'てんけん', 'inspection'], ['{階段|かいだん}', 'かいだん', 'stairs'], ['{車|くるま}いす', 'くるまいす', 'wheelchair'], ['{荷物|にもつ}', 'にもつ', 'luggage, things to carry'], ['{管理人|かんりにん}', 'かんりにん', '(building) manager'], ['ご{連絡|れんらく}ください', 'ごれんらくください', 'please contact (us)']],
+    },
+
+    {
+      id: 'n4-memo-report', level: 'N4', type: 'short', form: 'memo',
+      title: 'The wrong theme',
+      text: `ジェイソンさん
+{先週|せんしゅう}{出|だ}してもらったレポートですが、テーマが{違|ちが}っていました。«1|{今回|こんかい}のテーマは「わたしの{町|まち}」です»。「わたしの{国|くに}」は{来月|らいげつ}のテーマです。
+«1|もう{一度|いちど}{書|か}いて、{今週|こんしゅう}の{金曜日|きんようび}までに{出|だ}してください»。{書|か}いたレポートは{来月|らいげつ}{使|つか}えるので、{捨|す}てないでください。
+> {木村|きむら}`,
+      en: `Jason,
+The report you handed in last week was on the wrong theme. This time the theme is "My town". "My country" is next month's theme.
+Please write it again and hand it in by Friday this week. You can use the report you wrote next month, so don't throw it away.
+Kimura`,
+      questions: [{
+        q: 'ジェイソンさんは{何|なに}をしなければなりませんか。',
+        en: 'What must Jason do?',
+        choices: [
+          ['「わたしの{町|まち}」のレポートを{書|か}いて、{金曜日|きんようび}までに{出|だ}す。', 'Write a report on “My town” and hand it in by Friday.'],
+          ['「わたしの{国|くに}」のレポートを{書|か}き{直|なお}して、{金曜日|きんようび}までに{出|だ}す。', 'Rewrite the “My country” report and hand it in by Friday.'],
+          ['{来月|らいげつ}、「わたしの{町|まち}」のレポートを{出|だ}す。', 'Hand in a “My town” report next month.'],
+          ['{書|か}いたレポートを{捨|す}てて、{新|あたら}しいテーマを{考|かんが}える。', 'Throw away the report and think of a new theme.'],
+        ],
+        why: 'Jason wrote about “My country”, which is next month’s theme; this time it’s “My town”, due this Friday (今週の金曜日までに). The old report is kept for next month — 捨てないでください.',
+      }],
+      words: [['レポート', '', 'report, essay'], ['{違|ちが}う', 'ちがう', 'to be wrong, different'], ['{今回|こんかい}', 'こんかい', 'this time'], ['テーマ', '', 'theme, topic'], ['もう{一度|いちど}', 'もういちど', 'once more'], ['{捨|す}てる', 'すてる', 'to throw away']],
+    },
+
+    {
+      id: 'n4-letter-visit', level: 'N4', type: 'short', form: 'letter',
+      title: 'A friend is coming to Japan',
+      text: `ゆきさんへ
+お{元気|げんき}ですか。{来年|らいねん}の3{月|がつ}に、{家族|かぞく}と{日本|にほん}へ{旅行|りょこう}に{行|い}くことになりました。{東京|とうきょう}に{一週間|いっしゅうかん}ぐらいいる{予定|よてい}です。
+«1|ゆきさんは{東京|とうきょう}に{住|す}んでいるので、{子|こ}どもといっしょに{楽|たの}しめる{場所|ばしょ}を{教|おし}えてくれませんか»。{両親|りょうしん}は{古|ふる}いお{寺|てら}が{見|み}たいそうです。
+{会|あ}えるのを{楽|たの}しみにしています。
+> マリア`,
+      en: `Dear Yuki,
+How are you? Next March I'm going on a trip to Japan with my family. We plan to stay in Tokyo for about a week.
+You live in Tokyo, so could you tell me some places where we can have fun with children? My parents say they'd like to see old temples.
+I'm looking forward to seeing you.
+Maria`,
+      questions: [{
+        q: 'マリアさんがこの{手紙|てがみ}で{一番|いちばん}{言|い}いたいことは{何|なん}ですか。',
+        en: 'What does Maria most want to say in this letter?',
+        choices: [
+          ['{子|こ}どもと{楽|たの}しめる{場所|ばしょ}を{教|おし}えてほしい。', 'She’d like to be told places to enjoy with children.'],
+          ['{東京|とうきょう}で{古|ふる}いお{寺|てら}が{見|み}たい。', 'She wants to see old temples in Tokyo.'],
+          ['{来年|らいねん}の3{月|がつ}から{日本|にほん}に{住|す}む。', 'She will live in Japan from next March.'],
+          ['ゆきさんの{家|いえ}に{泊|と}まりたい。', 'She’d like to stay at Yuki’s house.'],
+        ],
+        why: 'The trip is the background; the request is 〜を教えてくれませんか, “could you tell me …?”: places to have fun with children. It’s her parents who want to see temples (見たいそうです — “they say”).',
+      }],
+      words: [['{旅行|りょこう}', 'りょこう', 'trip'], ['{予定|よてい}', 'よてい', 'plan'], ['{楽|たの}しめる', 'たのしめる', 'can enjoy'], ['〜てくれませんか', '', 'could you … (for me)?'], ['{両親|りょうしん}', 'りょうしん', 'parents'], ['〜そうです', '', 'they say …, I hear …']],
+    },
+
+    {
+      id: 'n4-notice-lost', level: 'N4', type: 'short', form: 'notice',
+      title: 'Lost property',
+      text: `# {忘|わす}れ{物|もの}のお{知|し}らせ
+{先週|せんしゅう}の{日本語|にほんご}スピーチ{大会|たいかい}の{後|あと}、ホールに{次|つぎ}の{物|もの}が{忘|わす}れてありました。
+・{青|あお}いかさ　・{黒|くろ}い{手|て}ぶくろ　・{名前|なまえ}のないノート
+«1|{自分|じぶん}の{物|もの}だと{思|おも}う{人|ひと}は、{事務|じむ}{室|しつ}に{取|と}りに{来|き}てください»。«1|{今月|こんげつ}の{終|お}わりまでに{取|と}りに{来|こ}ない{物|もの}は、{捨|す}てます»。
+> {国際|こくさい}センター　{事務|じむ}{室|しつ}`,
+      en: `Lost property
+After last week's Japanese speech contest, the following things were left in the hall.
+• A blue umbrella • Black gloves • A notebook with no name
+If you think something is yours, please come and collect it from the office. Things not collected by the end of this month will be thrown away.
+International Centre office`,
+      questions: [{
+        q: 'かさを{忘|わす}れた{人|ひと}は、どうしなければなりませんか。',
+        en: 'What must the person who left the umbrella do?',
+        choices: [
+          ['{今月|こんげつ}の{終|お}わりまでに、{事務|じむ}{室|しつ}に{取|と}りに{行|い}く。', 'Collect it from the office by the end of this month.'],
+          ['{来月|らいげつ}、ホールに{取|と}りに{行|い}く。', 'Collect it from the hall next month.'],
+          ['{事務|じむ}{室|しつ}に{電話|でんわ}して、{送|おく}ってもらう。', 'Phone the office and have it sent.'],
+          ['{次|つぎ}のスピーチ{大会|たいかい}の{日|ひ}に、ホールに{取|と}りに{行|い}く。', 'Collect it from the hall on the day of the next speech contest.'],
+        ],
+        why: 'Lost things are kept at the office (事務室に取りに来てください), not in the hall, and only until the end of the month — after that they’re thrown away (捨てます).',
+      }],
+      words: [['{忘|わす}れ{物|もの}', 'わすれもの', 'something left behind'], ['{大会|たいかい}', 'たいかい', 'contest, competition'], ['{手|て}ぶくろ', 'てぶくろ', 'gloves'], ['{事務|じむ}{室|しつ}', 'じむしつ', 'office'], ['{取|と}りに{来|く}る', 'とりにくる', 'to come and collect'], ['{終|お}わり', 'おわり', 'end']],
+    },
+
+    {
+      id: 'n4-email-hotel', level: 'N4', type: 'short', form: 'email',
+      title: 'A hotel booking',
+      text: `@{件名|けんめい}|ご{予約|よやく}の{確認|かくにん}
+@{送信|そうしん}{者|しゃ}|ホテルみなと
+スミス{様|さま}
+ご{予約|よやく}ありがとうございます。{次|つぎ}のとおり、ご{予約|よやく}を{受|う}け{付|つ}けました。
+{日|ひ}にち：11{月|がつ}{3日|みっか}から2{泊|はく}　{部屋|へや}：{二人部屋|ふたりべや}
+チェックインは{午後|ごご}3{時|じ}から、チェックアウトは{午前|ごぜん}10{時|じ}までです。«1|{朝食|ちょうしょく}は{料金|りょうきん}に{入|はい}っていません»。«1|{朝食|ちょうしょく}が{必要|ひつよう}な{方|かた}は、1{回|かい}1,200{円|えん}で、{前|まえ}の{日|ひ}の{夜|よる}までにフロントでお{申|もう}し{込|こ}みください»。`,
+      en: `Subject: Booking confirmation
+From: Hotel Minato
+Dear Mr Smith,
+Thank you for your booking. We have taken your booking as follows.
+Dates: 2 nights from 3 November   Room: twin room
+Check-in is from three in the afternoon, and check-out is by ten in the morning. Breakfast is not included in the price. If you would like breakfast, it is 1,200 yen each time; please book it at the front desk by the evening before.`,
+      questions: [{
+        q: 'スミスさんがホテルで{朝|あさ}ご{飯|はん}を{食|た}べたいとき、どうしますか。',
+        en: 'If Mr Smith wants to have breakfast at the hotel, what does he do?',
+        choices: [
+          ['{前|まえ}の{日|ひ}の{夜|よる}までにフロントで{申|もう}し{込|こ}んで、1,200{円|えん}{払|はら}う。', 'Book at the front desk by the evening before, and pay 1,200 yen.'],
+          ['{何|なに}もしなくても、{朝|あさ}ご{飯|はん}が{食|た}べられる。', 'Nothing — breakfast is included.'],
+          ['その{日|ひ}の{朝|あさ}、フロントで{申|もう}し{込|こ}む。', 'Book at the front desk that morning.'],
+          ['メールで{申|もう}し{込|こ}んで、ホテルの{料金|りょうきん}といっしょに{払|はら}う。', 'Book by email and pay with the room charge.'],
+        ],
+        why: 'Breakfast isn’t in the price (料金に入っていません). It costs 1,200 yen each time, booked at the front desk by the evening before (前の日の夜までに) — not on the morning itself.',
+      }],
+      words: [['{予約|よやく}', 'よやく', 'booking, reservation'], ['{確認|かくにん}', 'かくにん', 'confirmation'], ['{泊|はく}', 'はく', '(counter for) nights'], ['{朝食|ちょうしょく}', 'ちょうしょく', 'breakfast'], ['{料金|りょうきん}', 'りょうきん', 'charge, price'], ['フロント', '', 'front desk']],
+    },
+
+    {
+      id: 'n4-info-clinic', level: 'N4', type: 'info', form: 'flyer',
+      title: 'Clinic opening hours',
+      text: `# さくらクリニック　{診察|しんさつ}{時間|じかん}
+|! | {月|げつ} | {火|か} | {水|すい} | {木|もく} | {金|きん} | {土|ど}
+| {午前|ごぜん} 9:00〜12:00 | ○ | ○ | ○ | ○ | ○ | «2|○»
+| {午後|ごご} 3:00〜6:00 | ○ | ○ | ― | ○ | ○ | ―
+| «1|{夜|よる} 6:00〜8:00» | ― | «1|○» | ― | ― | «1|○» | ―
+・{日曜日|にちようび}と{祝日|しゅくじつ}は{休|やす}みです。
+・«1|{受付|うけつけ}は、{終|お}わる{時間|じかん}の30{分|ぷん}{前|まえ}までです»。
+・はじめての{方|かた}は、{保険|ほけん}{証|しょう}を{持|も}ってきてください。
+・{予約|よやく}はいりません。{来|き}た{順番|じゅんばん}に{診|み}ます。
+・{熱|ねつ}がある{方|かた}は、{入|はい}る{前|まえ}に{受付|うけつけ}に{電話|でんわ}してください。
+・{駐車|ちゅうしゃ}{場|じょう}は5{台|だい}です。となりのスーパーの{駐車|ちゅうしゃ}{場|じょう}は{使|つか}わないでください。
+・{薬|くすり}は、クリニックの{前|まえ}の{薬局|やっきょく}でもらってください。`,
+      en: `Sakura Clinic — consultation hours
+ | Mon | Tue | Wed | Thu | Fri | Sat
+Morning 9:00–12:00 | ○ | ○ | ○ | ○ | ○ | ○
+Afternoon 3:00–6:00 | ○ | ○ | — | ○ | ○ | —
+Evening 6:00–8:00 | — | ○ | — | — | ○ | —
+• Closed on Sundays and public holidays.
+• Reception closes 30 minutes before the end of each session.
+• On your first visit, please bring your health insurance card.
+• No appointment needed. Patients are seen in the order they arrive.
+• If you have a fever, please phone reception before you come in.
+• There are 5 parking spaces. Please don't use the supermarket car park next door.
+• Please get your medicine at the pharmacy in front of the clinic.`,
+      questions: [{
+        q: 'リンさんは{平日|へいじつ}は{毎日|まいにち}、{夕方|ゆうがた}5{時|じ}40{分|ぷん}まで{仕事|しごと}があります。{仕事|しごと}の{後|あと}に、このクリニックへ{行|い}きたいです。{何|なに}{曜日|ようび}に{行|い}けますか。',
+        en: 'Lin works until 5:40 p.m. every weekday, and wants to go to the clinic after work. On which days can Lin go?',
+        choices: [
+          ['{火曜日|かようび}と{金曜日|きんようび}', 'Tuesday and Friday'],
+          ['{月曜日|げつようび}と{金曜日|きんようび}', 'Monday and Friday'],
+          ['{火曜日|かようび}と{木曜日|もくようび}', 'Tuesday and Thursday'],
+          ['{水曜日|すいようび}と{土曜日|どようび}', 'Wednesday and Saturday'],
+        ],
+        why: 'The afternoon session ends at 6, but reception closes 30 minutes earlier, at 5:30 — before Lin finishes work. So it has to be the evening session (6–8), which is only on Tuesdays and Fridays.',
+      }, {
+        q: 'このクリニックについて、{正|ただ}しいものはどれですか。',
+        en: 'Which is true about this clinic?',
+        choices: [
+          ['{土曜日|どようび}の{午前|ごぜん}に、{診|み}てもらえる。', 'You can be seen on Saturday morning.'],
+          ['{日曜日|にちようび}の{午前|ごぜん}に、{診|み}てもらえる。', 'You can be seen on Sunday morning.'],
+          ['{予約|よやく}をしなければならない。', 'You must make an appointment.'],
+          ['{水曜日|すいようび}の{夜|よる}に、{診|み}てもらえる。', 'You can be seen on Wednesday evening.'],
+        ],
+        why: 'Saturday has a morning session (the ○ under 土). Sundays are closed, Wednesday has only the morning, and no appointment is needed (予約はいりません).',
+      }],
+      words: [['{診察|しんさつ}', 'しんさつ', 'medical examination, consultation'], ['{祝日|しゅくじつ}', 'しゅくじつ', 'public holiday'], ['{受付|うけつけ}', 'うけつけ', 'reception'], ['{保険|ほけん}{証|しょう}', 'ほけんしょう', 'health insurance card'], ['{順番|じゅんばん}', 'じゅんばん', 'order, turn'], ['{診|み}る', 'みる', 'to examine (a patient)']],
+    },
+
+    {
+      id: 'n4-info-bike', level: 'N4', type: 'info', form: 'flyer',
+      title: 'Renting a bicycle',
+      text: `# レンタサイクル「みどり」
+|! {自転車|じてんしゃ} | 2{時間|じかん} | 1{日|にち}（9:00〜18:00）
+| ふつうの{自転車|じてんしゃ} | 500{円|えん} | 1,000{円|えん}
+| «1|{電動|でんどう}{自転車|じてんしゃ}» | 800{円|えん} | «1|1,500{円|えん}»
+| «2|{子|こ}ども{用|よう}{自転車|じてんしゃ}» | «2|300{円|えん}» | 600{円|えん}
+・2{時間|じかん}を{過|す}ぎたら、1{時間|じかん}ごとに300{円|えん}{払|はら}ってください。
+・{借|か}りるときに、{名前|なまえ}と{住所|じゅうしょ}が{分|わ}かるもの（パスポートなど）を{見|み}せてください。
+・«2|{電動|でんどう}{自転車|じてんしゃ}は、{中学生|ちゅうがくせい}{以上|いじょう}の{方|かた}だけ{借|か}りられます»。
+・{雨|あめ}の{日|ひ}は{休|やす}みです。
+・{自転車|じてんしゃ}は、{借|か}りた{店|みせ}に{返|かえ}してください。
+・かぎをなくしたときは、1,000{円|えん}{払|はら}ってください。`,
+      en: `Midori bicycle hire
+Bicycle | 2 hours | 1 day (9:00–18:00)
+Ordinary bicycle | 500 yen | 1,000 yen
+Electric bicycle | 800 yen | 1,500 yen
+Children's bicycle | 300 yen | 600 yen
+• After 2 hours, please pay 300 yen for each extra hour.
+• When you hire a bicycle, please show something with your name and address on it (such as a passport).
+• Electric bicycles can only be hired by people of junior-high-school age and over.
+• Closed on rainy days.
+• Please return the bicycle to the shop you hired it from.
+• If you lose the key, please pay 1,000 yen.`,
+      questions: [{
+        q: '{大学生|だいがくせい}のカルロスさんは、{朝|あさ}9{時|じ}から{夕方|ゆうがた}6{時|じ}まで、{電動|でんどう}{自転車|じてんしゃ}で{町|まち}を{回|まわ}りたいと{思|おも}っています。いくら{払|はら}いますか。',
+        en: 'Carlos, a university student, wants to ride around town on an electric bicycle from 9 a.m. to 6 p.m. How much does he pay?',
+        choices: [
+          ['1,500{円|えん}', '1,500 yen'],
+          ['800{円|えん}', '800 yen'],
+          ['1,000{円|えん}', '1,000 yen'],
+          ['2,900{円|えん}', '2,900 yen'],
+        ],
+        why: '9 to 6 is the whole-day slot (1日（9:00〜18:00）), and a day on an electric bicycle is 1,500 yen. Paying by the hour would be 800 + 7 × 300 = 2,900 yen — the day rate is much cheaper.',
+      }, {
+        q: '10{歳|さい}の{子|こ}どもについて、{正|ただ}しいものはどれですか。',
+        en: 'Which is true about a ten-year-old child?',
+        choices: [
+          ['{子|こ}ども{用|よう}{自転車|じてんしゃ}を、2{時間|じかん}300{円|えん}で{借|か}りられる。', 'They can hire a children’s bicycle for 300 yen for 2 hours.'],
+          ['{電動|でんどう}{自転車|じてんしゃ}を{借|か}りられる。', 'They can hire an electric bicycle.'],
+          ['{雨|あめ}の{日|ひ}でも{借|か}りられる。', 'They can hire a bicycle even on rainy days.'],
+          ['ふつうの{自転車|じてんしゃ}を、2{時間|じかん}300{円|えん}で{借|か}りられる。', 'They can hire an ordinary bicycle for 300 yen for 2 hours.'],
+        ],
+        why: 'Electric bicycles are for junior-high age and over, so a ten-year-old can’t take one. The children’s bicycle is 300 yen for 2 hours; an ordinary one costs 500, not 300. Nobody can hire on rainy days.',
+      }],
+      words: [['レンタサイクル', '', 'bicycle hire'], ['{電動|でんどう}{自転車|じてんしゃ}', 'でんどうじてんしゃ', 'electric bicycle'], ['〜{用|よう}', 'よう', 'for … (子ども用: for children)'], ['{過|す}ぎる', 'すぎる', 'to pass, go over'], ['〜ごとに', '', 'every …, per …'], ['{以上|いじょう}', 'いじょう', '… and over']],
+    },
+
+    {
+      id: 'n4-info-concert', level: 'N4', type: 'info', form: 'flyer',
+      title: 'A winter concert',
+      text: `# さくら{市民|しみん}オーケストラ　{冬|ふゆ}のコンサート
+{日|ひ}にち：12{月|がつ}{14日|じゅうよっか}（{日|にち}）{午後|ごご}2{時|じ}から
+{場所|ばしょ}：さくら{市民|しみん}ホール
+|! {席|せき} | {一般|いっぱん} | {学生|がくせい}
+| S{席|せき} | 4,000{円|えん} | 3,000{円|えん}
+| «1|A{席|せき}» | «1|3,000{円|えん}» | «1|2,000{円|えん}»
+| B{席|せき} | 2,000{円|えん} | 1,000{円|えん}
+・«1|{学生|がくせい}{料金|りょうきん}は、{中学生|ちゅうがくせい}から{大学生|だいがくせい}までです»。{学生|がくせい}{証|しょう}を{見|み}せてください。
+・«1|{小学生|しょうがくせい}{以下|いか}は、{大人|おとな}といっしょなら{無料|むりょう}です»（{席|せき}は{大人|おとな}のひざの{上|うえ}）。
+・チケットは、ホールの{受付|うけつけ}と{電話|でんわ}で{売|う}っています。
+・コンサートの{間|ま}は、{写真|しゃしん}をとったり、{電話|でんわ}を{使|つか}ったりしないでください。
+・ホールの{近|ちか}くに{駐車|ちゅうしゃ}{場|じょう}はありませんので、{電車|でんしゃ}かバスで{来|き}てください。`,
+      en: `Sakura Citizens' Orchestra — winter concert
+Date: Sunday 14 December, from 2 p.m.
+Place: Sakura Civic Hall
+Seat | General | Students
+S | 4,000 yen | 3,000 yen
+A | 3,000 yen | 2,000 yen
+B | 2,000 yen | 1,000 yen
+• The student price is for junior-high to university students. Please show your student card.
+• Children of primary-school age and under go free with an adult (sitting on the adult's lap).
+• Tickets are sold at the hall's reception desk and by phone.
+• During the concert, please don't take photos or use your phone.
+• There is no car park near the hall, so please come by train or bus.`,
+      questions: [{
+        q: '{会社|かいしゃ}{員|いん}の{松田|まつだ}さんは、{大学生|だいがくせい}の{息子|むすこ}と{小学|しょうがく}2{年生|ねんせい}の{娘|むすめ}と3{人|にん}で、A{席|せき}で{聞|き}きたいと{思|おも}っています。{全部|ぜんぶ}でいくらですか。',
+        en: 'Mr Matsuda, an office worker, wants to go in A seats with his son, a university student, and his daughter, who is in the second year of primary school. How much is it in total?',
+        choices: [
+          ['5,000{円|えん}', '5,000 yen'],
+          ['6,000{円|えん}', '6,000 yen'],
+          ['7,000{円|えん}', '7,000 yen'],
+          ['8,000{円|えん}', '8,000 yen'],
+        ],
+        why: 'Mr Matsuda pays the general A price, 3,000; his son is a university student, so 2,000; his daughter is at primary school, so she’s free with an adult. 3,000 + 2,000 + 0 = 5,000 yen.',
+      }],
+      words: [['{市民|しみん}', 'しみん', 'citizen'], ['{席|せき}', 'せき', 'seat'], ['{一般|いっぱん}', 'いっぱん', 'general (admission)'], ['{学生|がくせい}{証|しょう}', 'がくせいしょう', 'student card'], ['{以下|いか}', 'いか', '… and under'], ['{無料|むりょう}', 'むりょう', 'free (of charge)']],
+    },
+
+    {
+      id: 'n4-info-exchange', level: 'N4', type: 'info', form: 'flyer',
+      title: 'November events at the international centre',
+      text: `# {国際|こくさい}{交流|こうりゅう}センター　11{月|がつ}のイベント
+|! イベント | {日|ひ}にち | {時間|じかん} | お{金|かね} | {申|もう}し{込|こ}み
+| {日本語|にほんご}でおしゃべり | {毎週|まいしゅう}{水曜日|すいようび} | 18:30〜20:00 | {無料|むりょう} | «2|いらない»
+| «1|{着物|きもの}を{着|き}てみよう» | «1|11{月|がつ}{9日|ここのか}（{日|にち}）» | 13:00〜15:00 | «1|1,000{円|えん}» | «1|{必要|ひつよう}（15{人|にん}まで）»
+| {日本|にほん}の{料理|りょうり}を{作|つく}ろう | 11{月|がつ}22{日|にち}（{土|ど}） | 10:00〜13:00 | 1,500{円|えん} | {必要|ひつよう}（12{人|にん}まで）
+| {書道|しょどう}{体験|たいけん} | 11{月|がつ}30{日|にち}（{日|にち}） | 14:00〜16:00 | 500{円|えん} | «2|いらない»
+・«1|{申|もう}し{込|こ}みが{必要|ひつよう}なイベントは、イベントの{3日|みっか}{前|まえ}までに、センターの{受付|うけつけ}か{電話|でんわ}で{申|もう}し{込|こ}んでください»。
+・«1|お{金|かね}は、イベントの{日|ひ}に{払|はら}ってください»。
+・どのイベントも、{日本|にほん}に{住|す}んでいる{外国|がいこく}の{方|かた}ならだれでも{参加|さんか}できます。`,
+      en: `International Exchange Centre — November events
+Event | Date | Time | Cost | Booking
+Chatting in Japanese | Every Wednesday | 18:30–20:00 | Free | Not needed
+Try on a kimono | Sun 9 Nov | 13:00–15:00 | 1,000 yen | Needed (up to 15 people)
+Let's cook Japanese food | Sat 22 Nov | 10:00–13:00 | 1,500 yen | Needed (up to 12 people)
+Try calligraphy | Sun 30 Nov | 14:00–16:00 | 500 yen | Not needed
+• For events that need booking, please book at the centre's reception desk or by phone at least 3 days before the event.
+• Please pay on the day of the event.
+• Any foreign resident of Japan can take part in any event.`,
+      questions: [{
+        q: 'キムさんは、{着物|きもの}を{着|き}てみたいです。どうしなければなりませんか。',
+        en: 'Kim would like to try on a kimono. What must Kim do?',
+        choices: [
+          ['11{月|がつ}{6日|むいか}までに{申|もう}し{込|こ}んで、{当日|とうじつ}1,000{円|えん}{払|はら}う。', 'Book by 6 November and pay 1,000 yen on the day.'],
+          ['11{月|がつ}{9日|ここのか}に{申|もう}し{込|こ}んで、{当日|とうじつ}1,000{円|えん}{払|はら}う。', 'Book on 9 November and pay 1,000 yen on the day.'],
+          ['{申|もう}し{込|こ}まないで、{当日|とうじつ}500{円|えん}{払|はら}う。', 'Not book, and pay 500 yen on the day.'],
+          ['11{月|がつ}{6日|むいか}までに{申|もう}し{込|こ}んで、そのとき1,000{円|えん}{払|はら}う。', 'Book by 6 November and pay 1,000 yen when booking.'],
+        ],
+        why: 'The kimono event needs booking (必要), 3 days before the 9th — so by the 6th. The money is paid on the day of the event (イベントの日に払って), not when you book. 500 yen is the calligraphy price.',
+      }, {
+        q: '{申|もう}し{込|こ}みをしなくても{参加|さんか}できるイベントはどれですか。',
+        en: 'Which events can you join without booking?',
+        choices: [
+          ['「{日本語|にほんご}でおしゃべり」と「{書道|しょどう}{体験|たいけん}」', '“Chatting in Japanese” and “Try calligraphy”'],
+          ['「{着物|きもの}を{着|き}てみよう」と「{日本|にほん}の{料理|りょうり}を{作|つく}ろう」', '“Try on a kimono” and “Let’s cook Japanese food”'],
+          ['「{日本|にほん}の{料理|りょうり}を{作|つく}ろう」と「{書道|しょどう}{体験|たいけん}」', '“Let’s cook Japanese food” and “Try calligraphy”'],
+          ['「{日本語|にほんご}でおしゃべり」と「{着物|きもの}を{着|き}てみよう」', '“Chatting in Japanese” and “Try on a kimono”'],
+        ],
+        why: 'Read down the last column: いらない (“not needed”) for the Wednesday chat and for calligraphy; the kimono and cooking events need booking (必要).',
+      }],
+      words: [['{国際|こくさい}{交流|こうりゅう}', 'こくさいこうりゅう', 'international exchange'], ['おしゃべり', '', 'chatting'], ['{着物|きもの}', 'きもの', 'kimono'], ['{書道|しょどう}', 'しょどう', 'calligraphy'], ['{体験|たいけん}', 'たいけん', '(a) try, experience'], ['{参加|さんか}', 'さんか', 'taking part']],
     },
 
     // ─── N3 ──────────────────────────────────────────────────────────────
@@ -1190,6 +1842,398 @@ Up to 120 cm | Up to 15 kg | 1,700 yen | 2,000 yen | 3,000 yen
       words: [['{宅配便|たくはいびん}', 'たくはいびん', 'parcel delivery'], ['{合計|ごうけい}', 'ごうけい', 'total'], ['{持|も}ち{込|こ}み', 'もちこみ', 'bringing in (yourself)'], ['{割引|わりびき}', 'わりびき', 'discount'], ['{指定|してい}', 'してい', 'specifying, choosing'], ['{再配達|さいはいたつ}', 'さいはいたつ', 'redelivery'], ['{不在票|ふざいひょう}', 'ふざいひょう', 'missed-delivery slip']],
     },
 
+    {
+      id: 'n3-email-return', level: 'N3', type: 'short', form: 'email',
+      title: 'Returning an item',
+      text: `@{件名|けんめい}|{返品|へんぴん}についてのご{案内|あんない}
+@{送信|そうしん}{者|しゃ}|さくらネットショップ　お{客様|きゃくさま}{窓口|まどぐち}
+{佐々木|ささき}{様|さま}
+お{問|と}い{合|あ}わせいただいた{商品|しょうひん}の{返品|へんぴん}について、ご{案内|あんない}いたします。
+{返品|へんぴん}は、{商品|しょうひん}がお{手元|てもと}に{届|とど}いてから{8日|ようか}{以内|いない}で、{未|み}{使用|しよう}のものに{限|かぎ}り{受|う}け{付|つ}けております。«1|お{客様|きゃくさま}のご{都合|つごう}による{返品|へんぴん}の{場合|ばあい}、{送料|そうりょう}はお{客様|きゃくさま}のご{負担|ふたん}となります»。なお、{商品|しょうひん}に{傷|きず}があった{場合|ばあい}は、{当店|とうてん}が{送料|そうりょう}を{負担|ふたん}いたします。
+«1|{返品|へんぴん}をご{希望|きぼう}の{際|さい}は、{商品|しょうひん}と{一緒|いっしょ}に{届|とど}いた{納品書|のうひんしょ}を{同封|どうふう}してください»。`,
+      en: `Subject: About returning an item
+From: Sakura Net Shop, customer service
+Dear Ms Sasaki,
+We are writing about returning the item you asked about.
+Returns are accepted only for unused items, within 8 days of the item reaching you. If you are returning an item for your own reasons, you pay the postage. However, if the item was damaged, we will pay the postage.
+If you would like to return it, please enclose the delivery note that came with the item.`,
+      questions: [{
+        q: '{佐々木|ささき}さんは、{届|とど}いた{服|ふく}のサイズが{合|あ}わなかったので、{着|き}ないで{返品|へんぴん}したい。どうすればいいか。',
+        en: 'The clothes Ms Sasaki received don’t fit, so she wants to return them unworn. What should she do?',
+        choices: [
+          ['{送料|そうりょう}を{自分|じぶん}で{払|はら}い、{納品書|のうひんしょ}と{一緒|いっしょ}に{服|ふく}を{送|おく}る。', 'Pay the postage herself and send the clothes with the delivery note.'],
+          ['{送料|そうりょう}は{店|みせ}が{払|はら}うので、{服|ふく}だけを{送|おく}る。', 'Send only the clothes, since the shop pays the postage.'],
+          ['{納品書|のうひんしょ}を{送|おく}って、{新|あたら}しい{服|ふく}を{送|おく}ってもらう。', 'Send the delivery note and have new clothes sent.'],
+          ['{一度|いちど}{着|き}てみてから、{8日|ようか}{以内|いない}に{送|おく}る。', 'Try them on once, then send them within 8 days.'],
+        ],
+        why: 'A wrong size is the customer’s own reason (お客様のご都合), so she pays the postage; the shop pays only when the item was damaged (なお、… 傷があった場合). And the delivery note must go in the parcel (納品書を同封してください). Worn items can’t be returned — 未使用のものに限り.',
+      }],
+      words: [['{返品|へんぴん}', 'へんぴん', 'returning goods'], ['お{手元|てもと}', 'おてもと', '(in) your hands'], ['{未|み}{使用|しよう}', 'みしよう', 'unused'], ['{送料|そうりょう}', 'そうりょう', 'postage'], ['{負担|ふたん}', 'ふたん', 'bearing (a cost)'], ['{納品書|のうひんしょ}', 'のうひんしょ', 'delivery note'], ['{同封|どうふう}', 'どうふう', 'enclosing']],
+    },
+
+    {
+      id: 'n3-notice-parking', level: 'N3', type: 'short', form: 'notice',
+      title: 'Work on the car park',
+      text: `# {駐車|ちゅうしゃ}{場|じょう}の{工事|こうじ}について
+{居住|きょじゅう}{者|しゃ}の{皆様|みなさま}
+{駐車|ちゅうしゃ}{場|じょう}の{線|せん}を{引|ひ}き{直|なお}す{工事|こうじ}を、{下記|かき}のとおり{行|おこな}います。
+{日時|にちじ}：9{月|がつ}{6日|むいか}（{土|ど}）{午前|ごぜん}8{時|じ}〜{午後|ごご}5{時|じ}
+«1|{工事|こうじ}の{間|あいだ}は{駐車|ちゅうしゃ}{場|じょう}に{車|くるま}を{止|と}めることができません»。«1|{前日|ぜんじつ}の{夜|よる}10{時|じ}までに、{車|くるま}を{近|ちか}くのコインパーキングなどに{移動|いどう}してください»。コインパーキングの{料金|りょうきん}は、{管理|かんり}{組合|くみあい}が{負担|ふたん}します。«1|{領収|りょうしゅう}{書|しょ}を{管理人|かんりにん}{室|しつ}に{出|だ}してください»。
+> さくらハイツ{管理|かんり}{組合|くみあい}`,
+      en: `About work on the car park
+To all residents
+Work to repaint the lines in the car park will be carried out as follows.
+When: Saturday 6 September, 8 a.m. to 5 p.m.
+Cars can't be parked in the car park during the work. Please move your car to a nearby coin car park or similar by 10 at night the day before. The management association will pay the coin parking charge. Please hand the receipt in to the manager's office.
+Sakura Heights management association`,
+      questions: [{
+        q: '{車|くるま}を{持|も}っている{居住|きょじゅう}{者|しゃ}は、どうしなければならないか。',
+        en: 'What must residents with a car do?',
+        choices: [
+          ['{5日|いつか}の{夜|よる}10{時|じ}までに{車|くるま}を{移動|いどう}し、{駐車|ちゅうしゃ}{料金|りょうきん}の{領収|りょうしゅう}{書|しょ}を{管理人|かんりにん}{室|しつ}に{出|だ}す。', 'Move the car by 10 p.m. on the 5th, and hand the parking receipt in to the manager’s office.'],
+          ['{6日|むいか}の{朝|あさ}8{時|じ}までに{車|くるま}を{移動|いどう}し、{駐車|ちゅうしゃ}{料金|りょうきん}を{自分|じぶん}で{払|はら}う。', 'Move the car by 8 a.m. on the 6th, and pay the parking charge themselves.'],
+          ['{6日|むいか}は{車|くるま}を{使|つか}わないで、{駐車|ちゅうしゃ}{場|じょう}に{止|と}めておく。', 'Not use the car on the 6th and leave it in the car park.'],
+          ['{管理|かんり}{組合|くみあい}に、{車|くるま}を{移動|いどう}してもらう。', 'Have the management association move the car.'],
+        ],
+        why: 'The deadline is the night before the work (前日の夜10時まで), so the 5th, not the morning of the 6th. The association pays for the coin parking, but only if you hand in the receipt (領収書を … 出してください).',
+      }],
+      words: [['{駐車|ちゅうしゃ}{場|じょう}', 'ちゅうしゃじょう', 'car park'], ['{工事|こうじ}', 'こうじ', '(building) work'], ['{引|ひ}き{直|なお}す', 'ひきなおす', 'to redraw'], ['{移動|いどう}', 'いどう', 'moving'], ['{管理|かんり}{組合|くみあい}', 'かんりくみあい', 'management association'], ['{領収|りょうしゅう}{書|しょ}', 'りょうしゅうしょ', 'receipt']],
+    },
+
+    {
+      id: 'n3-memo-client', level: 'N3', type: 'short', form: 'memo',
+      title: 'Getting ready for a visitor',
+      text: `{山口|やまぐち}さん
+{明日|あした}の{午後|ごご}2{時|じ}に、ABC{商事|しょうじ}の{方|かた}が{新|あたら}しい{商品|しょうひん}の{説明|せつめい}を{聞|き}きに{来|こ}られます。{私|わたし}は{午前|ごぜん}{中|ちゅう}、{外|そと}での{会議|かいぎ}があり、{会社|かいしゃ}に{戻|もど}るのは1{時|じ}{半|はん}ごろになります。
+«1|それまでに、{説明|せつめい}に{使|つか}う{資料|しりょう}を5{部|ぶ}コピーして、{会議|かいぎ}{室|しつ}に{用意|ようい}しておいてもらえますか»。{資料|しりょう}は{共有|きょうゆう}フォルダの「{新|しん}{商品|しょうひん}」に{入|はい}っています。お{茶|ちゃ}は{私|わたし}が{戻|もど}ってから{頼|たの}みます。
+> {部長|ぶちょう}　{村上|むらかみ}`,
+      en: `Ms Yamaguchi,
+Tomorrow at two in the afternoon, people from ABC Trading are coming to hear about the new product. I have a meeting outside in the morning, and I'll be back at the office around half past one.
+Could you copy five sets of the materials for the presentation and have them ready in the meeting room by then? The materials are in the "New product" folder on the shared drive. I'll order the tea when I get back.
+Murakami, department manager`,
+      questions: [{
+        q: '{山口|やまぐち}さんが、{明日|あした}の1{時|じ}{半|はん}までにしなければならないことは{何|なに}か。',
+        en: 'What must Ms Yamaguchi do by half past one tomorrow?',
+        choices: [
+          ['{資料|しりょう}を5{部|ぶ}コピーして、{会議|かいぎ}{室|しつ}に{用意|ようい}しておく。', 'Copy five sets of the materials and have them ready in the meeting room.'],
+          ['ABC{商事|しょうじ}の{人|ひと}に、{新|あたら}しい{商品|しょうひん}の{説明|せつめい}をする。', 'Explain the new product to the people from ABC Trading.'],
+          ['{部長|ぶちょう}の{代|か}わりに、{外|そと}での{会議|かいぎ}に{出|で}る。', 'Go to the outside meeting in the manager’s place.'],
+          ['{会議|かいぎ}{室|しつ}に、お{茶|ちゃ}を{用意|ようい}しておく。', 'Have tea ready in the meeting room.'],
+        ],
+        why: 'それまでに (“by then”) points back to the manager’s return at half past one, and 〜てもらえますか is the request: five copies of the materials, ready in the meeting room. The manager will give the explanation and order the tea himself after getting back (私が戻ってから頼みます).',
+      }],
+      words: [['{商事|しょうじ}', 'しょうじ', 'trading (company)'], ['{来|こ}られる', 'こられる', 'to come (respectful)'], ['{資料|しりょう}', 'しりょう', 'materials, documents'], ['〜{部|ぶ}', 'ぶ', 'copies (counter)'], ['{用意|ようい}', 'ようい', 'preparing'], ['{共有|きょうゆう}', 'きょうゆう', 'shared']],
+    },
+
+    {
+      id: 'n3-notice-typhoon', level: 'N3', type: 'short', form: 'notice',
+      title: 'School on typhoon days',
+      text: `# {台風|たいふう}の{時|とき}の{授業|じゅぎょう}について
+{保護|ほご}{者|しゃ}の{皆様|みなさま}
+{台風|たいふう}が{近|ちか}づいた{時|とき}は、{次|つぎ}のようにします。
+・«1|{朝|あさ}7{時|じ}の{時点|じてん}で、さくら{市|し}に「{警報|けいほう}」が{出|で}ている{場合|ばあい}は、{授業|じゅぎょう}を{休|やす}みにします»。
+・7{時|じ}より{後|あと}に{警報|けいほう}が{出|で}た{場合|ばあい}は、{子|こ}どもたちの{安全|あんぜん}を{考|かんが}えて{学校|がっこう}で{判断|はんだん}し、メールでお{知|し}らせします。
+・{注意報|ちゅういほう}だけの{場合|ばあい}は、ふだんどおり{授業|じゅぎょう}があります。
+{休|やす}みになっても、{授業|じゅぎょう}を{別|べつ}の{日|ひ}に{行|おこな}うことはありません。
+> さくら{小学校|しょうがっこう}`,
+      en: `Lessons when a typhoon comes
+To all parents and guardians
+When a typhoon is approaching, we will do the following.
+• If a "warning" is in force for Sakura City at 7 in the morning, there will be no lessons.
+• If a warning is issued after 7, the school will decide with the children's safety in mind and let you know by email.
+• If there is only an advisory, there will be lessons as usual.
+Even if lessons are cancelled, they will not be made up on another day.
+Sakura Primary School`,
+      questions: [{
+        q: '{朝|あさ}6{時|じ}{半|はん}に{警報|けいほう}が{出|で}て、{朝|あさ}7{時|じ}にもまだ{出|で}ていた。この{日|ひ}はどうなるか。',
+        en: 'A warning was issued at 6:30 a.m. and was still in force at 7. What happens that day?',
+        choices: [
+          ['{授業|じゅぎょう}は{休|やす}みになる。', 'There are no lessons.'],
+          ['{学校|がっこう}がメールで{知|し}らせるまで{待|ま}つ。', 'Parents wait until the school emails.'],
+          ['ふだんどおり{授業|じゅぎょう}がある。', 'There are lessons as usual.'],
+          ['{授業|じゅぎょう}は{午後|ごご}から{始|はじ}まる。', 'Lessons start in the afternoon.'],
+        ],
+        why: 'What counts is whether a warning is in force at 7 a.m. (朝7時の時点で) — here it is, so lessons are off. The school only decides case by case (and emails) when a warning comes after 7; an advisory (注意報) alone changes nothing.',
+      }],
+      words: [['{台風|たいふう}', 'たいふう', 'typhoon'], ['{保護|ほご}{者|しゃ}', 'ほごしゃ', 'parent, guardian'], ['{時点|じてん}', 'じてん', 'point (in time)'], ['{警報|けいほう}', 'けいほう', '(weather) warning'], ['{注意報|ちゅういほう}', 'ちゅういほう', '(weather) advisory'], ['{判断|はんだん}', 'はんだん', 'decision, judgement']],
+    },
+
+    {
+      id: 'n3-email-volunteer', level: 'N3', type: 'short', form: 'email',
+      title: 'The river clean-up',
+      text: `@{件名|けんめい}|{日曜日|にちようび}の{清掃|せいそう}ボランティアについて
+@{送信|そうしん}{者|しゃ}|さくら{川|がわ}をきれいにする{会|かい}　{原田|はらだ}
+ボランティアの{皆|みな}さん
+{今週|こんしゅう}{日曜日|にちようび}の{川|かわ}の{清掃|せいそう}ですが、{参加|さんか}{希望|きぼう}の{方|かた}が{予想|よそう}より{多|おお}かったため、{集合|しゅうごう}{場所|ばしょ}を{二|ふた}つに{分|わ}けることにしました。
+«1|{名字|みょうじ}が「あ」から「な」で{始|はじ}まる{方|かた}は{西公園|にしこうえん}、「は」から「わ」で{始|はじ}まる{方|かた}は{東公園|ひがしこうえん}に、9{時|じ}に{集|あつ}まってください»。{軍手|ぐんて}とごみ{袋|ぶくろ}は、こちらで{用意|ようい}します。«1|{飲|の}み{物|もの}は{各自|かくじ}でお{持|も}ちください»。`,
+      en: `Subject: About Sunday's clean-up volunteering
+From: Harada, Sakura River Clean-up Group
+To all volunteers,
+About this Sunday's river clean-up: more people want to take part than we expected, so we have decided to split the meeting point into two.
+If your surname begins with a sound from あ to な, please gather at West Park, and from は to わ at East Park, at 9 o'clock. We will provide work gloves and rubbish bags. Please bring your own drinks.`,
+      questions: [{
+        q: '「{森|もり}」という{名字|みょうじ}の{人|ひと}は、{日曜日|にちようび}にどうすればいいか。',
+        en: 'What should someone with the surname Mori do on Sunday?',
+        choices: [
+          ['9{時|じ}に{東公園|ひがしこうえん}へ{行|い}く。{飲|の}み{物|もの}を{持|も}っていく。', 'Go to East Park at 9, with a drink.'],
+          ['9{時|じ}に{西公園|にしこうえん}へ{行|い}く。{飲|の}み{物|もの}を{持|も}っていく。', 'Go to West Park at 9, with a drink.'],
+          ['9{時|じ}に{東公園|ひがしこうえん}へ{行|い}く。{軍手|ぐんて}とごみ{袋|ぶくろ}を{持|も}っていく。', 'Go to East Park at 9, with work gloves and rubbish bags.'],
+          ['9{時|じ}に{西公園|にしこうえん}へ{行|い}く。{軍手|ぐんて}とごみ{袋|ぶくろ}を{持|も}っていく。', 'Go to West Park at 9, with work gloves and rubbish bags.'],
+        ],
+        why: '森 is read もり, which starts with ま — between は and わ, so East Park. Gloves and bags are provided (こちらで用意します); drinks are each person’s own (各自でお持ちください).',
+      }],
+      words: [['{清掃|せいそう}', 'せいそう', 'cleaning'], ['{予想|よそう}', 'よそう', 'expectation'], ['{集合|しゅうごう}', 'しゅうごう', 'meeting, gathering'], ['{名字|みょうじ}', 'みょうじ', 'surname'], ['{軍手|ぐんて}', 'ぐんて', 'work gloves'], ['{各自|かくじ}', 'かくじ', 'each person']],
+    },
+
+    {
+      id: 'n3-notice-bikeshare', level: 'N3', type: 'short', form: 'notice',
+      title: 'Bike-share prices go up',
+      text: `# シェアサイクル{料金|りょうきん}{変更|へんこう}のお{知|し}らせ
+いつも「さくらサイクル」をご{利用|りよう}いただき、ありがとうございます。
+{自転車|じてんしゃ}の{修理|しゅうり}や{電池|でんち}の{交換|こうかん}にかかる{費用|ひよう}が{上|あ}がっているため、«1|4{月|がつ}{1日|ついたち}から、{最初|さいしょ}の30{分|ぷん}の{料金|りょうきん}を150{円|えん}から200{円|えん}に{変更|へんこう}します»。その{後|あと}の30{分|ぷん}ごとの{料金|りょうきん}100{円|えん}と、{月額|げつがく}プランの{料金|りょうきん}は{変|か}わりません。
+これからも、{安全|あんぜん}で{便利|べんり}なサービスを{目指|めざ}してまいります。
+> さくらサイクル{株式会社|かぶしきがいしゃ}`,
+      en: `Notice of bike-share price change
+Thank you for using Sakura Cycle.
+Because the cost of repairing bicycles and changing batteries is rising, from 1 April the price for the first 30 minutes will change from 150 yen to 200 yen. The price of 100 yen for each 30 minutes after that, and the price of the monthly plan, will not change.
+We will keep working to provide a safe and convenient service.
+Sakura Cycle Co., Ltd.`,
+      questions: [{
+        q: 'このお{知|し}らせで、{一番|いちばん}{伝|つた}えたいことは{何|なに}か。',
+        en: 'What does this notice most want to say?',
+        choices: [
+          ['4{月|がつ}から、{最初|さいしょ}の30{分|ぷん}の{料金|りょうきん}が{上|あ}がること', 'That from April the price of the first 30 minutes goes up'],
+          ['4{月|がつ}から、{月額|げつがく}プランの{料金|りょうきん}が{上|あ}がること', 'That from April the monthly plan costs more'],
+          ['{自転車|じてんしゃ}の{修理|しゅうり}のため、サービスを{休|やす}むこと', 'That the service is stopping for bicycle repairs'],
+          ['4{月|がつ}から、30{分|ぷん}ごとの{料金|りょうきん}が100{円|えん}になること', 'That from April each 30 minutes costs 100 yen'],
+        ],
+        why: 'The rising costs are the reason (〜ため); the change is the first 30 minutes, from 150 to 200 yen. Each later 30 minutes was already 100 yen and stays that way, and the monthly plan doesn’t change.',
+      }],
+      words: [['シェアサイクル', '', 'bike share'], ['{修理|しゅうり}', 'しゅうり', 'repair'], ['{電池|でんち}', 'でんち', 'battery'], ['{交換|こうかん}', 'こうかん', 'replacing, exchange'], ['{費用|ひよう}', 'ひよう', 'cost'], ['{月額|げつがく}', 'げつがく', 'monthly (charge)'], ['{目指|めざ}す', 'めざす', 'to aim for']],
+    },
+
+    {
+      id: 'n3-info-apartments', level: 'N3', type: 'info', form: 'flyer',
+      title: 'Flats to rent',
+      text: `# さくら{不動産|ふどうさん}　おすすめの{部屋|へや}
+|! {名前|なまえ} | {家賃|やちん}（{月|つき}） | {広|ひろ}さ | {駅|えき}から | そのほか
+| ① コーポ{桜|さくら} | 52,000{円|えん} | 1K（20㎡） | {歩|ある}いて15{分|ふん} | 2{階|かい}。ペット{不可|ふか}
+| «1|② ハイツみどり» | «1|68,000{円|えん}» | 1DK（30㎡） | «1|{歩|ある}いて5{分|ふん}» | 3{階|がい}。«1|ペット{可|か}（{小型|こがた}{犬|けん}・{猫|ねこ}）»
+| «2|③ メゾン{青葉|あおば}» | «2|61,000{円|えん}» | 1K（25㎡） | {歩|ある}いて8{分|ぷん} | 1{階|かい}。ペット{不可|ふか}。«2|{楽器|がっき}{可|か}»
+| ④ サンハウス | 58,000{円|えん} | 1K（22㎡） | バス10{分|ぷん} | 5{階|かい}。ペット{可|か}（{猫|ねこ}のみ）
+・«1|{家賃|やちん}のほかに、{毎月|まいつき}{管理|かんり}{費|ひ}が3,000{円|えん}かかります（②は5,000{円|えん}）»。
+・«2|{契約|けいやく}の{時|とき}に、{敷金|しききん}（{家賃|やちん}1か{月|げつ}{分|ぶん}）と{礼金|れいきん}（{家賃|やちん}1か{月|げつ}{分|ぶん}）が{必要|ひつよう}です。③は{礼金|れいきん}なし»。
+・{駐車|ちゅうしゃ}{場|じょう}は、①と④にのみあります（{月|つき}8,000{円|えん}）。
+・どの{部屋|へや}も、{見学|けんがく}は{予約|よやく}{制|せい}です。お{電話|でんわ}でお{申|もう}し{込|こ}みください。
+・{契約|けいやく}の{時|とき}には、ほかに{火災|かさい}{保険|ほけん}{料|りょう}（2{年|ねん}で20,000{円|えん}）と{鍵|かぎ}の{交換|こうかん}{代|だい}（15,000{円|えん}）がかかります。
+・インターネットは、どの{部屋|へや}も{無料|むりょう}で{使|つか}えます。
+・お{申|もう}し{込|こ}みから{入居|にゅうきょ}まで、だいたい2{週間|しゅうかん}かかります。`,
+      en: `Sakura Real Estate — recommended flats
+Name | Rent (monthly) | Size | From the station | Other
+① Corpo Sakura | 52,000 yen | 1K (20 m²) | 15 min on foot | 2nd floor. No pets
+② Heights Midori | 68,000 yen | 1DK (30 m²) | 5 min on foot | 3rd floor. Pets OK (small dogs, cats)
+③ Maison Aoba | 61,000 yen | 1K (25 m²) | 8 min on foot | 1st floor. No pets. Instruments OK
+④ Sun House | 58,000 yen | 1K (22 m²) | 10 min by bus | 5th floor. Pets OK (cats only)
+• On top of the rent, there is a management fee of 3,000 yen a month (5,000 yen for ②).
+• When you sign the contract, a deposit (one month's rent) and key money (one month's rent) are needed. There is no key money for ③.
+• Only ① and ④ have parking (8,000 yen a month).
+• Viewings for all flats are by appointment. Please book by phone.
+• When you sign the contract, fire insurance (20,000 yen for 2 years) and a lock change (15,000 yen) are also charged.
+• All flats have free internet.
+• It takes about 2 weeks from application to moving in.`,
+      questions: [{
+        q: '{猫|ねこ}を{飼|か}っている{会社|かいしゃ}{員|いん}のハンさんは、{駅|えき}から{歩|ある}いて10{分|ぷん}{以内|いない}の{部屋|へや}を{探|さが}している。{家賃|やちん}と{管理|かんり}{費|ひ}を{合|あ}わせて、{毎月|まいつき}いくら{払|はら}うことになるか。',
+        en: 'Han, an office worker who has a cat, is looking for a flat within 10 minutes’ walk of the station. How much will Han pay each month, rent and management fee together?',
+        choices: [
+          ['73,000{円|えん}', '73,000 yen'],
+          ['71,000{円|えん}', '71,000 yen'],
+          ['68,000{円|えん}', '68,000 yen'],
+          ['64,000{円|えん}', '64,000 yen'],
+        ],
+        why: 'Cats are allowed only in ② and ④, and ④ is a bus ride away, so it’s ②: 68,000 yen. Its management fee is 5,000, not the usual 3,000 (②は5,000円): 73,000 yen a month.',
+      }, {
+        q: 'ピアノを{弾|ひ}く{学生|がくせい}のチェンさんが{選|えら}ぶ{部屋|へや}で、{契約|けいやく}の{時|とき}に{払|はら}う{敷金|しききん}と{礼金|れいきん}は、{合|あ}わせていくらか。',
+        en: 'Chen, a student who plays the piano, chooses a flat. How much are the deposit and key money together at signing?',
+        choices: [
+          ['61,000{円|えん}', '61,000 yen'],
+          ['122,000{円|えん}', '122,000 yen'],
+          ['104,000{円|えん}', '104,000 yen'],
+          ['0{円|えん}', '0 yen'],
+        ],
+        why: 'Only ③ allows instruments (楽器可). The deposit is one month’s rent, 61,000 yen, and ③ has no key money (③は礼金なし), so 61,000 yen in all.',
+      }],
+      words: [['{不動産|ふどうさん}', 'ふどうさん', 'real estate'], ['{家賃|やちん}', 'やちん', 'rent'], ['{不可|ふか} / {可|か}', 'ふか / か', 'not allowed / allowed'], ['{管理|かんり}{費|ひ}', 'かんりひ', 'management fee'], ['{敷金|しききん}', 'しききん', 'deposit'], ['{礼金|れいきん}', 'れいきん', 'key money'], ['{楽器|がっき}', 'がっき', 'musical instrument']],
+    },
+
+    {
+      id: 'n3-info-courses', level: 'N3', type: 'info', form: 'flyer',
+      title: 'Spring courses at the community college',
+      text: `# さくら{市民|しみん}{大学|だいがく}　{春|はる}の{講座|こうざ}
+|! {講座|こうざ} | {曜日|ようび}・{時間|じかん} | {回数|かいすう} | {受講|じゅこう}{料|りょう} | {定員|ていいん}
+| A　はじめての{写真|しゃしん} | {火|か}　10:00〜12:00 | 6{回|かい} | «2|6,000{円|えん}» | 20{名|めい}
+| B　{英語|えいご}で{話|はな}そう | {水|すい}　19:00〜20:30 | 10{回|かい} | «2|12,000{円|えん}» | 15{名|めい}
+| «1|C　{体|からだ}にやさしいヨガ» | «1|{土|ど}　9:30〜11:00» | 8{回|かい} | «1|8,000{円|えん}» | 25{名|めい}
+| «1|D　{地域|ちいき}の{歴史|れきし}を{歩|ある}く» | «1|{日|にち}　13:00〜16:00» | 4{回|かい} | «1|4,000{円|えん}» | 30{名|めい}
+■«1|{受講|じゅこう}できる{方|かた}：さくら{市内|しない}に{住|す}んでいるか、{通勤|つうきん}・{通学|つうがく}している16{歳|さい}{以上|いじょう}の{方|かた}»
+■{申|もう}し{込|こ}み：3{月|がつ}{1日|ついたち}〜15{日|にち}に、はがきかホームページで。«1|{一人|ひとり}2{講座|こうざ}まで»。
+■{定員|ていいん}を{超|こ}えた{場合|ばあい}は{抽選|ちゅうせん}です。{結果|けっか}は3{月|がつ}{20日|はつか}ごろお{知|し}らせします。
+■«2|65{歳|さい}{以上|いじょう}の{方|かた}は、{受講|じゅこう}{料|りょう}が{半額|はんがく}になります»。
+■Cは{動|うご}きやすい{服|ふく}で{来|き}てください。Dは{雨|あめ}でも{行|おこな}います。
+■{受講|じゅこう}{料|りょう}は、{最初|さいしょ}の{講座|こうざ}の{日|ひ}に{会場|かいじょう}で{払|はら}ってください。{一度|いちど}{払|はら}った{受講|じゅこう}{料|りょう}は、お{返|かえ}しできません。
+■{会場|かいじょう}：さくら{市民|しみん}センター（Dは、{市役所前|しやくしょまえ}に{集合|しゅうごう}）
+■お{問|と}い{合|あ}わせ：さくら{市民|しみん}{大学|だいがく}{事務|じむ}{局|きょく}（{平日|へいじつ}9:00〜17:00）`,
+      en: `Sakura Community College — spring courses
+Course | Day and time | Sessions | Fee | Places
+A Photography for beginners | Tue 10:00–12:00 | 6 | 6,000 yen | 20
+B Let's speak English | Wed 19:00–20:30 | 10 | 12,000 yen | 15
+C Gentle yoga | Sat 9:30–11:00 | 8 | 8,000 yen | 25
+D Walking through local history | Sun 13:00–16:00 | 4 | 4,000 yen | 30
+Who can take a course: people aged 16 or over who live, work or study in Sakura City
+Applications: 1–15 March, by postcard or on our website. Up to 2 courses per person.
+If a course is oversubscribed, places are drawn by lot. Results will be sent around 20 March.
+People aged 65 or over pay half the fee.
+For C, please wear clothes you can move in easily. D goes ahead even if it rains.
+Please pay the fee at the venue on the day of the first session. Fees cannot be refunded once paid.
+Venue: Sakura Community Centre (for D, meet in front of City Hall)
+Enquiries: Sakura Community College office (weekdays 9:00–17:00)`,
+      questions: [{
+        q: '{隣|となり}の{市|し}に{住|す}み、さくら{市|し}の{会社|かいしゃ}に{勤|つと}めている{田中|たなか}さん（35{歳|さい}）は、{平日|へいじつ}は{夜|よる}8{時|じ}まで{仕事|しごと}がある。{土日|どにち}の{講座|こうざ}に{二|ふた}つ{申|もう}し{込|こ}みたい。{受講|じゅこう}{料|りょう}は{全部|ぜんぶ}でいくらか。',
+        en: 'Mr Tanaka (35) lives in the next city and works for a company in Sakura City; on weekdays he works until 8 p.m. He wants to apply for two weekend courses. How much are the fees in total?',
+        choices: [
+          ['12,000{円|えん}', '12,000 yen'],
+          ['6,000{円|えん}', '6,000 yen'],
+          ['16,000{円|えん}', '16,000 yen'],
+          ['20,000{円|えん}', '20,000 yen'],
+        ],
+        why: 'He works in the city (通勤), so he can take courses even though he lives elsewhere. The weekend courses are C (Saturday, 8,000) and D (Sunday, 4,000) — two, the most allowed: 12,000 yen.',
+      }, {
+        q: '70{歳|さい}の{山本|やまもと}さんは、AとBに{申|もう}し{込|こ}みたい。{受講|じゅこう}{料|りょう}は{全部|ぜんぶ}でいくらか。',
+        en: 'Ms Yamamoto, who is 70, wants to apply for A and B. How much are the fees in total?',
+        choices: [
+          ['9,000{円|えん}', '9,000 yen'],
+          ['18,000{円|えん}', '18,000 yen'],
+          ['6,000{円|えん}', '6,000 yen'],
+          ['12,000{円|えん}', '12,000 yen'],
+        ],
+        why: 'A and B cost 6,000 + 12,000 = 18,000 yen, but people aged 65 and over pay half (半額): 9,000 yen.',
+      }],
+      words: [['{講座|こうざ}', 'こうざ', 'course'], ['{受講|じゅこう}{料|りょう}', 'じゅこうりょう', 'course fee'], ['{定員|ていいん}', 'ていいん', 'number of places'], ['{通勤|つうきん}・{通学|つうがく}', 'つうきん・つうがく', 'commuting to work / school'], ['{抽選|ちゅうせん}', 'ちゅうせん', 'drawing lots'], ['{半額|はんがく}', 'はんがく', 'half price']],
+    },
+
+    {
+      id: 'n3-info-hotel', level: 'N3', type: 'info', form: 'flyer',
+      title: 'Hotel room plans',
+      text: `# ホテルさくら　{宿泊|しゅくはく}プラン（2{名|めい}1{室|しつ}・1{泊|はく}の{料金|りょうきん}）
+|! プラン | {食事|しょくじ} | {平日|へいじつ} | {土曜|どよう}・{祝|しゅく}{前日|ぜんじつ}
+| ① {素泊|すど}まり | なし | 12,000{円|えん} | 16,000{円|えん}
+| «2|② {朝食|ちょうしょく}{付|つ}き» | {朝食|ちょうしょく} | «2|15,000{円|えん}» | «1|19,000{円|えん}»
+| ③ {二食|にしょく}{付|つ}き | {朝食|ちょうしょく}・{夕食|ゆうしょく} | 22,000{円|えん} | 26,000{円|えん}
+| ④ {早|はや}{割|わり}（{朝食|ちょうしょく}{付|つ}き） | {朝食|ちょうしょく} | 13,000{円|えん} | 17,000{円|えん}
+・«1|④は、{宿泊|しゅくはく}{日|び}の30{日|にち}{前|まえ}までにご{予約|よやく}の{場合|ばあい}のみご{利用|りよう}いただけます。キャンセル・{変更|へんこう}はできません»。
+・{小学生|しょうがくせい}は{大人|おとな}{料金|りょうきん}の70%、{小学校|しょうがっこう}{入学|にゅうがく}{前|まえ}のお{子様|こさま}（{食事|しょくじ}・{布団|ふとん}なし）は{無料|むりょう}です。
+・«2|キャンセル{料|りょう}（①〜③）：{前日|ぜんじつ}は{料金|りょうきん}の50%、{当日|とうじつ}は100%いただきます»。
+・チェックイン 15:00〜　チェックアウト 〜11:00
+・{駐車|ちゅうしゃ}{場|じょう}は1{泊|はく}1,000{円|えん}です。
+・{大|だい}{浴場|よくじょう}は、15:00〜24:00と6:00〜9:00にご{利用|りよう}いただけます。
+・{夕食|ゆうしょく}は、18:00〜20:00に1{階|かい}のレストランでお{召|め}し{上|あ}がりください。
+・ペットを{連|つ}れてのご{宿泊|しゅくはく}はできません。`,
+      en: `Hotel Sakura — room plans (per room for 2 people, per night)
+Plan | Meals | Weekdays | Saturdays and the night before a holiday
+① Room only | None | 12,000 yen | 16,000 yen
+② With breakfast | Breakfast | 15,000 yen | 19,000 yen
+③ Half board | Breakfast and dinner | 22,000 yen | 26,000 yen
+④ Early-bird (with breakfast) | Breakfast | 13,000 yen | 17,000 yen
+• ④ is only available if you book at least 30 days before your stay. It can't be cancelled or changed.
+• Primary-school children pay 70% of the adult price; children who haven't started school yet (no meals or futon) stay free.
+• Cancellation fee (① to ③): 50% of the price the day before, 100% on the day.
+• Check-in from 15:00, check-out by 11:00
+• Parking is 1,000 yen per night.
+• The large public bath is open 15:00–24:00 and 6:00–9:00.
+• Dinner is served 18:00–20:00 in the restaurant on the ground floor.
+• Guests can't stay with pets.`,
+      questions: [{
+        q: '{来月|らいげつ}の{土曜日|どようび}に{二人|ふたり}で{泊|と}まりたい。{予約|よやく}は{今日|きょう}（{宿泊|しゅくはく}{日|び}の40{日|にち}{前|まえ}）する。{朝食|ちょうしょく}は{食|た}べたいが、{予定|よてい}が{変|か}わるかもしれないので、キャンセルできるプランがいい。{一番|いちばん}{安|やす}いのはどれか。',
+        en: 'Two people want to stay on a Saturday next month, booking today (40 days ahead). They want breakfast, but their plans may change, so they want a plan they can cancel. Which is the cheapest?',
+        choices: [
+          ['② 19,000{円|えん}', '② 19,000 yen'],
+          ['④ 17,000{円|えん}', '④ 17,000 yen'],
+          ['① 16,000{円|えん}', '① 16,000 yen'],
+          ['③ 26,000{円|えん}', '③ 26,000 yen'],
+        ],
+        why: '④ is cheaper and they’re booking early enough, but it can’t be cancelled (キャンセル・変更はできません). ① has no breakfast. So the cheapest that fits is ② at the Saturday price, 19,000 yen.',
+      }, {
+        q: '{平日|へいじつ}に②で{泊|と}まる{予定|よてい}だったが、{前|まえ}の{日|ひ}に{急|きゅう}に{行|い}けなくなった。キャンセル{料|りょう}はいくらか。',
+        en: 'Someone was going to stay on plan ② on a weekday, but suddenly can’t go, the day before. How much is the cancellation fee?',
+        choices: [
+          ['7,500{円|えん}', '7,500 yen'],
+          ['15,000{円|えん}', '15,000 yen'],
+          ['0{円|えん}', '0 yen'],
+          ['9,500{円|えん}', '9,500 yen'],
+        ],
+        why: 'Cancelling the day before costs 50% of the price (前日は料金の50%). ② on a weekday is 15,000 yen, so 7,500 yen. 9,500 would be half the Saturday price.',
+      }],
+      words: [['{宿泊|しゅくはく}', 'しゅくはく', 'staying (at a hotel)'], ['{素泊|すど}まり', 'すどまり', 'room only'], ['〜{付|つ}き', 'つき', 'with …'], ['{祝|しゅく}{前日|ぜんじつ}', 'しゅくぜんじつ', 'the day before a public holiday'], ['{早|はや}{割|わり}', 'はやわり', 'early-booking discount'], ['キャンセル{料|りょう}', 'キャンセルりょう', 'cancellation fee']],
+    },
+
+    {
+      id: 'n3-info-healthcheck', level: 'N3', type: 'info', form: 'flyer',
+      title: 'The company health check',
+      text: `# {健康|けんこう}{診断|しんだん}のお{知|し}らせ
+{社員|しゃいん}の{皆|みな}さん
+{今年|ことし}の{健康|けんこう}{診断|しんだん}を、{次|つぎ}の{日程|にってい}で{行|おこな}います。
+|! {日|ひ}にち | {時間|じかん} | {受|う}ける{人|ひと}
+| 6{月|がつ}{9日|ここのか}（{火|か}） | 9:00〜11:30 | {営業|えいぎょう}{部|ぶ}
+| 6{月|がつ}{10日|とおか}（{水|すい}） | 9:00〜11:30 | {総務|そうむ}{部|ぶ}・{経理|けいり}{部|ぶ}
+| 6{月|がつ}11{日|にち}（{木|もく}） | 9:00〜11:30 | {開発|かいはつ}{部|ぶ}
+| «1|6{月|がつ}12{日|にち}（{金|きん}）» | «1|13:00〜15:30» | «1|{上|うえ}の{日|ひ}に{受|う}けられなかった{人|ひと}»
+・{前|まえ}の{日|ひ}の{夜|よる}9{時|じ}{以降|いこう}は、{水|みず}{以外|いがい}は{何|なに}も{食|た}べたり{飲|の}んだりしないでください。
+・{午前|ごぜん}に{受|う}ける{人|ひと}は、{朝|あさ}ご{飯|はん}を{食|た}べないで{来|き}てください。«2|{午後|ごご}に{受|う}ける{人|ひと}は、{朝|あさ}7{時|じ}までに{軽|かる}い{朝食|ちょうしょく}をとってもかまいません»。
+・{当日|とうじつ}は{保険|ほけん}{証|しょう}と、{前|まえ}に{配|くば}った{問診|もんしん}{票|ひょう}を{持|も}ってきてください。
+・{受|う}けなかった{人|ひと}は、{自分|じぶん}で{病院|びょういん}に{行|い}って{受|う}け、{結果|けっか}を{総務|そうむ}{部|ぶ}に{出|だ}さなければなりません。
+・{会場|かいじょう}は、{本社|ほんしゃ}8{階|かい}の{大|だい}{会議|かいぎ}{室|しつ}です。
+・{結果|けっか}は、7{月|がつ}{中旬|ちゅうじゅん}に{一人|ひとり}ずつ{封筒|ふうとう}でお{渡|わた}しします。
+・{当日|とうじつ}に{体調|たいちょう}が{悪|わる}い{人|ひと}は{無理|むり}をしないで{総務|そうむ}{部|ぶ}に{連絡|れんらく}し、12{日|にち}に{受|う}けてください。
+> {総務|そうむ}{部|ぶ}`,
+      en: `Notice of health checks
+To all staff
+This year's health checks will be held on the following dates.
+Date | Time | For
+Tue 9 June | 9:00–11:30 | Sales
+Wed 10 June | 9:00–11:30 | General Affairs and Accounts
+Thu 11 June | 9:00–11:30 | Development
+Fri 12 June | 13:00–15:30 | Anyone who couldn't come on their day
+• From 9 p.m. the night before, please don't eat or drink anything except water.
+• If your check is in the morning, please come without breakfast. If your check is in the afternoon, you may have a light breakfast before 7 in the morning.
+• On the day, please bring your health insurance card and the questionnaire handed out earlier.
+• Anyone who doesn't have the check must go to a hospital themselves for one, and hand the results in to General Affairs.
+• The venue is the large meeting room on the 8th floor of the head office.
+• Results will be handed to each person in an envelope in mid-July.
+• If you feel unwell on the day, don't push yourself: contact General Affairs and have your check on the 12th.
+General Affairs`,
+      questions: [{
+        q: '{経理|けいり}{部|ぶ}の{木下|きのした}さんは、6{月|がつ}{10日|とおか}は{朝|あさ}から{大阪|おおさか}へ{出張|しゅっちょう}することになった。{健康|けんこう}{診断|しんだん}はいつ{受|う}けるか。',
+        en: 'Mr Kinoshita in Accounts now has a business trip to Osaka from the morning of 10 June. When does he have his health check?',
+        choices: [
+          ['6{月|がつ}12{日|にち}の{午後|ごご}', 'The afternoon of 12 June'],
+          ['6{月|がつ}{10日|とおか}の{午前|ごぜん}', 'The morning of 10 June'],
+          ['6{月|がつ}11{日|にち}の{午前|ごぜん}', 'The morning of 11 June'],
+          ['{自分|じぶん}で{病院|びょういん}に{行|い}って{受|う}ける', 'He goes to a hospital himself'],
+        ],
+        why: 'Accounts is on the 10th, when he’s away. The 12th (afternoon) is for anyone who couldn’t come on their own day (上の日に受けられなかった人). The 11th is Development’s day, and the hospital is only for people who miss the check altogether.',
+      }, {
+        q: '{木下|きのした}さんは、{健康|けんこう}{診断|しんだん}の{日|ひ}の{朝|あさ}、どうすればいいか。',
+        en: 'What should Mr Kinoshita do on the morning of his check?',
+        choices: [
+          ['{朝|あさ}7{時|じ}までなら、{軽|かる}い{朝|あさ}ご{飯|はん}を{食|た}べてもいい。', 'He may have a light breakfast, as long as it’s before 7.'],
+          ['{朝|あさ}ご{飯|はん}も{水|みず}も、{何|なに}もとらないで{行|い}く。', 'Go without breakfast or even water.'],
+          ['{朝|あさ}ご{飯|はん}を{食|た}べないで、9{時|じ}までに{行|い}く。', 'Go by 9 without breakfast.'],
+          ['{朝|あさ}、{保険|ほけん}{証|しょう}を{総務|そうむ}{部|ぶ}に{出|だ}しに{行|い}く。', 'Take his insurance card to General Affairs in the morning.'],
+        ],
+        why: 'His check is on the afternoon of the 12th, and afternoon people may have a light breakfast before 7 (朝7時までに軽い朝食をとってもかまいません). Water is allowed for everyone; going without breakfast is the rule for the morning checks.',
+      }],
+      words: [['{健康|けんこう}{診断|しんだん}', 'けんこうしんだん', 'health check'], ['{日程|にってい}', 'にってい', 'schedule'], ['{経理|けいり}{部|ぶ}', 'けいりぶ', 'accounts department'], ['{以降|いこう}', 'いこう', 'from … on'], ['〜てもかまいません', '', 'it’s all right to …'], ['{問診|もんしん}{票|ひょう}', 'もんしんひょう', 'medical questionnaire'], ['{出張|しゅっちょう}', 'しゅっちょう', 'business trip']],
+    },
+
     // ─── N2 ──────────────────────────────────────────────────────────────
 
     {
@@ -1576,6 +2620,422 @@ Fixed-desk member | Every day, 24 hours | 30,000 yen a month | Full-time service
         why: 'Registering a company at this address is only possible on the fixed-desk plan (固定席会員のみ), which is also open 24 hours: 30,000 yen. Add the one-off 5,000-yen joining fee: 35,000. Joining at the start of the month means no day-by-day calculation.',
       }],
       words: [['{上限|じょうげん}', 'じょうげん', 'upper limit, cap'], ['{月額|げつがく}', 'げつがく', 'monthly charge'], ['{固定席|こていせき}', 'こていせき', 'fixed (own) desk'], ['{登記|とうき}', 'とうき', 'registration (of a company)'], ['{日割|ひわ}り', 'ひわり', 'calculated by the day'], ['{所在地|しょざいち}', 'しょざいち', 'address, location'], ['{解約|かいやく}', 'かいやく', 'cancellation (of a contract)']],
+    },
+
+    {
+      id: 'n2-email-defect', level: 'N2', type: 'short', form: 'email',
+      title: 'A faulty kettle',
+      text: `@{件名|けんめい}|お{問|と}い{合|あ}わせの{件|けん}（ご{注文|ちゅうもん}{番号|ばんごう}：A-2307）
+@{送信|そうしん}{者|しゃ}|{株式会社|かぶしきがいしゃ}みどり{家電|かでん}　お{客様|きゃくさま}{相談|そうだん}{室|しつ}
+{高木|たかぎ}{様|さま}
+このたびは、{弊社|へいしゃ}の{電気|でんき}ケトルに{不具合|ふぐあい}があったとのこと、{大変|たいへん}ご{迷惑|めいわく}をおかけし、{誠|まこと}に{申|もう}し{訳|わけ}ございません。
+お{手数|てすう}をおかけいたしますが、«1|{本|ほん}メールに{添付|てんぷ}した{着払|ちゃくばら}い{伝票|でんぴょう}を{印刷|いんさつ}していただき、お{手元|てもと}の{製品|せいひん}を{弊社|へいしゃ}までご{返送|へんそう}いただけますでしょうか»。{到着|とうちゃく}{後|ご}、{検品|けんぴん}のうえ、{新|あたら}しい{製品|せいひん}を{発送|はっそう}いたします。なお、{交換|こうかん}ではなく{返金|へんきん}をご{希望|きぼう}の{場合|ばあい}は、{返送|へんそう}の{際|さい}に「{返金|へんきん}{希望|きぼう}」と{書|か}いたメモを{製品|せいひん}と{一緒|いっしょ}にお{入|い}れください。
+{今後|こんご}このようなことがないよう、{品質|ひんしつ}{管理|かんり}を{徹底|てってい}してまいります。`,
+      en: `Subject: Your enquiry (order no. A-2307)
+From: Midori Electric Co., Ltd., Customer Service
+Dear Ms Takagi,
+We are very sorry for the trouble caused by the fault in our electric kettle.
+We apologise for the inconvenience, but could you print the cash-on-delivery shipping label attached to this email and send the product back to us? Once it arrives and has been checked, we will send you a new one. If you would prefer a refund rather than an exchange, please put a note saying "refund please" in with the product when you send it back.
+We will make sure our quality control prevents this from happening again.`,
+      questions: [{
+        q: '{高木|たかぎ}さんが{新|あたら}しい{製品|せいひん}を{受|う}け{取|と}るためには、まず{何|なに}をしなければならないか。',
+        en: 'To get a new product, what must Ms Takagi do first?',
+        choices: [
+          ['{添付|てんぷ}の{伝票|でんぴょう}を{印刷|いんさつ}して、ケトルを{会社|かいしゃ}に{送|おく}り{返|かえ}す。', 'Print the attached label and send the kettle back to the company.'],
+          ['{送料|そうりょう}を{払|はら}って、ケトルを{買|か}った{店|みせ}に{持|も}って{行|い}く。', 'Pay the postage and take the kettle to the shop where she bought it.'],
+          ['「{返金|へんきん}{希望|きぼう}」と{書|か}いたメモを{会社|かいしゃ}に{送|おく}る。', 'Send the company a note saying “refund please”.'],
+          ['{新|あたら}しい{製品|せいひん}が{届|とど}いてから、{古|ふる}いケトルを{送|おく}り{返|かえ}す。', 'Send the old kettle back once the new one arrives.'],
+        ],
+        why: 'The request is 〜ていただけますでしょうか: print the label and send the kettle back. The new one is sent only after it arrives and is checked (到着{後|ご}、検品のうえ). The label is cash-on-delivery (着払い), so she doesn’t pay postage, and the “refund” note is only for someone who wants their money back instead.',
+      }],
+      words: [['{不具合|ふぐあい}', 'ふぐあい', 'fault, defect'], ['お{手数|てすう}をおかけいたしますが', 'おてすうをおかけいたしますが', 'sorry to trouble you, but'], ['{着払|ちゃくばら}い', 'ちゃくばらい', 'cash on delivery (the receiver pays postage)'], ['{伝票|でんぴょう}', 'でんぴょう', 'slip, (shipping) label'], ['{検品|けんぴん}', 'けんぴん', 'inspecting goods'], ['〜のうえ', '', 'after …ing'], ['{徹底|てってい}する', 'てっていする', 'to be thorough']],
+    },
+
+    {
+      id: 'n2-notice-gym-fee', level: 'N2', type: 'short', form: 'notice',
+      title: 'Membership fees are going up',
+      text: `# {会員|かいいん}の{皆様|みなさま}へ　{月|つき}{会費|かいひ}{改定|かいてい}のお{知|し}らせ
+{平素|へいそ}より{当|とう}クラブをご{利用|りよう}いただき、{誠|まこと}にありがとうございます。
+{近年|きんねん}の{光熱|こうねつ}{費|ひ}の{上昇|じょうしょう}に{伴|ともな}い、«1|2027{年|ねん}4{月|がつ}より、{全|ぜん}プランの{月|つき}{会費|かいひ}を{一律|いちりつ}1,000{円|えん}{値上|ねあ}げさせていただくこととなりました»。ただし、«1|2027{年|ねん}3{月|がつ}{末日|まつじつ}までにご{入会|にゅうかい}された{方|かた}は、2028{年|ねん}3{月|がつ}{分|ぶん}までは{現在|げんざい}の{月|つき}{会費|かいひ}のままご{利用|りよう}いただけます»。
+{会員|かいいん}の{皆様|みなさま}にはご{負担|ふたん}をおかけいたしますが、{何卒|なにとぞ}ご{理解|りかい}{賜|たまわ}りますようお{願|ねが}い{申|もう}し{上|あ}げます。
+> フィットネスクラブ「ゆうゆう」`,
+      en: `To all members: notice of revised monthly fees
+Thank you very much for your continued use of our club.
+Because of the rise in heating and electricity costs in recent years, from April 2027 the monthly fee for every plan will go up by a flat 1,000 yen. However, members who join by the end of March 2027 can keep paying the current monthly fee until the March 2028 payment.
+We are sorry for the extra burden on our members, and ask for your kind understanding.
+Yuyu Fitness Club`,
+      questions: [{
+        q: 'このお{知|し}らせの{内容|ないよう}と{合|あ}っているものはどれか。',
+        en: 'Which matches what this notice says?',
+        choices: [
+          ['{今|いま}すでに{会員|かいいん}の{人|ひと}は、2028{年|ねん}4{月|がつ}{分|ぶん}から{月|つき}{会費|かいひ}が{上|あ}がる。', 'For people who are already members, the fee goes up from the April 2028 payment.'],
+          ['2027{年|ねん}4{月|がつ}から、すべての{会員|かいいん}の{月|つき}{会費|かいひ}が{上|あ}がる。', 'From April 2027, every member’s fee goes up.'],
+          ['2027{年|ねん}3{月|がつ}までに{入会|にゅうかい}すれば、ずっと{今|いま}の{月|つき}{会費|かいひ}で{利用|りよう}できる。', 'Joining by March 2027 means paying the current fee for good.'],
+          ['プランによって、{値上|ねあ}げの{金額|きんがく}が{違|ちが}う。', 'The increase is different for each plan.'],
+        ],
+        why: 'ただし introduces the exception: anyone who joins by the end of March 2027 — which includes people who are members now — keeps the old fee until the March 2028 payment, so their fee rises from April 2028. It’s not “for good”, and the rise is the same 1,000 yen for every plan (一律).',
+      }],
+      words: [['{改定|かいてい}', 'かいてい', 'revision (of prices)'], ['{光熱|こうねつ}{費|ひ}', 'こうねつひ', 'heating and electricity costs'], ['{一律|いちりつ}', 'いちりつ', 'across the board, flat'], ['{値上|ねあ}げ', 'ねあげ', 'price rise'], ['{末日|まつじつ}', 'まつじつ', 'the last day (of a month)'], ['〜のまま', '', 'as it is, unchanged']],
+    },
+
+    {
+      id: 'n2-memo-weekly-report', level: 'N2', type: 'short', form: 'memo',
+      title: 'A new way to write the weekly report',
+      text: `{課員|かいん}{各位|かくい}
+> {営業|えいぎょう}{企画|きかく}{課|か}　{課長|かちょう}　{松井|まつい}
+{来月|らいげつ}から、{週報|しゅうほう}の{書|か}き{方|かた}を{一部|いちぶ}{変更|へんこう}します。
+これまでは、{訪問|ほうもん}した{取引|とりひき}{先|さき}と{商談|しょうだん}の{内容|ないよう}をすべて{書|か}いてもらっていましたが、{今後|こんご}は«1|「{成果|せいか}があったもの」と「{問題|もんだい}が{起|お}きているもの」に{絞|しぼ}って{書|か}いてください»。{商談|しょうだん}の{細|こま}かい{記録|きろく}は、{顧客|こきゃく}{管理|かんり}システムに{入力|にゅうりょく}するだけで{構|かま}いません。
+{提出|ていしゅつ}{期限|きげん}は、これまでどおり{毎週|まいしゅう}{金曜日|きんようび}の17{時|じ}です。なお、{変更|へんこう}に{伴|ともな}い{書式|しょしき}も{新|あたら}しいものに{替|か}えますので、{来週|らいしゅう}{中|ちゅう}に{共有|きょうゆう}フォルダに{置|お}いておきます。`,
+      en: `To all section members
+Matsui, Manager, Sales Planning Section
+From next month, part of the way the weekly report is written will change.
+Until now we have asked you to write about every client you visited and everything discussed, but from now on please only write about deals that produced results and deals where problems are arising. Detailed records of meetings only need to be entered in the customer management system.
+The deadline stays the same: 17:00 every Friday. With this change, the form will also be replaced by a new one, which I will put in the shared folder during next week.`,
+      questions: [{
+        q: 'このメモで{課長|かちょう}が{最|もっと}も{伝|つた}えたいことは{何|なに}か。',
+        en: 'What does the section manager most want to say in this memo?',
+        choices: [
+          ['{週報|しゅうほう}には、{成果|せいか}があった{商談|しょうだん}と{問題|もんだい}が{起|お}きている{商談|しょうだん}だけを{書|か}けばいい。', 'The weekly report need only cover deals with results and deals with problems.'],
+          ['{週報|しゅうほう}の{提出|ていしゅつ}{期限|きげん}が{変|か}わる。', 'The deadline for the weekly report is changing.'],
+          ['{商談|しょうだん}の{記録|きろく}は、{週報|しゅうほう}にも{顧客|こきゃく}{管理|かんり}システムにもすべて{書|か}く。', 'Every meeting must be recorded both in the report and in the system.'],
+          ['{来週|らいしゅう}から、{新|あたら}しい{書式|しょしき}で{週報|しゅうほう}を{出|だ}さなければならない。', 'From next week, reports must be on the new form.'],
+        ],
+        why: 'The change is 今後は … に絞って書いてください: only the deals with results or problems. The deadline stays as it was (これまでどおり), details go only in the system (入力するだけで構いません), and the new form is put out next week for use from next month.',
+      }],
+      words: [['{各位|かくい}', 'かくい', 'to all (in an address)'], ['{週報|しゅうほう}', 'しゅうほう', 'weekly report'], ['{取引|とりひき}{先|さき}', 'とりひきさき', 'client, business partner'], ['{商談|しょうだん}', 'しょうだん', 'business talks, deal'], ['〜に{絞|しぼ}る', 'にしぼる', 'to narrow down to …'], ['{顧客|こきゃく}', 'こきゃく', 'customer'], ['{書式|しょしき}', 'しょしき', 'form, format']],
+    },
+
+    {
+      id: 'n2-notice-demolition', level: 'N2', type: 'short', form: 'notice',
+      title: 'Demolition work next door',
+      text: `# {近隣|きんりん}の{皆様|みなさま}へ　{解体|かいたい}{工事|こうじ}のお{知|し}らせ
+このたび、{下記|かき}の{建物|たてもの}の{解体|かいたい}{工事|こうじ}を{行|おこな}うこととなりました。{工事|こうじ}{期間|きかん}{中|ちゅう}は、{騒音|そうおん}や{振動|しんどう}などでご{迷惑|めいわく}をおかけいたしますが、ご{理解|りかい}とご{協力|きょうりょく}をお{願|ねが}い{申|もう}し{上|あ}げます。
+{工事|こうじ}{場所|ばしょ}：さくら{町|まち}3{丁目|ちょうめ}　{旧|きゅう}さくら{銀行|ぎんこう}ビル
+{工事|こうじ}{期間|きかん}：2027{年|ねん}1{月|がつ}12{日|にち}〜3{月|がつ}31{日|にち}（{日曜|にちよう}・{祝日|しゅくじつ}は{休|きゅう}{工|こう}）
+{作業|さぎょう}{時間|じかん}：{午前|ごぜん}8{時|じ}30{分|ぷん}〜{午後|ごご}5{時|じ}30{分|ぷん}
+«1|{特|とく}に{大|おお}きな{音|おと}が{出|で}る{作業|さぎょう}は、{午前|ごぜん}9{時|じ}から{正午|しょうご}まで、および{午後|ごご}1{時|じ}から4{時|じ}までの{時間|じかん}に{限|かぎ}って{行|おこな}います»。また、{工事|こうじ}{車両|しゃりょう}が{出入|でい}りする{際|さい}は{誘導|ゆうどう}{員|いん}を{配置|はいち}し、{歩行|ほこう}{者|しゃ}の{安全|あんぜん}を{確保|かくほ}いたします。
+> {施工|しこう}：みどり{建設|けんせつ}{株式会社|かぶしきがいしゃ}`,
+      en: `To our neighbours: notice of demolition work
+We will be demolishing the building below. We apologise for the noise, vibration and other trouble during the work, and ask for your understanding and cooperation.
+Site: the former Sakura Bank building, 3-chome, Sakura-machi
+Period: 12 January to 31 March 2027 (no work on Sundays and public holidays)
+Working hours: 8:30 in the morning to 5:30 in the afternoon
+Particularly noisy work will be done only from 9 in the morning to noon, and from 1 to 4 in the afternoon. When construction vehicles come and go, guides will be posted to keep pedestrians safe.
+Contractor: Midori Construction Co., Ltd.`,
+      questions: [{
+        q: 'この{工事|こうじ}について、{正|ただ}しいものはどれか。',
+        en: 'Which is true about this work?',
+        choices: [
+          ['{大|おお}きな{音|おと}の{出|で}る{作業|さぎょう}は、{昼|ひる}の12{時|じ}から1{時|じ}の{間|あいだ}には{行|おこな}われない。', 'No noisy work is done between 12 and 1.'],
+          ['{作業|さぎょう}は、{毎日|まいにち}{午前|ごぜん}8{時|じ}30{分|ぷん}から{行|おこな}われる。', 'Work starts at 8:30 every day.'],
+          ['{大|おお}きな{音|おと}の{出|で}る{作業|さぎょう}は、{午後|ごご}5{時|じ}30{分|ぷん}まで{続|つづ}く。', 'Noisy work continues until 5:30.'],
+          ['{工事|こうじ}{車両|しゃりょう}が{出入|でい}りする{時|とき}は、{歩行|ほこう}{者|しゃ}は{通|とお}れなくなる。', 'Pedestrians can’t pass when construction vehicles come and go.'],
+        ],
+        why: 'Noisy work is limited (〜に限って) to 9–12 and 1–4, so the lunch hour is quiet. Sundays and holidays are off (not every day), work in general — not noisy work — runs to 5:30, and guides keep pedestrians safe rather than stopping them.',
+      }],
+      words: [['{近隣|きんりん}', 'きんりん', 'neighbourhood'], ['{解体|かいたい}', 'かいたい', 'demolition'], ['{騒音|そうおん}', 'そうおん', 'noise'], ['{振動|しんどう}', 'しんどう', 'vibration'], ['〜に{限|かぎ}って', 'にかぎって', 'only (at / in) …'], ['{誘導|ゆうどう}{員|いん}', 'ゆうどういん', 'traffic guide'], ['{確保|かくほ}', 'かくほ', 'securing, ensuring']],
+    },
+
+    {
+      id: 'n2-letter-anniversary', level: 'N2', type: 'short', form: 'letter',
+      title: 'An anniversary party invitation',
+      text: `{株式会社|かぶしきがいしゃ}さくら{商事|しょうじ}　{営業|えいぎょう}{部長|ぶちょう}　{中島|なかじま}{様|さま}
+> {株式会社|かぶしきがいしゃ}みどりデザイン　{代表|だいひょう}{取締役|とりしまりやく}　{小川|おがわ}{健|けん}
+# {創立|そうりつ}{二|に}{十|じゅう}{周年|しゅうねん}{記念|きねん}パーティーのご{案内|あんない}
+{拝啓|はいけい}　{晩秋|ばんしゅう}の{候|こう}、{貴社|きしゃ}ますますご{清栄|せいえい}のこととお{喜|よろこ}び{申|もう}し{上|あ}げます。{平素|へいそ}は{格別|かくべつ}のご{高配|こうはい}を{賜|たまわ}り、{厚|あつ}く{御礼|おれい}{申|もう}し{上|あ}げます。
+さて、{弊社|へいしゃ}はおかげさまで、この12{月|がつ}に{創立|そうりつ}{二|に}{十|じゅう}{周年|しゅうねん}を{迎|むか}えることとなりました。つきましては、{日頃|ひごろ}お{世話|せわ}になっている{皆様|みなさま}への{感謝|かんしゃ}を{込|こ}めて、{記念|きねん}パーティーを{催|もよお}したく{存|ぞん}じます。
+ご{多用|たよう}{中|ちゅう}とは{存|ぞん}じますが、«1|ご{出席|しゅっせき}の{可否|かひ}を、11{月|がつ}28{日|にち}までに{同封|どうふう}のはがきにてお{知|し}らせくださいますよう»お{願|ねが}い{申|もう}し{上|あ}げます。　{敬具|けいぐ}`,
+      en: `Mr Nakajima, Sales Manager, Sakura Trading Co., Ltd.
+Ken Ogawa, President, Midori Design Inc.
+Invitation to our 20th anniversary party
+Dear Sir, In this late autumn season, we hope your company continues to prosper. We are deeply grateful for your exceptional support.
+We are happy to say that this December our company will celebrate the 20th anniversary of its founding. To thank everyone who has supported us, we would like to hold an anniversary party.
+We know you are busy, but we would be grateful if you could let us know whether you can attend, using the enclosed postcard, by 28 November. Yours sincerely`,
+      questions: [{
+        q: '{中島|なかじま}さんがしなければならないことは{何|なに}か。',
+        en: 'What must Mr Nakajima do?',
+        choices: [
+          ['11{月|がつ}28{日|にち}までに、{出席|しゅっせき}するかどうかをはがきで{知|し}らせる。', 'Say by postcard, by 28 November, whether he will attend.'],
+          ['11{月|がつ}28{日|にち}に、パーティーに{出席|しゅっせき}する。', 'Attend the party on 28 November.'],
+          ['12{月|がつ}までに、お{祝|いわ}いの{品|しな}を{送|おく}る。', 'Send an anniversary gift by December.'],
+          ['パーティーに{出席|しゅっせき}する{人数|にんずう}を、{電話|でんわ}で{知|し}らせる。', 'Phone to say how many people will attend.'],
+        ],
+        why: 'Everything before the last paragraph is formal greeting and background. The request is ご出席の可否を … はがきにてお知らせくださいますよう: whether he can attend (可否 — yes or no), by the 28th, on the enclosed postcard. The 28th is the reply deadline, not the party.',
+      }],
+      words: [['{創立|そうりつ}', 'そうりつ', 'founding'], ['{周|しゅう}{年|ねん}', 'しゅうねん', '… th anniversary'], ['{拝啓|はいけい} / {敬具|けいぐ}', 'はいけい / けいぐ', 'formal letter opening / closing'], ['ご{高配|こうはい}', 'ごこうはい', '(your) kind consideration'], ['{催|もよお}す', 'もよおす', 'to hold (an event)'], ['{可否|かひ}', 'かひ', 'yes or no; whether'], ['ご{多用|たよう}{中|ちゅう}', 'ごたようちゅう', 'while you are busy']],
+    },
+
+    {
+      id: 'n2-email-recall', level: 'N2', type: 'short', form: 'email',
+      title: 'A product recall',
+      text: `@{件名|けんめい}|【{重要|じゅうよう}】{製品|せいひん}の{自主|じしゅ}{回収|かいしゅう}のお{知|し}らせとお{願|ねが}い
+@{送信|そうしん}{者|しゃ}|{株式会社|かぶしきがいしゃ}ひかり{電機|でんき}　お{客様|きゃくさま}{窓口|まどぐち}
+お{客様|きゃくさま}{各位|かくい}
+{弊社|へいしゃ}が2025{年|ねん}10{月|がつ}から2026{年|ねん}3{月|がつ}までに{販売|はんばい}いたしました{充電|じゅうでん}{式|しき}{扇風機|せんぷうき}「そよかぜ」の{一部|いちぶ}{製品|せいひん}において、バッテリーが{異常|いじょう}に{発熱|はつねつ}するおそれがあることが{判明|はんめい}いたしました。
+{対象|たいしょう}{製品|せいひん}をお{持|も}ちのお{客様|きゃくさま}は、«1|{直|ただ}ちにご{使用|しよう}を{中止|ちゅうし}し、{充電|じゅうでん}{器|き}をコンセントから{抜|ぬ}いていただきますよう»お{願|ねが}いいたします。{対象|たいしょう}かどうかは、{本体|ほんたい}の{裏面|りめん}に{記載|きさい}された{製造|せいぞう}{番号|ばんごう}で{確認|かくにん}できます。{対象|たいしょう}{製品|せいひん}は{弊社|へいしゃ}が{無償|むしょう}で{回収|かいしゅう}し、{代金|だいきん}を{全額|ぜんがく}{返金|へんきん}いたします。«1|{回収|かいしゅう}のお{申|もう}し{込|こ}みは、{専用|せんよう}ダイヤルまたはホームページにて{承|うけたまわ}っております»。`,
+      en: `Subject: [Important] Voluntary recall of a product
+From: Hikari Electric Co., Ltd., customer service
+To all our customers,
+We have found that the battery in some of the "Soyokaze" rechargeable fans we sold between October 2025 and March 2026 may overheat.
+If you have one of the affected products, please stop using it at once and unplug the charger. You can check whether yours is affected by the serial number on the back of the fan. We will collect affected products free of charge and refund the full price. Collection can be requested on our dedicated phone line or on our website.`,
+      questions: [{
+        q: '{対象|たいしょう}の{扇風機|せんぷうき}を{持|も}っている{人|ひと}がすべきことは{何|なに}か。',
+        en: 'What should someone with an affected fan do?',
+        choices: [
+          ['{使|つか}うのをやめ、{専用|せんよう}ダイヤルかホームページで{回収|かいしゅう}を{申|もう}し{込|こ}む。', 'Stop using it and request a collection by phone or on the website.'],
+          ['{充電|じゅうでん}{器|き}を{新|あたら}しいものに{替|か}えて、{使|つか}い{続|つづ}ける。', 'Replace the charger and keep using it.'],
+          ['{製造|せいぞう}{番号|ばんごう}を{確認|かくにん}し、{買|か}った{店|みせ}に{持|も}って{行|い}く。', 'Check the serial number and take it to the shop where they bought it.'],
+          ['{扇風機|せんぷうき}を{会社|かいしゃ}に{送|おく}り、{修理|しゅうり}してもらう。', 'Send the fan to the company to be repaired.'],
+        ],
+        why: 'Two steps: stop using it now and unplug the charger (直ちにご使用を中止し…), then request collection on the dedicated line or the website (専用ダイヤルまたはホームページにて). The company collects it and refunds the money — no shop visit and no repair.',
+      }],
+      words: [['{自主|じしゅ}{回収|かいしゅう}', 'じしゅかいしゅう', 'voluntary recall'], ['{発熱|はつねつ}', 'はつねつ', 'heating up'], ['〜おそれがある', '', 'there is a risk that …'], ['{判明|はんめい}', 'はんめい', 'becoming clear, being found'], ['{直|ただ}ちに', 'ただちに', 'at once'], ['{無償|むしょう}', 'むしょう', 'free of charge'], ['{承|うけたまわ}る', 'うけたまわる', 'to accept (humble)']],
+    },
+
+    {
+      id: 'n2-info-subsidy', level: 'N2', type: 'info', form: 'flyer',
+      title: 'A grant for energy-saving appliances',
+      text: `# さくら{市|し}　{省|しょう}エネ{家電|かでん}{買|か}い{替|か}え{補助|ほじょ}{金|きん}
+{市民|しみん}の{皆様|みなさま}が、{省|しょう}エネ{性能|せいのう}の{高|たか}い{家電|かでん}に{買|か}い{替|か}える{際|さい}、{購入|こうにゅう}{費用|ひよう}の{一部|いちぶ}を{補助|ほじょ}します。
+|! {対象|たいしょう}{製品|せいひん} | {条件|じょうけん} | {補助|ほじょ}{額|がく}
+| «1|エアコン» | «1|{省|しょう}エネ{基準|きじゅん}{達成|たっせい}{率|りつ}100%{以上|いじょう}» | «1|{購入|こうにゅう}{額|がく}の20%（{上限|じょうげん}3{万|まん}{円|えん}）»
+| «2|{冷蔵庫|れいぞうこ}» | «2|{省|しょう}エネ{基準|きじゅん}{達成|たっせい}{率|りつ}100%{以上|いじょう}・{容量|ようりょう}250L{以上|いじょう}» | «2|{購入|こうにゅう}{額|がく}の20%（{上限|じょうげん}2{万|まん}{円|えん}）»
+| «2|LED{照明|しょうめい}» | {居間|いま}・{台所|だいどころ}などに{設置|せっち}するもの | «2|{購入|こうにゅう}{額|がく}の50%（{上限|じょうげん}5{千|せん}{円|えん}）»
+■{対象|たいしょう}となる{方|かた}
+・{市内|しない}に{住民|じゅうみん}{登録|とうろく}があり、{市|し}{税|ぜい}を{滞納|たいのう}していない{方|かた}
+・«1|2026{年|ねん}4{月|がつ}1{日|にち}{以降|いこう}に、{市内|しない}の{登録|とうろく}{店|てん}で{購入|こうにゅう}し、{設置|せっち}まで{完了|かんりょう}した{方|かた}»
+■{申請|しんせい}{方法|ほうほう}
+{購入|こうにゅう}{日|び}から3か{月|げつ}{以内|いない}に、{申請|しんせい}{書|しょ}・{領収|りょうしゅう}{書|しょ}（{原本|げんぽん}）・{保証書|ほしょうしょ}の{写|うつ}しを、{市役所|しやくしょ}{環境|かんきょう}{課|か}へ{郵送|ゆうそう}または{持参|じさん}してください。«2|{申請|しんせい}は1{世帯|せたい}につき1{回|かい}{限|かぎ}り、{補助|ほじょ}{額|がく}は{合計|ごうけい}5{万|まん}{円|えん}まで»です。
+■{注意|ちゅうい}
+・{中古|ちゅうこ}{品|ひん}、インターネット{通販|つうはん}での{購入|こうにゅう}は{対象|たいしょう}{外|がい}です。
+・リースやレンタルの{製品|せいひん}も{対象|たいしょう}{外|がい}です。
+・{予算|よさん}{額|がく}に{達|たっ}した{時点|じてん}で{受付|うけつけ}を{終了|しゅうりょう}します。
+■{審査|しんさ}と{支払|しはら}い
+{申請|しんせい}{書類|しょるい}を{審査|しんさ}のうえ、{約|やく}2か{月|げつ}{後|ご}に{指定|してい}の{口座|こうざ}へ{振|ふ}り{込|こ}みます。{書類|しょるい}に{不備|ふび}がある{場合|ばあい}は{支払|しはら}いが{遅|おく}れることがありますので、ご{注意|ちゅうい}ください。
+{登録|とうろく}{店|てん}の{一覧|いちらん}は、{市|し}のホームページでご{確認|かくにん}いただけます。
+お{問|と}い{合|あ}わせ：さくら{市役所|しやくしょ}　{環境|かんきょう}{課|か}（{平日|へいじつ}8:30〜17:15）`,
+      en: `Sakura City — grant for replacing appliances with energy-saving ones
+When residents replace an appliance with a highly energy-efficient one, the city pays part of the cost.
+Product | Condition | Grant
+Air conditioner | 100% or more of the energy-saving standard | 20% of the price (up to 30,000 yen)
+Fridge | 100% or more of the energy-saving standard, capacity 250 L or more | 20% of the price (up to 20,000 yen)
+LED lighting | Fitted in a living room, kitchen etc. | 50% of the price (up to 5,000 yen)
+Who can apply
+• Registered residents of the city who are not behind with city taxes
+• People who bought the product at a registered shop in the city on or after 1 April 2026, and have had it installed
+How to apply
+Within 3 months of the date of purchase, send or bring the application form, the original receipt and a copy of the guarantee to the Environment Division at City Hall. Each household can apply once, for up to 50,000 yen in all.
+Please note
+• Second-hand goods and goods bought online are not covered.
+• Leased and rented products are not covered either.
+• Applications close when the budget runs out.
+Checking and payment
+After your application has been checked, the grant will be paid into your chosen account about 2 months later. Please note that payment may be delayed if anything is missing from your documents.
+A list of registered shops can be found on the city's website.
+Enquiries: Sakura City Hall, Environment Division (weekdays 8:30–17:15)`,
+      questions: [{
+        q: '{鈴木|すずき}さんは、2026{年|ねん}5{月|がつ}に{市内|しない}の{登録|とうろく}{店|てん}でエアコン（{基準|きじゅん}{達成|たっせい}{率|りつ}120%）を18{万|まん}{円|えん}で{買|か}い、{設置|せっち}してもらった。{補助|ほじょ}{額|がく}はいくらか。',
+        en: 'In May 2026 Ms Suzuki bought an air conditioner (120% of the standard) for 180,000 yen at a registered shop in the city, and had it installed. How much is the grant?',
+        choices: [
+          ['3{万|まん}{円|えん}', '30,000 yen'],
+          ['3{万|まん}6{千|せん}{円|えん}', '36,000 yen'],
+          ['1{万|まん}8{千|せん}{円|えん}', '18,000 yen'],
+          ['5{万|まん}{円|えん}', '50,000 yen'],
+        ],
+        why: '20% of 180,000 yen is 36,000 yen, but the air-conditioner grant is capped at 30,000 (上限3万円). Everything else fits: bought after 1 April 2026, at a registered shop in the city, and installed.',
+      }, {
+        q: '{鈴木|すずき}さんは、{同|おな}じ{申請|しんせい}で、{冷蔵庫|れいぞうこ}（{容量|ようりょう}300L・{基準|きじゅん}{達成|たっせい}{率|りつ}110%・15{万|まん}{円|えん}）とLED{照明|しょうめい}（2{万|まん}{円|えん}）の{分|ぶん}も{申|もう}し{込|こ}んだ。{補助|ほじょ}{額|がく}は{全部|ぜんぶ}でいくらか。',
+        en: 'In the same application, Ms Suzuki also claims for a fridge (300 L, 110% of the standard, 150,000 yen) and LED lighting (20,000 yen). How much is the grant in total?',
+        choices: [
+          ['5{万|まん}{円|えん}', '50,000 yen'],
+          ['5{万|まん}5{千|せん}{円|えん}', '55,000 yen'],
+          ['4{万|まん}5{千|せん}{円|えん}', '45,000 yen'],
+          ['7{万|まん}6{千|せん}{円|えん}', '76,000 yen'],
+        ],
+        why: 'Air conditioner 30,000 (capped); fridge 20% of 150,000 = 30,000, capped at 20,000; LED 50% of 20,000 = 10,000, capped at 5,000. That adds up to 55,000 — but one household gets at most 50,000 yen in all (合計5万円まで).',
+      }],
+      words: [['{省|しょう}エネ', 'しょうエネ', 'energy-saving'], ['{補助|ほじょ}{金|きん}', 'ほじょきん', 'grant, subsidy'], ['{達成|たっせい}{率|りつ}', 'たっせいりつ', 'rate of achievement'], ['{上限|じょうげん}', 'じょうげん', 'upper limit'], ['{滞納|たいのう}', 'たいのう', 'being behind with payments'], ['{世帯|せたい}', 'せたい', 'household'], ['{予算|よさん}', 'よさん', 'budget']],
+    },
+
+    {
+      id: 'n2-info-railpass', level: 'N2', type: 'info', form: 'flyer',
+      title: 'Rail and bus passes',
+      text: `# みどり{鉄道|てつどう}　お{得|とく}なきっぷのご{案内|あんない}
+|! きっぷ | {有効|ゆうこう}{期間|きかん} | {利用|りよう}できる{範囲|はんい} | {大人|おとな} | {小児|しょうに}
+| 1{日|にち}フリーきっぷ | 1{日|にち} | みどり{鉄道|てつどう}{全線|ぜんせん} | 1,800{円|えん} | 900{円|えん}
+| «2|{2日|ふつか}フリーきっぷ» | «2|{連続|れんぞく}する{2日間|ふつかかん}» | みどり{鉄道|てつどう}{全線|ぜんせん}・{路線|ろせん}バス | 3,200{円|えん} | 1,600{円|えん}
+| «1|{週末|しゅうまつ}パス» | «1|{土|ど}・{日|にち}・{祝日|しゅくじつ}のうち1{日|にち}» | «1|みどり{鉄道|てつどう}{全線|ぜんせん}・{路線|ろせん}バス» | «1|1,500{円|えん}» | 750{円|えん}
+| {回数|かいすう}{券|けん}（11{枚|まい}つづり） | {発売|はつばい}{日|び}から3か{月|げつ} | {指定|してい}した{区間|くかん} | {普通|ふつう}{運賃|うんちん}の10{回分|かいぶん} | {普通|ふつう}{運賃|うんちん}の10{回分|かいぶん}
+・«2|{小児|しょうに}は{小学生|しょうがくせい}です。{小学生|しょうがくせい}{未満|みまん}のお{子様|こさま}は、{大人|おとな}1{名|めい}につき2{名|めい}まで{無料|むりょう}です»。
+・«2|フリーきっぷ・{週末|しゅうまつ}パスは、{駅|えき}の{窓口|まどぐち}と{券売|けんばい}{機|き}で{当日|とうじつ}のみ{発売|はつばい}します（{前売|まえう}りはありません）»。
+・«2|{特急|とっきゅう}にご{乗車|じょうしゃ}の{場合|ばあい}は、{別|べつ}に{特急|とっきゅう}{券|けん}が{必要|ひつよう}です»。
+・{週末|しゅうまつ}パスは、{年末年始|ねんまつねんし}（12{月|がつ}30{日|にち}〜1{月|がつ}{3日|みっか}）もご{利用|りよう}いただけます。
+・{回数|かいすう}{券|けん}の{払|はら}い{戻|もど}しには{手数料|てすうりょう}220{円|えん}がかかり、{使用|しよう}{済|ず}みの{分|ぶん}は{普通|ふつう}{運賃|うんちん}で{計算|けいさん}します。
+・きっぷをなくされた{場合|ばあい}、{再|さい}{発行|はっこう}はいたしません。
+・フリーきっぷ・{週末|しゅうまつ}パスをお{持|も}ちの{方|かた}は、{沿線|えんせん}の{美術館|びじゅつかん}・{博物館|はくぶつかん}の{入館|にゅうかん}{料|りょう}が1{割|わり}{引|び}きになります（{入館|にゅうかん}の{際|さい}にきっぷをお{見|み}せください）。
+・{2日|ふつか}フリーきっぷは、1{日|にち}{目|め}に{初|はじ}めて{改札|かいさつ}を{通|とお}る{時|とき}に、{日付|ひづけ}が{入|はい}ります。
+お{問|と}い{合|あ}わせ：みどり{鉄道|てつどう}お{客様|きゃくさま}センター（{毎日|まいにち}7:00〜21:00）`,
+      en: `Midori Railway — money-saving tickets
+Ticket | Valid for | Where you can use it | Adults | Children
+1-day free pass | 1 day | All Midori Railway lines | 1,800 yen | 900 yen
+2-day free pass | 2 days in a row | All Midori Railway lines and local buses | 3,200 yen | 1,600 yen
+Weekend pass | 1 day on a Saturday, Sunday or holiday | All Midori Railway lines and local buses | 1,500 yen | 750 yen
+Book of tickets (11) | 3 months from the date of sale | A section you choose | The price of 10 ordinary fares | The price of 10 ordinary fares
+• Children means primary-school children. Up to 2 children under primary-school age travel free with each adult.
+• Free passes and weekend passes are sold on the day only, at station ticket offices and machines (no advance sales).
+• If you take a limited express, you need a separate limited express ticket.
+• The weekend pass can also be used over New Year (30 December to 3 January).
+• Refunds on books of tickets cost a 220-yen fee, and the tickets you have used are charged at the ordinary fare.
+• Lost tickets cannot be reissued.
+• With a free pass or weekend pass, you get 10% off admission at art galleries and museums along the line (show your ticket when you go in).
+• The 2-day free pass is dated when you first go through the ticket gate on day 1.
+Enquiries: Midori Railway Customer Centre (daily 7:00–21:00)`,
+      questions: [{
+        q: '{大人|おとな}2{人|にん}で、{日曜日|にちようび}に{一|いち}{日|にち}、みどり{鉄道|てつどう}の{電車|でんしゃ}と{路線|ろせん}バスを{使|つか}って{観光|かんこう}したい。{一番|いちばん}{安|やす}く{済|す}むきっぷを{買|か}うと、2{人|にん}でいくらか。',
+        en: 'Two adults want to spend a Sunday sightseeing by Midori Railway trains and local buses. Buying the cheapest ticket that works, how much do the two of them pay?',
+        choices: [
+          ['3,000{円|えん}', '3,000 yen'],
+          ['3,600{円|えん}', '3,600 yen'],
+          ['6,400{円|えん}', '6,400 yen'],
+          ['1,500{円|えん}', '1,500 yen'],
+        ],
+        why: 'The weekend pass covers one Saturday, Sunday or holiday, trains and buses, for 1,500 yen: 3,000 for two. The 1-day free pass costs more and doesn’t cover buses; the 2-day pass is for two days.',
+      }, {
+        q: 'きっぷについて、{正|ただ}しいものはどれか。',
+        en: 'Which is true about these tickets?',
+        choices: [
+          ['3{歳|さい}と5{歳|さい}の{子|こ}どもは、{大人|おとな}1{人|にん}と{一緒|いっしょ}なら{無料|むりょう}で{乗|の}れる。', 'A 3-year-old and a 5-year-old ride free with one adult.'],
+          ['{週末|しゅうまつ}パスは、{前|まえ}の{日|ひ}に{駅|えき}の{窓口|まどぐち}で{買|か}える。', 'The weekend pass can be bought at the station the day before.'],
+          ['フリーきっぷがあれば、{特急|とっきゅう}にもそのまま{乗|の}れる。', 'With a free pass you can ride limited expresses as it is.'],
+          ['{2日|ふつか}フリーきっぷは、{土曜日|どようび}と{次|つぎ}の{週|しゅう}の{土曜日|どようび}に{使|つか}える。', 'The 2-day pass can be used on a Saturday and the Saturday after.'],
+        ],
+        why: 'Children under primary-school age ride free, up to two per adult — so the 3- and 5-year-old are free. Passes are sold on the day only, limited expresses need a separate ticket, and the 2-day pass is for two days in a row (連続する2日間).',
+      }],
+      words: [['お{得|とく}', 'おとく', 'good value'], ['{有効|ゆうこう}{期間|きかん}', 'ゆうこうきかん', 'period of validity'], ['{範囲|はんい}', 'はんい', 'range, area'], ['{小児|しょうに}', 'しょうに', 'child (fares)'], ['{回数|かいすう}{券|けん}', 'かいすうけん', 'book of tickets'], ['{前売|まえう}り', 'まえうり', 'advance sale'], ['{払|はら}い{戻|もど}し', 'はらいもどし', 'refund']],
+    },
+
+    {
+      id: 'n2-info-afterschool', level: 'N2', type: 'info', form: 'flyer',
+      title: 'After-school childcare',
+      text: `# さくら{市|し}　{放課後|ほうかご}{児童|じどう}クラブ　{利用|りよう}{案内|あんない}
+■{対象|たいしょう}：{市内|しない}の{小学校|しょうがっこう}に{通|かよ}う1〜6{年生|ねんせい}で、{保護|ほご}{者|しゃ}が{仕事|しごと}などのため、{放課後|ほうかご}に{家庭|かてい}にいない{児童|じどう}
+■{開所|かいしょ}{時間|じかん}
+・{授業|じゅぎょう}のある{日|ひ}：{放課後|ほうかご}〜{午後|ごご}7{時|じ}
+・{土曜日|どようび}・{長期|ちょうき}{休業|きゅうぎょう}{中|ちゅう}（{夏休|なつやす}みなど）：{午前|ごぜん}8{時|じ}〜{午後|ごご}7{時|じ}
+・{日曜日|にちようび}・{祝日|しゅくじつ}・{年末年始|ねんまつねんし}は{休|やす}み
+■{利用|りよう}{料|りょう}（{月額|げつがく}）
+|! {区分|くぶん} | {利用|りよう}{料|りょう} | おやつ{代|だい}
+| «2|{通年|つうねん}{利用|りよう}» | «2|6,000{円|えん}» | «2|1,500{円|えん}»
+| {夏休|なつやす}みのみ{利用|りよう}（7・8{月|がつ}） | 10,000{円|えん} | 1,500{円|えん}
+・«2|{兄弟|きょうだい}{姉妹|しまい}が{同時|どうじ}に{利用|りよう}する{場合|ばあい}、2{人|にん}{目|め}{以降|いこう}の{利用|りよう}{料|りょう}は{半額|はんがく}になります（おやつ{代|だい}は{全員|ぜんいん}{同額|どうがく}）»。
+・{市民|しみん}{税|ぜい}が{非課税|ひかぜい}の{世帯|せたい}は、{利用|りよう}{料|りょう}が{免除|めんじょ}になります。
+・{利用|りよう}{料|りょう}とおやつ{代|だい}は、{毎月|まいつき}{10日|とおか}に{指定|してい}の{口座|こうざ}から{引|ひ}き{落|お}とします。
+■{申|もう}し{込|こ}み
+«1|1{月|がつ}{6日|むいか}〜1{月|がつ}31{日|にち}に、{利用|りよう}するクラブではなく、{市役所|しやくしょ}の{子育|こそだ}て{支援|しえん}{課|か}へ{申込|もうしこみ}{書|しょ}と{就労|しゅうろう}{証明|しょうめい}{書|しょ}を{提出|ていしゅつ}してください»。{結果|けっか}は3{月|がつ}{上旬|じょうじゅん}に{郵送|ゆうそう}でお{知|し}らせします。{年度|ねんど}の{途中|とちゅう}からの{利用|りよう}も、{空|あ}きがあれば{随時|ずいじ}{受|う}け{付|つ}けます。
+■{持|も}ち{物|もの}：{上|うえ}ばき、{水筒|すいとう}、{着替|きが}え。{持|も}ち{物|もの}には{必|かなら}ず{名前|なまえ}を{書|か}いてください。
+■お{迎|むか}え：{午後|ごご}6{時|じ}{以降|いこう}は、{保護|ほご}{者|しゃ}または{保護|ほご}{者|しゃ}が{届|とど}け{出|で}た{方|かた}がお{迎|むか}えに{来|き}てください。{児童|じどう}だけで{帰宅|きたく}することはできません。
+■お{問|と}い{合|あ}わせ：さくら{市役所|しやくしょ}　{子育|こそだ}て{支援|しえん}{課|か}（{平日|へいじつ}8:30〜17:15）`,
+      en: `Sakura City — after-school children's clubs: how to use them
+For: children in years 1–6 at a primary school in the city whose parents are not at home after school because of work or similar
+Opening hours
+• School days: after school until 7 p.m.
+• Saturdays and long holidays (summer holidays etc.): 8 a.m. to 7 p.m.
+• Closed on Sundays, public holidays and over New Year
+Fees (monthly)
+Type | Fee | Snacks
+All year | 6,000 yen | 1,500 yen
+Summer holidays only (July and August) | 10,000 yen | 1,500 yen
+• When brothers and sisters use a club at the same time, the fee for the second child and after is halved (snacks cost the same for everyone).
+• Households exempt from city resident tax pay no fee.
+• Fees and snack money are taken from your chosen bank account on the 10th of each month.
+Applications
+From 6 to 31 January, please hand in the application form and a certificate of employment to the Childcare Support Division at City Hall, not to the club you will use. Results will be posted to you in early March. Children can also join part-way through the year whenever there is space.
+What to bring: indoor shoes, a water bottle and a change of clothes. Please write your child's name on everything.
+Collection: after 6 p.m., children must be collected by a parent or by someone the parents have registered. Children cannot go home on their own.
+Enquiries: Sakura City Hall, Childcare Support Division (weekdays 8:30–17:15)`,
+      questions: [{
+        q: '{申|もう}し{込|こ}みについて、{正|ただ}しいものはどれか。',
+        en: 'Which is true about applying?',
+        choices: [
+          ['1{月|がつ}{中|ちゅう}に、{市役所|しやくしょ}に{申込|もうしこみ}{書|しょ}と{就労|しゅうろう}{証明|しょうめい}{書|しょ}を{出|だ}す。', 'Hand the form and the certificate of employment in to City Hall in January.'],
+          ['1{月|がつ}{中|ちゅう}に、{利用|りよう}するクラブに{申込|もうしこみ}{書|しょ}を{出|だ}す。', 'Hand the form in to the club you will use, in January.'],
+          ['{年度|ねんど}の{途中|とちゅう}からは、{申|もう}し{込|こ}めない。', 'You can’t apply part-way through the year.'],
+          ['3{月|がつ}{上旬|じょうじゅん}までに、{就労|しゅうろう}{証明|しょうめい}{書|しょ}を{郵送|ゆうそう}する。', 'Post the certificate of employment by early March.'],
+        ],
+        why: 'Applications go to City Hall’s Childcare Support Division, “not to the club you will use” (利用するクラブではなく), between 6 and 31 January. Early March is when results arrive, and late joiners are accepted when there is space (随時受け付けます).',
+      }, {
+        q: '{小学|しょうがく}3{年生|ねんせい}と1{年生|ねんせい}の{兄弟|きょうだい}が、{通年|つうねん}{利用|りよう}する。1か{月|げつ}に{払|はら}う{金額|きんがく}は、{全部|ぜんぶ}でいくらか。',
+        en: 'Two brothers, in years 3 and 1 of primary school, use the club all year. How much is paid in total each month?',
+        choices: [
+          ['12,000{円|えん}', '12,000 yen'],
+          ['10,500{円|えん}', '10,500 yen'],
+          ['15,000{円|えん}', '15,000 yen'],
+          ['9,000{円|えん}', '9,000 yen'],
+        ],
+        why: 'The first child pays 6,000 yen and the second half that, 3,000. Snacks are 1,500 each — not halved (おやつ代は全員同額): 6,000 + 3,000 + 1,500 + 1,500 = 12,000 yen.',
+      }],
+      words: [['{放課後|ほうかご}', 'ほうかご', 'after school'], ['{児童|じどう}', 'じどう', 'child (of primary-school age)'], ['{開所|かいしょ}', 'かいしょ', 'opening'], ['{長期|ちょうき}{休業|きゅうぎょう}', 'ちょうききゅうぎょう', 'long holidays'], ['{非課税|ひかぜい}', 'ひかぜい', 'not taxed'], ['{免除|めんじょ}', 'めんじょ', 'exemption'], ['{就労|しゅうろう}{証明|しょうめい}{書|しょ}', 'しゅうろうしょうめいしょ', 'certificate of employment']],
+    },
+
+    {
+      id: 'n2-info-seminar', level: 'N2', type: 'info', form: 'flyer',
+      title: 'Job-hunting seminars',
+      text: `# {就職|しゅうしょく}{支援|しえん}セミナー　2{月|がつ}のスケジュール
+さくら{市|し}{若者|わかもの}サポートステーション
+|! {日程|にってい} | テーマ | {時間|じかん} | {形式|けいしき} | {定員|ていいん}
+| «2|2{月|がつ}{4日|よっか}（{水|すい}）» | «2|{自己|じこ}{分析|ぶんせき}と{自己|じこ}PRの{書|か}き{方|かた}» | 14:00〜16:00 | {会場|かいじょう} | 20{名|めい}
+| «1|2{月|がつ}{10日|とおか}（{火|か}）» | {業界|ぎょうかい}{研究|けんきゅう}：IT・{情報|じょうほう}{通信|つうしん} | «1|19:00〜20:30» | «1|オンライン» | 50{名|めい}
+| 2{月|がつ}{14日|じゅうよっか}（{土|ど}） | {模擬|もぎ}{面接|めんせつ}（{個人|こじん}） | 10:00〜16:00（1{人|にん}30{分|ぷん}） | {会場|かいじょう} | 12{名|めい}
+| «1|2{月|がつ}21{日|にち}（{土|ど}）» | {外国|がいこく}{人|じん}{留学生|りゅうがくせい}のための{就職|しゅうしょく}{活動|かつどう} | 13:00〜15:00 | «1|{会場|かいじょう}・オンライン» | 30{名|めい}
+■{対象|たいしょう}：おおむね15〜39{歳|さい}で、{就職|しゅうしょく}を{目指|めざ}している{方|かた}（{学生|がくせい}も{可|か}）
+■{参加|さんか}{費|ひ}：{無料|むりょう}
+■«2|{申|もう}し{込|こ}み：{各|かく}セミナーの{3日|みっか}{前|まえ}までに、ウェブサイトの{申込|もうしこみ}フォームから»。
+・«2|{模擬|もぎ}{面接|めんせつ}は、2{月|がつ}{4日|よっか}のセミナーに{参加|さんか}した{方|かた}のみ{申|もう}し{込|こ}めます»。
+・オンラインのセミナーは、{前日|ぜんじつ}までに{参加|さんか}{用|よう}のURLをメールでお{送|おく}りします。
+・{会場|かいじょう}：さくら{市|し}{産業|さんぎょう}{会館|かいかん}3{階|がい}
+・{当日|とうじつ}の{様子|ようす}を{写真|しゃしん}に{撮|と}り、ウェブサイトに{載|の}せることがあります。
+・{服装|ふくそう}は{自由|じゆう}ですが、{模擬|もぎ}{面接|めんせつ}の{日|ひ}は、できるだけスーツでお{越|こ}しください。
+・キャンセルの{場合|ばあい}は、{必|かなら}ず{前日|ぜんじつ}までにご{連絡|れんらく}ください。{連絡|れんらく}なしで{欠席|けっせき}された{方|かた}は、{次回|じかい}{以降|いこう}のお{申|もう}し{込|こ}みをお{断|ことわ}りすることがあります。
+お{問|と}い{合|あ}わせ：さくら{市|し}{若者|わかもの}サポートステーション（{火|ひ}〜{土|ど}　10:00〜18:00）`,
+      en: `Job-hunting support seminars — February schedule
+Sakura City Youth Support Station
+Date | Theme | Time | Format | Places
+Wed 4 Feb | Self-analysis and writing your self-PR | 14:00–16:00 | In person | 20
+Tue 10 Feb | Industry research: IT and telecommunications | 19:00–20:30 | Online | 50
+Sat 14 Feb | Mock interviews (one-to-one) | 10:00–16:00 (30 min each) | In person | 12
+Sat 21 Feb | Job hunting for international students | 13:00–15:00 | In person and online | 30
+For: people aged roughly 15–39 who are looking for work (students welcome)
+Cost: free
+Applications: using the form on our website, at least 3 days before each seminar.
+• Mock interviews are only open to people who took part in the seminar on 4 February.
+• For online seminars, we will email you the URL to join by the day before.
+• Venue: Sakura City Industry Hall, 3rd floor
+• We may take photos on the day and put them on our website.
+• Dress as you like, but please wear a suit if you can for the mock interviews.
+• If you need to cancel, please let us know by the day before. We may turn down future applications from people who miss a seminar without telling us.
+Enquiries: Sakura City Youth Support Station (Tue–Sat 10:00–18:00)`,
+      questions: [{
+        q: '{平日|へいじつ}は{午後|ごご}6{時|じ}まで{大学|だいがく}で{授業|じゅぎょう}がある{留学生|りゅうがくせい}のアンさんは、オンラインで{参加|さんか}できるセミナーに{出|で}たい。{参加|さんか}できるのはどれか。',
+        en: 'An, an international student with university classes until 6 p.m. on weekdays, wants to join seminars she can attend online. Which can she attend?',
+        choices: [
+          ['2{月|がつ}{10日|とおか}と2{月|がつ}21{日|にち}', '10 and 21 February'],
+          ['2{月|がつ}{4日|よっか}と2{月|がつ}21{日|にち}', '4 and 21 February'],
+          ['2{月|がつ}{10日|とおか}だけ', 'Only 10 February'],
+          ['2{月|がつ}{14日|じゅうよっか}と2{月|がつ}21{日|にち}', '14 and 21 February'],
+        ],
+        why: 'Online is possible on the 10th (from 7 p.m., after her classes) and on the 21st (a Saturday, in person or online). The 4th and the 14th are in-person only — and the 4th is on a weekday afternoon.',
+      }, {
+        q: '{模擬|もぎ}{面接|めんせつ}に{参加|さんか}したい{人|ひと}は、どうすればいいか。',
+        en: 'What should someone who wants to do a mock interview do?',
+        choices: [
+          ['2{月|がつ}{4日|よっか}のセミナーに{参加|さんか}し、2{月|がつ}11{日|にち}までに{模擬|もぎ}{面接|めんせつ}に{申|もう}し{込|こ}む。', 'Take part in the seminar on 4 February, and apply for the mock interview by 11 February.'],
+          ['2{月|がつ}{14日|じゅうよっか}に{会場|かいじょう}へ{行|い}って、その{場|ば}で{申|もう}し{込|こ}む。', 'Go to the venue on 14 February and apply there.'],
+          ['2{月|がつ}{4日|よっか}のセミナーに{申|もう}し{込|こ}めば、{模擬|もぎ}{面接|めんせつ}には{申|もう}し{込|こ}まなくていい。', 'Applying for the 4 February seminar is enough; no separate application is needed.'],
+          ['2{月|がつ}21{日|にち}までに、ウェブサイトから{申|もう}し{込|こ}む。', 'Apply on the website by 21 February.'],
+        ],
+        why: 'Mock interviews are only for people who attended the 4 February seminar (2月4日のセミナーに参加した方のみ), and every seminar must be booked on the website 3 days ahead — for the 14th, by the 11th. There’s no applying on the day.',
+      }],
+      words: [['{就職|しゅうしょく}', 'しゅうしょく', 'finding a job'], ['{支援|しえん}', 'しえん', 'support'], ['{自己|じこ}{分析|ぶんせき}', 'じこぶんせき', 'self-analysis'], ['{業界|ぎょうかい}', 'ぎょうかい', 'industry'], ['{模擬|もぎ}{面接|めんせつ}', 'もぎめんせつ', 'mock interview'], ['おおむね', '', 'roughly, about'], ['{形式|けいしき}', 'けいしき', 'format']],
     },
 
   ];

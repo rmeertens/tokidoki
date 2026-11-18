@@ -445,7 +445,7 @@
   function loadWords() {
     if (WORDS || loading) return;
     loading = document.createElement('script');
-    loading.src = 'jlpt-reading-words.js?v=1';
+    loading.src = 'jlpt-reading-words.js?v=2';
     loading.onload = () => { WORDS = global.JLPT_READING_WORDS || null; if (current) render(); };
     loading.onerror = () => { loading = null; };
     document.head.appendChild(loading);

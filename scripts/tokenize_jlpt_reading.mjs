@@ -52,7 +52,11 @@ const WHOLE = [...json('phrase_whole_words.json'), 'お知らせ', 'お疲れさ
   'Wi-Fi', 'ホワイトボード', 'お一人様', 'お一人', '添付ファイル', '私費留学生', '在学証明書', '成績証明書', '指導教員', '新入生',
   '学年不問', '資格外活動許可', '情報システム部', '出退勤', 'コワーキングスペース', 'フィットネスクラブ', '受付時間外', 'ようび',
   '1まい', '4時', 'お使い', '土・日・祝日', '1つ', '解約希望月', '履歴書', '30cm', '更新申込書', '3月中', '法人登記', 'なお',
-  'ただし', 'つきましては', 'みどり', 'なんさい'];
+  'ただし', 'つきましては', 'みどり', 'なんさい', 'でんしゃ', 'こんしゅう', 'まいしゅう', 'りょこう', 'だいどころ', 'やくそく', 'そうじ',
+  'いりぐち', 'とちゅう', 'ひらがな', 'かいわ', 'よめる', 'はなせる', 'おやつ', 'さんぽ', '1かい', 'きゅうこう', 'どうぶつえん', 'ミカ', 'ナナ',
+  '手ぶくろ', 'レンタサイクル', 'コインパーキング', '領収書', '問診票', '祝前日', '素泊まり', '二食付き', '早割', '模擬面接', '達成率', '省エネ',
+  '二十周年', '誘導員', '歩行者', '休工', 'ご高配', 'ご多用中', '券売機', '1割引き', '30分', '20日ごろ', '1時間ごと', '30分ごと', '3丁目',
+  'つく', '西公園', '東公園', 'とっても', 'おかけいたしますが', 'クール便', 'あした', 'まい月', '10ぷん', 'お渡し', 'そよかぜ', '約2か月後'];
 const { segment } = await createWordFinder({ extra: EXTRA, whole: WHOLE });
 
 // Grammar of notices, emails and business letters, in the Stories notes'
@@ -107,7 +111,7 @@ const READING_RULES = [
   { id: 'mono-to-shite', rx: /ものとして/, replaces: ['to-quote', 'te-sequence'] },
   { id: 'tame-reason', rx: /ため(?![にの])/, replaces: ['tame-ni'] },
   { id: 'sai', rx: /(?<!実)際(?=[はに、])/ },
-  { id: 'te-ori', rx: /ており/, replaces: ['te-sequence'] },
+  { id: 'te-ori', rx: /ており(?!ま)/, replaces: ['te-sequence'] },
   { id: 'to-naru', rx: /とな(?:る|ります|りました)/, replaces: ['to-with', 'to-and', 'plain-form'] },
   { id: 'mikomi', rx: /見込み/ },
   { id: 'koto-ni-naru', rx: /ことにな(?:り|っ)/, replaces: ['ni-naru'] },
@@ -117,7 +121,7 @@ const READING_RULES = [
   { id: 'you-ni-request', rx: /(?<=[るうくすつぬぶむ])よう(?:に)?(?=、|お願い)/, back: 1 },
   { id: 'ni-yori', rx: /により/, replaces: ['ni-particle'] },
   { id: 'reru-honorific', rx: /(?:さ|か|ま|わ|た|ら)れ(?:る|た)(?=(?:場合|方|お店|店|際))/, back: 1, replaces: ['passive'] },
-  { id: 'yori-from', rx: /(?:日|分|時)より/, back: 1, replaces: ['yori'] },
+  { id: 'yori-from', rx: /(?:日|分|時|月)より/, back: 1, replaces: ['yori'] },
   { id: 'ni-yoru-to', rx: /によると/, replaces: ['ni-particle', 'to-conditional'] },
   { id: 'tame-ni', rx: /ために/, replaces: ['ni-particle'] },
   { id: 'te-hoshii', rx: /てほしい/ },
@@ -176,6 +180,13 @@ const toFinder = markup => markup.replace(/\{([^|}]+)\|([^}]+)\}/g, (all, base, 
 
 function split(markup) {
   const { pieces, morphs, plain } = segment(toFinder(markup));
+  // The word finder can lose a character (two prefixes in a row, as in the
+  // kana ごご); stop rather than shift every word after it.
+  pieces.forEach((p, i) => {
+    if (p.from !== (i ? pieces[i - 1].to : 0) || p.src.replace(/\[[^\]]*\]/g, '') !== plain.slice(p.from, p.to)) {
+      throw new Error(`words don't line up in “${markup}” at “${p.src}” — write the word in kanji with furigana`);
+    }
+  });
   const us = ourUnits(markup);
   if (us.map(u => u.text).join('') !== plain) throw new Error(`plain text differs: ${markup}`);
   const owner = [];
@@ -262,7 +273,11 @@ const COUNTERS = [
   ['割', n => `${n}0 percent`], ['個', n => `${n} (items)`], ['台', n => `${n} (cars, machines)`], ['年度', n => `the ${n} (school / business) year`],
   ['年生', n => `year ${n} (of school / university)`], ['年', n => `the year ${n}`], ['月', n => ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][n - 1] || `month ${n}`], ['号', n => `No. ${n}`],
   ['点', n => `${n} item${n === '1' ? '' : 's'}`], ['本', n => `${n} (bottles, long things)`], ['辺', n => `${n} sides`], ['社', n => `${n} companies`],
-  ['こ', n => `${n} (things)`], ['つ', n => `${n} (things)`], ['cm', n => `${n} centimetres`], ['kg', n => `${n} kilograms`],
+  ['こ', n => `${n} (things)`], ['つ', n => `${n} (things)`], ['泊', n => `${n} night${n === '1' ? '' : 's'} (staying)`],
+  ['室', n => `${n} room${n === '1' ? '' : 's'}`], ['部', n => `${n} cop${n === '1' ? 'y' : 'ies'}`], ['丁目', n => `${n}-chome (block ${n} of a district)`],
+  ['時間ごと', n => `every ${n} hour${n === '1' ? '' : 's'}`], ['分ごと', n => `every ${n} minutes`], ['日ごろ', n => `around the ${ordinal(n)}`],
+  ['か月後', n => `${n} month${n === '1' ? '' : 's'} later`], ['日目', n => `day ${n}`], ['人目', n => `the ${ordinal(n)} person`], ['回分', n => `${n} times' worth`],
+  ['千円', n => `${n},000 yen`], ['ぷん', n => `${n} minutes`], ['ふん', n => `${n} minutes`], ['cm', n => `${n} centimetres`], ['kg', n => `${n} kilograms`],
 ];
 const ordinal = n => n + ((/1[123]$/.test(n) ? 'th' : { 1: 'st', 2: 'nd', 3: 'rd' }[n.slice(-1)]) || 'th');
 const kanaOf = src => src.replace(/\{[^|}]+\|([^}]+)\}/g, '$1');
@@ -292,7 +307,7 @@ for (const passage of PASSAGES) {
         gloss[num[0]] = num[1];
         words.push([src, num[0]]);
       } else if (k && k.miss) {
-        if (/[^\s0-9０-９,.:〜~ー・%％()（）①-⑨A-Z×\-]/.test(k.miss)) misses.set(k.miss, (misses.get(k.miss) || []).concat(passage.id));
+        if (/[^\s0-9０-９,.:〜~ー・%％()（）①-⑨A-Z×\-/、：㎡]/.test(k.miss)) misses.set(k.miss, (misses.get(k.miss) || []).concat(passage.id));
         words.push(src);
       } else if (k && /^[0-9０-９,.:]+$/.test(R.plain(src))) {
         words.push(src);
