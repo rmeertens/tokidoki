@@ -27,6 +27,172 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-11-18-fukuoka-mayor-rerun',
+      date: '2026-11-18',
+      emoji: '🗳️',
+      titleEn: 'Fukuoka mayoral election ends with no winner: none of a record 13 candidates gets a quarter of the vote, so the city will vote again',
+      sources: [
+        { name: 'Jiji via nippon.com', url: 'https://www.nippon.com/ja/articles/-/57504' },
+        { name: 'Nikkei', url: 'https://www.nikkei.com/article/DGXZQOJC0957Z0Z01C26A1000000/' },
+        { name: 'RKB via Yahoo! News', url: 'https://news.yahoo.co.jp/articles/1738bb2660e067c04a3caf6d8d079d98f1f60ea8' },
+        { name: 'Data Max', url: 'https://data-max.co.jp/article/87986' },
+      ],
+      quiz: [
+        ['How many people ran for mayor?', '13', '3', '30', '2'],
+        ['Why did nobody become mayor?', 'No one got at least a quarter of the votes', 'The top two candidates had the same number of votes', 'A typhoon stopped the vote', 'The old mayor refused to leave'],
+        ['What will happen now?', 'Fukuoka will hold the election again', 'The candidate with the most votes becomes mayor', 'The old mayor stays for four more years', 'The city will have no mayor at all'],
+      ],
+      levels: {
+        N5: {
+          title: '福岡市[ふくおかし]の　市長[しちょう]の　選挙[せんきょ]を　もう　一度[いちど]',
+          lines: [
+            ['十五日[じゅうごにち]、福岡市[ふくおかし]で　市長[しちょう]を　選[えら]ぶ　選挙[せんきょ]が　ありました。', 'On the 15th, there was an election to choose the mayor of Fukuoka City.', '選挙 means election and 市長 means mayor. Fukuoka is the biggest city in Kyushu.'],
+            ['選挙[せんきょ]に　出[で]た　人[ひと]は　13人[にん]で、今[いま]までで　いちばん　多[おお]かったです。', 'Thirteen people ran, the most ever.', 'The mayor of the last 16 years, Soichiro Takashima, did not run again.'],
+            ['でも、だれも　市長[しちょう]に　なりませんでした。', 'But nobody became mayor.'],
+            ['市長[しちょう]に　なるには、ぜんぶの　票[ひょう]の　4分[ぶん]の1以上[いじょう]が　必要[ひつよう]です。', 'To become mayor, you need at least a quarter of all the votes.', '票 means vote. Japanese law says the winner of a mayoral election must get at least a quarter of the valid votes.'],
+            ['いちばん　多[おお]かった　稲富[いなとみ]修二[しゅうじ]さんも、23％ぐらいでした。', 'Even Shuji Inatomi, who got the most, had only about 23 percent.'],
+            ['それで、もう　一度[いちど]　選挙[せんきょ]を　します。', 'So the election will be held again.', 'A repeat election like this is called 再選挙.'],
+            ['福岡市[ふくおかし]で　市長[しちょう]の　選挙[せんきょ]を　もう　一度[いちど]　するのは　初[はじ]めてです。', 'It is the first time Fukuoka City has had to hold a mayoral election again.'],
+          ],
+        },
+        N4: {
+          title: '福岡[ふくおか]市長[しちょう]選挙[せんきょ]　だれも当選[とうせん]しないで再選挙[さいせんきょ]に',
+          lines: [
+            ['十五日[じゅうごにち]の福岡[ふくおか]市長[しちょう]選挙[せんきょ]は、4期[き]続[つづ]けた高島[たかしま]宗一郎[そういちろう]市長[しちょう]が出[で]なかったため、新[あたら]しい人[ひと]ばかり13人[にん]が立候補[りっこうほ]しました。', 'In the Fukuoka mayoral election on the 15th, Mayor Soichiro Takashima, who had served four terms, did not run, so 13 newcomers stood as candidates.', '立候補 means standing as a candidate; 期 counts terms in office.'],
+            ['これは、戦後[せんご]の福岡[ふくおか]市長[しちょう]選挙[せんきょ]でいちばん多[おお]い数[かず]です。', 'That is the largest number in any Fukuoka mayoral election since the war.'],
+            ['当選[とうせん]するには、有効[ゆうこう]な票[ひょう]の4分[ぶん]の1以上[いじょう]を取[と]る必要[ひつよう]がありますが、だれもそこまで届[とど]きませんでした。', 'To win, a candidate needs at least a quarter of the valid votes, but nobody reached that.', '当選する means to be elected.'],
+            ['いちばん多[おお]く票[ひょう]を取[と]ったのは元[もと]衆議院[しゅうぎいん]議員[ぎいん]の稲富[いなとみ]修二[しゅうじ]さんで、13万[まん]7667票[ひょう]でしたが、23％ぐらいでした。', 'The most votes went to former House of Representatives member Shuji Inatomi, with 137,667, but that was only about 23 percent.'],
+            ['投票率[とうひょうりつ]は45.58％で、前回[ぜんかい]より11ポイントぐらい高[たか]くなりました。', 'Turnout was 45.58 percent, about 11 points higher than last time.', '投票率 is voter turnout.'],
+            ['このため、もう一度[いちど]選挙[せんきょ]をする「再選挙[さいせんきょ]」が行[おこな]われることになりました。', 'Because of this, a rerun, a "re-election", will be held.'],
+            ['福岡市[ふくおかし]では初[はじ]めてで、大[おお]きな政令市[せいれいし]の市長[しちょう]選挙[せんきょ]では2003年[ねん]の札幌市[さっぽろし]に続[つづ]いて2回目[かいめ]です。', 'It is the first time for Fukuoka City, and the second time for one of the big designated cities, after Sapporo in 2003.', '政令市 are Japan\'s 20 large "government-ordinance-designated" cities, which run many services themselves.'],
+          ],
+        },
+        N3: {
+          title: '福岡[ふくおか]市長選[しちょうせん]、法定[ほうてい]得票[とくひょう]に届[とど]かず再選挙[さいせんきょ]へ',
+          lines: [
+            ['十五日[じゅうごにち]に投開票[とうかいひょう]された福岡[ふくおか]市長選[しちょうせん]は、立候補[りっこうほ]した新人[しんじん]13人[にん]のいずれも当選[とうせん]に必要[ひつよう]な法定[ほうてい]得票数[とくひょうすう]に届[とど]かず、再選挙[さいせんきょ]が行[おこな]われることになった。', 'In the Fukuoka mayoral election, voted and counted on the 15th, none of the 13 newcomers who ran reached the legal minimum number of votes needed to win, so the election will be rerun.', '投開票 means voting and counting the votes; 法定得票数 is the legal minimum, a quarter of the valid votes.'],
+            ['4期[き]務[つと]めた高島[たかしま]宗一郎[そういちろう]市長[しちょう]が立候補[りっこうほ]しなかったため、候補者[こうほしゃ]は戦後[せんご]最多[さいた]の13人[にん]に上[のぼ]り、票[ひょう]が大[おお]きく分[わ]かれた。', 'Because Mayor Soichiro Takashima, who had served four terms, did not run, the number of candidates rose to 13, the most since the war, and the vote was split widely.'],
+            ['最多[さいた]得票[とくひょう]の元[もと]衆院[しゅういん]議員[ぎいん]、稲富[いなとみ]修二[しゅうじ]氏[し]も13万[まん]7667票[ひょう]で、得票率[とくひょうりつ]は23.23％にとどまった。', 'Even former lower house member Shuji Inatomi, who got the most votes, won 137,667, just 23.23 percent of the vote.', '衆院 is short for 衆議院, the House of Representatives.'],
+            ['稲富[いなとみ]氏[し]は「私[わたし]の力[ちから]不足[ぶそく]」と述[の]べ、再選挙[さいせんきょ]に出[で]るかどうかは支援者[しえんしゃ]と相談[そうだん]するとしている。', 'Inatomi said it was "my lack of ability" and that he will discuss with his supporters whether to run in the rerun.'],
+            ['投票率[とうひょうりつ]は45.58％で、前回[ぜんかい]を11.27ポイント上回[うわまわ]り、平成[へいせい]以降[いこう]で最[もっと]も高[たか]かった。', 'Turnout was 45.58 percent, 11.27 points above last time and the highest since the Heisei era began in 1989.'],
+            ['福岡[ふくおか]市長選[しちょうせん]が再選挙[さいせんきょ]となるのは初[はじ]めてで、政令市[せいれいし]の市長選[しちょうせん]としては2003年[ねん]の札幌[さっぽろ]市長選[しちょうせん]以来[いらい]2例目[れいめ]だ。', 'It is the first rerun of a Fukuoka mayoral election, and only the second in a designated city, after the Sapporo mayoral election of 2003.', '政令市 are Japan\'s 20 large "government-ordinance-designated" cities.'],
+            ['再選挙[さいせんきょ]は、十七日[じゅうしちにち]から2週間[しゅうかん]の異議[いぎ]申[もう]し立[た]ての期間[きかん]を経[へ]て行[おこな]われる見通[みとお]しだ。', 'The rerun is expected to be held after a two-week period for objections that began on the 17th.', '異議申し立て is a formal objection; during this period anyone can challenge the result.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-18-aiko-singapore',
+      date: '2026-11-18',
+      emoji: '🇸🇬',
+      titleEn: 'Princess Aiko arrives in Singapore for her second official overseas visit and meets President Tharman',
+      sources: [
+        { name: 'Jiji via nippon.com', url: 'https://www.nippon.com/ja/articles/-/57552' },
+        { name: 'TBS NEWS DIG via Yahoo! News', url: 'https://news.yahoo.co.jp/articles/e426935d95184168bcf3db7b3aea71a6088c7791' },
+        { name: 'ANN (KSB)', url: 'https://news.ksb.co.jp/ann/article/17060576' },
+        { name: 'ANN via Yahoo! News', url: 'https://news.yahoo.co.jp/articles/aa9f36c44ae631de9ed7730803c532bca5819568' },
+        { name: 'Jiji via nippon.com', url: 'https://www.nippon.com/en/news/yjj2026102300224/' },
+      ],
+      quiz: [
+        ['Why did Princess Aiko visit Singapore?', 'Japan and Singapore\'s relations turned 60 years old', 'She is studying at a university there', 'She went to watch a football match', 'She is on a holiday with friends'],
+        ['Whom did she meet on the 18th?', 'The President of Singapore', 'The Prime Minister of Japan', 'The King of Laos', 'A famous singer'],
+        ['Which country did she visit on her first official trip?', 'Laos', 'The United States', 'France', 'Australia'],
+      ],
+      levels: {
+        N5: {
+          title: '愛子[あいこ]さまが　シンガポールへ',
+          lines: [
+            ['天皇[てんのう]陛下[へいか]の　娘[むすめ]の　愛子[あいこ]さまが、十七日[じゅうしちにち]、シンガポールに　着[つ]きました。', 'Princess Aiko, the Emperor\'s daughter, arrived in Singapore on the 17th.', 'さま is the honorific used for members of the imperial family. Princess Aiko, 24, is the only child of Emperor Naruhito and Empress Masako.'],
+            ['二十一日[にじゅういちにち]まで、五日間[いつかかん]　シンガポールに　います。', 'She will be in Singapore for five days, until the 21st.'],
+            ['今年[ことし]は、日本[にほん]と　シンガポールの　国[くに]の　関係[かんけい]が　始[はじ]まってから　60年[ねん]です。', 'This year is 60 years since relations between the countries of Japan and Singapore began.', 'The two countries set up diplomatic relations in 1966.'],
+            ['それで、シンガポールの　大統領[だいとうりょう]が　愛子[あいこ]さまを　招待[しょうたい]しました。', 'So the President of Singapore invited Princess Aiko.', '大統領 means president; 招待する means to invite.'],
+            ['十八日[じゅうはちにち]、愛子[あいこ]さまは　ターマン大統領[だいとうりょう]に　会[あ]いました。', 'On the 18th, Princess Aiko met President Tharman.', 'President Tharman Shanmugaratnam. It was the first time the two had met.'],
+            ['それから、大統領[だいとうりょう]と　いっしょに　昼[ひる]ご飯[はん]を　食[た]べました。', 'After that, she had lunch with the President.', 'The President held a lunch in her honour.'],
+            ['愛子[あいこ]さまが　仕事[しごと]で　外国[がいこく]へ　行[い]くのは、去年[きょねん]の　ラオスに　続[つづ]いて　2回目[かいめ]です。', 'It is the second time Princess Aiko has gone abroad on official duty, after Laos last year.', 'This kind of trip is called an official visit, 公式訪問.'],
+          ],
+        },
+        N4: {
+          title: '愛子[あいこ]さま　シンガポールを公式[こうしき]訪問[ほうもん]',
+          lines: [
+            ['天皇[てんのう]陛下[へいか]の長女[ちょうじょ]の愛子[あいこ]さまが、十七日[じゅうしちにち]の夕方[ゆうがた]、シンガポールのチャンギ空港[くうこう]に到着[とうちゃく]しました。', 'Princess Aiko, the Emperor\'s eldest daughter, arrived at Singapore\'s Changi Airport on the evening of the 17th.', '長女 means eldest daughter.'],
+            ['日本[にほん]とシンガポールが外交[がいこう]関係[かんけい]を結[むす]んでから60年[ねん]になるのに合[あ]わせて、ターマン大統領[だいとうりょう]から招待[しょうたい]されました。', 'She was invited by President Tharman to mark 60 years since Japan and Singapore established diplomatic relations.', '外交関係 means diplomatic relations.'],
+            ['愛子[あいこ]さまの外国[がいこく]への公式[こうしき]訪問[ほうもん]は、去年[きょねん]11月[がつ]のラオスに続[つづ]いて2回目[かいめ]です。', 'It is Princess Aiko\'s second official visit abroad, after Laos last November.'],
+            ['十八日[じゅうはちにち]には大統領府[だいとうりょうふ]を訪[たず]ねて、ターマン大統領[だいとうりょう]に初[はじ]めて会[あ]いました。', 'On the 18th, she visited the presidential palace and met President Tharman for the first time.', 'The presidential palace in Singapore is called the Istana.'],
+            ['そのあと、大統領[だいとうりょう]が開[ひら]いた昼食会[ちゅうしょくかい]に出[で]て、招待[しょうたい]へのお礼[れい]を述[の]べました。', 'After that, she attended a lunch the President held and gave her thanks for the invitation.'],
+            ['滞在[たいざい]中[ちゅう]は、上皇[じょうこう]ご夫妻[ふさい]が木[き]を植[う]えた日本[にほん]庭園[ていえん]や、マーライオンなどを訪[おとず]れる予定[よてい]です。', 'During her stay she plans to visit a Japanese garden where the Emperor Emeritus and Empress Emerita once planted a tree, and places such as the Merlion.', '上皇ご夫妻 are her grandparents, the former Emperor Akihito and Empress Michiko. The tree they planted is a sago palm (ソテツ).'],
+            ['愛子[あいこ]さまは二十一日[にじゅういちにち]に日本[にほん]へ帰[かえ]ります。', 'Princess Aiko will return to Japan on the 21st.'],
+          ],
+        },
+        N3: {
+          title: '愛子[あいこ]さま、シンガポール大統領[だいとうりょう]を表敬[ひょうけい]訪問[ほうもん]',
+          lines: [
+            ['天皇[てんのう]、皇后[こうごう]両陛下[りょうへいか]の長女[ちょうじょ]愛子[あいこ]さまは十七日[じゅうしちにち]、民間機[みんかんき]で羽田[はねだ]空港[くうこう]を出発[しゅっぱつ]し、同日[どうじつ]夕方[ゆうがた]、シンガポールに到着[とうちゃく]した。', 'Princess Aiko, the eldest daughter of the Emperor and Empress, left Haneda Airport on a commercial flight on the 17th and arrived in Singapore that evening.', '民間機 is a commercial (non-government) plane.'],
+            ['今年[ことし]は日本[にほん]とシンガポールの外交[がいこう]関係[かんけい]樹立[じゅりつ]60周年[しゅうねん]にあたり、ターマン・シャンムガラトナム大統領[だいとうりょう]の招待[しょうたい]を受[う]けての訪問[ほうもん]だ。', 'This year marks the 60th anniversary of diplomatic relations between Japan and Singapore, and she is visiting at the invitation of President Tharman Shanmugaratnam.', '樹立 means establishing (relations, a record).'],
+            ['愛子[あいこ]さまの外国[がいこく]公式[こうしき]訪問[ほうもん]は、昨年[さくねん]11月[がつ]のラオス以来[いらい]2度目[どめ]となる。', 'It is Princess Aiko\'s second official foreign visit, following Laos last November.'],
+            ['十八日[じゅうはちにち]には大統領府[だいとうりょうふ]でターマン大統領[だいとうりょう]の出迎[でむか]えを受[う]け、初[はじ]めて会[あ]って言葉[ことば]を交[か]わした。', 'On the 18th she was greeted by President Tharman at the presidential palace, and the two met and talked for the first time.', 'A visit like this to a head of state is called 表敬訪問, a courtesy call.'],
+            ['続[つづ]いて大統領[だいとうりょう]主催[しゅさい]の昼食会[ちゅうしょくかい]に出席[しゅっせき]し、招待[しょうたい]への感謝[かんしゃ]を述[の]べた。', 'She then attended a lunch hosted by the President and expressed her thanks for the invitation.', '主催 means hosting or organizing an event.'],
+            ['滞在[たいざい]中[ちゅう]は、上皇[じょうこう]ご夫妻[ふさい]がソテツを植[う]えた日本[にほん]庭園[ていえん]の視察[しさつ]や、マーライオンなどの名所[めいしょ]の訪問[ほうもん]も予定[よてい]されている。', 'During her stay, she is also due to see a Japanese garden where the Emperor Emeritus and Empress Emerita planted a sago palm, and to visit sights such as the Merlion.', '上皇ご夫妻 are the former Emperor Akihito and Empress Michiko, her grandparents.'],
+            ['愛子[あいこ]さまは二十一日[にじゅういちにち]に帰国[きこく]する予定[よてい]だ。', 'Princess Aiko is scheduled to return to Japan on the 21st.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-18-mercari-surugaya-us',
+      date: '2026-11-18',
+      emoji: '🛍️',
+      titleEn: 'Mercari and Suruga-ya to set up a joint company in the US to buy and sell Japanese anime, game and hobby goods',
+      sources: [
+        { name: 'gamebiz', url: 'https://gamebiz.jp/news/435580' },
+        { name: 'FASHIONSNAP', url: 'https://www.fashionsnap.com/article/2026-11-16/mercari-surugaya-america/' },
+        { name: 'Inside Games', url: 'https://www.inside-games.jp/article/2026/11/16/191069.html' },
+        { name: 'Unite.AI', url: 'https://www.unite.ai/?p=518359' },
+      ],
+      quiz: [
+        ['In which city will the new company be based?', 'Los Angeles', 'New York', 'Tokyo', 'London'],
+        ['What will it buy and sell?', 'Japanese anime and game goods', 'Used cars', 'Fresh fish', 'Medicine'],
+        ['When is the company to be set up?', 'In December', 'Next summer', 'In 2030', 'It was set up ten years ago'],
+      ],
+      levels: {
+        N5: {
+          title: 'メルカリと　駿河屋[するがや]が　アメリカで　新[あたら]しい　会社[かいしゃ]',
+          lines: [
+            ['メルカリと　駿河屋[するがや]が、アメリカに　いっしょに　新[あたら]しい　会社[かいしゃ]を　作[つく]ります。', 'Mercari and Suruga-ya will make a new company together in America.', 'They announced it on the 16th.'],
+            ['メルカリは、人[ひと]が　ものを　売[う]ったり　買[か]ったり　する　アプリの　会社[かいしゃ]です。', 'Mercari is a company with an app where people sell and buy things.', 'Mercari is Japan\'s biggest flea-market app.'],
+            ['駿河屋[するがや]は、古[ふる]い　ゲームや　アニメの　グッズを　売[う]る　店[みせ]です。', 'Suruga-ya is a shop that sells second-hand games and anime goods.', 'Suruga-ya, from Shizuoka, sells used games, anime goods and other hobby items in shops and online. 古い here means used, second-hand.'],
+            ['新[あたら]しい　会社[かいしゃ]は　ロサンゼルスで、日本[にほん]の　アニメや　ゲームの　ものを　買[か]って、売[う]ります。', 'The new company will buy and sell Japanese anime and game goods in Los Angeles.'],
+            ['インターネットと　店[みせ]で　売[う]ります。', 'It will sell on the internet and in shops.'],
+            ['メルカリが　51％、駿河屋[するがや]が　49％の　お金[かね]を　出[だ]します。', 'Mercari will put in 51 percent of the money and Suruga-ya 49 percent.'],
+            ['12月[がつ]に　会社[かいしゃ]を　作[つく]る　予定[よてい]です。', 'They plan to set up the company in December.', '予定 means plan or schedule.'],
+          ],
+        },
+        N4: {
+          title: 'メルカリと駿河屋[するがや]　アメリカにいっしょに会社[かいしゃ]を作[つく]る',
+          lines: [
+            ['フリマアプリのメルカリと中古[ちゅうこ]のゲームやアニメのグッズを売[う]る駿河屋[するがや]は十六日[じゅうろくにち]、アメリカにいっしょに会社[かいしゃ]を作[つく]ると発表[はっぴょう]しました。', 'Mercari, the flea-market app, and Suruga-ya, which sells used games and anime goods, announced on the 16th that they will set up a company together in America.', 'フリマ is short for "flea market"; 中古 means second-hand.'],
+            ['新[あたら]しい会社[かいしゃ]は12月[がつ]に作[つく]られる予定[よてい]で、メルカリが51％、駿河屋[するがや]が49％のお金[かね]を出[だ]します。', 'The new company is to be set up in December, with Mercari putting in 51 percent of the money and Suruga-ya 49 percent.'],
+            ['ロサンゼルスを中心[ちゅうしん]に、日本[にほん]のアニメやゲームなどの商品[しょうひん]を買[か]い取[と]ったり、売[う]ったりします。', 'Based in Los Angeles, it will buy in and sell goods such as Japanese anime and games.', '買い取る means to buy something from a customer, as a second-hand shop does.'],
+            ['インターネットで商品[しょうひん]を買[か]い取[と]るのに加[くわ]えて、お店[みせ]も開[ひら]く計画[けいかく]です。', 'It plans not only to buy goods over the internet but also to open shops.'],
+            ['集[あつ]めた商品[しょうひん]は、アメリカのメルカリのアプリなどでも売[う]ります。', 'The goods it collects will also be sold on the American Mercari app and elsewhere.'],
+            ['また、AIを使[つか]って、本物[ほんもの]かどうかを調[しら]べたり、商品[しょうひん]を探[さが]しやすくしたりします。', 'It will also use AI to check whether goods are genuine and to make them easier to find.', '本物 means the real thing, not a fake.'],
+            ['2社[しゃ]は去年[きょねん]12月[がつ]に協力[きょうりょく]することを決[き]めて、今年[ことし]7月[がつ]にはロサンゼルスのアニメのイベントにいっしょに店[みせ]を出[だ]しました。', 'The two companies agreed to work together last December, and in July this year they ran a shop together at an anime event in Los Angeles.', 'The event was Anime Expo, one of the biggest anime conventions in North America.'],
+          ],
+        },
+        N3: {
+          title: 'メルカリと駿河屋[するがや]、米国[べいこく]に合弁[ごうべん]会社[がいしゃ]設立[せつりつ]へ',
+          lines: [
+            ['フリマアプリ大手[おおて]のメルカリと中古[ちゅうこ]ゲームやホビー商品[しょうひん]の販売[はんばい]を手[て]がける駿河屋[するがや]は十六日[じゅうろくにち]、米国[べいこく]で合弁[ごうべん]会社[がいしゃ]を設立[せつりつ]すると発表[はっぴょう]した。', 'Major flea-market app Mercari and Suruga-ya, which sells used games and hobby goods, announced on the 16th that they will set up a joint venture in the United States.', '合弁会社 is a joint venture, a company owned by two or more companies; 手がける means to be engaged in (a business).'],
+            ['新[しん]会社[がいしゃ]は12月[がつ]に米国[べいこく]デラウェア州[しゅう]に設立[せつりつ]される予定[よてい]で、メルカリが51％、駿河屋[するがや]が49％を出資[しゅっし]し、メルカリの子会社[こがいしゃ]となる。', 'The new company is due to be registered in Delaware in December, with Mercari investing 51 percent and Suruga-ya 49 percent, making it a Mercari subsidiary.', '出資 means investing money in a company. Many US companies are registered in Delaware.'],
+            ['ロサンゼルスを拠点[きょてん]に、日本[にほん]のアニメやゲームなどエンタメ・ホビー商品[しょうひん]の買[か]い取[と]りと販売[はんばい]を行[おこな]う。', 'Based in Los Angeles, it will buy in and sell entertainment and hobby goods such as Japanese anime and games.', '拠点 means a base of operations.'],
+            ['オンラインでの買[か]い取[と]りに加[くわ]え、実店舗[じつてんぽ]も運営[うんえい]し、仕入[しい]れた商品[しょうひん]は米国[べいこく]版[ばん]メルカリなどでも販売[はんばい]する計画[けいかく]だ。', 'Besides buying online, it will run physical shops, and plans to sell the goods it buys on the US version of Mercari and elsewhere.', '実店舗 is a real (bricks-and-mortar) shop; 仕入れる means to stock up on goods to sell.'],
+            ['集[あつ]めた商品[しょうひん]のデータをAIで分析[ぶんせき]し、検索[けんさく]やおすすめ、真贋[しんがん]鑑定[かんてい]の精度[せいど]を高[たか]める方針[ほうしん]だという。', 'It reportedly plans to use the product data it gathers with AI to make search, recommendations and authenticity checks more accurate.', '真贋鑑定 means checking whether an item is genuine or fake.'],
+            ['両社[りょうしゃ]は2025年[ねん]12月[がつ]に資本[しほん]業務[ぎょうむ]提携[ていけい]を結[むす]んでおり、今回[こんかい]の合弁[ごうべん]はその協力[きょうりょく]を一歩[いっぽ]進[すす]めるものだ。', 'The two companies formed a capital and business alliance in December 2025, and the joint venture takes that cooperation a step further.', '資本業務提携 is an alliance in which one company also buys shares in the other.'],
+            ['日本[にほん]のアニメやゲームの人気[にんき]が海外[かいがい]で高[たか]まる中[なか]、両社[りょうしゃ]は米国[べいこく]での事業[じぎょう]拡大[かくだい]を目指[めざ]している。', 'With Japanese anime and games growing more popular abroad, the two companies aim to expand their business in the US.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-11-17-russia-airspace-fukuoka',
       date: '2026-11-17',
       emoji: '✈️',

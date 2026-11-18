@@ -167,7 +167,7 @@
   </url>
   <url>
     <loc>https://tokidoki.meertens.dev/news-week-2026-11-16.html</loc>
-    <lastmod>2026-11-17</lastmod>
+    <lastmod>2026-11-18</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
@@ -199,6 +199,21 @@
     <loc>https://tokidoki.meertens.dev/news-week-2026-10-05.html</loc>
     <lastmod>2026-10-11</lastmod>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-11-18-fukuoka-mayor-rerun.html</loc>
+    <lastmod>2026-11-18</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-11-18-aiko-singapore.html</loc>
+    <lastmod>2026-11-18</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-11-18-mercari-surugaya-us.html</loc>
+    <lastmod>2026-11-18</lastmod>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://tokidoki.meertens.dev/news-2026-11-17-russia-airspace-fukuoka.html</loc>
