@@ -27,6 +27,170 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-11-19-trade-deficit-october',
+      date: '2026-11-19',
+      emoji: '🚢',
+      titleEn: 'Japan posts a 476.5 billion yen trade deficit in October, the sixth in a row, even though exports hit a record high',
+      sources: [
+        { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261118de77503' },
+        { name: 'Nikkei', url: 'https://www.nikkei.com/article/DGXZQOUA176GF0X11C26A1000000/' },
+        { name: 'Kyodo via Akita Sakigake Shimpo', url: 'https://www.sakigake.jp/news/article/20261118CO0047/' },
+      ],
+      quiz: [
+        ['What was Japan\'s trade balance in October?', 'A deficit of about 476.5 billion yen', 'A surplus of about 476.5 billion yen', 'Exactly zero', 'A deficit of about 47 trillion yen'],
+        ['What happened to Japan\'s exports?', 'They were the biggest ever for one month', 'They fell for the sixth month in a row', 'They stopped because of a strike', 'They were the smallest since 1979'],
+        ['Why did Japan spend so much on imports?', 'Oil is expensive because of problems in the Middle East', 'Japan bought many more foreign cars', 'The price of rice doubled', 'Japan bought a lot of semiconductors from China'],
+      ],
+      levels: {
+        N5: {
+          title: '10月[がつ]の　貿易[ぼうえき]　6か月[げつ]　続[つづ]けて　赤字[あかじ]',
+          lines: [
+            ['財務省[ざいむしょう]が　十八日[じゅうはちにち]、10月[がつ]の　貿易[ぼうえき]の　数字[すうじ]を　発表[はっぴょう]しました。', 'On the 18th, the Ministry of Finance announced the trade figures for October.', '貿易 means trade, buying and selling with other countries. 財務省 is the Ministry of Finance.'],
+            ['日本[にほん]が　外国[がいこく]に　売[う]った　物[もの]は　11兆[ちょう]7688億[おく]円[えん]でした。', 'What Japan sold to other countries came to 11.77 trillion yen.', '兆 is a trillion and 億 is a hundred million.'],
+            ['1か月[げつ]の　金額[きんがく]では　今[いま]までで　いちばん　多[おお]いです。', 'It is the biggest amount ever for one month.', 'Figures that can be compared go back to 1979.'],
+            ['車[くるま]や　半導体[はんどうたい]が　よく　売[う]れました。', 'Cars and semiconductors sold well.', '半導体 are semiconductors, the chips used in computers and phones.'],
+            ['でも、外国[がいこく]から　買[か]った　物[もの]は　もっと　多[おお]くて、12兆[ちょう]2453億[おく]円[えん]でした。', 'But what Japan bought from other countries was even more: 12.25 trillion yen.'],
+            ['中東[ちゅうとう]の　問題[もんだい]で、石油[せきゆ]が　高[たか]く　なっているからです。', 'That is because oil has become expensive because of the problems in the Middle East.', 'The value of Japan\'s crude oil imports rose 61 percent from a year before.'],
+            ['買[か]った　物[もの]が　4765億[おく]円[えん]　多[おお]くて、6か月[げつ]　続[つづ]けて　赤字[あかじ]に　なりました。', 'Japan bought 476.5 billion yen more than it sold, so trade has been in deficit for six months in a row.', '赤字 (literally "red figures") means a deficit, a loss.'],
+          ],
+        },
+        N4: {
+          title: '10月[がつ]の貿易[ぼうえき]　輸出[ゆしゅつ]は過去[かこ]最高[さいこう]でも6か月[げつ]連続[れんぞく]の赤字[あかじ]',
+          lines: [
+            ['財務省[ざいむしょう]は十八日[じゅうはちにち]、10月[がつ]の貿易[ぼうえき]統計[とうけい]を発表[はっぴょう]しました。', 'On the 18th, the Ministry of Finance released its trade statistics for October.', '統計 means statistics. These are early figures and may be revised.'],
+            ['輸出[ゆしゅつ]は去年[きょねん]の同[おな]じ月[つき]より約[やく]2割[わり]増[ふ]えて11兆[ちょう]7688億[おく]円[えん]になり、1979年[ねん]からの記録[きろく]でいちばん多[おお]くなりました。', 'Exports rose about 20 percent from the same month last year to 11.77 trillion yen, the most in records going back to 1979.', '輸出 means exports; 2割 is 20 percent.'],
+            ['自動車[じどうしゃ]や半導体[はんどうたい]の輸出[ゆしゅつ]が伸[の]びて、輸出[ゆしゅつ]が増[ふ]えたのは14か月[げつ]連続[れんぞく]です。', 'Exports of cars and semiconductors grew, and exports have now risen for 14 months in a row.', '連続 means in a row.'],
+            ['一方[いっぽう]、輸入[ゆにゅう]も約[やく]2割[わり]増[ふ]えて12兆[ちょう]2453億[おく]円[えん]になり、こちらも過去[かこ]最大[さいだい]でした。', 'Imports, on the other hand, also rose about 20 percent to 12.25 trillion yen, also the largest ever.', '輸入 means imports.'],
+            ['中東[ちゅうとう]の情勢[じょうせい]が悪[わる]くなったため、ほかの国[くに]から買[か]う原油[げんゆ]の値段[ねだん]が高[たか]いままで、原油[げんゆ]の輸入[ゆにゅう]は61％増[ふ]えました。', 'Because the situation in the Middle East has worsened, the crude oil Japan buys from other countries stays expensive, and crude oil imports rose 61 percent.', '原油 is crude oil; 情勢 means the situation.'],
+            ['その結果[けっか]、貿易[ぼうえき]収支[しゅうし]は4765億[おく]円[えん]の赤字[あかじ]で、6か月[げつ]連続[れんぞく]の赤字[あかじ]になりました。', 'As a result, the trade balance was a deficit of 476.5 billion yen, the sixth deficit in a row.', '貿易収支 is the trade balance, exports minus imports.'],
+            ['赤字[あかじ]は去年[きょねん]の同[おな]じ月[つき]の約[やく]1.6倍[ばい]ですが、8月[がつ]の1兆[ちょう]1206億[おく]円[えん]よりは小[ちい]さくなりました。', 'The deficit is about 1.6 times that of the same month last year, but smaller than August\'s 1.12 trillion yen.'],
+          ],
+        },
+        N3: {
+          title: '10月[がつ]の貿易[ぼうえき]赤字[あかじ]4765億[おく]円[えん]、輸出入[ゆしゅつにゅう]とも過去[かこ]最大[さいだい]',
+          lines: [
+            ['財務省[ざいむしょう]が十八日[じゅうはちにち]発表[はっぴょう]した10月[がつ]の貿易[ぼうえき]統計[とうけい]（速報[そくほう]）によると、輸出[ゆしゅつ]から輸入[ゆにゅう]を差[さ]し引[ひ]いた貿易[ぼうえき]収支[しゅうし]は4765億[おく]円[えん]の赤字[あかじ]だった。', 'According to the October trade statistics (preliminary) released by the Ministry of Finance on the 18th, the trade balance, exports minus imports, was a deficit of 476.5 billion yen.', '速報 means preliminary figures; 差し引く means to subtract.'],
+            ['赤字[あかじ]は6か月[げつ]連続[れんぞく]で、赤字[あかじ]幅[はば]は前年[ぜんねん]同月[どうげつ]の約[やく]1.6倍[ばい]に広[ひろ]がった。', 'It is the sixth deficit in a row, and the deficit grew to about 1.6 times that of the same month a year earlier.', '赤字幅 is the size of the deficit; 前年同月 is the same month of the year before.'],
+            ['輸出[ゆしゅつ]は前年[ぜんねん]同月[どうげつ]比[ひ]約[やく]2割[わり]増[ぞう]の11兆[ちょう]7688億[おく]円[えん]で、比較[ひかく]できる1979年[ねん]以降[いこう]で単月[たんげつ]として過去[かこ]最大[さいだい]となった。', 'Exports rose about 20 percent year on year to 11.77 trillion yen, the most for a single month since comparable records began in 1979.', '比 after a period means "compared with"; 単月 means a single month.'],
+            ['自動車[じどうしゃ]や半導体[はんどうたい]の輸出[ゆしゅつ]が伸[の]び、輸出[ゆしゅつ]の増加[ぞうか]は14か月[げつ]連続[れんぞく]となった。', 'Exports of cars and semiconductors grew, making it the 14th straight month of rising exports.'],
+            ['一方[いっぽう]、輸入[ゆにゅう]も21.6％増[ぞう]の12兆[ちょう]2453億[おく]円[えん]と過去[かこ]最大[さいだい]に膨[ふく]らんだ。', 'Imports, meanwhile, also swelled 21.6 percent to a record 12.25 trillion yen.', '膨らむ means to swell.'],
+            ['中東[ちゅうとう]情勢[じょうせい]の混乱[こんらん]を受[う]けて代替[だいたい]調達[ちょうたつ]した原油[げんゆ]の価格[かかく]が高止[たかど]まりしており、原油[げんゆ]の輸入[ゆにゅう]額[がく]は61％増[ふ]えた。', 'The price of crude oil bought from alternative suppliers after the turmoil in the Middle East has stayed high, and the value of crude oil imports rose 61 percent.', '代替調達 means buying from other suppliers instead of the usual ones; 高止まり means staying at a high level.'],
+            ['ただ、赤字[あかじ]幅[はば]は8月[がつ]の1兆[ちょう]1206億[おく]円[えん]よりは縮小[しゅくしょう]した。', 'However, the deficit was smaller than August\'s 1.12 trillion yen.', '縮小する means to shrink.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-19-moriyasu-last-match',
+      date: '2026-11-19',
+      emoji: '⚽',
+      titleEn: 'Japan lose 2–1 to Paraguay in Hajime Moriyasu\'s last match as coach; debutant Shio Fukuda scores Japan\'s goal',
+      sources: [
+        { name: 'TV Tokyo', url: 'https://www.tv-tokyo.co.jp/sports/articles/2026/11/042940.html' },
+        { name: 'FIFA', url: 'https://www.fifa.com/ja/news/articles/japan-paraguay-friendly-match-report-171126-ja' },
+        { name: 'J.League live commentary', url: 'https://www.jleague.jp/match/friendly/2026/111701/live-commentary/' },
+        { name: 'Nikkei', url: 'https://www.nikkei.com/article/DGXZQODH05B620V01C26A1000000/' },
+      ],
+      quiz: [
+        ['Which team did Japan play?', 'Paraguay', 'Brazil', 'Singapore', 'Saudi Arabia'],
+        ['What was the result?', 'Paraguay won 2–1', 'Japan won 2–1', 'It was a 1–1 draw', 'Paraguay won 3–0'],
+        ['Who will be Japan\'s new coach from March?', 'Go Oiwa', 'Shio Fukuda', 'Hajime Moriyasu', 'Takefusa Kubo'],
+      ],
+      levels: {
+        N5: {
+          title: 'サッカー　森保[もりやす]監督[かんとく]の　最後[さいご]の　試合[しあい]',
+          lines: [
+            ['十七日[じゅうしちにち]、シンガポールで　サッカーの　日本[にほん]と　パラグアイの　試合[しあい]が　ありました。', 'On the 17th, there was a soccer match between Japan and Paraguay in Singapore.', 'It was a friendly match, not part of a tournament.'],
+            ['日本[にほん]の　監督[かんとく]、森保[もりやす]一[はじめ]さんの　最後[さいご]の　試合[しあい]でした。', 'It was the last match for Japan\'s coach, Hajime Moriyasu.', '監督 means a team\'s manager or head coach.'],
+            ['パラグアイは　前半[ぜんはん]に　2点[てん]を　入[い]れました。', 'Paraguay scored two goals in the first half.', '前半 is the first half. The goals came in the 2nd and 40th minutes.'],
+            ['日本[にほん]は　85分[ふん]に　福田[ふくだ]師王[しおう]さんが　1点[てん]を　入[い]れました。', 'For Japan, Shio Fukuda scored a goal in the 85th minute.', 'It was Fukuda\'s first match and first goal for the national team.'],
+            ['でも、日本[にほん]は　1対[たい]2で　負[ま]けました。', 'But Japan lost 2–1.', '1対2 is read いちたいに: Japan\'s score comes first.'],
+            ['森保[もりやす]さんは　2018年[ねん]から　8年[ねん]ぐらい　日本[にほん]の　監督[かんとく]でした。', 'Moriyasu was Japan\'s coach for about eight years, from 2018.', 'He led Japan at two World Cups.'],
+            ['来年[らいねん]の　3月[がつ]から、大岩[おおいわ]剛[ごう]さんが　新[あたら]しい　監督[かんとく]に　なります。', 'From March next year, Go Oiwa will be the new coach.'],
+          ],
+        },
+        N4: {
+          title: '森保[もりやす]監督[かんとく]の最後[さいご]の試合[しあい]　パラグアイに1対[たい]2で負[ま]ける',
+          lines: [
+            ['サッカー日本[にほん]代表[だいひょう]は十七日[じゅうしちにち]、シンガポールでパラグアイと親善[しんぜん]試合[しあい]をして、1対[たい]2で負[ま]けました。', 'On the 17th, Japan\'s national soccer team played a friendly against Paraguay in Singapore and lost 2–1.', '代表 here is the national team; 親善試合 is a friendly match.'],
+            ['2018年[ねん]から8年[ねん]あまり代表[だいひょう]を指導[しどう]した森保[もりやす]一[はじめ]監督[かんとく]にとって、最後[さいご]の試合[しあい]でした。', 'It was the last match for coach Hajime Moriyasu, who had led the national team for a little over eight years since 2018.', 'あまり after a number means "a little over".'],
+            ['日本[にほん]は試合[しあい]が始[はじ]まってすぐの前半[ぜんはん]2分[ふん]に点[てん]を取[と]られ、40分[ぷん]にも点[てん]を取[と]られました。', 'Japan gave up a goal in the 2nd minute, right after the start, and another in the 40th minute.', '点を取られる means to concede a goal.'],
+            ['後半[こうはん]85分[ふん]、代表[だいひょう]の試合[しあい]に初[はじ]めて出[で]た福田[ふくだ]師王[しおう]選手[せんしゅ]がヘディングで1点[てん]を返[かえ]しましたが、追[お]いつけませんでした。', 'In the 85th minute, in the second half, Shio Fukuda, playing his first national team match, pulled a goal back with a header, but Japan could not catch up.', '1点を返す means to pull a goal back; 追いつく means to catch up.'],
+            ['森保[もりやす]監督[かんとく]は、来年[らいねん]の初[はじ]めにあるアジアカップまで監督[かんとく]を続[つづ]ける予定[よてい]でした。', 'Moriyasu had been due to stay on as coach until the Asian Cup early next year.', 'The Asian Cup was to be held in Saudi Arabia.'],
+            ['しかし、中東[ちゅうとう]の情勢[じょうせい]が悪[わる]くなって大会[たいかい]が約[やく]1年[ねん]延期[えんき]になったため、今年[ことし]でやめることになりました。', 'But because the situation in the Middle East worsened and the tournament was postponed by about a year, he is stepping down this year.', '延期 means postponement; 情勢 means the situation.'],
+            ['来年[らいねん]3月[がつ]からは、21歳[さい]以下[いか]の日本[にほん]代表[だいひょう]の大岩[おおいわ]剛[ごう]監督[かんとく]が新[あたら]しい監督[かんとく]になります。', 'From March next year, Go Oiwa, coach of Japan\'s under-21 team, will be the new coach.', 'He will keep coaching the under-21 team too.'],
+          ],
+        },
+        N3: {
+          title: '森保[もりやす]監督[かんとく]の最終戦[さいしゅうせん]、日本[にほん]はパラグアイに1対[たい]2で敗[やぶ]れる',
+          lines: [
+            ['サッカー日本[にほん]代表[だいひょう]は十七日[じゅうしちにち]、シンガポールでパラグアイ代表[だいひょう]と国際[こくさい]親善[しんぜん]試合[しあい]を行[おこな]い、1対[たい]2で敗[やぶ]れた。', 'On the 17th, Japan\'s national soccer team played an international friendly against Paraguay in Singapore and lost 2–1.'],
+            ['2018年[ねん]から8年[ねん]余[あま]りにわたって指揮[しき]を執[と]り、ワールドカップ2大会[たいかい]で日本[にほん]を率[ひき]いた森保[もりやす]一[はじめ]監督[かんとく]にとって、これが最後[さいご]の試合[しあい]となった。', 'It was the last match for coach Hajime Moriyasu, who had been in charge for a little over eight years since 2018 and led Japan at two World Cups.', '指揮を執る means to be in command; 率いる means to lead.'],
+            ['日本[にほん]は前半[ぜんはん]開始[かいし]直後[ちょくご]の2分[ふん]に先制[せんせい]を許[ゆる]し、40分[ぷん]にも追加点[ついかてん]を奪[うば]われた。', 'Japan let Paraguay score first in the 2nd minute, just after kickoff, and conceded another goal in the 40th minute.', '先制を許す means to let the other side score first; 追加点 is a further goal.'],
+            ['後半[こうはん]85分[ふん]、代表[だいひょう]デビュー戦[せん]の福田[ふくだ]師王[しおう]がヘディングで代表[だいひょう]初[はつ]ゴールを決[き]めたが、反撃[はんげき]は及[およ]ばなかった。', 'In the 85th minute, Shio Fukuda, in his national team debut, headed in his first goal for Japan, but the fightback fell short.', 'Newspapers name players without さん or 選手. 及ばない means to fall short.'],
+            ['森保[もりやす]監督[かんとく]は来年[らいねん]初[はじ]めにサウジアラビアで開[ひら]かれる予定[よてい]だったアジアカップまで指揮[しき]を執[と]る契約[けいやく]だったが、中東[ちゅうとう]情勢[じょうせい]の悪化[あっか]で大会[たいかい]が約[やく]1年[ねん]延期[えんき]され、今年[ことし]限[かぎ]りでの退任[たいにん]が決[き]まっていた。', 'Moriyasu\'s contract ran until the Asian Cup, which was to be held in Saudi Arabia early next year, but the tournament was postponed by about a year because of the worsening situation in the Middle East, and it had been decided he would step down at the end of this year.', '退任 means stepping down; 限り here means "as the last".'],
+            ['後任[こうにん]には、21歳[さい]以下[いか]の日本[にほん]代表[だいひょう]を率[ひき]いる大岩[おおいわ]剛[ごう]監督[かんとく]が来年[らいねん]3月[がつ]から就[つ]き、両方[りょうほう]の監督[かんとく]を兼任[けんにん]する。', 'His successor, Go Oiwa, who coaches Japan\'s under-21 team, will take over from March next year and hold both jobs.', '後任 is a successor; 兼任する means to hold two posts at once.'],
+            ['新[しん]体制[たいせい]の初戦[しょせん]は、来年[らいねん]3月[がつ]に広島[ひろしま]と東京[とうきょう]で行[おこな]われる親善[しんぜん]試合[しあい]2試合[しあい]になる見通[みとお]しだ。', 'The new setup\'s first matches are expected to be two friendlies in Hiroshima and Tokyo next March.', '体制 is the setup or regime; 見通し means an expectation.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-19-october-visitors-record',
+      date: '2026-11-19',
+      emoji: '🍁',
+      titleEn: 'A record 3.91 million foreign visitors come to Japan in October, the most for any month, even as visitors from China fall 47%',
+      sources: [
+        { name: 'Kyodo via Ryukyu Shimpo', url: 'https://ryukyushimpo.jp/kyodo/entry-5605803.html' },
+        { name: 'Kyodo via Minami-Nippon Shimbun', url: 'https://373news.com/news/national/detail/2026111801001314/' },
+        { name: 'ANN via KSB', url: 'https://news.ksb.co.jp/ann/article/17061296' },
+        { name: 'Tokyo Brief', url: 'https://tokyobrief.com/jp/articles/japan-october-arrivals-record-china-down-year-still-behind' },
+      ],
+      quiz: [
+        ['How many foreign visitors came to Japan in October?', 'About 3.91 million', 'About 391,000', 'About 39 million', 'About 1 million'],
+        ['Where did the most visitors come from?', 'South Korea', 'China', 'Taiwan', 'The United States'],
+        ['What happened to the number of visitors from China?', 'It fell by 47 percent', 'It rose by 47 percent', 'It stayed the same', 'It doubled'],
+      ],
+      levels: {
+        N5: {
+          title: '10月[がつ]に　日本[にほん]に　来[き]た　外国[がいこく]の　人[ひと]が　いちばん　多[おお]く',
+          lines: [
+            ['10月[がつ]に　日本[にほん]に　来[き]た　外国[がいこく]の　人[ひと]は、391万[まん]2500人[にん]でした。', '3,912,500 foreign visitors came to Japan in October.'],
+            ['1か月[げつ]では　今[いま]までで　いちばん　多[おお]い　数[かず]です。', 'It is the biggest number ever for one month.', 'The old record was April 2025, with 3,909,128.'],
+            ['日本[にほん]政府[せいふ]観光局[かんこうきょく]が　十八日[じゅうはちにち]に　発表[はっぴょう]しました。', 'The Japan National Tourism Organization announced it on the 18th.', '日本政府観光局 (JNTO) is the government body that promotes travel to Japan.'],
+            ['いちばん　多[おお]かったのは　韓国[かんこく]の　人[ひと]で、103万[まん]5800人[にん]でした。', 'The most came from South Korea: 1,035,800 people.'],
+            ['秋[あき]の　紅葉[こうよう]を　見[み]に　来[く]る　人[ひと]が　多[おお]かったです。', 'Many people came to see the autumn leaves.', '紅葉 are the red and yellow autumn leaves. The weak yen also helped.'],
+            ['でも、中国[ちゅうごく]から　来[き]た　人[ひと]は　37万[まん]9500人[にん]で、去年[きょねん]の　10月[がつ]より　47％　少[すく]なく　なりました。', 'But visitors from China numbered 379,500, 47 percent fewer than last October.'],
+            ['1月[がつ]から　10月[がつ]までで　見[み]ると、去年[きょねん]より　少[すこ]し　少[すく]ないです。', 'Looking at January to October together, the number is a little lower than last year.', 'The ten-month total is 34.64 million, 2.5 percent fewer.'],
+          ],
+        },
+        N4: {
+          title: '10月[がつ]に日本[にほん]に来[き]た外国人[がいこくじん]　391万[まん]人[にん]で1か月[げつ]の最多[さいた]に',
+          lines: [
+            ['日本[にほん]政府[せいふ]観光局[かんこうきょく]は十八日[じゅうはちにち]、10月[がつ]に日本[にほん]を訪[おとず]れた外国人[がいこくじん]が391万[まん]2500人[にん]だったと発表[はっぴょう]しました。', 'On the 18th, the Japan National Tourism Organization announced that 3,912,500 foreigners visited Japan in October.', 'The figure is an estimate.'],
+            ['去年[きょねん]の10月[がつ]より0.4％多[おお]く、去年[きょねん]4月[がつ]の390万[まん]9128人[にん]を超[こ]えて、1か月[げつ]の数[かず]として過去[かこ]最多[さいた]になりました。', 'That is 0.4 percent more than last October, and it beat last April\'s 3,909,128 to become the highest ever for one month.', '過去最多 means the most ever.'],
+            ['紅葉[こうよう]のシーズンで、円安[えんやす]も旅行者[りょこうしゃ]を後押[あとお]ししました。', 'It was the autumn leaves season, and the weak yen also gave travellers a push.', '円安 is a weak yen; 後押しする means to give a push or boost.'],
+            ['国[くに]や地域[ちいき]別[べつ]では韓国[かんこく]が103万[まん]5800人[にん]でいちばん多[おお]く、台湾[たいわん]が63万[まん]4600人[にん]で続[つづ]きました。', 'By country and region, South Korea had the most with 1,035,800, followed by Taiwan with 634,600.', '地域 means region; 別 means "by".'],
+            ['一方[いっぽう]、中国[ちゅうごく]からの客[きゃく]は37万[まん]9500人[にん]で、去年[きょねん]より47％減[へ]りました。', 'Visitors from China, on the other hand, numbered 379,500, down 47 percent from last year.'],
+            ['台湾[たいわん]についての高市[たかいち]首相[しゅしょう]の発言[はつげん]の後[あと]、中国[ちゅうごく]からの客[きゃく]は減[へ]り続[つづ]けています。', 'Since Prime Minister Takaichi\'s remarks about Taiwan, visitors from China have kept falling.', 'In November 2025, China told its people to avoid travel to Japan after Takaichi spoke in parliament about a possible emergency over Taiwan.'],
+            ['1月[がつ]から10月[がつ]までの合計[ごうけい]は3464万[まん]3000人[にん]で、去年[きょねん]より2.5％少[すく]なくなっています。', 'The total for January to October is 34,643,000, 2.5 percent fewer than last year.', '合計 means the total.'],
+          ],
+        },
+        N3: {
+          title: '10月[がつ]の訪日[ほうにち]客[きゃく]、単月[たんげつ]最多[さいた]の391万[まん]人[にん]　中国[ちゅうごく]は47％減[げん]',
+          lines: [
+            ['日本[にほん]政府[せいふ]観光局[かんこうきょく]が十八日[じゅうはちにち]発表[はっぴょう]した推計[すいけい]によると、10月[がつ]の訪日[ほうにち]客[きゃく]数[すう]は前年[ぜんねん]同月[どうげつ]比[ひ]0.4％増[ぞう]の391万[まん]2500人[にん]だった。', 'According to estimates released by the Japan National Tourism Organization on the 18th, the number of visitors to Japan in October was 3,912,500, up 0.4 percent from a year earlier.', '訪日客 are visitors to Japan; 推計 is an estimate.'],
+            ['これまで最多[さいた]だった2025年[ねん]4月[がつ]の390万[まん]9128人[にん]を上回[うわまわ]り、単月[たんげつ]として過去[かこ]最多[さいた]を更新[こうしん]した。', 'It topped the previous high of 3,909,128 in April 2025, setting a new record for a single month.', '更新する here means to set a new record.'],
+            ['紅葉[こうよう]シーズンに加[くわ]え、円安[えんやす]が追[お]い風[かぜ]となったとみられる。', 'Besides the autumn leaves season, the weak yen is thought to have helped.', '追い風 (a tailwind) means something that helps.'],
+            ['国[くに]・地域[ちいき]別[べつ]では韓国[かんこく]が19.4％増[ぞう]の103万[まん]5800人[にん]で最[もっと]も多[おお]く、台湾[たいわん]が6.5％増[ぞう]の63万[まん]4600人[にん]で続[つづ]いた。', 'By country and region, South Korea was first with 1,035,800, up 19.4 percent, followed by Taiwan with 634,600, up 6.5 percent.'],
+            ['一方[いっぽう]、中国[ちゅうごく]は47.0％減[げん]の37万[まん]9500人[にん]にとどまった。', 'China, meanwhile, came to only 379,500, down 47.0 percent.', '〜にとどまる means to stay at only that much.'],
+            ['台湾[たいわん]有事[ゆうじ]をめぐる高市[たかいち]首相[しゅしょう]の発言[はつげん]に中国[ちゅうごく]政府[せいふ]が反発[はんぱつ]し、日本[にほん]への渡航[とこう]を控[ひか]えるよう呼[よ]びかけて以来[いらい]、中国[ちゅうごく]客[きゃく]の減少[げんしょう]が続[つづ]いている。', 'Ever since the Chinese government objected to Prime Minister Takaichi\'s remarks about a Taiwan emergency and told its people to avoid travelling to Japan, the number of Chinese visitors has kept falling.', '台湾有事 is a military emergency over Taiwan; 渡航 is travel abroad. The call came in November 2025.'],
+            ['1月[がつ]から10月[がつ]までの累計[るいけい]は前年[ぜんねん]同期[どうき]比[ひ]2.5％減[げん]の3464万[まん]3000人[にん]で、年間[ねんかん]でも前年[ぜんねん]を下回[したまわ]る可能性[かのうせい]がある。', 'The total for January to October was 34,643,000, down 2.5 percent from the same period last year, and the full year may also come in below last year.', '累計 is a running total; 同期 is the same period.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-11-18-fukuoka-mayor-rerun',
       date: '2026-11-18',
       emoji: '🗳️',

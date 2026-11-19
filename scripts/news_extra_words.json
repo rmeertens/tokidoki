@@ -12343,5 +12343,435 @@
     "いつかかん",
     "for five days",
     "noun"
+  ],
+  "6か月": [
+    "ろっかげつ",
+    "six months",
+    "number + counter"
+  ],
+  "11兆7688億円": [
+    "じゅういっちょうななせんろっぴゃくはちじゅうはちおくえん",
+    "11.7688 trillion yen",
+    "number + counter"
+  ],
+  "12兆2453億円": [
+    "じゅうにちょうにせんよんひゃくごじゅうさんおくえん",
+    "12.2453 trillion yen",
+    "number + counter"
+  ],
+  "4765億円": [
+    "よんせんななひゃくろくじゅうごおくえん",
+    "476.5 billion yen",
+    "number + counter"
+  ],
+  "1979年": [
+    "せんきゅうひゃくななじゅうきゅうねん",
+    "1979",
+    "number + counter"
+  ],
+  "14か月": [
+    "じゅうよんかげつ",
+    "14 months",
+    "number + counter"
+  ],
+  "61％": [
+    "ろくじゅういちパーセント",
+    "61 percent",
+    "number + counter"
+  ],
+  "1.6倍": [
+    "いってんろくばい",
+    "1.6 times",
+    "number + counter"
+  ],
+  "約1.6倍": [
+    "やくいってんろくばい",
+    "about 1.6 times",
+    "number + counter"
+  ],
+  "1兆1206億円": [
+    "いっちょうせんにひゃくろくおくえん",
+    "1.1206 trillion yen",
+    "number + counter"
+  ],
+  "輸出入": [
+    "ゆしゅつにゅう",
+    "exports and imports",
+    "noun"
+  ],
+  "差し引く": [
+    "さしひく",
+    "to subtract, to deduct",
+    "verb"
+  ],
+  "単月": [
+    "たんげつ",
+    "a single month",
+    "noun"
+  ],
+  "21.6％": [
+    "にじゅういってんろくパーセント",
+    "21.6 percent",
+    "number + counter"
+  ],
+  "膨らむ": [
+    "ふくらむ",
+    "to swell, to grow",
+    "verb"
+  ],
+  "代替": [
+    "だいたい",
+    "substitute, alternative",
+    "noun"
+  ],
+  "森保": [
+    "もりやす",
+    "Moriyasu (family name)",
+    "name"
+  ],
+  "森保一": [
+    "もりやすはじめ",
+    "Hajime Moriyasu, Japan's soccer coach",
+    "name"
+  ],
+  "パラグアイ": [
+    "パラグアイ",
+    "Paraguay",
+    "place name"
+  ],
+  "85分": [
+    "はちじゅうごふん",
+    "85 minutes; the 85th minute",
+    "number + counter"
+  ],
+  "福田": [
+    "ふくだ",
+    "Fukuda (family name)",
+    "name"
+  ],
+  "福田師王": [
+    "ふくだしおう",
+    "Shio Fukuda, a soccer forward",
+    "name"
+  ],
+  "2018年": [
+    "にせんじゅうはちねん",
+    "2018",
+    "number + counter"
+  ],
+  "8年": [
+    "はちねん",
+    "eight years",
+    "number + counter"
+  ],
+  "大岩": [
+    "おおいわ",
+    "Oiwa (family name)",
+    "name"
+  ],
+  "大岩剛": [
+    "おおいわごう",
+    "Go Oiwa, a soccer coach",
+    "name"
+  ],
+  "8年あまり": [
+    "はちねんあまり",
+    "a little over eight years",
+    "number + counter"
+  ],
+  "8年余り": [
+    "はちねんあまり",
+    "a little over eight years",
+    "number + counter"
+  ],
+  "2分": [
+    "にふん",
+    "two minutes; the 2nd minute",
+    "number + counter"
+  ],
+  "40分": [
+    "よんじゅっぷん",
+    "40 minutes; the 40th minute",
+    "number + counter"
+  ],
+  "ヘディング": [
+    "ヘディング",
+    "a header (soccer)",
+    "noun"
+  ],
+  "追いつける": [
+    "おいつける",
+    "can catch up (potential of 追いつく)",
+    "verb"
+  ],
+  "約1年": [
+    "やくいちねん",
+    "about a year",
+    "number + counter"
+  ],
+  "21歳": [
+    "にじゅういっさい",
+    "21 years old",
+    "number + counter"
+  ],
+  "執る": [
+    "とる",
+    "to take (command), to carry out",
+    "verb"
+  ],
+  "ワールドカップ": [
+    "ワールドカップ",
+    "the World Cup",
+    "noun"
+  ],
+  "率いる": [
+    "ひきいる",
+    "to lead",
+    "verb"
+  ],
+  "デビュー": [
+    "デビュー",
+    "debut",
+    "noun"
+  ],
+  "反撃": [
+    "はんげき",
+    "counterattack, fightback",
+    "noun"
+  ],
+  "サウジアラビア": [
+    "サウジアラビア",
+    "Saudi Arabia",
+    "place name"
+  ],
+  "悪化": [
+    "あっか",
+    "worsening",
+    "noun"
+  ],
+  "限り": [
+    "かぎり",
+    "limit; (今年限り) up to and ending with",
+    "noun"
+  ],
+  "退任": [
+    "たいにん",
+    "stepping down from a post",
+    "noun"
+  ],
+  "兼任": [
+    "けんにん",
+    "holding two posts at once",
+    "noun"
+  ],
+  "広島": [
+    "ひろしま",
+    "Hiroshima",
+    "place name"
+  ],
+  "391万2500人": [
+    "さんびゃくきゅうじゅういちまんにせんごひゃくにん",
+    "3,912,500 people",
+    "number + counter"
+  ],
+  "103万5800人": [
+    "ひゃくさんまんごせんはっぴゃくにん",
+    "1,035,800 people",
+    "number + counter"
+  ],
+  "37万9500人": [
+    "さんじゅうななまんきゅうせんごひゃくにん",
+    "379,500 people",
+    "number + counter"
+  ],
+  "47％": [
+    "よんじゅうななパーセント",
+    "47 percent",
+    "number + counter"
+  ],
+  "47.0％": [
+    "よんじゅうななてんれいパーセント",
+    "47.0 percent",
+    "number + counter"
+  ],
+  "391万人": [
+    "さんびゃくきゅうじゅういちまんにん",
+    "3.91 million people",
+    "number + counter"
+  ],
+  "0.4％": [
+    "れいてんよんパーセント",
+    "0.4 percent",
+    "number + counter"
+  ],
+  "390万9128人": [
+    "さんびゃくきゅうじゅうまんきゅうせんひゃくにじゅうはちにん",
+    "3,909,128 people",
+    "number + counter"
+  ],
+  "63万4600人": [
+    "ろくじゅうさんまんよんせんろっぴゃくにん",
+    "634,600 people",
+    "number + counter"
+  ],
+  "3464万3000人": [
+    "さんぜんよんひゃくろくじゅうよんまんさんぜんにん",
+    "34,643,000 people",
+    "number + counter"
+  ],
+  "2.5％": [
+    "にてんごパーセント",
+    "2.5 percent",
+    "number + counter"
+  ],
+  "19.4％": [
+    "じゅうきゅうてんよんパーセント",
+    "19.4 percent",
+    "number + counter"
+  ],
+  "6.5％": [
+    "ろくてんごパーセント",
+    "6.5 percent",
+    "number + counter"
+  ],
+  "推計": [
+    "すいけい",
+    "estimate",
+    "noun"
+  ],
+  "客数": [
+    "きゃくすう",
+    "number of visitors",
+    "noun"
+  ],
+  "追い風": [
+    "おいかぜ",
+    "tailwind; something that helps",
+    "noun"
+  ],
+  "有事": [
+    "ゆうじ",
+    "emergency, (military) crisis",
+    "noun"
+  ],
+  "渡航": [
+    "とこう",
+    "travel abroad",
+    "noun"
+  ],
+  "控える": [
+    "ひかえる",
+    "to hold back from, to refrain",
+    "verb"
+  ],
+  "累計": [
+    "るいけい",
+    "running total",
+    "noun"
+  ],
+  "2500人": [
+    "にせんごひゃくにん",
+    "2,500 people",
+    "number + counter"
+  ],
+  "日本政府観光局": [
+    "にほんせいふかんこうきょく",
+    "Japan National Tourism Organization (JNTO)",
+    "organization"
+  ],
+  "円安": [
+    "えんやす",
+    "weak yen",
+    "noun"
+  ],
+  "高止まり": [
+    "たかどまり",
+    "staying at a high level",
+    "noun"
+  ],
+  "追加点": [
+    "ついかてん",
+    "a further goal / point",
+    "noun"
+  ],
+  "デビュー戦": [
+    "デビューせん",
+    "debut match",
+    "noun"
+  ],
+  "最終戦": [
+    "さいしゅうせん",
+    "final match",
+    "noun"
+  ],
+  "前年同月比": [
+    "ぜんねんどうげつひ",
+    "compared with the same month a year earlier",
+    "noun"
+  ],
+  "前年同期比": [
+    "ぜんねんどうきひ",
+    "compared with the same period a year earlier",
+    "noun"
+  ],
+  "地域別": [
+    "ちいきべつ",
+    "by region",
+    "noun"
+  ],
+  "新体制": [
+    "しんたいせい",
+    "new setup, new regime",
+    "noun"
+  ],
+  "アジアカップ": [
+    "アジアカップ",
+    "the Asian Cup (soccer)",
+    "noun"
+  ],
+  "訪日客": [
+    "ほうにちきゃく",
+    "visitors to Japan",
+    "noun"
+  ],
+  "0.4％増": [
+    "れいてんよんパーセントぞう",
+    "up 0.4 percent",
+    "number + counter"
+  ],
+  "21.6％増": [
+    "にじゅういってんろくパーセントぞう",
+    "up 21.6 percent",
+    "number + counter"
+  ],
+  "19.4％増": [
+    "じゅうきゅうてんよんパーセントぞう",
+    "up 19.4 percent",
+    "number + counter"
+  ],
+  "6.5％増": [
+    "ろくてんごパーセントぞう",
+    "up 6.5 percent",
+    "number + counter"
+  ],
+  "47.0％減": [
+    "よんじゅうななてんれいパーセントげん",
+    "down 47.0 percent",
+    "number + counter"
+  ],
+  "47％減": [
+    "よんじゅうななパーセントげん",
+    "down 47 percent",
+    "number + counter"
+  ],
+  "2.5％減": [
+    "にてんごパーセントげん",
+    "down 2.5 percent",
+    "number + counter"
+  ],
+  "2割増": [
+    "にわりぞう",
+    "up 20 percent",
+    "number + counter"
   ]
 }
