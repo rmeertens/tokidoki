@@ -207,8 +207,8 @@
   }
 
   function setToggles() {
-    $('#phrase-toggle-furigana').checked = settings.furigana;
-    $('#phrase-toggle-english').checked = settings.english;
+    // The toggles above the phrases and above the story are kept in step.
+    document.querySelectorAll('[data-phrase-toggle]').forEach(box => { box.checked = !!settings[box.dataset.phraseToggle]; });
     document.body.classList.toggle('phrases-hide-english', !settings.english);
   }
 
@@ -439,15 +439,25 @@
   }
 
   function onToggles(rerender) {
-    $('#phrase-toggle-furigana').addEventListener('change', e => {
-      settings.furigana = e.target.checked;
-      saveSettings();
-      rerender();
-    });
-    $('#phrase-toggle-english').addEventListener('change', e => {
-      settings.english = e.target.checked;
+    document.querySelectorAll('[data-phrase-toggle]').forEach(box => box.addEventListener('change', e => {
+      const key = e.target.dataset.phraseToggle;
+      settings[key] = e.target.checked;
       saveSettings();
       setToggles();
+      if (key === 'furigana') rerender();
+    }));
+    // Keys: F furigana, E English (each flips its checkbox).
+    const HOTKEYS = { f: 'furigana', e: 'english' };
+    document.addEventListener('keydown', e => {
+      if (e.ctrlKey || e.metaKey || e.altKey || e.repeat || e.isComposing) return;
+      const t = e.target;
+      if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) && t.type !== 'checkbox')) return;
+      if (document.querySelector('dialog[open]')) return;
+      const key = HOTKEYS[(e.key || '').toLowerCase()];
+      const box = key && document.querySelector(`[data-phrase-toggle="${key}"]`);
+      if (!box) return;
+      e.preventDefault();
+      box.click();
     });
   }
 

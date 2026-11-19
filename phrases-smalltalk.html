@@ -115,8 +115,8 @@
       <p class="phrase-section-blurb">Japan talks about the weather — and the seasons — a lot.</p>
 
       <div class="kana-settings-row phrase-toggles">
-        <label class="kana-script-toggle"><input type="checkbox" id="phrase-toggle-furigana"> Furigana</label>
-        <label class="kana-script-toggle"><input type="checkbox" id="phrase-toggle-english"> English</label>
+        <label class="kana-script-toggle" title="Key: F"><input type="checkbox" id="phrase-toggle-furigana" data-phrase-toggle="furigana"> Furigana</label>
+        <label class="kana-script-toggle" title="Key: E"><input type="checkbox" id="phrase-toggle-english" data-phrase-toggle="english"> English</label>
         <button type="button" class="btn-secondary speak-toggle hidden" data-speak-toggle aria-pressed="false">&#128266; Speak words on click: Off</button>
       </div>
 
@@ -130,6 +130,8 @@
         <div class="kana-settings-row phrase-story-controls">
           <button type="button" class="btn-secondary story-read hidden" id="btn-story-read" aria-pressed="false">▶ Read aloud</button>
           <button type="button" class="btn-secondary story-read hidden" id="btn-story-read-slow" aria-pressed="false">🐢 Slowly</button>
+          <label class="kana-script-toggle" title="Key: F"><input type="checkbox" data-phrase-toggle="furigana"> Furigana</label>
+          <label class="kana-script-toggle" title="Key: E"><input type="checkbox" data-phrase-toggle="english"> English</label>
         </div>
         <div class="phrase-story-lines" id="phrase-story-lines"></div>
       </section>
