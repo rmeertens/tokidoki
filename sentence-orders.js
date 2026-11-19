@@ -171,11 +171,12 @@
   ];
   const isWatashiWa = ph => /^(私|わたし)は、?$/.test(textOf(ph));
 
-  // Every accepted way to write a sentence, as { ja, jaHtml }; the first is
-  // the sentence as written. `line` is its entry in SENTENCE_WORDS.lines,
+  // Every accepted way to write a sentence, as { ja, jaHtml, kinds }; the
+  // first is the sentence as written. `kinds` says how a version differs:
+  // 'order' (another word order), 'no-watashi' / 'add-watashi'. `line` is its entry in SENTENCE_WORDS.lines,
   // `en` its English (an "I" sentence takes 私は or leaves it out).
   function variants(sentence, line, gloss) {
-    const own = { ja: sentence.ja, jaHtml: sentence.jaHtml || sentence.ja };
+    const own = { ja: sentence.ja, jaHtml: sentence.jaHtml || sentence.ja, kinds: [] };
     if (!line || !gloss) return [own];
     const toWith = line.g.filter(([id]) => id === 'to-with').map(([, snip]) => snip);
     const ph = phrases(line, gloss, toWith);
@@ -194,15 +195,15 @@
     };
     let orders = free.length <= MAX_PHRASES ? permutations(free).filter(o => natural(o, ctx)) : [];
     orders = [free].concat(orders);
-    let sentences = orders.map(o => fixed.concat(o, [pred]));
+    let sentences = orders.map((o, i) => Object.assign(fixed.concat(o, [pred]), { kinds: i ? ['order'] : [] }));
 
     // With or without 私は when the English is about "I".
     if (/^I\b/.test(sentence.en || '')) {
       const extra = [];
       const mine = ph.some(p => /^(私|わたし|僕|ぼく)/.test(textOf(p)));
       sentences.forEach(list => {
-        if (isWatashiWa(list[0])) extra.push(list.slice(1));
-        else if (!mine) extra.push([WATASHI].concat(list));
+        if (isWatashiWa(list[0])) extra.push(Object.assign(list.slice(1), { kinds: list.kinds.concat('no-watashi') }));
+        else if (!mine) extra.push(Object.assign([WATASHI].concat(list), { kinds: list.kinds.concat('add-watashi') }));
       });
       sentences = sentences.concat(extra);
     }
@@ -214,7 +215,7 @@
       const ja = toks.map(t => t.text).join('');
       if (seen.has(ja) || !ja.replace(/[。、？！?!]/g, '')) return;
       seen.add(ja);
-      out.push({ ja, jaHtml: toks.map(t => t.html).join('') });
+      out.push({ ja, jaHtml: toks.map(t => t.html).join(''), kinds: list.kinds });
     });
     return out;
   }

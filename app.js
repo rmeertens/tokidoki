@@ -2047,7 +2047,8 @@
     if (lastTypedCorrect) sessionCorrect++;
     exEl.innerHTML = typedHtml
       + '<div class="translate-retry"></div>'
-      + `<div class="translate-original-label">Translation</div><div class="translate-original">${originalContent}</div>`;
+      + `<div class="translate-original-label">Translation</div><div class="translate-original">${originalContent}</div>`
+      + `<div class="translate-alts">${translateAltsHtml(sentence, isEnToJa)}</div>`;
     // "Retry": after a wrong typed answer, a new box to type it again.
     if (settings.retryTyping && settings.typingMode && typed && !lastTypedCorrect) addTranslateRetryBox();
 
@@ -2292,6 +2293,8 @@
     const ja = settings.showFurigana ? (s.jaHtml || s.ja) : s.ja;
     if (currentCard.direction === 'en-to-ja') {
       if (answered) $('#card-kanji-back').innerHTML = ja;
+      const alts = $('#card-example-sentence .translate-alts');
+      if (answered && alts) alts.innerHTML = translateAltsHtml(s, true);
     } else {
       $('#card-kanji').innerHTML = ja;
       const orig = $('#card-example-sentence .translate-original');
@@ -2308,8 +2311,37 @@
     const data = window.SENTENCE_WORDS;
     const id = translateSource === 'sentences' && currentCard && currentCard.sentence === sentence
       ? translateLineId(currentCard) : null;
-    if (!window.SentenceOrders || !data || !id) return [sentence];
-    return SentenceOrders.variants(sentence, data.lines[id], data.gloss);
+    // Other word orders, with or without 私は, 〜ないです / 〜ありません…
+    // (sentence-alternatives.js), each tagged with how it differs.
+    if (!window.SentenceAlternatives) return [sentence];
+    return SentenceAlternatives.japanese(sentence, data && id ? data.lines[id] : null, data && data.gloss);
+  }
+
+  // Under the card's answer: the other right answers, each with why.
+  function translateAltsHtml(sentence, isEnToJa) {
+    if (!window.SentenceAlternatives || translateSource === 'adjectives') return '';
+    const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const versions = isEnToJa ? translateVersions(sentence) : SentenceAlternatives.english(sentence);
+    const groups = SentenceAlternatives.shown(versions);
+    if (!groups.length) return '';
+    const items = groups.map(g => {
+      const lines = g.items.map(v => (isEnToJa
+        ? `<div class="translate-alt-text" lang="ja">${settings.showFurigana ? v.jaHtml : esc(v.ja)}</div>`
+        : `<div class="translate-alt-text">${esc(v.en)}</div>`)).join('');
+      const more = g.more ? ` <span class="translate-alt-more">(+${g.more} more)</span>` : '';
+      return `<li class="translate-alt">${lines}`
+        + `<div class="translate-alt-why"><span class="translate-alt-label">${esc(g.label)}</span> ${esc(g.why)}${more}</div></li>`;
+    });
+    const combined = groups.length > 1 && isEnToJa ? '<p class="translate-alt-note">These can be combined, too.</p>' : '';
+    return `<div class="translate-original-label">Also correct</div><ul class="translate-alts-list">${items.join('')}</ul>${combined}`;
+  }
+
+  // "✓ Correct", and why when the answer was one of the other ways to say it.
+  function translateCorrectHtml(reasons) {
+    const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const why = (reasons || []).map(([label, text]) =>
+      `<div class="translate-alt-why"><span class="translate-alt-label">${esc(label)}</span> ${esc(text)}</div>`).join('');
+    return `<div class="translate-typed"><span class="bunkei-ok">✓ Correct</span>${why}</div>`;
   }
 
   // An adjective sentence with the adjective in each of its other spellings
@@ -2337,37 +2369,50 @@
     const kana = html => (window.EnHover ? EnHover.kanaOfRuby(html) : html);
     // Other word orders (友達と日曜日に… for 日曜日に友達と…) and the sentence
     // with or without 私は count too (sentence-orders.js).
+    // English: contractions, Mr. / Ms. / -san, a / the count the same.
+    if (!isEnToJa && window.SentenceAlternatives) {
+      const reasons = SentenceAlternatives.matchEnglish(typed, sentence);
+      if (reasons) {
+        lastTypedCorrect = true;
+        return translateCorrectHtml(reasons);
+      }
+    }
     const versions = isEnToJa ? translateVersions(sentence) : [sentence];
     const answers = [];
+    const versionOf = new Map();
     versions.forEach(v => {
       if (!isEnToJa) { answers.push(v.en); return; }
-      answers.push(v.ja, kana(v.jaHtml || v.ja));
-      // 家 read いえ can just as well be read うち.
-      const ie = '<ruby>家<rp>(</rp><rt>いえ</rt><rp>)</rp></ruby>';
-      if (v.jaHtml && v.jaHtml.includes(ie)) {
-        const alt = v.jaHtml.split(ie).join('うち');
-        answers.push(kana(alt), alt.replace(/<rp>.*?<\/rp>|<rt>.*?<\/rt>|<\/?ruby>/g, ''));
-      }
+      [v.ja, kana(v.jaHtml || v.ja)].forEach(a => {
+        answers.push(a);
+        if (!versionOf.has(a)) versionOf.set(a, v);
+      });
     });
     // Katakana counts the same as hiragana (typing gives hiragana: アメリカ
     // can be typed あめりか), and punctuation is ignored, as in the diff.
     const key = s => s.normalize('NFKC').toLowerCase()
       .replace(/[ァ-ヶ]/g, k => String.fromCharCode(k.charCodeAt(0) - 0x60))
       .replace(/[\s　。、．，,.!?！？「」『』'"’~～〜・]/g, '');
-    lastTypedCorrect = answers.some(a => key(a) === key(typed));
+    const hit = answers.find(a => key(a) === key(typed));
+    lastTypedCorrect = hit !== undefined;
     if (lastTypedCorrect) {
-      return `<div class="translate-typed"><span class="bunkei-ok">✓ Correct</span></div>`;
+      const v = versionOf.get(hit);
+      return translateCorrectHtml(v && window.SentenceAlternatives ? SentenceAlternatives.reasons(v.kinds) : []);
     }
     if (!window.AnswerDiff) return '';
     // The answer spelt the way it was typed (kanji where the kanji was typed),
     // so a kanji word typed right isn't held against a kana answer.
-    if (isEnToJa) versions.forEach(v => answers.push(spelledAsTyped(typed, v)));
+    if (isEnToJa) versions.forEach(v => {
+      const a = spelledAsTyped(typed, v);
+      answers.push(a);
+      if (!versionOf.has(a)) versionOf.set(a, v);
+    });
     const target = AnswerDiff.closest(typed, answers);
     const d = AnswerDiff.diff(typed, target);
     // Nothing to mark (only differences the diff doesn't count): it's right.
     if (d.typed.every(c => c.ok) && d.expected.every(c => c.ok)) {
       lastTypedCorrect = true;
-      return `<div class="translate-typed"><span class="bunkei-ok">✓ Correct</span></div>`;
+      const v = versionOf.get(target);
+      return translateCorrectHtml(v && window.SentenceAlternatives ? SentenceAlternatives.reasons(v.kinds) : []);
     }
     return `<div class="translate-typed answer-diff"${isEnToJa ? ' lang="ja"' : ''}>`
       + `<div><span class="answer-diff-label">You typed</span>${AnswerDiff.toHtml(d.typed, 'diff-wrong')}</div>`

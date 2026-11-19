@@ -206,6 +206,16 @@
   `sentences-words.js`, conservatively (only noun phrases before a simple
   verb move; nothing moves into or out of a clause). `test_sentence_orders.js`
   lists what must and mustn't be accepted.
+- `sentence-alternatives.js` adds the other right answers on top of those
+  orders — 〜ないです / 〜ありません and では / じゃ, 私の or not with family
+  words (母 = "my mother"), あなたは or not in questions, 家 read うち, 僕 for
+  私 — each version tagged with how it differs (`kinds`), and checks typed
+  English loosely (contractions, Mr. / Ms. / -san for さん, a / the / my
+  where the Japanese doesn't say). The card's answer side lists them under
+  "Also correct" with why each is right (`WHY`, `SHOW`), and a typed answer
+  that was one of them gets that reason under "✓ Correct". A new kind of
+  alternative is a rule in `RULES` with an entry in `WHY`;
+  `test_sentence_alternatives.js` lists what must and mustn't be accepted.
 
 - Conversation starters spot the hints an answer uses by meaning, not by
   spelling: the answer is split into words, each taken back to its
