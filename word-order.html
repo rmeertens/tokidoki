@@ -21,7 +21,7 @@
   <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
   <link rel="canonical" href="https://tokidoki.meertens.dev/word-order.html">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "JLPT Word Order Practice — 文の組み立て ★ questions", "description": "Free JLPT-style word order (文の組み立て) practice for N5 to N3: put four pieces of a sentence in order and pick the one for the ★ blank, like the real test.", "url": "https://tokidoki.meertens.dev/word-order.html", "inLanguage": "en", "learningResourceType": "exercise", "educationalLevel": "JLPT N5–N3", "isAccessibleForFree": true, "isPartOf": {"@type": "WebSite", "name": "Tokidoki", "url": "https://tokidoki.meertens.dev/"}}</script>
-  <link rel="stylesheet" href="style.css?v=119">
+  <link rel="stylesheet" href="style.css?v=120">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -159,13 +159,14 @@
         <button id="wo-quit" class="btn-undo" aria-label="Back to the start">✕</button>
       </div>
 
+      <div class="wo-quiz-toggles">
+        <label class="kana-script-toggle" title="Show or hide furigana (F)"><input type="checkbox" id="wo-q-furigana" checked> Furigana <span class="wo-key" aria-hidden="true">F</span></label>
+      </div>
+
       <div class="card wo-card">
         <div class="wo-head">
           <span class="wo-badge" lang="ja">文の組み立て</span>
-          <span class="wo-head-right">
-            <button type="button" class="wo-furi-toggle" id="wo-furi-toggle" aria-pressed="true" title="Show or hide furigana (F)"><span lang="ja">ふりがな</span></button>
-            <span class="wo-level" id="wo-level"></span>
-          </span>
+          <span class="wo-level" id="wo-level"></span>
         </div>
         <div class="kana-prompt-label" id="wo-prompt"></div>
         <div class="wo-sentence" id="wo-sentence" lang="ja"></div>
@@ -214,7 +215,7 @@
   </div>
 
   <script src="word-order-data.js?v=4"></script>
-  <script src="word-order.js?v=7"></script>
+  <script src="word-order.js?v=8"></script>
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=5"></script>
   <script src="app.js?v=87"></script>

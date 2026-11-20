@@ -152,7 +152,7 @@
   function applyDisplaySettings() {
     document.body.classList.toggle('wo-no-furigana', !settings.furigana);
     $('wo-opt-furigana').checked = settings.furigana;
-    $('wo-furi-toggle').setAttribute('aria-pressed', String(settings.furigana));
+    $('wo-q-furigana').checked = settings.furigana;
   }
 
   function toggleFurigana() {
@@ -614,7 +614,7 @@
     $('wo-en').classList.remove('hidden');
     $('wo-en-btn').classList.add('hidden');
   });
-  $('wo-furi-toggle').addEventListener('click', toggleFurigana);
+  $('wo-q-furigana').addEventListener('change', toggleFurigana);
   $('btn-wo-check').addEventListener('click', () => answer());
   $('btn-wo-clear').addEventListener('click', () => {
     const q = current();
@@ -640,7 +640,8 @@
 
   document.addEventListener('keydown', e => {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
-    if (e.target.closest && e.target.closest('input, textarea, select')) return;
+    if (e.target.closest && e.target.closest('input:not([type=checkbox]), textarea, select')) return;
+    if (e.target.type === 'checkbox' && e.key !== 'f' && e.key !== 'F') return;
     if ($('screen-word-order-done').classList.contains('active') && e.key === ' '
         && !(e.target.closest && e.target.closest('button'))) {
       e.preventDefault();
@@ -649,8 +650,8 @@
       return;
     }
     if (!session || !$('screen-word-order').classList.contains('active')) return;
-    const q = current();
     if (e.key === 'f' || e.key === 'F') { e.preventDefault(); toggleFurigana(); return; }
+    const q = current();
     const n = Number(e.key);
     if (n >= 1 && n <= q.deck.length && !q.answered) { e.preventDefault(); place(q.deck[n - 1]); }
     else if (e.key === 'Backspace' && !q.answered) { e.preventDefault(); undo(); }
