@@ -6823,6 +6823,8 @@ body.lis-panel-open #screen-listening { padding-bottom: 50dvh; }
 .wo-card { align-items: stretch; background: var(--bg-card); border-left-color: var(--salmon); }
 .wo-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
 .wo-badge { font-family: var(--font-jp); font-size: 0.8rem; font-weight: 700; color: var(--salmon); }
+.wo-head-right { display: flex; align-items: center; gap: 10px; }
+.wo-furi-toggle { font-size: 0.75rem; margin: 0; padding: 3px 10px; gap: 6px; }
 .wo-level { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); border: 1px solid var(--border); border-radius: 999px; padding: 1px 8px; }
 
 /* The sentence: text runs and four blanks, wrapping as one line of text. */

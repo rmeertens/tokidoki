@@ -151,6 +151,14 @@
 
   function applyDisplaySettings() {
     document.body.classList.toggle('wo-no-furigana', !settings.furigana);
+    $('wo-opt-furigana').checked = settings.furigana;
+    $('wo-card-furigana').checked = settings.furigana;
+  }
+
+  function setFurigana(on) {
+    settings.furigana = on;
+    save(SETTINGS_KEY, settings);
+    applyDisplaySettings();
   }
 
   // ─── Home ──────────────────────────────────────────────────────────────────
@@ -476,6 +484,7 @@
       save(SETTINGS_KEY, settings);
       applyDisplaySettings();
     }));
+  $('wo-card-furigana').addEventListener('change', e => setFurigana(e.target.checked));
   $('wo-sections').addEventListener('click', e => {
     const chip = e.target.closest('[data-set]');
     if (chip) start(chip.dataset.set);
@@ -630,7 +639,14 @@
 
   document.addEventListener('keydown', e => {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
-    if (e.target.closest && e.target.closest('input, textarea, select')) return;
+    const inField = sel => e.target.closest && e.target.closest(sel);
+    if ((e.key === 'f' || e.key === 'F') && !inField('input:not([type=checkbox]), textarea, select')
+        && $('screen-word-order').classList.contains('active')) {
+      e.preventDefault();
+      setFurigana(!settings.furigana);
+      return;
+    }
+    if (inField('input, textarea, select')) return;
     if ($('screen-word-order-done').classList.contains('active') && e.key === ' '
         && !(e.target.closest && e.target.closest('button'))) {
       e.preventDefault();
