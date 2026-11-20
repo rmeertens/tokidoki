@@ -6996,7 +6996,7 @@ body.wo-dragging, body.wo-dragging * { cursor: grabbing !important; }
 .wo-cmp-arrows .bad { stroke: var(--red); fill: var(--red); }
 .wo-cmp-arrows line { stroke-width: 2.5; stroke-linecap: round; }
 
-body.wo-no-furigana .wo-card rt, body.wo-no-furigana .wo-drag-ghost rt { visibility: hidden; }
+body.wo-no-furigana .wo-card:not(.wo-answered) rt, body.wo-no-furigana .wo-drag-ghost rt { visibility: hidden; }
 
 @media (max-width: 480px) {
   .wo-sentence { font-size: 1.1rem; gap: 12px 4px; }

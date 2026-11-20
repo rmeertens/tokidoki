@@ -322,6 +322,8 @@
     $('wo-progress-text').textContent = `${session.pos + 1} / ${session.queue.length}`;
     $('wo-bar-fill').style.width = `${(session.pos / session.queue.length) * 100}%`;
     $('wo-level').textContent = session.title;
+    // Once answered, the furigana always shows, even with the switch off.
+    document.querySelector('.wo-card').classList.toggle('wo-answered', q.answered);
     $('wo-prompt').textContent = session.starOnly
       ? 'Which piece goes in the ★ blank?'
       : 'Put the pieces in the right order.';
