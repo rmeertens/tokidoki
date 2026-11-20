@@ -151,6 +151,15 @@
 
   function applyDisplaySettings() {
     document.body.classList.toggle('wo-no-furigana', !settings.furigana);
+    $('wo-opt-furigana').checked = settings.furigana;
+    $('wo-furi-toggle').setAttribute('aria-pressed', String(settings.furigana));
+  }
+
+  function toggleFurigana() {
+    settings.furigana = !settings.furigana;
+    save(SETTINGS_KEY, settings);
+    applyDisplaySettings();
+    drawArrows();
   }
 
   // ─── Home ──────────────────────────────────────────────────────────────────
@@ -605,6 +614,7 @@
     $('wo-en').classList.remove('hidden');
     $('wo-en-btn').classList.add('hidden');
   });
+  $('wo-furi-toggle').addEventListener('click', toggleFurigana);
   $('btn-wo-check').addEventListener('click', () => answer());
   $('btn-wo-clear').addEventListener('click', () => {
     const q = current();
@@ -640,6 +650,7 @@
     }
     if (!session || !$('screen-word-order').classList.contains('active')) return;
     const q = current();
+    if (e.key === 'f' || e.key === 'F') { e.preventDefault(); toggleFurigana(); return; }
     const n = Number(e.key);
     if (n >= 1 && n <= q.deck.length && !q.answered) { e.preventDefault(); place(q.deck[n - 1]); }
     else if (e.key === 'Backspace' && !q.answered) { e.preventDefault(); undo(); }
