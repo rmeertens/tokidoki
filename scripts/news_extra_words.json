@@ -12773,5 +12773,415 @@
     "にわりぞう",
     "up 20 percent",
     "number + counter"
+  ],
+  "3007円": [
+    "さんぜんななえん",
+    "3,007 yen",
+    "number"
+  ],
+  "3007": [
+    "さんぜんなな",
+    "3,007",
+    "number"
+  ],
+  "5万6436円": [
+    "ごまんろくせんよんひゃくさんじゅうろくえん",
+    "56,436 yen",
+    "number"
+  ],
+  "アンソロピック": [
+    "アンソロピック",
+    "Anthropic (US AI company)",
+    "organization"
+  ],
+  "もうける": [
+    "もうける",
+    "to make a profit",
+    "verb"
+  ],
+  "もうかる": [
+    "もうかる",
+    "to be profitable, to pay",
+    "verb"
+  ],
+  "約5％": [
+    "やくごパーセント",
+    "about 5 percent",
+    "number"
+  ],
+  "約7か月ぶり": [
+    "やくななかげつぶり",
+    "for the first time in about seven months",
+    "expression"
+  ],
+  "1社": [
+    "いっしゃ",
+    "one company",
+    "number"
+  ],
+  "約631円": [
+    "やくろっぴゃくさんじゅういちえん",
+    "about 631 yen",
+    "number"
+  ],
+  "83ドル": [
+    "はちじゅうさんドル",
+    "83 dollars",
+    "number"
+  ],
+  "3割": [
+    "さんわり",
+    "30 percent",
+    "number"
+  ],
+  "三日ぶり": [
+    "みっかぶり",
+    "for the first time in three days",
+    "expression"
+  ],
+  "反落": [
+    "はんらく",
+    "a fall after a rise",
+    "noun"
+  ],
+  "56銭安": [
+    "ごじゅうろくせんやす",
+    "down 56 sen (0.56 yen)",
+    "number"
+  ],
+  "65銭": [
+    "ろくじゅうごせん",
+    "65 sen (0.65 yen)",
+    "number"
+  ],
+  "割り込む": [
+    "わりこむ",
+    "to fall below (a level); to cut in",
+    "verb"
+  ],
+  "ナスダック": [
+    "ナスダック",
+    "Nasdaq (US stock market)",
+    "organization"
+  ],
+  "初値": [
+    "はつね",
+    "first traded price of a new stock",
+    "noun"
+  ],
+  "伸び悩む": [
+    "のびなやむ",
+    "to stop growing, to lose momentum",
+    "verb"
+  ],
+  "採算": [
+    "さいさん",
+    "profitability",
+    "noun"
+  ],
+  "和らげる": [
+    "やわらげる",
+    "to ease, to soften",
+    "verb"
+  ],
+  "419円": [
+    "よんひゃくじゅうきゅうえん",
+    "419 yen",
+    "number"
+  ],
+  "一転": [
+    "いってん",
+    "complete change, turnaround",
+    "noun"
+  ],
+  "水星": [
+    "すいせい",
+    "Mercury (planet)",
+    "noun"
+  ],
+  "ベピコロンボ": [
+    "ベピコロンボ",
+    "BepiColombo (Japan-Europe Mercury mission)",
+    "organization"
+  ],
+  "MPO": [
+    "エムピーオー",
+    "MPO (Mercury Planetary Orbiter, ESA probe)",
+    "name"
+  ],
+  "約8年": [
+    "やくはちねん",
+    "about eight years",
+    "number"
+  ],
+  "重力": [
+    "じゅうりょく",
+    "gravity",
+    "noun"
+  ],
+  "磁場": [
+    "じば",
+    "magnetic field",
+    "noun"
+  ],
+  "周回": [
+    "しゅうかい",
+    "going around, orbiting",
+    "noun"
+  ],
+  "磁気圏": [
+    "じきけん",
+    "magnetosphere",
+    "noun"
+  ],
+  "結合": [
+    "けつごう",
+    "joining, combining",
+    "noun"
+  ],
+  "金星": [
+    "きんせい",
+    "Venus (planet)",
+    "noun"
+  ],
+  "スイングバイ": [
+    "スイングバイ",
+    "swing-by (gravity assist)",
+    "noun"
+  ],
+  "推進": [
+    "すいしん",
+    "propulsion; promotion",
+    "noun"
+  ],
+  "出力": [
+    "しゅつりょく",
+    "output, power",
+    "noun"
+  ],
+  "大相撲": [
+    "おおずもう",
+    "professional sumo",
+    "noun"
+  ],
+  "十一勝": [
+    "じゅういっしょう",
+    "11 wins",
+    "number"
+  ],
+  "一敗": [
+    "いっぱい",
+    "1 loss",
+    "number"
+  ],
+  "二敗": [
+    "にはい",
+    "2 losses",
+    "number"
+  ],
+  "八勝": [
+    "はっしょう",
+    "8 wins",
+    "number"
+  ],
+  "力士": [
+    "りきし",
+    "sumo wrestler",
+    "noun"
+  ],
+  "横綱": [
+    "よこづな",
+    "yokozuna (sumo's top rank)",
+    "noun"
+  ],
+  "単独": [
+    "たんどく",
+    "alone, sole",
+    "noun"
+  ],
+  "12日目": [
+    "じゅうににちめ",
+    "the 12th day",
+    "number"
+  ],
+  "13日目": [
+    "じゅうさんにちめ",
+    "the 13th day",
+    "number"
+  ],
+  "前頭": [
+    "まえがしら",
+    "maegashira (sumo rank)",
+    "noun"
+  ],
+  "小結": [
+    "こむすび",
+    "komusubi (sumo rank)",
+    "noun"
+  ],
+  "関脇": [
+    "せきわけ",
+    "sekiwake (sumo rank)",
+    "noun"
+  ],
+  "大関": [
+    "おおぜき",
+    "ozeki (sumo's second rank)",
+    "noun"
+  ],
+  "若元春": [
+    "わかもとはる",
+    "Wakamotoharu (sumo wrestler)",
+    "name"
+  ],
+  "若隆景": [
+    "わかたかかげ",
+    "Wakatakakage (sumo wrestler)",
+    "name"
+  ],
+  "熱海富士": [
+    "あたみふじ",
+    "Atamifuji (sumo wrestler)",
+    "name"
+  ],
+  "義ノ富士": [
+    "よしのふじ",
+    "Yoshinofuji (sumo wrestler)",
+    "name"
+  ],
+  "金峰山": [
+    "きんぼうざん",
+    "Kinbozan (sumo wrestler)",
+    "name"
+  ],
+  "霧島": [
+    "きりしま",
+    "Kirishima (sumo wrestler)",
+    "name"
+  ],
+  "取組": [
+    "とりくみ",
+    "sumo bout",
+    "noun"
+  ],
+  "33歳": [
+    "さんじゅうさんさい",
+    "33 years old",
+    "number"
+  ],
+  "幕内": [
+    "まくうち",
+    "top division of sumo",
+    "noun"
+  ],
+  "十両": [
+    "じゅうりょう",
+    "juryo, sumo's second division",
+    "noun"
+  ],
+  "守り": [
+    "まもり",
+    "keeping, protecting (守る)",
+    "verb"
+  ],
+  "平幕": [
+    "ひらまく",
+    "rank-and-file top-division wrestler (maegashira)",
+    "noun"
+  ],
+  "寄り切る": [
+    "よりきる",
+    "to force out (sumo, holding the belt)",
+    "verb"
+  ],
+  "押し出す": [
+    "おしだす",
+    "to push out",
+    "verb"
+  ],
+  "10勝目": [
+    "じゅっしょうめ",
+    "10th win",
+    "number"
+  ],
+  "1差": [
+    "いっさ",
+    "a difference of one",
+    "number"
+  ],
+  "争い": [
+    "あらそい",
+    "contest, race",
+    "noun"
+  ],
+  "4人": [
+    "よにん",
+    "four people",
+    "number"
+  ],
+  "絞る": [
+    "しぼる",
+    "to narrow down; to squeeze",
+    "verb"
+  ],
+  "山場": [
+    "やまば",
+    "climax, decisive point",
+    "noun"
+  ],
+  "日経平均": [
+    "にっけいへいきん",
+    "Nikkei Stock Average (Tokyo stock index)",
+    "noun"
+  ],
+  "大の里": [
+    "おおのさと",
+    "Onosato (sumo wrestler)",
+    "name"
+  ],
+  "ESA": [
+    "イーエスエー",
+    "ESA, the European Space Agency",
+    "organization"
+  ],
+  "九州場所": [
+    "きゅうしゅうばしょ",
+    "Kyushu Grand Sumo Tournament (November, Fukuoka)",
+    "noun"
+  ],
+  "日欧": [
+    "にちおう",
+    "Japan and Europe",
+    "noun"
+  ],
+  "今週末": [
+    "こんしゅうまつ",
+    "this weekend",
+    "noun"
+  ],
+  "全面安": [
+    "ぜんめんやす",
+    "a fall in almost all stocks",
+    "noun"
+  ],
+  "大幅安": [
+    "おおはばやす",
+    "a sharp fall (in prices)",
+    "noun"
+  ],
+  "史上初": [
+    "しじょうはつ",
+    "first ever in history",
+    "noun"
+  ],
+  "初優勝": [
+    "はつゆうしょう",
+    "first tournament win",
+    "noun"
+  ],
+  "本格的": [
+    "ほんかくてき",
+    "full-scale, proper",
+    "na-adjective"
   ]
 }

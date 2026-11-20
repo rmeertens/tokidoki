@@ -27,6 +27,173 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-11-20-nikkei-falls-3007',
+      date: '2026-11-20',
+      emoji: '📉',
+      titleEn: 'Nikkei average falls 3,007 points, the fifth-biggest one-day drop ever, as AI and chip stocks are sold the day after Anthropic\'s record IPO',
+      sources: [
+        { name: 'Kobe Keizai News', url: 'https://news.kobekeizai.jp/blog-entry-23993.html' },
+        { name: 'ANN via Yahoo! News', url: 'https://news.yahoo.co.jp/articles/7bd93db529f3316eb7b7f694de109bd7dff4b0ce' },
+        { name: 'Fisco via Zaikei', url: 'https://www.zaikei.co.jp/article/20261120/878590.html' },
+        { name: 'Nikkei', url: 'https://www.nikkei.com/article/DGXZQOFL200MHTQ6A121C2000000/' },
+        { name: 'NBC News', url: 'https://www.nbcnews.com/business/markets/live-blog/anthropic-ipo-live-updates-rcna610159' },
+      ],
+      quiz: [
+        ['How much did the Nikkei average fall on the 20th?', '3,007 yen (points)', '307 yen (points)', '30,007 yen (points)', 'It rose by 3,007 yen'],
+        ['Shares of what kind of companies were sold a lot?', 'AI and semiconductor companies', 'Food companies', 'Railway companies', 'Banks only'],
+        ['What happened in America just before?', 'Shares of the AI company Anthropic started trading', 'The stock market closed for a week', 'A big earthquake hit California', 'The dollar became worth nothing'],
+      ],
+      levels: {
+        N5: {
+          title: '日経平均[にっけいへいきん]が　3007円[えん]　下[さ]がりました',
+          lines: [
+            ['二十日[はつか]、日本[にっぽん]の　株[かぶ]の　値段[ねだん]が　大[おお]きく　下[さ]がりました。', 'On the 20th, stock prices in Japan fell a lot.', '株 are shares (stocks) in a company.'],
+            ['日経平均[にっけいへいきん]は　3007円[えん]　下[さ]がって、5万[まん]6436円[えん]に　なりました。', 'The Nikkei average fell 3,007 yen to 56,436 yen.', '日経平均 is the average price of 225 big companies on the Tokyo stock market. The fall was 5.06%.'],
+            ['1日[にち]で　下[さ]がった　数字[すうじ]は、今[いま]までで　5番目[ばんめ]に　大[おお]きいです。', 'It is the fifth-biggest fall in one day ever.', '番目 makes order numbers: 5番目 = fifth.'],
+            ['AIや　半導体[はんどうたい]の　会社[かいしゃ]の　株[かぶ]を　売[う]る　人[ひと]が　多[おお]かったです。', 'Many people sold shares of AI and semiconductor companies.', '半導体 are semiconductors, the chips used in computers and phones.'],
+            ['十九日[じゅうくにち]、アメリカで　AIの　会社[かいしゃ]「アンソロピック」の　株[かぶ]を　買[か]う　ことが　できるように　なりました。', 'On the 19th, it became possible to buy shares of the AI company Anthropic in America.', 'Anthropic listed its shares on the Nasdaq market in New York, in what is said to be the biggest share listing (IPO) ever.'],
+            ['でも、アメリカの　株[かぶ]の　値段[ねだん]も　下[さ]がりました。', 'But stock prices in America fell too.'],
+            ['AIの　会社[かいしゃ]が　本当[ほんとう]に　お金[かね]を　もうける　ことが　できるか、心配[しんぱい]する　人[ひと]が　います。', 'Some people are worried about whether AI companies can really make money.', 'もうける means to make a profit.'],
+          ],
+        },
+        N4: {
+          title: '日経平均[にっけいへいきん]、3007円[えん]安[やす]　AIや半導体[はんどうたい]の株[かぶ]が売[う]られる',
+          lines: [
+            ['二十日[はつか]の東京[とうきょう]株式[かぶしき]市場[しじょう]で、日経平均[にっけいへいきん]株価[かぶか]が大[おお]きく下[さ]がりました。', 'On the Tokyo stock market on the 20th, the Nikkei average fell sharply.', '株式市場 is the stock market; 株価 is a share price.'],
+            ['終値[おわりね]は前[まえ]の日[ひ]より3007円[えん]安[やす]い5万[まん]6436円[えん]で、約[やく]5％の下落[げらく]でした。', 'It closed at 56,436 yen, 3,007 yen lower than the day before, a fall of about 5 percent.', '終値 is the closing price; 下落 means a fall.'],
+            ['1日[にち]の下[さ]げ幅[はば]としては、今[いま]までで5番目[ばんめ]に大[おお]きいです。', 'As a one-day fall, it is the fifth-biggest ever.', '下げ幅 is the size of a fall.'],
+            ['終値[おわりね]が5万[まん]7000円[えん]より低[ひく]くなったのは、約[やく]7か月[げつ]ぶりです。', 'It is the first time in about seven months that the Nikkei has closed below 57,000 yen.', '〜ぶり means "for the first time in (a period)".'],
+            ['AIや半導体[はんどうたい]に関係[かんけい]する会社[かいしゃ]の株[かぶ]が売[う]られ、アドバンテスト1社[しゃ]だけで日経平均[にっけいへいきん]を約[やく]631円[えん]下[さ]げました。', 'Shares of companies related to AI and semiconductors were sold, and Advantest alone pulled the Nikkei average down by about 631 yen.', 'Advantest makes machines that test semiconductor chips. Big companies like it have a large weight in the Nikkei average.'],
+            ['アメリカでは十九日[じゅうくにち]、AIの会社[かいしゃ]アンソロピックが上場[じょうじょう]し、株価[かぶか]は最初[さいしょ]、83ドルの公開[こうかい]価格[かかく]より3割[わり]以上[いじょう]高[たか]くなりました。', 'In America on the 19th, the AI company Anthropic listed its shares, and the price at first rose more than 30 percent above the offer price of 83 dollars.', '上場する means to list shares on a stock market; 公開価格 is the price at which the new shares are first sold.'],
+            ['しかし、その後[ご]は下[さ]がり、AIが本当[ほんとう]にもうかるのかという心配[しんぱい]は消[き]えなかったと伝[つた]えられています。', 'But it then fell, and it is reported that worries about whether AI really makes money did not go away.', 'もうかる means to be profitable.'],
+          ],
+        },
+        N3: {
+          title: '日経平均[にっけいへいきん]3007円[えん]安[やす]、下[さ]げ幅[はば]歴代[れきだい]5位[い]　AI・半導体[はんどうたい]株[かぶ]に売[う]り',
+          lines: [
+            ['二十日[はつか]の東京[とうきょう]株式[かぶしき]市場[しじょう]で日経平均[にっけいへいきん]株価[かぶか]は三日[みっか]ぶりに大幅[おおはば]に反落[はんらく]し、終値[おわりね]は前日[ぜんじつ]比[ひ]3007円[えん]56銭[せん]安[やす]の5万[まん]6436円[えん]65銭[せん]だった。', 'On the Tokyo stock market on the 20th, the Nikkei average fell sharply for the first time in three days, closing at 56,436.65 yen, down 3,007.56 yen from the previous day.', '反落 is a fall after a rise; 銭 is a hundredth of a yen. The fall was 5.06%.'],
+            ['下[さ]げ幅[はば]は歴代[れきだい]5番目[ばんめ]の大[おお]きさで、終値[おわりね]が5万[まん]7000円[えん]を割[わ]り込[こ]むのは約[やく]7か月[げつ]ぶりだ。', 'The size of the fall is the fifth-biggest ever, and it is the first close below 57,000 yen in about seven months.', '割り込む means to fall below a level.'],
+            ['AI・半導体[はんどうたい]関連[かんれん]株[かぶ]を中心[ちゅうしん]にほぼ全面[ぜんめん]安[やす]となり、アドバンテスト1銘柄[めいがら]だけで指数[しすう]を約[やく]631円[えん]押[お]し下[さ]げた。', 'Almost all stocks fell, led by AI and semiconductor shares, and Advantest alone pushed the index down by about 631 yen.', '全面安 means almost every stock fell; 銘柄 is a single stock.'],
+            ['米国[べいこく]では十九日[じゅうくにち]、AI企業[きぎょう]アンソロピックがナスダックに上場[じょうじょう]し、調達[ちょうたつ]額[がく]は過去[かこ]最大[さいだい]の新規[しんき]株式[かぶしき]公開[こうかい]とされる。', 'In the US on the 19th, the AI company Anthropic listed on the Nasdaq, in what is said to be the largest initial public offering ever by money raised.', '新規株式公開 is an IPO; 調達額 is the amount of money raised.'],
+            ['初値[はつね]は公開[こうかい]価格[かかく]の83ドルを3割[わり]以上[いじょう]上回[うわまわ]ったものの、その後[ご]は伸[の]び悩[なや]み、米国[べいこく]株[かぶ]全体[ぜんたい]の下落[げらく]も止[と]まらなかった。', 'Its first price was more than 30 percent above the offer price of 83 dollars, but it then lost momentum, and the fall in US stocks as a whole did not stop.', '初値 is the first traded price of a new stock; 伸び悩む means to stop rising.'],
+            ['市場[しじょう]関係者[かんけいしゃ]は、上場[じょうじょう]がAIの採算[さいさん]への不安[ふあん]を和[やわ]らげるには至[いた]らなかったと指摘[してき]している。', 'Market participants point out that the listing was not enough to ease worries about whether AI will pay off.', '採算 means profitability; 〜には至らない means "does not go as far as".'],
+            ['東京[とうきょう]市場[しじょう]では前日[ぜんじつ]、上場[じょうじょう]への期待[きたい]から日経平均[にっけいへいきん]が419円[えん]上[あ]がっていたが、一転[いってん]して大幅[おおはば]安[やす]となった。', 'In Tokyo the day before, the Nikkei average had risen 419 yen on hopes for the listing, but it turned around and fell sharply.', '一転する means to change completely.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-20-mio-reaches-mercury',
+      date: '2026-11-20',
+      emoji: '🛰️',
+      titleEn: 'Japan\'s Mercury probe Mio, travelling with Europe\'s MPO as BepiColombo, is due to enter orbit around Mercury this weekend after an eight-year journey',
+      sources: [
+        { name: 'JAXA (Mio)', url: 'https://mio.isas.jaxa.jp/mission/' },
+        { name: 'Zaikei', url: 'https://www.zaikei.co.jp/article/20261107/876516.html' },
+        { name: 'sorae', url: 'https://sorae.info/space/20260904-bepicolombo-farewell-mtm.html' },
+        { name: 'JAXA ISAS (arrival date change)', url: 'https://www.isas.jaxa.jp/topics/003810.html' },
+      ],
+      quiz: [
+        ['Which planet is Mio about to reach?', 'Mercury', 'Mars', 'Venus', 'Jupiter'],
+        ['When did Mio leave Earth?', 'In 2018', 'In 2008', 'Last month', 'In 2024'],
+        ['When will Mio start studying the planet in detail?', 'In April 2027', 'Tomorrow', 'In December 2026', 'In 2030'],
+      ],
+      levels: {
+        N5: {
+          title: '探査機[たんさき]「みお」が　もうすぐ　水星[すいせい]に　着[つ]きます',
+          lines: [
+            ['日本[にっぽん]と　ヨーロッパの　探査機[たんさき]が、もうすぐ　水星[すいせい]に　着[つ]きます。', 'A Japanese and European space probe will soon arrive at Mercury.', '探査機 is a space probe; 水星 is the planet Mercury, the closest planet to the Sun.'],
+            ['日本[にっぽん]の　探査機[たんさき]の　名前[なまえ]は　「みお」です。', 'The Japanese probe is called "Mio".'],
+            ['「みお」は　2018年[ねん]に　地球[ちきゅう]を　出[で]て、8年[ねん]　宇宙[うちゅう]を　飛[と]びました。', 'Mio left Earth in 2018 and has flown through space for eight years.', 'It was launched in October 2018 together with Europe\'s probe MPO.'],
+            ['今週末[こんしゅうまつ]、水星[すいせい]の　まわりを　回[まわ]り始[はじ]める　予定[よてい]です。', 'It is planned to start going around Mercury this weekend.', 'The European Space Agency gives the date as November 21.'],
+            ['日本[にっぽん]の　探査機[たんさき]が　水星[すいせい]へ　行[い]くのは　はじめてです。', 'It is the first time a Japanese probe has gone to Mercury.'],
+            ['十二月[じゅうにがつ]に、「みお」は　ヨーロッパの　探査機[たんさき]から　はなれます。', 'In December, Mio will separate from the European probe.'],
+            ['2027年[ねん]の　四月[しがつ]から、水星[すいせい]を　くわしく　調[しら]べます。', 'From April 2027, it will study Mercury in detail.'],
+          ],
+        },
+        N4: {
+          title: '水星[すいせい]探査機[たんさき]「みお」、今週末[こんしゅうまつ]に水星[すいせい]の軌道[きどう]へ',
+          lines: [
+            ['日本[にっぽん]とヨーロッパが一緒[いっしょ]に進[すす]めている水星[すいせい]探査[たんさ]計画[けいかく]「ベピコロンボ」の探査機[たんさき]が、もうすぐ水星[すいせい]に到着[とうちゃく]します。', 'The probe of BepiColombo, the Mercury exploration project Japan and Europe are carrying out together, will soon arrive at Mercury.', '探査 means exploration.'],
+            ['探査機[たんさき]は、JAXAの「みお」と、ヨーロッパ宇宙[うちゅう]機関[きかん]（ESA）の「MPO」がつながった形[かたち]をしています。', 'The probe is made of JAXA\'s "Mio" and the European Space Agency\'s "MPO" joined together.'],
+            ['2018年[ねん]十月[じゅうがつ]に打[う]ち上[あ]げられて、約[やく]8年[ねん]かけて水星[すいせい]の近[ちか]くまで来[き]ました。', 'It was launched in October 2018 and has taken about eight years to come close to Mercury.'],
+            ['今週末[こんしゅうまつ]、水星[すいせい]の重力[じゅうりょく]につかまって、まわりを回[まわ]る軌道[きどう]に入[はい]る予定[よてい]です。', 'This weekend, it is due to be caught by Mercury\'s gravity and enter an orbit around it.', '重力 is gravity; 軌道 is an orbit. ESA gives the date as November 21.'],
+            ['エンジンに問題[もんだい]があったため、到着[とうちゃく]は最初[さいしょ]の計画[けいかく]より約[やく]1年[ねん]遅[おく]れました。', 'Because there was a problem with its engines, the arrival is about a year later than first planned.', 'In 2024 the power of its electric engines dropped, so the route was changed.'],
+            ['十二月[じゅうにがつ]に2機[き]は分[わ]かれて、「みお」は水星[すいせい]の磁場[じば]などを、MPOは表面[ひょうめん]などを調[しら]べます。', 'In December the two will separate; Mio will study things like Mercury\'s magnetic field, and MPO things like its surface.', '磁場 is a magnetic field; 機 counts aircraft and spacecraft.'],
+            ['本格的[ほんかくてき]な観測[かんそく]は、2027年[ねん]四月[しがつ]に始[はじ]まる予定[よてい]です。', 'Full-scale observations are due to begin in April 2027.', '本格的 means full-scale, proper.'],
+          ],
+        },
+        N3: {
+          title: '日欧[にちおう]の水星[すいせい]探査機[たんさき]、今週末[こんしゅうまつ]にも周回[しゅうかい]軌道[きどう]へ　「みお」8年[ねん]の旅[たび]',
+          lines: [
+            ['日本[にっぽん]と欧州[おうしゅう]の共同[きょうどう]水星[すいせい]探査[たんさ]計画[けいかく]「ベピコロンボ」の探査機[たんさき]が、今週末[こんしゅうまつ]にも水星[すいせい]を回[まわ]る軌道[きどう]に入[はい]る見通[みとお]しだ。', 'The probe of BepiColombo, a joint Japanese-European Mercury exploration project, is expected to enter orbit around Mercury as early as this weekend.', 'ESA gives the date as November 21; depending on the time, it may already be the 22nd in Japan.'],
+            ['探査機[たんさき]は、JAXAの水星[すいせい]磁気圏[じきけん]探査機[たんさき]「みお」と、欧州[おうしゅう]宇宙[うちゅう]機関[きかん]（ESA）の「MPO」が結合[けつごう]した状態[じょうたい]で飛行[ひこう]している。', 'The probe is flying as JAXA\'s Mercury magnetosphere orbiter "Mio" and the European Space Agency\'s "MPO" joined together.', '磁気圏 is a magnetosphere, the space around a planet controlled by its magnetic field.'],
+            ['2018年[ねん]十月[じゅうがつ]の打[う]ち上[あ]げから約[やく]8年[ねん]、地球[ちきゅう]や金星[きんせい]、水星[すいせい]の重力[じゅうりょく]を利用[りよう]するスイングバイを繰[く]り返[かえ]して減速[げんそく]してきた。', 'In the roughly eight years since its launch in October 2018, it has slowed down through repeated swing-bys that use the gravity of Earth, Venus and Mercury.', 'A swing-by (flyby) uses a planet\'s gravity to change a spacecraft\'s speed and direction.'],
+            ['当初[とうしょ]は2025年[ねん]十二月[じゅうにがつ]に到着[とうちゃく]する予定[よてい]だったが、2024年[ねん]に電気[でんき]推進[すいしん]エンジンの出力[しゅつりょく]が下[さ]がる問題[もんだい]が起[お]き、約[やく]1年[ねん]遅[おく]れた。', 'It was first due to arrive in December 2025, but in 2024 a problem arose in which the power of its electric propulsion engines dropped, and it was delayed by about a year.', '出力 is output, power; 当初 means originally.'],
+            ['軌道[きどう]投入[とうにゅう]の後[あと]、十二月[じゅうにがつ]に「みお」はMPOから分離[ぶんり]され、それぞれの観測[かんそく]軌道[きどう]に向[む]かう。', 'After entering orbit, Mio will be separated from MPO in December, and each will head to its own observation orbit.', '軌道投入 means putting a spacecraft into orbit.'],
+            ['「みお」は水星[すいせい]の磁場[じば]や周[まわ]りの宇宙[うちゅう]環境[かんきょう]を、MPOは表面[ひょうめん]や内部[ないぶ]の構造[こうぞう]を詳[くわ]しく調[しら]べる計画[けいかく]だ。', 'Mio is to study Mercury\'s magnetic field and the space environment around it in detail, and MPO its surface and internal structure.'],
+            ['日本[にっぽん]の探査機[たんさき]が水星[すいせい]に向[む]かうのは初[はじ]めてで、本格的[ほんかくてき]な科学[かがく]観測[かんそく]は2027年[ねん]四月[しがつ]に始[はじ]まる予定[よてい]だ。', 'It is the first Japanese probe to head to Mercury, and full-scale scientific observations are due to begin in April 2027.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-20-wakamotoharu-leads-kyushu',
+      date: '2026-11-20',
+      emoji: '🏆',
+      titleEn: 'Sumo: Wakamotoharu stays alone in the lead of the Kyushu tournament at 11–1 and faces yokozuna Onosato next',
+      sources: [
+        { name: 'Yomiuri via Yahoo! News', url: 'https://news.yahoo.co.jp/articles/a231ad04f950ff5720396131de3a42a54405d8af' },
+        { name: 'Sponichi via Yahoo! News', url: 'https://news.yahoo.co.jp/articles/05bbfeac031216a153994951962e0c7ef7af9679' },
+        { name: 'Daily Sports', url: 'https://www.daily.co.jp/general/2026/11/19/0021051800.shtml' },
+        { name: 'Daily Sports (brothers)', url: 'https://www.daily.co.jp/general/2026/11/19/0021052306.shtml' },
+        { name: 'Tokyo Sports via Yahoo! News', url: 'https://news.yahoo.co.jp/articles/b6fb9c071df1a86a26c8c53198c228991af80398' },
+      ],
+      quiz: [
+        ['What is Wakamotoharu\'s record after 12 days?', '11 wins and 1 loss', '12 wins and no losses', '10 wins and 2 losses', '1 win and 11 losses'],
+        ['Who does Wakamotoharu fight on the 20th?', 'Yokozuna Onosato', 'His younger brother', 'Nobody, it is a rest day', 'A wrestler from the lowest division'],
+        ['Where is the tournament held?', 'Fukuoka', 'Tokyo', 'Osaka', 'Sapporo'],
+      ],
+      levels: {
+        N5: {
+          title: '大相撲[おおずもう]　若元春[わかもとはる]が　一人[ひとり]だけ　トップ',
+          lines: [
+            ['福岡[ふくおか]で、大相撲[おおずもう]の　九州[きゅうしゅう]場所[ばしょ]を　して　います。', 'The Kyushu tournament of professional sumo is being held in Fukuoka.', '場所 here means a sumo tournament (basho). Each one lasts 15 days.'],
+            ['十九日[じゅうくにち]、若元春[わかもとはる]が　勝[か]って、十一勝[じゅういっしょう]一敗[いっぱい]に　なりました。', 'On the 19th, Wakamotoharu won and now has 11 wins and 1 loss.', '勝 counts wins and 敗 counts losses. The 19th was the 12th day.'],
+            ['負[ま]けたのが　1回[かい]だけの　力士[りきし]は、若元春[わかもとはる]　一人[ひとり]です。', 'Wakamotoharu is the only wrestler who has lost just once.', '力士 is a sumo wrestler.'],
+            ['横綱[よこづな]の　大[おお]の里[さと]など　3人[にん]が、二敗[にはい]で　あとに　続[つづ]いて　います。', 'Three wrestlers, including yokozuna Onosato, follow with two losses.', '横綱 (yokozuna) is the highest rank in sumo.'],
+            ['二十日[はつか]は、若元春[わかもとはる]と　大[おお]の里[さと]が　戦[たたか]います。', 'On the 20th, Wakamotoharu and Onosato fight each other.'],
+            ['若元春[わかもとはる]は、まだ　優勝[ゆうしょう]した　ことが　ありません。', 'Wakamotoharu has never won a tournament.', '優勝 means winning the whole tournament.'],
+            ['九州[きゅうしゅう]場所[ばしょ]は　二十二日[にじゅうににち]に　終[お]わります。', 'The Kyushu tournament ends on the 22nd.'],
+          ],
+        },
+        N4: {
+          title: '九州[きゅうしゅう]場所[ばしょ]　若元春[わかもとはる]が一敗[いっぱい]を守[まも]って単独[たんどく]トップ',
+          lines: [
+            ['大相撲[おおずもう]九州[きゅうしゅう]場所[ばしょ]は十九日[じゅうくにち]、福岡[ふくおか]国際[こくさい]センターで12日目[にちめ]が行[おこな]われました。', 'On the 19th, the 12th day of the Kyushu sumo tournament was held at the Fukuoka Kokusai Center.', '日目 counts days in order: 12日目 = the 12th day.'],
+            ['前頭[まえがしら]の若元春[わかもとはる]は、小結[こむすび]の義[よし]ノ富士[ふじ]に勝[か]って、十一勝[じゅういっしょう]一敗[いっぱい]になりました。', 'Maegashira Wakamotoharu beat komusubi Yoshinofuji and now has 11 wins and 1 loss.', '前頭 (maegashira) is the rank below the top four ranks; 小結 (komusubi) is one of those four.'],
+            ['一敗[いっぱい]は若元春[わかもとはる]だけで、単独[たんどく]のトップを守[まも]りました。', 'Wakamotoharu is the only one with one loss, so he kept the lead on his own.', '単独 means alone, by oneself.'],
+            ['横綱[よこづな]の大[おお]の里[さと]、関脇[せきわけ]の熱海[あたみ]富士[ふじ]、前頭[まえがしら]の金峰山[きんぼうざん]の3人[にん]が、二敗[にはい]で追[お]っています。', 'Three wrestlers, yokozuna Onosato, sekiwake Atamifuji and maegashira Kinbozan, are chasing him with two losses.', '追う means to chase.'],
+            ['二十日[はつか]の13日目[にちめ]は、若元春[わかもとはる]と大[おお]の里[さと]の取組[とりくみ]があります。', 'On the 13th day, the 20th, there is a bout between Wakamotoharu and Onosato.', '取組 is a sumo bout.'],
+            ['33歳[さい]の若元春[わかもとはる]は、まだ一度[いちど]も幕内[まくうち]で優勝[ゆうしょう]したことがありません。', 'Wakamotoharu, 33, has never once won the top division.', '幕内 is the top division of sumo.'],
+            ['弟[おとうと]の若隆景[わかたかかげ]も、十両[じゅうりょう]で単独[たんどく]のトップに立[た]っています。', 'His younger brother Wakatakakage is also alone in the lead in the juryo division.', '十両 (juryo) is the second division. Brothers have never won both divisions in the same tournament.'],
+          ],
+        },
+        N3: {
+          title: '九州[きゅうしゅう]場所[ばしょ]12日目[にちめ]　若元春[わかもとはる]一敗[いっぱい]守[まも]り単独[たんどく]首位[しゅい]、13日目[にちめ]は大[おお]の里[さと]と対戦[たいせん]',
+          lines: [
+            ['大相撲[おおずもう]九州[きゅうしゅう]場所[ばしょ]12日目[にちめ]の十九日[じゅうくにち]、平幕[ひらまく]の若元春[わかもとはる]は小結[こむすび]義[よし]ノ富士[ふじ]を寄[よ]り切[き]り、十一勝[じゅういっしょう]一敗[いっぱい]で単独[たんどく]首位[しゅい]を守[まも]った。', 'On the 19th, the 12th day of the Kyushu sumo tournament, rank-and-file wrestler Wakamotoharu forced out komusubi Yoshinofuji and kept the sole lead at 11–1.', '平幕 means a maegashira, a wrestler without a named rank; 寄り切る is to force an opponent out while holding his belt.'],
+            ['横綱[よこづな]大[おお]の里[さと]は大関[おおぜき]霧島[きりしま]を押[お]し出[だ]して10勝[しょう]目[め]を挙[あ]げ、二敗[にはい]を守[まも]った。', 'Yokozuna Onosato pushed out ozeki Kirishima for his 10th win and stayed at two losses.', '押し出す is to push an opponent out of the ring; 勝目 after a number = the nth win.'],
+            ['関脇[せきわけ]熱海[あたみ]富士[ふじ]と平幕[ひらまく]金峰山[きんぼうざん]も勝[か]ち、二敗[にはい]で1差[さ]で追[お]う。', 'Sekiwake Atamifuji and maegashira Kinbozan also won and are chasing one win behind, with two losses.', '1差 means a difference of one (win).'],
+            ['三敗[さんぱい]の力士[りきし]はいなくなり、優勝[ゆうしょう]争[あらそ]いは4人[にん]に絞[しぼ]られた。', 'No wrestler is left on three losses, and the race for the title has narrowed to four.', '絞られる means to be narrowed down.'],
+            ['13日目[にちめ]の二十日[はつか]には若元春[わかもとはる]と大[おお]の里[さと]が対戦[たいせん]し、優勝[ゆうしょう]争[あらそ]いの大[おお]きな山場[やまば]となる。', 'On the 13th day, the 20th, Wakamotoharu and Onosato meet, a big turning point in the title race.', '山場 is a climax, a decisive point.'],
+            ['過去[かこ]の対戦[たいせん]成績[せいせき]は大[おお]の里[さと]の八勝[はっしょう]三敗[さんぱい]で、33歳[さい]の若元春[わかもとはる]は初[はつ]優勝[ゆうしょう]を目指[めざ]す。', 'Onosato leads their past meetings 8–3, and the 33-year-old Wakamotoharu is aiming for his first title.', '対戦成績 is the head-to-head record.'],
+            ['弟[おとうと]の若隆景[わかたかかげ]も十両[じゅうりょう]で単独[たんどく]首位[しゅい]に立[た]っており、史上[しじょう]初[はつ]の兄弟[きょうだい]同時[どうじ]優勝[ゆうしょう]の可能性[かのうせい]もある。', 'His younger brother Wakatakakage is also alone in the lead in the juryo division, raising the chance of brothers winning (two divisions) in the same tournament for the first time ever.', '十両 (juryo) is the second division; 同時 means at the same time.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-11-19-trade-deficit-october',
       date: '2026-11-19',
       emoji: '🚢',
