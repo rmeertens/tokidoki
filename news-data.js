@@ -27,6 +27,171 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-11-21-cpi-october-rice',
+      date: '2026-11-21',
+      emoji: '🍚',
+      titleEn: 'Japan\'s core consumer prices rise 2.2% in October as electricity gets dearer, while rice falls a record 29.7%',
+      sources: [
+        { name: 'Nikkei', url: 'https://www.nikkei.com/article/DGXZQOUA169NP0W6A111C2000000/' },
+        { name: 'ANN via Yahoo! News', url: 'https://news.yahoo.co.jp/articles/c0df89b3a9e406547f64729f9c7997918527579a' },
+        { name: 'TV Tokyo BIZ', url: 'https://txbiz.tv-tokyo.co.jp/hiru/news/post_352901' },
+        { name: 'Kyodo via San\'in Chuo Shimpo', url: 'https://www.sanin-chuo.co.jp/articles/-/1119440' },
+      ],
+      quiz: [
+        ['By how much did prices (not counting fresh food) rise in October from a year earlier?', '2.2%', '29.7%', '0.2%', '12%'],
+        ['What happened to the price of rice?', 'It fell by about 30%, the biggest fall since 1971', 'It rose by about 30%', 'It did not change', 'It doubled'],
+        ['Which of these became more expensive?', 'Electricity and gas', 'Rice', 'Nothing at all', 'Only cars'],
+      ],
+      levels: {
+        N5: {
+          title: '十月[じゅうがつ]の　物[もの]の　値段[ねだん]　お米[こめ]は　とても　安[やす]く　なりました',
+          lines: [
+            ['二十日[はつか]、国[くに]が　十月[じゅうがつ]の　物[もの]の　値段[ねだん]を　発表[はっぴょう]しました。', 'On the 20th, the government announced how prices changed in October.', 'This is the consumer price index, which the Ministry of Internal Affairs and Communications publishes every month.'],
+            ['野菜[やさい]や　魚[さかな]などを　入[い]れないで　計算[けいさん]すると、去年[きょねん]の　十月[じゅうがつ]より　2.2％　高[たか]く　なりました。', 'Calculated without things like vegetables and fish, prices were 2.2% higher than last October.', 'Fresh food is left out because its price changes a lot with the weather.'],
+            ['2％より　高[たか]く　なったのは、2か月[げつ]　続[つづ]けてです。', 'It is the second month in a row that the rise was more than 2%.'],
+            ['電気[でんき]や　ガスの　値段[ねだん]が　上[あ]がりました。', 'Electricity and gas prices went up.', 'The government\'s help with electricity and gas bills became smaller.'],
+            ['からあげや、店[みせ]で　食[た]べる　すしの　値段[ねだん]も　上[あ]がりました。', 'Prices of things like fried chicken and sushi at restaurants also went up.'],
+            ['でも、お米[こめ]の　値段[ねだん]は　29.7％　下[さ]がりました。', 'But the price of rice fell 29.7%.'],
+            ['1971年[ねん]から　今[いま]までで、いちばん　大[おお]きく　下[さ]がりました。', 'It is the biggest fall since 1971, when the records start.', 'Rice became very expensive in 2025. Now there is a lot of rice in stock.'],
+          ],
+        },
+        N4: {
+          title: '十月[じゅうがつ]の物価[ぶっか]、2.2％上[あ]がる　コメは29.7％下[さ]がる',
+          lines: [
+            ['総務省[そうむしょう]は二十日[はつか]、十月[じゅうがつ]の全国[ぜんこく]の消費者物価指数[しょうひしゃぶっかしすう]を発表[はっぴょう]しました。', 'On the 20th, the Ministry of Internal Affairs and Communications released the nationwide consumer price index for October.', '消費者物価指数 (CPI) shows how the prices of things people buy change.'],
+            ['値段[ねだん]が大[おお]きく変[か]わる生鮮食品[せいせんしょくひん]を除[のぞ]いた指数[しすう]は、去年[きょねん]の同[おな]じ月[つき]より2.2％上[あ]がりました。', 'The index without fresh food, whose prices change a lot, rose 2.2% from the same month last year.', '生鮮食品 is fresh food: vegetables, fruit, fish and so on.'],
+            ['九月[くがつ]は2.1％だったので、少[すこ]し大[おお]きく上[あ]がり、2か月[げつ]続[つづ]けて2％を超[こ]えました。', 'September\'s rise was 2.1%, so this was a little bigger, and it was above 2% for the second month in a row.'],
+            ['電気[でんき]・ガス代[だい]への国[くに]の補助[ほじょ]が小[ちい]さくなったため、電気代[でんきだい]は1.6％上[あ]がりました。', 'Because the government\'s help with electricity and gas bills became smaller, electricity rose 1.6%.', '補助 is financial help (a subsidy); 代 after a noun means the charge for it.'],
+            ['食[た]べ物[もの]では、からあげや外食[がいしょく]のすし、輸入[ゆにゅう]した牛肉[ぎゅうにく]などが10％ぐらい上[あ]がりました。', 'Among foods, things like fried chicken, sushi eaten out and imported beef rose about 10%.', '外食 means eating out at restaurants.'],
+            ['一方[いっぽう]、コメ類[るい]は29.7％下[さ]がり、比[くら]べられる1971年[ねん]以降[いこう]でいちばん大[おお]きく下[さ]がりました。', 'Rice, on the other hand, fell 29.7%, the biggest fall since 1971, when comparable records begin.', 'Newspapers often write rice as コメ in katakana; 類 means "kinds of".'],
+            ['去年[きょねん]はコメの値段[ねだん]がとても高[たか]くなりましたが、今[いま]は在庫[ざいこ]が増[ふ]えて、値段[ねだん]が下[さ]がっています。', 'Rice prices became very high last year, but now stocks have grown and prices are falling.', '在庫 is stock kept in warehouses and shops.'],
+          ],
+        },
+        N3: {
+          title: '十月[じゅうがつ]の消費者物価[しょうひしゃぶっか]2.2％上昇[じょうしょう]　コメ類[るい]は過去[かこ]最大[さいだい]の下落[げらく]',
+          lines: [
+            ['総務省[そうむしょう]が二十日[はつか]発表[はっぴょう]した十月[じゅうがつ]の全国[ぜんこく]消費者物価指数[しょうひしゃぶっかしすう]は、生鮮食品[せいせんしょくひん]を除[のぞ]く総合[そうごう]が102.9となり、前年同月[ぜんねんどうげつ]比[ひ]で2.2％上昇[じょうしょう]した。', 'The nationwide consumer price index for October, released by the Ministry of Internal Affairs and Communications on the 20th, stood at 102.9 for all items excluding fresh food, up 2.2% from the same month a year earlier.', 'The index takes 2025 as 100.'],
+            ['上昇率[じょうしょうりつ]は九月[くがつ]から0.1ポイント拡大[かくだい]し、日本銀行[にっぽんぎんこう]が目標[もくひょう]とする2％を2か月[げつ]連続[れんぞく]で上回[うわまわ]った。', 'The rate of increase widened by 0.1 point from September and was above the Bank of Japan\'s 2% target for the second month in a row.'],
+            ['生鮮食品[せいせんしょくひん]を含[ふく]む総合[そうごう]は2.3％の上昇[じょうしょう]だった。', 'The all-items index including fresh food rose 2.3%.'],
+            ['電気[でんき]・ガス代[だい]への補助[ほじょ]が縮小[しゅくしょう]したことで、九月[くがつ]に2.4％下落[げらく]していた電気代[でんきだい]は1.6％の上昇[じょうしょう]に転[てん]じた。', 'With the subsidies for electricity and gas bills reduced, electricity charges, which had fallen 2.4% in September, turned to a 1.6% rise.', '〜に転じる means to turn into (the opposite).'],
+            ['一方[いっぽう]、生鮮食品[せいせんしょくひん]を除[のぞ]く食料[しょくりょう]は2.2％の上昇[じょうしょう]で、伸[の]び率[りつ]は前月[ぜんげつ]より0.7ポイント縮小[しゅくしょう]した。', 'Food excluding fresh food, meanwhile, rose 2.2%, a growth rate 0.7 point smaller than the month before.'],
+            ['コメ類[るい]は29.7％下落[げらく]し、比較[ひかく]できる1971年[ねん]1月[がつ]以降[いこう]で過去[かこ]最大[さいだい]の下落幅[げらくはば]となった。', 'Rice products fell 29.7%, the largest drop since January 1971, when comparable data begin.'],
+            ['コメの値段[ねだん]が高騰[こうとう]した昨年[さくねん]から一転[いってん]し、需給[じゅきゅう]の緩和[かんわ]や在庫[ざいこ]の積[つ]み上[あ]がりが影響[えいきょう]しているとみられる。', 'In a reversal from last year, when rice prices soared, looser supply and demand and piled-up stocks are thought to be behind the fall.', '需給 is supply and demand; 緩和 means easing; 高騰 is a sharp rise in price.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-21-hayabusa2-new-target',
+      date: '2026-11-21',
+      emoji: '☄️',
+      titleEn: 'Engine trouble ends Hayabusa2\'s planned 2031 asteroid visit; JAXA will instead fly it past a small asteroid in 2028',
+      sources: [
+        { name: 'Nikkei', url: 'https://www.nikkei.com/article/DGXZQOSG138C90T11C26A1000000/' },
+        { name: 'Jiji Press', url: 'https://www.jiji.com/jc/article?k=2026111701040&g=soc' },
+        { name: 'Mynavi TECH+', url: 'https://news.mynavi.jp/techplus/article/20261117-5344971/' },
+        { name: 'AstroArts', url: 'https://www.astroarts.co.jp/article/hl/a/14778_hayabusa2' },
+      ],
+      quiz: [
+        ['Why did JAXA change Hayabusa2\'s plan?', 'Its engine is not working well', 'It ran out of money', 'It found water on an asteroid', 'It lost contact with Earth'],
+        ['When will Hayabusa2 reach the new asteroid?', 'In 2028', 'In 2031', 'Next month', 'In 2040'],
+        ['What will Hayabusa2 do at the new asteroid?', 'Pass close by it quickly and study it', 'Land on it and take sand', 'Bring it back to Earth', 'Crash into it'],
+      ],
+      levels: {
+        N5: {
+          title: '「はやぶさ2」が　行[い]く　ところを　変[か]えます',
+          lines: [
+            ['JAXAが、「はやぶさ2」の　計画[けいかく]を　変[か]えると　発表[はっぴょう]しました。', 'JAXA announced that it will change the plan for Hayabusa2.', 'JAXA is Japan\'s space agency. Hayabusa2 is a space probe.'],
+            ['はやぶさ2は、2020年[ねん]に　小惑星[しょうわくせい]「リュウグウ」の　砂[すな]を　地球[ちきゅう]に　届[とど]けました。', 'In 2020, Hayabusa2 delivered sand from the asteroid Ryugu to Earth.', '小惑星 is an asteroid, a small rocky body that goes around the sun.'],
+            ['その　後[あと]も、ほかの　小惑星[しょうわくせい]に　行[い]く　ために　宇宙[うちゅう]を　飛[と]んで　います。', 'After that, it has kept flying through space to go to another asteroid.'],
+            ['でも、エンジンの　調子[ちょうし]が　悪[わる]く　なりました。', 'But its engine stopped working well.', '調子が悪い means something is not in good condition.'],
+            ['それで、2031年[ねん]に　行[い]く　予定[よてい]だった　小惑星[しょうわくせい]には　行[い]きません。', 'So it will not go to the asteroid it had planned to reach in 2031.'],
+            ['2028年[ねん]4月[がつ]に、別[べつ]の　小[ちい]さい　小惑星[しょうわくせい]の　近[ちか]くを　速[はや]く　通[とお]ります。', 'In April 2028, it will pass quickly near a different, small asteroid.'],
+            ['通[とお]りながら、その　小惑星[しょうわくせい]を　調[しら]べます。', 'It will study the asteroid as it passes.', 'This is called a flyby.'],
+          ],
+        },
+        N4: {
+          title: '「はやぶさ2」、エンジンの故障[こしょう]で目的地[もくてきち]を変更[へんこう]',
+          lines: [
+            ['JAXAは、小惑星[しょうわくせい]探査機[たんさき]「はやぶさ2」の目的地[もくてきち]を変[か]えると発表[はっぴょう]しました。', 'JAXA announced that it will change the destination of the asteroid probe Hayabusa2.', '探査機 is a space probe.'],
+            ['はやぶさ2は2014年[ねん]に打[う]ち上[あ]げられ、2020年[ねん]に小惑星[しょうわくせい]リュウグウの砂[すな]を地球[ちきゅう]に届[とど]けました。', 'Hayabusa2 was launched in 2014 and delivered sand from the asteroid Ryugu to Earth in 2020.', '打ち上げる means to launch a rocket.'],
+            ['その後[ご]は、2031年[ねん]に別[べつ]の小惑星[しょうわくせい]に着[つ]く計画[けいかく]で飛[と]び続[つづ]けていました。', 'After that, it kept flying with a plan to reach another asteroid in 2031.'],
+            ['しかし、4つあるイオンエンジンのうち3つは弱[よわ]くなり、残[のこ]りの1つも八月[はちがつ]に故障[こしょう]しました。', 'But three of its four ion engines had grown weak, and the last one also broke down in August.', 'An ion engine pushes the probe gently for a long time using electricity.'],
+            ['そのため、2031年[ねん]に着[つ]くのは難[むずか]しいと判断[はんだん]しました。', 'So JAXA judged that reaching it in 2031 would be difficult.'],
+            ['新[あたら]しい目的地[もくてきち]は直径[ちょっけい]17メートルから74メートルぐらいの小[ちい]さな小惑星[しょうわくせい]で、2028年[ねん]4月[がつ]に近[ちか]くを通[とお]りながら観測[かんそく]します。', 'The new destination is a small asteroid about 17 to 74 meters across, which it will observe while passing nearby in April 2028.', '観測 means observing with instruments.'],
+            ['秒速[びょうそく]約[やく]6キロの速[はや]さで、小惑星[しょうわくせい]から数百[すうひゃく]メートルのところを通[とお]る計画[けいかく]です。', 'The plan is to pass a few hundred meters from the asteroid at about 6 kilometers per second.', 'JAXA calls this the most difficult flyby ever tried.'],
+          ],
+        },
+        N3: {
+          title: '「はやぶさ2」、2031年[ねん]の小惑星[しょうわくせい]探査[たんさ]を断念[だんねん]　28年[ねん]に別[べつ]の天体[てんたい]をフライバイへ',
+          lines: [
+            ['宇宙航空研究開発機構[うちゅうこうくうけんきゅうかいはつきこう]（JAXA）は十七日[じゅうしちにち]の記者会見[きしゃかいけん]で、小惑星[しょうわくせい]探査機[たんさき]「はやぶさ2」の拡張[かくちょう]ミッションの最終[さいしゅう]目的地[もくてきち]を変更[へんこう]すると説明[せつめい]した。', 'The Japan Aerospace Exploration Agency (JAXA) explained at a press conference on the 17th that it will change the final destination of the asteroid probe Hayabusa2\'s extended mission.', 'The extended mission began after Hayabusa2 brought back samples from the asteroid Ryugu in 2020.'],
+            ['当初[とうしょ]は地球[ちきゅう]の重力[じゅうりょく]を利用[りよう]して軌道[きどう]を変[か]える「スイングバイ」を行[おこな]い、2031年[ねん]に小惑星[しょうわくせい]に到着[とうちゃく]する計画[けいかく]だった。', 'The original plan was to use Earth\'s gravity to change its orbit in "swing-bys" and to arrive at an asteroid in 2031.', 'That asteroid is 1998 KY26.'],
+            ['しかし、4基[き]あるイオンエンジンのうち3基[き]は劣化[れっか]が進[すす]み、残[のこ]る1基[き]も八月[はちがつ]に故障[こしょう]した。', 'However, three of its four ion engines had deteriorated, and the remaining one also broke down in August.', '基 is the counter for engines and other large machines; 劣化 means wearing out.'],
+            ['エンジンの残[のこ]りの寿命[じゅみょう]を予測[よそく]するのが難[むずか]しく、JAXAは2031年[ねん]の探査[たんさ]は困難[こんなん]だと判断[はんだん]した。', 'Because it is hard to predict how much longer the engines will last, JAXA judged that the 2031 exploration would be too difficult.'],
+            ['新[あら]たな目標[もくひょう]は直径[ちょっけい]17メートルから74メートルとみられる小惑星[しょうわくせい]で、2028年[ねん]4月[がつ]に近[ちか]くを高速[こうそく]で通過[つうか]しながら観測[かんそく]する「フライバイ」を行[おこな]う。', 'The new target is an asteroid thought to be 17 to 74 meters across, and in April 2028 the probe will make a "flyby", observing it while passing close at high speed.', 'The new asteroid is called 2015 BM510.'],
+            ['中心[ちゅうしん]から数百[すうひゃく]メートルの距離[きょり]を秒速[びょうそく]約[やく]6キロで通過[つうか]する計画[けいかく]で、JAXAは世界[せかい]最高[さいこう]難易度[なんいど]のフライバイだとしている。', 'It plans to pass a few hundred meters from the asteroid\'s center at about 6 kilometers per second, which JAXA calls the hardest flyby in the world.', '難易度 means level of difficulty.'],
+            ['天体[てんたい]が暗[くら]く小[ちい]さいため、最接近[さいせっきん]の約[やく]10時間[じかん]前[まえ]まで姿[すがた]を確認[かくにん]できないという。', 'Because the asteroid is dark and small, it reportedly cannot be seen until about ten hours before the closest approach.', '〜という at the end of a sentence means "it is said / reportedly".'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-21-kunieda-hall-of-fame',
+      date: '2026-11-21',
+      emoji: '🎾',
+      titleEn: 'Wheelchair tennis great Shingo Kunieda becomes the first Japanese player elected to the International Tennis Hall of Fame',
+      sources: [
+        { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261119de78535' },
+        { name: 'Jiji Press', url: 'https://www.jiji.com/jc/article?k=2026111900508&g=spo' },
+        { name: 'Daily Sports', url: 'https://www.daily.co.jp/general/2026/11/20/0021052771.shtml' },
+        { name: 'Tennis Majors', url: 'https://www.tennismajors.com/wta-tour-news/ash-barty-and-shingo-kunieda-elected-to-the-international-tennis-hall-of-fame-867316.html' },
+      ],
+      quiz: [
+        ['What sport did Shingo Kunieda play?', 'Wheelchair tennis', 'Table tennis', 'Wheelchair basketball', 'Badminton'],
+        ['What is special about his election to the Hall of Fame?', 'He is the first Japanese player to be chosen', 'He is the youngest person ever chosen', 'He is the first wheelchair player ever chosen', 'Fans chose him on the internet'],
+        ['Where will the ceremony be held?', 'In the United States', 'In Tokyo', 'In London', 'In Paris'],
+      ],
+      levels: {
+        N5: {
+          title: '国枝慎吾[くにえだしんご]さんが　テニスの　殿堂[でんどう]に　入[はい]ります',
+          lines: [
+            ['車[くるま]いすテニスの　国枝慎吾[くにえだしんご]さんが、国際[こくさい]テニス殿堂[でんどう]に　入[はい]る　ことが　決[き]まりました。', 'Wheelchair tennis player Shingo Kunieda will be inducted into the International Tennis Hall of Fame.', '殿堂 is a hall of fame. The International Tennis Hall of Fame in the US honours the greatest players.'],
+            ['日本[にっぽん]の　選手[せんしゅ]が　殿堂[でんどう]に　入[はい]るのは、初[はじ]めてです。', 'It is the first time a Japanese player has been chosen for the Hall of Fame.'],
+            ['国枝[くにえだ]さんは、パラリンピックで　金[きん]メダルを　4つ　取[と]りました。', 'Mr. Kunieda won four gold medals at the Paralympics.', 'Three in singles and one in doubles.'],
+            ['世界[せかい]の　4つの　大[おお]きな　大会[たいかい]でも、28回[かい]　優勝[ゆうしょう]しました。', 'He also won 28 titles at the world\'s four biggest tournaments.', 'The four Grand Slams: the Australian Open, the French Open, Wimbledon and the US Open. 28 is his number of singles titles.'],
+            ['2023年[ねん]に　選手[せんしゅ]を　やめました。', 'He retired as a player in 2023.'],
+            ['来年[らいねん]の　八月[はちがつ]、アメリカで　式[しき]が　あります。', 'The ceremony will be held in America next August.', 'In Newport, Rhode Island.'],
+            ['国枝[くにえだ]さんは、とても　大[おお]きな　名誉[めいよ]だと　話[はな]しました。', 'Mr. Kunieda said it was a very great honour.', '名誉 means honour.'],
+          ],
+        },
+        N4: {
+          title: '国枝慎吾[くにえだしんご]さん、日本[にっぽん]の選手[せんしゅ]で初[はじ]めて国際[こくさい]テニス殿堂[でんどう]へ',
+          lines: [
+            ['車[くるま]いすテニスで活躍[かつやく]した国枝慎吾[くにえだしんご]さん（42）が、国際[こくさい]テニス殿堂[でんどう]に入[はい]ることが決[き]まりました。', 'Shingo Kunieda (42), who starred in wheelchair tennis, has been chosen for the International Tennis Hall of Fame.', '活躍する means to be active and successful.'],
+            ['すべての部門[ぶもん]を合[あ]わせて、日本[にっぽん]の選手[せんしゅ]が選[えら]ばれるのは初[はじ]めてです。', 'Counting all categories, it is the first time a Japanese player has been chosen.'],
+            ['国枝[くにえだ]さんはパラリンピックのシングルスで3つ、ダブルスで1つの金[きん]メダルを取[と]りました。', 'Mr. Kunieda won three Paralympic gold medals in singles and one in doubles.'],
+            ['四大[よんだい]大会[たいかい]のシングルスでは28回[かい]優勝[ゆうしょう]し、「生涯[しょうがい]ゴールデンスラム」も達成[たっせい]しました。', 'He won 28 singles titles at the four Grand Slams, and also achieved a "career Golden Slam".', 'A career Golden Slam means winning all four Grand Slams and a Paralympic (or Olympic) gold medal.'],
+            ['2023年[ねん]に引退[いんたい]し、同[おな]じ年[とし]にパラスポーツの選手[せんしゅ]として初[はじ]めて国民栄誉賞[こくみんえいよしょう]を受[う]けました。', 'He retired in 2023 and in the same year became the first para-sport athlete to receive the People\'s Honour Award.', '国民栄誉賞 is an award the Prime Minister gives to people loved by the whole nation.'],
+            ['今回[こんかい]は、女子[じょし]の元[もと]世界[せかい]1位[い]、アシュリー・バーティさんも選[えら]ばれました。', 'This time, former women\'s world number one Ashleigh Barty was also chosen.', 'Barty is from Australia.'],
+            ['式典[しきてん]は来年[らいねん]8月[がつ]、アメリカのロードアイランド州[しゅう]ニューポートで行[おこな]われます。', 'The ceremony will be held next August in Newport, Rhode Island, in the United States.', '州 is a state.'],
+          ],
+        },
+        N3: {
+          title: '国枝慎吾[くにえだしんご]さん、日本[にっぽん]勢[ぜい]初[はつ]のテニス殿堂[でんどう]入[い]り　生涯[しょうがい]ゴールデンスラム達成[たっせい]',
+          lines: [
+            ['国際[こくさい]テニス殿堂[でんどう]は、車[くるま]いすテニスで活躍[かつやく]した国枝慎吾[くにえだしんご]さん（42）が2027年[ねん]に殿堂[でんどう]入[い]りすると発表[はっぴょう]した。', 'The International Tennis Hall of Fame announced that Shingo Kunieda (42), who starred in wheelchair tennis, will be inducted in 2027.', '殿堂入り means being inducted into a hall of fame.'],
+            ['全[すべ]ての部門[ぶもん]を通[つう]じて、日本[にっぽん]の選手[せんしゅ]の殿堂[でんどう]入[い]りは初[はじ]めてとなる。', 'It is the first time a Japanese player has been inducted in any category.', '〜を通じて here means "across, throughout".'],
+            ['国枝[くにえだ]さんはパラリンピックでシングルス3個[こ]、ダブルス1個[こ]の金[きん]メダルを獲得[かくとく]し、四大[よんだい]大会[たいかい]のシングルスでは通算[つうさん]28度[ど]優勝[ゆうしょう]した。', 'Mr. Kunieda won three Paralympic gold medals in singles and one in doubles, and won a total of 28 Grand Slam singles titles.', '通算 means "in total, over a career"; 度 here counts times.'],
+            ['パラリンピックの金[きん]メダルと四大[よんだい]大会[たいかい]全[ぜん]制覇[せいは]を合[あ]わせた「生涯[しょうがい]ゴールデンスラム」も達成[たっせい]している。', 'He also achieved a "career Golden Slam", a Paralympic gold medal together with winning all four Grand Slams.', '制覇 means winning (a championship); 全制覇 means winning them all.'],
+            ['2023年[ねん]に現役[げんえき]を引退[いんたい]し、同年[どうねん]、パラスポーツの選手[せんしゅ]として初[はじ]めて国民栄誉賞[こくみんえいよしょう]を授与[じゅよ]された。', 'He retired from competition in 2023 and the same year became the first para-sport athlete to be given the People\'s Honour Award.', '授与する means to award (formally).'],
+            ['今回[こんかい]は女子[じょし]の元[もと]世界[せかい]ランキング1位[い]、アシュリー・バーティさんも選[えら]ばれ、来年[らいねん]8月[がつ]に米国[べいこく]ロードアイランド州[しゅう]ニューポートで式典[しきてん]が行[おこな]われる。', 'Former women\'s world number one Ashleigh Barty was also chosen, and the ceremony will be held next August in Newport, Rhode Island, in the US.'],
+            ['国枝[くにえだ]さんは殿堂[でんどう]入[い]りを大[おお]きな名誉[めいよ]だとして、支[ささ]えてくれた人々[ひとびと]への感謝[かんしゃ]を述[の]べた。', 'Mr. Kunieda called his induction a great honour and thanked the people who had supported him.', '述べる is a formal word for "to say, to state".'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-11-20-nikkei-falls-3007',
       date: '2026-11-20',
       emoji: '📉',

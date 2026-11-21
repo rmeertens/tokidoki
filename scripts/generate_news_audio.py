@@ -123,7 +123,7 @@ def distance(a, b):
 
 
 # Latin the voice misreads (5G as ゴジー), said as written here instead.
-SAY_LATIN = {"5G": "ファイブジー", "4G": "フォージー"}
+SAY_LATIN = {"5G": "ファイブジー", "4G": "フォージー", "はやぶさ2": "はやぶさツー"}
 
 
 def speech(markup, kana):

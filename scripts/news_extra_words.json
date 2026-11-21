@@ -13183,5 +13183,380 @@
     "ほんかくてき",
     "full-scale, proper",
     "na-adjective"
+  ],
+  "2.2％": [
+    "にてんにパーセント",
+    "2.2%",
+    "number + counter"
+  ],
+  "29.7％": [
+    "にじゅうきゅうてんななパーセント",
+    "29.7%",
+    "number + counter"
+  ],
+  "1.6％": [
+    "いってんろくパーセント",
+    "1.6%",
+    "number + counter"
+  ],
+  "2.3％": [
+    "にてんさんパーセント",
+    "2.3%",
+    "number + counter"
+  ],
+  "10％": [
+    "じゅっパーセント",
+    "10%",
+    "number + counter"
+  ],
+  "0.7ポイント": [
+    "れいてんななポイント",
+    "0.7 point",
+    "number + counter"
+  ],
+  "102.9": [
+    "ひゃくにてんきゅう",
+    "102.9",
+    "number"
+  ],
+  "2か月": [
+    "にかげつ",
+    "two months",
+    "number + counter"
+  ],
+  "1971年": [
+    "せんきゅうひゃくななじゅういちねん",
+    "1971",
+    "number + counter"
+  ],
+  "すし": [
+    "すし",
+    "sushi",
+    "noun"
+  ],
+  "在庫": [
+    "ざいこ",
+    "stock, inventory",
+    "noun"
+  ],
+  "高騰": [
+    "こうとう",
+    "sharp rise (in price)",
+    "noun"
+  ],
+  "需給": [
+    "じゅきゅう",
+    "supply and demand",
+    "noun"
+  ],
+  "緩和": [
+    "かんわ",
+    "easing, relaxation",
+    "noun"
+  ],
+  "はやぶさ2": [
+    "はやぶさツー",
+    "Hayabusa2 (space probe)",
+    "noun"
+  ],
+  "小惑星": [
+    "しょうわくせい",
+    "asteroid",
+    "noun"
+  ],
+  "リュウグウ": [
+    "リュウグウ",
+    "Ryugu (an asteroid)",
+    "place name"
+  ],
+  "ことにする": [
+    "ことにする",
+    "to decide to",
+    "expression"
+  ],
+  "2014年": [
+    "にせんじゅうよねん",
+    "2014",
+    "number + counter"
+  ],
+  "イオンエンジン": [
+    "イオンエンジン",
+    "ion engine",
+    "noun"
+  ],
+  "直径": [
+    "ちょっけい",
+    "diameter",
+    "noun"
+  ],
+  "17メートル": [
+    "じゅうななメートル",
+    "17 meters",
+    "number + counter"
+  ],
+  "74メートル": [
+    "ななじゅうよんメートル",
+    "74 meters",
+    "number + counter"
+  ],
+  "秒速": [
+    "びょうそく",
+    "speed per second",
+    "noun"
+  ],
+  "約6キロ": [
+    "やくろっキロ",
+    "about 6 kilometers",
+    "number + counter"
+  ],
+  "数百メートル": [
+    "すうひゃくメートル",
+    "a few hundred meters",
+    "number + counter"
+  ],
+  "断念": [
+    "だんねん",
+    "giving up",
+    "noun"
+  ],
+  "28年": [
+    "にじゅうはちねん",
+    "(20)28",
+    "number + counter"
+  ],
+  "天体": [
+    "てんたい",
+    "heavenly body",
+    "noun"
+  ],
+  "フライバイ": [
+    "フライバイ",
+    "flyby",
+    "noun"
+  ],
+  "拡張": [
+    "かくちょう",
+    "extension",
+    "noun"
+  ],
+  "ミッション": [
+    "ミッション",
+    "mission",
+    "noun"
+  ],
+  "4基": [
+    "よんき",
+    "four (engines, machines)",
+    "number + counter"
+  ],
+  "3基": [
+    "さんき",
+    "three (engines, machines)",
+    "number + counter"
+  ],
+  "1基": [
+    "いっき",
+    "one (engine, machine)",
+    "number + counter"
+  ],
+  "劣化": [
+    "れっか",
+    "deterioration, wearing out",
+    "noun"
+  ],
+  "寿命": [
+    "じゅみょう",
+    "life span",
+    "noun"
+  ],
+  "難易度": [
+    "なんいど",
+    "level of difficulty",
+    "noun"
+  ],
+  "国枝慎吾": [
+    "くにえだしんご",
+    "Shingo Kunieda",
+    "name"
+  ],
+  "国枝": [
+    "くにえだ",
+    "Kunieda (family name)",
+    "name"
+  ],
+  "殿堂": [
+    "でんどう",
+    "hall of fame",
+    "noun"
+  ],
+  "殿堂入り": [
+    "でんどういり",
+    "induction into a hall of fame",
+    "noun"
+  ],
+  "国際テニス殿堂": [
+    "こくさいテニスでんどう",
+    "International Tennis Hall of Fame",
+    "organization"
+  ],
+  "パラリンピック": [
+    "パラリンピック",
+    "Paralympics",
+    "noun"
+  ],
+  "28回": [
+    "にじゅうはっかい",
+    "28 times",
+    "number + counter"
+  ],
+  "42": [
+    "よんじゅうに",
+    "42",
+    "number"
+  ],
+  "ダブルス": [
+    "ダブルス",
+    "doubles",
+    "noun"
+  ],
+  "ゴールデンスラム": [
+    "ゴールデンスラム",
+    "Golden Slam",
+    "noun"
+  ],
+  "達成": [
+    "たっせい",
+    "achievement",
+    "noun"
+  ],
+  "アシュリー・バーティ": [
+    "アシュリー・バーティ",
+    "Ashleigh Barty",
+    "name"
+  ],
+  "8月": [
+    "はちがつ",
+    "August",
+    "noun"
+  ],
+  "ロードアイランド州": [
+    "ロードアイランドしゅう",
+    "Rhode Island (US state)",
+    "place name"
+  ],
+  "ニューポート": [
+    "ニューポート",
+    "Newport",
+    "place name"
+  ],
+  "3個": [
+    "さんこ",
+    "three (things)",
+    "number + counter"
+  ],
+  "1個": [
+    "いっこ",
+    "one (thing)",
+    "number + counter"
+  ],
+  "28度": [
+    "にじゅうはちど",
+    "28 times",
+    "number + counter"
+  ],
+  "制覇": [
+    "せいは",
+    "conquest, winning a title",
+    "noun"
+  ],
+  "全制覇": [
+    "ぜんせいは",
+    "winning them all",
+    "noun"
+  ],
+  "現役": [
+    "げんえき",
+    "active (player)",
+    "noun"
+  ],
+  "同年": [
+    "どうねん",
+    "the same year",
+    "noun"
+  ],
+  "授与": [
+    "じゅよ",
+    "awarding",
+    "noun"
+  ],
+  "ランキング": [
+    "ランキング",
+    "ranking",
+    "noun"
+  ],
+  "四大大会": [
+    "よんだいたいかい",
+    "the four Grand Slams",
+    "noun"
+  ],
+  "国民栄誉賞": [
+    "こくみんえいよしょう",
+    "People's Honour Award",
+    "noun"
+  ],
+  "入り": [
+    "いり",
+    "entering, being admitted",
+    "noun"
+  ],
+  "からあげ": [
+    "からあげ",
+    "fried chicken (karaage)",
+    "noun"
+  ],
+  "1つ": [
+    "ひとつ",
+    "one (thing)",
+    "number + counter"
+  ],
+  "3つ": [
+    "みっつ",
+    "three (things)",
+    "number + counter"
+  ],
+  "4つ": [
+    "よっつ",
+    "four (things)",
+    "number + counter"
+  ],
+  "速さ": [
+    "はやさ",
+    "speed",
+    "noun"
+  ],
+  "10時間前": [
+    "じゅうじかんまえ",
+    "ten hours before",
+    "number + counter"
+  ],
+  "積み上がり": [
+    "つみあがり",
+    "piling up",
+    "noun"
+  ],
+  "約10時間前": [
+    "やくじゅうじかんまえ",
+    "about ten hours before",
+    "number + counter"
+  ],
+  "記者会見": [
+    "きしゃかいけん",
+    "press conference",
+    "noun"
+  ],
+  "宇宙航空研究開発機構": [
+    "うちゅうこうくうけんきゅうかいはつきこう",
+    "Japan Aerospace Exploration Agency (JAXA)",
+    "organization"
   ]
 }
