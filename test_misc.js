@@ -221,12 +221,12 @@ check(Misc.formatTime(75) === '1:15', 'formatTime');
 // ─── より and のほう ──────────────────────────────────────────────────────────
 
 const compare = Misc.QUIZZES.find(q => q.id === 'comparisons');
-check(compare && compare.sections.length === 5, 'the comparisons quiz has its five sections');
+check(compare && compare.sections.length === 8, 'the comparisons quiz has its eight sections');
 const SAME = '同じぐらい';
 compare.sections.forEach(sec => sec.items.forEach(it => {
   const where = it.sentence.replace(/\n/g, ' ');
   check(!/[[\]]/.test(it.prompt + it.sentence + it.options.map(o => o.text).join('')), `comparisons ${where}: markup left`);
-  check(/より|ほう|ほど|同じ/.test(it.sentence), `comparisons ${where}: compares nothing`);
+  check(/より|ほう|ほど|同じ|まして|比べ|どっち/.test(it.sentence), `comparisons ${where}: compares nothing`);
   check(/<span lang="en"><b>“.+”<\/b> ./.test(it.note), `comparisons ${where}: no translation or explanation`);
   // Every option but "about the same" is one of the two things in the sentence
   // (a verb's ending may differ: 歩く for 歩いた).
@@ -244,6 +244,9 @@ check(cmp('東京は大阪より', 'Which city is bigger?').answer === '東京',
 check(cmp('このかばんはあのかばんより高い', 'Which bag is cheaper?').answer === 'あのかばん', 'AはBより高い: B is cheaper');
 check(cmp('バスより電車のほうが', 'Which is cheaper?').answer === '電車', 'BよりAのほうが安い: A is cheaper');
 check(cmp('大阪は東京ほど', 'Which city is bigger?').answer === '東京', 'AはBほど大きくない: B is bigger');
+check(cmp('今日は暖かいというより', 'How would the speaker describe today?').answer === '暑い', 'AというよりB: B');
+check(cmp('今年の夏は、去年にもまして', 'Which summer is hotter?').answer === '今年', 'BにもましてA: A is even more');
+check(cmp('このアパートは駅から遠いほうだが', 'Which apartment is closer to the station?').answer === 'このアパート', '遠いほうだ is no comparison');
 
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);
