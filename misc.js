@@ -418,6 +418,153 @@
     { key: 'す', value: 'して', ex: '話す → 話して' },
   ];
 
+  // Comparisons with より, のほう and ほど: read the sentence (or the little
+  // exchange), then pick which one is cheaper, bigger, slower… Each item is
+  // [sentence, question, options (answer first), English, why]. An option's
+  // " (…)" part is an English gloss; SAME is "about the same".
+  const SAME = '同[おな]じぐらい (about the same)';
+  const COMPARE = [
+    ['A は B より … — the first one is more (N5)', [
+      ['東京[とうきょう]は大阪[おおさか]より大[おお]きいです。', 'Which city is bigger?', ['東京[とうきょう]', '大阪[おおさか]'],
+        'Tokyo is bigger than Osaka.',
+        'A は B より 大きい: A is bigger than B. より ("than") comes after the one that loses, so the topic, 東京, is the bigger one.'],
+      ['このかばんはあのかばんより高[たか]いです。', 'Which bag is cheaper?', ['あのかばん', 'このかばん'],
+        'This bag is more expensive than that bag.',
+        'このかばん is the more expensive (高い) one. The question asks the opposite, cheaper, so it\'s the one before より: あのかばん.'],
+      ['電車[でんしゃ]はバスより速[はや]いです。', 'Which is slower?', ['バス', '電車[でんしゃ]'],
+        'The train is faster than the bus.',
+        'The train is the faster (速い) one; より marks what it beats, the bus — so the bus is slower.'],
+      ['兄[あに]は私[わたし]より背[せ]が高[たか]いです。', 'Who is taller?', ['兄[あに] (my brother)', '私[わたし] (me)'],
+        'My older brother is taller than me.',
+        '背が高い = tall. 兄 is the topic (は) and 私 comes before より, so my brother is the taller one.'],
+      ['今日[きょう]はきのうより寒[さむ]いです。', 'Which day was warmer?', ['きのう (yesterday)', '今日[きょう] (today)'],
+        'Today is colder than yesterday.',
+        'Today is the colder (寒い) one, so yesterday, the day before より, was warmer.'],
+      ['この部屋[へや]はあの部屋[へや]より狭[せま]いです。', 'Which room is larger?', ['あの部屋[へや]', 'この部屋[へや]'],
+        'This room is smaller than that room.',
+        '狭い = small (of a space), the opposite of 広い. この部屋 is the smaller one, so あの部屋 is larger.'],
+      ['日本語[にほんご]は英語[えいご]より難[むずか]しいです。', 'Which language does the speaker find easier?', ['英語[えいご]', '日本語[にほんご]'],
+        'Japanese is more difficult than English.',
+        '日本語 is the more difficult (難しい) one; より marks 英語, which is therefore the easier one.'],
+      ['北海道[ほっかいどう]は九州[きゅうしゅう]より広[ひろ]いです。', 'Which is smaller?', ['九州[きゅうしゅう]', '北海道[ほっかいどう]'],
+        'Hokkaido is larger than Kyushu.',
+        '広い = large (in area). 北海道 is the larger, so 九州, before より, is the smaller — Hokkaido is about twice its size.'],
+    ]],
+    ['B より A のほうが … — the のほう one is more (N5)', [
+      ['バスより電車[でんしゃ]のほうが安[やす]いです。', 'Which is cheaper?', ['電車[でんしゃ] (the train)', 'バス (the bus)'],
+        'The train is cheaper than the bus.',
+        'のほうが marks the winner: 電車のほうが安い, "the train is the cheaper side". The より part comes first here, but it still marks the other one, バス.'],
+      ['肉[にく]より魚[さかな]のほうが好[す]きです。', 'Which does the speaker like more?', ['魚[さかな] (fish)', '肉[にく] (meat)'],
+        'I like fish more than meat.',
+        '魚のほうが好き: fish is the one they like more. 肉より = "than meat".'],
+      ['山[やま]のほうが海[うみ]より好[す]きです。', 'Which does the speaker like less?', ['海[うみ] (the sea)', '山[やま] (the mountains)'],
+        'I like the mountains more than the sea.',
+        'The order can flip: A のほうが B より … still means A is more. 山 has のほうが, so the sea (海より) is the one they like less.'],
+      ['コーヒーより紅茶[こうちゃ]のほうがよく飲[の]みます。', 'Which does the speaker drink more often?', ['紅茶[こうちゃ] (tea)', 'コーヒー (coffee)'],
+        'I drink tea more often than coffee.',
+        'Comparisons work with verbs too: 紅茶のほうがよく飲みます, "tea is the one I drink more often (よく)".'],
+      ['父[ちち]より母[はは]のほうが料理[りょうり]が上手[じょうず]です。', 'Who is the better cook?', ['母[はは] (my mother)', '父[ちち] (my father)'],
+        'My mother is a better cook than my father.',
+        '料理が上手 = good at cooking. 母 has のほうが, so she is the better cook; 父より = "than my father".'],
+      ['東京[とうきょう]タワーよりスカイツリーのほうが高[たか]いです。', 'Which is lower?', ['東京[とうきょう]タワー', 'スカイツリー'],
+        'The Skytree is taller than Tokyo Tower.',
+        '高い means tall here. The Skytree (634 m) is the taller, so Tokyo Tower (333 m), before より, is the lower one.'],
+      ['このスマホより、あのスマホのほうが軽[かる]いです。', 'Which phone is heavier?', ['このスマホ', 'あのスマホ'],
+        'That phone is lighter than this one.',
+        'あのスマホ is the lighter (軽い) one, so このスマホ, the one with より, is heavier.'],
+      ['新幹線[しんかんせん]のほうが飛行機[ひこうき]より遅[おそ]いです。', 'Which is faster?', ['飛行機[ひこうき] (the plane)', '新幹線[しんかんせん] (the shinkansen)'],
+        'The shinkansen is slower than the plane.',
+        '遅い = slow. The shinkansen is the slower one (のほうが), so the plane (飛行機より) is faster.'],
+    ]],
+    ['どちらが…？ — asking and answering (N5)', [
+      ['A：夏[なつ]と冬[ふゆ]と、どちらが好[す]きですか。\nB：冬[ふゆ]のほうが好[す]きです。', 'Which season does B like more?', ['冬[ふゆ] (winter)', '夏[なつ] (summer)'],
+        'A: Which do you like more, summer or winter? B: I like winter more.',
+        'A と B と、どちらが…ですか asks "which of A and B is more …?". The answer names the winner with のほうが: 冬のほうが.'],
+      ['A：北海道[ほっかいどう]と沖縄[おきなわ]と、どっちが暑[あつ]い？\nB：沖縄[おきなわ]のほうが暑[あつ]いよ。', 'Which is cooler?', ['北海道[ほっかいどう]', '沖縄[おきなわ]'],
+        'A: Which is hotter, Hokkaido or Okinawa? B: Okinawa is hotter.',
+        'どっち is casual どちら. 沖縄 is the hotter (暑い) one, so 北海道 is cooler.'],
+      ['A：りんごとみかんと、どちらが高[たか]いですか。\nB：みかんより、りんごのほうが高[たか]いです。', 'Which is cheaper?', ['みかん (mandarins)', 'りんご (apples)'],
+        'A: Which is more expensive, apples or mandarins? B: Apples are more expensive than mandarins.',
+        'りんご has のほうが (more expensive); みかん has より, so mandarins are the cheaper ones.'],
+      ['A：日本[にほん]とアメリカと、どちらが大[おお]きいですか。\nB：アメリカのほうがずっと大[おお]きいです。', 'Which is smaller?', ['日本[にほん]', 'アメリカ'],
+        'A: Which is bigger, Japan or America? B: America is much bigger.',
+        'ずっと before the adjective in a comparison means "by far". America is much bigger, so Japan is the smaller.'],
+      ['A：電車[でんしゃ]とタクシーと、どちらが速[はや]いですか。\nB：この時間[じかん]は電車[でんしゃ]のほうが速[はや]いですよ。', 'At this time of day, which is slower?', ['タクシー', '電車[でんしゃ]'],
+        'A: Which is faster, the train or a taxi? B: At this time of day the train is faster.',
+        '電車のほうが速い: the train wins on speed (traffic, probably), so the taxi is the slower one.'],
+      ['A：赤[あか]いのと青[あお]いのと、どっちがいい？\nB：青[あお]いほうがいいな。', 'Which one does B want?', ['青[あお]いの (the blue one)', '赤[あか]いの (the red one)'],
+        'A: Which do you want, the red one or the blue one? B: The blue one, I think.',
+        'After an adjective, ほう follows straight on, with no の: 青いほう, "the blue one". ほうがいい = "is better", so B picks the blue one.'],
+      ['A：平日[へいじつ]と週末[しゅうまつ]と、どちらが忙[いそが]しいですか。\nB：週末[しゅうまつ]のほうが忙[いそが]しいです。', 'When does B have more free time?', ['平日[へいじつ] (weekdays)', '週末[しゅうまつ] (the weekend)'],
+        'A: When are you busier, on weekdays or at the weekend? B: I\'m busier at the weekend.',
+        'The weekend is the busier (忙しい) time, so B has more free time on weekdays, 平日.'],
+    ]],
+    ['ほど…ない and 同じぐらい — not as … as, as … as (N4)', [
+      ['大阪[おおさか]は東京[とうきょう]ほど大[おお]きくないです。', 'Which city is bigger?', ['東京[とうきょう]', '大阪[おおさか]', SAME],
+        'Osaka is not as big as Tokyo.',
+        'A は B ほど …ない: A is not as … as B. ほど, like より, marks the one compared against — but with the negative, that one wins: Tokyo is bigger.'],
+      ['今年[ことし]の夏[なつ]は去年[きょねん]ほど暑[あつ]くなかったです。', 'Which summer was hotter?', ['去年[きょねん] (last year)', '今年[ことし] (this year)', SAME],
+        'This summer wasn\'t as hot as last year\'s.',
+        'This year\'s summer was not as hot as 去年 (last year\'s), so last year\'s summer was hotter.'],
+      ['このレストランはあの店[みせ]ほど高[たか]くありません。', 'Which is cheaper?', ['このレストラン', 'あの店[みせ]', SAME],
+        'This restaurant isn\'t as expensive as that place.',
+        'このレストラン is "not as expensive as" あの店, so it is the cheaper one.'],
+      ['漢字[かんじ]はひらがなほど簡単[かんたん]じゃありません。', 'Which is easier?', ['ひらがな', '漢字[かんじ]', SAME],
+        'Kanji aren\'t as easy as hiragana.',
+        'With a な-adjective the negative is じゃありません. Kanji are not as easy (簡単) as hiragana, so hiragana are easier.'],
+      ['私[わたし]の部屋[へや]は姉[あね]の部屋[へや]ほど広[ひろ]くないです。', 'Whose room is smaller?', ['私[わたし]の部屋[へや] (mine)', '姉[あね]の部屋[へや] (my sister\'s)', SAME],
+        'My room isn\'t as big as my older sister\'s.',
+        'My room is "not as spacious (広い) as" my sister\'s, so mine is the smaller one.'],
+      ['このかばんはあのかばんほど重[おも]くないです。', 'Which bag is lighter?', ['このかばん', 'あのかばん', SAME],
+        'This bag isn\'t as heavy as that one.',
+        'このかばん is "not as heavy (重い) as" あのかばん, so this bag is the lighter one.'],
+      ['弟[おとうと]は私[わたし]と同[おな]じぐらい背[せ]が高[たか]いです。', 'Who is taller?', [SAME, '弟[おとうと] (my brother)', '私[わたし] (me)'],
+        'My younger brother is about as tall as me.',
+        'A は B と同じぐらい … = A is about as … as B, so neither is taller.'],
+      ['兄[あに]は父[ちち]と同[おな]じくらい食[た]べます。', 'Who eats more?', [SAME, '兄[あに] (my brother)', '父[ちち] (my father)'],
+        'My older brother eats about as much as my father.',
+        '同じくらい is the same as 同じぐらい, and works with verbs too: they eat about the same amount.'],
+    ]],
+    ['Actions: 〜より 〜ほうが (N4)', [
+      ['駅[えき]まではバスに乗[の]るより、歩[ある]いたほうが早[はや]いです。', 'Which gets you to the station sooner?', ['歩[ある]く (walking)', 'バスに乗[の]る (taking the bus)'],
+        'It\'s quicker to walk to the station than to take the bus.',
+        'Actions compare the same way: [verb]より, [verb]ほうが. 歩いたほう has ほうが, so walking is quicker (早い = soon, early).'],
+      ['外[そと]で食[た]べるより、家[うち]で作[つく]るほうが安[やす]いです。', 'Which costs more?', ['外[そと]で食[た]べる (eating out)', '家[うち]で作[つく]る (cooking at home)'],
+        'Cooking at home is cheaper than eating out.',
+        'Cooking at home (作るほうが) is the cheaper one, so eating out (食べるより) costs more.'],
+      ['見[み]るより、自分[じぶん]でやってみるほうが楽[たの]しいです。', 'Which is more fun?', ['やってみる (trying it yourself)', '見[み]る (watching)'],
+        'Trying it yourself is more fun than watching.',
+        'やってみる = "try doing". It has ほうが, so it\'s the more fun (楽しい) one.'],
+      ['雨[あめ]の日[ひ]は、出[で]かけるより家[うち]にいるほうが好[す]きです。', 'What does the speaker prefer on rainy days?', ['家[うち]にいる (staying in)', '出[で]かける (going out)'],
+        'On rainy days I prefer staying in to going out.',
+        '家にいるほうが好き: staying at home is what they like more.'],
+      ['一人[ひとり]で勉強[べんきょう]するより、友達[ともだち]と勉強[べんきょう]したほうが続[つづ]きます。', 'Which way is it easier to keep studying?', ['友達[ともだち]と (with friends)', '一人[ひとり]で (alone)'],
+        'You keep at it longer studying with friends than alone.',
+        '続く = to keep going. 友達と勉強したほう has ほうが, so studying with friends is easier to keep up.'],
+      ['タクシーで行[い]くより、電車[でんしゃ]で行[い]ったほうがいいですよ。', 'What does the speaker recommend?', ['電車[でんしゃ]で (by train)', 'タクシーで (by taxi)'],
+        'You\'d better go by train rather than by taxi.',
+        '〜たほうがいい is advice, "you\'d better …"; より names what not to do. So: take the train.'],
+    ]],
+  ];
+
+  // An option: its Japanese (furigana markup) and English gloss, if any.
+  function compareOption(o) {
+    const [, ja, en] = o.match(/^(.*?)(?: \((.*)\))?$/);
+    return {
+      text: rubyPlain(ja),
+      html: rubyHtml(ja) + (en ? ` <span class="misc-prompt-en" lang="en">(${esc(en)})</span>` : ''),
+      last: o === SAME,
+    };
+  }
+  const compareItems = rows => rows.map(([sentence, question, options, en, why]) => ({
+    prompt: `${rubyPlain(sentence).replace(/\n/g, ' ')} — ${question}`,
+    promptHtml: `${sentence.split('\n').map(rubyHtml).join('<br>')}<span class="misc-question" lang="en">${esc(question)}</span>`,
+    sentence: rubyPlain(sentence),
+    answer: compareOption(options[0]).text,
+    options: options.map(compareOption),
+    note: `<span lang="en"><b>“${esc(en)}”</b> ${rubyHtml(why)}</span>`,
+  }));
+
   const QUIZZES = [
     {
       id: 'ru-exceptions',
@@ -603,6 +750,20 @@
       ],
     },
     {
+      id: 'comparisons',
+      glyph: '比',
+      title: 'より and のほう: which one?',
+      ja: '比較 — どちらが？',
+      desc: 'Read a comparison with より, のほう or ほど and pick which one is more expensive, cheaper, bigger, smaller, faster… Every answer is explained.',
+      sections: COMPARE.map(([label, rows]) => ({
+        type: 'choice',
+        label,
+        stack: true,
+        columns: ['Sentence', 'Which one?'],
+        items: compareItems(rows),
+      })),
+    },
+    {
       id: 'dates',
       glyph: '日',
       title: 'Dates of the month',
@@ -690,6 +851,22 @@
     }).slice(0, n - 1);
     const opts = [i, ...others];
     return shuffled(opts.length, rand).map(k => opts[k]);
+  }
+
+  // The buttons for multiple-choice item i, as { html, right }. An item with
+  // options of its own (the comparisons) offers those, answer first in the
+  // data, shuffled except "about the same", which stays last; otherwise the
+  // options are other items' answers, from choiceOptions.
+  function choiceButtons(section, i, rand = Math.random) {
+    const it = section.items[i];
+    if (it.options) {
+      const order = shuffled(it.options.length, rand);
+      return [...order.filter(k => !it.options[k].last), ...order.filter(k => it.options[k].last)]
+        .map(k => ({ html: it.options[k].html, text: it.options[k].text, right: k === 0 }));
+    }
+    return choiceOptions(section, i, rand).map(j => ({
+      html: section.items[j].answerHtml || esc(section.items[j].answer), text: section.items[j].answer, right: j === i,
+    }));
   }
 
   const total = quiz => quiz.sections.reduce((n, sec) => n + sec.items.length, 0);
@@ -828,12 +1005,12 @@
         if (sec.type === 'choice') {
           const rows = sec.items.map((it, i) => `<tr data-row="${i}">
             <td lang="ja" class="misc-prompt">${it.promptHtml || esc(it.prompt)}</td>
-            <td><div class="misc-choices">${choiceOptions(sec, i).map(j => `<button class="misc-choice" lang="ja"
-              data-section="${si}" data-row="${i}" data-opt="${j}">${sec.items[j].answerHtml || esc(sec.items[j].answer)}</button>`).join('')}</div>
+            <td><div class="misc-choices">${choiceButtons(sec, i).map(o => `<button class="misc-choice" lang="ja"
+              data-section="${si}" data-row="${i}" data-right="${o.right ? 1 : 0}">${o.html}</button>`).join('')}</div>
               ${it.note ? `<div class="misc-choice-note hidden" lang="ja">${it.note}</div>` : ''}</td>
           </tr>`).join('');
           return `<section class="misc-section" data-section="${si}">${label}
-            <table class="misc-table misc-table-choice"><thead>${head}</thead><tbody>${rows}</tbody></table>
+            <table class="misc-table misc-table-choice${sec.stack ? ' misc-table-stack' : ''}"><thead>${head}</thead><tbody>${rows}</tbody></table>
           </section>`;
         }
         const rows = sec.items.map((it, i) => `<tr data-row="${i}">
@@ -908,7 +1085,7 @@
       const si = +btn.dataset.section;
       const i = +btn.dataset.row;
       btn.classList.add('misc-choice-picked');
-      if (+btn.dataset.opt === i) reveal(si, i, 'found');
+      if (btn.dataset.right === '1') reveal(si, i, 'found');
       else { wrong[si].add(i); reveal(si, i, 'missed'); }
       updateScore();
       if (allAnswered()) finish();
@@ -933,7 +1110,7 @@
       } else if (sec.type === 'choice') {
         row.querySelectorAll('.misc-choice').forEach(b => {
           b.disabled = true;
-          if (+b.dataset.opt === i) b.classList.add('misc-choice-right');
+          if (b.dataset.right === '1') b.classList.add('misc-choice-right');
         });
         const note = row.querySelector('.misc-choice-note');
         if (note) note.classList.remove('hidden');
@@ -1111,7 +1288,7 @@
     if (QUIZZES.some(q => q.id === hash)) start(hash);
   }
 
-  const api = { rubyHtml, rubyPlain, rubyKana, QUIZZES, RU_EXCEPTIONS, normalize, matchItems, choiceOptions, shuffled, total, better, formatTime };
+  const api = { rubyHtml, rubyPlain, rubyKana, QUIZZES, RU_EXCEPTIONS, normalize, matchItems, choiceOptions, choiceButtons, shuffled, total, better, formatTime };
   global.Misc = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   if (typeof document !== 'undefined') {

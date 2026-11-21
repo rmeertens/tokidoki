@@ -7895,6 +7895,15 @@ a.chapter-card.news-headline-card {
 .misc-choice.misc-choice-right { border-color: var(--green); color: var(--green); }
 .misc-choice-note { margin-top: 6px; font-size: 0.9rem; color: var(--text-dim); }
 .misc-choice-note rt { font-size: 0.55em; }
+/* Comparisons (より / のほう): a sentence, the question under it, two or three picks */
+.misc-table-stack thead { display: none; }
+.misc-table-stack tr, .misc-table-stack td { display: block; width: auto !important; }
+.misc-table-stack td:first-child { padding-top: 10px; }
+.misc-table-stack td:last-child { border-top: 0; padding-top: 4px; padding-bottom: 12px; }
+.misc-table-stack .misc-choices { grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); }
+.misc-table-stack .misc-prompt { font-weight: 400; line-height: 1.7; }
+.misc-question { display: block; margin-top: 2px; font-family: var(--font); font-weight: 700; font-size: 0.88em; color: var(--accent); }
+.misc-choice-note b { color: var(--text); font-weight: 600; }
 
 .misc-result { margin-top: 16px; }
 .misc-actions { margin-top: 16px; }
@@ -7905,6 +7914,7 @@ a.chapter-card.news-headline-card {
   .misc-glyph { width: 34px; height: 34px; font-size: 1.1rem; }
   .misc-table-choice td:first-child { width: 34%; }
   .misc-choices { grid-template-columns: 1fr; }
+  .misc-table-stack .misc-choices { grid-template-columns: 1fr 1fr; }
 }
 
 /* ─── Conversation starters (conversation.html) ─────────────────────────── */

@@ -27,6 +27,14 @@ Misc.QUIZZES.forEach(q => {
         check(Misc.matchItems(sec, typed).includes(i), `${q.id}#${si}.${i}: "${typed}" isn't accepted`);
       } else if (sec.type === 'choice') {
         check(it.prompt && it.answer, `${q.id}#${si}.${i}: missing prompt or answer`);
+        // Options of its own: at least two, exactly one right, none the same.
+        if (it.options) {
+          const btns = Misc.choiceButtons(sec, i);
+          check(btns.length === it.options.length && btns.length >= 2, `${q.id}#${si}.${i}: options ${btns.length}`);
+          check(btns.filter(b => b.right).length === 1 && btns.find(b => b.right).text === it.answer, `${q.id}#${si}.${i}: right option`);
+          check(new Set(btns.map(b => b.text)).size === btns.length, `${q.id}#${si}.${i}: repeated option`);
+          return;
+        }
         // Four options, the right one among them, none spelled the same.
         const opts = Misc.choiceOptions(sec, i);
         check(opts.length === Math.min(4, sec.items.length) && opts.includes(i), `${q.id}#${si}.${i}: options ${opts}`);
@@ -208,6 +216,34 @@ check(Misc.better(undefined, { score: 1, time: 9 }), 'first result is best');
 check(Misc.better({ score: 5, time: 60 }, { score: 6, time: 99 }), 'higher score wins');
 check(!Misc.better({ score: 6, time: 60 }, { score: 6, time: 70 }), 'slower same score loses');
 check(Misc.formatTime(75) === '1:15', 'formatTime');
+
+
+// ─── より and のほう ──────────────────────────────────────────────────────────
+
+const compare = Misc.QUIZZES.find(q => q.id === 'comparisons');
+check(compare && compare.sections.length === 5, 'the comparisons quiz has its five sections');
+const SAME = '同じぐらい';
+compare.sections.forEach(sec => sec.items.forEach(it => {
+  const where = it.sentence.replace(/\n/g, ' ');
+  check(!/[[\]]/.test(it.prompt + it.sentence + it.options.map(o => o.text).join('')), `comparisons ${where}: markup left`);
+  check(/より|ほう|ほど|同じ/.test(it.sentence), `comparisons ${where}: compares nothing`);
+  check(/<span lang="en"><b>“.+”<\/b> ./.test(it.note), `comparisons ${where}: no translation or explanation`);
+  // Every option but "about the same" is one of the two things in the sentence
+  // (a verb's ending may differ: 歩く for 歩いた).
+  it.options.filter(o => o.text !== SAME).forEach(o =>
+    check(where.includes(o.text.replace(/(?<=[^ぁ-ん])[ぁ-ん]+$/, '')), `comparisons ${where}: option ${o.text} isn't in it`));
+  // "About the same" stays the last button, and is the answer only with 同じ.
+  for (let r = 0; r < 5; r++) {
+    const btns = Misc.choiceButtons(sec, sec.items.indexOf(it));
+    check(btns.findIndex(b => b.text === SAME) === (btns.some(b => b.text === SAME) ? btns.length - 1 : -1), `comparisons ${where}: 同じぐらい not last`);
+  }
+  check((it.answer === SAME) === where.includes('同じ'), `comparisons ${where}: 同じぐらい answer`);
+}));
+const cmp = (s, q) => compare.sections.flatMap(x => x.items).find(it => it.sentence.startsWith(s) && it.prompt.endsWith(q));
+check(cmp('東京は大阪より', 'Which city is bigger?').answer === '東京', 'AはBより大きい: A is bigger');
+check(cmp('このかばんはあのかばんより高い', 'Which bag is cheaper?').answer === 'あのかばん', 'AはBより高い: B is cheaper');
+check(cmp('バスより電車のほうが', 'Which is cheaper?').answer === '電車', 'BよりAのほうが安い: A is cheaper');
+check(cmp('大阪は東京ほど', 'Which city is bigger?').answer === '東京', 'AはBほど大きくない: B is bigger');
 
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);
