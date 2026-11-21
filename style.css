@@ -7836,6 +7836,14 @@ a.chapter-card.news-headline-card {
 .misc-toggles { display: flex; flex-wrap: wrap; gap: 8px 12px; margin-bottom: 14px; }
 .misc-toggles.hidden { display: none; }
 .misc-shuffle-row { display: inline-flex; }
+.misc-order { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 3px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-card); }
+.misc-order button {
+  font: inherit; font-size: 0.85rem; font-weight: 600; color: var(--text-dim);
+  padding: 5px 12px; border: 0; border-radius: 7px; background: transparent; cursor: pointer;
+}
+.misc-order button:hover { color: var(--text); }
+.misc-order button.active { background: var(--accent); color: #fff; }
+.misc-tabs { margin: -4px 0 14px; }
 .misc-retype-on .misc-table-fill .misc-answer { cursor: pointer; text-decoration: underline dotted; text-underline-offset: 4px; }
 .misc-missed.misc-retyped td { background: var(--green-dim); }
 .misc-missed.misc-retyped .misc-answer { color: var(--green); }

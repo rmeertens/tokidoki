@@ -622,6 +622,334 @@
     ]],
   ];
 
+  // Sets 2 and 3: the same eight kinds of question, as more tabs.
+  const COMPARE_2 = [
+    [
+      ['新幹線[しんかんせん]はバスより高[たか]いです。', 'Which is cheaper?', ['バス (the bus)', '新幹線[しんかんせん] (the shinkansen)'],
+        'The shinkansen is more expensive than the bus.',
+        'The shinkansen is the more expensive (高い) one, so the bus, before より, is cheaper.'],
+      ['姉[あね]は私[わたし]より早[はや]く起[お]きます。', 'Who gets up later?', ['私[わたし] (me)', '姉[あね] (my sister)'],
+        'My older sister gets up earlier than me.',
+        'My sister gets up earlier (早く); より marks me, so I\'m the one who gets up later.'],
+      ['京都[きょうと]は東京[とうきょう]より古[ふる]い町[まち]です。', 'Which city is newer?', ['東京[とうきょう]', '京都[きょうと]'],
+        'Kyoto is an older city than Tokyo.',
+        'Kyoto is the older (古い) one, so Tokyo, before より, is newer.'],
+      ['このカメラはあのカメラより軽[かる]いです。', 'Which camera is heavier?', ['あのカメラ', 'このカメラ'],
+        'This camera is lighter than that camera.',
+        'このカメラ is the lighter (軽い) one, so あのカメラ is heavier.'],
+      ['富士山[ふじさん]は高尾山[たかおさん]より高[たか]いです。', 'Which mountain is lower?', ['高尾山[たかおさん] (Mt Takao)', '富士山[ふじさん] (Mt Fuji)'],
+        'Mt Fuji is higher than Mt Takao.',
+        'Mt Fuji (3,776 m) is the higher one; より marks Mt Takao (599 m), the lower one.'],
+      ['私[わたし]の家[いえ]は駅[えき]より学校[がっこう]に近[ちか]いです。', 'Is the speaker\'s house nearer the station or the school?', ['学校[がっこう] (the school)', '駅[えき] (the station)'],
+        'My house is closer to the school than to the station.',
+        'より can compare other parts of a sentence too: 駅より学校に近い = "closer to the school than (to) the station".'],
+    ],
+    [
+      ['春[はる]より秋[あき]のほうが好[す]きです。', 'Which season does the speaker like less?', ['春[はる] (spring)', '秋[あき] (autumn)'],
+        'I like autumn more than spring.',
+        '秋のほうが好き: autumn is the favourite, so spring (春より) is liked less.'],
+      ['手紙[てがみ]よりメールのほうが速[はや]いです。', 'Which is slower?', ['手紙[てがみ] (a letter)', 'メール (email)'],
+        'Email is faster than a letter.',
+        'メールのほうが速い: email wins on speed, so the letter is slower.'],
+      ['姉[あね]のほうが私[わたし]より歌[うた]が上手[じょうず]です。', 'Who sings better?', ['姉[あね] (my sister)', '私[わたし] (me)'],
+        'My older sister sings better than me.',
+        '歌が上手 = good at singing. 姉 has のほうが, so she sings better.'],
+      ['ラーメンよりうどんのほうがよく食[た]べます。', 'Which does the speaker eat less often?', ['ラーメン', 'うどん'],
+        'I eat udon more often than ramen.',
+        'うどんのほうがよく食べます: udon is eaten more often, so ramen less.'],
+      ['平日[へいじつ]より日曜日[にちようび]のほうが店[みせ]が混[こ]んでいます。', 'When is the shop less crowded?', ['平日[へいじつ] (weekdays)', '日曜日[にちようび] (Sundays)'],
+        'The shop is more crowded on Sundays than on weekdays.',
+        '混んでいる = crowded. Sundays are more crowded, so weekdays are quieter.'],
+      ['地下鉄[ちかてつ]よりタクシーのほうが便利[べんり]です。', 'Which is more convenient?', ['タクシー', '地下鉄[ちかてつ] (the subway)'],
+        'A taxi is more convenient than the subway.',
+        'タクシーのほうが便利: the taxi has のほうが, so it\'s the more convenient (便利) one.'],
+    ],
+    [
+      ['A：犬[いぬ]と猫[ねこ]と、どちらが好[す]きですか。\nB：猫[ねこ]のほうが好[す]きです。', 'Which does B like less?', ['犬[いぬ] (dogs)', '猫[ねこ] (cats)'],
+        'A: Which do you like more, dogs or cats? B: I like cats more.',
+        'B answers with 猫のほうが, so cats win and dogs are liked less.'],
+      ['A：東京[とうきょう]と大阪[おおさか]と、どちらが人[ひと]が多[おお]いですか。\nB：東京[とうきょう]のほうが多[おお]いです。', 'Which has fewer people?', ['大阪[おおさか]', '東京[とうきょう]'],
+        'A: Which has more people, Tokyo or Osaka? B: Tokyo has more.',
+        '東京のほうが多い: Tokyo has more people, so Osaka has fewer.'],
+      ['A：月曜日[げつようび]と水曜日[すいようび]と、どちらが暇[ひま]ですか。\nB：水曜日[すいようび]のほうが暇[ひま]です。', 'On which day is B busier?', ['月曜日[げつようび] (Monday)', '水曜日[すいようび] (Wednesday)'],
+        'A: Which day are you freer, Monday or Wednesday? B: I\'m freer on Wednesday.',
+        '暇 = free, not busy. Wednesday is the freer day, so B is busier on Monday.'],
+      ['A：この赤[あか]いシャツと白[しろ]いシャツ、どっちが安[やす]い？\nB：白[しろ]いほうが安[やす]いよ。', 'Which shirt costs more?', ['赤[あか]いシャツ (the red one)', '白[しろ]いシャツ (the white one)'],
+        'A: Which is cheaper, this red shirt or the white one? B: The white one is cheaper.',
+        '白いほう = "the white one" (no の after an adjective). It\'s the cheaper one, so the red shirt costs more.'],
+      ['A：電話[でんわ]とメールと、どちらがいいですか。\nB：どちらでもいいですよ。', 'Which does B prefer?', ['どちらでもいい (either)', '電話[でんわ] (a call)', 'メール (email)'],
+        'A: Which is better for you, a call or email? B: Either is fine.',
+        'どちらでもいい = "either is fine": B has no preference, so neither wins.'],
+      ['A：コーヒーと紅茶[こうちゃ]と、どちらがよろしいですか。\nB：じゃあ、コーヒーをお願[ねが]いします。', 'Which does B choose?', ['コーヒー (coffee)', '紅茶[こうちゃ] (tea)'],
+        'A: Which would you like, coffee or tea? B: Coffee, please.',
+        'An answer doesn\'t need のほう: B just orders coffee. よろしい is the polite いい that staff use.'],
+    ],
+    [
+      ['北海道[ほっかいどう]の夏[なつ]は東京[とうきょう]ほど暑[あつ]くないです。', 'Where is summer hotter?', ['東京[とうきょう]', '北海道[ほっかいどう]', SAME],
+        'Summer in Hokkaido isn\'t as hot as in Tokyo.',
+        'A は B ほど …ない: A is not as … as B. Hokkaido isn\'t as hot, so Tokyo\'s summer is hotter.'],
+      ['この本[ほん]はあの本[ほん]ほどおもしろくなかったです。', 'Which book was more interesting?', ['あの本[ほん] (that book)', 'この本[ほん] (this book)', SAME],
+        'This book wasn\'t as interesting as that one.',
+        'この本 was "not as interesting as" あの本, so that book was the more interesting one.'],
+      ['私[わたし]は兄[あに]ほど速[はや]く走[はし]れません。', 'Who runs faster?', ['兄[あに] (my brother)', '私[わたし] (me)', SAME],
+        'I can\'t run as fast as my older brother.',
+        'ほど works with verbs too: 兄ほど速く走れません, "can\'t run as fast as my brother". He\'s faster.'],
+      ['今日[きょう]はきのうと同[おな]じぐらい寒[さむ]いです。', 'Which day is colder?', [SAME, '今日[きょう] (today)', 'きのう (yesterday)'],
+        'Today is about as cold as yesterday.',
+        'A は B と同じぐらい … = A is about as … as B: neither day is colder.'],
+      ['バスはタクシーほど便利[べんり]じゃありませんが、安[やす]いです。', 'Which is more convenient?', ['タクシー', 'バス', SAME],
+        'The bus isn\'t as convenient as a taxi, but it\'s cheap.',
+        'The bus is "not as convenient (便利) as" the taxi, so the taxi is more convenient. The bus wins on price.'],
+      ['このりんごは、あのりんごと大[おお]きさが同[おな]じです。', 'Which apple is bigger?', [SAME, 'このりんご', 'あのりんご'],
+        'This apple is the same size as that one.',
+        '大きさ = size (大きい → 大きさ). Their size is 同じ, the same.'],
+    ],
+    [
+      ['買[か]うより借[か]りるほうが安[やす]いです。', 'Which costs less?', ['借[か]りる (renting)', '買[か]う (buying)'],
+        'Renting is cheaper than buying.',
+        '[verb]より [verb]ほうが: 借りるほう has ほうが, so renting is cheaper.'],
+      ['夜[よる]勉強[べんきょう]するより、朝[あさ]勉強[べんきょう]したほうが覚[おぼ]えられます。', 'When does the speaker remember more?', ['朝[あさ] (in the morning)', '夜[よる] (at night)'],
+        'I can remember more when I study in the morning than at night.',
+        '覚えられる = can remember. 朝勉強したほう has ほうが, so mornings work better.'],
+      ['一人[ひとり]で行[い]くより、みんなで行[い]ったほうが楽[たの]しいですよ。', 'Which is more fun?', ['みんなで (all together)', '一人[ひとり]で (alone)'],
+        'It\'s more fun to go all together than alone.',
+        'みんなで行ったほう has ほうが: going together is more fun.'],
+      ['自分[じぶん]で直[なお]すより、店[みせ]に頼[たの]んだほうが早[はや]いです。', 'Which is quicker?', ['店[みせ]に頼[たの]む (asking the shop)', '自分[じぶん]で直[なお]す (fixing it yourself)'],
+        'It\'s quicker to ask the shop than to fix it yourself.',
+        '頼む = ask (someone to do it). 店に頼んだほう wins: it\'s quicker.'],
+      ['話[はな]すより聞[き]くほうが得意[とくい]です。', 'What is the speaker better at?', ['聞[き]く (listening)', '話[はな]す (speaking)'],
+        'I\'m better at listening than speaking.',
+        '得意 = good at. 聞くほうが得意: listening is their strength.'],
+      ['寝[ね]る前[まえ]にスマホを見[み]るより、本[ほん]を読[よ]んだほうがよく眠[ねむ]れます。', 'What helps the speaker sleep better?', ['本[ほん]を読[よ]む (reading a book)', 'スマホを見[み]る (the phone)'],
+        'I sleep better if I read a book before bed rather than look at my phone.',
+        'よく眠れる = can sleep well. 本を読んだほう has ほうが, so reading helps.'],
+    ],
+    [
+      ['姉[あね]は母[はは]より背[せ]が高[たか]いが、父[ちち]ほどではない。', 'Who is the tallest?', ['父[ちち] (my father)', '姉[あね] (my sister)', '母[はは] (my mother)'],
+        'My sister is taller than my mother, but not as tall as my father.',
+        'In a row: 母 < 姉 (母より高い), and 姉 < 父 (父ほどではない, "not as … as father"). Father is the tallest.'],
+      ['車[くるま]は便利[べんり]だが、この町[まち]では自転車[じてんしゃ]のほうが早[はや]く着[つ]くことが多[おお]い。', 'In this town, which usually gets you there sooner?', ['自転車[じてんしゃ] (a bike)', '車[くるま] (a car)'],
+        'Cars are convenient, but in this town you often get there sooner by bike.',
+        '〜ことが多い = "it often happens that…". The car is 便利, but the bike (のほうが) arrives sooner.'],
+      ['去年[きょねん]ほどではないが、今年[ことし]も雪[ゆき]がたくさん降[ふ]った。', 'Which year had more snow?', ['去年[きょねん] (last year)', '今年[ことし] (this year)', SAME],
+        'It wasn\'t as much as last year, but a lot of snow fell this year too.',
+        'ほどではない = "not as much as". This year had a lot too (今年も), but last year had more.'],
+      ['値段[ねだん]だけなら駅前[えきまえ]の店[みせ]のほうが安[やす]いが、品物[しなもの]はこの店[みせ]のほうがいい。', 'Where are the goods better?', ['この店[みせ] (this shop)', '駅前[えきまえ]の店[みせ] (the shop by the station)'],
+        'On price alone the shop by the station is cheaper, but the goods are better at this shop.',
+        'Two のほう, each about something else: price (値段) → the station shop; goods (品物) → this shop. The question is about the goods.'],
+      ['兄[あに]より私[わたし]のほうが年上[としうえ]に見[み]られることが多[おお]い。', 'Who is actually older?', ['兄[あに] (my brother)', '私[わたし] (me)'],
+        'People often take me for older than my older brother.',
+        'A trap: 年上に見られる = "be taken for older". People think I look older, but 兄 means older brother — he really is older.'],
+      ['私[わたし]の町[まち]は人口[じんこう]では隣[となり]の町[まち]より少[すく]ないが、面積[めんせき]では二倍[にばい]もある。', 'Which town is larger in area?', ['私[わたし]の町[まち] (mine)', '隣[となり]の町[まち] (the next town)'],
+        'My town has fewer people than the next town, but it\'s twice as big in area.',
+        '人口 = population (my town has fewer); 面積 = area, and 二倍もある = "is as much as twice". So my town is larger in area.'],
+    ],
+    [
+      ['あの人[ひと]は先生[せんせい]というより、友達[ともだち]みたいだ。', 'What is that person more like to the speaker?', ['友達[ともだち] (a friend)', '先生[せんせい] (a teacher)'],
+        'That person is more like a friend than a teacher.',
+        'A というより B: the word after というより, 友達, is the one the speaker settles on.'],
+      ['この料理[りょうり]は辛[から]いというより、痛[いた]いぐらいだ。', 'How does the dish feel?', ['痛[いた]い (painful)', '辛[から]い (spicy)'],
+        'This dish isn\'t so much spicy as almost painful.',
+        '辛い doesn\'t go far enough for the speaker: it\'s so hot it almost hurts (痛いぐらい).'],
+      ['彼[かれ]は話[はな]すのが下手[へた]というより、恥[は]ずかしがり屋[や]なのだ。', 'Why doesn\'t he talk much, really?', ['恥[は]ずかしがり屋[や] (he\'s shy)', '下手[へた] (he\'s bad at it)'],
+        'It\'s not so much that he\'s bad at talking — he\'s shy.',
+        '恥ずかしがり屋 = a shy person. 〜のだ gives the real reason, after というより sets aside the other one.'],
+      ['A：昨日[きのう]のパーティー、楽[たの]しかった？\nB：楽[たの]しかったというより、疲[つか]れたかな。', 'How did B feel about the party?', ['疲[つか]れた (tired)', '楽[たの]しかった (it was fun)'],
+        'A: Was yesterday\'s party fun? B: More tiring than fun, I\'d say.',
+        'B takes A\'s word, 楽しかった, and swaps in a better one after というより: 疲れた.'],
+      ['ここは町[まち]というより、村[むら]に近[ちか]い。', 'What is this place closer to?', ['村[むら] (a village)', '町[まち] (a town)'],
+        'This place is closer to a village than a town.',
+        '町というより = "rather than a town"; 村に近い = "closer to a village".'],
+      ['怒[おこ]っているというより、悲[かな]しんでいるように見[み]えた。', 'How did they seem?', ['悲[かな]しんでいる (sad)', '怒[おこ]っている (angry)'],
+        'They seemed sad rather than angry.',
+        '〜ように見えた = "seemed". Angry is set aside; sad (悲しんでいる) is what they looked like.'],
+    ],
+    [
+      ['今回[こんかい]の試験[しけん]は、前回[ぜんかい]にもまして難[むずか]しかった。', 'Which exam was harder?', ['今回[こんかい] (this one)', '前回[ぜんかい] (the last one)', SAME],
+        'This exam was even harder than the last one.',
+        'B にもまして A: "even more A than B". The last exam was hard, and this one was harder still.'],
+      ['新[あたら]しい部長[ぶちょう]は、前[まえ]の部長[ぶちょう]にもまして厳[きび]しい。', 'Who is stricter?', ['新[あたら]しい部長[ぶちょう] (the new manager)', '前[まえ]の部長[ぶちょう] (the old manager)', SAME],
+        'The new manager is even stricter than the last one.',
+        'The old manager was strict (厳しい), and the new one is stricter still.'],
+      ['店[みせ]の評判[ひょうばん]は、料理[りょうり]にもましてサービスの良[よ]さで広[ひろ]がった。', 'What did the most for the shop\'s name?', ['サービス (the service)', '料理[りょうり] (the food)'],
+        'The shop\'s reputation spread thanks to its good service, even more than its food.',
+        '評判 = reputation. The food helped, but 料理にもまして: the service did even more.'],
+      ['雨[あめ]の日[ひ]は、晴[は]れの日[ひ]にもまして道[みち]が混[こ]む。', 'When are the roads more crowded?', ['雨[あめ]の日[ひ] (rainy days)', '晴[は]れの日[ひ] (sunny days)', SAME],
+        'On rainy days the roads are even more crowded than on sunny days.',
+        'The roads are busy on sunny days too, and even busier when it rains.'],
+      ['今年[ことし]の新入社員[しんにゅうしゃいん]は、例年[れいねん]にもましてやる気[き]がある。', 'Which new staff are keener?', ['今年[ことし] (this year\'s)', '例年[れいねん] (most years\')', SAME],
+        'This year\'s new employees are even more motivated than in most years.',
+        '例年 = an ordinary year, most years. やる気 = motivation. This year\'s are keener still.'],
+      ['祖母[そぼ]は退院[たいいん]してから、前[まえ]にもまして元気[げんき]になった。', 'When is the grandmother livelier?', ['退院[たいいん]してから (since leaving hospital)', '前[まえ] (before)'],
+        'Since leaving hospital, my grandmother has become even livelier than before.',
+        '退院する = leave hospital. 前にもまして = "even more than before".'],
+    ],
+  ];
+
+  const COMPARE_3 = [
+    [
+      ['私[わたし]の部屋[へや]は兄[あに]の部屋[へや]より明[あか]るいです。', 'Whose room is darker?', ['兄[あに]の部屋[へや] (my brother\'s)', '私[わたし]の部屋[へや] (mine)'],
+        'My room is brighter than my brother\'s.',
+        'My room is the brighter (明るい) one, so my brother\'s, before より, is darker.'],
+      ['八月[はちがつ]は六月[ろくがつ]より暑[あつ]いです。', 'Which month is cooler?', ['六月[ろくがつ] (June)', '八月[はちがつ] (August)'],
+        'August is hotter than June.',
+        'August is the hotter one; より marks June, the cooler month.'],
+      ['中国[ちゅうごく]は日本[にほん]より人[ひと]が多[おお]いです。', 'Which country has fewer people?', ['日本[にほん] (Japan)', '中国[ちゅうごく] (China)'],
+        'China has more people than Japan.',
+        'China has more people (人が多い), so Japan, before より, has fewer.'],
+      ['父[ちち]は母[はは]より料理[りょうり]が下手[へた]です。', 'Who cooks better?', ['母[はは] (my mother)', '父[ちち] (my father)'],
+        'My father is a worse cook than my mother.',
+        '下手 = bad at. Father is the worse cook, so mother, before より, cooks better.'],
+      ['新[あたら]しい駅[えき]は古[ふる]い駅[えき]より大[おお]きいです。', 'Which station is smaller?', ['古[ふる]い駅[えき] (the old one)', '新[あたら]しい駅[えき] (the new one)'],
+        'The new station is bigger than the old one.',
+        'The new station is bigger, so the old station, before より, is smaller.'],
+      ['日曜日[にちようび]は土曜日[どようび]より道[みち]が空[す]いています。', 'On which day are the roads busier?', ['土曜日[どようび] (Saturday)', '日曜日[にちようび] (Sunday)'],
+        'The roads are emptier on Sunday than on Saturday.',
+        '空いている = empty, not crowded. Sunday is emptier, so Saturday is busier.'],
+    ],
+    [
+      ['日本語[にほんご]より英語[えいご]のほうが上手[じょうず]です。', 'Which language does the speaker speak less well?', ['日本語[にほんご] (Japanese)', '英語[えいご] (English)'],
+        'I\'m better at English than Japanese.',
+        '英語のほうが上手: English is the stronger one, so Japanese is weaker.'],
+      ['電車[でんしゃ]より車[くるま]のほうが便利[べんり]です。', 'Which is less convenient?', ['電車[でんしゃ] (the train)', '車[くるま] (a car)'],
+        'A car is more convenient than the train.',
+        '車のほうが便利: the car wins, so the train is less convenient.'],
+      ['赤[あか]いのより、黒[くろ]いのほうが似合[にあ]いますよ。', 'Which one suits the listener better?', ['黒[くろ]いの (the black one)', '赤[あか]いの (the red one)'],
+        'The black one suits you better than the red one.',
+        '似合う = suit, look good on. 黒いのほうが似合う: the black one does.'],
+      ['朝[あさ]ご飯[はん]より晩[ばん]ご飯[はん]のほうがたくさん食[た]べます。', 'Which meal is smaller?', ['朝[あさ]ご飯[はん] (breakfast)', '晩[ばん]ご飯[はん] (dinner)'],
+        'I eat more at dinner than at breakfast.',
+        '晩ご飯のほうがたくさん: dinner is the bigger meal, so breakfast is smaller.'],
+      ['大阪[おおさか]のほうが京都[きょうと]より人[ひと]が多[おお]いです。', 'Which city has fewer people?', ['京都[きょうと]', '大阪[おおさか]'],
+        'Osaka has more people than Kyoto.',
+        '大阪のほうが多い: Osaka has more people; 京都より marks Kyoto, which has fewer.'],
+      ['去年[きょねん]より今年[ことし]のほうが雨[あめ]が少[すく]ないです。', 'Which year had more rain?', ['去年[きょねん] (last year)', '今年[ことし] (this year)'],
+        'There\'s less rain this year than last year.',
+        'Careful: 少ない = little, few. This year has less rain (のほうが少ない), so last year had more.'],
+    ],
+    [
+      ['A：海[うみ]と山[やま]と、どちらへ行[い]きたいですか。\nB：山[やま]のほうがいいです。', 'Where does B want to go?', ['山[やま] (the mountains)', '海[うみ] (the sea)'],
+        'A: Where would you like to go, the sea or the mountains? B: The mountains would be better.',
+        '山のほうがいい: B prefers the mountains.'],
+      ['A：バスと電車[でんしゃ]と、どちらが安[やす]いですか。\nB：バスのほうが少[すこ]し安[やす]いです。', 'Which costs more?', ['電車[でんしゃ] (the train)', 'バス (the bus)'],
+        'A: Which is cheaper, the bus or the train? B: The bus is a little cheaper.',
+        'バスのほうが安い: the bus is cheaper, so the train costs more — but only a little (少し).'],
+      ['A：大[おお]きいのと小[ちい]さいのと、どっちにする？\nB：小[ちい]さいほうにする。', 'Which one does B take?', ['小[ちい]さいの (the small one)', '大[おお]きいの (the big one)'],
+        'A: Which will you have, the big one or the small one? B: I\'ll take the small one.',
+        '〜にする = decide on. 小さいほうにする: B picks the small one.'],
+      ['A：お兄[にい]さんとお姉[ねえ]さんと、どちらが背[せ]が高[たか]いですか。\nB：姉[あね]のほうが高[たか]いです。', 'Who is shorter?', ['兄[あに] (the brother)', '姉[あね] (the sister)'],
+        'A: Who is taller, your brother or your sister? B: My sister is taller.',
+        'お兄さん / お姉さん are the polite words for someone else\'s family; B answers with 姉 for their own sister. She\'s taller, so the brother is shorter.'],
+      ['A：日本[にほん]の映画[えいが]と外国[がいこく]の映画[えいが]と、どちらをよく見[み]ますか。\nB：外国[がいこく]の映画[えいが]のほうがよく見[み]ます。', 'Which films does B watch less?', ['日本[にほん]の映画[えいが] (Japanese)', '外国[がいこく]の映画[えいが] (foreign)'],
+        'A: Which do you watch more, Japanese or foreign films? B: I watch foreign films more.',
+        'With a verb, どちら takes を: どちらをよく見ますか. Foreign films win, so Japanese films are watched less.'],
+      ['A：午前[ごぜん]と午後[ごご]と、どちらが都合[つごう]がいいですか。\nB：午後[ごご]のほうが都合[つごう]がいいです。', 'When suits B?', ['午後[ごご] (the afternoon)', '午前[ごぜん] (the morning)'],
+        'A: Which suits you better, the morning or the afternoon? B: The afternoon suits me better.',
+        '都合がいい = convenient (for a time or plan). 午後のほうが: the afternoon.'],
+    ],
+    [
+      ['今週[こんしゅう]は先週[せんしゅう]ほど忙[いそが]しくないです。', 'Which week is busier?', ['先週[せんしゅう] (last week)', '今週[こんしゅう] (this week)', SAME],
+        'This week isn\'t as busy as last week.',
+        'This week is "not as busy as" last week, so last week was busier.'],
+      ['私[わたし]の町[まち]は東京[とうきょう]ほど物価[ぶっか]が高[たか]くありません。', 'Where are prices higher?', ['東京[とうきょう]', '私[わたし]の町[まち] (my town)', SAME],
+        'Prices in my town aren\'t as high as in Tokyo.',
+        '物価 = prices, the cost of living. My town is "not as expensive as" Tokyo, so Tokyo is pricier.'],
+      ['弟[おとうと]は私[わたし]ほど勉強[べんきょう]しません。', 'Who studies more?', ['私[わたし] (me)', '弟[おとうと] (my brother)', SAME],
+        'My younger brother doesn\'t study as much as I do.',
+        '私ほど勉強しません = "doesn\'t study as much as me". I study more.'],
+      ['この店[みせ]のラーメンは、あの店[みせ]のと同[おな]じぐらいおいしいです。', 'Which shop\'s ramen is better?', [SAME, 'この店[みせ] (this shop)', 'あの店[みせ] (that shop)'],
+        'This shop\'s ramen is about as good as that shop\'s.',
+        'あの店の = "that shop\'s (ramen)". 同じぐらいおいしい: they\'re about as good as each other.'],
+      ['今[いま]の家[いえ]は前[まえ]の家[いえ]ほど広[ひろ]くないですが、駅[えき]に近[ちか]いです。', 'Which house is bigger?', ['前[まえ]の家[いえ] (the old one)', '今[いま]の家[いえ] (the one now)', SAME],
+        'My house now isn\'t as big as my old one, but it\'s near the station.',
+        'The house now is "not as spacious (広い) as" the old one, so the old house was bigger.'],
+      ['姉[あね]と私[わたし]は同[おな]じぐらいの時間[じかん]に家[いえ]を出[で]ます。', 'Who leaves home earlier?', [SAME, '姉[あね] (my sister)', '私[わたし] (me)'],
+        'My sister and I leave home at about the same time.',
+        '同じぐらいの時間 = "about the same time": neither leaves earlier.'],
+    ],
+    [
+      ['バスを待[ま]つより、タクシーに乗[の]ったほうが早[はや]いです。', 'Which is quicker?', ['タクシーに乗[の]る (taking a taxi)', 'バスを待[ま]つ (waiting for the bus)'],
+        'Taking a taxi is quicker than waiting for the bus.',
+        'タクシーに乗ったほう has ほうが: the taxi is quicker.'],
+      ['新[あたら]しいのを買[か]うより、直[なお]して使[つか]うほうがいいと思[おも]います。', 'What does the speaker think is better?', ['直[なお]して使[つか]う (repairing it)', '新[あたら]しいのを買[か]う (buying a new one)'],
+        'I think it\'s better to repair it and keep using it than to buy a new one.',
+        '直して使う = "repair and use". It has ほうがいい, so that\'s the speaker\'s choice.'],
+      ['テレビを見[み]るより、外[そと]で遊[あそ]ぶほうが好[す]きです。', 'What does the speaker like more?', ['外[そと]で遊[あそ]ぶ (playing outside)', 'テレビを見[み]る (watching TV)'],
+        'I like playing outside more than watching TV.',
+        '外で遊ぶほうが好き: playing outside wins.'],
+      ['書[か]くより読[よ]むほうが簡単[かんたん]です。', 'Which is harder?', ['書[か]く (writing)', '読[よ]む (reading)'],
+        'Reading is easier than writing.',
+        '読むほうが簡単: reading is the easier one, so writing (書くより) is harder.'],
+      ['熱[ねつ]があるなら、学校[がっこう]に行[い]くより休[やす]んだほうがいいです。', 'What\'s the advice?', ['休[やす]む (rest)', '学校[がっこう]に行[い]く (go to school)'],
+        'If you have a fever, you\'d better rest rather than go to school.',
+        '〜なら = "if". 〜たほうがいい gives advice, and より names what not to do: rest, don\'t go.'],
+      ['エレベーターを待[ま]つより、階段[かいだん]を使[つか]ったほうが早[はや]いですよ。', 'Which is quicker?', ['階段[かいだん]を使[つか]う (the stairs)', 'エレベーターを待[ま]つ (waiting for the lift)'],
+        'It\'s quicker to take the stairs than to wait for the lift.',
+        '階段を使ったほう has ほうが: the stairs are quicker.'],
+    ],
+    [
+      ['田中[たなか]さんは山田[やまだ]さんほど背[せ]が高[たか]くないが、木村[きむら]さんよりは高[たか]い。', 'Who is the shortest?', ['木村[きむら]さん', '田中[たなか]さん', '山田[やまだ]さん'],
+        'Tanaka isn\'t as tall as Yamada, but is taller than Kimura.',
+        'In a row: 田中 < 山田 (山田さんほど…ない), and 木村 < 田中 (木村さんよりは高い). Kimura is the shortest.'],
+      ['年[とし]を取[と]るにつれて、肉[にく]より魚[さかな]のほうを好[この]むようになった。', 'What does the speaker prefer now?', ['魚[さかな] (fish)', '肉[にく] (meat)'],
+        'As I\'ve got older, I\'ve come to prefer fish to meat.',
+        '〜につれて = "as (time goes on)"; 好む = like (written style). ほう takes を here, as the object of 好む: 魚のほうを好む.'],
+      ['東京[とうきょう]から大阪[おおさか]までは、飛行機[ひこうき]より新幹線[しんかんせん]を使[つか]う人[ひと]のほうが多[おお]い。', 'Tokyo to Osaka: which do more people use?', ['新幹線[しんかんせん] (the shinkansen)', '飛行機[ひこうき] (the plane)'],
+        'From Tokyo to Osaka, more people take the shinkansen than fly.',
+        'のほうが goes on the whole phrase 新幹線を使う人, "people who use the shinkansen": there are more of them.'],
+      ['この薬[くすり]は前[まえ]の薬[くすり]ほど眠[ねむ]くならないので、仕事[しごと]の前[まえ]でも飲[の]める。', 'Which medicine makes you sleepier?', ['前[まえ]の薬[くすり] (the old one)', 'この薬[くすり] (this one)', SAME],
+        'This medicine doesn\'t make me as sleepy as the old one, so I can take it even before work.',
+        '眠くならない = doesn\'t make you sleepy. This one is "not as (sleep-making) as" the old one, so the old one made you sleepier.'],
+      ['若[わか]いころは都会[とかい]のほうが好[す]きだったが、今[いま]は田舎[いなか]のほうが落[お]ち着[つ]く。', 'Where does the speaker feel more at ease now?', ['田舎[いなか] (the countryside)', '都会[とかい] (the city)'],
+        'When I was young I preferred the city, but now I feel more at ease in the countryside.',
+        'Two のほう at two times: young → the city; now (今は) → the countryside. 落ち着く = feel at ease.'],
+      ['子供[こども]のころ、私[わたし]は兄[あに]より足[あし]が速[はや]かったが、今[いま]は兄[あに]にかなわない。', 'Who runs faster now?', ['兄[あに] (my brother)', '私[わたし] (me)', SAME],
+        'As a child I ran faster than my older brother, but now I can\'t beat him.',
+        '足が速い = fast on your feet. 〜にかなわない = "can\'t beat". I was faster then; now my brother is.'],
+    ],
+    [
+      ['父[ちち]の料理[りょうり]は料理[りょうり]というより、実験[じっけん]だ。', 'What is father\'s cooking more like?', ['実験[じっけん] (an experiment)', '料理[りょうり] (cooking)'],
+        'My father\'s cooking is less cooking than an experiment.',
+        'A というより B: what comes after というより, 実験, is the better description (a joke).'],
+      ['この町[まち]は静[しず]かというより、寂[さび]しい感[かん]じがする。', 'How does the town feel?', ['寂[さび]しい (lonely)', '静[しず]か (quiet)'],
+        'This town feels lonely rather than quiet.',
+        '静か is a nice word; the speaker picks the less kind 寂しい after というより.'],
+      ['テニスは運動[うんどう]というより、友達[ともだち]に会[あ]うための時間[じかん]だ。', 'What is tennis to the speaker, really?', ['友達[ともだち]に会[あ]うための時間[じかん] (time with friends)', '運動[うんどう] (exercise)'],
+        'Tennis is less exercise than a time to see friends.',
+        '〜ための時間 = "time for…". After というより: it\'s a way to see friends.'],
+      ['A：あの映画[えいが]、怖[こわ]かった？\nB：怖[こわ]いというより、ちょっと悲[かな]しい話[はなし]だったよ。', 'What was the film like?', ['悲[かな]しい (sad)', '怖[こわ]い (scary)'],
+        'A: Was that film scary? B: It was more of a sad story than scary.',
+        'B sets aside A\'s word 怖い and puts 悲しい after というより.'],
+      ['彼[かれ]が遅刻[ちこく]したのは寝坊[ねぼう]というより、電車[でんしゃ]が止[と]まったからだ。', 'Why was he late?', ['電車[でんしゃ]が止[と]まった (the train stopped)', '寝坊[ねぼう] (he overslept)'],
+        'He was late not so much because he overslept as because the train stopped.',
+        '遅刻 = being late; 寝坊 = oversleeping. 〜からだ gives the real reason: the train.'],
+      ['この仕事[しごと]は難[むずか]しいというより、時間[じかん]がかかるのだ。', 'What is the problem with this job?', ['時間[じかん]がかかる (it takes time)', '難[むずか]しい (it\'s hard)'],
+        'This job isn\'t so much hard as time-consuming.',
+        '時間がかかる = take time. The difficulty isn\'t the point; the time is.'],
+    ],
+    [
+      ['今年[ことし]の冬[ふゆ]は、例年[れいねん]にもまして雪[ゆき]が多[おお]い。', 'Which winter has more snow?', ['今年[ことし] (this year)', '例年[れいねん] (most years)', SAME],
+        'This winter there\'s even more snow than in most years.',
+        '例年 = an ordinary year. 例年にもまして: there\'s plenty of snow most years, and even more this year.'],
+      ['決勝[けっしょう]の前[まえ]は、予選[よせん]の時[とき]にもまして選手[せんしゅ]たちが緊張[きんちょう]している。', 'When are the players more nervous?', ['決勝[けっしょう]の前[まえ] (before the final)', '予選[よせん] (the heats)', SAME],
+        'Before the final, the players are even more nervous than in the heats.',
+        '決勝 = the final; 予選 = the heats; 緊張する = be nervous. Nervous in the heats, more so before the final.'],
+      ['この町[まち]では、車[くるま]にもまして自転車[じてんしゃ]が便利[べんり]だ。', 'Which is more convenient in this town?', ['自転車[じてんしゃ] (a bike)', '車[くるま] (a car)', SAME],
+        'In this town, a bike is even more convenient than a car.',
+        'A car is convenient, and 車にもまして, a bike is more so.'],
+      ['誕生日[たんじょうび]にはプレゼントもたくさんもらったが、何[なに]にもまして嬉[うれ]しかったのは母[はは]からの手紙[てがみ]だった。', 'What made the speaker happiest?', ['母[はは]からの手紙[てがみ] (mother\'s letter)', 'プレゼント (the presents)'],
+        'I got lots of presents for my birthday, but what made me happiest of all was a letter from my mother.',
+        '何にもまして = "more than anything". The presents were nice, but the letter came first.'],
+      ['新[あたら]しいスマホは、前[まえ]のモデルにもまして電池[でんち]が長[なが]く持[も]つ。', 'Whose battery lasts longer?', ['新[あたら]しいスマホ (the new phone)', '前[まえ]のモデル (the old model)', SAME],
+        'The new phone\'s battery lasts even longer than the previous model\'s.',
+        '持つ = last. The old model\'s battery was good; the new one is better still.'],
+      ['引[ひ]っ越[こ]してから、以前[いぜん]にもまして運動[うんどう]するようになった。', 'When does the speaker exercise more?', ['引[ひ]っ越[こ]してから (since moving)', '以前[いぜん] (before)', SAME],
+        'Since moving, I\'ve started exercising even more than before.',
+        '引っ越す = move house. 以前にもまして = "even more than before".'],
+    ],
+  ];
+  const COMPARE_SETS = [COMPARE, ...[COMPARE_2, COMPARE_3].map(set => set.map((rows, k) => [COMPARE[k][0], rows]))];
+
   // An option: its Japanese (furigana markup) and English gloss, if any.
   function compareOption(o) {
     const [, ja, en] = o.match(/^(.*?)(?: \((.*)\))?$/);
@@ -824,20 +1152,23 @@
         },
       ],
     },
-    {
-      id: 'comparisons',
+    // One quiz per set, shown as tabs of one quiz (group).
+    ...COMPARE_SETS.map((set, n) => ({
+      id: n ? `comparisons-${n + 1}` : 'comparisons',
+      group: 'comparisons',
+      tab: `Set ${n + 1}`,
       glyph: '比',
       title: 'より and のほう: which one?',
       ja: '比較 — どちらが？',
       desc: 'Read a comparison with より, のほう, ほど, というより or にもまして and pick which one is more expensive, cheaper, bigger, smaller, faster… from easy N5 sentences to tricky ones. Every answer is explained.',
-      sections: COMPARE.map(([label, rows]) => ({
+      sections: set.map(([label, rows]) => ({
         type: 'choice',
         label,
         stack: true,
         columns: ['Sentence', 'Which one?'],
         items: compareItems(rows),
       })),
-    },
+    })),
     {
       id: 'dates',
       glyph: '日',
@@ -944,6 +1275,9 @@
     }));
   }
 
+  // The quizzes shown as tabs of one: those in the same group, in order.
+  const tabsOf = quiz => QUIZZES.filter(q => q.group && q.group === quiz.group);
+
   const total = quiz => quiz.sections.reduce((n, sec) => n + sec.items.length, 0);
 
   // ─── Storage ───────────────────────────────────────────────────────────────
@@ -965,11 +1299,30 @@
     try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* private mode */ }
   }
 
+  // order: 'none' (as listed), 'section' (shuffled within each category) or
+  // 'all' (every question mixed together). Older saves had shuffle: true.
   function loadSettings() {
-    try { return JSON.parse(localStorage.getItem(SETTINGS_KEY)) || {}; } catch { return {}; }
+    let settings = {};
+    try { settings = JSON.parse(localStorage.getItem(SETTINGS_KEY)) || {}; } catch { /* private mode */ }
+    if (!ORDERS.includes(settings.order)) settings.order = settings.shuffle ? 'section' : 'none';
+    delete settings.shuffle;
+    return settings;
   }
   function saveSettings(settings) {
     try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); } catch { /* private mode */ }
+  }
+
+  const ORDERS = ['none', 'section', 'all'];
+
+  // Where each row goes for an order: [{ section, rows }] for each table to
+  // fill, rows as [section, row] in order. `sections` lists the section
+  // index of each one that can be reordered and its number of rows; with
+  // 'all' every row goes into one table (section -1).
+  function rowOrder(sections, order, rand = Math.random) {
+    const rows = sec => Array.from({ length: sec.n }, (_, i) => [sec.si, i]);
+    const mix = list => shuffled(list.length, rand).map(k => list[k]);
+    if (order === 'all' && sections.length > 1) return [{ section: -1, rows: mix(sections.flatMap(rows)) }];
+    return sections.map(sec => ({ section: sec.si, rows: order === 'none' ? rows(sec) : mix(rows(sec)) }));
   }
 
   // 0…n-1 in random order (Fisher–Yates).
@@ -1013,12 +1366,22 @@
 
     function renderList() {
       const store = loadStore();
-      list.innerHTML = QUIZZES.map(q => {
+      list.innerHTML = QUIZZES.filter(q => !q.group || tabsOf(q)[0] === q).map(q => {
         const best = store[q.id];
         const n = total(q);
         const choice = q.sections.every(sec => sec.type === 'choice');
-        const meta = best ? `Best ${best.score} / ${n}<br>${formatTime(best.time)}` : `${n} ${choice ? 'questions' : 'to name'}`;
-        return `<button class="lis-part-row misc-row${best && best.score === n ? ' misc-row-perfect' : ''}" data-quiz="${q.id}">
+        let meta = best ? `Best ${best.score} / ${n}<br>${formatTime(best.time)}` : `${n} ${choice ? 'questions' : 'to name'}`;
+        let perfect = best && best.score === n;
+        if (q.group) {
+          // A quiz in tabs: each tab's best, or how many questions in all.
+          const tabs = tabsOf(q);
+          const played = tabs.filter(t => store[t.id]);
+          meta = played.length
+            ? played.map(t => `${esc(t.tab)}: ${store[t.id].score} / ${total(t)}`).join('<br>')
+            : `${tabs.reduce((a, t) => a + total(t), 0)} questions<br>${tabs.length} sets`;
+          perfect = tabs.every(t => store[t.id] && store[t.id].score === total(t));
+        }
+        return `<button class="lis-part-row misc-row${perfect ? ' misc-row-perfect' : ''}" data-quiz="${q.id}">
           <span class="lis-part-head">
             <span class="misc-glyph" lang="ja" aria-hidden="true">${esc(q.glyph)}</span>
             <span class="lis-part-body">
@@ -1049,8 +1412,9 @@
       // only typed ones answers worth typing again.
       $('#misc-toggles').classList.toggle('hidden', !quiz.sections.some(sec => sec.type !== 'find'));
       $('#misc-retype-row').classList.toggle('hidden', !quiz.sections.some(sec => sec.type === 'fill'));
-      $('#misc-shuffle').checked = !!settings.shuffle;
       $('#misc-retype').checked = !!settings.retype;
+      renderTabs();
+      renderOrder();
       $('#misc-body').classList.remove('misc-retype-on');
       orderRows();
       updateScore();
@@ -1063,12 +1427,39 @@
       if (first) first.focus();
     }
 
+    // The other sets of a quiz in tabs; picking one starts it.
+    function renderTabs() {
+      const tabs = quiz.group ? tabsOf(quiz) : [];
+      const box = $('#misc-tabs');
+      box.classList.toggle('hidden', tabs.length < 2);
+      box.innerHTML = tabs.map(t => `<button type="button" class="deck-tab${t === quiz ? ' active' : ''}" role="tab"
+        aria-selected="${t === quiz}" data-tab="${t.id}">${esc(t.tab)}<span class="deck-tab-count">${total(t)}</span></button>`).join('');
+    }
+
+    // Sections whose rows can be put in another order.
+    const movable = () => quiz.sections.map((sec, si) => ({ si, n: sec.items.length, type: sec.type }))
+      .filter(sec => sec.type !== 'find');
+
+    // In order / Shuffle per category / Shuffle everything. With one
+    // category the last two are the same, so it's just In order / Shuffle.
+    function renderOrder() {
+      const many = movable().length > 1;
+      const shown = settings.order === 'all' && !many ? 'section' : settings.order;
+      document.querySelectorAll('#misc-order [data-order]').forEach(btn => {
+        const o = btn.dataset.order;
+        btn.classList.toggle('hidden', o === 'all' && !many);
+        if (o === 'section') btn.textContent = many ? 'Shuffle per category' : 'Shuffle';
+        btn.classList.toggle('active', o === shown);
+        btn.setAttribute('aria-checked', String(o === shown));
+      });
+    }
+
     function renderQuiz() {
       $('#misc-body').innerHTML = quiz.sections.map((sec, si) => {
         const head = `<tr>${sec.columns.map(c => `<th>${esc(c)}</th>`).join('')}</tr>`;
         const label = sec.label ? `<h3 class="lis-heading">${esc(sec.label)}</h3>` : '';
         if (sec.type === 'find') {
-          const rows = sec.items.map((it, i) => `<tr data-row="${i}">${it.cells.map(c =>
+          const rows = sec.items.map((it, i) => `<tr data-section="${si}" data-row="${i}">${it.cells.map(c =>
             `<td lang="ja"><span class="misc-cell">${esc(c)}</span></td>`).join('')}</tr>`).join('');
           return `<section class="misc-section" data-section="${si}">${label}
             <input type="text" class="answer-input misc-find" lang="ja" data-section="${si}"
@@ -1078,7 +1469,7 @@
           </section>`;
         }
         if (sec.type === 'choice') {
-          const rows = sec.items.map((it, i) => `<tr data-row="${i}">
+          const rows = sec.items.map((it, i) => `<tr data-section="${si}" data-row="${i}">
             <td lang="ja" class="misc-prompt">${it.promptHtml || esc(it.prompt)}</td>
             <td><div class="misc-choices">${choiceButtons(sec, i).map(o => `<button class="misc-choice" lang="ja"
               data-section="${si}" data-row="${i}" data-right="${o.right ? 1 : 0}">${o.html}</button>`).join('')}</div>
@@ -1088,7 +1479,7 @@
             <table class="misc-table misc-table-choice${sec.stack ? ' misc-table-stack' : ''}"><thead>${head}</thead><tbody>${rows}</tbody></table>
           </section>`;
         }
-        const rows = sec.items.map((it, i) => `<tr data-row="${i}">
+        const rows = sec.items.map((it, i) => `<tr data-section="${si}" data-row="${i}">
           <td lang="ja" class="misc-prompt">${it.promptHtml || esc(it.prompt)}</td>
           <td><input type="text" class="answer-input misc-fill" lang="ja" data-section="${si}" data-row="${i}"
             autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="${esc(it.prompt)}"></td>
@@ -1098,7 +1489,7 @@
         return `<section class="misc-section" data-section="${si}">${label}${tip}
           <table class="misc-table misc-table-fill"><thead>${head}</thead><tbody>${rows}</tbody></table>
         </section>`;
-      }).join('');
+      }).join('') + mixedTableHtml();
       document.querySelectorAll('#misc-body input').forEach(inp => {
         if (Romaji) Romaji.attach(inp);
         inp.addEventListener('input', () => onInput(inp, false));
@@ -1106,15 +1497,38 @@
       });
     }
 
-    // Puts each fill or choice section's rows in random or list order.
-    // Answers and focus follow the rows, so this works mid-quiz too.
+    // One more table, for "Shuffle everything": every category's rows
+    // mixed together, styled like the first category's table.
+    function mixedTableHtml() {
+      const secs = movable();
+      if (secs.length < 2) return '';
+      const first = quiz.sections[secs[0].si];
+      const cls = first.type === 'choice' ? `misc-table-choice${first.stack ? ' misc-table-stack' : ''}` : 'misc-table-fill';
+      return `<section class="misc-section misc-mixed hidden">
+        <h3 class="lis-heading">All ${secs.reduce((a, x) => a + x.n, 0)} questions, mixed</h3>
+        <table class="misc-table ${cls}"><thead><tr>${first.columns.map(c => `<th>${esc(c)}</th>`).join('')}</tr></thead><tbody></tbody></table>
+      </section>`;
+    }
+
+    // Puts the fill and choice rows in list order, shuffled per category, or
+    // all mixed into one table. Answers and focus follow the rows, so this
+    // works mid-quiz too.
     function orderRows() {
-      document.querySelectorAll('#misc-body .misc-table-fill tbody, #misc-body .misc-table-choice tbody').forEach(tbody => {
-        const rows = [...tbody.children].sort((a, b) => a.dataset.row - b.dataset.row);
-        const order = settings.shuffle ? shuffled(rows.length) : rows.map((_, i) => i);
-        order.forEach(i => tbody.appendChild(rows[i]));
+      const plan = rowOrder(movable(), settings.order);
+      const mixed = plan.length === 1 && plan[0].section === -1;
+      document.querySelectorAll('#misc-body .misc-section[data-section]').forEach(box => {
+        if (quiz.sections[+box.dataset.section].type !== 'find') box.classList.toggle('hidden', mixed);
+      });
+      const mixedBox = document.querySelector('#misc-body .misc-mixed');
+      if (mixedBox) mixedBox.classList.toggle('hidden', !mixed);
+      plan.forEach(({ section, rows }) => {
+        const tbody = section < 0 ? mixedBox.querySelector('tbody')
+          : document.querySelector(`#misc-body .misc-section[data-section="${section}"] tbody`);
+        rows.forEach(([si, i]) => tbody.appendChild(rowEl(si, i)));
       });
     }
+
+    const rowEl = (si, i) => document.querySelector(`#misc-body tr[data-section="${si}"][data-row="${i}"]`);
 
     function onInput(inp, enter) {
       if (over) { if (inp.dataset.retype) onRetype(inp, enter); return; }
@@ -1169,7 +1583,7 @@
     function reveal(si, i, how) {
       const sec = quiz.sections[si];
       if (how === 'found') found[si].add(i);
-      const row = document.querySelector(`.misc-section[data-section="${si}"] tr[data-row="${i}"]`);
+      const row = rowEl(si, i);
       row.classList.add(how === 'found' ? 'misc-found' : 'misc-missed');
       if (sec.type === 'fill') {
         const it = sec.items[i];
@@ -1348,14 +1762,21 @@
       saveSettings(settings);
       if (quiz) retypeOn();
     });
-    $('#misc-shuffle').addEventListener('change', e => {
-      settings.shuffle = e.target.checked;
+    $('#misc-order').addEventListener('click', e => {
+      const btn = e.target.closest('[data-order]');
+      if (!btn || !quiz) return;
+      settings.order = btn.dataset.order;
       saveSettings(settings);
+      renderOrder();
       orderRows();
       const next = [...document.querySelectorAll('#misc-body input, #misc-body .misc-choice')].find(x => !x.disabled);
       if (next) next.focus();
     });
     $('#misc-again').addEventListener('click', () => start(quiz.id));
+    $('#misc-tabs').addEventListener('click', e => {
+      const tab = e.target.closest('[data-tab]');
+      if (tab && tab.dataset.tab !== quiz.id) start(tab.dataset.tab);
+    });
     $('#misc-quit').addEventListener('click', home);
 
     renderList();
@@ -1363,7 +1784,7 @@
     if (QUIZZES.some(q => q.id === hash)) start(hash);
   }
 
-  const api = { rubyHtml, rubyPlain, rubyKana, QUIZZES, RU_EXCEPTIONS, normalize, matchItems, choiceOptions, choiceButtons, shuffled, total, better, formatTime };
+  const api = { rubyHtml, rubyPlain, rubyKana, QUIZZES, RU_EXCEPTIONS, normalize, matchItems, choiceOptions, choiceButtons, rowOrder, ORDERS, tabsOf, shuffled, total, better, formatTime };
   global.Misc = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   if (typeof document !== 'undefined') {

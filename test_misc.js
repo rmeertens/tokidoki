@@ -221,12 +221,18 @@ check(Misc.formatTime(75) === '1:15', 'formatTime');
 // ─── より and のほう ──────────────────────────────────────────────────────────
 
 const compare = Misc.QUIZZES.find(q => q.id === 'comparisons');
-check(compare && compare.sections.length === 8, 'the comparisons quiz has its eight sections');
+const compareSets = Misc.tabsOf(compare);
+check(compareSets.map(q => q.tab).join() === 'Set 1,Set 2,Set 3', 'the comparisons come in three sets');
+check(compareSets.every(q => q.sections.length === 8 && q.title === compare.title), 'every set has the eight categories');
+check(compareSets.every(q => q.sections.map(x => x.label).join() === compare.sections.map(x => x.label).join()), 'the sets share their categories');
+check(compareSets.slice(1).every(q => q.sections.every(x => x.items.length >= 5)), 'sets 2 and 3 have at least five per category');
+const sentences = compareSets.flatMap(q => q.sections.flatMap(x => x.items.map(it => it.sentence)));
+check(new Set(sentences).size === sentences.length, 'no sentence is in two sets');
 const SAME = '同じぐらい';
-compare.sections.forEach(sec => sec.items.forEach(it => {
+compareSets.flatMap(q => q.sections).forEach(sec => sec.items.forEach(it => {
   const where = it.sentence.replace(/\n/g, ' ');
   check(!/[[\]]/.test(it.prompt + it.sentence + it.options.map(o => o.text).join('')), `comparisons ${where}: markup left`);
-  check(/より|ほう|ほど|同じ|まして|比べ|どっち/.test(it.sentence), `comparisons ${where}: compares nothing`);
+  check(/より|ほう|ほど|同じ|まして|比べ|どっち|どちら/.test(it.sentence), `comparisons ${where}: compares nothing`);
   check(/<span lang="en"><b>“.+”<\/b> ./.test(it.note), `comparisons ${where}: no translation or explanation`);
   // Every option but "about the same" is one of the two things in the sentence
   // (a verb's ending may differ: 歩く for 歩いた).
@@ -239,14 +245,36 @@ compare.sections.forEach(sec => sec.items.forEach(it => {
   }
   check((it.answer === SAME) === where.includes('同じ'), `comparisons ${where}: 同じぐらい answer`);
 }));
-const cmp = (s, q) => compare.sections.flatMap(x => x.items).find(it => it.sentence.startsWith(s) && it.prompt.endsWith(q));
+const cmp = (s, q) => compareSets.flatMap(x => x.sections).flatMap(x => x.items).find(it => it.sentence.startsWith(s) && it.prompt.endsWith(q));
 check(cmp('東京は大阪より', 'Which city is bigger?').answer === '東京', 'AはBより大きい: A is bigger');
 check(cmp('このかばんはあのかばんより高い', 'Which bag is cheaper?').answer === 'あのかばん', 'AはBより高い: B is cheaper');
 check(cmp('バスより電車のほうが', 'Which is cheaper?').answer === '電車', 'BよりAのほうが安い: A is cheaper');
 check(cmp('大阪は東京ほど', 'Which city is bigger?').answer === '東京', 'AはBほど大きくない: B is bigger');
 check(cmp('今日は暖かいというより', 'How would the speaker describe today?').answer === '暑い', 'AというよりB: B');
 check(cmp('今年の夏は、去年にもまして', 'Which summer is hotter?').answer === '今年', 'BにもましてA: A is even more');
+check(cmp('兄より私のほうが年上に見られる', 'Who is actually older?').answer === '兄', '年上に見られる: the brother is still older');
+check(cmp('田中さんは山田さんほど', 'Who is the shortest?').answer === '木村さん', 'three people in a row');
 check(cmp('このアパートは駅から遠いほうだが', 'Which apartment is closer to the station?').answer === 'このアパート', '遠いほうだ is no comparison');
+
+
+// ─── Order: in order, per category, everything ──────────────────────────────
+
+const secs = [{ si: 0, n: 3 }, { si: 2, n: 4 }];
+const key = plan => plan.map(t => `${t.section}:${t.rows.map(r => r.join('.')).join(',')}`).join(' | ');
+check(key(Misc.rowOrder(secs, 'none')) === '0:0.0,0.1,0.2 | 2:2.0,2.1,2.2,2.3', 'in order keeps every category as listed');
+const per = Misc.rowOrder(secs, 'section');
+check(per.length === 2 && per.every((t, k) => t.section === secs[k].si && t.rows.every(r => r[0] === t.section)
+  && t.rows.map(r => r[1]).sort().join() === [...Array(secs[k].n).keys()].join()), 'per category keeps rows in their category');
+const all = Misc.rowOrder(secs, 'all');
+check(all.length === 1 && all[0].section === -1 && all[0].rows.length === 7
+  && new Set(all[0].rows.map(r => r.join('.'))).size === 7, 'everything puts all rows in one table');
+let rnd = 0;
+const seq = () => [0.9, 0.1, 0.5, 0.3, 0.7, 0.2][rnd++ % 6];
+check(Misc.rowOrder(secs, 'all', seq)[0].rows.some((r, k, a) => k && r[0] !== a[k - 1][0]), 'everything mixes the categories');
+check(key(Misc.rowOrder([{ si: 0, n: 3 }], 'all', () => 0)) === key(Misc.rowOrder([{ si: 0, n: 3 }], 'section', () => 0)),
+  'with one category, everything is the same as per category');
+check(Misc.ORDERS.join() === 'none,section,all', 'the three orders');
+check(Misc.tabsOf(Misc.QUIZZES.find(q => q.id === 'dates')).length === 0, 'a quiz without a group has no tabs');
 
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

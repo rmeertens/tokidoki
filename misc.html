@@ -130,10 +130,15 @@
       </div>
 
       <div class="card misc-card">
+        <div class="deck-tabs misc-tabs hidden" id="misc-tabs" role="tablist" aria-label="Question sets"></div>
         <h2 class="misc-title" id="misc-title"></h2>
         <p class="misc-desc" id="misc-desc"></p>
         <div class="misc-toggles" id="misc-toggles">
-          <label class="kana-script-toggle misc-shuffle-row"><input type="checkbox" id="misc-shuffle"> Shuffle the order</label>
+          <div class="misc-order" id="misc-order" role="radiogroup" aria-label="Question order">
+            <button type="button" role="radio" data-order="none">In order</button>
+            <button type="button" role="radio" data-order="section">Shuffle per category</button>
+            <button type="button" role="radio" data-order="all">Shuffle everything</button>
+          </div>
           <label class="kana-script-toggle misc-shuffle-row" id="misc-retype-row"><input type="checkbox" id="misc-retype"> Type answers again after the results</label>
         </div>
         <div id="misc-body"></div>
@@ -149,7 +154,7 @@
 
   <script src="verbs.js?v=8"></script>
   <script src="romaji.js"></script>
-  <script src="misc.js?v=15"></script>
+  <script src="misc.js?v=16"></script>
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=5"></script>
   <script src="app.js?v=87"></script>
@@ -175,9 +180,9 @@
       (人, 個, 本, 枚, 冊, 台, 匹, 杯, 回, 階, 泊, 両, 便, 位 …); comparisons with より, のほう, ほど, というより and にもまして —
       read 東京は大阪より大きいです, バスより電車のほうが安いです or 大阪は東京ほど大きくないです and pick
       which one is bigger, cheaper, slower or about the same, up to harder sentences like
-      暖かいというより暑いぐらいです and 今年の夏は去年にもまして暑い, with every answer explained; and the ways to say
+      暖かいというより暑いぐらいです and 今年の夏は去年にもまして暑い, in three sets of 156 questions with every answer explained; and the ways to say
       “but” (が, けど, けれど, けれども, でも, しかし, ですが, なのに, それでも, ところが). Type in kana, kanji or romaji,
-      in any order (or pick from the choices in the multiple-choice quizzes), and your best score and time are kept.
+      in any order (or pick from the choices in the multiple-choice quizzes), in list order, shuffled per category or all mixed together, and your best score and time are kept.
     </p>
   </section>
 </body>
