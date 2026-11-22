@@ -12,6 +12,7 @@ function ok(cond, label) {
 }
 
 const PAGES = ['verb-conjugation-chart', 'wa-vs-ga', 'jlpt-listening-practice'];
+const NO_QUIZ = ['verb-conjugation-chart']; // the chart is the page
 const sitemap = fs.readFileSync('sitemap.xml', 'utf8');
 
 try {
@@ -35,8 +36,10 @@ for (const name of PAGES) {
   ok(html.includes('og-image.png') && html.includes('summary_large_image'), `${file}: share image`);
   ok(html.includes('G-XXWYNZC7YH'), `${file}: Google tag`);
   ok((html.match(/<h1[ >]/g) || []).length === 1, `${file}: exactly one h1`);
-  ok(html.includes('id="lp-quiz"') && html.includes('landing.js'), `${file}: quiz mount`);
+  ok(html.includes('landing.js'), `${file}: landing.js`);
   ok(sitemap.includes(`<loc>${url}</loc>`), `${file}: in sitemap.xml`);
+  if (NO_QUIZ.includes(name)) { ok(!html.includes('id="lp-quiz"'), `${file}: no quiz`); continue; }
+  ok(html.includes('id="lp-quiz"'), `${file}: quiz mount`);
 
   const m = html.match(/<script type="application\/json" id="lp-data">([\s\S]*?)<\/script>/);
   ok(!!m, `${file}: lp-data present`);

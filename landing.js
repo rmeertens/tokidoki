@@ -15,7 +15,7 @@
 
   var root = document.getElementById('lp-quiz');
   var dataEl = document.getElementById('lp-data');
-  if (!root || !dataEl) return;
+  if (!dataEl) return;
   var data = JSON.parse(dataEl.textContent);
   var qs = data.questions;
   var i = 0, score = 0, started = false, audio = null;
@@ -118,6 +118,7 @@
     var a = e.target.closest && e.target.closest('a[data-cta], #lp-cta-end');
     if (a) track('lp_cta_click', { href: a.getAttribute('href') });
   });
+  if (!root || !qs.length) return; // a page with no quiz (the verb chart)
   document.addEventListener('keydown', function (e) {
     if (e.ctrlKey || e.metaKey || e.altKey) return;
     var n = parseInt(e.key, 10);
