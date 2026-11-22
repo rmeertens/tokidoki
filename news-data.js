@@ -27,6 +27,171 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-11-22-fujii-ryuo-sixth',
+      date: '2026-11-22',
+      emoji: '☗',
+      titleEn: 'Sota Fujii sweeps Shinichiro Hattori 4–0 to keep the Ryuo shogi title for a sixth year in a row',
+      sources: [
+        { name: 'MRT Miyazaki via Yahoo! News', url: 'https://news.yahoo.co.jp/articles/ff261348c4a180c0ae367abb5dbd9a1e8e49f6e9' },
+        { name: 'UMK via Yahoo! News', url: 'https://news.yahoo.co.jp/articles/a9f21f4b3108e8e26cce09e63f84e426dd2b599d' },
+        { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261121de79696' },
+        { name: 'Yomiuri Ryuo-sen (official)', url: 'https://x.com/yomiuri_ryuo/status/2124061967170367598' },
+      ],
+      quiz: [
+        ['For how many years in a row has Fujii now held the Ryuo title?', 'Six', 'Four', 'Nine', 'Two'],
+        ['How did Fujii do in this year\'s match against Hattori?', 'He won four games in a row', 'He lost the title', 'He won four games and lost three', 'The match was stopped'],
+        ['Where was the last game played?', 'Miyakonojo, in Miyazaki Prefecture', 'Tokyo', 'Osaka', 'Sapporo'],
+      ],
+      levels: {
+        N5: {
+          title: '将棋[しょうぎ]の　藤井[ふじい]さん　六年[ろくねん]　続[つづ]けて　「竜王[りゅうおう]」',
+          lines: [
+            ['二十一日[にじゅういちにち]、将棋[しょうぎ]の　「竜王[りゅうおう]」を　決[き]める　試合[しあい]が　ありました。', 'On the 21st, there was a game to decide the Ryuo title in shogi.', 'Shogi is Japanese chess. 竜王 (Ryuo, "dragon king") is one of its eight big titles.'],
+            ['試合[しあい]は　宮崎県[みやざきけん]の　都城市[みやこのじょうし]で　ありました。', 'The game was in Miyakonojo, in Miyazaki Prefecture.'],
+            ['竜王[りゅうおう]の　藤井聡太[ふじいそうた]さんが、服部慎一郎[はっとりしんいちろう]さんに　勝[か]ちました。', 'The Ryuo, Sota Fujii, beat Shinichiro Hattori.'],
+            ['藤井[ふじい]さんは　四回[よんかい]　続[つづ]けて　勝[か]って、今年[ことし]も　竜王[りゅうおう]に　なりました。', 'Fujii won four times in a row and is Ryuo again this year.', 'The first player to win four games out of seven gets the title.'],
+            ['藤井[ふじい]さんが　竜王[りゅうおう]に　なるのは、六年[ろくねん]　続[つづ]けてです。', 'It is the sixth year in a row that Fujii is Ryuo.'],
+            ['六年[ろくねん]　続[つづ]けて　竜王[りゅうおう]に　なった　人[ひと]は、二人目[ふたりめ]です。', 'He is the second person to be Ryuo six years in a row.', 'The first was Akira Watanabe, who held it nine years in a row.'],
+            ['藤井[ふじい]さんは　二十四歳[にじゅうよんさい]で、今[いま]　六[むっ]つの　タイトルを　持[も]って　います。', 'Fujii is 24 and now holds six titles.'],
+          ],
+        },
+        N4: {
+          title: '藤井[ふじい]竜王[りゅうおう]、4連勝[れんしょう]で竜王戦[りゅうおうせん]6連覇[れんぱ]',
+          lines: [
+            ['将棋[しょうぎ]の竜王戦[りゅうおうせん]七番勝負[しちばんしょうぶ]の第[だい]4局[きょく]が、二十日[はつか]と二十一日[にじゅういちにち]に宮崎県[みやざきけん]都城市[みやこのじょうし]で行[おこな]われました。', 'Game 4 of the best-of-seven Ryuo shogi match was played on the 20th and 21st in Miyakonojo, Miyazaki Prefecture.', '七番勝負 is a best-of-seven match; 局 counts shogi games. Each game takes two days.'],
+            ['藤井聡太[ふじいそうた]竜王[りゅうおう]（24）が、挑戦者[ちょうせんしゃ]の服部慎一郎[はっとりしんいちろう]七段[ななだん]（27）に勝[か]ちました。', 'Ryuo Sota Fujii, 24, beat the challenger, Shinichiro Hattori 7-dan, 27.', '挑戦者 is the challenger. 七段 is a professional rank. The numbers in brackets are ages.'],
+            ['藤井[ふじい]さんは4連勝[れんしょう]でタイトルを守[まも]り、竜王[りゅうおう]6連覇[れんぱ]を達成[たっせい]しました。', 'Fujii kept the title with four straight wins, making it six Ryuo titles in a row.', '連覇 means winning the same title several times in a row.'],
+            ['竜王戦[りゅうおうせん]で6連覇[れんぱ]したのは、9連覇[れんぱ]した渡辺明[わたなべあきら]九段[くだん]に続[つづ]いて二人目[ふたりめ]です。', 'He is the second to win six in a row in the Ryuo match, after Akira Watanabe 9-dan, who won nine in a row.'],
+            ['服部[はっとり]さんは1時間[じかん]近[ちか]く考[かんが]える場面[ばめん]もありましたが、藤井[ふじい]さんが94手[て]で勝[か]ちました。', 'Hattori at one point thought for nearly an hour, but Fujii won in 94 moves.', '手 counts moves in shogi.'],
+            ['服部[はっとり]さんにとっては2回目[かいめ]のタイトル戦[せん]でしたが、初[はじ]めてのタイトルは取[と]れませんでした。', 'It was Hattori\'s second title match, but he could not win his first title.'],
+            ['藤井[ふじい]さんは去年[きょねん]、5連覇[れんぱ]で「永世竜王[えいせいりゅうおう]」の資格[しかく]を得[え]ています。', 'Last year, with five in a row, Fujii earned the right to be called "Lifetime Ryuo".', 'A player who wins the Ryuo five years in a row (or seven times in all) earns this honorary title.'],
+          ],
+        },
+        N3: {
+          title: '藤井[ふじい]竜王[りゅうおう]、ストレートで防衛[ぼうえい]　史上[しじょう]二人目[ふたりめ]の竜王[りゅうおう]6連覇[れんぱ]',
+          lines: [
+            ['将棋[しょうぎ]の第[だい]39期[き]竜王戦[りゅうおうせん]七番勝負[しちばんしょうぶ]第[だい]4局[きょく]は二十一日[にじゅういちにち]、宮崎県[みやざきけん]都城市[みやこのじょうし]で二日目[ふつかめ]の対局[たいきょく]が行[おこな]われ、藤井聡太[ふじいそうた]竜王[りゅうおう]（24）が挑戦者[ちょうせんしゃ]の服部慎一郎[はっとりしんいちろう]七段[ななだん]（27）に94手[て]で勝[か]った。', 'Game 4 of the 39th Ryuo shogi match went into its second day on the 21st in Miyakonojo, Miyazaki Prefecture, and Ryuo Sota Fujii, 24, beat the challenger, Shinichiro Hattori 7-dan, 27, in 94 moves.', 'Title games are played over two days. 期 counts the yearly editions of a title.'],
+            ['藤井[ふじい]竜王[りゅうおう]はシリーズ4連勝[れんしょう]でタイトルを防衛[ぼうえい]し、竜王[りゅうおう]6連覇[れんぱ]を果[は]たした。', 'Fujii defended the title with four straight wins in the series, achieving six Ryuo titles in a row.'],
+            ['竜王戦[りゅうおうせん]での6連覇[れんぱ]は、9連覇[れんぱ]を達成[たっせい]した渡辺明[わたなべあきら]九段[くだん]以来[いらい]、史上[しじょう]二人目[ふたりめ]となる。', 'He is only the second in history to win six Ryuo titles in a row, after Akira Watanabe 9-dan, who won nine.'],
+            ['対局[たいきょく]は二十日[はつか]に始[はじ]まり、戦型[せんけい]は「角換[かくが]わり」となった。', 'The game began on the 20th, and the opening was a "bishop exchange".', '角換わり is an opening in which both players trade their bishops early.'],
+            ['3連敗[れんぱい]で後[あと]がない服部[はっとり]七段[ななだん]は、1時間[じかん]近[ちか]い長考[ちょうこう]の末[すえ]に打開[だかい]を図[はか]ったが、藤井[ふじい]竜王[りゅうおう]が押[お]し切[き]った。', 'Three games down with no room left, Hattori tried to break through after thinking for nearly an hour, but Fujii held him off.', '後がない means one more loss ends it; 長考 is a long think over one move; 押し切る means to push through to the end.'],
+            ['服部[はっとり]七段[ななだん]にとっては2度目[どめ]のタイトル挑戦[ちょうせん]だったが、初[はつ]タイトル獲得[かくとく]はならなかった。', 'It was Hattori\'s second title challenge, but he did not win his first title.', '〜はならなかった means it did not come about.'],
+            ['藤井[ふじい]竜王[りゅうおう]は昨年[さくねん]、5連覇[れんぱ]で永世竜王[えいせいりゅうおう]の資格[しかく]を得[え]ており、六冠[ろっかん]を保[たも]ったまま今年[ことし]を終[お]えることになった。', 'Fujii earned the right to the title of Lifetime Ryuo with five in a row last year, and he will end this year still holding six titles.', '六冠 means holding six titles at once.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-22-bluefin-tuna-quota',
+      date: '2026-11-22',
+      emoji: '🐟',
+      titleEn: 'Japan, South Korea and Taiwan agree to raise large Pacific bluefin tuna catch limits by 25% from 2027',
+      sources: [
+        { name: 'Kyodo via Tokyo Shimbun', url: 'https://www.tokyo-np.co.jp/article/529693' },
+        { name: 'Kyodo via Web Too', url: 'https://www.toonippo.co.jp/articles/-/2407878' },
+        { name: 'Jiji Press via nippon.com', url: 'https://www.nippon.com/ja/articles/-/57818' },
+        { name: 'Nikkei', url: 'https://www.nikkei.com/article/DGXZQOUA1416M0U6A810C2000000/' },
+      ],
+      quiz: [
+        ['By how much will Japan\'s limit for catching large bluefin tuna go up?', '25%', '6%', '50%', '2.5%'],
+        ['What will happen to the limit for small bluefin tuna?', 'It will go down by 6%', 'It will go up by 25%', 'It will not change', 'Catching them will be banned'],
+        ['When will the new limits be used?', 'For two years from 2027', 'From today, for one month', 'From 2030', 'Forever'],
+      ],
+      levels: {
+        N5: {
+          title: '大[おお]きい　クロマグロを　もっと　とれるように　なります',
+          lines: [
+            ['二十日[はつか]、国[くに]が　クロマグロに　ついて　発表[はっぴょう]しました。', 'On the 20th, the government made an announcement about bluefin tuna.', 'クロマグロ is Pacific bluefin tuna, a big fish loved for sushi. The Fisheries Agency made the announcement.'],
+            ['クロマグロは、日本[にほん]や　韓国[かんこく]、台湾[たいわん]などが　話[はな]し合[あ]って、とる　量[りょう]を　決[き]めて　います。', 'For bluefin tuna, Japan, South Korea, Taiwan and others talk together and decide how much can be caught.', 'The limits stop the fish from being caught until there are too few.'],
+            ['今度[こんど]の　話[はな]し合[あ]いで、日本[にほん]が　とる　大[おお]きい　クロマグロを　25％　増[ふ]やすことに　なりました。', 'In the latest talks, it was agreed that Japan can catch 25% more large bluefin tuna.', 'Large means 30 kg or more.'],
+            ['小[ちい]さい　クロマグロは　6％　減[へ]らします。', 'The catch of small bluefin tuna will be cut by 6%.', 'Small ones are young fish; leaving them in the sea lets them grow.'],
+            ['2027年[ねん]から　2年間[ねんかん]の　量[りょう]です。', 'These amounts are for two years from 2027.'],
+            ['今月[こんげつ]の　終[お]わりに　ある　会議[かいぎ]で、正式[せいしき]に　決[き]まります。', 'It will be officially decided at a meeting at the end of this month.', '正式に means officially.'],
+            ['クロマグロの　値段[ねだん]が　安[やす]く　なるかも　しれません。', 'Bluefin tuna may become cheaper.'],
+          ],
+        },
+        N4: {
+          title: 'クロマグロの漁獲枠[ぎょかくわく]、大型魚[おおがたぎょ]は25％増[ふ]える',
+          lines: [
+            ['水産庁[すいさんちょう]は二十日[はつか]、太平洋[たいへいよう]クロマグロの漁獲枠[ぎょかくわく]を話[はな]し合[あ]う国際[こくさい]会議[かいぎ]で合意[ごうい]したと発表[はっぴょう]しました。', 'On the 20th, the Fisheries Agency announced that an agreement had been reached at an international meeting on catch limits for Pacific bluefin tuna.', '水産庁 is the Fisheries Agency; 漁獲枠 is a catch limit (quota).'],
+            ['日本[にほん]の大型魚[おおがたぎょ]の枠[わく]は25％増[ふ]えて、小型魚[こがたぎょ]の枠[わく]は6％減[へ]ります。', 'Japan\'s limit for large fish will go up 25%, and the limit for small fish will go down 6%.', '大型魚 are fish of 30 kg or more.'],
+            ['今[いま]の日本[にほん]の大型魚[おおがたぎょ]の枠[わく]は8421トンですが、2027年[ねん]は1万[まん]526トンになる予定[よてい]です。', 'Japan\'s limit for large fish is now 8,421 tons, but in 2027 it is expected to be 10,526 tons.'],
+            ['新[あたら]しい枠[わく]は2027年[ねん]から2年間[ねんかん]使[つか]われます。', 'The new limits will be used for two years from 2027.'],
+            ['十一日[じゅういちにち]の会議[かいぎ]では、日本[にほん]と韓国[かんこく]、台湾[たいわん]の間[あいだ]で分[わ]け方[かた]が決[き]まらず、話[はな]し合[あ]いが続[つづ]いていました。', 'At the meeting on the 11th, Japan, South Korea and Taiwan could not agree on how to share the catch, so the talks went on.'],
+            ['結局[けっきょく]、日本[にほん]が求[もと]めていたとおりに枠[わく]が増[ふ]えることになりました。', 'In the end, the limit will rise just as Japan had asked.'],
+            ['今月[こんげつ]三十日[さんじゅうにち]から始[はじ]まる会議[かいぎ]で正式[せいしき]に決[き]まれば、クロマグロの値段[ねだん]が下[さ]がることも期待[きたい]されています。', 'If it is officially decided at a meeting starting on the 30th of this month, people hope bluefin tuna prices will also fall.'],
+          ],
+        },
+        N3: {
+          title: '太平洋[たいへいよう]クロマグロ、大型魚[おおがたぎょ]の漁獲枠[ぎょかくわく]25％拡大[かくだい]で合意[ごうい]',
+          lines: [
+            ['水産庁[すいさんちょう]は二十日[はつか]、太平洋[たいへいよう]クロマグロの資源[しげん]管理[かんり]を議論[ぎろん]する国際[こくさい]会議[かいぎ]で、日本[にほん]の大型魚[おおがたぎょ]の漁獲枠[ぎょかくわく]を25％拡大[かくだい]し、小型魚[こがたぎょ]は6％縮小[しゅくしょう]する内容[ないよう]で合意[ごうい]したと発表[はっぴょう]した。', 'On the 20th, the Fisheries Agency announced that, at an international meeting on managing Pacific bluefin tuna stocks, it had agreed to expand Japan\'s catch limit for large fish by 25% and cut the limit for small fish by 6%.', 'The meeting was the online Northern Committee of the Western and Central Pacific Fisheries Commission. 資源 here means the fish stock.'],
+            ['新[あら]たな枠[わく]は2027年[ねん]から2年間[ねんかん]適用[てきよう]される。', 'The new limits will apply for two years from 2027.'],
+            ['現在[げんざい]の日本[にほん]の枠[わく]は大型魚[おおがたぎょ]が8421トン、小型魚[こがたぎょ]が4407トンで、正式[せいしき]に決定[けってい]すれば、27年[ねん]は大型魚[おおがたぎょ]が1万[まん]526トン、小型魚[こがたぎょ]が4147トンとなる。', 'Japan\'s current limits are 8,421 tons for large fish and 4,407 tons for small fish; once formally decided, the 2027 limits will be 10,526 tons and 4,147 tons.'],
+            ['十一日[じゅういちにち]の会合[かいごう]では、日本[にほん]、韓国[かんこく]、台湾[たいわん]の間[あいだ]で国[くに]・地域[ちいき]ごとの配分[はいぶん]の調整[ちょうせい]が難航[なんこう]し、結論[けつろん]が持[も]ち越[こ]されていた。', 'At the meeting on the 11th, working out the share for each country and region among Japan, South Korea and Taiwan ran into difficulty, and a conclusion was put off.', '難航 means to run into trouble; 持ち越す means to carry over to later.'],
+            ['最終的[さいしゅうてき]に日本[にほん]の主張[しゅちょう]どおりの増枠[ぞうわく]となる一方[いっぽう]、韓国[かんこく]には昨年[さくねん]残[のこ]った小型魚[こがたぎょ]の枠[わく]の一部[いちぶ]を大型魚[おおがたぎょ]に換算[かんさん]し、509トン上乗[うわの]せすることが認[みと]められた。', 'In the end the increase was as Japan had argued, while South Korea was allowed to add 509 tons by converting part of last year\'s unused small-fish quota into large fish.', '換算 means converting into another unit; 上乗せ means adding on top.'],
+            ['今月[こんげつ]三十日[さんじゅうにち]に始[はじ]まる中西部[ちゅうせいぶ]太平洋[たいへいよう]まぐろ類[るい]委員会[いいんかい]の年次[ねんじ]会合[かいごう]で、正式[せいしき]に決定[けってい]する見通[みとお]しだ。', 'It is expected to be formally decided at the annual meeting of the Western and Central Pacific Fisheries Commission, which starts on the 30th of this month.', 'The commission is known as WCPFC.'],
+            ['漁獲枠[ぎょかくわく]の拡大[かくだい]で、クロマグロの価格[かかく]が下[さ]がることへの期待[きたい]も出[で]ている。', 'There are also hopes that the larger catch limits will bring down bluefin tuna prices.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-22-jt-russia-loss',
+      date: '2026-11-22',
+      emoji: '📉',
+      titleEn: 'Japan Tobacco expects a record ¥724 billion net loss after losing control of its Russian business',
+      sources: [
+        { name: 'Nikkei', url: 'https://www.nikkei.com/article/DGXZQOUB196SK0Z11C26A1000000/' },
+        { name: 'Nikkei (share price)', url: 'https://www.nikkei.com/article/DGXZQOUB200OY0Q6A121C2000000/' },
+        { name: 'Zaikei Shimbun', url: 'https://www.zaikei.co.jp/article/20261120/878541.html' },
+        { name: 'Toyo Keizai', url: 'https://toyokeizai.net/articles/-/964200' },
+      ],
+      quiz: [
+        ['Why does JT expect a big loss this year?', 'It can no longer run its companies in Russia', 'Fewer people smoke in Japan', 'A fire closed its factory', 'A new product did not sell'],
+        ['How big is the loss JT expects?', '724 billion yen', '7.24 billion yen', '72.4 trillion yen', '7,240 yen'],
+        ['What happened to JT\'s share price on the 20th?', 'It fell about 10%', 'It rose about 10%', 'It did not change', 'It doubled'],
+      ],
+      levels: {
+        N5: {
+          title: 'JT、ロシアの　ことで　とても　大[おお]きな　損[そん]',
+          lines: [
+            ['十九日[じゅうくにち]、たばこの　会社[かいしゃ]の　JTが、今年[ことし]は　大[おお]きな　損[そん]を　すると　発表[はっぴょう]しました。', 'On the 19th, the tobacco company JT announced that it will make a big loss this year.', 'JT is Japan Tobacco. 損 is a loss of money.'],
+            ['JTは、ロシアでも　たばこを　作[つく]って　売[う]って　います。', 'JT also makes and sells cigarettes in Russia.'],
+            ['でも、十一月[じゅういちがつ]、ロシアの　大統領[だいとうりょう]が　命令[めいれい]を　出[だ]しました。', 'But in November, the president of Russia gave an order.', '大統領 is a president; 命令 is an order.'],
+            ['それで、ロシアに　ある　JTの　七[なな]つの　会社[かいしゃ]は、ロシアの　会社[かいしゃ]が　管理[かんり]することに　なりました。', 'Because of this, JT\'s seven companies in Russia are now run by a Russian company.', '管理する means to manage or control.'],
+            ['このため、JTの　今年[ことし]の　損[そん]は　7240億円[おくえん]に　なりそうです。', 'Because of this, JT\'s loss this year looks set to be 724 billion yen.', '億 is a hundred million, so 7240億円 is 724 billion yen.'],
+            ['JTの　損[そん]で、今[いま]までで　いちばん　大[おお]きいです。', 'It is JT\'s biggest loss ever.'],
+            ['二十日[はつか]、JTの　株[かぶ]の　値段[ねだん]は　10％ぐらい　下[さ]がりました。', 'On the 20th, JT\'s share price fell about 10%.', '株 is a share in a company.'],
+          ],
+        },
+        N4: {
+          title: 'JT、ロシア事業[じぎょう]のため過去[かこ]最大[さいだい]の赤字[あかじ]に',
+          lines: [
+            ['日本[にほん]たばこ産業[さんぎょう]（JT）は十九日[じゅうくにち]、今年[ことし]の決算[けっさん]が7240億円[おくえん]の赤字[あかじ]になるという見通[みとお]しを発表[はっぴょう]しました。', 'On the 19th, Japan Tobacco (JT) announced that it expects a 724 billion yen loss in this year\'s results.', '決算 is a company\'s yearly results; 赤字 ("red ink") is a loss. JT\'s business year is the calendar year.'],
+            ['前[まえ]は大[おお]きな利益[りえき]が出[で]ると予想[よそう]していましたが、ロシアの事業[じぎょう]のために大[おお]きく変[か]わりました。', 'It had expected a big profit, but this changed a lot because of its Russian business.', '利益 is profit; 事業 is a business.'],
+            ['十一月[じゅういちがつ]初[はじ]めのロシアの大統領令[だいとうりょうれい]で、ロシアにあるJTの会社[かいしゃ]7社[しゃ]が、ロシアの会社[かいしゃ]の一時的[いちじてき]な管理[かんり]の下[した]に置[お]かれました。', 'Under a Russian presidential decree in early November, JT\'s seven companies in Russia were put under the temporary control of a Russian company.', '大統領令 is a presidential decree.'],
+            ['JTはこの7社[しゃ]をグループの決算[けっさん]から外[はず]し、約[やく]1兆[ちょう]3770億円[おくえん]の損失[そんしつ]を出[だ]しました。', 'JT took these seven companies out of the group\'s results and recorded a loss of about 1.377 trillion yen.', '兆 is a trillion.'],
+            ['ロシアの事業[じぎょう]は、JTグループの売[う]り上[あ]げの約[やく]10％、利益[りえき]の約[やく]25％を占[し]めていました。', 'The Russian business made up about 10% of the JT group\'s sales and about 25% of its profit.'],
+            ['配当[はいとう]も1株[かぶ]272円[えん]から204円[えん]に減[へ]らすことになり、二十日[はつか]のJTの株価[かぶか]は10％ぐらい下[さ]がりました。', 'JT will also cut its dividend from 272 yen to 204 yen a share, and its share price fell about 10% on the 20th.', '配当 is money a company pays to its shareholders. The Japanese government is JT\'s biggest shareholder.'],
+            ['社長[しゃちょう]は、これは会計[かいけい]の上[うえ]のことで、ロシアから撤退[てったい]するという意味[いみ]ではないと話[はな]しました。', 'The company\'s president said this was only a matter of accounting and did not mean JT is leaving Russia.', '撤退 means pulling out.'],
+          ],
+        },
+        N3: {
+          title: 'JT、過去[かこ]最大[さいだい]の最終[さいしゅう]赤字[あかじ]へ　ロシア事業[じぎょう]を連結[れんけつ]除外[じょがい]',
+          lines: [
+            ['日本[にほん]たばこ産業[さんぎょう]（JT）は十九日[じゅうくにち]、2026年[ねん]12月期[がつき]の連結[れんけつ]最終[さいしゅう]損益[そんえき]が7240億円[おくえん]の赤字[あかじ]になる見通[みとお]しだと発表[はっぴょう]した。', 'On the 19th, Japan Tobacco (JT) announced that it expects a consolidated net loss of 724 billion yen for the year ending December 2026.', '12月期 is the business year ending in December; 連結 means for the whole group; 最終損益 is net profit or loss.'],
+            ['従来[じゅうらい]予想[よそう]から1兆[ちょう]3860億円[おくえん]の下方[かほう]修正[しゅうせい]で、最終[さいしゅう]赤字[あかじ]は2004年[ねん]3月期[がつき]以来[いらい]で、過去[かこ]最大[さいだい]の赤字[あかじ]となる。', 'That is 1.386 trillion yen below its earlier forecast; it is JT\'s first net loss since the year to March 2004, and the largest ever.', '下方修正 is a downward revision of a forecast.'],
+            ['十一月[じゅういちがつ]五日[いつか]から六日[むいか]にかけて出[だ]されたロシアの大統領令[だいとうりょうれい]により、ロシアの現地[げんち]法人[ほうじん]7社[しゃ]すべてがロシア企業[きぎょう]の一時[いちじ]管理下[かんりか]に置[お]かれた。', 'Under Russian presidential decrees issued on November 5 and 6, all seven of JT\'s local subsidiaries in Russia were placed under the temporary control of a Russian company.', '現地法人 is a company set up in another country.'],
+            ['JTは事実上[じじつじょう]経営権[けいえいけん]を失[うしな]ったとして7社[しゃ]を連結[れんけつ]対象[たいしょう]から外[はず]し、約[やく]1兆[ちょう]3770億円[おくえん]の損失[そんしつ]を計上[けいじょう]した。', 'Saying it had in effect lost control of them, JT removed the seven companies from its consolidated accounts and booked a loss of about 1.377 trillion yen.', '経営権 is the right to run a company; 計上する means to record in the accounts.'],
+            ['ロシア事業[じぎょう]はグループの売上[うりあげ]収益[しゅうえき]の約[やく]10％、調整後[ちょうせいご]営業[えいぎょう]利益[りえき]の約[やく]25％を占[し]めていた。', 'The Russian business accounted for about 10% of the group\'s revenue and about 25% of its adjusted operating profit.'],
+            ['年間[ねんかん]配当[はいとう]の予想[よそう]も272円[えん]から204円[えん]に引[ひ]き下[さ]げ、二十日[はつか]の東京[とうきょう]株式[かぶしき]市場[しじょう]でJT株[かぶ]の終値[おわりね]は約[やく]10％下落[げらく]した。', 'JT also lowered its forecast annual dividend from 272 yen to 204 yen, and on the 20th its shares closed about 10% lower on the Tokyo stock market.', '終値 is the closing price. The government is JT\'s largest shareholder, so the loss also affects public finances.'],
+            ['筒井岳彦[つついたけひこ]社長[しゃちょう]は、今回[こんかい]の措置[そち]は会計上[かいけいじょう]の扱[あつか]いで、所有権[しょゆうけん]の放棄[ほうき]や撤退[てったい]を意味[いみ]するものではないと強調[きょうちょう]した。', 'President Takehiko Tsutsui stressed that the step is an accounting treatment and does not mean giving up ownership or pulling out.', '放棄 means giving up; 撤退 means pulling out.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-11-21-cpi-october-rice',
       date: '2026-11-21',
       emoji: '🍚',

@@ -13558,5 +13558,455 @@
     "うちゅうこうくうけんきゅうかいはつきこう",
     "Japan Aerospace Exploration Agency (JAXA)",
     "organization"
+  ],
+  "藤井": [
+    "ふじい",
+    "Fujii (family name)",
+    "name"
+  ],
+  "藤井聡太": [
+    "ふじいそうた",
+    "Sota Fujii (shogi player)",
+    "name"
+  ],
+  "服部": [
+    "はっとり",
+    "Hattori (family name)",
+    "name"
+  ],
+  "慎一郎": [
+    "しんいちろう",
+    "Shinichiro (given name)",
+    "name"
+  ],
+  "服部慎一郎": [
+    "はっとりしんいちろう",
+    "Shinichiro Hattori (shogi player)",
+    "name"
+  ],
+  "渡辺明": [
+    "わたなべあきら",
+    "Akira Watanabe (shogi player)",
+    "name"
+  ],
+  "竜王": [
+    "りゅうおう",
+    "Ryuo (\"dragon king\"), a top shogi title",
+    "noun"
+  ],
+  "竜王戦": [
+    "りゅうおうせん",
+    "the Ryuo title match",
+    "noun"
+  ],
+  "六年": [
+    "ろくねん",
+    "six years",
+    "number + counter"
+  ],
+  "宮崎": [
+    "みやざき",
+    "Miyazaki",
+    "place name"
+  ],
+  "宮崎県": [
+    "みやざきけん",
+    "Miyazaki Prefecture",
+    "place name"
+  ],
+  "都城": [
+    "みやこのじょう",
+    "Miyakonojo",
+    "place name"
+  ],
+  "都城市": [
+    "みやこのじょうし",
+    "Miyakonojo City",
+    "place name"
+  ],
+  "四回": [
+    "よんかい",
+    "four times",
+    "number + counter"
+  ],
+  "二十四歳": [
+    "にじゅうよんさい",
+    "24 years old",
+    "number + counter"
+  ],
+  "第4局": [
+    "だいよんきょく",
+    "game 4",
+    "number + counter"
+  ],
+  "24": [
+    "にじゅうよん",
+    "24 (age)",
+    "number"
+  ],
+  "27": [
+    "にじゅうなな",
+    "27 (age)",
+    "number"
+  ],
+  "七段": [
+    "ななだん",
+    "7-dan (a professional rank)",
+    "noun"
+  ],
+  "九段": [
+    "くだん",
+    "9-dan (the top professional rank)",
+    "noun"
+  ],
+  "94手": [
+    "きゅうじゅうよんて",
+    "94 moves",
+    "number + counter"
+  ],
+  "ストレート": [
+    "ストレート",
+    "straight (winning every game)",
+    "noun"
+  ],
+  "第39期": [
+    "だいさんじゅうきゅうき",
+    "the 39th (edition)",
+    "number + counter"
+  ],
+  "戦型": [
+    "せんけい",
+    "opening strategy (in shogi)",
+    "noun"
+  ],
+  "連敗": [
+    "れんぱい",
+    "losses in a row",
+    "noun"
+  ],
+  "長考": [
+    "ちょうこう",
+    "long thought over one move",
+    "noun"
+  ],
+  "打開": [
+    "だかい",
+    "breaking through (a deadlock)",
+    "noun"
+  ],
+  "押し切る": [
+    "おしきる",
+    "to push through to the end",
+    "verb"
+  ],
+  "六冠": [
+    "ろっかん",
+    "holding six titles",
+    "noun"
+  ],
+  "クロマグロ": [
+    "クロマグロ",
+    "bluefin tuna",
+    "noun"
+  ],
+  "25％": [
+    "にじゅうごパーセント",
+    "25%",
+    "number + counter"
+  ],
+  "6％": [
+    "ろくパーセント",
+    "6%",
+    "number + counter"
+  ],
+  "漁獲": [
+    "ぎょかく",
+    "catch (of fish)",
+    "noun"
+  ],
+  "漁獲枠": [
+    "ぎょかくわく",
+    "catch limit, quota",
+    "noun"
+  ],
+  "水産庁": [
+    "すいさんちょう",
+    "Fisheries Agency",
+    "organization"
+  ],
+  "小型": [
+    "こがた",
+    "small-sized",
+    "noun"
+  ],
+  "大型魚": [
+    "おおがたぎょ",
+    "large fish (here: 30 kg or more)",
+    "noun"
+  ],
+  "小型魚": [
+    "こがたぎょ",
+    "small fish (here: under 30 kg)",
+    "noun"
+  ],
+  "8421トン": [
+    "はっせんよんひゃくにじゅういちトン",
+    "8,421 tons",
+    "number + counter"
+  ],
+  "1万526トン": [
+    "いちまんごひゃくにじゅうろくトン",
+    "10,526 tons",
+    "number + counter"
+  ],
+  "4407トン": [
+    "よんせんよんひゃくななトン",
+    "4,407 tons",
+    "number + counter"
+  ],
+  "4147トン": [
+    "よんせんひゃくよんじゅうななトン",
+    "4,147 tons",
+    "number + counter"
+  ],
+  "509トン": [
+    "ごひゃくきゅうトン",
+    "509 tons",
+    "number + counter"
+  ],
+  "27年": [
+    "にじゅうななねん",
+    "(20)27",
+    "number + counter"
+  ],
+  "配分": [
+    "はいぶん",
+    "sharing out, allocation",
+    "noun"
+  ],
+  "持ち越す": [
+    "もちこす",
+    "to carry over, put off",
+    "verb"
+  ],
+  "上乗せ": [
+    "うわのせ",
+    "adding on top",
+    "noun"
+  ],
+  "中西部": [
+    "ちゅうせいぶ",
+    "west and central part",
+    "noun"
+  ],
+  "まぐろ": [
+    "まぐろ",
+    "tuna",
+    "noun"
+  ],
+  "まぐろ類": [
+    "まぐろるい",
+    "tunas, tuna species",
+    "noun"
+  ],
+  "中西部太平洋まぐろ類委員会": [
+    "ちゅうせいぶたいへいようまぐろるいいいんかい",
+    "Western and Central Pacific Fisheries Commission (WCPFC)",
+    "organization"
+  ],
+  "年次": [
+    "ねんじ",
+    "annual",
+    "noun"
+  ],
+  "増枠": [
+    "ぞうわく",
+    "raising a quota",
+    "noun"
+  ],
+  "JT": [
+    "ジェイティー",
+    "JT (Japan Tobacco)",
+    "organization"
+  ],
+  "日本たばこ産業": [
+    "にほんたばこさんぎょう",
+    "Japan Tobacco (JT)",
+    "organization"
+  ],
+  "7240億円": [
+    "ななせんにひゃくよんじゅうおくえん",
+    "724 billion yen",
+    "number + counter"
+  ],
+  "決算": [
+    "けっさん",
+    "(yearly) financial results",
+    "noun"
+  ],
+  "7社": [
+    "ななしゃ",
+    "seven companies",
+    "number + counter"
+  ],
+  "約1兆3770億円": [
+    "やくいっちょうさんぜんななひゃくななじゅうおくえん",
+    "about 1.377 trillion yen",
+    "number + counter"
+  ],
+  "1兆3770億円": [
+    "いっちょうさんぜんななひゃくななじゅうおくえん",
+    "1.377 trillion yen",
+    "number + counter"
+  ],
+  "約25％": [
+    "やくにじゅうごパーセント",
+    "about 25%",
+    "number + counter"
+  ],
+  "約10％": [
+    "やくじゅっパーセント",
+    "about 10%",
+    "number + counter"
+  ],
+  "272円": [
+    "にひゃくななじゅうにえん",
+    "272 yen",
+    "number + counter"
+  ],
+  "204円": [
+    "にひゃくよえん",
+    "204 yen",
+    "number + counter"
+  ],
+  "撤退": [
+    "てったい",
+    "pulling out, withdrawal",
+    "noun"
+  ],
+  "連結": [
+    "れんけつ",
+    "consolidated (for the whole group)",
+    "noun"
+  ],
+  "2026年": [
+    "にせんにじゅうろくねん",
+    "2026",
+    "number + counter"
+  ],
+  "損益": [
+    "そんえき",
+    "profit and loss",
+    "noun"
+  ],
+  "従来": [
+    "じゅうらい",
+    "previous, until now",
+    "noun"
+  ],
+  "1兆3860億円": [
+    "いっちょうさんぜんはっぴゃくろくじゅうおくえん",
+    "1.386 trillion yen",
+    "number + counter"
+  ],
+  "下方": [
+    "かほう",
+    "downward",
+    "noun"
+  ],
+  "下方修正": [
+    "かほうしゅうせい",
+    "downward revision",
+    "noun"
+  ],
+  "2004年": [
+    "にせんよねん",
+    "2004",
+    "number + counter"
+  ],
+  "法人": [
+    "ほうじん",
+    "corporation, company",
+    "noun"
+  ],
+  "現地法人": [
+    "げんちほうじん",
+    "local subsidiary (abroad)",
+    "noun"
+  ],
+  "売上": [
+    "うりあげ",
+    "sales",
+    "noun"
+  ],
+  "売上収益": [
+    "うりあげしゅうえき",
+    "revenue",
+    "noun"
+  ],
+  "筒井": [
+    "つつい",
+    "Tsutsui (family name)",
+    "name"
+  ],
+  "岳彦": [
+    "たけひこ",
+    "Takehiko (given name)",
+    "name"
+  ],
+  "筒井岳彦": [
+    "つついたけひこ",
+    "Takehiko Tsutsui (JT president)",
+    "name"
+  ],
+  "所有": [
+    "しょゆう",
+    "ownership",
+    "noun"
+  ],
+  "所有権": [
+    "しょゆうけん",
+    "ownership rights",
+    "noun"
+  ],
+  "放棄": [
+    "ほうき",
+    "giving up, abandoning",
+    "noun"
+  ],
+  "1時間近く": [
+    "いちじかんちかく",
+    "nearly an hour",
+    "number + counter"
+  ],
+  "1時間近い": [
+    "いちじかんちかい",
+    "nearly an hour (+ noun)",
+    "number + counter"
+  ],
+  "角換わり": [
+    "かくがわり",
+    "bishop exchange (a shogi opening)",
+    "noun"
+  ],
+  "12月期": [
+    "じゅうにがつき",
+    "business year ending in December",
+    "number + counter"
+  ],
+  "大統領令": [
+    "だいとうりょうれい",
+    "presidential decree",
+    "noun"
+  ],
+  "経営権": [
+    "けいえいけん",
+    "right to run a company, management control",
+    "noun"
+  ],
+  "永世竜王": [
+    "えいせいりゅうおう",
+    "Lifetime Ryuo (honorary shogi title)",
+    "noun"
   ]
 }

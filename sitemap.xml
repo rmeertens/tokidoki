@@ -167,7 +167,7 @@
   </url>
   <url>
     <loc>https://tokidoki.meertens.dev/news-week-2026-11-16.html</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
@@ -199,6 +199,21 @@
     <loc>https://tokidoki.meertens.dev/news-week-2026-10-05.html</loc>
     <lastmod>2026-10-11</lastmod>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-11-22-fujii-ryuo-sixth.html</loc>
+    <lastmod>2026-11-22</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-11-22-bluefin-tuna-quota.html</loc>
+    <lastmod>2026-11-22</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-11-22-jt-russia-loss.html</loc>
+    <lastmod>2026-11-22</lastmod>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://tokidoki.meertens.dev/news-2026-11-21-cpi-october-rice.html</loc>
