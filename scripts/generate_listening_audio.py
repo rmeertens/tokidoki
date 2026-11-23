@@ -46,11 +46,11 @@ OUT_DIR = REPO_ROOT / "audio" / "listening"
 INDEX = REPO_ROOT / "listening-audio.js"
 
 LEAD_IN = 0.3                 # seconds of silence at the start of each question
-MAX_NUMBER = 150              # the numbers file holds 1番 … 150番
+MAX_NUMBER = 300              # the numbers file holds 1番 … 300番
 
 DUMP_JS = """
 global.window = global;
-for (const f of ['listening-data.js', 'listening-data-2.js', 'listening-data-3.js', 'listening-data-4.js', 'listening-data-5.js', 'listening-data-6.js', 'listening-data-7.js', 'listening-data-8.js', 'listening-data-9.js']) require(process.argv[1] + '/' + f);
+for (const f of ['listening-data.js', 'listening-data-2.js', 'listening-data-3.js', 'listening-data-4.js', 'listening-data-5.js', 'listening-data-6.js', 'listening-data-7.js', 'listening-data-8.js', 'listening-data-9.js', 'listening-data-10.js', 'listening-data-11.js', 'listening-data-12.js', 'listening-data-13.js', 'listening-data-14.js', 'listening-data-15.js']) require(process.argv[1] + '/' + f);
 const L = require(process.argv[1] + '/listening.js');
 const out = [];
 for (const section of global.LISTENING_SECTIONS) {
@@ -154,7 +154,7 @@ def main():
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     index, warnings, recorded = {}, [], 0
 
-    # The question numbers, 1番 to 150番, in one file: the page plays the
+    # The question numbers, 1番 to 300番, in one file: the page plays the
     # number before each question, whatever its position in a session.
     key = dump["numbersKey"]
     texts = [f"{n}番。" for n in range(1, MAX_NUMBER + 1)]

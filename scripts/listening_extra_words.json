@@ -4,6 +4,11 @@
     "A",
     "letter"
   ],
+  "ABC社": [
+    "えーびーしーしゃ",
+    "ABC (a company name)",
+    "name"
+  ],
   "A社": [
     "えーしゃ",
     "Company A",
@@ -49,6 +54,11 @@
     "if there is (ある → あったら)",
     "verb"
   ],
+  "ありがたい": [
+    "ありがたい",
+    "welcome, something to be grateful for",
+    "い adjective"
+  ],
   "いえいえ": [
     "いえいえ",
     "no, no (modest: not at all)",
@@ -63,6 +73,11 @@
     "いちご",
     "strawberry",
     "noun"
+  ],
+  "いったん": [
+    "いったん",
+    "for now, for the moment; once",
+    "adverb"
   ],
   "いってらっしゃい": [
     "いってらっしゃい",
@@ -79,6 +94,11 @@
     "no, nope (casual)",
     "interjection"
   ],
+  "うどん": [
+    "うどん",
+    "udon (thick wheat noodles)",
+    "noun"
+  ],
   "うーん": [
     "うーん",
     "hmm",
@@ -87,6 +107,16 @@
   "え": [
     "え",
     "eh? oh! (surprise)",
+    "interjection"
+  ],
+  "えび": [
+    "えび",
+    "shrimp, prawn",
+    "noun"
+  ],
+  "えー": [
+    "えー",
+    "oh no, what? (surprise, disappointment)",
     "interjection"
   ],
   "おかえりなさい": [
@@ -99,15 +129,50 @@
     "rice porridge",
     "noun"
   ],
+  "おじゃま": [
+    "おじゃま",
+    "(おじゃまします / しました) sorry to intrude — said entering / leaving someone's home",
+    "noun"
+  ],
   "おやすみなさい": [
     "おやすみなさい",
     "good night",
     "expression"
   ],
+  "お一人": [
+    "おひとり",
+    "one person (polite)",
+    "noun"
+  ],
+  "お乗り": [
+    "おのり",
+    "riding, boarding (polite: お乗りいただけます: you may board)",
+    "noun"
+  ],
+  "お付け": [
+    "おつけ",
+    "adding, giving (polite: ポイントをお付けします: we'll add points)",
+    "noun"
+  ],
+  "お伺い": [
+    "おうかがい",
+    "visiting (humble: お伺いしてもよろしいですか: may I come?)",
+    "noun"
+  ],
   "お作り": [
     "おつくり",
     "making (polite: お作りします, I'll make it for you)",
     "verb (polite)"
+  ],
+  "お使い": [
+    "おつかい",
+    "use (polite: お使いください: please use)",
+    "noun"
+  ],
+  "お兄ちゃん": [
+    "おにいちゃん",
+    "big brother (affectionate)",
+    "noun"
   ],
   "お先に": [
     "おさきに",
@@ -119,9 +184,34 @@
     "waiting (polite: お待ちしていました, we've been expecting you)",
     "noun / verb (polite)"
   ],
+  "お応え": [
+    "おこたえ",
+    "response (humble: お応えする: to meet (wishes))",
+    "noun"
+  ],
   "お手数": [
     "おてすう",
     "trouble (お手数ですが: sorry to trouble you, but)",
+    "noun"
+  ],
+  "お招き": [
+    "おまねき",
+    "invitation (polite: お招きいただいて: for inviting me)",
+    "noun"
+  ],
+  "お渡し": [
+    "おわたし",
+    "handing over (humble: お渡しします: we'll hand over)",
+    "noun"
+  ],
+  "お話し": [
+    "おはなし",
+    "talk, speaking (polite: お話しに行く)",
+    "noun"
+  ],
+  "お調べ": [
+    "おしらべ",
+    "checking (humble: お調べします: I'll check)",
     "noun"
   ],
   "お越し": [
@@ -139,6 +229,16 @@
     "on the contrary, instead (makes it worse)",
     "adverb"
   ],
+  "かかわる": [
+    "かかわる",
+    "(にもかかわらず) in spite of, even though",
+    "verb"
+  ],
+  "かぎり": [
+    "かぎり",
+    "(〜ないかぎり) unless, as long as … not",
+    "noun"
+  ],
   "かけ合う": [
     "かけあう",
     "to call out to each other (声をかけ合う)",
@@ -154,10 +254,20 @@
     "might, may (polite)",
     "grammar"
   ],
+  "がち": [
+    "がち",
+    "(〜がち) tend to, be apt to (思われがち: often assumed)",
+    "suffix"
+  ],
   "きたん": [
     "きたん",
     "(〜てきたんです) started …ing (and that's the problem)",
     "grammar"
+  ],
+  "くっつける": [
+    "くっつける",
+    "to put together, to push together",
+    "verb"
   ],
   "こうした": [
     "こうした",
@@ -174,6 +284,11 @@
     "thank you for the meal (said after eating)",
     "expression"
   ],
+  "ご苦労さま": [
+    "ごくろうさま",
+    "good work, thanks for your trouble (to someone junior)",
+    "expression"
+  ],
   "さくら駅": [
     "さくらえき",
     "Sakura Station",
@@ -184,9 +299,34 @@
     "when (I) did, when (I) tried (〜ようとしたら)",
     "grammar"
   ],
+  "すいか": [
+    "すいか",
+    "watermelon",
+    "noun"
+  ],
+  "すっきり": [
+    "すっきり",
+    "refreshed, clear (頭がすっきりする: clears your head)",
+    "adverb"
+  ],
+  "すり減る": [
+    "すりへる",
+    "to wear down, to wear out",
+    "verb"
+  ],
   "そうですね": [
     "そうですね",
     "let me see; that's right",
+    "expression"
+  ],
+  "そのもの": [
+    "そのもの",
+    "itself, the very (考え方そのもの: the very way of thinking)",
+    "noun"
+  ],
+  "それだけ": [
+    "それだけ",
+    "that alone; only that",
     "expression"
   ],
   "それなら": [
@@ -204,10 +344,25 @@
     "however, but (a condition)",
     "conjunction"
   ],
+  "ただ今": [
+    "ただいま",
+    "right now, at the moment (formal)",
+    "adverb"
+  ],
   "たって": [
     "たって",
     "(casual 〜たって聞いた) I heard that …; they say",
     "grammar"
+  ],
+  "たんぱく質": [
+    "たんぱくしつ",
+    "protein",
+    "noun"
+  ],
+  "だからこそ": [
+    "だからこそ",
+    "that is exactly why",
+    "conjunction"
   ],
   "ちゃう": [
     "ちゃう",
@@ -224,10 +379,20 @@
     "(casual ついている) is attached, comes with",
     "verb"
   ],
+  "つかめる": [
+    "つかめる",
+    "can grasp, can get a feel for",
+    "verb (potential)"
+  ],
   "つけ": [
     "つけ",
     "(気をつける) to be careful",
     "verb"
+  ],
+  "つながり": [
+    "つながり",
+    "connection, bond",
+    "noun"
   ],
   "てる": [
     "てる",
@@ -238,6 +403,16 @@
     "ですが",
     "but, however (polite, at the start of a sentence)",
     "conjunction"
+  ],
+  "とたんに": [
+    "とたんに",
+    "(〜たとたんに) the moment that, just as",
+    "expression"
+  ],
+  "とりあえず": [
+    "とりあえず",
+    "for now, for the time being",
+    "adverb"
   ],
   "どういう": [
     "どういう",
@@ -253,6 +428,16 @@
     "どうせ",
     "anyway, in any case (resigned)",
     "adverb"
+  ],
+  "どおり": [
+    "どおり",
+    "(〜どおり) as, in accordance with (予定どおり: as planned)",
+    "suffix"
+  ],
+  "どける": [
+    "どける",
+    "to move out of the way",
+    "verb"
   ],
   "どちら様": [
     "どちらさま",
@@ -284,6 +469,11 @@
     "far, by far (はるかに多い)",
     "adverb"
   ],
+  "はーい": [
+    "はーい",
+    "OK! (a drawn-out はい, casual)",
+    "interjection"
+  ],
   "へえ": [
     "へえ",
     "wow, really? (surprise)",
@@ -304,6 +494,16 @@
     "mandarin orange",
     "noun"
   ],
+  "もうける": [
+    "もうける",
+    "to make money, to profit",
+    "verb"
+  ],
+  "もともと": [
+    "もともと",
+    "originally; (駄目でもともと) nothing to lose",
+    "adverb"
+  ],
   "もらえる": [
     "もらえる",
     "can receive; (〜てもらえますか) could you …?",
@@ -314,10 +514,30 @@
     "as expected; after all, on second thought",
     "adverb"
   ],
+  "やつ": [
+    "やつ",
+    "one, thing (casual: カメラがいいやつ: one with a good camera)",
+    "noun"
+  ],
+  "よって": [
+    "よって",
+    "(によって) depending on, according to",
+    "expression"
+  ],
+  "よほど": [
+    "よほど",
+    "very, really (よほどひどくない限り: unless really bad)",
+    "adverb"
+  ],
   "わが": [
     "わが",
     "our, my (わが町: our town)",
     "pre-noun"
+  ],
+  "わざわざ": [
+    "わざわざ",
+    "specially, going to the trouble of",
+    "adverb"
   ],
   "アナウンス": [
     "あなうんす",
@@ -329,9 +549,24 @@
     "app",
     "noun"
   ],
+  "アレルギー": [
+    "あれるぎー",
+    "allergy",
+    "noun"
+  ],
+  "イタリア": [
+    "いたりあ",
+    "Italy (イタリア料理: Italian food)",
+    "place name"
+  ],
   "イベント": [
     "いべんと",
     "event",
+    "noun"
+  ],
+  "ウェア": [
+    "うぇあ",
+    "(ski) wear, clothing",
     "noun"
   ],
   "エプロン": [
@@ -339,9 +574,34 @@
     "apron",
     "noun"
   ],
+  "オープン": [
+    "おーぷん",
+    "opening (of a shop)",
+    "noun"
+  ],
+  "カタログ": [
+    "かたろぐ",
+    "catalogue",
+    "noun"
+  ],
+  "カッパ": [
+    "かっぱ",
+    "raincoat, rain cape",
+    "noun"
+  ],
   "カラオケ": [
     "からおけ",
     "karaoke",
+    "noun"
+  ],
+  "ガイド": [
+    "がいど",
+    "guide",
+    "noun"
+  ],
+  "キャッシュカード": [
+    "きゃっしゅかーど",
+    "cash card, bank card",
     "noun"
   ],
   "キャンセル": [
@@ -379,6 +639,26 @@
     "goggles",
     "noun"
   ],
+  "サークル": [
+    "さーくる",
+    "(university) club, circle",
+    "noun"
+  ],
+  "システム": [
+    "しすてむ",
+    "system",
+    "noun"
+  ],
+  "スカーフ": [
+    "すかーふ",
+    "scarf",
+    "noun"
+  ],
+  "スプレー": [
+    "すぷれー",
+    "spray",
+    "noun"
+  ],
   "スマホ": [
     "すまほ",
     "smartphone",
@@ -409,6 +689,16 @@
     "tyre",
     "noun"
   ],
+  "チェック": [
+    "ちぇっく",
+    "check (チェックアウト: check-out)",
+    "noun"
+  ],
+  "チェックアウト": [
+    "ちぇっくあうと",
+    "check-out (from a hotel)",
+    "noun"
+  ],
   "チューリップ": [
     "ちゅーりっぷ",
     "tulip",
@@ -434,9 +724,19 @@
     "theme, topic",
     "noun"
   ],
+  "トラブル": [
+    "とらぶる",
+    "trouble, dispute",
+    "noun"
+  ],
   "ネックレス": [
     "ねっくれす",
     "necklace",
+    "noun"
+  ],
+  "バス停": [
+    "ばすてい",
+    "bus stop",
     "noun"
   ],
   "バナナ": [
@@ -449,6 +749,31 @@
     "package, packaging",
     "noun"
   ],
+  "パレード": [
+    "ぱれーど",
+    "parade",
+    "noun"
+  ],
+  "パンフレット": [
+    "ぱんふれっと",
+    "brochure, pamphlet",
+    "noun"
+  ],
+  "ビジネス": [
+    "びじねす",
+    "business",
+    "noun"
+  ],
+  "ビニール": [
+    "びにーる",
+    "vinyl, plastic (ビニール傘: clear plastic umbrella)",
+    "noun"
+  ],
+  "ビニール傘": [
+    "びにーるがさ",
+    "clear plastic umbrella",
+    "noun"
+  ],
   "フラッシュ": [
     "ふらっしゅ",
     "flash (camera)",
@@ -459,9 +784,24 @@
     "front desk, reception",
     "noun"
   ],
+  "ブース": [
+    "ぶーす",
+    "booth (at a show)",
+    "noun"
+  ],
   "プリンター": [
     "ぷりんたー",
     "printer",
+    "noun"
+  ],
+  "プリント": [
+    "ぷりんと",
+    "handout, printout",
+    "noun"
+  ],
+  "プレゼン": [
+    "ぷれぜん",
+    "presentation (short for プレゼンテーション)",
     "noun"
   ],
   "プロジェクター": [
@@ -479,14 +819,44 @@
     "helmet",
     "noun"
   ],
+  "ホラー": [
+    "ほらー",
+    "horror (ホラー映画: horror film)",
+    "noun"
+  ],
+  "ポイント": [
+    "ぽいんと",
+    "(loyalty) points",
+    "noun"
+  ],
+  "ポット": [
+    "ぽっと",
+    "kettle, pot (電気ポット: electric kettle)",
+    "noun"
+  ],
+  "マナー": [
+    "まなー",
+    "manners, etiquette",
+    "noun"
+  ],
   "メニュー": [
     "めにゅー",
     "menu",
     "noun"
   ],
+  "メモ用紙": [
+    "めもようし",
+    "scrap paper, memo paper",
+    "noun"
+  ],
   "ユニフォーム": [
     "ゆにふぉーむ",
     "uniform (sports)",
+    "noun"
+  ],
+  "リュックサック": [
+    "りゅっくさっく",
+    "backpack, rucksack",
     "noun"
   ],
   "レシート": [
@@ -514,10 +884,40 @@
     "dress (one-piece)",
     "noun"
   ],
+  "一か月分": [
+    "いっかげつぶん",
+    "one month's worth",
+    "noun"
+  ],
+  "一年中": [
+    "いちねんじゅう",
+    "all year round",
+    "noun"
+  ],
+  "一応": [
+    "いちおう",
+    "just in case, anyway, for the time being",
+    "adverb"
+  ],
+  "一日(ついたち)": [
+    "ついたち",
+    "the first (day of the month)",
+    "noun"
+  ],
+  "一月(いちがつ)": [
+    "いちがつ",
+    "January",
+    "noun"
+  ],
   "一部": [
     "いちぶ",
     "a part, some",
     "noun"
+  ],
+  "七時半ごろ": [
+    "しちじはんごろ",
+    "around half past seven",
+    "number"
   ],
   "不動産": [
     "ふどうさん",
@@ -529,6 +929,16 @@
     "being out, absence",
     "noun"
   ],
+  "世代": [
+    "せだい",
+    "generation",
+    "noun"
+  ],
+  "中でも": [
+    "なかでも",
+    "even in, among others (忙しい毎日の中でも: even in busy days)",
+    "expression"
+  ],
   "主": [
     "おも",
     "main (主な: main, chief; 主に: mainly)",
@@ -538,6 +948,11 @@
     "おもに",
     "mainly, mostly",
     "adverb"
+  ],
+  "乗り": [
+    "のり",
+    "(乗りに来る) to come to ride (乗る)",
+    "verb stem"
   ],
   "乗り換え": [
     "のりかえ",
@@ -549,9 +964,29 @@
     "how to ride",
     "noun"
   ],
+  "乗車": [
+    "じょうしゃ",
+    "boarding, riding (ご乗車ありがとうございます: thank you for travelling with us)",
+    "noun"
+  ],
+  "九月": [
+    "くがつ",
+    "September",
+    "noun"
+  ],
+  "了解": [
+    "りょうかい",
+    "consent, OK, understanding",
+    "noun"
+  ],
   "事前": [
     "じぜん",
     "beforehand, in advance",
+    "noun"
+  ],
+  "事務室": [
+    "じむしつ",
+    "(administrative) office",
     "noun"
   ],
   "二十四分": [
@@ -559,9 +994,19 @@
     "24 minutes; :24 on the clock",
     "number"
   ],
+  "五月": [
+    "ごがつ",
+    "May",
+    "noun"
+  ],
   "人事": [
     "じんじ",
     "personnel, HR",
+    "noun"
+  ],
+  "人前": [
+    "ひとまえ",
+    "in front of people, in public",
     "noun"
   ],
   "人手": [
@@ -579,6 +1024,11 @@
     "to finish, to complete",
     "verb"
   ],
+  "他社": [
+    "たしゃ",
+    "other companies, competitors",
+    "noun"
+  ],
   "代わる": [
     "かわる",
     "to take someone's place (〜に代わっていただく: have someone else go)",
@@ -594,6 +1044,11 @@
     "subject (of an email)",
     "noun"
   ],
+  "企画": [
+    "きかく",
+    "plan, project, event",
+    "noun"
+  ],
   "休まる": [
     "やすまる",
     "to be rested, to feel relaxed",
@@ -603,6 +1058,16 @@
     "やすめる",
     "can take time off; to rest (体を休める)",
     "verb"
+  ],
+  "休業": [
+    "きゅうぎょう",
+    "closure (of a business), being closed",
+    "noun"
+  ],
+  "会える": [
+    "あえる",
+    "can meet",
+    "verb (potential)"
   ],
   "会費": [
     "かいひ",
@@ -614,6 +1079,11 @@
     "can visit, can ask (humble)",
     "verb (potential)"
   ],
+  "体操服": [
+    "たいそうふく",
+    "gym clothes, PE kit",
+    "noun"
+  ],
   "体温計": [
     "たいおんけい",
     "thermometer",
@@ -623,6 +1093,11 @@
     "たいけん",
     "experience, trying something out",
     "noun / する verb"
+  ],
+  "何だか": [
+    "なんだか",
+    "somehow; (何が何だか) what on earth is what",
+    "expression"
   ],
   "何と": [
     "なんと",
@@ -634,6 +1109,11 @@
     "above all; more than anything",
     "adverb"
   ],
+  "何千枚": [
+    "なんぜんまい",
+    "thousands of (photos, sheets)",
+    "number"
+  ],
   "何名様": [
     "なんめいさま",
     "how many people (polite, asked by staff)",
@@ -643,6 +1123,11 @@
     "なんようび",
     "what day of the week",
     "question word"
+  ],
+  "余る": [
+    "あまる",
+    "to be left over",
+    "verb"
   ],
   "作り直す": [
     "つくりなおす",
@@ -654,6 +1139,16 @@
     "can make",
     "verb (potential)"
   ],
+  "使い分ける": [
+    "つかいわける",
+    "to use different things for different purposes",
+    "verb"
+  ],
+  "例年": [
+    "れいねん",
+    "normal year, usually (例年どおり: as in other years)",
+    "noun"
+  ],
   "保つ": [
     "たもつ",
     "to keep, to maintain",
@@ -664,10 +1159,35 @@
     "insurance",
     "noun"
   ],
+  "倉庫": [
+    "そうこ",
+    "storeroom, warehouse",
+    "noun"
+  ],
+  "値上げ": [
+    "ねあげ",
+    "price rise",
+    "noun"
+  ],
   "値下げ": [
     "ねさげ",
     "price cut",
     "noun / する verb"
+  ],
+  "健": [
+    "けん",
+    "Ken (a given name)",
+    "name"
+  ],
+  "健太": [
+    "けんた",
+    "Kenta (a boy's name)",
+    "name"
+  ],
+  "側": [
+    "がわ",
+    "side (読む側: the one reading)",
+    "noun"
   ],
   "傷つく": [
     "きずつく",
@@ -704,10 +1224,40 @@
     "input, typing in",
     "noun / する verb"
   ],
+  "入園料": [
+    "にゅうえんりょう",
+    "admission fee (zoo, park)",
+    "noun"
+  ],
+  "入館料": [
+    "にゅうかんりょう",
+    "admission fee (museum)",
+    "noun"
+  ],
+  "全線": [
+    "ぜんせん",
+    "the whole line",
+    "noun"
+  ],
   "再開": [
     "さいかい",
     "reopening, restart",
     "noun / する verb"
+  ],
+  "処方箋": [
+    "しょほうせん",
+    "prescription",
+    "noun"
+  ],
+  "出せる": [
+    "だせる",
+    "can put out, can serve, can produce",
+    "verb (potential)"
+  ],
+  "出欠": [
+    "しゅっけつ",
+    "attendance (who will and won't come)",
+    "noun"
   ],
   "出産": [
     "しゅっさん",
@@ -719,14 +1269,49 @@
     "thick",
     "い adjective"
   ],
+  "分散": [
+    "ぶんさん",
+    "spreading out, dispersal",
+    "noun"
+  ],
+  "切れ端": [
+    "きれはし",
+    "scrap, offcut",
+    "noun"
+  ],
+  "利点": [
+    "りてん",
+    "advantage, merit",
+    "noun"
+  ],
   "前年": [
     "ぜんねん",
     "the previous year",
     "noun"
   ],
+  "前日": [
+    "ぜんじつ",
+    "the day before",
+    "noun"
+  ],
+  "割引": [
+    "わりびき",
+    "discount",
+    "noun"
+  ],
+  "力仕事": [
+    "ちからしごと",
+    "physical labour, heavy work",
+    "noun"
+  ],
   "効率": [
     "こうりつ",
     "efficiency",
+    "noun"
+  ],
+  "勘違い": [
+    "かんちがい",
+    "misunderstanding, mistaking (勘違いさせる: to fool)",
     "noun"
   ],
   "勝てる": [
@@ -744,9 +1329,29 @@
     "section (of a line or road)",
     "noun"
   ],
+  "千九百九十年": [
+    "せんきゅうひゃくきゅうじゅうねん",
+    "(the year) 1990",
+    "number"
+  ],
+  "卒業生": [
+    "そつぎょうせい",
+    "graduate, former pupil",
+    "noun"
+  ],
   "南側": [
     "みなみがわ",
     "south side",
+    "noun"
+  ],
+  "印鑑": [
+    "いんかん",
+    "personal seal (hanko)",
+    "noun"
+  ],
+  "反応": [
+    "はんのう",
+    "reaction, response",
     "noun"
   ],
   "取り": [
@@ -764,9 +1369,19 @@
     "to demolish, to pull down",
     "verb"
   ],
+  "取り除く": [
+    "とりのぞく",
+    "to remove, to clear away",
+    "verb"
+  ],
   "取引": [
     "とりひき",
     "business, dealings (取引先: client, business partner)",
+    "noun"
+  ],
+  "受け取り": [
+    "うけとり",
+    "receipt, receiving (受け取りのサイン: signing for a delivery)",
     "noun"
   ],
   "受け方": [
@@ -779,6 +1394,16 @@
     "to inherit, to carry on",
     "verb"
   ],
+  "受験票": [
+    "じゅけんひょう",
+    "exam admission slip",
+    "noun"
+  ],
+  "口コミ": [
+    "くちこみ",
+    "word of mouth, (online) reviews",
+    "noun"
+  ],
   "口座": [
     "こうざ",
     "bank account",
@@ -789,14 +1414,54 @@
     "host, MC",
     "noun"
   ],
+  "各地": [
+    "かくち",
+    "various places, around the country",
+    "noun"
+  ],
+  "各店": [
+    "かくてん",
+    "each shop, every branch",
+    "noun"
+  ],
+  "各駅停車": [
+    "かくえきていしゃ",
+    "local train (stopping at every station)",
+    "noun"
+  ],
+  "合間": [
+    "あいま",
+    "interval, gap (仕事の合間に: between tasks)",
+    "noun"
+  ],
   "名札": [
     "なふだ",
     "name tag",
     "noun"
   ],
+  "向かい合う": [
+    "むかいあう",
+    "to face each other",
+    "verb"
+  ],
+  "呼び戻す": [
+    "よびもどす",
+    "to bring back, to call back",
+    "verb"
+  ],
+  "品切れ": [
+    "しなぎれ",
+    "out of stock, sold out",
+    "noun"
+  ],
   "品質": [
     "ひんしつ",
     "quality",
+    "noun"
+  ],
+  "問い合わせ": [
+    "といあわせ",
+    "enquiry",
     "noun"
   ],
   "問い合わせる": [
@@ -814,6 +1479,21 @@
     "number of times",
     "noun"
   ],
+  "回答者": [
+    "かいとうしゃ",
+    "respondent (to a survey)",
+    "noun"
+  ],
+  "園長": [
+    "えんちょう",
+    "director (of a zoo, kindergarten)",
+    "noun"
+  ],
+  "在庫": [
+    "ざいこ",
+    "stock, inventory",
+    "noun"
+  ],
   "地元": [
     "じもと",
     "local area, hometown",
@@ -829,10 +1509,25 @@
     "salt (content)",
     "noun"
   ],
+  "売り切れ": [
+    "うりきれ",
+    "sold out",
+    "noun"
+  ],
+  "売り買い": [
+    "うりかい",
+    "buying and selling",
+    "noun"
+  ],
   "外れ": [
     "はずれ",
     "a miss, a blank (lottery); a letdown",
     "noun"
+  ],
+  "多め": [
+    "おおめ",
+    "on the large side, extra",
+    "noun / な adjective"
   ],
   "好評": [
     "こうひょう",
@@ -854,6 +1549,11 @@
     "tuition fees",
     "noun"
   ],
+  "学長": [
+    "がくちょう",
+    "university president",
+    "noun"
+  ],
   "宅配": [
     "たくはい",
     "home delivery",
@@ -862,6 +1562,11 @@
   "守り": [
     "まもり",
     "defence",
+    "noun"
+  ],
+  "定休日": [
+    "ていきゅうび",
+    "regular closing day",
     "noun"
   ],
   "宛名": [
@@ -874,14 +1579,39 @@
     "household budget",
     "noun"
   ],
+  "対応": [
+    "たいおう",
+    "dealing with, how one is treated (service)",
+    "noun"
+  ],
+  "対策": [
+    "たいさく",
+    "measures, countermeasures",
+    "noun"
+  ],
+  "居酒屋": [
+    "いざかや",
+    "izakaya, Japanese pub",
+    "noun"
+  ],
   "展示": [
     "てんじ",
     "exhibition, display",
     "noun / する verb"
   ],
+  "履く": [
+    "はく",
+    "to put on, to wear (shoes, trousers)",
+    "verb"
+  ],
   "山登り": [
     "やまのぼり",
     "mountain climbing, hiking",
+    "noun"
+  ],
+  "川原": [
+    "かわら",
+    "riverbank, riverbed",
     "noun"
   ],
   "工夫": [
@@ -889,10 +1619,20 @@
     "ingenuity, a clever idea",
     "noun / する verb"
   ],
+  "市営": [
+    "しえい",
+    "municipal, run by the city",
+    "noun"
+  ],
   "市役所": [
     "しやくしょ",
     "city hall",
     "noun"
+  ],
+  "帰れる": [
+    "かえれる",
+    "can go home",
+    "verb (potential)"
   ],
   "常連": [
     "じょうれん",
@@ -914,6 +1654,11 @@
     "inside the shop",
     "noun"
   ],
+  "廃止": [
+    "はいし",
+    "abolition, closure (of a line)",
+    "noun"
+  ],
   "延長": [
     "えんちょう",
     "extension",
@@ -924,9 +1669,24 @@
     "to debit (from an account)",
     "verb"
   ],
+  "張り切る": [
+    "はりきる",
+    "to be eager, to get carried away (with energy)",
+    "verb"
+  ],
   "強風": [
     "きょうふう",
     "strong wind",
+    "noun"
+  ],
+  "当園": [
+    "とうえん",
+    "our zoo, our park (formal)",
+    "noun"
+  ],
+  "当店": [
+    "とうてん",
+    "our shop (formal)",
     "noun"
   ],
   "当社": [
@@ -939,15 +1699,30 @@
     "round trip, there and back",
     "noun"
   ],
+  "従業員": [
+    "じゅうぎょういん",
+    "employee, staff",
+    "noun"
+  ],
   "得": [
     "とく",
     "profit, a good deal (得だ: it's a good deal)",
     "noun / な adjective"
   ],
+  "心強い": [
+    "こころづよい",
+    "reassuring",
+    "い adjective"
+  ],
   "思い切り": [
     "おもいきり",
     "as much as one likes, to one's heart's content",
     "adverb"
+  ],
+  "思い通り": [
+    "おもいどおり",
+    "as one wishes (思い通りにいかない: not go as hoped)",
+    "noun"
   ],
   "急ぎ": [
     "いそぎ",
@@ -957,6 +1732,21 @@
   "急用": [
     "きゅうよう",
     "urgent business",
+    "noun"
+  ],
+  "愛着": [
+    "あいちゃく",
+    "attachment, fondness",
+    "noun"
+  ],
+  "戦える": [
+    "たたかえる",
+    "can fight, can compete",
+    "verb (potential)"
+  ],
+  "戸籍": [
+    "こせき",
+    "family register",
     "noun"
   ],
   "手前": [
@@ -974,6 +1764,11 @@
     "procedure, paperwork",
     "noun"
   ],
+  "打ち合わせ": [
+    "うちあわせ",
+    "(business) meeting, discussion",
+    "noun"
+  ],
   "打ち合わせる": [
     "うちあわせる",
     "to discuss, to have a meeting about",
@@ -984,14 +1779,44 @@
     "to receive, to take (an order, a message) — humble",
     "verb"
   ],
+  "折りたたみ": [
+    "おりたたみ",
+    "folding (折りたたみ傘: folding umbrella)",
+    "noun"
+  ],
   "折り返し": [
     "おりかえし",
     "calling back",
     "noun"
   ],
+  "押して": [
+    "おして",
+    "pressing, pushing (押す in the て form)",
+    "verb"
+  ],
+  "押す": [
+    "おす",
+    "to push, to press",
+    "verb"
+  ],
   "持ち歩く": [
     "もちあるく",
     "to carry around",
+    "verb"
+  ],
+  "指定席": [
+    "していせき",
+    "reserved seat",
+    "noun"
+  ],
+  "挟まる": [
+    "はさまる",
+    "to get caught, to be stuck between",
+    "verb"
+  ],
+  "振り込む": [
+    "ふりこむ",
+    "to pay by bank transfer",
     "verb"
   ],
   "控える": [
@@ -999,10 +1824,20 @@
     "to cut down on, to hold back",
     "verb"
   ],
+  "掲示板": [
+    "けいじばん",
+    "notice board",
+    "noun"
+  ],
   "撮れる": [
     "とれる",
     "can take (a photo)",
     "verb (potential)"
+  ],
+  "撮影": [
+    "さつえい",
+    "photography, filming",
+    "noun"
   ],
   "支社": [
     "ししゃ",
@@ -1019,9 +1854,19 @@
     "to lay out, to spread",
     "verb"
   ],
+  "文房具屋": [
+    "ぶんぼうぐや",
+    "stationer's",
+    "noun"
+  ],
   "新入社員": [
     "しんにゅうしゃいん",
     "new employee",
+    "noun"
+  ],
+  "新品": [
+    "しんぴん",
+    "brand-new item",
     "noun"
   ],
   "施設": [
@@ -1034,9 +1879,29 @@
     "date, day",
     "noun"
   ],
+  "日帰り": [
+    "ひがえり",
+    "day trip",
+    "noun"
+  ],
   "日程": [
     "にってい",
     "schedule, dates",
+    "noun"
+  ],
+  "昆虫": [
+    "こんちゅう",
+    "insect",
+    "noun"
+  ],
+  "昇進": [
+    "しょうしん",
+    "promotion",
+    "noun"
+  ],
+  "明後日(あさって)": [
+    "あさって",
+    "the day after tomorrow",
     "noun"
   ],
   "昨年": [
@@ -1074,6 +1939,11 @@
     "to be replaced, to change (person in charge)",
     "verb"
   ],
+  "最低限": [
+    "さいていげん",
+    "minimum",
+    "noun"
+  ],
   "最優先": [
     "さいゆうせん",
     "top priority",
@@ -1087,6 +1957,11 @@
   "有料": [
     "ゆうりょう",
     "paid, there is a charge",
+    "noun"
+  ],
+  "朝食": [
+    "ちょうしょく",
+    "breakfast",
     "noun"
   ],
   "本体": [
@@ -1104,6 +1979,11 @@
     "today (formal)",
     "noun"
   ],
+  "来年度": [
+    "らいねんど",
+    "next fiscal year",
+    "noun"
+  ],
   "来店": [
     "らいてん",
     "coming to the shop",
@@ -1118,6 +1998,11 @@
     "らいかん",
     "visiting (a museum, library)",
     "noun / する verb"
+  ],
+  "栄養士": [
+    "えいようし",
+    "nutritionist, dietitian",
+    "noun"
   ],
   "業者": [
     "ぎょうしゃ",
@@ -1139,6 +2024,21 @@
     "Yokohama",
     "place name"
   ],
+  "次に": [
+    "つぎに",
+    "next",
+    "adverb"
+  ],
+  "正しい": [
+    "ただしい",
+    "correct, right",
+    "い adjective"
+  ],
+  "正しく": [
+    "ただしく",
+    "correctly (正しい)",
+    "い adjective"
+  ],
   "段階": [
     "だんかい",
     "stage, step",
@@ -1148,6 +2048,16 @@
     "まいかい",
     "every time",
     "noun"
+  ],
+  "毎食後": [
+    "まいしょくご",
+    "after every meal",
+    "noun"
+  ],
+  "気持ちよい": [
+    "きもちよい",
+    "pleasant, feeling good",
+    "い adjective"
   ],
   "気軽": [
     "きがる",
@@ -1159,9 +2069,44 @@
     "swimsuit",
     "noun"
   ],
+  "汚れ": [
+    "よごれ",
+    "dirt, stain",
+    "noun"
+  ],
+  "決定的": [
+    "けっていてき",
+    "decisive",
+    "な adjective"
+  ],
+  "決算": [
+    "けっさん",
+    "settling of accounts, year-end accounts",
+    "noun"
+  ],
   "治す": [
     "なおす",
     "to cure, to get over (an illness)",
+    "verb"
+  ],
+  "沿線": [
+    "えんせん",
+    "along the (railway) line",
+    "noun"
+  ],
+  "泊まりがけ": [
+    "とまりがけ",
+    "overnight (trip)",
+    "noun"
+  ],
+  "活発": [
+    "かっぱつ",
+    "active, lively",
+    "な adjective"
+  ],
+  "浮かぶ": [
+    "うかぶ",
+    "to come to mind; to float",
     "verb"
   ],
   "添付": [
@@ -1173,6 +2118,26 @@
     "せいそう",
     "cleaning",
     "noun / する verb"
+  ],
+  "災害": [
+    "さいがい",
+    "disaster",
+    "noun"
+  ],
+  "炭": [
+    "すみ",
+    "charcoal",
+    "noun"
+  ],
+  "点数": [
+    "てんすう",
+    "score, marks",
+    "noun"
+  ],
+  "点検": [
+    "てんけん",
+    "inspection, check",
+    "noun"
   ],
   "甘える": [
     "あまえる",
@@ -1189,14 +2154,34 @@
     "form, sheet of paper (to fill in)",
     "noun"
   ],
+  "田村": [
+    "たむら",
+    "Tamura (a family name)",
+    "name"
+  ],
   "田植え": [
     "たうえ",
     "rice planting",
     "noun"
   ],
+  "由美": [
+    "ゆみ",
+    "Yumi (a girl's name)",
+    "name"
+  ],
   "申し込み": [
     "もうしこみ",
     "application, sign-up",
+    "noun"
+  ],
+  "申請": [
+    "しんせい",
+    "application, claim",
+    "noun"
+  ],
+  "申請書": [
+    "しんせいしょ",
+    "application form, claim form",
     "noun"
   ],
   "申込": [
@@ -1204,15 +2189,30 @@
     "application, sign-up (申込書: application form)",
     "noun"
   ],
+  "町内会": [
+    "ちょうないかい",
+    "neighbourhood association",
+    "noun"
+  ],
   "町長": [
     "ちょうちょう",
     "town mayor",
+    "noun"
+  ],
+  "番地": [
+    "ばんち",
+    "street number (in an address)",
     "noun"
   ],
   "発売": [
     "はつばい",
     "release, going on sale",
     "noun / する verb"
+  ],
+  "発送": [
+    "はっそう",
+    "dispatch, shipping",
+    "noun"
   ],
   "登録": [
     "とうろく",
@@ -1254,6 +2254,16 @@
     "national holiday",
     "noun"
   ],
+  "秘書": [
+    "ひしょ",
+    "secretary",
+    "noun"
+  ],
+  "移転": [
+    "いてん",
+    "moving (premises), relocation",
+    "noun"
+  ],
   "空ける": [
     "あける",
     "to empty, to clear (space)",
@@ -1269,15 +2279,50 @@
     "third",
     "number"
   ],
+  "系統": [
+    "けいとう",
+    "system (電気の系統: the electrics)",
+    "noun"
+  ],
+  "終わらせる": [
+    "おわらせる",
+    "to finish (something)",
+    "verb"
+  ],
   "経理": [
     "けいり",
     "accounting (department)",
+    "noun"
+  ],
+  "絞る": [
+    "しぼる",
+    "to narrow down; to squeeze",
+    "verb"
+  ],
+  "網棚": [
+    "あみだな",
+    "luggage rack (on a train)",
+    "noun"
+  ],
+  "総務": [
+    "そうむ",
+    "general affairs (department)",
+    "noun"
+  ],
+  "線路": [
+    "せんろ",
+    "railway track",
     "noun"
   ],
   "緩む": [
     "ゆるむ",
     "to come loose",
     "verb"
+  ],
+  "考え方": [
+    "かんがえかた",
+    "way of thinking",
+    "noun"
   ],
   "職員": [
     "しょくいん",
@@ -1304,15 +2349,65 @@
     "one's home",
     "noun"
   ],
+  "苦情": [
+    "くじょう",
+    "complaint",
+    "noun"
+  ],
+  "英会話": [
+    "えいかいわ",
+    "English conversation",
+    "noun"
+  ],
+  "茶色い": [
+    "ちゃいろい",
+    "brown",
+    "い adjective"
+  ],
+  "茶道": [
+    "さどう",
+    "tea ceremony",
+    "noun"
+  ],
+  "薬剤師": [
+    "やくざいし",
+    "pharmacist",
+    "noun"
+  ],
+  "薬局": [
+    "やっきょく",
+    "pharmacy, chemist's",
+    "noun"
+  ],
+  "虫よけ": [
+    "むしよけ",
+    "insect repellent",
+    "noun"
+  ],
   "血圧": [
     "けつあつ",
     "blood pressure",
+    "noun"
+  ],
+  "行き方": [
+    "いきかた",
+    "how to get there, the way",
     "noun"
   ],
   "行ける": [
     "いける",
     "can go",
     "verb (potential)"
+  ],
+  "行列": [
+    "ぎょうれつ",
+    "queue, line",
+    "noun"
+  ],
+  "見かける": [
+    "みかける",
+    "to see, to catch sight of",
+    "verb"
   ],
   "見にくい": [
     "みにくい",
@@ -1324,10 +2419,20 @@
     "visit, tour (to see how something is done)",
     "noun / する verb"
   ],
+  "見本": [
+    "みほん",
+    "sample",
+    "noun"
+  ],
   "見直す": [
     "みなおす",
     "to look over again, to review",
     "verb"
+  ],
+  "見積もり": [
+    "みつもり",
+    "quote, estimate",
+    "noun"
   ],
   "見積書": [
     "みつもりしょ",
@@ -1339,10 +2444,20 @@
     "prospect, expectation",
     "noun"
   ],
+  "見返す": [
+    "みかえす",
+    "to look back at, to look at again",
+    "verb"
+  ],
   "親しむ": [
     "したしむ",
     "to get familiar with, to enjoy",
     "verb"
+  ],
+  "親子": [
+    "おやこ",
+    "parent and child",
+    "noun"
   ],
   "親自身": [
     "おやじしん",
@@ -1364,10 +2479,25 @@
     "to set up, to provide",
     "verb"
   ],
+  "試み": [
+    "こころみ",
+    "attempt, trial",
+    "noun"
+  ],
+  "話し合い": [
+    "はなしあい",
+    "discussion",
+    "noun"
+  ],
   "話し合える": [
     "はなしあえる",
     "can talk it over",
     "verb (potential)"
+  ],
+  "読者": [
+    "どくしゃ",
+    "reader",
+    "noun"
   ],
   "調整": [
     "ちょうせい",
@@ -1382,6 +2512,11 @@
   "警察官": [
     "けいさつかん",
     "police officer",
+    "noun"
+  ],
+  "豚": [
+    "ぶた",
+    "pig",
     "noun"
   ],
   "買い": [
@@ -1399,14 +2534,49 @@
     "best-before date",
     "noun"
   ],
+  "車両": [
+    "しゃりょう",
+    "(railway) carriage, car",
+    "noun"
+  ],
+  "車内": [
+    "しゃない",
+    "inside the train / car",
+    "noun"
+  ],
+  "軍手": [
+    "ぐんて",
+    "cotton work gloves",
+    "noun"
+  ],
   "転勤": [
     "てんきん",
     "transfer (to another office)",
     "noun / する verb"
   ],
+  "込み合う": [
+    "こみあう",
+    "to be crowded",
+    "verb"
+  ],
   "近道": [
     "ちかみち",
     "shortcut",
+    "noun"
+  ],
+  "返し": [
+    "かえし",
+    "(返しに来る) to come to return something (返す)",
+    "verb stem"
+  ],
+  "返せる": [
+    "かえせる",
+    "can return",
+    "verb (potential)"
+  ],
+  "返送": [
+    "へんそう",
+    "sending back",
     "noun"
   ],
   "返金": [
@@ -1419,6 +2589,11 @@
     "the opposite effect, counterproductive",
     "noun"
   ],
+  "通話": [
+    "つうわ",
+    "phone call",
+    "noun"
+  ],
   "通路": [
     "つうろ",
     "aisle, passage",
@@ -1429,15 +2604,40 @@
     "consecutive holidays, long weekend",
     "noun"
   ],
+  "遅くとも": [
+    "おそくとも",
+    "at the latest",
+    "adverb"
+  ],
+  "遊び場": [
+    "あそびば",
+    "playground, place to play",
+    "noun"
+  ],
   "遊べる": [
     "あそべる",
     "can play",
+    "verb (potential)"
+  ],
+  "運行": [
+    "うんこう",
+    "running (of trains), operation",
+    "noun"
+  ],
+  "過ごせる": [
+    "すごせる",
+    "can spend (time)",
     "verb (potential)"
   ],
   "道理で": [
     "どうりで",
     "no wonder (道理で〜わけだ)",
     "adverb"
+  ],
+  "遠慮ない": [
+    "えんりょない",
+    "without hesitation (遠慮なく: don't hesitate)",
+    "い adjective"
   ],
   "遠足": [
     "えんそく",
@@ -1474,6 +2674,16 @@
     "club room",
     "noun"
   ],
+  "部署": [
+    "ぶしょ",
+    "department, section",
+    "noun"
+  ],
+  "配送": [
+    "はいそう",
+    "delivery",
+    "noun"
+  ],
   "釣り": [
     "つり",
     "fishing",
@@ -1484,25 +2694,70 @@
     "many years, for years",
     "noun"
   ],
+  "閉校": [
+    "へいこう",
+    "closing of a school",
+    "noun"
+  ],
   "閉館": [
     "へいかん",
     "closing (of a museum, library)",
     "noun / する verb"
+  ],
+  "開園": [
+    "かいえん",
+    "opening (of a zoo, park)",
+    "noun"
   ],
   "間違う": [
     "まちがう",
     "to be wrong, to make a mistake",
     "verb"
   ],
+  "降り出す": [
+    "ふりだす",
+    "to start to rain / fall",
+    "verb"
+  ],
+  "電源": [
+    "でんげん",
+    "power (supply), power switch",
+    "noun"
+  ],
+  "領収書": [
+    "りょうしゅうしょ",
+    "receipt",
+    "noun"
+  ],
+  "頼みごと": [
+    "たのみごと",
+    "favour, request",
+    "noun"
+  ],
   "顔色": [
     "かおいろ",
     "complexion, how someone looks",
+    "noun"
+  ],
+  "食材": [
+    "しょくざい",
+    "ingredients",
     "noun"
   ],
   "飲める": [
     "のめる",
     "can drink",
     "verb (potential)"
+  ],
+  "駄目": [
+    "だめ",
+    "no good (駄目でもともと: nothing to lose)",
+    "な adjective"
+  ],
+  "駐輪場": [
+    "ちゅうりんじょう",
+    "bicycle parking",
+    "noun"
   ],
   "高め": [
     "たかめ",

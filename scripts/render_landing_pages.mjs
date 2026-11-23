@@ -170,7 +170,7 @@ function listeningQuestions() {
 const LISTENING_BODY = `
 <section class="lp-ref">
   <h2 class="lis-heading">Pick your level</h2>
-  <p>Free JLPT-style listening (聴解) with 438 questions and 15 mock tests, scripts with furigana and English after every question.</p>
+  <p>Free JLPT-style listening (聴解) with 900 questions and 32 mock tests, scripts with furigana and English after every question.</p>
   <div class="lp-levels">
     <a class="btn-secondary" href="listening.html" data-cta>N5 practice</a><a class="btn-secondary" href="listening.html" data-cta>N4 practice</a>
     <a class="btn-secondary" href="listening.html" data-cta>N3 practice</a><a class="btn-secondary" href="listening.html" data-cta>N2 practice</a>
@@ -218,7 +218,7 @@ const PAGES = [
   {
     file: 'jlpt-listening-practice.html',
     title: 'JLPT Listening Practice (N5–N2): Free Audio Quiz | Tokidoki',
-    desc: 'Free JLPT listening practice: try real-format quick-response questions with audio right now, then continue to 438 questions and 15 mock tests for N5–N2.',
+    desc: 'Free JLPT listening practice: try real-format quick-response questions with audio right now, then continue to 900 questions and 32 mock tests for N5–N2.',
     shortTitle: 'JLPT Listening Practice (N5–N2) | Tokidoki',
     h1: 'JLPT listening practice (N5–N2)',
     cta: { href: 'listening.html', label: 'Open the full listening practice →', lead: 'open the full practice →' },

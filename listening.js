@@ -813,7 +813,7 @@
     if (global.LISTENING_WORDS) return global.LISTENING_WORDS;
     if (!wordsLoading) {
       wordsLoading = true;
-      loadScript('listening-words.js?v=1', () => { if (current()) renderScript(); });
+      loadScript('listening-words.js?v=2', () => { if (current()) renderScript(); });
       const panelAgain = () => { if (selected) renderPanel(); };
       if (!global.KANJI_INFO) loadScript('kanji-info-data.js', panelAgain);
       if (!global.KANJI_QUIZ_DATA) loadScript('kanji-quiz-data.js', panelAgain);

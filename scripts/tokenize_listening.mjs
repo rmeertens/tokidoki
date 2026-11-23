@@ -29,7 +29,7 @@ const EXTRA = Object.assign({}, json('sentence_extra_words.json'), json('story_f
 
 // Kuromoji splits these oddly in kana-heavy speech; keep them whole.
 const WHOLE = ['かもしれない', 'かもしれません', 'すみません', 'ありがとうございます', 'いらっしゃいませ', 'いってらっしゃい',
-  'おはようございます', 'こんにちは', 'こんばんは', 'あさって', 'スマホ', '主に', '道理で', '見積書', '乗り方', '選び方', '書き方', '受け方', '二十四分'];
+  'おはようございます', 'こんにちは', 'こんばんは', 'あさって', 'スマホ', '主に', '道理で', '見積書', '乗り方', '選び方', '書き方', '受け方', '二十四分', '二十分', '虫よけ'];
 const { segment, lookup } = await createWordFinder({ extra: EXTRA, whole: WHOLE });
 
 // Words kuromoji links to the wrong entry, told apart by the line's own
@@ -55,7 +55,7 @@ function fixed(key, src) {
   return hit ? FIXES[hit] : key;
 }
 
-const files = ['listening-data.js', ...[2, 3, 4, 5, 6, 7, 8, 9].map(n => `listening-data-${n}.js`)];
+const files = ['listening-data.js', ...[2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(n => `listening-data-${n}.js`)];
 const { LISTENING_SECTIONS: SECTIONS } = loadSiteData(files);
 const L = require(path.join(ROOT, 'listening.js'));
 
@@ -91,6 +91,7 @@ function kanjiNumber(s) {
   return total + part + digit;
 }
 const ord = n => n + ({ 1: 'st', 2: 'nd', 3: 'rd' }[n % 100 > 10 && n % 100 < 14 ? 0 : n % 10] || 'th');
+const MONTHS = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
 // counter → [meaning of N, meaning of 何], longest first.
 const COUNTERS = [
@@ -100,6 +101,13 @@ const COUNTERS = [
   ['分おき', n => `every ${n} minutes`],
   ['名様', n => `${n} (people — polite, said by staff)`],
   ['時ごろ', n => `around ${n} o'clock`],
+  ['時半ごろ', n => `around half past ${n}`],
+  ['か月分', n => `${plural(n, 'month', 'months')}' worth`],
+  ['年ぶり', n => `for the first time in ${plural(n, 'year', 'years')}`],
+  ['人分', n => `for ${plural(n, 'person', 'people')}, ${n} people's worth`],
+  ['号機', n => `machine No. ${n}`],
+  ['日間', n => plural(n, 'day', 'days'), 'how many days'],
+  ['か月', n => plural(n, 'month', 'months'), 'how many months'],
   ['時半', n => `half past ${n}`],
   ['時間', n => plural(n, 'hour', 'hours'), 'how many hours'],
   ['週間', n => plural(n, 'week', 'weeks')],
@@ -122,6 +130,16 @@ const COUNTERS = [
   ['冊', n => plural(n, 'book', 'books'), 'how many (books)'],
   ['本', n => `${n} (long things: bottles, pens, trains)`, 'how many (long things)'],
   ['度', n => `${n} degrees`],
+  ['歳', n => `${n} years old`, 'how old'],
+  ['部', n => plural(n, 'copy', 'copies'), 'how many copies'],
+  ['件', n => `${n} (cases, matters)`, 'how many (cases)'],
+  ['社', n => plural(n, 'company', 'companies'), 'how many companies'],
+  ['倍', n => `${n} times as much`],
+  ['点', n => plural(n, 'point', 'points'), 'how many points'],
+  ['泊', n => plural(n, 'night', 'nights') + ' (a stay)', 'how many nights'],
+  ['両', n => plural(n, 'carriage', 'carriages') + ' (of a train)'],
+  ['月', n => MONTHS[n] || `month ${n}`, 'which month'],
+  ['年', n => `(the year) ${n}`],
   ['駅', n => plural(n, 'station', 'stations')],
 ];
 function numberGloss(word, reading) {
