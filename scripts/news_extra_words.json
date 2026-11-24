@@ -14423,5 +14423,415 @@
     "ひなんじょ",
     "evacuation shelter",
     "noun"
+  ],
+  "イデコ": [
+    "いでこ",
+    "iDeCo (individual-type defined-contribution pension)",
+    "noun"
+  ],
+  "貯める": [
+    "ためる",
+    "to save (money)",
+    "verb"
+  ],
+  "年金": [
+    "ねんきん",
+    "pension",
+    "noun"
+  ],
+  "2万3000円": [
+    "にまんさんぜんえん",
+    "23,000 yen",
+    "number"
+  ],
+  "6万2000円": [
+    "ろくまんにせんえん",
+    "62,000 yen",
+    "number"
+  ],
+  "6万8000円": [
+    "ろくまんはっせんえん",
+    "68,000 yen",
+    "number"
+  ],
+  "7万5000円": [
+    "ななまんごせんえん",
+    "75,000 yen",
+    "number"
+  ],
+  "5万5000円": [
+    "ごまんごせんえん",
+    "55,000 yen",
+    "number"
+  ],
+  "7000円": [
+    "ななせんえん",
+    "7,000 yen",
+    "number"
+  ],
+  "69歳": [
+    "ろくじゅうきゅうさい",
+    "69 years old",
+    "number"
+  ],
+  "64歳": [
+    "ろくじゅうよんさい",
+    "64 years old",
+    "number"
+  ],
+  "掛け金": [
+    "かけきん",
+    "regular payment, contribution",
+    "noun"
+  ],
+  "老後": [
+    "ろうご",
+    "old age, life after retirement",
+    "noun"
+  ],
+  "積み立てる": [
+    "つみたてる",
+    "to save up regularly",
+    "verb"
+  ],
+  "自営業": [
+    "じえいぎょう",
+    "self-employment, running one's own business",
+    "noun"
+  ],
+  "自営業者": [
+    "じえいぎょうしゃ",
+    "self-employed person",
+    "noun"
+  ],
+  "扶養": [
+    "ふよう",
+    "supporting (a dependant)",
+    "noun"
+  ],
+  "基礎": [
+    "きそ",
+    "basis, foundation",
+    "noun"
+  ],
+  "基礎年金": [
+    "きそねんきん",
+    "basic (state) pension",
+    "noun"
+  ],
+  "老齢基礎年金": [
+    "ろうれいきそねんきん",
+    "old-age basic pension",
+    "noun"
+  ],
+  "企業年金": [
+    "きぎょうねんきん",
+    "company pension",
+    "noun"
+  ],
+  "国民年金": [
+    "こくみんねんきん",
+    "national pension",
+    "noun"
+  ],
+  "国民年金基金": [
+    "こくみんねんきんききん",
+    "National Pension Fund",
+    "organization"
+  ],
+  "限度額": [
+    "げんどがく",
+    "limit (on an amount)",
+    "noun"
+  ],
+  "加入": [
+    "かにゅう",
+    "joining, membership",
+    "noun"
+  ],
+  "公的": [
+    "こうてき",
+    "public, official",
+    "adjective"
+  ],
+  "拠出": [
+    "きょしゅつ",
+    "contribution (of money)",
+    "noun"
+  ],
+  "確定拠出年金": [
+    "かくていきょしゅつねんきん",
+    "defined-contribution pension",
+    "noun"
+  ],
+  "個人型": [
+    "こじんがた",
+    "individual type",
+    "noun"
+  ],
+  "第1号": [
+    "だいいちごう",
+    "No. 1, Category 1",
+    "number"
+  ],
+  "第2号": [
+    "だいにごう",
+    "No. 2, Category 2",
+    "number"
+  ],
+  "第3号": [
+    "だいさんごう",
+    "No. 3, Category 3",
+    "number"
+  ],
+  "被保険者": [
+    "ひほけんしゃ",
+    "insured person",
+    "noun"
+  ],
+  "老齢": [
+    "ろうれい",
+    "old age",
+    "noun"
+  ],
+  "十三勝": [
+    "じゅうさんしょう",
+    "13 wins",
+    "number"
+  ],
+  "十四勝": [
+    "じゅうよんしょう",
+    "14 wins",
+    "number"
+  ],
+  "七回目": [
+    "ななかいめ",
+    "the seventh time",
+    "number + counter"
+  ],
+  "7回目": [
+    "ななかいめ",
+    "the seventh time",
+    "number + counter"
+  ],
+  "7度目": [
+    "ななどめ",
+    "the seventh time",
+    "number + counter"
+  ],
+  "千秋楽": [
+    "せんしゅうらく",
+    "final day (of a sumo tournament)",
+    "noun"
+  ],
+  "対決": [
+    "たいけつ",
+    "showdown, clash",
+    "noun"
+  ],
+  "突き落とす": [
+    "つきおとす",
+    "to thrust down (sumo technique)",
+    "verb"
+  ],
+  "渡し込み": [
+    "わたしこみ",
+    "watashikomi (sumo technique: thigh grab and push)",
+    "noun"
+  ],
+  "戦前": [
+    "せんぜん",
+    "before the war",
+    "noun"
+  ],
+  "三賞": [
+    "さんしょう",
+    "the three special prizes (sumo)",
+    "noun"
+  ],
+  "殊勲賞": [
+    "しゅくんしょう",
+    "Outstanding Performance Prize",
+    "noun"
+  ],
+  "敢闘賞": [
+    "かんとうしょう",
+    "Fighting Spirit Prize",
+    "noun"
+  ],
+  "技能賞": [
+    "ぎのうしょう",
+    "Technique Prize",
+    "noun"
+  ],
+  "本割": [
+    "ほんわり",
+    "regular scheduled bouts (sumo)",
+    "noun"
+  ],
+  "決定戦": [
+    "けっていせん",
+    "playoff, deciding match",
+    "noun"
+  ],
+  "優勝決定戦": [
+    "ゆうしょうけっていせん",
+    "playoff for the championship",
+    "noun"
+  ],
+  "先場所": [
+    "せんばしょ",
+    "the previous tournament",
+    "noun"
+  ],
+  "豊昇龍": [
+    "ほうしょうりゅう",
+    "Hoshoryu (yokozuna)",
+    "name"
+  ],
+  "羽黒山": [
+    "はぐろやま",
+    "Haguroyama (yokozuna of the 1940s)",
+    "name"
+  ],
+  "玉鷲": [
+    "たまわし",
+    "Tamawashi (wrestler)",
+    "name"
+  ],
+  "たまごっち": [
+    "たまごっち",
+    "Tamagotchi (digital pet toy)",
+    "noun"
+  ],
+  "バンダイ": [
+    "ばんだい",
+    "Bandai (toy company)",
+    "organization"
+  ],
+  "1996年": [
+    "せんきゅうひゃくきゅうじゅうろくねん",
+    "1996",
+    "number"
+  ],
+  "30年": [
+    "さんじゅうねん",
+    "30 years",
+    "number"
+  ],
+  "30周年": [
+    "さんじゅっしゅうねん",
+    "30th anniversary",
+    "number"
+  ],
+  "1億個": [
+    "いちおくこ",
+    "100 million (items)",
+    "number"
+  ],
+  "売り出す": [
+    "うりだす",
+    "to put on sale",
+    "verb"
+  ],
+  "発売": [
+    "はつばい",
+    "release, going on sale",
+    "noun"
+  ],
+  "大人気": [
+    "だいにんき",
+    "hugely popular",
+    "noun"
+  ],
+  "ブーム": [
+    "ぶーむ",
+    "boom, craze",
+    "noun"
+  ],
+  "出荷": [
+    "しゅっか",
+    "shipping (goods)",
+    "noun"
+  ],
+  "突破": [
+    "とっぱ",
+    "breaking through (a number)",
+    "noun"
+  ],
+  "遊び方": [
+    "あそびかた",
+    "way of playing",
+    "noun"
+  ],
+  "復活": [
+    "ふっかつ",
+    "comeback, revival",
+    "noun"
+  ],
+  "内訳": [
+    "うちわけ",
+    "breakdown (of a total)",
+    "noun"
+  ],
+  "南北アメリカ": [
+    "なんぼくあめりか",
+    "North and South America",
+    "place name"
+  ],
+  "33％": [
+    "さんじゅうさんぱーせんと",
+    "33%",
+    "number"
+  ],
+  "レトロブーム": [
+    "れとろぶーむ",
+    "retro boom",
+    "noun"
+  ],
+  "他社": [
+    "たしゃ",
+    "other companies",
+    "noun"
+  ],
+  "コラボ": [
+    "こらぼ",
+    "collaboration",
+    "noun"
+  ],
+  "知的財産": [
+    "ちてきざいさん",
+    "intellectual property",
+    "noun"
+  ],
+  "携帯型": [
+    "けいたいがた",
+    "handheld, portable",
+    "noun"
+  ],
+  "7月末": [
+    "しちがつまつ",
+    "end of July",
+    "noun"
+  ],
+  "福岡国際センター": [
+    "ふくおかこくさいせんたー",
+    "Fukuoka Kokusai Center (sumo venue)",
+    "place name"
+  ],
+  "日本中": [
+    "にほんじゅう",
+    "all over Japan",
+    "noun"
+  ],
+  "2場所": [
+    "にばしょ",
+    "two tournaments",
+    "number + counter"
+  ],
+  "回数": [
+    "かいすう",
+    "number of times",
+    "noun"
   ]
 }

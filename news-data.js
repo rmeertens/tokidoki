@@ -27,6 +27,171 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-11-24-ideco-limits-raised',
+      date: '2026-11-24',
+      emoji: '💴',
+      titleEn: 'iDeCo private pensions: monthly limits go up from December, and people can join until age 69',
+      sources: [
+        { name: 'Kyodo via Yahoo! News', url: 'https://news.yahoo.co.jp/articles/eb3db7a7ebbfecb39df1e52b7112da02abfa16e5' },
+        { name: 'Government of Japan (gov-online)', url: 'https://www.gov-online.go.jp/article/202412/entry-6825.html' },
+        { name: 'Monex Securities', url: 'https://info.monex.co.jp/news/2026/20260514_01.html' },
+      ],
+      quiz: [
+        ['When do the new iDeCo limits start?', 'In December', 'Next April', 'Next summer', 'They started last year'],
+        ['For a company employee with no company pension, how much can they put in each month?', '62,000 yen (up from 23,000)', '23,000 yen (no change)', '75,000 yen (up from 68,000)', '100,000 yen (up from 50,000)'],
+        ['Up to what age will people be able to join?', '69', '59', '75', '80'],
+      ],
+      levels: {
+        N5: {
+          title: '十二月[じゅうにがつ]から　イデコが　変[か]わります',
+          lines: [
+            ['イデコは、年[とし]を　取[と]った　時[とき]の　ために、自分[じぶん]で　お金[かね]を　貯[た]める　年金[ねんきん]です。', 'iDeCo is a pension where you save money yourself for when you are old.', 'イデコ is iDeCo, a private pension plan. The money is invested, and you pay less tax on it. 年を取る means to get old.'],
+            ['毎月[まいつき]、決[き]めた　お金[かね]を　入[い]れます。', 'Every month, you put in an amount you have decided.'],
+            ['十二月[じゅうにがつ]から、入[い]れる　ことが　できる　お金[かね]が　多[おお]く　なります。', 'From December, the amount you can put in goes up.'],
+            ['会社[かいしゃ]の　年金[ねんきん]が　ない　会社員[かいしゃいん]は、1か月[げつ]　2万[まん]3000円[えん]から　6万[まん]2000円[えん]に　なります。', 'For company employees with no company pension, it goes from 23,000 yen to 62,000 yen a month.'],
+            ['自分[じぶん]で　店[みせ]や　仕事[しごと]を　して　いる　人[ひと]は、6万[まん]8000円[えん]から　7万[まん]5000円[えん]に　なります。', 'For people who run their own shop or business, it goes from 68,000 yen to 75,000 yen.', 'This amount includes money paid into the National Pension Fund and similar plans.'],
+            ['入[はい]る　ことが　できる　年[とし]も　変[か]わります。', 'The age until which you can join also changes.'],
+            ['これからは、69歳[さい]まで　入[はい]る　ことが　できます。', 'From now on, you can join until age 69.', 'Until now the limit was 59 or 64, depending on the kind of worker. There are conditions, such as not yet receiving the basic state pension.'],
+          ],
+        },
+        N4: {
+          title: 'イデコの掛[か]け金[きん]　十二月[じゅうにがつ]から上限[じょうげん]が上[あ]がる',
+          lines: [
+            ['老後[ろうご]のためにお金[かね]を積[つ]み立[た]てる「イデコ」の制度[せいど]が、十二月[じゅうにがつ]から変[か]わります。', 'The iDeCo system, where you save up money for old age, changes from December.', 'iDeCo is a private pension plan: you choose how the money is invested, and you pay less tax. 老後 means life in old age, after work.'],
+            ['毎月[まいつき]払[はら]う掛[か]け金[きん]の上限[じょうげん]が、引[ひ]き上[あ]げられます。', 'The limit on the money paid in each month will be raised.', '掛け金 is a regular payment into a plan; 上限 is an upper limit.'],
+            ['自営業[じえいぎょう]の人[ひと]は、国民[こくみん]年金[ねんきん]基金[ききん]などと合[あ]わせて、6万[まん]8000円[えん]から7万[まん]5000円[えん]になります。', 'For self-employed people, together with the National Pension Fund and similar plans, it goes from 68,000 to 75,000 yen.', '自営業 means running your own business.'],
+            ['会社員[かいしゃいん]や公務員[こうむいん]は、企業[きぎょう]年金[ねんきん]と合[あ]わせて5万[まん]5000円[えん]から6万[まん]2000円[えん]になります。', 'For company employees and public servants, together with a company pension, it goes from 55,000 to 62,000 yen.', '企業年金 is a pension run by a company for its workers.'],
+            ['企業[きぎょう]年金[ねんきん]がない会社員[かいしゃいん]は、2万[まん]3000円[えん]から6万[まん]2000円[えん]へ大[おお]きく増[ふ]えます。', 'For employees without a company pension, it rises sharply from 23,000 to 62,000 yen.'],
+            ['会社員[かいしゃいん]の夫[おっと]や妻[つま]に扶養[ふよう]されている人[ひと]は、2万[まん]3000円[えん]のままです。', 'For people supported by a husband or wife who is an employee, it stays at 23,000 yen.', '扶養 means supporting a family member who has little or no income of their own.'],
+            ['入[はい]ることができる年齢[ねんれい]も、基礎[きそ]年金[ねんきん]をもらっていないなどの条件[じょうけん]で、69歳[さい]までに広[ひろ]がります。', 'The age until which you can join is also widened to 69, on conditions such as not receiving the basic pension.', '基礎年金 is the basic state pension paid to everyone in old age.'],
+          ],
+        },
+        N3: {
+          title: 'イデコ、十二月[じゅうにがつ]から限度額[げんどがく]引[ひ]き上[あ]げ　加入[かにゅう]年齢[ねんれい]も69歳[さい]まで拡大[かくだい]',
+          lines: [
+            ['公的[こうてき]年金[ねんきん]に上乗[うわの]せする個人型[こじんがた]確定[かくてい]拠出[きょしゅつ]年金[ねんきん]「イデコ」の掛[か]け金[きん]の限度額[げんどがく]が、十二月[じゅうにがつ]から引[ひ]き上[あ]げられる。', 'The limit on payments into iDeCo, the individual defined-contribution pension that tops up the public pension, will be raised from December.', '上乗せする means to add on top. In a 確定拠出年金 (defined-contribution pension), what you pay in is fixed, and what you get later depends on the investments.'],
+            ['自営業者[じえいぎょうしゃ]ら国民[こくみん]年金[ねんきん]の第[だい]1号[ごう]被保険者[ひほけんしゃ]は、国民[こくみん]年金[ねんきん]基金[ききん]などとの合計[ごうけい]で、月[つき]6万[まん]8000円[えん]から7000円[えん]増[ふ]えて7万[まん]5000円[えん]となる。', 'For Category 1 insured people in the national pension, such as the self-employed, the total including the National Pension Fund and similar plans goes up by 7,000 yen, from 68,000 to 75,000 yen a month.', '被保険者 is an insured person. The national pension sorts people into three categories (第1号, 第2号, 第3号).'],
+            ['会社員[かいしゃいん]や公務員[こうむいん]ら第[だい]2号[ごう]被保険者[ひほけんしゃ]は、企業[きぎょう]年金[ねんきん]がある場合[ばあい]、その掛[か]け金[きん]との合計[ごうけい]で5万[まん]5000円[えん]から6万[まん]2000円[えん]に上[あ]がる。', 'For Category 2 insured people, such as company employees and public servants, with a company pension the total including its payments goes up from 55,000 to 62,000 yen.'],
+            ['企業[きぎょう]年金[ねんきん]がない場合[ばあい]は、現在[げんざい]の2万[まん]3000円[えん]から6万[まん]2000円[えん]へと大幅[おおはば]に拡大[かくだい]される。', 'Without a company pension, it is greatly expanded from the current 23,000 yen to 62,000 yen.', '大幅に means by a large amount.'],
+            ['会社員[かいしゃいん]などに扶養[ふよう]される第[だい]3号[ごう]被保険者[ひほけんしゃ]は、2万[まん]3000円[えん]で据[す]え置[お]かれる。', 'For Category 3 insured people, who are supported by an employee spouse, it is left unchanged at 23,000 yen.', '据え置く means to leave something as it is.'],
+            ['加入[かにゅう]できる年齢[ねんれい]は現在[げんざい]、第[だい]1号[ごう]と第[だい]3号[ごう]が59歳[さい]、第[だい]2号[ごう]が64歳[さい]までだが、老齢[ろうれい]基礎[きそ]年金[ねんきん]を受[う]け取[と]っていないことなどを条件[じょうけん]に、一律[いちりつ]69歳[さい]までとなる。', 'The age limit for joining is now 59 for Categories 1 and 3 and 64 for Category 2, but on conditions such as not receiving the old-age basic pension, it becomes 69 for everyone.', '一律 means uniformly, the same for all.'],
+            ['老後[ろうご]に備[そな]えた資産[しさん]づくりを後押[あとお]しするのが狙[ねら]いだ。', 'The aim is to help people build up savings for old age.', '後押しする means to support, give a push to.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-24-onosato-kyushu-playoff',
+      date: '2026-11-24',
+      emoji: '🏆',
+      titleEn: 'Sumo: Onosato beats Wakamotoharu in a playoff to win the Kyushu tournament, his seventh title',
+      sources: [
+        { name: 'Tokyo Shimbun', url: 'https://www.tokyo-np.co.jp/article/530035' },
+        { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261122de79989' },
+        { name: 'Fukushima Minyu', url: 'https://www.minyu-net.com/news/detail/2026112217480457571' },
+        { name: 'Daily Sports', url: 'https://www.daily.co.jp/general/2026/11/23/0021063448.shtml' },
+      ],
+      quiz: [
+        ['How did Onosato win the tournament?', 'He beat Wakamotoharu in a playoff', 'He won all 15 bouts', 'Wakamotoharu was injured and stopped', 'He had the most wins without a playoff'],
+        ['How many tournaments has Onosato won now?', 'Seven', 'One', 'Three', 'Thirteen'],
+        ['What did Wakamotoharu\'s younger brother Wakatakakage do?', 'He won the juryo (second) division', 'He won the top division', 'He retired', 'He became a yokozuna'],
+      ],
+      levels: {
+        N5: {
+          title: '大相撲[おおずもう]　大[おお]の里[さと]が　また　優勝[ゆうしょう]しました',
+          lines: [
+            ['福岡[ふくおか]の　大相撲[おおずもう]が　二十二日[にじゅうににち]に　終[お]わりました。', 'The sumo tournament in Fukuoka ended on the 22nd.', 'The Kyushu tournament is held every November in Fukuoka and lasts 15 days.'],
+            ['横綱[よこづな]の　大[おお]の里[さと]と　若元春[わかもとはる]は、二人[ふたり]とも　十三勝[じゅうさんしょう]二敗[にはい]でした。', 'Yokozuna Onosato and Wakamotoharu both had 13 wins and 2 losses.', '横綱 (yokozuna) is the top rank. 勝 counts wins and 敗 counts losses.'],
+            ['それで、二人[ふたり]は　もう　一度[いちど]　相撲[すもう]を　取[と]りました。', 'So the two had one more bout.', 'This extra bout is a playoff (優勝決定戦). 相撲を取る means to do a sumo bout.'],
+            ['大[おお]の里[さと]が　勝[か]って、七回目[ななかいめ]の　優勝[ゆうしょう]を　しました。', 'Onosato won and took his seventh title.', '優勝 means winning the whole tournament. He also won in September, so it is two in a row.'],
+            ['33歳[さい]の　若元春[わかもとはる]は、初[はじ]めての　優勝[ゆうしょう]が　できませんでした。', 'Wakamotoharu, 33, could not win his first title.'],
+            ['でも、若元春[わかもとはる]は　技能賞[ぎのうしょう]を　もらいました。', 'But Wakamotoharu received the Technique Prize.', '技能賞 is one of three special prizes, given for good technique. It is his second.'],
+            ['弟[おとうと]の　若隆景[わかたかかげ]は、十両[じゅうりょう]で　優勝[ゆうしょう]しました。', 'His younger brother Wakatakakage won the juryo division.', '十両 (juryo) is the second division. He won with 14 wins and 1 loss.'],
+          ],
+        },
+        N4: {
+          title: '九州[きゅうしゅう]場所[ばしょ]　大[おお]の里[さと]が決定戦[けっていせん]で若元春[わかもとはる]に勝[か]って優勝[ゆうしょう]',
+          lines: [
+            ['大相撲[おおずもう]九州[きゅうしゅう]場所[ばしょ]は二十二日[にじゅうににち]、福岡[ふくおか]で最後[さいご]の日[ひ]を迎[むか]えました。', 'The Kyushu sumo tournament reached its final day in Fukuoka on the 22nd.', 'In sumo the final (15th) day is called 千秋楽 (senshuraku).'],
+            ['横綱[よこづな]の大[おお]の里[さと]は、同[おな]じ横綱[よこづな]の豊昇龍[ほうしょうりゅう]を押[お]し出[だ]して、十三勝[じゅうさんしょう]二敗[にはい]になりました。', 'Yokozuna Onosato pushed out fellow yokozuna Hoshoryu and finished at 13 wins and 2 losses.', '押し出す is to push an opponent out of the ring.'],
+            ['前頭[まえがしら]の若元春[わかもとはる]も関脇[せきわけ]の熱海[あたみ]富士[ふじ]に勝[か]ち、十三勝[じゅうさんしょう]二敗[にはい]で並[なら]びました。', 'Maegashira Wakamotoharu also beat sekiwake Atamifuji, drawing level at 13 wins and 2 losses.', '並ぶ here means to be level, with the same record.'],
+            ['二人[ふたり]が戦[たたか]った優勝[ゆうしょう]決定戦[けっていせん]では、大[おお]の里[さと]が勝[か]ちました。', 'In the playoff between the two, Onosato won.', '優勝決定戦 is a playoff between wrestlers with the same record.'],
+            ['大[おお]の里[さと]は先場所[せんばしょ]に続[つづ]いて優勝[ゆうしょう]し、優勝[ゆうしょう]は7回目[かいめ]になりました。', 'Onosato won for the second tournament in a row, and it is his seventh title.', '先場所 means the previous tournament, in September.'],
+            ['若元春[わかもとはる]は初[はじ]めての優勝[ゆうしょう]はできませんでしたが、技能賞[ぎのうしょう]をもらいました。', 'Wakamotoharu could not win his first title, but he received the Technique Prize.', '技能賞 is one of three special prizes. His 13 wins are his best ever.'],
+            ['弟[おとうと]の若隆景[わかたかかげ]は、十両[じゅうりょう]で十四勝[じゅうよんしょう]一敗[いっぱい]で優勝[ゆうしょう]しました。', 'His younger brother Wakatakakage won the juryo division with 14 wins and 1 loss.', '十両 (juryo) is the second division.'],
+          ],
+        },
+        N3: {
+          title: '九州[きゅうしゅう]場所[ばしょ]千秋楽[せんしゅうらく]　大[おお]の里[さと]が決定戦[けっていせん]で若元春[わかもとはる]を下[くだ]し2場所[ばしょ]連続[れんぞく]優勝[ゆうしょう]',
+          lines: [
+            ['大相撲[おおずもう]九州[きゅうしゅう]場所[ばしょ]は二十二日[にじゅうににち]、福岡[ふくおか]国際[こくさい]センターで千秋楽[せんしゅうらく]を迎[むか]え、横綱[よこづな]大[おお]の里[さと]が平幕[ひらまく]若元春[わかもとはる]との優勝[ゆうしょう]決定戦[けっていせん]を制[せい]した。', 'On the 22nd, the Kyushu sumo tournament reached its final day at Fukuoka Kokusai Center, and yokozuna Onosato won the playoff against rank-and-file Wakamotoharu.', '千秋楽 is the final day of a tournament; 制する means to win (a contest).'],
+            ['本割[ほんわり]では、大[おお]の里[さと]が横綱[よこづな]対決[たいけつ]で豊昇龍[ほうしょうりゅう]を押[お]し出[だ]し、若元春[わかもとはる]は関脇[せきわけ]熱海[あたみ]富士[ふじ]を突[つ]き落[お]として、ともに十三勝[じゅうさんしょう]二敗[にはい]で並[なら]んだ。', 'In the regular bouts, Onosato pushed out Hoshoryu in a clash of yokozuna, and Wakamotoharu thrust down sekiwake Atamifuji, so both finished level at 13–2.', '本割 are the scheduled bouts, as opposed to a playoff. 突き落とす is to thrust an opponent down to the side.'],
+            ['決定戦[けっていせん]は大[おお]の里[さと]が渡[わた]し込[こ]みで勝[か]ち、2場所[ばしょ]連続[れんぞく]7度目[どめ]の優勝[ゆうしょう]を果[は]たした。', 'Onosato won the playoff with a watashikomi, taking his seventh title and his second in a row.', '渡し込み is a technique: holding the opponent\'s thigh and driving him backwards out or down. 果たす means to achieve.'],
+            ['これで優勝[ゆうしょう]回数[かいすう]は、戦前[せんぜん]から戦後[せんご]にかけて活躍[かつやく]した横綱[よこづな]羽黒山[はぐろやま]に並[なら]んだ。', 'His number of titles now equals that of yokozuna Haguroyama, who was active from before to after the war.', '〜にかけて means "from ... through ...". It was also his first title in the Kyushu tournament.'],
+            ['33歳[さい]の若元春[わかもとはる]は初[はつ]優勝[ゆうしょう]を逃[のが]したが、自己[じこ]最多[さいた]の十三勝[じゅうさんしょう]を挙[あ]げ、2度[ど]目[め]の技能賞[ぎのうしょう]を受[う]けた。', 'Wakamotoharu, 33, missed out on his first title, but won a personal-best 13 bouts and received his second Technique Prize.', '逃す means to miss (a chance); 自己最多 is a personal best.'],
+            ['三賞[さんしょう]はほかに、熱海[あたみ]富士[ふじ]が初[はつ]の殊勲賞[しゅくんしょう]、金峰山[きんぼうざん]と玉鷲[たまわし]が敢闘賞[かんとうしょう]に選[えら]ばれた。', 'Among the other special prizes, Atamifuji won his first Outstanding Performance Prize, and Kinbozan and Tamawashi the Fighting Spirit Prize.', '三賞 are the three special prizes: 殊勲賞 (for beating top wrestlers), 敢闘賞 (fighting spirit) and 技能賞 (technique).'],
+            ['弟[おとうと]の元[もと]関脇[せきわけ]若隆景[わかたかかげ]は十両[じゅうりょう]で十四勝[じゅうよんしょう]一敗[いっぱい]で優勝[ゆうしょう]したが、兄弟[きょうだい]そろっての優勝[ゆうしょう]はならなかった。', 'His younger brother, former sekiwake Wakatakakage, won the juryo division at 14–1, but the brothers could not both win titles.', '十両 (juryo) is the second division. 〜はならなかった means something hoped for did not happen.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-24-tamagotchi-30-years',
+      date: '2026-11-24',
+      emoji: '🥚',
+      titleEn: 'Tamagotchi turns 30, with over 100 million shipped around the world',
+      sources: [
+        { name: 'Jiji Press via nippon.com', url: 'https://www.nippon.com/en/articles/-/57859' },
+        { name: 'Kyodo via Tokyo Shimbun', url: 'https://www.tokyo-np.co.jp/article/529989' },
+        { name: 'Ryukyu Shimpo (Kyodo)', url: 'https://ryukyushimpo.jp/economics/entry-5612827.html' },
+        { name: 'Bandai Namco (IR newsletter)', url: 'https://www.bandainamco.co.jp/en/ir/library/newsletter82_special.html' },
+        { name: 'Seoul Economic Daily', url: 'https://en.sedaily.com/business/2026/11/24/tamagotchi-turns-30-as-retro-boom-lifts-sales-past-100' },
+      ],
+      quiz: [
+        ['When did the first Tamagotchi go on sale?', 'In 1996', 'In 1986', 'In 2004', 'In 2016'],
+        ['How many Tamagotchi have been shipped around the world?', 'Over 100 million', 'About 1 million', 'About 10 million', 'Over 1 billion'],
+        ['Which company makes Tamagotchi?', 'Bandai', 'Nintendo', 'Sony', 'Sega'],
+      ],
+      levels: {
+        N5: {
+          title: 'たまごっちが　30歳[さい]に　なりました',
+          lines: [
+            ['たまごっちは、バンダイの　小[ちい]さい　ゲームの　おもちゃです。', 'Tamagotchi is a small game toy from Bandai.', 'Bandai is a big Japanese toy company. A Tamagotchi is shaped like an egg (たまご).'],
+            ['画面[がめん]の　中[なか]で、小[ちい]さい　キャラクターを　育[そだ]てます。', 'You raise a little character on the screen.', '育てる means to raise or bring up.'],
+            ['ご飯[はん]を　あげたり、一緒[いっしょ]に　遊[あそ]んだり　します。', 'You give it food and play with it.', '〜たり〜たりする lists examples of things you do.'],
+            ['初[はじ]めての　たまごっちは、1996年[ねん]十一月[じゅういちがつ]二十三日[にじゅうさんにち]に　売[う]り出[だ]されました。', 'The first Tamagotchi went on sale on November 23, 1996.', '売り出す means to put on sale.'],
+            ['今年[ことし]の　二十三日[にじゅうさんにち]で、ちょうど　30年[ねん]に　なりました。', 'On the 23rd this year, it was exactly 30 years.'],
+            ['今[いま]まで　世界[せかい]で　1億[おく]個[こ]より　多[おお]く　売[う]れました。', 'More than 100 million have been sold around the world so far.', '億 is a hundred million, and 個 counts small things. The number is how many were sent to shops; it passed 100 million in 2025.'],
+            ['半分[はんぶん]ぐらいは　外国[がいこく]で　売[う]れました。', 'About half were sold abroad.'],
+          ],
+        },
+        N4: {
+          title: '「たまごっち」が発売[はつばい]から30年[ねん]　世界[せかい]で1億[おく]個[こ]以上[いじょう]',
+          lines: [
+            ['バンダイのおもちゃ「たまごっち」が、二十三日[にじゅうさんにち]で発売[はつばい]から30年[ねん]になりました。', 'Bandai\'s toy "Tamagotchi" marked 30 years since its release on the 23rd.', '発売 means going on sale.'],
+            ['たまごっちは卵[たまご]の形[かたち]をした小[ちい]さいゲーム機[き]で、画面[がめん]の中[なか]のキャラクターを育[そだ]てて遊[あそ]びます。', 'Tamagotchi is a small egg-shaped game device; you play by raising a character on its screen.'],
+            ['最初[さいしょ]のたまごっちは1996年[ねん]に発売[はつばい]され、日本中[にほんじゅう]で大[だい]人気[にんき]になりました。', 'The first Tamagotchi went on sale in 1996 and became hugely popular all over Japan.', '〜中 (じゅう) after a place means "all over". It was a huge boom in the late 1990s.'],
+            ['ブームが終[お]わって売[う]れなくなった時期[じき]もありましたが、2004年[ねん]に新[あたら]しいたまごっちが出[で]ました。', 'There was a time when the boom ended and it stopped selling, but a new Tamagotchi came out in 2004.', '時期 is a period of time.'],
+            ['去年[きょねん]の夏[なつ]には、世界[せかい]で出荷[しゅっか]された数[かず]が1億[おく]個[こ]を超[こ]えました。', 'Last summer, the number shipped around the world passed 100 million.', '出荷 means sending goods out to shops. 億 is a hundred million.'],
+            ['そのうち、半分[はんぶん]ぐらいは外国[がいこく]向[む]けです。', 'About half of them were for other countries.', '〜向け means "for, aimed at".'],
+            ['バンダイは、ほかの会社[かいしゃ]と一緒[いっしょ]に作[つく]る商品[しょうひん]などにも、たまごっちを使[つか]っていくつもりです。', 'Bandai plans to use Tamagotchi in things such as products made together with other companies.', 'These are called collaborations (コラボ).'],
+          ],
+        },
+        N3: {
+          title: '「たまごっち」発売[はつばい]30周年[しゅうねん]　累計[るいけい]出荷[しゅっか]1億[おく]個[こ]突破[とっぱ]、半数[はんすう]は海外[かいがい]向[む]け',
+          lines: [
+            ['バンダイの携帯型[けいたいがた]育成[いくせい]ゲーム「たまごっち」は二十三日[にじゅうさんにち]、1996年[ねん]の発売[はつばい]から30周年[しゅうねん]を迎[むか]えた。', 'On the 23rd, Bandai\'s handheld raising game "Tamagotchi" marked the 30th anniversary of its release in 1996.', '携帯型 means handheld; 育成ゲーム is a game where you raise something. 周年 counts anniversaries.'],
+            ['卵[たまご]型[がた]の画面[がめん]の中[なか]でキャラクターに食事[しょくじ]を与[あた]えたり世話[せわ]をしたりして育[そだ]てる遊[あそ]び方[かた]が、子[こ]どもから大人[おとな]まで人気[にんき]を集[あつ]めた。', 'Its way of playing, feeding and looking after a character on an egg-shaped screen to raise it, became popular with children and adults alike.', '世話をする means to look after, take care of.'],
+            ['発売[はつばい]当時[とうじ]は社会[しゃかい]現象[げんしょう]となるほどのブームとなったが、その後[ご]人気[にんき]が落[お]ち込[こ]み、2004年[ねん]に新[あら]たなシリーズで復活[ふっかつ]した。', 'When it first came out, the boom was so big it became a social phenomenon, but its popularity then fell, and it made a comeback with a new series in 2004.', '社会現象 is something the whole country talks about. 復活 is a comeback.'],
+            ['同社[どうしゃ]によると、シリーズの累計[るいけい]出荷[しゅっか]数[すう]は2025年[ねん]7月末[がつまつ]に世界[せかい]で1億[おく]個[こ]を突破[とっぱ]した。', 'According to the company, total shipments of the series passed 100 million worldwide at the end of July 2025.', '累計 is a running total; 突破 means breaking through (a number).'],
+            ['出荷[しゅっか]先[さき]の内訳[うちわけ]は日本[にほん]が49％、南北[なんぼく]アメリカが33％で、およそ半数[はんすう]が海外[かいがい]向[む]けだという。', 'By destination, Japan accounts for 49% and the Americas for 33%, so about half are for overseas.', '内訳 is a breakdown. 南北アメリカ means North and South America.'],
+            ['最近[さいきん]は、かつての子[こ]どもたちを中心[ちゅうしん]としたレトロブームも人気[にんき]を後押[あとお]ししているという。', 'Recently, a retro boom, centred on people who were children back then, is also said to be boosting its popularity.', 'レトロ means retro, old-fashioned in a nostalgic way. かつての means "former, of the past".'],
+            ['バンダイは今後[こんご]、他社[たしゃ]とのコラボ商品[しょうひん]など、知的[ちてき]財産[ざいさん]としての活用[かつよう]にも力[ちから]を入[い]れる方針[ほうしん]だ。', 'From now on, Bandai plans to put more effort into using it as intellectual property, for example in products made with other companies.', '知的財産 (IP) is intellectual property; 力を入れる means to put effort into something.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-11-23-aizu-snow-isolation',
       date: '2026-11-23',
       emoji: '❄️',
