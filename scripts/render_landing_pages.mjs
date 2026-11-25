@@ -4,6 +4,7 @@
 //   verb-conjugation-chart.html         verb conjugation chart
 //   wa-vs-ga.html                       は vs が rule of thumb + quiz
 //   jlpt-listening-practice.html        listening sample + level links
+//   grammar-cheatsheet.html             N5–N3 grammar, one line per point
 //
 //   node scripts/render_landing_pages.mjs           write the pages
 //   node scripts/render_landing_pages.mjs --check   fail if they're stale
@@ -187,6 +188,62 @@ const LISTENING_BODY = `
 </section>`;
 const VOICE_CREDIT = (read('listening.html').match(/<p class="lis-credits"[^>]*>([^<]+)<\/p>/) || die('no credits line'))[1];
 
+// ---- 4. grammar cheatsheet ----------------------------------------------
+// One line per grammar point (pattern, meaning, how to make it); each is a
+// <details> that opens to more explanation, examples and the traps. The
+// points are hand-written in scripts/grammar_cheatsheet_data.mjs; landing.js
+// adds the search box, level filter and "Open all".
+const { SECTIONS: GRAMMAR } = await import('./grammar_cheatsheet_data.mjs');
+const LEVELS = ['N5', 'N4', 'N3'];
+const SLOT_RE = /(V-(?:dict|masu|te|ta|nai|vol)|い-adj|な-adj|\bplain\b|\bN\b)/g;
+const slots = s => esc(s).replace(SLOT_RE, '<span class="gc-slot">$1</span>');
+const marked = s => ruby(esc(s)).replace(/\{([^}]+)\}/g, '<b>$1</b>');
+const GRAMMAR_COUNT = GRAMMAR.reduce((n, s) => n + s.points.length, 0);
+
+function grammarBody() {
+  const ids = new Set();
+  const toc = GRAMMAR.map(s => `<a href="#${s.id}">${esc(s.title)}</a>`).join('');
+  let h = `<section class="lp-ref gc-tools" hidden>
+        <div class="gc-bar">
+          <input type="search" class="gc-search" placeholder="Search: て, because, passive…" aria-label="Search the grammar points">
+          <div class="gc-levels" role="group" aria-label="JLPT level">` +
+    ['All', ...LEVELS].map(l => `<button type="button" class="gc-lv-btn" data-lv="${l}" aria-pressed="${l === 'All'}">${l}</button>`).join('') +
+    `</div>
+          <button type="button" class="lp-rules-all gc-all">Open all</button>
+        </div>
+        <p class="gc-none" hidden>Nothing matches. Try a shorter word, or another level.</p>
+      </section>
+      <section class="lp-ref gc-key">
+        <p><b>How to read the rules:</b> <span class="gc-slot">V-dict</span> 食べる · <span class="gc-slot">V-masu</span> 食べ(ます) · <span class="gc-slot">V-te</span> 食べて · <span class="gc-slot">V-ta</span> 食べた · <span class="gc-slot">V-nai</span> 食べない · <span class="gc-slot">V-vol</span> 食べよう · <span class="gc-slot">N</span> noun · <span class="gc-slot">plain</span> plain form (食べる, 食べない, 食べた, 食べなかった). Tap a line for more, examples and exceptions. Levels follow common study lists; the JLPT doesn’t publish an official one.</p>
+        <nav class="gc-toc" aria-label="Sections">${toc}</nav>
+      </section>`;
+  for (const s of GRAMMAR) {
+    h += `\n      <section class="lp-ref gc-section" id="${s.id}"><h2 class="lis-heading">${esc(s.title)} <span class="gc-jp" lang="ja">${esc(s.jp)}</span></h2><div class="gc-list">`;
+    s.points.forEach((g, i) => {
+      if (!LEVELS.includes(g.lv)) die(`${s.id} ${g.p}: level ${g.lv}`);
+      for (const k of ['p', 'm', 'r', 'more']) if (!g[k]) die(`${s.id} ${g.p}: no ${k}`);
+      if (!g.ex?.length || !g.warn?.length) die(`${s.id} ${g.p}: needs examples and exceptions`);
+      for (const [ja] of g.ex) {
+        if (/[一-鿿々]/.test(ja.replace(RUBY_RE, ''))) die(`${s.id} ${g.p}: kanji without furigana in ${ja}`);
+        if (!/\{[^}]+\}/.test(ja)) die(`${s.id} ${g.p}: example doesn't mark the grammar: ${ja}`);
+      }
+      const id = `${s.id}-${i + 1}`;
+      if (ids.has(id)) die(`duplicate id ${id}`);
+      ids.add(id);
+      h += `<details class="gc-item" id="${id}" data-lv="${g.lv}"><summary>` +
+        `<span class="gc-p" lang="ja">${esc(g.p)}</span>` +
+        `<span class="gc-sum"><span class="gc-m">${esc(g.m)}</span><span class="gc-r">${slots(g.r)}</span></span>` +
+        `<span class="gc-lv gc-${g.lv.toLowerCase()}">${g.lv}</span></summary><div class="gc-more">` +
+        `<p>${esc(g.more)}</p>` +
+        `<ul class="gc-ex">${g.ex.map(([ja, en]) => `<li><span class="gc-ja" lang="ja">${marked(ja)}</span><span class="gc-en">${esc(en)}</span></li>`).join('')}</ul>` +
+        `<div class="gc-warn"><span class="gc-warn-title">Watch out</span><ul>${g.warn.map(w => `<li>${esc(w)}</li>`).join('')}</ul></div>` +
+        `</div></details>`;
+    });
+    h += `</div><p class="gc-practice">Practise: ${s.practice.map(([href, label]) => `<a href="${href}">${esc(label)} →</a>`).join(' · ')}</p></section>`;
+  }
+  return h + `\n      <section class="lp-ref lp-next"><p>Rules stick once you use them.</p><a class="btn-primary lp-btn" href="bunkei.html" data-cta>Drill the patterns in Bunkei →</a></section>`;
+}
+
 // ---- pages --------------------------------------------------------------
 const PAGES = [
   {
@@ -227,6 +284,18 @@ const PAGES = [
     quiz: listeningQuestions(),
     body: LISTENING_BODY,
     credit: VOICE_CREDIT,
+  },
+  {
+    file: 'grammar-cheatsheet.html',
+    title: 'Big Japanese Grammar Cheat Sheet (JLPT N5–N3) | Tokidoki',
+    desc: `${GRAMMAR_COUNT} Japanese grammar points for JLPT N5–N3, one line each: what it means and how to make it. Tap any for examples and exceptions.`,
+    shortTitle: 'Big Japanese Grammar Cheat Sheet (N5–N3) | Tokidoki',
+    h1: 'Big Japanese grammar cheatsheet (JLPT N5–N3)',
+    cta: { href: 'bunkei.html', label: 'Drill the patterns in Bunkei →', lead: 'drill the patterns →' },
+    teaches: 'Japanese grammar',
+    hero: { face: '文', kicker: '文法 · JLPT N5–N3', card: ['Big Grammar Cheatsheet', 'N5–N3, one line each · tap for more'] },
+    sub: `Free, no login. ${GRAMMAR_COUNT} grammar points, one line each, or`,
+    body: grammarBody(),
   },
 ];
 
@@ -287,7 +356,7 @@ function render(p) {
   <meta name="twitter:description" content="${esc(p.desc)}">
   <meta name="twitter:image" content="${SITE}/og-image.png">
   <link rel="canonical" href="${url}">
-${STYLE}  <link rel="stylesheet" href="landing.css?v=3">
+${STYLE}  <link rel="stylesheet" href="landing.css?v=4">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -333,7 +402,7 @@ ${p.quiz ? `      <div class="lp-quiz" id="lp-quiz"><noscript><p><a href="${p.ct
   </div>
 
   <script type="application/json" id="lp-data">${json(data)}</script>
-${SCRIPTS}  <script src="landing.js?v=4"></script>
+${SCRIPTS}  <script src="landing.js?v=5"></script>
 </body>
 </html>
 `;

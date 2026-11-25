@@ -171,3 +171,78 @@
   fit();
   window.addEventListener('resize', fit);
 })();
+
+// The grammar cheatsheet: each point is a <details> (it opens without
+// JavaScript too); this adds the search box, the level buttons and
+// "Open all", and opens a point linked to by #id.
+(function () {
+  'use strict';
+
+  var tools = document.querySelector('.gc-tools');
+  if (!tools) return;
+  var items = Array.prototype.slice.call(document.querySelectorAll('.gc-item'));
+  var sections = document.querySelectorAll('.gc-section');
+  var search = tools.querySelector('.gc-search');
+  var lvBtns = tools.querySelectorAll('.gc-lv-btn');
+  var all = tools.querySelector('.gc-all');
+  var none = tools.querySelector('.gc-none');
+  var level = 'All';
+  var text = items.map(function (d) { return d.textContent.toLowerCase(); });
+
+  function shown() { return items.filter(function (d) { return !d.hidden; }); }
+
+  function filter() {
+    var q = search.value.trim().toLowerCase();
+    items.forEach(function (d, i) {
+      d.hidden = !((level === 'All' || d.getAttribute('data-lv') === level) && (!q || text[i].indexOf(q) !== -1));
+    });
+    Array.prototype.forEach.call(sections, function (s) {
+      s.hidden = !s.querySelector('.gc-item:not([hidden])');
+    });
+    none.hidden = shown().length > 0;
+    sync();
+  }
+
+  function sync() {
+    var vis = shown();
+    var open = vis.length && vis.every(function (d) { return d.open; });
+    all.textContent = open ? 'Close all' : 'Open all';
+  }
+
+  search.addEventListener('input', filter);
+  Array.prototype.forEach.call(lvBtns, function (b) {
+    b.addEventListener('click', function () {
+      level = b.getAttribute('data-lv');
+      Array.prototype.forEach.call(lvBtns, function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      filter();
+    });
+  });
+  all.addEventListener('click', function () {
+    var open = all.textContent === 'Open all';
+    shown().forEach(function (d) { d.open = open; });
+    sync();
+  });
+  items.forEach(function (d) { d.addEventListener('toggle', sync); });
+
+  // The site header is sticky too: the tools stick just under it, and
+  // jumps to a section or point stop below both (landing.css).
+  function fit() {
+    var head = document.getElementById('header');
+    var root = document.documentElement.style;
+    root.setProperty('--gc-head', (head ? head.offsetHeight : 0) + 'px');
+    root.setProperty('--gc-tools', tools.offsetHeight + 'px');
+  }
+  window.addEventListener('resize', fit);
+  window.addEventListener('load', fit);
+
+  function openHash() {
+    var d = location.hash && document.getElementById(location.hash.slice(1));
+    if (d && d.classList.contains('gc-item')) { d.open = true; d.scrollIntoView(); }
+  }
+  window.addEventListener('hashchange', openHash);
+  tools.hidden = false;
+  // app.js draws the header on DOMContentLoaded, so measure after it.
+  function start() { fit(); openHash(); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
+})();

@@ -11,8 +11,8 @@ function ok(cond, label) {
   else { failed++; console.log(`  FAIL: ${label}`); }
 }
 
-const PAGES = ['verb-conjugation-chart', 'wa-vs-ga', 'jlpt-listening-practice'];
-const NO_QUIZ = ['verb-conjugation-chart']; // the chart is the page
+const PAGES = ['verb-conjugation-chart', 'wa-vs-ga', 'jlpt-listening-practice', 'grammar-cheatsheet'];
+const NO_QUIZ = ['verb-conjugation-chart', 'grammar-cheatsheet']; // the chart / list is the page
 const sitemap = fs.readFileSync('sitemap.xml', 'utf8');
 
 try {
@@ -54,6 +54,27 @@ for (const name of PAGES) {
     ok(q.explain && q.explain.length > 10, `${label}: has an explanation`);
     if (q.audio) ok(fs.existsSync(q.audio), `${label}: audio file exists`);
   });
+}
+
+// The grammar cheatsheet: every point has its one line, examples and
+// exceptions (render_landing_pages.mjs also refuses examples with kanji
+// lacking furigana), and the ids that deep links use are unique.
+{
+  const html = fs.readFileSync('grammar-cheatsheet.html', 'utf8');
+  const items = html.match(/<details class="gc-item"[\s\S]*?<\/details>/g) || [];
+  ok(items.length >= 100, `grammar cheatsheet: at least 100 points (${items.length})`);
+  const ids = items.map(x => (x.match(/ id="([^"]+)"/) || [])[1]);
+  ok(new Set(ids).size === ids.length, 'grammar cheatsheet: unique ids');
+  items.forEach((x, i) => {
+    const label = `grammar point ${ids[i]}`;
+    ok(/data-lv="N[345]"/.test(x), `${label}: level`);
+    ok(/class="gc-m">[^<]+</.test(x) && /class="gc-r">./.test(x), `${label}: meaning and rule`);
+    ok(/class="gc-ja"[^>]*>.*<b>/.test(x), `${label}: an example marking the grammar`);
+    ok(/class="gc-warn"/.test(x), `${label}: exceptions`);
+  });
+  for (const page of ['index.html', 'blog.html']) {
+    ok(fs.readFileSync(page, 'utf8').includes('href="grammar-cheatsheet.html"'), `${page} links to the grammar cheatsheet`);
+  }
 }
 
 ok(fs.readFileSync('index.html', 'utf8').includes('href="wa-vs-ga.html"'), 'homepage links to the landing pages');

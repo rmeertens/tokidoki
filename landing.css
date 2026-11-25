@@ -123,3 +123,71 @@
 .lp-chart .lp-rule .ref-explanation b { color: var(--form-color); }
 .lp-chart .lp-rule .ref-explanation .conj-note { border-left-color: var(--form-color); }
 .lp-chart .lp-rule .ref-explanation td { border-top: 0; }
+
+/* The grammar cheatsheet (grammar-cheatsheet.html): one <details> per
+   point, a line of pattern · meaning · rule that opens to more, examples
+   and the traps. Levels: N5 green, N4 blue, N3 orange. */
+.gc-n5 { --lv: var(--green); } .gc-n4 { --lv: var(--blue); } .gc-n3 { --lv: var(--orange); }
+.gc-item[data-lv="N5"] { --lv: var(--green); } .gc-item[data-lv="N4"] { --lv: var(--blue); } .gc-item[data-lv="N3"] { --lv: var(--orange); }
+
+.gc-tools { position: sticky; top: var(--gc-head, 0px); z-index: 5; margin-top: 18px; padding: 10px 0; background: var(--bg); }
+.gc-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.gc-search { flex: 1 1 220px; min-width: 0; padding: 9px 12px; border-radius: 999px; border: 1px solid var(--border);
+  background: var(--bg-card); color: var(--text); font: 1rem var(--font); }
+.gc-search:focus { outline: none; border-color: var(--accent); }
+.gc-levels { display: flex; gap: 4px; }
+.gc-lv-btn { padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); background: var(--bg-card);
+  color: var(--text-dim); font: 700 0.8rem var(--font); cursor: pointer; }
+.gc-lv-btn[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--bg-card); }
+.gc-bar .lp-rules-all { margin-left: 0; }
+.gc-none { margin-top: 10px; color: var(--text-dim); font-size: 0.9rem; }
+
+.gc-key { margin-top: 14px; }
+.gc-key > p { font-size: 0.85rem; }
+.gc-key > p b { color: var(--text); }
+.gc-slot { display: inline-block; padding: 0 5px; border-radius: 5px; background: var(--accent-dim); color: var(--accent);
+  font: 700 0.78em var(--font); letter-spacing: 0.01em; white-space: nowrap; }
+.gc-toc { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.gc-toc a { padding: 3px 10px; border: 1px solid var(--border); border-radius: 999px; background: var(--bg-card);
+  font-size: 0.8rem; font-weight: 600; text-decoration: none; }
+.gc-toc a:hover { border-color: var(--accent); }
+
+.gc-section, .gc-item { scroll-margin-top: calc(var(--gc-head, 0px) + var(--gc-tools, 60px) + 8px); }
+.gc-jp { font-family: var(--font-jp); font-weight: 400; color: var(--text-muted); font-size: 0.8em; margin-left: 4px; }
+.gc-list { border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-card); overflow: hidden; }
+.gc-item { border-left: 4px solid var(--lv); }
+.gc-item + .gc-item { border-top: 1px solid var(--border); }
+.gc-item summary { display: grid; grid-template-columns: minmax(8.5em, 12em) 1fr auto; gap: 4px 14px; align-items: center;
+  padding: 10px 34px 10px 12px; cursor: pointer; list-style: none; position: relative; }
+.gc-item summary::-webkit-details-marker { display: none; }
+.gc-item summary::after { content: '▸'; position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  color: var(--lv); transition: transform var(--transition); }
+.gc-item[open] summary::after { transform: translateY(-50%) rotate(90deg); }
+.gc-item summary:hover, .gc-item[open] summary { background: color-mix(in srgb, var(--lv) 7%, var(--bg-card)); }
+.gc-item summary:focus-visible { outline: 2px solid var(--lv); outline-offset: -2px; }
+.gc-p { font: 700 1.1rem var(--font-jp); color: var(--text); }
+.gc-sum { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.gc-m { font-weight: 600; color: var(--text); }
+.gc-r { font-size: 0.85rem; color: var(--text-dim); font-family: var(--font-jp); }
+.gc-lv { font: 700 0.7rem var(--font); color: var(--lv); border: 1px solid var(--lv); border-radius: 999px; padding: 1px 7px; }
+
+.gc-more { padding: 4px 16px 14px; font-size: 0.9rem; line-height: 1.6; color: var(--text-dim);
+  background: color-mix(in srgb, var(--lv) 4%, var(--bg-card)); }
+.gc-more > p { margin: 6px 0 10px; }
+.gc-ex { list-style: none; display: grid; gap: 8px; margin-bottom: 10px; }
+.gc-ex li { padding: 8px 12px; border-radius: var(--radius-sm); background: var(--bg-card); border: 1px solid var(--border); }
+.gc-ja { display: block; font: 1.08rem var(--font-jp); color: var(--text); line-height: 1.9; }
+.gc-ja b { color: color-mix(in srgb, var(--lv) 80%, var(--text)); }
+.gc-ja rt { font-size: 0.55em; color: var(--text-dim); }
+.gc-en { display: block; font-size: 0.85rem; }
+.gc-warn { border-left: 3px solid var(--red); padding: 2px 0 2px 12px; }
+.gc-warn-title { display: block; font: 700 0.72rem var(--font); text-transform: uppercase; letter-spacing: 0.06em; color: var(--red); }
+.gc-warn ul { margin: 2px 0 0 1.1em; }
+.gc-warn li { margin-top: 2px; }
+.gc-practice { margin-top: 8px; font-size: 0.85rem; }
+
+@media (max-width: 600px) {
+  .gc-item summary { grid-template-columns: 1fr auto; padding-right: 30px; }
+  .gc-sum { grid-column: 1 / -1; grid-row: 2; }
+  .gc-more { padding: 2px 12px 12px; }
+}

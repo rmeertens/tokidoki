@@ -64,6 +64,13 @@
 
 ## Generated pages
 
+- The landing pages (verb chart, は vs が, listening sampler and the big
+  grammar cheatsheet, `grammar-cheatsheet.html`) are written by
+  `node scripts/render_landing_pages.mjs`. The cheatsheet's points are
+  hand-written in `scripts/grammar_cheatsheet_data.mjs` (format at its top:
+  one line of meaning + rule, then more, examples with furigana, and
+  exceptions); `landing.js` adds its search, level filter and "Open all".
+  `test_landing.js` fails if the pages are stale.
 - The Phrases category pages, `phrases-<id>.html`, are written by
   `node scripts/render_phrase_pages.mjs` from `phrases.html` (head, nav,
   scripts) and the phrase data. After changing any of those — including the
