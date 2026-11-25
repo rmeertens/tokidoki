@@ -27,6 +27,171 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-11-25-icc-early-payment',
+      date: '2026-11-25',
+      emoji: '⚖️',
+      titleEn: 'Takaichi meets ICC President Akane and says Japan will pay its 2027 share to the court in full this year',
+      sources: [
+        { name: 'Tokyo Shimbun', url: 'https://www.tokyo-np.co.jp/article/530418' },
+        { name: 'Sankei via Yahoo! News', url: 'https://news.yahoo.co.jp/articles/345480125d20b129865f9ae0487db390bd5ba503' },
+        { name: 'Mainichi via Yahoo! News', url: 'https://news.yahoo.co.jp/articles/207caf6e18457d50186a1a817bf320421572b54b' },
+        { name: 'Newsweek Japan', url: 'https://www.newsweekjapan.jp/articles/-/341094' },
+      ],
+      quiz: [
+        ['Who did Prime Minister Takaichi meet?', 'Tomoko Akane, the head of the ICC', 'The president of the United States', 'The UN Secretary-General', 'The prime minister of the Netherlands'],
+        ['When does Japan usually pay its money to the ICC?', 'In April', 'In December', 'In January', 'In September'],
+        ['What did the United States do in August?', 'It put sanctions on Akane', 'It gave the ICC extra money', 'It joined the ICC', 'It invited Akane to Washington'],
+      ],
+      levels: {
+        N5: {
+          title: '日本[にほん]が　ICCに　早[はや]く　お金[かね]を　払[はら]います',
+          lines: [
+            ['二十四日[にじゅうよっか]、高市[たかいち]総理[そうり]大臣[だいじん]は、ICCの　赤根[あかね]智子[ともこ]さんに　会[あ]いました。', 'On the 24th, Prime Minister Takaichi met Tomoko Akane of the ICC.', 'ICC is the International Criminal Court. 総理大臣 is the prime minister.'],
+            ['ICCは、オランダに　ある　世界[せかい]の　裁判所[さいばんしょ]です。', 'The ICC is a world court in the Netherlands.', '裁判所 means a court. The ICC judges people for very serious crimes, such as war crimes.'],
+            ['赤根[あかね]さんは　日本人[にほんじん]で、ICCの　いちばん　上[うえ]の　人[ひと]です。', 'Ms. Akane is Japanese, and she is the head of the ICC.'],
+            ['八月[はちがつ]、アメリカは　赤根[あかね]さんに　制裁[せいさい]を　しました。', 'In August, the United States put sanctions on Ms. Akane.', '制裁 means sanctions, measures a country takes to punish someone, such as blocking their money.'],
+            ['日本[にほん]は、ICCに　いちばん　多[おお]く　お金[かね]を　出[だ]して　いる　国[くに]です。', 'Japan is the country that gives the most money to the ICC.'],
+            ['いつもは　四月[しがつ]に　払[はら]いますが、来年[らいねん]の　お金[かね]を　今年[ことし]の　うちに　全部[ぜんぶ]　払[はら]います。', 'It usually pays in April, but it will pay all of next year\'s money within this year.', '〜のうちに means "within, before (a time) ends".'],
+            ['赤根[あかね]さんは「大変[たいへん]な　英断[えいだん]」と　言[い]いました。', 'Ms. Akane called it "a very wise and bold decision."', '英断 is a wise, bold decision.'],
+          ],
+        },
+        N4: {
+          title: '首相[しゅしょう]、ICCの赤根[あかね]所長[しょちょう]と会[あ]う　来年[らいねん]の分担金[ぶんたんきん]を今年[ことし]のうちに',
+          lines: [
+            ['高市[たかいち]首相[しゅしょう]は二十四日[にじゅうよっか]、国際[こくさい]刑事[けいじ]裁判所[さいばんしょ]（ICC）の赤根[あかね]智子[ともこ]所長[しょちょう]と首相[しゅしょう]官邸[かんてい]で会[あ]いました。', 'On the 24th, Prime Minister Takaichi met Tomoko Akane, president of the International Criminal Court (ICC), at the prime minister\'s office.', '所長 is the head of an office or institution. 首相官邸 is the prime minister\'s official office in Tokyo.'],
+            ['ICCはオランダのハーグにあって、戦争[せんそう]犯罪[はんざい]などの重[おも]い罪[つみ]を裁[さば]く裁判所[さいばんしょ]です。', 'The ICC is in The Hague in the Netherlands, and it is a court that judges serious crimes such as war crimes.', '裁く means to judge (in court).'],
+            ['アメリカの政府[せいふ]は八月[はちがつ]、日本人[にほんじん]の裁判官[さいばんかん]である赤根[あかね]さんを、制裁[せいさい]の対象[たいしょう]にしました。', 'In August, the US government put Ms. Akane, a Japanese judge, under sanctions.', '対象 means the target of something.'],
+            ['二人[ふたり]が会[あ]ったのは、それから初[はじ]めてです。', 'It was the first time the two met since then.'],
+            ['日本[にほん]はICCに最[もっと]も多[おお]くの分担金[ぶんたんきん]を出[だ]している国[くに]で、1年[ねん]のお金[かね]の15パーセントぐらいを払[はら]っています。', 'Japan is the country that pays the largest share to the ICC, about 15 percent of its yearly budget.', '分担金 is the share of costs each member pays.'],
+            ['首相[しゅしょう]は、いつもは四月[しがつ]に払[はら]う来年[らいねん]の分担金[ぶんたんきん]を、今年[ことし]のうちに全部[ぜんぶ]払[はら]うと伝[つた]えました。', 'The prime minister told her that Japan will pay all of next year\'s share, usually paid in April, within this year.'],
+            ['制裁[せいさい]でお金[かね]が足[た]りなくなるおそれがあるICCを助[たす]けるためで、赤根[あかね]さんは「大変[たいへん]な英断[えいだん]」と話[はな]しました。', 'It is to help the ICC, which may run short of money because of the sanctions, and Ms. Akane called it "a very wise and bold decision."'],
+          ],
+        },
+        N3: {
+          title: '高市[たかいち]首相[しゅしょう]、ICC分担金[ぶんたんきん]を年内[ねんない]に全額[ぜんがく]拠出[きょしゅつ]へ　赤根[あかね]所長[しょちょう]と面会[めんかい]',
+          lines: [
+            ['高市[たかいち]早苗[さなえ]首相[しゅしょう]は二十四日[にじゅうよっか]、国際[こくさい]刑事[けいじ]裁判所[さいばんしょ]（ICC）の赤根[あかね]智子[ともこ]所長[しょちょう]と首相[しゅしょう]官邸[かんてい]で面会[めんかい]し、来年[らいねん]分[ぶん]の分担金[ぶんたんきん]を年内[ねんない]に全額[ぜんがく]拠出[きょしゅつ]する方針[ほうしん]を伝[つた]えた。', 'Prime Minister Sanae Takaichi met ICC President Tomoko Akane at the prime minister\'s office on the 24th and told her of the plan to pay next year\'s share in full within this year.', '拠出する means to contribute money to a fund or organization. 方針 is a policy or plan.'],
+            ['米[べい]政権[せいけん]が八月[はちがつ]に赤根[あかね]氏[し]を制裁[せいさい]対象[たいしょう]に指定[してい]して以降[いこう]、首相[しゅしょう]との面会[めんかい]は初[はじ]めてだ。', 'It was her first meeting with the prime minister since the US administration put her under sanctions in August.', '米 is short for America in news writing. 〜以降 means "since".'],
+            ['日本[にほん]はICCへの最大[さいだい]の拠出国[きょしゅつこく]で、年間[ねんかん]活動費[かつどうひ]の15パーセント程度[ていど]を負担[ふたん]している。', 'Japan is the largest contributor to the ICC, paying about 15 percent of its yearly running costs.'],
+            ['分担金[ぶんたんきん]は通常[つうじょう]その年[とし]の四月[しがつ]に支払[しはら]っているが、制裁[せいさい]の影響[えいきょう]で資金[しきん]不足[ぶそく]が心配[しんぱい]されるICCが、前倒[まえだお]しでの支払[しはら]いを求[もと]めていた。', 'Japan normally pays its share in April of that year, but the ICC, which fears a shortage of funds because of the sanctions, had asked for early payment.', '前倒し means doing something earlier than planned.'],
+            ['赤根[あかね]氏[し]は「大変[たいへん]な英断[えいだん]」と評価[ひょうか]し、職員[しょくいん]の給料[きゅうりょう]の支払[しはら]いなどに役立[やくだ]つとの考[かんが]えを示[しめ]した。', 'Ms. Akane praised it as "a very wise and bold decision" and said it would help with things such as paying staff salaries.'],
+            ['首相[しゅしょう]は自身[じしん]のSNSに「我[わ]が国[くに]は、ICCを一貫[いっかん]して支持[しじ]しており、これからも支持[しじ]していきます」と投稿[とうこう]した。', 'The prime minister posted on social media: "Our country has consistently supported the ICC and will continue to do so."', '我が国 means "our country", a formal phrase. 一貫して means consistently.'],
+            ['来年[らいねん]の分担金[ぶんたんきん]の金額[きんがく]は、今月[こんげつ]下旬[げじゅん]から開[ひら]かれるICCの締約国[ていやくこく]会議[かいぎ]で決[き]まる予定[よてい]だ。', 'The amount of next year\'s share is to be decided at the ICC\'s Assembly of States Parties, which opens late this month.', '締約国 are the countries that have signed a treaty. 下旬 is the last ten days of a month.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-25-rakuten-securities-leak',
+      date: '2026-11-25',
+      emoji: '🔓',
+      titleEn: 'Rakuten Securities: personal data of about 4.41 million people leaked in a cyberattack, no passwords taken',
+      sources: [
+        { name: 'Impress Watch', url: 'https://www.watch.impress.co.jp/docs/news/2158909.html' },
+        { name: 'INTERNET Watch', url: 'https://internet.watch.impress.co.jp/docs/news/2158982.html' },
+        { name: 'Keitai Watch', url: 'https://k-tai.watch.impress.co.jp/docs/news/2159063.html' },
+        { name: 'Daily Sports (Kyodo)', url: 'https://daily.co.jp/society/economics/2026/11/25/0021070929.shtml' },
+      ],
+      quiz: [
+        ['About how many cases of personal information leaked?', 'About 4.41 million', 'About 441,000', 'About 44 million', 'About 4,410'],
+        ['Whose information was also among the leaked data?', 'People who never opened an account', 'Only Rakuten\'s own staff', 'Bank employees in other countries', 'Nobody else; only account holders'],
+        ['What does the company say about passwords?', 'They did not leak', 'All of them leaked', 'Only passwords leaked', 'About half of them leaked'],
+      ],
+      levels: {
+        N5: {
+          title: '楽天[らくてん]証券[しょうけん]で　お客[きゃく]さんの　情報[じょうほう]が　外[そと]に　出[で]ました',
+          lines: [
+            ['楽天[らくてん]証券[しょうけん]は、株[かぶ]などを　売[う]ったり　買[か]ったり　する　会社[かいしゃ]です。', 'Rakuten Securities is a company where people buy and sell things like shares.', '証券会社 is a securities company, a brokerage. 株 are shares in companies.'],
+            ['十一月[じゅういちがつ]16日[にち]、だれかが　この　会社[かいしゃ]の　コンピューターに　入[はい]りました。', 'On November 16, someone got into this company\'s computers.', 'This is called 不正アクセス, unauthorized access.'],
+            ['二十四日[にじゅうよっか]、会社[かいしゃ]は、441万[まん]件[けん]ぐらいの　名前[なまえ]や　住所[じゅうしょ]が　外[そと]に　出[で]たと　言[い]いました。', 'On the 24th, the company said about 4.41 million sets of names and addresses had got out.', '件 is a counter for cases or items. 441万 is 4,410,000.'],
+            ['生[う]まれた　日[ひ]や　電話[でんわ]番号[ばんごう]も　ありました。', 'Birthdays and phone numbers were among them too.'],
+            ['口座[こうざ]を　作[つく]らなかった　人[ひと]の　情報[じょうほう]も、119万[まん]件[けん]ぐらい　ありました。', 'There was also information on about 1.19 million people who did not open an account.', '口座 is an account (at a bank or securities company).'],
+            ['会社[かいしゃ]は、パスワードは　外[そと]に　出[で]て　いないと　言[い]って　います。', 'The company says passwords did not get out.'],
+            ['今[いま]まで、お客[きゃく]さんの　口座[こうざ]で　おかしな　取引[とりひき]は　見[み]つかって　いません。', 'So far, no strange trading has been found in customers\' accounts.', '取引 means trading, buying and selling.'],
+          ],
+        },
+        N4: {
+          title: '楽天[らくてん]証券[しょうけん]　個人[こじん]情報[じょうほう]約[やく]441万[まん]件[けん]が漏[も]れる',
+          lines: [
+            ['ネット証券[しょうけん]大手[おおて]の楽天[らくてん]証券[しょうけん]は二十四日[にじゅうよっか]、不正[ふせい]アクセスで漏[も]れた個人[こじん]情報[じょうほう]が約[やく]441万[まん]件[けん]だったと発表[はっぴょう]しました。', 'On the 24th, Rakuten Securities, a major online brokerage, announced that about 4.41 million cases of personal information had leaked through unauthorized access.', 'ネット証券 is an online securities company. 大手 means a major company. 不正アクセス is unauthorized access to a computer system.'],
+            ['会社[かいしゃ]は十一月[じゅういちがつ]16日[にち]に不正[ふせい]アクセスに気[き]づいて、次[つぎ]の日[ひ]に最初[さいしょ]の発表[はっぴょう]をしていました。', 'The company noticed the unauthorized access on November 16 and made its first announcement the next day.'],
+            ['漏[も]れたのは名前[なまえ]、生年月日[せいねんがっぴ]、住所[じゅうしょ]、電話[でんわ]番号[ばんごう]などで、新[あたら]しく性別[せいべつ]や国籍[こくせき]なども分[わ]かりました。', 'What leaked was names, dates of birth, addresses, phone numbers and so on, and it was newly found that gender, nationality and more had leaked too.'],
+            ['約[やく]322万[まん]件[けん]は口座[こうざ]を持[も]っている人[ひと]、約[やく]119万[まん]件[けん]は口座[こうざ]を作[つく]らなかった人[ひと]の情報[じょうほう]です。', 'About 3.22 million cases are information on account holders, and about 1.19 million on people who did not open an account.', 'The second group applied for an account but never finished opening it.'],
+            ['ログインIDだけが漏[も]れた口座[こうざ]は、約[やく]1198万[まん]に増[ふ]えました。', 'The number of accounts where only the login ID leaked rose to about 11.98 million.'],
+            ['パスワードや暗証[あんしょう]番号[ばんごう]は漏[も]れていなくて、不正[ふせい]な取引[とりひき]も見[み]つかっていないということです。', 'Passwords and PIN numbers did not leak, and no unauthorized trading has been found, the company says.', '暗証番号 is a PIN. 〜ということです is used to report what someone has said.'],
+            ['金融庁[きんゆうちょう]は楽天[らくてん]証券[しょうけん]に、くわしく報告[ほうこく]するように命[めい]じています。', 'The Financial Services Agency has ordered Rakuten Securities to report in detail.', '金融庁 is the Financial Services Agency, which watches over banks and securities companies.'],
+          ],
+        },
+        N3: {
+          title: '楽天[らくてん]証券[しょうけん]の情報[じょうほう]漏洩[ろうえい]、個人[こじん]情報[じょうほう]は約[やく]441万[まん]件[けん]に　第[だい]2報[ほう]',
+          lines: [
+            ['楽天[らくてん]証券[しょうけん]は二十四日[にじゅうよっか]、不正[ふせい]アクセスによる顧客[こきゃく]情報[じょうほう]の漏洩[ろうえい]について第[だい]2報[ほう]を公表[こうひょう]し、氏名[しめい]や住所[じゅうしょ]などの個人[こじん]情報[じょうほう]の漏洩[ろうえい]は約[やく]441万[まん]件[けん]に上[のぼ]ると明[あき]らかにした。', 'Rakuten Securities released its second report on the leak of customer data through unauthorized access on the 24th, revealing that personal information such as names and addresses leaked in about 4.41 million cases.', '第2報 is a second, follow-up report. 〜に上る means "to reach (a large number)".'],
+            ['内訳[うちわけ]は口座[こうざ]保有者[ほゆうしゃ]が約[やく]322万[まん]件[けん]、口座[こうざ]を開設[かいせつ]しなかった申込者[もうしこみしゃ]が約[やく]119万[まん]件[けん]で、重複[ちょうふく]が含[ふく]まれている可能性[かのうせい]もあるという。', 'Of these, about 3.22 million are account holders and about 1.19 million are applicants who never opened an account, and some may be counted twice, the company says.', '内訳 is a breakdown of a total.'],
+            ['第[だい]1報[ほう]で示[しめ]した生年月日[せいねんがっぴ]や電話[でんわ]番号[ばんごう]などに加[くわ]え、性別[せいべつ]や国籍[こくせき]など7項目[こうもく]が新[あら]たに確認[かくにん]された。', 'On top of the dates of birth, phone numbers and other items given in the first report, seven more items, such as gender and nationality, were newly confirmed.'],
+            ['商品別[しょうひんべつ]の資産[しさん]情報[じょうほう]も約[やく]168万[まん]件[けん]漏[も]れたが、自己[じこ]申告[しんこく]の年収[ねんしゅう]や資産[しさん]は選[えら]んだ区分[くぶん]の番号[ばんごう]だけで、詳[くわ]しい金額[きんがく]は含[ふく]まれていないとしている。', 'Information on assets by product also leaked in about 1.68 million cases, but self-reported income and assets were only the number of the range chosen, with no exact amounts, the company says.', '自己申告 means reported by oneself. 区分 is a category or bracket.'],
+            ['ログインIDなどのみの漏洩[ろうえい]は約[やく]1198万[まん]口座[こうざ]で、前回[ぜんかい]の最大[さいだい]約[やく]1125万[まん]口座[こうざ]から増[ふ]えた。', 'Leaks of only login IDs and the like came to about 11.98 million accounts, up from up to about 11.25 million last time.'],
+            ['同社[どうしゃ]は十一月[じゅういちがつ]16日[にち]に不正[ふせい]アクセスの可能性[かのうせい]を検知[けんち]したが、パスワードや暗証[あんしょう]番号[ばんごう]の漏洩[ろうえい]、不正[ふせい]な取引[とりひき]は現時点[げんじてん]で確認[かくにん]されていないという。', 'The company detected possible unauthorized access on November 16, but says no leak of passwords or PINs, and no unauthorized trading, has been confirmed so far.', '同社 means "the said company". 検知する means to detect.'],
+            ['金融庁[きんゆうちょう]は同社[どうしゃ]に報告[ほうこく]徴求[ちょうきゅう]命令[めいれい]を出[だ]しており、原因[げんいん]の究明[きゅうめい]と再発[さいはつ]防止[ぼうし]が求[もと]められる。', 'The Financial Services Agency has ordered the company to report, and it will need to find the cause and stop it from happening again.', '報告徴求命令 is an official order to submit a report. 再発防止 means preventing something from happening again.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-25-warm-winter-forecast',
+      date: '2026-11-25',
+      emoji: '⛄',
+      titleEn: 'Winter outlook: a warmer than usual winter is expected across Japan, but heavy snow is still possible',
+      sources: [
+        { name: 'Weathernews', url: 'https://weathernews.jp/news/202611/240171/' },
+        { name: 'Kyodo via d menu news', url: 'https://topics.smt.docomo.ne.jp/article/kyodo_nor/nation/kyodo_nor-2026112401001194' },
+        { name: 'NNN via Yahoo! News', url: 'https://news.yahoo.co.jp/articles/190df614a47d0e23fe67e9db5576d9d4d4e80ea4' },
+        { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261124de80586' },
+      ],
+      quiz: [
+        ['What kind of winter does the Japan Meteorological Agency expect?', 'Warmer than usual in much of Japan', 'Much colder than usual', 'Just like every other year', 'Very hot, like summer'],
+        ['Why?', 'El Niño makes it hard for cold air to reach Japan', 'A volcano is warming the air', 'The Sea of Japan is freezing over', 'Typhoons keep bringing hot air'],
+        ['What may still happen this winter?', 'Heavy snow when strong cold air comes in', 'A heat wave in January', 'Floods all over Okinawa', 'No change in temperature at all'],
+      ],
+      levels: {
+        N5: {
+          title: 'この　冬[ふゆ]は　暖[あたた]かく　なりそうです',
+          lines: [
+            ['二十四日[にじゅうよっか]、気象庁[きしょうちょう]は、十二月[じゅうにがつ]から　二月[にがつ]までの　天気[てんき]の　予想[よそう]を　出[だ]しました。', 'On the 24th, the Japan Meteorological Agency gave its forecast for the weather from December to February.', '気象庁 is the Japan Meteorological Agency. 予想 means a forecast or guess.'],
+            ['この　冬[ふゆ]は、日本[にほん]の　多[おお]くの　所[ところ]で、いつもの　年[とし]より　暖[あたた]かく　なりそうです。', 'This winter looks like it will be warmer than usual in many places in Japan.'],
+            ['エルニーニョが　続[つづ]いて　いるので、冷[つめ]たい　空気[くうき]が　日本[にほん]に　来[き]にくく　なります。', 'Because El Niño is continuing, it becomes hard for cold air to come to Japan.', 'エルニーニョ is El Niño, when the sea in the eastern Pacific near the equator gets warmer than usual. 〜にくい means "hard to ~".'],
+            ['日本海[にほんかい]の　ほうの　雪[ゆき]は、いつもより　少[すく]ないと　考[かんが]えて　います。', 'It thinks there will be less snow than usual on the Sea of Japan side.', 'The Sea of Japan side (日本海側) usually gets a lot of snow in winter.'],
+            ['でも、ときどき　とても　冷[つめ]たい　空気[くうき]が　来[き]て、雪[ゆき]が　たくさん　降[ふ]る　ことも　あります。', 'But sometimes very cold air comes, and a lot of snow can fall.'],
+            ['東京[とうきょう]などの　太平洋[たいへいよう]の　ほうでも、雪[ゆき]が　たくさん　降[ふ]るかもしれません。', 'Even on the Pacific side, such as Tokyo, a lot of snow may fall.'],
+            ['暖[あたた]かい　日[ひ]と　寒[さむ]い　日[ひ]が　大[おお]きく　変[か]わる　冬[ふゆ]に　なりそうです。', 'It looks like a winter with big swings between warm and cold days.'],
+          ],
+        },
+        N4: {
+          title: 'この冬[ふゆ]は暖冬[だんとう]の見込[みこ]み　でも大雪[おおゆき]のおそれも',
+          lines: [
+            ['気象庁[きしょうちょう]は二十四日[にじゅうよっか]、十二月[じゅうにがつ]から来年[らいねん]二月[にがつ]までの3か月[げつ]予報[よほう]を発表[はっぴょう]しました。', 'On the 24th, the Japan Meteorological Agency announced its three-month forecast for December to next February.', '予報 is a (weather) forecast.'],
+            ['東日本[ひがしにほん]と西日本[にしにほん]、沖縄[おきなわ]・奄美[あまみ]では、気温[きおん]が平年[へいねん]より高[たか]くなる見込[みこ]みです。', 'In eastern and western Japan and in Okinawa and Amami, temperatures are expected to be higher than normal.', '平年 is the average of past years. 見込み means an expectation. 奄美 is a group of islands in Kagoshima.'],
+            ['北日本[きたにほん]も平年[へいねん]並[な]みか高[たか]く、全国的[ぜんこくてき]に暖冬[だんとう]になりそうです。', 'Northern Japan will also be about normal or higher, and it looks like a warm winter across the country.', '暖冬 is a warm winter. 並み means "about the same as".'],
+            ['過去[かこ]最大[さいだい]の強[つよ]さのエルニーニョ現象[げんしょう]が続[つづ]いていて、日本[にほん]の近[ちか]くに寒気[かんき]が入[はい]りにくくなるためです。', 'It is because the strongest El Niño on record is continuing, which makes it hard for cold air to come near Japan.', '寒気 is cold air.'],
+            ['日本海[にほんかい]側[がわ]の雪[ゆき]の量[りょう]は、平年[へいねん]より少[すく]ないと予想[よそう]されています。', 'The amount of snow on the Sea of Japan side is expected to be less than normal.'],
+            ['ただ、一時的[いちじてき]に強[つよ]い寒気[かんき]が入[はい]ると、気温[きおん]が大[おお]きく変[か]わって大雪[おおゆき]になるおそれがあります。', 'However, when strong cold air comes in for a while, temperatures may swing a lot and heavy snow may fall.', '一時的に means for a short time. 〜おそれがある means there is a risk of ~.'],
+            ['関東[かんとう]など太平洋[たいへいよう]側[がわ]でも、大雪[おおゆき]になる可能性[かのうせい]があるということです。', 'Heavy snow is possible even on the Pacific side, such as the Kanto region, it is said.'],
+          ],
+        },
+        N3: {
+          title: '今冬[こんとう]は全国的[ぜんこくてき]に暖冬[だんとう]傾向[けいこう]　寒気[かんき]流入[りゅうにゅう]で大雪[おおゆき]のおそれも　気象庁[きしょうちょう]3か月[げつ]予報[よほう]',
+          lines: [
+            ['気象庁[きしょうちょう]は二十四日[にじゅうよっか]、十二月[じゅうにがつ]から来年[らいねん]二月[にがつ]までの3か月[げつ]予報[よほう]を発表[はっぴょう]し、この冬[ふゆ]は全国的[ぜんこくてき]に暖冬[だんとう]傾向[けいこう]になるとの見通[みとお]しを示[しめ]した。', 'The Japan Meteorological Agency announced its three-month forecast for December to next February on the 24th, saying this winter is likely to be warm across the country.', '傾向 means a tendency. 見通し is an outlook.'],
+            ['平均[へいきん]気温[きおん]は、関東[かんとう]甲信[こうしん]や北陸[ほくりく]、東海[とうかい]の東日本[ひがしにほん]と、近畿[きんき]から九州[きゅうしゅう]までの西日本[にしにほん]、沖縄[おきなわ]・奄美[あまみ]で平年[へいねん]より高[たか]く、北日本[きたにほん]でも平年[へいねん]並[な]みか高[たか]いと予想[よそう]されている。', 'Average temperatures are forecast to be above normal in eastern Japan (Kanto-Koshin, Hokuriku, Tokai), western Japan from Kinki to Kyushu, and Okinawa and Amami, and normal or above in northern Japan.', 'These are the regions the agency uses for its forecasts. 甲信 is Yamanashi and Nagano.'],
+            ['過去[かこ]最大[さいだい]級[きゅう]とされるエルニーニョ現象[げんしょう]の影響[えいきょう]で、日本[にほん]付近[ふきん]には寒気[かんき]が流[なが]れ込[こ]みにくくなるとみられる。', 'Because of an El Niño said to be among the strongest on record, cold air is expected to have trouble flowing in around Japan.', '〜級 means "of the class of". 〜とみられる means "is thought to".'],
+            ['このため、日本海[にほんかい]側[がわ]の降雪量[こうせつりょう]は少[すく]なめになる見込[みこ]みだ。', 'For this reason, snowfall on the Sea of Japan side is expected to be on the low side.', '少なめ means "on the small side".'],
+            ['一方[いっぽう]で、一時的[いちじてき]に強[つよ]い寒気[かんき]が流[なが]れ込[こ]むと気温[きおん]の変化[へんか]が大[おお]きくなり、大雪[おおゆき]となるおそれがある。', 'On the other hand, when strong cold air flows in for a while, temperatures may change sharply and heavy snow may fall.'],
+            ['首都圏[しゅとけん]など太平洋[たいへいよう]側[がわ]でも、大雪[おおゆき]になる可能性[かのうせい]があると指摘[してき]されている。', 'It has been pointed out that heavy snow is possible even on the Pacific side, including the Tokyo area.', '首都圏 is the Tokyo metropolitan area. 指摘する means to point out.'],
+            ['暖冬[だんとう]の予想[よそう]であっても、急[きゅう]な大雪[おおゆき]や寒[さむ]さへの備[そな]えは欠[か]かせない。', 'Even with a warm winter forecast, being ready for sudden heavy snow and cold is a must.', '欠かせない means "indispensable, a must".'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-11-24-ideco-limits-raised',
       date: '2026-11-24',
       emoji: '💴',

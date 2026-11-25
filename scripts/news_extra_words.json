@@ -14833,5 +14833,370 @@
     "かいすう",
     "number of times",
     "noun"
+  ],
+  "ICC": [
+    "アイシーシー",
+    "the ICC, International Criminal Court",
+    "organization"
+  ],
+  "赤根": [
+    "あかね",
+    "Akane (family name)",
+    "name"
+  ],
+  "智子": [
+    "ともこ",
+    "Tomoko (given name)",
+    "name"
+  ],
+  "赤根智子": [
+    "あかねともこ",
+    "Tomoko Akane, ICC president",
+    "name"
+  ],
+  "英断": [
+    "えいだん",
+    "a wise, bold decision",
+    "noun"
+  ],
+  "所長": [
+    "しょちょう",
+    "head, president (of an institution)",
+    "noun"
+  ],
+  "分担": [
+    "ぶんたん",
+    "sharing (of costs, work)",
+    "noun"
+  ],
+  "分担金": [
+    "ぶんたんきん",
+    "share of costs, contribution",
+    "noun"
+  ],
+  "ハーグ": [
+    "ハーグ",
+    "The Hague",
+    "place name"
+  ],
+  "15パーセント": [
+    "じゅうごパーセント",
+    "15 percent",
+    "number + counter"
+  ],
+  "15パーセント程度": [
+    "じゅうごパーセントていど",
+    "about 15 percent",
+    "number + counter"
+  ],
+  "全額": [
+    "ぜんがく",
+    "the full amount",
+    "noun"
+  ],
+  "指定": [
+    "してい",
+    "designation; to designate",
+    "noun"
+  ],
+  "我が国": [
+    "わがくに",
+    "our country",
+    "noun"
+  ],
+  "一貫": [
+    "いっかん",
+    "consistency; 一貫して consistently",
+    "noun"
+  ],
+  "下旬": [
+    "げじゅん",
+    "the last ten days of a month",
+    "noun"
+  ],
+  "締約": [
+    "ていやく",
+    "concluding (a treaty)",
+    "noun"
+  ],
+  "締約国": [
+    "ていやくこく",
+    "states parties (to a treaty)",
+    "noun"
+  ],
+  "楽天": [
+    "らくてん",
+    "Rakuten (company)",
+    "organization"
+  ],
+  "楽天証券": [
+    "らくてんしょうけん",
+    "Rakuten Securities",
+    "organization"
+  ],
+  "441万件": [
+    "よんひゃくよんじゅういちまんけん",
+    "4.41 million items",
+    "number + counter"
+  ],
+  "119万件": [
+    "ひゃくじゅうきゅうまんけん",
+    "1.19 million items",
+    "number + counter"
+  ],
+  "おかしな": [
+    "おかしな",
+    "strange, odd",
+    "adjective"
+  ],
+  "約441万件": [
+    "やくよんひゃくよんじゅういちまんけん",
+    "about 4.41 million items",
+    "number + counter"
+  ],
+  "約322万件": [
+    "やくさんびゃくにじゅうにまんけん",
+    "about 3.22 million items",
+    "number + counter"
+  ],
+  "約119万件": [
+    "やくひゃくじゅうきゅうまんけん",
+    "about 1.19 million items",
+    "number + counter"
+  ],
+  "約1198万": [
+    "やくせんひゃくきゅうじゅうはちまん",
+    "about 11.98 million",
+    "number"
+  ],
+  "約168万件": [
+    "やくひゃくろくじゅうはちまんけん",
+    "about 1.68 million items",
+    "number + counter"
+  ],
+  "約1125万": [
+    "やくせんひゃくにじゅうごまん",
+    "about 11.25 million",
+    "number"
+  ],
+  "性別": [
+    "せいべつ",
+    "gender, sex",
+    "noun"
+  ],
+  "暗証": [
+    "あんしょう",
+    "password (暗証番号 PIN)",
+    "noun"
+  ],
+  "暗証番号": [
+    "あんしょうばんごう",
+    "PIN number",
+    "noun"
+  ],
+  "漏洩": [
+    "ろうえい",
+    "leak (of information)",
+    "noun"
+  ],
+  "第2報": [
+    "だいにほう",
+    "second report",
+    "noun"
+  ],
+  "第1報": [
+    "だいいっぽう",
+    "first report",
+    "noun"
+  ],
+  "開設": [
+    "かいせつ",
+    "opening, setting up",
+    "noun"
+  ],
+  "申込": [
+    "もうしこみ",
+    "application",
+    "noun"
+  ],
+  "申込者": [
+    "もうしこみしゃ",
+    "applicant",
+    "noun"
+  ],
+  "重複": [
+    "ちょうふく",
+    "duplication, overlap",
+    "noun"
+  ],
+  "区分": [
+    "くぶん",
+    "category, bracket",
+    "noun"
+  ],
+  "のみ": [
+    "のみ",
+    "only",
+    "particle"
+  ],
+  "徴求": [
+    "ちょうきゅう",
+    "demanding (a report)",
+    "noun"
+  ],
+  "報告徴求命令": [
+    "ほうこくちょうきゅうめいれい",
+    "order to submit a report",
+    "noun"
+  ],
+  "暖冬": [
+    "だんとう",
+    "a warm winter",
+    "noun"
+  ],
+  "西日本": [
+    "にしにほん",
+    "western Japan",
+    "place name"
+  ],
+  "北日本": [
+    "きたにほん",
+    "northern Japan",
+    "place name"
+  ],
+  "奄美": [
+    "あまみ",
+    "Amami (islands)",
+    "place name"
+  ],
+  "寒気": [
+    "かんき",
+    "cold air",
+    "noun"
+  ],
+  "今冬": [
+    "こんとう",
+    "this winter",
+    "noun"
+  ],
+  "流入": [
+    "りゅうにゅう",
+    "inflow",
+    "noun"
+  ],
+  "甲信": [
+    "こうしん",
+    "Koshin (Yamanashi and Nagano)",
+    "place name"
+  ],
+  "関東甲信": [
+    "かんとうこうしん",
+    "Kanto-Koshin region",
+    "place name"
+  ],
+  "降雪": [
+    "こうせつ",
+    "snowfall",
+    "noun"
+  ],
+  "降雪量": [
+    "こうせつりょう",
+    "amount of snowfall",
+    "noun"
+  ],
+  "少なめ": [
+    "すくなめ",
+    "on the small side",
+    "adjective"
+  ],
+  "3か月予報": [
+    "さんかげつよほう",
+    "three-month forecast",
+    "noun"
+  ],
+  "東海": [
+    "とうかい",
+    "Tokai region",
+    "place name"
+  ],
+  "強さ": [
+    "つよさ",
+    "strength",
+    "noun"
+  ],
+  "寒さ": [
+    "さむさ",
+    "the cold, coldness",
+    "noun"
+  ],
+  "首都圏": [
+    "しゅとけん",
+    "the Tokyo metropolitan area",
+    "place name"
+  ],
+  "米政権": [
+    "べいせいけん",
+    "the US administration",
+    "organization"
+  ],
+  "一方で": [
+    "いっぽうで",
+    "on the other hand",
+    "expression"
+  ],
+  "一時的": [
+    "いちじてき",
+    "temporary",
+    "na-adjective"
+  ],
+  "最大級": [
+    "さいだいきゅう",
+    "among the largest, of the largest class",
+    "noun"
+  ],
+  "全国的": [
+    "ぜんこくてき",
+    "nationwide",
+    "na-adjective"
+  ],
+  "平年並み": [
+    "へいねんなみ",
+    "about normal (for the time of year)",
+    "noun"
+  ],
+  "日本海側": [
+    "にほんかいがわ",
+    "the Sea of Japan side",
+    "place name"
+  ],
+  "欠かせない": [
+    "かかせない",
+    "indispensable, a must",
+    "adjective"
+  ],
+  "平均": [
+    "へいきん",
+    "average",
+    "noun"
+  ],
+  "拠出国": [
+    "きょしゅつこく",
+    "contributing country",
+    "noun"
+  ],
+  "活動費": [
+    "かつどうひ",
+    "running costs",
+    "noun"
+  ],
+  "保有者": [
+    "ほゆうしゃ",
+    "holder, owner",
+    "noun"
+  ],
+  "商品別": [
+    "しょうひんべつ",
+    "by product",
+    "noun"
   ]
 }
