@@ -8677,6 +8677,28 @@ body.vq-no-furigana #screen-vocab-questions rt { visibility: hidden; }
 .vq-lookalikes b { font-family: var(--font-jp); font-size: 1.1rem; }
 .vq-lookalike-en { color: var(--text-dim); font-size: 0.88rem; }
 
+/* JLPT Questions: particles — why, why not the others, the grammar point and its Bunpro link */
+.vq-pt-why { margin-bottom: 8px; }
+.vq-pt-why b, .vq-pt-others b { font-family: var(--font-jp); font-size: 1.05rem; }
+.vq-pt-why b { color: var(--green); }
+.vq-pt-subtitle { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-muted); margin: 10px 0 4px; }
+.vq-pt-others, .vq-pt-keep { margin: 0 0 4px 1.2em; display: flex; flex-direction: column; gap: 4px; }
+.vq-pt-others { list-style: none; margin-left: 0; color: var(--text-dim); }
+.vq-pt { margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--border); }
+.vq-pt p + p { margin-top: 6px; }
+.vq-pt-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+.vq-pt-tag { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--accent); }
+.vq-pt-name { font-weight: 700; }
+.vq-pt-name b { font-family: var(--font-jp); font-size: 1.15rem; }
+.vq-pt-gist { font-style: italic; color: var(--text-dim); }
+.vq-pt-link { display: inline-block; margin-top: 10px; font-weight: 700; }
+.vq-missed-point { font-size: 0.8rem; }
+.vq-pt-list { margin: 10px 0 4px; font-size: 0.9rem; }
+.vq-pt-list summary { cursor: pointer; color: var(--text-dim); }
+.vq-pt-level { display: flex; gap: 10px; align-items: flex-start; margin-top: 10px; }
+.vq-pt-level ul { list-style: none; display: flex; flex-wrap: wrap; gap: 4px 14px; }
+.vq-pt-level b { font-family: var(--font-jp); margin-right: 3px; }
+
 /* Particle quiz: JLPT level filter on the setup screen */
 .pq-level-row { align-items: center; }
 .pq-level-label { font-size: 0.8rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.04em; }

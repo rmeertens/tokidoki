@@ -14,6 +14,10 @@
 //     by scripts/build_vocab_fill.mjs).
 //   Similar meaning (言い換え類義) — which sentence means about the same as
 //     the underlined part? (similar-meaning-data.js)
+//   Particles (文法形式の判断) — which particle goes in the （　）? Once
+//     answered: why it's that one and not the others, the grammar point it
+//     tests, explained, and a link to Bunpro's page for it
+//     (particle-questions-data.js).
 //
 // Every question is also a flashcard: once answered you grade it Again or
 // Good, through the shared SRS store (app.js's window.TokidokiSRS, cards
@@ -60,7 +64,7 @@
 
   // Every set: { id, kind, level, questions }, each question with its
   // choices (the answer first).
-  function sets(fill, similar, kanji) {
+  function sets(fill, similar, kanji, particles) {
     const out = [];
     for (const [kind, field] of [['readword', 'v'], ['reading', 'r'], ['writing', 'x']]) {
       for (const level of LEVELS) {
@@ -88,6 +92,14 @@
         q: q.q, en: q.en, note: q.note,
         choices: [q.ok, ...q.wrong],
         choicesEn: [q.okEn, ...(q.wrongEn || [])],
+      })) });
+    }
+    const points = (particles || {}).POINTS || {};
+    for (const level of LEVELS) {
+      out.push({ id: `particle-${level}`, kind: 'particle', level, questions: ((particles || {})[level] || []).map(q => ({
+        kind: 'particle', key: `${plain(q.b)}（${q.c[0]}）${plain(q.a)}`,
+        b: q.b, a: q.a, en: q.en,
+        choices: q.c, x: q.x, point: Object.assign({ id: q.p }, points[q.p]),
       })) });
     }
     return out;
@@ -127,7 +139,52 @@
   // The ones answered wrong, or marked Again: what still needs answering.
   const toRedo = round => round.filter(q => q.pick !== 0 || q.grade === 1);
 
-  const api = { rubyHtml, underlinedHtml, plain, kanaOf, sets, cardId, counts, makeRound, score, toRedo, ROUND };
+  // Bunpro's page for a grammar point: https://bunpro.jp/grammar_points/<slug>.
+  const bunproUrl = slug => `https://bunpro.jp/grammar_points/${encodeURIComponent(slug)}`;
+
+  // Explanations: furigana markup, and *a few words* in italics.
+  const proseHtml = text => rubyHtml(text).replace(/\*([^*]+)\*/g, '<em>$1</em>');
+
+  // A particle question, once answered: why the answer fits, why each other
+  // choice doesn't, then the grammar point — what it is, how it works, what
+  // to keep in mind — with a link to Bunpro's page for it.
+  function particleWhyHtml(question) {
+    const pt = question.point;
+    const x = question.x || [];
+    // The choice in bold, then its note — whose own first word, when it is
+    // the choice (“し lists reasons”), becomes that bold word.
+    const noted = (c, note = '') => (note.startsWith(c) && !/^[ぁ-ゖ]/.test(note.slice(c.length))
+      ? `<b lang="ja">${esc(c)}</b>${proseHtml(note.slice(c.length))}`
+      : `<b lang="ja">${esc(c)}</b> ${proseHtml(note)}`);
+    const others = question.choices.slice(1).map((c, k) => `<li>${noted(c, x[k + 1])}</li>`).join('');
+    return `<p class="vq-pt-why">${noted(question.choices[0], x[0])}</p>
+      <div class="vq-pt-subtitle">Why not the others</div>
+      <ul class="vq-pt-others">${others}</ul>
+      <div class="vq-pt">
+        <div class="vq-pt-head"><span class="vq-pt-tag">Grammar point</span> <span class="vq-pt-name"><b lang="ja">${esc(pt.name)}</b> ${esc(pt.use)}</span></div>
+        <p class="vq-pt-gist">${proseHtml(pt.gist)}</p>
+        ${(pt.about || []).map(p => `<p>${proseHtml(p)}</p>`).join('')}
+        <div class="vq-pt-subtitle">Keep in mind</div>
+        <ul class="vq-pt-keep">${(pt.keep || []).map(k => `<li>${proseHtml(k)}</li>`).join('')}</ul>
+        <a class="vq-pt-link" href="${esc(bunproUrl(pt.bunpro))}" target="_blank" rel="noopener">Read more on Bunpro: <span lang="ja">${esc(pt.name)}</span> ↗</a>
+      </div>`;
+  }
+
+  // Every grammar point the particle questions test, by the level where it
+  // first comes up, each linked to Bunpro.
+  function pointsListHtml(particles) {
+    const seen = new Set();
+    return LEVELS.map(level => {
+      const ids = ((particles || {})[level] || []).map(q => q.p).filter(id => !seen.has(id) && seen.add(id));
+      if (!ids.length) return '';
+      return `<div class="vq-pt-level"><span class="sf-item-level">${level}</span><ul>${ids.map(id => {
+        const pt = particles.POINTS[id];
+        return `<li><a href="${esc(bunproUrl(pt.bunpro))}" target="_blank" rel="noopener"><b lang="ja">${esc(pt.name)}</b> ${esc(pt.use)}</a></li>`;
+      }).join('')}</ul></div>`;
+    }).join('');
+  }
+
+  const api = { rubyHtml, underlinedHtml, plain, kanaOf, sets, cardId, counts, makeRound, score, toRedo, bunproUrl, particleWhyHtml, pointsListHtml, ROUND };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   global.VocabQuestions = api;
   if (typeof document === 'undefined') return;
@@ -141,7 +198,7 @@
     try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* storage unavailable */ }
   }
 
-  const SETS = sets(global.VOCAB_FILL, global.SIMILAR_MEANING, global.VOCAB_KANJI);
+  const SETS = sets(global.VOCAB_FILL, global.SIMILAR_MEANING, global.VOCAB_KANJI, global.PARTICLE_QUESTIONS);
   const settings = Object.assign({ furigana: true }, load(SETTINGS_KEY, {}));
   const store = Object.assign({ best: {}, last: {} }, load(STORE_KEY, {}));
   // The questions' SRS cards: app.js's copy of the store once it's running
@@ -172,6 +229,7 @@
     writing: { title: 'Kanji writing', ja: '表記', about: 'How is the underlined word written?' },
     fill: { title: 'Fill in the blank', ja: '文脈規定', about: 'Which word goes in the （　）?' },
     similar: { title: 'Similar meaning', ja: '言い換え類義', about: 'Which sentence means about the same as the underlined part?' },
+    particle: { title: 'Particles', ja: '助詞', about: 'Which particle goes in the （　）?' },
   };
 
   function countsText(set) {
@@ -198,6 +256,7 @@
     for (const kind of Object.keys(KIND)) {
       $(`vq-list-${kind}`).innerHTML = SETS.filter(s => s.kind === kind && s.questions.length).map(setHtml).join('');
     }
+    if ($('vq-particle-points')) $('vq-particle-points').innerHTML = pointsListHtml(global.PARTICLE_QUESTIONS);
   }
 
   // The Furigana switch is on the home screen and on the question screen;
@@ -286,6 +345,7 @@
     (global.KanjiCards ? KanjiCards.breakdownHtml(plain(text), from, title ? { title } : {}) : '');
 
   function whyHtml(question) {
+    if (question.kind === 'particle') return particleWhyHtml(question);
     if (question.kind === 'similar') {
       const kanji = breakdown(question.q.split('_')[1] + question.choices[0], {}, 'Kanji in this question');
       return `<p>${esc(question.note)}</p>${kanji}`;
@@ -422,8 +482,11 @@
     const still = due
       ? `<b>${due} question${due === 1 ? '' : 's'}</b> in this set still need${due === 1 ? 's' : ''} answering — they come first in your next round.`
       : `Nothing in this set is waiting to be answered again.`;
+    // A particle question also names its grammar point, linked to Bunpro.
+    const pointOf = question => (question.kind === 'particle'
+      ? `<a class="vq-missed-point" href="${esc(bunproUrl(question.point.bunpro))}" target="_blank" rel="noopener"><b lang="ja">${esc(question.point.name)}</b> ${esc(question.point.use)} ↗</a>` : '');
     $('vq-missed').innerHTML = `${redo.length ? `<div class="vq-missed-title">To answer again</div>
-      <ul class="vq-missed-list">${redo.map(q => `<li class="${q.pick === 0 ? '' : 'vq-missed-wrong'}">${answerOf(questionOf(q))}${q.pick === 0 ? '<span class="vq-missed-tag">marked Again</span>' : ''}</li>`).join('')}</ul>` : ''}
+      <ul class="vq-missed-list">${redo.map(q => `<li class="${q.pick === 0 ? '' : 'vq-missed-wrong'}">${answerOf(questionOf(q))}${pointOf(questionOf(q))}${q.pick === 0 ? '<span class="vq-missed-tag">marked Again</span>' : ''}</li>`).join('')}</ul>` : ''}
       <p class="vq-missed-still">${still}${fresh ? ` ${fresh} never seen yet.` : ''}</p>`;
     $('btn-vq-again').focus({ preventScroll: true });
   }

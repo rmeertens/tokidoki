@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" id="viewport-meta" content="width=device-width, initial-scale=1.0">
-  <title>JLPT Vocabulary Questions — Kanji Reading, Writing, Fill in the Blank | Tokidoki</title>
-  <meta name="description" content="Free JLPT-style vocabulary practice for N5, N4 and N3: read the underlined kanji, pick the right kanji for a word in hiragana, choose the word that fits the blank, or the sentence that means the same. Four choices, with explanations.">
+  <title>JLPT Vocabulary &amp; Particle Questions — Kanji Reading, Writing, Fill in the Blank | Tokidoki</title>
+  <meta name="description" content="Free JLPT-style practice for N5, N4 and N3: read the underlined kanji, pick the right kanji for a word in hiragana, choose the word or particle that fits the blank, or the sentence that means the same. Four choices, with explanations.">
   <meta property="og:title" content="JLPT Vocabulary Questions | Tokidoki">
-  <meta property="og:description" content="JLPT-style vocabulary questions, N5 to N3: kanji reading, kanji writing, fill in the blank and similar meaning, four choices each. No login required.">
+  <meta property="og:description" content="JLPT-style vocabulary and particle questions, N5 to N3: kanji reading, kanji writing, fill in the blank, similar meaning and particles, four choices each. No login required.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://tokidoki.meertens.dev/vocab-questions.html">
   <meta property="og:site_name" content="Tokidoki">
@@ -17,11 +17,11 @@
   <meta property="og:image:alt" content="Tokidoki — free Japanese practice, one plate at a time">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="JLPT Vocabulary Questions | Tokidoki">
-  <meta name="twitter:description" content="JLPT-style vocabulary questions, N5 to N3: kanji reading and writing, fill in the blank, similar meaning.">
+  <meta name="twitter:description" content="JLPT-style vocabulary and particle questions, N5 to N3: kanji reading and writing, fill in the blank, similar meaning, particles.">
   <meta name="twitter:image" content="https://tokidoki.meertens.dev/og-image.png">
   <link rel="canonical" href="https://tokidoki.meertens.dev/vocab-questions.html">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "JLPT Vocabulary Questions — Kanji Reading, Writing, Fill in the Blank", "description": "Free JLPT-style vocabulary practice for N5, N4 and N3: read the underlined kanji, pick the right kanji for a word in hiragana, choose the word that fits the blank, or the sentence that means the same. Four choices, with explanations.", "url": "https://tokidoki.meertens.dev/vocab-questions.html", "inLanguage": "en", "learningResourceType": "quiz", "educationalLevel": "JLPT N5–N3", "isAccessibleForFree": true, "isPartOf": {"@type": "WebSite", "name": "Tokidoki", "url": "https://tokidoki.meertens.dev/"}}</script>
-  <link rel="stylesheet" href="style.css?v=122">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "JLPT Vocabulary Questions — Kanji Reading, Writing, Fill in the Blank", "description": "Free JLPT-style practice for N5, N4 and N3: read the underlined kanji, pick the right kanji for a word in hiragana, choose the word or particle that fits the blank, or the sentence that means the same. Four choices, with explanations.", "url": "https://tokidoki.meertens.dev/vocab-questions.html", "inLanguage": "en", "learningResourceType": "quiz", "educationalLevel": "JLPT N5–N3", "isAccessibleForFree": true, "isPartOf": {"@type": "WebSite", "name": "Tokidoki", "url": "https://tokidoki.meertens.dev/"}}</script>
+  <link rel="stylesheet" href="style.css?v=123">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -111,7 +111,7 @@
         <div>
           <p class="lis-hero-kicker" lang="ja">もんだい · JLPT N5–N3</p>
           <h2 class="lis-hero-title">JLPT vocabulary questions</h2>
-          <p class="lis-hero-sub">The vocabulary questions of the JLPT, four choices each, ten at a time. Once answered, mark each one Again or Good, as with flashcards: the due ones come first. Printable versions are on the <a href="kanji.html">Practice Sheets</a> page.</p>
+          <p class="lis-hero-sub">The vocabulary and particle questions of the JLPT, four choices each, ten at a time. Once answered, mark each one Again or Good, as with flashcards: the due ones come first. Printable versions are on the <a href="kanji.html">Practice Sheets</a> page.</p>
         </div>
       </section>
 
@@ -135,6 +135,14 @@
       <h3 class="lis-heading">Similar meaning <span lang="ja" class="vq-title-ja">言い換え類義</span></h3>
       <p class="tab-intro">Which sentence means about the same as the underlined part?</p>
       <div class="sf-list" id="vq-list-similar"></div>
+
+      <h3 class="lis-heading">Particles <span lang="ja" class="vq-title-ja">助詞</span></h3>
+      <p class="tab-intro">Which particle goes in the （　）? は or が, に or で, まで or までに, について or にとって… Once answered you see why it’s that one and not the others, the grammar point it tests explained — with what to keep in mind — and a link to Bunpro’s page on it.</p>
+      <div class="sf-list" id="vq-list-particle"></div>
+      <details class="vq-pt-list">
+        <summary>The grammar points these questions test</summary>
+        <div id="vq-particle-points"></div>
+      </details>
 
       <div class="reset-section">
         <button id="btn-vq-reset" class="btn-danger">Reset progress</button>
@@ -179,7 +187,8 @@
   <script src="vocab-fill-data.js?v=1"></script>
   <script src="vocab-kanji-data.js?v=2"></script>
   <script src="similar-meaning-data.js?v=3"></script>
-  <script src="vocab-questions.js?v=14"></script>
+  <script src="particle-questions-data.js?v=1"></script>
+  <script src="vocab-questions.js?v=15"></script>
   <script src="kanji-cards.js?v=2"></script>
   <script src="swipe-cards.js?v=5"></script>
   <script src="app.js?v=87"></script>
@@ -190,9 +199,9 @@
 
   <!-- Static content for search engines -->
   <section id="seo-content" class="page-about">
-    <h1>JLPT vocabulary questions — kanji reading, kanji writing, fill in the blank and similar meaning</h1>
+    <h1>JLPT vocabulary and particle questions — kanji reading, kanji writing, fill in the blank, similar meaning and particles</h1>
     <p>
-      Free, no-login practice for four kinds of vocabulary question on the Japanese-Language
+      Free, no-login practice for five kinds of vocabulary and grammar question on the Japanese-Language
       Proficiency Test, at N5, N4 and N3. In <b>kanji reading</b> (漢字読み) you pick how the
       underlined word is read: 楽しかった is たのしかった, not うれしかった or いそがしかった — or,
       harder, がいこく, not がいごく or がいこっく. <b>Kanji writing</b> (表記) is
@@ -202,7 +211,10 @@
       the form the sentence needs (集めて, 起きます), い- and な-adjectives. In <b>similar
       meaning</b> (言い換え類義) you choose the sentence that means about the same as the
       underlined part: おととい and ふつかまえ, 留守です and 家にいません, 延期になった and
-      後の日に変わった. Every answer comes with the word's meaning, the look-alike kanji, the meaning of all four words or a short note,
+      後の日に変わった. In <b>particles</b> (助詞) you choose the particle that fits: は or が,
+      に or で, まで or までに, について, にとって or として — and once answered, every question
+      explains why that particle and not the others, names the grammar point it tests, explains
+      it with what to keep in mind, and links to Bunpro's page on it. Every answer comes with the word's meaning, the look-alike kanji, the meaning of all four words or a short note,
       and the English of the sentence. Ten questions at a time, with optional furigana. Each
       question is also a flashcard: mark it Again or Good, and the due ones come first. The same questions are also printable as PDF worksheets
       with the answers on the last page.

@@ -203,15 +203,61 @@ const fs = require('fs');
   // ─── The practice page ───
   const VQ = require('./vocab-questions.js');
   require('./vocab-fill-data.js');
-  const allSets = VQ.sets(global.VOCAB_FILL, SIMILAR, KANJI);
+  const PARTICLES = require('./particle-questions-data.js');
+  const allSets = VQ.sets(global.VOCAB_FILL, SIMILAR, KANJI, PARTICLES);
   assert.deepStrictEqual(allSets.map(s => s.id), ['readword-N5', 'readword-N4', 'readword-N3', 'reading-N5', 'reading-N4', 'reading-N3', 'writing-N5', 'writing-N4', 'writing-N3',
-    'fill-N5', 'fill-N4', 'fill-N3', 'similar-N5', 'similar-N4', 'similar-N3']);
+    'fill-N5', 'fill-N4', 'fill-N3', 'similar-N5', 'similar-N4', 'similar-N3', 'particle-N5', 'particle-N4', 'particle-N3']);
   const reading = allSets[3];
   assert.ok(allSets[0].questions.every(q => q.words.length === 4 && q.choices[0] === VQ.kanaOf(q.t)), 'reading (words): choices');
   assert.strictEqual(VQ.cardId(reading, reading.questions[0]), `vq:reading-N5:${KANJI.N5.find(q => q.r).w}|${KANJI.N5.find(q => q.r).k}`);
   assert.ok(allSets[6].questions.every(q => q.choices[0] === VQ.plain(q.t)), 'writing: the answer is the word in kanji');
   assert.strictEqual(VQ.kanaOf('{泳|およ}いで'), 'およいで');
-  const sets = allSets.slice(9);
+  // ─── Particles ───
+  // Every grammar point: a name, its use, a gist, an explanation, what to
+  // keep in mind, and a Bunpro page (one of the slugs checked to exist).
+  const BUNPRO = ['は', 'が', 'を', 'に', 'へ', 'で', 'と-and', 'と-with', 'も', 'の', 'や', 'から', 'noun-まで', 'から-because', 'ので', 'か', 'ね', 'よ',
+    'だけ', 'より-のほうが', 'くらい1', 'しか-ない', 'より', 'ほど', 'でも', 'までに', 'v-まで', 'し-し', 'とか-とか', 'だけでなく', 'に-frequency', 'が-but',
+    'の-subject', 'について', 'に取って', 'として', 'によって-による', 'に対して', 'さえ', 'こそ', 'ばかり', 'に比べて'];
+  for (const [id, pt] of Object.entries(PARTICLES.POINTS)) {
+    assert.ok(pt.name && pt.use && pt.gist, `${id}: name, use, gist`);
+    assert.ok(Array.isArray(pt.about) && pt.about.length && pt.about.every(Boolean), `${id}: explanation`);
+    assert.ok(Array.isArray(pt.keep) && pt.keep.length && pt.keep.every(Boolean), `${id}: keep in mind`);
+    assert.ok(BUNPRO.includes(pt.bunpro), `${id}: Bunpro page ${pt.bunpro} not one of the checked ones`);
+  }
+  assert.strictEqual(VQ.bunproUrl('に'), 'https://bunpro.jp/grammar_points/%E3%81%AB');
+  assert.strictEqual(VQ.bunproUrl('noun-まで'), 'https://bunpro.jp/grammar_points/noun-%E3%81%BE%E3%81%A7');
+  const used = new Set();
+  const balanced = t => !/\{[^}]*\{|\}[^{]*\}/.test(t) && (t.match(/\{/g) || []).length === (t.match(/\}/g) || []).length
+    && (t.match(/\{/g) || []).length === (t.match(/\{[^|}]+\|[ぁ-ゖー]+\}/g) || []).length;
+  for (const level of m.LEVELS) {
+    const qs = PARTICLES[level];
+    assert.ok(qs.length >= 15, `${level}: ${qs.length} particle questions`);
+    const set = allSets.find(s => s.id === `particle-${level}`);
+    assert.strictEqual(new Set(set.questions.map(q => VQ.cardId(set, q))).size, qs.length, `${level}: two particle questions share a card`);
+    for (const q of qs) {
+      const where = `${level} ${q.b}（${q.c[0]}）${q.a}`;
+      assert.ok(PARTICLES.POINTS[q.p], `${where}: no grammar point ${q.p}`);
+      used.add(q.p);
+      assert.strictEqual(q.c.length, 4, where);
+      assert.strictEqual(new Set(q.c).size, 4, `${where}: a choice twice`);
+      assert.ok(q.c.every(c => /^[ぁ-ゖ比対]+$/.test(c)), `${where}: choices`);
+      assert.ok(Array.isArray(q.x) && q.x.length === 4 && q.x.every(Boolean), `${where}: a note for every choice`);
+      assert.ok(q.en, `${where}: English`);
+      assert.ok(balanced(q.b) && balanced(q.a), `${where}: furigana markup`);
+      // Every kanji has its furigana.
+      assert.ok(!/[㐀-鿿々]/.test((q.b + q.a).replace(/\{[^|}]+\|[^}]+\}/g, '')), `${where}: kanji without furigana`);
+      assert.ok(/[。？」]$/.test(q.a), `${where}: ends with 。`);
+    }
+  }
+  assert.deepStrictEqual(Object.keys(PARTICLES.POINTS).filter(id => !used.has(id)), [], 'grammar points no question tests');
+  // Once answered: why, the other three, the grammar point and its link.
+  const pq = allSets.find(s => s.id === 'particle-N5').questions[0];
+  const why = VQ.particleWhyHtml(pq);
+  assert.ok(why.includes(VQ.bunproUrl(pq.point.bunpro)) && why.includes(pq.point.use) && why.includes('Keep in mind'));
+  assert.strictEqual((why.match(/<li>/g) || []).length, 3 + pq.point.keep.length);
+  assert.strictEqual((VQ.pointsListHtml(PARTICLES).match(/<li>/g) || []).length, Object.keys(PARTICLES.POINTS).length);
+
+  const sets = allSets.slice(9, 15);
   let seed = 1;
   const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
   const set = sets[3];
