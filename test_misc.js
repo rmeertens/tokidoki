@@ -257,6 +257,37 @@ check(cmp('田中さんは山田さんほど', 'Who is the shortest?').answer ==
 check(cmp('このアパートは駅から遠いほうだが', 'Which apartment is closer to the station?').answer === 'このアパート', '遠いほうだ is no comparison');
 
 
+
+// ─── 〜たがる: who wants what ───────────────────────────────────────────────
+
+const tagaru = Misc.QUIZZES.find(q => q.id === 'tagaru');
+check(tagaru && tagaru.sections.length === 4 && tagaru.sections.every(x => x.type === 'choice' && x.items.length >= 8), 'たがる: four sets of at least eight');
+const tgSentences = tagaru.sections.flatMap(x => x.items.map(it => it.sentence));
+check(new Set(tgSentences).size === tgSentences.length, 'たがる: no sentence twice');
+tagaru.sections.forEach((sec, si) => sec.items.forEach(it => {
+  const where = it.sentence.replace(/\n/g, ' ');
+  check(!/[[\]]/.test(it.prompt + it.sentence + it.options.map(o => o.text).join('')), `たがる ${where}: markup left`);
+  check(/<span lang="en"><b>“.+”<\/b> ./.test(it.note), `たがる ${where}: no translation or explanation`);
+  if (where.includes('（　）')) {
+    // Pick the form: the options are forms for the gap, one of them たがる.
+    check(it.options.some(o => /たが|ほしが/.test(o.text)), `たがる ${where}: no たがる option`);
+  } else {
+    // Who / what: someone in the sentence wants something "from outside", and
+    // every option is in the sentence.
+    check(/たが|ほしが/.test(where), `たがる ${where}: no たがる`);
+    it.options.forEach(o => check(where.includes(o.text), `たがる ${where}: option ${o.text} isn't in it`));
+  }
+}));
+check(tagaru.sections[2].items.every(it => it.sentence.includes('（　）')), 'たがる: the third set picks the form');
+const tg = (s, q) => tagaru.sections.flatMap(x => x.items).find(it => it.sentence.startsWith(s) && (!q || it.prompt.endsWith(q)));
+check(tg('私はすしが食べたいですが', 'Who wants a hamburger?').answer === '弟', 'たい is me, たがっている the brother');
+check(tg('私は日本へ').answer === '行きたいです', 'my own wish: たい');
+check(tg('弟は日本へ').answer === '行きたがっています', 'someone else\'s wish: たがっている');
+check(tg('うちの犬は毎朝').answer === '遊びたがります', 'a habit: たがります');
+check(tg('あなたは何が').answer === '食べたいです', 'asking you: たい');
+check(tg('妹は「早く').answer === '帰りたい', 'in a quote: たい');
+check(tg('姉が行きたがっていたコンサート', 'Who went to the concert?').answer === '私', 'the sister wanted to, I went');
+
 // ─── Order: in order, per category, everything ──────────────────────────────
 
 const secs = [{ si: 0, n: 3 }, { si: 2, n: 4 }];

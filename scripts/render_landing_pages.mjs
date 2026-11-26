@@ -4,7 +4,7 @@
 //   verb-conjugation-chart.html         verb conjugation chart
 //   wa-vs-ga.html                       は vs が rule of thumb + quiz
 //   jlpt-listening-practice.html        listening sample + level links
-//   grammar-cheatsheet.html             N5–N3 grammar, one line per point
+//   grammar-cheatsheet.html             N5–N1 grammar, one line per point
 //
 //   node scripts/render_landing_pages.mjs           write the pages
 //   node scripts/render_landing_pages.mjs --check   fail if they're stale
@@ -194,11 +194,23 @@ const VOICE_CREDIT = (read('listening.html').match(/<p class="lis-credits"[^>]*>
 // points are hand-written in scripts/grammar_cheatsheet_data.mjs; landing.js
 // adds the search box, level filter and "Open all".
 const { SECTIONS: GRAMMAR } = await import('./grammar_cheatsheet_data.mjs');
-const LEVELS = ['N5', 'N4', 'N3'];
+const LEVELS = ['N5', 'N4', 'N3', 'N2', 'N1'];
 const SLOT_RE = /(V-(?:dict|masu|te|ta|nai|vol)|い-adj|な-adj|\bplain\b|\bN\b)/g;
 // Every kanji on the page has furigana (漢字[かんじ] in the data), so the
 // rules and notes are as readable as the examples.
-const jp = s => ruby(esc(s));
+// @{pattern} in the data links to the point with that pattern (the build
+// fails if there's none); @{label|href} links anywhere.
+const POINT_IDS = new Map(GRAMMAR.flatMap(s => s.points.map((g, i) => [g.p, `${s.id}-${i + 1}`])));
+const LINK_RE = /@\{([^}|]+)(?:\|([^}]+))?\}/g;
+const jp = s => {
+  let out = '', last = 0;
+  for (const m of s.matchAll(LINK_RE)) {
+    const href = m[2] || (POINT_IDS.has(m[1]) ? `#${POINT_IDS.get(m[1])}` : die(`no grammar point ${m[1]} to link to`));
+    out += ruby(esc(s.slice(last, m.index))) + `<a class="gc-link" href="${esc(href)}">${ruby(esc(m[1]))}</a>`;
+    last = m.index + m[0].length;
+  }
+  return out + ruby(esc(s.slice(last)));
+};
 const slots = s => jp(s).replace(SLOT_RE, '<span class="gc-slot">$1</span>');
 const marked = s => jp(s).replace(/\{([^}]+)\}/g, '<b>$1</b>');
 const GRAMMAR_COUNT = GRAMMAR.reduce((n, s) => n + s.points.length, 0);
@@ -208,7 +220,7 @@ function grammarBody() {
   const toc = GRAMMAR.map(s => `<a href="#${s.id}">${esc(s.title)}</a>`).join('');
   let h = `<section class="lp-ref gc-tools" hidden>
         <div class="gc-bar">
-          <input type="search" class="gc-search" placeholder="Search: て, because, passive…" aria-label="Search the grammar points">
+          <input type="search" class="gc-search" placeholder="Search: て, nara, because, passive…" aria-label="Search the grammar points (Japanese, romaji or English)">
           <div class="gc-levels" role="group" aria-label="JLPT level">` +
     ['All', ...LEVELS].map(l => `<button type="button" class="gc-lv-btn" data-lv="${l}" aria-pressed="${l === 'All'}">${l}</button>`).join('') +
     `</div>
@@ -240,11 +252,12 @@ function grammarBody() {
         `<span class="gc-sum"><span class="gc-m">${jp(g.m)}</span><span class="gc-r">${slots(g.r)}</span></span>` +
         `<span class="gc-lv gc-${g.lv.toLowerCase()}">${g.lv}</span></summary><div class="gc-more">` +
         `<p>${jp(g.more)}</p>` +
-        `<ul class="gc-ex">${g.ex.map(([ja, en]) => `<li><span class="gc-ja" lang="ja">${marked(ja)}</span><span class="gc-en">${esc(en)}</span></li>`).join('')}</ul>` +
+        `<ul class="gc-ex">${g.ex.map(([ja, en]) => `<li><span class="gc-ja" lang="ja">${marked(ja)}</span><span class="gc-en">${jp(en)}</span></li>`).join('')}</ul>` +
         `<div class="gc-warn"><span class="gc-warn-title">Watch out</span><ul>${g.warn.map(w => `<li>${jp(w)}</li>`).join('')}</ul></div>` +
+        (g.links ? `<p class="gc-practice">Practise: ${g.links.map(([href, label]) => `<a href="${href}">${jp(label)} →</a>`).join(' · ')}</p>` : '') +
         `</div></details>`;
     });
-    h += `</div><p class="gc-practice">Practise: ${s.practice.map(([href, label]) => `<a href="${href}">${esc(label)} →</a>`).join(' · ')}</p></section>`;
+    h += '</div>' + (s.practice.length ? `<p class="gc-practice">Practise: ${s.practice.map(([href, label]) => `<a href="${href}">${esc(label)} →</a>`).join(' · ')}</p>` : '') + '</section>';
   }
   return h + `\n      <section class="lp-ref lp-next"><p>Rules stick once you use them.</p><a class="btn-primary lp-btn" href="bunkei.html" data-cta>Drill the patterns in Bunkei →</a></section>`;
 }
@@ -292,14 +305,15 @@ const PAGES = [
   },
   {
     file: 'grammar-cheatsheet.html',
-    title: 'Big Japanese Grammar Cheat Sheet (JLPT N5–N3) | Tokidoki',
-    desc: `${GRAMMAR_COUNT} Japanese grammar points for JLPT N5–N3, one line each: what it means and how to make it. Tap any for examples and exceptions.`,
-    shortTitle: 'Big Japanese Grammar Cheat Sheet (N5–N3) | Tokidoki',
-    h1: 'Big Japanese grammar cheatsheet (JLPT N5–N3)',
+    title: 'Big Japanese Grammar Cheat Sheet (JLPT N5–N1) | Tokidoki',
+    desc: `${GRAMMAR_COUNT} Japanese grammar points for JLPT N5–N1, one line each: what it means and how to make it. Tap any for examples and exceptions.`,
+    shortTitle: 'Big Japanese Grammar Cheat Sheet (N5–N1) | Tokidoki',
+    h1: 'Big Japanese grammar cheatsheet (JLPT N5–N1)',
     cta: { href: 'bunkei.html', label: 'Drill the patterns in Bunkei →', lead: 'drill the patterns →' },
     teaches: 'Japanese grammar',
-    hero: { face: '文', kicker: '文法 · JLPT N5–N3', card: ['Big Grammar Cheatsheet', 'N5–N3, one line each · tap for more'] },
+    hero: { face: '文', kicker: '文法 · JLPT N5–N1', card: ['Big Grammar Cheatsheet', 'N5–N1, one line each · tap for more'] },
     sub: `Free, no login. ${GRAMMAR_COUNT} grammar points, one line each, or`,
+    scripts: ['romaji.js?v=8'], // the search box takes romaji (nara → なら)
     body: grammarBody(),
   },
 ];
@@ -362,7 +376,7 @@ function render(p) {
   <meta name="twitter:description" content="${esc(p.desc)}">
   <meta name="twitter:image" content="${SITE}/og-image.png">
   <link rel="canonical" href="${url}">
-${STYLE}  <link rel="stylesheet" href="landing.css?v=5">
+${STYLE}  <link rel="stylesheet" href="landing.css?v=8">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -408,7 +422,7 @@ ${p.quiz ? `      <div class="lp-quiz" id="lp-quiz"><noscript><p><a href="${p.ct
   </div>
 
   <script type="application/json" id="lp-data">${json(data)}</script>
-${SCRIPTS}  <script src="landing.js?v=6"></script>
+${SCRIPTS}${p.scripts ? p.scripts.map(f => `  <script src="${f}"></script>\n`).join('') : ''}  <script src="landing.js?v=9"></script>
 </body>
 </html>
 `;

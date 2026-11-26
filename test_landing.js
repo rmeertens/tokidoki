@@ -63,16 +63,25 @@ for (const name of PAGES) {
   const html = fs.readFileSync('grammar-cheatsheet.html', 'utf8');
   const items = html.match(/<details class="gc-item"[\s\S]*?<\/details>/g) || [];
   ok(items.length >= 100, `grammar cheatsheet: at least 100 points (${items.length})`);
+  ok(/<script src="romaji\.js[^"]*"><\/script>\n  <script src="landing\.js/.test(html), 'grammar cheatsheet: romaji.js loads before landing.js (romaji search)');
   const ids = items.map(x => (x.match(/ id="([^"]+)"/) || [])[1]);
   ok(new Set(ids).size === ids.length, 'grammar cheatsheet: unique ids');
   items.forEach((x, i) => {
     const label = `grammar point ${ids[i]}`;
-    ok(/data-lv="N[345]"/.test(x), `${label}: level`);
+    ok(/data-lv="N[1-5]"/.test(x), `${label}: level`);
     ok(/class="gc-m">[^<]+</.test(x) && /class="gc-r">./.test(x), `${label}: meaning and rule`);
     ok(/class="gc-ja"[^>]*>.*<b>/.test(x), `${label}: an example marking the grammar`);
     ok(/class="gc-warn"/.test(x), `${label}: exceptions`);
     ok(!/[一-鿿々]/.test(x.replace(/<ruby>[\s\S]*?<\/ruby>/g, '')), `${label}: furigana on every kanji`);
   });
+  // The い-adjectives note lists every な-adjective in the Misc quiz
+  // (misc.js NA_EI) and links to it.
+  const naEi = [...fs.readFileSync('misc.js', 'utf8').match(/const NA_EI = \[([\s\S]*?)\n  \];/)[1].matchAll(/^\s*\['([^']+)'/gm)].map(m => m[1]);
+  const iAdj = items.find(x => x.includes('>い-adj'));
+  const iAdjText = (iAdj || '').replace(/<(rt|rp)>[^<]*<\/\1>|<\/?[^>]+>/g, '');
+  ok(naEi.length >= 9, `found the Misc quiz's な-adjectives (${naEi.length})`);
+  for (const w of naEi) ok(iAdjText.includes(w), `い-adjectives note lists ${w}`);
+  ok((iAdj || '').includes('href="misc.html#na-ei"'), 'い-adjectives links to the Misc quiz');
   for (const page of ['index.html', 'blog.html']) {
     ok(fs.readFileSync(page, 'utf8').includes('href="grammar-cheatsheet.html"'), `${page} links to the grammar cheatsheet`);
   }
