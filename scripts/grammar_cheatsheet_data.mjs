@@ -1524,7 +1524,7 @@ export const SECTIONS = [
           ['予定[よてい]{どおり}に終[お]わった。', 'It finished as planned. (N どおり)'],
           ['電車[でんしゃ]は時間[じかん]{どおり}に来[き]た。', 'The train came on time. (N どおり)'],
         ],
-        warn: ['Straight after a noun it becomes どおり: 予定[よてい]どおり, 時間[じかん]どおり.'],
+        warn: ['V-dict + とおり: the way someone says or does it (now, or always): 私[わたし]が言[い]うとおりにして. V-ta + とおり: the way it was said or done before: 先生[せんせい]が言[い]ったとおりだった (it was just as the teacher said).', 'Straight after a noun it becomes どおり: 予定[よてい]どおり, 時間[じかん]どおり.'],
       },
       {
         p: '〜ように言[い]う · 頼[たの]む', lv: 'N3', m: 'tell / ask (someone) to', r: 'V-dict / V-nai + ように 言[い]う / 頼[たの]む / 注意[ちゅうい]する',
