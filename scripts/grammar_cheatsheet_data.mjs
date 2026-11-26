@@ -551,8 +551,21 @@ export const SECTIONS = [
       {
         p: '〜たら', lv: 'N4', m: 'if; when (once)', r: 'V-ta + ら · い-adj: 〜かったら · N / な-adj + だったら',
         more: 'The most flexible “if”. Also “once X happens” and, with a past ending, “when I did X, I found…”.',
-        ex: [['駅[えき]に着[つ]い{たら}、電話[でんわ]してください。', 'Call me when you get to the station.'], ['窓[まど]を開[あ]け{たら}、雪[ゆき]が降[ふ]っていた。', 'When I opened the window, it was snowing.']],
-        warn: ['When in doubt, たら is the safe choice, especially before a request, wish or plan.'],
+        ex: [
+          ['駅[えき]に着[つ]い{たら}、電話[でんわ]してください。', 'Call me when you get to the station. (once)'],
+          ['雨[あめ]が降[ふ]っ{たら}、試合[しあい]は中止[ちゅうし]です。', 'If it rains, the match is off. (if)'],
+          ['宝[たから]くじが当[あ]たっ{たら}、世界[せかい]中[じゅう]を旅行[りょこう]したい。', 'If I won the lottery, I’d travel the world. (a wish)'],
+          ['明日[あした]までに返事[へんじ]が来[こ]{なかったら}、連絡[れんらく]してください。', 'If there’s no reply by tomorrow, let me know. (negative)'],
+          ['高[たか]{かったら}、買[か]いません。', 'If it’s expensive, I won’t buy it. (い-adj)'],
+          ['暇[ひま]{だったら}、手伝[てつだ]ってくれない？', 'If you’re free, could you help me? (な-adj)'],
+          ['私[わたし]{だったら}、行[い]かないな。', 'If it were me, I wouldn’t go. (noun)'],
+          ['窓[まど]を開[あ]け{たら}、雪[ゆき]が降[ふ]っていた。', 'When I opened the window, it was snowing. (what I found)'],
+        ],
+        warn: [
+          'When in doubt, たら is the safe choice, especially before a request, wish or plan.',
+          'Negative: V-nai → 〜なかったら. いい → よかったら: よかったら、どうぞ (please, if you like).',
+          '〜たらどうですか: why don’t you…? (a suggestion): 医者[いしゃ]に行[い]ったらどうですか.',
+        ],
       },
       {
         p: '〜ば', lv: 'N4', m: 'if (general condition)', r: 'u-verb: え-row + ば · ru-verb: 〜れば · い-adj: 〜ければ · N / な-adj: なら(ば)',
