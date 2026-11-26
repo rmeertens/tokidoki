@@ -194,11 +194,13 @@
   // kept for three parts, best first: the pattern, the one-line summary
   // (pattern, meaning, rule) and the whole point.
   var hira = function (s) { return s.replace(/[ァ-ヶ]/g, function (k) { return String.fromCharCode(k.charCodeAt(0) - 0x60); }); };
+  // Curly quotes on the page, straight ones from the keyboard (don’t / don't).
+  function quotes(s) { return s.replace(/[’‘]/g, "'").replace(/[“”]/g, '"'); }
   function written(el) {
     var c = el.cloneNode(true);
     var rts = Array.prototype.map.call(c.querySelectorAll('rt'), function (r) { return r.textContent; });
     Array.prototype.forEach.call(c.querySelectorAll('rt, rp'), function (r) { r.remove(); });
-    return (c.textContent + ' ' + rts.join(' ')).toLowerCase();
+    return quotes(c.textContent + ' ' + rts.join(' ')).toLowerCase();
   }
   function read(el) {
     var c = el.cloneNode(true);
@@ -265,7 +267,7 @@
   none.parentNode.insertBefore(moreBox, none);
 
   function filter() {
-    var q = search.value.trim().toLowerCase();
+    var q = quotes(search.value.trim()).toLowerCase();
     var inLevel = items.map(function (d) { return level === 'All' || d.getAttribute('data-lv') === level; });
     var m = q ? matches(q, inLevel, wide) : { hit: inLevel, more: 0 };
     items.forEach(function (d, i) { d.hidden = !m.hit[i]; });

@@ -422,7 +422,7 @@ ${p.quiz ? `      <div class="lp-quiz" id="lp-quiz"><noscript><p><a href="${p.ct
   </div>
 
   <script type="application/json" id="lp-data">${json(data)}</script>
-${SCRIPTS}${p.scripts ? p.scripts.map(f => `  <script src="${f}"></script>\n`).join('') : ''}  <script src="landing.js?v=9"></script>
+${SCRIPTS}${p.scripts ? p.scripts.map(f => `  <script src="${f}"></script>\n`).join('') : ''}  <script src="landing.js?v=10"></script>
 </body>
 </html>
 `;
