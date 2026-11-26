@@ -126,9 +126,12 @@
 
 /* The grammar cheatsheet (grammar-cheatsheet.html): one <details> per
    point, a line of pattern · meaning · rule that opens to more, examples
-   and the traps. Levels: N5 green, N4 blue, N3 orange. */
+   and the traps. Levels: N5 green, N4 blue, N3 orange, N2 purple, N1 red. */
 .gc-n5 { --lv: var(--green); } .gc-n4 { --lv: var(--blue); } .gc-n3 { --lv: var(--orange); }
+.gc-n2 { --lv: #9b59b6; } .gc-n1 { --lv: var(--red); }
 .gc-item[data-lv="N5"] { --lv: var(--green); } .gc-item[data-lv="N4"] { --lv: var(--blue); } .gc-item[data-lv="N3"] { --lv: var(--orange); }
+.gc-item[data-lv="N2"] { --lv: #9b59b6; } .gc-item[data-lv="N1"] { --lv: var(--red); }
+[data-theme="dark"] .gc-n2, [data-theme="dark"] .gc-item[data-lv="N2"] { --lv: #c39bd3; }
 
 .gc-tools { position: sticky; top: var(--gc-head, 0px); z-index: 5; margin-top: 18px; padding: 10px 0; background: var(--bg); }
 .gc-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }

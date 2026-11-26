@@ -68,7 +68,7 @@ for (const name of PAGES) {
   ok(new Set(ids).size === ids.length, 'grammar cheatsheet: unique ids');
   items.forEach((x, i) => {
     const label = `grammar point ${ids[i]}`;
-    ok(/data-lv="N[345]"/.test(x), `${label}: level`);
+    ok(/data-lv="N[1-5]"/.test(x), `${label}: level`);
     ok(/class="gc-m">[^<]+</.test(x) && /class="gc-r">./.test(x), `${label}: meaning and rule`);
     ok(/class="gc-ja"[^>]*>.*<b>/.test(x), `${label}: an example marking the grammar`);
     ok(/class="gc-warn"/.test(x), `${label}: exceptions`);

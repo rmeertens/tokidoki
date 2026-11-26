@@ -4,7 +4,7 @@
 //   verb-conjugation-chart.html         verb conjugation chart
 //   wa-vs-ga.html                       は vs が rule of thumb + quiz
 //   jlpt-listening-practice.html        listening sample + level links
-//   grammar-cheatsheet.html             N5–N3 grammar, one line per point
+//   grammar-cheatsheet.html             N5–N1 grammar, one line per point
 //
 //   node scripts/render_landing_pages.mjs           write the pages
 //   node scripts/render_landing_pages.mjs --check   fail if they're stale
@@ -194,7 +194,7 @@ const VOICE_CREDIT = (read('listening.html').match(/<p class="lis-credits"[^>]*>
 // points are hand-written in scripts/grammar_cheatsheet_data.mjs; landing.js
 // adds the search box, level filter and "Open all".
 const { SECTIONS: GRAMMAR } = await import('./grammar_cheatsheet_data.mjs');
-const LEVELS = ['N5', 'N4', 'N3'];
+const LEVELS = ['N5', 'N4', 'N3', 'N2', 'N1'];
 const SLOT_RE = /(V-(?:dict|masu|te|ta|nai|vol)|い-adj|な-adj|\bplain\b|\bN\b)/g;
 // Every kanji on the page has furigana (漢字[かんじ] in the data), so the
 // rules and notes are as readable as the examples.
@@ -257,7 +257,7 @@ function grammarBody() {
         (g.links ? `<p class="gc-practice">Practise: ${g.links.map(([href, label]) => `<a href="${href}">${jp(label)} →</a>`).join(' · ')}</p>` : '') +
         `</div></details>`;
     });
-    h += `</div><p class="gc-practice">Practise: ${s.practice.map(([href, label]) => `<a href="${href}">${esc(label)} →</a>`).join(' · ')}</p></section>`;
+    h += '</div>' + (s.practice.length ? `<p class="gc-practice">Practise: ${s.practice.map(([href, label]) => `<a href="${href}">${esc(label)} →</a>`).join(' · ')}</p>` : '') + '</section>';
   }
   return h + `\n      <section class="lp-ref lp-next"><p>Rules stick once you use them.</p><a class="btn-primary lp-btn" href="bunkei.html" data-cta>Drill the patterns in Bunkei →</a></section>`;
 }
@@ -305,13 +305,13 @@ const PAGES = [
   },
   {
     file: 'grammar-cheatsheet.html',
-    title: 'Big Japanese Grammar Cheat Sheet (JLPT N5–N3) | Tokidoki',
-    desc: `${GRAMMAR_COUNT} Japanese grammar points for JLPT N5–N3, one line each: what it means and how to make it. Tap any for examples and exceptions.`,
-    shortTitle: 'Big Japanese Grammar Cheat Sheet (N5–N3) | Tokidoki',
-    h1: 'Big Japanese grammar cheatsheet (JLPT N5–N3)',
+    title: 'Big Japanese Grammar Cheat Sheet (JLPT N5–N1) | Tokidoki',
+    desc: `${GRAMMAR_COUNT} Japanese grammar points for JLPT N5–N1, one line each: what it means and how to make it. Tap any for examples and exceptions.`,
+    shortTitle: 'Big Japanese Grammar Cheat Sheet (N5–N1) | Tokidoki',
+    h1: 'Big Japanese grammar cheatsheet (JLPT N5–N1)',
     cta: { href: 'bunkei.html', label: 'Drill the patterns in Bunkei →', lead: 'drill the patterns →' },
     teaches: 'Japanese grammar',
-    hero: { face: '文', kicker: '文法 · JLPT N5–N3', card: ['Big Grammar Cheatsheet', 'N5–N3, one line each · tap for more'] },
+    hero: { face: '文', kicker: '文法 · JLPT N5–N1', card: ['Big Grammar Cheatsheet', 'N5–N1, one line each · tap for more'] },
     sub: `Free, no login. ${GRAMMAR_COUNT} grammar points, one line each, or`,
     scripts: ['romaji.js?v=8'], // the search box takes romaji (nara → なら)
     body: grammarBody(),
@@ -376,7 +376,7 @@ function render(p) {
   <meta name="twitter:description" content="${esc(p.desc)}">
   <meta name="twitter:image" content="${SITE}/og-image.png">
   <link rel="canonical" href="${url}">
-${STYLE}  <link rel="stylesheet" href="landing.css?v=7">
+${STYLE}  <link rel="stylesheet" href="landing.css?v=8">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">

@@ -4,7 +4,8 @@
 // Each section: { id, title, jp, practice: [[href, label]], points: [...] }
 // Each point:
 //   p      the pattern, as shown (Japanese)
-//   lv     'N5' | 'N4' | 'N3' (common study lists; there's no official one)
+//   lv     'N5' | 'N4' | 'N3' | 'N2' | 'N1' (common study lists; there's no
+//          official one)
 //   m      what it means, a few words
 //   r      how to make it: slots V-dict, V-masu (stem), V-te, V-ta, V-nai,
 //          V-vol, N, い-adj, な-adj and plain are highlighted on the page
@@ -1505,6 +1506,720 @@ export const SECTIONS = [
           ['あの人[ひと]の名前[なまえ]、何[なん]だった{っけ}。', 'What was that person’s name again? (だった)'],
         ],
         warn: ['Casual only; politely: 〜でしたっけ.'],
+      },
+    ],
+  },
+  {
+    id: 'n2', title: 'N2 patterns', jp: 'N2の文型[ぶんけい]',
+    practice: [['jlpt-reading.html', 'JLPT Reading'], ['listening.html', 'Listening']],
+    points: [
+      {
+        p: '〜わけにはいかない', lv: 'N2', m: 'can’t (because it wouldn’t be right)', r: 'V-dict + わけにはいかない · V-nai + わけにはいかない (must)',
+        more: 'Not impossible, but you can’t because of duty, manners or the situation. After a negative it means “I have to”.',
+        ex: [
+          ['明日[あした]は試験[しけん]だから、遊[あそ]びに行[い]く{わけにはいかない}。', 'I have an exam tomorrow, so I can’t go out. (V-dict)'],
+          ['大事[だいじ]な会議[かいぎ]なので、休[やす]む{わけにはいきません}。', 'It’s an important meeting, so I can’t take the day off. (V-dict)'],
+          ['先生[せんせい]に頼[たの]まれたので、やらない{わけにはいかない}。', 'The teacher asked me, so I have to do it. (V-nai: must)'],
+          ['約束[やくそく]したから、行[い]かない{わけにはいきません}。', 'I promised, so I have to go. (V-nai: must)'],
+        ],
+        warn: ['Different from できない: the reason is social or moral, not ability.'],
+      },
+      {
+        p: '〜ざるを得[え]ない', lv: 'N2', m: 'have no choice but to', r: 'V-nai (drop ない) + ざるを得[え]ない · する → せざるを得[え]ない',
+        more: 'You don’t want to, but there’s no other way. Formal; in speech 〜しかない or 〜なければならない.',
+        ex: [
+          ['電車[でんしゃ]が止[と]まったので、タクシーで行[い]か{ざるを得[え]ない}。', 'The trains have stopped, so I have no choice but to take a taxi. (V-nai)'],
+          ['これだけ証拠[しょうこ]があれば、認[みと]め{ざるを得[え]ない}。', 'With this much evidence, I have to admit it. (V-nai)'],
+          ['雨[あめ]が強[つよ]くなったので、試合[しあい]は中止[ちゅうし]{せざるを得[え]なかった}。', 'The rain got heavier, so the match had to be called off. (せざるを得[え]ない)'],
+          ['予算[よさん]が足[た]りないので、計画[けいかく]を変更[へんこう]{せざるを得[え]ない}。', 'The budget is short, so we have to change the plan. (せざるを得[え]ない)'],
+        ],
+        warn: ['する → せざる (×しざる).'],
+      },
+      {
+        p: '〜に限[かぎ]る', lv: 'N2', m: 'nothing beats, the best thing is', r: 'V-dict / V-nai / N + に限[かぎ]る',
+        more: 'The speaker’s opinion of the best thing to do or have.',
+        ex: [
+          ['疲[つか]れた時[とき]は、早[はや]く寝[ね]る{に限[かぎ]る}。', 'When you’re tired, nothing beats an early night. (V-dict)'],
+          ['風邪[かぜ]の時[とき]は、家[いえ]でゆっくり休[やす]む{に限[かぎ]る}。', 'With a cold, the best thing is to rest at home. (V-dict)'],
+          ['危[あぶ]ない所[ところ]には近[ちか]づかない{に限[かぎ]る}。', 'Best not to go near dangerous places. (V-nai)'],
+          ['こういう時[とき]は何[なに]も言[い]わない{に限[かぎ]る}。', 'At times like this, it’s best to say nothing. (V-nai)'],
+          ['夏[なつ]はビール{に限[かぎ]る}。', 'In summer, nothing beats a beer. (N)'],
+          ['寒[さむ]い日[ひ]は温[あたた]かいラーメン{に限[かぎ]る}。', 'On a cold day, nothing beats a hot bowl of ramen. (N)'],
+        ],
+        warn: ['N + に限[かぎ]り (“only”) is different: 先着[せんちゃく]100名[めい]に限[かぎ]り無料[むりょう] (free for the first 100 only).'],
+      },
+      {
+        p: '〜ものだ', lv: 'N2', m: 'that’s how it is; you should · used to', r: 'V-dict + ものだ · V-ta + ものだ (used to)',
+        more: 'After the dictionary form: what is natural or proper in general (often advice). After the た-form: fond memories of what you used to do.',
+        ex: [
+          ['人[ひと]の話[はなし]は最後[さいご]まで聞[き]く{ものだ}。', 'You should hear people out. (V-dict: should)'],
+          ['年[とし]をとると、昔[むかし]のことを思[おも]い出[だ]す{ものだ}。', 'As you get older, you think back on the past; that’s just how it is. (V-dict: natural)'],
+          ['子供[こども]の頃[ころ]は、よくこの川[かわ]で泳[およ]いだ{ものだ}。', 'As a child, I often used to swim in this river. (V-ta: used to)'],
+          ['学生[がくせい]時代[じだい]は、朝[あさ]まで友達[ともだち]と話[はな]した{ものだ}。', 'In my student days, I used to talk with friends until morning. (V-ta: used to)'],
+        ],
+        warn: ['〜ものではない: you shouldn’t: 人[ひと]の悪口[わるぐち]を言[い]うものではない.', 'Casual: もんだ.'],
+      },
+      {
+        p: '〜ことだ', lv: 'N2', m: 'you should, the thing to do is', r: 'V-dict / V-nai + ことだ',
+        more: 'Direct advice, often from someone older or more experienced.',
+        ex: [
+          ['上手[じょうず]になりたければ、毎日[まいにち]練習[れんしゅう]する{ことだ}。', 'If you want to get good, practise every day. (V-dict)'],
+          ['合格[ごうかく]したいなら、もっと勉強[べんきょう]する{ことだ}。', 'If you want to pass, study more. (V-dict)'],
+          ['風邪[かぜ]のときは、無理[むり]をしない{ことだ}。', 'When you have a cold, don’t push yourself. (V-nai)'],
+          ['人[ひと]の悪口[わるぐち]は言[い]わない{ことだ}。', 'You shouldn’t speak ill of others. (V-nai)'],
+        ],
+        warn: ['Sounds like advice from above; not for your boss.'],
+      },
+      {
+        p: '〜っこない', lv: 'N2', m: 'no way, can’t possibly', r: 'V-masu + っこない',
+        more: 'Casual and strong: “there’s no chance”.',
+        ex: [
+          ['こんなに難[むずか]しい問題[もんだい]、分[わ]かり{っこない}よ。', 'There’s no way I can solve a question this hard. (V-masu)'],
+          ['一[いち]日[にち]で全部[ぜんぶ]覚[おぼ]えられ{っこない}。', 'You can’t possibly learn it all in a day. (V-masu)'],
+        ],
+        warn: ['Casual; in writing 〜わけがない or 〜はずがない.'],
+      },
+      {
+        p: '〜かねない', lv: 'N2', m: 'could well (something bad)', r: 'V-masu + かねない',
+        more: 'Warns that something bad might happen.',
+        ex: [
+          ['そんなにスピードを出[だ]すと、事故[じこ]を起[お]こし{かねない}。', 'Driving that fast, you could cause an accident. (V-masu)'],
+          ['寝不足[ねぶそく]が続[つづ]くと、病気[びょうき]になり{かねない}。', 'If you keep missing sleep, you could get ill. (V-masu)'],
+        ],
+        warn: ['Only for bad outcomes.', '〜かねる (without ない) means the opposite: “can’t”, politely: お答[こた]えしかねます (I’m afraid I can’t answer).'],
+      },
+      {
+        p: '〜おそれがある', lv: 'N2', m: 'there’s a risk that', r: 'V-dict / N の + おそれがある',
+        more: 'Formal: news, forecasts and notices.',
+        ex: [
+          ['明日[あした]は大雪[おおゆき]になる{おそれがあります}。', 'There is a risk of heavy snow tomorrow. (V-dict)'],
+          ['この薬[くすり]は眠[ねむ]くなる{おそれがある}。', 'This medicine may cause drowsiness. (V-dict)'],
+          ['台風[たいふう]の{おそれがある}ので、旅行[りょこう]を延期[えんき]した。', 'There was a risk of a typhoon, so we put off the trip. (N の)'],
+          ['大[だい]地震[じしん]の{おそれがある}地域[ちいき]', 'an area at risk of a major earthquake (N の)'],
+        ],
+        warn: ['Only for bad things.'],
+      },
+      {
+        p: '〜一方[いっぽう]だ', lv: 'N2', m: 'keeps getting (more and more)', r: 'V-dict + 一方[いっぽう]だ',
+        more: 'A change that only goes one way, usually a bad one.',
+        ex: [
+          ['物価[ぶっか]は上[あ]がる{一方[いっぽう]だ}。', 'Prices just keep going up. (V-dict)'],
+          ['この町[まち]の人口[じんこう]は減[へ]る{一方[いっぽう]です}。', 'This town’s population keeps falling. (V-dict)'],
+        ],
+        warn: ['Used with change verbs: 増[ふ]える, 減[へ]る, 悪[わる]くなる, 上[あ]がる.'],
+      },
+      {
+        p: '〜つつある', lv: 'N2', m: 'is in the process of', r: 'V-masu + つつある',
+        more: 'A change that is under way. Formal, written.',
+        ex: [
+          ['景気[けいき]は回復[かいふく]し{つつある}。', 'The economy is recovering. (V-masu)'],
+          ['地球[ちきゅう]の気温[きおん]は上[あ]がり{つつある}。', 'The Earth’s temperature is rising. (V-masu)'],
+        ],
+        warn: ['〜つつ alone means “while” (= ながら), and 〜つつも “although”: 悪[わる]いと知[し]りつつも、また食[た]べてしまった.'],
+      },
+      {
+        p: '〜上[うえ]で', lv: 'N2', m: 'after (doing); in (doing)', r: 'V-ta / N の + 上[うえ]で (after) · V-dict / N の + 上[うえ]で (in, for)',
+        more: 'After the た-form: first do A, then B on that basis. After the dictionary form: in the process of, when it comes to.',
+        ex: [
+          ['よく考[かんが]えた{上[うえ]で}、決[き]めます。', 'I’ll decide after thinking it over carefully. (V-ta: after)'],
+          ['両親[りょうしん]と相談[そうだん]した{上[うえ]で}、返事[へんじ]をします。', 'I’ll answer after talking it over with my parents. (V-ta: after)'],
+          ['日本語[にほんご]を勉強[べんきょう]する{上[うえ]で}、漢字[かんじ]は大切[たいせつ]だ。', 'In studying Japanese, kanji matter. (V-dict: in)'],
+          ['仕事[しごと]の{上[うえ]で}、一番[いちばん]大事[だいじ]なのは信頼[しんらい]だ。', 'In work, the most important thing is trust. (N の: in)'],
+        ],
+        warn: ['N の上[うえ]で can mean either: 確認[かくにん]の上[うえ]で (after checking).'],
+      },
+      {
+        p: '〜上[うえ]に', lv: 'N2', m: 'on top of, not only … but also', r: 'plain + 上[うえ]に · N の / な-adj な + 上[うえ]に',
+        more: 'Adds a second point of the same kind (both good or both bad).',
+        ex: [
+          ['この店[みせ]は安[やす]い{上[うえ]に}、おいしい。', 'This place is cheap, and on top of that it’s good. (い-adj)'],
+          ['道[みち]に迷[まよ]った{上[うえ]に}、雨[あめ]まで降[ふ]ってきた。', 'I got lost, and on top of that it started to rain. (verb)'],
+          ['彼[かれ]は親切[しんせつ]な{上[うえ]に}、頭[あたま]もいい。', 'He’s kind, and smart too. (な-adj な)'],
+          ['この部屋[へや]は静[しず]かな{上[うえ]に}、駅[えき]にも近[ちか]い。', 'This room is quiet and close to the station too. (な-adj な)'],
+          ['今日[きょう]は雨[あめ]の{上[うえ]に}、風[かぜ]も強[つよ]い。', 'It’s raining today, and windy too. (N の)'],
+        ],
+        warn: ['Both points go the same way: ×安[やす]い上[うえ]にまずい (use けど / のに).'],
+      },
+      {
+        p: '〜ばかりか · 〜ばかりでなく', lv: 'N2', m: 'not only … but also', r: 'plain / N + ばかりか · ばかりでなく',
+        more: 'Adds something, often more surprising: “not just A, even B”. Often with も or まで.',
+        ex: [
+          ['彼[かれ]は英語[えいご]{ばかりか}、中国[ちゅうごく]語[ご]も話[はな]せる。', 'He speaks not only English but Chinese too. (ばかりか)'],
+          ['財布[さいふ]をなくした{ばかりか}、携帯[けいたい]まで落[お]とした。', 'Not only did I lose my wallet, I dropped my phone too. (ばかりか)'],
+          ['この本[ほん]は子供[こども]{ばかりでなく}、大人[おとな]にも人気[にんき]がある。', 'This book is popular not only with children but with adults too. (ばかりでなく)'],
+          ['彼[かれ]は勉強[べんきょう]{ばかりでなく}、スポーツも得意[とくい]だ。', 'He’s good not only at studying but at sports too. (ばかりでなく)'],
+        ],
+        warn: ['Similar: 〜だけでなく (more everyday), 〜のみならず (more formal).'],
+      },
+      {
+        p: '〜にかかわらず', lv: 'N2', m: 'regardless of', r: 'N + にかかわらず · V-dict V-nai + にかかわらず',
+        more: 'It makes no difference which: with pairs of opposites or words like 年齢[ねんれい], 天候[てんこう], 経験[けいけん].',
+        ex: [
+          ['年齢[ねんれい]{にかかわらず}、誰[だれ]でも参加[さんか]できます。', 'Anyone can take part, regardless of age. (N)'],
+          ['天気[てんき]{にかかわらず}、試合[しあい]は行[おこな]われます。', 'The match will be held whatever the weather. (N)'],
+          ['行[い]く行[い]かない{にかかわらず}、連絡[れんらく]してください。', 'Whether you’re going or not, please let us know. (V-dict V-nai)'],
+          ['参加[さんか]する、しない{にかかわらず}、返事[へんじ]をください。', 'Please reply whether or not you’ll take part. (V-dict V-nai)'],
+        ],
+        warn: ['Different from @{〜にもかかわらず} (despite).'],
+      },
+      {
+        p: '〜にもかかわらず', lv: 'N2', m: 'despite, even though', r: 'plain / N + にもかかわらず (N, な-adj: no だ, or である)',
+        more: 'A formal のに: the result goes against what you’d expect.',
+        ex: [
+          ['雨[あめ]{にもかかわらず}、たくさんの人[ひと]が来[き]た。', 'Despite the rain, lots of people came. (N)'],
+          ['休日[きゅうじつ]{にもかかわらず}、会社[かいしゃ]に行[い]った。', 'I went to the office even though it was a holiday. (N)'],
+          ['一生懸命[いっしょうけんめい]勉強[べんきょう]した{にもかかわらず}、不[ふ]合格[ごうかく]だった。', 'Despite studying hard, I failed. (verb)'],
+          ['彼[かれ]は熱[ねつ]がある{にもかかわらず}、仕事[しごと]に来[き]た。', 'He came to work even though he had a fever. (verb)'],
+        ],
+        warn: ['More formal and less emotional than のに.'],
+      },
+      {
+        p: '〜に関[かん]して · 〜に関[かん]する', lv: 'N2', m: 'about, concerning', r: 'N + に関[かん]して · N + に関[かん]する + N',
+        more: 'A formal について.',
+        ex: [
+          ['この件[けん]{に関[かん]して}、ご質問[しつもん]はありますか。', 'Do you have any questions about this matter? (に関[かん]して)'],
+          ['環境[かんきょう]問題[もんだい]{に関[かん]して}調[しら]べています。', 'I’m researching environmental problems. (に関[かん]して)'],
+          ['日本[にほん]の歴史[れきし]{に関[かん]する}本[ほん]を読[よ]んだ。', 'I read a book about Japanese history. (に関[かん]する + N)'],
+          ['事故[じこ]{に関[かん]する}情報[じょうほう]はまだない。', 'There’s no information on the accident yet. (に関[かん]する + N)'],
+        ],
+        warn: ['Before a noun: に関[かん]する (or に関[かん]しての).'],
+      },
+      {
+        p: '〜に基[もと]づいて', lv: 'N2', m: 'based on', r: 'N + に基[もと]づいて · N + に基[もと]づく + N',
+        more: 'Facts, data, rules or experience as the basis.',
+        ex: [
+          ['調査[ちょうさ]の結果[けっか]{に基[もと]づいて}、計画[けいかく]を立[た]てた。', 'We made a plan based on the survey results. (に基[もと]づいて)'],
+          ['この映画[えいが]は事実[じじつ]{に基[もと]づいて}作[つく]られた。', 'This movie is based on a true story. (に基[もと]づいて)'],
+          ['経験[けいけん]{に基[もと]づく}アドバイス', 'advice based on experience (に基[もと]づく + N)'],
+          ['法律[ほうりつ]{に基[もと]づく}手続[てつづ]き', 'a procedure based on the law (に基[もと]づく + N)'],
+        ],
+        warn: ['〜をもとに is similar, but for material you build something from: 実話[じつわ]をもとにした小説[しょうせつ].'],
+      },
+      {
+        p: '〜を中心[ちゅうしん]に', lv: 'N2', m: 'centred on, mainly', r: 'N + を中心[ちゅうしん]に · N + を中心[ちゅうしん]とした + N',
+        more: 'The centre or main part of an area, group or activity.',
+        ex: [
+          ['駅[えき]{を中心[ちゅうしん]に}、町[まち]が広[ひろ]がっている。', 'The town spreads out around the station. (を中心[ちゅうしん]に)'],
+          ['今回[こんかい]の旅行[りょこう]は京都[きょうと]{を中心[ちゅうしん]に}回[まわ]った。', 'On this trip we went round mainly Kyoto. (を中心[ちゅうしん]に)'],
+          ['若者[わかもの]{を中心[ちゅうしん]とした}グループ', 'a group made up mainly of young people (を中心[ちゅうしん]とした + N)'],
+          ['東京[とうきょう]{を中心[ちゅうしん]とした}地域[ちいき]', 'the area centred on Tokyo (を中心[ちゅうしん]とした + N)'],
+        ],
+        warn: ['Similar: 〜をはじめ (starting with, as the main example).'],
+      },
+      {
+        p: '〜からといって', lv: 'N2', m: 'just because … (doesn’t mean)', r: 'plain + からといって (N, な-adj + だ)',
+        more: 'Denies the obvious conclusion. The second half is usually negative.',
+        ex: [
+          ['お金[かね]がある{からといって}、幸[しあわ]せだとは限[かぎ]らない。', 'Just because you have money doesn’t mean you’re happy. (verb)'],
+          ['日本人[にほんじん]だ{からといって}、敬語[けいご]が上手[じょうず]なわけではない。', 'Being Japanese doesn’t make you good at keigo. (N + だ)'],
+          ['安[やす]い{からといって}、たくさん買[か]うのはよくない。', 'Just because it’s cheap doesn’t mean you should buy lots. (い-adj)'],
+          ['好[す]きだ{からといって}、毎日[まいにち]食[た]べるのは体[からだ]に悪[わる]い。', 'Even if you like it, eating it every day is bad for you. (な-adj + だ)'],
+        ],
+        warn: ['Often ends with 〜とは限[かぎ]らない, 〜わけではない or 〜ない. Casual: 〜からって.'],
+      },
+      {
+        p: '〜からこそ', lv: 'N2', m: 'precisely because', r: 'plain + からこそ (N, な-adj + だ)',
+        more: 'Stresses that this, and nothing else, is the reason.',
+        ex: [
+          ['あなたのことが大切[たいせつ]だ{からこそ}、厳[きび]しく言[い]うのです。', 'It’s precisely because you matter to me that I’m being strict. (な-adj + だ)'],
+          ['毎日[まいにち]練習[れんしゅう]した{からこそ}、優勝[ゆうしょう]できた。', 'We won precisely because we practised every day. (verb)'],
+          ['難[むずか]しい{からこそ}、やりがいがある。', 'It’s worth doing precisely because it’s hard. (い-adj)'],
+          ['家族[かぞく]だ{からこそ}、言[い]えないこともある。', 'Some things you can’t say precisely because they’re family. (N + だ)'],
+        ],
+        warn: ['Not with ので: ×のでこそ.'],
+      },
+      {
+        p: '〜からには · 〜以上[いじょう](は)', lv: 'N2', m: 'now that, since (so you must)', r: 'plain + からには / 以上[いじょう](は) (N, な-adj + である)',
+        more: 'Since this is the case, you have to see it through. The end is a duty, will or strong guess.',
+        ex: [
+          ['やると決[き]めた{からには}、最後[さいご]までやる。', 'Now that I’ve decided to do it, I’ll see it through. (からには)'],
+          ['日本[にほん]に来[き]た{からには}、日本語[にほんご]を話[はな]せるようになりたい。', 'Since I’ve come to Japan, I want to be able to speak Japanese. (からには)'],
+          ['約束[やくそく]した{以上[いじょう]}、守[まも]らなければならない。', 'Since you promised, you have to keep it. (以上[いじょう])'],
+          ['学生[がくせい]である{以上[いじょう]は}、勉強[べんきょう]するべきだ。', 'As long as you’re a student, you should study. (以上[いじょう]は)'],
+        ],
+        warn: ['The second half is a must, should, want or will, not a plain fact.'],
+      },
+      {
+        p: '〜ものの', lv: 'N2', m: 'although, but', r: 'plain + ものの · な-adj な / である + ものの',
+        more: 'Written “although”: you did A, but the expected result didn’t follow.',
+        ex: [
+          ['薬[くすり]を飲[の]んだ{ものの}、まだ熱[ねつ]が下[さ]がらない。', 'I took medicine, but my fever still hasn’t gone down. (verb)'],
+          ['大学[だいがく]を卒業[そつぎょう]した{ものの}、仕事[しごと]が見[み]つからない。', 'I graduated, but I can’t find a job. (verb)'],
+          ['料理[りょうり]は高[たか]い{ものの}、とてもおいしかった。', 'The food was pricey, but very good. (い-adj)'],
+          ['不便[ふべん]な{ものの}、この町[まち]が好[す]きだ。', 'It’s inconvenient, but I like this town. (な-adj な)'],
+        ],
+        warn: ['More written than けど; the second half isn’t a request or plan.'],
+      },
+      {
+        p: '〜くせに', lv: 'N2', m: 'even though (and I blame you)', r: 'plain + くせに · N の / な-adj な + くせに',
+        more: 'Like のに, but critical or contemptuous of the person.',
+        ex: [
+          ['知[し]っている{くせに}、教[おし]えてくれない。', 'You know, but you won’t tell me. (verb)'],
+          ['自分[じぶん]はやらない{くせに}、人[ひと]には文句[もんく]を言[い]う。', 'He doesn’t do it himself, yet he complains about others. (verb)'],
+          ['子供[こども]の{くせに}、生意気[なまいき]だ。', 'Cheeky, for a kid. (N の)'],
+          ['下手[へた]な{くせに}、いつも歌[うた]いたがる。', 'He’s bad at it, yet he always wants to sing. (な-adj な)'],
+        ],
+        warn: ['Rude about the person; not about yourself, and not polite.'],
+      },
+      {
+        p: '〜わりに(は)', lv: 'N2', m: 'considering, for', r: 'plain + わりに · N の / な-adj な + わりに',
+        more: 'More (or less) than you’d expect given A.',
+        ex: [
+          ['この店[みせ]は値段[ねだん]の{わりに}おいしい。', 'This place is good for the price. (N の)'],
+          ['年[とし]の{わりに}若[わか]く見[み]える。', 'She looks young for her age. (N の)'],
+          ['あまり勉強[べんきょう]しなかった{わりに}、いい点[てん]が取[と]れた。', 'I got a good mark considering I didn’t study much. (verb)'],
+          ['彼[かれ]はよく食[た]べる{わりに}、太[ふと]らない。', 'He doesn’t put on weight, considering how much he eats. (verb)'],
+          ['高[たか]い{わりに}、品質[ひんしつ]がよくない。', 'The quality isn’t good, considering the price. (い-adj)'],
+          ['簡単[かんたん]な{わりに}、時間[じかん]がかかった。', 'It took a long time for something so easy. (な-adj な)'],
+        ],
+        warn: ['Casual: わりと / わりに alone means “fairly”: わりとおいしい.'],
+      },
+      {
+        p: '〜次第[しだい]', lv: 'N2', m: 'as soon as · depending on', r: 'V-masu + 次第[しだい] (as soon as) · N + 次第[しだい]だ / 次第[しだい]で (depends on)',
+        more: 'After a verb stem: as soon as A happens, I’ll do B (polite, business). After a noun: everything depends on it.',
+        ex: [
+          ['資料[しりょう]が届[とど]き{次第[しだい]}、ご連絡[れんらく]します。', 'I’ll contact you as soon as the documents arrive. (V-masu: as soon as)'],
+          ['準備[じゅんび]ができ{次第[しだい]}、出発[しゅっぱつ]します。', 'We’ll leave as soon as we’re ready. (V-masu: as soon as)'],
+          ['合格[ごうかく]できるかどうかは、あなたの努力[どりょく]{次第[しだい]だ}。', 'Whether you pass depends on your effort. (N: depends on)'],
+          ['天気[てんき]{次第[しだい]で}、予定[よてい]を変[か]えます。', 'We’ll change the plan depending on the weather. (N: depends on)'],
+        ],
+        warn: ['“As soon as” 次第[しだい] is for the future, not the past: ×着[つ]き次第[しだい]、電話[でんわ]した.'],
+      },
+      {
+        p: '〜たとたん(に)', lv: 'N2', m: 'the moment, just as', r: 'V-ta + とたん(に)',
+        more: 'Something unexpected happens right after A.',
+        ex: [
+          ['家[いえ]を出[で]た{とたん}、雨[あめ]が降[ふ]り出[だ]した。', 'The moment I left the house, it started to rain. (V-ta)'],
+          ['立[た]ち上[あ]がった{とたんに}、めまいがした。', 'As soon as I stood up, I felt dizzy. (V-ta)'],
+        ],
+        warn: ['The second half is a surprise, not your plan: ×家[いえ]に帰[かえ]ったとたん、宿題[しゅくだい]をしよう.'],
+      },
+      {
+        p: '〜て以来[いらい]', lv: 'N2', m: 'ever since', r: 'V-te + 以来[いらい] · N + 以来[いらい]',
+        more: 'From that point until now, a state has continued.',
+        ex: [
+          ['日本[にほん]に来[き]て{以来[いらい]}、ずっと東京[とうきょう]に住[す]んでいる。', 'Ever since I came to Japan, I’ve lived in Tokyo. (V-te)'],
+          ['あの店[みせ]で食[た]べて{以来[いらい]}、すしが好[す]きになった。', 'Since eating at that place, I’ve loved sushi. (V-te)'],
+          ['卒業[そつぎょう]{以来[いらい]}、彼[かれ]に会[あ]っていない。', 'I haven’t seen him since graduation. (N)'],
+          ['先月[せんげつ]{以来[いらい]}、雨[あめ]が降[ふ]っていない。', 'It hasn’t rained since last month. (N)'],
+        ],
+        warn: ['Not for a single recent event: ×昨日[きのう]来[き]て以来[いらい].'],
+      },
+      {
+        p: '〜際[さい](に)', lv: 'N2', m: 'when, on the occasion of', r: 'V-dict / V-ta / N の + 際[さい](に)',
+        more: 'A formal 時[とき]: notices, announcements, business.',
+        ex: [
+          ['お降[お]りの{際[さい]は}、足元[あしもと]にご注意[ちゅうい]ください。', 'Please watch your step when getting off. (N の)'],
+          ['非常[ひじょう]の{際[さい]は}、このボタンを押[お]してください。', 'In an emergency, press this button. (N の)'],
+          ['お帰[かえ]りになる{際[さい]に}、受付[うけつけ]に寄[よ]ってください。', 'Please stop by reception on your way out. (V-dict)'],
+          ['先日[せんじつ]お会[あ]いした{際[さい]に}、お話[はな]ししたことですが…', 'About what I mentioned when we met the other day… (V-ta)'],
+        ],
+        warn: ['〜に際[さい]して is even more formal: 開会[かいかい]に際[さい]して (on opening).'],
+      },
+      {
+        p: '〜を問[と]わず', lv: 'N2', m: 'regardless of', r: 'N + を問[と]わず',
+        more: 'Formal: with pairs (男女[だんじょ], 昼夜[ちゅうや]) or words like 年齢[ねんれい], 経験[けいけん].',
+        ex: [
+          ['経験[けいけん]{を問[と]わず}、誰[だれ]でも応募[おうぼ]できます。', 'Anyone can apply, regardless of experience. (N)'],
+          ['この店[みせ]は昼夜[ちゅうや]{を問[と]わず}込[こ]んでいる。', 'This place is busy day and night. (N)'],
+        ],
+        warn: ['Like @{〜にかかわらず}, but only after nouns.'],
+      },
+      {
+        p: '〜どころか', lv: 'N2', m: 'far from, let alone', r: 'plain / N + どころか (な-adj: な or no な)',
+        more: 'Not only is A not true, the reverse (or something more extreme) is.',
+        ex: [
+          ['薬[くすり]を飲[の]んだが、よくなる{どころか}、もっと悪[わる]くなった。', 'I took medicine, but far from getting better, I got worse. (verb)'],
+          ['彼[かれ]は謝[あやま]る{どころか}、怒[おこ]り出[だ]した。', 'Far from apologising, he got angry. (verb)'],
+          ['漢字[かんじ]{どころか}、ひらがなも読[よ]めない。', 'I can’t read hiragana, let alone kanji. (N)'],
+          ['海外[かいがい]旅行[りょこう]{どころか}、近[ちか]くの温泉[おんせん]にも行[い]けない。', 'Forget going abroad, I can’t even go to a nearby hot spring. (N)'],
+        ],
+        warn: ['Different from ばかりか: どころか denies A.'],
+      },
+      {
+        p: '〜ようがない', lv: 'N2', m: 'there’s no way to', r: 'V-masu + ようがない',
+        more: 'Impossible because there is no method.',
+        ex: [
+          ['住所[じゅうしょ]が分[わ]からないので、連絡[れんらく]し{ようがない}。', 'I don’t know the address, so there’s no way to contact them. (V-masu)'],
+          ['こんなに壊[こわ]れていたら、直[なお]し{ようがない}。', 'If it’s this broken, there’s no way to fix it. (V-masu)'],
+        ],
+        warn: ['する-verbs: 説明[せつめい]のしようがない or 説明[せつめい]しようがない.'],
+      },
+      {
+        p: '〜がち · 〜気味[ぎみ]', lv: 'N2', m: 'tends to · a bit, a touch of', r: 'V-masu / N + がち · V-masu / N + 気味[ぎみ]',
+        more: 'がち: something (bad) that happens often. 気味[ぎみ]: a slight sign of something.',
+        ex: [
+          ['冬[ふゆ]は風邪[かぜ]をひき{がち}だ。', 'In winter I tend to catch colds. (がち)'],
+          ['彼[かれ]は最近[さいきん]、休[やす]み{がち}だ。', 'He’s been off a lot lately. (がち)'],
+          ['今日[きょう]は少[すこ]し風邪[かぜ]{気味[ぎみ]}です。', 'I have a bit of a cold today. (気味[ぎみ])'],
+          ['最近[さいきん]、太[ふと]り{気味[ぎみ]}なので、運動[うんどう]を始[はじ]めた。', 'I’ve been putting on a little weight, so I started exercising. (気味[ぎみ])'],
+        ],
+        warn: ['Both usually for bad things.'],
+      },
+      {
+        p: '〜に過[す]ぎない', lv: 'N2', m: 'merely, no more than', r: 'plain / N + に過[す]ぎない',
+        more: 'Makes something sound small or unimportant.',
+        ex: [
+          ['それはうわさ{に過[す]ぎない}。', 'That’s merely a rumour. (N)'],
+          ['私[わたし]はただの学生[がくせい]{に過[す]ぎません}。', 'I’m just a student. (N)'],
+          ['彼[かれ]は自分[じぶん]の意見[いけん]を言[い]った{に過[す]ぎない}。', 'He just gave his own opinion. (verb)'],
+          ['参加[さんか]者[しゃ]は十[じゅう]人[にん]{に過[す]ぎなかった}。', 'There were only ten participants. (N)'],
+        ],
+        warn: ['Often with ただ or 単[たん]なる: 単[たん]なる偶然[ぐうぜん]に過[す]ぎない.'],
+      },
+      {
+        p: '〜とは限[かぎ]らない', lv: 'N2', m: 'not necessarily', r: 'plain + とは限[かぎ]らない',
+        more: 'There are exceptions. Often with 必[かなら]ずしも or いつも.',
+        ex: [
+          ['高[たか]い物[もの]がいい物[もの]だ{とは限[かぎ]らない}。', 'Expensive things aren’t necessarily good. (N + だ)'],
+          ['日本人[にほんじん]がみんな寿司[すし]が好[す]きだ{とは限[かぎ]らない}。', 'Not every Japanese person likes sushi. (な-adj + だ)'],
+          ['毎日[まいにち]練習[れんしゅう]しても、勝[か]てる{とは限[かぎ]らない}。', 'Practising every day doesn’t mean you’ll win. (verb)'],
+          ['ニュースが必[かなら]ずしも正[ただ]しい{とは限[かぎ]らない}。', 'The news isn’t always right. (い-adj)'],
+        ],
+        warn: ['Pairs well with @{〜からといって}.'],
+      },
+      {
+        p: '〜ずにはいられない', lv: 'N2', m: 'can’t help doing', r: 'V-nai (drop ない) + ずにはいられない · する → せずには',
+        more: 'A feeling so strong you can’t stop yourself.',
+        ex: [
+          ['この映画[えいが]を見[み]ると、泣[な]か{ずにはいられない}。', 'I can’t help crying when I see this movie. (V-nai)'],
+          ['彼[かれ]の話[はなし]を聞[き]いて、笑[わら]わ{ずにはいられなかった}。', 'I couldn’t help laughing at his story. (V-nai)'],
+        ],
+        warn: ['Casual: 〜ないではいられない.'],
+      },
+      {
+        p: '〜てたまらない · 〜てしょうがない', lv: 'N2', m: 'terribly, can’t stand how', r: 'V-te / い-adj くて / な-adj で + たまらない · しょうがない',
+        more: 'A feeling or sensation that is very strong.',
+        ex: [
+          ['暑[あつ]く{てたまらない}。', 'It’s unbearably hot. (い-adj)'],
+          ['試験[しけん]の結果[けっか]が心配[しんぱい]で{たまらない}。', 'I’m terribly worried about the exam results. (な-adj)'],
+          ['家族[かぞく]に会[あ]いたく{てしょうがない}。', 'I’m dying to see my family. (い-adj: 〜たい)'],
+          ['眠[ねむ]く{てしょうがない}。', 'I’m so sleepy I can’t stand it. (い-adj)'],
+        ],
+        warn: ['Your own feelings; for others add らしい / ようだ.', 'Also 〜てしかたがない (more formal).'],
+      },
+      {
+        p: '〜につれて', lv: 'N2', m: 'as (one thing changes, so does another)', r: 'V-dict / N + につれて',
+        more: 'Two changes going together.',
+        ex: [
+          ['年[とし]をとる{につれて}、体力[たいりょく]が落[お]ちてきた。', 'As I get older, my stamina is dropping. (V-dict)'],
+          ['日本語[にほんご]が上手[じょうず]になる{につれて}、日本[にほん]の生活[せいかつ]が楽[たの]しくなった。', 'As my Japanese got better, life in Japan got more fun. (V-dict)'],
+          ['時間[じかん]の経過[けいか]{につれて}、痛[いた]みが消[き]えた。', 'As time passed, the pain went away. (N)'],
+          ['経済[けいざい]の発展[はってん]{につれて}、生活[せいかつ]が便利[べんり]になった。', 'As the economy grew, life got more convenient. (N)'],
+        ],
+        warn: ['Similar: 〜に伴[ともな]って (more formal), 〜にしたがって.'],
+      },
+      {
+        p: '〜をきっかけに', lv: 'N2', m: 'prompted by, since', r: 'N / V-ta の + をきっかけに',
+        more: 'Something that started a change.',
+        ex: [
+          ['留学[りゅうがく]{をきっかけに}、料理[りょうり]を始[はじ]めた。', 'Studying abroad got me into cooking. (N)'],
+          ['アニメ{をきっかけに}、日本語[にほんご]に興味[きょうみ]を持[も]った。', 'Anime got me interested in Japanese. (N)'],
+          ['入院[にゅういん]したの{をきっかけに}、たばこをやめた。', 'Going into hospital made me quit smoking. (V-ta の)'],
+          ['子供[こども]が生[う]まれたこと{をきっかけに}、引[ひ]っ越[こ]した。', 'We moved when our child was born. (V-ta こと)'],
+        ],
+        warn: ['Also 〜がきっかけで: 友達[ともだち]の一言[ひとこと]がきっかけで.'],
+      },
+      {
+        p: '〜あげく', lv: 'N2', m: 'after all that, in the end (sadly)', r: 'V-ta / N の + あげく(に)',
+        more: 'After a long, troublesome process, a (usually bad) result.',
+        ex: [
+          ['さんざん迷[まよ]った{あげく}、何[なに]も買[か]わなかった。', 'After agonising for ages, I didn’t buy anything. (V-ta)'],
+          ['長[なが]い間[ま]話[はな]し合[あ]った{あげく}、計画[けいかく]は中止[ちゅうし]になった。', 'After long talks, the plan was dropped. (V-ta)'],
+          ['けんかの{あげく}、二[に]人[にん]は別[わか]れた。', 'After all their fighting, the two split up. (N の)'],
+          ['悩[なや]んだ{あげく}、会社[かいしゃ]を辞[や]めることにした。', 'After a lot of worrying, I decided to quit. (V-ta)'],
+        ],
+        warn: ['〜末[すえ](に) is similar but neutral or good: 考[かんが]えた末[すえ]に、留学[りゅうがく]を決[き]めた.'],
+      },
+      {
+        p: '〜ないことはない', lv: 'N2', m: 'it’s not that … not (it’s possible)', r: 'V-nai / い-adj くない / な-adj じゃない + ことはない',
+        more: 'A hesitant yes: it is possible, but not ideal.',
+        ex: [
+          ['行[い]け{ないことはない}けど、ちょっと遠[とお]い。', 'It’s not that I can’t go, but it’s a bit far. (verb)'],
+          ['刺身[さしみ]は食[た]べられ{ないことはない}。', 'I can eat sashimi, sort of. (verb)'],
+          ['この服[ふく]は高[たか]く{ないことはない}が、買[か]う価値[かち]はある。', 'These clothes aren’t exactly cheap, but they’re worth it. (い-adj)'],
+          ['その仕事[しごと]は好[す]きじゃ{ないことはない}。', 'It’s not that I don’t like the job. (な-adj)'],
+        ],
+        warn: ['Different from @{〜ことはない} (there’s no need to).'],
+      },
+    ],
+  },
+  {
+    id: 'n1', title: 'N1 patterns', jp: 'N1の文型[ぶんけい]',
+    practice: [],
+    points: [
+      {
+        p: '〜ものを', lv: 'N1', m: 'if only (but you didn’t)', r: 'plain + ものを',
+        more: 'Regret or reproach: it would have been fine if…',
+        ex: [
+          ['言[い]ってくれれば手伝[てつだ]った{ものを}。', 'If you’d told me, I’d have helped. (verb)'],
+          ['早[はや]く病院[びょういん]に行[い]けばよかった{ものを}。', 'You should have gone to the hospital sooner. (い-adj: よかった)'],
+        ],
+        warn: ['Written and literary.'],
+      },
+      {
+        p: '〜をもって', lv: 'N1', m: 'by means of; as of', r: 'N + をもって',
+        more: 'Formal: the means (書面[しょめん]をもって) or a point in time (本日[ほんじつ]をもって).',
+        ex: [
+          ['本日[ほんじつ]{をもって}、営業[えいぎょう]を終了[しゅうりょう]いたします。', 'As of today, we are closing our business. (time)'],
+          ['これ{をもって}、会議[かいぎ]を終[お]わります。', 'With this, the meeting is over. (time)'],
+          ['結果[けっか]は書面[しょめん]{をもって}お知[し]らせします。', 'We will inform you of the results in writing. (means)'],
+          ['彼[かれ]は努力[どりょく]{をもって}成功[せいこう]を手[て]に入[い]れた。', 'He achieved success through hard work. (means)'],
+        ],
+        warn: ['Also 〜をもちまして (more polite) in speeches.'],
+      },
+      {
+        p: '〜を皮切[かわき]りに', lv: 'N1', m: 'starting with', r: 'N + を皮切[かわき]りに(して)',
+        more: 'The first of a series of events.',
+        ex: [
+          ['東京[とうきょう]{を皮切[かわき]りに}、全国[ぜんこく]でコンサートを行[おこな]う。', 'Starting in Tokyo, they’ll tour the country. (N)'],
+          ['彼[かれ]の発言[はつげん]{を皮切[かわき]りに}、多[おお]くの人[ひと]が意見[いけん]を言[い]い始[はじ]めた。', 'Starting with his comment, many people began to speak up. (N)'],
+        ],
+        warn: ['Used for things that spread or continue; not for ordinary first steps.'],
+      },
+      {
+        p: '〜に至[いた]るまで', lv: 'N1', m: 'right down to, even', r: 'N + に至[いた]るまで',
+        more: 'Stresses how far something reaches, often with から.',
+        ex: [
+          ['子供[こども]から大人[おとな]{に至[いた]るまで}、みんなが楽[たの]しめる。', 'Everyone, from children to adults, can enjoy it. (N)'],
+          ['服装[ふくそう]から言葉[ことば]遣[づか]い{に至[いた]るまで}、厳[きび]しく注意[ちゅうい]された。', 'I was told off about everything, from my clothes right down to my language. (N)'],
+        ],
+        warn: ['〜に至[いた]っては: as for (the most extreme case): 弟[おとうと]に至[いた]っては、名前[なまえ]も知[し]らない.'],
+      },
+      {
+        p: '〜を禁[きん]じ得[え]ない', lv: 'N1', m: 'can’t help feeling', r: 'N + を禁[きん]じ得[え]ない',
+        more: 'Formal: a feeling (anger, surprise, sympathy) you can’t hold back.',
+        ex: [
+          ['被害[ひがい]者[しゃ]の話[はなし]に、同情[どうじょう]{を禁[きん]じ得[え]ない}。', 'Hearing the victims’ story, I can’t help feeling sympathy. (N)'],
+          ['その決定[けってい]には怒[いか]り{を禁[きん]じ得[え]ない}。', 'I can’t help feeling angry at that decision. (N)'],
+        ],
+        warn: ['With feeling nouns: 涙[なみだ], 怒[いか]り, 驚[おどろ]き, 同情[どうじょう]. Not for your own actions.'],
+      },
+      {
+        p: '〜てやまない', lv: 'N1', m: 'never stop (hoping, wishing)', r: 'V-te + やまない',
+        more: 'A strong, lasting feeling, in speeches and letters.',
+        ex: [
+          ['皆様[みなさま]のご健康[けんこう]を願[ねが]っ{てやみません}。', 'I sincerely wish you all good health. (V-te)'],
+          ['彼[かれ]の成功[せいこう]を祈[いの]っ{てやまない}。', 'I will always pray for his success. (V-te)'],
+        ],
+        warn: ['With 願[ねが]う, 祈[いの]る, 愛[あい]する, 期待[きたい]する; the speaker’s own feeling.'],
+      },
+      {
+        p: '〜べからず · 〜べからざる', lv: 'N1', m: 'must not · that must not be', r: 'V-dict + べからず (sign) · V-dict + べからざる + N',
+        more: 'Old, strong prohibitions on signs; べからざる before a noun.',
+        ex: [
+          ['芝生[しばふ]に入[はい]る{べからず}。', 'Keep off the grass. (べからず)'],
+          ['ここにごみを捨[す]てる{べからず}。', 'No littering here. (べからず)'],
+          ['それは許[ゆる]す{べからざる}行為[こうい]だ。', 'That is an unforgivable act. (べからざる + N)'],
+          ['彼[かれ]はこの会社[かいしゃ]に欠[か]く{べからざる}人物[じんぶつ]だ。', 'He is indispensable to this company. (べからざる + N)'],
+        ],
+        warn: ['する → すべからず / するべからず.'],
+      },
+      {
+        p: '〜までもない', lv: 'N1', m: 'there’s no need to', r: 'V-dict + までもない',
+        more: 'It’s so obvious or minor that you needn’t.',
+        ex: [
+          ['言[い]う{までもなく}、健康[けんこう]は大切[たいせつ]だ。', 'Needless to say, health matters. (V-dict)'],
+          ['そんな簡単[かんたん]なこと、調[しら]べる{までもない}。', 'Something that simple, there’s no need to look it up. (V-dict)'],
+        ],
+        warn: ['言[い]うまでもない is the most common use.'],
+      },
+      {
+        p: '〜ずにはおかない · 〜ずにはすまない', lv: 'N1', m: 'will surely (cause) · can’t get away without', r: 'V-nai (drop ない) + ずにはおかない / ずにはすまない',
+        more: 'ずにはおかない: something inevitably causes a feeling or action. ずにはすまない: you can’t avoid doing it (duty).',
+        ex: [
+          ['この映画[えいが]は見[み]る人[ひと]を感動[かんどう]させ{ずにはおかない}。', 'This movie is bound to move anyone who sees it. (ずにはおかない)'],
+          ['彼[かれ]の言葉[ことば]は人[ひと]を傷[きず]つけ{ずにはおかない}。', 'His words are sure to hurt people. (ずにはおかない)'],
+          ['人[ひと]の物[もの]を壊[こわ]したのだから、謝[あやま]ら{ずにはすまない}。', 'You broke someone’s things, so you have to apologise. (ずにはすまない)'],
+          ['このミスは、部長[ぶちょう]に報告[ほうこく]せ{ずにはすまない}だろう。', 'There’s no getting out of reporting this mistake to the manager. (ずにはすまない)'],
+        ],
+        warn: ['する → せずには.'],
+      },
+      {
+        p: '〜をよそに', lv: 'N1', m: 'ignoring, in spite of', r: 'N + をよそに',
+        more: 'Going ahead without caring about others’ worries or a situation.',
+        ex: [
+          ['親[おや]の心配[しんぱい]{をよそに}、彼[かれ]は一[いち]人[にん]で旅[たび]に出[で]た。', 'Ignoring his parents’ worries, he set off alone. (N)'],
+          ['反対[はんたい]の声[こえ]{をよそに}、工事[こうじ]が始[はじ]まった。', 'Construction began in spite of the opposition. (N)'],
+        ],
+        warn: ['Often with 心配[しんぱい], 反対[はんたい], 期待[きたい].'],
+      },
+      {
+        p: '〜ならでは', lv: 'N1', m: 'only (possible) with, unique to', r: 'N + ならではの + N · N + ならでは',
+        more: 'Something only this place or person can offer. Common in ads.',
+        ex: [
+          ['京都[きょうと]{ならではの}景色[けしき]を楽[たの]しんだ。', 'We enjoyed scenery you can only see in Kyoto. (ならではの + N)'],
+          ['この料理[りょうり]は、地元[じもと]の人[ひと]{ならではの}味[あじ]だ。', 'This dish has a flavour only locals can make. (ならではの + N)'],
+          ['これはプロ{ならでは}の技術[ぎじゅつ]だ。', 'That’s a skill only a pro has. (ならでは)'],
+        ],
+        warn: ['Praise, not criticism.'],
+      },
+      {
+        p: '〜といえども', lv: 'N1', m: 'even though, even if', r: 'plain / N + といえども',
+        more: 'Formal: even someone or something special is no exception.',
+        ex: [
+          ['子供[こども]{といえども}、ルールは守[まも]らなければならない。', 'Even children have to follow the rules. (N)'],
+          ['専門[せんもん]家[か]{といえども}、間違[まちが]えることはある。', 'Even experts make mistakes. (N)'],
+          ['いくら忙[いそが]しい{といえども}、食事[しょくじ]はとるべきだ。', 'However busy you are, you should eat. (い-adj)'],
+        ],
+        warn: ['Often with たとえ, いくら or いかに.'],
+      },
+      {
+        p: '〜とあって', lv: 'N1', m: 'because (it’s such a special case)', r: 'plain / N + とあって',
+        more: 'A special situation and its natural result. Used to report, not for your own plans.',
+        ex: [
+          ['人気[にんき]歌手[かしゅ]が来[く]る{とあって}、会場[かいじょう]は満員[まんいん]だった。', 'With a famous singer coming, the hall was packed. (verb)'],
+          ['連休[れんきゅう]{とあって}、道路[どうろ]は込[こ]んでいる。', 'It being a long weekend, the roads are busy. (N)'],
+        ],
+        warn: ['The result is a fact, not a wish or request.'],
+      },
+      {
+        p: '〜であれ〜であれ', lv: 'N1', m: 'whether … or', r: 'N + であれ、N + であれ',
+        more: 'It makes no difference which of the cases.',
+        ex: [
+          ['大人[おとな]{であれ}子供[こども]{であれ}、ルールは同[おな]じだ。', 'Adults or children, the rules are the same. (N)'],
+          ['雨[あめ]{であれ}雪[ゆき]{であれ}、出発[しゅっぱつ]する。', 'Rain or snow, we’re leaving. (N)'],
+        ],
+        warn: ['One alone: question word + であれ: 何[なん]であれ (whatever it is).'],
+      },
+      {
+        p: '〜ともなると · 〜ともなれば', lv: 'N1', m: 'when it comes to, once you get to', r: 'N / V-dict + ともなると / ともなれば',
+        more: 'At this (higher) level or stage, things naturally change.',
+        ex: [
+          ['社長[しゃちょう]{ともなると}、毎日[まいにち]忙[いそが]しい。', 'When you’re the company president, you’re busy every day. (N)'],
+          ['十二月[じゅうにがつ]{ともなると}、町[まち]はクリスマスの雰囲気[ふんいき]になる。', 'Once it’s December, the town feels like Christmas. (N)'],
+          ['大学生[だいがくせい]{ともなれば}、自分[じぶん]で考[かんが]えるべきだ。', 'Once you’re a university student, you should think for yourself. (N)'],
+          ['結婚[けっこん]する{ともなれば}、お金[かね]がかかる。', 'When it comes to getting married, it costs money. (V-dict)'],
+        ],
+        warn: ['The second half is what’s natural or expected at that level.'],
+      },
+      {
+        p: '〜なりに', lv: 'N1', m: 'in one’s own way', r: 'N / plain + なりに · N + なりの + N',
+        more: 'Within one’s own limits, as best one can.',
+        ex: [
+          ['私[わたし]{なりに}頑張[がんば]りました。', 'I did my best in my own way. (N)'],
+          ['子供[こども]は子供[こども]{なりに}考[かんが]えている。', 'Children think about things in their own way. (N)'],
+          ['彼[かれ]には彼[かれ]{なりの}理由[りゆう]がある。', 'He has his own reasons. (なりの + N)'],
+          ['安[やす]い{なりに}、よくできている。', 'For something cheap, it’s well made. (い-adj)'],
+        ],
+        warn: ['Modest about yourself; not to praise others highly.'],
+      },
+      {
+        p: '〜や否[いな]や · 〜が早[はや]いか', lv: 'N1', m: 'no sooner … than', r: 'V-dict + や否[いな]や / が早[はや]いか',
+        more: 'B happens immediately after A. Literary.',
+        ex: [
+          ['ベルが鳴[な]る{や否[いな]や}、学生[がくせい]たちは教室[きょうしつ]を飛[と]び出[だ]した。', 'The moment the bell rang, the students rushed out. (や否[いな]や)'],
+          ['ドアが開[あ]く{や否[いな]や}、子供[こども]が走[はし]ってきた。', 'No sooner had the door opened than a child came running. (や否[いな]や)'],
+          ['彼[かれ]は家[いえ]に着[つ]く{が早[はや]いか}、ベッドに倒[たお]れ込[こ]んだ。', 'No sooner did he get home than he collapsed onto the bed. (が早[はや]いか)'],
+          ['電車[でんしゃ]が止[と]まる{が早[はや]いか}、乗客[じょうきゃく]が降[お]りてきた。', 'The train had barely stopped before the passengers poured out. (が早[はや]いか)'],
+        ],
+        warn: ['For past facts you saw, not for your own plans.'],
+      },
+      {
+        p: '〜そばから', lv: 'N1', m: 'no sooner … than (again and again)', r: 'V-dict / V-ta + そばから',
+        more: 'Something keeps undoing what you just did.',
+        ex: [
+          ['片付[かたづ]ける{そばから}、子供[こども]が散[ち]らかす。', 'As soon as I tidy up, the kids make a mess again. (V-dict)'],
+          ['聞[き]いた{そばから}忘[わす]れてしまう。', 'I forget things as soon as I hear them. (V-ta)'],
+        ],
+        warn: ['For repeated, frustrating situations.'],
+      },
+      {
+        p: '〜までだ · 〜までのことだ', lv: 'N1', m: 'I’ll just …; it’s only that', r: 'V-dict + までだ (resolve) · V-ta + までのことだ (only)',
+        more: 'After the dictionary form: if that fails, I’ll simply do this. After the た-form: I only did this, nothing more.',
+        ex: [
+          ['電車[でんしゃ]がないなら、歩[ある]いて帰[かえ]る{までだ}。', 'If there are no trains, I’ll just walk home. (V-dict)'],
+          ['だめなら、もう一度[いちど]やる{までだ}。', 'If it doesn’t work, I’ll simply try again. (V-dict)'],
+          ['当然[とうぜん]のことをした{までです}。', 'I only did what anyone would. (V-ta)'],
+          ['気[き]になったので聞[き]いた{までのことだ}。', 'I only asked because I was curious. (V-ta)'],
+        ],
+        warn: ['Formal and a little stiff.'],
+      },
+      {
+        p: '〜極[きわ]まりない · 〜極[きわ]まる', lv: 'N1', m: 'extremely', r: 'な-adj + 極[きわ]まりない / 極[きわ]まる',
+        more: 'Strong, written: usually criticism.',
+        ex: [
+          ['彼[かれ]の態度[たいど]は失礼[しつれい]{極[きわ]まりない}。', 'His attitude is extremely rude. (極[きわ]まりない)'],
+          ['この道[みち]は危険[きけん]{極[きわ]まりない}。', 'This road is extremely dangerous. (極[きわ]まりない)'],
+          ['その発言[はつげん]は無礼[ぶれい]{極[きわ]まる}ものだった。', 'That remark was utterly rude. (極[きわ]まる)'],
+          ['感激[かんげき]{極[きわ]まって}、泣[な]き出[だ]した。', 'Overwhelmed with emotion, she burst into tears. (極[きわ]まる)'],
+        ],
+        warn: ['With な-adjectives made of kanji: 失礼[しつれい], 危険[きけん], 不愉快[ふゆかい], 退屈[たいくつ].'],
+      },
+      {
+        p: '〜んばかり', lv: 'N1', m: 'as if about to', r: 'V-nai (drop ない) + んばかり(に / の) · する → せんばかり',
+        more: 'Looks like it’s about to happen.',
+        ex: [
+          ['彼女[かのじょ]は泣[な]き出[だ]さ{んばかりの}顔[かお]をしていた。', 'She looked as if she was about to cry. (の + N)'],
+          ['彼[かれ]は「出[で]て行[い]け」と言[い]わ{んばかりに}ドアを開[あ]けた。', 'He opened the door as if to say “get out”. (に)'],
+        ],
+        warn: ['Written; for what you see in others, not yourself.'],
+      },
+      {
+        p: '〜ずくめ · 〜まみれ', lv: 'N1', m: 'nothing but · covered in', r: 'N + ずくめ · N + まみれ',
+        more: 'ずくめ: everything is that (often good: いいことずくめ, or black clothes: 黒[くろ]ずくめ). まみれ: covered in something dirty.',
+        ex: [
+          ['今年[ことし]はいいこと{ずくめ}の一[いち]年[ねん]だった。', 'This year was nothing but good things. (ずくめ)'],
+          ['彼[かれ]はいつも黒[くろ]{ずくめ}の服[ふく]を着[き]ている。', 'He always dresses all in black. (ずくめ)'],
+          ['子供[こども]たちは泥[どろ]{まみれ}になって遊[あそ]んだ。', 'The children played until they were covered in mud. (まみれ)'],
+          ['汗[あせ]{まみれ}で家[いえ]に帰[かえ]った。', 'I got home drenched in sweat. (まみれ)'],
+        ],
+        warn: ['〜だらけ (N3) is close to まみれ but covers more: 間違[まちが]いだらけ (full of mistakes).'],
+      },
+      {
+        p: '〜かたわら', lv: 'N1', m: 'while also (doing something else)', r: 'V-dict / N の + かたわら',
+        more: 'Alongside one’s main job or activity, over a long time.',
+        ex: [
+          ['彼[かれ]は会社[かいしゃ]で働[はたら]く{かたわら}、小説[しょうせつ]を書[か]いている。', 'He writes novels alongside his office job. (V-dict)'],
+          ['子育[こそだ]ての{かたわら}、大学[だいがく]で勉強[べんきょう]している。', 'She studies at university while raising children. (N の)'],
+        ],
+        warn: ['For long-term activities, not one occasion (use ながら).'],
+      },
+      {
+        p: '〜がてら', lv: 'N1', m: 'while, on the way (doing two things)', r: 'V-masu / N + がてら',
+        more: 'Using one outing to do a second thing too.',
+        ex: [
+          ['散歩[さんぽ]{がてら}、パンを買[か]いに行[い]った。', 'I went for a walk and picked up some bread. (N)'],
+          ['駅[えき]まで送[おく]り{がてら}、買[か]い物[もの]をしてきた。', 'I did some shopping while dropping her off at the station. (V-masu)'],
+        ],
+        warn: ['Usually with movement verbs (行[い]く, 歩[ある]く, 出[で]かける).'],
+      },
+      {
+        p: '〜とはいえ', lv: 'N1', m: 'although, that said', r: 'plain / N + とはいえ',
+        more: 'Admits A, then adds something that goes against it.',
+        ex: [
+          ['春[はる]{とはいえ}、まだ寒[さむ]い。', 'It may be spring, but it’s still cold. (N)'],
+          ['仕事[しごと]{とはいえ}、休[やす]みの日[ひ]に呼[よ]ばれるのは嫌[いや]だ。', 'It may be work, but I hate being called in on my day off. (N)'],
+          ['安[やす]くなった{とはいえ}、まだ高[たか]い。', 'It’s got cheaper, but it’s still expensive. (verb)'],
+        ],
+        warn: ['At the start of a sentence: とはいえ、… (that said).'],
+      },
+      {
+        p: '〜にかたくない', lv: 'N1', m: 'it’s not hard to (imagine)', r: 'N / V-dict + にかたくない',
+        more: 'With 想像[そうぞう], 察[さっ]する, 理解[りかい]: easy to imagine or understand.',
+        ex: [
+          ['彼[かれ]の悲[かな]しみは想像[そうぞう]{にかたくない}。', 'It’s not hard to imagine his sorrow. (N)'],
+          ['家族[かぞく]の苦労[くろう]は察[さっ]する{にかたくない}。', 'It’s easy to guess what the family went through. (V-dict)'],
+        ],
+        warn: ['Almost only with 想像[そうぞう], 察[さっ]する, 理解[りかい].'],
+      },
+      {
+        p: '〜たりとも', lv: 'N1', m: 'not even (one)', r: 'one + counter + たりとも + negative',
+        more: 'Stresses that not even the smallest amount is allowed.',
+        ex: [
+          ['一[いち]円[えん]{たりとも}無駄[むだ]にできない。', 'I can’t waste even one yen. (one + counter)'],
+          ['一[いち]日[にち]{たりとも}休[やす]まなかった。', 'I didn’t take a single day off. (one + counter)'],
+        ],
+        warn: ['Always one of something, and a negative.'],
+      },
+      {
+        p: '〜すら', lv: 'N1', m: 'even', r: 'N (+ particle) + すら',
+        more: 'A written さえ: even the most basic thing.',
+        ex: [
+          ['疲[つか]れて、立[た]つこと{すら}できない。', 'I’m so tired I can’t even stand. (N)'],
+          ['そんなこと、子供[こども]で{すら}知[し]っている。', 'Even a child knows that. (N + で)'],
+        ],
+        warn: ['Usually with a negative or a surprise.'],
       },
     ],
   },
