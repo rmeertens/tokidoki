@@ -190,7 +190,7 @@ export const SECTIONS = [
           ['百円[ひゃくえん]{しか}ありません。', 'I only have 100 yen (that’s all). (しか〜ない)'],
           ['ひらがな{しか}読[よ]めません。', 'I can only read hiragana. (しか〜ない)'],
         ],
-        warn: ['しか always takes a negative verb, though the meaning is positive.', 'しか replaces が and を but goes after other particles: 東京[とうきょう]にしか.'],
+        warn: ['しか always takes a negative verb, though the meaning is positive.', 'しか replaces が and を but goes after other particles: 東京[とうきょう]にしか.', 'With a verb, だけで means “just by doing”: @{〜だけで}.'],
       },
       {
         p: 'でも', lv: 'N4', m: '… or something; any-', r: 'N + でも · question word + でも',
@@ -1506,6 +1506,21 @@ export const SECTIONS = [
           ['あの人[ひと]の名前[なまえ]、何[なん]だった{っけ}。', 'What was that person’s name again? (だった)'],
         ],
         warn: ['Casual only; politely: 〜でしたっけ.'],
+      },
+      {
+        p: '〜だけで', lv: 'N3', m: 'just by (doing); with only', r: 'V-dict / N + だけで',
+        more: 'Doing only this (or having only this) is enough for the result.',
+        ex: [
+          ['このボタンを押[お]す{だけで}、お湯[ゆ]が出[で]ます。', 'Just press this button and hot water comes out. (V-dict)'],
+          ['考[かんが]える{だけで}、緊張[きんちょう]する。', 'Just thinking about it makes me nervous. (V-dict)'],
+          ['声[こえ]{だけで}、誰[だれ]か分[わ]かった。', 'I knew who it was from the voice alone. (N)'],
+          ['千円[せんえん]{だけで}、一週間[いっしゅうかん]暮[く]らした。', 'I lived for a week on just 1,000 yen. (N)'],
+        ],
+        warn: [
+          'With V-ta: just by having done it once: 一度[いちど]聞[き]いただけで覚[おぼ]えた (I remembered it after hearing it just once).',
+          'Also 〜ているだけで: just by being / doing: 見[み]ているだけで楽[たの]しい (it’s fun just watching).',
+          'Not the same as 〜だけでなく (not only): 英語[えいご]だけでなく中国語[ちゅうごくご]も話[はな]せる. Plain “only”: @{だけ · しか〜ない}.',
+        ],
       },
     ],
   },
