@@ -61,7 +61,9 @@
     ['丁寧', 'ていねい', 'polite / careful'],
     ['失礼', 'しつれい', 'rude'],
     ['得意', 'とくい', 'good at'],
+    ['不得意', 'ふとくい', 'bad at'],
     ['心配', 'しんぱい', 'worried'],
+    ['意外', 'いがい', 'surprising'],
     ['曖昧', 'あいまい', 'vague'],
   ];
   const I_ADJECTIVES = ADJECTIVES.filter(a => a.type === 'i-adj');

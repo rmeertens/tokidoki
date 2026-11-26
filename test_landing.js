@@ -73,6 +73,14 @@ for (const name of PAGES) {
     ok(/class="gc-warn"/.test(x), `${label}: exceptions`);
     ok(!/[一-鿿々]/.test(x.replace(/<ruby>[\s\S]*?<\/ruby>/g, '')), `${label}: furigana on every kanji`);
   });
+  // The い-adjectives note lists every な-adjective in the Misc quiz
+  // (misc.js NA_EI) and links to it.
+  const naEi = [...fs.readFileSync('misc.js', 'utf8').match(/const NA_EI = \[([\s\S]*?)\n  \];/)[1].matchAll(/^\s*\['([^']+)'/gm)].map(m => m[1]);
+  const iAdj = items.find(x => x.includes('>い-adj'));
+  const iAdjText = (iAdj || '').replace(/<(rt|rp)>[^<]*<\/\1>|<\/?[^>]+>/g, '');
+  ok(naEi.length >= 9, `found the Misc quiz's な-adjectives (${naEi.length})`);
+  for (const w of naEi) ok(iAdjText.includes(w), `い-adjectives note lists ${w}`);
+  ok((iAdj || '').includes('href="misc.html#na-ei"'), 'い-adjectives links to the Misc quiz');
   for (const page of ['index.html', 'blog.html']) {
     ok(fs.readFileSync(page, 'utf8').includes('href="grammar-cheatsheet.html"'), `${page} links to the grammar cheatsheet`);
   }

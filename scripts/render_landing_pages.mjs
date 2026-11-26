@@ -242,6 +242,7 @@ function grammarBody() {
         `<p>${jp(g.more)}</p>` +
         `<ul class="gc-ex">${g.ex.map(([ja, en]) => `<li><span class="gc-ja" lang="ja">${marked(ja)}</span><span class="gc-en">${esc(en)}</span></li>`).join('')}</ul>` +
         `<div class="gc-warn"><span class="gc-warn-title">Watch out</span><ul>${g.warn.map(w => `<li>${jp(w)}</li>`).join('')}</ul></div>` +
+        (g.links ? `<p class="gc-practice">Practise: ${g.links.map(([href, label]) => `<a href="${href}">${jp(label)} →</a>`).join(' · ')}</p>` : '') +
         `</div></details>`;
     });
     h += `</div><p class="gc-practice">Practise: ${s.practice.map(([href, label]) => `<a href="${href}">${esc(label)} →</a>`).join(' · ')}</p></section>`;
