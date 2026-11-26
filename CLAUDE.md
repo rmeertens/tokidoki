@@ -69,7 +69,8 @@
   `node scripts/render_landing_pages.mjs`. The cheatsheet's points are
   hand-written in `scripts/grammar_cheatsheet_data.mjs` (format at its top:
   one line of meaning + rule, then more, examples with furigana, and
-  exceptions); `landing.js` adds its search (Japanese, English or romaji via
+  exceptions; where a rule lists several forms, at least two examples of
+  each, tagged with the form in the English); `landing.js` adds its search (Japanese, English or romaji via
   `romaji.js`: "nara" finds 〜なら; pattern matches first, then summaries,
   then any mention), level filter and "Open all". `@{pattern}` in the
   data links to another point.
