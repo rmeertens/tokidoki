@@ -213,7 +213,14 @@ export const SECTIONS = [
       {
         p: '〜て (and, then)', lv: 'N5', m: 'and; and then', r: 'V-te … · い-adj → 〜くて · N / な-adj + で',
         more: 'Links actions in the order they happen, or links descriptions. The last verb sets the tense and politeness for the whole sentence.',
-        ex: [['朝[あさ]起[お]き{て}、顔[かお]を洗[あら]い{ます}。', 'I get up and wash my face.'], ['この店[みせ]は安[やす]く{て}おいしい。', 'This place is cheap and good.']],
+        ex: [
+          ['朝[あさ]起[お]き{て}、顔[かお]を洗[あら]い{ます}。', 'I get up and wash my face.'],
+          ['昨日[きのう]は友達[ともだち]に会[あ]っ{て}、映画[えいが]を見[み]{ました}。', 'Yesterday I met a friend and saw a movie.'],
+          ['この店[みせ]は安[やす]{くて}おいしい。', 'This place is cheap and good.'],
+          ['新[あたら]しい部屋[へや]は広[ひろ]{くて}明[あか]るいです。', 'The new room is big and bright.'],
+          ['兄[あに]は医者[いしゃ]{で}、姉[あね]は先生[せんせい]です。', 'My older brother is a doctor, and my older sister is a teacher.'],
+          ['京都[きょうと]は静[しず]か{で}きれいな町[まち]です。', 'Kyoto is a quiet, pretty town.'],
+        ],
         warn: ['て-form rules (書[か]いて, 飲[の]んで, 行[い]って…): see the @{conjugation chart|verb-conjugation-chart.html}.', 'Don’t link a good and a bad point with て; use が / けど: 安[やす]いけど、まずい.'],
       },
       {
