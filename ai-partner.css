@@ -1,0 +1,49 @@
+/* blog-ai-language-partner.html: the "paste this link" box, the copyable
+   instructions, and the tables / cards of starters and role-plays
+   (filled in and copied by ai-partner.js). */
+.aip-quick { margin-top: 20px; background: var(--bg-card); border: 2px solid var(--accent); border-radius: var(--radius); padding: 14px 16px; }
+.post .aip-quick h2 { margin-top: 0; font-size: 1.05rem; }
+.aip-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px 12px; margin: 10px 0 12px; }
+.aip-fields label { display: flex; flex-direction: column; gap: 4px; font-size: 0.8rem; font-weight: 600; color: var(--text-dim); }
+.aip-fields input { width: 100%; padding: 8px 10px; font: inherit; font-size: 0.92rem; font-weight: 400; color: var(--text);
+  background: var(--bg-input); border: 2px solid var(--border); border-radius: var(--radius-sm); outline: none; }
+.aip-fields input:focus { border-color: var(--accent); }
+.aip-msg, .aip-prompt { margin: 0; padding: 12px 14px; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-sm);
+  color: var(--text); font: 0.86rem/1.6 ui-monospace, 'SF Mono', Menlo, Consolas, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+.aip-msg { font-family: var(--font); font-size: 0.95rem; }
+.aip-prompt { max-height: 28em; overflow-y: auto; }
+.aip-copyrow { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; margin-top: 10px; }
+.aip-copyrow .btn-primary, .aip-copyrow .btn-secondary { padding: 8px 16px; font-size: 0.9rem; }
+.aip-status { font-size: 0.85rem; color: var(--green); }
+.post .aip-note { font-size: 0.88rem; }
+
+.aip-principles { display: grid; gap: 10px; margin: 12px 0; }
+.aip-principle { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 14px; }
+.aip-principle h3 { font-family: var(--font-display); font-size: 0.98rem; color: var(--text); margin: 0 0 4px; }
+.post .aip-principle p { font-size: 0.9rem; line-height: 1.6; }
+.post .aip-principle p + p { margin-top: 4px; }
+
+.aip-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 12px 0; border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.aip-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+.aip-table th { background: var(--bg-input); padding: 8px 10px; text-align: left; font-size: 0.72rem; font-weight: 600; color: var(--text-dim);
+  text-transform: uppercase; letter-spacing: 0.4px; }
+.aip-table td { padding: 8px 10px; border-top: 1px solid var(--border); color: var(--text-dim); vertical-align: top; line-height: 1.5; }
+.aip-table td:first-child { color: var(--text); font-weight: 600; }
+.post .aip-table [lang="ja"] { white-space: normal; color: var(--text); }
+
+.aip-scenes { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; margin: 12px 0; max-width: none; }
+.aip-scene { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 0.86rem; color: var(--text-dim); line-height: 1.5; }
+.aip-scene h3 { font-family: var(--font-display); font-size: 0.98rem; color: var(--text); margin: 2px 0 6px; }
+.aip-scene .aip-lv { display: inline-block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px;
+  color: var(--accent); background: var(--accent-dim); border-radius: 999px; padding: 1px 8px; }
+.aip-scene dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 3px 8px; }
+.aip-scene dt { font-weight: 600; color: var(--text); }
+.aip-scene dd { margin: 0; }
+.post .aip-scene [lang="ja"] { white-space: normal; }
+.post code { font: 0.88em ui-monospace, 'SF Mono', Menlo, Consolas, monospace; background: var(--bg-input); border-radius: 4px; padding: 1px 5px; white-space: nowrap; }
+@media (max-width: 600px) {
+  .aip-table thead { display: none; }
+  .aip-table tr { display: block; padding: 8px 0; }
+  .aip-table tr + tr { border-top: 1px solid var(--border); }
+  .aip-table td { display: block; border: none; padding: 1px 12px; }
+}
