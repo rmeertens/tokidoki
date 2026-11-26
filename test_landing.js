@@ -71,6 +71,7 @@ for (const name of PAGES) {
     ok(/class="gc-m">[^<]+</.test(x) && /class="gc-r">./.test(x), `${label}: meaning and rule`);
     ok(/class="gc-ja"[^>]*>.*<b>/.test(x), `${label}: an example marking the grammar`);
     ok(/class="gc-warn"/.test(x), `${label}: exceptions`);
+    ok(!/[一-鿿々]/.test(x.replace(/<ruby>[\s\S]*?<\/ruby>/g, '')), `${label}: furigana on every kanji`);
   });
   for (const page of ['index.html', 'blog.html']) {
     ok(fs.readFileSync(page, 'utf8').includes('href="grammar-cheatsheet.html"'), `${page} links to the grammar cheatsheet`);

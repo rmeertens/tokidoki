@@ -196,8 +196,11 @@ const VOICE_CREDIT = (read('listening.html').match(/<p class="lis-credits"[^>]*>
 const { SECTIONS: GRAMMAR } = await import('./grammar_cheatsheet_data.mjs');
 const LEVELS = ['N5', 'N4', 'N3'];
 const SLOT_RE = /(V-(?:dict|masu|te|ta|nai|vol)|い-adj|な-adj|\bplain\b|\bN\b)/g;
-const slots = s => esc(s).replace(SLOT_RE, '<span class="gc-slot">$1</span>');
-const marked = s => ruby(esc(s)).replace(/\{([^}]+)\}/g, '<b>$1</b>');
+// Every kanji on the page has furigana (漢字[かんじ] in the data), so the
+// rules and notes are as readable as the examples.
+const jp = s => ruby(esc(s));
+const slots = s => jp(s).replace(SLOT_RE, '<span class="gc-slot">$1</span>');
+const marked = s => jp(s).replace(/\{([^}]+)\}/g, '<b>$1</b>');
 const GRAMMAR_COUNT = GRAMMAR.reduce((n, s) => n + s.points.length, 0);
 
 function grammarBody() {
@@ -214,29 +217,31 @@ function grammarBody() {
         <p class="gc-none" hidden>Nothing matches. Try a shorter word, or another level.</p>
       </section>
       <section class="lp-ref gc-key">
-        <p><b>How to read the rules:</b> <span class="gc-slot">V-dict</span> 食べる · <span class="gc-slot">V-masu</span> 食べ(ます) · <span class="gc-slot">V-te</span> 食べて · <span class="gc-slot">V-ta</span> 食べた · <span class="gc-slot">V-nai</span> 食べない · <span class="gc-slot">V-vol</span> 食べよう · <span class="gc-slot">N</span> noun · <span class="gc-slot">plain</span> plain form (食べる, 食べない, 食べた, 食べなかった). Tap a line for more, examples and exceptions. Levels follow common study lists; the JLPT doesn’t publish an official one.</p>
+        <p><b>How to read the rules:</b> <span class="gc-slot">V-dict</span> <ruby>食<rp>(</rp><rt>た</rt><rp>)</rp></ruby>べる · <span class="gc-slot">V-masu</span> <ruby>食<rp>(</rp><rt>た</rt><rp>)</rp></ruby>べ(ます) · <span class="gc-slot">V-te</span> <ruby>食<rp>(</rp><rt>た</rt><rp>)</rp></ruby>べて · <span class="gc-slot">V-ta</span> <ruby>食<rp>(</rp><rt>た</rt><rp>)</rp></ruby>べた · <span class="gc-slot">V-nai</span> <ruby>食<rp>(</rp><rt>た</rt><rp>)</rp></ruby>べない · <span class="gc-slot">V-vol</span> <ruby>食<rp>(</rp><rt>た</rt><rp>)</rp></ruby>べよう · <span class="gc-slot">N</span> noun · <span class="gc-slot">plain</span> plain form (<ruby>食<rp>(</rp><rt>た</rt><rp>)</rp></ruby>べる, <ruby>食<rp>(</rp><rt>た</rt><rp>)</rp></ruby>べない, <ruby>食<rp>(</rp><rt>た</rt><rp>)</rp></ruby>べた, <ruby>食<rp>(</rp><rt>た</rt><rp>)</rp></ruby>べなかった). Tap a line for more, examples and exceptions. Levels follow common study lists; the JLPT doesn’t publish an official one.</p>
         <nav class="gc-toc" aria-label="Sections">${toc}</nav>
       </section>`;
   for (const s of GRAMMAR) {
-    h += `\n      <section class="lp-ref gc-section" id="${s.id}"><h2 class="lis-heading">${esc(s.title)} <span class="gc-jp" lang="ja">${esc(s.jp)}</span></h2><div class="gc-list">`;
+    h += `\n      <section class="lp-ref gc-section" id="${s.id}"><h2 class="lis-heading">${esc(s.title)} <span class="gc-jp" lang="ja">${jp(s.jp)}</span></h2><div class="gc-list">`;
     s.points.forEach((g, i) => {
       if (!LEVELS.includes(g.lv)) die(`${s.id} ${g.p}: level ${g.lv}`);
       for (const k of ['p', 'm', 'r', 'more']) if (!g[k]) die(`${s.id} ${g.p}: no ${k}`);
+      for (const t of [s.jp, g.p, g.m, g.r, g.more, ...g.ex.flat(), ...g.warn]) {
+        if (/[一-鿿々]/.test(t.replace(RUBY_RE, ''))) die(`${s.id} ${g.p}: kanji without furigana in ${t}`);
+      }
       if (!g.ex?.length || !g.warn?.length) die(`${s.id} ${g.p}: needs examples and exceptions`);
       for (const [ja] of g.ex) {
-        if (/[一-鿿々]/.test(ja.replace(RUBY_RE, ''))) die(`${s.id} ${g.p}: kanji without furigana in ${ja}`);
         if (!/\{[^}]+\}/.test(ja)) die(`${s.id} ${g.p}: example doesn't mark the grammar: ${ja}`);
       }
       const id = `${s.id}-${i + 1}`;
       if (ids.has(id)) die(`duplicate id ${id}`);
       ids.add(id);
       h += `<details class="gc-item" id="${id}" data-lv="${g.lv}"><summary>` +
-        `<span class="gc-p" lang="ja">${esc(g.p)}</span>` +
-        `<span class="gc-sum"><span class="gc-m">${esc(g.m)}</span><span class="gc-r">${slots(g.r)}</span></span>` +
+        `<span class="gc-p" lang="ja">${jp(g.p)}</span>` +
+        `<span class="gc-sum"><span class="gc-m">${jp(g.m)}</span><span class="gc-r">${slots(g.r)}</span></span>` +
         `<span class="gc-lv gc-${g.lv.toLowerCase()}">${g.lv}</span></summary><div class="gc-more">` +
-        `<p>${esc(g.more)}</p>` +
+        `<p>${jp(g.more)}</p>` +
         `<ul class="gc-ex">${g.ex.map(([ja, en]) => `<li><span class="gc-ja" lang="ja">${marked(ja)}</span><span class="gc-en">${esc(en)}</span></li>`).join('')}</ul>` +
-        `<div class="gc-warn"><span class="gc-warn-title">Watch out</span><ul>${g.warn.map(w => `<li>${esc(w)}</li>`).join('')}</ul></div>` +
+        `<div class="gc-warn"><span class="gc-warn-title">Watch out</span><ul>${g.warn.map(w => `<li>${jp(w)}</li>`).join('')}</ul></div>` +
         `</div></details>`;
     });
     h += `</div><p class="gc-practice">Practise: ${s.practice.map(([href, label]) => `<a href="${href}">${esc(label)} →</a>`).join(' · ')}</p></section>`;
@@ -356,7 +361,7 @@ function render(p) {
   <meta name="twitter:description" content="${esc(p.desc)}">
   <meta name="twitter:image" content="${SITE}/og-image.png">
   <link rel="canonical" href="${url}">
-${STYLE}  <link rel="stylesheet" href="landing.css?v=4">
+${STYLE}  <link rel="stylesheet" href="landing.css?v=5">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -402,7 +407,7 @@ ${p.quiz ? `      <div class="lp-quiz" id="lp-quiz"><noscript><p><a href="${p.ct
   </div>
 
   <script type="application/json" id="lp-data">${json(data)}</script>
-${SCRIPTS}  <script src="landing.js?v=5"></script>
+${SCRIPTS}  <script src="landing.js?v=6"></script>
 </body>
 </html>
 `;

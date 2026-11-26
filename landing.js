@@ -187,7 +187,14 @@
   var all = tools.querySelector('.gc-all');
   var none = tools.querySelector('.gc-none');
   var level = 'All';
-  var text = items.map(function (d) { return d.textContent.toLowerCase(); });
+  // Search the text as written (後で, without the furigana in between) and
+  // the readings on their own (あと), so either finds a point.
+  var text = items.map(function (d) {
+    var c = d.cloneNode(true);
+    var rts = Array.prototype.map.call(c.querySelectorAll('rt'), function (r) { return r.textContent; });
+    Array.prototype.forEach.call(c.querySelectorAll('rt, rp'), function (r) { r.remove(); });
+    return (c.textContent + ' ' + rts.join(' ')).toLowerCase();
+  });
 
   function shown() { return items.filter(function (d) { return !d.hidden; }); }
 

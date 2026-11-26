@@ -179,6 +179,11 @@
 .gc-ja { display: block; font: 1.08rem var(--font-jp); color: var(--text); line-height: 1.9; }
 .gc-ja b { color: color-mix(in srgb, var(--lv) 80%, var(--text)); }
 .gc-ja rt { font-size: 0.55em; color: var(--text-dim); }
+/* Furigana everywhere: small, quiet, with room above each line. */
+.gc-item rt, .gc-jp rt, .gc-key rt { font-size: 0.6em; font-weight: 400; color: var(--text-muted); }
+.gc-p, .gc-r { line-height: 1.9; }
+.gc-m { line-height: 1.6; }
+.gc-more > p, .gc-warn li, .gc-key > p { line-height: 2; }
 .gc-en { display: block; font-size: 0.85rem; }
 .gc-warn { border-left: 3px solid var(--red); padding: 2px 0 2px 12px; }
 .gc-warn-title { display: block; font: 700 0.72rem var(--font); text-transform: uppercase; letter-spacing: 0.06em; color: var(--red); }
