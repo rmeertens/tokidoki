@@ -678,7 +678,7 @@ export const SECTIONS = [
       },
       {
         p: '〜と言[い]う', lv: 'N5', m: 'say (that)', r: '「quote」と言[い]う · plain + と言[い]う',
-        more: 'Quotes words exactly, or reports what someone said. Casual: って.',
+        more: 'Quotes words exactly, or reports what someone said. Casual: って (行[い]くって言[い]ってた), and on its own at the end it means “they say”: @{〜って (I hear)}.',
         ex: [
           ['先生[せんせい]は「静[しず]かにしてください」{と言[い]いました}。', 'The teacher said, “Please be quiet.” (quote)'],
           ['日本[にほん]では食[た]べる前[まえ]に「いただきます」{と言[い]います}。', 'In Japan you say “itadakimasu” before eating. (quote)'],
@@ -780,7 +780,7 @@ export const SECTIONS = [
           ['あの町[まち]はとても静[しず]かだ{そうです}。', 'I hear that town is very quiet. (な-adj + だ)'],
           ['山田[やまだ]さんはテニスが上手[じょうず]だ{そうだ}。', 'I hear Yamada is good at tennis. (な-adj + だ)'],
         ],
-        warn: ['降[ふ]りそう: looks like rain. 降[ふ]るそう: I hear it’ll rain.', 'そうだ itself never changes: ×そうでした, ×そうじゃない.'],
+        warn: ['降[ふ]りそう: looks like rain. 降[ふ]るそう: I hear it’ll rain.', 'Casual: @{〜って (I hear)}: 雪[ゆき]が降[ふ]るって.', 'そうだ itself never changes: ×そうでした, ×そうじゃない.'],
       },
       {
         p: '〜ようだ · 〜みたいだ', lv: 'N4', m: 'seems; is like', r: 'plain + ようだ (N の, な-adj な) · plain / N + みたいだ (casual)',
@@ -812,6 +812,26 @@ export const SECTIONS = [
           ['子供[こども]{らしい}、元気[げんき]な絵[え]ですね。', 'A lively picture, just what a child would draw. (typical of N)'],
         ],
         warn: ['Feels more distant than そうだ: you heard it somewhere and aren’t vouching for it.'],
+      },
+      {
+        p: '〜って (I hear)', lv: 'N4', m: 'they say, apparently (casual)', r: 'plain + って · N / な-adj + だって',
+        more: 'The spoken, casual way to pass on what you heard: the same as 〜そうだ or 〜と言[い]っていた, at the end of the sentence. Between friends and family.',
+        ex: [
+          ['明日[あした]は雪[ゆき]が降[ふ]る{って}。', 'They say it’ll snow tomorrow. (verb)'],
+          ['田中[たなか]さん、来週[らいしゅう]結婚[けっこん]する{って}。', 'Tanaka is getting married next week, apparently. (verb)'],
+          ['駅[えき]の前[まえ]の店[みせ]、すごくおいしい{って}。', 'They say the place by the station is really good. (い-adj)'],
+          ['今日[きょう]の試験[しけん]、難[むずか]しかった{って}。', 'Apparently today’s exam was hard. (い-adj)'],
+          ['明日[あした]は休[やす]み{だって}。', 'Apparently tomorrow is a day off. (N + だって)'],
+          ['山田[やまだ]さん、風邪[かぜ]{だって}。', 'Yamada has a cold, apparently. (N + だって)'],
+          ['あの公園[こうえん]、夜[よる]はとても静[しず]か{だって}。', 'They say that park is very quiet at night. (な-adj + だって)'],
+          ['新[あたら]しい先生[せんせい]、すごく親切[しんせつ]{だって}。', 'They say the new teacher is really kind. (な-adj + だって)'],
+        ],
+        warn: [
+          'Casual only. Politely, use @{〜そうだ (I hear)}: 雪[ゆき]が降[ふ]るそうです.',
+          'Keep だ after a noun or な-adj: 休[やす]みだって. Without it, って marks a topic: 休[やす]みって何曜日[なんようび]？ (When’s the day off?)',
+          'As a question, it asks what someone said: 田中[たなか]さん、来[く]るって？ (Did Tanaka say they’re coming?)',
+          'って also stands for と in quotes: 「行[い]く」って言[い]ってた (see @{〜と言[い]う}).',
+        ],
       },
     ],
   },
