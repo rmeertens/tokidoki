@@ -157,7 +157,12 @@ export const SECTIONS = [
       {
         p: 'な-adjectives', lv: 'N5', m: 'describing words that take な', r: 'な-adj + な + N · な-adj + です / じゃない / でした · な-adj + で (and)',
         more: 'They work like nouns at the end of a sentence (静[しず]かです, 静[しず]かじゃない) and take な before a noun: 静[しず]かな部屋[へや].',
-        ex: [['{静[しず]かな}部屋[へや]です。', 'It’s a quiet room.'], ['この町[まち]は{有名[ゆうめい]じゃない}です。', 'This town isn’t famous.']],
+        ex: [['{静[しず]かな}部屋[へや]です。', 'It’s a quiet room.'], ['この町[まち]は{有名[ゆうめい]じゃない}です。', 'This town isn’t famous.'],
+          ['{好[す]きな}食[た]べ物[もの]は何[なん]ですか。', 'What’s your favourite food?'],
+          ['昨日[きのう]のテストは{簡単[かんたん]でした}。', 'Yesterday’s test was easy.'],
+          ['昔[むかし]、この川[かわ]は{きれいじゃなかった}です。', 'This river wasn’t clean in the past.'],
+          ['田中[たなか]さんは{親切[しんせつ]で}、面白[おもしろ]い人[ひと]です。', 'Tanaka is kind and fun.'],
+        ],
         warn: ['Drop な before です: 静[しず]かです (×静[しず]かなです).', '好[す]き and 嫌[きら]い are な-adjectives: 好[す]きな食[た]べ物[もの].', 'Some look like い-adjectives: きれい, 嫌[きら]い, 有名[ゆうめい], 丁寧[ていねい], 失礼[しつれい]… (the full list is under い-adjectives).'],
         links: [['misc.html#na-ei', 'Quiz: な-adjectives ending in い']],
       },
