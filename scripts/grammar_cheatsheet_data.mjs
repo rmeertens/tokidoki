@@ -225,9 +225,16 @@ export const SECTIONS = [
       },
       {
         p: '〜てください · 〜ないでください', lv: 'N5', m: 'please do · please don’t', r: 'V-te + ください · V-nai + でください',
-        more: 'A polite request or instruction.',
-        ex: [['ここに名前[なまえ]を書[か]い{てください}。', 'Please write your name here.'], ['写真[しゃしん]を撮[と]ら{ないでください}。', 'Please don’t take photos.']],
-        warn: ['Still a request you expect to be done. To a superior, ask: 〜ていただけませんか.'],
+        more: 'A polite request or instruction. The words are polite, but it still tells the other person what to do: there’s no question, so no room to say no.',
+        ex: [
+          ['ここに名前[なまえ]を書[か]い{てください}。', 'Please write your name here.'],
+          ['写真[しゃしん]を撮[と]ら{ないでください}。', 'Please don’t take photos.'],
+          ['すみません、もう一度[いちど]言[い]っ{ていただけませんか}。', 'Excuse me, could you say that once more? (to a teacher or a stranger)'],
+        ],
+        warn: [
+          'Fine for instructions (a teacher to the class, a shop to its customers, signs) and small everyday things (ちょっと待[ま]ってください).',
+          'To ask a favour of someone above you (your boss, a teacher, a stranger), ask a question instead, so they can say no. From polite to most polite: 〜てくれませんか (won’t you…?), 〜てもらえませんか (could I have you…?), 〜ていただけませんか (would you be so kind as to…?). More in @{〜てあげる · 〜てくれる · 〜てもらう}.',
+        ],
       },
       {
         p: '〜ている', lv: 'N5', m: 'is doing; is (in a state)', r: 'V-te + いる',
