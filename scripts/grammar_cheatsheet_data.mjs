@@ -138,7 +138,7 @@ export const SECTIONS = [
         p: 'あります · います', lv: 'N5', m: 'there is; have', r: 'place に N が あります (things) / います (people, animals)',
         more: 'ある for things and plants, いる for people and animals. Also “have”: 時間[じかん]があります, 兄[あに]がいます.',
         ex: [['机[つくえ]の上[うえ]に本[ほん]が{あります}。', 'There’s a book on the desk.'], ['公園[こうえん]に子供[こども]が{います}。', 'There are children in the park.']],
-        warn: ['The plain negative of ある is ない (×あらない).', 'Put the topic first to say where something is: 本[ほん]は机[つくえ]の上[うえ]にあります.'],
+        warn: ['The plain negative of ある is ない (×あらない). The polite negative is ありません, or ないです in everyday speech (ありません is more formal); past: なかった, ありませんでした / なかったです.', 'いる is regular: いない, いません, いませんでした.', 'Put the topic first to say where something is: 本[ほん]は机[つくえ]の上[うえ]にあります.'],
       },
       {
         p: 'これ · それ · あれ · どれ', lv: 'N5', m: 'this · that · that over there · which', r: 'こ (near me) · そ (near you) · あ (far from both) · ど (which?)',
