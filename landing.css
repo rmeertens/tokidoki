@@ -197,3 +197,5 @@
   .gc-more { padding: 2px 12px 12px; }
 }
 .gc-more a.gc-link { color: var(--accent); font-weight: 600; }
+.gc-more-hits { margin-top: 8px; font-size: 0.85rem; color: var(--text-dim); }
+.gc-show-all { background: none; border: 0; padding: 0; color: var(--accent); font: 600 0.85rem var(--font); cursor: pointer; text-decoration: underline; }

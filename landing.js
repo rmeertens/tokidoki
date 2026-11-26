@@ -187,26 +187,98 @@
   var all = tools.querySelector('.gc-all');
   var none = tools.querySelector('.gc-none');
   var level = 'All';
-  // Search the text as written (後で, without the furigana in between) and
-  // the readings on their own (あと), so either finds a point.
-  var text = items.map(function (d) {
-    var c = d.cloneNode(true);
+  // Each point is searched as written (後で, without the furigana in
+  // between) plus its readings on their own (あと), and as read: every
+  // kanji swapped for its furigana and katakana made hiragana (あとで), which
+  // is what a romaji search ("atode", "nara") is matched against. Both are
+  // kept for three parts, best first: the pattern, the one-line summary
+  // (pattern, meaning, rule) and the whole point.
+  var hira = function (s) { return s.replace(/[ァ-ヶ]/g, function (k) { return String.fromCharCode(k.charCodeAt(0) - 0x60); }); };
+  function written(el) {
+    var c = el.cloneNode(true);
     var rts = Array.prototype.map.call(c.querySelectorAll('rt'), function (r) { return r.textContent; });
     Array.prototype.forEach.call(c.querySelectorAll('rt, rp'), function (r) { r.remove(); });
     return (c.textContent + ' ' + rts.join(' ')).toLowerCase();
+  }
+  function read(el) {
+    var c = el.cloneNode(true);
+    Array.prototype.forEach.call(c.querySelectorAll('ruby'), function (r) {
+      var rt = r.querySelector('rt');
+      r.replaceWith(rt ? rt.textContent : r.textContent);
+    });
+    return hira(c.textContent);
+  }
+  var TIERS = ['.gc-p', 'summary', null];
+  var index = items.map(function (d) {
+    return TIERS.map(function (sel) {
+      var el = sel ? d.querySelector(sel) : d;
+      return { text: written(el), kana: read(el) };
+    });
   });
+
+  // A query typed all in romaji ("nara", "te", "kara") is looked for in
+  // the Japanese, as kana (particles as said: "wa" finds は, "e" へ, "o" を).
+  // English that only looks like romaji ("passive") finds nothing there,
+  // so it's looked for as typed.
+  function romajiForms(q) {
+    if (!window.Romaji || !/[a-z]/.test(q) || /[^a-z' -]/.test(q)) return null;
+    var k = window.Romaji.toHiragana(q.replace(/ /g, ''), true);
+    if (/[a-z]/.test(k)) return null;
+    var forms = [k];
+    [['わ', 'は'], ['え', 'へ'], ['お', 'を']].forEach(function (p) {
+      forms.slice().forEach(function (f) { if (f.indexOf(p[0]) !== -1) forms.push(f.split(p[0]).join(p[1])); });
+    });
+    return forms;
+  }
+
+  // Which points match, in the best part that has any match: points whose
+  // pattern matches if there are some ("tara" → 〜たら, Japanese only), else those whose
+  // summary does, else any mention. `more` counts every point that
+  // mentions it anywhere, for the "Show all" button.
+  function matches(q, inLevel, everywhere) {
+    var forms = romajiForms(q);
+    function hits(t) {
+      var byKana = forms && items.map(function (d, i) {
+        return inLevel[i] && forms.some(function (f) { return index[i][t].kana.indexOf(f) !== -1; });
+      });
+      if (byKana && byKana.some(Boolean)) return byKana;
+      // English ("because") starts at the summaries, where the meanings are.
+      if (t === 0 && /[a-z]/.test(q)) return items.map(function () { return false; });
+      return items.map(function (d, i) { return inLevel[i] && index[i][t].text.indexOf(q) !== -1; });
+    }
+    var all = hits(TIERS.length - 1);
+    var count = function (h) { return h.filter(Boolean).length; };
+    if (everywhere) return { hit: all, tier: TIERS.length - 1, more: 0 };
+    for (var t = 0; t < TIERS.length; t++) {
+      var h = t === TIERS.length - 1 ? all : hits(t);
+      if (count(h)) return { hit: h, tier: t, more: count(all) - count(h) };
+    }
+    return { hit: all, tier: TIERS.length - 1, more: 0 };
+  }
 
   function shown() { return items.filter(function (d) { return !d.hidden; }); }
 
+  var wide = false; // "Show all" pressed for this query
+  var moreBox = document.createElement('p');
+  moreBox.className = 'gc-more-hits';
+  moreBox.hidden = true;
+  none.parentNode.insertBefore(moreBox, none);
+
   function filter() {
     var q = search.value.trim().toLowerCase();
-    items.forEach(function (d, i) {
-      d.hidden = !((level === 'All' || d.getAttribute('data-lv') === level) && (!q || text[i].indexOf(q) !== -1));
-    });
+    var inLevel = items.map(function (d) { return level === 'All' || d.getAttribute('data-lv') === level; });
+    var m = q ? matches(q, inLevel, wide) : { hit: inLevel, more: 0 };
+    items.forEach(function (d, i) { d.hidden = !m.hit[i]; });
     Array.prototype.forEach.call(sections, function (s) {
       s.hidden = !s.querySelector('.gc-item:not([hidden])');
     });
     none.hidden = shown().length > 0;
+    moreBox.hidden = !m.more;
+    if (m.more) {
+      moreBox.innerHTML = 'Showing the points whose ' + (m.tier === 0 ? 'pattern' : 'summary') + ' matches. ' +
+        '<button type="button" class="gc-show-all">Show ' + m.more + ' more that mention it</button>';
+      moreBox.querySelector('button').addEventListener('click', function () { wide = true; filter(); });
+    }
     sync();
   }
 
@@ -216,7 +288,7 @@
     all.textContent = open ? 'Close all' : 'Open all';
   }
 
-  search.addEventListener('input', filter);
+  search.addEventListener('input', function () { wide = false; filter(); });
   Array.prototype.forEach.call(lvBtns, function (b) {
     b.addEventListener('click', function () {
       level = b.getAttribute('data-lv');

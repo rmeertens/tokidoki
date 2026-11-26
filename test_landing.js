@@ -63,6 +63,7 @@ for (const name of PAGES) {
   const html = fs.readFileSync('grammar-cheatsheet.html', 'utf8');
   const items = html.match(/<details class="gc-item"[\s\S]*?<\/details>/g) || [];
   ok(items.length >= 100, `grammar cheatsheet: at least 100 points (${items.length})`);
+  ok(/<script src="romaji\.js[^"]*"><\/script>\n  <script src="landing\.js/.test(html), 'grammar cheatsheet: romaji.js loads before landing.js (romaji search)');
   const ids = items.map(x => (x.match(/ id="([^"]+)"/) || [])[1]);
   ok(new Set(ids).size === ids.length, 'grammar cheatsheet: unique ids');
   items.forEach((x, i) => {

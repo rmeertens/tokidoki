@@ -220,7 +220,7 @@ function grammarBody() {
   const toc = GRAMMAR.map(s => `<a href="#${s.id}">${esc(s.title)}</a>`).join('');
   let h = `<section class="lp-ref gc-tools" hidden>
         <div class="gc-bar">
-          <input type="search" class="gc-search" placeholder="Search: て, because, passive…" aria-label="Search the grammar points">
+          <input type="search" class="gc-search" placeholder="Search: て, nara, because, passive…" aria-label="Search the grammar points (Japanese, romaji or English)">
           <div class="gc-levels" role="group" aria-label="JLPT level">` +
     ['All', ...LEVELS].map(l => `<button type="button" class="gc-lv-btn" data-lv="${l}" aria-pressed="${l === 'All'}">${l}</button>`).join('') +
     `</div>
@@ -313,6 +313,7 @@ const PAGES = [
     teaches: 'Japanese grammar',
     hero: { face: '文', kicker: '文法 · JLPT N5–N3', card: ['Big Grammar Cheatsheet', 'N5–N3, one line each · tap for more'] },
     sub: `Free, no login. ${GRAMMAR_COUNT} grammar points, one line each, or`,
+    scripts: ['romaji.js?v=8'], // the search box takes romaji (nara → なら)
     body: grammarBody(),
   },
 ];
@@ -375,7 +376,7 @@ function render(p) {
   <meta name="twitter:description" content="${esc(p.desc)}">
   <meta name="twitter:image" content="${SITE}/og-image.png">
   <link rel="canonical" href="${url}">
-${STYLE}  <link rel="stylesheet" href="landing.css?v=6">
+${STYLE}  <link rel="stylesheet" href="landing.css?v=7">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -421,7 +422,7 @@ ${p.quiz ? `      <div class="lp-quiz" id="lp-quiz"><noscript><p><a href="${p.ct
   </div>
 
   <script type="application/json" id="lp-data">${json(data)}</script>
-${SCRIPTS}  <script src="landing.js?v=7"></script>
+${SCRIPTS}${p.scripts ? p.scripts.map(f => `  <script src="${f}"></script>\n`).join('') : ''}  <script src="landing.js?v=9"></script>
 </body>
 </html>
 `;
