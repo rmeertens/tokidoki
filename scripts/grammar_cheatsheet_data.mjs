@@ -71,8 +71,20 @@ export const SECTIONS = [
       {
         p: 'も', lv: 'N5', m: 'also, too; (not) even', r: 'N + も (replaces は / が / を)',
         more: 'Replaces は, が and を, and goes after other particles (にも, でも, とも). With a question word and a negative verb it means “no …”: 何[なに]も (nothing), 誰[だれ]も (no one), どこにも (nowhere).',
-        ex: [['私[わたし]{も}行[い]きます。', 'I’ll go too.'], ['何[なに]{も}食[た]べませんでした。', 'I didn’t eat anything.']],
-        warn: ['Never stack: ×はも, ×がも, ×をも.', '何[なに]も, 誰[だれ]も and いつも are different: いつも means “always” and takes a positive verb.'],
+        ex: [
+          ['私[わたし]{も}行[い]きます。', 'I’ll go too.'],
+          ['{何[なに]も}食[た]べ{ませんでした}。', 'I didn’t eat anything.'],
+          ['冷蔵庫[れいぞうこ]に{何[なに]も}あり{ません}。', 'There’s nothing in the fridge.'],
+          ['教室[きょうしつ]には{誰[だれ]も}い{ません}。', 'There’s no one in the classroom.'],
+          ['日曜日[にちようび]は{どこにも}行[い]き{ませんでした}。', 'I didn’t go anywhere on Sunday.'],
+          ['このことは{誰[だれ]にも}言[い]わ{ないで}ください。', 'Please don’t tell anyone about this.'],
+        ],
+        warn: [
+          'Never stack: ×はも, ×がも, ×をも.',
+          'が and を drop out (誰[だれ]も来[こ]ない, 何[なに]も食[た]べない), but other particles stay before も: どこにも行[い]かない, 誰[だれ]にも会[あ]わない, 誰[だれ]とも話[はな]さない.',
+          'The verb must be negative: ×何[なに]も食[た]べました. With a positive verb, use でも for “any-” (何[なん]でも食[た]べます, I eat anything) or か for “some-” (何[なに]か食[た]べました, I ate something).',
+          '何[なに]も, 誰[だれ]も and いつも are different: いつも means “always” and takes a positive verb.',
+        ],
       },
       {
         p: 'の', lv: 'N5', m: '’s, of; the one', r: 'N + の + N',
