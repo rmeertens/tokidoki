@@ -151,7 +151,7 @@ export const SECTIONS = [
         p: 'い-adjectives', lv: 'N5', m: 'describing words ending in い', r: 'い-adj: 高[たか]い → 高[たか]くない · 高[たか]かった · 高[たか]くなかった · 高[たか]くて',
         more: 'They conjugate themselves: drop い and add くない (not), かった (was), くなかった (wasn’t), くて (and). Before a noun, just as they are: 高[たか]い本[ほん].',
         ex: [['このカレーは辛[から]{くない}です。', 'This curry isn’t spicy.'], ['旅行[りょこう]は楽[たの]し{かった}です。', 'The trip was fun.']],
-        warn: ['いい is irregular: よくない, よかった, よくて.', 'These end in い but are な-adjectives (きれいな人[ひと], ×きれくない): きれい (pretty, clean), 嫌[きら]い (disliked) and 大嫌[だいきら]い (hated), 有名[ゆうめい] (famous), 丁寧[ていねい] (polite, careful), 失礼[しつれい] (rude), 得意[とくい] (good at) and 不得意[ふとくい] (bad at), 心配[しんぱい] (worried), 意外[いがい] (surprising), 曖昧[あいまい] (vague).', 'Past is on the adjective, not です: ×高[たか]いでした.'],
+        warn: ['いい is irregular: よくない, よかった, よくて.', 'These end in い but are な-adjectives (きれいな人[ひと], ×きれくない): きれい (pretty, clean), 嫌[きら]い (disliked) and 大嫌[だいきら]い (hated), 有名[ゆうめい] (famous), 丁寧[ていねい] (polite, careful), 失礼[しつれい] (rude), 得意[とくい] (good at) and 不得意[ふとくい] (bad at), 心配[しんぱい] (worried), 意外[いがい] (surprising), 曖昧[あいまい] (vague).', 'Past is on the adjective, not です: 高[たか]かったです (×高[たか]いでした). Past negative the same way: 高[たか]くなかったです (×高[たか]くないでした).'],
         links: [['misc.html#na-ei', 'Quiz: な-adjectives ending in い']],
       },
       {
