@@ -15198,5 +15198,405 @@
     "しょうひんべつ",
     "by product",
     "noun"
+  ],
+  "関税": [
+    "かんぜい",
+    "tariff, customs duty",
+    "noun"
+  ],
+  "EU": [
+    "イーユー",
+    "EU (European Union)",
+    "organization"
+  ],
+  "14": [
+    "じゅうよん",
+    "fourteen",
+    "number"
+  ],
+  "通商": [
+    "つうしょう",
+    "trade, commerce",
+    "noun"
+  ],
+  "通商代表部": [
+    "つうしょうだいひょうぶ",
+    "Office of the US Trade Representative",
+    "organization"
+  ],
+  "USTR": [
+    "ユーエスティーアール",
+    "USTR (US Trade Representative)",
+    "organization"
+  ],
+  "20パーセント": [
+    "にじゅうパーセント",
+    "20 percent",
+    "number + counter"
+  ],
+  "公聴会": [
+    "こうちょうかい",
+    "public hearing",
+    "noun"
+  ],
+  "過剰": [
+    "かじょう",
+    "excess, too much",
+    "na-adjective"
+  ],
+  "過剰生産": [
+    "かじょうせいさん",
+    "overproduction, excess capacity",
+    "noun"
+  ],
+  "課す": [
+    "かす",
+    "to impose (a tax)",
+    "verb"
+  ],
+  "悪影響": [
+    "あくえいきょう",
+    "bad effect, harm",
+    "noun"
+  ],
+  "301条": [
+    "さんびゃくいちじょう",
+    "Section 301",
+    "number + counter"
+  ],
+  "通商法": [
+    "つうしょうほう",
+    "Trade Act",
+    "noun"
+  ],
+  "不十分": [
+    "ふじゅうぶん",
+    "insufficient, not enough",
+    "na-adjective"
+  ],
+  "申し入れる": [
+    "もうしいれる",
+    "to formally tell, lodge (a protest)",
+    "verb"
+  ],
+  "NPO": [
+    "エヌピーオー",
+    "NPO, non-profit organization",
+    "noun"
+  ],
+  "NPO法人": [
+    "エヌピーオーほうじん",
+    "non-profit corporation",
+    "noun"
+  ],
+  "1万3879か所": [
+    "いちまんさんぜんはっぴゃくななじゅうきゅうかしょ",
+    "13,879 places",
+    "number + counter"
+  ],
+  "1200か所": [
+    "せんにひゃくかしょ",
+    "1,200 places",
+    "number + counter"
+  ],
+  "1403か所": [
+    "せんよんひゃくさんかしょ",
+    "1,403 places",
+    "number + counter"
+  ],
+  "1700か所": [
+    "せんななひゃくかしょ",
+    "1,700 places",
+    "number + counter"
+  ],
+  "43パーセント": [
+    "よんじゅうさんパーセント",
+    "43 percent",
+    "number + counter"
+  ],
+  "68パーセント": [
+    "ろくじゅうはちパーセント",
+    "68 percent",
+    "number + counter"
+  ],
+  "68.1パーセント": [
+    "ろくじゅうはちてんいちパーセント",
+    "68.1 percent",
+    "number + counter"
+  ],
+  "約40パーセント": [
+    "やくよんじゅうパーセント",
+    "about 40 percent",
+    "number + counter"
+  ],
+  "4割": [
+    "よんわり",
+    "40 percent",
+    "noun"
+  ],
+  "約8割": [
+    "やくはちわり",
+    "about 80 percent",
+    "noun"
+  ],
+  "公立": [
+    "こうりつ",
+    "public (school etc.)",
+    "noun"
+  ],
+  "区域": [
+    "くいき",
+    "area, zone, district",
+    "noun"
+  ],
+  "通学区域": [
+    "つうがくくいき",
+    "school district",
+    "noun"
+  ],
+  "鳥取": [
+    "とっとり",
+    "Tottori",
+    "place name"
+  ],
+  "鳥取県": [
+    "とっとりけん",
+    "Tottori Prefecture",
+    "place name"
+  ],
+  "緩やか": [
+    "ゆるやか",
+    "gentle, slow",
+    "na-adjective"
+  ],
+  "市区町村": [
+    "しくちょうそん",
+    "cities, wards, towns and villages",
+    "noun"
+  ],
+  "高齢者": [
+    "こうれいしゃ",
+    "elderly person",
+    "noun"
+  ],
+  "居場所": [
+    "いばしょ",
+    "place where one belongs, whereabouts",
+    "noun"
+  ],
+  "大河ドラマ": [
+    "たいがドラマ",
+    "taiga drama (NHK's year-long historical drama)",
+    "noun"
+  ],
+  "大河": [
+    "たいが",
+    "taiga drama (short for 大河ドラマ); big river",
+    "noun"
+  ],
+  "神木": [
+    "かみき",
+    "Kamiki (surname)",
+    "name"
+  ],
+  "神木隆之介": [
+    "かみきりゅうのすけ",
+    "Ryunosuke Kamiki, actor",
+    "name"
+  ],
+  "戦国": [
+    "せんごく",
+    "Warring States (period)",
+    "noun"
+  ],
+  "戦国時代": [
+    "せんごくじだい",
+    "the Warring States period (c. 1467–1600)",
+    "noun"
+  ],
+  "武将": [
+    "ぶしょう",
+    "samurai general, military commander",
+    "noun"
+  ],
+  "石田": [
+    "いしだ",
+    "Ishida (surname)",
+    "name"
+  ],
+  "石田三成": [
+    "いしだみつなり",
+    "Ishida Mitsunari (1560–1600), samurai general",
+    "name"
+  ],
+  "主演": [
+    "しゅえん",
+    "leading role, starring",
+    "noun"
+  ],
+  "豊臣": [
+    "とよとみ",
+    "Toyotomi (family name)",
+    "name"
+  ],
+  "豊臣秀吉": [
+    "とよとみひでよし",
+    "Toyotomi Hideyoshi (1537–1598), ruler who unified Japan",
+    "name"
+  ],
+  "秀吉": [
+    "ひでよし",
+    "Hideyoshi (given name)",
+    "name"
+  ],
+  "5回目": [
+    "ごかいめ",
+    "the fifth time",
+    "number + counter"
+  ],
+  "脚本": [
+    "きゃくほん",
+    "script, screenplay",
+    "noun"
+  ],
+  "黒岩": [
+    "くろいわ",
+    "Kuroiwa (surname)",
+    "name"
+  ],
+  "黒岩勉": [
+    "くろいわつとむ",
+    "Tsutomu Kuroiwa, screenwriter",
+    "name"
+  ],
+  "好奇心": [
+    "こうきしん",
+    "curiosity",
+    "noun"
+  ],
+  "好奇心旺盛": [
+    "こうきしんおうせい",
+    "full of curiosity",
+    "na-adjective"
+  ],
+  "29年": [
+    "にじゅうきゅうねん",
+    "(20)29",
+    "number + counter"
+  ],
+  "第68作": [
+    "だいろくじゅうはっさく",
+    "the 68th work",
+    "number + counter"
+  ],
+  "出演": [
+    "しゅつえん",
+    "appearance (in a film, show)",
+    "noun"
+  ],
+  "5作目": [
+    "ごさくめ",
+    "the fifth work",
+    "number + counter"
+  ],
+  "らんまん": [
+    "らんまん",
+    "\"Ranman\", an NHK morning drama (2023)",
+    "name"
+  ],
+  "連続テレビ小説": [
+    "れんぞくテレビしょうせつ",
+    "NHK's morning drama series",
+    "noun"
+  ],
+  "会見": [
+    "かいけん",
+    "news conference, interview",
+    "noun"
+  ],
+  "冷徹": [
+    "れいてつ",
+    "cool-headed, unfeeling",
+    "na-adjective"
+  ],
+  "旺盛": [
+    "おうせい",
+    "full of, lively",
+    "na-adjective"
+  ],
+  "滋賀": [
+    "しが",
+    "Shiga",
+    "place name"
+  ],
+  "滋賀県": [
+    "しがけん",
+    "Shiga Prefecture",
+    "place name"
+  ],
+  "長浜": [
+    "ながはま",
+    "Nagahama",
+    "place name"
+  ],
+  "長浜市": [
+    "ながはまし",
+    "Nagahama (city in Shiga)",
+    "place name"
+  ],
+  "明かす": [
+    "あかす",
+    "to reveal",
+    "verb"
+  ],
+  "出身地": [
+    "しゅっしんち",
+    "birthplace, hometown",
+    "noun"
+  ],
+  "木原稔": [
+    "きはらみのる",
+    "Minoru Kihara, chief cabinet secretary",
+    "name"
+  ],
+  "欧州連合": [
+    "おうしゅうれんごう",
+    "European Union",
+    "organization"
+  ],
+  "むすびえ": [
+    "むすびえ",
+    "Musubie, an NPO supporting children's cafeterias",
+    "organization"
+  ],
+  "こども食堂": [
+    "こどもしょくどう",
+    "children's cafeteria (cheap or free meals for children)",
+    "noun"
+  ],
+  "速報値": [
+    "そくほうち",
+    "preliminary figure",
+    "noun"
+  ],
+  "構造的": [
+    "こうぞうてき",
+    "structural",
+    "na-adjective"
+  ],
+  "非市場的": [
+    "ひしじょうてき",
+    "non-market",
+    "na-adjective"
+  ],
+  "措置案": [
+    "そちあん",
+    "proposed measures",
+    "noun"
+  ],
+  "隆之介": [
+    "りゅうのすけ",
+    "Ryunosuke (given name)",
+    "name"
   ]
 }

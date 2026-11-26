@@ -27,6 +27,170 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-11-26-us-overcapacity-tariff',
+      date: '2026-11-26',
+      emoji: '📦',
+      titleEn: 'The US proposes new tariffs of up to 15% on Japan and 13 other economies over "excess capacity", and Japan calls it regrettable',
+      sources: [
+        { name: 'USTR', url: 'https://ustr.gov/about/policy-offices/press-office/press-releases/2026/november/ustr-makes-determinations-and-proposes-actions-14-section-301-investigations-relating-structural' },
+        { name: 'Jiji Press', url: 'https://www.jiji.com/jc/article?k=2026112600486&g=pol&m=rss' },
+        { name: 'Mynavi News', url: 'https://news.mynavi.jp/techplus/article/20261126-5411509/' },
+        { name: 'Holland & Knight', url: 'https://www.hklaw.com/en/insights/publications/2026/11/ustr-proposes-tariffs-following-14-section-301' },
+      ],
+      quiz: [
+        ['How many countries and regions does the US plan cover?', '14', '3', '50', '100'],
+        ['What is the highest tariff on Japanese goods in the plan?', '15 percent', '50 percent', '1 percent', '100 percent'],
+        ['What reason does the US give?', 'It says these countries make too many goods', 'It says these countries sell too few goods', 'It says these countries buy too much oil', 'It says these countries have too few workers'],
+      ],
+      levels: {
+        N5: {
+          title: 'アメリカが　日本[にほん]の　物[もの]に　新[あたら]しい　関税[かんぜい]を　考[かんが]えて　います',
+          lines: [
+            ['二十五日[にじゅうごにち]、アメリカの　政府[せいふ]は　新[あたら]しい　関税[かんぜい]の　案[あん]を　出[だ]しました。', 'On the 25th, the US government put out a plan for new tariffs.', '関税 (tariff) is a tax on goods that come in from other countries. 案 is a plan or proposal.'],
+            ['日本[にほん]や　中国[ちゅうごく]、EUなど、14の　国[くに]と　地域[ちいき]が　対象[たいしょう]です。', 'Fourteen countries and regions, such as Japan, China and the EU, are its targets.', '地域 means a region: the EU and Taiwan are counted as regions. 対象 is the target of something.'],
+            ['アメリカは「この　国[くに]は　物[もの]を　作[つく]りすぎて　いる」と　言[い]って　います。', 'The US says these countries make too many goods.', '〜すぎる means "too much". The US calls this "excess capacity".'],
+            ['日本[にほん]の　物[もの]の　関税[かんぜい]は、いちばん　高[たか]くて　15パーセントです。', 'For Japanese goods, the tariff would be 15 percent at most.'],
+            ['来年[らいねん]の　一月[いちがつ]に、アメリカで　この　案[あん]の　話[はな]し合[あ]いが　あります。', 'Next January, there will be a hearing on this plan in the US.', 'At the hearing, companies and others can give their views before the US decides.'],
+            ['二十六日[にじゅうろくにち]、木原[きはら]官房[かんぼう]長官[ちょうかん]は、日本[にほん]は　物[もの]を　作[つく]りすぎて　いないと　言[い]いました。', 'On the 26th, Chief Cabinet Secretary Kihara said that Japan does not make too many goods.', '官房長官 (chief cabinet secretary) is the government\'s spokesperson.'],
+            ['日本[にほん]は　アメリカに「遺憾[いかん]だ」と　伝[つた]えました。', 'Japan told the US that it was "regrettable."', '遺憾 means regrettable, a formal word governments use when they complain.'],
+          ],
+        },
+        N4: {
+          title: 'アメリカ、日本[にほん]など14の国[くに]と地域[ちいき]に新[あたら]しい関税[かんぜい]の案[あん]',
+          lines: [
+            ['アメリカの通商[つうしょう]代表部[だいひょうぶ]（USTR）は二十五日[にじゅうごにち]、新[あたら]しい関税[かんぜい]の案[あん]を発表[はっぴょう]しました。', 'On the 25th, the Office of the US Trade Representative (USTR) announced a plan for new tariffs.', '通商代表部 (USTR) is the US government office in charge of trade talks.'],
+            ['日本[にほん]や中国[ちゅうごく]、EU、韓国[かんこく]、インドなど、14の国[くに]と地域[ちいき]が対象[たいしょう]です。', 'Fourteen countries and regions, such as Japan, China, the EU, South Korea and India, are its targets.'],
+            ['アメリカは、これらの国[くに]の政府[せいふ]が会社[かいしゃ]を助[たす]けすぎて、物[もの]が必要[ひつよう]より多[おお]く作[つく]られていると考[かんが]えています。', 'The US thinks the governments of these countries help their companies too much, so more goods are made than are needed.', 'This is called 過剰生産, "excess capacity".'],
+            ['日本[にほん]の物[もの]には、今[いま]の関税[かんぜい]を含[ふく]めて最大[さいだい]15パーセントの関税[かんぜい]をかける案[あん]です。', 'The plan is to put a tariff of at most 15 percent, together with today\'s tariffs, on Japanese goods.', '最大 means "at most". 15% is the same ceiling as in the Japan–US trade deal.'],
+            ['話[はな]し合[あ]いがうまく進[すす]まない場合[ばあい]は、20パーセントにする案[あん]もあります。', 'There is also a plan to make it 20 percent if talks do not go well.', '〜場合は means "in case of, if".'],
+            ['来年[らいねん]一月[いちがつ]には、この案[あん]について意見[いけん]を聞[き]く公聴会[こうちょうかい]が開[ひら]かれます。', 'Next January, a public hearing will be held to hear views on this plan.', '公聴会 is a public hearing.'],
+            ['木原[きはら]官房[かんぼう]長官[ちょうかん]は二十六日[にじゅうろくにち]、日本[にほん]に過剰[かじょう]生産[せいさん]はないと話[はな]し、アメリカに「遺憾[いかん]だ」と伝[つた]えたと言[い]いました。', 'On the 26th, Chief Cabinet Secretary Kihara said Japan has no excess capacity, and that Japan had told the US the plan was "regrettable."'],
+          ],
+        },
+        N3: {
+          title: '米[べい]、過剰[かじょう]生産[せいさん]理由[りゆう]に新[しん]関税[かんぜい]案[あん]　日本[にほん]は最大[さいだい]15パーセント、政府[せいふ]「遺憾[いかん]」',
+          lines: [
+            ['米[べい]通商[つうしょう]代表部[だいひょうぶ]（USTR）は二十五日[にじゅうごにち]、日本[にほん]や中国[ちゅうごく]、欧州[おうしゅう]連合[れんごう]（EU）など14の国[くに]・地域[ちいき]に新[あら]たな関税[かんぜい]を課[か]す案[あん]を公表[こうひょう]した。', 'On the 25th, the Office of the US Trade Representative (USTR) published a plan to put new tariffs on 14 countries and regions, including Japan, China and the European Union (EU).', '課す means to impose (a tax). 米 is short for America in news writing.'],
+            ['各国[かっこく]の政府[せいふ]が産業[さんぎょう]を支援[しえん]した結果[けっか]、「構造的[こうぞうてき]な過剰[かじょう]生産[せいさん]能力[のうりょく]」が生[う]まれ、米国[べいこく]の産業[さんぎょう]に悪影響[あくえいきょう]を与[あた]えているとしている。', 'It says that each government\'s support for its industries has created "structural excess capacity," which is harming American industry.', '過剰生産能力 is excess production capacity: being able to make far more than the market needs.'],
+            ['通商法[つうしょうほう]301条[じょう]に基[もと]づく調査[ちょうさ]の結果[けっか]で、日本[にほん]向[む]けの税率[ぜいりつ]は既存[きそん]の関税[かんぜい]を含[ふく]めて最大[さいだい]15パーセントとなる案[あん]だ。', 'It comes from investigations under Section 301 of the Trade Act, and for Japan the plan is a rate of at most 15 percent including existing tariffs.', 'Section 301 of the 1974 Trade Act lets the US act against trade practices it judges unfair. 〜に基づく means "based on".'],
+            ['15パーセントは日米[にちべい]の関税[かんぜい]合意[ごうい]で決[き]めた上限[じょうげん]と同[おな]じ水準[すいじゅん]だが、協議[きょうぎ]が不十分[ふじゅうぶん]な場合[ばあい]は20パーセントに引[ひ]き上[あ]げる案[あん]も示[しめ]された。', '15 percent is the same level as the ceiling set in the Japan–US tariff agreement, but a plan to raise it to 20 percent if consultations are not good enough was also shown.', '上限 is an upper limit.'],
+            ['来年[らいねん]一月[いちがつ]に公聴会[こうちょうかい]を開[ひら]いたうえで、最終的[さいしゅうてき]な税率[ぜいりつ]や時期[じき]を決[き]めるとみられる。', 'The final rates and timing are expected to be decided after a public hearing next January.', '〜たうえで means "after (doing), and then".'],
+            ['木原[きはら]稔[みのる]官房[かんぼう]長官[ちょうかん]は二十六日[にじゅうろくにち]の記者[きしゃ]会見[かいけん]で「日本[にほん]に非[ひ]市場的[しじょうてき]な政策[せいさく]、慣行[かんこう]や構造的[こうぞうてき]な過剰[かじょう]生産[せいさん]能力[のうりょく]は存在[そんざい]しません」と述[の]べた。', 'At a news conference on the 26th, Chief Cabinet Secretary Minoru Kihara said: "Japan has no non-market policies or practices, and no structural excess capacity."', '慣行 is a usual practice. 非市場的 means not following market rules.'],
+            ['措置[そち]案[あん]の発表[はっぴょう]は遺憾[いかん]だとして、米側[べいがわ]に申[もう]し入[い]れたことも明[あ]らかにした。', 'He also said Japan had told the US side that announcing the proposed measures was regrettable.', '申し入れる means to formally tell or request something of another government. 措置 is a measure or step.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-26-kodomo-shokudo-record',
+      date: '2026-11-26',
+      emoji: '🍛',
+      titleEn: 'Children\'s cafeterias reach a record 13,879 across Japan, now in over 40% of primary school districts',
+      sources: [
+        { name: 'Musubie', url: 'https://musubie.org/news/press/35465' },
+        { name: 'PR TIMES (Musubie)', url: 'https://prtimes.jp/main/html/rd/p/000000159.000044382.html' },
+        { name: 'Nihon Shokuryo Shimbun', url: 'https://news.nissyoku.co.jp/flash/1338498' },
+      ],
+      quiz: [
+        ['How many children\'s cafeterias are there in Japan now?', 'About 13,900', 'About 1,400', 'About 4,300', 'About 139,000'],
+        ['Which prefecture has the most?', 'Tokyo', 'Osaka', 'Tottori', 'Hokkaido'],
+        ['What is a children\'s cafeteria?', 'A place where children can eat cheaply or for free', 'A school that teaches children to cook', 'A restaurant for birthday parties', 'A shop that sells baby food'],
+      ],
+      levels: {
+        N5: {
+          title: 'こども食堂[しょくどう]が　いちばん　多[おお]く　なりました',
+          lines: [
+            ['こども食堂[しょくどう]は、子[こ]どもが　安[やす]く、または　ただで　ご飯[はん]を　食[た]べられる　所[ところ]です。', 'A children\'s cafeteria is a place where children can eat cheaply or for free.', 'こども食堂 are mostly run by local volunteers, and adults and older people often come too. ただ means free.'],
+            ['二十五日[にじゅうごにち]、NPOの「むすびえ」が　調[しら]べた　数[かず]を　発表[はっぴょう]しました。', 'On the 25th, the NPO Musubie announced the numbers it had found.', 'むすびえ is a non-profit group that supports children\'s cafeterias around Japan.'],
+            ['こども食堂[しょくどう]は　日本[にほん]に　1万[まん]3879か所[しょ]　あります。', 'There are 13,879 children\'s cafeterias in Japan.', '〜か所 counts places.'],
+            ['去年[きょねん]より　1200か所[しょ]　以上[いじょう]　多[おお]く、いちばん　多[おお]い　数[かず]です。', 'That is more than 1,200 more than last year, the highest number ever.'],
+            ['東京[とうきょう]が　1403か所[しょ]で　いちばん　多[おお]いです。', 'Tokyo has the most, with 1,403.'],
+            ['小学校[しょうがっこう]の　地域[ちいき]の　43パーセントに　こども食堂[しょくどう]が　あります。', '43 percent of primary school areas have a children\'s cafeteria.', 'This is the share of public primary school districts with at least one.'],
+            ['物[もの]の　値段[ねだん]が　高[たか]く　なって　大変[たいへん]ですが、こども食堂[しょくどう]は　増[ふ]えて　います。', 'Prices have gone up and things are hard, but children\'s cafeterias are increasing.'],
+          ],
+        },
+        N4: {
+          title: 'こども食堂[しょくどう]、全国[ぜんこく]で1万[まん]3879か所[しょ]　今[いま]までで一番[いちばん]多[おお]く',
+          lines: [
+            ['NPO法人[ほうじん]「全国[ぜんこく]こども食堂[しょくどう]支援[しえん]センター・むすびえ」は二十五日[にじゅうごにち]、こども食堂[しょくどう]の数[かず]を調[しら]べた結果[けっか]を発表[はっぴょう]しました。', 'On the 25th, the NPO Musubie, the national support center for children\'s cafeterias, announced the results of its count of children\'s cafeterias.', 'NPO法人 is a non-profit organization.'],
+            ['こども食堂[しょくどう]は、地域[ちいき]の人[ひと]が子[こ]どもに無料[むりょう]や安[やす]い値段[ねだん]でご飯[はん]を出[だ]す所[ところ]です。', 'Children\'s cafeterias are places where local people serve meals to children for free or at a low price.'],
+            ['全国[ぜんこく]で1万[まん]3879か所[しょ]あり、去年[きょねん]より1200か所[しょ]以上[いじょう]増[ふ]えて、今[いま]までで一番[いちばん]多[おお]くなりました。', 'There are 13,879 across Japan, more than 1,200 more than last year, the most ever.'],
+            ['都道府県[とどうふけん]別[べつ]では、東京都[とうきょうと]が1403か所[しょ]で最[もっと]も多[おお]く、大阪府[おおさかふ]、神奈川県[かながわけん]が続[つづ]きます。', 'By prefecture, Tokyo has the most with 1,403, followed by Osaka and Kanagawa.', '〜別 means "by (category)". 続く here means to come next.'],
+            ['公立[こうりつ]の小学校[しょうがっこう]の通学[つうがく]区域[くいき]の43パーセントに、こども食堂[しょくどう]が少[すく]なくとも1つあります。', '43 percent of public primary school districts have at least one children\'s cafeteria.', '通学区域 is the area whose children go to a given school. 少なくとも means "at least".'],
+            ['一番[いちばん]割合[わりあい]が高[たか]いのは鳥取県[とっとりけん]で、68パーセントでした。', 'Tottori Prefecture had the highest share, 68 percent.', '割合 means a share or ratio.'],
+            ['ただ、増[ふ]え方[かた]は前[まえ]より小[ちい]さくなっていて、物価[ぶっか]が上[あ]がる中[なか]、続[つづ]けるのが難[むずか]しい食堂[しょくどう]もあります。', 'But the increase is smaller than before, and as prices rise, some cafeterias find it hard to keep going.', '〜中 here means "while, amid".'],
+          ],
+        },
+        N3: {
+          title: 'こども食堂[しょくどう]、過去[かこ]最多[さいた]の1万[まん]3879か所[しょ]　小学校[しょうがっこう]区[く]の4割[わり]超[こ]える',
+          lines: [
+            ['認定[にんてい]NPO法人[ほうじん]「全国[ぜんこく]こども食堂[しょくどう]支援[しえん]センター・むすびえ」は二十五日[にじゅうごにち]、全国[ぜんこく]のこども食堂[しょくどう]が1万[まん]3879か所[しょ]に上[のぼ]り、過去[かこ]最多[さいた]を更新[こうしん]したとする調査[ちょうさ]結果[けっか]（速報値[そくほうち]）を発表[はっぴょう]した。', 'On the 25th, the certified NPO Musubie announced survey results (preliminary figures) showing that children\'s cafeterias across Japan have reached 13,879, a new record.', '速報値 is a preliminary figure. 〜に上る means "to reach (a large number)".'],
+            ['前年度[ぜんねんど]から1200か所[しょ]以上[いじょう]増[ふ]えたが、毎年[まいとし]1700か所[しょ]以上[いじょう]増[ふ]えていた時期[じき]に比[くら]べると、伸[の]びは緩[ゆる]やかになった。', 'They grew by more than 1,200 from the previous year, but compared with the years when they grew by more than 1,700 a year, the growth has slowed.', '緩やか means gentle or slow.'],
+            ['公立[こうりつ]小学校[しょうがっこう]の通学[つうがく]区域[くいき]のうち、こども食堂[しょくどう]がある区域[くいき]の割合[わりあい]は43パーセントで、前年度[ぜんねんど]の約[やく]40パーセントから上昇[じょうしょう]した。', 'Among public primary school districts, the share with a children\'s cafeteria was 43 percent, up from about 40 percent the year before.'],
+            ['都道府県[とどうふけん]別[べつ]では東京都[とうきょうと]が1403か所[しょ]で最[もっと]も多[おお]く、割合[わりあい]では鳥取県[とっとりけん]が68.1パーセントで最[もっと]も高[たか]かった。', 'By prefecture, Tokyo had the most, with 1,403, and Tottori had the highest share, at 68.1 percent.'],
+            ['こども食堂[しょくどう]がある市区町村[しくちょうそん]は、全国[ぜんこく]の約[やく]8割[わり]に広[ひろ]がっている。', 'Children\'s cafeterias have spread to about 80 percent of cities, towns and villages in Japan.', '市区町村 means cities, wards, towns and villages: all local municipalities.'],
+            ['子[こ]どもの食事[しょくじ]の場[ば]だけでなく、高齢者[こうれいしゃ]なども集[あつ]まる地域[ちいき]の居場所[いばしょ]としての役割[やくわり]も大[おお]きくなっている。', 'They are not only places for children to eat, but are also playing a bigger role as community spaces where older people and others gather.', '居場所 is a place where someone feels they belong.'],
+            ['一方[いっぽう]で、物価[ぶっか]高[だか]が続[つづ]く中[なか]、運営[うんえい]が厳[きび]しくなり、活動[かつどう]を休[やす]んだりやめたりする食堂[しょくどう]も相次[あいつ]いでいるという。', 'On the other hand, with prices staying high, running them has become harder, and one after another, some cafeterias are pausing or stopping their activities.', '物価高 means high prices. 相次ぐ means to happen one after another.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-26-taiga-mitsunari-kamiki',
+      date: '2026-11-26',
+      emoji: '🎬',
+      titleEn: 'NHK\'s 2029 taiga drama will be "Mitsunari no Uta", with Ryunosuke Kamiki in his first lead role as Ishida Mitsunari',
+      sources: [
+        { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261125de81004' },
+        { name: 'Oricon', url: 'https://www.oricon.co.jp/news/2495091/full/' },
+        { name: 'Mynavi News', url: 'https://news.mynavi.jp/article/20261126-5412391/' },
+        { name: 'WEB The Television via Yahoo! News', url: 'https://news.yahoo.co.jp/articles/2b2451864869c002d9b2f1d909a0f367d813c662' },
+      ],
+      quiz: [
+        ['Who is the main character of the drama?', 'Ishida Mitsunari', 'Oda Nobunaga', 'Tokugawa Ieyasu', 'Sakamoto Ryoma'],
+        ['Who will play him?', 'Ryunosuke Kamiki', 'A child actor chosen in an audition', 'An NHK newsreader', 'The writer of the drama'],
+        ['When will the drama be shown?', 'In 2029', 'Next month', 'In 2027', 'In 2035'],
+      ],
+      levels: {
+        N5: {
+          title: '2029年[ねん]の　大河[たいが]ドラマは　神木[かみき]隆之介[りゅうのすけ]さん',
+          lines: [
+            ['二十五日[にじゅうごにち]、NHKは　2029年[ねん]の　大河[たいが]ドラマを　発表[はっぴょう]しました。', 'On the 25th, NHK announced its taiga drama for 2029.', '大河ドラマ (taiga drama) is NHK\'s big historical drama, shown every Sunday evening for a whole year.'],
+            ['タイトルは「三成[みつなり]のうた」です。', 'The title is "Mitsunari no Uta" (Mitsunari\'s Song).'],
+            ['戦国[せんごく]時代[じだい]の　武将[ぶしょう]、石田[いしだ]三成[みつなり]の　一生[いっしょう]の　話[はなし]です。', 'It is the story of the whole life of Ishida Mitsunari, a samurai general of the Warring States period.', 'Ishida Mitsunari (1560–1600) served Toyotomi Hideyoshi and led the western side at the Battle of Sekigahara. 武将 is a samurai general; 一生 is a whole life.'],
+            ['三成[みつなり]が　主人公[しゅじんこう]の　大河[たいが]ドラマは　初[はじ]めてです。', 'It is the first taiga drama with Mitsunari as the main character.', '主人公 is the main character of a story.'],
+            ['三成[みつなり]は、俳優[はいゆう]の　神木[かみき]隆之介[りゅうのすけ]さんが　やります。', 'The actor Ryunosuke Kamiki will play Mitsunari.', '俳優 is an actor. Kamiki starred in the morning drama "Ranman" (2023).'],
+            ['神木[かみき]さんは　33歳[さい]で、大河[たいが]ドラマの　主人公[しゅじんこう]は　初[はじ]めてです。', 'Mr. Kamiki is 33, and it is his first time as the main character of a taiga drama.'],
+            ['神木[かみき]さんは「皆[みな]さんに　愛[あい]して　もらえるような　三成[みつなり]を」と　話[はな]しました。', 'Mr. Kamiki said, "(I want to make) a Mitsunari that everyone can love."', '〜てもらえるような means "such that (someone) will do ~ for me".'],
+          ],
+        },
+        N4: {
+          title: '2029年[ねん]の大河[たいが]ドラマは「三成[みつなり]のうた」　主演[しゅえん]は神木[かみき]隆之介[りゅうのすけ]さん',
+          lines: [
+            ['NHKは二十五日[にじゅうごにち]、2029年[ねん]に放送[ほうそう]する大河[たいが]ドラマのタイトルが「三成[みつなり]のうた」に決[き]まったと発表[はっぴょう]しました。', 'On the 25th, NHK announced that the title of its taiga drama to be broadcast in 2029 will be "Mitsunari no Uta."', '大河ドラマ (taiga drama) is NHK\'s year-long historical drama.'],
+            ['戦国[せんごく]時代[じだい]に豊臣[とよとみ]秀吉[ひでよし]のもとで活躍[かつやく]した石田[いしだ]三成[みつなり]の一生[いっしょう]を描[えが]きます。', 'It portrays the life of Ishida Mitsunari, who was active under Toyotomi Hideyoshi in the Warring States period.', 'のもとで means "under (someone)". 描く means to portray.'],
+            ['三成[みつなり]が主人公[しゅじんこう]になるのは、大河[たいが]ドラマで初[はじ]めてです。', 'It is the first time Mitsunari is the main character of a taiga drama.'],
+            ['主演[しゅえん]は神木[かみき]隆之介[りゅうのすけ]さんで、大河[たいが]ドラマに出[で]るのは5回目[かいめ]ですが、主演[しゅえん]は初[はじ]めてです。', 'The lead is Ryunosuke Kamiki: it is his fifth taiga drama, but his first as the lead.', '主演 is the leading role.'],
+            ['脚本[きゃくほん]を書[か]く黒岩[くろいわ]勉[つとむ]さんは、最初[さいしょ]から三成[みつなり]は神木[かみき]さんのイメージだったと話[はな]しました。', 'Tsutomu Kuroiwa, who is writing the script, said he pictured Mr. Kamiki as Mitsunari from the start.', '脚本 is a script.'],
+            ['三成[みつなり]は冷[つめ]たい人[ひと]というイメージが多[おお]いですが、ドラマでは明[あか]るくて好奇心[こうきしん]のある三成[みつなり]として描[えが]かれる予定[よてい]です。', 'Mitsunari is often pictured as a cold person, but the drama plans to show him as cheerful and curious.', '好奇心 is curiosity. 〜として means "as".'],
+            ['神木[かみき]さんは「皆[みな]さんに愛[あい]してもらえるような三成[みつなり]を」と話[はな]しました。', 'Mr. Kamiki said, "(I want to make) a Mitsunari that everyone can love."'],
+          ],
+        },
+        N3: {
+          title: '29年[ねん]大河[たいが]は「三成[みつなり]のうた」　神木[かみき]隆之介[りゅうのすけ]さんが初[はつ]主演[しゅえん]',
+          lines: [
+            ['NHKは二十五日[にじゅうごにち]、2029年[ねん]に放送[ほうそう]する第[だい]68作[さく]の大河[たいが]ドラマが「三成[みつなり]のうた」に決[き]まったと発表[はっぴょう]した。', 'On the 25th, NHK announced that its 68th taiga drama, to be broadcast in 2029, will be "Mitsunari no Uta."', '第〜作 means "the ~th work".'],
+            ['戦国[せんごく]時代[じだい]の武将[ぶしょう]、石田[いしだ]三成[みつなり]の生涯[しょうがい]を描[えが]く作品[さくひん]で、三成[みつなり]が大河[たいが]ドラマの主人公[しゅじんこう]になるのは初[はじ]めてだ。', 'The work portrays the life of Ishida Mitsunari, a samurai general of the Warring States period, and it is the first time Mitsunari is the main character of a taiga drama.', '生涯 is a lifetime, a more formal word than 一生.'],
+            ['主演[しゅえん]は俳優[はいゆう]の神木[かみき]隆之介[りゅうのすけ]さん（33）で、大河[たいが]への出演[しゅつえん]は5作目[さくめ]となるが、主演[しゅえん]は初[はじ]めてとなる。', 'The lead is the actor Ryunosuke Kamiki (33): it will be his fifth taiga drama, but his first in the lead role.', 'A number in brackets after a name is the person\'s age, as newspapers write it.'],
+            ['神木[かみき]さんは2023年[ねん]の連続[れんぞく]テレビ小説[しょうせつ]「らんまん」でも主演[しゅえん]を務[つと]めた。', 'Mr. Kamiki also played the lead in the 2023 morning drama "Ranman."', '連続テレビ小説 is the official name of NHK\'s morning drama series (朝ドラ).'],
+            ['脚本[きゃくほん]を担当[たんとう]する黒岩[くろいわ]勉[つとむ]さんは会見[かいけん]で、「最初[さいしょ]からイメージは神木[かみき]隆之介[りゅうのすけ]さんでした」と語[かた]った。', 'Tsutomu Kuroiwa, who is writing the script, said at the news conference, "From the start, the image I had was Ryunosuke Kamiki."'],
+            ['三成[みつなり]は冷徹[れいてつ]なイメージが強[つよ]いが、ドラマでは好奇心[こうきしん]旺盛[おうせい]で明[あか]るい人物[じんぶつ]として描[えが]かれる予定[よてい]だ。', 'Mitsunari has a strong image of being cold and calculating, but the drama plans to portray him as a cheerful, very curious person.', '冷徹 means cool-headed and unfeeling. 好奇心旺盛 means full of curiosity.'],
+            ['神木[かみき]さんは発表[はっぴょう]を前[まえ]に、三成[みつなり]が生[う]まれた滋賀県[しがけん]長浜市[ながはまし]を訪[おとず]れたことも明[あ]かした。', 'Mr. Kamiki also revealed that before the announcement he visited Nagahama in Shiga Prefecture, where Mitsunari was born.', '〜を前に means "ahead of, before". 明かす means to reveal.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-11-25-icc-early-payment',
       date: '2026-11-25',
       emoji: '⚖️',
