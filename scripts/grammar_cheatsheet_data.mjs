@@ -497,9 +497,16 @@ export const SECTIONS = [
       },
       {
         p: '〜ながら', lv: 'N4', m: 'while (doing two things at once)', r: 'V-masu + ながら',
-        more: 'One person does two things at the same time. The main action is the last verb.',
-        ex: [['音楽[おんがく]を聞[き]き{ながら}勉強[べんきょう]します。', 'I study while listening to music.']],
-        warn: ['Same person for both actions. For two people, or a time span, use 〜間[あいだ](に).'],
+        more: 'One person does two things at the same time. The verb at the end is the main thing you’re doing; the ながら verb happens alongside it: in 音楽[おんがく]を聞[き]きながら勉強[べんきょう]する, studying is the point and the music is in the background.',
+        ex: [
+          ['音楽[おんがく]を聞[き]き{ながら}勉強[べんきょう]します。', 'I study while listening to music.'],
+          ['テレビを見[み]{ながら}ご飯[はん]を食[た]べないで。', 'Don’t eat while watching TV.'],
+        ],
+        warn: [
+          'Both actions must be done by the same person. If two different people are doing things at the same time, ながら doesn’t work: use 〜ている間[あいだ] instead. 母[はは]が料理[りょうり]をしている間[あいだ]、私[わたし]はテレビを見[み]ていた (my mother was cooking while I watched TV), not ×母[はは]が料理[りょうり]をしながら、私[わたし]はテレビを見[み]ていた. See @{〜間[あいだ] · 〜間[あいだ]に}.',
+          'ながら is for two actions, not a stretch of time. For “while I’m in Japan” or “while I was out”, use 間[あいだ](に) too: 日本[にほん]にいる間[あいだ]に、京都[きょうと]へ行[い]きたい.',
+          'With a state (いる, 知[し]っている, 住[す]んでいる), ながら means “although”: 知[し]っていながら、教[おし]えてくれなかった (they knew, but didn’t tell me).',
+        ],
       },
       {
         p: '〜つもり', lv: 'N4', m: 'intend to, plan to', r: 'V-dict / V-nai + つもりだ',
