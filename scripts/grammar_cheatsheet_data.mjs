@@ -42,7 +42,7 @@ export const SECTIONS = [
         p: 'に', lv: 'N5', m: 'at (time), to (place / person), in (where something is)', r: 'N + に',
         more: 'Points at a target: a clock time or date (三[さん]時[じ]に), a destination (学校[がっこう]に行[い]く), the person you give or say something to (友達[ともだち]にあげる), where something exists (机[つくえ]の上[うえ]にある), and the purpose of going (買[か]い物[もの]に行[い]く, 食[た]べに行[い]く).',
         ex: [['七時[しちじ]{に}起[お]きます。', 'I get up at seven.'], ['駅[えき]の前[まえ]{に}本屋[ほんや]があります。', 'There’s a bookshop in front of the station.']],
-        warn: ['No に with relative time words: 今日[きょう], 明日[あした], 毎日[まいにち], 先週[せんしゅう], 来年[らいねん] (×明日[あした]に). Days of the week can take it or not.', 'Where you live is に (東京[とうきょう]に住[す]む), but where you work or do anything is で (東京[とうきょう]で働[はたら]く).'],
+        warn: ['No に with relative time words, the ones that count from now: 今日[きょう], 明日[あした], 毎日[まいにち], 先週[せんしゅう], 来年[らいねん], 今[いま] (×明日[あした]に).', 'Instead, use them bare, like “tomorrow” in English, usually at the start: 明日[あした]、東京[とうきょう]に行[い]きます. Add は to make one the topic or a contrast (明日[あした]は休[やす]みです; 今日[きょう]は暑[あつ]いですが、明日[あした]は寒[さむ]いです), も for “too” (明日[あした]も来[き]ます), and の before a noun (明日[あした]の会議[かいぎ]).', 'Fixed points do take に: clock times, dates and years (三時[さんじ]に, 五月[ごがつ]五日[いつか]に, 2020年[ねん]に). Days of the week can take it or not (日曜日[にちようび](に)).', 'Where you live is に (東京[とうきょう]に住[す]む), but where you work or do anything is で (東京[とうきょう]で働[はたら]く).'],
       },
       {
         p: 'へ', lv: 'N5', m: 'toward (direction)', r: 'N + へ',
