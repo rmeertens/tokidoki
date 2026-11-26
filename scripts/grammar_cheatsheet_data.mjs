@@ -13,6 +13,8 @@
 //          the grammar point
 //   warn   exceptions and traps
 //   links  optional [[href, label]]: a quiz on just this point
+// In any text, @{pattern} links to the point with that pattern (exactly as
+// its `p`), and @{label|href} to anywhere.
 // Text is plain (escaped on the page). Every kanji, in every field, has
 // furigana as 漢字[かんじ] (the render script refuses one without).
 
@@ -31,7 +33,7 @@ export const SECTIONS = [
         p: 'が', lv: 'N5', m: 'subject: who / what (new information)', r: 'N + が',
         more: 'Marks the subject when it is new information, the answer to a question, or after a question word. Also marks the thing liked, wanted, understood or owned with 好[す]き, 嫌[きら]い, 上手[じょうず], 分[わ]かる, 欲[ほ]しい, ある, いる.',
         ex: [['誰[だれ]{が}来[き]ましたか。— 田中[たなか]さん{が}来[き]ました。', 'Who came? — Tanaka came.'], ['私[わたし]は猫[ねこ]{が}好[す]きです。', 'I like cats.']],
-        warn: ['After a sentence, が means “but” (see 〜が / 〜けど).', 'Can’t be stacked with も: ×がも, just も.'],
+        warn: ['After a sentence, が means “but”: see @{〜が · 〜けど}.', 'Can’t be stacked with も: ×がも, just も.'],
       },
       {
         p: 'を', lv: 'N5', m: 'direct object', r: 'N + を + verb',
@@ -61,7 +63,7 @@ export const SECTIONS = [
         p: 'と', lv: 'N5', m: 'and (complete list); with', r: 'N + と + N · N + と (together)',
         more: 'Joins nouns into a complete list, or says who you do something with.',
         ex: [['パン{と}牛乳[ぎゅうにゅう]を買[か]いました。', 'I bought bread and milk.'], ['友達[ともだち]{と}映画[えいが]を見[み]ました。', 'I saw a movie with a friend.']],
-        warn: ['Only joins nouns. For verbs and adjectives use the て-form: 安[やす]くておいしい.', 'After a verb, と means “when / if” or quotes something (see their own entries).'],
+        warn: ['Only joins nouns. For verbs and adjectives use the て-form: 安[やす]くておいしい.', 'After a verb, と means “when / if” (@{〜と (whenever)}) or quotes something (@{〜と言[い]う}).'],
       },
       {
         p: 'や', lv: 'N5', m: 'and (among others)', r: 'N + や + N (+ など)',
@@ -97,7 +99,7 @@ export const SECTIONS = [
         p: 'から · まで', lv: 'N5', m: 'from · until / as far as', r: 'N + から · N + まで',
         more: 'Starting and end points in time or space: 九[きゅう]時[じ]から五[ご]時[じ]まで, 駅[えき]から家[いえ]まで.',
         ex: [['駅[えき]{から}家[いえ]{まで}歩[ある]きます。', 'I walk from the station to my house.']],
-        warn: ['まで = until (the whole time): 五[ご]時[じ]まで働[はたら]く. までに = by (a deadline): 金曜日[きんようび]までに出[だ]してください.', 'After a sentence, から means “because” (see 〜から).'],
+        warn: ['まで = until (the whole time): 五[ご]時[じ]まで働[はたら]く. までに = by (a deadline): 金曜日[きんようび]までに出[だ]してください.', 'After a sentence, から means “because”: see @{〜から (because)}.'],
       },
       {
         p: 'か', lv: 'N5', m: 'question mark; or; some-', r: 'sentence + か · N + か + N',
@@ -188,7 +190,7 @@ export const SECTIONS = [
         p: '〜ます · ません · ました · ませんでした', lv: 'N5', m: 'polite present / future, negative, past', r: 'V-masu + ます · ません · ました · ませんでした',
         more: 'The present also covers the future: 明日[あした]行[い]きます (I’ll go tomorrow). It describes habits, not what’s happening right now.',
         ex: [['毎朝[まいあさ]コーヒーを飲[の]み{ます}。', 'I drink coffee every morning.'], ['昨日[きのう]は勉強[べんきょう]し{ませんでした}。', 'I didn’t study yesterday.']],
-        warn: ['“I’m eating (now)” is 食[た]べています, not 食[た]べます.'],
+        warn: ['“I’m eating (now)” is 食[た]べています, not 食[た]べます: see @{〜ている}.'],
       },
       {
         p: '〜ましょう · 〜ましょうか', lv: 'N5', m: 'let’s · shall I / shall we?', r: 'V-masu + ましょう(か)',
@@ -212,7 +214,7 @@ export const SECTIONS = [
         p: '〜て (and, then)', lv: 'N5', m: 'and; and then', r: 'V-te … · い-adj → 〜くて · N / な-adj + で',
         more: 'Links actions in the order they happen, or links descriptions. The last verb sets the tense and politeness for the whole sentence.',
         ex: [['朝[あさ]起[お]き{て}、顔[かお]を洗[あら]い{ます}。', 'I get up and wash my face.'], ['この店[みせ]は安[やす]く{て}おいしい。', 'This place is cheap and good.']],
-        warn: ['て-form rules (書[か]いて, 飲[の]んで, 行[い]って…): see the conjugation chart.', 'Don’t link a good and a bad point with て; use が / けど: 安[やす]いけど、まずい.'],
+        warn: ['て-form rules (書[か]いて, 飲[の]んで, 行[い]って…): see the @{conjugation chart|verb-conjugation-chart.html}.', 'Don’t link a good and a bad point with て; use が / けど: 安[やす]いけど、まずい.'],
       },
       {
         p: '〜てください · 〜ないでください', lv: 'N5', m: 'please do · please don’t', r: 'V-te + ください · V-nai + でください',
@@ -266,7 +268,7 @@ export const SECTIONS = [
         p: '〜てから', lv: 'N5', m: 'after doing; since', r: 'V-te + から',
         more: 'First one action, then the next.',
         ex: [['手[て]を洗[あら]っ{てから}、食[た]べます。', 'I eat after washing my hands.']],
-        warn: ['Compare 〜た後[あと]で: てから stresses the order (first this, then that).'],
+        warn: ['Compare @{〜前[まえ]に · 〜た後[あと]で}: てから stresses the order (first this, then that).'],
       },
       {
         p: '〜前[まえ]に · 〜た後[あと]で', lv: 'N5', m: 'before · after', r: 'V-dict + 前[まえ]に · V-ta + 後[あと]で · N の + 前[まえ]に / 後[あと]で',
@@ -302,7 +304,7 @@ export const SECTIONS = [
         p: '〜てみる', lv: 'N4', m: 'try (doing) and see', r: 'V-te + みる',
         more: 'Do something to find out what it’s like.',
         ex: [['この服[ふく]、着[き]{てみ}てもいいですか。', 'May I try these clothes on?']],
-        warn: ['“Try (hard), attempt” is 〜ようとする.'],
+        warn: ['“Try (hard), attempt” is @{〜ようとする}.'],
       },
       {
         p: '〜てしまう', lv: 'N4', m: 'do completely; do (by mistake, sadly)', r: 'V-te + しまう · casual 〜ちゃう / 〜じゃう',
@@ -380,7 +382,7 @@ export const SECTIONS = [
         p: '〜ことにする', lv: 'N4', m: 'decide to', r: 'V-dict / V-nai + ことにする',
         more: 'Your own decision. 〜ことにしている: a rule you have made for yourself.',
         ex: [['来年[らいねん]、留学[りゅうがく]する{ことにしました}。', 'I’ve decided to study abroad next year.']],
-        warn: ['Compare ことになる: decided by others or by circumstances.'],
+        warn: ['Compare @{〜ことになる}: decided by others or by circumstances.'],
       },
       {
         p: '〜ことになる', lv: 'N4', m: 'it has been decided that', r: 'V-dict / V-nai + ことになる',
@@ -716,13 +718,13 @@ export const SECTIONS = [
         p: '〜ばかり', lv: 'N3', m: 'nothing but; just (did)', r: 'N + ばかり · V-te + ばかりいる · V-ta + ばかり',
         more: 'Too much of one thing, often as a complaint. After V-ta: something happened only a short time ago.',
         ex: [['弟[おとうと]はゲーム{ばかり}している。', 'My brother does nothing but play games.'], ['日本[にほん]に来[き]た{ばかり}です。', 'I’ve only just come to Japan.']],
-        warn: ['Compare だけ (“only”, neutral) with ばかり (“nothing but”, often critical).'],
+        warn: ['Compare @{だけ · しか〜ない} (“only”, neutral) with ばかり (“nothing but”, often critical).'],
       },
       {
         p: '〜ようとする', lv: 'N3', m: 'try to; be about to', r: 'V-vol + とする',
         more: 'An attempt (that may fail), or the moment just before something happens.',
         ex: [['出[で]かけ{ようとした}時[とき]、電話[でんわ]が鳴[な]った。', 'Just as I was about to go out, the phone rang.']],
-        warn: ['〜てみる: try it and see. 〜ようとする: attempt it.'],
+        warn: ['@{〜てみる}: try it and see. 〜ようとする: attempt it.'],
       },
       {
         p: '〜うちに', lv: 'N3', m: 'while (still); before', r: 'V-dict / V-te いる / い-adj / N の + うちに · V-nai + うちに',

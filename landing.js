@@ -242,11 +242,27 @@
   window.addEventListener('resize', fit);
   window.addEventListener('load', fit);
 
+  // A point linked to (#verbs-7, or a "see …" link in another point) opens,
+  // and the search and level are cleared first if they hide it.
   function openHash() {
     var d = location.hash && document.getElementById(location.hash.slice(1));
-    if (d && d.classList.contains('gc-item')) { d.open = true; d.scrollIntoView(); }
+    if (!d || !d.classList.contains('gc-item')) return;
+    if (d.hidden) {
+      search.value = '';
+      level = 'All';
+      Array.prototype.forEach.call(lvBtns, function (x) { x.setAttribute('aria-pressed', x.getAttribute('data-lv') === 'All' ? 'true' : 'false'); });
+      filter();
+    }
+    d.open = true;
+    d.scrollIntoView();
   }
   window.addEventListener('hashchange', openHash);
+  // Clicking a link to the point already in the address bar fires no
+  // hashchange, so open it here.
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a.gc-link');
+    if (a && a.getAttribute('href') === location.hash) { e.preventDefault(); openHash(); }
+  });
   tools.hidden = false;
   // app.js draws the header on DOMContentLoaded, so measure after it.
   function start() { fit(); openHash(); }

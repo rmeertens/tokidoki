@@ -198,7 +198,19 @@ const LEVELS = ['N5', 'N4', 'N3'];
 const SLOT_RE = /(V-(?:dict|masu|te|ta|nai|vol)|い-adj|な-adj|\bplain\b|\bN\b)/g;
 // Every kanji on the page has furigana (漢字[かんじ] in the data), so the
 // rules and notes are as readable as the examples.
-const jp = s => ruby(esc(s));
+// @{pattern} in the data links to the point with that pattern (the build
+// fails if there's none); @{label|href} links anywhere.
+const POINT_IDS = new Map(GRAMMAR.flatMap(s => s.points.map((g, i) => [g.p, `${s.id}-${i + 1}`])));
+const LINK_RE = /@\{([^}|]+)(?:\|([^}]+))?\}/g;
+const jp = s => {
+  let out = '', last = 0;
+  for (const m of s.matchAll(LINK_RE)) {
+    const href = m[2] || (POINT_IDS.has(m[1]) ? `#${POINT_IDS.get(m[1])}` : die(`no grammar point ${m[1]} to link to`));
+    out += ruby(esc(s.slice(last, m.index))) + `<a class="gc-link" href="${esc(href)}">${ruby(esc(m[1]))}</a>`;
+    last = m.index + m[0].length;
+  }
+  return out + ruby(esc(s.slice(last)));
+};
 const slots = s => jp(s).replace(SLOT_RE, '<span class="gc-slot">$1</span>');
 const marked = s => jp(s).replace(/\{([^}]+)\}/g, '<b>$1</b>');
 const GRAMMAR_COUNT = GRAMMAR.reduce((n, s) => n + s.points.length, 0);
@@ -363,7 +375,7 @@ function render(p) {
   <meta name="twitter:description" content="${esc(p.desc)}">
   <meta name="twitter:image" content="${SITE}/og-image.png">
   <link rel="canonical" href="${url}">
-${STYLE}  <link rel="stylesheet" href="landing.css?v=5">
+${STYLE}  <link rel="stylesheet" href="landing.css?v=6">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -409,7 +421,7 @@ ${p.quiz ? `      <div class="lp-quiz" id="lp-quiz"><noscript><p><a href="${p.ct
   </div>
 
   <script type="application/json" id="lp-data">${json(data)}</script>
-${SCRIPTS}  <script src="landing.js?v=6"></script>
+${SCRIPTS}  <script src="landing.js?v=7"></script>
 </body>
 </html>
 `;

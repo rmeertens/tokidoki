@@ -196,3 +196,4 @@
   .gc-sum { grid-column: 1 / -1; grid-row: 2; }
   .gc-more { padding: 2px 12px 12px; }
 }
+.gc-more a.gc-link { color: var(--accent); font-weight: 600; }
