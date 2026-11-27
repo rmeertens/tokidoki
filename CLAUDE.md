@@ -133,6 +133,15 @@
   fits on four pages after an edit). Re-run it, then
   `node scripts/stamp_sheet_belts.mjs grammar-sheets` (needs
   `npm install --no-save pdf-lib`).
+- Its practice sheets, `grammar-sheets/tokidoki-grammar-practice-n5.pdf`
+  (n4, n3): 150 questions each — particles (four choices), verb forms to
+  write, and verb groups (N5) or が / を with the verb pairs (N4, N3) — then
+  the answers, each with why, on the last pages. The questions come from the
+  site's data in `scripts/grammar_practice_questions.mjs` (only particle
+  questions whose wrong choices were checked; more N3 ones in `EXTRA`; the
+  explanations of verb forms come from the rules in `formWhy`), fixed by a
+  seed; `node scripts/render_grammar_practice.mjs`, then stamp as above.
+  `test_grammar_practice.js` checks them.
 
 - JLPT-style vocabulary questions, N5 / N4 / N3, from the GTK example
   sentences (`guess-words-data.js`) via `scripts/vocab_questions.mjs`:
