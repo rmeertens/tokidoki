@@ -1052,6 +1052,26 @@ export const SECTIONS = [
         ],
         warn: ['Same subject and an action you control: use ために instead.'],
       },
+      {
+        p: 'A ではなくて B', lv: 'N4', m: 'not A, but B', r: 'N + ではなくて / じゃなくて / ではなく · plain + のではなく(て)',
+        more: 'Corrects something: it isn’t A, it’s B. The second half says what is true.',
+        ex: [
+          ['これは塩[しお]{ではなくて}、砂糖[さとう]です。', 'This isn’t salt, it’s sugar. (N ではなくて)'],
+          ['会議[かいぎ]は今日[きょう]{ではなくて}、明日[あした]です。', 'The meeting isn’t today, it’s tomorrow. (N ではなくて)'],
+          ['好[す]きなのはコーヒー{じゃなくて}紅茶[こうちゃ]だよ。', 'It’s tea I like, not coffee. (N じゃなくて, casual)'],
+          ['「田中[たなか]さん？」「田中[たなか]{じゃなくて}、中田[なかた]です。」', '“Tanaka?” “Not Tanaka, Nakata.” (N じゃなくて, casual)'],
+          ['電話[でんわ]{ではなく}、メールで連絡[れんらく]してください。', 'Please contact us by email, not by phone. (N ではなく, written)'],
+          ['大切[たいせつ]なのは結果[けっか]{ではなく}、努力[どりょく]だ。', 'What matters isn’t the result but the effort. (N ではなく, written)'],
+          ['覚[おぼ]える{のではなくて}、理解[りかい]することが大切[たいせつ]だ。', 'The important thing isn’t memorising but understanding. (plain + のではなくて)'],
+          ['彼[かれ]は怒[おこ]っている{のではなく}、疲[つか]れているだけだ。', 'He isn’t angry, he’s just tired. (plain + のではなく)'],
+        ],
+        warn: [
+          'From casual to formal: じゃなくて → ではなくて → ではなく.',
+          'After a verb or adjective, add の: 見[み]るのではなく、聞[き]く (×見[み]るではなく). な-adj: 静[しず]かなのではなく.',
+          '“Not only A but also B” is a different pattern: 〜だけでなく / @{〜ばかりか · 〜ばかりでなく}.',
+          'Also “not A, B instead”: A のかわりに B: 肉[にく]のかわりに魚[さかな]を食[た]べる (fish instead of meat).',
+        ],
+      },
     ],
   },
   {
