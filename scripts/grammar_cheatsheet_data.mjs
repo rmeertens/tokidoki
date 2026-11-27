@@ -1198,6 +1198,26 @@ export const SECTIONS = [
         ],
         warn: ['〜づらい: hard to do because it’s painful or awkward.'],
       },
+      {
+        p: '〜と同[おな]じ · 〜と違[ちが]う', lv: 'N5', m: 'the same as · different from', r: 'A は B と同[おな]じ(だ) · A と同[おな]じ + N · A と B は同[おな]じ · A は B と違[ちが]う',
+        more: 'と marks what you compare with. 同[おな]じ is “the same”, 違[ちが]う “different”; 違[ちが]って means “unlike”.',
+        ex: [
+          ['私[わたし]の誕生日[たんじょうび]は兄[あに]{と同[おな]じ}です。', 'My birthday is the same as my brother’s. (A は B と同[おな]じ)'],
+          ['このかばんは田中[たなか]さんの{と同[おな]じ}だ。', 'This bag is the same as Tanaka’s. (A は B と同[おな]じ)'],
+          ['田中[たなか]さん{と同[おな]じ}大学[だいがく]に行[い]きたい。', 'I want to go to the same university as Tanaka. (と同[おな]じ + N)'],
+          ['昨日[きのう]{と同[おな]じ}服[ふく]を着[き]ている。', 'You’re wearing the same clothes as yesterday. (と同[おな]じ + N)'],
+          ['この二[ふた]つの言葉[ことば]は意味[いみ]が{同[おな]じ}です。', 'These two words have the same meaning. (A と B は同[おな]じ)'],
+          ['姉[あね]と私[わたし]は背[せ]が{同[おな]じ}くらいです。', 'My sister and I are about the same height. (A と B は同[おな]じ)'],
+          ['答[こた]えが私[わたし]の{と違[ちが]う}。', 'The answer is different from mine. (と違[ちが]う)'],
+          ['日本[にほん]の夏[なつ]は私[わたし]の国[くに]{と違[ちが]って}、とても暑[あつ]い。', 'Unlike in my country, summer in Japan is very hot. (と違[ちが]って)'],
+        ],
+        warn: [
+          '同[おな]じ takes nothing before a noun: 同[おな]じ本[ほん] (×同[おな]じな本[ほん], ×同[おな]じの本[ほん]).',
+          'X の on its own stands for X’s thing: 田中[たなか]さんのと同[おな]じ = the same as Tanaka’s (bag). See @{の}.',
+          '〜と同[おな]じように: in the same way as: 先生[せんせい]と同[おな]じように発音[はつおん]してください.',
+          'Looks like, takes after: に似[に]ている: 父[ちち]に似[に]ている.',
+        ],
+      },
     ],
   },
   {
