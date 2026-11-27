@@ -126,6 +126,14 @@
   printable worksheets follow the same chunks: `node scripts/extract_sentence_data.mjs`
   (also rewrites the list on `kanji.html`), then `render_sentence_html.py` and
   `render_sheets_pdfs.mjs` / `stamp_sheet_belts.mjs`.
+- The particles & verbs guide (`grammar-sheets/tokidoki-grammar-guide.pdf`,
+  four A4 pages, linked from `kanji.html`) is hand-written in
+  `scripts/render_grammar_guide.mjs` (`漢字[かんじ]` becomes furigana; pages 3
+  and 4 place their boxes in fixed left / right columns, so check it still
+  fits on four pages after an edit). Re-run it, then
+  `node scripts/stamp_sheet_belts.mjs grammar-sheets` (needs
+  `npm install --no-save pdf-lib`).
+
 - JLPT-style vocabulary questions, N5 / N4 / N3, from the GTK example
   sentences (`guess-words-data.js`) via `scripts/vocab_questions.mjs`:
   kanji reading (underlined word → write the reading; six parts of 50
