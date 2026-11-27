@@ -15598,5 +15598,415 @@
     "りゅうのすけ",
     "Ryunosuke (given name)",
     "name"
+  ],
+  "35万9424人": [
+    "さんじゅうごまんきゅうせんよんひゃくにじゅうよにん",
+    "359,424 people",
+    "number + counter"
+  ],
+  "約4000人": [
+    "やくよんせんにん",
+    "about 4,000 people",
+    "number + counter"
+  ],
+  "約14万1000人": [
+    "やくじゅうよんまんせんにん",
+    "about 141,000 people",
+    "number + counter"
+  ],
+  "約21万7000人": [
+    "やくにじゅういちまんななせんにん",
+    "about 217,000 people",
+    "number + counter"
+  ],
+  "約79万2000件": [
+    "やくななじゅうきゅうまんにせんけん",
+    "about 792,000 cases",
+    "number + counter"
+  ],
+  "約13万5000件": [
+    "やくじゅうさんまんごせんけん",
+    "about 135,000 cases",
+    "number + counter"
+  ],
+  "十三年": [
+    "じゅうさんねん",
+    "thirteen years",
+    "number + counter"
+  ],
+  "13年": [
+    "じゅうさんねん",
+    "thirteen years",
+    "number + counter"
+  ],
+  "1.1パーセント": [
+    "いってんいちパーセント",
+    "1.1 percent",
+    "number + counter"
+  ],
+  "不登校": [
+    "ふとうこう",
+    "not attending school (for 30+ days a year)",
+    "noun"
+  ],
+  "登校": [
+    "とうこう",
+    "going to school",
+    "noun"
+  ],
+  "小中学生": [
+    "しょうちゅうがくせい",
+    "elementary and junior high school students",
+    "noun"
+  ],
+  "いじめ": [
+    "いじめ",
+    "bullying",
+    "noun"
+  ],
+  "暴力": [
+    "ぼうりょく",
+    "violence",
+    "noun"
+  ],
+  "暴力行為": [
+    "ぼうりょくこうい",
+    "act of violence",
+    "noun"
+  ],
+  "行為": [
+    "こうい",
+    "act, deed",
+    "noun"
+  ],
+  "認知": [
+    "にんち",
+    "recognition, becoming aware of",
+    "noun"
+  ],
+  "認知件数": [
+    "にんちけんすう",
+    "number of recognized cases",
+    "noun"
+  ],
+  "鈍い": [
+    "にぶい",
+    "slow, dull",
+    "adjective"
+  ],
+  "富士山": [
+    "ふじさん",
+    "Mount Fuji",
+    "place name"
+  ],
+  "再来年": [
+    "さらいねん",
+    "the year after next",
+    "noun"
+  ],
+  "同時に": [
+    "どうじに",
+    "at the same time",
+    "adverb"
+  ],
+  "同時": [
+    "どうじ",
+    "the same time",
+    "noun"
+  ],
+  "噴火": [
+    "ふんか",
+    "(volcanic) eruption",
+    "noun"
+  ],
+  "道府県": [
+    "どうふけん",
+    "prefectures (other than Tokyo)",
+    "noun"
+  ],
+  "受け付ける": [
+    "うけつける",
+    "to accept (applications)",
+    "verb"
+  ],
+  "被災": [
+    "ひさい",
+    "being hit by a disaster",
+    "noun"
+  ],
+  "群馬": [
+    "ぐんま",
+    "Gunma",
+    "place name"
+  ],
+  "副首都": [
+    "ふくしゅと",
+    "backup capital",
+    "noun"
+  ],
+  "東京圏": [
+    "とうきょうけん",
+    "the Tokyo area",
+    "place name"
+  ],
+  "首都直下地震": [
+    "しゅとちょっかじしん",
+    "an earthquake directly under the Tokyo area",
+    "noun"
+  ],
+  "仙台大学": [
+    "せんだいだいがく",
+    "Sendai University",
+    "organization"
+  ],
+  "仙台大": [
+    "せんだいだい",
+    "Sendai University",
+    "organization"
+  ],
+  "大阪商業大学": [
+    "おおさかしょうぎょうだいがく",
+    "Osaka University of Commerce",
+    "organization"
+  ],
+  "大阪商業大": [
+    "おおさかしょうぎょうだい",
+    "Osaka University of Commerce",
+    "organization"
+  ],
+  "亜細亜大": [
+    "あじあだい",
+    "Asia University",
+    "organization"
+  ],
+  "東北": [
+    "とうほく",
+    "Tohoku (northeast Japan)",
+    "place name"
+  ],
+  "三年生": [
+    "さんねんせい",
+    "third-year student",
+    "noun"
+  ],
+  "大城": [
+    "おおしろ",
+    "Oshiro (family name)",
+    "name"
+  ],
+  "大城海翔": [
+    "おおしろかいと",
+    "Kaito Oshiro, Sendai University pitcher",
+    "name"
+  ],
+  "明治神宮": [
+    "めいじじんぐう",
+    "Meiji Jingu (shrine)",
+    "organization"
+  ],
+  "明治神宮大会": [
+    "めいじじんぐうたいかい",
+    "Meiji Jingu Tournament",
+    "organization"
+  ],
+  "明治神宮野球大会": [
+    "めいじじんぐうやきゅうたいかい",
+    "Meiji Jingu Baseball Tournament",
+    "organization"
+  ],
+  "神宮球場": [
+    "じんぐうきゅうじょう",
+    "Jingu Stadium",
+    "place name"
+  ],
+  "八回": [
+    "はちかい",
+    "the eighth inning",
+    "noun"
+  ],
+  "二回": [
+    "にかい",
+    "the second inning; twice",
+    "noun"
+  ],
+  "4点": [
+    "よんてん",
+    "four points, four runs",
+    "number + counter"
+  ],
+  "三振": [
+    "さんしん",
+    "strikeout",
+    "noun"
+  ],
+  "9奪三振": [
+    "きゅうだつさんしん",
+    "nine strikeouts",
+    "number + counter"
+  ],
+  "ドラフト": [
+    "ドラフト",
+    "(professional) draft",
+    "noun"
+  ],
+  "王者": [
+    "おうじゃ",
+    "champion",
+    "noun"
+  ],
+  "制する": [
+    "せいする",
+    "to win, to take control of",
+    "verb"
+  ],
+  "創部": [
+    "そうぶ",
+    "founding of a (school) team",
+    "noun"
+  ],
+  "打線": [
+    "だせん",
+    "batting lineup",
+    "noun"
+  ],
+  "三塁打": [
+    "さんるいだ",
+    "triple (baseball)",
+    "noun"
+  ],
+  "適時三塁打": [
+    "てきじさんるいだ",
+    "run-scoring triple",
+    "noun"
+  ],
+  "スクイズ": [
+    "スクイズ",
+    "squeeze bunt",
+    "noun"
+  ],
+  "先取": [
+    "せんしゅ",
+    "scoring first",
+    "noun"
+  ],
+  "突き放す": [
+    "つきはなす",
+    "to pull ahead (of a rival)",
+    "verb"
+  ],
+  "左腕": [
+    "さわん",
+    "left-handed pitcher",
+    "noun"
+  ],
+  "好投": [
+    "こうとう",
+    "good pitching",
+    "noun"
+  ],
+  "来秋": [
+    "らいしゅう",
+    "next autumn",
+    "noun"
+  ],
+  "4安打": [
+    "よんあんだ",
+    "four hits",
+    "number + counter"
+  ],
+  "1失点": [
+    "いちしってん",
+    "one run allowed",
+    "number + counter"
+  ],
+  "東北勢": [
+    "とうほくぜい",
+    "teams from Tohoku",
+    "noun"
+  ],
+  "海翔": [
+    "かいと",
+    "Kaito (given name)",
+    "name"
+  ],
+  "7対1": [
+    "ななたいいち",
+    "7 to 1",
+    "number + counter"
+  ],
+  "5対2": [
+    "ごたいに",
+    "5 to 2",
+    "number + counter"
+  ],
+  "第57回": [
+    "だいごじゅうななかい",
+    "the 57th",
+    "number + counter"
+  ],
+  "増え方": [
+    "ふえかた",
+    "how (much) something grows",
+    "noun"
+  ],
+  "このうち": [
+    "このうち",
+    "of these, among them",
+    "expression"
+  ],
+  "いずれも": [
+    "いずれも",
+    "all of them, both",
+    "expression"
+  ],
+  "4道府県": [
+    "よんどうふけん",
+    "four prefectures",
+    "number + counter"
+  ],
+  "両県": [
+    "りょうけん",
+    "both prefectures",
+    "noun"
+  ],
+  "総生産": [
+    "そうせいさん",
+    "gross (regional) product",
+    "noun"
+  ],
+  "国内総生産": [
+    "こくないそうせいさん",
+    "gross domestic product (GDP)",
+    "noun"
+  ],
+  "大規模": [
+    "だいきぼ",
+    "large-scale",
+    "noun"
+  ],
+  "1.2パーセント": [
+    "いってんにパーセント",
+    "1.2 percent",
+    "number + counter"
+  ],
+  "2025年度": [
+    "にせんにじゅうごねんど",
+    "the 2025 school / fiscal year",
+    "number + counter"
+  ],
+  "大学の部": [
+    "だいがくのぶ",
+    "university division (of a tournament)",
+    "noun"
+  ],
+  "経済的": [
+    "けいざいてき",
+    "economic, financial",
+    "na-adjective"
+  ],
+  "増加率": [
+    "ぞうかりつ",
+    "rate of increase",
+    "noun"
   ]
 }

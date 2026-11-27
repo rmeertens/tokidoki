@@ -27,6 +27,170 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-11-27-futoko-record',
+      date: '2026-11-27',
+      emoji: '🏫',
+      titleEn: 'A record 359,424 elementary and junior high school students stayed away from school last year, the 13th rise in a row',
+      sources: [
+        { name: 'Jiji Press', url: 'https://www.jiji.com/jc/article?k=2026112600746&g=soc&m=rss' },
+        { name: 'Mainichi Shimbun', url: 'https://news.infoseek.co.jp/article/mainichi_20261126k0000m040053000c/' },
+        { name: 'Okinawa Times (Kyodo)', url: 'https://www.okinawatimes.co.jp/articles/-/1975051' },
+        { name: 'ReseMom', url: 'https://reseed.resemom.jp/article/2026/11/27/14648.html' },
+      ],
+      quiz: [
+        ['About how many elementary and junior high school students stayed away from school?', 'About 360,000', 'About 36,000', 'About 3.6 million', 'About 3,600'],
+        ['For how many years in a row has the number gone up?', '13', '3', '30', '1'],
+        ['What else reached its highest number ever?', 'Cases of bullying', 'Teachers leaving their jobs', 'New schools opening', 'School trips abroad'],
+      ],
+      levels: {
+        N5: {
+          title: '学校[がっこう]を　長[なが]く　休[やす]む　子[こ]どもが　いちばん　多[おお]く　なりました',
+          lines: [
+            ['二十六日[にじゅうろくにち]、文部科学省[もんぶかがくしょう]は　学校[がっこう]の　調査[ちょうさ]の　結果[けっか]を　出[だ]しました。', 'On the 26th, the education ministry put out the results of a survey of schools.', '文部科学省 is the Ministry of Education, Culture, Sports, Science and Technology.'],
+            ['去年[きょねん]の　四月[しがつ]から　今年[ことし]の　三月[さんがつ]までの　一年[いちねん]を　調[しら]べました。', 'It looked at the year from last April to this March.', 'The Japanese school year starts in April.'],
+            ['病気[びょうき]では　ないのに、一年[いちねん]に　30日[にち]　以上[いじょう]　学校[がっこう]を　休[やす]んだ　小学生[しょうがくせい]と　中学生[ちゅうがくせい]は、35万[まん]9424人[にん]でした。', 'There were 359,424 elementary and junior high school students who missed school for 30 days or more in a year, without being ill.', 'This is called 不登校 (futoko), "not going to school".'],
+            ['今[いま]までで　いちばん　多[おお]い　数[かず]です。', 'It is the highest number ever.'],
+            ['この　数[かず]は　十三年[じゅうさんねん]　続[つづ]けて　増[ふ]えて　います。', 'The number has gone up for thirteen years in a row.'],
+            ['でも、増[ふ]えた　人[ひと]の　数[かず]は　前[まえ]より　少[すく]なく　なりました。', 'But the number of extra students was smaller than before.'],
+            ['いじめの　数[かず]も、今[いま]までで　いちばん　多[おお]く　なりました。', 'The number of bullying cases also became the highest ever.'],
+          ],
+        },
+        N4: {
+          title: '不登校[ふとうこう]の小中学生[しょうちゅうがくせい]、35万[まん]9424人[にん]で一番[いちばん]多[おお]く',
+          lines: [
+            ['文部科学省[もんぶかがくしょう]は二十六日[にじゅうろくにち]、2025年度[ねんど]の不登校[ふとうこう]などについての調査[ちょうさ]の結果[けっか]を発表[はっぴょう]しました。', 'On the 26th, the education ministry announced the results of its survey on school non-attendance and other problems for the 2025 school year.', '年度 is the school or business year, from April to March. 不登校 means missing school for 30 days or more in a year, not because of illness or money.'],
+            ['不登校[ふとうこう]の小学生[しょうがくせい]と中学生[ちゅうがくせい]は35万[まん]9424人[にん]で、今[いま]までで一番[いちばん]多[おお]くなりました。', 'There were 359,424 elementary and junior high school students not going to school, the highest number ever.'],
+            ['前[まえ]の年[とし]より約[やく]4000人[にん]増[ふ]えて、十三年[じゅうさんねん]続[つづ]けて増[ふ]えています。', 'That is about 4,000 more than the year before, and it has gone up for thirteen years in a row.'],
+            ['このうち、小学生[しょうがくせい]は約[やく]14万[まん]1000人[にん]、中学生[ちゅうがくせい]は約[やく]21万[まん]7000人[にん]でした。', 'Of these, about 141,000 were elementary school students and about 217,000 were junior high school students.', 'The rest go to special-needs schools.'],
+            ['ただ、増[ふ]え方[かた]は前[まえ]の年[とし]までより小[ちい]さくなりました。', 'However, it grew by less than in the years before.'],
+            ['学校[がっこう]が知[し]ったいじめの数[かず]は約[やく]79万[まん]2000件[けん]で、これも一番[いちばん]多[おお]くなりました。', 'The number of bullying cases the schools learned of was about 792,000, also the highest ever.'],
+            ['学校[がっこう]での暴力[ぼうりょく]も約[やく]13万[まん]5000件[けん]で、今[いま]までで一番[いちばん]多[おお]くなりました。', 'Violence at school, at about 135,000 cases, was also the highest ever.'],
+          ],
+        },
+        N3: {
+          title: '不登校[ふとうこう]、過去[かこ]最多[さいた]の35万[まん]9424人[にん]　13年[ねん]連続[れんぞく]増加[ぞうか]も伸[の]びは鈍化[どんか]',
+          lines: [
+            ['文部科学省[もんぶかがくしょう]は二十六日[にじゅうろくにち]、2025年度[ねんど]の「問題[もんだい]行動[こうどう]・不登校[ふとうこう]調査[ちょうさ]」の結果[けっか]を公表[こうひょう]した。', 'On the 26th, the education ministry published the results of its "problem behaviour and school non-attendance survey" for the 2025 school year.'],
+            ['病気[びょうき]や経済的[けいざいてき]な理由[りゆう]以外[いがい]で年間[ねんかん]30日[にち]以上[いじょう]欠席[けっせき]した不登校[ふとうこう]の小中学生[しょうちゅうがくせい]は35万[まん]9424人[にん]で、過去[かこ]最多[さいた]を更新[こうしん]した。', 'Elementary and junior high school students not attending school, absent for 30 days or more in the year for reasons other than illness or money, numbered 359,424, a new record.', '過去最多を更新する means to set a new record high.'],
+            ['前年度[ぜんねんど]より約[やく]4000人[にん]増[ふ]え、増加[ぞうか]は十三年[じゅうさんねん]連続[れんぞく]となった。', 'That is about 4,000 more than the year before, the thirteenth rise in a row.'],
+            ['一方[いっぽう]、増加率[ぞうかりつ]は1.1パーセントにとどまり、伸[の]びは鈍[にぶ]くなっている。', 'On the other hand, the rate of increase stayed at 1.1 percent, so the growth is slowing.', '〜にとどまる means "to stay at (only)".'],
+            ['このうち小学生[しょうがくせい]は約[やく]14万[まん]1000人[にん]、中学生[ちゅうがくせい]は約[やく]21万[まん]7000人[にん]だった。', 'Of these, about 141,000 were elementary school students and about 217,000 were junior high school students.'],
+            ['いじめの認知[にんち]件数[けんすう]も約[やく]79万[まん]2000件[けん]、暴力[ぼうりょく]行為[こうい]も約[やく]13万[まん]5000件[けん]で、いずれも過去[かこ]最多[さいた]となった。', 'Recognized bullying cases, at about 792,000, and acts of violence, at about 135,000, also both reached record highs.', '認知件数 is the number of cases the schools found out about.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-27-backup-capital-plan',
+      date: '2026-11-27',
+      emoji: '🏛️',
+      titleEn: 'The government plans to name several "backup capitals" next autumn, ready to take over if a big disaster hits Tokyo',
+      sources: [
+        { name: 'Nikkei', url: 'https://www.nikkei.com/article/DGXZQOUA26ARB0W6A121C2000000/' },
+        { name: 'Hokkoku Shimbun (Kyodo)', url: 'https://www.hokkoku.co.jp/articles/-/2303152' },
+        { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261127de82236' },
+        { name: 'Yomiuri Shimbun', url: 'https://news.infoseek.co.jp/article/yomiuri_20261027_gyt1t00312/' },
+      ],
+      quiz: [
+        ['What is a "backup capital" for?', 'Doing the country\'s work if a big disaster hits Tokyo', 'Holding big sports events', 'Giving tourists a second airport', 'Moving all companies out of Tokyo'],
+        ['Which of these places wants to become a backup capital?', 'Fukuoka', 'Kyoto', 'Okinawa', 'Nagano'],
+        ['When does the government plan to choose them?', 'Next autumn', 'Next week', 'In ten years', 'This winter'],
+      ],
+      levels: {
+        N5: {
+          title: '政府[せいふ]が　来年[らいねん]の　秋[あき]に「副首都[ふくしゅと]」を　決[き]めます',
+          lines: [
+            ['政府[せいふ]は、「副首都[ふくしゅと]」を　作[つく]る　予定[よてい]を　発表[はっぴょう]しました。', 'The government announced its schedule for making "backup capitals."', '副首都 (fukushuto) means a second, backup capital.'],
+            ['東京[とうきょう]で　大[おお]きい　地震[じしん]などが　あった　とき、国[くに]の　仕事[しごと]を　する　場所[ばしょ]です。', 'It is a place that will do the country\'s work when there is a big earthquake or other disaster in Tokyo.'],
+            ['東京[とうきょう]や　富士山[ふじさん]の　近[ちか]くでは　ない　ことが　大切[たいせつ]です。', 'It matters that it is not near Tokyo or Mount Fuji.', 'A backup capital must not be hit by the same disaster as Tokyo, such as an eruption of Mount Fuji.'],
+            ['北海道[ほっかいどう]、愛知[あいち]、大阪[おおさか]、福岡[ふくおか]が　副首都[ふくしゅと]に　なりたいと　考[かんが]えて　います。', 'Hokkaido, Aichi, Osaka and Fukuoka want to become backup capitals.'],
+            ['来年[らいねん]の　六月[ろくがつ]から、国[くに]に　申[もう]し込[こ]む　ことが　できます。', 'From next June, they can apply to the national government.'],
+            ['政府[せいふ]は　来年[らいねん]の　秋[あき]に、いくつかの　場所[ばしょ]を　一度[いちど]に　決[き]める　予定[よてい]です。', 'The government plans to choose several places at the same time next autumn.'],
+            ['副首都[ふくしゅと]の　仕事[しごと]は、再来年[さらいねん]の　春[はる]に　始[はじ]まる　予定[よてい]です。', 'The backup capitals\' work is planned to start in the spring of the year after next.', '再来年 means the year after next, here 2028.'],
+          ],
+        },
+        N4: {
+          title: '「副首都[ふくしゅと]」、来年[らいねん]の秋[あき]にいくつか同時[どうじ]に決[き]める予定[よてい]',
+          lines: [
+            ['政府[せいふ]は、「副首都[ふくしゅと]」を来年[らいねん]の秋[あき]に決[き]める予定[よてい]を発表[はっぴょう]しました。', 'The government announced a plan to choose "backup capitals" next autumn.'],
+            ['副首都[ふくしゅと]は、首都[しゅと]の東京[とうきょう]で大[おお]きな災害[さいがい]が起[お]きたときに、国[くに]の大切[たいせつ]な仕事[しごと]を代[か]わりに行[おこな]う場所[ばしょ]です。', 'A backup capital is a place that does the country\'s important work instead of the capital, Tokyo, when a big disaster happens there.', '首都 means a capital city.'],
+            ['東京[とうきょう]と一緒[いっしょ]に被害[ひがい]を受[う]けないように、東京[とうきょう]の地震[じしん]や富士山[ふじさん]の噴火[ふんか]で危[あぶ]ない地域[ちいき]は選[えら]ばれません。', 'So that it is not damaged together with Tokyo, areas in danger from a Tokyo earthquake or an eruption of Mount Fuji will not be chosen.'],
+            ['人口[じんこう]や経済[けいざい]の大[おお]きさの条件[じょうけん]もあり、北海道[ほっかいどう]、愛知県[あいちけん]、大阪府[おおさかふ]、福岡県[ふくおかけん]が条件[じょうけん]に合[あ]っています。', 'There are also conditions on the size of the population and economy, and Hokkaido, Aichi, Osaka and Fukuoka meet them.'],
+            ['道府県[どうふけん]からの申請[しんせい]は、来年[らいねん]の六月[ろくがつ]から受[う]け付[つ]けます。', 'Applications from prefectures will be accepted from next June.', '道府県 means the prefectures other than Tokyo (都).'],
+            ['条件[じょうけん]に合[あ]えば、来年[らいねん]の十月[じゅうがつ]か十一月[じゅういちがつ]ごろに、いくつかを同時[どうじ]に指定[してい]します。', 'If they meet the conditions, several will be designated at the same time around October or November next year.', '指定する means to officially name or designate.'],
+            ['副首都[ふくしゅと]は、2028年[ねん]の四月[しがつ]ごろから動[うご]き始[はじ]める予定[よてい]です。', 'The backup capitals are planned to start working around April 2028.'],
+          ],
+        },
+        N3: {
+          title: '副首都[ふくしゅと]、2027年[ねん]秋[あき]に複数[ふくすう]同時[どうじ]指定[してい]へ　28年[ねん]春[はる]から運用[うんよう]',
+          lines: [
+            ['政府[せいふ]は、大規模[だいきぼ]災害[さいがい]の際[さい]に首都[しゅと]機能[きのう]を代替[だいたい]する「副首都[ふくしゅと]」について、2027年[ねん]秋[あき]に複数[ふくすう]を同時[どうじ]に指定[してい]する日程[にってい]を示[しめ]した。', 'The government has set out a schedule to designate several "backup capitals," which would take over the functions of the capital in a large-scale disaster, at the same time in autumn 2027.', '代替する means to take the place of something. 〜の際に is a formal "at the time of".'],
+            ['来年[らいねん]六月[ろくがつ]以降[いこう]に道府県[どうふけん]からの申請[しんせい]を受[う]け付[つ]け、要件[ようけん]を満[み]たせば十月[じゅうがつ]から十一月[じゅういちがつ]ごろに指定[してい]する想定[そうてい]だ。', 'It expects to accept applications from prefectures from next June and, if they meet the requirements, designate them around October or November.', '想定 is an assumed or planned scenario.'],
+            ['2028年[ねん]四月[しがつ]ごろからの本格的[ほんかくてき]な運用[うんよう]を目指[めざ]す。', 'It aims for full operation from around April 2028.'],
+            ['要件[ようけん]には、国内[こくない]人口[じんこう]の1.2パーセント以上[いじょう]が住[す]む市町村[しちょうそん]があることや、道府県[どうふけん]の総生産[そうせいさん]が国内[こくない]総生産[そうせいさん]（GDP）の2.1パーセント以上[いじょう]を占[し]めることが含[ふく]まれる。', 'The requirements include having a city, town or village where at least 1.2 percent of the national population lives, and the prefecture\'s output making up at least 2.1 percent of gross domestic product (GDP).'],
+            ['東京圏[とうきょうけん]と同時[どうじ]に被災[ひさい]するのを避[さ]けるため、首都[しゅと]直下[ちょっか]地震[じしん]の緊急[きんきゅう]対策[たいさく]区域[くいき]や富士山[ふじさん]の火山[かざん]災害[さいがい]警戒[けいかい]地域[ちいき]に入[はい]らないことも条件[じょうけん]とされた。', 'To avoid being hit at the same time as the Tokyo area, not being in the emergency zone for an earthquake directly under the capital or in the Mount Fuji volcanic disaster warning area was also made a condition.', '首都直下地震 is a big earthquake directly under the Tokyo area, which experts warn could happen.'],
+            ['要件[ようけん]を満[み]たすのは北海道[ほっかいどう]、愛知[あいち]、大阪[おおさか]、福岡[ふくおか]の4道府県[どうふけん]で、いずれも指定[してい]を目指[めざ]して準備[じゅんび]を進[すす]めている。', 'The four prefectures that meet the requirements are Hokkaido, Aichi, Osaka and Fukuoka, and all of them are preparing to be designated.'],
+            ['広島[ひろしま]、群馬[ぐんま]の両県[りょうけん]は要件[ようけん]を満[み]たさず、指定[してい]の可能性[かのうせい]はなくなった。', 'Hiroshima and Gunma prefectures do not meet the requirements, so they can no longer be designated.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-27-sendai-univ-jingu',
+      date: '2026-11-27',
+      emoji: '⚾',
+      titleEn: 'Sendai University wins the Meiji Jingu Baseball Tournament, the first university champion from the Tohoku region',
+      sources: [
+        { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261125de81431' },
+        { name: 'Kahoku Shimpo', url: 'https://kahoku.news/articles/JY738DTPWFKHN.html' },
+        { name: 'Full-Count', url: 'https://news.yahoo.co.jp/articles/f383b4b19a42fa8fc97e7e408133cee5a573b71f' },
+        { name: 'Baseball Channel (hb-nippon)', url: 'https://www.hb-nippon.com/articles/19372' },
+      ],
+      quiz: [
+        ['What was the score in the final?', '7 to 1', '1 to 0', '3 to 2', '10 to 7'],
+        ['Why is this win special?', 'No university from Tohoku had won it before', 'It was the first game played at night', 'The team had won it ten times in a row', 'It was the last tournament ever held'],
+        ['Which prefecture is Sendai University in?', 'Miyagi', 'Osaka', 'Hokkaido', 'Okinawa'],
+      ],
+      levels: {
+        N5: {
+          title: '仙台[せんだい]大学[だいがく]が　野球[やきゅう]の　大会[たいかい]で　初[はじ]めて　優勝[ゆうしょう]しました',
+          lines: [
+            ['二十五日[にじゅうごにち]、東京[とうきょう]で　大学[だいがく]の　野球[やきゅう]の　大会[たいかい]の　決勝[けっしょう]が　ありました。', 'On the 25th, the final of a university baseball tournament took place in Tokyo.', 'This is the Meiji Jingu Baseball Tournament, held every autumn at Jingu Stadium for the champions of each region.'],
+            ['宮城県[みやぎけん]の　仙台[せんだい]大学[だいがく]と　大阪[おおさか]商業[しょうぎょう]大学[だいがく]が　試合[しあい]を　しました。', 'Sendai University from Miyagi Prefecture played Osaka University of Commerce.'],
+            ['仙台[せんだい]大学[だいがく]が　7対[たい]1で　勝[か]ちました。', 'Sendai University won 7 to 1.', '7対1 is read なな たい いち: "7 to 1".'],
+            ['仙台[せんだい]大学[だいがく]は　この　大会[たいかい]で　初[はじ]めて　優勝[ゆうしょう]しました。', 'It was Sendai University\'s first win in this tournament.'],
+            ['東北[とうほく]の　大学[だいがく]が　優勝[ゆうしょう]したのも　初[はじ]めてです。', 'It is also the first time a university from Tohoku has won.', '東北 (Tohoku) is the northeast of Japan\'s main island, Honshu.'],
+            ['三年生[さんねんせい]の　大城[おおしろ]投手[とうしゅ]が、九回[きゅうかい]の　途中[とちゅう]まで　投[な]げました。', 'Pitcher Oshiro, a third-year student, pitched until partway through the ninth inning.', '投手 means pitcher. 途中 means "partway through".'],
+            ['相手[あいて]の　チームの　点[てん]は　1点[てん]だけでした。', 'The other team scored only one run.'],
+          ],
+        },
+        N4: {
+          title: '明治[めいじ]神宮[じんぐう]大会[たいかい]、仙台[せんだい]大学[だいがく]が東北[とうほく]の大学[だいがく]で初[はじ]めて優勝[ゆうしょう]',
+          lines: [
+            ['大学[だいがく]野球[やきゅう]の明治[めいじ]神宮[じんぐう]大会[たいかい]の決勝[けっしょう]が二十五日[にじゅうごにち]、東京[とうきょう]の神宮[じんぐう]球場[きゅうじょう]で行[おこな]われました。', 'The final of the Meiji Jingu Tournament for university baseball was held at Jingu Stadium in Tokyo on the 25th.'],
+            ['宮城県[みやぎけん]の仙台[せんだい]大学[だいがく]が、大阪[おおさか]商業[しょうぎょう]大学[だいがく]に7対[たい]1で勝[か]って、初[はじ]めて優勝[ゆうしょう]しました。', 'Sendai University from Miyagi Prefecture beat Osaka University of Commerce 7 to 1 and won for the first time.'],
+            ['東北[とうほく]の大学[だいがく]がこの大会[たいかい]で優勝[ゆうしょう]したのは、初[はじ]めてです。', 'It is the first time a university from Tohoku has won this tournament.'],
+            ['仙台[せんだい]大学[だいがく]は二回[にかい]に2点[てん]を取[と]り、八回[はちかい]にも4点[てん]を取[と]りました。', 'Sendai University scored two runs in the second inning and four more in the eighth.'],
+            ['ピッチャーの大城[おおしろ]海翔[かいと]選手[せんしゅ]は、九回[きゅうかい]の途中[とちゅう]まで投[な]げて、1点[てん]しか取[と]られませんでした。', 'Pitcher Kaito Oshiro threw until partway through the ninth inning and gave up only one run.', '〜しか…ない means "only".'],
+            ['三振[さんしん]も9つ取[と]りました。', 'He also struck out nine batters.', '三振 is a strikeout.'],
+            ['大城[おおしろ]選手[せんしゅ]は三年生[さんねんせい]で、来年[らいねん]のドラフトの候補[こうほ]として注目[ちゅうもく]されています。', 'Oshiro is a third-year student and is drawing attention as a candidate for next year\'s professional draft.', 'In the draft, professional teams pick new players from high schools, universities and company teams.'],
+          ],
+        },
+        N3: {
+          title: '仙台[せんだい]大[だい]が初優勝[はつゆうしょう]　東北[とうほく]の大学[だいがく]で初[はじ]めての王者[おうじゃ]に　明治[めいじ]神宮[じんぐう]大会[たいかい]',
+          lines: [
+            ['第[だい]57回[かい]明治[めいじ]神宮[じんぐう]野球[やきゅう]大会[たいかい]の大学[だいがく]の部[ぶ]は二十五日[にじゅうごにち]、神宮[じんぐう]球場[きゅうじょう]で決勝[けっしょう]が行[おこな]われ、仙台[せんだい]大[だい]が大阪[おおさか]商業[しょうぎょう]大[だい]を7対[たい]1で破[やぶ]り、初優勝[はつゆうしょう]した。', 'In the university division of the 57th Meiji Jingu Baseball Tournament, the final was played at Jingu Stadium on the 25th, and Sendai University beat Osaka University of Commerce 7 to 1 to win for the first time.', '〜大 is short for 〜大学 in news writing.'],
+            ['東北[とうほく]地区[ちく]の大学[だいがく]が大学[だいがく]の部[ぶ]を制[せい]するのは初[はじ]めてで、仙台[せんだい]大[だい]にとっても創部[そうぶ]以来[いらい]初[はじ]めての大学[だいがく]日本一[にっぽんいち]となった。', 'It is the first time a university from the Tohoku region has won the university division, and for Sendai University too it is its first national university title since the team was founded.', '制する means to win or take control of. 創部 is the founding of a school team.'],
+            ['打線[だせん]は二回[にかい]、適時[てきじ]三塁打[さんるいだ]とスクイズで2点[てん]を先取[せんしゅ]した。', 'In the second inning, the batters took a two-run lead with a run-scoring triple and a squeeze bunt.', '適時打 is a hit that brings in a run. 先取する means to score first.'],
+            ['八回[はちかい]に4点[てん]、九回[きゅうかい]にも1点[てん]を加[くわ]え、相手[あいて]を突[つ]き放[はな]した。', 'They added four runs in the eighth and one more in the ninth, pulling away from their opponents.', '突き放す means to pull clearly ahead.'],
+            ['先発[せんぱつ]したエース左腕[さわん]の大城[おおしろ]海翔[かいと]投手[とうしゅ]は九回[きゅうかい]途中[とちゅう]まで投[な]げ、4安打[あんだ]1失点[しってん]、9奪三振[だつさんしん]と好投[こうとう]した。', 'Starter Kaito Oshiro, the ace left-hander, pitched until partway through the ninth, giving up four hits and one run with nine strikeouts.', '左腕 (さわん) is a left-handed pitcher. 好投する means to pitch well.'],
+            ['準決勝[じゅんけっしょう]では亜細亜[あじあ]大[だい]を5対[たい]2で破[やぶ]っていた。', 'In the semifinal, they had beaten Asia University 5 to 2.'],
+            ['大城[おおしろ]投手[とうしゅ]は三年生[さんねんせい]で、来秋[らいしゅう]のドラフト候補[こうほ]として注目[ちゅうもく]を集[あつ]めている。', 'Oshiro is a third-year student and is drawing attention as a candidate for next autumn\'s draft.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-11-26-us-overcapacity-tariff',
       date: '2026-11-26',
       emoji: '📦',
