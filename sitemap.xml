@@ -172,7 +172,7 @@
   </url>
   <url>
     <loc>https://tokidoki.meertens.dev/news-week-2026-11-23.html</loc>
-    <lastmod>2026-11-27</lastmod>
+    <lastmod>2026-11-28</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
@@ -209,6 +209,21 @@
     <loc>https://tokidoki.meertens.dev/news-week-2026-10-05.html</loc>
     <lastmod>2026-10-11</lastmod>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-11-28-third-child-10-million.html</loc>
+    <lastmod>2026-11-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-11-28-go-nagai-kyoto.html</loc>
+    <lastmod>2026-11-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://tokidoki.meertens.dev/news-2026-11-28-basketball-lebanon.html</loc>
+    <lastmod>2026-11-28</lastmod>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://tokidoki.meertens.dev/news-2026-11-27-futoko-record.html</loc>

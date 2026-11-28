@@ -4191,7 +4191,7 @@
   ],
   "会期": [
     "かいき",
-    "(Diet) session period",
+    "session period (of the Diet); run (of an exhibition)",
     "noun"
   ],
   "会派": [
@@ -10916,7 +10916,7 @@
   ],
   "フィギュア": [
     "ふぃぎゅあ",
-    "figure (skating)",
+    "figure (skating); figure (a model of a character)",
     "noun"
   ],
   "フィギュアスケート": [
@@ -16008,5 +16008,430 @@
     "ぞうかりつ",
     "rate of increase",
     "noun"
+  ],
+  "三人目": [
+    "さんにんめ",
+    "the third (person / child)",
+    "noun"
+  ],
+  "3人目": [
+    "さんにんめ",
+    "the third (person / child)",
+    "noun"
+  ],
+  "1000万円": [
+    "いっせんまんえん",
+    "10 million yen",
+    "number + counter"
+  ],
+  "提言": [
+    "ていげん",
+    "proposal, recommendation",
+    "noun"
+  ],
+  "少子化": [
+    "しょうしか",
+    "falling birth rate (fewer children being born)",
+    "noun"
+  ],
+  "幼児": [
+    "ようじ",
+    "small child, preschooler",
+    "noun"
+  ],
+  "保育": [
+    "ほいく",
+    "childcare",
+    "noun"
+  ],
+  "定年": [
+    "ていねん",
+    "retirement age",
+    "noun"
+  ],
+  "第3子": [
+    "だいさんし",
+    "third child",
+    "noun"
+  ],
+  "設置": [
+    "せっち",
+    "setting up, establishment",
+    "noun"
+  ],
+  "定義": [
+    "ていぎ",
+    "definition",
+    "noun"
+  ],
+  "異例": [
+    "いれい",
+    "unusual, unprecedented",
+    "noun / na-adjective"
+  ],
+  "委ねる": [
+    "ゆだねる",
+    "to leave (a decision) to, to entrust",
+    "verb"
+  ],
+  "人口戦略本部": [
+    "じんこうせんりゃくほんぶ",
+    "(LDP) Population Strategy Headquarters",
+    "organization"
+  ],
+  "人口戦略庁": [
+    "じんこうせんりゃくちょう",
+    "population strategy agency (proposed)",
+    "organization"
+  ],
+  "無償化": [
+    "むしょうか",
+    "making free of charge",
+    "noun"
+  ],
+  "永井": [
+    "ながい",
+    "Nagai (Go Nagai, manga artist)",
+    "name"
+  ],
+  "永井豪": [
+    "ながいごう",
+    "Go Nagai (manga artist)",
+    "name"
+  ],
+  "石川": [
+    "いしかわ",
+    "Ishikawa (prefecture)",
+    "place name"
+  ],
+  "石川県": [
+    "いしかわけん",
+    "Ishikawa Prefecture",
+    "place name"
+  ],
+  "輪島": [
+    "わじま",
+    "Wajima (city in Ishikawa)",
+    "place name"
+  ],
+  "輪島市": [
+    "わじまし",
+    "Wajima City",
+    "place name"
+  ],
+  "能登": [
+    "のと",
+    "Noto (area in Ishikawa)",
+    "place name"
+  ],
+  "能登半島": [
+    "のとはんとう",
+    "Noto Peninsula",
+    "place name"
+  ],
+  "108枚": [
+    "ひゃくはちまい",
+    "108 (sheets)",
+    "number + counter"
+  ],
+  "原画": [
+    "げんが",
+    "original drawing",
+    "noun"
+  ],
+  "展示": [
+    "てんじ",
+    "display, exhibition",
+    "noun"
+  ],
+  "朝市": [
+    "あさいち",
+    "morning market",
+    "noun"
+  ],
+  "108点": [
+    "ひゃくはちてん",
+    "108 (works)",
+    "number + counter"
+  ],
+  "助け出す": [
+    "たすけだす",
+    "to rescue, to get (someone / something) out",
+    "verb"
+  ],
+  "約2メートル": [
+    "やくにメートル",
+    "about 2 metres",
+    "number + counter"
+  ],
+  "全焼": [
+    "ぜんしょう",
+    "burning down completely",
+    "noun"
+  ],
+  "開館": [
+    "かいかん",
+    "opening (of a museum or hall)",
+    "noun"
+  ],
+  "開館時": [
+    "かいかんじ",
+    "when (the hall) opened",
+    "noun"
+  ],
+  "耐火": [
+    "たいか",
+    "fire-resistant",
+    "noun"
+  ],
+  "グレンダイザー": [
+    "グレンダイザー",
+    "Grendizer (giant robot in Go Nagai's manga)",
+    "name"
+  ],
+  "グレートマジンガー": [
+    "グレートマジンガー",
+    "Great Mazinger (giant robot in Go Nagai's manga)",
+    "name"
+  ],
+  "描き下ろす": [
+    "かきおろす",
+    "to draw (something new) especially for",
+    "verb"
+  ],
+  "テーマ": [
+    "テーマ",
+    "theme",
+    "noun"
+  ],
+  "内覧会": [
+    "ないらんかい",
+    "preview (before an exhibition opens)",
+    "noun"
+  ],
+  "思い": [
+    "おもい",
+    "feeling, wish",
+    "noun"
+  ],
+  "巡回": [
+    "じゅんかい",
+    "touring (to other venues)",
+    "noun"
+  ],
+  "京都文化博物館": [
+    "きょうとぶんかはくぶつかん",
+    "Museum of Kyoto",
+    "organization"
+  ],
+  "記念館": [
+    "きねんかん",
+    "memorial hall",
+    "noun"
+  ],
+  "特別展": [
+    "とくべつてん",
+    "special exhibition",
+    "noun"
+  ],
+  "バスケットボール": [
+    "バスケットボール",
+    "basketball",
+    "noun"
+  ],
+  "バスケ": [
+    "バスケ",
+    "basketball (short)",
+    "noun"
+  ],
+  "レバノン": [
+    "レバノン",
+    "Lebanon",
+    "place name"
+  ],
+  "カタール": [
+    "カタール",
+    "Qatar",
+    "place name"
+  ],
+  "86": [
+    "はちじゅうろく",
+    "eighty-six",
+    "number"
+  ],
+  "82": [
+    "はちじゅうに",
+    "eighty-two",
+    "number"
+  ],
+  "38": [
+    "さんじゅうはち",
+    "thirty-eight",
+    "number"
+  ],
+  "51": [
+    "ごじゅういち",
+    "fifty-one",
+    "number"
+  ],
+  "比江島": [
+    "ひえじま",
+    "Hiejima (Makoto Hiejima, basketball player)",
+    "name"
+  ],
+  "比江島慎": [
+    "ひえじままこと",
+    "Makoto Hiejima (basketball player)",
+    "name"
+  ],
+  "馬場": [
+    "ばば",
+    "Baba (Yudai Baba, basketball player)",
+    "name"
+  ],
+  "馬場雄大": [
+    "ばばゆうだい",
+    "Yudai Baba (basketball player)",
+    "name"
+  ],
+  "スリーポイントシュート": [
+    "スリーポイントシュート",
+    "three-point shot",
+    "noun"
+  ],
+  "3ポイントシュート": [
+    "スリーポイントシュート",
+    "three-point shot",
+    "noun"
+  ],
+  "7勝": [
+    "ななしょう",
+    "seven wins",
+    "number + counter"
+  ],
+  "2敗": [
+    "にはい",
+    "two losses",
+    "number + counter"
+  ],
+  "約19年ぶり": [
+    "やくじゅうきゅうねんぶり",
+    "for the first time in about 19 years",
+    "number + counter"
+  ],
+  "リード": [
+    "リード",
+    "lead (in a game)",
+    "noun"
+  ],
+  "折り返す": [
+    "おりかえす",
+    "to turn back; to reach the halfway point",
+    "verb"
+  ],
+  "約1分": [
+    "やくいっぷん",
+    "about one minute",
+    "number + counter"
+  ],
+  "20秒": [
+    "にじゅうびょう",
+    "20 seconds",
+    "number + counter"
+  ],
+  "ブロック": [
+    "ブロック",
+    "block (a shot)",
+    "noun"
+  ],
+  "速攻": [
+    "そっこう",
+    "fast break",
+    "noun"
+  ],
+  "FIBA": [
+    "フィーバ",
+    "FIBA, the International Basketball Federation",
+    "organization"
+  ],
+  "逆転勝ち": [
+    "ぎゃくてんがち",
+    "come-from-behind win",
+    "noun"
+  ],
+  "3大会": [
+    "さんたいかい",
+    "three tournaments",
+    "number + counter"
+  ],
+  "本大会": [
+    "ほんたいかい",
+    "main tournament",
+    "noun"
+  ],
+  "王手": [
+    "おうて",
+    "check (shogi); one step from winning",
+    "noun"
+  ],
+  "描き下ろした": [
+    "かきおろした",
+    "drew (something new) especially for (a show or book)",
+    "verb"
+  ],
+  "二十九日": [
+    "にじゅうくにち",
+    "the 29th (day of the month)",
+    "noun"
+  ],
+  "一月": [
+    "いちがつ",
+    "January",
+    "noun"
+  ],
+  "高さ": [
+    "たかさ",
+    "height",
+    "noun"
+  ],
+  "敵地": [
+    "てきち",
+    "the other team's home ground (lit. enemy territory)",
+    "noun"
+  ],
+  "漫画家": [
+    "まんがか",
+    "manga artist",
+    "noun"
+  ],
+  "86対82": [
+    "はちじゅうろくたいはちじゅうに",
+    "86 to 82 (score)",
+    "number + counter"
+  ],
+  "38対51": [
+    "さんじゅうはちたいごじゅういち",
+    "38 to 51 (score)",
+    "number + counter"
+  ],
+  "カタール戦": [
+    "カタールせん",
+    "the game against Qatar",
+    "noun"
+  ],
+  "フィギュア類": [
+    "フィギュアるい",
+    "figures (models of characters)",
+    "noun"
+  ],
+  "13点": [
+    "じゅうさんてん",
+    "13 points",
+    "number + counter"
+  ],
+  "一人あたり": [
+    "ひとりあたり",
+    "per person",
+    "expression"
   ]
 }

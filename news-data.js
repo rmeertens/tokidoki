@@ -27,6 +27,168 @@
 
   global.NEWS_ITEMS = [
     {
+      id: '2026-11-28-third-child-10-million',
+      date: '2026-11-28',
+      emoji: '👶',
+      titleEn: 'The LDP drafts a proposal to give ¥10 million for each third and later child, and to set up a "population strategy agency"',
+      sources: [
+        { name: 'TV Asahi (ANN)', url: 'https://news.yahoo.co.jp/articles/5de75a1c6abc5a21d944aef84871eecf2290ef6b' },
+        { name: 'ABEMA Times', url: 'https://news.yahoo.co.jp/articles/06031f0edcb9682c720ed35503fd65ec1d94ec36' },
+        { name: 'Nippon.com (Jiji Press)', url: 'https://www.nippon.com/en/articles/-/58117' },
+      ],
+      quiz: [
+        ['Under the LDP proposal, how much money would be given when a third child is born?', '10 million yen', '1 million yen', '100,000 yen', '100 million yen'],
+        ['Who will the LDP pass the proposal on to?', 'Prime Minister Takaichi', 'The Governor of Tokyo', 'The Bank of Japan', 'The Emperor'],
+        ['What new government office does the proposal ask for?', 'An office for population problems', 'An office for tourism', 'An office for space', 'An office for sport'],
+      ],
+      levels: {
+        N5: {
+          title: '三人目[さんにんめ]の　子[こ]どもに　1000万円[まんえん]？　自民党[じみんとう]の　考[かんが]え',
+          lines: [
+            ['自民党[じみんとう]は、子[こ]どもを　増[ふ]やす　ための　考[かんが]えを　まとめました。', 'The Liberal Democratic Party has put together ideas for having more children.', '自民党 is the Liberal Democratic Party (LDP), the main party in the government.'],
+            ['三人目[さんにんめ]から　あとの　子[こ]どもが　生[う]まれた　とき、一人[ひとり]に　1000万円[まんえん]を　出[だ]す　という　考[かんが]えです。', 'The idea is to give 10 million yen for each child from the third one on, when they are born.', '三人目 means "the third (person)". 1000万円 is ten million yen.'],
+            ['日本[にほん]では、生[う]まれる　子[こ]どもが　少[すく]なく　なって　います。', 'In Japan, fewer and fewer children are being born.'],
+            ['人[ひと]の　数[かず]の　問題[もんだい]を　考[かんが]える　新[あたら]しい　役所[やくしょ]を　作[つく]る　ことも　考[かんが]えて　います。', 'The party is also thinking of making a new government office to deal with population problems.', 'The office would be called 人口戦略庁, the "population strategy agency".'],
+            ['自民党[じみんとう]は、来週[らいしゅう]にも　高市[たかいち]総理[そうり]に　この　考[かんが]えを　伝[つた]えます。', 'The LDP will pass the ideas on to Prime Minister Takaichi, perhaps as early as next week.', '〜にも after a time means "as early as".'],
+            ['でも、お金[かね]が　とても　多[おお]いので、心配[しんぱい]する　声[こえ]も　あります。', 'But because it is a very large amount of money, some people are worried.'],
+            ['まだ　決[き]まった　ことでは　ありません。', 'Nothing has been decided yet.'],
+          ],
+        },
+        N4: {
+          title: '自民党[じみんとう]、3人目[にんめ]の子[こ]どもから1000万円[まんえん]の給付[きゅうふ]を提言[ていげん]へ',
+          lines: [
+            ['自民党[じみんとう]の人口[じんこう]戦略[せんりゃく]本部[ほんぶ]は二十七日[にじゅうしちにち]、少子化[しょうしか]対策[たいさく]などについての提言[ていげん]の案[あん]をまとめました。', 'On the 27th, the LDP\'s population strategy headquarters put together a draft proposal on measures against the falling birth rate and other issues.', '少子化 means fewer children being born. 提言 is a proposal, here one made to the government.'],
+            ['3人目[にんめ]から後[あと]の子[こ]どもが生[う]まれたとき、一人[ひとり]に1000万円[まんえん]を給付[きゅうふ]するという案[あん]が入[はい]っています。', 'It includes a plan to pay 10 million yen for each child from the third one on, when they are born.', '給付する means to pay out money (a benefit).'],
+            ['国[くに]の新[あたら]しい組織[そしき]として、「人口[じんこう]戦略庁[せんりゃくちょう]」を作[つく]ることも求[もと]めています。', 'It also asks for a new government body, a "population strategy agency".'],
+            ['幼児[ようじ]教育[きょういく]や保育[ほいく]が無料[むりょう]になる年齢[ねんれい]を広[ひろ]げることや、定年[ていねん]を上[あ]げることも入[はい]っています。', 'It also includes widening the ages for which preschool education and childcare are free, and raising the retirement age.', '定年 is the age at which workers must retire.'],
+            ['自民党[じみんとう]は来週[らいしゅう]にも、高市[たかいち]総理[そうり]にこの提言[ていげん]を伝[つた]える予定[よてい]です。', 'The LDP plans to pass the proposal on to Prime Minister Takaichi, perhaps as early as next week.'],
+            ['政府[せいふ]は、今年[ことし]中[じゅう]に人口[じんこう]についての戦略[せんりゃく]を作[つく]ろうとしています。', 'The government is trying to draw up a strategy on population within this year.'],
+            ['ただ、金額[きんがく]がとても大[おお]きいので、心配[しんぱい]する声[こえ]も出[で]ています。', 'However, because the amount is so large, some people have raised concerns.'],
+          ],
+        },
+        N3: {
+          title: '自民[じみん]、第[だい]3子[し]以降[いこう]に1000万円[まんえん]給付[きゅうふ]を提言[ていげん]へ　「人口[じんこう]戦略庁[せんりゃくちょう]」設置[せっち]も',
+          lines: [
+            ['自民党[じみんとう]の人口[じんこう]戦略[せんりゃく]本部[ほんぶ]は二十七日[にじゅうしちにち]、少子化[しょうしか]対策[たいさく]などを盛[も]り込[こ]んだ政府[せいふ]への提言[ていげん]案[あん]をまとめた。', 'On the 27th, the LDP\'s population strategy headquarters compiled a draft proposal to the government that includes measures against the falling birth rate.', '盛り込む means to include (in a plan or document).'],
+            ['第[だい]3子[し]以降[いこう]の子[こ]どもが生[う]まれた際[さい]に、一人[ひとり]あたり1000万円[まんえん]を給付[きゅうふ]することが柱[はしら]となっている。', 'Its centrepiece is paying 10 million yen per child when a third or later child is born.', '第3子 is the third child. 〜が柱となる means "is the main pillar".'],
+            ['政府[せいふ]の司令塔[しれいとう]として「人口[じんこう]戦略庁[せんりゃくちょう]」を設置[せっち]することや、国会[こっかい]に委員会[いいんかい]を設[もう]けることも求[もと]めた。', 'It also called for a "population strategy agency" to lead the government\'s efforts, and for a committee in the Diet.', '司令塔 (control tower) is the body that directs a policy. 国会 is the Diet, Japan\'s parliament.'],
+            ['このほか、幼児[ようじ]教育[きょういく]・保育[ほいく]の無償化[むしょうか]の対象[たいしょう]年齢[ねんれい]の拡大[かくだい]や、定年[ていねん]の引[ひ]き上[あ]げ、高齢者[こうれいしゃ]の定義[ていぎ]の見直[みなお]しなども盛[も]り込[こ]んだ。', 'It also includes widening the ages covered by free preschool education and childcare, raising the retirement age and reviewing the definition of "elderly".', '無償化 means making something free of charge.'],
+            ['自民党[じみんとう]は来週[らいしゅう]にも高市[たかいち]首相[しゅしょう]に申[もう]し入[い]れる方針[ほうしん]で、政府[せいふ]は年内[ねんない]に人口[じんこう]総合[そうごう]戦略[せんりゃく]をまとめることを目指[めざ]している。', 'The LDP plans to present it to Prime Minister Takaichi as early as next week, and the government aims to compile an overall population strategy within the year.', '申し入れる means to formally put a request or proposal to someone.'],
+            ['一方[いっぽう]、異例[いれい]の金額[きんがく]に懸念[けねん]の声[こえ]も上[あ]がっており、財源[ざいげん]や対象者[たいしょうしゃ]をどうするかは今後[こんご]の政府[せいふ]の判断[はんだん]に委[ゆだ]ねられている。', 'On the other hand, concerns have been raised about the unusually large sum, and how to fund it and who would qualify are left to the government to decide.', '財源 is the source of money for a policy. 〜に委ねられる means "to be left to".'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-28-go-nagai-kyoto',
+      date: '2026-11-28',
+      emoji: '🎨',
+      titleEn: 'Go Nagai drawings saved from the Noto earthquake fire go on show in Kyoto for the first time',
+      sources: [
+        { name: 'Hokuriku Chunichi Shimbun', url: 'https://www.chunichi.co.jp/article/1345631' },
+        { name: 'Museum of Kyoto', url: 'https://www.bunpaku.or.jp/exhi_special_post/20261128-20270111/' },
+        { name: 'Sankei Shimbun', url: 'https://news.yahoo.co.jp/articles/d36184151f4f95ba5e40f2abb03b2298cb5e44b4' },
+        { name: 'Kyodo News', url: 'https://news.yahoo.co.jp/articles/c31e9166b4093806088892cb2f69fc99a98b944b' },
+      ],
+      quiz: [
+        ['Where did the exhibition open?', 'Kyoto', 'Tokyo', 'Wajima', 'Osaka'],
+        ['What happened to the Go Nagai memorial hall in Wajima?', 'It burned down in a fire after the earthquake', 'It was washed away by a tsunami', 'It was moved to Kyoto', 'It closed because nobody visited'],
+        ['How many drawings were found?', '108', '18', '1,008', '8'],
+      ],
+      levels: {
+        N5: {
+          title: '火事[かじ]から　助[たす]かった　漫画[まんが]の　絵[え]を　京都[きょうと]で',
+          lines: [
+            ['二十八日[にじゅうはちにち]から、京都[きょうと]の　博物館[はくぶつかん]で　漫画家[まんがか]の　永井[ながい]豪[ごう]さんの　展覧会[てんらんかい]が　始[はじ]まりました。', 'From the 28th, an exhibition of the manga artist Go Nagai began at a museum in Kyoto.', 'Go Nagai is known for manga such as Mazinger Z and Devilman. 展覧会 is an exhibition.'],
+            ['永井[ながい]さんは　石川県[いしかわけん]の　輪島[わじま]で　生[う]まれました。', 'Mr Nagai was born in Wajima in Ishikawa Prefecture.'],
+            ['輪島[わじま]には　永井[ながい]さんの　記念館[きねんかん]が　ありました。', 'There was a memorial hall for Mr Nagai in Wajima.', '記念館 is a memorial hall, a museum about one person.'],
+            ['2024年[ねん]の　能登[のと]半島[はんとう]の　地震[じしん]の　あと、火事[かじ]で　記念館[きねんかん]が　焼[や]けて　しまいました。', 'After the 2024 earthquake on the Noto Peninsula, the memorial hall burned down in a fire.', 'The earthquake struck on New Year\'s Day 2024, and a big fire burned the area around Wajima\'s morning market.'],
+            ['でも、火[ひ]に　強[つよ]く　作[つく]った　ところが　あったので、108枚[まい]の　絵[え]が　見[み]つかりました。', 'But because part of it had been built to resist fire, 108 drawings were found.'],
+            ['展覧会[てんらんかい]では、この　絵[え]や　大[おお]きい　ロボットの　人形[にんぎょう]などを　見[み]る　ことが　できます。', 'At the exhibition, you can see these drawings, big robot figures and other things.'],
+            ['展覧会[てんらんかい]は　来年[らいねん]の　一月[いちがつ]　十一日[じゅういちにち]までです。', 'The exhibition runs until January 11 next year.'],
+          ],
+        },
+        N4: {
+          title: '火事[かじ]から助[たす]かった永井[ながい]豪[ごう]さんの原画[げんが]、京都[きょうと]で展示[てんじ]',
+          lines: [
+            ['漫画家[まんがか]の永井[ながい]豪[ごう]さんの展覧会[てんらんかい]が、二十八日[にじゅうはちにち]から京都[きょうと]文化[ぶんか]博物館[はくぶつかん]で始[はじ]まりました。', 'An exhibition of the manga artist Go Nagai began at the Museum of Kyoto on the 28th.', 'Go Nagai is known for manga such as Mazinger Z and Devilman.'],
+            ['石川県[いしかわけん]輪島市[わじまし]は永井[ながい]さんが生[う]まれた町[まち]で、永井[ながい]さんの作品[さくひん]を見[み]られる記念館[きねんかん]がありました。', 'Wajima in Ishikawa Prefecture is the town where Mr Nagai was born, and it had a memorial hall where people could see his work.'],
+            ['2024年[ねん]の能登[のと]半島[はんとう]地震[じしん]のとき、輪島[わじま]の朝市[あさいち]の辺[あた]りで大[おお]きな火事[かじ]があり、記念館[きねんかん]も全部[ぜんぶ]焼[や]けました。', 'At the time of the 2024 Noto Peninsula earthquake, there was a big fire around Wajima\'s morning market, and the memorial hall burned down completely.', '朝市 (morning market) is a famous street market in Wajima.'],
+            ['しかし、火[ひ]に強[つよ]くする工事[こうじ]をしていた所[ところ]から、原画[げんが]108点[てん]やフィギュアが見[み]つかりました。', 'However, 108 original drawings and some figures were found in the part that had been built to resist fire.', '原画 are the original hand-drawn pictures. 点 counts works of art.'],
+            ['記念館[きねんかん]から助[たす]け出[だ]された物[もの]の中[なか]には、高[たか]さ約[やく]2メートルのロボットのフィギュアもあります。', 'Among the things rescued from the hall are robot figures about 2 metres tall.'],
+            ['永井[ながい]さんがこの展覧会[てんらんかい]のために新[あたら]しくかいた、輪島[わじま]の思[おも]い出[で]の漫画[まんが]もあります。', 'There is also a new manga about his memories of Wajima, which Mr Nagai drew for this exhibition.'],
+            ['展覧会[てんらんかい]は来年[らいねん]一月[いちがつ]十一日[じゅういちにち]までで、そのあと東京[とうきょう]でも開[ひら]かれる予定[よてい]です。', 'The exhibition runs until January 11 next year, and it is planned to be held in Tokyo after that.'],
+          ],
+        },
+        N3: {
+          title: '被災[ひさい]原画[げんが]、京都[きょうと]で初[はつ]公開[こうかい]　全焼[ぜんしょう]の永井[ながい]豪[ごう]記念館[きねんかん]から救出[きゅうしゅつ]',
+          lines: [
+            ['能登[のと]半島[はんとう]地震[じしん]で被災[ひさい]した輪島市[わじまし]の「永井[ながい]豪[ごう]記念館[きねんかん]」から救出[きゅうしゅつ]された原画[げんが]などを紹介[しょうかい]する特別展[とくべつてん]が二十八日[にじゅうはちにち]、京都[きょうと]文化[ぶんか]博物館[はくぶつかん]で始[はじ]まった。', 'A special exhibition of original drawings and other items rescued from the Go Nagai Memorial Hall in Wajima, hit by the Noto Peninsula earthquake, opened at the Museum of Kyoto on the 28th.', '被災する means to be hit by a disaster.'],
+            ['記念館[きねんかん]は、地震[じしん]の後[あと]に輪島[わじま]朝市[あさいち]の周辺[しゅうへん]で起[お]きた大規模[だいきぼ]な火災[かさい]で全焼[ぜんしょう]した。', 'The memorial hall burned down in the large fire that broke out around the Wajima morning market after the earthquake.', '全焼する means to burn down completely.'],
+            ['しかし、開館時[かいかんじ]に耐火[たいか]対策[たいさく]をしていた建物[たてもの]の一部[いちぶ]から、原画[げんが]108点[てん]とフィギュア類[るい]が見[み]つかった。', 'However, 108 original drawings and figures were found in the part of the building that had been fireproofed when the hall opened.', '耐火 means fire-resistant.'],
+            ['救出[きゅうしゅつ]された品[しな]の中[なか]には、高[たか]さ約[やく]2メートルの「グレンダイザー」と「グレートマジンガー」のフィギュアもある。', 'Among the rescued items are figures of Grendizer and Great Mazinger, about 2 metres tall.', 'Grendizer and Great Mazinger are giant robots from Go Nagai\'s works.'],
+            ['輪島[わじま]を故郷[こきょう]とする永井[ながい]さんがこの展覧会[てんらんかい]のために描[か]き下[お]ろした、輪島[わじま]の思[おも]い出[で]がテーマの漫画[まんが]も初[はじ]めて公開[こうかい]される。', 'A manga about memories of Wajima, drawn especially for this exhibition by Mr Nagai, whose hometown is Wajima, is also shown for the first time.', '描き下ろす means to draw something new for a particular publication or show.'],
+            ['二十七日[にじゅうしちにち]の内覧会[ないらんかい]で永井[ながい]さんは「助[たす]かった原画[げんが]たちからエネルギーを感[かん]じて」と話[はな]し、能登[のと]の復興[ふっこう]につなげたいという思[おも]いを語[かた]った。', 'At a preview on the 27th, Mr Nagai said, "Feel the energy from the drawings that were saved," and spoke of his wish to help the recovery of Noto.', '内覧会 is a preview for the press and guests before an exhibition opens. 復興 is rebuilding after a disaster.'],
+            ['会期[かいき]は来年[らいねん]一月[いちがつ]十一日[じゅういちにち]までで、2027年[ねん]10月[がつ]には東京[とうきょう]への巡回[じゅんかい]も予定[よてい]されている。', 'It runs until January 11 next year, and it is planned to travel to Tokyo in October 2027.', '巡回 here means an exhibition touring to another venue.'],
+          ],
+        },
+      },
+    },
+    {
+      id: '2026-11-28-basketball-lebanon',
+      date: '2026-11-28',
+      emoji: '🏀',
+      titleEn: 'Basketball: Japan come from 13 points down to beat Lebanon away, one win from a third World Cup in a row',
+      sources: [
+        { name: 'Basketball King', url: 'https://basketballking.jp/news/japan/20261127/645314.html' },
+        { name: 'Kyodo News', url: 'https://news.yahoo.co.jp/articles/92272713d23edc7428bf76da8d7c1c9c20c6f5bd' },
+        { name: 'NHK', url: 'https://news.web.nhk/newsweb/na/nd-20261127de82386' },
+        { name: 'Sponichi Annex', url: 'https://news.yahoo.co.jp/articles/7eaa338e0f38d2f916e291d7e8baa63d64e62752' },
+      ],
+      quiz: [
+        ['What was the final score?', 'Japan 86, Lebanon 82', 'Lebanon 86, Japan 82', 'Japan 82, Lebanon 82', 'Japan 51, Lebanon 38'],
+        ['Who was ahead at half-time?', 'Lebanon, by 13 points', 'Japan, by 13 points', 'Japan, by 4 points', 'Nobody, it was a tie'],
+        ['What happens if Japan beat Qatar on the 29th?', 'They qualify for the World Cup', 'They host the World Cup', 'They win the World Cup', 'They play Lebanon again'],
+      ],
+      levels: {
+        N5: {
+          title: 'バスケットボール　日本[にほん]が　レバノンに　勝[か]ちました',
+          lines: [
+            ['バスケットボールの　ワールドカップに　出[で]る　ための　試合[しあい]が　ありました。', 'There was a game to qualify for the basketball World Cup.', 'These are the Asian qualifiers for the 2027 FIBA Basketball World Cup.'],
+            ['日本[にほん]の　男子[だんし]チームは、レバノンで　レバノンと　試合[しあい]を　しました。', 'Japan\'s men\'s team played Lebanon in Lebanon.'],
+            ['前半[ぜんはん]は　レバノンが　13点[てん]　多[おお]く　取[と]って　いました。', 'In the first half, Lebanon scored 13 points more.', '前半 is the first half of a game, 後半 the second half.'],
+            ['でも、後半[こうはん]に　日本[にほん]が　たくさん　点[てん]を　取[と]りました。', 'But in the second half, Japan scored a lot of points.'],
+            ['日本[にほん]は　86対[たい]82で　勝[か]ちました。', 'Japan won 86 to 82.', '〜対〜 is how scores are said: 86対82 is 86 to 82.'],
+            ['二十九日[にじゅうくにち]の　カタールとの　試合[しあい]に　勝[か]つと、ワールドカップに　出[で]られます。', 'If Japan win the game against Qatar on the 29th, they can go to the World Cup.'],
+            ['日本[にほん]は　2019年[ねん]と　2023年[ねん]の　ワールドカップにも　出[で]ました。', 'Japan also played in the 2019 and 2023 World Cups.'],
+          ],
+        },
+        N4: {
+          title: 'バスケ男子[だんし]、レバノンに逆転[ぎゃくてん]勝[が]ち　ワールドカップまであと1勝[しょう]',
+          lines: [
+            ['バスケットボールのワールドカップのアジア予選[よせん]で、日本[にほん]の男子[だんし]代表[だいひょう]がレバノンと試合[しあい]をしました。', 'In the Asian qualifiers for the basketball World Cup, Japan\'s men\'s national team played Lebanon.', '予選 are qualifying rounds. 代表 here is the national team.'],
+            ['試合[しあい]はレバノンで行[おこな]われ、会場[かいじょう]はレバノンを応援[おうえん]する人[ひと]でいっぱいでした。', 'The game was held in Lebanon, and the arena was full of people cheering for Lebanon.'],
+            ['日本[にほん]は前半[ぜんはん]を38対[たい]51で終[お]え、13点[てん]負[ま]けていました。', 'Japan ended the first half 38 to 51, 13 points behind.'],
+            ['しかし後半[こうはん]に追[お]いつき、比江島[ひえじま]慎[まこと]選手[せんしゅ]のスリーポイントシュートで逆転[ぎゃくてん]しました。', 'But they caught up in the second half, and took the lead with a three-point shot by Makoto Hiejima.', '逆転する means to turn a game around and go ahead.'],
+            ['最後[さいご]は馬場[ばば]雄大[ゆうだい]選手[せんしゅ]が相手[あいて]のシュートを止[と]めて、日本[にほん]が86対[たい]82で勝[か]ちました。', 'At the end, Yudai Baba blocked a Lebanon shot, and Japan won 86 to 82.'],
+            ['日本[にほん]は7勝[しょう]2敗[はい]になり、二十九日[にじゅうくにち]のカタール戦[せん]に勝[か]てば、ワールドカップに出[で]られることが決[き]まります。', 'Japan now have 7 wins and 2 losses, and if they beat Qatar on the 29th, they will be sure of a place at the World Cup.', '〜戦 after a team\'s name means "the game against ...".'],
+            ['公式[こうしき]の大会[たいかい]でレバノンに勝[か]ったのは、約[やく]19年[ねん]ぶりです。', 'It is the first time in about 19 years that Japan have beaten Lebanon in an official FIBA competition.', '〜ぶり means "for the first time in (a length of time)".'],
+          ],
+        },
+        N3: {
+          title: 'バスケ男子[だんし]、敵地[てきち]でレバノンに逆転[ぎゃくてん]勝[が]ち　3大会[たいかい]連続[れんぞく]のワールドカップへ王手[おうて]',
+          lines: [
+            ['バスケットボール男子[だんし]の2027年[ねん]ワールドカップ・アジア地区[ちく]予選[よせん]で、日本[にほん]代表[だいひょう]は敵地[てきち]でレバノンと対戦[たいせん]し、86対[たい]82で逆転[ぎゃくてん]勝[が]ちした。', 'In the Asian qualifiers for the 2027 men\'s basketball World Cup, Japan played Lebanon away and came from behind to win 86–82.', '敵地 is the other team\'s home ground. 逆転勝ち is a come-from-behind win.'],
+            ['日本[にほん]は相手[あいて]の3ポイントシュートに苦[くる]しみ、前半[ぜんはん]を38対[たい]51とリードされて折[お]り返[かえ]した。', 'Japan struggled against Lebanon\'s three-point shooting and went into half-time trailing 38–51.', '折り返す here means to reach half-time.'],
+            ['後半[こうはん]に入[はい]って反撃[はんげき]し、試合[しあい]の終盤[しゅうばん]に同点[どうてん]に追[お]いつくと、比江島[ひえじま]慎[まこと]選手[せんしゅ]の3ポイントシュートで逆転[ぎゃくてん]した。', 'They fought back in the second half, drew level late in the game, and went ahead with a three-pointer by Makoto Hiejima.', '終盤 is the final stage of a game.'],
+            ['残[のこ]り約[やく]1分[ぷん]20秒[びょう]には馬場[ばば]雄大[ゆうだい]選手[せんしゅ]が相手[あいて]のシュートをブロックし、そのまま速攻[そっこう]につなげてリードを広[ひろ]げた。', 'With about 1 minute 20 seconds left, Yudai Baba blocked a Lebanon shot and turned it straight into a fast break to stretch the lead.', '速攻 is a fast break.'],
+            ['FIBAの公式[こうしき]大会[たいかい]で日本[にほん]がレバノンに勝[か]ったのは、約[やく]19年[ねん]ぶりだという。', 'It is said to be Japan\'s first win over Lebanon in an official FIBA competition in about 19 years.', '〜という at the end of a sentence reports what the source says.'],
+            ['日本[にほん]は通算[つうさん]7勝[しょう]2敗[はい]でグループ首位[しゅい]を守[まも]り、二十九日[にじゅうくにち]のカタール戦[せん]に勝[か]てば、3大会[たいかい]連続[れんぞく]の本大会[ほんたいかい]出場[しゅつじょう]が決[き]まる。', 'Japan stay top of their group with 7 wins and 2 losses, and a win over Qatar on the 29th will secure a place at a third straight World Cup.', '王手 in the headline is a shogi word for "check", used to mean being one step from a goal. 本大会 is the main tournament.'],
+          ],
+        },
+      },
+    },
+    {
       id: '2026-11-27-futoko-record',
       date: '2026-11-27',
       emoji: '🏫',
